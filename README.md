@@ -13,6 +13,7 @@ then...
 docker-compose up
 ```
 
+Your react app should be running at http://localhost:3000/
 
 
 ---
