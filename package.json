@@ -1,6 +1,7 @@
 {
   "name": "janis",
   "version": "0.1.0",
+  "description": "Public facing frontend public side of austin.gov using React components.",
   "private": true,
   "dependencies": {
     "react": "^16.1.1",
