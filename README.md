@@ -4,13 +4,7 @@ Frontend for [joplin](https://github.com/cityofaustin/joplin).
 ## Run locally
 
 ```
-docker-compose build
-```
-
-then...
-
-```
-docker-compose up
+./scripts/serve-local.sh
 ```
 
 Your react app should be running at http://localhost:3000/
