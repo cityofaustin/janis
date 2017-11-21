@@ -10,5 +10,6 @@ docker run \
     --name janis \
     --tty --interactive \
     --publish 3000:3000 \
-    --volume "$PWD:/app" \
+    --volume "$PWD/src:/app/src" \
+    --volume "$PWD/public:/app/public" \
     "$TAG" "$@"
