@@ -5,21 +5,24 @@ import {
   Link
 } from 'react-router-dom'
 
-import ServicesIndex from "./ServicesIndex"
-import Service from "./Service"
+import Banner from "components/Banner"
+import Header from "components/Header"
+import ServicesIndex from "components/ServicesIndex"
+import Service from "components/Service"
+
+import 'css/App.css'
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <header className="App-header">
-            <p className="App-intro">
-              Hello Janis <span role="img" aria-label="peace sign">☮️</span>
-            </p>
-          </header>
-          <Route path="/services" component={ServicesIndex} />
-          <Route path="/service/:id" component={Service} />
+          <Banner />
+          <Header />
+          <section className="usa-section usa-grid">
+            <Route path="/services" component={ServicesIndex} />
+            <Route path="/service/:id" component={Service} />
+          </section>
         </div>
       </Router>
     );
