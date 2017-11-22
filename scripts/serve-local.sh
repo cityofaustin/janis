@@ -13,4 +13,6 @@ docker run \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/package.json:/app/package.json" \
+    --env PORT=80 \
+    --env NODE_PATH=src \
     "$TAG" "$@"
