@@ -15,4 +15,5 @@ docker run \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/package.json:/app/package.json" \
+    --volume "$PWD/yarn.lock:/app/yarn.lock" \
     "$TAG" "$@"

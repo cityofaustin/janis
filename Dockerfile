@@ -3,6 +3,7 @@ RUN mkdir /app
 WORKDIR /app
 ENV PORT=80
 ENV NODE_PATH=src
+COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
 RUN yarn
 COPY public /app/public
