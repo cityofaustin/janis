@@ -12,7 +12,7 @@ Your react app should be running at http://localhost:3000/
 
 ---
 
-## Adding yarn
+## Adding dependencies via yarn
 
 This will update your container's yarn.lock and package.json files.
 Your local host machine's yarn.lock and package.json files will also be updated via mounted docker volumes. These local files are versioned and should be checked into git.
