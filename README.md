@@ -12,6 +12,20 @@ Your react app should be running at http://localhost:3000/
 
 ---
 
+## Update node_modules in running container
+
+```
+docker exec -it janis /bin/bash
+```
+
+in container prompt
+
+```
+yarn install
+```
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
