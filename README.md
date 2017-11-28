@@ -12,6 +12,28 @@ Your react app should be running at http://localhost:3000/
 
 ---
 
+## Adding dependencies via yarn
+
+This will update your container's yarn.lock and package.json files.
+Your local host machine's yarn.lock and package.json files will also be updated via mounted docker volumes. These local files are versioned and should be checked into git.
+
+
+To access container via terminal
+```
+docker exec -it janis /bin/bash
+```
+
+Add a package via yarn add as you normally would (https://yarnpkg.com/lang/en/docs/cli/add/)
+```
+yarn add <package name>
+```
+
+Exit container
+```
+exit
+```
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
