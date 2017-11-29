@@ -11,6 +11,11 @@ html {
   line-height: $base-line-height;
 }
 
+//helpers
+.nowrap {
+  white-space: nowrap;
+}
+
 // variables
 $space-level1: 5px;
 $space-level2: 10px;
@@ -45,6 +50,8 @@ h6 {
 }
 
 // components
+
+// coa content link
 .coa-content_link {
   @include box_verticalcenter();
   border-bottom: 1px dashed $color-gray-dark;
@@ -60,15 +67,43 @@ h6 {
 }
 
 .coa-content_link--box {
-  @include box_verticalcenter(100px);
   border: 1px solid $color-gray-lighter;
   font-size: $lead-font-size;
   margin-bottom: $space-level2;
+  height: 100px;
   padding: 0 $space-level2;
 }
 
-.coa-content_links {
-  margin-top: $space-level5;
-  margin-bottom: $space-level6;
+// coa section
+.coa-section {
+  padding-bottom: $space-level6;
+  padding-left: $space-level3;
+  padding-right: $space-level3;
+  padding-top: $space-level5;
+}
+
+.coa-section--tbonly {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.coa-section--grey {
+  background-color: $color-gray-lightest;
+}
+
+.coa-section__title {
+  border-bottom: 5px solid $color-black;
+  padding-bottom: $space-level2;
+  margin: 0 0 $space-level2 0;
+}
+
+
+// coa page layout
+.coa-hero {
+  margin-bottom: $space-level4;
+  padding: $space-level3;
+}
+.coa-body {
+  padding: 0 $space-level3;
 }
 

@@ -12,22 +12,22 @@ class ServicesIndex extends Component {
     return (
       <div>
         <div className="coa-hero">
-          <div className="coa-hero-callout">
+          <div className="coa-hero__callout">
             <h1>{data.title}</h1>
           </div>
         </div>
 
-        <p>
+        <div className="coa-body">
           {data.body}
-        </p>
+        </div>
 
-        <div className="coa-section coa-content_links">
+        <div className="coa-section">
           {
             services.map((service) => {
               return (
                 <a className="coa-content_link coa-content_link--box" key={service.id}>
                   <span>{service.title}</span>
-                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
               );
             })
@@ -35,15 +35,20 @@ class ServicesIndex extends Component {
         </div>
 
         <div className="coa-section coa-section--grey">
-          <h2 className="coa-section_title">Request 311 Service or Call 512-974-2000</h2>
-          <div className="coa-section_body usa-content">311 is the city of Austin’s 24 hour information desk.</div>
-          <div className="coa-section coa-content_links">
+          <h3 className="coa-section__title">Send us feedback on this page or city services.</h3>
+          <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" tel="512-974-2000">512-974-2000</a>. </p>
+        </div>
+
+        <div className="coa-section">
+          <h3 className="coa-section__title">Request 311 Service or Call <a className="nowrap" tel="512-974-2000">512-974-2000</a></h3>
+          <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
+          <div className="coa-section--tbonly">
             {
               services311.map((service) => {
                 return (
                   <a className="coa-content_link" key={service.id}>
                     <span>{service.title}</span>
-                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
                   </a>
                 );
               })

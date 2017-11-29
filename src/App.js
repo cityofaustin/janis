@@ -18,7 +18,7 @@ class App extends Component {
         <div>
           <Banner />
           <Header />
-          <section className="usa-section usa-grid">
+          <section>
             <Route path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />
           </section>
