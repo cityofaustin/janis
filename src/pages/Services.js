@@ -37,6 +37,32 @@ class ServicesIndex extends Component {
         <div className="coa-section coa-section--grey">
           <h3 className="coa-section__title">Send us feedback on this page or city services.</h3>
           <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" tel="512-974-2000">512-974-2000</a>. </p>
+
+          <form className="usa-form">
+            <fieldset className="usa-fieldset-inputs usa-sans">
+              <legend className="usa-sr-only">Historical figures 2</legend>
+              <ul className="usa-unstyled-list">
+                <li>
+                  <input id="stanton" type="radio" name="historical-figures-2" value="stanton" />
+                  <label for="stanton">Elizabeth Cady Stanton</label>
+                </li>
+                <li>
+                  <input id="anthony" type="radio" name="historical-figures-2" value="anthony" />
+                  <label for="anthony">Susan B. Anthony</label>
+                </li>
+                <li>
+                  <input id="tubman" type="radio" name="historical-figures-2" value="tubman" />
+                  <label for="tubman">Harriet Tubman</label>
+                </li>
+              </ul>
+            </fieldset>
+            <input type="submit" value="Continue" />
+          </form>
+
+          <div className="coa-section coa-section--tbonly">
+            <a>Return to Top</a>
+          </div>
+
         </div>
 
         <div className="coa-section">
