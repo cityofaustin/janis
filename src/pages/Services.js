@@ -59,9 +59,7 @@ class ServicesIndex extends Component {
             <input type="submit" value="Continue" />
           </form>
 
-          <div className="coa-section coa-section--tbonly">
-            <a>Return to Top</a>
-          </div>
+          <a>Return to Top</a>
 
         </div>
 
