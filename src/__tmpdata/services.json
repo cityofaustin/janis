@@ -1,0 +1,35 @@
+{
+  "meta": {},
+  "title": "Use City of Austin Services",
+  "body": "The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.",
+  "snippets": {
+    "services": [
+      {
+        "id": 1,
+        "title": "Look up recycling, compost, and trash pick-up days"
+      },
+      {
+        "id": 2,
+        "title": "Get ready for bulk item collection"
+      },
+      {
+        "id": 3,
+        "title": "Visit the Recycle and Reuse Drop-off Center"
+      },
+      {
+        "id": 4,
+        "title": "Recycle your Christmas tree"
+      }
+    ],
+    "services311": [
+      {
+        "id": 1,
+        "title": "Report a Pothole"
+      },
+      {
+        "id": 2,
+        "title": "Request Street Maintenance"
+      }
+    ]
+  }
+}

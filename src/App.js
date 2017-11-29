@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 import Banner from "components/Banner"
 import Header from "components/Header"
-import ServicesIndex from "components/ServicesIndex"
+import ServicesIndex from "pages/Services"
 import Service from "components/Service"
 
 import 'css/App.css'
