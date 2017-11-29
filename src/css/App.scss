@@ -1,2 +1,74 @@
+// vendor
 @import 'uswds_variables';
 @import 'node_modules/uswds/src/stylesheets/uswds';
+@import 'css/vendor/font_awesome/scss/font-awesome.scss';
+
+// base
+html {
+  font-family: $font-sans;
+  font-size: $em-base;
+  font-weight: $font-normal;
+  line-height: $base-line-height;
+}
+
+// variables
+$space-level1: 5px;
+$space-level2: 10px;
+$space-level3: 15px;
+$space-level4: 20px;
+$space-level5: 40px;
+$space-level6: 60px;
+
+@mixin box_verticalcenter($height: auto) {
+  align-items: center;
+  display: flex;
+  height: $height;
+  justify-content: space-between;
+}
+
+// uswds overrides
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-sans;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-medium;
+}
+
+// components
+.coa-content_link {
+  @include box_verticalcenter();
+  border-bottom: 1px dashed $color-gray-dark;
+  color: $color-black;
+  cursor: pointer;
+  font-size: $base-font-size;
+  text-decoration: none;
+  padding: $space-level4 0;
+
+  i {
+    padding-left: $space-level2;;
+  }
+}
+
+.coa-content_link--box {
+  @include box_verticalcenter(100px);
+  border: 1px solid $color-gray-lighter;
+  font-size: $lead-font-size;
+  margin-bottom: $space-level2;
+  padding: 0 $space-level2;
+}
+
+.coa-content_links {
+  margin-top: $space-level5;
+  margin-bottom: $space-level6;
+}
+
