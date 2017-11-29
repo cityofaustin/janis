@@ -29,6 +29,22 @@
       {
         "id": 2,
         "title": "Request Street Maintenance"
+      },
+      {
+        "id": 3,
+        "title": "Report Problem with a Bridge"
+      },
+      {
+        "id": 4,
+        "title": "Report a Stray Animal You Found"
+      },
+      {
+        "id": 5,
+        "title": "Report Erosion along Waterways"
+      },
+      {
+        "id": 6,
+        "title": "Report a Possible Code Violation"
       }
     ]
   }

@@ -11,6 +11,7 @@ class ServicesIndex extends Component {
 
     return (
       <div>
+
         <div className="coa-hero">
           <div className="coa-hero__callout">
             <h1>{data.title}</h1>
@@ -25,7 +26,7 @@ class ServicesIndex extends Component {
           {
             services.map((service) => {
               return (
-                <a className="coa-content_link coa-content_link--box" key={service.id}>
+                <a className="coa-list_link coa-list_link--box" key={service.id} href={`service/${service.id}`}>
                   <span>{service.title}</span>
                   <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
@@ -40,19 +41,19 @@ class ServicesIndex extends Component {
 
           <form className="usa-form">
             <fieldset className="usa-fieldset-inputs usa-sans">
-              <legend className="usa-sr-only">Historical figures 2</legend>
+              <legend className="usa-sr-only">Site Feedback Options</legend>
               <ul className="usa-unstyled-list">
                 <li>
-                  <input id="stanton" type="radio" name="historical-figures-2" value="stanton" />
-                  <label for="stanton">Elizabeth Cady Stanton</label>
+                  <input id="page-content" type="radio" name="site-feedback-options" value="stanton" />
+                  <label for="page-content">Information on this page</label>
                 </li>
                 <li>
-                  <input id="anthony" type="radio" name="historical-figures-2" value="anthony" />
-                  <label for="anthony">Susan B. Anthony</label>
+                  <input id="technical-issue" type="radio" name="site-feedback-options" value="anthony" />
+                  <label for="technical-issue">Technical Issue</label>
                 </li>
                 <li>
-                  <input id="tubman" type="radio" name="historical-figures-2" value="tubman" />
-                  <label for="tubman">Harriet Tubman</label>
+                  <input id="other" type="radio" name="site-feedback-options" value="tubman" />
+                  <label for="other">Something else</label>
                 </li>
               </ul>
             </fieldset>
@@ -66,19 +67,25 @@ class ServicesIndex extends Component {
         <div className="coa-section">
           <h3 className="coa-section__title">Request 311 Service or Call <a className="nowrap" tel="512-974-2000">512-974-2000</a></h3>
           <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
-          <div className="coa-section--tbonly">
-            {
-              services311.map((service) => {
-                return (
-                  <a className="coa-content_link" key={service.id}>
-                    <span>{service.title}</span>
-                    <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                  </a>
-                );
-              })
-            }
-          </div>
         </div>
+
+        <div className="coa-section coa-section--pad_lr">
+        {
+          services311.map((service) => {
+            return (
+              <a className="coa-list_link" key={service.id} href="#">
+                <span>{service.title}</span>
+                <i className="fa fa-chevron-right" aria-hidden="true"></i>
+              </a>
+            );
+          })
+        }
+        </div>
+
+        <div className="coa-section">
+          <a>See a Full List of 311 Services</a>
+        </div>
+
       </div>
     );
   }

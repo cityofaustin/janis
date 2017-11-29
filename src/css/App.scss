@@ -52,7 +52,7 @@ h6 {
 // components
 
 // coa content link
-.coa-content_link {
+.coa-list_link {
   @include box_verticalcenter();
   border-bottom: 1px dashed $color-gray-dark;
   color: $color-black;
@@ -66,7 +66,7 @@ h6 {
   }
 }
 
-.coa-content_link--box {
+.coa-list_link--box {
   border: 1px solid $color-gray-lighter;
   font-size: $lead-font-size;
   margin-bottom: $space-level2;
@@ -82,7 +82,23 @@ h6 {
   padding-top: $space-level5;
 }
 
-.coa-section--tbonly {
+.coa-section--pad_tb {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.coa-section--pad_lr {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.coa-section--pad_t {
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.coa-section--pad_b {
+  padding-top: 0;
   padding-left: 0;
   padding-right: 0;
 }
