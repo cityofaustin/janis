@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import data from '__tmpdata/services';
+var axios = require('axios');
 
 class ServicesIndex extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      body: ''
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get('http://localhost:8000/api/v2/pages/?format=json&type=base.ServicePage&fields=content,extra_content,tags')
+      .then(res => {
+        this.setState({
+          title: res.data.items[0].title,
+          body: res.data.items[0].content
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
 
+    const title = get(this.state, "title", "");
+    const body = get(this.state, "body", "");
     const services = get(data, "snippets.services", []);
     const services311 = get(data, "snippets.services311", []);
 
@@ -14,13 +37,11 @@ class ServicesIndex extends Component {
 
         <div className="coa-hero">
           <div className="coa-hero__callout">
-            <h1>{data.title}</h1>
+            <h1>{title}</h1>
           </div>
         </div>
 
-        <div className="coa-body">
-          {data.body}
-        </div>
+        <div className="coa-body" dangerouslySetInnerHTML={{__html: body}} />
 
         <div className="coa-section">
           {
