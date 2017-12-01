@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import data from '__tmpdata/services';
+import FormFeedback from 'components/FormFeedback';
 var axios = require('axios');
 
 class ServicesIndex extends Component {
@@ -27,8 +28,8 @@ class ServicesIndex extends Component {
 
   render() {
 
-    const title = get(this.state, "title", "");
-    const body = get(this.state, "body", "");
+    const title = get(data, "title", "");
+    const body = get(data, "body", "");
     const services = get(data, "snippets.services", []);
     const services311 = get(data, "snippets.services311", []);
 
@@ -57,32 +58,8 @@ class ServicesIndex extends Component {
         </div>
 
         <div className="coa-section coa-section--grey">
-          <h3 className="coa-section__title">Send us feedback on this page or city services.</h3>
-          <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" tel="512-974-2000">512-974-2000</a>. </p>
-
-          <form className="usa-form">
-            <fieldset className="usa-fieldset-inputs usa-sans">
-              <legend className="usa-sr-only">Site Feedback Options</legend>
-              <ul className="usa-unstyled-list">
-                <li>
-                  <input id="page-content" type="radio" name="site-feedback-options" value="stanton" />
-                  <label for="page-content">Information on this page</label>
-                </li>
-                <li>
-                  <input id="technical-issue" type="radio" name="site-feedback-options" value="anthony" />
-                  <label for="technical-issue">Technical Issue</label>
-                </li>
-                <li>
-                  <input id="other" type="radio" name="site-feedback-options" value="tubman" />
-                  <label for="other">Something else</label>
-                </li>
-              </ul>
-            </fieldset>
-            <input type="submit" value="Continue" />
-          </form>
-
-          <a>Return to Top</a>
-
+          <FormFeedback />
+          <a href="#">Return to Top</a>
         </div>
 
         <div className="coa-section">
@@ -104,7 +81,7 @@ class ServicesIndex extends Component {
         </div>
 
         <div className="coa-section">
-          <a>See a Full List of 311 Services</a>
+          <a href="#">See a Full List of 311 Services</a>
         </div>
 
       </div>

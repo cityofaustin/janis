@@ -56,7 +56,6 @@ h6 {
   @include box_verticalcenter();
   border-bottom: 1px dashed $color-gray-dark;
   color: $color-black;
-  cursor: pointer;
   font-size: $base-font-size;
   text-decoration: none;
   padding: $space-level4 0;
