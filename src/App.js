@@ -7,7 +7,7 @@ import {
 import Banner from "components/Banner"
 import Header from "components/Header"
 import ServicesIndex from "pages/Services"
-import Service from "components/Service"
+import Service from "pages/Service"
 
 import 'css/App.css'
 
