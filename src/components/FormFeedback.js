@@ -5,8 +5,8 @@ class FormFeedback extends Component {
   render() {
     return (
       <form className="usa-form">
-        <h3 className="coa-section__title">Send us feedback on this page or city services.</h3>
-        <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" tel="512-974-2000">512-974-2000</a>. </p>
+        <h4 className="coa-section__title">Send us feedback on this page or city services.</h4>
+        <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a>. </p>
 
         <fieldset className="usa-fieldset-inputs usa-sans">
           <legend className="usa-sr-only">Site Feedback Options</legend>

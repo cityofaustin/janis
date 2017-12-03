@@ -36,19 +36,19 @@ class ServicesIndex extends Component {
     return (
       <div>
 
-        <div className="coa-hero">
-          <div className="coa-hero__callout">
-            <h1>{title}</h1>
+        <div className="coa-page_hero">
+          <div className="coa-page_hero__callout">
+            <h2>{title}</h2>
           </div>
         </div>
 
-        <div className="coa-body" dangerouslySetInnerHTML={{__html: body}} />
+        <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
 
         <div className="coa-section">
           {
             services.map((service) => {
               return (
-                <a className="coa-list_link coa-list_link--box" key={service.id} href={`service/${service.id}`}>
+                <a className="coa-list_link coa-list_link--box" key={service.id} href={`/service/${service.id}`}>
                   <span>{service.title}</span>
                   <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
@@ -59,15 +59,13 @@ class ServicesIndex extends Component {
 
         <div className="coa-section coa-section--grey">
           <FormFeedback />
-          <a href="#">Return to Top</a>
+          <a className="coa-section__link" href="#">Return to Top</a>
         </div>
 
         <div className="coa-section">
-          <h3 className="coa-section__title">Request 311 Service or Call <a className="nowrap" tel="512-974-2000">512-974-2000</a></h3>
+          <h3 className="coa-section__title">Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
           <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
-        </div>
 
-        <div className="coa-section coa-section--pad_lr">
         {
           services311.map((service) => {
             return (
@@ -78,10 +76,7 @@ class ServicesIndex extends Component {
             );
           })
         }
-        </div>
-
-        <div className="coa-section">
-          <a href="#">See a Full List of 311 Services</a>
+          <a className="coa-section__link" href="#">See a Full List of 311 Services</a>
         </div>
 
       </div>
