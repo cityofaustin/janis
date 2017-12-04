@@ -49,7 +49,7 @@ class ServicesIndex extends Component {
             services.map((service) => {
               return (
                 <a className="coa-list_link coa-list_link--box" key={service.id} href={`/service/${service.id}`}>
-                  <span>{service.title}</span>
+                  <span>{service.name}</span>
                   <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
               );
@@ -63,14 +63,14 @@ class ServicesIndex extends Component {
         </div>
 
         <div className="coa-section">
-          <h3 className="coa-section__title">Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
+          <h4 className="coa-section__title">Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h4>
           <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
 
         {
           services311.map((service) => {
             return (
               <a className="coa-list_link" key={service.id} href="#">
-                <span>{service.title}</span>
+                <span>{service.name}</span>
                 <i className="fa fa-chevron-right" aria-hidden="true"></i>
               </a>
             );

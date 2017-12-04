@@ -103,29 +103,6 @@ li {
   padding-top: $space-level5;
 }
 
-.coa-section--pad_tlr {
-  padding-bottom: 0;
-}
-.coa-section--pad_tb {
-  padding-left: 0;
-  padding-right: 0;
-}
-.coa-section--pad_lr {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.coa-section--pad_t {
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.coa-section--pad_b {
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .coa-section--grey {
   background-color: $color-gray-lightest;
 }
@@ -135,13 +112,28 @@ li {
   margin-bottom: $space-level2;
   padding-bottom: $space-level2;
 }
-.coa-section__subtitle {
+
+.coa-section > h4 {
+  margin-top: $space-level5;
   margin-bottom: $space-level2;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.coa-section > p {
+  margin: 0;
+  margin-bottom: $space-level2;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .coa-section__map {
  margin-bottom: $space-level2;
- a, span {
+ & > a, span {
   display: block;
  }
 }
@@ -168,6 +160,7 @@ li {
 .coa-page_hero__callout {
   h2 {
     font-weight: $font-bold;
+    margin: 0;
   }
 }
 .coa-page_body {

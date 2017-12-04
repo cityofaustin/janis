@@ -1,60 +1,74 @@
 import React, { Component } from 'react';
+import { get } from 'lodash';
+import data from '__tmpdata/service_1';
 import FormFeedback from 'components/FormFeedback';
 
 class Service extends Component {
 
   render() {
 
-    const title = "Look up recycling, compost, and trash pick-up days";
-    const topicId = "1";
-    const topicArea = "Manage Utilities and Resources";
+    const topicId = get(data, "topic.id", null);
+    const topicName = get(data, "topic.name", null);
+    const title = get(data, "title", null);
+    const steps = get(data, "steps", null);
+    const body = get(data, "body", null);
+    const phone = get(data, "phone", null);
+    const email = get(data, "email", null);
+    const address = get(data, "address", null);
+    const hours = get(data, "hours", null);
+    const app = get(data, "app", null);
+    const related = get(data, "related", null);
 
     return (
       <div>
 
         <div className="coa-section">
-          <a className="coa-page_breadcrumb" href={`/services/${topicId}`}>{topicArea}</a>
+          <a className="coa-page_breadcrumb" href={`/services/${topicId}`}>{topicName}</a>
           <h3 className="coa-page_title">{title}</h3>
-          <ol>
-            <li>Type your address, without apartment number, in the box below</li>
-            <li>Press the search button to view your schedule</li>
-            <li>(optional) Click to add your schedule to your Google, iCal, or Microsoft calendar or click to print a copy</li>
-          </ol>
+          { steps && (
+              <ol>{ steps.map((step) => { return <li>{step}</li> }) }</ol>
+          )}
         </div>
 
+      { app && (
         <div className="coa-section">
-          <h4 className="coa-section__subtitle">Use this form to look up your schedule</h4>
-          INSERT IFRAME/FORM HERE
+          <h4>{app.title}</h4>
+          INSERT {app.type} app HERE
         </div>
+      )}
 
-        <div className="coa-section coa-section--pad_tlr">
-          <h4 className="coa-section__subtitle">Apartments or Condos</h4>
-          If you live in an apartment or condo, do not enter your unit number.
-        </div>
+      { body && (
+        <div className="coa-section" dangerouslySetInnerHTML={{__html: body}} />
+      )}
 
-        <div className="coa-section coa-section--pad_tlr">
-          <h4 className="coa-section__subtitle">Holidays</h4>
-          Service is postponed by one day during holiday weeks: Thanksgiving, Christmas, and New Year’s Day, unless the holiday falls on a Sunday.
-        </div>
-
+      { (phone || email || address || hours) && (
         <div className="coa-section">
-          <h4 className="coa-section__subtitle">Contact</h4>
+          <h4>Contact</h4>
+
+        { phone && (
           <div className="coa-section__map">
             <h5>Phone Number</h5>
-            <a href="tel:512-367-8695">512-367-8695</a>
+            <a href={`tel:${phone}`}>{phone}</a>
           </div>
+        )}
 
+        { email && (
           <div className="coa-section__map">
             <h5>Email</h5>
-            <a href="mailto:resourcerecovery@austintexas.gov">resourcerecovery@austintexas.gov</a>
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
+        )}
 
+        { address && (
           <div className="coa-section__map">
-            <h5>Austin Recycle and Reuse Drop-off Center</h5>
-            <span>2514 Business Center Drive </span>
-            <span>Austin, Texas 78744 </span>
-            <span>United States</span>
+            <h5>{address.name}</h5>
+            <span>{address.street}</span>
+            <span>{address.city}, {address.state} {address.zip} </span>
+            <span>{address.country}</span>
           </div>
+        )}
+
+        { hours && (
 
           <div className="coa-section__map">
             <h5>Hours</h5>
@@ -66,51 +80,40 @@ class Service extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">Monday</th>
-                  <td>9:00 AM - 5:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Tuesday</th>
-                  <td>9:00 AM - 5:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Wednesday</th>
-                  <td>9:00 AM - 5:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Thursday</th>
-                  <td>9:00 AM - 5:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Friday</th>
-                  <td>9:00 AM - 5:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Saturday</th>
-                  <td>7:00 AM - 12:00 PM</td>
-                </tr>
-                <tr>
-                  <th scope="row">Sunday</th>
-                  <td>Closed</td>
-                </tr>
+              {
+                Object.entries(hours).map((hour) => {
+                  return (
+                    <tr>
+                      <th scope="row">{hour[0]}</th>
+                      <td>{hour[1]}</td>
+                    </tr>
+                  );
+                })
+              }
               </tbody>
             </table>
           </div>
-        </div>
+        )}
 
+        </div>
+      )}
+
+      { related && (
         <div className="coa-section coa-section--grey">
           <h4 className="coa-section__title">Use related services</h4>
-          <a className="coa-list_link coa-list_link--box bg-white" href="/service/2">
-            <span>Request a second, free recycling cart for your house</span>
-            <i className="fa fa-chevron-right" aria-hidden="true"></i>
-          </a>
-          <a className="coa-list_link coa-list_link--box bg-white" href="/service/3">
-            <span>Pick Up Free Mulch</span>
-            <i className="fa fa-chevron-right" aria-hidden="true"></i>
-          </a>
-          <a className="coa-section__link" href="services/topicArea/1">See all services under Manage recycling, trash, compost, energy, and water</a>
+          {
+            related.map((service) => {
+              return (
+                <a className="coa-list_link coa-list_link--box bg-white" href={`/service/${service.id}`}>
+                  <span>{service.name}</span>
+                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+              );
+            })
+          }
+          <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
         </div>
+      )}
 
         <div className="coa-section">
           <FormFeedback />

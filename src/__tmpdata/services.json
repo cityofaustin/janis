@@ -6,45 +6,45 @@
     "services": [
       {
         "id": 1,
-        "title": "Look up recycling, compost, and trash pick-up days"
+        "name": "Look up recycling, compost, and trash pick-up days"
       },
       {
         "id": 2,
-        "title": "Get ready for bulk item collection"
+        "name": "Get ready for bulk item collection"
       },
       {
         "id": 3,
-        "title": "Visit the Recycle and Reuse Drop-off Center"
+        "name": "Visit the Recycle and Reuse Drop-off Center"
       },
       {
         "id": 4,
-        "title": "Recycle your Christmas tree"
+        "name": "Recycle your Christmas tree"
       }
     ],
     "services311": [
       {
         "id": 1,
-        "title": "Report a Pothole"
+        "name": "Report a Pothole"
       },
       {
         "id": 2,
-        "title": "Request Street Maintenance"
+        "name": "Request Street Maintenance"
       },
       {
         "id": 3,
-        "title": "Report Problem with a Bridge"
+        "name": "Report Problem with a Bridge"
       },
       {
         "id": 4,
-        "title": "Report a Stray Animal You Found"
+        "name": "Report a Stray Animal You Found"
       },
       {
         "id": 5,
-        "title": "Report Erosion along Waterways"
+        "name": "Report Erosion along Waterways"
       },
       {
         "id": 6,
-        "title": "Report a Possible Code Violation"
+        "name": "Report a Possible Code Violation"
       }
     ]
   }
