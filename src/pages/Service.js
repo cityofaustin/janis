@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import FormFeedback from 'components/FormFeedback';
+import ListLink from 'components/ListLink';
 
 import s1 from '__tmpdata/service_1';
 import s2 from '__tmpdata/service_2';
@@ -114,18 +115,14 @@ class Service extends Component {
         <div className="coa-section coa-section--grey">
           <h4 className="coa-section__title">Use related services</h4>
           {
-            related.map((service) => {
-              return (
-                <a
-                  key={service.id}
-                  className="coa-list_link coa-list_link--box bg-white"
-                  href={`/service/${service.id}`}
-                >
-                  <span>{service.name}</span>
-                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                </a>
-              );
-            })
+            related.map((service) =>
+              <ListLink
+                id={service.id}
+                url={`/service/${service.id}`}
+                text={service.name}
+                isBoxType="true"
+              />
+            )
           }
           <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
         </div>

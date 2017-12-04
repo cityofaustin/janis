@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import data from '__tmpdata/services';
 import FormFeedback from 'components/FormFeedback';
+import ListLink from 'components/ListLink';
 var axios = require('axios');
 
 class ServicesIndex extends Component {
@@ -46,14 +47,14 @@ class ServicesIndex extends Component {
 
         <div className="coa-section">
           {
-            services.map((service) => {
-              return (
-                <a className="coa-list_link coa-list_link--box" key={service.id} href={`/service/${service.id}`}>
-                  <span>{service.name}</span>
-                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                </a>
-              );
-            })
+            services.map((service) =>
+              <ListLink
+                id={service.id}
+                url={`/service/${service.id}`}
+                text={service.name}
+                isBoxType="true"
+              />
+            )
           }
         </div>
 
@@ -67,14 +68,13 @@ class ServicesIndex extends Component {
           <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
 
         {
-          services311.map((service) => {
-            return (
-              <a className="coa-list_link" key={service.id} href="#">
-                <span>{service.name}</span>
-                <i className="fa fa-chevron-right" aria-hidden="true"></i>
-              </a>
-            );
-          })
+          services311.map((service) =>
+            <ListLink
+              id={service.id}
+              url="#"
+              text={service.name}
+            />
+          )
         }
           <a className="coa-section__link" href="#">See a Full List of 311 Services</a>
         </div>
