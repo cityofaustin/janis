@@ -1,0 +1,50 @@
+{
+  "id": 1,
+  "meta": {},
+  "topic": {
+    "id": 1,
+    "name": "Manage Utilities and Resources"
+  },
+  "title": "Look up recycling, compost, and trash pick-up days",
+  "body": "<h4>Apartments or Condos</h4><p>If you live in an apartment or condo, do not enter your unit number.</p><h4>Holidays</h4><p>Service is postponed by one day during holiday weeks: Thanksgiving, Christmas, and New Year’s Day, unless the holiday falls on a Sunday.</p>",
+  "steps": [
+    "Type your address, without apartment number, in the box below",
+    "Press the search button to view your schedule",
+    "(optional) Click to add your schedule to your Google, iCal, or Microsoft calendar or click to print a copy"
+  ],
+  "phone":"512-367-8695",
+  "email":"resourcerecovery@austintexas.gov",
+  "address": {
+    "name": "Austin Recycle and Reuse Drop-off Center",
+    "street": "2514 Business Center Drive ",
+    "city": "Austin",
+    "state": "Texas",
+    "zip": "78744 ",
+    "country": "United States"
+  },
+  "hours": {
+    "Monday":"9:00 AM - 5:00 PM",
+    "Tuesday":"9:00 AM - 5:00 PM",
+    "Wednesday":"9:00 AM - 5:00 PM",
+    "Thursday":"9:00 AM - 5:00 PM",
+    "Friday":"9:00 AM - 5:00 PM",
+    "Saturday":"7:00 AM - 12:00 PM",
+    "Sunday":"closed"
+  },
+  "app": {
+    "title":"Use this form to look up your schedule",
+    "type": "form",
+    "embed_data": {},
+    "body": ""
+  },
+  "related": [
+    {
+      "id": 5,
+      "name": "Request a second, free recycling cart for your house"
+    },
+    {
+      "id": 6,
+      "name": "Pick Up Free Mulch"
+    }
+  ]
+}

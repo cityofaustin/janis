@@ -1,0 +1,46 @@
+{
+  "id": 2,
+  "meta": {},
+  "topic": {
+    "id": 1,
+    "name": "Manage Utilities and Resources"
+  },
+  "title": "Visit the Recycle and Reuse Drop-off Center",
+  "body": "<h4>Recycle and reuse drop-off</h4><p>The Household Hazardous Waste Facility and the Resource Recovery Center have merged into the Recycle & Reuse Drop-Off Center.</p><p>At the Recycle & Reuse Drop-Off Center, you can drop off many items to be recycled, reused or safely discarded. You can also pick up free items to reuse yourself.</p><p>Most Recycle & Reuse Drop-Off Center services are free to Austin residents, but some services have a fee. Eligibility and cost information are listed with each service.</p>",
+  "steps": null,
+  "phone":"512-367-8695",
+  "email":"resourcerecovery@austintexas.gov",
+  "address": {
+    "name": "Austin Recycle and Reuse Drop-off Center",
+    "street": "2514 Business Center Drive ",
+    "city": "Austin",
+    "state": "Texas",
+    "zip": "78744 ",
+    "country": "United States"
+  },
+  "hours": {
+    "Monday":"8:00 AM - 4:30 PM",
+    "Tuesday":"8:00 AM - 4:30 PM",
+    "Wednesday":"8:00 AM - 4:30 PM",
+    "Thursday":"8:00 AM - 4:30 PM",
+    "Friday":"8:00 AM - 4:30 PM",
+    "Saturday": "closed",
+    "Sunday":"closed"
+  },
+  "app": {
+    "title": "Recycle and Reuse Drop-off Center",
+    "type": "map",
+    "embeddata": {},
+    "body": "Visit the Recycle and Reuse Drop-off Center.<br />3810 Todd Ln.<br />Austin, TX 78744<br />8 a.m. to 4:30 p.m.<br />Monday - Friday"
+  },
+  "related": [
+    {
+      "id": 3,
+      "name": "Get ready for bulk item collection"
+    },
+    {
+      "id": 1,
+      "name": "Look up recycling, compost, and trash pick-up days"
+    }
+  ]
+}

@@ -1,2 +1,175 @@
+// vendor
 @import 'uswds_variables';
 @import 'node_modules/uswds/src/stylesheets/uswds';
+@import 'css/vendor/font_awesome/scss/font-awesome.scss';
+
+// base
+html {
+  font-family: $font-sans;
+  font-size: $em-base;
+  font-weight: $font-normal;
+  line-height: $base-line-height;
+}
+
+// variables
+$space-level1: 5px;
+$space-level2: 10px;
+$space-level3: 15px;
+$space-level4: 20px;
+$space-level5: 40px;
+$space-level6: 60px;
+
+@mixin box_verticalcenter($height: auto) {
+  align-items: center;
+  display: flex;
+  height: $height;
+  justify-content: space-between;
+}
+
+// uswds overrides
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-sans;
+  font-weight: $font-medium;
+  margin: 0;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+li {
+  margin-bottom: $space-level2;
+}
+
+.usa-table-borderless {
+  margin: 0;
+  padding: 0;
+
+  td, th {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  th:first-child {
+    padding-right: $space-level2;
+  }
+}
+
+//helpers
+.nowrap {
+  white-space: nowrap;
+}
+.bg-white {
+  background-color: $color-white;
+}
+
+// components
+
+// coa content link
+.coa-list_link {
+  @include box_verticalcenter();
+  border-bottom: 1px dashed $color-gray-dark;
+  color: $color-black;
+  font-size: $base-font-size;
+  text-decoration: none;
+  padding: $space-level4 0;
+
+  i {
+    padding-left: $space-level2;;
+  }
+}
+
+.coa-list_link--box {
+  border: 1px solid $color-gray-lighter;
+  font-size: $lead-font-size;
+  margin-bottom: $space-level2;
+  height: 100px;
+  padding: 0 $space-level2;
+}
+
+// coa section
+.coa-section {
+  margin-bottom: $space-level6;
+  margin-left: $space-level3;
+  margin-right: $space-level3;
+  margin-top: $space-level5;
+}
+
+.coa-section--grey {
+  background-color: $color-gray-lightest;
+  margin: 0;
+  padding-bottom: $space-level6;
+  padding-left: $space-level3;
+  padding-right: $space-level3;
+  padding-top: $space-level5;
+}
+
+.coa-section__title {
+  border-bottom: 5px solid $color-black;
+  margin-bottom: $space-level2;
+  padding-bottom: $space-level2;
+}
+
+.coa-section > h4 {
+  margin-bottom: $space-level2;
+  margin-top: $space-level5;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.coa-section > p {
+  margin: 0;
+  margin-bottom: $space-level4;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.coa-section__map {
+ margin-bottom: $space-level2;
+ & > a, span {
+  display: block;
+ }
+}
+
+.coa-section__link {
+  display: block;
+  margin-top: $space-level5;
+}
+
+// coa page layout
+.coa-page_breadcrumb {
+  display: block;
+  margin-bottom: $space-level2;
+}
+.coa-page_title {
+  margin-bottom: $space-level5;
+}
+.coa-page_hero {
+  @include box_verticalcenter(200px);
+  background-color: $color-gray-lighter;
+  margin-bottom: $space-level4;
+  padding: $space-level3;
+}
+.coa-page_hero__callout {
+  h2 {
+    font-weight: $font-bold;
+    margin: 0;
+  }
+}
+.coa-page_body {
+  margin: 0 $space-level3;
+}
+
+

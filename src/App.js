@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 import Banner from "components/Banner"
 import Header from "components/Header"
-import ServicesIndex from "components/ServicesIndex"
-import Service from "components/Service"
+import ServicesIndex from "pages/Services"
+import Service from "pages/Service"
 
 import 'css/App.css'
 
@@ -19,7 +18,7 @@ class App extends Component {
         <div>
           <Banner />
           <Header />
-          <section className="usa-section usa-grid">
+          <section>
             <Route path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />
           </section>
