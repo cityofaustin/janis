@@ -38,7 +38,7 @@ h6 {
   margin: 0;
 }
 
-ol {
+ol, ul {
   margin: 0;
   padding: 0;
   list-style-position: inside;
@@ -97,14 +97,19 @@ li {
 
 // coa section
 .coa-section {
-  padding-bottom: $space-level6;
-  padding-left: $space-level3;
-  padding-right: $space-level3;
-  padding-top: $space-level5;
+  margin-bottom: $space-level6;
+  margin-left: $space-level3;
+  margin-right: $space-level3;
+  margin-top: $space-level5;
 }
 
 .coa-section--grey {
   background-color: $color-gray-lightest;
+  margin: 0;
+  padding-bottom: $space-level6;
+  padding-left: $space-level3;
+  padding-right: $space-level3;
+  padding-top: $space-level5;
 }
 
 .coa-section__title {
@@ -114,8 +119,8 @@ li {
 }
 
 .coa-section > h4 {
-  margin-top: $space-level5;
   margin-bottom: $space-level2;
+  margin-top: $space-level5;
 
   &:first-child {
     margin-top: 0;
@@ -124,7 +129,7 @@ li {
 
 .coa-section > p {
   margin: 0;
-  margin-bottom: $space-level2;
+  margin-bottom: $space-level4;
 
   &:last-child {
     margin-bottom: 0;

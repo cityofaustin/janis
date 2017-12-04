@@ -6,12 +6,8 @@
     "name": "Manage Utilities and Resources"
   },
   "title": "Visit the Recycle and Reuse Drop-off Center",
-  "body": "<h4>Apartments or Condos</h4><p>If you live in an apartment or condo, do not enter your unit number.</p><h4>Holidays</h4><p>Service is postponed by one day during holiday weeks: Thanksgiving, Christmas, and New Year’s Day, unless the holiday falls on a Sunday.</p>",
-  "steps": [
-    "Type your address, without apartment number, in the box below",
-    "Press the search button to view your schedule",
-    "(optional) Click to add your schedule to your Google, iCal, or Microsoft calendar or click to print a copy"
-  ],
+  "body": "<h4>Recycle and reuse drop-off</h4><p>The Household Hazardous Waste Facility and the Resource Recovery Center have merged into the Recycle & Reuse Drop-Off Center.</p><p>At the Recycle & Reuse Drop-Off Center, you can drop off many items to be recycled, reused or safely discarded. You can also pick up free items to reuse yourself.</p><p>Most Recycle & Reuse Drop-Off Center services are free to Austin residents, but some services have a fee. Eligibility and cost information are listed with each service.</p>",
+  "steps": null,
   "phone":"512-367-8695",
   "email":"resourcerecovery@austintexas.gov",
   "address": {
@@ -23,27 +19,28 @@
     "country": "United States"
   },
   "hours": {
-    "monday":"9:00 AM - 5:00 PM",
-    "tuesday":"9:00 AM - 5:00 PM",
-    "wednesday":"9:00 AM - 5:00 PM",
-    "thursday":"9:00 AM - 5:00 PM",
-    "friday":"9:00 AM - 5:00 PM",
-    "saturday":"7:00 AM - 12:00 PM",
-    "sunday":"closed"
+    "Monday":"8:00 AM - 4:30 PM",
+    "Tuesday":"8:00 AM - 4:30 PM",
+    "Wednesday":"8:00 AM - 4:30 PM",
+    "Thursday":"8:00 AM - 4:30 PM",
+    "Friday":"8:00 AM - 4:30 PM",
+    "Saturday": "closed",
+    "Sunday":"closed"
   },
   "app": {
     "title": "Recycle and Reuse Drop-off Center",
     "type": "map",
-    "embeddata": {}
+    "embeddata": {},
+    "body": "Visit the Recycle and Reuse Drop-off Center.<br />3810 Todd Ln.<br />Austin, TX 78744<br />8 a.m. to 4:30 p.m.<br />Monday - Friday"
   },
   "related": [
     {
-      "id": 2,
-      "name": "Request a second, free recycling cart for your house"
+      "id": 3,
+      "name": "Get ready for bulk item collection"
     },
     {
-      "id": 3,
-      "name": "Pick Up Free Mulch"
+      "id": 1,
+      "name": "Look up recycling, compost, and trash pick-up days"
     }
   ]
 }

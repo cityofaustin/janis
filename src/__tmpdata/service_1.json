@@ -23,18 +23,19 @@
     "country": "United States"
   },
   "hours": {
-    "monday":"9:00 AM - 5:00 PM",
-    "tuesday":"9:00 AM - 5:00 PM",
-    "wednesday":"9:00 AM - 5:00 PM",
-    "thursday":"9:00 AM - 5:00 PM",
-    "friday":"9:00 AM - 5:00 PM",
-    "saturday":"7:00 AM - 12:00 PM",
-    "sunday":"closed"
+    "Monday":"9:00 AM - 5:00 PM",
+    "Tuesday":"9:00 AM - 5:00 PM",
+    "Wednesday":"9:00 AM - 5:00 PM",
+    "Thursday":"9:00 AM - 5:00 PM",
+    "Friday":"9:00 AM - 5:00 PM",
+    "Saturday":"7:00 AM - 12:00 PM",
+    "Sunday":"closed"
   },
   "app": {
     "title":"Use this form to look up your schedule",
     "type": "form",
-    "embed_data": {}
+    "embed_data": {},
+    "body": ""
   },
   "related": [
     {
