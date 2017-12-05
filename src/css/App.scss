@@ -67,15 +67,13 @@ li {
 .nowrap {
   white-space: nowrap;
 }
-.bg-white {
-  background-color: $color-white;
-}
 
 // components
 
 // coa content link
 .coa-list_link {
   @include box_verticalcenter();
+  background-color: $color-white;
   border-bottom: 1px dashed $color-gray-dark;
   color: $color-black;
   font-size: $base-font-size;
