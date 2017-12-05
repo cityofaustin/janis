@@ -3,7 +3,8 @@ import { get } from 'lodash';
 import data from '__tmpdata/services';
 import FormFeedback from 'components/FormFeedback';
 import ListLink from 'components/ListLink';
-var axios = require('axios');
+
+const axios = require('axios');
 
 class ServicesIndex extends Component {
 
