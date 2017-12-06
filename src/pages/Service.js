@@ -79,7 +79,7 @@ class Service extends Component {
         </div>
       )}
 
-        <div className="coa-section">
+        <div className="coa-section coa-section--lightgrey">
           <FormFeedback />
           <a className="coa-section__link" href="#">Return to Top</a>
         </div>

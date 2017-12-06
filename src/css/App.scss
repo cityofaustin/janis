@@ -93,6 +93,36 @@ li {
   padding: 0 $space-level2;
 }
 
+.coa-overlay {
+  align-items: center;
+  background-color: $color-white;
+  display: flex;
+  left: 50%;
+  height: 50vh;
+  margin-left: -40vw;
+  margin-top: -25vh;
+  outline: 9999px solid rgba(0,0,0,0.5);
+  padding: $space-level5;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  width: 80vw;
+  z-index: 10;
+}
+
+.coa-overlay__content {
+  width: 100%;
+}
+
+// form controls
+.coa-form_field__helpertext_main {
+
+}
+.coa-form_field__helpertext_sub {
+  text-align: right;
+}
+
+
 // coa section
 .coa-section {
   margin-bottom: $space-level6;
@@ -102,12 +132,17 @@ li {
 }
 
 .coa-section--grey {
-  background-color: $color-gray-lightest;
+  background-color: $color-gray-lighter;
   margin: 0;
   padding-bottom: $space-level6;
   padding-left: $space-level3;
   padding-right: $space-level3;
   padding-top: $space-level5;
+}
+
+.coa-section--lightgrey {
+  @extend .coa-section--grey;
+  background-color: $color-gray-lightest;
 }
 
 .coa-section__title {

@@ -50,6 +50,7 @@ class ServicesIndex extends Component {
           {
             services.map((service) =>
               <ListLink
+                key={service.id}
                 id={service.id}
                 url={`/service/${service.id}`}
                 text={service.name}
@@ -59,7 +60,7 @@ class ServicesIndex extends Component {
           }
         </div>
 
-        <div className="coa-section coa-section--grey">
+        <div className="coa-section coa-section--lightgrey">
           <FormFeedback />
           <a className="coa-section__link" href="#">Return to Top</a>
         </div>
@@ -71,6 +72,7 @@ class ServicesIndex extends Component {
         {
           services311.map((service) =>
             <ListLink
+              key={service.id}
               id={service.id}
               url="#"
               text={service.name}
