@@ -29,26 +29,31 @@ class Service extends Component {
     const email = get(data, "email", null);
     const address = get(data, "address", null);
     const hours = get(data, "hours", null);
-    const app = get(data, "app", null);
+    const apps = get(data, "apps", null);
     const related = get(data, "related", null);
 
     return (
       <div>
-
+        <div className="coa-page_hero--small"></div>
         <div className="coa-section">
           <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a>
-          <h3 className="coa-page_title">{title}</h3>
+          <h2 className="coa-page_title">{title}</h2>
           { steps && (
-              <ol>{ steps.map((step) => { return <li>{step}</li> }) }</ol>
+              <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} />
           )}
         </div>
 
-      { app && (
-        <div className="coa-section">
-          <h4>{app.title}</h4>
-          INSERT {app.type} app HERE
-          { app.body && <div dangerouslySetInnerHTML={{__html: app.body}} /> }
-        </div>
+      { apps && (
+
+        apps.map((app) => {
+          return (
+            <div className="coa-section">
+              <h4>{app.title}</h4>
+              INSERT {app.type} app HERE
+              { app.body && <div dangerouslySetInnerHTML={{__html: app.body}} /> }
+            </div>
+          );
+        })
       )}
 
       { body && (

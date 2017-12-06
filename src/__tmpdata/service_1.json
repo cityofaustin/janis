@@ -6,12 +6,8 @@
     "name": "Manage Utilities and Resources"
   },
   "title": "Look up recycling, compost, and trash pick-up days",
-  "body": "<h4>Apartments or Condos</h4><p>If you live in an apartment or condo, do not enter your unit number.</p><h4>Holidays</h4><p>Service is postponed by one day during holiday weeks: Thanksgiving, Christmas, and New Year’s Day, unless the holiday falls on a Sunday.</p>",
-  "steps": [
-    "Type your address, without apartment number, in the box below",
-    "Press the search button to view your schedule",
-    "(optional) Click to add your schedule to your Google, iCal, or Microsoft calendar or click to print a copy"
-  ],
+  "body": "<p>If your pickup day falls on Thanksgiving Day, Christmas Day or New Year's Day—or if it falls after the holiday in the same week—it slides to one day later. If the holiday falls on a Sunday, your pickup day will not slide.</p><p>We will pick up your trash and yard trimmings every week. Every other week, we will pick up recycling, clothing, and housewares are collected every other week. All curbside pick-ups happen on the same day of the week unless it is a holiday. Use My Schedule to get your personalized collection calendar.</p>",
+  "steps": "<ol><li>Type your address, without apartment number, in the box below</li><li>Press the search button to view your schedule</li><li>(optional) Click to add your schedule to your Google, iCal, or Microsoft calendar or click to print a copy</li></ol>",
   "phone":"512-367-8695",
   "email":"resourcerecovery@austintexas.gov",
   "address": {
@@ -31,12 +27,12 @@
     "Saturday":"7:00 AM - 12:00 PM",
     "Sunday":"closed"
   },
-  "app": {
-    "title":"Use this form to look up your schedule",
-    "type": "form",
-    "embed_data": {},
-    "body": ""
-  },
+  "apps": [{
+      "title":"Use this form to look up your pick up schedule",
+      "type": "form",
+      "embed_data": {},
+      "body": ""
+  }],
   "related": [
     {
       "id": 5,

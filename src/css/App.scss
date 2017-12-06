@@ -44,10 +44,6 @@ ol, ul {
   list-style-position: inside;
 }
 
-li {
-  margin-bottom: $space-level2;
-}
-
 .usa-table-borderless {
   margin: 0;
   padding: 0;
@@ -110,6 +106,12 @@ li {
   z-index: 10;
 }
 
+.coa-steps {
+  li {
+    margin-bottom: $space-level3;
+  }
+}
+
 .coa-overlay__content {
   width: 100%;
 }
@@ -151,6 +153,20 @@ li {
   padding-bottom: $space-level2;
 }
 
+.coa-section__map {
+ margin-bottom: $space-level2;
+ & > a, span {
+  display: block;
+ }
+}
+
+.coa-section__link {
+  display: block;
+  margin-top: $space-level5;
+}
+
+
+// WYSIWYG editor content
 .coa-section > h4 {
   margin-bottom: $space-level2;
   margin-top: $space-level5;
@@ -169,16 +185,28 @@ li {
   }
 }
 
-.coa-section__map {
- margin-bottom: $space-level2;
- & > a, span {
-  display: block;
- }
+.coa-section > ul {
+  margin-bottom: $space-level4;
+
+  & > li {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.coa-section__link {
-  display: block;
-  margin-top: $space-level5;
+.coa-section > ol {
+  margin-bottom: $space-level4;
+
+  & > li {
+    margin-bottom: $space-level2;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 // coa page layout
@@ -188,6 +216,7 @@ li {
 }
 .coa-page_title {
   margin-bottom: $space-level5;
+  font-weight: $font-bold;
 }
 .coa-page_hero {
   @include box_verticalcenter(200px);
@@ -195,6 +224,12 @@ li {
   margin-bottom: $space-level4;
   padding: $space-level3;
 }
+
+.coa-page_hero--small {
+  @extend .coa-page_hero;
+  height: 80px;
+}
+
 .coa-page_hero__callout {
   h2 {
     font-weight: $font-bold;
@@ -204,5 +239,4 @@ li {
 .coa-page_body {
   margin: 0 $space-level3;
 }
-
 
