@@ -31,13 +31,15 @@ class FormFeedback extends Component {
 
   render() {
     return (
-      <form className="usa-form">
-        <h4 className="coa-section__title">Send us feedback on this page or city services.</h4>
+      <form>
+        <div className="coa-section__title">
+          <h3>Send us feedback on this page or city services.</h3>
+        </div>
 
       { (this.state.stage === 0 || this.state.stage === 1) && (
 
         <div>
-          <p className="usa-content">Prefer to talk to a person at 311? Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a>. </p>
+          <p>Prefer to talk to a person at 311? Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a>. </p>
           <fieldset className="usa-fieldset-inputs usa-sans">
             <legend className="usa-sr-only">Site Feedback Options</legend>
             <ul className="usa-unstyled-list">
@@ -95,7 +97,7 @@ class FormFeedback extends Component {
       { this.state.stage === 2 && (
 
         <div>
-          <p className="usa-content">Your feedback will be public and can be found at <a className="nowrap" href="#">austin.gov feedback tracker</a>.</p>
+          <p>Your feedback will be public and can be found at <a className="nowrap" href="#">austin.gov feedback tracker</a>.</p>
           <fieldset>
             <div className="coa-form_field__helpertext_sub">required</div>
             <label className="usa-sr-only" for="site-feedback-textarea">Tell Us More</label>
@@ -107,7 +109,7 @@ class FormFeedback extends Component {
             >{this.state["site-feedback-textarea"]}</textarea>
           </fieldset>
 
-          <p className="usa-content coa-form_field__helpertext_main">Type your email in the box if you would like to receive a link to your feedback.</p>
+          <p className="coa-form_field__helpertext_main">Type your email in the box if you would like to receive a link to your feedback.</p>
           <fieldset>
             <div className="coa-form_field__helpertext_sub">required</div>
             <label className="usa-sr-only" for="site-feedback-email">Email</label>

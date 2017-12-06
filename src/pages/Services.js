@@ -66,8 +66,10 @@ class ServicesIndex extends Component {
         </div>
 
         <div className="coa-section">
-          <h4 className="coa-section__title">Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h4>
-          <p className="usa-content">311 is the city of Austin’s 24 hour information desk.</p>
+          <div className="coa-section__title">
+            <h3>Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
+          </div>
+          <p>311 is the city of Austin’s 24 hour information desk.</p>
 
         {
           services311.map((service) =>

@@ -69,7 +69,9 @@ class Service extends Component {
 
       { related && (
         <div className="coa-section coa-section--grey">
-          <h4 className="coa-section__title">Use related services</h4>
+          <div className="coa-section__title">
+            <h3>Use related services</h3>
+          </div>
           {
             related.map((service) =>
               <ListLink

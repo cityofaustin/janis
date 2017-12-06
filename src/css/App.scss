@@ -66,6 +66,23 @@ ol, ul {
 
 // components
 
+.coa-content {
+  span,
+  a,
+  p,
+  table,
+  ul,
+  ol,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: 850px;
+  }
+}
+
 // coa content link
 .coa-list_link {
   @include box_verticalcenter();
@@ -106,14 +123,14 @@ ol, ul {
   z-index: 10;
 }
 
+.coa-overlay__content {
+  width: 100%;
+}
+
 .coa-steps {
   li {
     margin-bottom: $space-level3;
   }
-}
-
-.coa-overlay__content {
-  width: 100%;
 }
 
 // form controls
