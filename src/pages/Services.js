@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
-import data from '__tmpdata/services';
+// TODO: this jsonFileData is temporary. Add it to Wagtail API
+import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'components/FormFeedback';
 import ListLink from 'components/ListLink';
 
@@ -11,29 +12,25 @@ class ServicesIndex extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      body: ''
+      data: {}
     };
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:8000/api/v2/pages/?format=json&type=base.ServicePage&fields=content,extra_content,tags')
+      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/?type=base.ServicePage`)
       .then(res => {
-        this.setState({
-          title: res.data.items[0].title,
-          body: res.data.items[0].content
-        })
+        this.setState({ data: res.data })
       })
       .catch(err => console.log(err))
   }
 
   render() {
 
-    const title = get(data, "title", "");
-    const body = get(data, "body", "");
-    const services = get(data, "snippets.services", []);
-    const services311 = get(data, "snippets.services311", []);
+    const title = get(jsonFileData, "title", "");
+    const body = get(jsonFileData, "body", "");
+    const services311 = get(jsonFileData, "snippets.services311", []);
+    const { items: services = [] } = this.state.data
 
     return (
       <div>
@@ -53,7 +50,7 @@ class ServicesIndex extends Component {
                 key={service.id}
                 id={service.id}
                 url={`/service/${service.id}`}
-                text={service.name}
+                text={service.title}
                 isBoxType="true"
               />
             )
@@ -77,7 +74,7 @@ class ServicesIndex extends Component {
               key={service.id}
               id={service.id}
               url="#"
-              text={service.name}
+              text={service.title}
             />
           )
         }
