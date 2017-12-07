@@ -52,7 +52,7 @@ class FormFeedback extends Component {
                   checked={this.state["site-feedback-options"] === "page-content"}
                   onChange={this.handleFieldChange}
                 />
-                <label for="page-content">Information on this page</label>
+                <label htmlFor="page-content">Information on this page</label>
               </li>
               <li>
                 <input
@@ -63,7 +63,7 @@ class FormFeedback extends Component {
                   checked={this.state["site-feedback-options"] === "translation"}
                   onChange={this.handleFieldChange}
                 />
-                <label for="translation">Language Translation</label>
+                <label htmlFor="translation">Language Translation</label>
               </li>
               <li>
                 <input
@@ -74,7 +74,7 @@ class FormFeedback extends Component {
                   checked={this.state["site-feedback-options"] === "technical-issue"}
                   onChange={this.handleFieldChange}
                 />
-                <label for="technical-issue">Technical Issue</label>
+                <label htmlFor="technical-issue">Technical Issue</label>
               </li>
               <li>
                 <input
@@ -85,7 +85,7 @@ class FormFeedback extends Component {
                   checked={this.state["site-feedback-options"] === "other"}
                   onChange={this.handleFieldChange}
                 />
-                <label for="other">Something else</label>
+                <label htmlFor="other">Something else</label>
               </li>
             </ul>
           </fieldset>
@@ -100,7 +100,7 @@ class FormFeedback extends Component {
           <p>Your feedback will be public and can be found at <a className="nowrap" href="#">austin.gov feedback tracker</a>.</p>
           <fieldset>
             <div className="coa-form_field__helpertext_sub">required</div>
-            <label className="usa-sr-only" for="site-feedback-textarea">Tell Us More</label>
+            <label className="usa-sr-only" htmlFor="site-feedback-textarea">Tell Us More</label>
             <textarea
               id="site-feedback-textarea"
               name="site-feedback-textarea"
@@ -112,7 +112,7 @@ class FormFeedback extends Component {
           <p className="coa-form_field__helpertext_main">Type your email in the box if you would like to receive a link to your feedback.</p>
           <fieldset>
             <div className="coa-form_field__helpertext_sub">required</div>
-            <label className="usa-sr-only" for="site-feedback-email">Email</label>
+            <label className="usa-sr-only" htmlFor="site-feedback-email">Email</label>
             <input
               id="site-feedback-email"
               name="site-feedback-email"
