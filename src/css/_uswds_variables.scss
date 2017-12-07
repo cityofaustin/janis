@@ -116,9 +116,10 @@ $grid-columns-medium: 6 !default;
 $grid-columns-large: 12 !default;
 
 // @media single-keyword helpers
-$small: new-breakpoint(min-width $small-screen $grid-columns-small) !default;
-$medium: new-breakpoint(min-width $medium-screen $grid-columns-medium) !default;
-$large: new-breakpoint(min-width $large-screen $grid-columns-large) !default;
+//TODO: file issue with USWDS --> new breakpoint will not be defined when this file is imported
+// $small: new-breakpoint(min-width $small-screen $grid-columns-small) !default;
+// $medium: new-breakpoint(min-width $medium-screen $grid-columns-medium) !default;
+// $large: new-breakpoint(min-width $large-screen $grid-columns-large) !default;
 
 // Relative font and image file paths
 $font-path:   '../../node_modules/uswds/src/fonts' !default;
