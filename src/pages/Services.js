@@ -45,17 +45,21 @@ class ServicesIndex extends Component {
         <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
 
         <div className="coa-section">
+          <div className="row">
           {
             services.map((service) =>
-              <ListLink
-                key={service.id}
-                id={service.id}
-                url={`/service/${service.id}`}
-                text={service.title}
-                isBoxType="true"
-              />
+              <div className="col-xs-12 col-md-6 col-lg-4">
+                <ListLink
+                  key={service.id}
+                  id={service.id}
+                  url={`/service/${service.id}`}
+                  text={service.title}
+                  isBoxType="true"
+                />
+              </div>
             )
           }
+          </div>
         </div>
 
         <div className="coa-section coa-section--lightgrey">
@@ -69,16 +73,21 @@ class ServicesIndex extends Component {
           </div>
           <p>311 is the city of Austin’s 24 hour information desk.</p>
 
-        {
-          services311.map((service) =>
-            <ListLink
-              key={service.id}
-              id={service.id}
-              url="#"
-              text={service.title}
-            />
-          )
-        }
+          <div className="row">
+          {
+            services311.map((service) =>
+              <div className="col-xs-12 col-lg-4">
+                <ListLink
+                  key={service.id}
+                  id={service.id}
+                  url="#"
+                  text={service.title}
+                />
+              </div>
+            )
+          }
+          </div>
+
           <a className="coa-section__link" href="#">See a Full List of 311 Services</a>
         </div>
 

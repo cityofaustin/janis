@@ -9,7 +9,7 @@ class ListLink extends Component {
 
     return (
       <Link
-        className={ isBoxType ? "coa-list_link coa-list_link--box" : "coa-list_link" }
+        className={ `coa-list_link ${(isBoxType && "coa-list_link--box" )}` }
         key={id}
         to={url}
       >

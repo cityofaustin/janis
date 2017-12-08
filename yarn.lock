@@ -2762,6 +2762,12 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+"flexboxgrid-sass@https://github.com/hugeinc/flexboxgrid-sass.git":
+  version "8.0.5"
+  resolved "https://github.com/hugeinc/flexboxgrid-sass.git#14d347cfa2dc11f9fac26fe00a8679fcda2736ff"
+  dependencies:
+    sass-flex-mixin "^1.0.3"
+
 follow-redirects@^1.2.5:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.6.tgz#4dcdc7e4ab3dd6765a97ff89c3b4c258117c79bf"
@@ -6135,6 +6141,10 @@ sane@~1.6.0:
     minimist "^1.1.1"
     walker "~1.0.5"
     watch "~0.10.0"
+
+sass-flex-mixin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/sass-flex-mixin/-/sass-flex-mixin-1.0.3.tgz#a504d62062f7b0e773aebc395de1f45aaa6e4fd0"
 
 sass-graph@^2.1.1, sass-graph@^2.2.4:
   version "2.2.4"
