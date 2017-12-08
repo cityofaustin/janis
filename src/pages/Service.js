@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 import FormFeedback from 'components/FormFeedback';
 import ListLink from 'components/ListLink';
@@ -56,7 +55,7 @@ class Service extends Component {
         <div className="coa-page_hero--small"></div>
         <div className="coa-section">
           { topicId && (
-            <Link className="coa-page_breadcrumb" to={`/services/topic/${topicId}`}>{topicName}</Link>
+            <a className="coa-page_breadcrumb" to={`/services/topic/${topicId}`}>{topicName}</a>
           )}
           <h2 className="coa-page_title">{title}</h2>
           { steps && (
