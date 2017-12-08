@@ -10,7 +10,7 @@ class ListLink extends Component {
       <a
         className={ `coa-list_link ${(isBoxType && "coa-list_link--box" )}` }
         key={id}
-        to={url}
+        href={url}
       >
         <span>{text}</span>
         <i className="fa fa-chevron-right" aria-hidden="true"></i>

@@ -55,7 +55,7 @@ class Service extends Component {
         <div className="coa-page_hero--small"></div>
         <div className="coa-section">
           { topicId && (
-            <a className="coa-page_breadcrumb" to={`/services/topic/${topicId}`}>{topicName}</a>
+            <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a>
           )}
           <h2 className="coa-page_title">{title}</h2>
           { steps && (
