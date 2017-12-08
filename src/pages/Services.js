@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
+import axios from 'axios';
+
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'components/FormFeedback';
 import ListLink from 'components/ListLink';
 
-const axios = require('axios');
 
 class ServicesIndex extends Component {
 
