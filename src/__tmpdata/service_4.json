@@ -30,12 +30,16 @@
   "apps": null,
   "related": [
     {
-      "id": 2,
+      "id": 5,
       "name": "Visit the Recycle and Reuse Drop-off Center"
     },
     {
-      "id": 1,
+      "id": 6,
       "name": "Look up recycling, compost, and trash pick-up days"
+    },
+    {
+      "id": 7,
+      "name": "Get ready for bulk item collection"
     }
   ]
 }
