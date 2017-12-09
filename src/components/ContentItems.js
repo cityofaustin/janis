@@ -7,25 +7,21 @@ class ContentItems extends Component {
     const { contentItems } = this.props;
 
     return (contentItems) && (
-      <div>
-      {
-        contentItems.map((content) => {
-          if (content.type === 'application_block') {
-            return (
-              <div className="coa-section">
-                <h4>{content.value.description}</h4>
-                INSERT {content.type} app HERE
-                { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
-              </div>
-            );
-          } else if (content.type === 'content') {
-            return (
-              <div className="coa-section" dangerouslySetInnerHTML={{__html: content.value}} />
-            )
-          }
-        })
-      }
-      </div>
+
+      contentItems.map((content) =>
+        <div key={content.id}>
+          {(content.type === 'application_block') && (
+            <div className="coa-section">
+              <h4>{content.value.description}</h4>
+              INSERT {content.type} app HERE
+              { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
+            </div>
+          )}
+          {(content.type === 'content') && (
+            <div className="coa-section" dangerouslySetInnerHTML={{__html: content.value}} />
+          )}
+        </div>
+      )
     );
   }
 }

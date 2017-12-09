@@ -19,14 +19,12 @@ class Hours extends Component {
           </thead>
           <tbody>
           {
-            Object.entries(hours).map((hour, index) => {
-              return (
-                <tr key={index}>
-                  <th scope="row">{hour[0]}</th>
-                  <td>{hour[1]}</td>
-                </tr>
-              );
-            })
+            Object.entries(hours).map((hour, index) =>
+              <tr key={index}>
+                <th scope="row">{hour[0]}</th>
+                <td>{hour[1]}</td>
+              </tr>
+            )
           }
           </tbody>
         </table>

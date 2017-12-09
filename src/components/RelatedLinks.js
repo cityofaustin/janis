@@ -17,7 +17,7 @@ class RelatedLinks extends Component {
         <div className="row">
         {
           relatedlinks.map((service) =>
-            <div className="col-xs-12 col-md-6 col-lg-4">
+            <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
             <ListLink
               id={service.id}
               url={`/service/${service.id}`}
