@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class ListLink extends Component {
 
-  render () {
+  render() {
 
-    const {id, url, text, isBoxType} = this.props;
+    const { id, url, text, isBoxType } = this.props;
 
     return (
       <a

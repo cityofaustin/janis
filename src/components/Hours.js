@@ -4,9 +4,10 @@ class Hours extends Component {
 
   render() {
 
-    const {hours} = this.props;
+    const { hours } = this.props;
 
-    if (hours) return (
+    return (hours) && (
+
       <div className="coa-section__map">
         <h5>Hours</h5>
         <table className="usa-table-borderless">

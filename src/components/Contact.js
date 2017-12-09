@@ -5,9 +5,9 @@ class Contact extends Component {
 
   render() {
 
-    const {phone, email, address, hours} = this.props;
+    const { phone, email, address, hours } = this.props;
 
-    if (phone || email || address || hours) return (
+    return (phone || email || address || hours) && (
 
       <div className="coa-section">
         <h4>Contact</h4>

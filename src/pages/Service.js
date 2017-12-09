@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
 
+import ContentItems from 'components/ContentItems';
+import RelatedLinks from 'components/RelatedLinks';
 import FormFeedback from 'components/FormFeedback';
-import ListLink from 'components/ListLink';
 import Contact from 'components/Contact';
 
 import s1 from '__tmpdata/service_1';
@@ -48,70 +49,35 @@ class Service extends Component {
     const email = get(jsonFileData, "email", null);
     const address = get(jsonFileData, "address", null);
     const hours = get(jsonFileData, "hours", null);
-    const related = get(jsonFileData, "related", null);
+    const relatedlinks = get(jsonFileData, "related", null);
 
     return (
+
       <div>
+
         <div className="coa-page_hero--small"></div>
-        <div className="coa-section">
-          { topicId && (
-            <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a>
-          )}
-          <h2 className="coa-page_title">{title}</h2>
-          { steps && (
-              <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} />
-          )}
-        </div>
 
-      {
-        contentItems && contentItems.map((content) => {
-          if (content.type === 'application_block') {
-            return (
-              <div className="coa-section">
-                <h4>{content.value.description}</h4>
-                INSERT {content.type} app HERE
-                { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
-              </div>
-            );
-          } else if (content.type === 'content') {
-            return (
-              <div className="coa-section" dangerouslySetInnerHTML={{__html: content.value}} />
-            )
-          }
-        })
-      }
+        <div className="row">
+          <div className="coa-page_left col-lg-8">
 
-      <Contact
-        phone={phone}
-        email={email}
-        address={address}
-        hours={hours}
-      />
+            <div className="coa-section">
+              { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+              <h2 className="coa-page_title">{title}</h2>
+              { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+            </div>
 
-      { related && (
-        <div className="coa-section coa-section--grey">
-          <div className="coa-section__title">
-            <h3>Use related services</h3>
+            <ContentItems contentItems={contentItems} />
+
           </div>
 
-          <div className="row">
-          {
-            related.map((service) =>
-              <div className="col-xs-12 col-md-6 col-lg-4">
-              <ListLink
-                id={service.id}
-                url={`/service/${service.id}`}
-                text={service.name}
-                isBoxType="true"
-              />
-              </div>
-            )
-          }
-          </div>
+          <div className="coa-page_right col-lg-4">
 
-          <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
+            <Contact phone={phone} email={email} address={address} hours={hours} />
+
+          </div>
         </div>
-      )}
+
+        <RelatedLinks relatedlinks={relatedlinks} topicId={topicId} topicName={topicName} />
 
         <div className="coa-section coa-section--lightgrey">
           <FormFeedback />
