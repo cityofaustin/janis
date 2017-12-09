@@ -58,7 +58,7 @@ class Service extends Component {
         <div className="coa-page_hero--small"></div>
 
         <div className="row">
-          <div className="coa-page_left col-lg-8">
+          <div className="coa-page_left col-xs-12 col-lg-8">
 
             <div className="coa-section">
               { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
@@ -70,7 +70,7 @@ class Service extends Component {
 
           </div>
 
-          <div className="coa-page_right col-lg-4">
+          <div className="coa-page_right col-xs-12 col-lg-4">
 
             <Contact phone={phone} email={email} address={address} hours={hours} />
 

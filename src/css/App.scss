@@ -64,7 +64,6 @@ ol, ul {
 
 .coa-content {
   span,
-  a,
   p,
   table,
   ul,
@@ -174,7 +173,7 @@ ol, ul {
 }
 
 .coa-section__link {
-  display: block;
+  display: inline-block;
   margin-top: $coa-space-level5;
 }
 
