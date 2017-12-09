@@ -1,0 +1,24 @@
+$coa-small-screen: 480px;
+$coa-medium-screen: 600px;
+$coa-large-screen: 1080px;
+
+$coa-space-level1: 5px;
+$coa-space-level2: 10px;
+$coa-space-level3: 15px;
+$coa-space-level4: 20px;
+$coa-space-level5: 40px;
+$coa-space-level6: 60px;
+
+$coa-column-count: 12;
+$coa-gutter-width: 2.5rem;
+
+$coa-fullwidth-margin: 2rem;
+$coa-container-maxwidth: 1200px;
+$coa-textwrap-width: 850px;
+
+@mixin box_verticalcenter($height: auto) {
+  align-items: center;
+  display: flex;
+  height: $height;
+  justify-content: space-between;
+}
