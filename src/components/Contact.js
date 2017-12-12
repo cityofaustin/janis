@@ -10,7 +10,7 @@ class Contact extends Component {
     return (phone || email || address || hours) && (
 
       <div className="coa-section">
-        <h4>Contact</h4>
+        <h4 className="coa-section__title--noborder">Contact</h4>
 
       { phone && (
         <div className="coa-section__map">

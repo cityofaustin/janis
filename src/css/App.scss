@@ -172,6 +172,13 @@ label {
   }
 }
 
+.coa-section__title--noborder {
+  @include media($coa-medium-screen) {
+    font-size: $h2-font-size;
+    font-weight: $font-bold;
+  }
+}
+
 .coa-section__map {
  margin-bottom: $coa-space-level2;
  & > a, span {
@@ -253,6 +260,10 @@ label {
 .coa-page_title {
   margin-bottom: $coa-space-level5;
   font-weight: $font-bold;
+
+  @include media($coa-medium-screen) {
+    font-size: $h1-font-size;
+  }
 }
 .coa-page_hero {
   @include box_verticalcenter(200px);
