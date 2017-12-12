@@ -1,140 +1,99 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
+import axios from 'axios';
+
+import ContentItems from 'components/ContentItems';
+import RelatedLinks from 'components/RelatedLinks';
 import FormFeedback from 'components/FormFeedback';
+import Contact from 'components/Contact';
+import Service311 from 'components/Service311';
 
 import s1 from '__tmpdata/service_1';
 import s2 from '__tmpdata/service_2';
 import s3 from '__tmpdata/service_3';
+import s4 from '__tmpdata/service_4';
+import jsonServicesFileData from '__tmpdata/services';
 
 const servicedata = {
-  1: s1,
-  2: s2,
-  3: s3
+  6: s1,
+  5: s2,
+  7: s3,
+  4: s4,
 }
 
 class Service extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {}
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,theme(text)`)
+      .then(res => {
+        this.setState({ data: res.data })
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
+    const { data } = this.state;
+    const jsonFileData = servicedata[this.props.match.params.id];
+    const services311 = get(jsonServicesFileData, "snippets.services311", []);
 
-    const data = servicedata[this.props.match.params.id];
-
-    const topicId = get(data, "topic.id", null);
-    const topicName = get(data, "topic.name", null);
+    const topicId = get(data, "theme.id", null);
+    const topicName = get(data, "theme.text", null);
     const title = get(data, "title", null);
-    const steps = get(data, "steps", null);
-    const body = get(data, "body", null);
-    const phone = get(data, "phone", null);
-    const email = get(data, "email", null);
-    const address = get(data, "address", null);
-    const hours = get(data, "hours", null);
-    const app = get(data, "app", null);
-    const related = get(data, "related", null);
+    const steps = get(data, "content", null);
+    const contentItems = get(data, "extra_content", null);
+    const phone = get(jsonFileData, "phone", null);
+    const email = get(jsonFileData, "email", null);
+    const address = get(jsonFileData, "address", null);
+    const hours = get(jsonFileData, "hours", null);
+    const relatedlinks = get(jsonFileData, "related", null);
 
     return (
+
       <div>
 
-        <div className="coa-section">
-          <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a>
-          <h3 className="coa-page_title">{title}</h3>
-          { steps && (
-              <ol>{ steps.map((step) => { return <li>{step}</li> }) }</ol>
-          )}
+        <div className="wrapper">
+          <div className="coa-page_hero--small"></div>
         </div>
 
-      { app && (
-        <div className="coa-section">
-          <h4>{app.title}</h4>
-          INSERT {app.type} app HERE
-          { app.body && <div dangerouslySetInnerHTML={{__html: app.body}} /> }
-        </div>
-      )}
+        <div className="wrapper">
+          <div className="row">
+            <div className="coa-page_left col-xs-12 col-lg-8">
 
-      { body && (
-        <div className="coa-section" dangerouslySetInnerHTML={{__html: body}} />
-      )}
+              <div className="coa-section">
+                { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+                <h2 className="coa-page_title">{title}</h2>
+                { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+              </div>
 
-      { (phone || email || address || hours) && (
-        <div className="coa-section">
-          <h4>Contact</h4>
+              <ContentItems contentItems={contentItems} />
 
-        { phone && (
-          <div className="coa-section__map">
-            <h5>Phone Number</h5>
-            <a href={`tel:${phone}`}>{phone}</a>
+            </div>
+
+            <div className="coa-page_right col-xs-12 col-lg-4">
+
+              <Contact phone={phone} email={email} address={address} hours={hours} />
+
+            </div>
           </div>
-        )}
-
-        { email && (
-          <div className="coa-section__map">
-            <h5>Email</h5>
-            <a href={`mailto:${email}`}>{email}</a>
-          </div>
-        )}
-
-        { address && (
-          <div className="coa-section__map">
-            <h5>{address.name}</h5>
-            <span>{address.street}</span>
-            <span>{address.city}, {address.state} {address.zip} </span>
-            <span>{address.country}</span>
-          </div>
-        )}
-
-        { hours && (
-
-          <div className="coa-section__map">
-            <h5>Hours</h5>
-            <table className="usa-table-borderless">
-              <thead className="usa-sr-only">
-                <tr>
-                  <th scope="col">Day</th>
-                  <th scope="col">Open - Close Hours</th>
-                </tr>
-              </thead>
-              <tbody>
-              {
-                Object.entries(hours).map((hour, index) => {
-                  return (
-                    <tr key={index}>
-                      <th scope="row">{hour[0]}</th>
-                      <td>{hour[1]}</td>
-                    </tr>
-                  );
-                })
-              }
-              </tbody>
-            </table>
-          </div>
-        )}
-
         </div>
-      )}
 
-      { related && (
-        <div className="coa-section coa-section--grey">
-          <h4 className="coa-section__title">Use related services</h4>
-          {
-            related.map((service) => {
-              return (
-                <a
-                  key={service.id}
-                  className="coa-list_link coa-list_link--box bg-white"
-                  href={`/service/${service.id}`}
-                >
-                  <span>{service.name}</span>
-                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
-                </a>
-              );
-            })
-          }
-          <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
-        </div>
-      )}
+        <RelatedLinks relatedlinks={relatedlinks} topicId={topicId} topicName={topicName} />
 
-        <div className="coa-section">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
+        <div className="coa-section coa-section--lightgrey">
+          <div className="wrapper">
+            <FormFeedback />
+            <a className="coa-section__link" href="#">Return to Top</a>
+          </div>
         </div>
+
+        <Service311 services311={services311} />
 
       </div>
     );

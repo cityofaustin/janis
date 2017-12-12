@@ -1,50 +1,32 @@
 {
   "meta": {},
   "title": "Use City of Austin Services",
-  "body": "The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.",
+  "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>",
   "snippets": {
-    "services": [
-      {
-        "id": 1,
-        "name": "Look up recycling, compost, and trash pick-up days"
-      },
-      {
-        "id": 2,
-        "name": "Visit the Recycle and Reuse Drop-off Center"
-      },
-      {
-        "id": 3,
-        "name": "Get ready for bulk item collection"
-      },
-      {
-        "id": 4,
-        "name": "Recycle your Christmas tree"
-      }
-    ],
     "services311": [
       {
         "id": 1,
-        "name": "Report a Pothole"
+        "title": "Report a Pothole"
       },
       {
         "id": 2,
-        "name": "Request Street Maintenance"
+        "title": "Request Street Maintenance"
       },
       {
         "id": 3,
-        "name": "Report Problem with a Bridge"
+        "title": "Report Problem with a Bridge"
       },
       {
         "id": 4,
-        "name": "Report a Stray Animal You Found"
+        "title": "Report a Stray Animal You Found"
       },
       {
         "id": 5,
-        "name": "Report Erosion along Waterways"
+        "title": "Report Erosion along Waterways"
       },
       {
         "id": 6,
-        "name": "Report a Possible Code Violation"
+        "title": "Report a Possible Code Violation"
       }
     ]
   }

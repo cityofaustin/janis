@@ -1,11 +1,11 @@
 {
-  "id": 7,
+  "id": 4,
   "meta": {},
   "topic": {
     "id": 1,
     "name": "Manage Utilities and Resources"
   },
-  "title": "Get ready for bulk item collection",
+  "title": "Christmas Treeland",
   "body": "<h4>Residential Bulk Collection</h4><p>We collect items that are too large for your trash cart during specially-scheduled bulk collections. Because these piles are collected by different trucks, they may be collected at different times throughout the week. Bulk items include:</p><ul><li>Doors</li><li>Carpet</li><li>Furniture</li><li>Appliances (remove doors)</li><li>Passenger car tires (remove rims; limit to 8 per household)</li><li>Lawn mowers (remove gas/oil)</li><li>Railroad ties (cut in half)</li><li>Pallets</li><li>Rolled Fencing</li><li>Nail-free lumber</li></ul><p>Have a big item that’s not on this list? Check our <a href=\"#\">What Do I Do With…?</a> page to check your item.</p><h4>Do Not:</h4><ul><li>Do not put items in bags, boxes or other containers. Bulk collection is for items too large to fit in containers. Bags will be treated as extra trash and are subject to extra trash fees.</li><li>Do not put items in an alley in any area, including Hyde Park, in front of a vacant lot or in front of a business</li></ul><h4>Do separate bulk items into 3 piles:</h4><ol><li>Metal items - Includes appliances (remove doors). These are taken to our Resource Recovery Center for recycling</li><li>Passenger car tires - Rims must be removed. Limit of eight tires per household. We cannot collect truck or tractor tires. Tires will go to a tire recycling facilit</li><li>Non-metal items - Includes carpeting and nail-free lumber. These items go to a landfill. Austin Resource Recovery is working on plans to salvage reusable items from bulk collection to help meet the City of Austin's Zero Waste goal</li></ol><h4>Bulk item collection crews cannot collect:</h4><ul><li>Brush, household trash, cardboard boxes, hazardous materials, mirrors, automotive chassis and bodies, motorcycles, trailers, boats and tires that are still mounted on rims</li><li>Sheet glass and other construction and remodeling debris</li></ul>",
   "steps": "<ol><li>Place bulk items at the curb in front of your house by 6:30 a.m. on the first day of your scheduled collection week</li><li>Separate items into three piles as described below</li><li>To prevent damage to your property, keep items 5 feet away from your trash cart, mailbox, fences or walls, water meter, telephone connection box and parked cars. Do not place any items under low hanging tree limbs or power lines</li></ol>",
   "phone":"512-367-8695",
@@ -38,8 +38,8 @@
       "name": "Look up recycling, compost, and trash pick-up days"
     },
     {
-      "id": 4,
-      "name": "Christmas Treeland"
+      "id": 7,
+      "name": "Get ready for bulk item collection"
     }
   ]
 }

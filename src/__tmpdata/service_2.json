@@ -1,13 +1,13 @@
 {
-  "id": 2,
+  "id": 5,
   "meta": {},
   "topic": {
     "id": 1,
     "name": "Manage Utilities and Resources"
   },
   "title": "Visit the Recycle and Reuse Drop-off Center",
-  "body": "<h4>Recycle and reuse drop-off</h4><p>The Household Hazardous Waste Facility and the Resource Recovery Center have merged into the Recycle & Reuse Drop-Off Center.</p><p>At the Recycle & Reuse Drop-Off Center, you can drop off many items to be recycled, reused or safely discarded. You can also pick up free items to reuse yourself.</p><p>Most Recycle & Reuse Drop-Off Center services are free to Austin residents, but some services have a fee. Eligibility and cost information are listed with each service.</p>",
-  "steps": null,
+  "body": "<h4>Household and Hazardous Waste</h4><p>Throwing household hazardous waste in the trash or pouring it down the drain is dangerous and harmful to the environment. Austin and Travis County residents can drop off hazardous waste for free, up to 30 gallons annually. Large truck or trailer loads will not be accepted after 4:45PM.</p><p>Businesses are not eligible to drop off hazardous waste. For information about how businesses can dispose of hazardous waste, call 512-974-4336.</p><h4>ReUse Store</h4><p>Many materials that are dropped off at the center are in usable condition. These items goto the ReUse Store, where everyone can pick them up for free. Store items often include:</p><ul><li>Art supplies</li><li>Cleaning products</li><li>Household chemicals</li><li>Automotive fluids</li><li>Austin ReBlend paint</li><li>Mulch</li></ul><p>Austin ReBlend paint is free for individuals and nonprofits. It is not available to businesses.</p><p>Mulch is free for everyone, but you must load it yourself. Bring a pitchfork or shovel, work gloves and containers.</p>",
+  "steps": "<ol><li>Check below to find out what hazardous waste items are accepted. Some items are free to drop off and some items, like tires, require a fee</li><li>Drop off your household hazardous waste or visit the ReUse Store at <a href=\"#\">2514 Business Center Dr, Austin, TX 78744</a></li><li>Be sure to bring products in original containers; do not mix, bring items in 5-gallon (or smaller) containers and put small containers upright in sturdy boxes.</li><li>If something is leaking, put it in a container and absorb the spill with cat litter.</li></ol>",
   "phone":"512-367-8695",
   "email":"resourcerecovery@austintexas.gov",
   "address": {
@@ -27,19 +27,24 @@
     "Saturday": "closed",
     "Sunday":"closed"
   },
-  "app": {
+  "apps": [{
+    "title":"Use this form to find out what to do with waste items",
+    "type": "form",
+    "embed_data": {},
+    "body": ""
+  },{
     "title": "Recycle and Reuse Drop-off Center",
     "type": "map",
     "embeddata": {},
     "body": "Visit the Recycle and Reuse Drop-off Center.<br />3810 Todd Ln.<br />Austin, TX 78744<br />8 a.m. to 4:30 p.m.<br />Monday - Friday"
-  },
+  }],
   "related": [
     {
-      "id": 3,
+      "id": 7,
       "name": "Get ready for bulk item collection"
     },
     {
-      "id": 1,
+      "id": 6,
       "name": "Look up recycling, compost, and trash pick-up days"
     }
   ]
