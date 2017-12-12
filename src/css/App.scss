@@ -100,13 +100,40 @@ ol, ul {
 }
 
 // form controls
-.coa-form_field__helpertext_main {
 
-}
-.coa-form_field__helpertext_sub {
-  text-align: right;
+label, textarea, input, select {
+  max-width: none;
 }
 
+label {
+  margin-top: $coa-space-level4
+  span {
+    color: $color-gray-medium;
+    display: block;
+    font-size: $small-font-size;
+    text-align: right;
+  }
+}
+.coa-form__actions {
+
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: $coa-space-level4;
+
+  & > input, a, button {
+
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+.coa-form__action_link {
+  margin-left: $spacing-medium;
+  margin-right: $spacing-medium;
+}
 
 // coa section
 .coa-section {
@@ -251,11 +278,7 @@ ol, ul {
   span,
   p,
   table,
-  fieldset,
-  input,
-  select,
-  textarea,
-  label,
+  form,
   ul,
   ol,
   h1,
