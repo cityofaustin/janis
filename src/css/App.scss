@@ -31,13 +31,6 @@ ol, ul {
   margin: 0;
   padding: 0;
   list-style-position: inside;
-  > li > p {
-    margin: 0;
-    display: inline;
-  }
-  ol, ul {
-    margin-left: $coa-space-level4;
-  }
 }
 
 .usa-table-borderless {
@@ -61,22 +54,6 @@ ol, ul {
 }
 
 // components
-
-.coa-content {
-  span,
-  p,
-  table,
-  ul,
-  ol,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    max-width: $coa-textwrap-width;
-  }
-}
 
 // coa content link
 .coa-list_link {
@@ -122,12 +99,6 @@ ol, ul {
   width: 100%;
 }
 
-.coa-steps {
-  li {
-    margin-bottom: $coa-space-level3;
-  }
-}
-
 // form controls
 .coa-form_field__helpertext_main {
 
@@ -163,6 +134,13 @@ ol, ul {
   border-bottom: 5px solid $color-black;
   margin-bottom: $coa-space-level2;
   padding-bottom: $coa-space-level2;
+
+  & > h3 {
+    @include media($coa-medium-screen) {
+      font-size: $h2-font-size;
+      font-weight: $font-bold;
+    }
+  }
 }
 
 .coa-section__map {
@@ -178,48 +156,65 @@ ol, ul {
 }
 
 
-// WYSIWYG editor content
-.coa-section > h4 {
-  margin-bottom: $coa-space-level2;
-  margin-top: $coa-space-level5;
+// steps & APP & WYSIWYG editor content
 
-  &:first-child {
-    margin-top: 0;
-  }
+.coa-steps > ol > li {
+  margin-bottom: $coa-space-level3;
 }
 
-.coa-section > p {
-  margin: 0;
-  margin-bottom: $coa-space-level4;
+.coa-steps, .coa-content_items {
+  & > .coa-section > h1, h2 {
+    font-size: $h4-font-size;
+    margin-bottom: $coa-space-level2;
+    margin-top: $coa-space-level5;
 
-  &:last-child {
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @include media($coa-medium-screen) {
+      font-size: $h2-font-size;
+      font-weight: $font-bold;
+    }
+  }
+
+  & > .coa-section > p {
+    margin: 0;
+    margin-bottom: $coa-space-level4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & > .coa-section > ul, ol {
+
+    margin-bottom: $coa-space-level4;
+
+    > li > p {
+      margin: 0;
+      display: inline;
+    }
+
+    ol, ul {
+      margin-left: $coa-space-level4;
+      list-style-type: disc;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & > .coa-section > ul > li {
     margin-bottom: 0;
   }
-}
 
-.coa-section > ul {
-  margin-bottom: $coa-space-level4;
-
-  & > li {
-    margin-bottom: 0;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.coa-section > ol {
-  margin-bottom: $coa-space-level4;
-
-  & > li {
+  & > .coa-section > ol > li {
     margin-bottom: $coa-space-level2;
   }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
+
 
 // coa page layout
 .coa-page_breadcrumb {
@@ -250,4 +245,25 @@ ol, ul {
 }
 .coa-page_body {
   margin: 0 $coa-space-level3;
+}
+
+.coa-page_content {
+  span,
+  p,
+  table,
+  fieldset,
+  input,
+  select,
+  textarea,
+  label,
+  ul,
+  ol,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: $coa-textwrap-width;
+  }
 }

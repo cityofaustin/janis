@@ -18,7 +18,7 @@ class App extends Component {
         <div>
           <Banner />
           <Header />
-          <section className="coa-content">
+          <section className="coa-page_content">
             <Route path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />
           </section>

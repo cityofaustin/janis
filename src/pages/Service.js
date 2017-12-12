@@ -6,11 +6,13 @@ import ContentItems from 'components/ContentItems';
 import RelatedLinks from 'components/RelatedLinks';
 import FormFeedback from 'components/FormFeedback';
 import Contact from 'components/Contact';
+import Service311 from 'components/Service311';
 
 import s1 from '__tmpdata/service_1';
 import s2 from '__tmpdata/service_2';
 import s3 from '__tmpdata/service_3';
 import s4 from '__tmpdata/service_4';
+import jsonServicesFileData from '__tmpdata/services';
 
 const servicedata = {
   6: s1,
@@ -39,6 +41,7 @@ class Service extends Component {
   render() {
     const { data } = this.state;
     const jsonFileData = servicedata[this.props.match.params.id];
+    const services311 = get(jsonServicesFileData, "snippets.services311", []);
 
     const topicId = get(data, "theme.id", null);
     const topicName = get(data, "theme.text", null);
@@ -55,34 +58,42 @@ class Service extends Component {
 
       <div>
 
-        <div className="coa-page_hero--small"></div>
+        <div className="wrapper">
+          <div className="coa-page_hero--small"></div>
+        </div>
 
-        <div className="row">
-          <div className="coa-page_left col-xs-12 col-lg-8">
+        <div className="wrapper">
+          <div className="row">
+            <div className="coa-page_left col-xs-12 col-lg-8">
 
-            <div className="coa-section">
-              { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
-              <h2 className="coa-page_title">{title}</h2>
-              { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+              <div className="coa-section">
+                { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+                <h2 className="coa-page_title">{title}</h2>
+                { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+              </div>
+
+              <ContentItems contentItems={contentItems} />
+
             </div>
 
-            <ContentItems contentItems={contentItems} />
+            <div className="coa-page_right col-xs-12 col-lg-4">
 
-          </div>
+              <Contact phone={phone} email={email} address={address} hours={hours} />
 
-          <div className="coa-page_right col-xs-12 col-lg-4">
-
-            <Contact phone={phone} email={email} address={address} hours={hours} />
-
+            </div>
           </div>
         </div>
 
         <RelatedLinks relatedlinks={relatedlinks} topicId={topicId} topicName={topicName} />
 
         <div className="coa-section coa-section--lightgrey">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
+          <div className="wrapper">
+            <FormFeedback />
+            <a className="coa-section__link" href="#">Return to Top</a>
+          </div>
         </div>
+
+        <Service311 services311={services311} />
 
       </div>
     );

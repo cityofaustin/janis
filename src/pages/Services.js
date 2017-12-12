@@ -6,6 +6,7 @@ import axios from 'axios';
 import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'components/FormFeedback';
 import ListLink from 'components/ListLink';
+import Service311 from 'components/Service311';
 
 
 class ServicesIndex extends Component {
@@ -67,29 +68,7 @@ class ServicesIndex extends Component {
           <a className="coa-section__link" href="#">Return to Top</a>
         </div>
 
-        <div className="coa-section">
-          <div className="coa-section__title">
-            <h3>Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
-          </div>
-          <p>311 is the city of Austin’s 24 hour information desk.</p>
-
-          <div className="row">
-          {
-            services311.map((service) =>
-              <div className="col-xs-12 col-lg-4">
-                <ListLink
-                  key={service.id}
-                  id={service.id}
-                  url="#"
-                  text={service.title}
-                />
-              </div>
-            )
-          }
-          </div>
-
-          <a className="coa-section__link" href="#">See a Full List of 311 Services</a>
-        </div>
+        <Service311 services311={services311} />
 
       </div>
     );

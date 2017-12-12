@@ -9,7 +9,7 @@ class ContentItems extends Component {
     return (contentItems) && (
 
       contentItems.map((content) =>
-        <div key={content.id}>
+        <div className="coa-content_items" key={content.id}>
           {(content.type === 'application_block') && (
             <div className="coa-section">
               <h4>{content.value.description}</h4>
