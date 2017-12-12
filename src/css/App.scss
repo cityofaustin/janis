@@ -106,7 +106,8 @@ label, textarea, input, select {
 }
 
 label {
-  margin-top: $coa-space-level4
+  margin-top: $coa-space-level4;
+
   span {
     color: $color-gray-medium;
     display: block;
@@ -114,6 +115,7 @@ label {
     text-align: right;
   }
 }
+
 .coa-form__actions {
 
   align-items: center;
