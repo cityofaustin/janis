@@ -37,35 +37,41 @@ class ServicesIndex extends Component {
     return (
       <div>
 
-        <div className="coa-page_hero">
-          <div className="coa-page_hero__callout">
-            <h2>{title}</h2>
+        <div className="wrapper">
+          <div className="coa-page_hero">
+            <div className="coa-page_hero__callout">
+              <h2>{title}</h2>
+            </div>
           </div>
+
+          <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
-        <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
-
         <div className="coa-section">
-          <div className="row">
-          {
-            services.map((service) =>
-              <div className="col-xs-12 col-md-6 col-lg-4">
-                <ListLink
-                  key={service.id}
-                  id={service.id}
-                  url={`/service/${service.id}`}
-                  text={service.title}
-                  isBoxType="true"
-                />
-              </div>
-            )
-          }
+          <div className="wrapper">
+            <div className="row">
+            {
+              services.map((service) =>
+                <div className="col-xs-12 col-md-6 col-lg-4">
+                  <ListLink
+                    key={service.id}
+                    id={service.id}
+                    url={`/service/${service.id}`}
+                    text={service.title}
+                    isBoxType="true"
+                  />
+                </div>
+              )
+            }
+            </div>
           </div>
         </div>
 
         <div className="coa-section coa-section--lightgrey">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
+          <div className="wrapper">
+            <FormFeedback />
+            <a className="coa-section__link" href="#">Return to Top</a>
+          </div>
         </div>
 
         <Service311 services311={services311} />
