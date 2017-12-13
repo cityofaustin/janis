@@ -10,13 +10,13 @@ class ContentItems extends Component {
 
       contentItems.map((content) =>
         <div className="coa-content_items" key={content.id}>
-          {(content.type === 'application_block') && (
+          {/*(content.type === 'application_block') && (
             <div className="coa-section">
               <h4>{content.value.description}</h4>
               INSERT {content.type} app HERE
               { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
             </div>
-          )}
+          )*/}
           {(content.type === 'content') && (
             <div className="coa-section" dangerouslySetInnerHTML={{__html: content.value}} />
           )}

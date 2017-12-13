@@ -17,7 +17,6 @@ class App extends Component {
       <Router>
         <div>
           <Banner />
-          <Header />
           <section className="coa-page_content">
             <Route path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />
