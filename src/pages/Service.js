@@ -20,27 +20,6 @@ class Service extends Component {
 
 
   componentDidMount() {
-    // const s = document.createElement('script');
-    // s.type = 'text/javascript';
-    // s.innerHTML = '_recollect_config = { area: "Austin", page: "tabbed_widget", name: "calendar" }';
-    // this.instance.appendChild(s);
-
-    // let s2 = document.createElement("script");
-    // s2.src = "https://recollect.net/0.0.1513115057520/javascript/compiled//recollect-l10n-widget.en-US.js";
-    // this.instance.appendChild(s2);
-
-    // s2 = document.createElement("script");
-    // s2.src = "https://recollect.net/0.0.1513115057520/javascript/compiled//recollect-widget-prod-us.js";
-    // this.instance.appendChild(s2);
-
-    // s2 = document.createElement("script");
-    // s2.src = "https://recollect.net/api/areas/Austin/services/waste.json?callback=svc_cb_1513139115936";
-    // this.instance.appendChild(s2);
-
-    // s2 = document.createElement("script");
-    // s2.src = "https://recollect.net/api/widget.js";
-    // this.instance.appendChild(s2);
-
     axios
       .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,theme(text)`)
       .then(res => {
