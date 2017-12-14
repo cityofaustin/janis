@@ -68,8 +68,6 @@ class Service extends Component {
 
       <div>
 
-        <div ref={el => (this.instance = el)} />
-
         <div className="wrapper">
           <div className="coa-page_hero--small"></div>
         </div>
