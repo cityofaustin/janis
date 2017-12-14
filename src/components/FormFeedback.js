@@ -132,7 +132,7 @@ class FormFeedback extends Component {
           <div>
             <p>Prefer to talk to a person at 311? Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a>. </p>
 
-            <div className={ `coa-input ${ this.state.errors['site-feedback-options'] && "usa-input-error" }` }>
+            <div className={ `coa-form_input ${ this.state.errors['site-feedback-options'] && "usa-input-error" }` }>
 
             <fieldset className="usa-fieldset-inputs usa-sans">
 
@@ -190,7 +190,7 @@ class FormFeedback extends Component {
             </fieldset>
             </div>
 
-            <div className="coa-form__actions">
+            <div className="coa-form_actions">
               <input
                 type="button"
                 value="Continue"
@@ -207,16 +207,15 @@ class FormFeedback extends Component {
 
           <div>
 
-            <div className={ `coa-input ${ this.state.errors['site-feedback-textarea'] && "usa-input-error" }` }>
+            <div className={ `coa-form_input ${ this.state.errors['site-feedback-textarea'] && "usa-input-error" }` }>
             <fieldset>
+              { this.state.errors['site-feedback-textarea'] && (
+                <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-textarea']}</span>
+              )}
               <label htmlFor="site-feedback-textarea">
                 Your feedback will be public and can be found at <a className="nowrap" href="#">austin.gov feedback tracker</a>.
                 <span>required</span>
               </label>
-
-              { this.state.errors['site-feedback-textarea'] && (
-                <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-textarea']}</span>
-              )}
 
               <textarea
                 id="site-feedback-textarea"
@@ -227,16 +226,15 @@ class FormFeedback extends Component {
             </fieldset>
             </div>
 
-            <div className={ `coa-input ${ this.state.errors['site-feedback-email'] && "usa-input-error" }` }>
+            <div className={ `coa-form_input ${ this.state.errors['site-feedback-email'] && "usa-input-error" }` }>
             <fieldset>
+              { this.state.errors['site-feedback-email'] && (
+                <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-email']}</span>
+              )}
               <label htmlFor="site-feedback-email">
                 Type your email in the box if you would like to receive a link to your feedback. Your email address will be kept private.
                 <span>optional</span>
               </label>
-
-              { this.state.errors['site-feedback-email'] && (
-                <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-email']}</span>
-              )}
 
               <input
                 id="site-feedback-email"
@@ -248,14 +246,14 @@ class FormFeedback extends Component {
             </fieldset>
             </div>
 
-            <div className="coa-form__actions">
+            <div className="coa-form_actions">
               <input
                 type="button"
                 value="Submit"
                 onClick={this.handleFormSubmit}
                 disabled={!this.isValid(this.state.errors)}
               />
-              <a className="coa-form__action_link" onClick={this.handleResetForm}>Cancel</a>
+              <a className="coa-form_actions__link" onClick={this.handleResetForm}>Cancel</a>
             </div>
           </div>
         )}
