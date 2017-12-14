@@ -48,6 +48,14 @@ ol, ul {
   }
 }
 
+.usa-input-error-message {
+  margin-bottom: $coa-space-level2;
+}
+
+.usa-input-error {
+  right: auto;
+}
+
 //helpers
 .nowrap {
   white-space: nowrap;
@@ -132,7 +140,9 @@ label {
     width: 100%;
   }
 }
+
 .coa-form__action_link {
+  cursor: pointer;
   margin-left: $spacing-medium;
   margin-right: $spacing-medium;
 }
@@ -288,6 +298,7 @@ label {
 }
 
 .coa-page_content {
+  .coa-overlay__content,
   span,
   p,
   table,
