@@ -7,7 +7,8 @@ class Service311 extends Component {
 
     const { services311 } = this.props;
 
-    return (
+    return (services311) && (
+
       <div className="coa-section">
         <div className="wrapper">
           <div className="coa-section__title">
