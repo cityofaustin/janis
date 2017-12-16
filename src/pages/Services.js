@@ -29,9 +29,9 @@ class ServicesIndex extends Component {
 
   render() {
 
-    const title = get(jsonFileData, "title", "");
-    const body = get(jsonFileData, "body", "");
-    const services311 = get(jsonFileData, "snippets.services311", []);
+    const title = get(jsonFileData, "servicepage.title", "");
+    const body = get(jsonFileData, "servicepage.body", "");
+    const services311 = get(jsonFileData, "services311", []);
     const { items: services = [] } = this.state.data
 
     return (

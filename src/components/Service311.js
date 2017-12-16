@@ -7,7 +7,8 @@ class Service311 extends Component {
 
     const { services311 } = this.props;
 
-    return (
+    return (services311) && (
+
       <div className="coa-section">
         <div className="wrapper">
           <div className="coa-section__title">
@@ -18,7 +19,7 @@ class Service311 extends Component {
           <div className="row">
           {
             services311.map((service) =>
-              <div className="col-xs-12 col-lg-4">
+              <div key={service.id} className="col-xs-12 col-lg-4">
                 <ListLink
                   key={service.id}
                   id={service.id}

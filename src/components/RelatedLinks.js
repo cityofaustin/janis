@@ -22,7 +22,7 @@ class RelatedLinks extends Component {
               <ListLink
                 id={service.id}
                 url={`/service/${service.id}`}
-                text={service.name}
+                text={service.title}
                 isBoxType="true"
               />
               </div>
