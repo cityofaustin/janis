@@ -37,8 +37,9 @@ class FormFeedback extends Component {
   handleFieldChange = (e) => {
 
     const values = Object.assign(this.state.values);
-    values[e.target.name] = e.target.value
-    const errors = this.validate(values);
+    const errors = Object.assign(this.state.errors);
+    values[e.target.name] = e.target.value;
+    errors[e.target.name] = this.validateField(e.target.name, e.target.value);
 
     this.setState({
       values: values,
@@ -66,6 +67,7 @@ class FormFeedback extends Component {
   }
 
   handleResetForm = (e) => {
+
     this.setState({
       stage: 1,
       values: {},
@@ -90,20 +92,26 @@ class FormFeedback extends Component {
     })
   }
 
+  validateField(field, value) {
+
+    const errors = [];
+
+    formConfig.fieldRules[field].forEach((fieldRule) => {
+      const errortext = rules[fieldRule](value);
+      if(errortext) errors.push(errortext);
+    });
+
+    return errors.join(" ");
+  }
+
   validate(values) {
 
-    const that = this;
     const fields = formConfig.stage[this.state.stage];
     const errors = [];
 
     fields.forEach((field) => {
-      errors[field] = [];
-      formConfig.fieldRules[field].forEach((fieldRule) => {
-        const errortext = rules[fieldRule](values[field]);
-        if(errortext) return errors[field].push(errortext);
-      });
-      errors[field] = errors[field].join(" ");
-    })
+      errors[field] = this.validateField(field, values[field]);
+    });
 
     return errors;
   }
