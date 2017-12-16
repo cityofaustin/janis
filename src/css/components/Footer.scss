@@ -1,0 +1,28 @@
+.coa-Footer {
+  display: inline-block;
+  background: $color-gray-lighter;
+  width: 100%;
+}
+
+.coa-Footer__icon_row {
+  a {
+    margin-right: $coa-space-level4;
+  }
+  svg {
+    fill: $color-blue-darkest;
+    &:hover {
+      fill: $color-blue;
+    }
+  }
+}
+
+.coa-Footer__body-text {
+  a {
+    svg {
+      fill: $color-blue-darker;
+      &:hover {
+        fill: $color-blue-darkest;
+      }
+    }
+  }
+}

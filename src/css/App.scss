@@ -7,6 +7,9 @@
 @import 'node_modules/flexboxgrid-sass/flexboxgrid';
 @import 'css/vendor/font_awesome/scss/font-awesome.scss';
 
+// component scss Manifest
+@import "css/components/Footer.scss";
+
 // base
 html {
   font-family: $font-sans;
