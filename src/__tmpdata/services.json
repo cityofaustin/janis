@@ -1,33 +1,72 @@
 {
   "meta": {},
-  "title": "Use City of Austin Services",
-  "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>",
-  "snippets": {
-    "services311": [
-      {
-        "id": 1,
-        "title": "Report a Pothole"
-      },
-      {
-        "id": 2,
-        "title": "Request Street Maintenance"
-      },
-      {
-        "id": 3,
-        "title": "Report Problem with a Bridge"
-      },
-      {
-        "id": 4,
-        "title": "Report a Stray Animal You Found"
-      },
-      {
-        "id": 5,
-        "title": "Report Erosion along Waterways"
-      },
-      {
-        "id": 6,
-        "title": "Report a Possible Code Violation"
-      }
-    ]
-  }
+  "servicepage": {
+    "title": "Use City of Austin Services",
+    "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
+  },
+  "topicpage":{
+    "title": "Use City of Austin Services",
+    "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
+  },
+  "contact":{
+    "phone":"512-367-8695",
+    "email":"resourcerecovery@austintexas.gov",
+    "address": {
+      "name": "Austin Recycle and Reuse Drop-off Center",
+      "street": "2514 Business Center Drive ",
+      "city": "Austin",
+      "state": "Texas",
+      "zip": "78744 ",
+      "country": "United States"
+    },
+    "hours": {
+      "Monday":"8:00 AM - 4:30 PM",
+      "Tuesday":"8:00 AM - 4:30 PM",
+      "Wednesday":"8:00 AM - 4:30 PM",
+      "Thursday":"8:00 AM - 4:30 PM",
+      "Friday":"8:00 AM - 4:30 PM",
+      "Saturday": "closed",
+      "Sunday":"closed"
+    }
+  },
+  "servicesRelated":[
+    {
+      "id": 5,
+      "title": "Visit the Recycle and Reuse Drop-off Center"
+    },
+    {
+      "id": 6,
+      "title": "Look up recycling, compost, and trash pick-up days"
+    },
+    {
+      "id": 7,
+      "title": "Get ready for bulk item collection"
+    }
+  ],
+  "services311": [
+    {
+      "id": 1,
+      "title": "Report a Pothole"
+    },
+    {
+      "id": 2,
+      "title": "Request Street Maintenance"
+    },
+    {
+      "id": 3,
+      "title": "Report Problem with a Bridge"
+    },
+    {
+      "id": 4,
+      "title": "Report a Stray Animal You Found"
+    },
+    {
+      "id": 5,
+      "title": "Report Erosion along Waterways"
+    },
+    {
+      "id": 6,
+      "title": "Report a Possible Code Violation"
+    }
+  ]
 }
