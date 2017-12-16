@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { clone } from "lodash";
 
 const rules = {
   'email': (value) => {
@@ -37,7 +36,7 @@ class FormFeedback extends Component {
 
   handleFieldChange = (e) => {
 
-    const values = clone(this.state.values);
+    const values = Object.assign(this.state.values);
     values[e.target.name] = e.target.value
     const errors = this.validate(values);
 
