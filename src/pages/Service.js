@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
+import { parse } from 'query-string';
 
 import ContentItems from 'components/ContentItems';
 import RelatedLinks from 'components/RelatedLinks';
@@ -20,6 +21,16 @@ class Service extends Component {
 
 
   componentDidMount() {
+    if (process.env.NODE_ENV !== 'production') {
+      // Allow querystrings to set data, which is used in joplin for livepreview
+      const query = parse(this.props.location.search);
+      if (query.preview) {
+        const data = JSON.parse(query.d);
+        this.setState({ data: data });
+        return;
+      }
+    }
+
     axios
       .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,theme(text)`)
       .then(res => {
