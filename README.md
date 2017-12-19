@@ -18,20 +18,11 @@ This will update your container's yarn.lock and package.json files.
 Your local host machine's yarn.lock and package.json files will also be updated via mounted docker volumes. These local files are versioned and should be checked into git.
 
 
-To access container via terminal
+Add a package via yarn (https://yarnpkg.com/lang/en/docs/cli/add/)
 ```
-docker exec -it janis /bin/bash
-```
-
-Add a package via yarn add as you normally would (https://yarnpkg.com/lang/en/docs/cli/add/)
-```
-yarn add <package name>
+docker exec --interactive --tty janis yarn add <package name>
 ```
 
-Exit container
-```
-exit
-```
 ---
 
 ## Accessibility Guidelines (WIP)
