@@ -7,6 +7,9 @@
 @import 'node_modules/flexboxgrid-sass/flexboxgrid';
 @import 'css/vendor/font_awesome/scss/font-awesome.scss';
 
+// component scss Manifest
+@import "css/components/Footer.scss";
+
 // base
 html {
   font-family: $font-sans;
@@ -48,6 +51,19 @@ ol, ul {
   }
 }
 
+.usa-input-error {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  label {
+    width: calc(100% + 1.9rem); // 1.5rem left padding + 4px border from input error spacing
+  }
+}
+
+.usa-input-error-message {
+  margin-bottom: $coa-space-level2;
+}
+
 //helpers
 .nowrap {
   white-space: nowrap;
@@ -87,7 +103,7 @@ ol, ul {
   margin-left: -40vw;
   margin-top: -25vh;
   outline: 9999px solid rgba(0,0,0,0.5);
-  padding: $coa-space-level5;
+  padding: $coa-space-level7;
   position: fixed;
   text-align: center;
   top: 50%;
@@ -96,6 +112,7 @@ ol, ul {
 }
 
 .coa-overlay__content {
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -112,11 +129,12 @@ label {
     color: $color-gray-medium;
     display: block;
     font-size: $small-font-size;
+    font-style: italic;
     text-align: right;
   }
 }
 
-.coa-form__actions {
+.coa-form_actions {
 
   align-items: center;
   display: flex;
@@ -132,26 +150,28 @@ label {
     width: 100%;
   }
 }
-.coa-form__action_link {
+
+.coa-form_actions__link {
+  cursor: pointer;
   margin-left: $spacing-medium;
   margin-right: $spacing-medium;
 }
 
 // coa section
 .coa-section {
-  margin-bottom: $coa-space-level6;
-  margin-left: $coa-space-level3;
-  margin-right: $coa-space-level3;
-  margin-top: $coa-space-level5;
+  margin-bottom: $coa-space-level8;
+  margin-left: $coa-space-level5;
+  margin-right: $coa-space-level5;
+  margin-top: $coa-space-level7;
 }
 
 .coa-section--grey {
   background-color: $color-gray-lighter;
   margin: 0;
-  padding-bottom: $coa-space-level6;
-  padding-left: $coa-space-level3;
-  padding-right: $coa-space-level3;
-  padding-top: $coa-space-level5;
+  padding-bottom: $coa-space-level8;
+  padding-left: $coa-space-level5;
+  padding-right: $coa-space-level5;
+  padding-top: $coa-space-level7;
 }
 
 .coa-section--lightgrey {
@@ -188,7 +208,7 @@ label {
 
 .coa-section__link {
   display: inline-block;
-  margin-top: $coa-space-level5;
+  margin-top: $coa-space-level7;
 }
 
 
@@ -202,7 +222,7 @@ label {
   & > .coa-section > h1, h2 {
     font-size: $h4-font-size;
     margin-bottom: $coa-space-level2;
-    margin-top: $coa-space-level5;
+    margin-top: $coa-space-level7;
 
     &:first-child {
       margin-top: 0;
@@ -258,7 +278,7 @@ label {
   margin-bottom: $coa-space-level2;
 }
 .coa-page_title {
-  margin-bottom: $coa-space-level5;
+  margin-bottom: $coa-space-level7;
   font-weight: $font-bold;
 
   @include media($coa-medium-screen) {
@@ -288,6 +308,7 @@ label {
 }
 
 .coa-page_content {
+  .coa-overlay__content,
   span,
   p,
   table,

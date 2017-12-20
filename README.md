@@ -34,6 +34,16 @@ exit
 ```
 ---
 
+## Accessibility Guidelines (WIP)
+
+- When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"`
+
+a11y Resources:
+- https://accessibility.18f.gov/
+- https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

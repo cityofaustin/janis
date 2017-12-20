@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
+import { parse } from 'query-string';
 
 import ContentItems from 'components/ContentItems';
 import RelatedLinks from 'components/RelatedLinks';
@@ -8,18 +9,7 @@ import FormFeedback from 'components/FormFeedback';
 import Contact from 'components/Contact';
 import Service311 from 'components/Service311';
 
-import s1 from '__tmpdata/service_1';
-import s2 from '__tmpdata/service_2';
-import s3 from '__tmpdata/service_3';
-import s4 from '__tmpdata/service_4';
-import jsonServicesFileData from '__tmpdata/services';
-
-const servicedata = {
-  6: s1,
-  5: s2,
-  7: s3,
-  4: s4,
-}
+import jsonFileData from '__tmpdata/services';
 
 class Service extends Component {
   constructor(props) {
@@ -29,9 +19,20 @@ class Service extends Component {
     };
   }
 
+
   componentDidMount() {
+    if (process.env.NODE_ENV !== 'production') {
+      // Allow querystrings to set data, which is used in joplin for livepreview
+      const query = parse(this.props.location.search);
+      if (query.preview) {
+        const data = JSON.parse(query.d);
+        this.setState({ data: data });
+        return;
+      }
+    }
+
     axios
-      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,theme(text)`)
+      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,topic(text),locations(location(name,street,city,state,zip,country,hours)),contacts(contact(name,email,phone))`)
       .then(res => {
         this.setState({ data: res.data })
       })
@@ -40,19 +41,18 @@ class Service extends Component {
 
   render() {
     const { data } = this.state;
-    const jsonFileData = servicedata[this.props.match.params.id];
-    const services311 = get(jsonServicesFileData, "snippets.services311", []);
 
-    const topicId = get(data, "theme.id", null);
-    const topicName = get(data, "theme.text", null);
+    const topicId = get(data, "topic.id", null);
+    const topicName = get(data, "topic.text", null);
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extra_content", null);
-    const phone = get(jsonFileData, "phone", null);
-    const email = get(jsonFileData, "email", null);
-    const address = get(jsonFileData, "address", null);
-    const hours = get(jsonFileData, "hours", null);
-    const relatedlinks = get(jsonFileData, "related", null);
+    const phone = get(data, "contacts[0].contact.phone", null);
+    const email = get(data, "contacts[0].contact.email", null);
+    const address = get(data, "locations[0].location", null);
+    const hours = get(data, "locations[0].location.hours", null);
+    const relatedlinks = get(jsonFileData, "servicesRelated", null);
+    const services311 = get(jsonFileData, "services311", []);
 
     return (
 
