@@ -1,0 +1,46 @@
+.coa-I18nBanner {
+  width: 100%;
+  background-color: $color-gray-light;
+  padding: .7rem 0;
+}
+
+.coa-I18nBanner__language-list {
+  text-align: right;
+}
+
+@mixin coa-I18nBanner__language {
+  display: inline;
+  padding: 0 $coa-space-level2;
+  cursor: pointer;
+}
+
+.coa-I18nBanner__language {
+  @include coa-I18nBanner__language;
+}
+
+.coa-I18nBanner__language--active {
+  background-color: $color-gray-lighter;
+}
+
+.coa-I18nBanner__language--other {
+  @include coa-I18nBanner__language;
+  position: relative;
+}
+
+@mixin coa-I18nBanner__other-language-options {
+  position: absolute;
+  background-color: $color-gray-light;
+  list-style: none;
+  top: $coa-space-level6;
+  right: $coa-space-level2;
+  padding: $coa-space-level3;
+}
+
+.coa-I18nBanner__other-language-options--open {
+  @include coa-I18nBanner__other-language-options;
+}
+
+.coa-I18nBanner__other-language-options--closed {
+  @include coa-I18nBanner__other-language-options;
+  display: none;
+}
