@@ -38,7 +38,7 @@ class I18nBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeLanguage: locale().substring(0,2) || 'en', // we could
+      activeLanguage: locale().substring(0,2) || 'en', 
     };
   }
 
