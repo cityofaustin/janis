@@ -7,6 +7,12 @@
 @import 'node_modules/flexboxgrid-sass/flexboxgrid';
 @import 'css/vendor/font_awesome/scss/font-awesome.scss';
 
+// mixins
+@mixin visually-hidden {
+  position: absolute;
+  left: -999em;
+}
+
 // component scss Manifest
 @import "css/components/I18nBanner.scss";
 @import "css/components/Header.scss";
@@ -18,6 +24,12 @@ html {
   font-size: $em-base;
   font-weight: $font-normal;
   line-height: $base-line-height;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  height: 100%;
 }
 
 // uswds overrides
@@ -69,6 +81,10 @@ ol, ul {
 //helpers
 .nowrap {
   white-space: nowrap;
+}
+
+.visually-hidden {
+  @include visually-hidden;
 }
 
 // components

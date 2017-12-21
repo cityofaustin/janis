@@ -11,8 +11,7 @@
 .coa-I18nBanner__prompt {
   display: none;
   font-size: 1.5rem;
-  position: absolute;
-  left: -999em;
+  @include visually-hidden;
   @include media($medium-screen) {
     position: relative;
     left: auto;
