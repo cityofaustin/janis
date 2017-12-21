@@ -12,6 +12,7 @@ import Footer from "components/Footer"
 
 // page routes
 import HomePage from "pages/HomePage"
+import SearchPage from "pages/SearchPage"
 import ServicesIndex from "pages/Services"
 import Service from "pages/Service"
 
@@ -24,9 +25,11 @@ class App extends Component {
         <div>
           <Banner />
           <I18nBanner />
+          <Header />
           <section className="coa-page_content">
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesIndex} />
+            <Route exact path="/search" component={SearchPage} />
             <Route path="/service/:id" component={Service} />
           </section>
           <Footer />
