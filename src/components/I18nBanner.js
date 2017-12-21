@@ -15,13 +15,22 @@ const languages = [
     abbr: 'vn',
   }, {
     title: '中文',
-    abbr: 'cn',
+    abbr: 'zh',
   }, {
-    title: 'Português',
-    abbr: 'pt',
+    title: 'Chinese Traditional',
+    abbr: 'zh',
   }, {
-    title: 'French',
-    abbr: 'fr',
+    title: 'عربى',
+    abbr: 'ar',
+  }, {
+    title: '한국어',
+    abbr: 'ko',
+  }, {
+    title: 'اردو',
+    abbr: 'ur',
+  }, {
+    title: 'မြန်မာ',
+    abbr: 'my',
   },
 ]
 
