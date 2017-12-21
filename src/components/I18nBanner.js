@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import locale from 'browser-locale';
 
+import CaretDownSVG from 'svg/CaretDown';
+
 const languages = [
   {
     title: 'English',
@@ -46,11 +48,12 @@ class I18nBanner extends Component {
   setLangauage = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    const languageAbbr = e.target.lang;
+    const languageAbbr = e.target.parentElement.lang;
     this.setState({
       activeLanguage: languageAbbr,
       isOpen: false,
     })
+    console.log(this.state.activeLanguage)
   }
 
   render() {
@@ -62,10 +65,10 @@ class I18nBanner extends Component {
       <div className="coa-I18nBanner">
         <div className="wrapper">
           <div className="row">
-            <div className="col-xs">
+            <div className="col-md-4 col-xs coa-I18nBanner__prompt">
               Choose your preferred language
             </div>
-            <div className="col-xs">
+            <div className="col-md-8 col-xs-12">
               <ul className="coa-I18nBanner__language-list">
                 { visibleLanguageOptions.map((language, i) => {
                     return (
@@ -73,7 +76,8 @@ class I18nBanner extends Component {
                         onClick={this.setLangauage} lang={language.abbr}
                         key={i}
                       >
-                        {language.title}
+                        <span className="coa-I18nBanner__language--hide-sm">{language.title}</span>
+                        <span className="coa-I18nBanner__language--hide-md">{language.abbr.toUpperCase()}</span>
                       </li>
                     )
                 })}
@@ -81,12 +85,13 @@ class I18nBanner extends Component {
                   <li className="coa-I18nBanner__language--other" lang=""
                     onClick={() => this.setState({ isOpen: !this.state.isOpen })}
                   >
-                    Other Language
+                    <span className="coa-I18nBanner__language--hide-sm">Other Language </span>
+                    <CaretDownSVG size="20"/>
                     <ul className={this.otherLanguageClassName()}>
                       { otherLanguageOptions.map((language) => {
                           return (
                             <li lang={language.abbr} onClick={this.setLangauage} className={this.languageClassName(language)}>
-                              {language.title}
+                              <span>{language.title}</span>
                             </li>
                           )
                         })
