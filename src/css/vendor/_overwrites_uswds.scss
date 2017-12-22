@@ -1,0 +1,44 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-sans;
+  font-weight: $font-medium;
+  margin: 0;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.usa-table-borderless {
+  margin: 0;
+  padding: 0;
+
+  td, th {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  th:first-child {
+    padding-right: $coa-space-level2;
+  }
+}
+
+.usa-input-error {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  label {
+    width: calc(100% + 1.9rem); // 1.5rem left padding + 4px border from input error spacing
+  }
+}
+
+.usa-input-error-message {
+  margin-bottom: $coa-space-level2;
+}

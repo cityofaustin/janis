@@ -1,0 +1,21 @@
+.coa-list_link {
+  @include box_verticalcenter();
+  background-color: $color-white;
+  border-bottom: 1px dashed $color-gray-dark;
+  color: $color-black;
+  font-size: $base-font-size;
+  text-decoration: none;
+  padding: $coa-space-level4 0;
+
+  i {
+    padding-left: $coa-space-level2;;
+  }
+}
+
+.coa-list_link--box {
+  border: 1px solid $color-gray-lighter;
+  font-size: $lead-font-size;
+  margin-bottom: $coa-space-level2;
+  height: 100px;
+  padding: 0 $coa-space-level2;
+}

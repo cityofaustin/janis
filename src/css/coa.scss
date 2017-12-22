@@ -1,0 +1,22 @@
+@import 'css/base/variables_coa';
+
+// vendor
+@import 'css/vendor/variables_uswds';
+@import 'node_modules/uswds/src/stylesheets/uswds';
+@import 'css/vendor/overwrites_uswds';
+@import 'css/vendor/variables_flexboxgrid';
+@import 'node_modules/flexboxgrid-sass/flexboxgrid';
+@import 'css/vendor/font_awesome/scss/font-awesome.scss';
+
+// base
+@import 'css/base/_main';
+@import 'css/base/helpers';
+
+// modules
+@import 'css/modules/_main';
+@import 'css/modules/ListLink';
+
+// layout
+@import 'css/layout/_main';
+@import "css/layout/Footer";
+

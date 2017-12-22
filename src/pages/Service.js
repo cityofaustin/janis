@@ -69,7 +69,7 @@ class Service extends Component {
               <div className="coa-section">
                 { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
                 <h2 className="coa-page_title">{title}</h2>
-                { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+                { steps && ( <div className="coa-page_steps coa-page_wysiwyg" dangerouslySetInnerHTML={{__html: steps}} /> )}
               </div>
 
               <ContentItems contentItems={contentItems} />

@@ -14,7 +14,7 @@ import HomePage from "pages/HomePage"
 import ServicesIndex from "pages/Services"
 import Service from "pages/Service"
 
-import 'css/App.css'
+import 'css/coa.css'
 
 class App extends Component {
   render() {

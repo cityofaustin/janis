@@ -1,0 +1,108 @@
+.coa-page_content {
+  span,
+  p,
+  table,
+  form,
+  ul,
+  ol,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: $coa-textwrap-width;
+  }
+}
+
+.coa-page_breadcrumb {
+  display: inline-block;
+  margin-bottom: $coa-space-level2;
+}
+
+.coa-page_title {
+  margin-bottom: $coa-space-level7;
+  font-weight: $font-bold;
+
+  @include media($coa-medium-screen) {
+    font-size: $h1-font-size;
+  }
+}
+
+.coa-page_hero {
+  @include box_verticalcenter(200px);
+  background-color: $color-gray-lighter;
+  margin-bottom: $coa-space-level4;
+  padding: $coa-space-level3;
+}
+.coa-page_hero--small {
+  @extend .coa-page_hero;
+  height: 80px;
+}
+.coa-page_hero__callout {
+  h2 {
+    font-weight: $font-bold;
+    margin: 0;
+  }
+}
+
+.coa-page_body {
+  margin: 0 $coa-space-level3;
+}
+
+.coa-page_steps > ol > li {
+  margin-bottom: $coa-space-level3;
+}
+
+.coa-page_wysiwyg {
+  & > .coa-section > h1, h2 {
+    font-size: $h4-font-size;
+    margin-bottom: $coa-space-level2;
+    margin-top: $coa-space-level7;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    @include media($coa-medium-screen) {
+      font-size: $h2-font-size;
+      font-weight: $font-bold;
+    }
+  }
+
+  & > .coa-section > p {
+    margin: 0;
+    margin-bottom: $coa-space-level4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & > .coa-section > ul, ol {
+
+    margin-bottom: $coa-space-level4;
+
+    > li > p {
+      margin: 0;
+      display: inline;
+    }
+
+    ol, ul {
+      margin-left: $coa-space-level4;
+      list-style-type: disc;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & > .coa-section > ul > li {
+    margin-bottom: 0;
+  }
+
+  & > .coa-section > ol > li {
+    margin-bottom: $coa-space-level2;
+  }
+}
