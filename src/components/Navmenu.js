@@ -25,18 +25,18 @@ class Navmenu extends Component {
       .get(endpoint)
       .then(res => {
         const leData = res.data.items;
-        const topics = uniq(leData.map((item) => item.topic.text))
+        const parentNavItems = uniq(leData.map((item) => item.topic.text))
 
-        const getServicesByTopic = (title) => {
-          return leData.filter((service) => {
-            return service.topic.text === title
+        const getChildrenNavItemsByParent = (title) => {
+          return leData.filter((data) => {
+            return data.topic.text === title
           })
         }
 
-        const nav = topics.map((title) => {
+        const nav = parentNavItems.map((title) => {
         	return {
-        		title: title,
-        		services: getServicesByTopic(title),
+        		parentTitle: title,
+        		children: getChildrenNavItemsByParent(title),
         	}
         })
 
@@ -60,8 +60,8 @@ class Navmenu extends Component {
     const pathname = this.getCurrentPath()
 
     const currentId = Number(pathname.split('/')[2]) // this is brittle
-    const serviceIds = topic.services.map((service) => service.id)
-    const isActive = includes(serviceIds, currentId)
+    const childrenIds = topic.children.map((child) => child.id)
+    const isActive = includes(childrenIds, currentId)
 
     return isActive ? 'usa-current' : ''
   }
@@ -75,20 +75,20 @@ class Navmenu extends Component {
             <li>
               <a href="/" className={this.getMenuItemClassName('/')}>Home</a>
             </li>
-            { this.state.nav && this.state.nav.map((topic) => {
+            { this.state.nav && this.state.nav.map((parent) => {
               return (
                 <li>
-                  <a className={this.getParentMenuItemClassName(topic)} href="/services">
-                    {topic.title}
+                  <a className={this.getParentMenuItemClassName(parent)} href="/services">
+                    {parent.parentTitle}
                   </a>
                   <ul className="usa-sidenav-sub_list">
-                  { topic.services.map((service) => {
+                  { parent.children.map((child) => {
                     return (
                       <li>
-                        <a className={this.getMenuItemClassName(`/service/${service.id}`)}
-                          href={`/service/${service.id}`}
+                        <a className={this.getMenuItemClassName(`/service/${child.id}`)}
+                          href={`/service/${child.id}`}
                         >
-                          {service.title}
+                          {child.title}
                         </a>
                       </li>
                     )
