@@ -23,9 +23,13 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Banner />
-          <I18nBanner />
-          <Header />
+          <Route path="/" render={props => (
+            <section>
+              <Banner />
+              <I18nBanner />
+              <Header {...props} />
+            </section>
+          )} />
           <section className="coa-page_content">
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesIndex} />

@@ -31,7 +31,9 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu} />
+        <Navmenu {...this.props}
+          isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu} 
+        />
       </header>
     );
   }
