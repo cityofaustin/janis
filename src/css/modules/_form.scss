@@ -1,12 +1,14 @@
-label {
-  margin-top: $coa-space-level4;
+form {
+  label {
+    margin-top: $coa-space-level4;
 
-  span {
-    color: $color-gray-medium;
-    display: block;
-    font-size: $small-font-size;
-    font-style: italic;
-    text-align: right;
+    span {
+      color: $color-gray-medium;
+      display: block;
+      font-size: $small-font-size;
+      font-style: italic;
+      text-align: right;
+    }
   }
 }
 
