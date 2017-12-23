@@ -9,7 +9,7 @@ class ContentItems extends Component {
     return (contentItems) && (
 
       contentItems.map((content) =>
-        <div className="coa-page_wysiwyg" key={content.id}>
+        <div className="coa-main__wysiwyg" key={content.id}>
           {/* TODO: removed temporarily for user testing,
             uncomment as applications blocks are implemented.
 

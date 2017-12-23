@@ -22,7 +22,7 @@ class App extends Component {
       <Router>
         <div>
           <Banner />
-          <section className="coa-page_content">
+          <section className="coa-main">
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />

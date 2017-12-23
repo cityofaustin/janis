@@ -1,4 +1,4 @@
-.coa-page_content {
+.coa-main {
   span,
   p,
   table,
@@ -15,12 +15,12 @@
   }
 }
 
-.coa-page_breadcrumb {
+.coa-main__breadcrumb {
   display: inline-block;
   margin-bottom: $coa-space-level2;
 }
 
-.coa-page_title {
+.coa-main__title {
   margin-bottom: $coa-space-level7;
   font-weight: $font-bold;
 
@@ -29,32 +29,32 @@
   }
 }
 
-.coa-page_hero {
+.coa-main__hero {
   @include box_verticalcenter(200px);
   background-color: $color-gray-lighter;
   margin-bottom: $coa-space-level4;
   padding: $coa-space-level3;
 }
-.coa-page_hero--small {
-  @extend .coa-page_hero;
+.coa-main__hero--small {
+  @extend .coa-main__hero;
   height: 80px;
 }
-.coa-page_hero__callout {
+.coa-main__hero__callout {
   h2 {
     font-weight: $font-bold;
     margin: 0;
   }
 }
 
-.coa-page_body {
+.coa-main__body {
   margin: 0 $coa-space-level3;
 }
 
-.coa-page_steps > ol > li {
+.coa-main__steps > ol > li {
   margin-bottom: $coa-space-level3;
 }
 
-.coa-page_wysiwyg {
+.coa-main__wysiwyg {
   & > .coa-section > h1, h2 {
     font-size: $h4-font-size;
     margin-bottom: $coa-space-level2;

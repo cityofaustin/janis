@@ -15,6 +15,10 @@ ol, ul {
   list-style-position: inside;
 }
 
+label, textarea, input, select {
+  max-width: none;
+}
+
 .usa-table-borderless {
   margin: 0;
   padding: 0;

@@ -59,24 +59,24 @@ class Service extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-page_hero--small"></div>
+          <div className="coa-main__hero--small"></div>
         </div>
 
         <div className="wrapper">
           <div className="row">
-            <div className="coa-page_left col-xs-12 col-lg-8">
+            <div className="coa-main__left col-xs-12 col-lg-8">
 
               <div className="coa-section">
-                { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
-                <h2 className="coa-page_title">{title}</h2>
-                { steps && ( <div className="coa-page_steps coa-page_wysiwyg" dangerouslySetInnerHTML={{__html: steps}} /> )}
+                { topicId && ( <a className="coa-main__breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+                <h2 className="coa-main__title">{title}</h2>
+                { steps && ( <div className="coa-main__steps coa-main__wysiwyg" dangerouslySetInnerHTML={{__html: steps}} /> )}
               </div>
 
               <ContentItems contentItems={contentItems} />
 
             </div>
 
-            <div className="coa-page_right col-xs-12 col-lg-4">
+            <div className="coa-main__right col-xs-12 col-lg-4">
 
               <Contact phone={phone} email={email} address={address} hours={hours} />
 

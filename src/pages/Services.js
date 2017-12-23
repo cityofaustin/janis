@@ -38,13 +38,13 @@ class ServicesIndex extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-page_hero">
-            <div className="coa-page_hero__callout">
+          <div className="coa-main__hero">
+            <div className="coa-main__hero__callout">
               <h2>{title}</h2>
             </div>
           </div>
 
-          <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
+          <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
         <div className="coa-section">
