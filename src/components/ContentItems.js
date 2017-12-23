@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import WYSIWYG from 'components/WYSIWYG';
 
 class ContentItems extends Component {
 
@@ -8,23 +9,28 @@ class ContentItems extends Component {
 
     return (contentItems) && (
 
-      contentItems.map((content) =>
-        <div className="coa-main__wysiwyg" key={content.id}>
-          {/* TODO: removed temporarily for user testing,
+      contentItems.map((content) => {
+
+        {
+          if (content.type === 'content') {
+            return <div key={content.id}><WYSIWYG content={content.value} isSection={true} /></div>;
+          }
+
+          /* TODO: removed temporarily for user testing,
             uncomment as applications blocks are implemented.
 
-          (content.type === 'application_block') && (
-            <div className="coa-section">
-              <h4>{content.value.description}</h4>
-              INSERT {content.type} app HERE
-              { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
-            </div>
-          )*/}
-          {(content.type === 'content') && (
-            <div className="coa-section" dangerouslySetInnerHTML={{__html: content.value}} />
-          )}
-        </div>
-      )
+          if (content.type === 'application_block') {
+            return (
+              <div key={content.id} className="coa-section">
+                <h4>{content.value.description}</h4>
+                INSERT {content.type} app HERE
+                { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
+              </div>
+            );
+          }*/
+        }
+
+      })
     );
   }
 }

@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 
+import WYSIWYG from 'components/WYSIWYG';
 import ContentItems from 'components/ContentItems';
 import RelatedLinks from 'components/RelatedLinks';
 import FormFeedback from 'components/FormFeedback';
@@ -18,7 +19,6 @@ class Service extends Component {
       data: {}
     };
   }
-
 
   componentDidMount() {
     if (process.env.NODE_ENV !== 'production') {
@@ -69,7 +69,7 @@ class Service extends Component {
               <div className="coa-section">
                 { topicId && ( <a className="coa-main__breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
                 <h2 className="coa-main__title">{title}</h2>
-                { steps && ( <div className="coa-main__steps coa-main__wysiwyg" dangerouslySetInnerHTML={{__html: steps}} /> )}
+                { steps && ( <div className="coa-main__steps"><WYSIWYG content={steps} /></div> )}
               </div>
 
               <ContentItems contentItems={contentItems} />

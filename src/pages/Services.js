@@ -58,7 +58,7 @@ class ServicesIndex extends Component {
                     id={service.id}
                     url={`/service/${service.id}`}
                     text={service.title}
-                    isBoxType="true"
+                    isBoxType={true}
                   />
                 </div>
               )
