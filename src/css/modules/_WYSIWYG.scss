@@ -1,4 +1,8 @@
 .coa-wysiwyg {
+  & > br {
+    display: none;
+  }
+
   & > h1, h2 {
     font-size: $h4-font-size;
     margin-bottom: $coa-space-level2;
