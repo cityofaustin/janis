@@ -5,9 +5,9 @@ import {
 } from 'react-router-dom'
 
 // components
-import Banner from "components/Banner"
-import Header from "components/Header"
-import Footer from "components/Footer"
+import Banner from "components/layout/Banner"
+import Header from "components/layout/Header"
+import Footer from "components/layout/Footer"
 
 // page routes
 import HomePage from "pages/HomePage"
