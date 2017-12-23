@@ -1,5 +1,12 @@
 .coa-Navmenu {
-  @include visually-hidden;
+  position: absolute;
+  left: -320px;
+  width: 320px;
+  transition: 0.5s;
+  top: 0;
+  bottom: 0;
+  background-color: $color-white;
+  z-index: 2;
 }
 
 .coa-Navmenu--open {
@@ -12,6 +19,7 @@
   left: 0;
   right: 0;
   overflow: hidden;
+  transition: 0.5s;
 }
 
 .coa-Navmenu__close-btn {

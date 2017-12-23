@@ -17,7 +17,6 @@ class Navmenu extends Component {
   }
 
   focusOnClose = () => {
-    console.log('hi')
     this.refs.closeTrigger.focus()
   }
 
