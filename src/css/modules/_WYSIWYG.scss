@@ -1,9 +1,9 @@
 .coa-wysiwyg {
-  & > br {
+  > br {
     display: none;
   }
 
-  & > h1, h2 {
+  > h1, h2 {
     font-size: $h4-font-size;
     margin-bottom: $coa-space-level2;
     margin-top: $coa-space-level7;
@@ -18,7 +18,7 @@
     }
   }
 
-  & > p {
+  > p {
     margin: 0;
     margin-bottom: $coa-space-level4;
 
@@ -27,7 +27,7 @@
     }
   }
 
-  & > ul, ol {
+  > ul, ol {
 
     margin-bottom: $coa-space-level4;
 
@@ -39,6 +39,10 @@
     ol, ul {
       margin-left: $coa-space-level4;
       list-style-type: disc;
+
+      li {
+        margin-bottom: 0;
+      }
     }
 
     &:last-child {
@@ -46,11 +50,11 @@
     }
   }
 
-  & > ul > li {
+  > ul > li {
     margin-bottom: 0;
   }
 
-  & > ol > li {
+  > ol > li {
     margin-bottom: $coa-space-level2;
   }
 }
