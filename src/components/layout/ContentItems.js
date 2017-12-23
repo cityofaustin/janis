@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import WYSIWYG from 'components/WYSIWYG';
+import WYSIWYG from 'components/modules/WYSIWYG';
 
 class ContentItems extends Component {
 

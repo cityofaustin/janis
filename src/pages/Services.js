@@ -4,10 +4,9 @@ import axios from 'axios';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
-import FormFeedback from 'components/FormFeedback';
-import ListLink from 'components/ListLink';
-import Service311 from 'components/Service311';
-
+import FormFeedback from 'components/layout/FormFeedback';
+import Service311 from 'components/layout/Service311';
+import ListLink from 'components/modules/ListLink';
 
 class ServicesIndex extends Component {
 

@@ -3,12 +3,12 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 
-import WYSIWYG from 'components/WYSIWYG';
-import ContentItems from 'components/ContentItems';
-import RelatedLinks from 'components/RelatedLinks';
-import FormFeedback from 'components/FormFeedback';
-import Contact from 'components/Contact';
-import Service311 from 'components/Service311';
+import ContentItems from 'components/layout/ContentItems';
+import Contact from 'components/layout/Contact';
+import RelatedLinks from 'components/layout/RelatedLinks';
+import FormFeedback from 'components/layout/FormFeedback';
+import Service311 from 'components/layout/Service311';
+import WYSIWYG from 'components/modules/WYSIWYG';
 
 import jsonFileData from '__tmpdata/services';
 
