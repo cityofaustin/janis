@@ -33,7 +33,7 @@
   @include box_verticalcenter(200px);
   background-color: $color-gray-lighter;
   margin-bottom: $coa-space-level4;
-  padding: $coa-space-level3;
+  padding: $coa-space-level5;
 }
 .coa-main__hero--small {
   @extend .coa-main__hero;
@@ -47,7 +47,7 @@
 }
 
 .coa-main__body {
-  margin: 0 $coa-space-level3;
+  margin: 0 $coa-space-level5;
 }
 
 .coa-main__steps {
