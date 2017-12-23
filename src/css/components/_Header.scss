@@ -26,18 +26,3 @@
 .coa-Header__text-spacer {
   margin: 0 $coa-space-level3;
 }
-
-.coa-Header__nav {
-  @include visually-hidden;
-}
-
-.coa-Header__nav--open {
-  width: 320px;
-  background-color: $color-white;
-  position: absolute;
-  top: $coa-space-level8;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-}

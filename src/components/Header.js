@@ -22,7 +22,7 @@ class Header extends Component {
         <div className="wrapper">
           <div className="row">
             <div className="col-xs-6 coa-Header__menu">
-              <span onClick={this.toggleMenu}>MENU</span>
+              <span onClick={this.toggleMenu} tabIndex="0">MENU</span>
               <span className="coa-Header__text-spacer">|</span>
               <a href="/">AUSTIN.GOV</a>
             </div>
@@ -32,7 +32,7 @@ class Header extends Component {
           </div>
         </div>
         <Navmenu {...this.props}
-          isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu} 
+          isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}
         />
       </header>
     );

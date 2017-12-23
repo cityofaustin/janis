@@ -1,0 +1,42 @@
+.coa-Navmenu {
+  @include visually-hidden;
+}
+
+.coa-Navmenu--open {
+  z-index: 2;
+  width: 320px;
+  background-color: $color-white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.coa-Navmenu__close-btn {
+  background: transparent;
+  padding: 0;
+  margin: $coa-space-level1;
+  width: auto;
+  &:hover, &:active {
+    background: transparent;
+  }
+  svg {
+    margin: $coa-space-level1 $coa-space-level2;
+  }
+}
+
+.coa-Navmenu__overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: rgba($color-gray-medium, .3);
+  position: absolute;
+}
+
+.coa-Navmenu__overlay--hide {
+  display: none;
+}

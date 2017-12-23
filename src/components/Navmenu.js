@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { uniq, includes } from 'lodash';
+import CloseSVG from 'svg/Close';
 
 class Navmenu extends Component {
   constructor(props) {
@@ -11,8 +12,13 @@ class Navmenu extends Component {
   }
 
   menuClassName = () => {
-    const baseClassName = `coa-Header__nav`;
+    const baseClassName = `coa-Navmenu`;
     return this.props.isOpen ? `${baseClassName}--open` : baseClassName;
+  }
+
+  focusOnClose = () => {
+    console.log('hi')
+    this.refs.closeTrigger.focus()
   }
 
   componentDidMount () {
@@ -45,6 +51,12 @@ class Navmenu extends Component {
       .catch(err => console.log(err))
   }
 
+  componentDidUpdate() {
+    if (this.props.isOpen) {
+      this.focusOnClose()
+    }
+  }
+
   getCurrentPath = () => {
     // this is dependent on react-router. We may want to use
     // `window.location.href` instead.
@@ -70,7 +82,9 @@ class Navmenu extends Component {
     return (
       <div className="usa-grid-full">
         <nav role="navigation" className={this.menuClassName()}>
-          <span onClick={this.props.toggleMenu}>x</span>
+          <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
+            <CloseSVG size="40" />
+          </button>
           <ul className="usa-sidenav-list">
             <li>
               <a href="/" className={this.getMenuItemClassName('/')}>Home</a>
@@ -99,6 +113,7 @@ class Navmenu extends Component {
             })}
           </ul>
         </nav>
+        <div className={`coa-Navmenu__overlay${this.props.isOpen ? '' : '--hide'}`}></div>
       </div>
     );
   }
