@@ -8,27 +8,107 @@
     "title": "Use City of Austin Services",
     "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
   },
-  "contact":{
-    "phone":"512-367-8695",
-    "email":"resourcerecovery@austintexas.gov",
-    "address": {
+  "contacts":[
+    {
       "name": "Austin Recycle and Reuse Drop-off Center",
-      "street": "2514 Business Center Drive ",
-      "city": "Austin",
-      "state": "Texas",
-      "zip": "78744 ",
-      "country": "United States"
+      "phone":"512-367-8695",
+      "email":"resourcerecovery@austintexas.gov",
+      "address": {
+        "street": "2514 Business Center Drive",
+        "city": "Austin",
+        "state": "Texas",
+        "zip": "78744",
+        "country": "United States"
+      },
+      "hours": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        }
+      ]
     },
-    "hours": {
-      "Monday":"8:00 AM - 4:30 PM",
-      "Tuesday":"8:00 AM - 4:30 PM",
-      "Wednesday":"8:00 AM - 4:30 PM",
-      "Thursday":"8:00 AM - 4:30 PM",
-      "Friday":"8:00 AM - 4:30 PM",
-      "Saturday": "closed",
-      "Sunday":"closed"
+    {
+      "name": "Some Other Location",
+      "phone":"555-555-5555",
+      "email":"someemail@austintexas.gov",
+      "address": {
+        "name": "Some Place",
+        "street": "1111 SomeWhere Drive",
+        "city": "Austin",
+        "state": "Texas",
+        "zip": "78744",
+        "country": "United States"
+      },
+      "hours": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        }
+      ]
     }
-  },
+  ],
   "servicesRelated":[
     {
       "id": 5,
