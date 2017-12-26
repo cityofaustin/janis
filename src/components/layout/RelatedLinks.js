@@ -9,10 +9,10 @@ class RelatedLinks extends Component {
 
     return (relatedlinks) && (
 
-      <div className="coa-section coa-section--grey">
+      <div className="coa-section">
         <div className="wrapper">
           <div className="coa-section__title">
-            <h3>Use related services</h3>
+            <h3>Check out related city services</h3>
           </div>
 
           <div className="row">
