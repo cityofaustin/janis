@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SectionTitle from 'components/modules/SectionTitle';
 import ListLink from 'components/modules/ListLink';
 
 class RelatedLinks extends Component {
@@ -11,9 +12,7 @@ class RelatedLinks extends Component {
 
       <div className="coa-section">
         <div className="wrapper">
-          <div className="coa-section__title">
-            <h3>Check out related city services</h3>
-          </div>
+          <SectionTitle title="Check out related city services" noBorder={true} />
 
           <div className="row">
           {
