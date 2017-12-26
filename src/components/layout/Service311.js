@@ -18,19 +18,17 @@ class Service311 extends Component {
 
           <div className="row">
           {
-            services311.map((service) =>
-              <div key={service.id} className="col-xs-12 col-lg-4">
+            services311.map((service, index) =>
+              <div key={index} className="col-xs-12 col-lg-4">
                 <ListLink
-                  key={service.id}
-                  id={service.id}
-                  url="#"
+                  url={service.url}
                   text={service.title}
                 />
               </div>
             )
           }
           </div>
-          <a className="coa-section__link" href="#">See a Full List of 311 Services</a>
+          <a className="coa-section__link" href="http://311.austintexas.gov/reports/list_services">See a Full List of 311 Services</a>
         </div>
       </div>
     );
