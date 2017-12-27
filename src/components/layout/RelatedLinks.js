@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ListLink from 'components/ListLink';
+import ListLink from 'components/modules/ListLink';
 
 class RelatedLinks extends Component {
 

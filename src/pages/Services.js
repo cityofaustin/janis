@@ -4,10 +4,9 @@ import axios from 'axios';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
-import FormFeedback from 'components/FormFeedback';
-import ListLink from 'components/ListLink';
-import Service311 from 'components/Service311';
-
+import FormFeedback from 'components/layout/FormFeedback';
+import Service311 from 'components/layout/Service311';
+import ListLink from 'components/modules/ListLink';
 
 class ServicesIndex extends Component {
 
@@ -38,13 +37,13 @@ class ServicesIndex extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-page_hero">
-            <div className="coa-page_hero__callout">
+          <div className="coa-main__hero">
+            <div className="coa-main__hero__callout">
               <h2>{title}</h2>
             </div>
           </div>
 
-          <div className="coa-page_body" dangerouslySetInnerHTML={{__html: body}} />
+          <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
         <div className="coa-section">
@@ -58,7 +57,7 @@ class ServicesIndex extends Component {
                     id={service.id}
                     url={`/service/${service.id}`}
                     text={service.title}
-                    isBoxType="true"
+                    isBoxType={true}
                   />
                 </div>
               )
