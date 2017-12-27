@@ -4,7 +4,7 @@ import axios from 'axios';
 import { parse } from 'query-string';
 
 import ContentItems from 'components/layout/ContentItems';
-import Contacts from 'components/layout/Contacts';
+import Contact from 'components/layout/Contact';
 import RelatedLinks from 'components/layout/RelatedLinks';
 import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
@@ -75,7 +75,7 @@ class Service extends Component {
 
             <div className="coa-main__right col-xs-12 col-lg-4">
 
-              <Contacts contacts={contacts} />
+              <Contact contacts={contacts} />
 
             </div>
           </div>
