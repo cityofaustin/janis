@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Hours from 'components/Hours';
+import Hours from 'components/modules/Hours';
 
 class Contact extends Component {
 

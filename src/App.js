@@ -5,16 +5,16 @@ import {
 } from 'react-router-dom'
 
 // components
-import Banner from "components/Banner"
-import Header from "components/Header"
-import Footer from "components/Footer"
+import Banner from "components/layout/Banner"
+import Header from "components/layout/Header"
+import Footer from "components/layout/Footer"
 
 // page routes
 import HomePage from "pages/HomePage"
 import ServicesIndex from "pages/Services"
 import Service from "pages/Service"
 
-import 'css/App.css'
+import 'css/coa.css'
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
       <Router>
         <div>
           <Banner />
-          <section className="coa-page_content">
+          <section className="coa-main">
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesIndex} />
             <Route path="/service/:id" component={Service} />
