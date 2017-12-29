@@ -1,0 +1,32 @@
+.nowrap {
+  white-space: nowrap;
+}
+
+.hidden--sm {
+// --> display none for small width screens and higher
+  display: none;
+  @include media($medium-screen) {
+    display: inline;
+  }
+}
+
+.hidden--md {
+// --> display none for medium width screens and higher
+  display: inline;
+  @include media($medium-screen) {
+    display: none !important;
+  }
+}
+
+.visible--sm {
+// --> display none by default, display initial for small screens and higher
+  display: inline;
+}
+
+.visible--md {
+// --> display none by default, display initial for medium screens and higher
+  display: none;
+  @include media($medium-screen) {
+    display: inline;
+  }
+}
