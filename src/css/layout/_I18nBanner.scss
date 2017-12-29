@@ -1,0 +1,62 @@
+.coa-I18nBanner {
+  width: 100%;
+  background-color: $color-gray-light;
+  padding: $coa-space-level1;
+}
+
+.coa-I18nBanner__language-list {
+  text-align: right;
+  font-size: $small-font-size;
+}
+
+.coa-I18nBanner__prompt {
+  display: none;
+  font-size: $small-font-size;
+  position: absolute;
+  left: -999em;
+  @include media($medium-screen) {
+    position: relative;
+    left: auto;
+    display: block;
+  };
+}
+
+@mixin coa-I18nBanner__language {
+  display: inline;
+  padding: 0 $coa-space-level2;
+  cursor: pointer;
+}
+
+.coa-I18nBanner__language {
+  @include coa-I18nBanner__language;
+}
+
+.coa-I18nBanner__language--active {
+  background-color: $color-gray-lighter;
+}
+
+.coa-I18nBanner__language--other {
+  @include coa-I18nBanner__language;
+  position: relative;
+  svg {
+    vertical-align: middle;
+  }
+}
+
+@mixin coa-I18nBanner__other-language-options {
+  position: absolute;
+  background-color: $color-gray-light;
+  list-style: none;
+  top: $coa-space-level5;
+  right: $coa-space-level2;
+  padding: $coa-space-level3;
+}
+
+.coa-I18nBanner__other-language-options--open {
+  @include coa-I18nBanner__other-language-options;
+}
+
+.coa-I18nBanner__other-language-options--closed {
+  @include coa-I18nBanner__other-language-options;
+  display: none;
+}

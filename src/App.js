@@ -6,6 +6,7 @@ import {
 
 // components
 import Banner from "components/layout/Banner"
+import I18nBanner from "components/I18nBanner"
 import Header from "components/layout/Header"
 import Footer from "components/layout/Footer"
 
@@ -22,6 +23,7 @@ class App extends Component {
       <Router>
         <div>
           <Banner />
+          <I18nBanner />
           <section className="coa-main">
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesIndex} />
