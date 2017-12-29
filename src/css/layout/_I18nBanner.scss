@@ -1,17 +1,19 @@
 .coa-I18nBanner {
   width: 100%;
   background-color: $color-gray-light;
-  padding: .7rem 0;
+  padding: $coa-space-level1;
 }
 
 .coa-I18nBanner__language-list {
   text-align: right;
+  font-size: $small-font-size;
 }
 
 .coa-I18nBanner__prompt {
   display: none;
-  font-size: 1.5rem;
-  @include visually-hidden;
+  font-size: $small-font-size;
+  position: absolute;
+  left: -999em;
   @include media($medium-screen) {
     position: relative;
     left: auto;
@@ -27,19 +29,6 @@
 
 .coa-I18nBanner__language {
   @include coa-I18nBanner__language;
-}
-
-.coa-I18nBanner__language--hide-sm {
-  display: none;
-  @include media($medium-screen) {
-    display: inline;
-  }
-}
-
-.coa-I18nBanner__language--hide-md {
-  @include media($medium-screen) {
-    display: none;
-  }
 }
 
 .coa-I18nBanner__language--active {
@@ -58,7 +47,7 @@
   position: absolute;
   background-color: $color-gray-light;
   list-style: none;
-  top: $coa-space-level6;
+  top: $coa-space-level5;
   right: $coa-space-level2;
   padding: $coa-space-level3;
 }

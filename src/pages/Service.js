@@ -3,11 +3,12 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 
-import ContentItems from 'components/ContentItems';
-import RelatedLinks from 'components/RelatedLinks';
-import FormFeedback from 'components/FormFeedback';
-import Contact from 'components/Contact';
-import Service311 from 'components/Service311';
+import ContentItems from 'components/layout/ContentItems';
+import Contact from 'components/layout/Contact';
+import RelatedLinks from 'components/layout/RelatedLinks';
+import FormFeedback from 'components/layout/FormFeedback';
+import Service311 from 'components/layout/Service311';
+import WYSIWYG from 'components/modules/WYSIWYG';
 
 import jsonFileData from '__tmpdata/services';
 
@@ -18,7 +19,6 @@ class Service extends Component {
       data: {}
     };
   }
-
 
   componentDidMount() {
     if (process.env.NODE_ENV !== 'production') {
@@ -59,24 +59,24 @@ class Service extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-page_hero--small"></div>
+          <div className="coa-main__hero--small"></div>
         </div>
 
         <div className="wrapper">
           <div className="row">
-            <div className="coa-page_left col-xs-12 col-lg-8">
+            <div className="coa-main__left col-xs-12 col-lg-8">
 
               <div className="coa-section">
-                { topicId && ( <a className="coa-page_breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
-                <h2 className="coa-page_title">{title}</h2>
-                { steps && ( <div className="coa-steps" dangerouslySetInnerHTML={{__html: steps}} /> )}
+                { topicId && ( <a className="coa-main__breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+                <h2 className="coa-main__title">{title}</h2>
+                { steps && ( <div className="coa-main__steps"><WYSIWYG content={steps} /></div> )}
               </div>
 
               <ContentItems contentItems={contentItems} />
 
             </div>
 
-            <div className="coa-page_right col-xs-12 col-lg-4">
+            <div className="coa-main__right col-xs-12 col-lg-4">
 
               <Contact phone={phone} email={email} address={address} hours={hours} />
 
