@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { uniq, includes } from 'lodash';
 import CloseSVG from 'svg/Close';
+import NAVMENU_ENDPOINT from 'constants/endpoints';
 
 class Navmenu extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Navmenu extends Component {
 
   menuClassName = () => {
     const baseClassName = `coa-Navmenu`;
-    return this.props.isOpen ? `${baseClassName}--open` : baseClassName;
+    return this.props.isOpen ? `${baseClassName} ${baseClassName}--open` : baseClassName;
   }
 
   focusOnClose = () => {
@@ -21,10 +22,7 @@ class Navmenu extends Component {
   }
 
   componentDidMount () {
-    const endpoint = [
-      `${process.env.REACT_APP_CMS_ENDPOINT}/pages/`,
-      `?format=json&type=base.ServicePage&fields=topic(text)`,
-    ].join('')
+    const endpoint = NAVMENU_ENDPOINT
 
     axios
       .get(endpoint)
@@ -65,6 +63,14 @@ class Navmenu extends Component {
   getMenuItemClassName = (path) => {
     const pathname = this.getCurrentPath()
     return pathname === path ? 'usa-current' : ''
+  }
+
+  getOverlayClassName = () => {
+    let className = `coa-Navmenu__overlay`;
+    if (this.props.isOpen) {
+      className = `${className} ${className}--open`
+    }
+    return className
   }
 
   getParentMenuItemClassName = (topic) => {
@@ -112,7 +118,7 @@ class Navmenu extends Component {
             })}
           </ul>
         </nav>
-        <div className={`coa-Navmenu__overlay${this.props.isOpen ? '' : '--hide'}`}></div>
+        <div className={this.getOverlayClassName()}></div>
       </div>
     );
   }

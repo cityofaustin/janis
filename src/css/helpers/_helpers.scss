@@ -30,3 +30,10 @@
     display: inline;
   }
 }
+
+.coa-text-spacer--vertical {
+  margin: 0 $coa-space-level3;
+  &:after {
+    content: "|";
+  }
+}

@@ -10,16 +10,9 @@
 }
 
 .coa-Navmenu--open {
-  z-index: 2;
-  width: 320px;
-  background-color: $color-white;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
   overflow: hidden;
-  transition: 0.5s;
 }
 
 .coa-Navmenu__close-btn {
@@ -41,10 +34,15 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background: rgba($color-gray-medium, .3);
+  transition: opacity 0.2s ease-in-out;
+  background: rgba($color-gray-medium, 1);
   position: absolute;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.coa-Navmenu__overlay--hide {
-  display: none;
+.coa-Navmenu__overlay--open {
+  opacity: 0.3;
+  visibility: visible;
 }

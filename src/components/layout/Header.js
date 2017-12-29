@@ -22,8 +22,12 @@ class Header extends Component {
         <div className="wrapper">
           <div className="row">
             <div className="col-xs-6 coa-Header__menu">
-              <span onClick={this.toggleMenu} tabIndex="0">MENU</span>
-              <span className="coa-Header__text-spacer">|</span>
+              <span onClick={this.toggleMenu} tabIndex="0"
+                className="coa-Header__menu-toggle"
+              >
+                MENU
+              </span>
+              <span className="coa-text-spacer--vertical"></span>
               <a href="/">AUSTIN.GOV</a>
             </div>
             <div className="col-xs-6 coa-Header__search">

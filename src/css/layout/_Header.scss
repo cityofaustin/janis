@@ -10,6 +10,10 @@
   }
 }
 
+.coa-Header__menu-toggle {
+  cursor: pointer;
+}
+
 .coa-Header__search {
   vertical-align: middle;
   text-align: right;
@@ -21,8 +25,4 @@
   svg {
     vertical-align: middle;
   }
-}
-
-.coa-Header__text-spacer {
-  margin: 0 $coa-space-level3;
 }
