@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { uniq, includes } from 'lodash';
 import CloseSVG from 'svg/Close';
+import { Link } from 'react-router-dom';
 import NAVMENU_ENDPOINT from 'constants/endpoints';
 
 class Navmenu extends Component {
@@ -92,23 +93,23 @@ class Navmenu extends Component {
           </button>
           <ul className="usa-sidenav-list">
             <li>
-              <a href="/" className={this.getMenuItemClassName('/')}>Home</a>
+              <Link to="/" className={this.getMenuItemClassName('/')}>Home</Link>
             </li>
             { this.state.nav && this.state.nav.map((parent) => {
               return (
                 <li>
-                  <a className={this.getParentMenuItemClassName(parent)} href="/services">
+                  <Link to="/services" className={this.getParentMenuItemClassName(parent)}>
                     {parent.parentTitle}
-                  </a>
+                  </Link>
                   <ul className="usa-sidenav-sub_list">
                   { parent.children.map((child) => {
                     return (
                       <li>
-                        <a className={this.getMenuItemClassName(`/service/${child.id}`)}
-                          href={`/service/${child.id}`}
+                        <Link to={`/service/${child.id}`}
+                          className={this.getMenuItemClassName(`/service/${child.id}`)}
                         >
                           {child.title}
-                        </a>
+                        </Link>
                       </li>
                     )
                   })}
