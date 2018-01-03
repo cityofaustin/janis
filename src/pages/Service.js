@@ -46,11 +46,21 @@ class Service extends Component {
     }
 
     axios
-      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,topic(text),locations(location(name,street,city,state,zip,country,hours)),contacts(contact(name,email,phone))`)
+      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,topic(text),contacts(contact(name,email,phone,hours,location(name,street,city,state,zip,country)))`)
       .then(res => {
         this.setState({ data: res.data })
       })
       .catch(err => console.log(err))
+  }
+
+  cleanContacts(contacts) {
+    return contacts && contacts.map((c) => {
+      let cleaned = {
+        address: c.contact.location,
+        ...c.contact,
+      };
+      return cleaned;
+    });
   }
 
   render() {
@@ -61,7 +71,7 @@ class Service extends Component {
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extra_content", null);
-    const contacts = get(jsonFileData, "contacts", null);
+    const contacts = this.cleanContacts(get(data, "contacts", null));
     const relatedlinks = get(jsonFileData, "servicesRelated", null);
     const services311 = get(jsonFileData, "services311", null);
 
