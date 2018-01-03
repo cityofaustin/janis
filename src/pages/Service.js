@@ -61,12 +61,9 @@ class Service extends Component {
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extra_content", null);
-    const phone = get(data, "contacts[0].contact.phone", null);
-    const email = get(data, "contacts[0].contact.email", null);
-    const address = get(data, "locations[0].location", null);
-    const hours = get(data, "locations[0].location.hours", null);
+    const contacts = get(jsonFileData, "contacts", null);
     const relatedlinks = get(jsonFileData, "servicesRelated", null);
-    const services311 = get(jsonFileData, "services311", []);
+    const services311 = get(jsonFileData, "services311", null);
 
     return (
 
@@ -92,7 +89,7 @@ class Service extends Component {
 
             <div className="coa-main__right col-xs-12 col-lg-4">
 
-              <Contact phone={phone} email={email} address={address} hours={hours} />
+              <Contact contacts={contacts} />
 
             </div>
           </div>

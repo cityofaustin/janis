@@ -8,27 +8,107 @@
     "title": "Use City of Austin Services",
     "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
   },
-  "contact":{
-    "phone":"512-367-8695",
-    "email":"resourcerecovery@austintexas.gov",
-    "address": {
+  "contacts":[
+    {
       "name": "Austin Recycle and Reuse Drop-off Center",
-      "street": "2514 Business Center Drive ",
-      "city": "Austin",
-      "state": "Texas",
-      "zip": "78744 ",
-      "country": "United States"
+      "phone":"512-367-8695",
+      "email":"resourcerecovery@austintexas.gov",
+      "address": {
+        "street": "2514 Business Center Drive",
+        "city": "Austin",
+        "state": "Texas",
+        "zip": "78744",
+        "country": "United States"
+      },
+      "hours": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        }
+      ]
     },
-    "hours": {
-      "Monday":"8:00 AM - 4:30 PM",
-      "Tuesday":"8:00 AM - 4:30 PM",
-      "Wednesday":"8:00 AM - 4:30 PM",
-      "Thursday":"8:00 AM - 4:30 PM",
-      "Friday":"8:00 AM - 4:30 PM",
-      "Saturday": "closed",
-      "Sunday":"closed"
+    {
+      "name": "Some Other Location",
+      "phone":"555-555-5555",
+      "email":"someemail@austintexas.gov",
+      "address": {
+        "name": "Some Place",
+        "street": "1111 SomeWhere Drive",
+        "city": "Austin",
+        "state": "Texas",
+        "zip": "78744",
+        "country": "United States"
+      },
+      "hours": [
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        },
+        {
+          "day_of_week": "Monday",
+          "start_time": "08:00:00",
+          "end_time": "16:30:00"
+        }
+      ]
     }
-  },
+  ],
   "servicesRelated":[
     {
       "id": 5,
@@ -45,28 +125,52 @@
   ],
   "services311": [
     {
-      "id": 1,
-      "title": "Report a Pothole"
+      "title": "Report Found Animal your Holding",
+      "url": "http://311.austintexas.gov/reports/new?service_id=535ffd34844eedb146000019"
     },
     {
-      "id": 2,
-      "title": "Request Street Maintenance"
+      "title": "Request Confined Dog Pick-up",
+      "url": "http://311.austintexas.gov/reports/new?service_id=535ffd34844eedb146000019"
     },
     {
-      "id": 3,
-      "title": "Report Problem with a Bridge"
+      "title": "Request Loose Dog Pick-up",
+      "url": "http://311.austintexas.gov/reports/new?service_id=5579f17347199e0be40000a8"
     },
     {
-      "id": 4,
-      "title": "Report a Stray Animal You Found"
+      "title": "Request Deceased Animal Collection",
+      "url": "http://311.austintexas.gov/reports/new?service_id=536011a1844eedb146000190"
     },
     {
-      "id": 5,
-      "title": "Report Erosion along Waterways"
+      "title": "Request a Traffic/Parking Sign",
+      "url": "http://311.austintexas.gov/reports/new?service_id=53600cfc844eedb14600013b"
     },
     {
-      "id": 6,
-      "title": "Report a Possible Code Violation"
+      "title": "Request Park Maintenance",
+      "url": "http://311.austintexas.gov/reports/new?service_id=53600b98844eedb146000102"
+    },
+    {
+      "title": "Request Pothole Repair",
+      "url": "http://311.austintexas.gov/reports/new?service_id=53606226844eedb146000267"
+    },
+    {
+      "title": "Request Sidewalk Repair",
+      "url": "http://311.austintexas.gov/reports/new?service_id=53606572844eedb146000290"
+    },
+    {
+      "title": "Report Current Flooding",
+      "url": "http://311.austintexas.gov/reports/new?service_id=544d151b6018273abe00003d"
+    },
+    {
+     "title": "Report a Food Complaint",
+      "url": "http://311.austintexas.gov/reports/new?service_id=577d9a28d02256733800002f"
+    },
+    {
+      "title": "Report Construction in Right of Way",
+      "url": "http://311.austintexas.gov/reports/new?service_id=56f56b31c41e5d565200008f"
+    },
+    {
+      "title": "Report Feedback for Community Engagement",
+      "url": "http://311.austintexas.gov/reports/new?service_id=536000b9844eedb14600006a"
     }
   ]
 }

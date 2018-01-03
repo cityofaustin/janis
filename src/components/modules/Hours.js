@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 class Hours extends Component {
 
@@ -22,7 +23,7 @@ class Hours extends Component {
             hours.map((hour, index) =>
               <tr key={index}>
                 <th scope="row">{hour.day_of_week}</th>
-                <td>{hour.start_time} - {hour.end_time}</td>
+                <td>{moment(hour.start_time, "HH:mm:ss").format('h:mm A')} - {moment(hour.end_time, "HH:mm:ss").format('h:mm A')}</td>
               </tr>
             )
           }

@@ -8,6 +8,7 @@
     "browser-locale": "^1.0.3",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
     "query-string": "^5.0.1",

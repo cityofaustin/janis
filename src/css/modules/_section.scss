@@ -19,6 +19,13 @@
   background-color: $color-gray-lightest;
 }
 
+.coa-section__subsection {
+  margin-bottom: $coa-space-level4;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .coa-section__title {
   border-bottom: 5px solid $color-black;
   margin-bottom: $coa-space-level2;
@@ -33,10 +40,15 @@
 }
 
 .coa-section__title--noborder {
-  @include media($coa-medium-screen) {
-    font-size: $h2-font-size;
-    font-weight: $font-bold;
-  }
+  border-bottom: none;
+  margin-bottom: $coa-space-level4;
+  padding-bottom: 0;
+}
+
+.coa-section__subtitle {
+  font-style: italic;
+  margin-bottom: $coa-space-level2;
+  margin-top: $coa-space-level2;
 }
 
 .coa-section__map {

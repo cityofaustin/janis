@@ -13,9 +13,19 @@
 }
 
 .coa-list_link--box {
-  border: 1px solid $color-gray-lighter;
+  background-color: $color-primary;
+  border: none;
+  color: $color-white;
   font-size: $lead-font-size;
   margin-bottom: $coa-space-level2;
   height: 100px;
-  padding: 0 $coa-space-level2;
+  padding: 0 $coa-space-level3;
+
+//TODO: define link state colors
+  &:focus {
+    color: $color-white;
+  }
+  &:visited {
+    color: $color-white;
+  }
 }
