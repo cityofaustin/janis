@@ -21,6 +21,20 @@ class Service extends Component {
   }
 
   componentDidMount() {
+    this.fetchData()
+  }
+
+  componentDidUpdate (prevProps) {
+   // Using React Router, we need to fetch new data when we switch between
+   // routes that use the same component but that have different url params.
+   // https://github.com/ReactTraining/react-router/blob/c865bc6b331eabd853641dcc7e0224a7dce76f3b/docs/guides/ComponentLifecycle.md
+   let oldId = prevProps.match.params.id
+   let newId = this.props.match.params.id
+   if (newId !== oldId)
+     this.fetchData()
+ }
+
+  fetchData = () => {
     if (process.env.NODE_ENV !== 'production') {
       // Allow querystrings to set data, which is used in joplin for livepreview
       const query = parse(this.props.location.search);

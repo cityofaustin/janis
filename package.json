@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "browser-locale": "^1.0.3",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",

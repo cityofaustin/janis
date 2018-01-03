@@ -10,7 +10,9 @@
 
 // base
 @import 'css/base/base';
-@import 'css/base/helpers';
+
+// helpers
+@import 'css/helpers/helpers';
 
 // modules
 @import 'css/modules/form';
@@ -21,5 +23,7 @@
 
 // layout
 @import 'css/layout/main';
+@import "css/layout/Header";
 @import "css/layout/Footer";
-
+@import "css/layout/I18nBanner";
+@import "css/layout/Navmenu";
