@@ -3,11 +3,11 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 
-import ContentItems from 'components/layout/ContentItems';
-import Contact from 'components/layout/Contact';
-import RelatedLinks from 'components/layout/RelatedLinks';
-import FormFeedback from 'components/layout/FormFeedback';
-import Service311 from 'components/layout/Service311';
+import ContentItems from 'js/layout/ContentItems';
+import Contact from 'js/layout/Contact';
+import RelatedLinks from 'js/layout/RelatedLinks';
+import FormFeedback from 'js/layout/FormFeedback';
+import Service311 from 'js/layout/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 
 import jsonFileData from '__tmpdata/services';

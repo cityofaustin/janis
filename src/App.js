@@ -5,10 +5,10 @@ import {
 } from 'react-router-dom'
 
 // components
-import Banner from "components/layout/Banner"
-import I18nBanner from "components/layout/I18nBanner"
-import Header from "components/layout/Header"
-import Footer from "components/layout/Footer"
+import Banner from "js/layout/Banner"
+import I18nBanner from "js/layout/I18nBanner"
+import Header from "js/layout/Header"
+import Footer from "js/layout/Footer"
 
 // page routes
 import Home from "js/pages/Home"

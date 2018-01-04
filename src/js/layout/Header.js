@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
-import Navmenu from 'components/Navmenu';
+import Navmenu from 'js/layout/Navmenu';
 
 class Header extends Component {
   constructor(props) {
