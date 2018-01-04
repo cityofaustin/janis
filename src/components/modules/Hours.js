@@ -22,8 +22,8 @@ class Hours extends Component {
           {
             hours.map((hour, index) =>
               <tr key={index}>
-                <th scope="row">{hour.day_of_week}</th>
-                <td>{moment(hour.start_time, "HH:mm:ss").format('h:mm A')} - {moment(hour.end_time, "HH:mm:ss").format('h:mm A')}</td>
+                <th scope="row">{hour.dayOfWeek}</th>
+                <td>{moment(hour.startTime, "HH:mm:ss").format('h:mm A')} - {moment(hour.endTime, "HH:mm:ss").format('h:mm A')}</td>
               </tr>
             )
           }

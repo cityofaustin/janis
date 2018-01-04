@@ -45,12 +45,62 @@ class Service extends Component {
       }
     }
 
+    const queryBody = `{
+      preview(pk: ${this.props.match.params.id}, showPreview: false) {
+        id
+        title
+        slug
+        topic {
+          id
+          text
+        }
+        content
+        extraContent
+        contacts {
+          edges {
+            node {
+              contact {
+                name
+                email
+                phone
+                hours {
+                  edges {
+                    node {
+                      dayOfWeek
+                      startTime
+                      endTime
+                    }
+                  }
+                }
+                location {
+                  name
+                  street
+                  city
+                  state
+                  zip
+                  country
+                }
+              }
+            }
+          }
+        }
+      }
+    }`;
+
     axios
-      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/${this.props.match.params.id}?fields=content,extra_content,topic(text),locations(location(name,street,city,state,zip,country,hours)),contacts(contact(name,email,phone))`)
+      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
+        query: queryBody,
+      })
       .then(res => {
-        this.setState({ data: res.data })
+        this.setState({ data: res.data.data.preview });
       })
       .catch(err => console.log(err))
+  }
+
+  cleanContact(contact) {
+    let cleaned = Object.assign(contact);
+    cleaned.hours = contact.hours.edges.map((d) => d.node);
+    return cleaned;
   }
 
   render() {
@@ -60,8 +110,8 @@ class Service extends Component {
     const topicName = get(data, "topic.text", null);
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
-    const contentItems = get(data, "extra_content", null);
-    const contacts = get(jsonFileData, "contacts", null);
+    const contentItems = get(data, "extraContent", null);
+    const contacts = get(data, "contacts.edges", []).map((n) => this.cleanContact(n.node.contact));
     const relatedlinks = get(jsonFileData, "servicesRelated", null);
     const services311 = get(jsonFileData, "services311", null);
 
