@@ -8,7 +8,7 @@ import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
 import ListLink from 'js/modules/ListLink';
 
-class ServicesIndex extends Component {
+class Services extends Component {
 
   constructor(props) {
     super(props);
@@ -81,4 +81,4 @@ class ServicesIndex extends Component {
 
 }
 
-export default ServicesIndex;
+export default Services;
