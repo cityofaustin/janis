@@ -4,7 +4,7 @@ class SectionSubtitle extends Component {
 
   render() {
 
-    const { title, noBorder } = this.props;
+    const { title } = this.props;
 
     return (
       <h4 className="coa-section__subtitle">{title}</h4>
