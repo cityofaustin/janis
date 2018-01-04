@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { uniq, includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
-import { Link } from 'react-router-dom';
 import NAVMENU_ENDPOINT from 'js/constants/endpoints';
 
 class Navmenu extends Component {
