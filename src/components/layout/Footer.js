@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TwitterSVG from 'components/svg/Twitter';
-import FacebookSVG from 'components/svg/Facebook';
-import GithubSVG from 'components/svg/Github';
-import ExternalLinkSVG from 'components/svg/ExternalLink';
+import TwitterSVG from 'js/svg/Twitter';
+import FacebookSVG from 'js/svg/Facebook';
+import GithubSVG from 'js/svg/Github';
+import ExternalLinkSVG from 'js/svg/ExternalLink';
 
 class Footer extends Component {
 

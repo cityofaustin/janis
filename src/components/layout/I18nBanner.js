@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import locale from 'browser-locale';
 
-import CaretDownSVG from 'svg/CaretDown';
+import CaretDownSVG from 'js/svg/CaretDown';
 
 const languages = [
   {

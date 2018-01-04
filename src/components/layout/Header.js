@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchSVG from 'svg/Search';
+import SearchSVG from 'js/svg/Search';
 import Navmenu from 'components/Navmenu';
 
 class Header extends Component {

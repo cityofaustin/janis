@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { uniq, includes } from 'lodash';
-import CloseSVG from 'svg/Close';
+import CloseSVG from 'js/svg/Close';
 import { Link } from 'react-router-dom';
 import NAVMENU_ENDPOINT from 'constants/endpoints';
 
