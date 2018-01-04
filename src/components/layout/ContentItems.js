@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import HtmlFromAdmin from 'components/modules/HtmlFromAdmin';
+import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 
 class ContentItems extends Component {
 

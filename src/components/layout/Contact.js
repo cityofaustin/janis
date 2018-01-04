@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {get} from 'lodash';
-import SectionTitle from 'components/modules/SectionTitle';
-import SectionSubtitle from 'components/modules/SectionSubtitle';
-import Hours from 'components/modules/Hours';
+import SectionTitle from 'js/modules/SectionTitle';
+import SectionSubtitle from 'js/modules/SectionSubtitle';
+import Hours from 'js/modules/Hours';
 
 class Contact extends Component {
 

@@ -6,7 +6,7 @@ import axios from 'axios';
 import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
-import ListLink from 'components/modules/ListLink';
+import ListLink from 'js/modules/ListLink';
 
 class ServicesIndex extends Component {
 

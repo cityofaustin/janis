@@ -8,7 +8,7 @@ import Contact from 'components/layout/Contact';
 import RelatedLinks from 'components/layout/RelatedLinks';
 import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
-import HtmlFromAdmin from 'components/modules/HtmlFromAdmin';
+import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 
 import jsonFileData from '__tmpdata/services';
 
