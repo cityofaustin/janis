@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import WYSIWYG from 'components/modules/WYSIWYG';
+import HtmlFromAdmin from 'components/modules/HtmlFromAdmin';
 
 class ContentItems extends Component {
 
@@ -13,7 +13,7 @@ class ContentItems extends Component {
 
         let JSX;
         if (content.type === 'content') {
-          JSX = <div key={content.id}><WYSIWYG content={content.value} isSection={true} /></div>;
+          JSX = <div key={content.id}><HtmlFromAdmin content={content.value} isSection={true} /></div>;
         }
 
         /* TODO: removed temporarily for user testing,

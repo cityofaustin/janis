@@ -8,7 +8,7 @@ import Contact from 'components/layout/Contact';
 import RelatedLinks from 'components/layout/RelatedLinks';
 import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
-import WYSIWYG from 'components/modules/WYSIWYG';
+import HtmlFromAdmin from 'components/modules/HtmlFromAdmin';
 
 import jsonFileData from '__tmpdata/services';
 
@@ -130,7 +130,7 @@ class Service extends Component {
               <div className="coa-section">
                 { topicId && ( <a className="coa-main__breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
                 <h2 className="coa-main__title">{title}</h2>
-                { steps && ( <div className="coa-main__steps"><WYSIWYG content={steps} /></div> )}
+                { steps && ( <div className="coa-main__steps"><HtmlFromAdmin content={steps} /></div> )}
               </div>
 
               <ContentItems contentItems={contentItems} />
