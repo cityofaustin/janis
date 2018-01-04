@@ -11,10 +11,10 @@ import Header from "components/layout/Header"
 import Footer from "components/layout/Footer"
 
 // page routes
-import HomePage from "pages/HomePage"
-import SearchPage from "pages/SearchPage"
-import ServicesIndex from "pages/Services"
-import Service from "pages/Service"
+import HomePage from "js/pages/HomePage"
+import SearchPage from "js/pages/SearchPage"
+import ServicesIndex from "js/pages/Services"
+import Service from "js/pages/Service"
 
 import 'css/coa.css'
 
