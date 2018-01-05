@@ -7,6 +7,7 @@ import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'components/layout/FormFeedback';
 import Service311 from 'components/layout/Service311';
 import ListLink from 'components/modules/ListLink';
+import allServicePagesQuery from 'queries/allServicePagesQuery';
 
 class ServicesIndex extends Component {
 
@@ -19,9 +20,11 @@ class ServicesIndex extends Component {
 
   componentDidMount() {
     axios
-      .get(`${process.env.REACT_APP_CMS_ENDPOINT}/pages/?type=base.ServicePage`)
+      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
+        query: allServicePagesQuery,
+      })
       .then(res => {
-        this.setState({ data: res.data })
+        this.setState({ data: res.data.data.allServicePages })
       })
       .catch(err => console.log(err))
   }
@@ -31,7 +34,7 @@ class ServicesIndex extends Component {
     const title = get(jsonFileData, "servicepage.title", "");
     const body = get(jsonFileData, "servicepage.body", "");
     const services311 = get(jsonFileData, "services311", []);
-    const { items: services = [] } = this.state.data
+    const { edges: services = [] } = this.state.data
 
     return (
       <div>
@@ -50,12 +53,12 @@ class ServicesIndex extends Component {
           <div className="wrapper">
             <div className="row">
             {
-              services.map((service) =>
+              services.map(({ node: service }) =>
                 <div className="col-xs-12 col-md-6 col-lg-4">
                   <ListLink
                     key={service.id}
                     id={service.id}
-                    url={`/service/${service.id}`}
+                    url={`/service/${service.slug}`}
                     text={service.title}
                     isBoxType={true}
                   />
