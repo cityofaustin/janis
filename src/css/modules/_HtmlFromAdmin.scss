@@ -1,4 +1,6 @@
 .coa-html_from_admin {
+  max-width: $coa-textwrap-width;
+
   > br {
     display: none;
   }
