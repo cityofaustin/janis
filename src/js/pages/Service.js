@@ -120,7 +120,7 @@ class Service extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-main__hero--small"></div>
+          <div className="coa-main__hero coa-main__hero--small"></div>
         </div>
 
         <div className="wrapper">

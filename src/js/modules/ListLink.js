@@ -8,7 +8,7 @@ class ListLink extends Component {
 
     return (
       <a
-        className={ `coa-list_link ${(isBoxType && "coa-list_link--box" )}` }
+        className={ `coa-ListLink ${(isBoxType && "coa-ListLink--boxprimary" )}` }
         key={id}
         href={url}
       >

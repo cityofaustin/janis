@@ -24,7 +24,7 @@ class Footer extends Component {
                 <p>
                   Request <a href="http://311.austintexas.gov/reports/list_services" target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">311 service</a> or call <a href="tel:1-512-974-2000">512-974-2000</a>
                 </p>
-                <div className="coa-Footer__icon_row">
+                <div className="coa-Footer__icons">
                   <a href="https://twitter.com/austintexasgov" target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">
                     <TwitterSVG size="20" />
                   </a>

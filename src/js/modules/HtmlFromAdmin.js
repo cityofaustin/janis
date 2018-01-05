@@ -7,7 +7,7 @@ class HtmlFromAdmin extends Component {
     const { content, isSection } = this.props;
 
     return (
-      <div className={ `coa-html_from_admin ${(isSection && "coa-section")}` } dangerouslySetInnerHTML={{__html: content}} />
+      <div className={ `coa-HtmlFromAdmin ${(isSection && "coa-section")}` } dangerouslySetInnerHTML={{__html: content}} />
     );
   }
 }

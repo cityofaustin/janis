@@ -1,5 +1,5 @@
-.coa-list_link {
-  @include box_verticalcenter();
+.coa-ListLink {
+  @include box-verticalcenter();
   background-color: $color-white;
   border-bottom: 1px dashed $color-gray-dark;
   color: $color-black;
@@ -12,7 +12,7 @@
   }
 }
 
-.coa-list_link--box {
+.coa-ListLink--boxprimary {
   background-color: $color-primary;
   border: none;
   color: $color-white;

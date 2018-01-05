@@ -1,4 +1,4 @@
-.coa-form_label {
+.coa-form__label {
   margin-top: $coa-space-level4;
 
   & > span {
@@ -10,7 +10,7 @@
   }
 }
 
-.coa-form_actions {
+.coa-form__actions {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@
     width: 100%;
   }
 }
-.coa-form_actions__link {
+.coa-form__actions__link {
   cursor: pointer;
   margin-left: $spacing-medium;
   margin-right: $spacing-medium;
