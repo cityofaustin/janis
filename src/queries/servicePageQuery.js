@@ -10,6 +10,11 @@ const servicePageQuery = `
       }
       content
       extraContent
+      related {
+        id
+        slug
+        title
+      }
       contacts {
         edges {
           node {

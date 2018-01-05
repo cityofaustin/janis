@@ -74,7 +74,7 @@ class Service extends Component {
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
     const contacts = get(data, "contacts.edges", []).map((n) => this.cleanContact(n.node.contact));
-    const relatedlinks = get(jsonFileData, "servicesRelated", null);
+    const relatedlinks = get(data, "related", null);
     const services311 = get(jsonFileData, "services311", null);
 
     return (
