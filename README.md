@@ -25,13 +25,33 @@ docker exec --interactive --tty janis yarn add <package name>
 
 ---
 
+## SASS Regime Guidelines (WIP)
+
+We're using a modified form of the 7-1 pattern, and BEM for CSS naming and organization
+- our css file structure and js file structure should be congruent.
+  EX. You can find css for js modules in the css/modules folder, you can find css for js page_sections in the css/page_sections folder and so on.
+- js/modules our are smallest unit and should not have any additional custom react component imports
+- our css is namespaced with coa-
+- our css classes should stack. EX. a blue button would look like `<button class="coa-button coa-button--blue">Button</button>`.
+- class names for js components should correspond with the js component name(capitalized and camelCased).
+  EX. LinkList.js markup has styles applied via the class names coa-LinkList, coa-LinkList--boxprimary.
+- class names which are not js components but have multiple words should be separated by a -
+  EX. coa-Footer__body-text
+
+Resources:
+- http://vanseodesign.com/css/sass-directory-structures/
+- http://getbem.com/introduction/
+
+---
+
 ## Accessibility Guidelines (WIP)
 
-- When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"`
+- When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"` and `rel="noopener noreferrer"` for security
 
 a11y Resources:
 - https://accessibility.18f.gov/
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
+- https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
 
 ---
 
