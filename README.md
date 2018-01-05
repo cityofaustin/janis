@@ -34,9 +34,9 @@ We're using a modified form of the 7-1 pattern, and BEM for CSS naming and organ
 - our css is namespaced with coa-
 - our css classes should stack. EX. a blue button would look like `<button class="coa-button coa-button--blue">Button</button>`.
 - class names for js components should correspond with the js component name(capitalized and camelCased).
-  EX. LinkList.js markup has styles applied via the class names coa-LinkList, coa-LinkList--boxprimary.
+  EX. LinkList.js markup has styles applied via the class names `coa-LinkList coa-LinkList--boxprimary`.
 - class names which are not js components but have multiple words should be separated by a -
-  EX. coa-Footer__body-text
+  EX. `coa-Footer__body-text`
 
 Resources:
 - http://vanseodesign.com/css/sass-directory-structures/
