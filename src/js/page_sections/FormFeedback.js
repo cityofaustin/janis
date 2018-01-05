@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 const rules = {
   'email': (value) => {
-    if (!value || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) return false;
+    if (!value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) return false;
     return 'Please enter a valid email.';
   },
   'required': (value) => {
