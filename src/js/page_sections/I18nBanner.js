@@ -103,7 +103,7 @@ class I18nBanner extends Component {
                     )
                 })}
                 { this.secondaryLanguageOptions.length > 0 &&
-                  <li className="coa-I18nBanner__language--other"
+                  <li className="coa-I18nBanner__language coa-I18nBanner__language--other"
                     onClick={this.handleExpandMenu}
                   >
                     <span className="hidden--sm">Other Language </span>
