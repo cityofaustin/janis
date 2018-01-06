@@ -19,28 +19,42 @@ import Service from "pages/Service"
 import SUPPORTED_LANGUAGES from 'constants/languages'
 
 class LanguageWrapper extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lang: this.setLanguage()
+    }
+    this.daysUntilCookieExpires = 7
+  }
+
   setLanguage = () => {
     let language = 'en'
-    const daysUntilCookieExpires = 7
     const isLanguageCodeInPath = SUPPORTED_LANGUAGES
       .map(lang => lang.code)
       .includes(this.props.urlPathLanguage)
 
     language = isLanguageCodeInPath ? this.props.urlPathLanguage : locale()
 
-    Cookies.set('lang', language, { expires: daysUntilCookieExpires })
+    Cookies.set('lang', language, { expires: this.daysUntilCookieExpires })
     return language
+  }
+
+  handleManualLanguageUpdate = (newLang) => {
+    Cookies.set('lang', newLang, { expires: this.daysUntilCookieExpires })
+    this.setState({ lang: newLang })
   }
 
   render() {
     return (
-      <IntlProvider locale={this.setLanguage()}>
+      <IntlProvider locale={this.state.lang}>
         <Router>
           <div>
             <Route path="/" render={props => (
               <section>
                 <Banner />
-                <I18nBanner activeLanguage={this.setLanguage()} {...props} />
+                <I18nBanner activeLanguage={this.state.lang} {...props}
+                  handleManualLanguageUpdate={this.handleManualLanguageUpdate}
+                />
                 <Header {...props} />
               </section>
             )} />

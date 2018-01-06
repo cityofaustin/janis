@@ -25,6 +25,13 @@
   display: inline;
   padding: 0 $coa-space-level2;
   cursor: pointer;
+  a {
+    text-decoration: none;
+    color: $color-black;
+    &:visited {
+      color: $color-black;
+    }
+  }
 }
 
 .coa-I18nBanner__language {

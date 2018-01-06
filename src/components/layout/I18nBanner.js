@@ -10,7 +10,6 @@ class I18nBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // activeLanguage: locale().substring(0,2) || 'en',
       isOpen: false,
     };
     this.displayedLanguageAmount = 4;
@@ -30,7 +29,7 @@ class I18nBanner extends Component {
 
   getLanguageMenuClassName = (language) => {
     const classNameBase = `coa-I18nBanner__language`;
-    return language.abbr === this.props.activeLanguage
+    return language.code === this.props.activeLanguage
              ? `${classNameBase}--active`
              : ''
   }
@@ -41,12 +40,8 @@ class I18nBanner extends Component {
   }
 
   handleSetLanguage = (e) => {
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
-    // const languageAbbr = e.target.lang;
-    // console.log(languageAbbr)
+    this.props.handleManualLanguageUpdate(e.target.lang)
     this.setState({
-      // activeLanguage: languageAbbr,
       isOpen: false,
     })
   }
@@ -73,16 +68,16 @@ class I18nBanner extends Component {
                 { this.visibleLanguageOptions.map((language, i) => {
                     return (
                       <li className={`coa-I18nBanner__language ${this.getLanguageMenuClassName(language)}`}
-                        key={i}
+                        key={i} onClick={this.handleSetLanguage}
                       >
                         <Link to={`/${language.code}/${this.getPathname()}`}>
                           <span className="hidden--sm visible--md"
-                            lang={language.abbr}
+                            lang={language.code}
                             >
                             {language.title}
                           </span>
                           <span className="hidden--md visible--sm"
-                            lang={language.abbr}
+                            lang={language.code}
                             >
                             {language.abbr.toUpperCase()}
                           </span>
@@ -103,7 +98,7 @@ class I18nBanner extends Component {
                               className={this.getLanguageMenuClassName(language)}
                             >
                               <Link to={`/${language.code}/${this.getPathname()}`}>
-                                <span lang={language.abbr}>
+                                <span lang={language.code}>
                                   {language.title}
                                 </span>
                               </Link>
