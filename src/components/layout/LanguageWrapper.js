@@ -22,12 +22,11 @@ class LanguageWrapper extends Component {
   setLanguage = () => {
     let language = 'en'
     const daysUntilCookieExpires = 7
+    const isLanguageCodeInPath = SUPPORTED_LANGUAGES
+      .map(lang => lang.code)
+      .includes(this.props.urlPathLanguage)
 
-    if (SUPPORTED_LANGUAGES.includes(this.props.urlPathLanguage)) {
-      language = this.props.urlPathLanguage
-    } else {
-      language = locale()
-    }
+    language = isLanguageCodeInPath ? this.props.urlPathLanguage : locale()
 
     Cookies.set('lang', language, { expires: daysUntilCookieExpires })
     return language
@@ -41,7 +40,7 @@ class LanguageWrapper extends Component {
             <Route path="/" render={props => (
               <section>
                 <Banner />
-                <I18nBanner />
+                <I18nBanner activeLanguage={this.setLanguage()} {...props} />
                 <Header {...props} />
               </section>
             )} />

@@ -13,7 +13,11 @@ class App extends Component {
         <Router>
           <Route path={`/:lang?`}
             render={(props) => {
-              return <LanguageWrapper urlPathLanguage={props.match.params.lang} />
+              return (
+                <LanguageWrapper {...props}
+                  urlPathLanguage={props.match.params.lang}
+                />
+              )
             }}
           />
         </Router>

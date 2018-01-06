@@ -1,50 +1,36 @@
-import React, { Component } from 'react';
-import locale from 'browser-locale';
+import React, { Component } from 'react'
+import locale from 'browser-locale'
+import { Link } from 'react-router-dom'
 
-import CaretDownSVG from 'svg/CaretDown';
+import CaretDownSVG from 'svg/CaretDown'
+import SUPPORTED_LANGUAGES from 'constants/languages'
 
-const languages = [
-  {
-    title: 'English',
-    abbr: 'en',
-  }, {
-    title: 'Español',
-    abbr: 'es',
-  }, {
-    title: 'Tiếng Việt',
-    abbr: 'vn',
-  }, {
-    title: '中文',
-    abbr: 'zh',
-  }, {
-    title: 'عربى',
-    abbr: 'ar',
-  }, {
-    title: '한국어',
-    abbr: 'ko',
-  }, {
-    title: 'اردو',
-    abbr: 'ur',
-  }, {
-    title: 'မြန်မာ',
-    abbr: 'my',
-  },
-]
 
 class I18nBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeLanguage: locale().substring(0,2) || 'en',
+      // activeLanguage: locale().substring(0,2) || 'en',
+      isOpen: false,
     };
     this.displayedLanguageAmount = 4;
-    this.visibleLanguageOptions = languages.slice(0, this.displayedLanguageAmount);
-    this.secondaryLanguageOptions = languages.slice(this.displayedLanguageAmount, languages.length);
+    this.visibleLanguageOptions = SUPPORTED_LANGUAGES.slice(0, this.displayedLanguageAmount);
+    this.secondaryLanguageOptions = SUPPORTED_LANGUAGES.slice(this.displayedLanguageAmount, SUPPORTED_LANGUAGES.length);
+    console.log(this.getPathname())
+  }
+
+  getPathname = () => {
+    let pathArray = this.props.location.pathname.split('/').filter(n => n)
+    if (SUPPORTED_LANGUAGES.map(lang => lang.code).includes(pathArray[0])){
+      pathArray.splice(0, 1)
+    }
+
+    return pathArray.join('/')
   }
 
   getLanguageMenuClassName = (language) => {
     const classNameBase = `coa-I18nBanner__language`;
-    return language.abbr === this.state.activeLanguage
+    return language.abbr === this.props.activeLanguage
              ? `${classNameBase}--active`
              : ''
   }
@@ -55,12 +41,12 @@ class I18nBanner extends Component {
   }
 
   handleSetLanguage = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    const languageAbbr = e.target.lang;
-    console.log(languageAbbr)
+    // e.stopPropagation();
+    // e.nativeEvent.stopImmediatePropagation();
+    // const languageAbbr = e.target.lang;
+    // console.log(languageAbbr)
     this.setState({
-      activeLanguage: languageAbbr,
+      // activeLanguage: languageAbbr,
       isOpen: false,
     })
   }
@@ -72,6 +58,7 @@ class I18nBanner extends Component {
   }
 
   render() {
+
     return (
       <div className="coa-I18nBanner">
         <div className="wrapper">
@@ -86,19 +73,20 @@ class I18nBanner extends Component {
                 { this.visibleLanguageOptions.map((language, i) => {
                     return (
                       <li className={`coa-I18nBanner__language ${this.getLanguageMenuClassName(language)}`}
-                        onClick={this.handleSetLanguage}
                         key={i}
                       >
-                        <span className="hidden--sm visible--md"
-                          lang={language.abbr}
-                        >
-                          {language.title}
-                        </span>
-                        <span className="hidden--md visible--sm"
-                          lang={language.abbr}
-                        >
-                          {language.abbr.toUpperCase()}
-                        </span>
+                        <Link to={`/${language.code}/${this.getPathname()}`}>
+                          <span className="hidden--sm visible--md"
+                            lang={language.abbr}
+                            >
+                            {language.title}
+                          </span>
+                          <span className="hidden--md visible--sm"
+                            lang={language.abbr}
+                            >
+                            {language.abbr.toUpperCase()}
+                          </span>
+                        </Link>
                       </li>
                     )
                 })}
@@ -114,9 +102,11 @@ class I18nBanner extends Component {
                             <li onClick={this.handleSetLanguage}
                               className={this.getLanguageMenuClassName(language)}
                             >
-                              <span lang={language.abbr}>
-                                {language.title}
-                              </span>
+                              <Link to={`/${language.code}/${this.getPathname()}`}>
+                                <span lang={language.abbr}>
+                                  {language.title}
+                                </span>
+                              </Link>
                             </li>
                           )
                         })
