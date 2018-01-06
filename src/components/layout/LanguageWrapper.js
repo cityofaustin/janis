@@ -62,7 +62,7 @@ class LanguageWrapper extends Component {
               <Route exact path={`/`} component={HomePage} />
               <Route exact path={`/:lang?/services`} component={ServicesIndex} />
               <Route exact path={`/:lang?/search`} component={SearchPage} />
-              <Route path={`/:lang?/service/:id`} component={Service} />
+              <Route path={`/:lang?/service/:slug`} component={Service} />
             </section>
             <Footer />
           </div>
