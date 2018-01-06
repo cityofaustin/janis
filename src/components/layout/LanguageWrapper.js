@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
+import Cookies from 'js-cookie'
 
 // components
 import Banner from "components/layout/Banner"
@@ -15,17 +16,21 @@ import SearchPage from "pages/SearchPage"
 import ServicesIndex from "pages/Services"
 import Service from "pages/Service"
 
+import SUPPORTED_LANGUAGES from 'constants/languages'
+
 class LanguageWrapper extends Component {
   setLanguage = () => {
-    const browserLocale = locale() || 'en'
+    let language = 'en'
+    const daysUntilCookieExpires = 7
 
-    // TODO:
-    // if there's no url language param
-    //  use browser settings
-    // if browser settings is null or outside our list
-    //  return 'en'
+    if (SUPPORTED_LANGUAGES.includes(this.props.urlPathLanguage)) {
+      language = this.props.urlPathLanguage
+    } else {
+      language = locale()
+    }
 
-    return this.props.urlPathLanguage
+    Cookies.set('lang', language, { expires: daysUntilCookieExpires })
+    return language
   }
 
   render() {
