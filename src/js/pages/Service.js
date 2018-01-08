@@ -9,6 +9,7 @@ import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import servicePageQuery from 'queries/servicePageQuery';
 
 import jsonFileData from '__tmpdata/services';
 
@@ -45,54 +46,15 @@ class Service extends Component {
       }
     }
 
-    const queryBody = `{
-      preview(pk: ${this.props.match.params.id}, showPreview: false) {
-        id
-        title
-        slug
-        topic {
-          id
-          text
-        }
-        content
-        extraContent
-        contacts {
-          edges {
-            node {
-              contact {
-                name
-                email
-                phone
-                hours {
-                  edges {
-                    node {
-                      dayOfWeek
-                      startTime
-                      endTime
-                    }
-                  }
-                }
-                location {
-                  name
-                  street
-                  city
-                  state
-                  zip
-                  country
-                }
-              }
-            }
-          }
-        }
-      }
-    }`;
-
     axios
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: queryBody,
+        query: servicePageQuery,
+        variables: {
+          slug: this.props.match.params.slug,
+        }
       })
       .then(res => {
-        this.setState({ data: res.data.data.preview });
+        this.setState({ data: res.data.data.servicePage });
       })
       .catch(err => console.log(err))
   }
@@ -112,7 +74,7 @@ class Service extends Component {
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
     const contacts = get(data, "contacts.edges", []).map((n) => this.cleanContact(n.node.contact));
-    const relatedlinks = get(jsonFileData, "servicesRelated", null);
+    const relatedlinks = get(data, "related", null);
     const services311 = get(jsonFileData, "services311", null);
 
     return (
