@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { uniq, includes } from 'lodash';
+import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
-import NAVMENU_ENDPOINT from 'js/constants/endpoints';
+import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 
 class Navmenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nav: []
+      nav: [],
+      isLoaded: false
     };
   }
 
@@ -19,75 +20,69 @@ class Navmenu extends Component {
   }
 
   focusOnClose = () => {
-    this.refs.closeTrigger.focus()
+    this.refs.closeTrigger.focus();
   }
 
   componentDidMount () {
-    const endpoint = NAVMENU_ENDPOINT
 
     axios
-      .get(endpoint)
-      .then(res => {
-        const leData = res.data.items;
-        const parentNavItems = uniq(leData.map((item) => item.topic.text))
-
-        const getChildrenNavItemsByParent = (title) => {
-          return leData.filter((data) => {
-            return data.topic.text === title
-          })
-        }
-
-        const nav = parentNavItems.map((title) => {
-        	return {
-        		parentTitle: title,
-        		children: getChildrenNavItemsByParent(title),
-        	}
-        })
-
-        this.setState({ nav: nav })
+      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
+        query: allTopicPagesQuery
       })
-      .catch(err => console.log(err))
+      .then(res => {
+        this.setState({
+          data: res.data.data.allTopics,
+          isLoaded: true
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   componentDidUpdate() {
     if (this.props.isOpen) {
-      this.focusOnClose()
+      this.focusOnClose();
     }
   }
 
   getCurrentPath = () => {
     // this is dependent on react-router. We may want to use
     // `window.location.href` instead.
-    return this.props.location.pathname
-  }
-
-  getMenuItemClassName = (path) => {
-    const pathname = this.getCurrentPath()
-    return pathname === path ? 'usa-current' : ''
+    return this.props.location.pathname;
   }
 
   getOverlayClassName = () => {
     let className = `coa-Navmenu__overlay`;
     if (this.props.isOpen) {
-      className = `${className} ${className}--open`
+      className = `${className} ${className}--open`;
     }
-    return className
+    return className;
   }
 
-  getParentMenuItemClassName = (topic) => {
-    const pathname = this.getCurrentPath()
+  getParentMenuItemClassName = (parentLink) => {
+    const currentPath = this.getCurrentPath();
+    const servicePaths = parentLink.services.edges
+      ? parentLink.services.edges.map(({ node:serviceLink }) => '/service/' + serviceLink.slug)
+      : [];
 
-    const currentId = Number(pathname.split('/')[2]) // this is brittle
-    const childrenIds = topic.children.map((child) => child.id)
-    const isActive = includes(childrenIds, currentId)
+    const isActive = includes(servicePaths, currentPath);
 
-    return isActive ? 'usa-current' : ''
+    return isActive ? 'usa-current' : '';
+  }
+
+  getMenuItemClassName = (path) => {
+    const currentPath = this.getCurrentPath();
+    return currentPath === path ? 'usa-current' : '';
   }
 
   render() {
-    return (
+
+    if (!this.state.isLoaded) return 'loading...';
+
+    const { edges: parentLinks = [] } = this.state.data;
+
+    return parentLinks.length && (
       <div className="usa-grid-full">
-        <nav role="navigation" className={this.menuClassName()}>
+        <nav className={this.menuClassName()}>
           <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
@@ -95,28 +90,39 @@ class Navmenu extends Component {
             <li>
               <Link to="/" className={this.getMenuItemClassName('/')}>Home</Link>
             </li>
-            { this.state.nav && this.state.nav.map((parent) => {
-              return (
-                <li>
-                  <Link to="/services" className={this.getParentMenuItemClassName(parent)}>
-                    {parent.parentTitle}
-                  </Link>
+
+        {
+          parentLinks.map(({ node: parentLink }) => {
+
+            let { edges: serviceLinks = [] } = parentLink.services;
+
+            return (
+              <li key={parentLink.id}>
+                <Link to="/services" className={this.getParentMenuItemClassName(parentLink)}>
+                  { parentLink.text }
+                </Link>
+
+                { serviceLinks.length && (
                   <ul className="usa-sidenav-sub_list">
-                  { parent.children.map((child) => {
-                    return (
-                      <li>
-                        <Link to={`/service/${child.id}`}
-                          className={this.getMenuItemClassName(`/service/${child.id}`)}
-                        >
-                          {child.title}
-                        </Link>
-                      </li>
-                    )
-                  })}
+                  {
+                    serviceLinks.map(({ node:serviceLink }) => {
+                      return (
+                        <li key={serviceLink.id}>
+                          <Link to={`/service/${serviceLink.slug}`}
+                            className={this.getMenuItemClassName(`/service/${serviceLink.slug}`)}
+                          >
+                            {serviceLink.title}
+                          </Link>
+                        </li>
+                      );
+                    })
+                  }
                   </ul>
-                </li>
-              )
-            })}
+                )}
+              </li>
+            );
+          })
+        }
           </ul>
         </nav>
         <div className={this.getOverlayClassName()}></div>

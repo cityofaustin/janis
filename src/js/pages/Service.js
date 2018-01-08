@@ -9,7 +9,7 @@ import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
-import servicePageQuery from 'queries/servicePageQuery';
+import servicePageQuery from 'js/queries/servicePageQuery';
 
 import jsonFileData from '__tmpdata/services';
 
