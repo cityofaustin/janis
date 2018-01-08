@@ -1,5 +1,5 @@
 const allTopicPagesQuery = `
-  query allServicePages {
+  query allTopicPagesQuery {
     allTopics{
       edges {
         node {
