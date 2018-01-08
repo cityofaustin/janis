@@ -24,32 +24,28 @@ class Service extends Component {
   }
 
   componentDidMount() {
-    this.fetchData(this.props.match.params.id);
+    this.fetchData(this.props.match.params.slug);
   }
 
   componentWillReceiveProps(nextProps) {
     // only refetch data when props have changed
     // this happens only when the route is updated
 
-    let oldId = this.props.match.params.id
-    let newId = nextProps.match.params.id
-
-    if (newId !== oldId) this.fetchData(newId);
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.fetchData(nextProps.match.params.slug);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     // only rerender component when state has changed
     // this happens only when data is refetched
 
-    let oldId = this.state.data.id
-    let newId = nextState.data.id
-
-    if (newId !== oldId) return true;
+    if (nextState.data.id !== this.state.data.id) return true;
 
     return false;
   }
 
-  fetchData(id) {
+  fetchData(slug) {
 
     if (process.env.NODE_ENV !== 'production') {
       // Allow querystrings to set data, which is used in joplin for livepreview
@@ -65,7 +61,7 @@ class Service extends Component {
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: servicePageQuery,
         variables: {
-          slug: this.props.match.params.slug,
+          slug: slug,
         }
       })
       .then(res => {
