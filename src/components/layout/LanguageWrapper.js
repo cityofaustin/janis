@@ -59,10 +59,10 @@ class LanguageWrapper extends Component {
               </section>
             )} />
             <section className="coa-main">
-              <Route exact path={`/`} component={HomePage} />
-              <Route exact path={`/:lang?/services`} component={ServicesIndex} />
-              <Route exact path={`/:lang?/search`} component={SearchPage} />
-              <Route path={`/:lang?/service/:slug`} component={Service} />
+              <Route exact path={`/`} component={HomePage} {...this.props} />
+              <Route exact path={`/:lang?/services`} component={ServicesIndex} {...this.props} />
+              <Route exact path={`/:lang?/search`} component={SearchPage} {...this.props} />
+              <Route path={`/:lang?/service/:slug`} component={Service} {...this.props} />
             </section>
             <Footer />
           </div>

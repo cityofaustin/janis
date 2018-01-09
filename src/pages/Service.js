@@ -47,6 +47,9 @@ class Service extends Component {
     }
 
     axios
+      .create({
+        headers: {'Accept-Language': this.props.match.params.lang }
+      })
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: servicePageQuery,
         variables: {
@@ -61,7 +64,11 @@ class Service extends Component {
 
   cleanContact(contact) {
     let cleaned = Object.assign(contact);
-    cleaned.hours = contact.hours.edges.map((d) => d.node);
+
+    // this check is ugly 😞
+    if (contact && contact.hours && contact.hours.edges) {
+      cleaned.hours = contact.hours.edges.map((d) => d.node);
+    }
     return cleaned;
   }
 

@@ -20,6 +20,9 @@ class ServicesIndex extends Component {
 
   componentDidMount() {
     axios
+      .create({
+        headers: {'Accept-Language': this.props.lang }
+      })
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: allServicePagesQuery,
       })
