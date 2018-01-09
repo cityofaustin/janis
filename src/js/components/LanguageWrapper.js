@@ -16,7 +16,7 @@ import Search from "js/pages/Search"
 import Services from "js/pages/Services"
 import Service from "js/pages/Service"
 
-import SUPPORTED_LANGUAGES from 'js/constants/languages'
+import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
 
 class LanguageWrapper extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class LanguageWrapper extends Component {
     this.state = {
       lang: this.setLanguage()
     }
-    this.daysUntilCookieExpires = 7
+    this.daysUntilCookieExpires = 10 * 365;
   }
 
   setLanguage = () => {

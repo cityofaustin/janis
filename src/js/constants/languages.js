@@ -1,4 +1,4 @@
-const SUPPORTED_LANGUAGES = [
+export const SUPPORTED_LANGUAGES = [
   {
     title: 'English',
     abbr: 'en',
@@ -38,4 +38,4 @@ const SUPPORTED_LANGUAGES = [
   },
 ]
 
-export default SUPPORTED_LANGUAGES
+export const SUPPORTED_LANG_CODES = SUPPORTED_LANGUAGES.map(lang => lang.code);
