@@ -109,10 +109,11 @@ class I18nBanner extends Component {
                     <span className="hidden--sm">Other Language </span>
                     <CaretDownSVG size="20"/>
                     <ul className={this.getSecondaryLanguageMenuClassName()}>
-                      { this.secondaryLanguageOptions.map((language) => {
+                      { this.secondaryLanguageOptions.map((language, i) => {
                           return (
                             <li onClick={this.handleSetLanguage}
                               className={this.getLanguageMenuClassName(language)}
+                              key={i}
                             >
                               <span lang={language.abbr}>
                                 {language.title}
