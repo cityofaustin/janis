@@ -9,33 +9,44 @@ import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
-import servicePageQuery from 'queries/servicePageQuery';
+import servicePageQuery from 'js/queries/servicePageQuery';
 
 import jsonFileData from '__tmpdata/services';
 
 class Service extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       data: {}
     };
+
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData(this.props.match.params.slug);
   }
 
-  componentDidUpdate (prevProps) {
-   // Using React Router, we need to fetch new data when we switch between
-   // routes that use the same component but that have different url params.
-   // https://github.com/ReactTraining/react-router/blob/c865bc6b331eabd853641dcc7e0224a7dce76f3b/docs/guides/ComponentLifecycle.md
-   let oldId = prevProps.match.params.id
-   let newId = this.props.match.params.id
-   if (newId !== oldId)
-     this.fetchData()
- }
+  componentWillReceiveProps(nextProps) {
+    // only refetch data when props have changed
+    // this happens only when the route is updated
 
-  fetchData = () => {
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.fetchData(nextProps.match.params.slug);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // only rerender component when state has changed
+    // this happens only when data is refetched
+
+    if (nextState.data.id !== this.state.data.id) return true;
+
+    return false;
+  }
+
+  fetchData(slug) {
+
     if (process.env.NODE_ENV !== 'production') {
       // Allow querystrings to set data, which is used in joplin for livepreview
       const query = parse(this.props.location.search);
@@ -50,7 +61,7 @@ class Service extends Component {
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: servicePageQuery,
         variables: {
-          slug: this.props.match.params.slug,
+          slug: slug,
         }
       })
       .then(res => {
@@ -66,6 +77,7 @@ class Service extends Component {
   }
 
   render() {
+
     const { data } = this.state;
 
     const topicId = get(data, "topic.id", null);

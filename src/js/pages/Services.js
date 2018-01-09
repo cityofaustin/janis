@@ -7,7 +7,7 @@ import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import ListLink from 'js/modules/ListLink';
-import allServicePagesQuery from 'queries/allServicePagesQuery';
+import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 
 class Services extends Component {
 
