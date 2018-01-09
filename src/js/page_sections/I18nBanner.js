@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import locale from 'browser-locale'
 import { Link } from 'react-router-dom'
 
 import SUPPORTED_LANGUAGES from 'js/constants/languages'

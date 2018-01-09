@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { IntlProvider } from 'react-intl'
-import locale from 'browser-locale'
 
 import LanguageWrapper from "js/components/LanguageWrapper"
 
