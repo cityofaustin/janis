@@ -54,9 +54,8 @@ class Services extends Component {
             <div className="row">
             {
               services.map(({ node: service }) =>
-                <div className="col-xs-12 col-md-6 col-lg-4">
+                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
                   <ListLink
-                    key={service.id}
                     id={service.id}
                     url={`/service/${service.slug}`}
                     text={service.title}
