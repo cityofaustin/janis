@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListLink from 'components/modules/ListLink';
+import ListLink from 'js/modules/ListLink';
 
 class Service311 extends Component {
 

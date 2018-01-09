@@ -4,12 +4,12 @@ import axios from 'axios';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
-import FormFeedback from 'components/layout/FormFeedback';
-import Service311 from 'components/layout/Service311';
-import ListLink from 'components/modules/ListLink';
-import allServicePagesQuery from 'queries/allServicePagesQuery';
+import FormFeedback from 'js/page_sections/FormFeedback';
+import Service311 from 'js/page_sections/Service311';
+import ListLink from 'js/modules/ListLink';
+import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 
-class ServicesIndex extends Component {
+class Services extends Component {
 
   constructor(props) {
     super(props);
@@ -54,9 +54,8 @@ class ServicesIndex extends Component {
             <div className="row">
             {
               services.map(({ node: service }) =>
-                <div className="col-xs-12 col-md-6 col-lg-4">
+                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
                   <ListLink
-                    key={service.id}
                     id={service.id}
                     url={`/service/${service.slug}`}
                     text={service.title}
@@ -84,4 +83,4 @@ class ServicesIndex extends Component {
 
 }
 
-export default ServicesIndex;
+export default Services;

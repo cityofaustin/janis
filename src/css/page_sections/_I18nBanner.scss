@@ -21,14 +21,10 @@
   };
 }
 
-@mixin coa-I18nBanner__language {
+.coa-I18nBanner__language {
   display: inline;
   padding: 0 $coa-space-level2;
-  cursor: pointer;
-}
-
-.coa-I18nBanner__language {
-  @include coa-I18nBanner__language;
+  cursor: pointer;;
 }
 
 .coa-I18nBanner__language--active {
@@ -36,7 +32,6 @@
 }
 
 .coa-I18nBanner__language--other {
-  @include coa-I18nBanner__language;
   position: relative;
   svg {
     vertical-align: middle;

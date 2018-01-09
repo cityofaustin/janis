@@ -19,11 +19,11 @@
 @import 'css/modules/overlay';
 @import 'css/modules/section';
 @import 'css/modules/ListLink';
-@import 'css/modules/WYSIWYG';
+@import 'css/modules/HtmlFromAdmin';
 
 // layout
-@import 'css/layout/main';
-@import "css/layout/Header";
-@import "css/layout/Footer";
-@import "css/layout/I18nBanner";
-@import "css/layout/Navmenu";
+@import 'css/page_sections/main';
+@import "css/page_sections/Header";
+@import "css/page_sections/Footer";
+@import "css/page_sections/I18nBanner";
+@import "css/page_sections/Navmenu";

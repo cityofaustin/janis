@@ -18,7 +18,7 @@ $coa-fullwidth-margin: 2rem;
 $coa-container-maxwidth: 1200px;
 $coa-textwrap-width: 545px;
 
-@mixin box_verticalcenter($height: auto) {
+@mixin box-verticalcenter($height: auto) {
   align-items: center;
   display: flex;
   height: $height;

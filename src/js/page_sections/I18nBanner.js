@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import locale from 'browser-locale';
 
-import CaretDownSVG from 'svg/CaretDown';
+import CaretDownSVG from 'js/svg/CaretDown';
 
 const languages = [
   {
@@ -103,16 +103,17 @@ class I18nBanner extends Component {
                     )
                 })}
                 { this.secondaryLanguageOptions.length > 0 &&
-                  <li className="coa-I18nBanner__language--other"
+                  <li className="coa-I18nBanner__language coa-I18nBanner__language--other"
                     onClick={this.handleExpandMenu}
                   >
                     <span className="hidden--sm">Other Language </span>
                     <CaretDownSVG size="20"/>
                     <ul className={this.getSecondaryLanguageMenuClassName()}>
-                      { this.secondaryLanguageOptions.map((language) => {
+                      { this.secondaryLanguageOptions.map((language, i) => {
                           return (
                             <li onClick={this.handleSetLanguage}
                               className={this.getLanguageMenuClassName(language)}
+                              key={i}
                             >
                               <span lang={language.abbr}>
                                 {language.title}

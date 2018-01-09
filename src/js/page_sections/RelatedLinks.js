@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SectionTitle from 'components/modules/SectionTitle';
-import ListLink from 'components/modules/ListLink';
+import SectionTitle from 'js/modules/SectionTitle';
+import ListLink from 'js/modules/ListLink';
 
 class RelatedLinks extends Component {
 

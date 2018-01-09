@@ -1,18 +1,16 @@
-form {
-  label {
-    margin-top: $coa-space-level4;
+.coa-form__label {
+  margin-top: $coa-space-level4;
 
-    span {
-      color: $color-gray-medium;
-      display: block;
-      font-size: $small-font-size;
-      font-style: italic;
-      text-align: right;
-    }
+  & > span {
+    color: $color-gray-medium;
+    display: block;
+    font-size: $small-font-size;
+    font-style: italic;
+    text-align: right;
   }
 }
 
-.coa-form_actions {
+.coa-form__actions {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -27,7 +25,7 @@ form {
     width: 100%;
   }
 }
-.coa-form_actions__link {
+.coa-form__actions__link {
   cursor: pointer;
   margin-left: $spacing-medium;
   margin-right: $spacing-medium;
