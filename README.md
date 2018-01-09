@@ -46,12 +46,11 @@ Resources:
 
 ## Accessibility Guidelines (WIP)
 
-- When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"` and `rel="noopener noreferrer"` for security
+- When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"` and `rel="noopener noreferrer"` for [security](https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/)
 
 a11y Resources:
 - https://accessibility.18f.gov/
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
-- https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
 
 ---
 
