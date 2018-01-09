@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class HomePage extends Component {
+class Home extends Component {
 
   render() {
     return (
       <section className="wrapper coa-section">
-        <h1>🔍 Search Page 🔍</h1>️
+        <h1>🏛️ Home Page 🏛</h1>️
         <p>just a placeholder</p>
       </section>
     );
@@ -13,4 +13,4 @@ class HomePage extends Component {
 
 }
 
-export default HomePage;
+export default Home;

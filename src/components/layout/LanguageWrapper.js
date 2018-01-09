@@ -16,7 +16,7 @@ import SearchPage from "pages/SearchPage"
 import ServicesIndex from "pages/Services"
 import Service from "pages/Service"
 
-import SUPPORTED_LANGUAGES from 'constants/languages'
+import SUPPORTED_LANGUAGES from 'js/constants/languages'
 
 class LanguageWrapper extends Component {
   constructor(props) {

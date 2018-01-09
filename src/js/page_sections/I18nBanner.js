@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import locale from 'browser-locale'
 import { Link } from 'react-router-dom'
 
-import CaretDownSVG from 'svg/CaretDown'
 import SUPPORTED_LANGUAGES from 'js/constants/languages'
+import CaretDownSVG from 'js/svg/CaretDown';
 
 
 class I18nBanner extends Component {
@@ -86,7 +86,7 @@ class I18nBanner extends Component {
                     )
                 })}
                 { this.secondaryLanguageOptions.length > 0 &&
-                  <li className="coa-I18nBanner__language--other"
+                  <li className="coa-I18nBanner__language coa-I18nBanner__language--other"
                     onClick={this.handleExpandMenu}
                   >
                     <span className="hidden--sm">Other Language </span>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 const rules = {
   'email': (value) => {
-    if (!value || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) return false;
+    if (!value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) return false;
     return 'Please enter a valid email.';
   },
   'required': (value) => {
@@ -133,13 +133,13 @@ class FormFeedback extends Component {
           <h3>Send us feedback on this page or city services.</h3>
         </div>
 
-        <form>
+        <form className="coa-form">
         { (this.state.stage === 0 || this.state.stage === 1) && (
 
           <div>
             <p>Prefer to talk to a person at 311? Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a>. </p>
 
-            <div className={ `coa-form_input ${ this.state.errors['site-feedback-options'] && "usa-input-error" }` }>
+            <div className={ `coa-form__input ${ this.state.errors['site-feedback-options'] && "usa-input-error" }` }>
 
             <fieldset className="usa-fieldset-inputs usa-sans">
 
@@ -158,7 +158,7 @@ class FormFeedback extends Component {
                     checked={this.state.values["site-feedback-options"] === "page-content"}
                     onChange={this.handleFieldChange}
                   />
-                  <label htmlFor="page-content">Information on this page</label>
+                  <label className="coa-form__label" htmlFor="page-content">Information on this page</label>
                 </li>
                 <li>
                   <input
@@ -169,7 +169,7 @@ class FormFeedback extends Component {
                     checked={this.state.values["site-feedback-options"] === "translation"}
                     onChange={this.handleFieldChange}
                   />
-                  <label htmlFor="translation">Language Translation</label>
+                  <label className="coa-form__label" htmlFor="translation">Language Translation</label>
                 </li>
                 <li>
                   <input
@@ -180,7 +180,7 @@ class FormFeedback extends Component {
                     checked={this.state.values["site-feedback-options"] === "technical-issue"}
                     onChange={this.handleFieldChange}
                   />
-                  <label htmlFor="technical-issue">Technical Issue</label>
+                  <label className="coa-form__label" htmlFor="technical-issue">Technical Issue</label>
                 </li>
                 <li>
                   <input
@@ -191,13 +191,13 @@ class FormFeedback extends Component {
                     checked={this.state.values["site-feedback-options"] === "other"}
                     onChange={this.handleFieldChange}
                   />
-                  <label htmlFor="other">Something else</label>
+                  <label className="coa-form__label" htmlFor="other">Something else</label>
                 </li>
               </ul>
             </fieldset>
             </div>
 
-            <div className="coa-form_actions">
+            <div className="coa-form__actions">
               <input
                 type="button"
                 value="Continue"
@@ -214,12 +214,12 @@ class FormFeedback extends Component {
 
           <div>
 
-            <div className={ `coa-form_input ${ this.state.errors['site-feedback-textarea'] && "usa-input-error" }` }>
+            <div className={ `coa-form__input ${ this.state.errors['site-feedback-textarea'] && "usa-input-error" }` }>
             <fieldset>
               { this.state.errors['site-feedback-textarea'] && (
                 <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-textarea']}</span>
               )}
-              <label htmlFor="site-feedback-textarea">
+              <label className="coa-form__label" htmlFor="site-feedback-textarea">
                 Your feedback will be public and can be found at <a className="nowrap" href="#">austin.gov feedback tracker</a>.
                 <span>required</span>
               </label>
@@ -233,12 +233,12 @@ class FormFeedback extends Component {
             </fieldset>
             </div>
 
-            <div className={ `coa-form_input ${ this.state.errors['site-feedback-email'] && "usa-input-error" }` }>
+            <div className={ `coa-form__input ${ this.state.errors['site-feedback-email'] && "usa-input-error" }` }>
             <fieldset>
               { this.state.errors['site-feedback-email'] && (
                 <span className="usa-input-error-message" id="input-error-message" role="alert">{this.state.errors['site-feedback-email']}</span>
               )}
-              <label htmlFor="site-feedback-email">
+              <label className="coa-form__label" htmlFor="site-feedback-email">
                 Type your email in the box if you would like to receive a link to your feedback. Your email address will be kept private.
                 <span>optional</span>
               </label>
@@ -253,14 +253,14 @@ class FormFeedback extends Component {
             </fieldset>
             </div>
 
-            <div className="coa-form_actions">
+            <div className="coa-form__actions">
               <input
                 type="button"
                 value="Submit"
                 onClick={this.handleFormSubmit}
                 disabled={!this.isValid(this.state.errors)}
               />
-              <a className="coa-form_actions__link" onClick={this.handleResetForm}>Cancel</a>
+              <a className="coa-form__actions__link" onClick={this.handleResetForm}>Cancel</a>
             </div>
           </div>
         )}

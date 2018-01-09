@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {get} from 'lodash';
-import SectionTitle from 'components/modules/SectionTitle';
-import SectionSubtitle from 'components/modules/SectionSubtitle';
-import Hours from 'components/modules/Hours';
+import SectionTitle from 'js/modules/SectionTitle';
+import SectionSubtitle from 'js/modules/SectionSubtitle';
+import Hours from 'js/modules/Hours';
 
 class Contact extends Component {
 
@@ -21,7 +21,7 @@ class Contact extends Component {
             const name = get(contact, "name", null);
             const phone = get(contact, "phone", null);
             const email = get(contact, "email", null);
-            const address = get(contact, "address", null);
+            const location = get(contact, "location", null);
             const hours = get(contact, "hours", null);
 
             return (
@@ -43,12 +43,12 @@ class Contact extends Component {
                   </div>
                 )}
 
-                { address && (
+                { location && (
                   <div className="coa-section__map">
                     <h5>Address</h5>
-                    <span>{address.street}</span>
-                    <span>{address.city}, {address.state} {address.zip}</span>
-                    <span>{address.country}</span>
+                    <span>{location.street}</span>
+                    <span>{location.city}, {location.state} {location.zip}</span>
+                    <span>{location.country}</span>
                   </div>
                 )}
 
