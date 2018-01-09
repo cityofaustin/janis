@@ -29,7 +29,7 @@ class I18nBanner extends Component {
 
   getLanguageMenuClassName = (language) => {
     const classNameBase = `coa-I18nBanner__language`;
-    return language.code === this.props.activeLanguage
+    return language.code === this.props.activeLanguage.substring(0,2)
              ? `${classNameBase}--active`
              : ''
   }

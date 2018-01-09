@@ -4,17 +4,17 @@ import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 
-// components
-import Banner from "components/layout/Banner"
-import I18nBanner from "components/layout/I18nBanner"
-import Header from "components/layout/Header"
-import Footer from "components/layout/Footer"
+// page_sections
+import Banner from "js/page_sections/Banner"
+import I18nBanner from "js/page_sections/I18nBanner"
+import Header from "js/page_sections/Header"
+import Footer from "js/page_sections/Footer"
 
-// page routes
-import HomePage from "pages/HomePage"
-import SearchPage from "pages/SearchPage"
-import ServicesIndex from "pages/Services"
-import Service from "pages/Service"
+// pages
+import Home from "js/pages/Home"
+import Search from "js/pages/Search"
+import Services from "js/pages/Services"
+import Service from "js/pages/Service"
 
 import SUPPORTED_LANGUAGES from 'js/constants/languages'
 
@@ -44,6 +44,12 @@ class LanguageWrapper extends Component {
     this.setState({ lang: newLang })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const isLanguageChanged = nextState.lang !== this.state.lang
+    if (isLanguageChanged) return true;
+    return false;
+  }
+
   render() {
     return (
       <IntlProvider locale={this.state.lang}>
@@ -59,10 +65,10 @@ class LanguageWrapper extends Component {
               </section>
             )} />
             <section className="coa-main">
-              <Route exact path={`/`} component={HomePage} {...this.props} />
-              <Route exact path={`/:lang?/services`} component={ServicesIndex} {...this.props} />
-              <Route exact path={`/:lang?/search`} component={SearchPage} {...this.props} />
-              <Route path={`/:lang?/service/:slug`} component={Service} {...this.props} />
+              <Route exact path={`/`} component={Home} {...this.props} />
+              <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
+              <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
+              <Route path={`/:lang?/service/:slug`} render={(props) => <Service {...props} lang={this.state.lang}/>} />
             </section>
             <Footer />
           </div>

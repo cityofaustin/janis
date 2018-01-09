@@ -27,25 +27,19 @@ class Service extends Component {
     this.fetchData(this.props.match.params.slug);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     // only refetch data when props have changed
     // this happens only when the route is updated
+    const isSlugChanged = nextProps.match.params.slug !== this.props.match.params.slug
+    const isLanguageChanged = nextProps.lang !== this.props.lang;
 
-    if (nextProps.match.params.slug !== this.props.match.params.slug) {
-      this.fetchData(nextProps.match.params.slug);
+    if (isSlugChanged || isLanguageChanged) {
+      this.fetchData(nextProps.match.params.slug, nextProps.lang);
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // only rerender component when state has changed
-    // this happens only when data is refetched
-
-    if (nextState.data.id !== this.state.data.id) return true;
-
-    return false;
-  }
-
-  fetchData(slug) {
+  fetchData(slug, lang = this.props.lang) {
+    console.log('fetching data', ` for ${slug}`, ` in ${lang}`)
 
     if (process.env.NODE_ENV !== 'production') {
       // Allow querystrings to set data, which is used in joplin for livepreview
@@ -59,7 +53,7 @@ class Service extends Component {
 
     axios
       .create({
-        headers: {'Accept-Language': this.props.match.params.lang }
+        headers: {'Accept-Language': lang }
       })
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: servicePageQuery,
