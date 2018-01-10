@@ -70,12 +70,6 @@ class Service extends Component {
       .catch(err => console.log(err))
   }
 
-  cleanContact(contact) {
-    let cleaned = Object.assign(contact);
-    cleaned.hours = contact.hours.edges.map((d) => d.node);
-    return cleaned;
-  }
-
   render() {
 
     const { data } = this.state;
@@ -85,7 +79,7 @@ class Service extends Component {
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
-    const contacts = get(data, "contacts.edges", []).map((n) => this.cleanContact(n.node.contact));
+    const contacts = get(data, "contacts.edges", null);
     const relatedlinks = get(data, "related", null);
     const services311 = get(jsonFileData, "services311", null);
 
