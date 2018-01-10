@@ -9,58 +9,64 @@ class Contact extends Component {
   render() {
 
     const { contacts } = this.props;
+    let JSX;
 
-    return (contacts) && (
+    if (!contacts || !contacts.length) {
+      JSX = null;
+    } else {
+      JSX = (
+        <div className="coa-section">
+          <SectionTitle title="Contact" noBorder={true} />
 
-      <div className="coa-section">
-        <SectionTitle title="Contact" noBorder={true} />
+          {
+            contacts.map((contact, index) => {
 
-        {
-          contacts.map((contact, index) => {
+              const name = get(contact, "name", null);
+              const phone = get(contact, "phone", null);
+              const email = get(contact, "email", null);
+              const location = get(contact, "location", null);
+              const hours = get(contact, "hours", null);
 
-            const name = get(contact, "name", null);
-            const phone = get(contact, "phone", null);
-            const email = get(contact, "email", null);
-            const location = get(contact, "location", null);
-            const hours = get(contact, "hours", null);
+              return (
+                <div key={index} className="coa-section__subsection">
 
-            return (
-              <div key={index} className="coa-section__subsection">
+                    <SectionSubtitle title={name} />
 
-                  <SectionSubtitle title={name} />
+                  { phone && (
+                    <div className="coa-section__map">
+                      <h5>Phone Number</h5>
+                      <a href={`tel:${phone}`}>{phone}</a>
+                    </div>
+                  )}
 
-                { phone && (
-                  <div className="coa-section__map">
-                    <h5>Phone Number</h5>
-                    <a href={`tel:${phone}`}>{phone}</a>
-                  </div>
-                )}
+                  { email && (
+                    <div className="coa-section__map">
+                      <h5>Email</h5>
+                      <a href={`mailto:${email}`}>{email}</a>
+                    </div>
+                  )}
 
-                { email && (
-                  <div className="coa-section__map">
-                    <h5>Email</h5>
-                    <a href={`mailto:${email}`}>{email}</a>
-                  </div>
-                )}
+                  { location && (
+                    <div className="coa-section__map">
+                      <h5>Address</h5>
+                      <span>{location.street}</span>
+                      <span>{location.city}, {location.state} {location.zip}</span>
+                      <span>{location.country}</span>
+                    </div>
+                  )}
 
-                { location && (
-                  <div className="coa-section__map">
-                    <h5>Address</h5>
-                    <span>{location.street}</span>
-                    <span>{location.city}, {location.state} {location.zip}</span>
-                    <span>{location.country}</span>
-                  </div>
-                )}
+                  <Hours hours={hours} />
 
-                <Hours hours={hours} />
+                </div>
+              );
 
-              </div>
-            );
+            })
+          }
+        </div>
+      );
+    }
 
-          })
-        }
-      </div>
-    );
+    return JSX;
   }
 }
 

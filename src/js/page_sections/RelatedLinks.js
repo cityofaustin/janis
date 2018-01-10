@@ -7,32 +7,38 @@ class RelatedLinks extends Component {
   render() {
 
     const { relatedlinks, topicId, topicName } = this.props;
+    let JSX;
 
-    return (relatedlinks) && (
+    if (!relatedlinks || !relatedlinks.length) {
+      JSX = null;
+    } else {
+      JSX = (
+        <div className="coa-section">
+          <div className="wrapper">
+            <SectionTitle title="Check out related city services" noBorder={true} />
 
-      <div className="coa-section">
-        <div className="wrapper">
-          <SectionTitle title="Check out related city services" noBorder={true} />
+            <div className="row">
+            {
+              relatedlinks.map((service) =>
+                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
+                <ListLink
+                  id={service.id}
+                  url={`/service/${service.slug}`}
+                  text={service.title}
+                  isBoxType="true"
+                />
+                </div>
+              )
+            }
+            </div>
 
-          <div className="row">
-          {
-            relatedlinks.map((service) =>
-              <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
-              <ListLink
-                id={service.id}
-                url={`/service/${service.slug}`}
-                text={service.title}
-                isBoxType="true"
-              />
-              </div>
-            )
-          }
+            <a className="coa-section__link" href={`/topic/${topicId}`}>See all services under {topicName}</a>
           </div>
-
-          <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return JSX;
   }
 }
 
