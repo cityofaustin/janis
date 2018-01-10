@@ -35,14 +35,12 @@ class Topic extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // only rerender component when state has changed
     // this happens only when data is refetched
-console.log(this.state.data.id, nextState.data.id);
     if (nextState.data.id !== this.state.data.id) return true;
 
     return false;
   }
 
   fetchData(id) {
-
     axios
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: topicPageQuery,
@@ -58,15 +56,10 @@ console.log(this.state.data.id, nextState.data.id);
   }
 
   render() {
-
-    const { data } = this.state;
-console.log('data', data);
-
     const title = get(this.state.data, "text", "");
     const body = get(this.state.data, "description", "");
     const services = get(this.state.data, "services.edges", []);
     const services311 = get(jsonFileData, "services311", []);
-
 
     return (
       <div>
