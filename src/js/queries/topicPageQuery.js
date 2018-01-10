@@ -1,6 +1,6 @@
 const topicPageQuery = `
-  query topicPageQuery($pk:ID) {
-    allTopics(id: $pk) {
+  query topicPageQuery($id:ID) {
+    allTopics(id: $id) {
       edges {
         node {
           id,
