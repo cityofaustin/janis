@@ -29,7 +29,7 @@ class RelatedLinks extends Component {
           }
           </div>
 
-          <a className="coa-section__link" href={`/services/topic/${topicId}`}>See all services under {topicName}</a>
+          <a className="coa-section__link" href={`/topic/${topicId}`}>See all services under {topicName}</a>
         </div>
       </div>
     );
