@@ -70,6 +70,19 @@ class Service extends Component {
       .catch(err => console.log(err))
   }
 
+  cleanRelatedLinks(relatedlinks) {
+    if (!relatedlinks) return null;
+
+    return (
+      relatedlinks.map((link) => {
+        return {
+          url: `/service/${link.slug}`,
+          text:  link.title
+        }
+      })
+    )
+  }
+
   render() {
 
     const { data } = this.state;
@@ -80,7 +93,7 @@ class Service extends Component {
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
     const contacts = get(data, "contacts.edges", null);
-    const relatedlinks = get(data, "related", null);
+    const relatedlinks = this.cleanRelatedLinks(get(data, "related", null));
     const services311 = get(jsonFileData, "services311", null);
 
     return (
@@ -113,7 +126,13 @@ class Service extends Component {
           </div>
         </div>
 
-        <RelatedLinks relatedlinks={relatedlinks} topicId={topicId} topicName={topicName} />
+        <RelatedLinks
+          relatedlinks={relatedlinks}
+          sectionLink={{url: `/topic/${topicId}`, text: `See all services under ${topicName}`}}
+          sectionStyle="primary"
+          sectionTitle="Check out related city services"
+          sectionText={null}
+        />
 
         <div className="coa-section coa-section--lightgrey">
           <div className="wrapper">

@@ -6,33 +6,46 @@ class RelatedLinks extends Component {
 
   render() {
 
-    const { relatedlinks, topicId, topicName } = this.props;
+    const { relatedlinks, sectionStyle, sectionTitle, sectionText, sectionLink } = this.props;
     let JSX;
 
     if (!relatedlinks || !relatedlinks.length) {
       JSX = null;
     } else {
       JSX = (
-        <div className="coa-section">
+        <div className={`coa-section ${sectionStyle === 'primary' ? '' : 'coa-section--grey' }`}>
           <div className="wrapper">
-            <SectionTitle title="Check out related city services" noBorder={true} />
-
+          {
+            sectionTitle && (
+              <SectionTitle
+                title={sectionTitle}
+                noBorder={sectionStyle === 'primary' ? true : false}
+              />
+            )
+          }
+          {
+            sectionText && (
+              <p>{sectionText}</p>
+            )
+          }
             <div className="row">
             {
-              relatedlinks.map((service) =>
-                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
+              relatedlinks.map((link, index) =>
+                <div key={index} className="col-xs-12 col-md-6 col-lg-4">
                 <ListLink
-                  id={service.id}
-                  url={`/service/${service.slug}`}
-                  text={service.title}
-                  isBoxType="true"
+                  url={link.url}
+                  text={link.text}
+                  linkStyle={sectionStyle === 'primary' ? 'boxprimary' : 'box'}
                 />
                 </div>
               )
             }
             </div>
 
-            <a className="coa-section__link" href={`/topic/${topicId}`}>See all services under {topicName}</a>
+          { sectionLink && (
+            <a className="coa-section__link" href={sectionLink.url}>{sectionLink.text}</a>
+            )
+          }
           </div>
         </div>
       );

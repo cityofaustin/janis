@@ -31,8 +31,8 @@ class Services extends Component {
 
   render() {
 
-    const title = get(jsonFileData, "servicepage.title", "");
-    const body = get(jsonFileData, "servicepage.body", "");
+    const title = get(jsonFileData, "servicespage.title", "");
+    const body = get(jsonFileData, "servicespage.body", "");
     const services311 = get(jsonFileData, "services311", []);
     const { edges: services = [] } = this.state.data
 
@@ -59,7 +59,7 @@ class Services extends Component {
                     id={service.id}
                     url={`/service/${service.slug}`}
                     text={service.title}
-                    isBoxType={true}
+                    linkStyle="boxprimary"
                   />
                 </div>
               )

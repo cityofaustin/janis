@@ -4,12 +4,11 @@ class ListLink extends Component {
 
   render() {
 
-    const { id, url, text, isBoxType } = this.props;
+    const { url, text, linkStyle } = this.props;
 
     return (
       <a
-        className={ `coa-ListLink ${(isBoxType && "coa-ListLink--boxprimary" )}` }
-        key={id}
+        className={ `coa-ListLink coa-ListLink--${(linkStyle)}` }
         href={url}
       >
         <span>{text}</span>

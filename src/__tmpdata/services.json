@@ -1,126 +1,21 @@
 {
   "meta": {},
-  "servicepage": {
+  "servicespage": {
     "title": "Use City of Austin Services",
     "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
   },
-  "topicpage":{
-    "title": "Use City of Austin Services",
-    "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
-  },
-  "contacts":[
+  "projectsRelated": [
     {
-      "name": "Austin Recycle and Reuse Drop-off Center",
-      "phone":"512-367-8695",
-      "email":"resourcerecovery@austintexas.gov",
-      "address": {
-        "street": "2514 Business Center Drive",
-        "city": "Austin",
-        "state": "Texas",
-        "zip": "78744",
-        "country": "United States"
-      },
-      "hours": [
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        }
-      ]
+      "text": "Project 1",
+      "url": "#"
     },
     {
-      "name": "Some Other Location",
-      "phone":"555-555-5555",
-      "email":"someemail@austintexas.gov",
-      "address": {
-        "name": "Some Place",
-        "street": "1111 SomeWhere Drive",
-        "city": "Austin",
-        "state": "Texas",
-        "zip": "78744",
-        "country": "United States"
-      },
-      "hours": [
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        },
-        {
-          "day_of_week": "Monday",
-          "start_time": "08:00:00",
-          "end_time": "16:30:00"
-        }
-      ]
-    }
-  ],
-  "servicesRelated":[
-    {
-      "id": 5,
-      "title": "Visit the Recycle and Reuse Drop-off Center"
+      "text": "Project 2",
+      "url": "#"
     },
     {
-      "id": 6,
-      "title": "Look up recycling, compost, and trash pick-up days"
-    },
-    {
-      "id": 7,
-      "title": "Get ready for bulk item collection"
+      "text": "Project 3",
+      "url": "#"
     }
   ],
   "services311": [

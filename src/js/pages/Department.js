@@ -6,6 +6,7 @@ import axios from 'axios';
 import jsonFileData from '__tmpdata/services';
 import SectionTitle from 'js/modules/SectionTitle';
 import Contact from 'js/page_sections/Contact';
+import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import departmentPageQuery from 'js/queries/departmentPageQuery';
@@ -58,13 +59,12 @@ class Department extends Component {
 
   render() {
 
-console.log(this.state.data);
-
     const { data } = this.state;
 
     const title = get(data, "name", null);
     const body = get(data, "mission", null);
     const contacts = get(data, "contacts.edges", []);
+    const relatedlinks = get(jsonFileData, "projectsRelated", []);
     const services311 = get(jsonFileData, "services311", []);
 
     return (
@@ -92,6 +92,14 @@ console.log(this.state.data);
             </div>
           </div>
         </div>
+
+        <RelatedLinks
+          relatedlinks={relatedlinks}
+          sectionType="secondary"
+          sectionLink={{url: "#", text: "Track all Resource Recovery projects"}}
+          sectionTitle="Track Resource Recovery Projects"
+          sectionText="Projects are short term, with a set budget, and defined goals. Projects can be specific to one department or a collaboration across multiple departments."
+        />
 
         <div className="coa-section coa-section--lightgrey">
           <div className="wrapper">
