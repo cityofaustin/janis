@@ -16,6 +16,7 @@ import Search from "js/pages/Search"
 import Services from "js/pages/Services"
 import Service from "js/pages/Service"
 import Department from "js/pages/Department"
+import Topic from "js/pages/Topic"
 
 import 'css/coa.css'
 
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route path="/service/:slug" component={Service} />
             <Route path="/department/:id" component={Department} />
+            <Route path="/topic/:id" component={Topic} />
           </section>
           <Footer />
         </div>

@@ -43,7 +43,7 @@ class RelatedLinks extends Component {
             </div>
 
           { sectionLink && (
-            <a className="coa-section__link" href={sectionLink.url}>{sectionLink.text}</a>
+              <a className="coa-section__link" href={sectionLink.url}>{sectionLink.text}</a>
             )
           }
           </div>
