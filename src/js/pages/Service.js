@@ -102,7 +102,7 @@ class Service extends Component {
             <div className="coa-main__left col-xs-12 col-lg-8">
 
               <div className="coa-section">
-                { topicId && ( <a className="coa-main__breadcrumb" href={`/services/topic/${topicId}`}>{topicName}</a> )}
+                { topicId && ( <a className="coa-main__breadcrumb" href={`/topic/${topicId}`}>{topicName}</a> )}
                 <h2 className="coa-main__title">{title}</h2>
                 { steps && ( <div className="coa-main__steps"><HtmlFromAdmin content={steps} /></div> )}
               </div>
