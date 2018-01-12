@@ -7,37 +7,59 @@ import jsonFileData from '__tmpdata/services';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import ListLink from 'js/modules/ListLink';
-import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import topicPageQuery from 'js/queries/topicPageQuery';
 
-class Services extends Component {
+class Topic extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       data: {}
     };
+
   }
 
   componentDidMount() {
+    this.fetchData(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // only refetch data when props have changed
+    // this happens only when the route is updated
+
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.fetchData(nextProps.match.params.id);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // only rerender component when state has changed
+    // this happens only when data is refetched
+    if (nextState.data.id !== this.state.data.id) return true;
+
+    return false;
+  }
+
+  fetchData(id) {
     axios
-      .create({
-        headers: { 'Accept-Language': this.props.lang }
-      })
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: allServicePagesQuery,
+        query: topicPageQuery,
+        variables: {
+          id: id,
+        }
       })
       .then(res => {
-        this.setState({ data: res.data.data.allServicePages })
+        const data = get(res.data.data.allTopics, 'edges.0.node', null);
+        this.setState({ data: data });
       })
       .catch(err => console.log(err))
   }
 
   render() {
-
-    const title = get(jsonFileData, "servicepage.title", "");
-    const body = get(jsonFileData, "servicepage.body", "");
+    const title = get(this.state.data, "text", "");
+    const body = get(this.state.data, "description", "");
+    const services = get(this.state.data, "services.edges", []);
     const services311 = get(jsonFileData, "services311", []);
-    const { edges: services = [] } = this.state.data
 
     return (
       <div>
@@ -86,4 +108,4 @@ class Services extends Component {
 
 }
 
-export default Services;
+export default Topic;

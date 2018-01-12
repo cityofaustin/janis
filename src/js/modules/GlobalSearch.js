@@ -7,11 +7,11 @@ class GlobalSearch extends Component {
     return  (
 
       <div role="search">
-        <form class="usa-search usa-search-big">
-          <label class="usa-sr-only" for="search-field-big">Search big</label>
+        <form className="usa-search usa-search-big">
+          <label className="usa-sr-only" htmlFor="search-field-big">Search big</label>
           <input id="search-field-big" type="search" name="search"/>
           <button type="submit">
-            <span class="usa-search-submit-text">Search</span>
+            <span className="usa-search-submit-text">Search</span>
           </button>
         </form>
       </div>
