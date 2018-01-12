@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
+import CaretUpSVG from 'js/svg/CaretUp';
 
 
 class I18nBanner extends Component {
@@ -80,7 +81,11 @@ class I18nBanner extends Component {
                         {languageTitle}
                       </span>
                     </span>
-                    <CaretDownSVG size="20"/>
+                    {
+                      this.state.isOpen ?
+                        <CaretUpSVG size="20"/> :
+                        <CaretDownSVG size="20"/>
+                    }
                     <div className={this.getMenuClassName()}>
                       <div className="wrapper">
                         <h4>Translated by City of Austin</h4>
