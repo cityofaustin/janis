@@ -11,7 +11,7 @@ class ListLink extends Component {
     return (
       <Link
         className={ `coa-ListLink coa-ListLink--${(linkStyle)}` }
-        to={getPathWithLangCode(url)}
+        to={url}
       >
         <span>{text}</span>
         <i className="fa fa-chevron-right" aria-hidden="true"></i>
