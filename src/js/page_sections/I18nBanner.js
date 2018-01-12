@@ -60,9 +60,10 @@ class I18nBanner extends Component {
   }
 
   getActiveLanguageTitle = () => {
-    const activeLanguage = SUPPORTED_LANGUAGES.find((lang) => {
+    let activeLanguage = SUPPORTED_LANGUAGES.find((lang) => {
       return lang.code === this.props.activeLanguage;
     });
+    activeLanguage = activeLanguage || SUPPORTED_LANGUAGES[0];
     return activeLanguage.title;
   }
 
@@ -84,7 +85,7 @@ class I18nBanner extends Component {
                 onClick={this.handleExpandMenu}
               >
                 <span>Choose Language
-                  <span className="link coa-I18nBanner__choose-language-link">
+                  <span className="coa-link coa-I18nBanner__choose-language-link">
                     {languageTitle}
                   </span>
                 </span>
