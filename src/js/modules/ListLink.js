@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 class ListLink extends Component {
 
@@ -11,7 +12,7 @@ class ListLink extends Component {
       <Link
         className={ `coa-ListLink ${(isBoxType && "coa-ListLink--boxprimary" )}` }
         key={id}
-        to={url}
+        to={getPathWithLangCode(url)}
       >
         <span>{text}</span>
         <i className="fa fa-chevron-right" aria-hidden="true"></i>

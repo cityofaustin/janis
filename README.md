@@ -23,6 +23,13 @@ Add a package via yarn (https://yarnpkg.com/lang/en/docs/cli/add/)
 docker exec --interactive --tty janis yarn add <package name>
 ```
 
+___
+
+## Design assets
+
+Current design mockups are stored in Google Drive as Sketch Files:
+https://drive.google.com/drive/u/1/folders/1Xg6739ixhIDrb7MdJAnO4_zCRu3kDmZQ
+
 ---
 
 ## SASS Regime Guidelines (WIP)

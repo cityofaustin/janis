@@ -37,3 +37,9 @@
     content: "|";
   }
 }
+
+.link {
+  text-decoration: underline;
+  color: $color-primary;
+  cursor: pointer;
+}

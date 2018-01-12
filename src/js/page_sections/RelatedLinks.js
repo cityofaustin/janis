@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import ListLink from 'js/modules/ListLink';
 import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 class RelatedLinks extends Component {
 
@@ -30,7 +31,9 @@ class RelatedLinks extends Component {
           }
           </div>
 
-          <Link className="coa-section__link" to={`/topic/${topicId}`}>
+          <Link className="coa-section__link"
+            to={getPathWithLangCode(`/topic/${topicId}`)}
+          >
             See all services under {topicName}
           </Link>
         </div>

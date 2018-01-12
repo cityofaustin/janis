@@ -75,7 +75,7 @@ class LanguageWrapper extends Component {
             )} />
             <section className="coa-main">
               <Switch>
-                <Route exact path={`/`} component={Home} {...this.props} />
+                <Route exact path={`/:lang?`} component={Home} {...this.props} />
                 <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
                 <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
                 <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
