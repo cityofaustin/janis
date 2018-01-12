@@ -8,30 +8,37 @@ export const SUPPORTED_LANGUAGES = [
     abbr: 'es',
     code: 'es',
   }, {
+    // Vietnamese
     title: 'Tiếng Việt',
     abbr: 'vi',
     code: 'vi',
   }, {
-    title: '中文',
+    // Simplified Chinese
+    title: '简体中文',
     abbr: 'zh',
     code: 'zh-hans',
   }, {
-    title: 'Chinese (Traditional)',
+    // Traditional Chinese
+    title: '繁體中文',
     abbr: 'zh',
     code: 'zh-hant',
   }, {
+    // Arabic
     title: 'عربى',
     abbr: 'ar',
     code: 'ar',
   }, {
+    // Korean
     title: '한국어',
     abbr: 'ko',
     code: 'ko',
   }, {
+    // Urdu
     title: 'اردو',
     abbr: 'ur',
     code: 'ur',
   }, {
+    // Burmese
     title: 'မြန်မာ',
     abbr: 'my',
     code: 'my',
