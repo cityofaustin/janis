@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
+import { Link } from 'react-router-dom';
 
 import ContentItems from 'js/page_sections/ContentItems';
 import Contact from 'js/page_sections/Contact';
@@ -103,7 +104,11 @@ class Service extends Component {
             <div className="coa-main__left col-xs-12 col-lg-8">
 
               <div className="coa-section">
-                { topicId && ( <a className="coa-main__breadcrumb" href={`/topic/${topicId}`}>{topicName}</a> )}
+                { topicId && (
+                  <Link className="coa-main__breadcrumb" to={`/topic/${topicId}`}>
+                    {topicName}
+                  </Link>
+                )}
                 <h2 className="coa-main__title">{title}</h2>
                 { steps && ( <div className="coa-main__steps"><HtmlFromAdmin content={steps} /></div> )}
               </div>

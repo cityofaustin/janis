@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import Navmenu from 'js/page_sections/Navmenu';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -28,10 +29,10 @@ class Header extends Component {
                 MENU
               </span>
               <span className="coa-text-spacer--vertical"></span>
-              <a href="/">AUSTIN.GOV</a>
+              <Link to="/">AUSTIN.GOV</Link>
             </div>
             <div className="col-xs-6 coa-Header__search">
-              <a href="/search">Search <SearchSVG size="18"/></a>
+              <Link to="/search"> Search <SearchSVG size="18"/></Link>
             </div>
           </div>
         </div>

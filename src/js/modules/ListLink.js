@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ListLink extends Component {
 
@@ -7,14 +8,14 @@ class ListLink extends Component {
     const { id, url, text, isBoxType } = this.props;
 
     return (
-      <a
+      <Link
         className={ `coa-ListLink ${(isBoxType && "coa-ListLink--boxprimary" )}` }
         key={id}
-        href={url}
+        to={url}
       >
         <span>{text}</span>
         <i className="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
+      </Link>
     );
   }
 }

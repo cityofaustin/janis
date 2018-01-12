@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import ListLink from 'js/modules/ListLink';
+import { Link } from 'react-router-dom';
 
 class RelatedLinks extends Component {
 
@@ -29,7 +30,9 @@ class RelatedLinks extends Component {
           }
           </div>
 
-          <a className="coa-section__link" href={`/topic/${topicId}`}>See all services under {topicName}</a>
+          <Link className="coa-section__link" to={`/topic/${topicId}`}>
+            See all services under {topicName}
+          </Link>
         </div>
       </div>
     );
