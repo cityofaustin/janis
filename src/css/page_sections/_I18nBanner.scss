@@ -8,16 +8,45 @@
   background-color: $color-white;
 }
 
-.coa-I18nBanner__language-list {
+.coa-I18nBanner__choose-language {
   text-align: right;
   font-size: $small-font-size;
+  svg {
+    vertical-align: middle;
+  }
 }
 
-.coa-I18nBanner__language {
-  display: inline;
+.coa-I18nBanner__choose-language-link {
+  margin: 0 $coa-space-level1;
+}
+
+.coa-I18nBanner__dropdown-menu {
+  position: absolute;
+  background-color: $color-gray-light;
+  top: 5rem;
+  right: 0;
+  padding: $coa-space-level4 $coa-space-level2;
+  width: 100vw;
+  text-align: left;
+}
+
+.coa-I18nBanner__language-list {
+  list-style: none;
+  padding-top: $coa-space-level2;
+}
+
+.coa-I18nBanner__language-item {
   padding: 0 $coa-space-level2;
   cursor: pointer;
+  width: 100%;
+  padding: $coa-space-level1 $coa-space-level2;
+  margin-bottom: 0;
+  &:hover {
+    background-color: $color-gray-light;
+  }
   a {
+    width: 100%;
+    display: block;
     text-decoration: none;
     color: $color-black;
     &:visited {
@@ -26,60 +55,23 @@
   }
 }
 
-.coa-I18nBanner__choose-language {
-  margin: 0 $coa-space-level1;
-}
-
-.coa-I18nBanner__language--active {
+.coa-I18nBanner__language-item--active {
   background-color: $color-gray-lighter;
 }
 
-.coa-I18nBanner__language--other {
-  svg {
-    vertical-align: middle;
-  }
+.coa-I18nBanner__menu-header {
+  padding: 0 $coa-space-level2;
 }
 
-@mixin coa-I18nBanner__other-language-options {
-  position: absolute;
-  background-color: $color-gray-light;
-  top: 5rem;
-  right: 0;
-  padding: $coa-space-level4 $coa-space-level2;
-  width: 100vw;
-  text-align: left;
-  h4 {
-    padding: 0 $coa-space-level2;
-  }
-  ul {
-    list-style: none;
-    padding-top: $coa-space-level2;
-    li {
-      width: 100%;
-      padding: $coa-space-level1 $coa-space-level2;
-      margin-bottom: 0;
-      &:hover {
-        background-color: $color-gray-light;
-      }
-      a {
-        width: 100%;
-        display: block;
-      }
-    }
-  }
-}
-
-.coa-I18nBanner__cancel {
-  text-align: center;
-}
-
-.coa-I18nBanner__other-language-options--open {
-  @include coa-I18nBanner__other-language-options;
+.coa-I18nBanner__dropdown-menu--open {
   background-color: $color-white;
   border-bottom: 1px solid $color-gray-light;
 }
 
-.coa-I18nBanner__other-language-options--closed {
-  @include coa-I18nBanner__other-language-options;
+.coa-I18nBanner__dropdown-menu--closed {
   display: none;
+}
+
+.coa-I18nBanner__cancel {
+  text-align: center;
 }
