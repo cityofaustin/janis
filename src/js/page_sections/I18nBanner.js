@@ -116,7 +116,11 @@ class I18nBanner extends Component {
                     }
                   </ul>
                 </div>
-                <p className="link coa-I18nBanner__cancel" onClick={this.handleCancel}>Cancel</p>
+                <p className="link coa-I18nBanner__cancel"
+                  onClick={this.handleCancel}
+                >
+                  Cancel
+                </p>
                 </div>
               </div>
             </div>
