@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 import ContentItems from 'js/page_sections/ContentItems';
 import Contact from 'js/page_sections/Contact';
@@ -94,7 +95,6 @@ class Service extends Component {
     return (
 
       <div>
-
         <div className="wrapper">
           <div className="coa-main__hero coa-main__hero--small"></div>
         </div>
@@ -105,7 +105,8 @@ class Service extends Component {
 
               <div className="coa-section">
                 { topicId && (
-                  <Link className="coa-main__breadcrumb" to={`/topic/${topicId}`}>
+                  <Link className="coa-main__breadcrumb"
+                    to={getPathWithLangCode(`/topic/${topicId}`)}>
                     {topicName}
                   </Link>
                 )}

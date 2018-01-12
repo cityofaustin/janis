@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
+import getPathWithLangCode from 'js/helpers/language';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
@@ -60,7 +61,7 @@ class Services extends Component {
                 <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
                   <ListLink
                     id={service.id}
-                    url={`/service/${service.slug}`}
+                    url={getPathWithLangCode(`/service/${service.slug}`)}
                     text={service.title}
                     isBoxType={true}
                   />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import Navmenu from 'js/page_sections/Navmenu';
 import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 class Header extends Component {
   constructor(props) {
@@ -29,10 +30,12 @@ class Header extends Component {
                 MENU
               </span>
               <span className="coa-text-spacer--vertical"></span>
-              <Link to="/">AUSTIN.GOV</Link>
+              <Link to={getPathWithLangCode('/')}>AUSTIN.GOV</Link>
             </div>
             <div className="col-xs-6 coa-Header__search">
-              <Link to="/search"> Search <SearchSVG size="18"/></Link>
+              <Link to={getPathWithLangCode('/search')}>
+                Search <SearchSVG size="18"/>
+              </Link>
             </div>
           </div>
         </div>

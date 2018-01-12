@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 import axios from 'axios';
 import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
@@ -88,7 +89,11 @@ class Navmenu extends Component {
           </button>
           <ul className="usa-sidenav-list">
             <li>
-              <Link to="/" className={this.getMenuItemClassName('/')}>Home</Link>
+              <Link to={getPathWithLangCode("/")}
+                className={this.getMenuItemClassName('/')}
+              >
+                Home
+              </Link>
             </li>
 
         {
@@ -98,7 +103,9 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id}>
-                <Link to={`/topic/${parentLink.id}`} className={this.getParentMenuItemClassName(parentLink)}>
+                <Link to={getPathWithLangCode(`/topic/${parentLink.id}`)}
+                  className={this.getParentMenuItemClassName(parentLink)}
+                >
                   { parentLink.text }
                 </Link>
 
@@ -108,7 +115,7 @@ class Navmenu extends Component {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id}>
-                          <Link to={`/service/${serviceLink.slug}`}
+                          <Link to={getPathWithLangCode(`/service/${serviceLink.slug}`)}
                             className={this.getMenuItemClassName(`/service/${serviceLink.slug}`)}
                           >
                             {serviceLink.title}
