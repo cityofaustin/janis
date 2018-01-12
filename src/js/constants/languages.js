@@ -16,12 +16,12 @@ export const SUPPORTED_LANGUAGES = [
     // Simplified Chinese
     title: '简体中文',
     abbr: 'zh',
-    code: 'zh-hans',
+    code: 'zh-cn',
   }, {
     // Traditional Chinese
     title: '繁體中文',
     abbr: 'zh',
-    code: 'zh-hant',
+    code: 'zh-tw',
   }, {
     // Arabic
     title: 'عربى',
