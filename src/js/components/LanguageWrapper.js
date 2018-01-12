@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
@@ -15,6 +15,7 @@ import Home from "js/pages/Home"
 import Search from "js/pages/Search"
 import Services from "js/pages/Services"
 import Service from "js/pages/Service"
+import Topic from "js/pages/Topic"
 
 import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
 
@@ -73,10 +74,13 @@ class LanguageWrapper extends Component {
               </section>
             )} />
             <section className="coa-main">
-              <Route exact path={`/`} component={Home} {...this.props} />
-              <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
-              <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
-              <Route path={`/:lang?/service/:slug`} render={(props) => <Service {...props} lang={this.state.lang}/>} />
+              <Switch>
+                <Route exact path={`/`} component={Home} {...this.props} />
+                <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
+                <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
+                <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
+                <Route path={`/:lang?/service/:slug`} render={(props) => <Service {...props} lang={this.state.lang}/>} />
+              </Switch>
             </section>
             <Footer />
           </div>

@@ -98,7 +98,7 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id}>
-                <Link to="/services" className={this.getParentMenuItemClassName(parentLink)}>
+                <Link to={`/topic/${parentLink.id}`} className={this.getParentMenuItemClassName(parentLink)}>
                   { parentLink.text }
                 </Link>
 
