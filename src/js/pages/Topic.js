@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
+import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
+import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
-import ListLink from 'js/modules/ListLink';
 import topicPageQuery from 'js/queries/topicPageQuery';
 
 class Topic extends Component {
 
   constructor(props) {
     super(props);
-    this.isLoaded = false;
     this.state = {
       data: {}
     };
@@ -33,17 +33,6 @@ class Topic extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // only rerender component when state has changed
-    // this happens only when data is refetched
-    if (this.isLoaded) {
-      this.isLoaded = false;
-      return true;
-    }
-
-    return false;
-  }
-
   fetchData(id) {
     axios
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
@@ -53,18 +42,25 @@ class Topic extends Component {
         }
       })
       .then(res => {
-        const data = get(res.data.data.allTopics, 'edges.0.node', null);
-        this.isLoaded = true;
+        const data = this.cleanData(res);
         this.setState({ data: data });
       })
       .catch(err => console.log(err))
   }
 
+  cleanData(res) {
+    const data = get(res.data, 'data.allTopics.edges[0].node', {});
+    data.services = cleanServiceLinks(data.services);
+    return data;
+  }
+
   render() {
-    const title = get(this.state.data, "text", "");
-    const body = get(this.state.data, "description", "");
-    const services = get(this.state.data, "services.edges", []);
-    const services311 = get(jsonFileData, "services311", []);
+
+    const { data } = this.state;
+    const title = get(data, "text", null);
+    const body = get(data, "description", null);
+    const relatedlinks = get(data, "services", null);
+    const services311 = get(jsonFileData, "services311", null);
 
     return (
       <div>
@@ -79,24 +75,10 @@ class Topic extends Component {
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
-        <div className="coa-section">
-          <div className="wrapper">
-            <div className="row">
-            {
-              services.map(({ node: service }) =>
-                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
-                  <ListLink
-                    id={service.id}
-                    url={`/service/${service.slug}`}
-                    text={service.title}
-                    isBoxType={true}
-                  />
-                </div>
-              )
-            }
-            </div>
-          </div>
-        </div>
+        <RelatedLinks
+          relatedlinks={relatedlinks}
+          sectionStyle="primary"
+        />
 
         <div className="coa-section coa-section--lightgrey">
           <div className="wrapper">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
+import { cleanContacts } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
@@ -15,7 +16,6 @@ class Department extends Component {
 
   constructor(props) {
     super(props);
-    this.isLoaded = false;
     this.state = {
       data: {}
     };
@@ -35,17 +35,6 @@ class Department extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // only rerender component when state has changed
-    // this happens only when data is refetched
-    if (this.isLoaded) {
-      this.isLoaded = false;
-      return true;
-    }
-
-    return false;
-  }
-
   fetchData(id) {
     axios
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
@@ -55,11 +44,16 @@ class Department extends Component {
         }
       })
       .then(res => {
-        const data = get(res.data.data.allDepartments, 'edges.0.node', {});
-        this.isLoaded = true;
+        const data = this.cleanData(res);
         this.setState({ data: data });
       })
       .catch(err => console.log(err))
+  }
+
+  cleanData(res) {
+    const data = get(res.data, 'data.allDepartments.edges.0.node', {});
+    data.contacts = cleanContacts(data.contacts);
+    return data;
   }
 
   render() {
@@ -68,7 +62,7 @@ class Department extends Component {
 
     const title = get(data, "name", null);
     const body = get(data, "mission", null);
-    const contacts = get(data, "contacts.edges", []);
+    const contacts = get(data, "contacts", null);
     const relatedlinks = get(jsonFileData, "projectsRelated", []);
     const services311 = get(jsonFileData, "services311", []);
 

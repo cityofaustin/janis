@@ -47,7 +47,7 @@ class RelatedLinks extends Component {
           { sectionLink && (
               <Link
                 className="coa-section__link"
-                to={getPathWithLangCode(sectionLink)}
+                to={sectionLink.url}
               >{sectionLink.text}</Link>
             )
           }

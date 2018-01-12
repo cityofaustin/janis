@@ -6,14 +6,6 @@ import Hours from 'js/modules/Hours';
 
 class Contact extends Component {
 
-  cleanContact(contact) {
-    let cleaned = Object.assign(contact.contact);
-    if(cleaned.hours) {
-      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => hours);
-    }
-    return cleaned;
-  }
-
   render() {
 
     const { contacts } = this.props;
@@ -27,14 +19,13 @@ class Contact extends Component {
           <SectionTitle title="Contact" noBorder={true} />
 
           {
-            contacts.map(({ node: contact }, index) => {
+            contacts.map((contact, index) => {
 
-              const formattedContact = this.cleanContact(contact);
-              const name = get(formattedContact, "name", null);
-              const phone = get(formattedContact, "phone", null);
-              const email = get(formattedContact, "email", null);
-              const location = get(formattedContact, "location", null);
-              const hours = get(formattedContact, "hours", null);
+              const name = get(contact, "name", null);
+              const phone = get(contact, "phone", null);
+              const email = get(contact, "email", null);
+              const location = get(contact, "location", null);
+              const hours = get(contact, "hours", null);
 
               return (
                 <div key={index} className="coa-section__subsection">

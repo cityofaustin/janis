@@ -4,6 +4,7 @@ import axios from 'axios';
 import { parse } from 'query-string';
 import { Link } from 'react-router-dom';
 import getPathWithLangCode from 'js/helpers/language';
+import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
 import ContentItems from 'js/page_sections/ContentItems';
 import Contact from 'js/page_sections/Contact';
@@ -19,7 +20,6 @@ class Service extends Component {
 
   constructor(props) {
     super(props);
-    this.isLoaded = false;
     this.state = {
       data: {}
     };
@@ -41,17 +41,6 @@ class Service extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // only rerender component when state has changed
-    // this happens only when data is refetched
-    if (this.isLoaded) {
-      this.isLoaded = false;
-      return true;
-    }
-
-    return false;
-  }
-
   fetchData(slug, lang = this.props.lang) {
     console.log('fetching data', ` for ${slug}`, ` in ${lang}`)
 
@@ -60,7 +49,6 @@ class Service extends Component {
       const query = parse(this.props.location.search);
       if (query.preview) {
         const data = JSON.parse(query.d);
-        this.isLoaded = true;
         this.setState({ data: data });
         return;
       }
@@ -77,23 +65,17 @@ class Service extends Component {
         }
       })
       .then(res => {
-        this.isLoaded = true;
-        this.setState({ data: res.data.data.servicePage });
+        const data = this.cleanData(res);
+        this.setState({ data: data });
       })
       .catch(err => console.log(err))
   }
 
-  cleanRelatedLinks(relatedlinks) {
-    if (!relatedlinks) return null;
-
-    return (
-      relatedlinks.map((link) => {
-        return {
-          url: `/service/${link.slug}`,
-          text:  link.title
-        }
-      })
-    )
+  cleanData(res) {
+    const data = get(res.data, 'data.servicePage', {});
+    data.contacts = cleanContacts(data.contacts);
+    data.related = cleanRelatedServiceLinks(data.related);
+    return data;
   }
 
   render() {
@@ -105,8 +87,8 @@ class Service extends Component {
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
-    const contacts = get(data, "contacts.edges", null);
-    const relatedlinks = this.cleanRelatedLinks(get(data, "related", null));
+    const contacts = get(data, "contacts", null);
+    const relatedlinks = get(data, "related", null);
     const services311 = get(jsonFileData, "services311", null);
 
     return (
