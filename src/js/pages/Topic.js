@@ -13,6 +13,7 @@ class Topic extends Component {
 
   constructor(props) {
     super(props);
+    this.isLoaded = false;
     this.state = {
       data: {}
     };
@@ -35,7 +36,10 @@ class Topic extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // only rerender component when state has changed
     // this happens only when data is refetched
-    if (nextState.data.id !== this.state.data.id) return true;
+    if (this.isLoaded) {
+      this.isLoaded = false;
+      return true;
+    }
 
     return false;
   }
@@ -50,6 +54,7 @@ class Topic extends Component {
       })
       .then(res => {
         const data = get(res.data.data.allTopics, 'edges.0.node', null);
+        this.isLoaded = true;
         this.setState({ data: data });
       })
       .catch(err => console.log(err))

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import ListLink from 'js/modules/ListLink';
+import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 class RelatedLinks extends Component {
 
@@ -43,7 +45,10 @@ class RelatedLinks extends Component {
             </div>
 
           { sectionLink && (
-              <a className="coa-section__link" href={sectionLink.url}>{sectionLink.text}</a>
+              <Link
+                className="coa-section__link"
+                to={getPathWithLangCode(sectionLink)}
+              >{sectionLink.text}</Link>
             )
           }
           </div>

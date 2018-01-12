@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
+import { Link } from 'react-router-dom';
+import getPathWithLangCode from 'js/helpers/language';
 
 import ContentItems from 'js/page_sections/ContentItems';
 import Contact from 'js/page_sections/Contact';
@@ -17,6 +19,7 @@ class Service extends Component {
 
   constructor(props) {
     super(props);
+    this.isLoaded = false;
     this.state = {
       data: {}
     };
@@ -27,37 +30,46 @@ class Service extends Component {
     this.fetchData(this.props.match.params.slug);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     // only refetch data when props have changed
     // this happens only when the route is updated
+    const isSlugChanged = nextProps.match.params.slug !== this.props.match.params.slug
+    const isLanguageChanged = nextProps.lang !== this.props.lang;
 
-    if (nextProps.match.params.slug !== this.props.match.params.slug) {
-      this.fetchData(nextProps.match.params.slug);
+    if (isSlugChanged || isLanguageChanged) {
+      this.fetchData(nextProps.match.params.slug, nextProps.lang);
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     // only rerender component when state has changed
     // this happens only when data is refetched
-
-    if (nextState.data.id !== this.state.data.id) return true;
+    if (this.isLoaded) {
+      this.isLoaded = false;
+      return true;
+    }
 
     return false;
   }
 
-  fetchData(slug) {
+  fetchData(slug, lang = this.props.lang) {
+    console.log('fetching data', ` for ${slug}`, ` in ${lang}`)
 
     if (process.env.NODE_ENV !== 'production') {
       // Allow querystrings to set data, which is used in joplin for livepreview
       const query = parse(this.props.location.search);
       if (query.preview) {
         const data = JSON.parse(query.d);
+        this.isLoaded = true;
         this.setState({ data: data });
         return;
       }
     }
 
     axios
+      .create({
+        headers: { 'Accept-Language': lang }
+      })
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
         query: servicePageQuery,
         variables: {
@@ -65,6 +77,7 @@ class Service extends Component {
         }
       })
       .then(res => {
+        this.isLoaded = true;
         this.setState({ data: res.data.data.servicePage });
       })
       .catch(err => console.log(err))
@@ -99,7 +112,6 @@ class Service extends Component {
     return (
 
       <div>
-
         <div className="wrapper">
           <div className="coa-main__hero coa-main__hero--small"></div>
         </div>
@@ -109,7 +121,12 @@ class Service extends Component {
             <div className="coa-main__left col-xs-12 col-lg-8">
 
               <div className="coa-section">
-                { topicId && ( <a className="coa-main__breadcrumb" href={`/topic/${topicId}`}>{topicName}</a> )}
+                { topicId && (
+                  <Link className="coa-main__breadcrumb"
+                    to={getPathWithLangCode(`/topic/${topicId}`)}>
+                    {topicName}
+                  </Link>
+                )}
                 <h2 className="coa-main__title">{title}</h2>
                 { steps && ( <div className="coa-main__steps"><HtmlFromAdmin content={steps} /></div> )}
               </div>

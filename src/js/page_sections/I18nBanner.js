@@ -1,131 +1,128 @@
 import React, { Component } from 'react';
-import locale from 'browser-locale';
+import { Link } from 'react-router-dom';
 
+import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
+import CaretUpSVG from 'js/svg/CaretUp';
 
-const languages = [
-  {
-    title: 'English',
-    abbr: 'en',
-  }, {
-    title: 'Español',
-    abbr: 'es',
-  }, {
-    title: 'Tiếng Việt',
-    abbr: 'vn',
-  }, {
-    title: '中文',
-    abbr: 'zh',
-  }, {
-    title: 'عربى',
-    abbr: 'ar',
-  }, {
-    title: '한국어',
-    abbr: 'ko',
-  }, {
-    title: 'اردو',
-    abbr: 'ur',
-  }, {
-    title: 'မြန်မာ',
-    abbr: 'my',
-  },
-]
 
 class I18nBanner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeLanguage: locale().substring(0,2) || 'en',
+      isOpen: false,
     };
-    this.displayedLanguageAmount = 4;
-    this.visibleLanguageOptions = languages.slice(0, this.displayedLanguageAmount);
-    this.secondaryLanguageOptions = languages.slice(this.displayedLanguageAmount, languages.length);
   }
 
-  getLanguageMenuClassName = (language) => {
-    const classNameBase = `coa-I18nBanner__language`;
-    return language.abbr === this.state.activeLanguage
-             ? `${classNameBase}--active`
-             : ''
+  getBannerClassName = () => {
+    const baseClass = 'coa-I18nBanner';
+    return `${baseClass} ${this.state.isOpen ? `${baseClass}--open` : ''}`;
   }
 
-  getSecondaryLanguageMenuClassName = () => {
-    const base = `coa-I18nBanner__other-language-options`;
-    return this.state.isOpen ? `${base}--open` : `${base}--closed`;
+  getPathname = () => {
+    let pathArray = this.props.location.pathname.split('/').filter(n => n);
+    if (SUPPORTED_LANG_CODES.includes(pathArray[0])){
+      pathArray.splice(0, 1)
+    }
+    return pathArray.join('/');
+  }
+
+  getLanguageItemClassName = (language) => {
+    const blockElementClassname = `coa-I18nBanner__language-item`;
+    let classNames = blockElementClassname;
+
+    if (language.code === this.props.activeLanguage) {
+      classNames = classNames + ` ${blockElementClassname}--active`;
+    }
+
+    return classNames;
+  }
+
+  getMenuClassName = () => {
+    const base = `coa-I18nBanner__dropdown-menu`;
+
+    return this.state.isOpen ? `${base} ${base}--open` : `${base} ${base}--closed`;
   }
 
   handleSetLanguage = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    const languageAbbr = e.target.lang;
-    console.log(languageAbbr)
-    this.setState({
-      activeLanguage: languageAbbr,
-      isOpen: false,
-    })
+    if (e.target.lang) {
+      this.props.handleManualLanguageUpdate(e.target.lang);
+      this.setState({
+        isOpen: false,
+      });
+    }
   }
 
   handleExpandMenu = () => {
     this.setState({
       isOpen: !this.state.isOpen
-    })
+    });
+  }
+
+  getActiveLanguageTitle = () => {
+    const activeLanguage = SUPPORTED_LANGUAGES.find((lang) => {
+      return lang.code === this.props.activeLanguage;
+    });
+    return activeLanguage.title;
+  }
+
+  handleCancel = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   render() {
+    const languageTitle = this.getActiveLanguageTitle();
+
     return (
-      <div className="coa-I18nBanner">
+      <div className={this.getBannerClassName()}>
         <div className="wrapper">
           <div className="row">
-            <div className="col-md-4 col-xs">
-              <div className="coa-I18nBanner__prompt">
-                Choose your preferred language
-              </div>
-            </div>
-            <div className="col-md-8 col-xs-12">
-              <ul className="coa-I18nBanner__language-list">
-                { this.visibleLanguageOptions.map((language, i) => {
-                    return (
-                      <li className={`coa-I18nBanner__language ${this.getLanguageMenuClassName(language)}`}
-                        onClick={this.handleSetLanguage}
-                        key={i}
-                      >
-                        <span className="hidden--sm visible--md"
-                          lang={language.abbr}
-                        >
-                          {language.title}
-                        </span>
-                        <span className="hidden--md visible--sm"
-                          lang={language.abbr}
-                        >
-                          {language.abbr.toUpperCase()}
-                        </span>
-                      </li>
-                    )
-                })}
-                { this.secondaryLanguageOptions.length > 0 &&
-                  <li className="coa-I18nBanner__language coa-I18nBanner__language--other"
-                    onClick={this.handleExpandMenu}
-                  >
-                    <span className="hidden--sm">Other Language </span>
+            <div className="col-md-12 col-xs-12">
+              <div className="coa-I18nBanner__choose-language"
+                onClick={this.handleExpandMenu}
+              >
+                <span>Choose Language
+                  <span className="link coa-I18nBanner__choose-language-link">
+                    {languageTitle}
+                  </span>
+                </span>
+                {
+                  this.state.isOpen ?
+                    <CaretUpSVG size="20"/> :
                     <CaretDownSVG size="20"/>
-                    <ul className={this.getSecondaryLanguageMenuClassName()}>
-                      { this.secondaryLanguageOptions.map((language, i) => {
-                          return (
-                            <li onClick={this.handleSetLanguage}
-                              className={this.getLanguageMenuClassName(language)}
-                              key={i}
-                            >
-                              <span lang={language.abbr}>
-                                {language.title}
-                              </span>
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
-                  </li>
                 }
-              </ul>
+                <div className={this.getMenuClassName()}>
+                  <div className="wrapper">
+                    <h4 className="coa-I18nBanner__menu-header">
+                      Translated by City of Austin
+                    </h4>
+                    <ul className="coa-I18nBanner__language-list">
+                      { SUPPORTED_LANGUAGES.map((language, i) => {
+                        return (
+                          <li onClick={this.handleSetLanguage}
+                            className={this.getLanguageItemClassName(language)}
+                            key={i}
+                          >
+                            <Link to={`/${language.code}/${this.getPathname()}`}
+                              lang={language.code}
+                            >
+                              {language.title}
+                            </Link>
+                          </li>
+                        )
+                      })
+                    }
+                  </ul>
+                </div>
+                <p className="link coa-I18nBanner__cancel"
+                  onClick={this.handleCancel}
+                >
+                  Cancel
+                </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
