@@ -18,10 +18,73 @@ class Hours extends Component {
     console.log(this.state.days);
   }
 
+  createDay(dayOfWeek, startTime, endTime) {
+    return {
+      'dayOfWeek': dayOfWeek,
+      'startTime': startTime,
+      'endTime': endTime
+    }
+  }
+
   sortDays(days) {
-    // TODO: method that returns given list of days sorted (ie. M, T, W, TH, F from F, W, TH, M, T)
-    // MAYBE: adds missing days
-    return days
+    // returns a complete sorted list of days in the week, with non-given days created as CLOSED
+    let newDays = new Array(7);
+    for (let i = 0; i < days.length; i++) {
+      switch (days[i].dayOfWeek) {
+        case 'SUNDAY':
+          newDays[0] = days[i];
+          break;
+        case 'MONDAY':
+          newDays[1] = days[i];
+          break;
+        case 'TUESDAY':
+          newDays[2] = days[i];
+          break;
+        case 'WEDNESDAY':
+          newDays[3] = days[i];
+          break;
+        case 'THURSDAY':
+          newDays[4] = days[i];
+          break;
+        case 'FRIDAY':
+          newDays[5] = days[i];
+          break;
+        case 'SATURDAY':
+          newDays[6] = days[i];
+          break;
+        default:
+          break;
+      }
+    }
+    for (let i = 0; i < newDays.length; i++) {
+      const CLOSED = 'CLOSED';
+      if (!newDays[i]) {
+        switch (i) {
+          case 0:
+            newDays[0] = this.createDay('SUNDAY', CLOSED, CLOSED);
+            break;
+          case 1:
+            newDays[1] = this.createDay('MONDAY', CLOSED, CLOSED);
+            break;
+          case 2:
+            newDays[2] = this.createDay('TUESDAY', CLOSED, CLOSED);
+            break;
+          case 3:
+            newDays[3] = this.createDay('WEDNESDAY', CLOSED, CLOSED);
+            break;
+          case 4:
+            newDays[4] = this.createDay('THURSDAY', CLOSED, CLOSED);
+            break;
+          case 5:
+            newDays[5] = this.createDay('FRIDAY', CLOSED, CLOSED);
+            break;
+          case 6:
+            newDays[6] = this.createDay('SATURDAY', CLOSED, CLOSED);
+            break;
+        }
+      }
+    }
+    return newDays
   }
 
   markTodayClasses(day, compare) {
@@ -67,10 +130,20 @@ class Hours extends Component {
 
 class IndividualDay extends Component {
     render() {
+      let startTime = this.props.day.startTime;
+      let endTime = this.props.day.endTime;
+
+      if (!typeof startTime === 'string') {
+        startTime = moment(this.props.day.startTime, "HH:mm:ss").format('h:mm A');
+      }
+
+      if (!typeof endTime === 'string') {
+        endTime = moment(this.props.day.endTime, "HH:mm:ss").format('h:mm A');
+      }
       return (
         <tr key={this.props.key} className={this.props.day.classes}>
           <th scope="row">{this.props.day.dayOfWeek}</th>
-          <td>{moment(this.props.day.startTime, "HH:mm:ss").format('h:mm A')} - {moment(this.props.day.endTime, "HH:mm:ss").format('h:mm A')}</td>
+          <td>{startTime} - {endTime}</td>
         </tr>
       )
     }
