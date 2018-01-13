@@ -9,15 +9,24 @@ class Hours extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      days: this.markToday(this.sortDays(this.props.hours), moment()),
+      hours: this.markToday(this.sortDays(this.props.hours), moment()),
       today: moment(),
-      showHide: 'Show All',
+      showHide: 'Show All Hours',
     }
-    console.log('\n\n\n');
-    console.log(this.state.days);
+  }
+
+  componentWillReceiveProps(newProps) {
+    // State must be updated each time component renders in order to update to
+    //    correct hours while maintaining hide/display method capability
+    this.setState({
+      hours: this.markToday(this.sortDays(newProps.hours), moment()),
+      today: moment(),
+      showHide: 'Show All Hours',
+    });
   }
 
   createDay(dayOfWeek, startTime, endTime) {
+    // Used for 'empty' days | empty dates from Wagtail
     return {
       'dayOfWeek': dayOfWeek,
       'startTime': startTime,
@@ -28,6 +37,8 @@ class Hours extends Component {
   sortDays(days) {
     // returns a complete sorted list of days in the week, with non-given days created as CLOSED
     let newDays = new Array(7);
+
+    // this loop simply sorts the days
     for (let i = 0; i < days.length; i++) {
       switch (days[i].dayOfWeek) {
         case 'SUNDAY':
@@ -55,6 +66,9 @@ class Hours extends Component {
           break;
       }
     }
+
+    // Creates a complete list of days. If a day isn't included in given 'days'
+    //  list, this loop will call a method to create a 'closed' day
     for (let i = 0; i < newDays.length; i++) {
       const CLOSED = 'CLOSED';
       if (!newDays[i]) {
@@ -83,6 +97,7 @@ class Hours extends Component {
         }
       }
     }
+
     return newDays
   }
 
@@ -104,18 +119,19 @@ class Hours extends Component {
   }
 
   handleClick(hours) {
+    // handles click for show/display button
     let newHours;
     let showHide;
-    if (this.state.showHide === 'Show All') {
+    if (this.state.showHide === 'Show All Hours') {
       newHours = this.displayAllDays(hours);
-      showHide = 'Hide Others';
+      showHide = 'Show Only Today';
     } else {
       newHours = this.markToday(hours, moment());
-      showHide = 'Show All';
+      showHide = 'Show All Hours';
     }
 
     this.setState({
-      days: newHours,
+      hours: newHours,
       today: this.state.today,
       showHide: showHide,
     });
@@ -131,14 +147,10 @@ class Hours extends Component {
     return newHours;
   }
 
-  hideOtherDays(hours) {
-    let newDays = hours;
-  }
-
   render() {
-    // const { hours } = this.props;
-    const hours = this.state.days.slice();
-    let showHide = this.state.showHide + ' Hours';
+    const hours = this.state.hours.slice();
+    let showHide = this.state.showHide;
+
     return (hours) && (
       <div className="coa-section__map">
         <h5>Hours</h5>
