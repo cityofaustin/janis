@@ -4,13 +4,14 @@ import moment from 'moment';
 
 class Hours extends Component {
   // TODO:
-  //  - Hours don't change from page to page... Should update when given new contact information.
+
 
   constructor(props) {
     super(props);
+    let today = moment()
     this.state = {
-      hours: this.markToday(this.sortDays(this.props.hours), moment()),
-      today: moment(),
+      hours: this.markToday(this.sortDays(this.props.hours, today), today),
+      today: today,
       showHide: 'Show All Hours',
     }
   }
@@ -18,15 +19,45 @@ class Hours extends Component {
   componentWillReceiveProps(newProps) {
     // State must be updated each time component renders in order to update to
     //    correct hours while maintaining hide/display method capability
+    let today = moment();
     this.setState({
-      hours: this.markToday(this.sortDays(newProps.hours), moment()),
-      today: moment(),
+      hours: this.markToday(this.sortDays(newProps.hours, today), today),
+      today: today,
       showHide: 'Show All Hours',
     });
   }
 
   createDay(dayOfWeek, startTime, endTime) {
     // Used for 'empty' days | empty dates from Wagtail
+    // dayOfWeek can be a string containing the name of the day or an int
+    //  representing the day's index in the week
+    if (typeof dayOfWeek == 'number') {
+      switch (dayOfWeek) {
+        case 0:
+          dayOfWeek = 'Sunday';
+          break;
+        case 1:
+          dayOfWeek = 'Monday';
+          break;
+        case 2:
+          dayOfWeek = 'Tuesday';
+          break;
+        case 3:
+          dayOfWeek = 'Wednesday';
+          break;
+        case 4:
+          dayOfWeek = 'Thursday';
+          break;
+        case 5:
+          dayOfWeek = 'Friday';
+          break;
+        case 6:
+          dayOfWeek = 'Saturday';
+          break;
+        default:
+          return;
+      }
+    }
     return {
       'dayOfWeek': dayOfWeek,
       'startTime': startTime,
@@ -34,71 +65,68 @@ class Hours extends Component {
     }
   }
 
-  sortDays(days) {
+  titleCaseWord(word) {
+    // title cases (first char captial, rest lower) given word
+    word = word.toLowerCase();
+    return word.replace(word[0], word[0].toUpperCase());
+  }
+
+  dayNumber(day) {
+    // takes in day and returns a number denoting its position in the week
+    day = day.toLowerCase();
+    switch(day) {
+      case "sunday":
+        return 0;
+      case "monday":
+        return 1;
+      case "tuesday":
+        return 2;
+      case "wednesday":
+        return 3;
+      case "thursday":
+        return 4;
+      case "friday":
+        return 5;
+      case "saturday":
+        return 6;
+    }
+  }
+
+
+
+  sortDays(days, today) {
     // returns a complete sorted list of days in the week, with non-given days created as CLOSED
-    let newDays = new Array(7);
+    // I can't figure out a better way to do this sorting than with several arrays.
+    // TODO: Refactor to be more efficient
 
-    // this loop simply sorts the days
-    for (let i = 0; i < days.length; i++) {
-      switch (days[i].dayOfWeek) {
-        case 'SUNDAY':
-          newDays[0] = days[i];
-          break;
-        case 'MONDAY':
-          newDays[1] = days[i];
-          break;
-        case 'TUESDAY':
-          newDays[2] = days[i];
-          break;
-        case 'WEDNESDAY':
-          newDays[3] = days[i];
-          break;
-        case 'THURSDAY':
-          newDays[4] = days[i];
-          break;
-        case 'FRIDAY':
-          newDays[5] = days[i];
-          break;
-        case 'SATURDAY':
-          newDays[6] = days[i];
-          break;
-        default:
-          break;
+    let offset = this.dayNumber(today.format('dddd')); // Offset to put today at first array position
+
+    // Creates a new array representing the entire week; populates correct
+    //    index with relevant day
+    let newDays = ['','','','','','',''];
+    days.map((day) => {
+      day.dayOfWeek = this.titleCaseWord(day.dayOfWeek);
+      newDays[this.dayNumber(day.dayOfWeek)] = day;
+    });
+
+    // Adds missing days to array
+    newDays.map((day, index) => {
+      if (!day) {
+        newDays[index] = this.createDay(index, "CLOSED", "CLOSED");
       }
-    }
+    });
 
-    // Creates a complete list of days. If a day isn't included in given 'days'
-    //  list, this loop will call a method to create a 'closed' day
-    for (let i = 0; i < newDays.length; i++) {
-      const CLOSED = 'CLOSED';
-      if (!newDays[i]) {
-        switch (i) {
-          case 0:
-            newDays[0] = this.createDay('SUNDAY', CLOSED, CLOSED);
-            break;
-          case 1:
-            newDays[1] = this.createDay('MONDAY', CLOSED, CLOSED);
-            break;
-          case 2:
-            newDays[2] = this.createDay('TUESDAY', CLOSED, CLOSED);
-            break;
-          case 3:
-            newDays[3] = this.createDay('WEDNESDAY', CLOSED, CLOSED);
-            break;
-          case 4:
-            newDays[4] = this.createDay('THURSDAY', CLOSED, CLOSED);
-            break;
-          case 5:
-            newDays[5] = this.createDay('FRIDAY', CLOSED, CLOSED);
-            break;
-          case 6:
-            newDays[6] = this.createDay('SATURDAY', CLOSED, CLOSED);
-            break;
-        }
+    // This bit actually creates the returned list with today as first elem
+    let returnDays = new Array(7);
+    newDays.map((day) => {
+      let dayNumber = this.dayNumber(day.dayOfWeek);
+      if (dayNumber < offset) {
+        returnDays[dayNumber + 7 - offset] = day;
+      } else {
+        returnDays[dayNumber - offset] = day;
       }
-    }
-
-    return newDays
+    });
+    return returnDays;
   }
 
   markTodayClasses(day, compare) {
