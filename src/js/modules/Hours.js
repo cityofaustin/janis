@@ -4,9 +4,7 @@ import moment from 'moment';
 
 class Hours extends Component {
   // TODO:
-  //  - create all seven days (do in WagTail?)
-  //  - create display all method
-  //  - create hide all but today method (same method as above?)
+  //  - Hours don't change from page to page... Should update when given new contact information.
 
   constructor(props) {
     super(props);
@@ -153,9 +151,9 @@ class Hours extends Component {
           </thead>
           <tbody>
             { hours.map((day, index) => <IndividualDay day={day} key={index} />)}
-            <tr><button onClick={() => this.handleClick(hours)}>{showHide}</button></tr>
           </tbody>
         </table>
+        <button onClick={() => this.handleClick(hours)}>{showHide}</button>
       </div>
     );
 
