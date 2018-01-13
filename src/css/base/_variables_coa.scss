@@ -18,6 +18,8 @@ $coa-fullwidth-margin: 2rem;
 $coa-container-maxwidth: 1200px;
 $coa-textwrap-width: 545px;
 
+$coa-font-semibold: 600;
+
 @mixin box-verticalcenter($height: auto) {
   align-items: center;
   display: flex;
