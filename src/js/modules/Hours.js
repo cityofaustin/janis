@@ -11,8 +11,9 @@ class Hours extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      days: this.sortDays(this.props.hours),
+      days: this.markToday(this.sortDays(this.props.hours), moment()),
       today: moment(),
+      showHide: 'Show All',
     }
     console.log('\n\n\n');
     console.log(this.state.days);
@@ -88,9 +89,9 @@ class Hours extends Component {
   }
 
   markTodayClasses(day, compare) {
-    // Returns hidden classes for rows that aren't today | returns empty string for today
-    let today = moment();
-    if (day.dayOfWeek.toLowerCase() == today.format('dddd').toLowerCase())
+    // day and compare are moment() objects; displayAll is Boolean
+    // Returns hidden classes for rows that aren't today if displayAll == false | returns empty string for today
+    if (day.dayOfWeek.toLowerCase() == compare.format('dddd').toLowerCase())
       return "coa-Hours__today";
     else
       return "hidden--sm hidden--md";
@@ -104,10 +105,42 @@ class Hours extends Component {
     return days;
   }
 
+  handleClick(hours) {
+    let newHours;
+    let showHide;
+    if (this.state.showHide === 'Show All') {
+      newHours = this.displayAllDays(hours);
+      showHide = 'Hide Others';
+    } else {
+      newHours = this.markToday(hours, moment());
+      showHide = 'Show All';
+    }
+
+    this.setState({
+      days: newHours,
+      today: this.state.today,
+      showHide: showHide,
+    });
+  }
+
+  displayAllDays(hours) {
+    // strips all hidden tags from all days
+    let newHours = hours;
+    for (let i = 0; i < newHours.length; i++) {
+      newHours[i].classes = newHours[i].classes.replace('hidden--sm', '');
+      newHours[i].classes = newHours[i].classes.replace('hidden--md', '');
+    }
+    return newHours;
+  }
+
+  hideOtherDays(hours) {
+    let newDays = hours;
+  }
+
   render() {
     // const { hours } = this.props;
-    const hours = this.markToday(this.state.days.slice(), this.state.today);
-
+    const hours = this.state.days.slice();
+    let showHide = this.state.showHide + ' Hours';
     return (hours) && (
       <div className="coa-section__map">
         <h5>Hours</h5>
@@ -120,6 +153,7 @@ class Hours extends Component {
           </thead>
           <tbody>
             { hours.map((day, index) => <IndividualDay day={day} key={index} />)}
+            <tr><button onClick={() => this.handleClick(hours)}>{showHide}</button></tr>
           </tbody>
         </table>
       </div>
