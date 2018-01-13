@@ -6,7 +6,6 @@ class Hours extends Component {
   // TODO:
   //  - Format in 12-hour time (make 12/24 a user option?)
 
-
   constructor(props) {
     super(props);
     let today = moment()
@@ -227,17 +226,3 @@ class IndividualDay extends Component {
 
 
 export default Hours;
-
-
-//===========
-// ORIGINAL hours mapping
-// {
-//
-//   hours.map((hour, index) =>
-//     // className = check to see if date is today, insert returned classes
-//     <tr key={index} className={this.markTodayClasses(hour, this.state.today)}>
-//       <th scope="row">{hour.dayOfWeek}</th>
-//       <td>{moment(hour.startTime, "HH:mm:ss").format('h:mm A')} - {moment(hour.endTime, "HH:mm:ss").format('h:mm A')}</td>
-//     </tr>
-//   )
-// }
