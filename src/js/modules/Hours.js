@@ -4,6 +4,7 @@ import moment from 'moment';
 
 class Hours extends Component {
   // TODO:
+  //  - Format in 12-hour time (make 12/24 a user option?)
 
 
   constructor(props) {
@@ -168,11 +169,14 @@ class Hours extends Component {
   displayAllDays(hours) {
     // strips all hidden tags from all days
     let newHours = hours;
-    for (let i = 0; i < newHours.length; i++) {
-      newHours[i].classes = newHours[i].classes.replace('hidden--sm', '');
-      newHours[i].classes = newHours[i].classes.replace('hidden--md', '');
-    }
-    return newHours;
+    hours.map((hour) => {
+      if (hour.dayOfWeek.toLowerCase() == this.state.today.format('dddd').toLowerCase()){
+        hour.classes = "coa-Hours__today-bolded";
+      }
+      hour.classes = hour.classes.replace('hidden--sm', '');
+      hour.classes = hour.classes.replace('hidden--md', '');
+    })
+    return hours;
   }
 
   render() {
