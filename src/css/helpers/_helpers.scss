@@ -3,8 +3,8 @@
 }
 
 .hidden--sm {
-// --> display none for small width screens and higher
-  display: none;
+// --> display none for small width screens and higher | !important must be included due to display conflicts lower in css chain
+  display: none !important;
   @include media($medium-screen) {
     display: inline;
   }
