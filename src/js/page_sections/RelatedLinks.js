@@ -8,37 +8,55 @@ class RelatedLinks extends Component {
 
   render() {
 
-    const { relatedlinks, topicId, topicName } = this.props;
+    const { relatedlinks, sectionStyle, sectionTitle, sectionText, sectionLink } = this.props;
+    let JSX;
 
-    return (relatedlinks) && (
-
-      <div className="coa-section">
-        <div className="wrapper">
-          <SectionTitle title="Check out related city services" noBorder={true} />
-
-          <div className="row">
+    if (!relatedlinks || !relatedlinks.length) {
+      JSX = null;
+    } else {
+      JSX = (
+        <div className={`coa-section ${sectionStyle === 'primary' ? '' : 'coa-section--grey' }`}>
+          <div className="wrapper">
           {
-            relatedlinks.map((service) =>
-              <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
-              <ListLink
-                id={service.id}
-                url={`/service/${service.slug}`}
-                text={service.title}
-                isBoxType="true"
+            sectionTitle && (
+              <SectionTitle
+                title={sectionTitle}
+                noBorder={sectionStyle === 'primary' ? true : false}
               />
-              </div>
+            )
+          }
+          {
+            sectionText && (
+              <p>{sectionText}</p>
+            )
+          }
+            <div className="row">
+            {
+              relatedlinks.map((link, index) =>
+                <div key={index} className="col-xs-12 col-md-6 col-lg-4">
+                <ListLink
+                  url={link.url}
+                  text={link.text}
+                  linkStyle={sectionStyle === 'primary' ? 'boxprimary' : 'box'}
+                />
+                </div>
+              )
+            }
+            </div>
+
+          { sectionLink && (
+              <Link
+                className="coa-section__link"
+                to={sectionLink.url}
+              >{sectionLink.text}</Link>
             )
           }
           </div>
-
-          <Link className="coa-section__link"
-            to={getPathWithLangCode(`/topic/${topicId}`)}
-          >
-            See all services under {topicName}
-          </Link>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return JSX;
   }
 }
 

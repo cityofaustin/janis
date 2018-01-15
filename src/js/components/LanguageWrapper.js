@@ -16,6 +16,7 @@ import Search from "js/pages/Search"
 import Services from "js/pages/Services"
 import Service from "js/pages/Service"
 import Topic from "js/pages/Topic"
+import Department from "js/pages/Department"
 
 import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
 
@@ -78,6 +79,7 @@ class LanguageWrapper extends Component {
                 <Route exact path={`/:lang?`} component={Home} {...this.props} />
                 <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
                 <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
+                <Route exact path={`/:lang?/department/:id`} component={Department} {...this.props} />
                 <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
                 <Route path={`/:lang?/service/:slug`} render={(props) => <Service {...props} lang={this.state.lang}/>} />
               </Switch>

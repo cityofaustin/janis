@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
-import { cleanServiceLinks } from 'js/helpers/cleanData';
+import { cleanContacts } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
+import SectionTitle from 'js/modules/SectionTitle';
+import Contact from 'js/page_sections/Contact';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
-import topicPageQuery from 'js/queries/topicPageQuery';
+import departmentPageQuery from 'js/queries/departmentPageQuery';
 
-class Topic extends Component {
+class Department extends Component {
 
   constructor(props) {
     super(props);
@@ -36,7 +38,7 @@ class Topic extends Component {
   fetchData(id) {
     axios
       .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: topicPageQuery,
+        query: departmentPageQuery,
         variables: {
           id: id,
         }
@@ -49,35 +51,53 @@ class Topic extends Component {
   }
 
   cleanData(res) {
-    const data = get(res.data, 'data.allTopics.edges[0].node', {});
-    data.services = cleanServiceLinks(data.services);
+    const data = get(res.data, 'data.allDepartments.edges.0.node', {});
+    data.contacts = cleanContacts(data.contacts);
     return data;
   }
 
   render() {
 
     const { data } = this.state;
-    const title = get(data, "text", null);
-    const body = get(data, "description", null);
-    const relatedlinks = get(data, "services", null);
-    const services311 = get(jsonFileData, "services311", null);
+
+    const title = get(data, "name", null);
+    const body = get(data, "mission", null);
+    const contacts = get(data, "contacts", null);
+    const relatedlinks = get(jsonFileData, "projectsRelated", []);
+    const services311 = get(jsonFileData, "services311", []);
 
     return (
       <div>
 
         <div className="wrapper">
-          <div className="coa-main__hero">
-            <div className="coa-main__hero__callout">
-              <h2>{title}</h2>
+          <div className="row">
+            <div className="coa-main__left col-xs-12 col-lg-8">
+
+              <div className="coa-section">
+                <SectionTitle title={title} noBorder={true} />
+              </div>
+
+              <div className="coa-section">
+                <SectionTitle title="Our Mission" noBorder={true} />
+                <p>{body}</p>
+              </div>
+
+            </div>
+
+            <div className="coa-main__right col-xs-12 col-lg-4">
+
+              <Contact contacts={contacts} />
+
             </div>
           </div>
-
-          <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
         <RelatedLinks
           relatedlinks={relatedlinks}
-          sectionStyle="primary"
+          sectionType="secondary"
+          sectionLink={{url: "#", text: "Track all Resource Recovery projects"}}
+          sectionTitle="Track Resource Recovery Projects"
+          sectionText="Projects are short term, with a set budget, and defined goals. Projects can be specific to one department or a collaboration across multiple departments."
         />
 
         <div className="coa-section coa-section--lightgrey">
@@ -95,4 +115,4 @@ class Topic extends Component {
 
 }
 
-export default Topic;
+export default Department;
