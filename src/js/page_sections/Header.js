@@ -13,6 +13,9 @@ class Header extends Component {
   }
 
   toggleMenu = () => {
+    if (this.state.menuIsOpen) {
+      this.refs.menu.focus();
+    }
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
     })
@@ -25,7 +28,7 @@ class Header extends Component {
           <div className="row">
             <div className="col-xs-6 coa-Header__menu">
               <span onClick={this.toggleMenu} tabIndex="0"
-                className="coa-Header__menu-toggle"
+                className="coa-Header__menu-toggle" ref="menu"
               >
                 MENU
               </span>

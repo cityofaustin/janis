@@ -88,7 +88,7 @@ class Navmenu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="usa-sidenav-list">
-            <li>
+            <li onClick={this.props.toggleMenu}>
               <Link to={getPathWithLangCode("/")}
                 className={this.getMenuItemClassName('/')}
               >
@@ -102,7 +102,7 @@ class Navmenu extends Component {
             let { edges: serviceLinks = [] } = parentLink.services;
 
             return (
-              <li key={parentLink.id}>
+              <li key={parentLink.id} onClick={this.props.toggleMenu}>
                 <Link to={getPathWithLangCode(`/topic/${parentLink.id}`)}
                   className={this.getParentMenuItemClassName(parentLink)}
                 >
@@ -114,7 +114,7 @@ class Navmenu extends Component {
                   {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
-                        <li key={serviceLink.id}>
+                        <li key={serviceLink.id} onClick={this.props.toggleMenu}>
                           <Link to={getPathWithLangCode(`/service/${serviceLink.slug}`)}
                             className={this.getMenuItemClassName(`/service/${serviceLink.slug}`)}
                           >
@@ -132,7 +132,10 @@ class Navmenu extends Component {
         }
           </ul>
         </nav>
-        <div className={this.getOverlayClassName()}></div>
+        <div className={this.getOverlayClassName()}
+          onClick={this.props.toggleMenu}
+        >  
+        </div>
       </div>
     );
   }
