@@ -53,4 +53,12 @@
   ol > li {
     margin-bottom: $coa-space-level3;
   }
+  &::after{
+    content:"";
+    margin: $coa-space-level7 0;
+    max-width: $coa-textwrap-width;
+    height: 1px;
+    display: block;
+    background-color: $color-gray-light;
+  }
 }
