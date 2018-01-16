@@ -58,7 +58,6 @@ Resources:
 a11y Resources:
 - https://accessibility.18f.gov/
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
-- https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
 
 ---
 

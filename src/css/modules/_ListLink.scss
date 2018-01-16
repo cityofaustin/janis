@@ -12,15 +12,18 @@
   }
 }
 
-.coa-ListLink--boxprimary {
-  background-color: $color-primary;
+.coa-ListLink--box {
   border: none;
-  color: $color-white;
   font-size: $lead-font-size;
   margin-bottom: $coa-space-level2;
   height: 100px;
   padding: 0 $coa-space-level3;
+}
 
+.coa-ListLink--boxprimary {
+  @extend .coa-ListLink--box;
+  background-color: $color-primary;
+  color: $color-white;
 //TODO: define link state colors
   &:focus {
     color: $color-white;

@@ -6,21 +6,22 @@ class ContentItems extends Component {
   render() {
 
     const { contentItems } = this.props;
+    let JSX;
 
-    return (contentItems) && (
-
-      contentItems.map((content) => {
-
-        let JSX;
+    if (!contentItems || !contentItems.length) {
+      JSX = null;
+    } else {
+      JSX = contentItems.map((content) => {
+        let JSXmap;
         if (content.type === 'content') {
-          JSX = <div key={content.id}><HtmlFromAdmin content={content.value} isSection={true} /></div>;
+          JSXmap = <div key={content.id}><HtmlFromAdmin content={content.value} isSection={true} /></div>;
         }
 
         /* TODO: removed temporarily for user testing,
           uncomment as applications blocks are implemented.
 
         if (content.type === 'application_block') {
-          JSX = (
+          JSXmap = (
             <div key={content.id} className="coa-section">
               <h4>{content.value.description}</h4>
               INSERT {content.type} app HERE
@@ -29,9 +30,11 @@ class ContentItems extends Component {
           );
         }*/
 
-        return JSX;
-      })
-    );
+        return JSXmap;
+      });
+    }
+
+    return JSX;
   }
 }
 

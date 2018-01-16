@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
-import getPathWithLangCode from 'js/helpers/language';
+import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
+import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
-import ListLink from 'js/modules/ListLink';
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 
 class Services extends Component {
@@ -28,17 +28,27 @@ class Services extends Component {
         query: allServicePagesQuery,
       })
       .then(res => {
-        this.setState({ data: res.data.data.allServicePages })
+        const data = this.cleanData(res);
+        this.setState({ data: data });
       })
       .catch(err => console.log(err))
   }
 
+  cleanData(res) {
+    const data = get(res.data, 'data.allServicePages', {});
+    data.services = cleanServiceLinks(data);
+
+    return data;
+  }
+
   render() {
 
-    const title = get(jsonFileData, "servicepage.title", "");
-    const body = get(jsonFileData, "servicepage.body", "");
-    const services311 = get(jsonFileData, "services311", []);
-    const { edges: services = [] } = this.state.data
+    const { data } = this.state;
+
+    const title = get(jsonFileData, "servicespage.title", null);
+    const body = get(jsonFileData, "servicespage.body", null);
+    const services311 = get(jsonFileData, "services311", null);
+    const relatedlinks = get(data, 'services', null);
 
     return (
       <div>
@@ -53,24 +63,10 @@ class Services extends Component {
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
-        <div className="coa-section">
-          <div className="wrapper">
-            <div className="row">
-            {
-              services.map(({ node: service }) =>
-                <div key={service.id} className="col-xs-12 col-md-6 col-lg-4">
-                  <ListLink
-                    id={service.id}
-                    url={getPathWithLangCode(`/service/${service.slug}`)}
-                    text={service.title}
-                    isBoxType={true}
-                  />
-                </div>
-              )
-            }
-            </div>
-          </div>
-        </div>
+        <RelatedLinks
+          relatedlinks={relatedlinks}
+          sectionStyle="primary"
+        />
 
         <div className="coa-section coa-section--lightgrey">
           <div className="wrapper">

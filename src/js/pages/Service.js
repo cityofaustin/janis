@@ -4,6 +4,7 @@ import axios from 'axios';
 import { parse } from 'query-string';
 import { Link } from 'react-router-dom';
 import getPathWithLangCode from 'js/helpers/language';
+import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
 import ContentItems from 'js/page_sections/ContentItems';
 import Contact from 'js/page_sections/Contact';
@@ -64,19 +65,17 @@ class Service extends Component {
         }
       })
       .then(res => {
-        this.setState({ data: res.data.data.servicePage });
+        const data = this.cleanData(res);
+        this.setState({ data: data });
       })
       .catch(err => console.log(err))
   }
 
-  cleanContact(contact) {
-    let cleaned = Object.assign(contact);
-
-    // this check is ugly 😞
-    if (contact && contact.hours && contact.hours.edges) {
-      cleaned.hours = contact.hours.edges.map((d) => d.node);
-    }
-    return cleaned;
+  cleanData(res) {
+    const data = get(res.data, 'data.servicePage', {});
+    data.contacts = cleanContacts(data.contacts);
+    data.related = cleanRelatedServiceLinks(data.related);
+    return data;
   }
 
   render() {
@@ -88,7 +87,7 @@ class Service extends Component {
     const title = get(data, "title", null);
     const steps = get(data, "content", null);
     const contentItems = get(data, "extraContent", null);
-    const contacts = get(data, "contacts.edges", []).map((n) => this.cleanContact(n.node.contact));
+    const contacts = get(data, "contacts", null);
     const relatedlinks = get(data, "related", null);
     const services311 = get(jsonFileData, "services311", null);
 
@@ -126,7 +125,13 @@ class Service extends Component {
           </div>
         </div>
 
-        <RelatedLinks relatedlinks={relatedlinks} topicId={topicId} topicName={topicName} />
+        <RelatedLinks
+          relatedlinks={relatedlinks}
+          sectionLink={{url: `/topic/${topicId}`, text: `See all services under ${topicName}`}}
+          sectionStyle="primary"
+          sectionTitle="Check out related city services"
+          sectionText={null}
+        />
 
         <div className="coa-section coa-section--lightgrey">
           <div className="wrapper">
