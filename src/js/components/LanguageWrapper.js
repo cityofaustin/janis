@@ -77,7 +77,6 @@ class LanguageWrapper extends Component {
           <div>
             <Route path="/" render={props => (
               <section>
-                <Banner />
                 <I18nBanner activeLanguage={this.state.lang} {...props}
                   handleManualLanguageUpdate={this.handleManualLanguageUpdate}
                 />
