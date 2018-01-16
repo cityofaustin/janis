@@ -29,9 +29,20 @@ class LanguageWrapper extends Component {
     this.daysUntilCookieExpires = 10 * 365;
   }
 
+  parseBrowserLanguageCode = () => {
+    // Normally, we only want the two letter lowercased language abbreviation
+    // bc we aren't worried about locale (ex: en-US vs. en-UK) at this point,
+    // just language.
+    const twoLetterLangCode = locale().split('-')[0].toLowerCase();
+    // But we do want to support two types of Chinese (zh-tw & zh-cn)
+    const isChinese = twoLetterLangCode === 'zh';
+    return isChinese ? locale().toLowerCase() : twoLetterLangCode;
+  }
+
   setLanguage = () => {
-    const cookieLanguage = Cookies.get('lang')
-    let language = ''
+    const cookieLanguage = Cookies.get('lang');
+    const browserLocale = this.parseBrowserLanguageCode();
+    let language = '';
 
     const isLanguageCodeInPath = SUPPORTED_LANGUAGES
       .map(lang => lang.code)
@@ -42,7 +53,7 @@ class LanguageWrapper extends Component {
     } else if (cookieLanguage) {
       language = cookieLanguage
     } else {
-      language = locale() || 'en'
+      language = browserLocale || 'en'
     }
 
     Cookies.set('lang', language, { expires: this.daysUntilCookieExpires })
