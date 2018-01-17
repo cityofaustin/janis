@@ -36,9 +36,6 @@ class I18nBanner extends Component {
   handleSetLanguage = (e) => {
     if (e.target.lang) {
       this.props.handleManualLanguageUpdate(e.target.lang);
-      this.setState({
-        isOpen: false,
-      });
     }
   }
 
@@ -91,13 +88,12 @@ class I18nBanner extends Component {
                     <ul className="coa-I18nBanner__language-list">
                       { SUPPORTED_LANGUAGES.map((language, i) => {
                         return (
-                          <li onClick={this.handleSetLanguage}
-                            key={i}
-                          >
+                          <li key={i}>
                             <NavLink to={`/${language.code}/${this.getPathname()}`}
                               className="coa-I18nBanner__language-item"
                               activeClassName="coa-I18nBanner__language-item--active"
                               lang={language.code}
+                              onClick={this.handleSetLanguage}
                             >
                               {language.title}
                             </NavLink>

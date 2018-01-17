@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import getPathWithLangCode from 'js/helpers/language';
 import axios from 'axios';
-import { includes } from 'lodash';
+import getPathWithLangCode from 'js/helpers/language';
 import CloseSVG from 'js/svg/Close';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 
