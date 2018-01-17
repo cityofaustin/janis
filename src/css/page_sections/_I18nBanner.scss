@@ -49,25 +49,24 @@
 .coa-I18nBanner__language-list {
   list-style: none;
   padding-top: $coa-space-level2;
+
+  li {
+    margin: 0;
+  }
 }
 
 .coa-I18nBanner__language-item {
-  padding: 0 $coa-space-level2;
   cursor: pointer;
   width: 100%;
   padding: $coa-space-level1 $coa-space-level2;
-  margin-bottom: 0;
+  display: block;
+  text-decoration: none;
+  color: $color-black;
+  &:visited {
+    color: $color-black;
+  }
   &:hover {
     background-color: $color-gray-light;
-  }
-  a {
-    width: 100%;
-    display: block;
-    text-decoration: none;
-    color: $color-black;
-    &:visited {
-      color: $color-black;
-    }
   }
 }
 

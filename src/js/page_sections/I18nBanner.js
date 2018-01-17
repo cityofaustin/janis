@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
@@ -25,17 +25,6 @@ class I18nBanner extends Component {
       pathArray.splice(0, 1)
     }
     return pathArray.join('/');
-  }
-
-  getLanguageItemClassName = (language) => {
-    const blockElementClassname = `coa-I18nBanner__language-item`;
-    let classNames = blockElementClassname;
-
-    if (language.code === this.props.activeLanguage) {
-      classNames = classNames + ` ${blockElementClassname}--active`;
-    }
-
-    return classNames;
   }
 
   getMenuClassName = () => {
@@ -103,14 +92,15 @@ class I18nBanner extends Component {
                       { SUPPORTED_LANGUAGES.map((language, i) => {
                         return (
                           <li onClick={this.handleSetLanguage}
-                            className={this.getLanguageItemClassName(language)}
                             key={i}
                           >
-                            <Link to={`/${language.code}/${this.getPathname()}`}
+                            <NavLink to={`/${language.code}/${this.getPathname()}`}
+                              className="coa-I18nBanner__language-item"
+                              activeClassName="coa-I18nBanner__language-item--active"
                               lang={language.code}
                             >
                               {language.title}
-                            </Link>
+                            </NavLink>
                           </li>
                         )
                       })
