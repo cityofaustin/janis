@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import getPathWithLangCode from 'js/helpers/language';
 import axios from 'axios';
 import { includes } from 'lodash';
@@ -15,7 +15,7 @@ class Navmenu extends Component {
     };
   }
 
-  menuClassName = () => {
+  getMenuClassName = () => {
     const baseClassName = `coa-Navmenu`;
     return this.props.isOpen ? `${baseClassName} ${baseClassName}--open` : baseClassName;
   }
@@ -45,34 +45,12 @@ class Navmenu extends Component {
     }
   }
 
-  getCurrentPath = () => {
-    // this is dependent on react-router. We may want to use
-    // `window.location.href` instead.
-    return this.props.location.pathname;
-  }
-
   getOverlayClassName = () => {
     let className = `coa-Navmenu__overlay`;
     if (this.props.isOpen) {
       className = `${className} ${className}--open`;
     }
     return className;
-  }
-
-  getParentMenuItemClassName = (parentLink) => {
-    const currentPath = this.getCurrentPath();
-    const servicePaths = parentLink.services.edges
-      ? parentLink.services.edges.map(({ node:serviceLink }) => '/service/' + serviceLink.slug)
-      : [];
-
-    const isActive = includes(servicePaths, currentPath);
-
-    return isActive ? 'usa-current' : '';
-  }
-
-  getMenuItemClassName = (path) => {
-    const currentPath = this.getCurrentPath();
-    return currentPath === path ? 'usa-current' : '';
   }
 
   render() {
@@ -83,17 +61,18 @@ class Navmenu extends Component {
 
     return parentLinks.length && (
       <div className="usa-grid-full">
-        <nav className={this.menuClassName()}>
+        <nav className={this.getMenuClassName()}>
           <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
           <ul className="usa-sidenav-list">
             <li onClick={this.props.toggleMenu}>
-              <Link to={getPathWithLangCode("/")}
-                className={this.getMenuItemClassName('/')}
+              <NavLink
+                to={getPathWithLangCode("/")}
+                activeClassName="usa-current"
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
 
         {
@@ -103,11 +82,11 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <Link to={getPathWithLangCode(`/topic/${parentLink.id}`)}
-                  className={this.getParentMenuItemClassName(parentLink)}
+                <NavLink to={getPathWithLangCode(`/topic/${parentLink.id}`)}
+                  activeClassName="usa-current"
                 >
                   { parentLink.text }
-                </Link>
+                </NavLink>
 
                 { serviceLinks.length && (
                   <ul className="usa-sidenav-sub_list">
@@ -115,11 +94,11 @@ class Navmenu extends Component {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <Link to={getPathWithLangCode(`/service/${serviceLink.slug}`)}
-                            className={this.getMenuItemClassName(`/service/${serviceLink.slug}`)}
+                          <NavLink to={getPathWithLangCode(`/service/${serviceLink.slug}`)}
+                            activeClassName="usa-current"
                           >
                             {serviceLink.title}
-                          </Link>
+                          </NavLink>
                         </li>
                       );
                     })
@@ -134,7 +113,7 @@ class Navmenu extends Component {
         </nav>
         <div className={this.getOverlayClassName()}
           onClick={this.props.toggleMenu}
-        >  
+        >
         </div>
       </div>
     );
