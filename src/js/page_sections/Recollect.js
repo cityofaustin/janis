@@ -1,19 +1,28 @@
 import React, {Component} from 'react';
+import Script from 'react-load-script'
 
 class Recollect extends Component {
 
-  componentDidMount() {
+  handleScriptLoad() {
 
     let script = document.createElement('script');
-      script.setAttribute('type', 'text/javascript');
-      script.text = '_recollect_config = { area: "Austin", page: "tabbed_widget", name: "calendar", container: "#recollectTest" };';
-      this.el.appendChild(script);
+        script.setAttribute('type', 'text/javascript');
+        script.text = `
+          window.loader = window.loader || new Recollect.Widget.Loader({
+              area: "Austin",
+              page: "tabbed_widget",
+              name: "calendar",
+              container: "#rCw"
+            });
+          window.loader.load();`;
+        document.getElementById('rCw').appendChild(script);
+  }
 
-    let script2 = document.createElement('script');
-      script2.setAttribute('type', 'text/javascript');
-      script2.setAttribute('src', 'https://recollect.net/api/widget.js');
-      this.el.appendChild(script2);
-
+  componentWillMount() {
+    // TODO: temp fix as current implementation of recollect app is not SPA friendly
+    if(window.Recollect) {
+      window.location.reload();
+    }
   }
 
   shouldComponentUpdate() {
@@ -22,22 +31,15 @@ class Recollect extends Component {
 
   render() {
     return (
-      <div>
-        <div id="recollectTest" ref={el => this.el = el}>
-          Recollect Loading...
+        <div id="rCw" ref={el => this.el = el}>
           <img alt="Loading" src="https://recollect.a.ssl.fastly.net/0.11.1516038288/images/loading.gif"/>
+          <Script
+            url="https://recollect.net/api/widget.js"
+            onLoad={this.handleScriptLoad.bind(this)}
+          />
         </div>
-      </div>
     );
   }
 }
 
 export default Recollect;
-
-/*
-
-<script>_recollect_config = { area: "Austin", page: "tabbed_widget", name: "calendar" }
-</script>
-<script src="https://recollect.net/api/widget.js"></script>
-
-*/
