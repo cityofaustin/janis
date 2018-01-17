@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import GlobalSearch from 'js/modules/GlobalSearch';
 
-
-import Recollect from 'js/page_sections/Recollect';
-
 class Home extends Component {
 
   render() {
 		return (
 			<div>
-        <Recollect />
         <div className="coa-main__hero">
   		   	<div className="wrapper">
             <div className="coa-main__hero__callout">
