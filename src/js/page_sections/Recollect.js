@@ -3,15 +3,33 @@ import Script from 'react-load-script'
 
 class Recollect extends Component {
 
+  getRecollectWidgetName() {
+
+    let name;
+
+    switch(this.props.name) {
+      case 'Collection Schedule Lookup':
+        name = "calendar";
+        break;
+      case 'What do I do with...':
+      default:
+        name = "wizard";
+        break;
+    }
+
+    return name;
+  }
+
   handleScriptLoad() {
+
+    const name = this.getRecollectWidgetName();
 
     let script = document.createElement('script');
         script.setAttribute('type', 'text/javascript');
         script.text = `
           window.loader = window.loader || new Recollect.Widget.Loader({
               area: "Austin",
-              page: "tabbed_widget",
-              name: "calendar",
+              name: "${name}",
               container: "#rCw"
             });
           window.loader.load();`;
