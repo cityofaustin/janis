@@ -5,7 +5,6 @@ import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 
 // page_sections
-import Banner from "js/page_sections/Banner"
 import I18nBanner from "js/page_sections/I18nBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
@@ -78,7 +77,6 @@ class LanguageWrapper extends Component {
           <div>
             <Route path="/" render={props => (
               <section>
-                <Banner />
                 <I18nBanner activeLanguage={this.state.lang} {...props}
                   handleManualLanguageUpdate={this.handleManualLanguageUpdate}
                 />
