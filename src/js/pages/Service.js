@@ -95,9 +95,7 @@ class Service extends Component {
     return (
 
       <div> 
-        <div className="wrapper">
-          <Hero page={data.slug} />
-        </div>
+        <Hero page={data.slug} />
 
         <div className="wrapper">
           <div className="row">
