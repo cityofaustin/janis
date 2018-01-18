@@ -7,7 +7,7 @@ class Recollect extends Component {
 
     let name;
 
-    switch(this.props.name) {
+    switch(this.props.type) {
       case 'Collection Schedule Lookup':
         name = "calendar";
         break;
