@@ -1,0 +1,28 @@
+.coa-Hero {
+  @include box-verticalcenter(200px);
+  background-color: $color-gray-lighter;
+  margin-bottom: $coa-space-level4;
+  padding: $coa-space-level5;
+}
+
+.coa-Hero--small {
+  height: 80px;
+}
+.coa-Hero__callout {
+  h2 {
+    font-weight: $font-bold;
+    margin: 0;
+  }
+}
+.coa-Hero--image {
+  background-color: $color-gray-lighter;
+  background-position: center center;
+  background-size: cover;
+  height: 12rem;
+  @include media($coa-small-screen) {
+    height: 24rem;
+  }
+  @include media($medium-screen) {
+    height: 32rem;
+  }
+}

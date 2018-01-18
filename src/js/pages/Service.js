@@ -12,6 +12,7 @@ import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import Hero from 'js/modules/Hero';
 import servicePageQuery from 'js/queries/servicePageQuery';
 
 import jsonFileData from '__tmpdata/services';
@@ -93,9 +94,9 @@ class Service extends Component {
 
     return (
 
-      <div>
+      <div> 
         <div className="wrapper">
-          <div className="coa-main__hero coa-main__hero--small"></div>
+          <Hero page={data.slug} />
         </div>
 
         <div className="wrapper">

@@ -29,6 +29,7 @@
   }
 }
 
+// TODO REMOVE THESE HERO CLASSES
 .coa-main__hero {
   @include box-verticalcenter(200px);
   background-color: $color-gray-lighter;
@@ -44,6 +45,8 @@
     margin: 0;
   }
 }
+// END TODO
+
 
 .coa-main__body {
   margin: 0 $coa-space-level5;
