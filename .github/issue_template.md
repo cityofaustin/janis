@@ -4,9 +4,12 @@ Thanks for creating an issue! Fill out as much information as possible. Skip sec
 
 ## Do you want to report a bug or request a feature?
 
-## What is the current behavior?
+- [ ] Report a bug
+- [ ] Request a feature
 
-## What is the expected behavior?
+### What is the current behavior?
+
+### What is the expected behavior?
 
 ## Additional info for bugs
 
