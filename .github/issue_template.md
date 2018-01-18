@@ -1,12 +1,21 @@
-Thanks for creating an issue! Here are some helpful tips:
-1. Provide as much info as possible, such as screenshots, links, or [browser info](https://www.whatismybrowser.com/)
-2. Skip sections that don't make sense
-100. Remove these tips before submitting :joy_cat:
+<!--
+Thanks for creating an issue! Fill out as much information as possible. Skip sections that don't make sense.
+-->
 
-### What happened?
+## Do you want to report a bug or request a feature?
 
-### What should've happened?
+## What is the current behavior?
 
-### How can we replicate the behavior?
+## What is the expected behavior?
 
-### What's the value to residents?
+## Additional info for bugs
+
+#### How can we replicate the behavior?
+
+## Additional info for features
+
+#### What's the value to residents?
+
+<!--
+Provide as much info as possible, such as screenshots, links, or [browser info](https://www.whatismybrowser.com/). The issue will be fixed much faster if there are clear instructions for replicating the behavior.
+-->
