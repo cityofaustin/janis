@@ -16,14 +16,16 @@ class Hero extends Component {
           className="coa-Hero--image"
           style={HeroImageStyles}
           role="img"
-          aria-label={image && image.title}
+          aria-label={image.title}
         ></div>
       )
     } else if (callout) {
       return (
-        <div className={`coa-Hero coa-Hero__callout ${home ? 'coa-Hero__callout--home': ''}`}>
-          <h2>{callout}</h2>
-          {this.props.children}
+        <div className={`coa-Hero ${home ? 'coa-Hero__home': 'coa-Hero__callout'}`}>
+          <div className="wrapper">
+            <h2>{callout}</h2>
+            {this.props.children}
+          </div>
         </div>
       )
     } else return '';

@@ -66,8 +66,9 @@ class Topic extends Component {
     return (
       <div>
 
+        <Hero callout={title} />
+        
         <div className="wrapper">
-          <Hero callout={title} />
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
