@@ -95,7 +95,7 @@ class Service extends Component {
     return (
 
       <div> 
-        <Hero page={this.props.slug} image={this.state.data.image} />
+        <Hero image={this.state.data.image} />
 
         <div className="wrapper">
           <div className="row">

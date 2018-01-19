@@ -11,7 +11,12 @@ class Hero extends Component {
     }
 
     return (
-      <div className="coa-Hero--image" style={HeroImageStyles}></div>
+      <div
+        className="coa-Hero--image"
+        style={HeroImageStyles}
+        role="img"
+        aria-label={image && image.title}
+      ></div>
     );
   }
 
