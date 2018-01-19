@@ -17,4 +17,5 @@ docker run \
     --volume "$PWD/package.json:/app/package.json" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --env "REACT_APP_CMS_ENDPOINT=http://localhost:8000/api" \
+    --env "REACT_APP_CMS_ASSETS=http://localhost:8000/media" \
     "$TAG" "$@"

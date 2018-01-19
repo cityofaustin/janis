@@ -8,6 +8,7 @@ import jsonFileData from '__tmpdata/services';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
+import Hero from 'js/modules/Hero';
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 
 class Services extends Component {
@@ -54,12 +55,7 @@ class Services extends Component {
       <div>
 
         <div className="wrapper">
-          <div className="coa-main__hero">
-            <div className="coa-main__hero__callout">
-              <h2>{title}</h2>
-            </div>
-          </div>
-
+          <Hero callout={title} />
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 

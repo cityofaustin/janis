@@ -1,0 +1,34 @@
+.coa-Hero {
+  @include box-verticalcenter(200px);
+  background-color: $color-gray-lighter;
+  margin-bottom: $coa-space-level4;
+  padding: $coa-space-level5;
+}
+
+.coa-Hero--image {
+  background-color: $color-gray-lighter;
+  background-position: center center;
+  background-size: cover;
+  height: 17rem;
+  @include media($coa-small-screen) {
+    height: 24rem;
+  }
+  @include media($medium-screen) {
+    height: 32rem;
+  }
+}
+
+.coa-Hero__callout {
+  .wrapper {
+    width: 100%;
+  }
+  h2 {
+    font-weight: $font-bold;
+    margin: 0;
+  }
+}
+.coa-Hero__home {
+  flex-direction: column;
+  padding: 4rem;
+
+}
