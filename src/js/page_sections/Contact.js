@@ -57,7 +57,7 @@ class Contact extends Component {
                   )}
 
                   { location && (
-                    <StaticMap location={location} title={name}/>
+                    <StaticMap location={location} title={`Map to ${name}`}/>
                   )}
 
                   <Hours hours={hours} />

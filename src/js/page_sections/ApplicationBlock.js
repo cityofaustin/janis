@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import Recollect from 'js/modules/Recollect';
+import StaticMap from 'js/modules/StaticMap';
 
 class ApplicationBlock extends Component {
 
@@ -13,13 +14,28 @@ class ApplicationBlock extends Component {
     let app;
 
     switch(type) {
-      case 'Collection Schedule Lookup':
-      case 'What do I do with...':
-        app = <Recollect name={type}/>;
+      case "Collection Schedule Lookup":
+        app = <Recollect name="calendar"/>;
         break;
-      case 'Map for Christmas Tree Dropoff':
-      case 'Map for Hazardous Waste Dropoff Center':
-        app = null; //TODO add map component block;
+
+      case "What do I do with...":
+        app = <Recollect name="wizard"/>;
+        break;
+
+      case "Map for Christmas Tree Dropoff":
+        app = <StaticMap title="Map for Christmas Tree Dropoff" location={{
+          "latitude":"30.266646",
+          "longitude":"-97.772701"
+        }} />
+        break;
+
+      case "Map for Hazardous Waste Dropoff Center":
+        app = <StaticMap title="Map for Hazardous Waste Dropoff Center" location={{
+          "street": "2514 Business Center Dr",
+          "city": "Austin",
+          "state": "Texas",
+          "zip": "78744"
+        }} />
         break;
     }
 

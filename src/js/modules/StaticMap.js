@@ -3,8 +3,19 @@ import React, {Component} from 'react';
 class StaticMap extends Component {
 
   getLocation() {
-    const { street, city, state, zip } = this.props.location;
-    return encodeURIComponent(`${street} ${city},${state} ${zip}`);
+
+    const { street, city, state, zip, latitude, longitude } = this.props.location;
+
+    if (street) {
+      return encodeURIComponent(`${street} ${city || "Austin"}, ${ state || "Texas"} ${zip}`);
+    }
+
+    if (latitude && longitude) {
+      return encodeURIComponent(`${latitude}, ${longitude}`);
+    }
+
+    return encodeURIComponent("City Hall, Austin, Texas 78701");
+
   }
 
   render() {
@@ -25,8 +36,8 @@ class StaticMap extends Component {
           aria-label="Opens in new window"
         >
           <img
-            src={`https://maps.googleapis.com/maps/api/staticmap?markers=${encodedLocation}&zoom=17&size=600x300&scale=1&maptype=roadmap&key=AIzaSyBqtg0ntvqWGSHOznB4kq3DiYSyyVNKzIs`}
-            alt={`map to ${title}`}
+            src={`//maps.googleapis.com/maps/api/staticmap?markers=${encodedLocation}&zoom=17&size=600x300&scale=1&maptype=roadmap&key=AIzaSyBqtg0ntvqWGSHOznB4kq3DiYSyyVNKzIs`}
+            alt={title || "map"}
           />
         </a>
       </div>
