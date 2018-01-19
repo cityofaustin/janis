@@ -19,10 +19,6 @@ const servicePageQuery = `
         id
         file
         title
-        focalPointX
-        focalPointY
-        focalPointWidth
-        focalPointHeight
       }
       contacts {
         edges {

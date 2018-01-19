@@ -4,7 +4,7 @@ class Hero extends Component {
 
   render() {
     const { image, callout, home } = this.props;
-    const heroImageSrc = image ?`http://localhost:8000/media/${image.file}` : '';
+    const heroImageSrc = image ?`${process.env.REACT_APP_CMS_ASSETS}/${image.file}` : '';
 
     const HeroImageStyles = {
       backgroundImage: `url(${heroImageSrc})`,
