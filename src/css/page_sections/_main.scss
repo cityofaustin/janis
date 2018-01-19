@@ -29,22 +29,6 @@
   }
 }
 
-.coa-main__hero {
-  @include box-verticalcenter(200px);
-  background-color: $color-gray-lighter;
-  margin-bottom: $coa-space-level4;
-  padding: $coa-space-level5;
-}
-.coa-main__hero--small {
-  height: 80px;
-}
-.coa-main__hero__callout {
-  h2 {
-    font-weight: $font-bold;
-    margin: 0;
-  }
-}
-
 .coa-main__body {
   margin: 0 $coa-space-level5;
 }
