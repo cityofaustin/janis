@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Script from 'react-load-script'
+import Script from 'react-load-script';
 
 class Recollect extends Component {
 
@@ -49,7 +49,7 @@ class Recollect extends Component {
 
   render() {
     return (
-        <div id="rCw" ref={el => this.el = el}>
+        <div id="rCw">
           <img alt="Loading" src="https://recollect.a.ssl.fastly.net/0.11.1516038288/images/loading.gif"/>
           <Script
             url="https://recollect.net/api/widget.js"

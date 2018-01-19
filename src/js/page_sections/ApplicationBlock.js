@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
-import Recollect from 'js/vendor/Recollect';
+import Recollect from 'js/modules/Recollect';
 
 class ApplicationBlock extends Component {
 
