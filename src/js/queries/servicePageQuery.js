@@ -15,6 +15,11 @@ const servicePageQuery = `
         slug
         title
       }
+      image {
+        id
+        file
+        title
+      }
       contacts {
         edges {
           node {

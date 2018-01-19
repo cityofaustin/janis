@@ -5,6 +5,7 @@ import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
+import Hero from 'js/modules/Hero';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
@@ -65,13 +66,9 @@ class Topic extends Component {
     return (
       <div>
 
+        <Hero callout={title} />
+        
         <div className="wrapper">
-          <div className="coa-main__hero">
-            <div className="coa-main__hero__callout">
-              <h2>{title}</h2>
-            </div>
-          </div>
-
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
 
