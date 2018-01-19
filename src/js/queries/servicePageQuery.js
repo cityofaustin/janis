@@ -15,6 +15,15 @@ const servicePageQuery = `
         slug
         title
       }
+      image {
+        id
+        file
+        title
+        focalPointX
+        focalPointY
+        focalPointWidth
+        focalPointHeight
+      }
       contacts {
         edges {
           node {
