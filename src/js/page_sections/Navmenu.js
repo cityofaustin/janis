@@ -67,8 +67,9 @@ class Navmenu extends Component {
         })
       : [];
     const isActive = includes(servicePaths, currentPath);
+    const isActiveTopic = `topic/${parentLink.id}` === currentPath;
 
-    return isActive ? 'usa-current' : '';
+    return isActive || isActiveTopic ? 'usa-current' : '';
   }
 
   getMenuItemClassName = (path) => {
