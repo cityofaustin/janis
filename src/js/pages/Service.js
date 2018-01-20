@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
 import { Link } from 'react-router-dom';
-import getPathWithLangCode from 'js/helpers/language';
+import { getPathWithLangCode } from 'js/helpers/language';
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
 import ContentItems from 'js/page_sections/ContentItems';

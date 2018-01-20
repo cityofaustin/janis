@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import getPathWithLangCode from 'js/helpers/language';
+import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
 import axios from 'axios';
 import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
@@ -60,19 +60,21 @@ class Navmenu extends Component {
   }
 
   getParentMenuItemClassName = (parentLink) => {
-    const currentPath = this.getCurrentPath();
+    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
     const servicePaths = parentLink.services.edges
-      ? parentLink.services.edges.map(({ node:serviceLink }) => '/service/' + serviceLink.slug)
+      ? parentLink.services.edges.map(({ node: serviceLink }) => {
+          return `service/${serviceLink.slug}`;
+        })
       : [];
-
     const isActive = includes(servicePaths, currentPath);
 
     return isActive ? 'usa-current' : '';
   }
 
   getMenuItemClassName = (path) => {
-    const currentPath = this.getCurrentPath();
-    return currentPath === path ? 'usa-current' : '';
+    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
+    const isMatchingPaths = currentPath === getPathnameWithoutLangCode(path);
+    return isMatchingPaths ? 'usa-current' : '';
   }
 
   render() {
@@ -134,7 +136,7 @@ class Navmenu extends Component {
         </nav>
         <div className={this.getOverlayClassName()}
           onClick={this.props.toggleMenu}
-        >  
+        >
         </div>
       </div>
     );
