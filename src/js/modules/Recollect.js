@@ -5,6 +5,10 @@ class Recollect extends Component {
 
   handleScriptLoad() {
 
+    // Recollect is a third party script,
+    // that isn't an import-able node module
+    // so we load the script as below
+    // rCw is the required container id to ensure styles are shown correctly
     let script = document.createElement('script');
         script.setAttribute('type', 'text/javascript');
         script.text = `
