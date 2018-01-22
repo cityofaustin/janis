@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
@@ -27,17 +27,6 @@ class I18nBanner extends Component {
     return pathArray.join('/');
   }
 
-  getLanguageItemClassName = (language) => {
-    const blockElementClassname = `coa-I18nBanner__language-item`;
-    let classNames = blockElementClassname;
-
-    if (language.code === this.props.activeLanguage) {
-      classNames = classNames + ` ${blockElementClassname}--active`;
-    }
-
-    return classNames;
-  }
-
   getMenuClassName = () => {
     const base = `coa-I18nBanner__dropdown-menu`;
 
@@ -47,9 +36,6 @@ class I18nBanner extends Component {
   handleSetLanguage = (e) => {
     if (e.target.lang) {
       this.props.handleManualLanguageUpdate(e.target.lang);
-      this.setState({
-        isOpen: false,
-      });
     }
   }
 
@@ -102,15 +88,15 @@ class I18nBanner extends Component {
                     <ul className="coa-I18nBanner__language-list">
                       { SUPPORTED_LANGUAGES.map((language, i) => {
                         return (
-                          <li onClick={this.handleSetLanguage}
-                            className={this.getLanguageItemClassName(language)}
-                            key={i}
-                          >
-                            <Link to={`/${language.code}/${this.getPathname()}`}
+                          <li key={i}>
+                            <NavLink to={`/${language.code}/${this.getPathname()}`}
+                              className="coa-I18nBanner__language-item"
+                              activeClassName="coa-I18nBanner__language-item--active"
                               lang={language.code}
+                              onClick={this.handleSetLanguage}
                             >
                               {language.title}
-                            </Link>
+                            </NavLink>
                           </li>
                         )
                       })
