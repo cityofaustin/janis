@@ -5,6 +5,7 @@ class StaticMap extends Component {
   getLocation() {
 
     const { street, city, state, zip, latitude, longitude } = this.props.location;
+    const defaultLocation = "City Hall, Austin, Texas 78701";
 
     if (street) {
       return encodeURIComponent(`${street} ${city || "Austin"}, ${ state || "Texas"} ${zip}`);
@@ -14,8 +15,7 @@ class StaticMap extends Component {
       return encodeURIComponent(`${latitude}, ${longitude}`);
     }
 
-    return encodeURIComponent("City Hall, Austin, Texas 78701");
-
+    return encodeURIComponent(defaultLocation);
   }
 
   render() {
