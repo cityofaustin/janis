@@ -16,9 +16,8 @@ class ContentItems extends Component {
         let JSXmap;
         if (content.type === 'content') {
           JSXmap = <HtmlFromAdmin content={content.value} />;
-        }
-        if (content.type === 'application_block') {
-          JSXmap = <ApplicationBlock type={content.value.description} title={content.value.description} data={null} />;
+        } else {
+          JSXmap = <ApplicationBlock type={content.value.description} title={content.value.description} />;
         }
         return <div key={content.id} className="coa-section">{JSXmap}</div>;
       });
