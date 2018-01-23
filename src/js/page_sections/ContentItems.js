@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import ApplicationBlock from 'js/page_sections/ApplicationBlock';
 
 class ContentItems extends Component {
 
@@ -14,23 +15,11 @@ class ContentItems extends Component {
       JSX = contentItems.map((content) => {
         let JSXmap;
         if (content.type === 'content') {
-          JSXmap = <div key={content.id}><HtmlFromAdmin content={content.value} isSection={true} /></div>;
+          JSXmap = <HtmlFromAdmin content={content.value} />;
+        } else {
+          JSXmap = <ApplicationBlock type={content.value.description} title={content.value.description} />;
         }
-
-        /* TODO: removed temporarily for user testing,
-          uncomment as applications blocks are implemented.
-
-        if (content.type === 'application_block') {
-          JSXmap = (
-            <div key={content.id} className="coa-section">
-              <h4>{content.value.description}</h4>
-              INSERT {content.type} app HERE
-              { content.value.url && <div dangerouslySetInnerHTML={{__html: content.value.url}} /> }
-            </div>
-          );
-        }*/
-
-        return JSXmap;
+        return <div key={content.id} className="coa-section">{JSXmap}</div>;
       });
     }
 

@@ -3,6 +3,7 @@ import {get} from 'lodash';
 import SectionTitle from 'js/modules/SectionTitle';
 import SectionSubtitle from 'js/modules/SectionSubtitle';
 import Hours from 'js/modules/Hours';
+import StaticMap from 'js/modules/StaticMap';
 
 class Contact extends Component {
 
@@ -53,6 +54,10 @@ class Contact extends Component {
                       <span>{location.city}, {location.state} {location.zip}</span>
                       <span>{location.country}</span>
                     </div>
+                  )}
+
+                  { location && (
+                    <StaticMap location={location} title={`Map to ${name}`}/>
                   )}
 
                   <Hours hours={hours} />

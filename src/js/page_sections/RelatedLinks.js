@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import ListLink from 'js/modules/ListLink';
 import { Link } from 'react-router-dom';
-import { getPathWithLangCode } from 'js/helpers/language';
 
 class RelatedLinks extends Component {
 

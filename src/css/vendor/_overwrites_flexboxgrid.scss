@@ -1,0 +1,9 @@
+.wrapper {
+  max-width: $coa-container-maxwidth;
+  padding-left: $coa-space-level5;
+  padding-right: $coa-space-level5;
+  @include media($coa-xlarge-screen) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
