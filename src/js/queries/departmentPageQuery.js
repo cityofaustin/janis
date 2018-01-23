@@ -6,6 +6,10 @@ const departmentPageQuery = `
           id,
           name,
           mission,
+          image {
+            title
+            file
+          },
           contacts {
             edges {
               node {

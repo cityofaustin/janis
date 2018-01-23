@@ -6,6 +6,7 @@ import { cleanContacts } from 'js/helpers/cleanData';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
 import SectionTitle from 'js/modules/SectionTitle';
+import Hero from 'js/modules/Hero';
 import Contact from 'js/page_sections/Contact';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
@@ -68,7 +69,8 @@ class Department extends Component {
 
     return (
       <div>
-
+        <Hero image={this.state.data.image} />
+        
         <div className="wrapper">
           <div className="row">
             <div className="coa-main__left col-xs-12 col-lg-8">
