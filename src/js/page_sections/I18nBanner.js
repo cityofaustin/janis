@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
 import CaretUpSVG from 'js/svg/CaretUp';
-
+import { getPathnameWithoutLangCode } from 'js/helpers/language';
 
 class I18nBanner extends Component {
   constructor(props) {
@@ -17,14 +17,6 @@ class I18nBanner extends Component {
   getBannerClassName = () => {
     const baseClass = 'coa-I18nBanner';
     return `${baseClass} ${this.state.isOpen ? `${baseClass}--open` : ''}`;
-  }
-
-  getPathname = () => {
-    let pathArray = this.props.location.pathname.split('/').filter(n => n);
-    if (SUPPORTED_LANG_CODES.includes(pathArray[0])){
-      pathArray.splice(0, 1)
-    }
-    return pathArray.join('/');
   }
 
   getLanguageItemClassName = (language) => {
@@ -106,7 +98,8 @@ class I18nBanner extends Component {
                             className={this.getLanguageItemClassName(language)}
                             key={i}
                           >
-                            <Link to={`/${language.code}/${this.getPathname()}`}
+                            <Link
+                              to={`/${language.code}/${getPathnameWithoutLangCode(this.props.location.pathname)}`}
                               lang={language.code}
                             >
                               {language.title}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import Navmenu from 'js/page_sections/Navmenu';
 import { Link } from 'react-router-dom';
-import getPathWithLangCode from 'js/helpers/language';
+import { getPathWithLangCode } from 'js/helpers/language';
 
 class Header extends Component {
   constructor(props) {

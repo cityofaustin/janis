@@ -1,4 +1,4 @@
-import getPathWithLangCode from 'js/helpers/language';
+import { getPathWithLangCode } from 'js/helpers/language';
 
 export const cleanContacts = (contacts) => {
 
