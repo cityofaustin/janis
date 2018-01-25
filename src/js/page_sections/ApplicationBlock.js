@@ -5,53 +5,48 @@ import StaticMap from 'js/modules/StaticMap';
 
 class ApplicationBlock extends Component {
 
-//TODO: getApp method is temporary
-//joplin app block should return app type, title, body
-
   getApp() {
 
     const { type, data } = this.props;
-    let app;
+    let app, title;
 
     switch(type) {
-      case "Collection Schedule Lookup":
+      case "collection_schedule_block":
         app = <Recollect name="calendar"/>;
+        title = "Use this form to look up your pickup schedule";
         break;
 
-      case "What do I do with...":
+      case "what_do_i_do_with_block":
         app = <Recollect name="wizard"/>;
+        title = "Recycling Guidelines";
         break;
 
-      case "Map for Christmas Tree Dropoff":
-        app = <StaticMap title="Map for Christmas Tree Dropoff" location={{
-          "latitude":"30.266646",
-          "longitude":"-97.772701"
-        }} />
-        break;
-
-      case "Map for Hazardous Waste Dropoff Center":
-        app = <StaticMap title="Map for Hazardous Waste Dropoff Center" location={{
-          "street": "2514 Business Center Dr",
-          "city": "Austin",
-          "state": "Texas",
-          "zip": "78744"
-        }} />
+      case "map_block":
+        app = <StaticMap title={data.description} location={data.location} />;
+        title = data.description;
         break;
     }
 
-    return app;
+    return { app, title };
   }
 
   render() {
 
-    const { type, title } = this.props;
+    const { app, title } = this.getApp();
+    let JSX;
 
-    return (
-      <div className="coa-ApplicationBlock">
-        <SectionTitle title={title} noBorder={true} />
-        {this.getApp()}
-      </div>
-    );
+    if (!app) {
+      JSX = null;
+    } else {
+      JSX = (
+        <div className="coa-ApplicationBlock">
+          <SectionTitle title={title} noBorder={true} />
+          {app}
+        </div>
+      );
+    }
+
+    return JSX;
   }
 }
 
