@@ -11,7 +11,7 @@ docker run \
     --rm \
     --name janis \
     --tty --interactive \
-    --publish 3000:80 \
+    --volume "$PWD/dist:/app/_dist" \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/package.json:/app/package.json" \
@@ -20,4 +20,4 @@ docker run \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --env "REACT_APP_CMS_ENDPOINT=http://localhost:8000/api" \
     --env "REACT_APP_CMS_ASSETS=http://localhost:8000/media" \
-    "$TAG" "$@"
+    "$TAG" /bin/bash

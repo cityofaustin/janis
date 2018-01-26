@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
 import { parse } from 'query-string';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 import { getPathWithLangCode } from 'js/helpers/language';
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 

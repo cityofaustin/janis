@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
 import axios from 'axios';
 import { includes } from 'lodash';
@@ -21,7 +21,7 @@ class Navmenu extends Component {
   }
 
   focusOnClose = () => {
-    this.refs.closeTrigger.focus();
+    this.refs.closeTrigger && this.refs.closeTrigger.focus();
   }
 
   componentDidMount () {

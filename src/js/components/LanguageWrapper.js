@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-static'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
