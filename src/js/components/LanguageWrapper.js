@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
+import ReactGA from 'react-ga'
+import GoogleAnalyticsPageView from 'js/helpers/GoogleAnalyticsPageView'
 
 // page_sections
 import I18nBanner from "js/page_sections/I18nBanner"
@@ -18,6 +20,9 @@ import Topic from "js/pages/Topic"
 import Department from "js/pages/Department"
 
 import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
+
+
+ReactGA.initialize('UA-110716917-2', { debug: true });
 
 class LanguageWrapper extends Component {
   constructor(props) {
@@ -75,6 +80,7 @@ class LanguageWrapper extends Component {
       <IntlProvider locale={this.state.lang}>
         <Router>
           <div>
+            <Route path="/" component={GoogleAnalyticsPageView} />
             <Route path="/" render={props => (
               <section>
                 <I18nBanner activeLanguage={this.state.lang} {...props}
