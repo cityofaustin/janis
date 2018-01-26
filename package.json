@@ -1,16 +1,10 @@
 {
-  "name": "react-static-example-basic",
+  "name": "janis",
+  "version": "0.1.0",
+  "description": "Public facing frontend public side of austin.gov using React components.",
   "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "start-js": "react-static start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-static build",
-    "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
-  },
   "dependencies": {
     "axios": "^0.16.2",
     "browser-locale": "^1.0.3",
@@ -33,5 +27,13 @@
   "devDependencies": {
     "eslint-config-react-tools": "1.x.x",
     "serve": "^6.1.0"
+  },
+  "scripts": {
+    "start-js": "react-static start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-static build",
+    "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   }
 }
