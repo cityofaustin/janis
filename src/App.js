@@ -16,6 +16,8 @@ import Service from "js/pages/Service"
 import Topic from "js/pages/Topic"
 import Department from "js/pages/Department"
 
+import Routes from 'react-static-routes'
+
 
 import 'css/coa.css'
 
@@ -39,9 +41,10 @@ class App extends Component {
                     </section>
                   )} />
                   <section className="coa-main">
+                    <Routes/>
                     <Switch>
-                      <Route exact path={`/:lang?`} component={Home} {...this.props} />
-                      <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
+                      {/* <Route exact path={`/:lang?`} component={Home} {...this.props} /> */}
+                      {/* <Route exact path={`/:lang?/services`} component={Services} {...this.props} /> */}
                       <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
                       <Route exact path={`/:lang?/department/:id`} component={Department} {...this.props} />
                       <Route exact path={`/:lang?/search`} component={Search} {...this.props} />

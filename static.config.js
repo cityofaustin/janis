@@ -1,12 +1,28 @@
-import axios from 'axios'
+
+import { request } from 'graphql-request';
+
+import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+const CMS_API = `http://${process.env.API_URL}:8000/api/graphql/`;
 
 export default {
   getSiteProps: () => ({
-    title: 'React Static',
+    title: 'City of Austin',
   }),
   getRoutes: async () => {
-    const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts')
+
+    const { allServicePages } = await request(
+      CMS_API,
+      allServicePagesQuery
+    )
+
     return [
+      {
+        path: '/test',
+        component: 'src/js/pages/Test',
+        getProps: () => ({
+          allServicePages,
+        })
+      },
       {
         path: '/',
         component: 'src/js/pages/Home',
@@ -14,6 +30,9 @@ export default {
       {
         path: '/services',
         component: 'src/js/pages/Services',
+        getProps: () => ({
+          allServicePages,
+        })
       },
       {
         path: '/service/:slug',
@@ -47,7 +66,7 @@ export default {
       // },
       {
         is404: true,
-        component: 'src/containers/404',
+        component: 'src/js/pages/404',
       },
     ]
   },
