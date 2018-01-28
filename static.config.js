@@ -17,13 +17,6 @@ export default {
 
     return [
       {
-        path: '/test',
-        component: 'src/js/pages/Test',
-        getProps: () => ({
-          allServicePages,
-        })
-      },
-      {
         path: '/',
         component: 'src/js/pages/Home',
       },
