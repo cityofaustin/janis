@@ -23,7 +23,7 @@ class Recollect extends Component {
 
   componentWillMount() {
     // TODO: temp fix as current implementation of recollect app is not SPA friendly
-    if(window.Recollect) {
+    if (typeof document !== 'undefined' && window.Recollect) {
       window.location.reload();
     }
   }
