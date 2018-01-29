@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { get } from 'lodash';
 import axios from 'axios';
 import { cleanContacts } from 'js/helpers/cleanData';
+import { getRouteProps } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
@@ -20,7 +21,6 @@ class Department extends Component {
     this.state = {
       data: {}
     };
-
   }
 
   componentDidMount() {
@@ -58,19 +58,21 @@ class Department extends Component {
   }
 
   render() {
-
-    const { data } = this.state;
+    console.log('props', this.props)
+    const data = this.props.node;
+    // const { data } = this.state;
 
     const title = get(data, "name", null);
     const body = get(data, "mission", null);
     const contacts = get(data, "contacts", null);
     const relatedlinks = get(jsonFileData, "projectsRelated", []);
     const services311 = get(jsonFileData, "services311", []);
+    const { image } = data;
 
     return (
       <div>
-        <Hero image={this.state.data.image} />
-        
+        <Hero image={image} />
+
         <div className="wrapper">
           <div className="row">
             <div className="coa-main__left col-xs-12 col-lg-8">
@@ -117,4 +119,4 @@ class Department extends Component {
 
 }
 
-export default Department;
+export default getRouteProps(Department);

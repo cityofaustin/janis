@@ -43,9 +43,6 @@ class App extends Component {
                   )} />
                   <section className="coa-main">
                     <Routes/>
-                    <Switch>
-                      <Route exact path={`/:lang?/department/:id`} component={Department} {...this.props} />
-                    </Switch>
                   </section>
                   <Footer />
                 </div>
