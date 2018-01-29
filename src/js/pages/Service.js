@@ -70,7 +70,7 @@ class Service extends Component {
               <div className="coa-section">
                 { topicId && (
                   <Link className="coa-main__breadcrumb"
-                    to={`/topic/${topicId}`}>
+                    to={`/topics/${topicId}`}>
                     {topicName}
                   </Link>
                 )}
@@ -96,7 +96,7 @@ class Service extends Component {
 
         <RelatedLinks
           relatedlinks={relatedlinks}
-          sectionLink={{url: `/topic/${topicId}`, text: `See all services under ${topicName}`}}
+          sectionLink={{url: `/topics/${topicId}`, text: `See all services under ${topicName}`}}
           sectionStyle="primary"
           sectionTitle="Check out related city services"
           sectionText={null}

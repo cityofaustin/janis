@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { getRouteProps } from 'react-static';
 import { get } from 'lodash';
-import axios from 'axios';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
@@ -15,59 +15,21 @@ class Topic extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      data: {}
-    };
-
-  }
-
-  componentDidMount() {
-    this.fetchData(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // only refetch data when props have changed
-    // this happens only when the route is updated
-
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchData(nextProps.match.params.id);
-    }
-  }
-
-  fetchData(id) {
-    axios
-      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: topicPageQuery,
-        variables: {
-          id: id,
-        }
-      })
-      .then(res => {
-        const data = this.cleanData(res);
-        this.setState({ data: data });
-      })
-      .catch(err => console.log(err))
-  }
-
-  cleanData(res) {
-    const data = get(res.data, 'data.allTopics.edges[0].node', {});
-    data.services = cleanServiceLinks(data.services);
-    return data;
   }
 
   render() {
-
-    const { data } = this.state;
+    const data = this.props;
     const title = get(data, "text", null);
     const body = get(data, "description", null);
-    const relatedlinks = get(data, "services", null);
+    const links = get(data, "services", null);
+    const relatedlinks = cleanServiceLinks(links);
     const services311 = get(jsonFileData, "services311", null);
 
     return (
       <div>
 
         <Hero callout={title} />
-        
+
         <div className="wrapper">
           <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
         </div>
@@ -92,4 +54,4 @@ class Topic extends Component {
 
 }
 
-export default Topic;
+export default getRouteProps(Topic);

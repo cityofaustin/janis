@@ -4,6 +4,8 @@ import { request } from 'graphql-request';
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import servicePageQuery from 'js/queries/servicePageQuery';
+import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import topicPageQuery from 'js/queries/topicPageQuery';
 
 // TODO: clean this up so its defined as an env var
 const CMS_API = `http://${process.env.API_URL}:8000/api/graphql/`;
@@ -17,6 +19,11 @@ export default {
     const { allServicePages } = await request(
       CMS_API,
       allServicePagesQuery
+    )
+
+    const { allTopics } = await request(
+      CMS_API,
+      allTopicPagesQuery
     )
 
 
@@ -34,7 +41,7 @@ export default {
         children: allServicePages.edges.map(service => ({
           path: `/${service.node.slug}`,
           component: 'src/js/pages/Service',
-          getProps: async ({route, dev}) => {
+          getProps: async () => {
             const { servicePage } = await request(
               CMS_API,
               servicePageQuery,
@@ -45,8 +52,23 @@ export default {
         })),
       },
       {
-        path: '/topic/:id',
-        component: 'src/js/pages/Topic',
+        path: '/topics',
+        component: 'src/js/pages/Topics',
+        getProps: () => ({
+          allTopics,
+        }),
+        children: allTopics.edges.map(topic => ({
+          path: `/${topic.node.id}`,
+          component: 'src/js/pages/Topic',
+          getProps: async () => {
+            const { allTopics } = await request(
+              CMS_API,
+              topicPageQuery,
+              { id: topic.node.id },
+            );
+            return allTopics.edges[0].node;
+          }
+        }))
       },
       {
         path: '/department/:id',
