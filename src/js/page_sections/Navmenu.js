@@ -107,14 +107,14 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                {/* <Link to={getPathWithLangCode(`/topic/${parentLink.id}`)} */}
-                <Link to={`/topic/${parentLink.id}`}
+                {/* <Link to={getPathWithLangCode(`/topics/${parentLink.id}`)} */}
+                <Link to={`/topics/${parentLink.id}`}
                   className={this.getParentMenuItemClassName(parentLink)}
                 >
                   { parentLink.text }
                 </Link>
 
-                { serviceLinks.length && (
+                { !!serviceLinks && (
                   <ul className="usa-sidenav-sub_list">
                   {
                     serviceLinks.map(({ node:serviceLink }) => {

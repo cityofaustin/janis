@@ -44,12 +44,7 @@ class App extends Component {
                   <section className="coa-main">
                     <Routes/>
                     <Switch>
-                      {/* <Route exact path={`/:lang?`} component={Home} {...this.props} /> */}
-                      {/* <Route exact path={`/:lang?/services`} component={Services} {...this.props} /> */}
-                      {/* <Route path={`/:lang?/services/:slug`} render={(props) => <Service {...props} />} /> */}
-                      <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
                       <Route exact path={`/:lang?/department/:id`} component={Department} {...this.props} />
-                      <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
                     </Switch>
                   </section>
                   <Footer />
