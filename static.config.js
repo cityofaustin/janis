@@ -1,7 +1,11 @@
 
 import { request } from 'graphql-request';
 
+// QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import servicePageQuery from 'js/queries/servicePageQuery';
+
+// TODO: clean this up so its defined as an env var
 const CMS_API = `http://${process.env.API_URL}:8000/api/graphql/`;
 
 export default {
@@ -15,6 +19,7 @@ export default {
       allServicePagesQuery
     )
 
+
     return [
       {
         path: '/',
@@ -25,11 +30,19 @@ export default {
         component: 'src/js/pages/Services',
         getProps: () => ({
           allServicePages,
-        })
-      },
-      {
-        path: '/service/:slug',
-        component: 'src/js/pages/Service',
+        }),
+        children: allServicePages.edges.map(service => ({
+          path: `/${service.node.slug}`,
+          component: 'src/js/pages/Service',
+          getProps: async ({route, dev}) => {
+            const { servicePage } = await request(
+              CMS_API,
+              servicePageQuery,
+              { slug: service.node.slug }
+            );
+            return { servicePage };
+          },
+        })),
       },
       {
         path: '/topic/:id',
@@ -43,20 +56,6 @@ export default {
         path: '/search',
         component: 'src/js/pages/Search',
       },
-      // {
-      //   path: '/blog',
-      //   component: 'src/containers/Blog',
-      //   getProps: () => ({
-      //     posts,
-      //   }),
-      //   children: posts.map(post => ({
-      //     path: `/post/${post.id}`,
-      //     component: 'src/containers/Post',
-      //     getProps: () => ({
-      //       post,
-      //     }),
-      //   })),
-      // },
       {
         is404: true,
         component: 'src/js/pages/404',

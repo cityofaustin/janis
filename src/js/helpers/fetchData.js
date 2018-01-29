@@ -3,6 +3,8 @@ import { get } from 'lodash';
 import request from 'graphql-request';
 
 
+
+
 // queries
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 
@@ -14,26 +16,6 @@ export const fetchServices = (lang) => {
     `${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`,
     allServicePagesQuery
   )
-
-  // console.log(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`)
-  // axios
-  //   .create({
-  //     headers: { 'Accept-Language': lang }
-  //   })
-  //   .get(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-  //     query: allServicePagesQuery,
-  //   })
-  //   .then(res => {
-  //     let data = get(res.data, 'data.allServicePages', {});
-  //     data = cleanServiceLinks(data);
-  //     console.log(data)
-  //     return data;
-  //
-  //     // const data = this.cleanData(res);
-  //     // return data;
-  //     // this.setState({ data: data });
-  //   })
-  //   .catch(err => console.log(err))
 }
 
 export const fetchData = (slug, lang = this.props.lang) => {
