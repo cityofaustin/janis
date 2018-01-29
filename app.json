@@ -1,0 +1,24 @@
+{
+  "name": "janis",
+  "scripts": {
+  },
+  "env": {
+    "REACT_APP_CMS_ASSETS": {
+      "required": true
+    },
+    "REACT_APP_CMS_ENDPOINT": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
