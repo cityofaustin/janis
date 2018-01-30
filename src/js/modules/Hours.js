@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import {sortBy, findIndex} from 'lodash';
 
 class Hours extends Component {
 
-  render() {
+  sort() {
+    // TODO: Joplin data MUST include data for all 7 days of week.
+    let now = moment().format('e') + "";
+    let sorted = sortBy(this.props.hours, ['day']);
+    let index = findIndex(sorted, {'day': now});
+    return sorted.splice(index).concat(sorted);
+  }
 
-    const { hours } = this.props;
+  render() {
+    const hours = this.sort();
     let JSX;
 
     if (!hours || !hours.length) {
@@ -26,7 +34,7 @@ class Hours extends Component {
               hours.map((hour, index) =>
                 <tr key={index}>
                   <th scope="row">{hour.dayOfWeek}</th>
-                  <td>{moment(hour.startTime, "HH:mm:ss").format('h:mm A')} - {moment(hour.endTime, "HH:mm:ss").format('h:mm A')}</td>
+                  <td>{ hour.startTime } - { hour.endTime }</td>
                 </tr>
               )
             }
