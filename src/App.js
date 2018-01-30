@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route, Switch } from 'react-static'
+import { Router, Route } from 'react-static'
 
 import LanguageWrapper from "js/components/LanguageWrapper"
 

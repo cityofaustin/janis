@@ -92,7 +92,6 @@ class Navmenu extends Component {
           </button>
           <ul className="usa-sidenav-list">
             <li onClick={this.props.toggleMenu}>
-              {/* <Link to={getPathWithLangCode("/")} */}
               <Link to={'/'}
                 className={this.getMenuItemClassName('/')}
               >
@@ -107,7 +106,6 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                {/* <Link to={getPathWithLangCode(`/topics/${parentLink.id}`)} */}
                 <Link to={`/topics/${parentLink.id}`}
                   className={this.getParentMenuItemClassName(parentLink)}
                 >
@@ -120,7 +118,6 @@ class Navmenu extends Component {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          {/* <Link to={getPathWithLangCode(`/services/${serviceLink.slug}`)} */}
                           <Link to={`/services/${serviceLink.slug}`}
                             className={this.getMenuItemClassName(`/services/${serviceLink.slug}`)}
                           >

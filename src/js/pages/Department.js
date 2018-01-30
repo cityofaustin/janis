@@ -58,9 +58,7 @@ class Department extends Component {
   }
 
   render() {
-    console.log('props', this.props)
     const data = this.props.node;
-    // const { data } = this.state;
 
     const title = get(data, "name", null);
     const body = get(data, "mission", null);
