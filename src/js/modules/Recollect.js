@@ -5,10 +5,9 @@ class Recollect extends Component {
 
   handleScriptLoad() {
 
-    // Recollect is a third party script,
-    // that isn't an import-able node module
-    // so we load the script as below
+    // Recollect is a third party script that isn't an import-able node module
     // rCw is the required container id to ensure styles are shown correctly
+
     let script = document.createElement('script');
         script.setAttribute('type', 'text/javascript');
         script.text = `
@@ -26,6 +25,15 @@ class Recollect extends Component {
     if (typeof document !== 'undefined' && window.Recollect) {
       window.location.reload();
     }
+
+
+    let loader = new window.Recollect.Widget.Loader({
+        area: "Austin",
+        name: this.props.name || 'calendar',
+        container: "#rCw"
+      });
+    loader.load();;
+
   }
 
   shouldComponentUpdate() {
