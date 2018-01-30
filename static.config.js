@@ -8,8 +8,7 @@ import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import topicPageQuery from 'js/queries/topicPageQuery';
 import departmentPageQuery from 'js/queries/departmentPageQuery';
 
-// TODO: clean this up so its defined as an env var
-const CMS_API = `http://${process.env.API_URL}:8000/api/graphql/`;
+const { CMS_API } = process.env;
 
 export default {
   getSiteProps: () => ({

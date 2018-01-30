@@ -27,7 +27,7 @@ class Navmenu extends Component {
   componentDidMount () {
 
     axios
-      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
+      .post(`${process.env.CMS_API}`, {
         query: allTopicPagesQuery
       })
       .then(res => {

@@ -18,7 +18,6 @@ docker run \
     --volume "$PWD/static.config.js:/app/static.config.js" \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
-    --env "REACT_APP_CMS_ENDPOINT=http://localhost:8000/api" \
-    --env "API_URL=$(ifconfig en0 | awk '$1 == "inet" {print $2}')" \
-    --env "REACT_APP_CMS_ASSETS=http://localhost:8000/media" \
+    --env "CMS_API=http://$(ifconfig en0 | awk '$1 == "inet" {print $2}'):8000/api/graphql/" \
+    --env "CMS_MEDIA=http://$(ifconfig en0 | awk '$1 == "inet" {print $2}'):8000/media/" \
     "$TAG" yarn build
