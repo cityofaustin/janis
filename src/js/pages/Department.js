@@ -18,43 +18,6 @@ class Department extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      data: {}
-    };
-  }
-
-  componentDidMount() {
-    this.fetchData(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // only refetch data when props have changed
-    // this happens only when the route is updated
-
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      this.fetchData(nextProps.match.params.id);
-    }
-  }
-
-  fetchData(id) {
-    axios
-      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: departmentPageQuery,
-        variables: {
-          id: id,
-        }
-      })
-      .then(res => {
-        const data = this.cleanData(res);
-        this.setState({ data: data });
-      })
-      .catch(err => console.log(err))
-  }
-
-  cleanData(res) {
-    const data = get(res.data, 'data.allDepartments.edges.0.node', {});
-    data.contacts = cleanContacts(data.contacts);
-    return data;
   }
 
   render() {
