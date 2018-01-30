@@ -13,7 +13,7 @@ import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 export const fetchServices = (lang) => {
   request(
-    `${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`,
+    `${process.env.CMS_API}`,
     allServicePagesQuery
   )
 }
@@ -35,7 +35,7 @@ export const fetchData = (slug, lang = this.props.lang) => {
     .create({
       headers: { 'Accept-Language': lang }
     })
-    .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
+    .post(`${process.env.CMS_API}`, {
       query: servicePageQuery,
       variables: {
         slug: slug,
