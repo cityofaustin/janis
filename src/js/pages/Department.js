@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { get } from 'lodash';
-import axios from 'axios';
 import { cleanContacts } from 'js/helpers/cleanData';
 import { getRouteProps } from 'react-static';
 

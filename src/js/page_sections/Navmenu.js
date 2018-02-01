@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-static';
 import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
-import axios from 'axios';
+import request from 'graphql-request'
 import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
@@ -26,17 +26,15 @@ class Navmenu extends Component {
 
   componentDidMount () {
 
-    axios
-      .post(`${process.env.CMS_API}`, {
-        query: allTopicPagesQuery
-      })
-      .then(res => {
-        this.setState({
-          data: res.data.data.allTopics,
-          isLoaded: true
-        });
-      })
-      .catch(err => console.log(err));
+    request(
+      `${process.env.CMS_API}`,
+      allTopicPagesQuery,
+    ).then(res => {
+      this.setState({
+        data: res.allTopics,
+        isLoaded: true
+      });
+    }).catch(err => console.log(err));
   }
 
   componentDidUpdate() {
