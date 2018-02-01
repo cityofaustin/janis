@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
-import axios from 'axios';
+import request from 'graphql-request'
 import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
@@ -21,22 +21,20 @@ class Navmenu extends Component {
   }
 
   focusOnClose = () => {
-    this.refs.closeTrigger.focus();
+    this.refs.closeTrigger && this.refs.closeTrigger.focus();
   }
 
   componentDidMount () {
 
-    axios
-      .post(`${process.env.REACT_APP_CMS_ENDPOINT}/graphql/`, {
-        query: allTopicPagesQuery
-      })
-      .then(res => {
-        this.setState({
-          data: res.data.data.allTopics,
-          isLoaded: true
-        });
-      })
-      .catch(err => console.log(err));
+    request(
+      `${process.env.CMS_API}`,
+      allTopicPagesQuery,
+    ).then(res => {
+      this.setState({
+        data: res.allTopics,
+        isLoaded: true
+      });
+    }).catch(err => console.log(err));
   }
 
   componentDidUpdate() {
@@ -92,7 +90,7 @@ class Navmenu extends Component {
           </button>
           <ul className="usa-sidenav-list">
             <li onClick={this.props.toggleMenu}>
-              <Link to={getPathWithLangCode("/")}
+              <Link to={'/'}
                 className={this.getMenuItemClassName('/')}
               >
                 Home
@@ -106,20 +104,20 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <Link to={getPathWithLangCode(`/topic/${parentLink.id}`)}
+                <Link to={`/topics/${parentLink.id}`}
                   className={this.getParentMenuItemClassName(parentLink)}
                 >
                   { parentLink.text }
                 </Link>
 
-                { serviceLinks.length && (
+                { !!serviceLinks && (
                   <ul className="usa-sidenav-sub_list">
                   {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <Link to={getPathWithLangCode(`/service/${serviceLink.slug}`)}
-                            className={this.getMenuItemClassName(`/service/${serviceLink.slug}`)}
+                          <Link to={`/services/${serviceLink.slug}`}
+                            className={this.getMenuItemClassName(`/services/${serviceLink.slug}`)}
                           >
                             {serviceLink.title}
                           </Link>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-static'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
@@ -93,7 +93,7 @@ class LanguageWrapper extends Component {
               <Switch>
                 <Route exact path={`/:lang?`} component={Home} {...this.props} />
                 <Route exact path={`/:lang?/services`} component={Services} {...this.props} />
-                <Route exact path={`/:lang?/topic/:id`} component={Topic} {...this.props} />
+                <Route exact path={`/:lang?/topics/:id`} component={Topic} {...this.props} />
                 <Route exact path={`/:lang?/department/:id`} component={Department} {...this.props} />
                 <Route exact path={`/:lang?/search`} component={Search} {...this.props} />
                 <Route path={`/:lang?/service/:slug`} render={(props) => <Service {...props} lang={this.state.lang}/>} />

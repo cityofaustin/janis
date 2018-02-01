@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Router, Route } from 'react-static'
+
 import LanguageWrapper from "js/components/LanguageWrapper"
+
+// page_sections
+import I18nBanner from "js/page_sections/I18nBanner"
+import Header from "js/page_sections/Header"
+import Footer from "js/page_sections/Footer"
+
+// pages
+import Home from "js/pages/Home"
+import Search from "js/pages/Search"
+import Services from "js/pages/Services"
+import Service from "js/pages/Service"
+import Topic from "js/pages/Topic"
+import Department from "js/pages/Department"
+
+import Routes from 'react-static-routes'
+
 
 import 'css/coa.css'
 
@@ -11,9 +28,24 @@ class App extends Component {
           <Route path={`/:lang?`}
             render={(props) => {
               return (
-                <LanguageWrapper {...props}
-                  urlPathLanguage={props.match.params.lang}
-                />
+                // TODO: Reapply language url prefix
+                // <LanguageWrapper {...props}
+                //   urlPathLanguage={props.match.params.lang}
+                // />
+                <div>
+                  <Route path="/" render={props => (
+                    <section>
+                      {/* <I18nBanner activeLanguage={this.state.lang} {...props}
+                        handleManualLanguageUpdate={this.handleManualLanguageUpdate}
+                      /> */}
+                      <Header {...props} />
+                    </section>
+                  )} />
+                  <section className="coa-main">
+                    <Routes/>
+                  </section>
+                  <Footer />
+                </div>
               )
             }}
           />

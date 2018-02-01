@@ -12,7 +12,7 @@ docker run \
     --rm \
     --name janis \
     --tty --interactive \
-    --publish 3000:80 \
+    --volume "$PWD/dist:/app/_dist" \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/package.json:/app/package.json" \
@@ -21,4 +21,4 @@ docker run \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --env "CMS_API=http://$HOST_IP:8000/api/graphql/" \
     --env "CMS_MEDIA=http://$HOST_IP:8000/media/" \
-    "$TAG" "$@"
+    "$TAG" yarn build

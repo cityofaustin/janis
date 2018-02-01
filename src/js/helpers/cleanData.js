@@ -28,7 +28,7 @@ export const cleanRelatedServiceLinks = (links) => {
 
   return links.map((link) => {
     return {
-      url: getPathWithLangCode(`/service/${link.slug}`),
+      url: `/services/${link.slug}`,
       text: link.title
     }
   });
@@ -40,7 +40,7 @@ export const cleanServiceLinks = (links) => {
 
   return links.edges.map(({node: link}) => {
     return {
-      url: getPathWithLangCode(`/service/${link.slug}`),
+      url: `/services/${link.slug}`,
       text: link.title
     }
   });

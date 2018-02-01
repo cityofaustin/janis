@@ -1,36 +1,42 @@
 {
   "name": "janis",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Public facing frontend public side of austin.gov using React components.",
-  "private": true,
+  "main": "index.js",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
     "browser-locale": "^1.0.3",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
+    "graphql-request": "^1.4.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
-    "prop-types": "^15.5.4",
+    "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-ga": "^2.4.1",
     "react-intl": "^2.4.0",
     "react-load-script": "^0.0.6",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
-    "uswds": "^1.4.3"
+    "react-static": "^4.9.0-beta.5",
+    "react-universal-component": "^2.8.1",
+    "uswds": "^1.4.5"
+  },
+  "devDependencies": {
+    "eslint-config-react-tools": "1.x.x",
+    "serve": "^6.1.0"
   },
   "scripts": {
-    "start-js": "react-scripts start",
+    "start-js": "react-static start",
     "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build-js": "react-static build",
+    "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   }
 }

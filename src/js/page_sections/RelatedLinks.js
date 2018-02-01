@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import ListLink from 'js/modules/ListLink';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 
 class RelatedLinks extends Component {
 
