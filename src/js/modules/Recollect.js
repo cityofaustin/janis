@@ -5,6 +5,7 @@ class Recollect extends Component {
 
   handleScriptLoad() {
     // Recollect is a third party script that isn't an import-able node module
+    // rCw is the required container id to ensure styles are shown correctly
     let loader = new window.Recollect.Widget.Loader({
         area: "Austin",
         name: this.props.name || 'calendar',
