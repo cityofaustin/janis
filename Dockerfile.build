@@ -32,5 +32,5 @@ COPY deploy/docker-entrypoint.sh /usr/local/docker-entrypoint.sh
 ENV PORT ${PORT:-80}
 EXPOSE $PORT
 
-ENTRYPOINT /usr/local/docker-entrypoint.sh
-CMD /usr/local/openresty/bin/openresty -g "daemon off;"
+ENTRYPOINT ["/usr/local/docker-entrypoint.sh"]
+CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
