@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 set -o errexit
 
-echo "Configuring server to run on port $PORT..."
-sed "s/listen[[:blank:]]*80/listen ${PORT:-80}/" /etc/nginx/conf.d/default.conf | tee /etc/nginx/conf.d/default.conf
+NGINX_CONFIG_FILE='/etc/nginx/conf.d/default.conf'
+
+echo "Setting up $NGINX_CONFIG_FILE..."
+envsubst < $NGINX_CONFIG_FILE | tee $NGINX_CONFIG_FILE
 
 echo "Waiting for requests..."
 exec "$@"
