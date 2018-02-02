@@ -1,11 +1,10 @@
 #!/usr/bin/env sh
 set -o errexit
-set -o xtrace
 
 echo "Configuring server to run on port $PORT..."
 sed "s/listen[[:blank:]]*80/listen ${PORT:-80}/" /etc/nginx/conf.d/default.conf | tee /etc/nginx/conf.d/default.conf
 
 echo "Waiting for requests...$@"
-exec "$@"
+# exec "$@"
 
 /usr/local/openresty/bin/openresty -g "daemon off;"

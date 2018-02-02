@@ -26,6 +26,7 @@ RUN yarn build
 FROM openresty/openresty:alpine-fat AS official
 
 COPY --from=builder /app/dist /usr/local/openresty/nginx/html
+COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
 COPY deploy/docker-entrypoint.sh /usr/local/docker-entrypoint.sh
 
 ENV PORT ${PORT:-80}
