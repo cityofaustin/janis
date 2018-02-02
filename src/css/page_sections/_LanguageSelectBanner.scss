@@ -1,4 +1,4 @@
-.coa-I18nBanner {
+.coa-LanguageSelectBanner {
   width: 100%;
   background-color: $color-gray-light;
   padding: $coa-space-level1;
@@ -6,11 +6,11 @@
   transition: 0.5s;
 }
 
-.coa-I18nBanner--open {
+.coa-LanguageSelectBanner--open {
   background-color: $color-white;
 }
 
-.coa-I18nBanner__choose-language {
+.coa-LanguageSelectBanner__choose-language {
   text-align: right;
   font-size: $small-font-size;
   svg {
@@ -18,11 +18,11 @@
   }
 }
 
-.coa-I18nBanner__choose-language-link {
+.coa-LanguageSelectBanner__choose-language-link {
   margin: 0 $coa-space-level1;
 }
 
-.coa-I18nBanner__dropdown-menu {
+.coa-LanguageSelectBanner__dropdown-menu {
   position: absolute;
   background-color: $color-gray-light;
   top: 5rem;
@@ -35,23 +35,23 @@
   height: 400px;
 }
 
-.coa-I18nBanner__dropdown-menu--open {
+.coa-LanguageSelectBanner__dropdown-menu--open {
   background-color: $color-white;
   border-bottom: 1px solid $color-gray-light;
 }
 
-.coa-I18nBanner__dropdown-menu--closed {
+.coa-LanguageSelectBanner__dropdown-menu--closed {
   background-color: $color-white;
   top: -400px;
 }
 
 
-.coa-I18nBanner__language-list {
+.coa-LanguageSelectBanner__language-list {
   list-style: none;
   padding-top: $coa-space-level2;
 }
 
-.coa-I18nBanner__language-item {
+.coa-LanguageSelectBanner__language-item {
   padding: 0 $coa-space-level2;
   cursor: pointer;
   width: 100%;
@@ -71,14 +71,14 @@
   }
 }
 
-.coa-I18nBanner__language-item--active {
+.coa-LanguageSelectBanner__language-item--active {
   background-color: $color-gray-lighter;
 }
 
-.coa-I18nBanner__menu-header {
+.coa-LanguageSelectBanner__menu-header {
   padding: 0 $coa-space-level2;
 }
 
-.coa-I18nBanner__cancel {
+.coa-LanguageSelectBanner__cancel {
   text-align: center;
 }
