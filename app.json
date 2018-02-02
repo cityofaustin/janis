@@ -3,10 +3,10 @@
   "scripts": {
   },
   "env": {
-    "REACT_APP_CMS_ASSETS": {
+    "CMS_API": {
       "required": true
     },
-    "REACT_APP_CMS_ENDPOINT": {
+    "CMS_MEDIA": {
       "required": true
     }
   },

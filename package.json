@@ -35,7 +35,7 @@
     "start-js": "react-static start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-static build",
-    "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
+    "build": "npm-run-all build-css build-js",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   }
