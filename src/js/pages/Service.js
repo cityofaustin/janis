@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { get } from 'lodash';
 import { parse } from 'query-string';
 import { Link, getRouteProps } from 'react-static';

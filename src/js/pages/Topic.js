@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getRouteProps } from 'react-static';
 import { get } from 'lodash';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
