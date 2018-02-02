@@ -23,8 +23,13 @@ RUN yarn build
 
 # ============================================
 
-FROM nginx:alpine AS official
+FROM openresty/openresty:alpine-fat AS official
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/local/openresty/nginx/html
+COPY deploy/docker-entrypoint.sh /usr/local/docker-entrypoint.sh
 
-ENV NGINX_PORT=${PORT:-80}
+ENV PORT ${PORT:-80}
+EXPOSE $PORT
+
+ENTRYPOINT /usr/local/docker-entrypoint.sh
+CMD /usr/local/openresty/bin/openresty -g "daemon off;"
