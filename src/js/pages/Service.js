@@ -48,16 +48,16 @@ class Service extends Component {
   }
 
   render() {
-    const { servicePage } = this.props;
-    const topicId = get(servicePage, "topic.id", null);
-    const topicName = get(servicePage, "topic.text", null);
-    const title = get(servicePage, "title", null);
-    const steps = get(servicePage, "content", null);
-    const contentItems = get(servicePage, "extraContent", null);
+    const { service } = this.props;
+    const topicId = get(service, "topic.id", null);
+    const topicName = get(service, "topic.text", null);
+    const title = get(service, "title", null);
+    const steps = get(service, "content", null);
+    const contentItems = get(service, "extraContent", null);
     const services311 = get(jsonFileData, "services311", null);
-    const image = servicePage.image;
-    const contacts = cleanContacts(servicePage.contacts);
-    const relatedlinks = cleanRelatedServiceLinks(servicePage.related);
+    const image = service.image;
+    const contacts = cleanContacts(service.contacts);
+    const relatedlinks = cleanRelatedServiceLinks(service.related);
 
     return (
       <div> 

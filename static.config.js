@@ -3,7 +3,6 @@ import { request } from 'graphql-request';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import servicePageQuery from 'js/queries/servicePageQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import topicPageQuery from 'js/queries/topicPageQuery';
 import departmentPageQuery from 'js/queries/departmentPageQuery';
@@ -42,14 +41,9 @@ export default {
         children: allServicePages.edges.map(service => ({
           path: `/${service.node.slug}`,
           component: 'src/js/pages/Service',
-          getProps: async () => {
-            const { servicePage } = await request(
-              CMS_API,
-              servicePageQuery,
-              { slug: service.node.slug }
-            );
-            return { servicePage };
-          },
+          getProps: () => ({
+            service: service.node,
+          }),
         })),
       },
       {
@@ -61,14 +55,9 @@ export default {
         children: allTopics.edges.map(topic => ({
           path: `/${topic.node.id}`,
           component: 'src/js/pages/Topic',
-          getProps: async () => {
-            const { allTopics } = await request(
-              CMS_API,
-              topicPageQuery,
-              { id: topic.node.id },
-            );
-            return allTopics.edges[0].node;
-          }
+          getProps: () => ({
+            topic: topic.node,
+          })
         }))
       },
       {
@@ -77,18 +66,12 @@ export default {
         getProps: () => ({
           allDepartments
         }),
-        children: allDepartments.edges.map(dept => ({
-          path: `${dept.node.id}`,
+        children: allDepartments.edges.map(department => ({
+          path: `${department.node.id}`,
           component: 'src/js/pages/Department',
-          getProps: async () => {
-            const { allDepartments } = await request(
-              CMS_API,
-              departmentPageQuery,
-              { id: dept.node.id },
-            );
-            const departmentData = allDepartments.edges[0]
-            return departmentData;
-          }
+          getProps: () => ({
+            department: department.node,
+          })
         }))
       },
       {

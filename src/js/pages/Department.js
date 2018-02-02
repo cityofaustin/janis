@@ -20,14 +20,13 @@ class Department extends Component {
   }
 
   render() {
-    const data = this.props.node;
-
-    const title = get(data, "name", null);
-    const body = get(data, "mission", null);
-    const contacts = get(data, "contacts", null);
+    const { department } = this.props;
+    const title = get(department, "name", null);
+    const body = get(department, "mission", null);
+    const contacts = get(department, "contacts", null);
+    const image = get(department, "image", null);
     const relatedlinks = get(jsonFileData, "projectsRelated", []);
     const services311 = get(jsonFileData, "services311", []);
-    const { image } = data;
 
     return (
       <div>

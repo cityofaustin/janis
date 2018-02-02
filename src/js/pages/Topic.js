@@ -18,10 +18,10 @@ class Topic extends Component {
   }
 
   render() {
-    const data = this.props;
-    const title = get(data, "text", null);
-    const body = get(data, "description", null);
-    const links = get(data, "services", null);
+    const { topic } = this.props;
+    const title = get(topic, "text", null);
+    const body = get(topic, "description", null);
+    const links = get(topic, "services", null);
     const relatedlinks = cleanServiceLinks(links);
     const services311 = get(jsonFileData, "services311", null);
 
