@@ -7,6 +7,7 @@ import servicePageQuery from 'js/queries/servicePageQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import topicPageQuery from 'js/queries/topicPageQuery';
 import departmentPageQuery from 'js/queries/departmentPageQuery';
+import { SUPPORTED_LANGUAGES } from 'js/constants/languages';
 
 const { CMS_API } = process.env;
 
@@ -31,12 +32,7 @@ export default {
       departmentPageQuery
     )
 
-
-    return [
-      {
-        path: '/',
-        component: 'src/js/pages/Home',
-      },
+    const allPages = [
       {
         path: '/services',
         component: 'src/js/pages/Services',
@@ -99,6 +95,25 @@ export default {
         path: '/search',
         component: 'src/js/pages/Search',
       },
+    ]
+
+    const allPagesWithLangCode = [];
+
+    SUPPORTED_LANGUAGES.map((lang) => {
+      allPagesWithLangCode.push({
+        path: `/${lang.code}`,
+        component: 'src/js/pages/Home',
+        children: allPages,
+      });
+    });
+
+    return [
+      {
+        path: '/',
+        component: 'src/js/pages/Home',
+      },
+      ...allPagesWithLangCode,
+      ...allPages,
       {
         is404: true,
         component: 'src/js/pages/404',
