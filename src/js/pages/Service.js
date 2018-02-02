@@ -15,107 +15,71 @@ import Hero from 'js/modules/Hero';
 
 import jsonFileData from '__tmpdata/services';
 
-class Service extends Component {
+const Service = ({ service }) => {
+  const topicId = get(service, "topic.id", null);
+  const topicName = get(service, "topic.text", null);
+  const title = get(service, "title", null);
+  const steps = get(service, "content", null);
+  const contentItems = get(service, "extraContent", null);
+  const services311 = get(jsonFileData, "services311", null);
+  const image = service.image;
+  const contacts = cleanContacts(service.contacts);
+  const relatedlinks = cleanRelatedServiceLinks(service.related);
 
-  constructor(props) {
-    super(props);
-  }
+  return (
+    <div> 
+      <Hero image={image} />
 
-  componentWillReceiveProps(nextProps, nextState) {
-    // only refetch data when props have changed
-    // this happens only when the route is updated
-    const isSlugChanged = nextProps.match.params.slug !== this.props.match.params.slug
-    const isLanguageChanged = nextProps.lang !== this.props.lang;
+      <div className="wrapper">
+        <div className="row">
+          <div className="coa-main__left col-xs-12 col-lg-8">
 
-    if (isSlugChanged || isLanguageChanged) {
-      this.fetchData(nextProps.match.params.slug, nextProps.lang);
-    }
-  }
-
-  // TODO: this will be broken in JOPLIN
-  fetchData(slug, lang = this.props.lang) {
-    console.log('fetching data', ` for ${slug}`, ` in ${lang}`)
-
-    if (process.env.NODE_ENV !== 'production') {
-      // Allow querystrings to set data, which is used in joplin for livepreview
-      const query = parse(this.props.location.search);
-      if (query.preview) {
-        const data = JSON.parse(query.d);
-        this.setState({ data: data });
-        return;
-      }
-    }
-  }
-
-  render() {
-    const { service } = this.props;
-    const topicId = get(service, "topic.id", null);
-    const topicName = get(service, "topic.text", null);
-    const title = get(service, "title", null);
-    const steps = get(service, "content", null);
-    const contentItems = get(service, "extraContent", null);
-    const services311 = get(jsonFileData, "services311", null);
-    const image = service.image;
-    const contacts = cleanContacts(service.contacts);
-    const relatedlinks = cleanRelatedServiceLinks(service.related);
-
-    return (
-      <div> 
-        <Hero image={image} />
-
-        <div className="wrapper">
-          <div className="row">
-            <div className="coa-main__left col-xs-12 col-lg-8">
-
-              <div className="coa-section">
-                { topicId && (
-                  <Link className="coa-main__breadcrumb"
-                    to={`/topics/${topicId}`}>
-                    {topicName}
-                  </Link>
-                )}
-                <h2 className="coa-main__title">{title}</h2>
-                { steps && (
-                  <div className="coa-main__steps">
-                    <HtmlFromAdmin content={steps} />
-                  </div>
-                )}
-              </div>
-
-              <ContentItems contentItems={contentItems} />
-
+            <div className="coa-section">
+              { topicId && (
+                <Link className="coa-main__breadcrumb"
+                  to={`/topics/${topicId}`}>
+                  {topicName}
+                </Link>
+              )}
+              <h2 className="coa-main__title">{title}</h2>
+              { steps && (
+                <div className="coa-main__steps">
+                  <HtmlFromAdmin content={steps} />
+                </div>
+              )}
             </div>
 
-            <div className="coa-main__right col-xs-12 col-lg-4">
+            <ContentItems contentItems={contentItems} />
 
-              <Contact contacts={contacts} />
+          </div>
 
-            </div>
+          <div className="coa-main__right col-xs-12 col-lg-4">
+
+            <Contact contacts={contacts} />
+
           </div>
         </div>
-
-        <RelatedLinks
-          relatedlinks={relatedlinks}
-          sectionLink={{url: `/topics/${topicId}`, text: `See all services under ${topicName}`}}
-          sectionStyle="primary"
-          sectionTitle="Check out related city services"
-          sectionText={null}
-        />
-
-        <div className="coa-section coa-section--lightgrey">
-          <div className="wrapper">
-            <FormFeedback />
-            <a className="coa-section__link" href="#">Return to Top</a>
-          </div>
-        </div>
-
-        <Service311 services311={services311} />
-
       </div>
-    );
-  }
 
+      <RelatedLinks
+        relatedlinks={relatedlinks}
+        sectionLink={{url: `/topics/${topicId}`, text: `See all services under ${topicName}`}}
+        sectionStyle="primary"
+        sectionTitle="Check out related city services"
+        sectionText={null}
+      />
+
+      <div className="coa-section coa-section--lightgrey">
+        <div className="wrapper">
+          <FormFeedback />
+          <a className="coa-section__link" href="#">Return to Top</a>
+        </div>
+      </div>
+
+      <Service311 services311={services311} />
+
+    </div>
+  )
 }
-
 
 export default getRouteProps(Service);
