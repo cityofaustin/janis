@@ -28,19 +28,11 @@ class App extends Component {
           <Route path={`/:lang?`}
             render={(props) => {
               return (
-                // TODO: Reapply language url prefix
-                // <LanguageWrapper {...props}
-                //   urlPathLanguage={props.match.params.lang}
-                // />
                 <div>
-                  <Route path="/" render={props => (
-                    <section>
-                      {/* <I18nBanner activeLanguage={this.state.lang} {...props}
-                        handleManualLanguageUpdate={this.handleManualLanguageUpdate}
-                      /> */}
-                      <Header {...props} />
-                    </section>
-                  )} />
+                  <section>
+                    <I18nBanner {...props} />
+                    <Header {...props} />
+                  </section>
                   <section className="coa-main">
                     <Routes/>
                   </section>

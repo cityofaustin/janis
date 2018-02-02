@@ -23,7 +23,7 @@ class I18nBanner extends Component {
     const blockElementClassname = `coa-I18nBanner__language-item`;
     let classNames = blockElementClassname;
 
-    if (language.code === this.props.activeLanguage) {
+    if (language.code === this.props.match.params.lang) {
       classNames = classNames + ` ${blockElementClassname}--active`;
     }
 
@@ -38,7 +38,6 @@ class I18nBanner extends Component {
 
   handleSetLanguage = (e) => {
     if (e.target.lang) {
-      this.props.handleManualLanguageUpdate(e.target.lang);
       this.setState({
         isOpen: false,
       });
@@ -53,7 +52,7 @@ class I18nBanner extends Component {
 
   getActiveLanguageTitle = () => {
     let activeLanguage = SUPPORTED_LANGUAGES.find((lang) => {
-      return lang.code === this.props.activeLanguage;
+      return lang.code === this.props.match.params.lang;
     });
     activeLanguage = activeLanguage || SUPPORTED_LANGUAGES[0];
     return activeLanguage.title;
