@@ -1,55 +1,102 @@
 import React, { Component } from 'react'
 import { Router, Route } from 'react-static'
-
-import LanguageWrapper from "js/components/LanguageWrapper"
+import Routes from 'react-static-routes'
+import { IntlProvider } from 'react-intl'
+import locale from 'browser-locale'
+import Cookies from 'js-cookie'
+import ReactGA from 'react-ga'
+import GoogleAnalyticsPageView from 'js/helpers/GoogleAnalyticsPageView'
 
 // page_sections
-import I18nBanner from "js/page_sections/I18nBanner"
+import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
 
-// pages
-import Home from "js/pages/Home"
-import Search from "js/pages/Search"
-import Services from "js/pages/Services"
-import Service from "js/pages/Service"
-import Topic from "js/pages/Topic"
-import Department from "js/pages/Department"
 
-import Routes from 'react-static-routes'
+import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
+
 
 
 import 'css/coa.css'
 
+ReactGA.initialize('UA-110716917-2', { debug: true });
+
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lang: this.setLanguage()
+    }
+    this.daysUntilCookieExpires = 10 * 365;
+  }
+
+  parseBrowserLanguageCode = () => {
+    // Normally, we only want the two letter lowercased language abbreviation
+    // bc we aren't worried about locale (ex: en-US vs. en-UK) at this point,
+    // just language.
+    if (typeof document !== 'undefined') {
+      const twoLetterLangCode = locale().split('-')[0].toLowerCase();
+      // But we do want to support two types of Chinese (zh-tw & zh-cn)
+      const isChinese = twoLetterLangCode === 'zh';
+      return isChinese ? locale().toLowerCase() : twoLetterLangCode;
+    }
+  }
+
+  setLanguage = () => {
+    const cookieLanguage = Cookies.get('lang');
+    const browserLocale = this.parseBrowserLanguageCode();
+    let language = '';
+
+    const isLanguageCodeInPath = SUPPORTED_LANGUAGES
+      .map(lang => lang.code)
+      .includes(this.props.urlPathLanguage)
+
+    if (isLanguageCodeInPath) {
+      language = this.props.urlPathLanguage
+    } else if (cookieLanguage) {
+      language = cookieLanguage
+    } else {
+      language = browserLocale || 'en'
+    }
+
+    Cookies.set('lang', language, { expires: this.daysUntilCookieExpires })
+    return language
+  }
+
+
+  handleLanguageUpdate = (newLang) => {
+    Cookies.set('lang', newLang, { expires: this.daysUntilCookieExpires })
+    this.setState({ lang: newLang })
+  }
+
   render() {
     return (
+      <IntlProvider locale={this.state.lang}>
         <Router>
-          <Route path={`/:lang?`}
-            render={(props) => {
-              return (
-                // TODO: Reapply language url prefix
-                // <LanguageWrapper {...props}
-                //   urlPathLanguage={props.match.params.lang}
-                // />
-                <div>
-                  <Route path="/" render={props => (
+          <div>
+            <Route path="/" component={GoogleAnalyticsPageView} />
+            <Route path={`/:lang?`}
+              render={(props) => {
+                return (
+                  <div>
                     <section>
-                      {/* <I18nBanner activeLanguage={this.state.lang} {...props}
-                        handleManualLanguageUpdate={this.handleManualLanguageUpdate}
-                      /> */}
+                      <LanguageSelectBanner {...props}
+                        updateLanguage={this.handleLanguageUpdate}
+                      />
                       <Header {...props} />
                     </section>
-                  )} />
-                  <section className="coa-main">
-                    <Routes/>
-                  </section>
-                  <Footer />
-                </div>
-              )
-            }}
-          />
+                    <section className="coa-main">
+                      <Routes/>
+                    </section>
+                    <Footer />
+                  </div>
+                )
+              }}
+            />
+          </div>
         </Router>
+      </IntlProvider>
     );
   }
 }

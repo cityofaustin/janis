@@ -1,5 +1,5 @@
-const departmentPageQuery = `
-  query departmentPageQuery($id:ID) {
+const allDepartmentPagesQuery = `
+  query allDepartmentPagesQuery($id:ID) {
     allDepartments(id: $id) {
       edges {
         node {
@@ -43,4 +43,4 @@ const departmentPageQuery = `
     }
   }`;
 
-export default departmentPageQuery;
+export default allDepartmentPagesQuery;
