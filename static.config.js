@@ -120,7 +120,7 @@ export default {
         path: '/',
         component: 'src/js/pages/Home',
       },
-      allPages(),
+      ...allPages(),
       {
         path: `/en`,
         component: 'src/js/pages/Home',
