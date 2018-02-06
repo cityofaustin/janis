@@ -1,12 +1,11 @@
 
-import { request } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import servicePageQuery from 'js/queries/servicePageQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
-import topicPageQuery from 'js/queries/topicPageQuery';
-import departmentPageQuery from 'js/queries/departmentPageQuery';
+import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
+import { SUPPORTED_LANGUAGES } from 'js/constants/languages';
 
 const { CMS_API } = process.env;
 
@@ -15,21 +14,104 @@ export default {
     title: 'City of Austin',
   }),
   getRoutes: async () => {
+    // In order to pass new headers, we have to reintantiate a new
+    // GraphQLClient constructor.
+    // https://github.com/graphcool/graphql-request/issues/33
+    const createGraphQLClientsByLang = async (lang) => {
+      return new GraphQLClient(CMS_API, {
+        headers: { 'Accept-Language': lang }
+      })
+    }
 
-    const { allServicePages } = await request(
-      CMS_API,
-      allServicePagesQuery
-    )
+    // TODO: There's a bunch of redundant code that could be cleaned up by
+    // looping through the SUPPORTED_LANGUAGES.
+    const enGraphQLClient = await createGraphQLClientsByLang('en');
+    const esGraphQLClient = await createGraphQLClientsByLang('es');
+    const viGraphQLClient = await createGraphQLClientsByLang('vi');
+    const arGraphQLClient = await createGraphQLClientsByLang('ar');
 
-    const { allTopics } = await request(
-      CMS_API,
-      allTopicPagesQuery
-    )
+    const { allServicePages } = await enGraphQLClient.request(allServicePagesQuery)
+    const { allTopics } = await enGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments } = await enGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_es } = await esGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(allDepartmentPagesQuery)
 
-    const { allDepartments } = await request(
-      CMS_API,
-      departmentPageQuery
-    )
+    const serviceQueries = {
+      en: allServicePages,
+      es: allServicePages_es,
+      vi: allServicePages_vi,
+      ar: allServicePages_ar,
+    }
+
+    const topicQueries = {
+      en: allTopics,
+      es: allTopics_es,
+      vi: allTopics_vi,
+      ar: allTopics_ar,
+    }
+
+    const departmentQueries = {
+      en: allDepartments,
+      es: allDepartments_es,
+      vi: allDepartments_vi,
+      ar: allDepartments_ar,
+    }
+
+    const allPages = (langCode = 'en') => {
+      return [{
+        path: '/services',
+        component: 'src/js/pages/Services',
+        getProps: () => ({
+          allServicePages: serviceQueries[langCode],
+        }),
+        children: serviceQueries[langCode].edges.map(service => ({
+          path: `/${service.node.slug}`,
+          component: 'src/js/pages/Service',
+          getProps: () => ({
+            service: service.node,
+          }),
+        })),
+      },
+      {
+        path: '/topics',
+        component: 'src/js/pages/Topics',
+        getProps: () => ({
+          allTopics: topicQueries[langCode],
+        }),
+        children: topicQueries[langCode].edges.map(topic => ({
+          path: `/${topic.node.id}`,
+          component: 'src/js/pages/Topic',
+          getProps: () => ({
+            topic: topic.node,
+          })
+        }))
+      },
+      {
+        path: '/departments',
+        component: 'src/js/pages/Departments',
+        getProps: () => ({
+          allDepartments: departmentQueries[langCode],
+        }),
+        children: departmentQueries[langCode].edges.map(department => ({
+          path: `${department.node.id}`,
+          component: 'src/js/pages/Department',
+          getProps: () => ({
+            department: department.node,
+          })
+        }))
+      },
+      {
+        path: '/search',
+        component: 'src/js/pages/Search',
+      },
+    ]}
 
 
     return [
@@ -37,67 +119,26 @@ export default {
         path: '/',
         component: 'src/js/pages/Home',
       },
+      ...allPages(),
       {
-        path: '/services',
-        component: 'src/js/pages/Services',
-        getProps: () => ({
-          allServicePages,
-        }),
-        children: allServicePages.edges.map(service => ({
-          path: `/${service.node.slug}`,
-          component: 'src/js/pages/Service',
-          getProps: async () => {
-            const { servicePage } = await request(
-              CMS_API,
-              servicePageQuery,
-              { slug: service.node.slug }
-            );
-            return { servicePage };
-          },
-        })),
+        path: `/en`,
+        component: 'src/js/pages/Home',
+        children: allPages('en'),
       },
       {
-        path: '/topics',
-        component: 'src/js/pages/Topics',
-        getProps: () => ({
-          allTopics,
-        }),
-        children: allTopics.edges.map(topic => ({
-          path: `/${topic.node.id}`,
-          component: 'src/js/pages/Topic',
-          getProps: async () => {
-            const { allTopics } = await request(
-              CMS_API,
-              topicPageQuery,
-              { id: topic.node.id },
-            );
-            return allTopics.edges[0].node;
-          }
-        }))
+        path: `/es`,
+        component: 'src/js/pages/Home',
+        children: allPages('es'),
       },
       {
-        path: '/departments',
-        component: 'src/js/pages/Departments',
-        getProps: () => ({
-          allDepartments
-        }),
-        children: allDepartments.edges.map(dept => ({
-          path: `${dept.node.id}`,
-          component: 'src/js/pages/Department',
-          getProps: async () => {
-            const { allDepartments } = await request(
-              CMS_API,
-              departmentPageQuery,
-              { id: dept.node.id },
-            );
-            const departmentData = allDepartments.edges[0]
-            return departmentData;
-          }
-        }))
+        path: `/vi`,
+        component: 'src/js/pages/Home',
+        children: allPages('vi'),
       },
       {
-        path: '/search',
-        component: 'src/js/pages/Search',
+        path: `/ar`,
+        component: 'src/js/pages/Home',
+        children: allPages('ar'),
       },
       {
         is404: true,
