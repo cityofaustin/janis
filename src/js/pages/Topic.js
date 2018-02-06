@@ -9,7 +9,6 @@ import Hero from 'js/modules/Hero';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
-import topicPageQuery from 'js/queries/topicPageQuery';
 
 const Topic = ({ topic }) => {
   const title = get(topic, "text", null);

@@ -4,8 +4,7 @@ import { GraphQLClient } from 'graphql-request';
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
-import topicPageQuery from 'js/queries/topicPageQuery';
-import departmentPageQuery from 'js/queries/departmentPageQuery';
+import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import { SUPPORTED_LANGUAGES } from 'js/constants/languages';
 
 const { CMS_API } = process.env;
@@ -33,16 +32,16 @@ export default {
 
     const { allServicePages } = await enGraphQLClient.request(allServicePagesQuery)
     const { allTopics } = await enGraphQLClient.request(allTopicPagesQuery)
-    const { allDepartments } = await enGraphQLClient.request(departmentPageQuery)
+    const { allDepartments } = await enGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
-    const { allDepartments: allDepartments_es } = await esGraphQLClient.request(departmentPageQuery)
+    const { allDepartments: allDepartments_es } = await esGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
-    const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(departmentPageQuery)
+    const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
-    const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(departmentPageQuery)
+    const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(allDepartmentPagesQuery)
 
     const serviceQueries = {
       en: allServicePages,
