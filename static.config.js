@@ -1,5 +1,5 @@
 
-import { request } from 'graphql-request';
+import { GraphQLClient } from 'graphql-request';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
@@ -15,30 +15,64 @@ export default {
     title: 'City of Austin',
   }),
   getRoutes: async () => {
+    // In order to pass new headers, we have to reintantiate a new
+    // GraphQLClient constructor.
+    // https://github.com/graphcool/graphql-request/issues/33
+    const createGraphQLClientsByLang = async (lang) => {
+      return new GraphQLClient(CMS_API, {
+        headers: { 'Accept-Language': lang }
+      })
+    }
 
-    const { allServicePages } = await request(
-      CMS_API,
-      allServicePagesQuery
-    )
+    // TODO: There's a bunch of redundant code that could be cleaned up by
+    // looping through the SUPPORTED_LANGUAGES.
+    const enGraphQLClient = await createGraphQLClientsByLang('en');
+    const esGraphQLClient = await createGraphQLClientsByLang('es');
+    const viGraphQLClient = await createGraphQLClientsByLang('vi');
+    const arGraphQLClient = await createGraphQLClientsByLang('ar');
 
-    const { allTopics } = await request(
-      CMS_API,
-      allTopicPagesQuery
-    )
+    const { allServicePages } = await enGraphQLClient.request(allServicePagesQuery)
+    const { allTopics } = await enGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments } = await enGraphQLClient.request(departmentPageQuery)
+    const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_es } = await esGraphQLClient.request(departmentPageQuery)
+    const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(departmentPageQuery)
+    const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
+    const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
+    const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(departmentPageQuery)
 
-    const { allDepartments } = await request(
-      CMS_API,
-      departmentPageQuery
-    )
+    const serviceQueries = {
+      en: allServicePages,
+      es: allServicePages_es,
+      vi: allServicePages_vi,
+      ar: allServicePages_ar,
+    }
 
-    const allPages = [
-      {
+    const topicQueries = {
+      en: allTopics,
+      es: allTopics_es,
+      vi: allTopics_vi,
+      ar: allTopics_ar,
+    }
+
+    const departmentQueries = {
+      en: allDepartments,
+      es: allDepartments_es,
+      vi: allDepartments_vi,
+      ar: allDepartments_ar,
+    }
+
+    const allPages = (langCode = 'en') => {
+      return [{
         path: '/services',
         component: 'src/js/pages/Services',
         getProps: () => ({
-          allServicePages,
+          allServicePages: serviceQueries[langCode],
         }),
-        children: allServicePages.edges.map(service => ({
+        children: serviceQueries[langCode].edges.map(service => ({
           path: `/${service.node.slug}`,
           component: 'src/js/pages/Service',
           getProps: () => ({
@@ -50,9 +84,9 @@ export default {
         path: '/topics',
         component: 'src/js/pages/Topics',
         getProps: () => ({
-          allTopics,
+          allTopics: topicQueries[langCode],
         }),
-        children: allTopics.edges.map(topic => ({
+        children: topicQueries[langCode].edges.map(topic => ({
           path: `/${topic.node.id}`,
           component: 'src/js/pages/Topic',
           getProps: () => ({
@@ -64,9 +98,9 @@ export default {
         path: '/departments',
         component: 'src/js/pages/Departments',
         getProps: () => ({
-          allDepartments
+          allDepartments: departmentQueries[langCode],
         }),
-        children: allDepartments.edges.map(department => ({
+        children: departmentQueries[langCode].edges.map(department => ({
           path: `${department.node.id}`,
           component: 'src/js/pages/Department',
           getProps: () => ({
@@ -78,25 +112,35 @@ export default {
         path: '/search',
         component: 'src/js/pages/Search',
       },
-    ]
+    ]}
 
-    const allPagesWithLangCode = [];
-
-    SUPPORTED_LANGUAGES.map((lang) => {
-      allPagesWithLangCode.push({
-        path: `/${lang.code}`,
-        component: 'src/js/pages/Home',
-        children: allPages,
-      });
-    });
 
     return [
       {
         path: '/',
         component: 'src/js/pages/Home',
       },
-      ...allPagesWithLangCode,
-      ...allPages,
+      allPages(),
+      {
+        path: `/en`,
+        component: 'src/js/pages/Home',
+        children: allPages('en'),
+      },
+      {
+        path: `/es`,
+        component: 'src/js/pages/Home',
+        children: allPages('es'),
+      },
+      {
+        path: `/vi`,
+        component: 'src/js/pages/Home',
+        children: allPages('vi'),
+      },
+      {
+        path: `/ar`,
+        component: 'src/js/pages/Home',
+        children: allPages('ar'),
+      },
       {
         is404: true,
         component: 'src/js/pages/404',
