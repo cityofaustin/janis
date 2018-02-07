@@ -3,7 +3,8 @@
 set -o errexit
 
 TAG=${TAG:-janis-build:local}
-CMS_URL=${CMS_URL:-https://joplin.herokuapp.com}
+HOST_IP=$(ifconfig en0 | awk '$1 == "inet" {print $2}')
+CMS_URL=${CMS_URL:-http://$HOST_IP:8000}
 
 echo "Building image..."
 docker build \
