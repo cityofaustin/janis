@@ -20,5 +20,5 @@ docker run \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --env "CMS_API=http://$HOST_IP:8000/api/graphql/" \
-    "$TAG" "$@"
     --env "CMS_MEDIA=http://$HOST_IP:8000/media" \
+    "$TAG" "$@"
