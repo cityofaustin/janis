@@ -1,4 +1,4 @@
-.coa-search {
+.coa-GlobalSearch {
   input {
     border: 1px solid $color-white;
   }
@@ -7,5 +7,20 @@
     background-color: $color-white;
     color: $color-black;
     border-left: 2px solid $color-gray-light;
+  }
+}
+
+.coa-GlobalSearch__button {
+  background-image: none !important;
+  &:hover {
+    svg path {
+      fill: $color-white;
+    }
+  }
+}
+
+.coa-GlobalSearch__icon {
+  @include media($coa-small-screen) {
+    display: none;
   }
 }
