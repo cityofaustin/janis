@@ -13,7 +13,7 @@
   @include media($coa-small-screen) {
     height: 24rem;
   }
-  @include media($medium-screen) {
+  @include media($coa-medium-screen) {
     height: 32rem;
   }
 }
@@ -30,5 +30,18 @@
 .coa-Hero__home {
   flex-direction: column;
   padding: 4rem;
+  height: 26rem;
+  @include media($coa-small-screen) {
+    height: 26rem;
+  }
+  @include media($coa-medium-screen) {
+    height: 40rem;
+  }
+  @include media($coa-large-screen) {
+    height: 44rem;
+  }
+}
 
+.coa-Hero__overlay {
+  background-color: rgba(#240B33, .3);
 }
