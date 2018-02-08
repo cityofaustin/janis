@@ -13,11 +13,10 @@ class Home extends Component {
 
 		return (
 			<div>
-        <Hero home={true}
-          callout={'Welcome to Austin.gov'}
-          image={homepageImage}
-        >
-          <GlobalSearch />
+        <Hero home={true} image={homepageImage}>
+          <span class="coa-Hero__home-preheader">Welcome to</span>
+          <h2 class="coa-Hero__home-header">Austin, TX</h2>
+          <GlobalSearch placeholder="Search for services" />
         </Hero>
 	      <section className="wrapper coa-section">
 	        <h1> Home Page </h1>️

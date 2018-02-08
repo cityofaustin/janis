@@ -1,0 +1,11 @@
+.coa-search {
+  input {
+    border: 1px solid $color-white;
+  }
+  button {
+    font-size: 20px !important;
+    background-color: $color-white;
+    color: $color-black;
+    border-left: 2px solid $color-gray-light;
+  }
+}

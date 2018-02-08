@@ -31,6 +31,11 @@
   flex-direction: column;
   padding: 4rem;
   height: 26rem;
+  color: $color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @include media($coa-small-screen) {
     height: 26rem;
   }
@@ -40,8 +45,25 @@
   @include media($coa-large-screen) {
     height: 44rem;
   }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
 }
 
-.coa-Hero__overlay {
-  background-color: rgba(#240B33, .3);
+.coa-Hero__home-children {
+  max-width: 75%;
+}
+
+.coa-Hero__home-preheader {
+  font-size: 24px;
+  @include media($coa-medium-screen) {
+    font-size: 40px;
+  }
+}
+
+.coa-Hero__home-header {
+  font-size: 44px;
+  @include media($coa-medium-screen) {
+    font-size: 100px;
+  }
 }

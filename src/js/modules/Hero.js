@@ -9,6 +9,10 @@ class Hero extends Component {
       image ? `${process.env.CMS_MEDIA}/${image.file}` : '';
 
     const HeroImageStyles = {
+      backgroundImage: `url(${heroImageSrc})`
+    }
+
+    const HomepageHeroImageStyles = {
       background: `
         linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
         url(${heroImageSrc})
@@ -19,17 +23,14 @@ class Hero extends Component {
 
     if (home) {
       return (
-        <div className="coa-Hero__overlay">
-          <div
-            className="coa-Hero--image coa-Hero__home"
-            style={HeroImageStyles}
-            role="img"
-            aria-label={image.title}
-          >
-            <div className="wrapper">
-              <h2>{callout}</h2>
-              {this.props.children}
-            </div>
+        <div
+          className="coa-Hero--image coa-Hero__home"
+          style={HomepageHeroImageStyles}
+          role="img"
+          aria-label={image.title}
+        >
+          <div className="coa-Hero__home-children">
+            {this.props.children}
           </div>
         </div>
       )
