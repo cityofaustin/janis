@@ -14,8 +14,8 @@ class Home extends Component {
 		return (
 			<div>
         <Hero home={true} image={homepageImage}>
-          <span class="coa-Hero__home-preheader">Welcome to</span>
-          <h2 class="coa-Hero__home-header">Austin, TX</h2>
+          <span className="coa-Hero__home-preheader">Welcome to</span>
+          <h2 className="coa-Hero__home-header">Austin, TX</h2>
           <GlobalSearch placeholder="Search for services" />
         </Hero>
 	      <section className="wrapper coa-section">
