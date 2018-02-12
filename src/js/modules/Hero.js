@@ -4,13 +4,37 @@ class Hero extends Component {
 
   render() {
     const { image, callout, home } = this.props;
-    const heroImageSrc = image ?`${process.env.CMS_MEDIA}/${image.file}` : '';
+    const heroImageSrc = image && home ?
+      image.file :
+      image ? `${process.env.CMS_MEDIA}/${image.file}` : '';
 
     const HeroImageStyles = {
-      backgroundImage: `url(${heroImageSrc})`,
+      backgroundImage: `url(${heroImageSrc})`
     }
 
-    if (image) {
+    const HomepageHeroImageStyles = {
+      background: `
+        linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
+        url(${heroImageSrc})
+      `,
+      backgroundSize: 'cover',
+      backgroundPosition: '50%',
+    }
+
+    if (home) {
+      return (
+        <div
+          className="coa-Hero--image coa-Hero__home"
+          style={HomepageHeroImageStyles}
+          role="img"
+          aria-label={image.title}
+        >
+          <div className="coa-Hero__home-children">
+            {this.props.children}
+          </div>
+        </div>
+      )
+    } else if (image) {
       return (
         <div
           className="coa-Hero--image"
@@ -21,7 +45,7 @@ class Hero extends Component {
       )
     } else if (callout) {
       return (
-        <div className={`coa-Hero ${home ? 'coa-Hero__home': 'coa-Hero__callout'}`}>
+        <div className="coa-Hero coa-Hero__callout">
           <div className="wrapper">
             <h2>{callout}</h2>
             {this.props.children}
