@@ -33,7 +33,7 @@ class Header extends Component {
                 MENU
               </span>
               <span className="coa-text-spacer--vertical"></span>
-              <Link to={'/'}>AUSTIN.GOV</Link>
+              <Link to={'/'}>alpha.AUSTIN.GOV</Link>
             </div>
             <div className="col-xs-6 coa-Header__search">
               <Link to={'/search'}>
