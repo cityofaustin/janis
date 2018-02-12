@@ -27,10 +27,12 @@ class LanguageWrapper extends Component {
     // Normally, we only want the two letter lowercased language abbreviation
     // bc we aren't worried about locale (ex: en-US vs. en-UK) at this point,
     // just language.
-    const twoLetterLangCode = locale().split('-')[0].toLowerCase();
-    // But we do want to support two types of Chinese (zh-tw & zh-cn)
-    const isChinese = twoLetterLangCode === 'zh';
-    return isChinese ? locale().toLowerCase() : twoLetterLangCode;
+    if (typeof document !== 'undefined') {
+      const twoLetterLangCode = locale().split('-')[0].toLowerCase();
+      // But we do want to support two types of Chinese (zh-tw & zh-cn)
+      const isChinese = twoLetterLangCode === 'zh';
+      return isChinese ? locale().toLowerCase() : twoLetterLangCode;
+    }
   }
 
   setLanguage = () => {
