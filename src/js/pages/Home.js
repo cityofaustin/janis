@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import GlobalSearch from 'js/modules/GlobalSearch';
+import { get } from 'lodash';
+
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
+import Service311 from 'js/page_sections/Service311';
+import GlobalSearch from 'js/modules/GlobalSearch';
 import Hero from 'js/modules/Hero';
 import ExternalLink from 'js/modules/ExternalLink';
 import homepageImg from 'images/lady_bird_lake.jpg';
+
+import jsonFileData from '__tmpdata/services';
+const services311 = get(jsonFileData, "services311", null);
+
 
 class Home extends Component {
 
@@ -28,8 +35,7 @@ class Home extends Component {
         </Hero>
         <SecondaryContentBanner content={bannerContent()} />
 	      <section className="wrapper coa-section">
-	        <h1> Home Page </h1>️
-	        <p>just a placeholder</p>
+          <Service311 services311={services311} />
 	      </section>
 			</div>
     );
