@@ -15,6 +15,9 @@ RUN yarn
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 
+ARG FEEDBACK_API
+ENV FEEDBACK_API=${FEEDBACK_API:-https://coa-test-form-api.herokuapp.com/process/}
+
 ARG CMS_API
 ENV CMS_API=${CMS_API:-https://joplin.herokuapp.com/api/graphql/}
 

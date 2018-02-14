@@ -1,50 +1,17 @@
 import axios from 'axios';
-import { get } from 'lodash';
-import request from 'graphql-request';
 
+export const postFeedback = (data) => {
 
+  const { title, description, email } = data;
 
-
-// queries
-import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-
-// clean data helpers
-import { cleanServiceLinks } from 'js/helpers/cleanData';
-
-export const fetchServices = (lang) => {
-  request(
-    `${process.env.CMS_API}`,
-    allServicePagesQuery
-  )
-}
-
-export const fetchData = (slug, lang = this.props.lang) => {
-  console.log('fetching data', ` for ${slug}`, ` in ${lang}`)
-
-  if (process.env.NODE_ENV !== 'production') {
-    // Allow querystrings to set data, which is used in joplin for livepreview
-    const query = parse(this.props.location.search);
-    if (query.preview) {
-      const data = JSON.parse(query.d);
-      // this.setState({ data: data });
-      return data;
-    }
-  }
-
-  axios
+  return axios
     .create({
-      headers: { 'Accept-Language': lang }
+      headers: { 'Content-Type': 'application/json' }
     })
-    .post(`${process.env.CMS_API}`, {
-      query: servicePageQuery,
-      variables: {
-        slug: slug,
-      }
+    .post(`${process.env.FEEDBACK_API}`, {
+      destination: 'githubIssue',
+      repository: 'janis',
+      title: `site-feedback-${title}`,
+      description: `**Description:**\n${description}\n\n**Contact:** ${email}\n_maybe email should not be collected, or stored differently to protect privacy_`
     })
-    .then(res => {
-      const data = this.cleanData(res);
-      return data;
-      // this.setState({ data: data });
-    })
-    .catch(err => console.log(err))
 }

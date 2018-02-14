@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { postFeedback } from 'js/helpers/fetchData';
 
 const rules = {
   'email': (value) => {
@@ -30,7 +31,8 @@ class FormFeedback extends Component {
     this.state = {
       stage: 1,
       values: {},
-      errors: {}
+      errors: {},
+      successUrl: null
     };
   }
 
@@ -71,7 +73,8 @@ class FormFeedback extends Component {
     this.setState({
       stage: 1,
       values: {},
-      errors: {}
+      errors: {},
+      successUrl: null
     });
   }
 
@@ -85,10 +88,20 @@ class FormFeedback extends Component {
       });
       return;
     }
-    //TODO: post data as needed
-    // after successful form submit
-    this.setState({
-      stage: 0
+
+    postFeedback({
+      title: this.state.values['site-feedback-options'],
+      description: this.state.values['site-feedback-textarea'],
+      email: this.state.values['site-feedback-email']
+    })
+    .then(({data: data}) => {
+      this.setState({
+        stage: 0,
+        successUrl: data.url
+      })
+    })
+    .catch((e) => {
+      console.log('error submitting form.', e)
     })
   }
 
@@ -269,7 +282,7 @@ class FormFeedback extends Component {
           <div className="coa-overlay">
             <div className="coa-overlay__content">
               <h4>Thank you for sharing your feedback!</h4>
-              <p>You can see your feedback in our <a href="#">austin.gov feedback tracker</a></p>
+              <p>You can see your feedback in our <a href={this.state.successUrl} target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">austin.gov feedback tracker</a></p>
               <button className="usa-button" onClick={this.handleResetForm}>Done</button>
             </div>
           </div>
