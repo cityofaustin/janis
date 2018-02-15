@@ -10,7 +10,7 @@ export const postFeedback = (data) => {
     })
     .post(`${process.env.FEEDBACK_API}`, {
       destination: 'githubIssue',
-      repository: 'janis',
+      repository: 'alpha-public-feedback',
       title: `site-feedback-${title}`,
       description: `**Description:**\n${description}\n\n**Contact:** ${email}\n_maybe email should not be collected, or stored differently to protect privacy_`
     })
