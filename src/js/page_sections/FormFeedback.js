@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { postFeedback } from 'js/helpers/fetchData';
+import { logEvent } from 'js/helpers/googleAnalytics';
 
 const rules = {
   'email': (value) => {
@@ -36,6 +37,17 @@ class FormFeedback extends Component {
     };
   }
 
+  logEvent(action, label) {
+
+    let analyticsEvent = {
+      category: 'FORM__site-feedback',
+      action: `${action}__stage-${this.state.stage}`,
+      label: label
+    }
+
+    logEvent(analyticsEvent);
+  }
+
   handleFieldChange = (e) => {
 
     const values = Object.assign(this.state.values);
@@ -54,12 +66,14 @@ class FormFeedback extends Component {
     const errors = this.validate(this.state.values);
 
     if (!this.isValid(errors)) {
+      this.logEvent('next--error', JSON.stringify(errors));
       this.setState({
         errors: errors
       });
       return;
     }
 
+    this.logEvent('next--success');
     this.setState((prevState)=> {
       return {
         stage: prevState.stage + 1,
@@ -69,6 +83,8 @@ class FormFeedback extends Component {
   }
 
   handleResetForm = (e) => {
+
+    this.logEvent('reset');
 
     this.setState({
       stage: 1,
@@ -83,11 +99,14 @@ class FormFeedback extends Component {
     const errors = this.validate(this.state.values);
 
     if (!this.isValid(errors)) {
+      this.logEvent('submit--errors', JSON.stringify(errors));
       this.setState({
         errors: errors
       });
       return;
     }
+
+    this.logEvent('submit--success');
 
     postFeedback({
       title: this.state.values['site-feedback-options'],
@@ -120,7 +139,7 @@ class FormFeedback extends Component {
   validate(values) {
 
     const fields = formConfig.stage[this.state.stage];
-    const errors = [];
+    const errors = {};
 
     fields.forEach((field) => {
       errors[field] = this.validateField(field, values[field]);
