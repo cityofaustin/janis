@@ -113,7 +113,7 @@ class FormFeedback extends Component {
       description: this.state.values['site-feedback-textarea'],
       email: this.state.values['site-feedback-email']
     })
-    .then(({data: data}) => {
+    .then(({data}) => {
       this.setState({
         stage: 0,
         successUrl: data.url
