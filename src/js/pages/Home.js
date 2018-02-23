@@ -32,9 +32,7 @@ const Home = ({ allServicePages }) => {
         <GlobalSearch placeholder="Search for services" />
       </Hero>
       <SecondaryContentBanner content={bannerContent()} />
-      <section className="wrapper coa-section">
-        <Service311 services311={services311} />
-      </section>
+      <Service311 services311={services311} />
     </div>
   );
 }
