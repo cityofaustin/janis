@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TwitterSVG from 'js/svg/Twitter';
 import FacebookSVG from 'js/svg/Facebook';
 import GithubSVG from 'js/svg/Github';
-import ExternalLinkSVG from 'js/svg/ExternalLink';
+import ExternalLink from 'js/modules/ExternalLink';
 
 class Footer extends Component {
 
@@ -17,7 +17,7 @@ class Footer extends Component {
               </div>
               <div className="col-xs-12 col-md-6 last-md">
                 <p className="coa-Footer__body-text">
-                  Austin.gov is a new website and a work in progress. For the full City of Austin website, visit <a href="http://austintexas.gov" target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">austintexas.gov <ExternalLinkSVG size="13"/></a>. Learn more about the new website at <a href="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/" target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">projects.austintexas.io <ExternalLinkSVG size="13"/></a>.
+                  Austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="http://austintexas.gov" iconSize="13">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/" iconSize="13">projects.austintexas.io</ExternalLink>.
                 </p>
               </div>
               <div className="col-xs-12 col-md-6">
