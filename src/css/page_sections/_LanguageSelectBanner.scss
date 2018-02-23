@@ -24,8 +24,8 @@
 
 .coa-LanguageSelectBanner__dropdown-menu {
   position: absolute;
-  background-color: $color-gray-light;
-  top: 5rem;
+  background-color: $color-white;
+  top: -400px;
   right: 0;
   padding: $coa-space-level4 $coa-space-level2;
   width: 100vw;
@@ -36,15 +36,9 @@
 }
 
 .coa-LanguageSelectBanner__dropdown-menu--open {
-  background-color: $color-white;
   border-bottom: 1px solid $color-gray-light;
+  top: 5rem;
 }
-
-.coa-LanguageSelectBanner__dropdown-menu--closed {
-  background-color: $color-white;
-  top: -400px;
-}
-
 
 .coa-LanguageSelectBanner__language-list {
   list-style: none;
@@ -52,22 +46,17 @@
 }
 
 .coa-LanguageSelectBanner__language-item {
-  padding: 0 $coa-space-level2;
   cursor: pointer;
   width: 100%;
   padding: $coa-space-level1 $coa-space-level2;
-  margin-bottom: 0;
+  display: block;
+  text-decoration: none;
+  color: $color-black;
+  &:visited {
+    color: $color-black;
+  }
   &:hover {
     background-color: $color-gray-light;
-  }
-  a {
-    width: 100%;
-    display: block;
-    text-decoration: none;
-    color: $color-black;
-    &:visited {
-      color: $color-black;
-    }
   }
 }
 

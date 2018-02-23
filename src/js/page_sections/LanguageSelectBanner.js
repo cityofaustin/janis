@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-static';
+import { NavLink } from 'react-static';
 import Cookies from 'js-cookie'
-
-import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
+import { find } from 'lodash'
+import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
 import CaretUpSVG from 'js/svg/CaretUp';
 
@@ -12,28 +12,6 @@ class LanguageSelectBanner extends Component {
     this.state = {
       isOpen: false,
     };
-  }
-
-  getBannerClassName = () => {
-    const baseClass = 'coa-LanguageSelectBanner';
-    return `${baseClass} ${this.state.isOpen ? `${baseClass}--open` : ''}`;
-  }
-
-  getLanguageItemClassName = (language) => {
-    const blockElementClassname = `coa-LanguageSelectBanner__language-item`;
-    let classNames = blockElementClassname;
-
-    if (language.code === this.props.lang) {
-      classNames = classNames + ` ${blockElementClassname}--active`;
-    }
-
-    return classNames;
-  }
-
-  getMenuClassName = () => {
-    const base = `coa-LanguageSelectBanner__dropdown-menu`;
-
-    return this.state.isOpen ? `${base} ${base}--open` : `${base} ${base}--closed`;
   }
 
   handleExpandMenu = () => {
@@ -50,8 +28,10 @@ class LanguageSelectBanner extends Component {
 
   render() {
 
+    const selectedLanguage = find(SUPPORTED_LANGUAGES, {'code': this.props.lang});
+
     return (
-      <div className={this.getBannerClassName()}>
+      <div className={`coa-LanguageSelectBanner ${this.state.isOpen ? 'coa-LanguageSelectBanner--open' : ''}`}>
         <div className="wrapper">
           <div className="row">
             <div className="col-md-12 col-xs-12">
@@ -60,7 +40,7 @@ class LanguageSelectBanner extends Component {
               >
                 <span>Choose Language
                   <span className="coa-link coa-LanguageSelectBanner__choose-language-link">
-                    {this.props.lang}
+                    { selectedLanguage.title }
                   </span>
                 </span>
                 {
@@ -68,23 +48,24 @@ class LanguageSelectBanner extends Component {
                     <CaretUpSVG size="20"/> :
                     <CaretDownSVG size="20"/>
                 }
-                <div className={this.getMenuClassName()}>
+                <div className={`coa-LanguageSelectBanner__dropdown-menu ${this.state.isOpen ? 'coa-LanguageSelectBanner__dropdown-menu--open' : ''}`}>
                   <div className="wrapper">
                     <h4 className="coa-LanguageSelectBanner__menu-header">
                       Translated by City of Austin
                     </h4>
                     <ul className="coa-LanguageSelectBanner__language-list">
-                      { SUPPORTED_LANGUAGES.map((language, i) => {
+                      { SUPPORTED_LANGUAGES.map(({title, abbr, code}, i) => {
                         return (
                           <li
-                            className={this.getLanguageItemClassName(language)}
                             key={i}
                           >
-                            <Link
-                              to={`/${language.code}/${this.props.path}`}
+                            <NavLink
+                              to={`/${code}/${this.props.path}`}
+                              className="coa-LanguageSelectBanner__language-item"
+                              activeClassName="coa-LanguageSelectBanner__language-item--active"
                             >
-                              {language.title}
-                            </Link>
+                              {title}
+                            </NavLink>
                           </li>
                         )
                       })
