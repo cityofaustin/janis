@@ -1,0 +1,11 @@
+.coa-SecondaryContentBanner {
+  display: inline-block;
+  width: 100%;
+  background-color: $coa-color-light-purple;
+  color: $coa-color-dark-purple;
+  p {
+    margin: $coa-space-level7 auto;
+    text-align: center;
+    line-height: $coa-space-level6;
+  }
+}

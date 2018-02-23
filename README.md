@@ -3,11 +3,17 @@ Frontend for [joplin](https://github.com/cityofaustin/joplin).
 
 ## Run locally
 
+#### As a React App:
 ```
 ./scripts/serve-local.sh
 ```
-
 Your react app should be running at http://localhost:3000/
+
+#### As a React-Static Site:
+```
+./scripts/serve-build.sh
+```
+Your react app should be running at http://localhost:8080/
 
 
 ---
