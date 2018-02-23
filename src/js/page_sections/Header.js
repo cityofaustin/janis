@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import Navmenu from 'js/page_sections/Navmenu';
 import { Link } from 'react-static';
-import { getPathWithLangCode } from 'js/helpers/language';
 
 class Header extends Component {
   constructor(props) {
@@ -42,9 +41,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Navmenu {...this.props}
-          isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}
-        />
+        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
       </header>
     );
   }

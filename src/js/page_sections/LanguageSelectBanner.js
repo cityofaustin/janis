@@ -5,7 +5,6 @@ import Cookies from 'js-cookie'
 import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES } from 'js/constants/languages'
 import CaretDownSVG from 'js/svg/CaretDown';
 import CaretUpSVG from 'js/svg/CaretUp';
-import { getPathnameWithoutLangCode } from 'js/helpers/language';
 
 class LanguageSelectBanner extends Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class LanguageSelectBanner extends Component {
     const blockElementClassname = `coa-LanguageSelectBanner__language-item`;
     let classNames = blockElementClassname;
 
-    if (language.code === this.props.match.params.lang) {
+    if (language.code === this.props.lang) {
       classNames = classNames + ` ${blockElementClassname}--active`;
     }
 
@@ -37,28 +36,10 @@ class LanguageSelectBanner extends Component {
     return this.state.isOpen ? `${base} ${base}--open` : `${base} ${base}--closed`;
   }
 
-  handleSetLanguage = (e) => {
-    if (e.target.lang) {
-      this.props.updateLanguage(e.target.lang)
-      this.setState({
-        isOpen: false,
-      });
-    }
-  }
-
   handleExpandMenu = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
-
-  getActiveLanguageTitle = () => {
-    const setLanguage = Cookies.get('lang') || this.props.match.params.lang;
-    let activeLanguage = SUPPORTED_LANGUAGES.find((lang) => {
-      return lang.code === setLanguage;
-    });
-    activeLanguage = activeLanguage || SUPPORTED_LANGUAGES[0];
-    return activeLanguage.title;
   }
 
   handleCancel = () => {
@@ -68,7 +49,6 @@ class LanguageSelectBanner extends Component {
   }
 
   render() {
-    const languageTitle = this.getActiveLanguageTitle();
 
     return (
       <div className={this.getBannerClassName()}>
@@ -80,7 +60,7 @@ class LanguageSelectBanner extends Component {
               >
                 <span>Choose Language
                   <span className="coa-link coa-LanguageSelectBanner__choose-language-link">
-                    {languageTitle}
+                    {this.props.lang}
                   </span>
                 </span>
                 {
@@ -96,13 +76,12 @@ class LanguageSelectBanner extends Component {
                     <ul className="coa-LanguageSelectBanner__language-list">
                       { SUPPORTED_LANGUAGES.map((language, i) => {
                         return (
-                          <li onClick={this.handleSetLanguage}
+                          <li
                             className={this.getLanguageItemClassName(language)}
                             key={i}
                           >
                             <Link
-                              to={`/${language.code}/${getPathnameWithoutLangCode(this.props.location.pathname)}`}
-                              lang={language.code}
+                              to={`/${language.code}/${this.props.path}`}
                             >
                               {language.title}
                             </Link>

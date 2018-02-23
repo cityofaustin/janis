@@ -46,7 +46,7 @@ class Navmenu extends Component {
   getCurrentPath = () => {
     // this is dependent on react-router. We may want to use
     // `window.location.href` instead.
-    return this.props.location.pathname;
+    return window.location.href
   }
 
   getOverlayClassName = () => {

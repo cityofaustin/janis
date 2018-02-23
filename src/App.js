@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Router, Route } from 'react-static'
 import ReactGA from 'react-ga'
 import GoogleAnalyticsPageView from 'js/helpers/GoogleAnalyticsPageView'
-import LanguageWrapper from "js/components/LanguageWrapper"
+import LanguageWrapper from 'js/components/LanguageWrapper'
 
 import 'css/coa.css'
 
@@ -14,15 +14,7 @@ class App extends Component {
       <Router>
         <div>
           <Route path="/" component={GoogleAnalyticsPageView} />
-          <Route path={`/:lang?`}
-            render={(props) => {
-              return (
-                <LanguageWrapper {...props}
-                  urlPathLanguage={props.match.params.lang}
-                />
-              )
-            }}
-          />
+          <Route path="(/)?:lang([a-z]{2})?/:path*" component={LanguageWrapper} />
         </div>
       </Router>
     );
