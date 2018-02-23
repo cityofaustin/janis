@@ -4,6 +4,7 @@ import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
 import Service311 from 'js/page_sections/Service311';
+import ServicesList from 'js/page_sections/ServicesList';
 import GlobalSearch from 'js/modules/GlobalSearch';
 import Hero from 'js/modules/Hero';
 import ExternalLink from 'js/modules/ExternalLink';
@@ -32,6 +33,7 @@ const Home = ({ allServicePages }) => {
         <GlobalSearch placeholder="Search for services" />
       </Hero>
       <SecondaryContentBanner content={bannerContent()} />
+      <ServicesList />
       <Service311 services311={services311} />
     </div>
   );
