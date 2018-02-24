@@ -16,7 +16,7 @@ const body = get(jsonFileData, "servicespage.body", null);
 const services311 = get(jsonFileData, "services311", null);
 
 const Services = ({ allServicePages }) => {
-  const relatedlinks = cleanServiceLinks(allServicePages)
+  const relatedLinks = cleanServiceLinks(allServicePages)
 
   return (
     <div>
@@ -25,7 +25,7 @@ const Services = ({ allServicePages }) => {
         <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
       </div>
       <RelatedLinks
-        relatedlinks={relatedlinks}
+        relatedLinks={relatedLinks}
         sectionStyle="primary"
       />
       <div className="coa-section coa-section--lightgrey">

@@ -14,7 +14,7 @@ const Departments = ({ allDepartments }) => {
     <div className="wrapper">
       <Hero callout={"All Departments"} />
       <RelatedLinks
-        relatedlinks={links}
+        relatedLinks={links}
         sectionStyle="primary"
       />
     </div>

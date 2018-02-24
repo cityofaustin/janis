@@ -24,7 +24,7 @@ const Service = ({ service }) => {
   const services311 = get(jsonFileData, "services311", null);
   const image = service.image;
   const contacts = cleanContacts(service.contacts);
-  const relatedlinks = cleanRelatedServiceLinks(service.related);
+  const relatedLinks = cleanRelatedServiceLinks(service.related);
 
   return (
     <div> 
@@ -62,7 +62,7 @@ const Service = ({ service }) => {
       </div>
 
       <RelatedLinks
-        relatedlinks={relatedlinks}
+        relatedLinks={relatedLinks}
         sectionLink={{url: `/topics/${topicId}`, text: `See all services under ${topicName}`}}
         sectionStyle="primary"
         sectionTitle="Check out related city services"

@@ -118,9 +118,9 @@ export default {
       {
         path: '/',
         component: 'src/js/pages/Home',
-        // getProps: () => ({
-        //   allServicePages: serviceQueries['en'],
-        // }),
+        getProps: () => ({
+          allServicePages: serviceQueries['en'],
+        }),
       },
       ...allPages(),
       {

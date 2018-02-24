@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class SectionTitle extends Component {
+const SectionTitle = ({ title }) => (
+  <h3 className="coa_SectionTitle">{title}</h3>
+);
 
-  render() {
-
-    const { title, noBorder } = this.props;
-
-    return (
-      <div className={ `coa-section__title ${(noBorder && "coa-section__title--noborder" )}` }>
-        <h3>{title}</h3>
-      </div>
-    );
-  }
-}
+SectionTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  noBorder: PropTypes.bool,
+};
 
 export default SectionTitle;

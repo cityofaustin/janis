@@ -14,7 +14,7 @@ const Topic = ({ topic }) => {
   const title = get(topic, "text", null);
   const body = get(topic, "description", null);
   const links = get(topic, "services", null);
-  const relatedlinks = cleanServiceLinks(links);
+  const relatedLinks = cleanServiceLinks(links);
   const services311 = get(jsonFileData, "services311", null);
 
   return (
@@ -26,7 +26,7 @@ const Topic = ({ topic }) => {
       </div>
 
       <RelatedLinks
-        relatedlinks={relatedlinks}
+        relatedLinks={relatedLinks}
         sectionStyle="primary"
       />
 

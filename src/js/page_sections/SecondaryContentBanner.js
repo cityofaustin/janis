@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SecondaryContentBanner = (props) => (
-  <div className="coa-SecondaryContentBanner">
+  <div className="coa-SecondaryContentBanner wrapper">
     {props.content}
   </div>
 );
