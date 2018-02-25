@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
@@ -42,4 +42,4 @@ const Topic = ({ topic }) => {
   )
 }
 
-export default getRouteProps(Topic);
+export default withRouteData(Topic);

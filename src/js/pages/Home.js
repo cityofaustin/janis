@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
@@ -17,7 +17,7 @@ import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 
 const Home = ({ allServicePages }) => {
-  const serviceLinks = cleanServiceLinks(allServicePages).slice(0,4);
+  const serviceLinks = cleanServiceLinks(allServicePages);
 
   const homepageImage = {
     file: homepageImg,
@@ -48,4 +48,4 @@ const Home = ({ allServicePages }) => {
   );
 }
 
-export default getRouteProps(Home);
+export default withRouteData(Home);

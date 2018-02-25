@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 import { parse } from 'query-string';
-import { Link, getRouteProps } from 'react-static';
+import { Link, withRouteData } from 'react-static';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
@@ -82,4 +82,4 @@ const Service = ({ service }) => {
   )
 }
 
-export default getRouteProps(Service);
+export default withRouteData(Service);

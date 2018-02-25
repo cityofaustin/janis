@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 
 import Hero from 'js/modules/Hero';
@@ -39,4 +39,4 @@ const Services = ({ allServicePages }) => {
   )
 }
 
-export default getRouteProps(Services)
+export default withRouteData(Services)

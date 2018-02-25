@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 import { cleanContacts } from 'js/helpers/cleanData';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
@@ -68,4 +68,4 @@ const Department = ({ department }) => {
   )
 }
 
-export default getRouteProps(Department);
+export default withRouteData(Department);
