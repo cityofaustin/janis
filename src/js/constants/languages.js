@@ -49,6 +49,8 @@ export const SUPPORTED_LANGUAGES = [
 
 export const SUPPORTED_LANG_CODES = SUPPORTED_LANGUAGES.map(lang => lang.code);
 
-export const DAYS_UNTIL_LANG_COOKIE_EXPIRES = 10 * 365;
+export const LANG_COOKIE_NAME = 'lang';
+
+export const LANG_COOKIE_EXPIRES = 10 * 365; //days
 
 export const DEFAULT_LANG = 'en';

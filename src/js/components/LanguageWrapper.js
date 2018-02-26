@@ -1,28 +1,28 @@
 import React, { Component } from 'react'
-import { Router } from 'react-static'
+import { Route, Router } from 'react-static'
 import Routes from 'react-static-routes'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
+import { createBrowserHistory } from 'history'
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
-import { SUPPORTED_LANG_CODES, DAYS_UNTIL_LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
+import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
 
 class LanguageWrapper extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      lang: this.setLanguage()
+      lang: this.getInitialLangState()
     }
   }
 
-  setLanguage() {
-
-    const getLang = [this.getLangFromProps, this.getLangFromCookie, this.getLangFromLocale, this.getDefaultLang];
+  getInitialLangState() {
+    const getLang = [ this.getLangFromProps, this.getLangFromCookie, this.getLangFromLocale, ()=>DEFAULT_LANG ];
     const that = this;
 
     return getLang.reduce((lang, fn) => {
@@ -31,12 +31,12 @@ class LanguageWrapper extends Component {
     }, null)
   }
 
-  getSupportedLang(lang) {
-    return SUPPORTED_LANG_CODES.find( (val) => val===lang );
+  persistLang(lang) {
+    Cookies.set(LANG_COOKIE_NAME, lang, { expires: LANG_COOKIE_EXPIRES });
   }
 
-  getDefaultLang() {
-    return DEFAULT_LANG;
+  getSupportedLang(langToCheck) {
+    return SUPPORTED_LANG_CODES.find( (lang) => lang===langToCheck );
   }
 
   getLangFromProps(props) {
@@ -44,20 +44,22 @@ class LanguageWrapper extends Component {
     const lang = this.getSupportedLang(props.match.params.lang);
 
     if(!lang) return null;
+    //TODO: if not supported, redirect to path without lang
 
-    Cookies.set('lang', lang, { expires: DAYS_UNTIL_LANG_COOKIE_EXPIRES })
+    this.persistLang(lang);
     return lang;
   }
 
   getLangFromCookie() {
     if (typeof document === 'undefined') return null;
 
-    const lang = this.getSupportedLang(Cookies.get('lang'));
+    const lang = this.getSupportedLang(Cookies.get(LANG_COOKIE_NAME));
 
     if(!lang) return null;
+    //TODO: if not supported, unset COOKIE
 
     if(lang === DEFAULT_LANG) {
-      Cookies.set('lang', lang, { expires: DAYS_UNTIL_LANG_COOKIE_EXPIRES })
+      this.persistLang(lang);
       return lang;
     }
 
@@ -88,24 +90,44 @@ class LanguageWrapper extends Component {
 
   render() {
 
+    // const RenderRoutes = ({ getComponentForPath }) => (
+    //   // The default renderer uses a catch all route to recieve the pathname
+    //   <Route path='*' render={props => {
+    //     const path = (this.state.lang) ? '/'+this.state.lang + props.location.pathname : props.location.pathname;
+    //     const Comp = getComponentForPath(path);
+    //     return <Comp {...props} />
+    //   }} />
+    // );
+
+    const history = (typeof document !== 'undefined' && this.state.lang)
+      ? createBrowserHistory({basename: '/'+this.state.lang})
+      : null;
+
+// console.log('history:', !!history );
+
+    const children = (
+      <div>
+        <Header />
+        <section className="coa-main">
+          <Routes></Routes>
+        </section>
+        <Footer />
+      </div>
+    );
+
+    const JSX = (history)
+      ? <Router history={history}>{children}</Router>
+      : <Router>{children}</Router>
+
     return (
       <IntlProvider locale={this.state.lang}>
-        <Router>
-          <div>
-            <section>
-              <LanguageSelectBanner lang={this.state.lang} path={this.props.match.params.path || ''}/>
-              <Header />
-            </section>
-            <section className="coa-main">
-              <Routes/>
-            </section>
-            <Footer />
-          </div>
-        </Router>
+        <div>
+          <LanguageSelectBanner lang={this.state.lang} path={this.props.match.params.path || ''}/>
+          {JSX}
+        </div>
       </IntlProvider>
     );
   }
-
 }
 
 export default LanguageWrapper;
