@@ -4,8 +4,10 @@
   background-color: $coa-color-light-purple;
   color: $coa-color-dark-purple;
   p {
+    max-width: 100% !important; // TODO: talk to simi about coa-main
     margin: $coa-space-level7 auto;
     text-align: center;
-    line-height: $coa-space-level6;
+    line-height: $coa-space-level7;
+    font-size: 24px;
   }
 }

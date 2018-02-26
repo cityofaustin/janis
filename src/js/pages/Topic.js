@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
@@ -14,7 +14,7 @@ const Topic = ({ topic }) => {
   const title = get(topic, "text", null);
   const body = get(topic, "description", null);
   const links = get(topic, "services", null);
-  const relatedlinks = cleanServiceLinks(links);
+  const relatedLinks = cleanServiceLinks(links);
   const services311 = get(jsonFileData, "services311", null);
 
   return (
@@ -26,7 +26,7 @@ const Topic = ({ topic }) => {
       </div>
 
       <RelatedLinks
-        relatedlinks={relatedlinks}
+        relatedLinks={relatedLinks}
         sectionStyle="primary"
       />
 
@@ -42,4 +42,4 @@ const Topic = ({ topic }) => {
   )
 }
 
-export default getRouteProps(Topic);
+export default withRouteData(Topic);

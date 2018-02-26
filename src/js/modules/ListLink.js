@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-static';
 
-class ListLink extends Component {
 
-  render() {
+const ListLink = ({ url, text, style }) => (
+  <Link
+    className={ `coa-ListLink coa-ListLink--${style}` }
+    to={url}
+  >
+    <span>{text}</span>
+    <i className="fa fa-chevron-right" aria-hidden="true"></i>
+  </Link>
+);
 
-    const { url, text, linkStyle } = this.props;
-
-    return (
-      <Link
-        className={ `coa-ListLink coa-ListLink--${(linkStyle)}` }
-        to={url}
-      >
-        <span>{text}</span>
-        <i className="fa fa-chevron-right" aria-hidden="true"></i>
-      </Link>
-    );
-  }
-}
+ListLink.propTypes = {
+  url: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  style: PropTypes.string,
+};
 
 export default ListLink;
