@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { postFeedback } from 'js/helpers/fetchData';
+import { logEvent } from 'js/helpers/googleAnalytics';
 
 const rules = {
   'email': (value) => {
@@ -30,8 +32,20 @@ class FormFeedback extends Component {
     this.state = {
       stage: 1,
       values: {},
-      errors: {}
+      errors: {},
+      successUrl: null
     };
+  }
+
+  logEvent(action, label) {
+
+    let analyticsEvent = {
+      category: 'FORM__site-feedback',
+      action: `${action}__stage-${this.state.stage}`,
+      label: label
+    }
+
+    logEvent(analyticsEvent);
   }
 
   handleFieldChange = (e) => {
@@ -52,12 +66,14 @@ class FormFeedback extends Component {
     const errors = this.validate(this.state.values);
 
     if (!this.isValid(errors)) {
+      this.logEvent('next--error', JSON.stringify(errors));
       this.setState({
         errors: errors
       });
       return;
     }
 
+    this.logEvent('next--success');
     this.setState((prevState)=> {
       return {
         stage: prevState.stage + 1,
@@ -68,10 +84,13 @@ class FormFeedback extends Component {
 
   handleResetForm = (e) => {
 
+    this.logEvent('reset');
+
     this.setState({
       stage: 1,
       values: {},
-      errors: {}
+      errors: {},
+      successUrl: null
     });
   }
 
@@ -80,15 +99,28 @@ class FormFeedback extends Component {
     const errors = this.validate(this.state.values);
 
     if (!this.isValid(errors)) {
+      this.logEvent('submit--errors', JSON.stringify(errors));
       this.setState({
         errors: errors
       });
       return;
     }
-    //TODO: post data as needed
-    // after successful form submit
-    this.setState({
-      stage: 0
+
+    this.logEvent('submit--success');
+
+    postFeedback({
+      title: this.state.values['site-feedback-options'],
+      description: this.state.values['site-feedback-textarea'],
+      email: this.state.values['site-feedback-email']
+    })
+    .then(({data}) => {
+      this.setState({
+        stage: 0,
+        successUrl: data.url
+      })
+    })
+    .catch((e) => {
+      console.log('error submitting form.', e)
     })
   }
 
@@ -107,7 +139,7 @@ class FormFeedback extends Component {
   validate(values) {
 
     const fields = formConfig.stage[this.state.stage];
-    const errors = [];
+    const errors = {};
 
     fields.forEach((field) => {
       errors[field] = this.validateField(field, values[field]);
@@ -269,7 +301,7 @@ class FormFeedback extends Component {
           <div className="coa-overlay">
             <div className="coa-overlay__content">
               <h4>Thank you for sharing your feedback!</h4>
-              <p>You can see your feedback in our <a href="#">austin.gov feedback tracker</a></p>
+              <p>You can see your feedback in our <a href={this.state.successUrl} target="_blank" rel="noopener noreferrer" aria-label="Opens in new window">austin.gov feedback tracker</a></p>
               <button className="usa-button" onClick={this.handleResetForm}>Done</button>
             </div>
           </div>

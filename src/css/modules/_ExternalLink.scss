@@ -1,0 +1,15 @@
+.coa-ExternalLink {
+  a {
+    color: $coa-color-blue;
+    &:visited {
+      color: $coa-color-blue;
+    }
+  }
+  svg {
+    margin-left: $coa-space-level1;
+    vertical-align: middle;
+    path {
+      fill: $color-blue;
+    }
+  };
+}

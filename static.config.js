@@ -118,27 +118,42 @@ export default {
       {
         path: '/',
         component: 'src/js/pages/Home',
+        // getProps: () => ({
+        //   allServicePages: serviceQueries['en'],
+        // }),
       },
       ...allPages(),
       {
         path: `/en`,
         component: 'src/js/pages/Home',
         children: allPages('en'),
+        getProps: () => ({
+          allServicePages: serviceQueries['en'],
+        }),
       },
       {
         path: `/es`,
         component: 'src/js/pages/Home',
         children: allPages('es'),
+        getProps: () => ({
+          allServicePages: serviceQueries['es'],
+        }),
       },
       {
         path: `/vi`,
         component: 'src/js/pages/Home',
         children: allPages('vi'),
+        getProps: () => ({
+          allServicePages: serviceQueries['vi'],
+        }),
       },
       {
         path: `/ar`,
         component: 'src/js/pages/Home',
         children: allPages('ar'),
+        getProps: () => ({
+          allServicePages: serviceQueries['ar'],
+        }),
       },
       {
         is404: true,
