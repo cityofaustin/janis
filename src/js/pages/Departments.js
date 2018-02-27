@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 
 import Hero from 'js/modules/Hero';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
@@ -14,11 +14,11 @@ const Departments = ({ allDepartments }) => {
     <div className="wrapper">
       <Hero callout={"All Departments"} />
       <RelatedLinks
-        relatedlinks={links}
+        relatedLinks={links}
         sectionStyle="primary"
       />
     </div>
   )
 }
 
-export default getRouteProps(Departments);
+export default withRouteData(Departments);

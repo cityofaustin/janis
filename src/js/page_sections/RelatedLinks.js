@@ -1,62 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
-import ListLink from 'js/modules/ListLink';
+import Tile from 'js/modules/Tile';
 import { Link } from 'react-static';
 
-class RelatedLinks extends Component {
+const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionLink }) => {
+  let JSX;
 
-  render() {
-
-    const { relatedlinks, sectionStyle, sectionTitle, sectionText, sectionLink } = this.props;
-    let JSX;
-
-    if (!relatedlinks || !relatedlinks.length) {
-      JSX = null;
-    } else {
-      JSX = (
-        <div className={`coa-section ${sectionStyle === 'primary' ? '' : 'coa-section--grey' }`}>
-          <div className="wrapper">
+  if (!relatedLinks || !relatedLinks.length) {
+    JSX = null;
+  } else {
+    JSX = (
+      <div className={`coa-section ${style === 'primary' ? '' : 'coa-section--grey' }`}>
+        <div className="wrapper">
+        {
+          sectionTitle && <SectionTitle title={sectionTitle} />
+        }
+        {
+          sectionText && <p>{sectionText}</p>
+        }
+          <div className="row">
           {
-            sectionTitle && (
-              <SectionTitle
-                title={sectionTitle}
-                noBorder={sectionStyle === 'primary' ? true : false}
-              />
-            )
-          }
-          {
-            sectionText && (
-              <p>{sectionText}</p>
-            )
-          }
-            <div className="row">
-            {
-              relatedlinks.map((link, index) =>
-                <div key={index} className="col-xs-12 col-md-6 col-lg-4">
-                <ListLink
+            relatedLinks.map((link, index) =>
+              <div key={index} className="col-xs-12 col-md-6 col-lg-3">
+                <Tile
                   url={link.url}
                   text={link.text}
-                  linkStyle={sectionStyle === 'primary' ? 'boxprimary' : 'box'}
+                  tag="Service"
                 />
-                </div>
-              )
-            }
-            </div>
-
-          { sectionLink && (
-              <Link
-                className="coa-section__link"
-                to={sectionLink.url}
-              >{sectionLink.text}</Link>
+              </div>
             )
           }
           </div>
-        </div>
-      );
-    }
 
-    return JSX;
+        { sectionLink && (
+            <Link
+              className="coa-section__link"
+              to={sectionLink.url}
+            >{sectionLink.text}</Link>
+          )
+        }
+        </div>
+      </div>
+    );
   }
+
+  return JSX;
 }
 
 export default RelatedLinks;

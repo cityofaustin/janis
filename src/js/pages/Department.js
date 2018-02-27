@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 import { cleanContacts } from 'js/helpers/cleanData';
-import { getRouteProps } from 'react-static';
+import { withRouteData } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/services';
@@ -17,7 +17,7 @@ const Department = ({ department }) => {
   const body = get(department, "mission", null);
   const contacts = get(department, "contacts", null);
   const image = get(department, "image", null);
-  const relatedlinks = get(jsonFileData, "projectsRelated", []);
+  const relatedLinks = get(jsonFileData, "projectsRelated", []);
   const services311 = get(jsonFileData, "services311", []);
 
   return (
@@ -48,7 +48,7 @@ const Department = ({ department }) => {
       </div>
 
       <RelatedLinks
-        relatedlinks={relatedlinks}
+        relatedLinks={relatedLinks}
         sectionType="secondary"
         sectionLink={{url: "#", text: "Track all Resource Recovery projects"}}
         sectionTitle="Track Resource Recovery Projects"
@@ -68,4 +68,4 @@ const Department = ({ department }) => {
   )
 }
 
-export default getRouteProps(Department);
+export default withRouteData(Department);

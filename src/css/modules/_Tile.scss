@@ -1,0 +1,22 @@
+.coa-Tile {
+  background-color: $color-gray-lighter;
+  height: $coa-space-level5 * 10;
+  text-decoration: none;
+  padding: $coa-space-level6 $coa-space-level3;
+  display: block;
+  margin-bottom: $coa-space-level4;
+  &:hover {
+    background-color: $color-gray-lightest;
+  }
+}
+
+.coa-Tile__tag {
+  font-size: 17px;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+.coa-Tile__text {
+  margin: $coa-space-level1 0 $coa-space-level3;
+  font-size: 24px;
+}

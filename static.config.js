@@ -5,6 +5,7 @@ import { GraphQLClient } from 'graphql-request';
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
+import topServicesQuery from 'js/queries/topServicesQuery';
 import { SUPPORTED_LANGUAGES } from 'js/constants/languages';
 
 const { CMS_API } = process.env;
@@ -33,15 +34,22 @@ export default {
     const { allServicePages } = await enGraphQLClient.request(allServicePagesQuery)
     const { allTopics } = await enGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments } = await enGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices } = await enGraphQLClient.request(topServicesQuery)
+
     const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_es } = await esGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_es } = await esGraphQLClient.request(topServicesQuery)
+
     const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_vi } = await viGraphQLClient.request(topServicesQuery)
+
     const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_ar } = await arGraphQLClient.request(topServicesQuery)
 
     const serviceQueries = {
       en: allServicePages,
@@ -68,13 +76,13 @@ export default {
       return [{
         path: '/services',
         component: 'src/js/pages/Services',
-        getProps: () => ({
+        getData: async () => ({
           allServicePages: serviceQueries[langCode],
         }),
         children: serviceQueries[langCode].edges.map(service => ({
           path: `/${service.node.slug}`,
           component: 'src/js/pages/Service',
-          getProps: () => ({
+          getData: async () => ({
             service: service.node,
           }),
         })),
@@ -82,13 +90,13 @@ export default {
       {
         path: '/topics',
         component: 'src/js/pages/Topics',
-        getProps: () => ({
+        getData: async () => ({
           allTopics: topicQueries[langCode],
         }),
         children: topicQueries[langCode].edges.map(topic => ({
           path: `/${topic.node.id}`,
           component: 'src/js/pages/Topic',
-          getProps: () => ({
+          getData: async () => ({
             topic: topic.node,
           })
         }))
@@ -96,13 +104,13 @@ export default {
       {
         path: '/departments',
         component: 'src/js/pages/Departments',
-        getProps: () => ({
+        getData: async () => ({
           allDepartments: departmentQueries[langCode],
         }),
         children: departmentQueries[langCode].edges.map(department => ({
           path: `${department.node.id}`,
           component: 'src/js/pages/Department',
-          getProps: () => ({
+          getData: async () => ({
             department: department.node,
           })
         }))
@@ -115,44 +123,44 @@ export default {
 
 
     return [
+      ...allPages(),
       {
         path: '/',
         component: 'src/js/pages/Home',
-        // getProps: () => ({
-        //   allServicePages: serviceQueries['en'],
-        // }),
+        getData: async () => ({
+          topServices,
+        }),
       },
-      ...allPages(),
       {
         path: `/en`,
         component: 'src/js/pages/Home',
         children: allPages('en'),
-        getProps: () => ({
-          allServicePages: serviceQueries['en'],
+        getData: async () => ({
+          topServices,
         }),
       },
       {
         path: `/es`,
         component: 'src/js/pages/Home',
         children: allPages('es'),
-        getProps: () => ({
-          allServicePages: serviceQueries['es'],
+        getData: async () => ({
+          topServices: topServices_es,
         }),
       },
       {
         path: `/vi`,
         component: 'src/js/pages/Home',
         children: allPages('vi'),
-        getProps: () => ({
-          allServicePages: serviceQueries['vi'],
+        getData: async () => ({
+          topServices: topServices_vi,
         }),
       },
       {
         path: `/ar`,
         component: 'src/js/pages/Home',
         children: allPages('ar'),
-        getProps: () => ({
-          allServicePages: serviceQueries['ar'],
+        getData: async () => ({
+          topServices: topServices_ar,
         }),
       },
       {
