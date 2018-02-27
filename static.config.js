@@ -39,14 +39,17 @@ export default {
     const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_es } = await esGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_es } = await esGraphQLClient.request(topServicesQuery)
 
     const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_vi } = await viGraphQLClient.request(topServicesQuery)
 
     const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(allDepartmentPagesQuery)
+    const { allServicePages: topServices_ar } = await arGraphQLClient.request(topServicesQuery)
 
     const serviceQueries = {
       en: allServicePages,
@@ -125,7 +128,7 @@ export default {
         path: '/',
         component: 'src/js/pages/Home',
         getData: async () => ({
-          allServicePages: topServices,
+          topServices,
         }),
       },
       {
@@ -133,7 +136,7 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('en'),
         getData: async () => ({
-          allServicePages: serviceQueries['en'],
+          topServices,
         }),
       },
       {
@@ -141,7 +144,7 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('es'),
         getData: async () => ({
-          allServicePages: serviceQueries['es'],
+          topServices: topServices_es,
         }),
       },
       {
@@ -149,7 +152,7 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('vi'),
         getData: async () => ({
-          allServicePages: serviceQueries['vi'],
+          topServices: topServices_vi,
         }),
       },
       {
@@ -157,7 +160,7 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('ar'),
         getData: async () => ({
-          allServicePages: serviceQueries['ar'],
+          topServices: topServices_ar,
         }),
       },
       {
