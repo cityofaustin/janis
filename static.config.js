@@ -123,10 +123,7 @@ export default {
       },
       {
         path: '/search',
-        component: 'src/js/pages/Search',
-        getData: async () => ({
-          langCode: "en", //TODO: update search page to be conscious of all languages
-        })
+        component: 'src/js/pages/Search', //TODO: update 404 page to be conscious of all languages
       },
     ]}
 
@@ -137,7 +134,6 @@ export default {
         path: '/',
         component: 'src/js/pages/Home',
         getData: async () => ({
-          langCode: "en",
           topServices,
         }),
       },
