@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-static';
 import request from 'graphql-request'
 import CloseSVG from 'js/svg/Close';
+import I18nNavLink from 'js/modules/I18nNavLink'
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 
 class Navmenu extends Component {
@@ -18,7 +18,6 @@ class Navmenu extends Component {
   }
 
   componentDidMount () {
-
     request(
       `${process.env.CMS_API}`,
       allTopicPagesQuery,
@@ -58,13 +57,13 @@ class Navmenu extends Component {
           </button>
           <ul className="usa-sidenav-list">
             <li onClick={this.props.toggleMenu}>
-              <NavLink
+              <I18nNavLink
                 to="/"
                 exact
                 activeClassName="usa-current"
               >
                 Home
-              </NavLink>
+              </I18nNavLink>
             </li>
 
         {
@@ -74,11 +73,11 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <NavLink to={`/topics/${parentLink.id}`}
+                <I18nNavLink to={`/topics/${parentLink.id}`}
                   activeClassName="usa-current"
                 >
                   { parentLink.text }
-                </NavLink>
+                </I18nNavLink>
 
                 { !!serviceLinks && (
                   <ul className="usa-sidenav-sub_list">
@@ -86,11 +85,11 @@ class Navmenu extends Component {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <NavLink to={`/services/${serviceLink.slug}`}
+                          <I18nNavLink to={`/services/${serviceLink.slug}`}
                             activeClassName="usa-current"
                           >
                             {serviceLink.title}
-                          </NavLink>
+                          </I18nNavLink>
                         </li>
                       );
                     })
