@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Route, Router } from 'react-static'
 import Routes from 'react-static-routes'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
-import { createBrowserHistory } from 'history'
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
@@ -56,7 +54,7 @@ class LanguageWrapper extends Component {
     const lang = this.getSupportedLang(Cookies.get(LANG_COOKIE_NAME));
 
     if(!lang) return null;
-    //TODO: if not supported, unset COOKIE
+    //TODO: if not supported, unset cookie
 
     if(lang === DEFAULT_LANG) {
       this.persistLang(lang);
@@ -89,41 +87,16 @@ class LanguageWrapper extends Component {
   }
 
   render() {
-
-    // const RenderRoutes = ({ getComponentForPath }) => (
-    //   // The default renderer uses a catch all route to recieve the pathname
-    //   <Route path='*' render={props => {
-    //     const path = (this.state.lang) ? '/'+this.state.lang + props.location.pathname : props.location.pathname;
-    //     const Comp = getComponentForPath(path);
-    //     return <Comp {...props} />
-    //   }} />
-    // );
-
-    const history = (typeof document !== 'undefined' && this.state.lang)
-      ? createBrowserHistory({basename: '/'+this.state.lang})
-      : null;
-
-// console.log('history:', !!history );
-
-    const children = (
-      <div>
-        <Header />
-        <section className="coa-main">
-          <Routes></Routes>
-        </section>
-        <Footer />
-      </div>
-    );
-
-    const JSX = (history)
-      ? <Router history={history}>{children}</Router>
-      : <Router>{children}</Router>
-
+    const { lang } = this.state;
     return (
-      <IntlProvider locale={this.state.lang}>
+      <IntlProvider locale={lang}>
         <div>
-          <LanguageSelectBanner lang={this.state.lang} path={this.props.match.params.path || ''}/>
-          {JSX}
+          <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
+          <Header />
+            <section className="coa-main">
+              <Routes />
+            </section>
+          <Footer />
         </div>
       </IntlProvider>
     );

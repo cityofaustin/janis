@@ -13,14 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="(/)?:lang([a-z]{2})?/:path*"
-            render={(props) => {
-              logPageView();
-              return (
-                <LanguageWrapper {...props} />
-              )
-            }}
-          />
+          <Route path="(/)?:lang([a-z]{2})?/:path*" component={LanguageWrapper} />
         </div>
       </Router>
     );
