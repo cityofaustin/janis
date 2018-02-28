@@ -54,3 +54,13 @@ export const LANG_COOKIE_NAME = 'lang';
 export const LANG_COOKIE_EXPIRES = 10 * 365; //days
 
 export const DEFAULT_LANG = 'en';
+
+export const i18nalizeLinkTo = ({to, langCode}) => {
+  let location;
+  if (!to) return null;
+  if (typeof to !== "string") location = to.pathname;
+  else location = to;
+  if (location.charAt(0) !== '/') location = location;
+  else location = langCode !== DEFAULT_LANG ? `/${langCode}${location}` : location;
+  return location;
+}
