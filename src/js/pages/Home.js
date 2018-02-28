@@ -16,8 +16,8 @@ const services311 = get(jsonFileData, "services311", null);
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 
-const Home = ({ allServicePages }) => {
-  const serviceLinks = cleanServiceLinks(allServicePages);
+const Home = ({ topServices }) => {
+  const serviceLinks = cleanServiceLinks(topServices);
 
   const homepageImage = {
     file: homepageImg,
