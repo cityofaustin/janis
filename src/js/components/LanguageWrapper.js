@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Router, Route, Switch } from 'react-static'
 import Routes from 'react-static-routes'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
@@ -9,93 +8,96 @@ import Cookies from 'js-cookie'
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
-
-import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
-
-
+import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
 
 class LanguageWrapper extends Component {
+
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      lang: this.setLanguage()
-    }
-    this.daysUntilCookieExpires = 10 * 365;
-  }
-
-  parseBrowserLanguageCode = () => {
-    // Normally, we only want the two letter lowercased language abbreviation
-    // bc we aren't worried about locale (ex: en-US vs. en-UK) at this point,
-    // just language.
-    if (typeof document !== 'undefined') {
-      const twoLetterLangCode = locale().split('-')[0].toLowerCase();
-      // But we do want to support two types of Chinese (zh-tw & zh-cn)
-      const isChinese = twoLetterLangCode === 'zh';
-      return isChinese ? locale().toLowerCase() : twoLetterLangCode;
+      lang: this.getInitialLangState()
     }
   }
 
-  setLanguage = () => {
-    const cookieLanguage = Cookies.get('lang');
-    const browserLocale = this.parseBrowserLanguageCode();
-    let language = '';
+  getInitialLangState() {
+    const getLang = [ this.getLangFromProps, this.getLangFromCookie, this.getLangFromLocale, ()=>DEFAULT_LANG ];
+    const that = this;
 
-    const isLanguageCodeInPath = SUPPORTED_LANGUAGES
-      .map(lang => lang.code)
-      .includes(this.props.urlPathLanguage)
+    return getLang.reduce((lang, fn) => {
+      if(!lang) return fn.call(that);
+      return lang;
+    }, null)
+  }
 
-    if (isLanguageCodeInPath) {
-      language = this.props.urlPathLanguage
-    } else if (cookieLanguage) {
-      language = cookieLanguage
-    } else {
-      language = browserLocale || 'en'
+  persistLang(lang) {
+    Cookies.set(LANG_COOKIE_NAME, lang, { expires: LANG_COOKIE_EXPIRES });
+  }
+
+  getSupportedLang(langToCheck) {
+    return SUPPORTED_LANG_CODES.find( (lang) => lang===langToCheck );
+  }
+
+  getLangFromProps(props) {
+    props = props || this.props;
+    const lang = this.getSupportedLang(props.match.params.lang);
+
+    if(!lang) return null;
+    //TODO: if not supported, redirect to path without lang
+
+    this.persistLang(lang);
+    return lang;
+  }
+
+  getLangFromCookie() {
+    if (typeof document === 'undefined') return null;
+
+    const lang = this.getSupportedLang(Cookies.get(LANG_COOKIE_NAME));
+
+    if(!lang) return null;
+    //TODO: if not supported, unset cookie
+
+    if(lang === DEFAULT_LANG) {
+      this.persistLang(lang);
+      return lang;
     }
 
-    Cookies.set('lang', language, { expires: this.daysUntilCookieExpires })
-    return language
+    window.location.href=`/${lang}/${this.props.match.params.path || ''}`;
   }
 
-  handleLanguageUpdate = (newLang) => {
-    Cookies.set('lang', newLang, { expires: this.daysUntilCookieExpires })
-    this.setState({ lang: newLang })
+  getLangFromLocale() {
+    if (typeof document === 'undefined') return null;
+
+    const lang = this.getSupportedLang(locale().split('-')[0].toLowerCase());
+
+    if(!lang) return null;
+
+    if(lang === DEFAULT_LANG) {
+      return lang;
+    }
+
+    window.location.href=`/${lang}/${this.props.match.params.path || ''}`;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const isLanguageChanged = nextState.lang !== this.state.lang
-    if (isLanguageChanged) return true;
-    return false;
+  componentWillReceiveProps(nextProps) {
+    const lang = this.getLangFromProps(nextProps);
+    if(lang && lang !== this.state.lang) this.setState({lang: lang});
   }
 
   render() {
+    const { lang } = this.state;
     return (
-      <IntlProvider locale={this.state.lang}>
-        <Router>
-          <div>
-            <Route path={`/:lang?`}
-              render={(props) => {
-                return (
-                  <div>
-                    <section>
-                      <LanguageSelectBanner {...props}
-                        updateLanguage={this.handleLanguageUpdate}
-                      />
-                      <Header {...props} />
-                    </section>
-                    <section className="coa-main">
-                      <Routes/>
-                    </section>
-                    <Footer />
-                  </div>
-                )
-              }}
-            />
-          </div>
-        </Router>
+      <IntlProvider locale={lang}>
+        <div>
+          <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
+          <Header />
+            <section className="coa-main">
+              <Routes />
+            </section>
+          <Footer />
+        </div>
       </IntlProvider>
     );
   }
-
 }
 
 export default LanguageWrapper;

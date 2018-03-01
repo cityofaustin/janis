@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionTitle from 'js/modules/SectionTitle';
 import Tile from 'js/modules/Tile';
-import { Link } from 'react-static';
+import I18nLink from 'js/modules/I18nLink';
 
 const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionLink }) => {
   let JSX;
@@ -33,10 +33,10 @@ const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionL
           </div>
 
         { sectionLink && (
-            <Link
+            <I18nLink
               className="coa-section__link"
               to={sectionLink.url}
-            >{sectionLink.text}</Link>
+            >{sectionLink.text}</I18nLink>
           )
         }
         </div>

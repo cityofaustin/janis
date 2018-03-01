@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-static';
-import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
 import request from 'graphql-request'
-import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
+import I18nNavLink from 'js/modules/I18nNavLink'
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 
 class Navmenu extends Component {
@@ -15,17 +13,11 @@ class Navmenu extends Component {
     };
   }
 
-  menuClassName = () => {
-    const baseClassName = `coa-Navmenu`;
-    return this.props.isOpen ? `${baseClassName} ${baseClassName}--open` : baseClassName;
-  }
-
   focusOnClose = () => {
     this.refs.closeTrigger && this.refs.closeTrigger.focus();
   }
 
   componentDidMount () {
-
     request(
       `${process.env.CMS_API}`,
       allTopicPagesQuery,
@@ -43,37 +35,12 @@ class Navmenu extends Component {
     }
   }
 
-  getCurrentPath = () => {
-    // this is dependent on react-router. We may want to use
-    // `window.location.href` instead.
-    return this.props.location.pathname;
-  }
-
   getOverlayClassName = () => {
     let className = `coa-Navmenu__overlay`;
     if (this.props.isOpen) {
       className = `${className} ${className}--open`;
     }
     return className;
-  }
-
-  getParentMenuItemClassName = (parentLink) => {
-    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
-    const servicePaths = parentLink.services.edges
-      ? parentLink.services.edges.map(({ node: serviceLink }) => {
-          return `service/${serviceLink.slug}`;
-        })
-      : [];
-    const isActive = includes(servicePaths, currentPath);
-    const isActiveTopic = `topic/${parentLink.id}` === currentPath;
-
-    return isActive || isActiveTopic ? 'usa-current' : '';
-  }
-
-  getMenuItemClassName = (path) => {
-    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
-    const isMatchingPaths = currentPath === getPathnameWithoutLangCode(path);
-    return isMatchingPaths ? 'usa-current' : '';
   }
 
   render() {
@@ -84,17 +51,19 @@ class Navmenu extends Component {
 
     return parentLinks.length && (
       <div className="usa-grid-full">
-        <nav className={this.menuClassName()}>
+        <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`}>
           <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
           <ul className="usa-sidenav-list">
             <li onClick={this.props.toggleMenu}>
-              <Link to={'/'}
-                className={this.getMenuItemClassName('/')}
+              <I18nNavLink
+                to="/"
+                exact
+                activeClassName="usa-current"
               >
                 Home
-              </Link>
+              </I18nNavLink>
             </li>
 
         {
@@ -104,11 +73,11 @@ class Navmenu extends Component {
 
             return (
               <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <Link to={`/topics/${parentLink.id}`}
-                  className={this.getParentMenuItemClassName(parentLink)}
+                <I18nNavLink to={`/topics/${parentLink.id}`}
+                  activeClassName="usa-current"
                 >
                   { parentLink.text }
-                </Link>
+                </I18nNavLink>
 
                 { !!serviceLinks && (
                   <ul className="usa-sidenav-sub_list">
@@ -116,11 +85,11 @@ class Navmenu extends Component {
                     serviceLinks.map(({ node:serviceLink }) => {
                       return (
                         <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <Link to={`/services/${serviceLink.slug}`}
-                            className={this.getMenuItemClassName(`/services/${serviceLink.slug}`)}
+                          <I18nNavLink to={`/services/${serviceLink.slug}`}
+                            activeClassName="usa-current"
                           >
                             {serviceLink.title}
-                          </Link>
+                          </I18nNavLink>
                         </li>
                       );
                     })

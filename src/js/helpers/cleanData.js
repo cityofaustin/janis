@@ -1,4 +1,3 @@
-import { getPathWithLangCode } from 'js/helpers/language';
 import moment from 'moment';
 
 export const cleanContacts = (contacts) => {
@@ -6,7 +5,7 @@ export const cleanContacts = (contacts) => {
   if(!contacts || !contacts.edges) return null;
 
   return contacts.edges.map(({node: contact}) => {
-    let cleaned = Object.assign(contact.contact);
+    let {contact: cleaned} = contact;
     if(cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => {
         hours.startTime = moment(hours.startTime, "HH:mm:ss").format('h:mm A');
