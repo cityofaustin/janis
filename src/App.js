@@ -6,7 +6,7 @@ import LanguageWrapper from "js/components/LanguageWrapper"
 
 import 'css/coa.css'
 
-ReactGA.initialize('UA-110716917-2', {titleCase: false});
+ReactGA.initialize(process.env.GOOGLE_ANALYTICS, {titleCase: false});
 
 class App extends Component {
   render() {
