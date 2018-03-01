@@ -123,7 +123,7 @@ export default {
       },
       {
         path: '/search',
-        component: 'src/js/pages/Search', //TODO: update 404 page to be conscious of all languages
+        component: 'src/js/pages/Search', //TODO: update search page to be conscious of all languages
       },
     ]}
 

@@ -13,7 +13,9 @@ class App extends Component {
     return (
       <Router>
         <div>
+          {/* regex to split url location into 2 character lang code (if present) and page path */}
           <Route path="(/)?:lang([a-z]{2})?/:path*" component={LanguageWrapper} />
+          }
         </div>
       </Router>
     );

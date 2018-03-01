@@ -68,9 +68,6 @@ class LanguageWrapper extends Component {
     if (typeof document === 'undefined') return null;
 
     const lang = this.getSupportedLang(locale().split('-')[0].toLowerCase());
-    // MVP does not need to include support for two types of Chinese (zh-tw & zh-cn)
-    // const isChinese = twoLetterLangCode === 'zh';
-    // return isChinese ? locale().toLowerCase() : twoLetterLangCode;
 
     if(!lang) return null;
 
