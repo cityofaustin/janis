@@ -5,14 +5,16 @@ import request from 'graphql-request'
 import { includes } from 'lodash';
 import CloseSVG from 'js/svg/Close';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import navigation from '__tmpdata/navigation';
 
 class Navmenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nav: [],
-      isLoaded: false
+      data: [],
+      // isLoaded: false
     };
+    console.log(navigation)
   }
 
   menuClassName = () => {
@@ -25,7 +27,6 @@ class Navmenu extends Component {
   }
 
   componentDidMount () {
-
     request(
       `${process.env.CMS_API}`,
       allTopicPagesQuery,
@@ -58,6 +59,7 @@ class Navmenu extends Component {
   }
 
   getParentMenuItemClassName = (parentLink) => {
+    return 'test'
     const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
     const servicePaths = parentLink.services.edges
       ? parentLink.services.edges.map(({ node: serviceLink }) => {
@@ -71,6 +73,7 @@ class Navmenu extends Component {
   }
 
   getMenuItemClassName = (path) => {
+    return 'test'
     const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
     const isMatchingPaths = currentPath === getPathnameWithoutLangCode(path);
     return isMatchingPaths ? 'usa-current' : '';
@@ -78,11 +81,13 @@ class Navmenu extends Component {
 
   render() {
 
-    if (!this.state.isLoaded) return 'loading...';
+    // if (!this.state.isLoaded) return 'loading...';
 
-    const { edges: parentLinks = [] } = this.state.data;
+    const { themes } = navigation;
+    // const { edges: parentLinks = [] } = this.state.data;
 
-    return parentLinks.length && (
+
+    return themes.length && (
       <div className="usa-grid-full">
         <nav className={this.menuClassName()}>
           <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
@@ -98,19 +103,16 @@ class Navmenu extends Component {
             </li>
 
         {
-          parentLinks.map(({ node: parentLink }) => {
-
-            let { edges: serviceLinks = [] } = parentLink.services;
-
+          themes.map((theme, i) => {
             return (
-              <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <Link to={`/topics/${parentLink.id}`}
-                  className={this.getParentMenuItemClassName(parentLink)}
+              <li key={i} onClick={this.props.toggleMenu}>
+                <Link to={`/topics/${theme.slug}`}
+                  className={this.getParentMenuItemClassName(theme)}
                 >
-                  { parentLink.text }
+                  { theme.title }
                 </Link>
 
-                { !!serviceLinks && (
+                {/* { !!serviceLinks && (
                   <ul className="usa-sidenav-sub_list">
                   {
                     serviceLinks.map(({ node:serviceLink }) => {
@@ -126,7 +128,7 @@ class Navmenu extends Component {
                     })
                   }
                   </ul>
-                )}
+                )} */}
               </li>
             );
           })
