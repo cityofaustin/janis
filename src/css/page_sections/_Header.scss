@@ -5,17 +5,17 @@
 
 .coa-Header__navbar-brand {
   display: flex;
+}
+
+.coa-Header__logo {
   a {
     color: $color-black;
     text-decoration: none;
+    @media screen and (min-width: $coa-large-screen) {
+      font-weight: bold;
+      font-size: $h3-font-size;
+    }
   }
-}
-
-.coa-Header__menu--mobile {
-
-}
-
-.coa-Header__menu {
 }
 
 .coa-Header__menu-toggle {
