@@ -13,16 +13,9 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path={`/:lang?`}
-            render={(props) => {
-              logPageView();
-              return (
-                <LanguageWrapper {...props}
-                  urlPathLanguage={props.match.params.lang}
-                />
-              )
-            }}
-          />
+          {/* regex to split url location into 2 character lang code (if present) and page path */}
+          <Route path="(/)?:lang([a-z]{2})?/:path*" component={LanguageWrapper} />
+          }
         </div>
       </Router>
     );

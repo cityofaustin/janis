@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import Navmenu from 'js/page_sections/Navmenu';
-import { Link } from 'react-static';
-import { getPathWithLangCode } from 'js/helpers/language';
+import I18nLink from 'js/modules/I18nLink'
 
 class Header extends Component {
   constructor(props) {
@@ -33,18 +32,16 @@ class Header extends Component {
                 MENU
               </span>
               <span className="coa-text-spacer--vertical"></span>
-              <Link to="/">ALPHA.AUSTIN.GOV</Link>
+              <I18nLink to="/">ALPHA.AUSTIN.GOV</I18nLink>
             </div>
             <div className="col-xs-6 coa-Header__search">
-              <Link to="/search">
+              <I18nLink to="/search">
                 Search <SearchSVG size="18"/>
-              </Link>
+              </I18nLink>
             </div>
           </div>
         </div>
-        <Navmenu {...this.props}
-          isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}
-        />
+        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
       </header>
     );
   }

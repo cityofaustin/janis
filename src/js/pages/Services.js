@@ -15,8 +15,8 @@ const title = get(jsonFileData, "servicespage.title", null);
 const body = get(jsonFileData, "servicespage.body", null);
 const services311 = get(jsonFileData, "services311", null);
 
-const Services = ({ allServicePages }) => {
-  const relatedLinks = cleanServiceLinks(allServicePages)
+const Services = ({ allServices }) => {
+  const relatedLinks = cleanServiceLinks(allServices)
 
   return (
     <div>
