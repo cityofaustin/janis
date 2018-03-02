@@ -3,11 +3,19 @@
   padding: $coa-space-level3;
 }
 
-.coa-Header__menu {
+.coa-Header__navbar-brand {
+  display: flex;
   a {
     color: $color-black;
     text-decoration: none;
   }
+}
+
+.coa-Header__menu--mobile {
+
+}
+
+.coa-Header__menu {
 }
 
 .coa-Header__menu-toggle {

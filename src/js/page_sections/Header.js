@@ -25,14 +25,18 @@ class Header extends Component {
       <header className="coa-Header" role="banner">
         <div className="wrapper">
           <div className="row">
-            <div className="col-xs-6 coa-Header__menu">
-              <span onClick={this.toggleMenu} tabIndex="0"
-                className="coa-Header__menu-toggle" ref="menu"
-              >
-                MENU
-              </span>
-              <span className="coa-text-spacer--vertical"></span>
-              <I18nLink to="/">ALPHA.AUSTIN.GOV</I18nLink>
+            <div className="col-xs-6 coa-Header__navbar-brand">
+              <div className="coa-Header__menu--mobile d-none d-md-block">
+                <span onClick={this.toggleMenu} tabIndex="0"
+                  className="coa-Header__menu-toggle" ref="menu"
+                  >
+                    MENU
+                  </span>
+                  <span className="coa-text-spacer--vertical"></span>
+              </div>
+              <div>
+                <I18nLink to="/">ALPHA.AUSTIN.GOV</I18nLink>
+              </div>
             </div>
             <div className="col-xs-6 coa-Header__search">
               <I18nLink to="/search">

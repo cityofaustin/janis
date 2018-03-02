@@ -2,15 +2,17 @@
   "themes": [
     {
       "title": "Permits & Tickets",
-      "slug": "#",
+      "slug": "permits-and-tickets/",
       "topics": [
         {
           "title": "Building permits",
-          "slug": "#"
+          "slug": "#",
+          "isVisible": "true"
         },
         {
           "title": "Business permits & licenses",
-          "slug": "#"
+          "slug": "#",
+          "isVisible": "false"
         },
         {
           "title": "Event permits",

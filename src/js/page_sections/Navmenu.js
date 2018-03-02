@@ -54,17 +54,16 @@ class Navmenu extends Component {
 
 
     return themes.length && (
-      <div className="usa-grid-full">
+      <div className="">
         <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`}>
           <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
-          <ul className="usa-sidenav-list">
+          <ul className="">
             <li onClick={this.props.toggleMenu}>
               <I18nNavLink
                 to="/"
                 exact
-                activeClassName="usa-current"
               >
                 Home
               </I18nNavLink>
@@ -73,30 +72,31 @@ class Navmenu extends Component {
         {
           themes.map((theme, i) => {
             return (
-              <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <I18nNavLink to={`/topics/${parentLink.id}`}
+              <li key={i} onClick={this.props.toggleMenu}>
+                <I18nNavLink to={`/topics/${theme.slug}`}
                   activeClassName="usa-current"
                 >
-                  { parentLink.text }
+                  { theme.title }
                 </I18nNavLink>
 
-                {/* { !!serviceLinks && (
-                  <ul className="usa-sidenav-sub_list">
+                { !!theme.topics && (
+                  <ul className="">
                   {
-                    serviceLinks.map(({ node:serviceLink }) => {
+                    theme.topics.map(({ title, slug }, i) => {
                       return (
-                        <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <I18nNavLink to={`/services/${serviceLink.slug}`}
+                        <li key={i} onClick={this.props.toggleMenu}>
+                          <I18nNavLink to={`/services/${slug}`}
                             activeClassName="usa-current"
+                            className="test"
                           >
-                            {serviceLink.title}
+                            {title}
                           </I18nNavLink>
                         </li>
                       );
                     })
                   }
                   </ul>
-                )} */}
+                )}
               </li>
             );
           })
