@@ -15,9 +15,6 @@ RUN yarn
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 
-ARG GOOGLE_ANALYTICS
-ENV GOOGLE_ANALYTICS=${GOOGLE_ANALYTICS:-UA-110716917-2}
-
 ARG FEEDBACK_API
 ENV FEEDBACK_API=${FEEDBACK_API:-https://coa-test-form-api.herokuapp.com/process/}
 
