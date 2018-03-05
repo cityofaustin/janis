@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'graphql-request'
+import ChevronDownSVG from 'js/svg/ChevronDown';
 import CloseSVG from 'js/svg/Close';
 import I18nNavLink from 'js/modules/I18nNavLink'
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
@@ -46,21 +47,17 @@ class Navmenu extends Component {
   }
 
   render() {
-
-    // if (!this.state.isLoaded) return 'loading...';
-
     const { themes } = navigation;
-    // const { edges: parentLinks = [] } = this.state.data;
 
 
     return themes.length && (
-      <div className="">
+      <div className="wrapper">
         <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`}>
-          <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
+          <button className="coa-Navmenu__close-btn d-lg-none" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
-          <ul className="">
-            <li onClick={this.props.toggleMenu}>
+          <ul className="coa-Navmenu__list">
+            <li onClick={this.props.toggleMenu} className="d-lg-none">
               <I18nNavLink
                 to="/"
                 exact
@@ -68,23 +65,27 @@ class Navmenu extends Component {
                 Home
               </I18nNavLink>
             </li>
-
         {
           themes.map((theme, i) => {
             return (
-              <li key={i} onClick={this.props.toggleMenu}>
+              <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__item">
                 <I18nNavLink to={`/topics/${theme.slug}`}
                   activeClassName="usa-current"
                 >
-                  { theme.title }
+                  <span className="coa-Navmenu__item-text">
+                    { theme.title }
+                  </span>
+                  <div className="coa-Navmenu__arrow-down d-none d-lg-block">
+                    <ChevronDownSVG size="14" />
+                  </div>
                 </I18nNavLink>
 
                 { !!theme.topics && (
-                  <ul className="">
+                  <ul className="coa-Navmenu__sublist">
                   {
                     theme.topics.map(({ title, slug }, i) => {
                       return (
-                        <li key={i} onClick={this.props.toggleMenu}>
+                        <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__subitem">
                           <I18nNavLink to={`/services/${slug}`}
                             activeClassName="usa-current"
                             className="test"
