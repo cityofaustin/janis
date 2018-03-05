@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import request from 'graphql-request'
+import request from 'graphql-request';
+
+import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import I18nNavLink from 'js/modules/I18nNavLink';
+import ExternalLink from 'js/modules/ExternalLink';
+import navigation from '__tmpdata/navigation';
+
 import ChevronDownSVG from 'js/svg/ChevronDown';
 import CloseSVG from 'js/svg/Close';
 import AirplaneSVG from 'js/svg/Airplane';
-import I18nNavLink from 'js/modules/I18nNavLink'
-import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
-import navigation from '__tmpdata/navigation';
+import citySealImg from 'images/coa_seal.png';
+
+
 
 class Navmenu extends Component {
   constructor(props) {
@@ -58,7 +64,7 @@ class Navmenu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Navmenu__list">
-            <li onClick={this.props.toggleMenu} className="coa-Navmenu__item d-lg-none">
+            <li onClick={this.props.toggleMenu} className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
               <I18nNavLink
                 to="/"
                 exact
@@ -66,13 +72,15 @@ class Navmenu extends Component {
                 Home
               </I18nNavLink>
             </li>
-            <li className="coa-Navmenu__item d-lg-none">
+            <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
               <a href="http://www.austintexas.gov/airport">
-                <AirplaneSVG size="14"/>
+                <div className="coa-Navmenu__airplane-icon">
+                  <AirplaneSVG size="15"/>
+                </div>
                 <span className="d-lg-none">Airport</span>
               </a>
             </li>
-            <li className="coa-Navmenu__item coa-Navmenu__item--flex d-lg-none">
+            <li className="coa-Navmenu__item coa-Navmenu__item--flex coa-Navmenu__item--small d-lg-none">
               <a href="tel:311">
                 Call 311
               </a>
@@ -118,6 +126,15 @@ class Navmenu extends Component {
             );
           })
         }
+            <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+              <a href="#">
+                Read Abour Privacy
+              </a>
+            </li>
+            <p>
+              Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.
+            </p>
+            <img src={citySealImg} alt="City of Austin Seal"/>
           </ul>
         </nav>
         <div className={this.getOverlayClassName()}
