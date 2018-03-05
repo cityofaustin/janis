@@ -78,14 +78,12 @@ export default {
         component: 'src/js/pages/Services',
         getData: async () => ({
           allServices: serviceQueries[langCode],
-          langCode: langCode,
         }),
         children: serviceQueries[langCode].edges.map(({node: service}) => ({
           path: `/${service.slug}`,
           component: 'src/js/pages/Service',
           getData: async () => ({
             service: service,
-            langCode: langCode,
           }),
         })),
       },
@@ -94,14 +92,12 @@ export default {
         component: 'src/js/pages/Topics',
         getData: async () => ({
           allTopics: topicQueries[langCode],
-          langCode: langCode,
         }),
         children: topicQueries[langCode].edges.map(({node:topic}) => ({
           path: `/${topic.id}`,
           component: 'src/js/pages/Topic',
           getData: async () => ({
             topic: topic,
-            langCode: langCode,
           })
         }))
       },
@@ -110,14 +106,12 @@ export default {
         component: 'src/js/pages/Departments',
         getData: async () => ({
           allDepartments: departmentQueries[langCode],
-          langCode: langCode,
         }),
         children: departmentQueries[langCode].edges.map(({node:department}) => ({
           path: `${department.id}`,
           component: 'src/js/pages/Department',
           getData: async () => ({
             department: department,
-            langCode: langCode,
           })
         }))
       },
@@ -142,7 +136,6 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('en'),
         getData: async () => ({
-          langCode: "en",
           topServices,
         }),
       },
@@ -151,7 +144,6 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('es'),
         getData: async () => ({
-          langCode: "es",
           topServices: topServices_es,
         }),
       },
@@ -160,7 +152,6 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('vi'),
         getData: async () => ({
-          langCode: "vi",
           topServices: topServices_vi,
         }),
       },
@@ -169,7 +160,6 @@ export default {
         component: 'src/js/pages/Home',
         children: allPages('ar'),
         getData: async () => ({
-          langCode: "ar",
           topServices: topServices_ar,
         }),
       },

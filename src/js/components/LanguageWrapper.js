@@ -3,6 +3,7 @@ import Routes from 'react-static-routes'
 import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
+import PropTypes from 'prop-types'
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
@@ -17,6 +18,12 @@ class LanguageWrapper extends Component {
     this.state = {
       lang: this.getInitialLangState()
     }
+  }
+
+  getChildContext() {
+    return {
+      langCode: this.state.lang
+    };
   }
 
   getInitialLangState() {
@@ -98,6 +105,10 @@ class LanguageWrapper extends Component {
       </IntlProvider>
     );
   }
+}
+
+LanguageWrapper.childContextTypes = {
+  langCode: PropTypes.string
 }
 
 export default LanguageWrapper;
