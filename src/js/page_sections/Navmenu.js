@@ -131,10 +131,10 @@ class Navmenu extends Component {
                 Read Abour Privacy
               </a>
             </li>
-            <p>
+            <p className="d-lg-none">
               Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.
             </p>
-            <img src={citySealImg} alt="City of Austin Seal"/>
+            <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
           </ul>
         </nav>
         <div className={this.getOverlayClassName()}
