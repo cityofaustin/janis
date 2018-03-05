@@ -19,6 +19,7 @@ docker run \
     --volume "$PWD/static.config.js:/app/static.config.js" \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
+    --env "GOOGLE_ANALYTICS=UA-110716917-2" \
     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
     --env "CMS_API=http://$HOST_IP:8000/api/graphql/" \
     --env "CMS_MEDIA=http://$HOST_IP:8000/media" \
