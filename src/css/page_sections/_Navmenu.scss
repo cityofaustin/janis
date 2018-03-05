@@ -26,6 +26,22 @@
   text-transform: uppercase;
   font-size: $h5-font-size;
   position: relative;
+  svg {
+    transition-duration: .3s;
+  }
+  &:hover {
+    .coa-Navmenu__item-text {
+      color: $coa-color-orange;
+    }
+    .coa-Navmenu__arrow-down {
+      svg {
+        transform: rotate(-180deg);
+      }
+      path {
+        fill: $coa-color-orange;
+      }
+    }
+  }
   a {
     color: $coa-color-dark-purple;
     text-decoration: none;
@@ -59,13 +75,13 @@
 .coa-Navmenu__sublist {
   @media screen and (min-width: $coa-large-screen) {
     display: none;
-  }
-  @media screen and (max-width: $coa-large-screen) {
     background-color: $color-white;
     padding-top: 4rem;
     left: -2rem;
     top: 23px;
     padding-top: 2rem;
+  }
+  @media screen and (max-width: $coa-large-screen) {
   }
 }
 
@@ -78,6 +94,11 @@
   text-transform: capitalize;
   @media screen and (min-width: $coa-large-screen) {
     // display: none;
+  }
+  &:hover {
+    a {
+      color: $coa-color-orange;
+    }
   }
 }
 
