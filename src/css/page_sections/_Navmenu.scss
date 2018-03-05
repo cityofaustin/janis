@@ -64,6 +64,15 @@
   }
 }
 
+.coa-Navmenu__item--flex {
+  display: flex;
+  a {
+    flex-shrink: 0;
+    text-decoration: underline;
+    color: $coa-color-blue;
+  }
+}
+
 .coa-Navmenu__item-text {
   flex-shrink: 0;
 }
@@ -73,8 +82,8 @@
 }
 
 .coa-Navmenu__sublist {
+  display: none;
   @media screen and (min-width: $coa-large-screen) {
-    display: none;
     background-color: $color-white;
     padding-top: 4rem;
     left: -2rem;

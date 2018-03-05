@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import request from 'graphql-request'
 import ChevronDownSVG from 'js/svg/ChevronDown';
 import CloseSVG from 'js/svg/Close';
+import AirplaneSVG from 'js/svg/Airplane';
 import I18nNavLink from 'js/modules/I18nNavLink'
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import navigation from '__tmpdata/navigation';
@@ -57,13 +58,28 @@ class Navmenu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Navmenu__list">
-            <li onClick={this.props.toggleMenu} className="d-lg-none">
+            <li onClick={this.props.toggleMenu} className="coa-Navmenu__item d-lg-none">
               <I18nNavLink
                 to="/"
                 exact
               >
                 Home
               </I18nNavLink>
+            </li>
+            <li className="coa-Navmenu__item d-lg-none">
+              <a href="http://www.austintexas.gov/airport">
+                <AirplaneSVG size="14"/>
+                <span className="d-lg-none">Airport</span>
+              </a>
+            </li>
+            <li className="coa-Navmenu__item coa-Navmenu__item--flex d-lg-none">
+              <a href="tel:311">
+                Call 311
+              </a>
+              &nbsp;or&nbsp;
+              <a href="http://311.austintexas.gov/">
+                Submit an Online Request
+              </a>
             </li>
         {
           themes.map((theme, i) => {
