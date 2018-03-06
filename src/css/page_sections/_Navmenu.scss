@@ -97,6 +97,10 @@
   margin-left: $coa-space-level1;
 }
 
+.coa-Navmenu__plus-sign {
+  margin-left: auto;
+}
+
 .coa-Navmenu__sublist {
   display: none;
   @media screen and (min-width: $coa-large-screen) {
@@ -163,4 +167,8 @@
 .coa-Navmenu__overlay--open {
   opacity: 0.3;
   visibility: visible;
+}
+
+.coa-Navmenu__footer-text {
+  font-size: $h6-font-size;
 }

@@ -9,6 +9,7 @@ import navigation from '__tmpdata/navigation';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 import CloseSVG from 'js/svg/Close';
 import AirplaneSVG from 'js/svg/Airplane';
+import PlusSVG from 'js/svg/Plus';
 import citySealImg from 'images/coa_seal.png';
 
 
@@ -99,6 +100,9 @@ class Navmenu extends Component {
                   <span className="coa-Navmenu__item-text">
                     { theme.title }
                   </span>
+                  <div className="coa-Navmenu__plus-sign d-lg-none">
+                    <PlusSVG size="18" />
+                  </div>
                   <div className="coa-Navmenu__arrow-down d-none d-lg-block">
                     <ChevronDownSVG size="14" />
                   </div>
@@ -131,7 +135,7 @@ class Navmenu extends Component {
                 Read Abour Privacy
               </a>
             </li>
-            <p className="d-lg-none">
+            <p className="coa-Navmenu__footer-text d-lg-none">
               Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.
             </p>
             <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
