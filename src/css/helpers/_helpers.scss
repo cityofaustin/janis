@@ -34,7 +34,9 @@
 .coa-text-spacer--vertical {
   margin: 0 $coa-space-level3;
   &:after {
+    color: $coa-color-light-purple;
     content: "|";
+    font-size: $h4-font-size;
   }
 }
 

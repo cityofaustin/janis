@@ -14,7 +14,6 @@ import MinusSVG from 'js/svg/Minus';
 import citySealImg from 'images/coa_seal.png';
 
 
-
 class Navmenu extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +21,6 @@ class Navmenu extends Component {
       data: [],
       openSection: null,
     };
-    console.log(navigation)
-
     this.DESKTOP_BREAKPOINT = 1080;
 
   }
@@ -61,7 +58,6 @@ class Navmenu extends Component {
   toggleMobileSublist = (e, openSectionId) => {
     if (window.innerWidth < this.DESKTOP_BREAKPOINT) {
       e.preventDefault();
-      console.log(window.innerWidth)
       if (openSectionId === this.state.openSection) {
         this.setState({
           openSection: null
@@ -75,7 +71,6 @@ class Navmenu extends Component {
   }
 
   render() {
-    console.log(this.state.openSection)
     const { themes } = navigation;
 
 

@@ -87,7 +87,7 @@ class LanguageWrapper extends Component {
     const { lang } = this.state;
     return (
       <IntlProvider locale={lang}>
-        <div>
+        <div style={{ position: 'relative' }}>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
             <section className="coa-main">
