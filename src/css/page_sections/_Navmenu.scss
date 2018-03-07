@@ -123,6 +123,7 @@
     left: -2rem;
     top: 23px;
     padding-top: 2rem;
+    z-index: 3;
   }
 }
 
@@ -134,7 +135,6 @@
 
 .coa-Navmenu__subitem {
   list-style: none;
-  z-index: 3;
   &:hover {
     a {
       color: $coa-color-orange;
