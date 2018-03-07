@@ -4,12 +4,24 @@ import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
+import moment from 'moment';
+import { addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import es from 'react-intl/locale-data/es'
+import fr from 'react-intl/locale-data/fr'
+
+//TODO: maybe change where this aggregated file lives
+//or maybe it shouldn't be aggregates?
+import localeData from 'js/constants/locales/data.json';
+
+import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
-import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
+
+addLocaleData([...en, ...es, ...fr]);
 
 class LanguageWrapper extends Component {
 
@@ -92,8 +104,11 @@ class LanguageWrapper extends Component {
 
   render() {
     const { lang } = this.state;
+    const messages = localeData[lang];
+    moment.locale(lang);
+
     return (
-      <IntlProvider locale={lang}>
+      <IntlProvider messages={messages} locale={lang} defaultLocale={DEFAULT_LANG} key={lang}>
         <div>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />

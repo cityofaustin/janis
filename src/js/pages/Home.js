@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouteData } from 'react-static';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
@@ -16,7 +17,7 @@ const services311 = get(jsonFileData, "services311", null);
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 
-const Home = ({ topServices }) => {
+const Home = ({ topServices, intl }) => {
   const serviceLinks = cleanServiceLinks(topServices);
 
   const homepageImage = {
@@ -30,10 +31,25 @@ const Home = ({ topServices }) => {
     </p>
   )
 
+  const TODO_DELETEME_NAME = 'simi';
+  const TODO_DELETEME_MESSAGES = defineMessages({
+    homeHeroWelcometext: {
+      id: 'Home.Hero.welcometext',
+      defaultMessage: 'Hi there, welome to',
+    },
+  });
+
   return (
     <div>
+
+      <FormattedMessage
+        id={ 'Home.greeting' }
+        defaultMessage={ 'Welcome to Austin, {name}!' }
+        values={{ name: TODO_DELETEME_NAME }}
+      />
+
       <Hero home={true} image={homepageImage}>
-        <span className="coa-Hero__home-preheader">Welcome to</span>
+        <span className="coa-Hero__home-preheader">{intl.formatMessage(TODO_DELETEME_MESSAGES.homeHeroWelcometext)}</span>
         <h2 className="coa-Hero__home-header">Austin, TX</h2>
         <GlobalSearch placeholder="Search for services" />
       </Hero>
@@ -48,4 +64,4 @@ const Home = ({ topServices }) => {
   );
 }
 
-export default withRouteData(Home);
+export default withRouteData(injectIntl(Home));

@@ -1,0 +1,10 @@
+{
+  "en": {
+    "Home.Hero.welcometext": "Hi there, welome to",
+    "Home.greeting": "Welcome to Austin, {name}!"
+  },
+  "es": {
+    "Home.Hero.welcometext": "Hola, bien venidos a",
+    "Home.greeting": "Bien Venidos a Austin, {name}!"
+  }
+}
