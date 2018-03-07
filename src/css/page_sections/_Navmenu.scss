@@ -57,8 +57,8 @@
     }
   }
   @media screen and (max-width: $coa-large-screen) {
-    border-bottom: 1px solid $color-gray-light;
-    padding: 1.2rem 0;
+    border-bottom: 2px solid $color-gray-lighter;
+    padding: $coa-space-level2 $coa-space-level1 $coa-space-level1;
     margin-bottom: 0;
   }
   @media screen and (min-width: $coa-large-screen) {
@@ -68,6 +68,14 @@
         display: block;
         position: absolute;
       }
+    }
+  }
+}
+
+.coa-Navmenu__item--open {
+  .coa-Navmenu__item-text {
+    @media screen and (max-width: $coa-large-screen) {
+      margin-bottom: $coa-space-level2;
     }
   }
 }
@@ -83,10 +91,16 @@
 
 .coa-Navmenu__item--small {
   font-size: $h6-font-size;
+  @media screen and (max-width: $coa-large-screen) {
+    padding-bottom: $coa-space-level2;
+  }
 }
 
 .coa-Navmenu__item-text {
   flex-shrink: 0;
+  @media screen and (max-width: $coa-large-screen) {
+    margin-bottom: $coa-space-level1;
+  }
 }
 
 .coa-Navmenu__airplane-icon {
@@ -110,24 +124,34 @@
     top: 23px;
     padding-top: 2rem;
   }
+}
+
+.coa-Navmenu__sublist--open {
   @media screen and (max-width: $coa-large-screen) {
+    display: block;
   }
 }
 
 .coa-Navmenu__subitem {
   list-style: none;
-  padding: 10px 20px;
-  border-bottom: 1px solid black;
-  width: 400px;
-  font-size: 15px;
-  text-transform: capitalize;
-  @media screen and (min-width: $coa-large-screen) {
-    // display: none;
-  }
+  z-index: 3;
   &:hover {
     a {
       color: $coa-color-orange;
     }
+  }
+  @media screen and (max-width: $coa-large-screen) {
+    text-transform: uppercase;
+    font-size: $small-font-size;
+    padding: $coa-space-level2 $coa-space-level2 0;
+    border-top: 2px solid $color-gray-lighter;
+  }
+  @media screen and (min-width: $coa-large-screen) {
+    border-bottom: 2px solid $color-gray-lighter;
+    width: 400px;
+    text-transform: capitalize;
+    font-size: $small-font-size;
+    padding: $coa-space-level3 $coa-space-level4;
   }
 }
 

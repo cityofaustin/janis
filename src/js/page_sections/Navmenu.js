@@ -10,6 +10,7 @@ import ChevronDownSVG from 'js/svg/ChevronDown';
 import CloseSVG from 'js/svg/Close';
 import AirplaneSVG from 'js/svg/Airplane';
 import PlusSVG from 'js/svg/Plus';
+import MinusSVG from 'js/svg/Minus';
 import citySealImg from 'images/coa_seal.png';
 
 
@@ -19,9 +20,12 @@ class Navmenu extends Component {
     super(props);
     this.state = {
       data: [],
-      // isLoaded: false
+      openSection: null,
     };
     console.log(navigation)
+
+    this.DESKTOP_BREAKPOINT = 1080;
+
   }
 
   focusOnClose = () => {
@@ -54,7 +58,24 @@ class Navmenu extends Component {
     return className;
   }
 
+  toggleMobileSublist = (e, openSectionId) => {
+    if (window.innerWidth < this.DESKTOP_BREAKPOINT) {
+      e.preventDefault();
+      console.log(window.innerWidth)
+      if (openSectionId === this.state.openSection) {
+        this.setState({
+          openSection: null
+        })
+      } else {
+        this.setState({
+          openSection: openSectionId,
+        })
+      }
+    }
+  }
+
   render() {
+    console.log(this.state.openSection)
     const { themes } = navigation;
 
 
@@ -93,15 +114,20 @@ class Navmenu extends Component {
         {
           themes.map((theme, i) => {
             return (
-              <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__item">
+              <li key={i} className={`coa-Navmenu__item ${this.state.openSection === i ? 'coa-Navmenu__item--open' : ''}`}>
                 <I18nNavLink to={`/topics/${theme.slug}`}
                   activeClassName="usa-current"
+                  onClick={(e) => this.toggleMobileSublist(e, i)}
                 >
                   <span className="coa-Navmenu__item-text">
                     { theme.title }
                   </span>
                   <div className="coa-Navmenu__plus-sign d-lg-none">
-                    <PlusSVG size="18" />
+                    {
+                      this.state.openSection === i ?
+                        <MinusSVG size="18" title="close section"/> :
+                        <PlusSVG size="18" title="open section" />
+                    }
                   </div>
                   <div className="coa-Navmenu__arrow-down d-none d-lg-block">
                     <ChevronDownSVG size="14" />
@@ -109,7 +135,7 @@ class Navmenu extends Component {
                 </I18nNavLink>
 
                 { !!theme.topics && (
-                  <ul className="coa-Navmenu__sublist">
+                  <ul className={`coa-Navmenu__sublist ${this.state.openSection === i ? 'coa-Navmenu__sublist--open' : ''}`}>
                   {
                     theme.topics.map(({ title, slug }, i) => {
                       return (
