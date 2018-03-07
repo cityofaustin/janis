@@ -1,5 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+####ARE THESE JUST GENERIC IGNORES, EXCEPT FOR OUR BUILT CSS FILE?
+
 # dependencies
 /node_modules
 
@@ -21,4 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
+# sass to css
 src/**/*.css
+
+# react-intl
+langs/
