@@ -12,9 +12,9 @@ import fr from 'react-intl/locale-data/fr'
 
 //TODO: maybe change where this aggregated file lives
 //or maybe it shouldn't be aggregates?
-import localeData from 'js/constants/locales/data.json';
+// import localeData from 'js/i18n/locales/data.json';
 
-import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
+import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/i18n/constants'
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
@@ -104,11 +104,11 @@ class LanguageWrapper extends Component {
 
   render() {
     const { lang } = this.state;
-    const messages = localeData[lang];
+    // const messages = localeData[lang];
     moment.locale(lang);
 
     return (
-      <IntlProvider messages={messages} locale={lang} defaultLocale={DEFAULT_LANG} key={lang}>
+      <IntlProvider locale={lang} defaultLocale={DEFAULT_LANG} key={lang}>
         <div>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />

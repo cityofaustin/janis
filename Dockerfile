@@ -20,10 +20,6 @@ COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 RUN yarn
 
-# TODO: might not need to copy the langs director
-# this directory is parsed via the init.buildlangs.js script
-COPY langs /app/langs
-
 COPY public /app/public
 COPY src /app/src
 

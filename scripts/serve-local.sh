@@ -11,7 +11,6 @@ HOST_IP=$(ifconfig en0 | awk '$1 == "inet" {print $2}')
 
 #TODO: review following lines -- they might not need to be mounted as volumes after development
 #--volume "$PWD/intl.buildlangs.js:/app/intl.buildlangs.js" \
-#--volume "$PWD/langs:/app/langs" \
 
 docker run \
     --rm \
@@ -20,7 +19,6 @@ docker run \
     --publish 3000:80 \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
-    --volume "$PWD/langs:/app/langs" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --volume "$PWD/package.json:/app/package.json" \
     --volume "$PWD/intl.buildlangs.js:/app/intl.buildlangs.js" \
