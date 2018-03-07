@@ -45,11 +45,11 @@ class Header extends Component {
                 </a>
                 <span className="coa-text-spacer--vertical"></span>
                 <a href="http://311.austintexas.gov/">311</a>
-                <span className="coa-text-spacer--vertical"></span>
+                {/* <span className="coa-text-spacer--vertical"></span> */}
               </div>
-              <I18nLink to="/search" className="coa-Header__search">
+              {/* <I18nLink to="/search" className="coa-Header__search">
                 <span className="d-none d-md-block">Search</span> <SearchSVG size="18"/>
-              </I18nLink>
+              </I18nLink> */}
             </div>
           </div>
         </div>
