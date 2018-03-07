@@ -6,7 +6,6 @@ import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import { SUPPORTED_LANGUAGES } from 'js/constants/languages';
 
 const { CMS_API } = process.env;
 
