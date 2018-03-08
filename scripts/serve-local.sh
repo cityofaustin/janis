@@ -9,9 +9,6 @@ docker build --tag "$TAG" .
 echo "running docker image..."
 HOST_IP=$(ifconfig en0 | awk '$1 == "inet" {print $2}')
 
-#TODO: review following lines -- they might not need to be mounted as volumes after development
-#--volume "$PWD/intl.buildlangs.js:/app/intl.buildlangs.js" \
-
 docker run \
     --rm \
     --name janis \

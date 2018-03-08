@@ -1,7 +1,5 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-####ARE THESE JUST GENERIC IGNORES, EXCEPT FOR OUR BUILT CSS FILE?
-
 # dependencies
 /node_modules
 
