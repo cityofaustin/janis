@@ -29,14 +29,16 @@
     "uswds": "^1.4.5"
   },
   "devDependencies": {
+    "babel-plugin-react-intl": "^2.4.0",
     "eslint-config-react-tools": "1.x.x",
     "serve": "^6.1.0"
   },
   "scripts": {
-    "start-js": "react-static start",
     "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-static build",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
+    "build-langs": "babel intl.buildlangs.js | node",
+    "start-js": "react-static start",
+    "build-js": "react-static build",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-static'
 import PropTypes from 'prop-types'
-import { i18nalizeLinkTo } from 'js/constants/languages'
+import { i18nalizeLinkTo } from 'js/i18n/constants'
 
 const I18nLink = (props, context) => {
   const { to, ...rest } = props;

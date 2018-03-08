@@ -1,3 +1,10 @@
 {
-  "extends": "react-static/.babelrc"
+  "extends": "react-static/.babelrc",
+  "plugins": [
+    [
+      "react-intl", {
+        "messagesDir": "./i18n/messages"
+      }
+    ]
+  ],
 }
