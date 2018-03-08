@@ -47,14 +47,6 @@ class Navmenu extends Component {
     }
   }
 
-  getOverlayClassName = () => {
-    let className = `coa-Navmenu__overlay`;
-    if (this.props.isOpen) {
-      className = `${className} ${className}--open`;
-    }
-    return className;
-  }
-
   toggleMobileSublist = (e, openSectionId) => {
     if (window.innerWidth < this.DESKTOP_BREAKPOINT) {
       e.preventDefault();
@@ -179,10 +171,6 @@ class Navmenu extends Component {
             <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
           </ul>
         </nav>
-        <div className={this.getOverlayClassName()}
-          onClick={this.props.toggleMenu}
-        >
-        </div>
       </div>
     );
   }
