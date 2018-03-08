@@ -1,11 +1,16 @@
 import React from 'react'
-import { NavLink, withRouteData } from 'react-static'
+import { NavLink } from 'react-static'
+import PropTypes from 'prop-types'
 import { i18nalizeLinkTo } from 'js/constants/languages'
 
-const I18nNavLink = (props) => {
-  const {langCode, to, ...rest} = props;
-  //TO DO -- only pass NavLink props, not all remaining ...rest
+const I18nNavLink = (props, context) => {
+  const { to, ...rest } = props;
+  const { langCode } = context;
   return <NavLink to={i18nalizeLinkTo({to, langCode})} {...rest} />
 }
 
-export default withRouteData(I18nNavLink);
+I18nNavLink.contextTypes = {
+  langCode: PropTypes.string,
+}
+
+export default I18nNavLink;
