@@ -70,13 +70,25 @@ class Navmenu extends Component {
     }
   }
 
+  themeClassnames = (id, theme) => {
+    const base = `coa-Navmenu__item`;
+    const openModifier = this.state.openSection === id ?
+      'coa-Navmenu__item--open' :
+      '';
+    const comingSoonModifier = theme.slug === 'false' ?
+      'coa-Navmenu__item--coming-soon' :
+      '';
+
+    return `${base} ${openModifier} ${comingSoonModifier}`;
+  }
+
   render() {
     const { themes } = navigation;
 
 
     return themes.length && (
       <div className="wrapper">
-        <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`}>
+        <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`} role="navigation">
           <button className="coa-Navmenu__close-btn d-lg-none" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
@@ -109,8 +121,8 @@ class Navmenu extends Component {
         {
           themes.map((theme, i) => {
             return (
-              <li key={i} className={`coa-Navmenu__item ${this.state.openSection === i ? 'coa-Navmenu__item--open' : ''}`}>
-                <I18nNavLink to={`/topics/${theme.slug}`}
+              <li key={i} className={this.themeClassnames(i, theme)}>
+                <I18nNavLink to={`/theme/${theme.slug}`}
                   activeClassName="usa-current"
                   onClick={(e) => this.toggleMobileSublist(e, i)}
                 >
@@ -133,9 +145,9 @@ class Navmenu extends Component {
                   <ul className={`coa-Navmenu__sublist ${this.state.openSection === i ? 'coa-Navmenu__sublist--open' : ''}`}>
                   {
                     theme.topics.map(({ title, slug }, i) => {
-                      return (
+                      return slug !== "false" && (
                         <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__subitem">
-                          <I18nNavLink to={`/services/${slug}`}
+                          <I18nNavLink to={`/topics/${slug}`}
                             activeClassName="usa-current"
                             className="test"
                           >
@@ -145,6 +157,11 @@ class Navmenu extends Component {
                       );
                     })
                   }
+                    <li className="coa-Navmenu__subitem coa-Navmenu__subitem--coming-soon-message">
+                      <a href="https://www.austintexas.gov">
+                        This site is a work in progress. More topics coming soon. Visit austintexas.gov for more topics.
+                      </a>
+                    </li>
                   </ul>
                 )}
               </li>

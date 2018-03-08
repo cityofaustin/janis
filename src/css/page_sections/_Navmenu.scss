@@ -80,6 +80,19 @@
   }
 }
 
+.coa-Navmenu__item--coming-soon {
+  &:hover {
+    .coa-Navmenu__item-text {
+      color: $color-gray-medium;
+    }
+    .coa-Navmenu__arrow-down {
+      path {
+        fill: $color-gray-medium;
+      }
+    }
+  }
+}
+
 .coa-Navmenu__item--flex {
   display: flex;
   a {
@@ -153,6 +166,10 @@
     font-size: $small-font-size;
     padding: $coa-space-level3 $coa-space-level4;
   }
+}
+
+.coa-Navmenu__subitem--coming-soon-message {
+  font-style: italic;
 }
 
 .coa-Navmenu--open {
