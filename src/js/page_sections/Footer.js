@@ -8,7 +8,7 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="coa-Footer">
+      <footer className="coa-Footer" role="contentinfo">
         <div className="wrapper">
           <div className="coa-section">
             <div className="row">
