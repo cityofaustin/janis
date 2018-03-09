@@ -15,15 +15,6 @@ Your react app should be running at http://localhost:3000/
 ```
 Your react app should be running at http://localhost:8080/
 
-
----
-
-# React-Static
-
-This project uses React-Static to generate static pages from a react app.
-
-TODO: more on this decision + evaluation
-
 ---
 
 ## Adding dependencies via yarn
@@ -37,7 +28,22 @@ Add a package via yarn (https://yarnpkg.com/lang/en/docs/cli/add/)
 docker exec --interactive --tty janis yarn add <package name>
 ```
 
+Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
 ___
+
+## Updating translation export via yarn
+
+All static translations live in src/js/i18n/locales/ directory.
+These files are versioned and built from the auto-generated default.json file (within that directory) via [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl).
+To re-generate default.json to update the static content to be translated, the following command can be run:
+
+```
+docker exec --interactive --tty janis yarn run build-langs
+```
+
+Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
+___
+
 
 ## Design assets
 
@@ -72,5 +78,13 @@ Resources:
 a11y Resources:
 - https://accessibility.18f.gov/
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
+
+---
+
+## React-Static
+
+This project uses React-Static to generate static pages from a react app.
+
+TODO: more on this decision + evaluation
 
 ---
