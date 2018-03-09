@@ -18,31 +18,17 @@ class Navmenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
       openSection: null,
     };
     this.DESKTOP_BREAKPOINT = 1080;
-
   }
 
   focusOnClose = () => {
     this.refs.closeTrigger && this.refs.closeTrigger.focus();
   }
 
-  componentDidMount () {
-    request(
-      `${process.env.CMS_API}`,
-      allTopicPagesQuery,
-    ).then(res => {
-      this.setState({
-        data: res.allTopics,
-        isLoaded: true
-      });
-    }).catch(err => console.log(err));
-  }
-
-  componentDidUpdate() {
-    if (this.props.isOpen) {
+  componentDidUpdate(prevProps) {
+    if (this.props.isOpen && !prevProps.isOpen) {
       this.focusOnClose();
     }
   }
@@ -76,7 +62,6 @@ class Navmenu extends Component {
 
   render() {
     const { themes } = navigation;
-
 
     return themes.length && (
       <div className="wrapper">
@@ -162,7 +147,7 @@ class Navmenu extends Component {
         }
             <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
               <a href="#">
-                Read Abour Privacy
+                Read About Privacy
               </a>
             </li>
             <p className="coa-Navmenu__footer-text d-lg-none">
@@ -174,7 +159,6 @@ class Navmenu extends Component {
       </div>
     );
   }
-
 }
 
 export default Navmenu;
