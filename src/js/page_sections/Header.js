@@ -28,11 +28,11 @@ class Header extends Component {
           <div className="row">
             <div className="col-xs-6 coa-Header__navbar-brand">
               <div className="coa-Header__menu d-lg-none">
-                <span onClick={this.toggleMenu} tabIndex="0"
-                  className="coa-Header__menu-toggle" ref="menu"
+                <button onClick={this.toggleMenu} tabIndex="0"
+                  className="coa-Header__menu-toggle coa-button-reset" ref="menu"
                 >
                   MENU
-                </span>
+                </button>
               </div>
               <div className="coa-Header__logo">
                 <I18nLink to="/">ALPHA.AUSTIN.GOV</I18nLink>
