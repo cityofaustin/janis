@@ -154,32 +154,46 @@
           "node": {
             "title": "Explore & Visit",
             "slug": "false",
-            "topics": [
-              {
-                "title": "Events & classes",
-                "slug": "false"
-              },
-              {
-                "title": "Hike, bike, swim, & play",
-                "slug": "false"
-              },
-              {
-                "title": "Arts & culture",
-                "slug": "false"
-              },
-              {
-                "title": "Libraries",
-                "slug": "false"
-              },
-              {
-                "title": "Transportation & parking",
-                "slug": "false"
-              },
-              {
-                "title": "Airport",
-                "slug": "false"
-              }
-            ]
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Events & classes",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Hike, bike, swim, & play",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Arts & culture",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Libraries",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Transportation & parking",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Airport",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
           }
         },
         {
