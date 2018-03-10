@@ -61,9 +61,9 @@ class Navmenu extends Component {
   }
 
   render() {
-    const { themes } = navigation;
+    const { allThemes } = navigation.data;
 
-    return themes.length && (
+    return allThemes.edges.length && (
       <div className="wrapper">
         <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`} role="navigation">
           <button className="coa-Navmenu__close-btn d-lg-none" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
@@ -96,7 +96,8 @@ class Navmenu extends Component {
               </a>
             </li>
         {
-          themes.map((theme, i) => {
+          allThemes.edges.map(({node: theme}, i) => {
+
             return (
               <li key={i} className={this.themeClassnames(i, theme)}>
                 <I18nNavLink to={`/theme/${theme.slug}`}
@@ -118,17 +119,17 @@ class Navmenu extends Component {
                   </div>
                 </I18nNavLink>
 
-                { !!theme.topics && (
+                { !!theme.topics.edges && (
                   <ul className={`coa-Navmenu__sublist ${this.state.openSection === i ? 'coa-Navmenu__sublist--open' : ''}`}>
                   {
-                    theme.topics.map(({ title, slug }, i) => {
-                      return slug !== "false" && (
+                    theme.topics.edges.map(({ node: topic }, i) => {
+                      return topic.slug !== "false" && (
                         <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__subitem">
-                          <I18nNavLink to={`/topics/${slug}`}
+                          <I18nNavLink to={`/topics/${topic.slug}`}
                             activeClassName="usa-current"
                             className="test"
                           >
-                            {title}
+                            {topic.title}
                           </I18nNavLink>
                         </li>
                       );

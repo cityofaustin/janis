@@ -1,194 +1,286 @@
 {
-  "themes": [
-    {
-      "title": "Permits & Tickets",
-      "slug": "false",
-      "topics": [
+  "data": {
+    "allThemes": {
+      "edges": [
         {
-          "title": "Building permits",
-          "slug": "false"
+          "node": {
+            "title": "Permits & Tickets",
+            "slug": "false",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Building permits",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Business permits & licenses",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Event permits",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Pay tickets",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         },
         {
-          "title": "Business permits & licenses",
-          "slug": "false"
+          "node": {
+            "title": "Housing & Utilities",
+            "slug": "housing-and-utilities",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Pay utility bills",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Water & electric service",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Recycling, trash, & compost",
+                    "slug": "VG9waWNOb2RlOjE="
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Housing assistance",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         },
         {
-          "title": "Event permits",
-          "slug": "false"
+          "node": {
+            "title": "Pets",
+            "slug": "false",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Pet adoption",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Foster an animal",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Report a loose animal",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Lost & found pets",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         },
         {
-          "title": "Pay tickets",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Housing & Utilities",
-      "slug": "housing-and-utilities",
-      "topics": [
-        {
-          "title": "Pay utility bills",
-          "slug": "false"
+          "node": {
+            "title": "Health & Safety",
+            "slug": "false",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Birth certificates",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Healthcare & prevention",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Find childcare",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Child & senior safety",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Disaster safety & relief",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Police reports & records",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         },
         {
-          "title": "Water & electric service",
-          "slug": "false"
+          "node": {
+            "title": "Explore & Visit",
+            "slug": "false",
+            "topics": [
+              {
+                "title": "Events & classes",
+                "slug": "false"
+              },
+              {
+                "title": "Hike, bike, swim, & play",
+                "slug": "false"
+              },
+              {
+                "title": "Arts & culture",
+                "slug": "false"
+              },
+              {
+                "title": "Libraries",
+                "slug": "false"
+              },
+              {
+                "title": "Transportation & parking",
+                "slug": "false"
+              },
+              {
+                "title": "Airport",
+                "slug": "false"
+              }
+            ]
+          }
         },
         {
-          "title": "Recycling, trash, & compost",
-          "slug": "VG9waWNOb2RlOjE="
+          "node": {
+            "title": "Government & Business",
+            "slug": "false",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "Departments",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Court dates & times",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Business development",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "City code & ordinances",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Budget, performance, & open records",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Funding, grants, & rebates",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Resident participation",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "Mayor & Council",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         },
         {
-          "title": "Housing assistance",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Pets",
-      "slug": "false",
-      "topics": [
-        {
-          "title": "Pet adoption",
-          "slug": "false"
-        },
-        {
-          "title": "Foster an animal",
-          "slug": "false"
-        },
-        {
-          "title": "Report a loose animal",
-          "slug": "false"
-        },
-        {
-          "title": "Lost & found pets",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Health & Safety",
-      "slug": "false",
-      "topics": [
-        {
-          "title": "Birth certificates",
-          "slug": "false"
-        },
-        {
-          "title": "Healthcare & prevention",
-          "slug": "false"
-        },
-        {
-          "title": "Find childcare",
-          "slug": "false"
-        },
-        {
-          "title": "Child & senior safety",
-          "slug": "false"
-        },
-        {
-          "title": "Disaster safety & relief",
-          "slug": "false"
-        },
-        {
-          "title": "Police reports & records",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Explore & Visit",
-      "slug": "false",
-      "topics": [
-        {
-          "title": "Events & classes",
-          "slug": "false"
-        },
-        {
-          "title": "Hike, bike, swim, & play",
-          "slug": "false"
-        },
-        {
-          "title": "Arts & culture",
-          "slug": "false"
-        },
-        {
-          "title": "Libraries",
-          "slug": "false"
-        },
-        {
-          "title": "Transportation & parking",
-          "slug": "false"
-        },
-        {
-          "title": "Airport",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Government & Business",
-      "slug": "false",
-      "topics": [
-        {
-          "title": "Departments",
-          "slug": "false"
-        },
-        {
-          "title": "Court dates & times",
-          "slug": "false"
-        },
-        {
-          "title": "Business development",
-          "slug": "false"
-        },
-        {
-          "title": "City code & ordinances",
-          "slug": "false"
-        },
-        {
-          "title": "Budget, performance, & open records",
-          "slug": "false"
-        },
-        {
-          "title": "Funding, grants, & rebates",
-          "slug": "false"
-        },
-        {
-          "title": "Resident participation",
-          "slug": "false"
-        },
-        {
-          "title": "Mayor & Council",
-          "slug": "false"
-        }
-      ]
-    },
-    {
-      "title": "Jobs",
-      "slug": "false",
-      "topics": [
-        {
-          "title": "City job titles & pay",
-          "slug": "false"
-        },
-        {
-          "title": "City benefits",
-          "slug": "false"
-        },
-        {
-          "title": "[Job type 1]",
-          "slug": "false"
-        },
-        {
-          "title": "[Job type 2]",
-          "slug": "false"
-        },
-        {
-          "title": "All jobs",
-          "slug": "false"
+          "node": {
+            "title": "Jobs",
+            "slug": "false",
+            "topics": {
+              "edges": [
+                {
+                  "node": {
+                    "title": "City job titles & pay",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "City benefits",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "[Job type 1]",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "[Job type 2]",
+                    "slug": "false"
+                  }
+                },
+                {
+                  "node": {
+                    "title": "All jobs",
+                    "slug": "false"
+                  }
+                }
+              ]
+            }
+          }
         }
       ]
     }
-  ]
+  }
 }
