@@ -28,7 +28,7 @@ const Service = ({ service }) => {
   const relatedLinks = cleanRelatedServiceLinks(service.related);
 
   return (
-    <div> 
+    <div>
 
       <Hero image={image} />
 
