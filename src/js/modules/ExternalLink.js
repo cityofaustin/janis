@@ -1,15 +1,22 @@
 import React from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
 import ExternalLinkSVG from 'js/svg/ExternalLink';
 
+const i18nMessages = defineMessages({
+  externalLinkAriaLabel: {
+    id: 'ExternalLink.ariaLabel',
+    defaultMessage: 'Opens in new window',
+  },
+});
 const defaultIconSize = "17";
 
-const ExternalLink = (props) => (
-  <a href={props.to} className="coa-ExternalLink"
-    target="_blank" rel="noopener noreferrer" aria-label="Opens in new window"
+const ExternalLink = ({to, iconSize, children, intl}) => (
+  <a href={to} className="coa-ExternalLink"
+    target="_blank" rel="noopener noreferrer" aria-label={intl.formatMessage(i18nMessages.externalLinkAriaLabel)}
   >
-    {props.children}
-    <ExternalLinkSVG size={props.iconSize || defaultIconSize} />
+    {children}
+    <ExternalLinkSVG size={iconSize || defaultIconSize} />
   </a>
 );
 
-export default ExternalLink;
+export default injectIntl(ExternalLink);

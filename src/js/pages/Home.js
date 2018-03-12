@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouteData } from 'react-static';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
@@ -10,12 +10,18 @@ import Hero from 'js/modules/Hero';
 import ExternalLink from 'js/modules/ExternalLink';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import homepageImg from 'images/lady_bird_lake.jpg';
+import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 import jsonFileData from '__tmpdata/services';
 const services311 = get(jsonFileData, "services311", null);
 
-import { cleanServiceLinks } from 'js/helpers/cleanData';
-
+const i18nMessages = defineMessages({
+  homeHeroWelcometext: {
+    id: 'Home.Hero.welcometext',
+    defaultMessage: 'Hi there, welcome to',
+    description: 'Homepage hero welcome text'
+  },
+});
 
 const Home = ({ topServices, intl }) => {
   const serviceLinks = cleanServiceLinks(topServices);
@@ -31,17 +37,10 @@ const Home = ({ topServices, intl }) => {
     </p>
   )
 
-  const i18nMessages = defineMessages({
-    homeHeroWelcometext: {
-      id: 'Home.Hero.welcometext',
-      defaultMessage: 'Hi there, welcome to',
-    },
-  });
-
   return (
     <div>
       <Hero home={true} image={homepageImage}>
-        <span className="coa-Hero__home-preheader">{intl.formatMessage(TODO_DELETEME_MESSAGES.homeHeroWelcometext)}</span>
+        <span className="coa-Hero__home-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
         <h2 className="coa-Hero__home-header">Austin, TX</h2>
         <GlobalSearch placeholder="Search for services" />
       </Hero>
