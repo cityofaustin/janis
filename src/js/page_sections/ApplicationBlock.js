@@ -40,7 +40,7 @@ class ApplicationBlock extends Component {
     } else {
       JSX = (
         <div className="coa-ApplicationBlock">
-          <SectionTitle title={title} noBorder={true} />
+          <SectionTitle title={title}/>
           {app}
         </div>
       );

@@ -17,7 +17,7 @@ class Contact extends Component {
     } else {
       JSX = (
         <div className="coa-section">
-          <SectionTitle title="Contact" noBorder={true} />
+          <SectionTitle title="Contact"/>
 
           {
             contacts.map((contact, index) => {
