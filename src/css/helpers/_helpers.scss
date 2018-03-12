@@ -26,4 +26,8 @@
   font-weight: normal;
   line-height: normal;
   padding: initial;
+  &:hover {
+    background: transparent;
+    color: $coa-color-blue;
+  }
 }
