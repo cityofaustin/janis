@@ -16,8 +16,9 @@
   justify-content: center;
   margin-top: $coa-space-level4;
 
-  & > input, a, button {
-
+  & > input,
+  & > a,
+  & > button {
     flex-grow: 1;
     margin: 0;
     padding: 0;
