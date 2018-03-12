@@ -1,4 +1,16 @@
 import React from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
+
+const i18nMessages = defineMessages({
+  staticMapAriaLabel: {
+    id: 'StaticMap.arialabel',
+    defaultMessage: 'Opens in new window',
+  },
+  staticMapAltText: {
+    id: 'StaticMap.alttext',
+    defaultMessage: 'map',
+  },
+});
 
 const getEncodedLocation = (location) => {
     const { street, city, state, zip, latitude, longitude } = location;
@@ -12,7 +24,7 @@ const getEncodedLocation = (location) => {
     return encodeURIComponent(defaultLocation);
 }
 
-const StaticMap = ({ location, title }) => {
+const StaticMap = ({ location, title, intl }) => {
   if(!location) return null;
   const encodedLocation = getEncodedLocation(location);
   return (
@@ -20,15 +32,15 @@ const StaticMap = ({ location, title }) => {
       <a href={`//www.google.com/maps/place/${encodedLocation}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Opens in new window"
+        aria-label={intl.formatMessage(i18nMessages.staticMapAriaLabel)}
       >
         <img
           src={`//maps.googleapis.com/maps/api/staticmap?markers=${encodedLocation}&zoom=17&size=600x300&scale=1&maptype=roadmap&key=AIzaSyBqtg0ntvqWGSHOznB4kq3DiYSyyVNKzIs`}
-          alt={title || "map"}
+          alt={title || intl.formatMessage(i18nMessages.staticMapAltText)}
         />
       </a>
     </div>
   );
 }
 
-export default StaticMap;
+export default injectIntl(StaticMap);
