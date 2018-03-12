@@ -31,23 +31,15 @@ const Home = ({ topServices, intl }) => {
     </p>
   )
 
-  const TODO_DELETEME_NAME = 'simi';
-  const TODO_DELETEME_MESSAGES = defineMessages({
+  const i18nMessages = defineMessages({
     homeHeroWelcometext: {
       id: 'Home.Hero.welcometext',
-      defaultMessage: 'Hi there, welome to',
+      defaultMessage: 'Hi there, welcome to',
     },
   });
 
   return (
     <div>
-
-      <FormattedMessage
-        id={ 'Home.greeting' }
-        defaultMessage={ 'Welcome to Austin, {name}!' }
-        values={{ name: TODO_DELETEME_NAME }}
-      />
-
       <Hero home={true} image={homepageImage}>
         <span className="coa-Hero__home-preheader">{intl.formatMessage(TODO_DELETEME_MESSAGES.homeHeroWelcometext)}</span>
         <h2 className="coa-Hero__home-header">Austin, TX</h2>

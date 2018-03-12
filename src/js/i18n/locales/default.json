@@ -1,4 +1,10 @@
 {
-  "Home.Hero.welcometext": "Hi there, welome to",
-  "Home.greeting": "Welcome to Austin, {name}!"
+  "Hours.weekday.sunday": "Sunday",
+  "Hours.weekday.monday": "Monday",
+  "Hours.weekday.tuesday": "Tuesday",
+  "Hours.weekday.wednesday": "Wednesday",
+  "Hours.weekday.thursday": "Thursday",
+  "Hours.weekday.friday": "Friday",
+  "Hours.weekday.saturday": "Saturday",
+  "Home.Hero.welcometext": "Hi there, welcome to"
 }

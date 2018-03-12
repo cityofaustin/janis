@@ -1,21 +1,38 @@
-import moment from 'moment';
-
 export const cleanContacts = (contacts) => {
 
   if(!contacts || !contacts.edges) return null;
 
+  const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
+
+  const weekdayMap = {
+    "SUNDAY":   0,
+    "MONDAY":   1,
+    "TUESDAY":  2,
+    "WEDNESDAY":3,
+    "THURSDAY": 4,
+    "FRIDAY":   5,
+    "SATURDAY": 6,
+  };
+
+  const getWeekday = (day) => (weekdayMap[day]);
+
+  const getTimestamp = (hours) => {
+    const splitHours = hours.split(':');
+    let timestamp = new Date(dateSeed);
+    timestamp.setHours(splitHours[0]);
+    timestamp.setMinutes(splitHours[1]);
+    return timestamp.getTime();
+  };
+
   return contacts.edges.map(({node: contact}) => {
     let {contact: cleaned} = contact;
     if(cleaned.hours && cleaned.hours.edges) {
-      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => {
-        hours.startTime = moment(hours.startTime, "HH:mm:ss").format('h:mm A');
-        hours.endTime = moment(hours.endTime, "HH:mm:ss").format('h:mm A');
-        let dayMoment = moment(hours.dayOfWeek, 'dddd');
-        hours.dayOfWeek = dayMoment.format('dddd');
-        hours.day = dayMoment.format('E');
-
-        return hours;
-      });
+      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
+        dayOfWeek: hours.dayOfWeek,
+        dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
+        startTime: getTimestamp(hours.startTime),
+        endTime: getTimestamp(hours.endTime),
+      }));
     }
     return cleaned;
   });
