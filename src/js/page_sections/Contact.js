@@ -6,6 +6,10 @@ import Hours from 'js/modules/Hours';
 import StaticMap from 'js/modules/StaticMap';
 
 const i18nMessages = defineMessages({
+  contactTitle: {
+    id: 'Contact.title',
+    defaultMessage: 'Contact',
+  },
   contactPhoneTitle: {
     id: 'Contact.phone.title',
     defaultMessage: 'Phone Number',
@@ -26,7 +30,8 @@ const Contact = ({ contacts, intl }) => {
 
   return (
     <div className="coa-section">
-      <SectionTitle title="Contact"/>
+
+      <SectionTitle title={intl.formatMessage(i18nMessages.contactTitle)}/>
       {
         contacts.map((contact, index) => {
 
