@@ -115,7 +115,7 @@ class LanguageWrapper extends Component {
 
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
-        <div>
+        <div style={{ position: 'relative' }}>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
             <section className="coa-main">

@@ -42,7 +42,7 @@ const Home = ({ topServices, intl }) => {
       <Hero home={true} image={homepageImage}>
         <span className="coa-Hero__home-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
         <h2 className="coa-Hero__home-header">Austin, TX</h2>
-        <GlobalSearch placeholder="Search for services" />
+        {/* <GlobalSearch placeholder="Search for services" /> */}
       </Hero>
       <SecondaryContentBanner content={bannerContent()} />
       <RelatedLinks
