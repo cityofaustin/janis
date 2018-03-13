@@ -33,18 +33,17 @@ class Navmenu extends Component {
     }
   }
 
-  toggleMobileSublist = (e, openSectionId) => {
-    if (window.innerWidth < this.DESKTOP_BREAKPOINT) {
-      e.preventDefault();
-      if (openSectionId === this.state.openSection) {
-        this.setState({
-          openSection: null
-        })
-      } else {
-        this.setState({
-          openSection: openSectionId,
-        })
-      }
+  toggleSublist = (e, openSectionId) => {
+    console.log(openSectionId)
+    e.preventDefault();
+    if (openSectionId === this.state.openSection) {
+      this.setState({
+        openSection: null
+      })
+    } else {
+      this.setState({
+        openSection: openSectionId,
+      })
     }
   }
 
@@ -79,24 +78,24 @@ class Navmenu extends Component {
             <ThreeOneOneMobileListItem />
         {
           allThemes.edges.map(({node: theme}, i) => {
-
             return (
               <li key={i} className={this.themeClassnames(i, theme)}
-                // TODO: implement aria expanded
-                // aria-expanded={false}
+                aria-expanded={this.state.openSection === i}
                 aria-haspopup={true}
                 aria-controls={`topicMenu${i+1}`}
                 tabIndex={0}
                 id={`theme${i+1}`}
-                onMouseOver={()=>console.log(`mouse over ${i+1}`)}
-                onMouseOut={()=>console.log(`mouse out ${i+1}`)}
-                // TODO: onClick too?
+                onMouseOver={(e) => this.toggleSublist(e, i)}
+                onMouseOut={(e) => this.toggleSublist(e, i)}
+                // TODO:
+                // should onClick trigger sublist open on desktop as it does on mobile?
+                // should onMouseOver/Out be disabled on mobile?
               >
 
                 <ThemeTopListItem id={i}
                   theme={theme}
                   openSection={this.state.openSection}
-                  handleClick={this.toggleMobileSublist}
+                  handleClick={this.toggleSublist}
                 />
 
                 { !!theme.topics.edges && (
