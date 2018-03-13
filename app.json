@@ -8,12 +8,6 @@
     },
     "CMS_MEDIA": {
       "required": true
-    },
-    "FEEDBACK_API": {
-      "required": true
-    },
-    "GOOGLE_ANALYTICS": {
-      "required": true
     }
   },
   "formation": {
