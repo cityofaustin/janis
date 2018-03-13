@@ -3,7 +3,6 @@ import Routes from 'react-static-routes'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
-import moment from 'moment';
 
 // react-intl i18n
 import { IntlProvider, addLocaleData } from 'react-intl'
@@ -111,7 +110,6 @@ class LanguageWrapper extends Component {
   render() {
     const { lang } = this.state;
     const messages = localeMessages[lang];
-    moment.locale(lang);
 
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
