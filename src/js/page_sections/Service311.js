@@ -1,44 +1,47 @@
 import React, { Component } from "react";
+import { defineMessages, injectIntl } from 'react-intl';
 import ListLink from 'js/modules/ListLink';
 
-class Service311 extends Component {
+const i18nMessages = defineMessages({
+  service311Sectiontitle: {
+    id: 'Service311.sectiontitle',
+    defaultMessage: 'Request 311 Service or Call',
+  },
+  service311Sectionbody: {
+    id: 'Service311.sectionbody',
+    defaultMessage: '311 is the city of Austin’s 24 hour information desk.',
+  },
+  service311Sectionlink: {
+    id: 'Service311.sectionlink',
+    defaultMessage: 'See a Full List of 311 Services',
+  },
+});
 
-  render() {
-
-    const { services311 } = this.props;
-    let JSX;
-
-    if (!services311 || !services311.length) {
-      JSX = null;
-    } else {
-      JSX = (
-        <div className="coa-section">
-          <div className="wrapper">
-            <div className="coa-section__title">
-              <h3>Request 311 Service or Call <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
-            </div>
-            <p>311 is the city of Austin’s 24 hour information desk.</p>
-
-            <div className="row">
-            {
-              services311.map((service, index) =>
-                <div key={index} className="col-xs-12 col-lg-4">
-                  <ListLink
-                    url={service.url}
-                    text={service.title}
-                  />
-                </div>
-              )
-            }
-            </div>
-            <a className="coa-section__link" href="http://311.austintexas.gov/reports/list_services">See a Full List of 311 Services</a>
-          </div>
+const Service311 = ({ services311, intl }) => {
+  if (!services311 || !services311.length) return null;
+  return (
+    <div className="coa-section">
+      <div className="wrapper">
+        <div className="coa-section__title">
+          <h3>{intl.formatMessage(i18nMessages.service311Sectiontitle)} <a className="nowrap" href="tel:512-974-2000">512-974-2000</a></h3>
         </div>
-      );
-    }
-
-    return JSX;
-  }
+        <p>{intl.formatMessage(i18nMessages.service311Sectionbody)}</p>
+        <div className="row">
+        {
+          services311.map((service, index) =>
+            <div key={index} className="col-xs-12 col-lg-4">
+              <ListLink
+                url={service.url}
+                text={service.title}
+              />
+            </div>
+          )
+        }
+        </div>
+        <a className="coa-section__link" href="http://311.austintexas.gov/reports/list_services">{intl.formatMessage(i18nMessages.service311Sectionlink)}</a>
+      </div>
+    </div>
+  );
 }
 
-export default Service311;
+export default injectIntl(Service311);
