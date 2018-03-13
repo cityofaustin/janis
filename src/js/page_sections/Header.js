@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
 import SearchSVG from 'js/svg/Search';
 import AirplaneSVG from 'js/svg/Airplane';
 import Navmenu from 'js/page_sections/Navmenu';
 import I18nLink from 'js/modules/I18nLink'
+
+const i18nMessages = defineMessages({
+  headerMenuButton: {
+    id: 'Header.Menu.button',
+    defaultMessage: 'Menu',
+  },
+  headerSearchButton: {
+    id: 'Header.Search.button',
+    defaultMessage: 'Search',
+  },
+});
 
 class Header extends Component {
   constructor(props) {
@@ -22,6 +34,9 @@ class Header extends Component {
   }
 
   render() {
+
+    const { intl } = this.props;
+
     return (
       <header className="coa-Header" role="banner">
         <div className="wrapper">
@@ -31,7 +46,7 @@ class Header extends Component {
                 <button onClick={this.toggleMenu} tabIndex="0"
                   className="coa-Header__menu-toggle coa-button-reset" ref="menu"
                 >
-                  MENU
+                  {intl.formatMessage(i18nMessages.headerMenuButton)}
                 </button>
               </div>
               <div className="coa-Header__logo">
@@ -48,7 +63,7 @@ class Header extends Component {
                 {/* <span className="coa-text-spacer--vertical"></span> */}
               </div>
               {/* <I18nLink to="/search" className="coa-Header__search">
-                <span className="d-none d-md-block">Search</span> <SearchSVG size="18"/>
+                <span className="d-none d-md-block">{intl.formatMessage(i18nMessages.headerSearchButton)}</span> <SearchSVG size="18"/>
               </I18nLink> */}
             </div>
           </div>
@@ -60,4 +75,4 @@ class Header extends Component {
 
 }
 
-export default Header;
+export default injectIntl(Header);
