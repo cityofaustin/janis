@@ -146,6 +146,11 @@
   }
 }
 
+.coa-Navmenu__sublist--align-right {
+  right: 0;
+  left: auto;  
+}
+
 .coa-Navmenu__subitem {
   list-style: none;
   &:hover {
