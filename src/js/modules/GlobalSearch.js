@@ -7,20 +7,24 @@ const i18nMessages = defineMessages({
     id: 'GlobalSearch.label',
     defaultMessage: 'Search Big',
   },
+  globalSearchPlaceholder: {
+    id: 'GlobalSearch.placeholder',
+    defaultMessage: 'Search for services',
+  },
   globalSearchButtonText: {
     id: 'GlobalSearch.buttontext',
     defaultMessage: 'Search',
   },
 });
 
-const GlobalSearch = ({ placeholder, intl }) => (
+const GlobalSearch = ({ intl }) => (
   <div role="search">
     <form className="coa-GlobalSearch usa-search usa-search-big">
       <label className="usa-sr-only" htmlFor="search-field-big">
         {intl.formatMessage(i18nMessages.globalSearchLabel)}
       </label>
       <input id="search-field-big" type="search" name="search"
-        placeholder={placeholder}
+        placeholder={intl.formatMessage(i18nMessages.globalSearchPlaceholder)}
       />
       <button type="submit" className="coa-GlobalSearch__button">
         <span className="usa-search-submit-text">
