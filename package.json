@@ -44,7 +44,7 @@
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NODE_PATH=src start-storybook -p 6006",
     "build-storybook": "build-storybook"
   }
 }
