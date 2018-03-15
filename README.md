@@ -79,4 +79,5 @@ a11y Resources:
 
 - Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
 - To run Storybooks locally:
-  - `yarn run storybook`
+  - `./scripts/serve-storybook.sh`
+  - open http://localhost:6006/

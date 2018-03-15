@@ -8,13 +8,12 @@ ENV NODE_PATH=src
 
 COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
-COPY static.config.js /app/static.config.js
-COPY .babelrc /app/.babelrc
 RUN yarn
 
+COPY .babelrc /app/.babelrc
 COPY public /app/public
 COPY src /app/src
 COPY .storybook /app/.storybook
 
 EXPOSE $PORT
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "run", "storybook"]
