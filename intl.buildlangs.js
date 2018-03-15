@@ -26,4 +26,4 @@ let defaultMessages = globSync(filePattern)
 mkdirpSync(outputDir);
 
 // Write the messages to this directory
-fs.writeFileSync(outputDir + 'default.json', `${JSON.stringify(defaultMessages, null, 2)}`);
+fs.writeFileSync(outputDir + 'en.json', `${JSON.stringify(defaultMessages, null, 2)}`);
