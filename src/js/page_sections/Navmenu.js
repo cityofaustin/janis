@@ -1,146 +1,165 @@
 import React, { Component } from 'react';
-import { Link } from 'react-static';
-import { getPathWithLangCode, getPathnameWithoutLangCode } from 'js/helpers/language';
-import request from 'graphql-request'
-import { includes } from 'lodash';
-import CloseSVG from 'js/svg/Close';
+import request from 'graphql-request';
+
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import I18nNavLink from 'js/modules/I18nNavLink';
+import ExternalLink from 'js/modules/ExternalLink';
+import navigation from '__tmpdata/navigation';
+
+import ChevronDownSVG from 'js/svg/ChevronDown';
+import CloseSVG from 'js/svg/Close';
+import AirplaneSVG from 'js/svg/Airplane';
+import PlusSVG from 'js/svg/Plus';
+import MinusSVG from 'js/svg/Minus';
+import citySealImg from 'images/coa_seal.png';
+
 
 class Navmenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nav: [],
-      isLoaded: false
+      openSection: null,
     };
-  }
-
-  menuClassName = () => {
-    const baseClassName = `coa-Navmenu`;
-    return this.props.isOpen ? `${baseClassName} ${baseClassName}--open` : baseClassName;
+    this.DESKTOP_BREAKPOINT = 1080;
   }
 
   focusOnClose = () => {
     this.refs.closeTrigger && this.refs.closeTrigger.focus();
   }
 
-  componentDidMount () {
-
-    request(
-      `${process.env.CMS_API}`,
-      allTopicPagesQuery,
-    ).then(res => {
-      this.setState({
-        data: res.allTopics,
-        isLoaded: true
-      });
-    }).catch(err => console.log(err));
-  }
-
-  componentDidUpdate() {
-    if (this.props.isOpen) {
+  componentDidUpdate(prevProps) {
+    if (this.props.isOpen && !prevProps.isOpen) {
       this.focusOnClose();
     }
   }
 
-  toggleSublist = (e, openSectionId) => {
-    e.preventDefault();
-    if (openSectionId === this.state.openSection) {
-      this.setState({
-        openSection: null
-      })
-    } else {
-      this.setState({
-        openSection: openSectionId,
-      })
-    }
-    return className;
-  }
-
-  getParentMenuItemClassName = (parentLink) => {
-    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
-    const servicePaths = parentLink.services.edges
-      ? parentLink.services.edges.map(({ node: serviceLink }) => {
-          return `service/${serviceLink.slug}`;
+  toggleMobileSublist = (e, openSectionId) => {
+    if (window.innerWidth < this.DESKTOP_BREAKPOINT) {
+      e.preventDefault();
+      if (openSectionId === this.state.openSection) {
+        this.setState({
+          openSection: null
         })
-      : [];
-    const isActive = includes(servicePaths, currentPath);
-    const isActiveTopic = `topic/${parentLink.id}` === currentPath;
-
-    return isActive || isActiveTopic ? 'usa-current' : '';
+      } else {
+        this.setState({
+          openSection: openSectionId,
+        })
+      }
+    }
   }
 
-  getMenuItemClassName = (path) => {
-    const currentPath = getPathnameWithoutLangCode(this.getCurrentPath());
-    const isMatchingPaths = currentPath === getPathnameWithoutLangCode(path);
-    return isMatchingPaths ? 'usa-current' : '';
+  themeClassnames = (id, theme) => {
+    const base = `coa-Navmenu__item`;
+    const openModifier = this.state.openSection === id ?
+      'coa-Navmenu__item--open' :
+      '';
+    const comingSoonModifier = theme.slug === 'false' ?
+      'coa-Navmenu__item--coming-soon' :
+      '';
+
+    return `${base} ${openModifier} ${comingSoonModifier}`;
   }
 
   render() {
+    const { allThemes } = navigation.data;
 
-    if (!this.state.isLoaded) return 'loading...';
-
-    const { edges: parentLinks = [] } = this.state.data;
-
-    return parentLinks.length && (
-      <div className="usa-grid-full">
-        <nav className={this.menuClassName()}>
-          <button className="coa-Navmenu__close-btn" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
+    return allThemes.edges.length && (
+      <div className="wrapper">
+        <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`} role="navigation">
+          <button className="coa-Navmenu__close-btn d-lg-none" onClick={this.props.toggleMenu} ref="closeTrigger" tabIndex="0">
             <CloseSVG size="40" />
           </button>
-          <ul className="usa-sidenav-list">
-            <li onClick={this.props.toggleMenu}>
-              <Link to={'/'}
-                className={this.getMenuItemClassName('/')}
+          <ul className="coa-Navmenu__list">
+            <li onClick={this.props.toggleMenu} className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+              <I18nNavLink
+                to="/"
+                exact
               >
                 Home
-              </Link>
+              </I18nNavLink>
             </li>
-
+            <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+              <a href="http://www.austintexas.gov/airport">
+                <div className="coa-Navmenu__airplane-icon">
+                  <AirplaneSVG size="15"/>
+                </div>
+                <span className="d-lg-none">Airport</span>
+              </a>
+            </li>
+            <li className="coa-Navmenu__item coa-Navmenu__item--flex coa-Navmenu__item--small d-lg-none">
+              <a href="tel:311">
+                Call 311
+              </a>
+              &nbsp;or&nbsp;
+              <a href="http://311.austintexas.gov/">
+                Submit an Online Request
+              </a>
+            </li>
         {
-          parentLinks.map(({ node: parentLink }) => {
-
-            let { edges: serviceLinks = [] } = parentLink.services;
+          allThemes.edges.map(({node: theme}, i) => {
 
             return (
-              <li key={parentLink.id} onClick={this.props.toggleMenu}>
-                <Link to={`/topics/${parentLink.id}`}
-                  className={this.getParentMenuItemClassName(parentLink)}
+              <li key={i} className={this.themeClassnames(i, theme)}>
+                <I18nNavLink to={`/theme/${theme.slug}`}
+                  activeClassName="usa-current"
+                  onClick={(e) => this.toggleMobileSublist(e, i)}
                 >
-                  { parentLink.text }
-                </Link>
+                  <span className="coa-Navmenu__item-text">
+                    { theme.title }
+                  </span>
+                  <div className="coa-Navmenu__plus-sign d-lg-none">
+                    {
+                      this.state.openSection === i ?
+                        <MinusSVG size="18" title="close section"/> :
+                        <PlusSVG size="18" title="open section" />
+                    }
+                  </div>
+                  <div className="coa-Navmenu__arrow-down d-none d-lg-block">
+                    <ChevronDownSVG size="14" />
+                  </div>
+                </I18nNavLink>
 
-                { !!serviceLinks && (
-                  <ul className="usa-sidenav-sub_list">
+                { !!theme.topics.edges && (
+                  <ul className={`coa-Navmenu__sublist ${this.state.openSection === i ? 'coa-Navmenu__sublist--open' : ''}`}>
                   {
-                    serviceLinks.map(({ node:serviceLink }) => {
-                      return (
-                        <li key={serviceLink.id} onClick={this.props.toggleMenu}>
-                          <Link to={`/services/${serviceLink.slug}`}
-                            className={this.getMenuItemClassName(`/services/${serviceLink.slug}`)}
+                    theme.topics.edges.map(({ node: topic }, i) => {
+                      return topic.slug !== "false" && (
+                        <li key={i} onClick={this.props.toggleMenu} className="coa-Navmenu__subitem">
+                          <I18nNavLink to={`/topics/${topic.slug}`}
+                            activeClassName="usa-current"
+                            className="test"
                           >
-                            {serviceLink.title}
-                          </Link>
+                            {topic.title}
+                          </I18nNavLink>
                         </li>
                       );
                     })
                   }
+                    <li className="coa-Navmenu__subitem coa-Navmenu__subitem--coming-soon-message">
+                      <a href="https://www.austintexas.gov">
+                        This site is a work in progress. More topics coming soon. Visit austintexas.gov for more topics.
+                      </a>
+                    </li>
                   </ul>
                 )}
               </li>
             );
           })
         }
+            <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+              <a href="#">
+                Read About Privacy
+              </a>
+            </li>
+            <p className="coa-Navmenu__footer-text d-lg-none">
+              Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.
+            </p>
+            <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
           </ul>
         </nav>
-        <div className={this.getOverlayClassName()}
-          onClick={this.props.toggleMenu}
-        >
-        </div>
       </div>
     );
   }
-
 }
 
 const HomeMobileListItem = ({handleClick}) => (

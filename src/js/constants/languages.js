@@ -8,7 +8,7 @@ export const SUPPORTED_LANGUAGES = [
     title: 'Español',
     abbr: 'es',
     code: 'es',
-  }, 
+  },
   { // Vietnamese
     title: 'Tiếng Việt',
     abbr: 'vi',
@@ -48,3 +48,19 @@ export const SUPPORTED_LANGUAGES = [
 ]
 
 export const SUPPORTED_LANG_CODES = SUPPORTED_LANGUAGES.map(lang => lang.code);
+
+export const LANG_COOKIE_NAME = 'lang';
+
+export const LANG_COOKIE_EXPIRES = 10 * 365; //days
+
+export const DEFAULT_LANG = 'en';
+
+export const i18nalizeLinkTo = ({to, langCode=DEFAULT_LANG}) => {
+  let location;
+  if (!to) return null;
+  if (typeof to !== "string") location = to.pathname;
+  else location = to;
+  if (location.charAt(0) !== '/') location = location;
+  else location = langCode !== DEFAULT_LANG ? `/${langCode}${location}` : location;
+  return location;
+}

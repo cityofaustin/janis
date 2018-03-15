@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-static';
+import I18nLink from 'js/modules/I18nLink'
 
 
 const ListLink = ({ url, text, style }) => (
-  <Link
+  <I18nLink
     className={ `coa-ListLink coa-ListLink--${style}` }
     to={url}
   >
     <span>{text}</span>
     <i className="fa fa-chevron-right" aria-hidden="true"></i>
-  </Link>
+  </I18nLink>
 );
 
 ListLink.propTypes = {

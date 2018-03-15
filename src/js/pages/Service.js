@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 import { parse } from 'query-string';
-import { Link, withRouteData } from 'react-static';
+import { withRouteData } from 'react-static';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
@@ -12,6 +12,7 @@ import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import Hero from 'js/modules/Hero';
+import I18nLink from 'js/modules/I18nLink';
 
 import jsonFileData from '__tmpdata/services';
 
@@ -27,7 +28,8 @@ const Service = ({ service }) => {
   const relatedLinks = cleanRelatedServiceLinks(service.related);
 
   return (
-    <div> 
+    <div>
+
       <Hero image={image} />
 
       <div className="wrapper">
@@ -36,10 +38,10 @@ const Service = ({ service }) => {
 
             <div className="coa-section">
               { topicId && (
-                <Link className="coa-main__breadcrumb"
+                <I18nLink className="coa-main__breadcrumb"
                   to={`/topics/${topicId}`}>
                   {topicName}
-                </Link>
+                </I18nLink>
               )}
               <h2 className="coa-main__title">{title}</h2>
               { steps && (

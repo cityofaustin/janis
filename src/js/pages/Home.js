@@ -35,7 +35,7 @@ const Home = ({ topServices }) => {
       <Hero home={true} image={homepageImage}>
         <span className="coa-Hero__home-preheader">Welcome to</span>
         <h2 className="coa-Hero__home-header">Austin, TX</h2>
-        <GlobalSearch placeholder="Search for services" />
+        {/* <GlobalSearch placeholder="Search for services" /> */}
       </Hero>
       <SecondaryContentBanner content={bannerContent()} />
       <RelatedLinks
