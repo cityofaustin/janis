@@ -6,6 +6,7 @@ const HeroHome = ({image, children}) => (
     className="coa-Hero coa-Hero--home"
     style={{
       backgroundImage: `
+        linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
         url(${process.env.CMS_MEDIA}/${image.file})
       `,
       backgroundSize: 'cover',
