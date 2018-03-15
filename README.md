@@ -74,3 +74,10 @@ a11y Resources:
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
 
 ---
+
+## Storybook
+
+- Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
+- To run Storybooks locally:
+  - `./scripts/serve-storybook.sh`
+  - open http://localhost:6006/
