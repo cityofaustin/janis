@@ -128,6 +128,10 @@ export default {
         component: 'src/js/pages/Home',
         getData: async () => ({
           topServices,
+          image: {
+            file: 'original_images/lady_bird_lake.jpg',
+            title: 'Lady Bird Lake walking trail'
+          }
         }),
       },
       {
@@ -136,6 +140,10 @@ export default {
         children: allPages('en'),
         getData: async () => ({
           topServices,
+          image: {
+            file: 'original_images/lady_bird_lake.jpg',
+            title: 'Lady Bird Lake walking trail'
+          }
         }),
       },
       {
@@ -144,6 +152,10 @@ export default {
         children: allPages('es'),
         getData: async () => ({
           topServices: topServices_es,
+          image: {
+            file: 'original_images/lady_bird_lake.jpg',
+            title: 'Lady Bird Lake walking trail in spanish'
+          }
         }),
       },
       {
@@ -152,6 +164,10 @@ export default {
         children: allPages('vi'),
         getData: async () => ({
           topServices: topServices_vi,
+          image: {
+            file: 'original_images/lady_bird_lake.jpg',
+            title: 'Lady Bird Lake walking trail in vietnamese'
+          }
         }),
       },
       {
@@ -160,6 +176,10 @@ export default {
         children: allPages('ar'),
         getData: async () => ({
           topServices: topServices_ar,
+          image: {
+            file: 'original_images/lady_bird_lake.jpg',
+            title: 'Lady Bird Lake walking trail in arabic'
+          }
         }),
       },
       {

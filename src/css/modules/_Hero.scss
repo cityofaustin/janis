@@ -1,15 +1,11 @@
 .coa-Hero {
-  @include box-verticalcenter(200px);
-  background-color: $color-gray-lighter;
-  margin-bottom: $coa-space-level4;
-  padding: $coa-space-level5;
-}
-
-.coa-Hero--image {
+  @include box-verticalcenter(17rem);
   background-color: $color-gray-lighter;
   background-position: center center;
   background-size: cover;
-  height: 17rem;
+  margin-bottom: $coa-space-level4;
+  padding: $coa-space-level5;
+
   @include media($coa-small-screen) {
     height: 24rem;
   }
@@ -19,15 +15,14 @@
 }
 
 .coa-Hero__callout {
-  .wrapper {
-    width: 100%;
-  }
   h2 {
     font-weight: $font-bold;
     margin: 0;
   }
 }
-.coa-Hero__home {
+
+.coa-Hero--home {
+  background-image: linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3));
   flex-direction: column;
   padding: 4rem;
   height: 26rem;

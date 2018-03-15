@@ -1,60 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Hero extends Component {
+const Hero = ({ image, callout }) => {
 
-  render() {
-    const { image, callout, home } = this.props;
-    const heroImageSrc = image && home ?
-      image.file :
-      image ? `${process.env.CMS_MEDIA}/${image.file}` : '';
-
-    const HeroImageStyles = {
-      backgroundImage: `url(${heroImageSrc})`
-    }
-
-    const HomepageHeroImageStyles = {
-      background: `
-        linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
-        url(${heroImageSrc})
-      `,
-      backgroundSize: 'cover',
-      backgroundPosition: '50%',
-    }
-
-    if (home) {
-      return (
-        <div
-          className="coa-Hero--image coa-Hero__home"
-          style={HomepageHeroImageStyles}
-          role="img"
-          aria-label={image.title}
-        >
-          <div className="coa-Hero__home-children">
-            {this.props.children}
-          </div>
-        </div>
-      )
-    } else if (image) {
-      return (
-        <div
-          className="coa-Hero--image"
-          style={HeroImageStyles}
-          role="img"
-          aria-label={image.title}
-        ></div>
-      )
-    } else if (callout) {
-      return (
-        <div className="coa-Hero coa-Hero__callout">
-          <div className="wrapper">
-            <h2>{callout}</h2>
-            {this.props.children}
-          </div>
-        </div>
-      )
-    } else return '';
+  if (image) {
+    return (
+      <div
+        className="coa-Hero"
+        style={{
+          backgroundImage: `url(${process.env.CMS_MEDIA}/${image.file})`
+        }}
+        role="img"
+        aria-label={image.title}
+      >
+        { callout && <h2 className="coa-Hero__callout">{callout}</h2> }
+      </div>
+    );
   }
 
+  return (
+    <div className="coa-Hero">
+      { callout && <h2 className="coa-Hero__callout">{callout}</h2> }
+    </div>
+  );
 }
 
 export default Hero;
