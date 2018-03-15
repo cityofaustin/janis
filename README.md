@@ -9,14 +9,6 @@ Frontend for [joplin](https://github.com/cityofaustin/joplin).
 ```
 Your react app should be running at http://localhost:3000/
 
-#### As a React-Static Site:
-```
-./scripts/serve-build.sh
-```
-Your react app should be running at http://localhost:8080/
-
----
-
 ## Adding dependencies via yarn
 
 This will update your container's yarn.lock and package.json files.
@@ -88,3 +80,10 @@ This project uses React-Static to generate static pages from a react app.
 TODO: more on this decision + evaluation
 
 ---
+
+## Storybook
+
+- Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
+- To run Storybooks locally:
+  - `./scripts/serve-storybook.sh`
+  - open http://localhost:6006/
