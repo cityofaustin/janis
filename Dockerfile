@@ -14,7 +14,6 @@ RUN yarn
 
 COPY public /app/public
 COPY src /app/src
-COPY .storybook /app/.storybook
 
 EXPOSE $PORT
 CMD [ "yarn", "start" ]
