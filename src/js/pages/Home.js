@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { defineMessages, injectIntl } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
@@ -23,8 +23,7 @@ const i18nMessages = defineMessages({
   homeRelatedlinksSectiontitle: {
     id: 'Home.RelatedLinks.SectionTitle',
     defaultMessage: 'Use City of Austin Services',
-  },
-
+  }
 });
 
 const Home = ({ topServices, image, intl }) => {
@@ -40,7 +39,16 @@ const Home = ({ topServices, image, intl }) => {
         </div>
       </HeroHome>
       <SecondaryContentBanner>
-        <p>Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.</p>
+        <p>
+        <FormattedMessage
+          id="Home.Secondarycontent.bodytext"
+          defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+          values = {{
+            citySiteLink: <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>,
+            projectsSiteLink: <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>
+          }}
+        />
+        </p>
       </SecondaryContentBanner>
       <RelatedLinks
         sectionTitle={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}
