@@ -43,16 +43,16 @@ class Navmenu extends Component {
     }
   }
 
-  getCurrentPath = () => {
-    // this is dependent on react-router. We may want to use
-    // `window.location.href` instead.
-    return this.props.location.pathname;
-  }
-
-  getOverlayClassName = () => {
-    let className = `coa-Navmenu__overlay`;
-    if (this.props.isOpen) {
-      className = `${className} ${className}--open`;
+  toggleSublist = (e, openSectionId) => {
+    e.preventDefault();
+    if (openSectionId === this.state.openSection) {
+      this.setState({
+        openSection: null
+      })
+    } else {
+      this.setState({
+        openSection: openSectionId,
+      })
     }
     return className;
   }
@@ -142,5 +142,98 @@ class Navmenu extends Component {
   }
 
 }
+
+const HomeMobileListItem = ({handleClick}) => (
+  <li onClick={handleClick}
+    className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none"
+  >
+    <I18nNavLink to="/" exact>
+      Home
+    </I18nNavLink>
+  </li>
+)
+
+const AirportMobileListItem = () => (
+  <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+    <a href="http://www.austintexas.gov/airport">
+      <div className="coa-Navmenu__airplane-icon">
+        <AirplaneSVG size="15"/>
+      </div>
+      <span className="d-lg-none">Airport</span>
+    </a>
+  </li>
+)
+
+const ThreeOneOneMobileListItem = () => (
+  <li className="coa-Navmenu__item coa-Navmenu__item--flex coa-Navmenu__item--small d-lg-none">
+    <a href="tel:311">
+      Call 311
+    </a>
+    &nbsp;or&nbsp;
+    <a href="http://311.austintexas.gov/">
+      Submit an Online Request
+    </a>
+  </li>
+)
+
+const ThemeTopListItem = ({ theme, e, id, openSection, handleClick }) => (
+  <I18nNavLink to={`/theme/${theme.slug}`} key={id}
+    activeClassName="usa-current"
+    onClick={(e) => handleClick(e, id)}
+  >
+    <span className="coa-Navmenu__item-text">
+      { theme.title }
+    </span>
+    <div className="coa-Navmenu__plus-sign d-lg-none">
+      {
+        openSection === id ?
+          <MinusSVG size="18" title="close section"/> :
+          <PlusSVG size="18" title="open section" />
+      }
+    </div>
+    <div className="coa-Navmenu__arrow-down d-none d-lg-block">
+      <ChevronDownSVG size="14" />
+    </div>
+  </I18nNavLink>
+)
+
+const TopicSubListItem = ({ id, topic, handleClick }) => (
+  <li key={id} onClick={handleClick} className="coa-Navmenu__subitem"
+    role="menuitem"
+  >
+    <I18nNavLink to={`/topics/${topic.slug}`}
+      activeClassName="usa-current"
+      className="test"
+      tabIndex={-1}
+    >
+      {topic.title}
+    </I18nNavLink>
+  </li>
+)
+
+const WorkInProgressSubitem = () => (
+  <li className="coa-Navmenu__subitem coa-Navmenu__subitem--coming-soon-message">
+    <a href="https://www.austintexas.gov">
+      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
+    </a>
+  </li>
+)
+
+const PrivacyPolicyListItem = () => (
+  <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+    <a href="#">
+      Read About Privacy
+    </a>
+  </li>
+)
+
+const MobileFooter = () => (
+  <div>
+    <p className="coa-Navmenu__footer-text d-lg-none">
+      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
+    </p>
+    <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
+  </div>
+)
 
 export default Navmenu;
