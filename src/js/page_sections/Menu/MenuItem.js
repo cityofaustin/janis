@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import I18nNavLink from 'js/modules/I18nNavLink';
+import Submenu from 'js/page_sections/Menu/Submenu';
 import PlusSVG from 'js/svg/Plus';
 import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
-
 
 
 const themeClassnames = (id, theme, openSection) => {
@@ -35,43 +35,24 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
       // should onMouseOver/Out be disabled on mobile?
     >
 
-      <ThemeTopListItem id={id}
+      <MenuItemHeader id={id}
         theme={theme}
         openSection={openSection}
         handleClick={handleSublistToggle}
       />
 
       { !!theme.topics.edges && (
-        <ul className={`coa-Menu__sublist
-            ${ id > 4 ? `coa-Menu__sublist--align-right` : '' }
-            ${ openSection === id ? 'coa-Menu__sublist--open' : '' }
-          `}
-          id={`topicMenu${id+1}`}
-          role="menu"
-          aria-labelledby={`theme${id+1}`}
-        >
-        {
-          theme.topics.edges.map(({ node: topic }, topicId) => {
-            return topic.slug !== "false" && (
-              <TopicSubListItem
-                key={topicId}
-                topic={topic}
-                handleClick={handleMenuToggle}
-              />
-            );
-          })
-        }
-          <WorkInProgressSubitem />
-        </ul>
+        <Submenu
+          id={id}
+          openSection={openSection}
+          theme={theme}
+          handleMenuToggle={handleMenuToggle}
+        />
       )}
     </li>
 );
 
-// MenuItem.propTypes = {
-//   : PropTypes.
-// };
-
-const ThemeTopListItem = ({ theme, e, id, openSection, handleClick }) => (
+const MenuItemHeader = ({ theme, e, id, openSection, handleClick }) => (
   <I18nNavLink to={`/theme/${theme.slug}`} key={id}
     activeClassName="usa-current"
     onClick={(e) => handleClick(e, id)}
@@ -92,27 +73,10 @@ const ThemeTopListItem = ({ theme, e, id, openSection, handleClick }) => (
   </I18nNavLink>
 )
 
-const WorkInProgressSubitem = () => (
-  <li className="coa-Menu__subitem coa-Menu__subitem--coming-soon-message">
-    <a href="https://www.austintexas.gov">
-      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
-    </a>
-  </li>
-)
 
+// MenuItem.propTypes = {
+//   : PropTypes.
+// };
 
-const TopicSubListItem = ({ id, topic, handleClick }) => (
-  <li key={id} onClick={handleClick} className="coa-Menu__subitem"
-    role="menuitem"
-  >
-    <I18nNavLink to={`/topics/${topic.slug}`}
-      activeClassName="usa-current"
-      className="test"
-      tabIndex={-1}
-    >
-      {topic.title}
-    </I18nNavLink>
-  </li>
-)
 
 export default MenuItem;
