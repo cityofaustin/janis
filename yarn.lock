@@ -17,6 +17,14 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@storybook/addon-a11y@^3.3.15":
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-3.3.15.tgz#00bdf940e8cc22b48652384d5f97a8dc1de51d89"
+  dependencies:
+    "@storybook/components" "^3.3.15"
+    axe-core "^2.6.0"
+    prop-types "^15.6.0"
+
 "@storybook/addon-actions@^3.3.15":
   version "3.3.15"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.3.15.tgz#2831e52947dc258208dd17804b479f7acc62d859"
@@ -31,6 +39,14 @@
 "@storybook/addon-links@^3.3.15":
   version "3.3.15"
   resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.3.15.tgz#b0ad4151de729aaa134ece86947e9df951583afe"
+  dependencies:
+    "@storybook/components" "^3.3.15"
+    global "^4.3.2"
+    prop-types "^15.5.10"
+
+"@storybook/addon-viewport@^3.3.15":
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-3.3.15.tgz#0b827634bd6b075ff5cd4963c8aa18e8226b03c9"
   dependencies:
     "@storybook/components" "^3.3.15"
     global "^4.3.2"
@@ -720,6 +736,10 @@ aws-sign2@~0.7.0:
 aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+
+axe-core@^2.6.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.6.1.tgz#28772c4f76966d373acda35b9a409299dc00d1b5"
 
 axios@^0.16.2:
   version "0.16.2"
