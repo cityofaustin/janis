@@ -49,7 +49,8 @@
 
 .coa-section__map {
  margin-bottom: $coa-space-level2;
- & > a, span {
+ & > a,
+ & > span {
   display: block;
  }
 }

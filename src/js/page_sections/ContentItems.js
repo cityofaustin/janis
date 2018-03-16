@@ -1,30 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import ApplicationBlock from 'js/page_sections/ApplicationBlock';
 
-class ContentItems extends Component {
-
-  render() {
-
-    const { contentItems } = this.props;
+const ContentItems = ({ contentItems }) => {
+  if (!contentItems || !contentItems.length) return null;
+  return contentItems.map((content) => {
     let JSX;
-
-    if (!contentItems || !contentItems.length) {
-      JSX = null;
+    if (content.type === 'content') {
+      JSX = <HtmlFromAdmin content={content.value} />;
     } else {
-      JSX = contentItems.map((content) => {
-        let JSXmap;
-        if (content.type === 'content') {
-          JSXmap = <HtmlFromAdmin content={content.value} />;
-        } else {
-          JSXmap = <ApplicationBlock type={content.type} data={content.value} />;
-        }
-        return <div key={content.id} className="coa-section">{JSXmap}</div>;
-      });
+      JSX = <ApplicationBlock type={content.type} data={content.value} />;
     }
-
-    return JSX;
-  }
+    return <div key={content.id} className="coa-section">{JSX}</div>;
+  });
 }
 
 export default ContentItems;

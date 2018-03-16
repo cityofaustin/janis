@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-static';
 import Cookies from 'js-cookie'
 import { find } from 'lodash'
-import { SUPPORTED_LANGUAGES } from 'js/constants/languages'
+import { SUPPORTED_LANGUAGES } from 'js/i18n/constants'
 import CaretDownSVG from 'js/svg/CaretDown';
 import CaretUpSVG from 'js/svg/CaretUp';
 

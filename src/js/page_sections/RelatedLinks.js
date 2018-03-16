@@ -4,47 +4,42 @@ import Tile from 'js/modules/Tile';
 import I18nLink from 'js/modules/I18nLink';
 
 const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionLink }) => {
-  let JSX;
 
-  if (!relatedLinks || !relatedLinks.length) {
-    JSX = null;
-  } else {
-    JSX = (
-      <div className={`coa-section ${style === 'primary' ? '' : 'coa-section--grey' }`}>
-        <div className="wrapper">
-        {
-          sectionTitle && <SectionTitle title={sectionTitle} />
-        }
-        {
-          sectionText && <p>{sectionText}</p>
-        }
-          <div className="row">
-          {
-            relatedLinks.map((link, index) =>
-              <div key={index} className="col-xs-12 col-md-6 col-lg-3">
-                <Tile
-                  url={link.url}
-                  text={link.text}
-                  tag="Service"
-                />
-              </div>
-            )
-          }
-          </div>
+  if (!relatedLinks || !relatedLinks.length) return null;
 
-        { sectionLink && (
-            <I18nLink
-              className="coa-section__link"
-              to={sectionLink.url}
-            >{sectionLink.text}</I18nLink>
+  return (
+    <div className={`coa-section ${style === 'primary' ? '' : 'coa-section--grey' }`}>
+      <div className="wrapper">
+      {
+        sectionTitle && <SectionTitle title={sectionTitle} />
+      }
+      {
+        sectionText && <p>{sectionText}</p>
+      }
+        <div className="row">
+        {
+          relatedLinks.map((link, index) =>
+            <div key={index} className="col-xs-12 col-md-6 col-lg-3">
+              <Tile
+                url={link.url}
+                text={link.text}
+                tag="Service"
+              />
+            </div>
           )
         }
         </div>
+      {
+        sectionLink && (
+          <I18nLink
+            className="coa-section__link"
+            to={sectionLink.url}
+          >{sectionLink.text}</I18nLink>
+        )
+      }
       </div>
-    );
-  }
-
-  return JSX;
+    </div>
+  );
 }
 
 export default RelatedLinks;
