@@ -82,7 +82,7 @@ class Menu extends Component {
 
 const HomeMobileListItem = ({handleClick}) => (
   <li onClick={handleClick}
-    className="coa-Menu__item coa-Menu__item--small d-lg-none"
+    className="coa-MenuItem coa-MenuItem--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
       Home
@@ -91,7 +91,7 @@ const HomeMobileListItem = ({handleClick}) => (
 )
 
 const AirportMobileListItem = () => (
-  <li className="coa-Menu__item coa-Menu__item--small d-lg-none">
+  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="http://www.austintexas.gov/airport">
       <div className="coa-Menu__airplane-icon">
         <AirplaneSVG size="15"/>
@@ -102,7 +102,7 @@ const AirportMobileListItem = () => (
 )
 
 const ThreeOneOneMobileListItem = () => (
-  <li className="coa-Menu__item coa-Menu__item--flex coa-Menu__item--small d-lg-none">
+  <li className="coa-MenuItem coa-MenuItem--flex coa-MenuItem--small d-lg-none">
     <a href="tel:311">
       Call 311
     </a>
@@ -114,7 +114,7 @@ const ThreeOneOneMobileListItem = () => (
 )
 
 const PrivacyPolicyListItem = () => (
-  <li className="coa-Menu__item coa-Menu__item--small d-lg-none">
+  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="#">
       Read About Privacy
     </a>

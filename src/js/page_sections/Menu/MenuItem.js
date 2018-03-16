@@ -9,12 +9,12 @@ import ChevronDownSVG from 'js/svg/ChevronDown';
 
 
 const themeClassnames = (id, theme, openSection) => {
-  const base = `coa-Menu__item`;
+  const base = `coa-MenuItem`;
   const openModifier = openSection === id ?
-    'coa-Menu__item--open' :
+    'coa-MenuItem--open' :
     '';
   const comingSoonModifier = theme.slug === 'false' ?
-    'coa-Menu__item--coming-soon' :
+    'coa-MenuItem--coming-soon' :
     '';
 
   return `${base} ${openModifier} ${comingSoonModifier}`;
@@ -57,7 +57,7 @@ const MenuItemHeader = ({ theme, e, id, openSection, handleClick }) => (
     activeClassName="usa-current"
     onClick={(e) => handleClick(e, id)}
   >
-    <span className="coa-Menu__item-text">
+    <span className="coa-MenuItem-text">
       { theme.title }
     </span>
     <div className="coa-Menu__plus-sign d-lg-none">
