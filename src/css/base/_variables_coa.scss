@@ -1,8 +1,22 @@
+//typography
+@import url('https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,600,700,800');
+/* TODO: determine fallback fonts */
+$coa-font-sans: 'Open Sans';
+$coa-font-serif: 'Lora';
+$coa-font-regular: 400;
+$coa-font-semibold: 600;
+$coa-font-bold: 700;
+$coa-font-extrabold: 800;
+$coa-em-base: 10px;
+$coa-base-font-size: 1.7rem;
+
+//breakpoints
 $coa-small-screen: 480px;
 $coa-medium-screen: 768px;
 $coa-large-screen: 1080px;
 $coa-xlarge-screen: 1250px;
 
+//padding / margin
 $coa-space-level1: 0.5rem;
 $coa-space-level2: 1.0rem;
 $coa-space-level3: 1.5rem;
@@ -12,9 +26,15 @@ $coa-space-level6: 3.0rem;
 $coa-space-level7: 4.0rem;
 $coa-space-level8: 6.0rem;
 
+$coa-spacing-x-small: $coa-space-level1;
+$coa-spacing-small: $coa-space-level2;
+$coa-spacing-md-small: $coa-space-level3;
+$coa-spacing-medium: $coa-space-level4;
+$coa-spacing-large: $coa-space-level6;
+
+//flexbox grid
 $coa-column-count: 12;
 $coa-gutter-width: 2.5rem;
-
 $coa-fullwidth-margin: 2rem;
 $coa-container-maxwidth: 1200px;
 $coa-textwrap-width: 545px;
@@ -26,13 +46,9 @@ $coa-textwrap-width: 545px;
   justify-content: space-between;
 }
 
-// COA COLORS
-
-// BLUES
+//colors
 $coa-color-blue: #005EFF;
-// PURPLES
 $coa-color-light-purple: #D7D2D9;
 $coa-color-purple: #9B90A2;
 $coa-color-dark-purple: #240B33;
-// ORANGE
 $coa-color-orange: #ED6F33;
