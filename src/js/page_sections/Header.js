@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchSVG from 'js/svg/Search';
 import AirplaneSVG from 'js/svg/Airplane';
-import Navmenu from 'js/page_sections/Navmenu';
+import Menu from 'js/page_sections/Menu';
 import I18nLink from 'js/modules/I18nLink'
 
 class Header extends Component {
@@ -53,7 +53,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
+        <Menu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
       </header>
     );
   }

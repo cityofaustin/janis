@@ -14,7 +14,7 @@ import MinusSVG from 'js/svg/Minus';
 import citySealImg from 'images/coa_seal.png';
 
 
-class Navmenu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,12 +48,12 @@ class Navmenu extends Component {
   }
 
   themeClassnames = (id, theme) => {
-    const base = `coa-Navmenu__item`;
+    const base = `coa-Menu__item`;
     const openModifier = this.state.openSection === id ?
-      'coa-Navmenu__item--open' :
+      'coa-Menu__item--open' :
       '';
     const comingSoonModifier = theme.slug === 'false' ?
-      'coa-Navmenu__item--coming-soon' :
+      'coa-Menu__item--coming-soon' :
       '';
 
     return `${base} ${openModifier} ${comingSoonModifier}`;
@@ -64,15 +64,15 @@ class Navmenu extends Component {
 
     return allThemes.edges.length && (
       <div className="wrapper">
-        <nav className={`coa-Navmenu ${this.props.isOpen ? 'coa-Navmenu--open' : ''}`} role="navigation">
-          <button className="coa-Navmenu__close-btn d-lg-none"
+        <nav className={`coa-Menu ${this.props.isOpen ? 'coa-Menu--open' : ''}`} role="navigation">
+          <button className="coa-Menu__close-btn d-lg-none"
             onClick={this.props.toggleMenu}
             ref="closeTrigger"
             tabIndex="0"
           >
             <CloseSVG size="40" />
           </button>
-          <ul className="coa-Navmenu__list">
+          <ul className="coa-Menu__list">
             <HomeMobileListItem handleClick={this.props.toggleMenu} />
             <AirportMobileListItem />
             <ThreeOneOneMobileListItem />
@@ -99,9 +99,9 @@ class Navmenu extends Component {
                 />
 
                 { !!theme.topics.edges && (
-                  <ul className={`coa-Navmenu__sublist
-                      ${ i > 4 ? `coa-Navmenu__sublist--align-right` : '' }
-                      ${ this.state.openSection === i ? 'coa-Navmenu__sublist--open' : '' }
+                  <ul className={`coa-Menu__sublist
+                      ${ i > 4 ? `coa-Menu__sublist--align-right` : '' }
+                      ${ this.state.openSection === i ? 'coa-Menu__sublist--open' : '' }
                     `}
                     id={`topicMenu${i+1}`}
                     role="menu"
@@ -136,7 +136,7 @@ class Navmenu extends Component {
 
 const HomeMobileListItem = ({handleClick}) => (
   <li onClick={handleClick}
-    className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none"
+    className="coa-Menu__item coa-Menu__item--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
       Home
@@ -145,9 +145,9 @@ const HomeMobileListItem = ({handleClick}) => (
 )
 
 const AirportMobileListItem = () => (
-  <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+  <li className="coa-Menu__item coa-Menu__item--small d-lg-none">
     <a href="http://www.austintexas.gov/airport">
-      <div className="coa-Navmenu__airplane-icon">
+      <div className="coa-Menu__airplane-icon">
         <AirplaneSVG size="15"/>
       </div>
       <span className="d-lg-none">Airport</span>
@@ -156,7 +156,7 @@ const AirportMobileListItem = () => (
 )
 
 const ThreeOneOneMobileListItem = () => (
-  <li className="coa-Navmenu__item coa-Navmenu__item--flex coa-Navmenu__item--small d-lg-none">
+  <li className="coa-Menu__item coa-Menu__item--flex coa-Menu__item--small d-lg-none">
     <a href="tel:311">
       Call 311
     </a>
@@ -172,24 +172,24 @@ const ThemeTopListItem = ({ theme, e, id, openSection, handleClick }) => (
     activeClassName="usa-current"
     onClick={(e) => handleClick(e, id)}
   >
-    <span className="coa-Navmenu__item-text">
+    <span className="coa-Menu__item-text">
       { theme.title }
     </span>
-    <div className="coa-Navmenu__plus-sign d-lg-none">
+    <div className="coa-Menu__plus-sign d-lg-none">
       {
         openSection === id ?
           <MinusSVG size="18" title="close section"/> :
           <PlusSVG size="18" title="open section" />
       }
     </div>
-    <div className="coa-Navmenu__arrow-down d-none d-lg-block">
+    <div className="coa-Menu__arrow-down d-none d-lg-block">
       <ChevronDownSVG size="14" />
     </div>
   </I18nNavLink>
 )
 
 const TopicSubListItem = ({ id, topic, handleClick }) => (
-  <li key={id} onClick={handleClick} className="coa-Navmenu__subitem"
+  <li key={id} onClick={handleClick} className="coa-Menu__subitem"
     role="menuitem"
   >
     <I18nNavLink to={`/topics/${topic.slug}`}
@@ -203,7 +203,7 @@ const TopicSubListItem = ({ id, topic, handleClick }) => (
 )
 
 const WorkInProgressSubitem = () => (
-  <li className="coa-Navmenu__subitem coa-Navmenu__subitem--coming-soon-message">
+  <li className="coa-Menu__subitem coa-Menu__subitem--coming-soon-message">
     <a href="https://www.austintexas.gov">
       Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
     </a>
@@ -211,7 +211,7 @@ const WorkInProgressSubitem = () => (
 )
 
 const PrivacyPolicyListItem = () => (
-  <li className="coa-Navmenu__item coa-Navmenu__item--small d-lg-none">
+  <li className="coa-Menu__item coa-Menu__item--small d-lg-none">
     <a href="#">
       Read About Privacy
     </a>
@@ -220,11 +220,11 @@ const PrivacyPolicyListItem = () => (
 
 const MobileFooter = () => (
   <div>
-    <p className="coa-Navmenu__footer-text d-lg-none">
+    <p className="coa-Menu__footer-text d-lg-none">
       Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
     </p>
     <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
   </div>
 )
 
-export default Navmenu;
+export default Menu;
