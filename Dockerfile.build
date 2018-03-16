@@ -17,20 +17,19 @@ COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 
 ARG GOOGLE_ANALYTICS
-ENV GOOGLE_ANALYTICS=${GOOGLE_ANALYTICS}
+ENV GOOGLE_ANALYTICS=${GOOGLE_ANALYTICS:-UA-110716917-2}
 
 ARG FEEDBACK_API
-ENV FEEDBACK_API=${FEEDBACK_API}
+ENV FEEDBACK_API=${FEEDBACK_API:-https://coa-test-form-api.herokuapp.com/process/}
 
 ARG CMS_API
-ENV CMS_API=${CMS_API}
+ENV CMS_API=${CMS_API:-https://joplin-staging.herokuapp.com/api/graphql}
 
 ARG CMS_MEDIA
-ENV CMS_MEDIA=${CMS_MEDIA}
+ENV CMS_MEDIA=${CMS_MEDIA:-https://joplin-staging.herokuapp.com/media}
 
 COPY public /app/public
 COPY src /app/src
-RUN printenv
 RUN yarn build
 
 # ============================================
