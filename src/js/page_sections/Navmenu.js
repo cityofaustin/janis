@@ -205,7 +205,7 @@ const TopicSubListItem = ({ id, topic, handleClick }) => (
 const WorkInProgressSubitem = () => (
   <li className="coa-Navmenu__subitem coa-Navmenu__subitem--coming-soon-message">
     <a href="https://www.austintexas.gov">
-      This site is a work in progress. More topics coming soon. Visit austintexas.gov for more topics.
+      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
     </a>
   </li>
 )
@@ -221,7 +221,7 @@ const PrivacyPolicyListItem = () => (
 const MobileFooter = () => (
   <div>
     <p className="coa-Navmenu__footer-text d-lg-none">
-      Aaalpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>. Learn more about the new website at <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>.
+      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
     </p>
     <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
   </div>
