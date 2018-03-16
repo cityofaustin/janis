@@ -1,0 +1,109 @@
+.coa-MenuItem {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  font-size: $h5-font-size;
+  position: relative;
+  margin-bottom: 0;
+  padding: $coa-space-level4 $coa-space-level2 $coa-space-level3;
+  cursor: pointer;
+  svg {
+    transition-duration: .3s;
+  }
+  &:hover, &:focus {
+    .coa-MenuItem__text {
+      @media screen and (min-width: $coa-large-screen) {
+        border-bottom: 3px solid $coa-color-orange;
+      }
+    }
+  }
+  a {
+    color: $coa-color-dark-purple;
+    text-decoration: none;
+    display: flex;
+  }
+  @media screen and (max-width: $coa-large-screen) {
+    border-bottom: 2px solid $color-gray-lighter;
+    padding: $coa-space-level2 $coa-space-level1 $coa-space-level1;
+    margin-bottom: 0;
+  }
+  @media screen and (min-width: $coa-large-screen) {
+    display: flex;
+  }
+}
+
+.coa-MenuItem--open {
+  &:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: $color-white;
+    bottom: -2px;
+    position: absolute;
+    left: 0;
+    z-index: 4;
+  }
+  @media screen and (min-width: $coa-large-screen) {
+    border: 1px solid $color-gray-medium;
+    border-bottom: 1px solid $color-white;
+  }
+  .coa-MenuItem__text {
+    color: $coa-color-orange;
+    border-bottom: 3px solid transparent !important;
+    @media screen and (max-width: $coa-large-screen) {
+      margin-bottom: $coa-space-level2;
+    }
+  }
+  .coa-Submenu {
+    display: block;
+    @media screen and (min-width: $coa-large-screen) {
+      position: absolute;
+    }
+  }
+  .coa-MenuItem__arrow-down {
+    svg {
+      transform: rotate(-180deg);
+    }
+    path {
+      fill: $coa-color-orange;
+    }
+  }
+}
+
+.coa-MenuItem--flex {
+  display: flex;
+  a {
+    flex-shrink: 0;
+    text-decoration: underline;
+    color: $coa-color-blue;
+  }
+}
+
+.coa-MenuItem--small {
+  font-size: $h6-font-size;
+  @media screen and (max-width: $coa-large-screen) {
+    padding-bottom: $coa-space-level2;
+  }
+}
+
+.coa-MenuItem__header {
+  display: flex;
+}
+
+.coa-MenuItem__text {
+  flex-shrink: 0;
+  border-bottom: 3px solid transparent;
+  @media screen and (min-width: $coa-large-screen) {
+    font-weight: bold;
+  }
+  @media screen and (max-width: $coa-large-screen) {
+    margin-bottom: $coa-space-level1;
+  }
+}
+
+.coa-MenuItem__arrow-down {
+  margin-left: $coa-space-level1;
+}
+
+.coa-MenuItem__plus-sign {
+  margin-left: auto;
+}

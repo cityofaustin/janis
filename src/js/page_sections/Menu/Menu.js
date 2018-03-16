@@ -32,8 +32,7 @@ class Menu extends Component {
   }
 
   toggleSublist = (e, openSectionId) => {
-    console.log(openSectionId)
-    e.preventDefault();
+    if (e.type === "keydown" && e.key !== 'Enter') return false;
     if (openSectionId === this.state.openSection) {
       this.setState({
         openSection: null

@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
+import ExternalLink from 'js/modules/ExternalLink';
 
 
 const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
-  <ul className={`coa-Menu__sublist
-      ${ id > 4 ? `coa-Menu__sublist--align-right` : '' }
-      ${ openSection === id ? 'coa-Menu__sublist--open' : '' }
+  <ul className={`coa-Submenu
+      ${ id > 4 ? `coa-Submenu--align-right` : '' }
+      ${ openSection === id ? 'coa-Submenu--open' : '' }
     `}
     id={`topicMenu${id+1}`}
     role="menu"

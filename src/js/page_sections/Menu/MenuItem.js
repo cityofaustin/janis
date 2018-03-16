@@ -13,11 +13,8 @@ const themeClassnames = (id, theme, openSection) => {
   const openModifier = openSection === id ?
     'coa-MenuItem--open' :
     '';
-  const comingSoonModifier = theme.slug === 'false' ?
-    'coa-MenuItem--coming-soon' :
-    '';
 
-  return `${base} ${openModifier} ${comingSoonModifier}`;
+  return `${base} ${openModifier}`;
 }
 
 const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle}) => (
@@ -28,11 +25,7 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
       tabIndex={0}
       id={`theme${id+1}`}
       onClick={(e) => handleSublistToggle(e, id)}
-      // onMouseOver={(e) => handleSublistToggle(e, id)}
-      // onMouseOut={(e) => handleSublistToggle(e, id)}
-      // TODO:
-      // should onClick trigger sublist open on desktop as it does on mobile?
-      // should onMouseOver/Out be disabled on mobile?
+      onKeyDown={(e) => handleSublistToggle(e, id)}
     >
 
       <MenuItemHeader id={id}
@@ -53,24 +46,21 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
 );
 
 const MenuItemHeader = ({ theme, e, id, openSection, handleClick }) => (
-  <I18nNavLink to={`/theme/${theme.slug}`} key={id}
-    activeClassName="usa-current"
-    onClick={(e) => handleClick(e, id)}
-  >
-    <span className="coa-MenuItem-text">
+  <div className="coa-MenuItem__header" onClick={(e) => handleClick(e, id)}>
+    <span className="coa-MenuItem__text">
       { theme.title }
     </span>
-    <div className="coa-Menu__plus-sign d-lg-none">
+    <div className="coa-MenuItem__plus-sign d-lg-none">
       {
         openSection === id ?
-          <MinusSVG size="18" title="close section"/> :
-          <PlusSVG size="18" title="open section" />
+          <MinusSVG size="18" title={`close ${theme.title} section`} /> :
+          <PlusSVG size="18" title={`open ${theme.title} section`} />
       }
     </div>
-    <div className="coa-Menu__arrow-down d-none d-lg-block">
+    <div className="coa-MenuItem__arrow-down d-none d-lg-inline">
       <ChevronDownSVG size="14" />
     </div>
-  </I18nNavLink>
+  </div>
 )
 
 
