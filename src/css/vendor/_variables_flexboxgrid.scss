@@ -5,13 +5,13 @@ $flexboxgrid-grid-columns: $coa-column-count !default;
 // Set the gutter between columns.
 $flexboxgrid-gutter-width: $coa-gutter-width !default;
 // Set a margin for the container sides.
-$flexboxgrid-outer-margin: $coa-fullwidth-margin !default;
+$flexboxgrid-outer-margin: $coa-wrapper-margin !default;
 // Create or remove breakpoints for your project
 // Syntax:
 // name SIZErem,
 $flexboxgrid-breakpoints:
   sm $coa-small-screen $coa-medium-screen - 10px,
   md $coa-medium-screen $coa-large-screen - 10px,
-  lg $coa-large-screen $coa-container-maxwidth - 10px !default;
+  lg $coa-large-screen $coa-wrapper-lg-maxwidth - 10px !default;
 
-$flexboxgrid-max-width: $coa-container-maxwidth !default;
+$flexboxgrid-max-width: $coa-wrapper-lg-maxwidth !default;
