@@ -1,0 +1,13 @@
+.coa-PageBanner {
+  @include box-verticalcenter(17rem);
+  background-position: center center;
+  background-size: cover;
+  margin-bottom: $coa-space-level4;
+
+  @include media($coa-small-screen) {
+    height: 41rem;
+  }
+  @include media($coa-medium-screen) {
+    height: 32rem;
+  }
+}

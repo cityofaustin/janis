@@ -1,0 +1,5 @@
+.wrapper {
+  &.wrapper--sm {
+    max-width: $coa-wrapper-sm-maxwidth;
+  }
+}

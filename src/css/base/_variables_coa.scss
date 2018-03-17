@@ -35,9 +35,10 @@ $coa-spacing-large: $coa-space-level6;
 //flexbox grid
 $coa-column-count: 12;
 $coa-gutter-width: 2.5rem;
-$coa-wrapper-margin: 2rem;
+$coa-container-margin: 2rem;
+$coa-wrapper-maxwidth: 1325px;
 $coa-wrapper-sm-maxwidth: 720px;
-$coa-wrapper-lg-maxwidth: 1325px;
+
 
 @mixin box-verticalcenter($height: auto) {
   align-items: center;

@@ -13,15 +13,17 @@
 @import 'css/base/base';
 @import 'css/base/form';
 @import 'css/base/overlay';
+@import 'css/base/wrapper';
 
 // helpers
 @import 'css/helpers/helpers';
 
 // modules
+@import 'css/modules/PageBanner';
+
 @import 'css/modules/ListLink';
 @import 'css/modules/HtmlFromAdmin';
 @import 'css/modules/StaticMap';
-@import 'css/modules/Hero';
 @import 'css/modules/GlobalSearch';
 @import 'css/modules/ExternalLink';
 @import 'css/modules/SectionTitle';

@@ -116,7 +116,7 @@ class LanguageWrapper extends Component {
         <div style={{ position: 'relative' }}>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
-            <section className="coa-main">
+            <section>
               <Routes />
             </section>
           <Footer />
