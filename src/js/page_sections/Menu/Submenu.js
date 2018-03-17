@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
 import ExternalLink from 'js/modules/ExternalLink';
-
+import I18nNavLink from 'js/modules/I18nNavLink';
+import ArrowRightSVG from 'js/svg/ArrowRight';
 
 const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
   <ul className={`coa-Submenu
@@ -25,6 +26,18 @@ const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
       );
     })
   }
+    <li key={id} className="coa-SubmenuItem coa-SubmenuItem--theme"
+      role="menuitem"
+    >
+      <I18nNavLink to={`/theme/${theme.slug}`}
+        tabIndex={-1}
+      >
+        {theme.title}
+        <span className="coa-SubmenuItem__arrow-right">
+          <ArrowRightSVG size="13" />
+        </span>
+      </I18nNavLink>
+    </li>
     <WorkInProgressSubitem />
   </ul>
 );
@@ -34,7 +47,7 @@ const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
 // };
 
 const WorkInProgressSubitem = () => (
-  <li className="coa-Menu__subitem coa-Menu__subitem--coming-soon-message">
+  <li className="coa-SubmenuItem coa-SubmenuItem--coming-soon-message">
     <a href="https://www.austintexas.gov">
       Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
     </a>

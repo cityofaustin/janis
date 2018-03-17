@@ -5,7 +5,7 @@ import I18nNavLink from 'js/modules/I18nNavLink';
 
 
 const SubmenuItem = ({ id, topic, handleClick }) => (
-  <li key={id} onClick={handleClick} className="coa-Menu__subitem"
+  <li key={id} onClick={handleClick} className="coa-SubmenuItem"
     role="menuitem"
   >
     <I18nNavLink to={`/topics/${topic.slug}`}

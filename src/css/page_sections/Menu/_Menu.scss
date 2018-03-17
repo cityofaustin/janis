@@ -29,35 +29,6 @@
   margin: 2px .5rem -3px;
 }
 
-.coa-Menu__subitem {
-  list-style: none;
-  &:hover {
-    a {
-      color: $coa-color-orange;
-    }
-  }
-  @media screen and (max-width: $coa-large-screen) {
-    text-transform: uppercase;
-    font-size: $small-font-size;
-    padding: $coa-space-level2 $coa-space-level2 0;
-    border-top: 2px solid $color-gray-lighter;
-  }
-  @media screen and (min-width: $coa-large-screen) {
-    border-bottom: 1px solid $coa-color-grayish-purple;
-    width: 400px;
-    text-transform: uppercase;
-    font-size: $small-font-size;
-    padding: $coa-space-level3 $coa-space-level4;
-  }
-}
-
-.coa-Menu__subitem--coming-soon-message {
-  font-family: $font-serif;
-  font-size: $h6-font-size;
-  // font-style: italic;
-  text-transform: none;
-}
-
 .coa-Menu--open {
   left: 0;
   right: 0;
