@@ -26,12 +26,8 @@ const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
       );
     })
   }
-    <li key={id} className="coa-SubmenuItem coa-SubmenuItem--theme"
-      role="menuitem"
-    >
-      <I18nNavLink to={`/theme/${theme.slug}`}
-        tabIndex={-1}
-      >
+    <li key={id} className="coa-SubmenuItem coa-SubmenuItem--theme" role="menuitem">
+      <I18nNavLink to={`/theme/${theme.slug}`}>
         {theme.title}
         <span className="coa-SubmenuItem__arrow-right">
           <ArrowRightSVG size="13" />
