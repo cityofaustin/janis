@@ -1,0 +1,31 @@
+.coa-PageBreadcrumbs {
+  border-bottom: 1px dashed $coa-color-gray;
+  text-align: center;
+
+  a {
+    color: $coa-color-purple-light;
+    font-family: $coa-font-sans;
+    font-size: $coa-base-font-size-small;
+    font-weight: $coa-font-semibold;
+    line-height: $coa-spacing-xlarge;
+    margin-left: $coa-spacing-small;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:before {
+      content: "<";
+      padding-right: $coa-spacing-small;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      &:before {
+        content: "";
+      }
+    }
+
+    &:last-child {
+      color: $coa-color-orange;
+    }
+  }
+}
