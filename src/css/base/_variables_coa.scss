@@ -8,7 +8,10 @@ $coa-font-semibold: 600;
 $coa-font-bold: 700;
 $coa-font-extrabold: 800;
 $coa-em-base: 10px;
-$coa-base-font-size: 1.7rem;
+$coa-base-font-size: 2rem;
+$coa-base-font-size-small: 1.4rem;
+$coa-base-line-height: 2.5rem;
+
 
 //breakpoints
 $coa-small-screen: 480px;
@@ -48,8 +51,29 @@ $coa-wrapper-sm-maxwidth: 720px;
 }
 
 //colors
-$coa-color-blue: #005EFF;
-$coa-color-light-purple: #D7D2D9;
-$coa-color-purple: #9B90A2;
-$coa-color-dark-purple: #240B33;
-$coa-color-orange: #ED6F33;
+$coa-color-blue: #3282AF;
+$coa-color-blue-dark: #2D759F;
+$coa-color-blue-darker: #065889;
+$coa-color-blue-darkest: #023654;
+
+$coa-color-orange: #E03400;
+$coa-color-orange-dark: #B82B00;
+
+$coa-color-purple-lightest: #D7D2D9;
+$coa-color-purple-lighter: #9B90A2;
+$coa-color-purple-light: #5F4D68;
+$coa-color-purple: #372145;
+$coa-color-purple-dark: #240B33;
+$coa-color-purple-darkest: #170821;
+
+$coa-color-gray-lightest: #F4F4F4;
+$coa-color-gray-lighter: #EAEAEA;
+$coa-color-gray-light: #CBCBCB;
+$coa-color-gray: #919191;
+$coa-color-gray-dark: #363636;
+
+
+
+
+
+
