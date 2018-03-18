@@ -1,0 +1,6 @@
+export const SCREEN_BREAKPOINTS = {
+  XLARGE: 1250,
+  LARGE: 1080,
+  MEDIUM: 768,
+  SMALL: 480,
+};
