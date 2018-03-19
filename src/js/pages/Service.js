@@ -20,8 +20,9 @@ const Service = ({ service }) => {
   const topicId = get(service, "topic.id", null);
   const topicName = get(service, "topic.text", null);
   const title = get(service, "title", null);
-  const steps = get(service, "content", null);
-  const contentItems = get(service, "extraContent", null);
+  const steps = get(service, "steps", null);
+  const contentItems = get(service, "dynamicContent", null);
+  const additionalContent = get(service, "additionalContent", null);
   const services311 = get(jsonFileData, "services311", null);
   const image = service.image;
   const contacts = cleanContacts(service.contacts);
@@ -52,6 +53,9 @@ const Service = ({ service }) => {
             </div>
 
             <ContentItems contentItems={contentItems} />
+            <div className="coa-section">
+              <HtmlFromAdmin content={additionalContent} />
+            </div>
 
           </div>
 

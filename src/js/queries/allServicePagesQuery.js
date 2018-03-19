@@ -10,8 +10,9 @@ const allServicePagesQuery = `
             id
             text
           }
-          content
-          extraContent
+          steps
+          dynamicContent
+          additionalContent
           related {
             id
             slug
