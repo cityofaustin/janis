@@ -55,7 +55,6 @@ $coa-container-margin: 2rem;
 $coa-wrapper-maxwidth: 1325px;
 $coa-wrapper-sm-maxwidth: 720px;
 
-
 @mixin box-verticalcenter($height: auto) {
   align-items: center;
   display: flex;
@@ -88,8 +87,8 @@ $coa-color-gray-light: #CBCBCB;
 $coa-color-gray: #919191;
 $coa-color-gray-dark: #363636;
 
-
-
+//magic numbers
+$coa-button-border-radius: 4px;
 
 
 

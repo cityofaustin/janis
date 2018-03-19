@@ -53,6 +53,24 @@ $color-secondary-dark:       $coa-color-orange-dark !default;
 // $color-focus:                $color-gray-light !default;
 // $color-visited:              $color-purple !default;
 
+// Magic Numbers
+// $text-max-width:                66ch !default; // 66 characters per line
+// $lead-max-width:                77rem !default;
+// $site-max-width:                1040px !default;
+// $site-margins:                  3rem !default;
+// $site-margins-mobile:           1.5rem !default;
+// $article-max-width:             600px !default;
+// $input-max-width:               46rem !default;
+// $label-border-radius:           2px !default;
+// $checkbox-border-radius:        2px !default;
+// $border-radius:                 3px !default;
+$button-border-radius:          $coa-button-border-radius !default;
+// $box-shadow:                    0 0 2px $color-shadow !default;
+// $focus-outline:                 2px dotted $color-gray-light !default;
+// $focus-spacing:                 3px !default;
+// $nav-width:                     951px !default;
+// $sidenav-current-border-width:  0.4rem !default; // must be in rem for math
+
 // Mobile First Breakpoints
 $small-screen:  $coa-small-screen !default;
 $medium-screen: $coa-medium-screen !default;

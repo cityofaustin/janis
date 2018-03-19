@@ -7,12 +7,13 @@ import PageBanner from 'js/modules/PageBanner';
 import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
+import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import ApplicationBlock from 'js/page_sections/ApplicationBlock';
 
-import ContentItems from 'js/page_sections/ContentItems';
+
 import Contact from 'js/page_sections/Contact';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import Service311 from 'js/page_sections/Service311';
-import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 
 import jsonFileData from '__tmpdata/pages';
 
@@ -39,10 +40,22 @@ const Service = ({ service }) => {
       <PageBanner image={image} />
       <PageBreadcrumbs title={title} order={['theme', 'topic']} theme={theme} topic={topic} />
       <div className="wrapper wrapper--sm container-fluid">
+
         <PageHeader title={title} />
+
         { content && <Steps steps={content} /> }
+
+        { (extraContent && extraContent.length) && (
+          extraContent.map((content) => {
+            if (content.type === 'content') {
+              return <HtmlFromAdmin key={content.id} content={content.value} />;
+            } else {
+              return <ApplicationBlock key={content.id} type={content.type} data={content.value} />;
+            }
+          })
+        )}
+
       </div>
-            <ContentItems contentItems={extraContent} />
 
             <Contact contacts={contacts} />
 
