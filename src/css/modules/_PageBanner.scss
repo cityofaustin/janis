@@ -1,5 +1,6 @@
 .coa-PageBanner {
   @include box-verticalcenter(17rem);
+  background-color: $coa-color-gray-lighter;
   background-position: center center;
   background-size: cover;
   margin-bottom: $coa-space-level4;

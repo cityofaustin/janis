@@ -1,0 +1,48 @@
+.coa-Steps {
+  & > ol {
+    counter-reset: step-item;
+    margin-bottom: $coa-space-level4;
+    list-style-type: none;
+
+    & > li {
+      align-items: flex-start;
+      counter-increment: step-item;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: $coa-spacing-large;
+
+      &:before {
+        background-color: $coa-color-white;
+        border: 1px solid $coa-color-purple-darkest;
+        border-radius: 50%;
+        color: $coa-color-purple-dark;
+        content: counter(step-item);
+        flex: 0 0 ($coa-line-height-small + .2);
+        font-family: $coa-font-serif;
+        font-size: $coa-font-size-small;
+        line-height: $coa-line-height-small;
+        margin-right: $coa-spacing-md-small;
+        text-align: center;
+      }
+
+      //TODO: adjust styles below when top level steps are not formatted within paragraphs
+      & > p {
+        display: inline;
+        flex: 1 1;
+      }
+    }
+
+    //TODO: remove styles below when steps do not have nested lists
+    ol, ul {
+      padding-left: $coa-spacing-xlarge;
+      padding-top: $coa-spacing-medium;
+      list-style-type: disc;
+      width: 100%;
+    }
+  }
+
+  //TODO: remove styles below when steps are properly formatted JSON
+  br {
+    display: none;
+  }
+}
