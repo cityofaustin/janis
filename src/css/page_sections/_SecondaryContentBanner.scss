@@ -7,17 +7,15 @@
     max-width: 100% !important; // TODO: talk to simi about coa-main
     text-align: center;
     font-style: italic;
-    @media screen and (max-width: $coa-medium-screen) {
-      font-size: $small-font-size;
-      line-height: $coa-space-level5;
-      margin: $coa-space-level4 auto;
-    }
-    @media only screen and (min-width: $coa-medium-screen) and (max-width: $coa-large-screen) {
+    font-size: $small-font-size;
+    line-height: $coa-space-level5;
+    margin: $coa-space-level4 auto;
+    @include media($coa-medium-screen) {
       font-size: $h5-font-size;
       line-height: $coa-space-level6;
       margin: $coa-space-level6 auto;
     }
-    @media screen and (min-width: $coa-large-screen) {
+    @include media($coa-large-screen) {
       font-size: $h4-font-size;
       line-height: $coa-space-level7;
       margin: $coa-space-level7 auto;

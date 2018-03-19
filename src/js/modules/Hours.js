@@ -1,14 +1,45 @@
 import React, {Component} from 'react';
-import moment from 'moment';
+import { FormattedMessage, FormattedTime } from 'react-intl';
 import {sortBy, findIndex} from 'lodash';
+
+const i18nMessagesWeekdayMap = {
+  "SUNDAY":   <FormattedMessage
+      id="Hours.weekday.sunday"
+      defaultMessage="Sunday"
+    />,
+  "MONDAY":   <FormattedMessage
+      id="Hours.weekday.monday"
+      defaultMessage="Monday"
+    />,
+  "TUESDAY":  <FormattedMessage
+      id="Hours.weekday.tuesday"
+      defaultMessage="Tuesday"
+    />,
+  "WEDNESDAY":<FormattedMessage
+      id="Hours.weekday.wednesday"
+      defaultMessage="Wednesday"
+    />,
+  "THURSDAY": <FormattedMessage
+      id="Hours.weekday.thursday"
+      defaultMessage="Thursday"
+    />,
+  "FRIDAY":   <FormattedMessage
+      id="Hours.weekday.friday"
+      defaultMessage="Friday"
+    />,
+  "SATURDAY": <FormattedMessage
+      id="Hours.weekday.saturday"
+      defaultMessage="Saturday"
+    />,
+};
 
 class Hours extends Component {
 
   sort() {
     // TODO: Joplin data MUST include data for all 7 days of week.
-    let now = moment().format('e') + "";
-    let sorted = sortBy(this.props.hours, ['day']);
-    let index = findIndex(sorted, {'day': now});
+    let now = new Date()
+    let sorted = sortBy(this.props.hours, ['dayOfWeekNumeric']);
+    let index = findIndex(sorted, {'dayOfWeek': now.getDay()});
     return sorted.splice(index).concat(sorted);
   }
 
@@ -33,8 +64,8 @@ class Hours extends Component {
             {
               hours.map((hour, index) =>
                 <tr key={index}>
-                  <th scope="row">{hour.dayOfWeek}</th>
-                  <td>{ hour.startTime } - { hour.endTime }</td>
+                  <th scope="row">{i18nMessagesWeekdayMap[hour.dayOfWeek]}</th>
+                  <td><FormattedTime value={hour.startTime} /> - <FormattedTime value={hour.endTime} /></td>
                 </tr>
               )
             }

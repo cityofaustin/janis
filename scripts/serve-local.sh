@@ -8,6 +8,7 @@ echo "building docker image..."
 docker build --tag "$TAG" .
 echo "running docker image..."
 HOST_IP=$(ifconfig en0 | awk '$1 == "inet" {print $2}')
+
 docker run \
     --rm \
     --name janis \
@@ -17,6 +18,7 @@ docker run \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --volume "$PWD/package.json:/app/package.json" \
+    --volume "$PWD/intl.buildlangs.js:/app/intl.buildlangs.js" \
     --volume "$PWD/static.config.js:/app/static.config.js" \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \

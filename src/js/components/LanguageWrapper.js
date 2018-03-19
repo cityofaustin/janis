@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 import Routes from 'react-static-routes'
-import { IntlProvider } from 'react-intl'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
+
+// react-intl i18n
+import { IntlProvider, addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import es from 'react-intl/locale-data/es'
+import vi from 'react-intl/locale-data/vi'
+import ar from 'react-intl/locale-data/ar'
+import messages_en from 'js/i18n/locales/en.json';
+import messages_es from 'js/i18n/locales/es.json';
+import messages_vi from 'js/i18n/locales/vi.json';
+import messages_ar from 'js/i18n/locales/ar.json';
+import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/i18n/constants'
+addLocaleData([...en, ...es, ...vi, ...ar]);
+const localeMessages = {
+  'en': messages_en,
+  'es': messages_es,
+  'vi': messages_vi,
+  'ar': messages_ar
+};
 
 // page_sections
 import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
-import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/constants/languages'
 
 class LanguageWrapper extends Component {
 
@@ -92,8 +109,10 @@ class LanguageWrapper extends Component {
 
   render() {
     const { lang } = this.state;
+    const messages = localeMessages[lang];
+
     return (
-      <IntlProvider locale={lang}>
+      <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>

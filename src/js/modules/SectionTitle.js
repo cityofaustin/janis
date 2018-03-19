@@ -6,8 +6,7 @@ const SectionTitle = ({ title }) => (
 );
 
 SectionTitle.propTypes = {
-  title: PropTypes.string.isRequired,
-  noBorder: PropTypes.bool,
+  title: PropTypes.string.isRequired
 };
 
 export default SectionTitle;
