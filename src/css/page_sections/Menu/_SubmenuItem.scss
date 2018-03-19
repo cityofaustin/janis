@@ -2,9 +2,6 @@
   list-style: none;
   &:hover {
     background: $coa-color-another-grayish-purple;
-    a {
-      // color:  $coa-color-orange;
-    }
   }
   @media screen and (max-width: $coa-large-screen) {
     text-transform: uppercase;
