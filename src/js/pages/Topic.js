@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/services';
+import jsonFileData from '__tmpdata/pages';
 import Hero from 'js/modules/Hero';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';

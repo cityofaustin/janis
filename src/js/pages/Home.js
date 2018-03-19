@@ -8,10 +8,9 @@ import Service311 from 'js/page_sections/Service311';
 import HeroHome from 'js/modules/HeroHome';
 import ExternalLink from 'js/modules/ExternalLink';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
-import homepageImg from 'images/lady_bird_lake.jpg';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
-import jsonFileData from '__tmpdata/services';
+import jsonFileData from '__tmpdata/pages';
 const services311 = get(jsonFileData, "services311", null);
 
 const i18nMessages = defineMessages({

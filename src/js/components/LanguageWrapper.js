@@ -117,7 +117,7 @@ class LanguageWrapper extends Component {
           <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
-          <main className="coa-main" role="main" id="main">
+          <main role="main" id="main">
             <Routes />
           </main>
           <Footer />

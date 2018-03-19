@@ -1,23 +1,37 @@
 {
   "meta": {},
+  "themepage":{},
+  "topicpage":{},
   "servicespage": {
     "title": "Use City of Austin Services",
     "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
   },
-  "projectsRelated": [
-    {
-      "text": "Project 1",
-      "url": "#"
+  "servicepage":{
+    "theme": {
+      "title":"Housing and Utilities",
+      "slug":"/themes/housing-and-utilities"
     },
-    {
-      "text": "Project 2",
-      "url": "#"
-    },
-    {
-      "text": "Project 3",
-      "url": "#"
+    "topic": {
+      "title":"Recycling, trash, and compost",
+      "slug":"/topics/VG9waWNOb2RlOjE"
     }
-  ],
+  },
+  "departmentpage": {
+    "projectsRelated": [
+      {
+        "text": "Project 1",
+        "url": "#"
+      },
+      {
+        "text": "Project 2",
+        "url": "#"
+      },
+      {
+        "text": "Project 3",
+        "url": "#"
+      }
+    ]
+  },
   "services311": [
     {
       "title": "Report Found Animal your Holding",

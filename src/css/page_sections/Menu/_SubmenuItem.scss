@@ -1,7 +1,7 @@
 .coa-SubmenuItem {
   list-style: none;
   &:hover {
-    background: $coa-color-another-grayish-purple;
+    background: $coa-color-gray-lighter;
   }
   @media screen and (max-width: $coa-large-screen) {
     text-transform: uppercase;
@@ -10,7 +10,7 @@
     border-top: 2px solid $color-gray-lighter;
   }
   @media screen and (min-width: $coa-large-screen) {
-    border-bottom: 1px solid $coa-color-grayish-purple;
+    border-bottom: 1px solid $coa-color-purple-lighter;
     width: 400px;
     text-transform: uppercase;
     font-size: $small-font-size;
