@@ -1,4 +1,13 @@
 .coa-Steps {
+  padding-top: 1px; //prevent stacking margins
+}
+
+.coa-Steps__title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.coa-Steps__list {
   & > ol {
     counter-reset: step-item;
     margin-bottom: $coa-space-level4;
