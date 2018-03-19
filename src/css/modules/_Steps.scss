@@ -1,4 +1,7 @@
 .coa-Steps {
+  border-bottom: 1px dashed $coa-color-gray;
+  margin-bottom: $coa-spacing-xlarge;
+  padding-bottom: $coa-spacing-large;
   padding-top: 1px; //prevent stacking margins
 }
 
