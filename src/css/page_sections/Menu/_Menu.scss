@@ -43,26 +43,18 @@
   }
 }
 
+.coa-Menu__footer-text {
+  padding: $coa-space-level3 0;
+  font-size: $coa-font-size-xsmall;
+}
+
 .coa-Menu__overlay {
+  position: absolute;
+  background: green;
   width: 100%;
   height: 100%;
   z-index: 1;
   top: 0;
   left: 0;
-  transition: opacity 0.2s ease-in-out;
-  background: rgba($color-gray-medium, 1);
-  position: absolute;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   opacity: 0;
-  visibility: hidden;
-}
-
-.coa-Menu__overlay--open {
-  opacity: 0.3;
-  visibility: visible;
-}
-
-.coa-Menu__footer-text {
-  padding: $coa-space-level3 0;
-  font-size: $coa-font-size-xsmall;
 }

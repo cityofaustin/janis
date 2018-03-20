@@ -70,6 +70,13 @@ class Menu extends Component {
             <MobileFooter />
           </ul>
         </nav>
+        {
+          this.state.openSection && (
+            <div className="coa-Menu__overlay"
+              onClick={() => this.setState({ openSection: null })}
+            ></div>
+          )
+        }
       </div>
     );
   }
