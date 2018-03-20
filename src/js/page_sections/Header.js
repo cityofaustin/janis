@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import SearchSVG from 'js/svg/Search';
 import AirplaneSVG from 'js/svg/Airplane';
-import Navmenu from 'js/page_sections/Navmenu';
+import Menu from 'js/page_sections/Menu/Menu';
 import I18nLink from 'js/modules/I18nLink'
 
 const i18nMessages = defineMessages({
@@ -40,7 +40,7 @@ class Header extends Component {
     return (
       <header className="coa-Header" role="banner">
         <div className="wrapper">
-          <div className="row">
+          <div className="row coa-Header__top-row">
             <div className="col-xs-6 coa-Header__navbar-brand">
               <div className="coa-Header__menu d-lg-none">
                 <button onClick={this.toggleMenu} tabIndex="0"
@@ -68,7 +68,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
+        <Menu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
       </header>
     );
   }
