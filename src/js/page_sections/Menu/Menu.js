@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import request from 'graphql-request';
 
-import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ExternalLink from 'js/modules/ExternalLink';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
 import navigation from '__tmpdata/navigation';
 
 import CloseSVG from 'js/svg/Close';
-import AirplaneSVG from 'js/svg/Airplane';
 import citySealImg from 'images/coa_seal.png';
 
 
@@ -18,7 +15,6 @@ class Menu extends Component {
     this.state = {
       openSection: null,
     };
-    this.DESKTOP_BREAKPOINT = 1080;
   }
 
   focusOnClose = () => {
@@ -92,9 +88,6 @@ const HomeMobileListItem = ({handleClick}) => (
 const AirportMobileListItem = () => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="http://www.austintexas.gov/airport">
-      <div className="coa-Menu__airplane-icon">
-        <AirplaneSVG size="15"/>
-      </div>
       <span className="d-lg-none">Airport</span>
     </a>
   </li>

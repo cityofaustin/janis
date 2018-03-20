@@ -17,7 +17,7 @@
     }
   }
   a {
-    color: $coa-color-dark-purple;
+    color: $coa-color-purple-dark;
     text-decoration: none;
     display: flex;
   }
@@ -92,11 +92,10 @@
 .coa-MenuItem__text {
   flex-shrink: 0;
   border-bottom: 3px solid transparent;
-  @media screen and (min-width: $coa-large-screen) {
+  margin-bottom: $coa-space-level1;
+  @include media($coa-large-screen) {
     font-weight: bold;
-  }
-  @media screen and (max-width: $coa-large-screen) {
-    margin-bottom: $coa-space-level1;
+    margin-bottom: 0;
   }
 }
 

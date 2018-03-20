@@ -1,21 +1,19 @@
 .coa-SubmenuItem {
   list-style: none;
-  &:hover {
-    background: $coa-color-gray-lighter;
-  }
-  @media screen and (max-width: $coa-large-screen) {
-    text-transform: uppercase;
-    font-size: $small-font-size;
-    padding: $coa-space-level2 $coa-space-level2 0;
-    border-top: 2px solid $color-gray-lighter;
-  }
-  @media screen and (min-width: $coa-large-screen) {
+  text-transform: uppercase;
+  font-size: $coa-font-size-small;
+  padding: $coa-space-level2 $coa-space-level2 0;
+  border-top: 2px solid $coa-color-gray-lighter;
+  @include media($coa-large-screen) {
     border-bottom: 1px solid $coa-color-purple-lighter;
+    border-top: none;
     width: 400px;
-    text-transform: uppercase;
-    font-size: $small-font-size;
+    font-size: $coa-font-size-xsmall;
     padding: $coa-space-level3 $coa-space-level4;
     margin-bottom: 0;
+    &:hover {
+      background: $coa-color-gray-lighter;
+    }
   }
 }
 
@@ -28,7 +26,7 @@
 }
 
 .coa-SubmenuItem--coming-soon-message {
-  font-family: $font-serif;
-  font-size: $h6-font-size;
+  font-family: $coa-font-serif;
+  font-size: $coa-font-size-xsmall;
   text-transform: none;
 }
