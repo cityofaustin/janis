@@ -45,14 +45,14 @@
 .coa-Menu__mobile-footer {
   padding: $coa-space-level2;
 }
+
 .coa-Menu__footer-text {
   padding: $coa-space-level3 0;
   font-size: $coa-font-size-xsmall;
 }
 
 .coa-Menu__overlay {
-  position: absolute;
-  background: green;
+  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 1;
