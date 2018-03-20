@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import request from 'graphql-request';
 
-import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ExternalLink from 'js/modules/ExternalLink';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
 import navigation from '__tmpdata/navigation';
 
 import CloseSVG from 'js/svg/Close';
-import AirplaneSVG from 'js/svg/Airplane';
 import citySealImg from 'images/coa_seal.png';
 
 
@@ -18,7 +15,6 @@ class Menu extends Component {
     this.state = {
       openSection: null,
     };
-    this.DESKTOP_BREAKPOINT = 1080;
   }
 
   focusOnClose = () => {
@@ -74,6 +70,13 @@ class Menu extends Component {
             <MobileFooter />
           </ul>
         </nav>
+        {
+          !!this.state.openSection && (
+            <div className="coa-Menu__overlay"
+              onClick={() => this.setState({ openSection: null })}
+            ></div>
+          )
+        }
       </div>
     );
   }
@@ -81,7 +84,7 @@ class Menu extends Component {
 
 const HomeMobileListItem = ({handleClick}) => (
   <li onClick={handleClick}
-    className="coa-MenuItem coa-MenuItem--small d-lg-none"
+    className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
       Home
@@ -92,10 +95,7 @@ const HomeMobileListItem = ({handleClick}) => (
 const AirportMobileListItem = () => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="http://www.austintexas.gov/airport">
-      <div className="coa-Menu__airplane-icon">
-        <AirplaneSVG size="15"/>
-      </div>
-      <span className="d-lg-none">Airport</span>
+      <span>Airport</span>
     </a>
   </li>
 )
@@ -121,7 +121,7 @@ const PrivacyPolicyListItem = () => (
 )
 
 const MobileFooter = () => (
-  <div>
+  <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
       Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
     </p>

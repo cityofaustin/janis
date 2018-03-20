@@ -1,8 +1,37 @@
+//typography
+@import url('https://fonts.googleapis.com/css?family=Lora|Open+Sans:400,600,700,800');
+/* TODO: determine fallback fonts */
+$coa-font-sans: 'Open Sans';
+$coa-font-serif: 'Lora';
+$coa-font-regular: 400;
+$coa-font-semibold: 600;
+$coa-font-bold: 700;
+$coa-font-extrabold: 800;
+$coa-em-base: 10px;
+$coa-base-font-size: 2rem;
+$coa-base-line-height: 2.5rem;
+
+$coa-font-size-xsmall: 1.4rem;
+$coa-font-size-small: 1.7rem;
+$coa-font-size-medium: 2.6rem;
+$coa-font-size-large: 3.6rem;
+$coa-font-size-xlarge: 4.4rem;
+$coa-font-size-xxlarge: 6.4rem;
+
+$coa-line-height-xsmall: 1.4rem;
+$coa-line-height-small: 2.7rem;
+$coa-line-height-medium: 3.6rem;
+$coa-line-height-large: 4.6rem;
+$coa-line-height-xlarge: 5.4rem;
+$coa-line-height-xxlarge: 8.7rem;
+
+//breakpoints
 $coa-small-screen: 480px;
 $coa-medium-screen: 768px;
 $coa-large-screen: 1080px;
 $coa-xlarge-screen: 1250px;
 
+//padding / margin
 $coa-space-level1: 0.5rem;
 $coa-space-level2: 1.0rem;
 $coa-space-level3: 1.5rem;
@@ -12,12 +41,20 @@ $coa-space-level6: 3.0rem;
 $coa-space-level7: 4.0rem;
 $coa-space-level8: 6.0rem;
 
+$coa-spacing-x-small: $coa-space-level1;
+$coa-spacing-small: $coa-space-level2;
+$coa-spacing-md-small: $coa-space-level3;
+$coa-spacing-medium: $coa-space-level4;
+$coa-spacing-large: $coa-space-level6;
+$coa-spacing-xlarge: $coa-space-level8;
+
+//flexbox grid
 $coa-column-count: 12;
 $coa-gutter-width: 2.5rem;
+$coa-container-margin: 2rem;
+$coa-wrapper-maxwidth: 1325px;
+$coa-wrapper-sm-maxwidth: 720px;
 
-$coa-fullwidth-margin: 2rem;
-$coa-container-maxwidth: 1200px;
-$coa-textwrap-width: 545px;
 
 @mixin box-verticalcenter($height: auto) {
   align-items: center;
@@ -26,14 +63,27 @@ $coa-textwrap-width: 545px;
   justify-content: space-between;
 }
 
-// COA COLORS
+//colors
+$coa-color-white: #FFFFFF;
+$coa-color-black: #000000;
 
-// BLUES
-$coa-color-blue: #005EFF;
-// PURPLES
-$coa-color-light-purple: #D7D2D9;
-$coa-color-another-grayish-purple: #EAEAEA;
-$coa-color-grayish-purple: #9B90A2;
-$coa-color-dark-purple: #240B33;
-// ORANGE
-$coa-color-orange: #ED6F33;
+$coa-color-blue: #3282AF;
+$coa-color-blue-dark: #2D759F;
+$coa-color-blue-darker: #065889;
+$coa-color-blue-darkest: #023654;
+
+$coa-color-orange: #E03400;
+$coa-color-orange-dark: #B82B00;
+
+$coa-color-purple-lightest: #D7D2D9;
+$coa-color-purple-lighter: #9B90A2;
+$coa-color-purple-light: #5F4D68;
+$coa-color-purple: #372145;
+$coa-color-purple-dark: #240B33;
+$coa-color-purple-darkest: #170821;
+
+$coa-color-gray-lightest: #F4F4F4;
+$coa-color-gray-lighter: #EAEAEA;
+$coa-color-gray-light: #CBCBCB;
+$coa-color-gray: #919191;
+$coa-color-gray-dark: #363636;

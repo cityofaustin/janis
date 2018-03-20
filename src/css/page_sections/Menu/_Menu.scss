@@ -1,32 +1,28 @@
 .coa-Menu {
-  @media screen and (min-width: $coa-large-screen) {
-    margin: $coa-space-level6 auto 0;
-  }
-  @media screen and (max-width: $coa-large-screen) {
-    position: absolute;
-    left: -100vw;
-    width: 100vw;
-    transition: 0.5s;
+  position: absolute;
+  left: -100vw;
+  width: 100vw;
+  transition: 0.5s;
+  top: 50px;
+  bottom: 0;
+  background-color: $coa-color-white;
+  z-index: 2;
+  @include media($coa-large-screen) {
+    position: relative;
+    left: auto;
     top: 0;
-    bottom: 0;
-    background-color: $color-white;
-    z-index: 2;
+    margin: $coa-space-level5 auto 0;
+    width: 100%;
   }
 }
 
 .coa-Menu__list {
   list-style: none;
-  @media screen and (max-width: $coa-large-screen) {
-    padding: 0 1.2rem;
-  }
-  @media screen and (min-width: $coa-large-screen) {
+  @include media($coa-large-screen) {
+    padding: auto;
     display: flex;
     justify-content: space-between;
   }
-}
-
-.coa-Menu__airplane-icon {
-  margin: 2px .5rem -3px;
 }
 
 .coa-Menu--open {
@@ -47,25 +43,21 @@
   }
 }
 
+.coa-Menu__mobile-footer {
+  padding: $coa-space-level2;
+}
+.coa-Menu__footer-text {
+  padding: $coa-space-level3 0;
+  font-size: $coa-font-size-xsmall;
+}
+
 .coa-Menu__overlay {
+  position: absolute;
+  background: green;
   width: 100%;
   height: 100%;
   z-index: 1;
   top: 0;
   left: 0;
-  transition: opacity 0.2s ease-in-out;
-  background: rgba($color-gray-medium, 1);
-  position: absolute;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   opacity: 0;
-  visibility: hidden;
-}
-
-.coa-Menu__overlay--open {
-  opacity: 0.3;
-  visibility: visible;
-}
-
-.coa-Menu__footer-text {
-  font-size: $h6-font-size;
 }

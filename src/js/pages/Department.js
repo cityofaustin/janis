@@ -4,7 +4,7 @@ import { cleanContacts } from 'js/helpers/cleanData';
 import { withRouteData } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/services';
+import jsonFileData from '__tmpdata/pages';
 import SectionTitle from 'js/modules/SectionTitle';
 import Hero from 'js/modules/Hero';
 import Contact from 'js/page_sections/Contact';
@@ -17,7 +17,7 @@ const Department = ({ department }) => {
   const body = get(department, "mission", null);
   const contacts = get(department, "contacts", null);
   const image = get(department, "image", null);
-  const relatedLinks = get(jsonFileData, "projectsRelated", []);
+  const relatedLinks = get(jsonFileData, "departmentpage.projectsRelated", []);
   const services311 = get(jsonFileData, "services311", []);
 
   return (

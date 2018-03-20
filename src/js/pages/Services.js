@@ -10,7 +10,7 @@ import Service311 from 'js/page_sections/Service311';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/services';
+import jsonFileData from '__tmpdata/pages';
 const title = get(jsonFileData, "servicespage.title", null);
 const body = get(jsonFileData, "servicespage.body", null);
 const services311 = get(jsonFileData, "services311", null);

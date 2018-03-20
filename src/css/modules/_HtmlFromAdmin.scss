@@ -1,11 +1,10 @@
 .coa-HtmlFromAdmin {
-  max-width: $coa-textwrap-width;
 
   > br {
     display: none;
   }
 
-  > h1, h2 {
+  > h1, > h2 {
     font-size: $h3-font-size;
     margin-bottom: $coa-space-level2;
     margin-top: $coa-space-level7;
@@ -29,7 +28,7 @@
     }
   }
 
-  > ul, ol {
+  > ul, > ol {
 
     margin-bottom: $coa-space-level4;
 
