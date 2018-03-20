@@ -71,7 +71,7 @@ class Menu extends Component {
           </ul>
         </nav>
         {
-          this.state.openSection && (
+          !!this.state.openSection && (
             <div className="coa-Menu__overlay"
               onClick={() => this.setState({ openSection: null })}
             ></div>
