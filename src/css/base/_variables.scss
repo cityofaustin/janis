@@ -8,8 +8,6 @@ $coa-font-semibold: 600;
 $coa-font-bold: 700;
 $coa-font-extrabold: 800;
 $coa-em-base: 10px;
-$coa-base-font-size: 2rem;
-$coa-base-line-height: 2.5rem;
 
 $coa-font-size-xsmall: 1.4rem;
 $coa-font-size-small: 1.7rem;
@@ -18,12 +16,15 @@ $coa-font-size-large: 3.6rem;
 $coa-font-size-xlarge: 4.4rem;
 $coa-font-size-xxlarge: 6.4rem;
 
-$coa-line-height-xsmall: 1.4rem;
+$coa-line-height-xsmall: 2.4rem;
 $coa-line-height-small: 2.7rem;
 $coa-line-height-medium: 3.6rem;
 $coa-line-height-large: 4.6rem;
 $coa-line-height-xlarge: 5.4rem;
 $coa-line-height-xxlarge: 8.7rem;
+
+$coa-base-font-size: $coa-font-size-small;
+$coa-base-line-height: $coa-line-height-small;
 
 //breakpoints
 $coa-small-screen: 480px;
@@ -41,7 +42,7 @@ $coa-space-level6: 3.0rem;
 $coa-space-level7: 4.0rem;
 $coa-space-level8: 6.0rem;
 
-$coa-spacing-x-small: $coa-space-level1;
+$coa-spacing-xsmall: $coa-space-level1;
 $coa-spacing-small: $coa-space-level2;
 $coa-spacing-md-small: $coa-space-level3;
 $coa-spacing-medium: $coa-space-level4;
@@ -54,13 +55,6 @@ $coa-gutter-width: 2.5rem;
 $coa-container-margin: 2rem;
 $coa-wrapper-maxwidth: 1325px;
 $coa-wrapper-sm-maxwidth: 720px;
-
-@mixin box-verticalcenter($height: auto) {
-  align-items: center;
-  display: flex;
-  height: $height;
-  justify-content: space-between;
-}
 
 //colors
 $coa-color-white: #FFFFFF;
@@ -89,6 +83,3 @@ $coa-color-gray-dark: #363636;
 
 //magic numbers
 $coa-button-border-radius: 4px;
-
-
-
