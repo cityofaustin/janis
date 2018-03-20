@@ -15,7 +15,7 @@ export const SUPPORTED_LANGUAGES = [
     code: 'vi',
   },
   { // Arabic
-    title: 'عربى',
+    title: 'العربية',
     abbr: 'ar',
     code: 'ar',
   },
