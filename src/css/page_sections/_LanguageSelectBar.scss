@@ -5,14 +5,13 @@
   font-family: $coa-font-sans;
   z-index: 3;
   transition: 0.5s;
-  height: 4.6rem;
   padding: 0 $coa-space-level1;
 }
 
 .coa-LanguageSelectBar__language-list {
   color: $coa-color-white;
   list-style: none;
-  padding-top: $coa-space-level2;
+  padding: $coa-space-level2 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -26,7 +25,6 @@
   font-size: $coa-font-size-xsmall;
   text-align: center;
   width: auto;
-  max-width: 90px;
   margin: 0 0 0 $coa-space-level1;
   @include media($coa-medium-screen) {
     margin: 0 0 0 $coa-space-level3;
