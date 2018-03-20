@@ -10,7 +10,7 @@ body {
   line-height: $coa-line-height-small;
 
   @include media($coa-medium-screen) {
-    font-size: $coa-font-size-medium;
-    line-height: $coa-line-height-medium;
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
   }
 }

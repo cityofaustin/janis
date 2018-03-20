@@ -22,12 +22,13 @@ ol, ul {
   padding: 0;
 
   li {
-    margin: 0;
+    @include responsivetext();
+    margin-bottom: .25rem;
   }
 }
 
 p {
-  @include paragraph();
+  @include responsivetext();
 }
 
 // label, textarea, input, select {

@@ -1,14 +1,14 @@
-@mixin paragraph() {
-  font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
-  margin-bottom: $coa-line-height-xsmall + .3;
-  margin-top: 0;
+@mixin responsivetext() {
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
 
   @include media($coa-medium-screen) {
-    font-size: $coa-font-size-small;
-    line-height: $coa-line-height-small;
-    margin-bottom: $coa-line-height-small + .3;
-    margin-top: 0;
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
+  }
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-medium;
+    line-height: $coa-line-height-medium;
   }
 }
 
@@ -76,8 +76,8 @@
   margin-top: $coa-spacing-medium;
 
   @include media($coa-small-screen) {
-    font-size: $coa-font-size-small;
-    line-height: $coa-line-height-small;
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
     margin-bottom: $coa-spacing-medium;
     margin-top: $coa-spacing-large;
   }
