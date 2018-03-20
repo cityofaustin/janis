@@ -114,11 +114,12 @@ class LanguageWrapper extends Component {
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }}>
+          <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
-            <main role="main" id="main">
-              <Routes />
-            </main>
+          <main role="main" id="main">
+            <Routes />
+          </main>
           <Footer />
         </div>
       </IntlProvider>

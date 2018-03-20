@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import SearchSVG from 'js/svg/Search';
 import AirplaneSVG from 'js/svg/Airplane';
-import Navmenu from 'js/page_sections/Navmenu';
-import I18nLink from 'js/modules/I18nLink'
+import Menu from 'js/page_sections/Menu/Menu';
+import I18nLink from 'js/modules/I18nLink';
+import ExternalLink from 'js/modules/ExternalLink';
 
 const i18nMessages = defineMessages({
   headerMenuButton: {
@@ -14,6 +15,10 @@ const i18nMessages = defineMessages({
     id: 'Header.Search.button',
     defaultMessage: 'Search',
   },
+  headerAirportText: {
+    id: 'Header.Airport.text',
+    defaultMessage: 'AIRPORT',
+  }
 });
 
 class Header extends Component {
@@ -40,7 +45,7 @@ class Header extends Component {
     return (
       <header className="coa-Header" role="banner">
         <div className="wrapper">
-          <div className="row">
+          <div className="row coa-Header__top-row">
             <div className="col-xs-6 coa-Header__navbar-brand">
               <div className="coa-Header__menu d-lg-none">
                 <button onClick={this.toggleMenu} tabIndex="0"
@@ -55,12 +60,13 @@ class Header extends Component {
             </div>
             <div className="col-xs-6 coa-Header__right-controls">
               <div className="d-none d-md-block">
-                <a href="http://www.austintexas.gov/airport">
-                  <AirplaneSVG size="14"/>
-                </a>
+                <ExternalLink to="http://www.austintexas.gov/airport">
+                  {intl.formatMessage(i18nMessages.headerAirportText)}
+                </ExternalLink>
                 <span className="coa-text-spacer--vertical"></span>
-                <a href="http://311.austintexas.gov/">311</a>
-                {/* <span className="coa-text-spacer--vertical"></span> */}
+                <ExternalLink to="http://311.austintexas.gov/">
+                  311
+                </ExternalLink>
               </div>
               {/* <I18nLink to="/search" className="coa-Header__search">
                 <span className="d-none d-md-block">{intl.formatMessage(i18nMessages.headerSearchButton)}</span> <SearchSVG size="18"/>
@@ -68,7 +74,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Navmenu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
+        <Menu isOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu}/>
       </header>
     );
   }

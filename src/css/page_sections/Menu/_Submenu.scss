@@ -1,0 +1,19 @@
+.coa-Submenu {
+  display: none;
+  @include media($coa-large-screen) {
+    background-color: $color-white;
+    left: -1px;
+    top: 61px;
+    z-index: 3;
+    border: 1px solid $color-gray-medium;
+  }
+}
+
+.coa-Submenu--open {
+  display: block;
+}
+
+.coa-Submenu--align-right {
+  right: 0;
+  left: auto;
+}
