@@ -11,7 +11,7 @@ const i18nMessages = defineMessages({
   },
   applicationBlockRecollectWizard: {
     id: 'ApplicationBlock.recollect.wizard',
-    defaultMessage: 'Check the what do I do with tool below',
+    defaultMessage: 'Check the "What do I do with" tool below to find out what items are accepted.',
   },
 });
 

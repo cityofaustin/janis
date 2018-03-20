@@ -17,9 +17,13 @@
   }
 
   > ul, > ol {
-
-    list-style-position: inside;
+    list-style-position: outside;
     margin-bottom: $coa-space-level4;
     margin-top: $coa-space-level4;
+    padding-left: $coa-space-level4;
+
+    p {
+      display: inline;
+    }
   }
 }

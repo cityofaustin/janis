@@ -8,7 +8,7 @@ import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
-import ApplicationBlock from 'js/page_sections/ApplicationBlock';
+import ApplicationBlock from 'js/modules/ApplicationBlock';
 
 
 import Contact from 'js/page_sections/Contact';
