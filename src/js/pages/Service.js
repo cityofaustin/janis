@@ -24,7 +24,7 @@ const i18nMessages = defineMessages({
 });
 
 const Service = ({ service }) => {
-  const { image, title, slug, content, extraContent, contacts, related } = service;
+  const { image, title, slug, steps, dynamicContent, additionalContent, contacts, related } = service;
 
   //TODO: data below should be sourced as above
   const { servicepage, services311 } = jsonFileData;
@@ -42,17 +42,15 @@ const Service = ({ service }) => {
 
         <PageHeader title={title} />
 
-        { content && <Steps steps={content} /> }
+        { steps && <Steps steps={steps} /> }
 
-        { (extraContent && extraContent.length) && (
-          extraContent.map((content) => {
-            if (content.type === 'content') {
-              return <HtmlFromAdmin key={content.id} content={content.value} />;
-            } else {
-              return <ApplicationBlock key={content.id} type={content.type} data={content.value} />;
-            }
-          })
+        { (dynamicContent && dynamicContent.length) && (
+          dynamicContent.map((content) => (
+            <ApplicationBlock key={content.id} type={content.type} data={content.value} />
+          ))
         )}
+
+        { additionalContent && <HtmlFromAdmin key={additionalContent.id} content={additionalContent.value} /> }
 
         { contact &&<ContactDetails contact={contact} /> }
 
