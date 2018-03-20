@@ -35,20 +35,20 @@ p {
 //   max-width: none;
 // }
 
-// .usa-table-borderless {
-//   margin: 0;
-//   padding: 0;
+.usa-table-borderless {
+  margin: 0;
+  padding: 0;
 
-//   td, th {
-//     border: none;
-//     margin: 0;
-//     padding: 0;
-//   }
+  td, th {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 
-//   th:first-child {
-//     padding-right: $coa-space-level2;
-//   }
-// }
+  th:first-child {
+    padding-right: $coa-spacing-xlarge;
+  }
+}
 
 // .usa-input-error {
 //   margin-top: 1rem;

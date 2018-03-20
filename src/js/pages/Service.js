@@ -9,9 +9,8 @@ import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import ApplicationBlock from 'js/modules/ApplicationBlock';
+import ContactDetails from 'js/modules/ContactDetails';
 
-
-import Contact from 'js/page_sections/Contact';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import Service311 from 'js/page_sections/Service311';
 
@@ -32,7 +31,7 @@ const Service = ({ service }) => {
   const { theme, topic } = servicepage;
 
   //TODO: clean data where sourced
-  const cleanedContacts = cleanContacts(contacts);
+  const contact = cleanContacts(contacts)[0];
   const cleanedRelated = cleanRelatedServiceLinks(related);
 
   return (
@@ -55,9 +54,11 @@ const Service = ({ service }) => {
           })
         )}
 
+        { contact &&<ContactDetails contact={contact} /> }
+
       </div>
 
-            <Contact contacts={contacts} />
+
 
       <RelatedLinks
         relatedLinks={cleanedRelated}
