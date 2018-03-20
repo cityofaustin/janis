@@ -10,6 +10,10 @@ import CloseSVG from 'js/svg/Close';
 import citySealImg from 'images/coa_seal.png';
 
 const i18nMessages = defineMessages({
+  home: {
+    id: 'Menu.HomeMobileListItem.text',
+    defaultMessage: 'Home',
+  },
   airport: {
     id: 'Menu.AirportMobileListItem.text',
     defaultMessage: 'Airport',
@@ -83,9 +87,9 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem handleClick={this.props.toggleMenu} />
             <AirportMobileListItem {...this.props} />
             <ThreeOneOneMobileListItem {...this.props} />
+            <HomeMobileListItem handleClick={this.props.toggleMenu} intl={intl} />
         {
           allThemes.edges.map(({node: theme}, i) => (
             <MenuItem id={i} {...this.state}
@@ -111,12 +115,12 @@ class Menu extends Component {
   }
 }
 
-const HomeMobileListItem = ({handleClick}) => (
+const HomeMobileListItem = ({handleClick, intl}) => (
   <li onClick={handleClick}
     className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
-      Home
+      {intl.formatMessage(i18nMessages.home)}
     </I18nNavLink>
   </li>
 )
