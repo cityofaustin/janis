@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-static';
 import { find } from 'lodash';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
-import CaretDownSVG from 'js/svg/CaretDown';
-import CaretUpSVG from 'js/svg/CaretUp';
-
 
 const selectedLanguage = (lang) => find(SUPPORTED_LANGUAGES, {'code': lang});
 
