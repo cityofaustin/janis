@@ -3,12 +3,17 @@
   text-transform: uppercase;
   font-size: $coa-font-size-small;
   padding: $coa-space-level2;
-  border-top: 2px solid $coa-color-gray-lighter;
+  border-top: 1px solid $coa-color-gray-light;
   > a {
     text-decoration: none;
+    color: $coa-color-black;
   }
   &:first-of-type {
     margin-top: $coa-space-level2;
+    @include media($coa-large-screen) {
+      margin-top: 0;
+      border-top: none;
+    }
   }
   @include media($coa-large-screen) {
     border-bottom: 1px solid $coa-color-purple-lighter;
@@ -17,6 +22,7 @@
     font-size: $coa-font-size-xsmall;
     padding: $coa-space-level3 $coa-space-level4;
     margin-bottom: 0;
+    font-weight: 600;
     &:hover {
       background: $coa-color-gray-lighter;
     }

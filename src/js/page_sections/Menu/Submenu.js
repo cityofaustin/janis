@@ -44,9 +44,7 @@ const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
 
 const WorkInProgressSubitem = () => (
   <li className="coa-SubmenuItem coa-SubmenuItem--coming-soon-message">
-    <a href="https://www.austintexas.gov">
-      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit austintexas.gov.
-    </a>
+    Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>.
   </li>
 )
 

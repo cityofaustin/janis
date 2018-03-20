@@ -3,15 +3,16 @@
   left: -100vw;
   width: 100vw;
   transition: 0.5s;
-  top: 0;
+  top: 50px;
   bottom: 0;
   background-color: $coa-color-white;
   z-index: 2;
   @include media($coa-large-screen) {
     position: relative;
     left: auto;
-    margin: $coa-space-level6 auto 0;
-
+    top: 0;
+    margin: $coa-space-level5 auto 0;
+    width: 100%;
   }
 }
 

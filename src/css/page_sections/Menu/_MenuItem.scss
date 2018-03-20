@@ -1,6 +1,5 @@
 .coa-MenuItem {
-  border: 1px solid transparent;
-  border-top: 2px solid $color-gray-lighter;
+  border-bottom: 1px solid $color-gray;
   text-transform: uppercase;
   font-size: $coa-font-size-small;
   font-family: $coa-font-sans;
@@ -9,11 +8,10 @@
   cursor: pointer;
   padding: $coa-space-level2 $coa-space-level3;
   &:last-of-type {
-    border-bottom: 2px solid $color-gray-lighter;
+    border-bottom: 1px solid $color-gray;
   }
   @include media($coa-large-screen) {
-    border-bottom: none;
-    display: flex;
+    border: 1px solid transparent;
     padding: $coa-space-level4 $coa-space-level2 $coa-space-level3;
 
   }
@@ -39,12 +37,13 @@
     width: 100%;
     height: 3px;
     background: $coa-color-white;
-    bottom: -2px;
+    bottom: 0px;
     position: absolute;
     left: 0;
     z-index: 4;
   }
   @include media($coa-large-screen) {
+    border: none;
     border: 1px solid $color-gray-medium;
     border-bottom: 1px solid $coa-color-white;
   }
@@ -79,11 +78,10 @@
 
 .coa-MenuItem--small {
   font-size: $coa-font-size-xsmall;
-  // padding-bottom: $coa-space-level2;
 }
 
 .coa-MenuItem--home > a {
-  color: $coa-color-black;
+  color: $coa-color-orange;
   text-decoration: none;
 }
 
@@ -94,7 +92,6 @@
 .coa-MenuItem__text {
   flex-shrink: 0;
   border-bottom: 3px solid transparent;
-  // margin-bottom: $coa-space-level1;
   @include media($coa-large-screen) {
     font-weight: bold;
     margin-bottom: 0;
