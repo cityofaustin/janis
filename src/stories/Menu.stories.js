@@ -34,24 +34,28 @@ storiesOf('Menu', module)
     </IntlProvider>
   ))
   .add('MenuItem closed', () => (
-    <ul className="coa-Menu__list">
-      <MenuItem
-        id={1}
-        theme={navigation.data.allThemes.edges[1].node}
-        openSection={1}
-        handleSublistToggle={linkTo('Menu', 'MenuItem open')}
-        handleMenuToggle={action('handleMenuToggle')}
-      />
-    </ul>
+    <IntlProvider locale="en">
+      <ul className="coa-Menu__list">
+        <MenuItem
+          id={1}
+          theme={navigation.data.allThemes.edges[1].node}
+          openSection={1}
+          handleSublistToggle={linkTo('Menu', 'MenuItem open')}
+          handleMenuToggle={action('handleMenuToggle')}
+        />
+      </ul>
+    </IntlProvider>
   ))
   .add('MenuItem open', () => (
-    <ul className="coa-Menu__list">
-      <MenuItem
-        id={1}
-        theme={navigation.data.allThemes.edges[1].node}
-        openSection={10}
-        handleSublistToggle={linkTo('Menu', 'MenuItem closed')}
-        handleMenuToggle={action('handleMenuToggle')}
-      />
-    </ul>
+    <IntlProvider locale="en">
+      <ul className="coa-Menu__list">
+        <MenuItem
+          id={1}
+          theme={navigation.data.allThemes.edges[1].node}
+          openSection={10}
+          handleSublistToggle={linkTo('Menu', 'MenuItem closed')}
+          handleMenuToggle={action('handleMenuToggle')}
+        />
+      </ul>
+    </IntlProvider>
   ))
