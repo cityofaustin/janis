@@ -37,7 +37,7 @@ const i18nMessages = defineMessages({
   sealAltText: {
     id: 'Menu.MobileFooter.sealAltText',
     defaultMessage: 'City of Austin Seal',
-  }
+  },
 });
 
 
@@ -87,9 +87,9 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <AirportMobileListItem {...this.props} />
-            <ThreeOneOneMobileListItem {...this.props} />
             <HomeMobileListItem handleClick={this.props.toggleMenu} intl={intl} />
+            <AirportMobileListItem intl={intl} />
+            <ThreeOneOneMobileListItem intl={intl} />
         {
           allThemes.edges.map(({node: theme}, i) => (
             <MenuItem id={i} {...this.state}
@@ -99,8 +99,8 @@ class Menu extends Component {
             />
           ))
         }
-            <PrivacyPolicyListItem {...this.props} />
-            <MobileFooter {...this.props} />
+            <PrivacyPolicyListItem intl={intl} />
+            <MobileFooter intl={intl} />
           </ul>
         </nav>
         {
