@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ExternalLink from 'js/modules/ExternalLink';
@@ -7,6 +8,37 @@ import navigation from '__tmpdata/navigation';
 
 import CloseSVG from 'js/svg/Close';
 import citySealImg from 'images/coa_seal.png';
+
+const i18nMessages = defineMessages({
+  home: {
+    id: 'Menu.HomeMobileListItem.text',
+    defaultMessage: 'Home',
+  },
+  airport: {
+    id: 'Menu.AirportMobileListItem.text',
+    defaultMessage: 'Airport',
+  },
+  call311: {
+    id: 'Menu.ThreeOneOneMobileListItem.callText',
+    defaultMessage: 'Call 311',
+  },
+  online311: {
+    id: 'Menu.ThreeOneOneMobileListItem.onlineText',
+    defaultMessage: 'Submit an Online Request',
+  },
+  privacy: {
+    id: 'Menu.PrivacyPolicyListItem.text',
+    defaultMessage: 'Read About Privacy',
+  },
+  footer: {
+    id: 'Menu.MobileFooter.text',
+    defaultMessage: 'Alpha.austin.gov is a work in progress. For the full City of Austin website, visit ',
+  },
+  sealAltText: {
+    id: 'Menu.MobileFooter.sealAltText',
+    defaultMessage: 'City of Austin Seal',
+  },
+});
 
 
 class Menu extends Component {
@@ -41,6 +73,7 @@ class Menu extends Component {
   }
 
   render() {
+    const { intl } = this.props;
     const { allThemes } = navigation.data;
 
     return allThemes.edges.length && (
@@ -54,9 +87,9 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem handleClick={this.props.toggleMenu} />
-            <AirportMobileListItem />
-            <ThreeOneOneMobileListItem />
+            <HomeMobileListItem handleClick={this.props.toggleMenu} intl={intl} />
+            <AirportMobileListItem intl={intl} />
+            <ThreeOneOneMobileListItem intl={intl} />
         {
           allThemes.edges.map(({node: theme}, i) => (
             <MenuItem id={i} {...this.state}
@@ -66,8 +99,8 @@ class Menu extends Component {
             />
           ))
         }
-            <PrivacyPolicyListItem />
-            <MobileFooter />
+            <PrivacyPolicyListItem intl={intl} />
+            <MobileFooter intl={intl} />
           </ul>
         </nav>
         {
@@ -82,51 +115,52 @@ class Menu extends Component {
   }
 }
 
-const HomeMobileListItem = ({handleClick}) => (
+const HomeMobileListItem = ({handleClick, intl}) => (
   <li onClick={handleClick}
     className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
-      Home
+      {intl.formatMessage(i18nMessages.home)}
     </I18nNavLink>
   </li>
 )
 
-const AirportMobileListItem = () => (
+const AirportMobileListItem = ({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
-    <a href="http://www.austintexas.gov/airport">
-      <span>Airport</span>
-    </a>
+    {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
+    <ExternalLink to="http://www.austintexas.gov/airport" aria-label="3 1 1.">
+      {intl.formatMessage(i18nMessages.airport)}
+    </ExternalLink>
   </li>
 )
 
-const ThreeOneOneMobileListItem = () => (
+const ThreeOneOneMobileListItem = ({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--flex coa-MenuItem--small d-lg-none">
     <a href="tel:311">
-      Call 311
+      {intl.formatMessage(i18nMessages.call311)}
     </a>
     &nbsp;or&nbsp;
-    <a href="http://311.austintexas.gov/">
-      Submit an Online Request
-    </a>
+    <ExternalLink to="http://311.austintexas.gov/">
+      {intl.formatMessage(i18nMessages.online311)}
+    </ExternalLink>
   </li>
 )
 
-const PrivacyPolicyListItem = () => (
+const PrivacyPolicyListItem = ({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="#">
-      Read About Privacy
+      {intl.formatMessage(i18nMessages.privacy)}
     </a>
   </li>
 )
 
-const MobileFooter = () => (
+const MobileFooter = ({intl}) => (
   <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
-      Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
+      {intl.formatMessage(i18nMessages.footer)}<ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
     </p>
-    <img className="d-lg-none" src={citySealImg} alt="City of Austin Seal"/>
+    <img className="d-lg-none" src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
   </div>
 )
 
-export default Menu;
+export default injectIntl(Menu);

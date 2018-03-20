@@ -3,8 +3,7 @@
   left: -100vw;
   width: 100vw;
   transition: 0.5s;
-  top: 50px;
-  bottom: 0;
+  top: 0;
   background-color: $coa-color-white;
   z-index: 2;
   @include media($coa-large-screen) {
