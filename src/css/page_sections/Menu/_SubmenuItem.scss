@@ -2,8 +2,14 @@
   list-style: none;
   text-transform: uppercase;
   font-size: $coa-font-size-small;
-  padding: $coa-space-level2 $coa-space-level2 0;
+  padding: $coa-space-level2;
   border-top: 2px solid $coa-color-gray-lighter;
+  > a {
+    text-decoration: none;
+  }
+  &:first-of-type {
+    margin-top: $coa-space-level2;
+  }
   @include media($coa-large-screen) {
     border-bottom: 1px solid $coa-color-purple-lighter;
     border-top: none;

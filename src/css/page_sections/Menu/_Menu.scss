@@ -5,7 +5,7 @@
   transition: 0.5s;
   top: 0;
   bottom: 0;
-  background-color: $color-white;
+  background-color: $coa-color-white;
   z-index: 2;
   @include media($coa-large-screen) {
     position: relative;
@@ -17,7 +17,6 @@
 
 .coa-Menu__list {
   list-style: none;
-  padding: 0 1.2rem;
   @include media($coa-large-screen) {
     padding: auto;
     display: flex;
@@ -43,6 +42,9 @@
   }
 }
 
+.coa-Menu__mobile-footer {
+  padding: $coa-space-level2;
+}
 .coa-Menu__footer-text {
   padding: $coa-space-level3 0;
   font-size: $coa-font-size-xsmall;

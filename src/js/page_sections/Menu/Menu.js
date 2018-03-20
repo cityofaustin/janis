@@ -84,7 +84,7 @@ class Menu extends Component {
 
 const HomeMobileListItem = ({handleClick}) => (
   <li onClick={handleClick}
-    className="coa-MenuItem coa-MenuItem--small d-lg-none"
+    className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
   >
     <I18nNavLink to="/" exact>
       Home
@@ -95,7 +95,7 @@ const HomeMobileListItem = ({handleClick}) => (
 const AirportMobileListItem = () => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="http://www.austintexas.gov/airport">
-      <span className="d-lg-none">Airport</span>
+      <span>Airport</span>
     </a>
   </li>
 )
@@ -121,7 +121,7 @@ const PrivacyPolicyListItem = () => (
 )
 
 const MobileFooter = () => (
-  <div>
+  <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
       Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
     </p>
