@@ -10,59 +10,11 @@ h6 {
 }
 
 h1 {
-  font-size: $coa-font-size-medium;
-  line-height: $coa-line-height-medium;
-  margin-bottom: $coa-spacing-small;
-  margin-top: $coa-spacing-medium;
-
-  @include media($coa-small-screen) {
-    font-size: $coa-font-size-large;
-    line-height: $coa-line-height-large;
-    margin-bottom: $coa-spacing-medium;
-    margin-top: $coa-spacing-large;
-  }
-
-  @include media($coa-medium-screen) {
-    font-size: $coa-font-size-xlarge;
-    line-height: $coa-line-height-xlarge;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
-
-  @include media($coa-large-screen) {
-    font-size: $coa-font-size-xxlarge;
-    line-height: $coa-line-height-xxlarge;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
+  @include heading1();
 }
 
 h2 {
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
-  margin-bottom: $coa-spacing-small;
-  margin-top: $coa-spacing-medium;
-
-  @include media($coa-small-screen) {
-    font-size: $coa-font-size-medium;
-    line-height: $coa-line-height-medium;
-    margin-bottom: $coa-spacing-medium;
-    margin-top: $coa-spacing-large;
-  }
-
-  @include media($coa-medium-screen) {
-    font-size: $coa-font-size-large;
-    line-height: $coa-line-height-large;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
-
-  @include media($coa-large-screen) {
-    font-size: $coa-font-size-xlarge;
-    line-height: $coa-line-height-xlarge;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
+  @include heading2();
 }
 
 ol, ul {
@@ -75,7 +27,7 @@ ol, ul {
 }
 
 p {
-  margin: 0;
+  @include paragraph();
 }
 
 // label, textarea, input, select {

@@ -10,6 +10,7 @@
 
 $em-base:             $coa-em-base;
 $base-font-size:      $coa-base-font-size !default;
+$base-line-height:    $coa-base-line-height !default;
 
 $font-sans:           $coa-font-sans !default;
 $font-serif:          $coa-font-serif !default;
@@ -86,7 +87,7 @@ $large-screen:  $coa-large-screen !default;
 $font-path:   '../../node_modules/uswds/src/fonts' !default;
 $image-path:  '../../node_modules/uswds/src/img' !default;
 
-$spacing-x-small: $coa-spacing-x-small;
+$spacing-x-small: $coa-spacing-xsmall;
 $spacing-small: $coa-spacing-small;
 $spacing-md-small: $coa-spacing-md-small;
 $spacing-medium: $coa-spacing-medium;
