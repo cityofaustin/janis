@@ -1,0 +1,52 @@
+.coa-ContactDetails {
+  border: 1px solid $coa-color-purple-lighter;
+  border-left: none;
+  border-right: none;
+  padding: $coa-spacing-large 0;
+}
+.coa-ContactDetails__title {
+  font-family: $coa-font-serif;
+  font-weight: $coa-font-regular;
+  font-size: $coa-font-size-medium;
+  text-align: center;
+
+  @include media($coa-small-screen) {
+    font-size: $coa-font-size-large;
+  }
+}
+
+.coa-ContactDetails__item {
+  border-bottom: 1px dashed $coa-color-purple-dark;
+  display: flex;
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+  padding: $coa-spacing-md-small 0;
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-small;
+    line-height: $coa-line-height-small;
+    padding: $coa-spacing-medium 0;
+  }
+
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
+  }
+
+  & > :first-child {
+    flex-basis: 15px;
+    margin-right: $coa-spacing-large;
+    margin-top: $coa-spacing-xsmall;
+  }
+
+  & > :last-child {
+    flex: 1 0 auto;
+    & > span {
+      display: block;
+    }
+  }
+
+  &:last-child {
+    border: none;
+  }
+}

@@ -7,11 +7,11 @@ import StaticMap from 'js/modules/StaticMap';
 const i18nMessages = defineMessages({
   applicationBlockRecollectCalendar: {
     id: 'ApplicationBlock.recollect.calendar',
-    defaultMessage: 'Use this form to look up your pickup schedule',
+    defaultMessage: 'Type your street address in the box below',
   },
   applicationBlockRecollectWizard: {
     id: 'ApplicationBlock.recollect.wizard',
-    defaultMessage: 'Recycling Guidelines',
+    defaultMessage: 'Check the "What do I do with" tool below to find out what items are accepted.',
   },
 });
 
@@ -35,7 +35,7 @@ const ApplicationBlock = ({ type, data, intl }) => {
   if (!app) return null;
   return (
     <div className="coa-ApplicationBlock">
-      <SectionTitle title={title}/>
+      <h2 className="coa-ApplicationBlock__title">{title}</h2>
       {app}
     </div>
   );

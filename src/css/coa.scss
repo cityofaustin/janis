@@ -1,4 +1,5 @@
-@import 'css/base/variables_coa';
+@import 'css/base/variables';
+@import 'css/base/mixins';
 
 // vendor
 @import 'css/vendor/variables_uswds';
@@ -23,10 +24,12 @@
 @import 'css/modules/PageBreadcrumbs';
 @import 'css/modules/PageHeader';
 @import 'css/modules/Steps';
-
-@import 'css/modules/ListLink';
+@import 'css/modules/ApplicationBlock';
 @import 'css/modules/HtmlFromAdmin';
 @import 'css/modules/StaticMap';
+@import 'css/modules/ContactDetails';
+
+@import 'css/modules/ListLink';
 @import 'css/modules/GlobalSearch';
 @import 'css/modules/ExternalLink';
 @import 'css/modules/SectionTitle';

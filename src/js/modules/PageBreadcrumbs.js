@@ -1,9 +1,7 @@
 import React from 'react';
 import I18nNavLink from 'js/modules/I18nNavLink';
 
-const PageBreadcrumbs = (props) => {
-
-  const { title, order, ...rest } = props;
+const PageBreadcrumbs = ({ title, order, ...rest }) => {
 
   const breadcrumbs = order.map(breadcrumb => ({
     className: breadcrumb,

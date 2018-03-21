@@ -7,7 +7,7 @@ import { withRouteData } from 'react-static';
 import jsonFileData from '__tmpdata/pages';
 import SectionTitle from 'js/modules/SectionTitle';
 import Hero from 'js/modules/Hero';
-import Contact from 'js/page_sections/Contact';
+import ContactDetails from 'js/modules/ContactDetails';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
@@ -41,7 +41,7 @@ const Department = ({ department }) => {
 
           <div className="coa-main__right col-xs-12 col-lg-4">
 
-            <Contact contacts={contacts} />
+            <ContactDetails contacts={contacts} />
 
           </div>
         </div>

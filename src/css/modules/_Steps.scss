@@ -1,4 +1,7 @@
 .coa-Steps {
+  border-bottom: 1px dashed $coa-color-gray;
+  margin-bottom: $coa-spacing-xlarge;
+  padding-bottom: $coa-spacing-large;
   padding-top: 1px; //prevent stacking margins
 }
 
@@ -32,21 +35,50 @@
         line-height: $coa-line-height-small;
         margin-right: $coa-spacing-md-small;
         text-align: center;
+
+        @include media($coa-medium-screen) {
+          font-size: $coa-font-size-md-small;
+          line-height: $coa-line-height-md-small;
+          flex: 0 0 ($coa-line-height-md-small + .2);
+        }
+
+        @include media($coa-large-screen) {
+          font-size: $coa-font-size-medium;
+          line-height: $coa-line-height-medium;
+          flex: 0 0 ($coa-line-height-medium + .2);
+        }
       }
 
       //TODO: adjust styles below when top level steps are not formatted within paragraphs
       & > p {
         display: inline;
         flex: 1 1;
+        font-size: $coa-font-size-md-small;
+        line-height: $coa-line-height-md-small;
+        margin: 0;
+
+        @include media($coa-medium-screen) {
+          font-size: $coa-font-size-medium;
+          line-height: $coa-line-height-medium;
+        }
+
+        @include media($coa-large-screen) {
+          font-size: $coa-font-size-medium + .3;
+          line-height: $coa-line-height-medium + .3;
+        }
       }
     }
 
-    //TODO: remove styles below when steps do not have nested lists
     ol, ul {
       padding-left: $coa-spacing-xlarge;
       padding-top: $coa-spacing-medium;
       list-style-type: disc;
       width: 100%;
+
+      //TODO: adjust styles below when nested lists are not formatted within paragraphs
+      p {
+        margin: 0;
+      }
     }
   }
 

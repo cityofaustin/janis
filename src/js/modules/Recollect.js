@@ -20,7 +20,7 @@ class Recollect extends Component {
 
   render() {
     return (
-        <div id="rCw">
+        <div className="coa-Recollect" id="rCw">
           <img alt="Loading" src="https://recollect.a.ssl.fastly.net/0.11.1516038288/images/loading.gif"/>
           <Script
             url="https://recollect.net/api/widget.js"

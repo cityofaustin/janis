@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { FormattedMessage, FormattedTime } from 'react-intl';
 import {sortBy, findIndex} from 'lodash';
+//TODO: import correct svg
+import AirplaneSVG from 'js/svg/Airplane';
+
 
 const i18nMessagesWeekdayMap = {
   "SUNDAY":   <FormattedMessage
@@ -33,50 +36,42 @@ const i18nMessagesWeekdayMap = {
     />,
 };
 
-class Hours extends Component {
+class ContactHours extends Component {
 
-  sort() {
+  sort(hours) {
     // TODO: Joplin data MUST include data for all 7 days of week.
     let now = new Date()
-    let sorted = sortBy(this.props.hours, ['dayOfWeekNumeric']);
+    let sorted = sortBy(hours, ['dayOfWeekNumeric']);
     let index = findIndex(sorted, {'dayOfWeek': now.getDay()});
     return sorted.splice(index).concat(sorted);
   }
 
   render() {
-    const hours = this.sort();
-    let JSX;
-
-    if (!hours || !hours.length) {
-      JSX = null;
-    } else {
-      JSX = (
-        <div className="coa-section__map">
-          <h5>Hours</h5>
-          <table className="usa-table-borderless">
-            <thead className="usa-sr-only">
-              <tr>
-                <th scope="col">Day</th>
-                <th scope="col">Open - Close Hours</th>
+    const hours = this.sort(this.props.hours);
+    return (
+      <div className={`${this.props.className} coa-ContactHours`}>
+        <AirplaneSVG size="20"/>
+        <table className="usa-table-borderless">
+          <thead className="usa-sr-only">
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Open - Close Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            hours.map((hour, index) =>
+              <tr key={index}>
+                <th scope="row">{i18nMessagesWeekdayMap[hour.dayOfWeek]}</th>
+                <td><FormattedTime value={hour.startTime} /> - <FormattedTime value={hour.endTime} /></td>
               </tr>
-            </thead>
-            <tbody>
-            {
-              hours.map((hour, index) =>
-                <tr key={index}>
-                  <th scope="row">{i18nMessagesWeekdayMap[hour.dayOfWeek]}</th>
-                  <td><FormattedTime value={hour.startTime} /> - <FormattedTime value={hour.endTime} /></td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-
-    return JSX;
+            )
+          }
+          </tbody>
+        </table>
+      </div>
+    );
   }
 }
 
-export default Hours;
+export default ContactHours;
