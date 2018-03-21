@@ -7,27 +7,23 @@ const selectedLanguage = (lang) => find(SUPPORTED_LANGUAGES, {'code': lang});
 
 const LanguageSelectBar = ({path, lang}) => (
   <div className="coa-LanguageSelectBar">
-    <div className="wrapper">
-      <div className="row">
-        <div className="col-md-12 col-xs-12">
-          <div className="coa-LanguageSelectBar__language-list">
-            {
-              SUPPORTED_LANGUAGES.map(({title, abbr, code}, i) => {
-                if (selectedLanguage(lang).title === title) return false;
-                return (
-                  <li key={i} className="coa-LanguageSelectBar__language-item">
-                    <NavLink to={`/${code}/${path}`} >
-                      {title}
-                    </NavLink>
-                  </li>
-                )
-              })
-            }
-            <li className="coa-LanguageSelectBar__language-item coa-LanguageSelectBar__language-item--active">
-              { selectedLanguage(lang).title }
-            </li>
-          </div>
-        </div>
+    <div className="container-fluid wrapper">
+      <div className="coa-LanguageSelectBar__language-list">
+        {
+          SUPPORTED_LANGUAGES.map(({title, abbr, code}, i) => {
+            if (selectedLanguage(lang).title === title) return false;
+            return (
+              <li key={i} className="coa-LanguageSelectBar__language-item">
+                <NavLink to={`/${code}/${path}`} >
+                  {title}
+                </NavLink>
+              </li>
+            )
+          })
+        }
+        <li className="coa-LanguageSelectBar__language-item coa-LanguageSelectBar__language-item--active">
+          { selectedLanguage(lang).title }
+        </li>
       </div>
     </div>
   </div>
