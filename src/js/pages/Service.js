@@ -45,11 +45,11 @@ const Service = ({ service, intl }) => {
 
         { steps && <Steps steps={steps} /> }
 
-        { (dynamicContent && dynamicContent.length) ? (
+        { !!dynamicContent && (
           dynamicContent.map(content =>
             <ApplicationBlock key={content.id} type={content.type} data={content.value} />
-          )) : ''
-        }
+          )
+        )}
 
         { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
 
