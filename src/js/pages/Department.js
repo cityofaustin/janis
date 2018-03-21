@@ -9,6 +9,7 @@ import SectionHeader from 'js/modules/SectionHeader';
 import Hero from 'js/modules/Hero';
 import ContactDetails from 'js/modules/ContactDetails';
 import FormFeedback from 'js/page_sections/FormFeedback';
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Department = ({ department }) => {
   const title = get(department, "name", null);
@@ -55,7 +56,7 @@ const Department = ({ department }) => {
         </div>
       </div>
 
-      <Service311 services311={services311} />
+      <ThreeOneOne services311={services311} />
 
     </div>
   )
