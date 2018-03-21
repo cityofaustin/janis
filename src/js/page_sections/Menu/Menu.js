@@ -7,8 +7,8 @@ import ExternalLink from 'js/modules/ExternalLink';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
 import navigation_en from '__tmpdata/navigation';
 import navigation_es from '__tmpdata/navigation_es';
-import navigation_vi from '__tmpdata/navigation';
-import navigation_ar from '__tmpdata/navigation';
+import navigation_vi from '__tmpdata/navigation_vi';
+import navigation_ar from '__tmpdata/navigation_ar';
 
 import CloseSVG from 'js/svg/Close';
 import citySealImg from 'images/coa_seal.png';
