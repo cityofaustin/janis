@@ -1,6 +1,5 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import SectionTitle from 'js/modules/SectionTitle';
 import Recollect from 'js/modules/Recollect';
 import StaticMap from 'js/modules/StaticMap';
 

@@ -92,7 +92,7 @@ class Menu extends Component {
             <ThreeOneOneMobileListItem intl={intl} />
         {
           allThemes.edges.map(({node: theme}, i) => (
-            <MenuItem id={i} {...this.state}
+            <MenuItem key={i} id={i} {...this.state}
               theme={theme}
               handleMenuToggle={this.props.toggleMenu}
               handleSublistToggle={this.toggleSublist}

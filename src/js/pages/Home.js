@@ -7,7 +7,8 @@ import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
 import Service311 from 'js/page_sections/Service311';
 import HeroHome from 'js/modules/HeroHome';
 import ExternalLink from 'js/modules/ExternalLink';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
+import SectionHeader from 'js/modules/SectionHeader';
+import TileGroup from 'js/modules/TileGroup';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 import jsonFileData from '__tmpdata/pages';
@@ -38,11 +39,10 @@ const Home = ({ topServices, image, intl }) => {
           />
         </p>
       </SecondaryContentBanner>
-      <RelatedLinks
-        sectionTitle={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}
-        relatedLinks={serviceLinks}
-        style="primary"
-      />
+      <div className="wrapper container-fluid">
+        <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
+        <TileGroup tiles={serviceLinks} />
+      </div>
       <Service311 services311={services311} />
     </div>
   );

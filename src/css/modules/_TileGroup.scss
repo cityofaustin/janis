@@ -1,0 +1,18 @@
+.coa-TileGroup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .coa-Tile {
+    flex-grow: 1 ;
+    flex-shrink: 0;
+    flex-basis: 98%;
+    margin: $coa-tile-spacearound;
+    @include media($coa-small-screen) {
+      flex-basis: 50% - (4 * $coa-tile-spacearound);
+    }
+    @include media($coa-large-screen) {
+      flex-basis: 25% - (8 * $coa-tile-spacearound);
+    }
+  }
+}

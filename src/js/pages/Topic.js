@@ -6,7 +6,7 @@ import { cleanServiceLinks } from 'js/helpers/cleanData';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 import Hero from 'js/modules/Hero';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
+import TileGroup from 'js/modules/TileGroup';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 
@@ -25,10 +25,7 @@ const Topic = ({ topic }) => {
         <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
       </div>
 
-      <RelatedLinks
-        relatedLinks={relatedLinks}
-        sectionStyle="primary"
-      />
+      <TileGroup tiles={relatedLinks} />
 
       <div className="coa-section coa-section--lightgrey">
         <div className="wrapper">

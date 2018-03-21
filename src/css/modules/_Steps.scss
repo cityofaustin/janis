@@ -11,7 +11,7 @@
 }
 
 .coa-Steps__list {
-  & > ol {
+  & > ul {
     counter-reset: step-item;
     margin-bottom: $coa-space-level4;
     list-style-type: none;
@@ -70,8 +70,9 @@
     }
 
     ol, ul {
-      padding-left: $coa-spacing-xlarge;
-      padding-top: $coa-spacing-medium;
+      padding-bottom: $coa-spacing-xlarge;
+      padding-left: $coa-spacing-xlarge + 2;
+      padding-top: $coa-spacing-md-small;
       list-style-type: disc;
       width: 100%;
 
