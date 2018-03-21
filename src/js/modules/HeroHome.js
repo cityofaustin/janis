@@ -12,7 +12,7 @@ const i18nMessages = defineMessages({
 
 const HeroHome = ({image, intl}) => (
   <div
-    className="coa-Hero coa-HeroHome"
+    className="coa-HeroHome"
     style={{
       backgroundImage: `
         linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
@@ -24,7 +24,7 @@ const HeroHome = ({image, intl}) => (
     role="img"
     aria-label={image.title}
   >
-    <div className="coa-HeroHome-children">
+    <div className="container-fluid wrapper">
       <span className="coa-HeroHome-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
     </div>
