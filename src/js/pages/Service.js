@@ -50,7 +50,7 @@ const Service = ({ service }) => {
           ))
         )}
 
-        { additionalContent && <HtmlFromAdmin key={additionalContent.id} content={additionalContent.value} /> }
+        { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
 
         { contact &&<ContactDetails contact={contact} /> }
 
