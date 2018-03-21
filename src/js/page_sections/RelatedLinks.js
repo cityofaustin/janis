@@ -9,7 +9,7 @@ const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionL
 
   return (
     <div className={`coa-section ${style === 'primary' ? '' : 'coa-section--grey' }`}>
-      <div className="wrapper">
+      <div className="container-fluid wrapper">
       {
         sectionTitle && <SectionTitle title={sectionTitle} />
       }
