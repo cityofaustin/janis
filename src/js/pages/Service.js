@@ -21,6 +21,10 @@ const i18nMessages = defineMessages({
   serviceRelatedlinksSectionheader: {
     id: 'Service.RelatedLinks.SectionHeader',
     defaultMessage: 'Check out related services',
+  },
+  serviceRelatedlinksTag: {
+    id: 'Service.RelatedLinks.Tag',
+    defaultMessage: 'Service',
   }
 });
 
@@ -59,7 +63,7 @@ const Service = ({ service, intl }) => {
 
       <div className="wrapper container-fluid">
         <SectionHeader title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)} />
-        <TileGroup tiles={cleanedRelated} />
+        <TileGroup tiles={cleanedRelated} tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)} />
       </div>
 
         <ThreeOneOne services311={services311} />

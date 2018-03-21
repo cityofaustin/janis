@@ -32,5 +32,6 @@
   "ThreeOneOne.sectiontitle.siterequest": "Submit an Online Request",
   "Home.RelatedLinks.SectionTitle": "الاطلاع على خدمات مدينة أوستن",
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}. تعرف على المزيد حول الموقع الإلكتروني الجديد عبر {projectsSiteLink}.",
-  "Service.RelatedLinks.SectionHeader": "الاطلاع على الخدمات ذات الصلة"
+  "Service.RelatedLinks.SectionHeader": "الاطلاع على الخدمات ذات الصلة",
+  "Service.RelatedLinks.Tag": "الخدمة"
 }
