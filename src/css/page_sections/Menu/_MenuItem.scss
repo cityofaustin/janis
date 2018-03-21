@@ -1,0 +1,109 @@
+.coa-MenuItem {
+  border-bottom: 1px solid $color-gray;
+  text-transform: uppercase;
+  font-size: $coa-font-size-small;
+  font-family: $coa-font-sans;
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  padding: $coa-space-level2 $coa-space-level3;
+  &:last-of-type {
+    border-bottom: 1px solid $color-gray;
+  }
+  @include media($coa-large-screen) {
+    border: 1px solid transparent;
+    padding: $coa-space-level4 $coa-space-level2 $coa-space-level3;
+
+  }
+  > a {
+    color: $coa-color-blue;
+  }
+  svg {
+    transition-duration: .3s;
+  }
+  &:hover, &:focus {
+    .coa-MenuItem__text {
+      @include media($coa-large-screen) {
+        border-bottom: 3px solid $coa-color-orange;
+      }
+    }
+  }
+}
+
+.coa-MenuItem--open {
+  &:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: $coa-color-white;
+    bottom: 0px;
+    position: absolute;
+    left: 0;
+    z-index: 4;
+  }
+  @include media($coa-large-screen) {
+    border: none;
+    border: 1px solid $color-gray-medium;
+    border-bottom: 1px solid $coa-color-white;
+  }
+  .coa-MenuItem__text {
+    color: $coa-color-orange;
+    border-bottom: 3px solid transparent !important;
+  }
+  .coa-Submenu {
+    display: block;
+    @include media($coa-large-screen) {
+      position: absolute;
+    }
+  }
+  .coa-MenuItem__arrow-down {
+    svg {
+      transform: rotate(-180deg);
+    }
+    path {
+      fill: $coa-color-orange;
+    }
+  }
+}
+
+.coa-MenuItem--flex {
+  display: flex;
+  a {
+    flex-shrink: 0;
+    text-decoration: underline;
+    color: $coa-color-blue;
+  }
+}
+
+.coa-MenuItem--small {
+  font-size: $coa-font-size-xsmall;
+}
+
+.coa-MenuItem--home > a {
+  color: $coa-color-orange;
+  text-decoration: none;
+}
+
+.coa-MenuItem__header {
+  display: flex;
+}
+
+.coa-MenuItem__text {
+  flex-shrink: 0;
+  border-bottom: 3px solid transparent;
+  @include media($coa-large-screen) {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+}
+
+.coa-MenuItem__arrow-down {
+  margin-left: $coa-space-level1;
+}
+
+.coa-MenuItem__plus-sign {
+  margin-left: auto;
+  svg {
+    vertical-align: middle;
+  }
+}

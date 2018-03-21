@@ -24,7 +24,7 @@ const localeMessages = {
 };
 
 // page_sections
-import LanguageSelectBanner from "js/page_sections/LanguageSelectBanner"
+import LanguageSelectBar from "js/page_sections/LanguageSelectBar"
 import Header from "js/page_sections/Header"
 import Footer from "js/page_sections/Footer"
 
@@ -114,11 +114,12 @@ class LanguageWrapper extends Component {
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }}>
-          <LanguageSelectBanner lang={lang} path={this.props.match.params.path || ''}/>
+          <a href="#main" className="usa-skipnav">Skip to main content</a>
+          <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
-            <section className="coa-main">
-              <Routes />
-            </section>
+          <main role="main" id="main">
+            <Routes />
+          </main>
           <Footer />
         </div>
       </IntlProvider>

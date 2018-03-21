@@ -1,0 +1,14 @@
+.coa-PageBanner {
+  background-color: $coa-color-gray-lighter;
+  background-position: center center;
+  background-size: cover;
+  height: 17rem;
+  margin-bottom: $coa-space-level4;
+
+  @include media($coa-small-screen) {
+    height: 41rem;
+  }
+  @include media($coa-medium-screen) {
+    height: 32rem;
+  }
+}

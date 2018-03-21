@@ -1,7 +1,31 @@
 .coa-Footer {
   display: inline-block;
-  background: $color-gray-lighter;
+  background: $coa-color-purple-darkest;
+  padding: $coa-space-level5 0 $coa-space-level6;
+  color: $coa-color-white;
+  font-family: $coa-font-sans;
   width: 100%;
+}
+
+.coa-Footer__city-seal-wrapper {
+  padding: $coa-space-level1 0 $coa-space-level3;
+  @include media($coa-medium-screen) {
+    text-align: center;
+  }
+}
+
+.coa-Footer__body-text {
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+  margin: 0 0 $coa-space-level5;
+  a {
+    svg {
+      fill: $coa-color-blue-darker;
+      &:hover {
+        fill: $coa-color-blue-darkest;
+      }
+    }
+  }
 }
 
 .coa-Footer__icons {
@@ -9,20 +33,16 @@
     margin-right: $coa-space-level4;
   }
   svg {
-    fill: $color-blue-darkest;
-    &:hover {
-      fill: $color-blue;
+    path {
+      fill: $coa-color-white;
     }
-  }
-}
-
-.coa-Footer__body-text {
-  a {
-    svg {
-      fill: $color-blue-darker;
-      &:hover {
-        fill: $color-blue-darkest;
+    &:hover {
+      path {
+        fill: $coa-color-blue;
       }
     }
+  }
+  @include media($coa-medium-screen) {
+    text-align: right;
   }
 }

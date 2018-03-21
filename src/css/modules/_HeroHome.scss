@@ -1,0 +1,47 @@
+.coa-HeroHome {
+  flex-direction: column;
+  padding: $coa-space-level7 0;
+  height: 26rem;
+  color: $coa-color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media($coa-medium-screen) {
+    height: 40rem;
+  }
+  @include media($coa-large-screen) {
+    height: 44rem;
+  }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
+}
+
+.coa-HeroHome-preheader {
+  font-size: $coa-font-size-md-small;
+  font-style: italic;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-large;
+  }
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-xlarge;
+  }
+}
+
+.coa-HeroHome-header {
+  font-size: $coa-font-size-large;
+  text-transform: uppercase;
+  line-height: $coa-line-height-large;
+  margin-top: $coa-space-level1;
+  @include media($coa-medium-screen) {
+    margin-top: $coa-space-level3;
+    line-height: $coa-line-height-xlarge;
+    font-size: 7.2rem;
+  }
+  @include media($coa-large-screen) {
+    margin-top: $coa-space-level4;
+    line-height: $coa-line-height-xxlarge;
+    font-size: 10.0rem;
+  }
+}

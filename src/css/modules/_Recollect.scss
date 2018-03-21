@@ -1,0 +1,94 @@
+//Overrides styles on third party application Recollect
+#rCw.coa-Recollect {
+  font-family: $coa-font-sans;
+  .widget-box {
+    border-color: $coa-color-gray;
+  }
+  .widget-header {
+    background: $coa-color-purple-darkest;
+    #rCw-title {
+      font-size: $coa-font-size-xsmall !important;
+      font-weight: $coa-font-extrabold;
+      line-height: $coa-line-height-large;
+      text-transform: uppercase;
+    }
+    .rChelp.btn-link {
+      display:none;
+    }
+    .rClocale.btn-link .ri-l10n {
+      display: none;
+    }
+  }
+  .widget-body {
+    #rCpage-calendar_search {
+      .page-section {
+        padding: 0;
+      }
+      .page-row-content[data-type=search] {
+        padding: $coa-spacing-medium;
+
+        & > label {
+          font-size:$coa-font-size-small;
+          font-weight: $coa-font-extrabold;
+          padding: 0 0 $coa-spacing-small;
+          text-transform: uppercase;
+        }
+        & > .rCsearch[data-type=Address] > .form-group {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          width: 100%;
+
+          input[type=search] {
+            border-radius: 0;
+            border: 1px solid $coa-color-purple-darkest;
+            flex-basis: 100%;
+            font-size: $coa-font-size-small;
+            height: auto;
+            line-height: $coa-line-height-medium;
+            margin: 0 0 $coa-spacing-small;
+            padding: 0;
+
+            @include media($coa-small-screen) {
+              flex-basis: 70%;
+            }
+          }
+          #rCbtn-search {
+            align-items: center;
+            background-color: $coa-color-blue;
+            border: none;
+            border-radius: $coa-button-border-radius;
+            display: flex;
+            flex-basis: 100%;
+            font-size: $coa-font-size-small;
+            font-weight: $coa-font-semibold;
+            justify-content: center;
+            line-height: $coa-line-height-medium;
+            margin: 0 0 $coa-spacing-small;
+            padding: 0;
+
+            @include media($coa-small-screen) {
+              flex-basis: 28%;
+            }
+          }
+          .example {
+            flex-basis: 100%;
+            order: -1;
+            a {
+              color: $coa-color-purple-light;
+              font-size: $coa-font-size-xsmall;
+              font-style: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+  .rC-inside-footer {
+    display: none !important;
+  }
+  .rC-footer .rC-powered {
+    line-height: $coa-line-height-xsmall;
+    padding: 0;
+  }
+}
