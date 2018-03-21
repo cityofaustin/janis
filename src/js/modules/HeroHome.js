@@ -1,5 +1,5 @@
 import React from 'react';
-import { defineMessages } from 'react-intl';
+import { defineMessages, formatMessage, injectIntl } from 'react-intl';
 
 const i18nMessages = defineMessages({
   homeHeroWelcometext: {
@@ -25,10 +25,12 @@ const HeroHome = ({image, intl}) => (
     aria-label={image.title}
   >
     <div className="container-fluid wrapper">
-      <span className="coa-HeroHome-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
+      <span className="coa-HeroHome-preheader">
+        {intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+      </span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
     </div>
   </div>
 );
 
-export default HeroHome;
+export default injectIntl(HeroHome);
