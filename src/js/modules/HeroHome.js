@@ -1,9 +1,18 @@
 import React from 'react';
-import GlobalSearch from 'js/modules/GlobalSearch';
+import { defineMessages, formatMessage, injectIntl } from 'react-intl';
 
-const HeroHome = ({image, children}) => (
+const i18nMessages = defineMessages({
+  homeHeroWelcometext: {
+    id: 'Home.Hero.welcometext',
+    defaultMessage: 'Hi there, welcome to',
+    description: 'Homepage hero welcome text'
+  },
+});
+
+
+const HeroHome = ({image, intl}) => (
   <div
-    className="coa-Hero coa-Hero--home"
+    className="coa-HeroHome"
     style={{
       backgroundImage: `
         linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
@@ -15,8 +24,13 @@ const HeroHome = ({image, children}) => (
     role="img"
     aria-label={image.title}
   >
-    {children}
+    <div className="container-fluid wrapper">
+      <span className="coa-HeroHome-preheader">
+        {intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+      </span>
+      <h2 className="coa-HeroHome-header">Austin, TX</h2>
+    </div>
   </div>
 );
 
-export default HeroHome;
+export default injectIntl(HeroHome);

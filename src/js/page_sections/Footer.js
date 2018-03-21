@@ -7,7 +7,7 @@ import ExternalLink from 'js/modules/ExternalLink';
 
 const Footer = (props) => (
   <footer className="coa-Footer">
-    <div className="wrapper">
+    <div className="container-fluid wrapper">
       <div className="coa-section">
         <div className="row">
           <div className="col-xs-12">
