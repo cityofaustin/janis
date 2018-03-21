@@ -77,7 +77,7 @@ class Menu extends Component {
     const { allThemes } = navigation.data;
 
     return allThemes.edges.length && (
-      <div className="wrapper">
+      <div className="container-fluid wrapper">
         <nav className={`coa-Menu ${this.props.isOpen ? 'coa-Menu--open' : ''}`} role="navigation">
           <button className="coa-Menu__close-btn d-lg-none"
             onClick={this.props.toggleMenu}
