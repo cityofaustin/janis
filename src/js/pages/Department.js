@@ -5,7 +5,7 @@ import { withRouteData } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-import SectionTitle from 'js/modules/SectionTitle';
+import SectionHeader from 'js/modules/SectionHeader';
 import Hero from 'js/modules/Hero';
 import ContactDetails from 'js/modules/ContactDetails';
 import RelatedLinks from 'js/page_sections/RelatedLinks';
@@ -29,11 +29,11 @@ const Department = ({ department }) => {
           <div className="coa-main__left col-xs-12 col-lg-8">
 
             <div className="coa-section">
-              <SectionTitle title={title}/>
+              <SectionHeader title={title}/>
             </div>
 
             <div className="coa-section">
-              <SectionTitle title="Our Mission"/>
+              <SectionHeader title="Our Mission"/>
               <p>{body}</p>
             </div>
 

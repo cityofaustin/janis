@@ -44,28 +44,25 @@ const Service = ({ service }) => {
 
         { steps && <Steps steps={steps} /> }
 
-        { (dynamicContent && dynamicContent.length) && (
-          dynamicContent.map((content) => (
+        { (dynamicContent && dynamicContent.length) ? (
+          dynamicContent.map(content =>
             <ApplicationBlock key={content.id} type={content.type} data={content.value} />
-          ))
-        )}
+          )) : ''
+        }
 
         { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
 
         { contact && <ContactDetails contact={contact} /> }
 
       </div>
+      <div className="wrapper container-fluid">
+        <RelatedLinks
+          relatedLinks={cleanedRelated}
+          title="Check out related city services"
+        />
+      </div>
 
-
-
-      <RelatedLinks
-        relatedLinks={cleanedRelated}
-        sectionStyle="primary"
-        sectionTitle="Check out related city services"
-        sectionText={null}
-      />
-
-      <Service311 services311={services311} />
+        <Service311 services311={services311} />
 
     </div>
   )

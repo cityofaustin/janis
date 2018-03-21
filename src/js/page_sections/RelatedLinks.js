@@ -1,21 +1,13 @@
 import React from 'react';
-import SectionTitle from 'js/modules/SectionTitle';
+import SectionHeader from 'js/modules/SectionHeader';
 import Tile from 'js/modules/Tile';
 import I18nLink from 'js/modules/I18nLink';
 
-const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionLink }) => {
-
-  if (!relatedLinks || !relatedLinks.length) return null;
+const RelatedLinks = ({ relatedLinks, title }) => {
 
   return (
-    <div className={`coa-section ${style === 'primary' ? '' : 'coa-section--grey' }`}>
-      <div className="wrapper">
-      {
-        sectionTitle && <SectionTitle title={sectionTitle} />
-      }
-      {
-        sectionText && <p>{sectionText}</p>
-      }
+      <div>
+        <SectionHeader title={title} />
         <div className="row">
         {
           relatedLinks.map((link, index) =>
@@ -29,16 +21,7 @@ const RelatedLinks = ({ relatedLinks, style, sectionTitle, sectionText, sectionL
           )
         }
         </div>
-      {
-        sectionLink && (
-          <I18nLink
-            className="coa-section__link"
-            to={sectionLink.url}
-          >{sectionLink.text}</I18nLink>
-        )
-      }
       </div>
-    </div>
   );
 }
 

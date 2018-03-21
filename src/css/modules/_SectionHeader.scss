@@ -1,0 +1,12 @@
+.coa_SectionHeader {
+  text-transform: uppercase;
+  text-align: center;
+  &:after {
+    margin: $coa-spacing-medium auto $coa-spacing-xlarge;
+    width: 40px;
+    background: $coa-color-orange;
+    height: 8px;
+    display: block;
+    content: "";
+  }
+}
