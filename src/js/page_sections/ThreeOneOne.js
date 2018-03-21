@@ -14,15 +14,7 @@ const i18nMessages = defineMessages({
   threeoneoneSectionTitleSiteRequest: {
     id: 'ThreeOneOne.sectiontitle.siterequest',
     defaultMessage: 'Submit an Online Request',
-  },
-  threeoneoneSectionbody: {
-    id: 'ThreeOneOne.sectionbody',
-    defaultMessage: '311 is the city of Austin’s 24 hour information desk.',
-  },
-  threeoneoneSectionlink: {
-    id: 'ThreeOneOne.sectionlink',
-    defaultMessage: 'See a Full List of 311 Services',
-  },
+  }
 });
 
 const ThreeOneOne = ({ services311, intl }) => (
