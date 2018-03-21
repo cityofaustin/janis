@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import I18nLink from 'js/modules/I18nLink'
-
+import I18nLink from 'js/modules/I18nLink';
+import ChevronRightSVG from 'js/svg/ChevronRight';
 
 const ListLink = ({ url, text, style }) => (
   <I18nLink
@@ -9,7 +9,7 @@ const ListLink = ({ url, text, style }) => (
     to={url}
   >
     <span>{text}</span>
-    <i className="fa fa-chevron-right" aria-hidden="true"></i>
+    <ChevronRightSVG size="20" />
   </I18nLink>
 );
 

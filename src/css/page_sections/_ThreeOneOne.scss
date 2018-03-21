@@ -17,5 +17,9 @@
   .coa-ListLink {
     color: $coa-color-gray-lightest;
     border-color: $coa-color-gray;
+
+    svg path {
+      fill: $coa-color-gray-lightest;
+    }
   }
 }
