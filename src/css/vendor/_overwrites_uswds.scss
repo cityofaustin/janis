@@ -4,20 +4,36 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-sans;
-  font-weight: $font-medium;
+  font-family: $coa-font-sans;
+  font-weight: $coa-font-extrabold;
   margin: 0;
+}
+
+h1 {
+  @include heading1();
+}
+
+h2 {
+  @include heading2();
 }
 
 ol, ul {
   margin: 0;
   padding: 0;
-  list-style-position: inside;
+
+  li {
+    @include responsivetext();
+    margin-bottom: .25rem;
+  }
 }
 
-label, textarea, input, select {
-  max-width: none;
+p {
+  @include responsivetext();
 }
+
+// label, textarea, input, select {
+//   max-width: none;
+// }
 
 .usa-table-borderless {
   margin: 0;
@@ -30,19 +46,19 @@ label, textarea, input, select {
   }
 
   th:first-child {
-    padding-right: $coa-space-level2;
+    padding-right: $coa-spacing-xlarge;
   }
 }
 
-.usa-input-error {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+// .usa-input-error {
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
 
-  label {
-    width: calc(100% + 1.9rem); // 1.5rem left padding + 4px border from input error spacing
-  }
-}
+//   label {
+//     width: calc(100% + 1.9rem); // 1.5rem left padding + 4px border from input error spacing
+//   }
+// }
 
-.usa-input-error-message {
-  margin-bottom: $coa-space-level2;
-}
+// .usa-input-error-message {
+//   margin-bottom: $coa-space-level2;
+// }

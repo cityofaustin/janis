@@ -1,87 +1,75 @@
 import React from 'react';
-import { get } from 'lodash';
-import { parse } from 'query-string';
 import { withRouteData } from 'react-static';
+import { defineMessages, injectIntl } from 'react-intl';
+
+import PageBanner from 'js/modules/PageBanner';
+import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
+import PageHeader from 'js/modules/PageHeader';
+import Steps from 'js/modules/Steps';
+import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import ApplicationBlock from 'js/modules/ApplicationBlock';
+import ContactDetails from 'js/modules/ContactDetails';
+import SectionHeader from 'js/modules/SectionHeader';
+import TileGroup from 'js/modules/TileGroup';
+
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
+import jsonFileData from '__tmpdata/pages';
 
-import ContentItems from 'js/page_sections/ContentItems';
-import Contact from 'js/page_sections/Contact';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
-import FormFeedback from 'js/page_sections/FormFeedback';
-import Service311 from 'js/page_sections/Service311';
-import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
-import Hero from 'js/modules/Hero';
-import I18nLink from 'js/modules/I18nLink';
+const i18nMessages = defineMessages({
+  serviceRelatedlinksSectionheader: {
+    id: 'Service.RelatedLinks.SectionHeader',
+    defaultMessage: 'Check out related services',
+  },
+  serviceRelatedlinksTag: {
+    id: 'Service.RelatedLinks.Tag',
+    defaultMessage: 'Service',
+  }
+});
 
-import jsonFileData from '__tmpdata/services';
+const Service = ({ service, intl }) => {
+  const { image, title, slug, steps, dynamicContent, additionalContent, contacts, related } = service;
 
-const Service = ({ service }) => {
-  const topicId = get(service, "topic.id", null);
-  const topicName = get(service, "topic.text", null);
-  const title = get(service, "title", null);
-  const steps = get(service, "content", null);
-  const contentItems = get(service, "extraContent", null);
-  const services311 = get(jsonFileData, "services311", null);
-  const image = service.image;
-  const contacts = cleanContacts(service.contacts);
-  const relatedLinks = cleanRelatedServiceLinks(service.related);
+  //TODO: data below should be sourced as above
+  const { servicepage, services311 } = jsonFileData;
+  const { theme, topic } = servicepage;
+
+  //TODO: clean data where sourced
+  const contact = cleanContacts(contacts)[0];
+  const cleanedRelated = cleanRelatedServiceLinks(related);
 
   return (
     <div>
+      <PageBanner image={image} />
+      <PageBreadcrumbs title={title} order={['theme', 'topic']} theme={theme} topic={topic} />
+      <div className="wrapper wrapper--sm container-fluid">
 
-      <Hero image={image} />
+        <PageHeader title={title} />
 
-      <div className="wrapper">
-        <div className="row">
-          <div className="coa-main__left col-xs-12 col-lg-8">
+        { steps && <Steps steps={steps} /> }
 
-            <div className="coa-section">
-              { topicId && (
-                <I18nLink className="coa-main__breadcrumb"
-                  to={`/topics/${topicId}`}>
-                  {topicName}
-                </I18nLink>
-              )}
-              <h2 className="coa-main__title">{title}</h2>
-              { steps && (
-                <div className="coa-main__steps">
-                  <HtmlFromAdmin content={steps} />
-                </div>
-              )}
-            </div>
+        { !!dynamicContent && (
+          dynamicContent.map(content =>
+            <ApplicationBlock key={content.id} type={content.type} data={content.value} />
+          )
+        )}
 
-            <ContentItems contentItems={contentItems} />
+        { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
 
-          </div>
+        { contact && <ContactDetails contact={contact} /> }
 
-          <div className="coa-main__right col-xs-12 col-lg-4">
-
-            <Contact contacts={contacts} />
-
-          </div>
-        </div>
       </div>
 
-      <RelatedLinks
-        relatedLinks={relatedLinks}
-        sectionLink={{url: `/topics/${topicId}`, text: `See all services under ${topicName}`}}
-        sectionStyle="primary"
-        sectionTitle="Check out related city services"
-        sectionText={null}
-      />
-
-      <div className="coa-section coa-section--lightgrey">
-        <div className="wrapper">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
-        </div>
+      <div className="wrapper container-fluid">
+        <SectionHeader title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)} />
+        <TileGroup tiles={cleanedRelated} tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)} />
       </div>
 
-      <Service311 services311={services311} />
+      <ThreeOneOne services311={services311} />
 
     </div>
   )
 }
 
-export default withRouteData(Service);
+export default withRouteData(injectIntl(Service));

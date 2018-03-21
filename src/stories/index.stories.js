@@ -1,4 +1,5 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -10,9 +11,11 @@ import ExternalLink from 'js/modules/ExternalLink';
 
 storiesOf('modules', module)
   .add('ExternalLink', () => (
-    <ExternalLink to="http://google.com" iconSize={24}>
-      Go to Google.com
-    </ExternalLink>
+    <IntlProvider locale="en">
+      <ExternalLink to="http://google.com" iconSize={24}>
+        Go to Google.com
+      </ExternalLink>
+    </IntlProvider>
   ))
 
 storiesOf('Docs', module)

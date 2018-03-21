@@ -1,34 +1,13 @@
 .coa-ListLink {
-  @include box-verticalcenter();
-  background-color: $color-white;
+  @include box-verticalcenter(7.5rem);
   border-bottom: 1px dashed $color-gray-dark;
-  color: $color-black;
-  font-size: $base-font-size;
+  font-family: $coa-font-sans;
+  font-size: $coa-font-size-small;
+  padding: $coa-spacing-medium;
   text-decoration: none;
-  padding: $coa-space-level4 0;
+  text-transform: uppercase;
 
   i {
-    padding-left: $coa-space-level2;;
-  }
-}
-
-.coa-ListLink--box {
-  border: none;
-  font-size: $lead-font-size;
-  margin-bottom: $coa-space-level2;
-  height: 100px;
-  padding: 0 $coa-space-level3;
-}
-
-.coa-ListLink--boxprimary {
-  @extend .coa-ListLink--box;
-  background-color: $color-primary;
-  color: $color-white;
-//TODO: define link state colors
-  &:focus {
-    color: $color-white;
-  }
-  &:visited {
-    color: $color-white;
+    padding-left: $coa-spacing-small;
   }
 }

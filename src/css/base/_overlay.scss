@@ -1,0 +1,21 @@
+.coa-overlay {
+  align-items: center;
+  background-color: $color-white;
+  display: flex;
+  left: 50%;
+  height: 50vh;
+  margin-left: -40vw;
+  margin-top: -25vh;
+  outline: 9999px solid rgba(0,0,0,0.5);
+  padding: $coa-space-level7;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  width: 80vw;
+  z-index: 10;
+}
+.coa-overlay__content {
+  margin: 0 auto;
+  max-width: $coa-wrapper-sm-maxwidth;
+  width: 100%;
+}

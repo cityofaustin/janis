@@ -1,62 +1,35 @@
 .coa-HtmlFromAdmin {
-  max-width: $coa-textwrap-width;
-
+  margin: $coa-spacing-large 0;
+}
+.coa-HtmlFromAdmin__title {
+  text-transform: uppercase;
+  text-align: center;
+}
+.coa-HtmlFromAdmin__content {
   > br {
     display: none;
   }
 
-  > h1, h2 {
-    font-size: $h3-font-size;
-    margin-bottom: $coa-space-level2;
-    margin-top: $coa-space-level7;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    @include media($coa-medium-screen) {
-      font-size: $h2-font-size;
-      font-weight: $font-bold;
-    }
+  > h1 {
+    @include heading2();
+    text-transform: uppercase;
+    text-align: center;
   }
 
-  > p {
-    margin: 0;
-    margin-bottom: $coa-space-level4;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+  > h2 {
+    @include heading3();
+    text-transform: uppercase;
+    text-align: center;
   }
 
-  > ul, ol {
-
+  > ul, > ol {
+    list-style-position: outside;
     margin-bottom: $coa-space-level4;
+    margin-top: $coa-space-level4;
+    padding-left: $coa-space-level4;
 
-    > li > p {
-      margin: 0;
+    p {
       display: inline;
     }
-
-    ol, ul {
-      margin-left: $coa-space-level4;
-      list-style-type: disc;
-
-      li {
-        margin-bottom: 0;
-      }
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  > ul > li {
-    margin-bottom: 0;
-  }
-
-  > ol > li {
-    margin-bottom: $coa-space-level2;
   }
 }

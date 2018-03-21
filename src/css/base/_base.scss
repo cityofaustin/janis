@@ -1,6 +1,16 @@
 html {
-  font-family: $font-sans;
-  font-size: $em-base;
-  font-weight: $font-normal;
-  line-height: $base-line-height;
+  color: $coa-color-purple-dark;
+  font-family: $coa-font-serif;
+  font-size: $coa-em-base;
+  font-weight: $coa-font-regular;
+  line-height: $coa-base-line-height;
+}
+body {
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
+  }
 }
