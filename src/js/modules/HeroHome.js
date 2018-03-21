@@ -4,8 +4,7 @@ import { defineMessages, formatMessage, injectIntl } from 'react-intl';
 const i18nMessages = defineMessages({
   homeHeroWelcometext: {
     id: 'Home.Hero.welcometext',
-    defaultMessage: 'Hi there, welcome to',
-    description: 'Homepage hero welcome text'
+    defaultMessage: 'Welcome to',
   },
 });
 

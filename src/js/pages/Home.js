@@ -17,7 +17,7 @@ const services311 = get(jsonFileData, "services311", null);
 const i18nMessages = defineMessages({
   homeRelatedlinksSectiontitle: {
     id: 'Home.RelatedLinks.SectionTitle',
-    defaultMessage: 'Use City of Austin Services',
+    defaultMessage: 'Check out City of Austin services',
   }
 });
 

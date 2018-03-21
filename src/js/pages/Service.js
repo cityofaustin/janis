@@ -20,7 +20,7 @@ import jsonFileData from '__tmpdata/pages';
 const i18nMessages = defineMessages({
   serviceRelatedlinksSectionheader: {
     id: 'Service.RelatedLinks.SectionHeader',
-    defaultMessage: 'Check out related city services',
+    defaultMessage: 'Check out related services',
   }
 });
 
