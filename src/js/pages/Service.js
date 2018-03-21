@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
-import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 
 import PageBanner from 'js/modules/PageBanner';
 import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
@@ -10,10 +9,12 @@ import Steps from 'js/modules/Steps';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import ApplicationBlock from 'js/modules/ApplicationBlock';
 import ContactDetails from 'js/modules/ContactDetails';
+import SectionHeader from 'js/modules/SectionHeader';
+import TileGroup from 'js/modules/TileGroup';
 
-import RelatedLinks from 'js/page_sections/RelatedLinks';
 import Service311 from 'js/page_sections/Service311';
 
+import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 import jsonFileData from '__tmpdata/pages';
 
 const i18nMessages = defineMessages({
@@ -23,7 +24,7 @@ const i18nMessages = defineMessages({
   }
 });
 
-const Service = ({ service }) => {
+const Service = ({ service, intl }) => {
   const { image, title, slug, steps, dynamicContent, additionalContent, contacts, related } = service;
 
   //TODO: data below should be sourced as above
@@ -55,11 +56,10 @@ const Service = ({ service }) => {
         { contact && <ContactDetails contact={contact} /> }
 
       </div>
+
       <div className="wrapper container-fluid">
-        <RelatedLinks
-          relatedLinks={cleanedRelated}
-          title="Check out related city services"
-        />
+        <SectionHeader title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)} />
+        <TileGroup tiles={cleanedRelated} />
       </div>
 
         <Service311 services311={services311} />
@@ -68,4 +68,4 @@ const Service = ({ service }) => {
   )
 }
 
-export default withRouteData(Service);
+export default withRouteData(injectIntl(Service));

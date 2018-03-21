@@ -5,7 +5,7 @@ import ChevronCircleRightSVG from 'js/svg/ChevronCircleRight';
 
 const Tile = ({ url, text, tag }) => (
   <I18nLink className="coa-Tile" to={url}>
-    <span className="coa-Tile__tag">{tag}</span>
+    { tag && <span className="coa-Tile__tag">{tag}</span> }
     <p className="coa-Tile__text">{text}</p>
     <ChevronCircleRightSVG size="22"/>
   </I18nLink>
