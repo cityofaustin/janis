@@ -3,7 +3,7 @@ import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 
 import Hero from 'js/modules/Hero';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
+import TileGroup from 'js/modules/TileGroup';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 
@@ -24,10 +24,7 @@ const Services = ({ allServices }) => {
         <Hero callout={title} />
         <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
       </div>
-      <RelatedLinks
-        relatedLinks={relatedLinks}
-        sectionStyle="primary"
-      />
+      <TileGroup tiles={relatedLinks} />
       <div className="coa-section coa-section--lightgrey">
         <div className="wrapper">
           <FormFeedback />

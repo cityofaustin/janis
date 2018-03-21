@@ -2,9 +2,7 @@ import React from 'react';
 import { withRouteData } from 'react-static';
 
 import Hero from 'js/modules/Hero';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
-
-
+import TileGroup from 'js/modules/TileGroup';
 
 const Topics = ({ allTopics }) => {
   const links = allTopics.edges.map(topic => ({
@@ -15,10 +13,7 @@ const Topics = ({ allTopics }) => {
   return (
     <div className="wrapper">
       <Hero callout={"All Topics"} />
-      <RelatedLinks
-        relatedLinks={links}
-        sectionStyle="primary"
-      />
+      <TileGroup tiles={links} />
     </div>
   )
 }

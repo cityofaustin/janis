@@ -8,7 +8,6 @@ import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
 import Hero from 'js/modules/Hero';
 import ContactDetails from 'js/modules/ContactDetails';
-import RelatedLinks from 'js/page_sections/RelatedLinks';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import Service311 from 'js/page_sections/Service311';
 
@@ -46,14 +45,6 @@ const Department = ({ department }) => {
           </div>
         </div>
       </div>
-
-      <RelatedLinks
-        relatedLinks={relatedLinks}
-        sectionType="secondary"
-        sectionLink={{url: "#", text: "Track all Resource Recovery projects"}}
-        sectionTitle="Track Resource Recovery Projects"
-        sectionText="Projects are short term, with a set budget, and defined goals. Projects can be specific to one department or a collaboration across multiple departments."
-      />
 
       <div className="coa-section coa-section--lightgrey">
         <div className="wrapper">
