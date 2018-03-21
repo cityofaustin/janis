@@ -19,6 +19,9 @@ const Department = ({ department }) => {
   const relatedLinks = get(jsonFileData, "departmentpage.projectsRelated", []);
   const services311 = get(jsonFileData, "services311", []);
 
+  //TODO: clean data where sourced
+  const contact = cleanContacts(contacts)[0];
+
   return (
     <div>
       <Hero image={image} />
@@ -40,7 +43,7 @@ const Department = ({ department }) => {
 
           <div className="coa-main__right col-xs-12 col-lg-4">
 
-            <ContactDetails contacts={contacts} />
+          { contact && <ContactDetails contact={contact} /> }
 
           </div>
         </div>
