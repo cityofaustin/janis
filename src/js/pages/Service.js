@@ -52,7 +52,7 @@ const Service = ({ service }) => {
 
         { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
 
-        { contact &&<ContactDetails contact={contact} /> }
+        { contact && <ContactDetails contact={contact} /> }
 
       </div>
 
