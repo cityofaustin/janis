@@ -66,7 +66,7 @@ const Service = ({ service, intl }) => {
         <TileGroup tiles={cleanedRelated} tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)} />
       </div>
 
-        <ThreeOneOne services311={services311} />
+      <ThreeOneOne services311={services311} />
 
     </div>
   )

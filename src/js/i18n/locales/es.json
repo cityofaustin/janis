@@ -33,5 +33,6 @@
   "Home.RelatedLinks.SectionTitle": "Vea los servicios de la Ciudad de Austin",
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Vea los servicios relacionados",
-  "Service.RelatedLinks.Tag": "servicio"
+  "Service.RelatedLinks.Tag": "servicio",
+  "Home.RelatedLinks.Tag": "servicio"
 }

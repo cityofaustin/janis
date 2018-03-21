@@ -18,6 +18,10 @@ const i18nMessages = defineMessages({
   homeRelatedlinksSectiontitle: {
     id: 'Home.RelatedLinks.SectionTitle',
     defaultMessage: 'Check out City of Austin services',
+  },
+  homeRelatedlinksTag: {
+    id: 'Home.RelatedLinks.Tag',
+    defaultMessage: 'Service',
   }
 });
 
@@ -41,7 +45,7 @@ const Home = ({ topServices, image, intl }) => {
       </SecondaryContentBanner>
       <div className="wrapper container-fluid">
         <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
-        <TileGroup tiles={serviceLinks} />
+        <TileGroup tiles={serviceLinks} tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)} />
       </div>
       <ThreeOneOne services311={services311} />
     </div>

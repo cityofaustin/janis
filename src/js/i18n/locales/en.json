@@ -33,5 +33,6 @@
   "Home.RelatedLinks.SectionTitle": "Check out City of Austin services",
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Check out related services",
-  "Service.RelatedLinks.Tag": "Check out related services"
+  "Service.RelatedLinks.Tag": "Service",
+  "Home.RelatedLinks.Tag": "Service"
 }
