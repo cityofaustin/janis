@@ -7,12 +7,12 @@
     flex-grow: 1 ;
     flex-shrink: 0;
     flex-basis: 98%;
-    margin: 1%;
+    margin: $coa-tile-spacearound;
     @include media($coa-small-screen) {
-      flex-basis: 50% - 4%;
+      flex-basis: 50% - (4 * $coa-tile-spacearound);
     }
     @include media($coa-large-screen) {
-      flex-basis: 25% - 8%;
+      flex-basis: 25% - (8 * $coa-tile-spacearound);
     }
   }
 }
