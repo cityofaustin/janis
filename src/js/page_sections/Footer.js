@@ -36,7 +36,7 @@ const Footer = ({ intl }) => (
               />
             </p>
           </div>
-          <div className="col-xs-12 col-md-2 col-md-offset-4">
+          <div className="col-xs-12 col-md-3 col-md-offset-3">
             <div className="coa-Footer__icons">
               <ExternalLink to="https://twitter.com/austintexasgov" noIcon={true}>
                 <TwitterSVG size="20" />
