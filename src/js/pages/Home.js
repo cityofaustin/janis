@@ -4,7 +4,7 @@ import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
-import Service311 from 'js/page_sections/Service311';
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 import HeroHome from 'js/modules/HeroHome';
 import ExternalLink from 'js/modules/ExternalLink';
 import SectionHeader from 'js/modules/SectionHeader';
@@ -43,7 +43,7 @@ const Home = ({ topServices, image, intl }) => {
         <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
         <TileGroup tiles={serviceLinks} />
       </div>
-      <Service311 services311={services311} />
+      <ThreeOneOne services311={services311} />
     </div>
   );
 }
