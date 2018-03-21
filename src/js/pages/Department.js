@@ -9,7 +9,6 @@ import SectionHeader from 'js/modules/SectionHeader';
 import Hero from 'js/modules/Hero';
 import ContactDetails from 'js/modules/ContactDetails';
 import FormFeedback from 'js/page_sections/FormFeedback';
-import Service311 from 'js/page_sections/Service311';
 
 const Department = ({ department }) => {
   const title = get(department, "name", null);

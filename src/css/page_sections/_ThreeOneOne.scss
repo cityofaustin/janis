@@ -1,0 +1,25 @@
+.coa-ThreeOneOne {
+  background-color: $coa-color-purple-darkest;
+  margin-top: $coa-spacing-large;
+  padding: 1px 0 $coa-spacing-large 0; //prevent margin stacking
+}
+
+.coa-ThreeOneOne__title {
+  color: $coa-color-gray-lightest;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.coa-ThreeOneOne__listlinks{
+  .coa-ListLink {
+    color: $coa-color-gray-lightest;
+    border-color: $coa-color-gray;
+
+    svg path {
+      fill: $coa-color-gray-lightest;
+    }
+  }
+}

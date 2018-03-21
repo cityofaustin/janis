@@ -12,7 +12,7 @@ import ContactDetails from 'js/modules/ContactDetails';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
 
-import Service311 from 'js/page_sections/Service311';
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 import jsonFileData from '__tmpdata/pages';
@@ -62,7 +62,7 @@ const Service = ({ service, intl }) => {
         <TileGroup tiles={cleanedRelated} />
       </div>
 
-        <Service311 services311={services311} />
+        <ThreeOneOne services311={services311} />
 
     </div>
   )

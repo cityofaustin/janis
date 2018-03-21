@@ -8,7 +8,7 @@ import jsonFileData from '__tmpdata/pages';
 import Hero from 'js/modules/Hero';
 import TileGroup from 'js/modules/TileGroup';
 import FormFeedback from 'js/page_sections/FormFeedback';
-import Service311 from 'js/page_sections/Service311';
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Topic = ({ topic }) => {
   const title = get(topic, "text", null);
@@ -34,7 +34,7 @@ const Topic = ({ topic }) => {
         </div>
       </div>
 
-      <Service311 services311={services311} />
+      <ThreeOneOne services311={services311} />
     </div>
   )
 }

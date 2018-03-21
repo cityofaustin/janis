@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import Hero from 'js/modules/Hero';
 import TileGroup from 'js/modules/TileGroup';
 import FormFeedback from 'js/page_sections/FormFeedback';
-import Service311 from 'js/page_sections/Service311';
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
@@ -31,7 +31,7 @@ const Services = ({ allServices }) => {
           <a className="coa-section__link" href="#">Return to Top</a>
         </div>
       </div>
-      <Service311 services311={services311} />
+      <ThreeOneOne services311={services311} />
     </div>
   )
 }
