@@ -1,10 +1,10 @@
 import React from 'react';
 //TODO: import correct svg
-import AirplaneSVG from 'js/svg/Airplane';
+import PhoneSVG from 'js/svg/Phone';
 
 const ContactPhone = ({ className, phone, tddphone }) => (
   <div className={`${className} coa-ContactPhone`}>
-    <AirplaneSVG size="20"/>
+    <PhoneSVG size="20"/>
     <div>
       <span><a href={`tel:${phone}`}>{phone}</a></span>
       <span>TDD/TTY: <a href={`tel:${tddphone}`}>{tddphone}</a></span>

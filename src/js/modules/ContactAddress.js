@@ -1,10 +1,10 @@
 import React from 'react';
 //TODO: import correct svg
-import AirplaneSVG from 'js/svg/Airplane';
+import MapMarkerSVG from 'js/svg/MapMarker';
 
 const ContactAddress = ({ className, name, location }) => (
   <div className={`${className} coa-ContactAddress`}>
-    <AirplaneSVG size="20"/>
+    <MapMarkerSVG size="20"/>
     <div>
       <span>{name}</span>
       <span>{location.street}</span>

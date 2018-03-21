@@ -1,10 +1,10 @@
 import React from 'react';
 //TODO: import correct svg
-import AirplaneSVG from 'js/svg/Airplane';
+import EnvelopSVG from 'js/svg/EnvelopO';
 
 const ContactEmail = ({ className, email }) => (
   <div className={`${className} coa-ContactEmail`}>
-    <AirplaneSVG size="20"/>
+    <EnvelopSVG size="20"/>
     <a href={`mailto:${email}`}>{email}</a>
   </div>
 );

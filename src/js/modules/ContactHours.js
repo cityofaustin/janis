@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { FormattedMessage, FormattedTime } from 'react-intl';
 import {sortBy, findIndex} from 'lodash';
 //TODO: import correct svg
-import AirplaneSVG from 'js/svg/Airplane';
+import ClockSVG from 'js/svg/ClockO';
 
 
 const i18nMessagesWeekdayMap = {
@@ -50,7 +50,7 @@ class ContactHours extends Component {
     const hours = this.sort(this.props.hours);
     return (
       <div className={`${this.props.className} coa-ContactHours`}>
-        <AirplaneSVG size="20"/>
+        <ClockSVG size="20"/>
         <table className="usa-table-borderless">
           <thead className="usa-sr-only">
             <tr>
