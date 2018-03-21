@@ -1,0 +1,40 @@
+.coa-HeroHome {
+  flex-direction: column;
+  padding: 4rem;
+  height: 26rem;
+  color: $coa-color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media($coa-small-screen) {
+    height: 26rem;
+  }
+  @include media($coa-medium-screen) {
+    height: 40rem;
+  }
+  @include media($coa-large-screen) {
+    height: 44rem;
+  }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
+}
+
+.coa-HeroHome-children {
+  max-width: 75%;
+}
+
+.coa-HeroHome-preheader {
+  font-size: 24px;
+  @include media($coa-medium-screen) {
+    font-size: 40px;
+  }
+}
+
+.coa-HeroHome-header {
+  font-size: 44px;
+  @include media($coa-medium-screen) {
+    font-size: 100px;
+  }
+}

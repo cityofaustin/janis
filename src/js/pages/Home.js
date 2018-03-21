@@ -14,11 +14,6 @@ import jsonFileData from '__tmpdata/pages';
 const services311 = get(jsonFileData, "services311", null);
 
 const i18nMessages = defineMessages({
-  homeHeroWelcometext: {
-    id: 'Home.Hero.welcometext',
-    defaultMessage: 'Hi there, welcome to',
-    description: 'Homepage hero welcome text'
-  },
   homeRelatedlinksSectiontitle: {
     id: 'Home.RelatedLinks.SectionTitle',
     defaultMessage: 'Use City of Austin Services',
@@ -30,13 +25,7 @@ const Home = ({ topServices, image, intl }) => {
 
   return (
     <div>
-      <HeroHome image={image}>
-        <div className="coa-Hero__home-children">
-          <span className="coa-Hero__home-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
-          <h2 className="coa-Hero__home-header">Austin, TX</h2>
-          {/* <GlobalSearch /> */}
-        </div>
-      </HeroHome>
+      <HeroHome image={image} intl={intl} />
       <SecondaryContentBanner>
         <p>
         <FormattedMessage
