@@ -15,11 +15,6 @@ import jsonFileData from '__tmpdata/pages';
 const services311 = get(jsonFileData, "services311", null);
 
 const i18nMessages = defineMessages({
-  homeHeroWelcometext: {
-    id: 'Home.Hero.welcometext',
-    defaultMessage: 'Hi there, welcome to',
-    description: 'Homepage hero welcome text'
-  },
   homeRelatedlinksSectiontitle: {
     id: 'Home.RelatedLinks.SectionTitle',
     defaultMessage: 'Use City of Austin Services',
@@ -31,27 +26,23 @@ const Home = ({ topServices, image, intl }) => {
 
   return (
     <div>
-      <HeroHome image={image}>
-        <div className="coa-Hero__home-children">
-          <span className="coa-Hero__home-preheader">{intl.formatMessage(i18nMessages.homeHeroWelcometext)}</span>
-          <h2 className="coa-Hero__home-header">Austin, TX</h2>
-          {/* <GlobalSearch /> */}
-        </div>
-      </HeroHome>
+      <HeroHome image={image} intl={intl} />
       <SecondaryContentBanner>
         <p>
-        <FormattedMessage
-          id="Home.Secondarycontent.bodytext"
-          defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-          values = {{
-            citySiteLink: <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>,
-            projectsSiteLink: <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>
-          }}
-        />
+          <FormattedMessage
+            id="Home.Secondarycontent.bodytext"
+            defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+            values = {{
+              citySiteLink: <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>,
+              projectsSiteLink: <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>
+            }}
+          />
         </p>
       </SecondaryContentBanner>
-      <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
-      <TileGroup tiles={serviceLinks} />
+      <div className="wrapper container-fluid">
+        <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
+        <TileGroup tiles={serviceLinks} />
+      </div>
       <Service311 services311={services311} />
     </div>
   );
