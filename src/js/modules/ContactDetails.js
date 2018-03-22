@@ -16,16 +16,24 @@ const i18nMessages = defineMessages({
   }
 });
 
+
+function cleanPhone(phoneData) {
+  const {'default': defaultPhone, tty: ttyPhone} = JSON.parse(phoneData);
+  return {defaultPhone, ttyPhone};
+}
+
+
 const Contact = ({ contact, intl }) => {
 
   const {name, phone, email, location, hours} = contact;
+  const {defaultPhone, ttyPhone} = cleanPhone(phone);
 
   return (
   <div className="coa-ContactDetails">
     <h2 className="coa-ContactDetails__title">{intl.formatMessage(i18nMessages.contactDetailsTitle)}</h2>
     <div className="coa-ContactDetails__items">
       { phone && (
-        <Phone className="coa-ContactDetails__item" phone={phone} tddphone={phone} />
+        <Phone className="coa-ContactDetails__item" phone={defaultPhone} ttyphone={ttyPhone} />
       )}
 
       { email && (
