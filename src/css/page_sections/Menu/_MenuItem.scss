@@ -3,6 +3,7 @@
   text-transform: uppercase;
   font-size: $coa-font-size-small;
   font-family: $coa-font-sans;
+  line-height: $coa-line-height-small;
   position: relative;
   margin: 0;
   cursor: pointer;
@@ -10,7 +11,6 @@
   @include media($coa-large-screen) {
     border: 1px solid transparent;
     padding: $coa-space-level4 $coa-space-level2 $coa-space-level3;
-
   }
   > a {
     color: $coa-color-blue;
@@ -72,14 +72,15 @@
 
 .coa-MenuItem__header {
   display: flex;
+  height: 100%;
 }
 
 .coa-MenuItem__text {
-  flex-shrink: 0;
   border-bottom: 3px solid transparent;
   @include media($coa-large-screen) {
     font-weight: $coa-font-bold;
     margin-bottom: 0;
+    text-align: center;
   }
 }
 
