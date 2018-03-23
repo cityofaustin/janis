@@ -10,6 +10,15 @@
   text-align: center;
 }
 
+.rtl {
+  .coa-Steps__list > ul > li {
+    &:before {
+      margin-left: $coa-space-level3;
+      margin-right: 0;
+    }
+  }
+}
+
 .coa-Steps__list {
   & > ul {
     counter-reset: step-item;

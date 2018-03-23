@@ -11,3 +11,12 @@
     }
   };
 }
+
+.rtl {
+  .coa-ExternalLink {
+    svg {
+      margin-right: $coa-space-level1;
+      margin-left: 0;
+    }
+  }
+}
