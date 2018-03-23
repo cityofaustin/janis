@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
 import ExternalLink from 'js/modules/ExternalLink';
@@ -50,7 +51,13 @@ const Submenu = ({id, openSection, theme, handleMenuToggle, intl}) => (
 
 const WorkInProgressSubitem = () => (
   <li className="coa-SubmenuItem coa-SubmenuItem--coming-soon-message">
-    Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>.
+    <FormattedMessage
+      id="Submenu.workInProgress"
+      defaultMessage="Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
+      values={{
+        citySiteLink: <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>
+      }}
+    />
   </li>
 )
 
