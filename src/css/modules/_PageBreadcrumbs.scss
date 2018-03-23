@@ -53,3 +53,31 @@
     }
   }
 }
+
+.rtl {
+  .coa-PageBreadcrumbs {
+    direction: rtl;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    a {
+      &:before {
+        content: ">";
+        padding-left: $coa-spacing-small;
+        padding-right: 0;
+      }
+    }
+  }
+  .coa-PageBreadcrumbs__title:before {
+    content: "";
+  }
+  @include media($coa-large-screen) {
+    &.coa-PageBreadcrumbs__home {
+      display: inline;
+      &:before {
+        content: "";
+        padding-right: 0;
+      }
+    }
+  }
+}
