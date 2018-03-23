@@ -25,7 +25,7 @@ const Contact = ({ contact, intl }) => {
     <h2 className="coa-ContactDetails__title">{intl.formatMessage(i18nMessages.contactDetailsTitle)}</h2>
     <div className="coa-ContactDetails__items">
       { phone && (
-        <Phone className="coa-ContactDetails__item" phone={phone} tddphone={phone} />
+        <Phone className="coa-ContactDetails__item" phone={phone.default} ttyphone={phone.tty} />
       )}
 
       { email && (
