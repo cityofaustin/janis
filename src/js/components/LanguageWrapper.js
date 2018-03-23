@@ -110,10 +110,12 @@ class LanguageWrapper extends Component {
   render() {
     const { lang } = this.state;
     const messages = localeMessages[lang];
+    // Right to Left Direction for arabic text
+    const direction = lang === 'ar' ? 'rtl' : 'auto';
 
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }} dir={direction}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
