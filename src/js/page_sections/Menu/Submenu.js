@@ -6,11 +6,17 @@ import ExternalLink from 'js/modules/ExternalLink';
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ArrowRightSVG from 'js/svg/ArrowRight';
 
-const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
-  <ul className={`coa-Submenu
-      ${ id > 4 ? `coa-Submenu--align-right` : '' }
-      ${ openSection === id ? 'coa-Submenu--open' : '' }
-    `}
+const getSubmenuClassnames = (intl, id, openSection) => {
+  const base = 'coa-Submenu';
+  const shouldAlignRight = (intl.locale === 'ar' && id < 5) ||  (intl.locale !== 'ar' && id > 4);
+  const alignRight = shouldAlignRight ? 'coa-Submenu--align-right' : '';
+  const open = openSection === id ? 'coa-Submenu--open' : '';
+
+  return `${base} ${alignRight} ${open}`;
+}
+
+const Submenu = ({id, openSection, theme, handleMenuToggle, intl}) => (
+  <ul className={getSubmenuClassnames(intl, id, openSection)}
     id={`topicMenu${id+1}`}
     role="menu"
     aria-labelledby={`theme${id+1}`}

@@ -108,6 +108,7 @@ class Menu extends Component {
               theme={theme}
               handleMenuToggle={this.props.toggleMenu}
               handleSublistToggle={this.toggleSublist}
+              intl={intl}
             />
           ))
         }
