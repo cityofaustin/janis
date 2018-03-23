@@ -4,9 +4,9 @@
   font-size: $coa-font-size-small;
   padding: $coa-space-level2;
   border-top: 1px solid $coa-color-gray-light;
-  > a {
-    text-decoration: none;
-    color: $coa-color-black;
+  margin-bottom: 0;
+  &:hover {
+    background: $coa-color-gray-lighter;
   }
   &:first-of-type {
     margin-top: $coa-space-level2;
@@ -15,17 +15,17 @@
       border-top: none;
     }
   }
+  & > a {
+    text-decoration: none;
+    color: $coa-color-black;
+  }
   @include media($coa-large-screen) {
     border-bottom: 1px solid $coa-color-purple-lighter;
     border-top: none;
     width: 400px;
     font-size: $coa-font-size-xsmall;
     padding: $coa-space-level3 $coa-space-level4;
-    margin-bottom: 0;
     font-weight: 600;
-    &:hover {
-      background: $coa-color-gray-lighter;
-    }
   }
 }
 

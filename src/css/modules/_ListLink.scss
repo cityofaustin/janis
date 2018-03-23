@@ -7,7 +7,8 @@
   text-decoration: none;
   text-transform: uppercase;
 
-  i {
-    padding-left: $coa-spacing-small;
+  svg {
+    margin-left: $coa-spacing-small;
+    flex-shrink: 0;
   }
 }

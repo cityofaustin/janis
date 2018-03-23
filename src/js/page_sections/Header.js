@@ -43,7 +43,7 @@ class Header extends Component {
     const { intl } = this.props;
 
     return (
-      <header className="coa-Header" role="banner">
+      <header className={`coa-Header ${this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''}`} role="banner">
         <div className="container-fluid wrapper">
           <div className="row coa-Header__top-row">
             <div className="col-xs-6 coa-Header__navbar-brand">
