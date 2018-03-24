@@ -4,6 +4,7 @@ const allTopicPagesQuery = `
       edges {
         node {
           id,
+          slug,
           text,
           description,
           services {

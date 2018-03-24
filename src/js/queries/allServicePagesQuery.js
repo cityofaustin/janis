@@ -8,6 +8,7 @@ const allServicePagesQuery = `
           slug
           topic {
             id
+            slug
             text
           }
           steps
