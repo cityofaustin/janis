@@ -42,8 +42,8 @@
 }
 
 @mixin heading2() {
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
+  font-size: $coa-font-size-md-small;
+  line-height: $coa-line-height-md-small;
   margin-bottom: $coa-spacing-small;
   margin-top: $coa-spacing-medium;
 

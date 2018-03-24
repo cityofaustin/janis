@@ -1,16 +1,20 @@
 .coa-Menu {
-  position: absolute;
-  left: -100vw;
-  width: 100vw;
-  transition: 0.5s;
-  top: 0;
   background-color: $coa-color-white;
+  bottom: 0;
+  left: -100vw;
+  overflow-y: auto;
+  position: fixed;
+  transition: left 0.5s;
+  top: $coa-languageselectbar-height;
+  width: 100vw;
   z-index: 2;
   @include media($coa-large-screen) {
-    position: relative;
+    bottom: auto;
     left: auto;
-    top: 0;
     margin: $coa-space-level5 auto 0;
+    overflow-y: visible;
+    position: static;
+    top: auto;
     width: 100%;
   }
 }
@@ -18,7 +22,6 @@
 .coa-Menu__list {
   list-style: none;
   @include media($coa-large-screen) {
-    padding: auto;
     display: flex;
     justify-content: space-between;
   }
@@ -26,7 +29,9 @@
 
 .coa-Menu--open {
   left: 0;
-  right: 0;
+  @include media($coa-large-screen) {
+    left: auto;
+  }
 }
 
 .coa-Menu__close-btn {

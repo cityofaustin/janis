@@ -9,7 +9,6 @@ const ContactAddress = ({ className, name, location }) => (
       <span>{name}</span>
       <span>{location.street}</span>
       <span>{location.city}, {location.state} {location.zip}</span>
-      <span>{location.country}</span>
     </div>
   </div>
 );
