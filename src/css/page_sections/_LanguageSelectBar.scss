@@ -12,30 +12,31 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
+  li {
+    margin: 0;
+  }
 }
 
 .coa-LanguageSelectBar__language-item {
+  color: $coa-color-white;
   cursor: pointer;
+  display: inline-block;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-md-small;
   margin: 0 0 0 $coa-spacing-xsmall;
   padding: 0 $coa-spacing-small;
   text-align: center;
+  text-decoration: none;
   white-space: nowrap;
   @include media($coa-medium-screen) {
     margin: 0 0 0 $coa-space-level3;
   }
-  a {
-    text-decoration: none;
+  &:visited {
     color: $coa-color-white;
-    &:visited {
-      color: $coa-color-white;
-    }
   }
-}
-
-.coa-LanguageSelectBar__language-item--active {
-  background-color: $color-gray-lighter;
-  color: $coa-color-purple-dark;
-  text-decoration: none;
+  &.coa-LanguageSelectBar__language-item--active {
+    background-color: $color-gray-lighter;
+    color: $coa-color-purple-dark;
+  }
 }
