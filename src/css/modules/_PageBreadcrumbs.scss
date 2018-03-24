@@ -56,26 +56,20 @@
   }
 }
 
+
 .coa-rtl {
   .coa-PageBreadcrumbs {
-    direction: rtl;
-    flex-direction: row-reverse;
     a {
+      margin-left: $coa-spacing-small;
+      margin-right: 0;
       &:before {
-        content: ">";
         padding-left: $coa-spacing-small;
         padding-right: 0;
       }
     }
-  }
-  .coa-PageBreadcrumbs__title:before {
-    content: "";
-  }
-  @include media($coa-large-screen) {
-    &.coa-PageBreadcrumbs__home {
-      display: inline;
+    .coa-PageBreadcrumbs__title {
       &:before {
-        content: "";
+        padding-left: $coa-spacing-small;
         padding-right: 0;
       }
     }

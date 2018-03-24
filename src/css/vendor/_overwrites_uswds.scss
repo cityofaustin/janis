@@ -50,6 +50,18 @@ p {
   }
 }
 
+.coa-rtl {
+  .usa-table-borderless {
+    th, td {
+      text-align: right;
+    }
+    th:first-child {
+      padding-left: 6rem;
+      padding-right: 0;
+    }
+  }
+}
+
 // .usa-input-error {
 //   margin-top: 1rem;
 //   margin-bottom: 1rem;
