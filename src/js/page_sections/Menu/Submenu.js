@@ -1,16 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
 import ExternalLink from 'js/modules/ExternalLink';
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ArrowRightSVG from 'js/svg/ArrowRight';
 
-const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
-  <ul className={`coa-Submenu
-      ${ id > 4 ? `coa-Submenu--align-right` : '' }
-      ${ openSection === id ? 'coa-Submenu--open' : '' }
-    `}
+const getSubmenuClassnames = (intl, id, openSection) => {
+  const base = 'coa-Submenu';
+  const arabicRightMenuItems = intl.locale === 'ar' && id < 5;
+  const nonArabicRightMenuItems = intl.locale !== 'ar' && id > 4;
+  const shouldAlignRight = arabicRightMenuItems ||  nonArabicRightMenuItems;
+  const alignRight = shouldAlignRight ? 'coa-Submenu--align-right' : '';
+  const open = openSection === id ? 'coa-Submenu--open' : '';
+
+  return `${base} ${alignRight} ${open}`;
+}
+
+const Submenu = ({id, openSection, theme, handleMenuToggle, intl}) => (
+  <ul className={getSubmenuClassnames(intl, id, openSection)}
     id={`topicMenu${id+1}`}
     role="menu"
     aria-labelledby={`theme${id+1}`}
@@ -44,8 +54,14 @@ const Submenu = ({id, openSection, theme, handleMenuToggle}) => (
 
 const WorkInProgressSubitem = () => (
   <li className="coa-SubmenuItem coa-SubmenuItem--coming-soon-message">
-    Alpha.austin.gov is a work in progress. For the full City of Austin website, visit <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>.
+    <FormattedMessage
+      id="Submenu.workInProgress"
+      defaultMessage="Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
+      values={{
+        citySiteLink: <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>
+      }}
+    />
   </li>
 )
 
-export default Submenu;
+export default injectIntl(Submenu);

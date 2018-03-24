@@ -50,3 +50,12 @@
     border: none;
   }
 }
+
+.coa-rtl {
+  .coa-ContactDetails__item {
+    & > :first-child {
+      margin-right: 0;
+      margin-left: $coa-spacing-large;
+    }
+  }
+}

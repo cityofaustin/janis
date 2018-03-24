@@ -1,8 +1,10 @@
 .coa-PageBreadcrumbs {
   border-bottom: 1px dashed $coa-color-gray;
+  display: flex;
   font-family: $coa-font-sans;
   font-size: $coa-font-size-xsmall;
   font-weight: $coa-font-semibold;
+  justify-content: center;
   line-height: $coa-line-height-xlarge;
   overflow: hidden;
   text-transform: uppercase;
@@ -50,6 +52,32 @@
 
     @include media($coa-medium-screen) {
       display: inline;
+    }
+  }
+}
+
+.coa-rtl {
+  .coa-PageBreadcrumbs {
+    direction: rtl;
+    flex-direction: row-reverse;
+    a {
+      &:before {
+        content: ">";
+        padding-left: $coa-spacing-small;
+        padding-right: 0;
+      }
+    }
+  }
+  .coa-PageBreadcrumbs__title:before {
+    content: "";
+  }
+  @include media($coa-large-screen) {
+    &.coa-PageBreadcrumbs__home {
+      display: inline;
+      &:before {
+        content: "";
+        padding-right: 0;
+      }
     }
   }
 }

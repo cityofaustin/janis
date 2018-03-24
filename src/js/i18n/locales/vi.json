@@ -25,7 +25,6 @@
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
   "Menu.ThreeOneOneMobileListItem.onlineText": "Submit an Online Request",
   "Menu.PrivacyPolicyListItem.text": "Read About Privacy",
-  "Menu.MobileFooter.text": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit",
   "Menu.MobileFooter.sealAltText": "City of Austin Seal",
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
@@ -34,5 +33,6 @@
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}. Tìm hiểu thêm về mạng mới tại {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Kiểm điểm các dịch vụ liên quan",
   "Service.RelatedLinks.Tag": "Dịch vụ",
-  "Home.RelatedLinks.Tag": "Dịch vụ"
+  "Home.RelatedLinks.Tag": "Dịch vụ",
+  "Submenu.workInProgress": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}."
 }
