@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
 import ExternalLink from 'js/modules/ExternalLink';
@@ -9,7 +10,9 @@ import ArrowRightSVG from 'js/svg/ArrowRight';
 
 const getSubmenuClassnames = (intl, id, openSection) => {
   const base = 'coa-Submenu';
-  const shouldAlignRight = (intl.locale === 'ar' && id < 5) ||  (intl.locale !== 'ar' && id > 4);
+  const arabicRightMenuItems = intl.locale === 'ar' && id < 5;
+  const nonArabicRightMenuItems = intl.locale !== 'ar' && id > 4;
+  const shouldAlignRight = arabicRightMenuItems ||  nonArabicRightMenuItems;
   const alignRight = shouldAlignRight ? 'coa-Submenu--align-right' : '';
   const open = openSection === id ? 'coa-Submenu--open' : '';
 
@@ -61,4 +64,4 @@ const WorkInProgressSubitem = () => (
   </li>
 )
 
-export default Submenu;
+export default injectIntl(Submenu);

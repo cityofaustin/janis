@@ -25,7 +25,6 @@
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
   "Menu.ThreeOneOneMobileListItem.onlineText": "Submit an Online Request",
   "Menu.PrivacyPolicyListItem.text": "Read About Privacy",
-  "Menu.MobileFooter.text": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit",
   "Menu.MobileFooter.sealAltText": "City of Austin Seal",
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
@@ -34,5 +33,6 @@
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Vea los servicios relacionados",
   "Service.RelatedLinks.Tag": "servicio",
-  "Home.RelatedLinks.Tag": "servicio"
+  "Home.RelatedLinks.Tag": "servicio",
+  "Submenu.workInProgress": "Alpha.austin.gov es aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}."
 }

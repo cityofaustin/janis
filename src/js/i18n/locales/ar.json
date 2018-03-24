@@ -25,7 +25,6 @@
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
   "Menu.ThreeOneOneMobileListItem.onlineText": "Submit an Online Request",
   "Menu.PrivacyPolicyListItem.text": "Read About Privacy",
-  "Menu.MobileFooter.text": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}. تعرف على المزيد حول الموقع الإلكتروني الجديد عبر {citySiteLink}.",
   "Menu.MobileFooter.sealAltText": "City of Austin Seal",
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
@@ -35,5 +34,5 @@
   "Service.RelatedLinks.SectionHeader": "الاطلاع على الخدمات ذات الصلة",
   "Service.RelatedLinks.Tag": "الخدمة",
   "Home.RelatedLinks.Tag": "الخدمة",
-  "Submenu.workInProgress": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}. تعرف على المزيد حول الموقع الإلكتروني الجديد عبر {citySiteLink}."
+  "Submenu.workInProgress": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}."
 }

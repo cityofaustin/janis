@@ -104,7 +104,6 @@ class Menu extends Component {
               theme={theme}
               handleMenuToggle={this.props.toggleMenu}
               handleSublistToggle={this.toggleSublist}
-              intl={intl}
             />
           ))
         }
@@ -172,10 +171,11 @@ const MobileFooter = ({intl}) => (
   <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
       <FormattedMessage
-        id="Menu.MobileFooter.text"
-        defaultMessage="Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
-        values={{
-          citySiteLink: <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>
+        id="Footer.bodytext"
+        defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+        values ={{
+          citySiteLink: <ExternalLink to="http://austintexas.gov" iconSize="small">austintexas.gov</ExternalLink>,
+          projectsSiteLink: <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/" iconSize="small">projects.austintexas.io</ExternalLink>
         }}
       />
     </p>

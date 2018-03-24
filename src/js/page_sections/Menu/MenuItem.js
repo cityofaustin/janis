@@ -17,7 +17,7 @@ const themeClassnames = (id, theme, openSection) => {
   return `${base} ${openModifier}`;
 }
 
-const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle, intl}) => (
+const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle}) => (
     <li key={id} className={themeClassnames(id, theme, openSection)}
       aria-expanded={openSection === id}
       aria-haspopup={true}
@@ -40,7 +40,6 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
           openSection={openSection}
           theme={theme}
           handleMenuToggle={handleMenuToggle}
-          intl={intl}
         />
       )}
     </li>
