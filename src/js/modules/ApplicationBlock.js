@@ -14,26 +14,36 @@ const i18nMessages = defineMessages({
   },
 });
 
-const ApplicationBlock = ({ type, data, intl }) => {
-  let app, title;
+const ApplicationBlock = ({ content, intl }) => {
+
+  const { type, value } = content;
+  let app, title, id;
   switch(type) {
     case "collection_schedule_block":
-      app = <Recollect name="calendar"/>;
+      app = <Recollect options={{name:"calendar"}} />;
       title = intl.formatMessage(i18nMessages.applicationBlockRecollectCalendar);
+      id = "HashLink-Recollect";
       break;
     case "what_do_i_do_with_block":
-      app = <Recollect name="wizard"/>;
+      app = <Recollect options={{name:"wizard"}}/>;
       title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
+      id = "HashLink-Recollect";
+      break;
+    case "recollect_block":
+      app = <Recollect options={{page:"tabbed_widget", name:"wizard"}}/>;
+      title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
+      id = "HashLink-Recollect";
       break;
     case "map_block":
-      app = <StaticMap title={data.description} location={data.location} />;
-      title = data.description;
+      app = <StaticMap title={value.description} location={value.location} />;
+      title = value.description;
+      id = `HashLink-Map-${content.id}`;
       break;
   }
 
   if (!app) return null;
   return (
-    <div className="coa-ApplicationBlock">
+    <div id={id} className="coa-ApplicationBlock">
       <h2 className="coa-ApplicationBlock__title">{title}</h2>
       {app}
     </div>
