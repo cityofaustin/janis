@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types'
 
 import I18nNavLink from 'js/modules/I18nNavLink';
@@ -41,10 +41,6 @@ const i18nMessages = defineMessages({
   privacy: {
     id: 'Menu.PrivacyPolicyListItem.text',
     defaultMessage: 'Read About Privacy',
-  },
-  footer: {
-    id: 'Menu.MobileFooter.text',
-    defaultMessage: 'Alpha.austin.gov is a work in progress. For the full City of Austin website, visit ',
   },
   sealAltText: {
     id: 'Menu.MobileFooter.sealAltText',
@@ -174,7 +170,14 @@ const PrivacyPolicyListItem = ({intl}) => (
 const MobileFooter = ({intl}) => (
   <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
-      {intl.formatMessage(i18nMessages.footer)}<ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>.
+      <FormattedMessage
+        id="Footer.bodytext"
+        defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+        values ={{
+          citySiteLink: <ExternalLink to="http://austintexas.gov" iconSize="small">austintexas.gov</ExternalLink>,
+          projectsSiteLink: <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/" iconSize="small">projects.austintexas.io</ExternalLink>
+        }}
+      />
     </p>
     <img className="d-lg-none" src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
   </div>

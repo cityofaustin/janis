@@ -1,6 +1,6 @@
 {
   "ApplicationBlock.recollect.calendar": "Đánh máy địa chỉ của quý vị vào ô bên dưới",
-  "ApplicationBlock.recollect.wizard": "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "ApplicationBlock.recollect.wizard": "Kiểm tra bằng công cụ \"What do I do with\" dưới đây để xác định những loại nào được chấp nhận",
   "ContactDetails.title": "Vẫn còn có thắc mắc? Xin liên lạc:",
   "Hours.weekday.sunday": "Chủ nhật",
   "Hours.weekday.monday": "Thứ Hai",
@@ -25,7 +25,6 @@
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
   "Menu.ThreeOneOneMobileListItem.onlineText": "Submit an Online Request",
   "Menu.PrivacyPolicyListItem.text": "Read About Privacy",
-  "Menu.MobileFooter.text": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit",
   "Menu.MobileFooter.sealAltText": "City of Austin Seal",
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
@@ -34,5 +33,6 @@
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}. Tìm hiểu thêm về mạng mới tại {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Kiểm điểm các dịch vụ liên quan",
   "Service.RelatedLinks.Tag": "Dịch vụ",
-  "Home.RelatedLinks.Tag": "Dịch vụ"
+  "Home.RelatedLinks.Tag": "Dịch vụ",
+  "Submenu.workInProgress": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}."
 }

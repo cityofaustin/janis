@@ -29,11 +29,11 @@ const i18nMessages = defineMessages({
 });
 
 const Service = ({ service, intl }) => {
-  const { image, title, slug, steps, dynamicContent, additionalContent, contacts, related } = service;
+  const { image, title, slug, topic, steps, dynamicContent, additionalContent, contacts, related } = service;
 
   //TODO: data below should be sourced as above
   const { servicepage, services311 } = jsonFileData;
-  const { theme, topic } = servicepage;
+  const { theme } = servicepage;
 
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];

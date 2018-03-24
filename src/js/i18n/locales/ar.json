@@ -1,6 +1,6 @@
 {
   "ApplicationBlock.recollect.calendar": "اكتب عنوان شارعك في المربع أدناه",
-  "ApplicationBlock.recollect.wizard": "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "ApplicationBlock.recollect.wizard": "أطلع على أداة \"What do I do with\" أدناه لمعرفة العناصر المقبولة",
   "ContactDetails.title": "هل ما زال لديك أسئلة? الاتصال:",
   "Hours.weekday.sunday": "الأحد",
   "Hours.weekday.monday": "الاثنين",
@@ -25,7 +25,6 @@
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
   "Menu.ThreeOneOneMobileListItem.onlineText": "Submit an Online Request",
   "Menu.PrivacyPolicyListItem.text": "Read About Privacy",
-  "Menu.MobileFooter.text": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit",
   "Menu.MobileFooter.sealAltText": "City of Austin Seal",
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
@@ -34,5 +33,6 @@
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}. تعرف على المزيد حول الموقع الإلكتروني الجديد عبر {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "الاطلاع على الخدمات ذات الصلة",
   "Service.RelatedLinks.Tag": "الخدمة",
-  "Home.RelatedLinks.Tag": "الخدمة"
+  "Home.RelatedLinks.Tag": "الخدمة",
+  "Submenu.workInProgress": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}."
 }

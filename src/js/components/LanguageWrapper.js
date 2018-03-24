@@ -3,6 +3,8 @@ import Routes from 'react-static-routes'
 import locale from 'browser-locale'
 import Cookies from 'js-cookie'
 import PropTypes from 'prop-types'
+import { find } from 'lodash';
+
 
 // react-intl i18n
 import { IntlProvider, addLocaleData } from 'react-intl'
@@ -14,7 +16,7 @@ import messages_en from 'js/i18n/locales/en.json';
 import messages_es from 'js/i18n/locales/es.json';
 import messages_vi from 'js/i18n/locales/vi.json';
 import messages_ar from 'js/i18n/locales/ar.json';
-import { SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/i18n/constants'
+import { SUPPORTED_LANGUAGES, SUPPORTED_LANG_CODES, LANG_COOKIE_NAME, LANG_COOKIE_EXPIRES, DEFAULT_LANG } from 'js/i18n/constants'
 addLocaleData([...en, ...es, ...vi, ...ar]);
 const localeMessages = {
   'en': messages_en,
@@ -107,13 +109,19 @@ class LanguageWrapper extends Component {
     if(lang && lang !== this.state.lang) this.setState({lang: lang});
   }
 
+  getDirectionFromLanguage(lang) {
+    const currentLangObject = find(SUPPORTED_LANGUAGES, {'code': lang});
+    return currentLangObject.direction;
+  }
+
   render() {
     const { lang } = this.state;
     const messages = localeMessages[lang];
+    const direction = this.getDirectionFromLanguage(lang);
 
     return (
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }} dir={direction} className={`coa-${direction}`}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
           <Header />
