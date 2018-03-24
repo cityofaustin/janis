@@ -8,12 +8,8 @@
   },
   "servicepage":{
     "theme": {
-      "title":"Housing and Utilities",
+      "text":"Housing and Utilities",
       "slug":"/themes/housing-and-utilities"
-    },
-    "topic": {
-      "title":"Recycling, trash, and compost",
-      "slug":"/topics/VG9waWNOb2RlOjE="
     }
   },
   "departmentpage": {

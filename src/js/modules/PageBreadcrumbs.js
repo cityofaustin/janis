@@ -5,13 +5,13 @@ const PageBreadcrumbs = ({ title, order, ...rest }) => {
 
   const breadcrumbs = order.map(breadcrumb => ({
     className: breadcrumb,
-    title: rest[breadcrumb].title,
-    slug: rest[breadcrumb].slug,
+    text: rest[breadcrumb].text,
+    slug: `/${breadcrumb}s/${rest[breadcrumb].id}`,
   }));
 
   breadcrumbs.unshift({
     className: 'home',
-    title: 'Home',
+    text: 'Home',
     slug: '/',
   });
 
@@ -21,7 +21,7 @@ const PageBreadcrumbs = ({ title, order, ...rest }) => {
       className={`coa-PageBreadcrumbs__${breadcrumb.className}`}
       to={breadcrumb.slug}
     >
-      {breadcrumb.title}
+      {breadcrumb.text}
     </I18nNavLink>
   );
 
