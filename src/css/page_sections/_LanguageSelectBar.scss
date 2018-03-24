@@ -18,6 +18,12 @@
   }
 }
 
+.coa-rtl {
+  .coa-LanguageSelectBar__language-list {
+    flex-direction: row-reverse;
+  }
+}
+
 .coa-LanguageSelectBar__language-item {
   color: $coa-color-white;
   cursor: pointer;

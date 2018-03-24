@@ -20,6 +20,7 @@
   "Header.Menu.button": "Menu",
   "Header.Search.button": "Buscar",
   "Header.Airport.text": "AEROPUERTO",
+  "PageBreadcrumbs.Home.text": "Inicio",
   "Menu.HomeMobileListItem.text": "Inicio",
   "Menu.AirportMobileListItem.text": "Aeropuerto",
   "Menu.ThreeOneOneMobileListItem.callText": "Call 311",
