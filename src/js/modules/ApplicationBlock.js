@@ -18,11 +18,15 @@ const ApplicationBlock = ({ type, data, intl }) => {
   let app, title;
   switch(type) {
     case "collection_schedule_block":
-      app = <Recollect name="calendar"/>;
+      app = <Recollect options={{name:"calendar"}} />;
       title = intl.formatMessage(i18nMessages.applicationBlockRecollectCalendar);
       break;
     case "what_do_i_do_with_block":
-      app = <Recollect name="wizard"/>;
+      app = <Recollect options={{name:"wizard"}}/>;
+      title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
+      break;
+    case "recollect":
+      app = <Recollect options={{page:"tabbed_widget", name:"wizard"}}/>;
       title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
       break;
     case "map_block":
