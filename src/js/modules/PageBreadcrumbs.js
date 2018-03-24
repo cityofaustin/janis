@@ -1,7 +1,15 @@
 import React from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
 import I18nNavLink from 'js/modules/I18nNavLink';
 
-const PageBreadcrumbs = ({ title, order, ...rest }) => {
+const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
+
+  const i18nMessages = defineMessages({
+    home: {
+      id: 'PageBreadcrumbs.Home.text',
+      defaultMessage: 'Home',
+    }
+  });
 
   const breadcrumbs = order.map(breadcrumb => ({
     className: breadcrumb,
@@ -11,7 +19,7 @@ const PageBreadcrumbs = ({ title, order, ...rest }) => {
 
   breadcrumbs.unshift({
     className: 'home',
-    text: 'Home',
+    text: intl.formatMessage(i18nMessages.home),
     slug: '/',
   });
 
@@ -35,4 +43,4 @@ const PageBreadcrumbs = ({ title, order, ...rest }) => {
   );
 }
 
-export default PageBreadcrumbs;
+export default injectIntl(PageBreadcrumbs);
