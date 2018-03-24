@@ -20,6 +20,7 @@
     }
   }
   .widget-body {
+    #rCpage-wizard_search,
     #rCpage-calendar_search {
       .page-section {
         padding: 0;
@@ -33,54 +34,59 @@
           padding: 0 0 $coa-spacing-small;
           text-transform: uppercase;
         }
-        & > .rCsearch[data-type=Address] > .form-group {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          width: 100%;
+        & > .rCsearch[data-type=Address],
+        & > .rCsearch[data-type=Material] {
 
-          input[type=search] {
-            border-radius: 0;
-            border: 1px solid $coa-color-purple-darkest;
-            flex-basis: 100%;
-            font-size: $coa-font-size-small;
-            height: auto;
-            line-height: $coa-line-height-medium;
-            margin: 0 0 $coa-spacing-small;
-            padding: 0;
 
-            @include media($coa-small-screen) {
-              flex-basis: 70%;
-            }
-          }
-          #rCbtn-search {
-            align-items: center;
-            background-color: $coa-color-blue;
-            border: none;
-            border-radius: $coa-button-border-radius;
+          > .form-group {
             display: flex;
-            flex-basis: 100%;
-            font-size: $coa-font-size-small;
-            font-weight: $coa-font-semibold;
-            justify-content: center;
-            line-height: $coa-line-height-medium;
-            margin: 0 0 $coa-spacing-small;
-            padding: 0;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
 
-            @include media($coa-small-screen) {
-              flex-basis: 28%;
+            input[type=search] {
+              border-radius: 0;
+              border: 1px solid $coa-color-purple-darkest;
+              flex-basis: 100%;
+              font-size: $coa-font-size-small;
+              height: auto;
+              line-height: $coa-line-height-medium;
+              margin: 0 0 $coa-spacing-small;
+              padding: 0;
+
+              @include media($coa-small-screen) {
+                flex-basis: 70%;
+              }
             }
-          }
-          .example {
-            flex-basis: 100%;
-            order: -1;
-            a {
-              color: $coa-color-purple-light;
-              font-size: $coa-font-size-xsmall;
-              font-style: normal;
+            #rCbtn-search {
+              align-items: center;
+              background-color: $coa-color-blue;
+              border: none;
+              border-radius: $coa-button-border-radius;
+              display: flex;
+              flex-basis: 100%;
+              font-size: $coa-font-size-small;
+              font-weight: $coa-font-semibold;
+              justify-content: center;
+              line-height: $coa-line-height-medium;
+              margin: 0 0 $coa-spacing-small;
+              padding: 0;
+
+              @include media($coa-small-screen) {
+                flex-basis: 28%;
+              }
             }
-          }
-        }
+            .example {
+              flex-basis: 100%;
+              order: -1;
+              a {
+                color: $coa-color-purple-light;
+                font-size: $coa-font-size-xsmall;
+                font-style: normal;
+              }
+            }//.example
+          }//.form-group
+        }//.rCsearch[data-type=Address], .rCsearch[data-type=Material]
       }
     }
   }
