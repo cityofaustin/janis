@@ -51,7 +51,7 @@ const Service = ({ service, intl }) => {
 
         { !!dynamicContent && (
           dynamicContent.map(content =>
-            <ApplicationBlock key={content.id} type={content.type} data={content.value} />
+            <ApplicationBlock key={content.id} content={content} />
           )
         )}
 
