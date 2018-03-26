@@ -63,10 +63,4 @@ const MenuItemHeader = ({ theme, id, openSection }) => (
   </div>
 )
 
-
-// MenuItem.propTypes = {
-//   : PropTypes.
-// };
-
-
 export default MenuItem;
