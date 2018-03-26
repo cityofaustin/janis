@@ -81,7 +81,6 @@ class Menu extends Component {
   }
 
   render() {
-    const { intl } = this.props;
     const { allThemes } = i18nNavigations[this.context.langCode].data;
 
     return allThemes.edges.length && (
@@ -95,9 +94,9 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem handleClick={this.props.toggleMenu} intl={intl} />
-            <AirportMobileListItem intl={intl} />
-            <ThreeOneOneMobileListItem intl={intl} />
+            <HomeMobileListItem handleClick={this.props.toggleMenu} />
+            <AirportMobileListItem />
+            <ThreeOneOneMobileListItem />
         {
           allThemes.edges.map(({node: theme}, i) => (
             <MenuItem key={i} id={i} {...this.state}
@@ -107,8 +106,8 @@ class Menu extends Component {
             />
           ))
         }
-            <PrivacyPolicyListItem intl={intl} />
-            <MobileFooter intl={intl} />
+            <PrivacyPolicyListItem />
+            <MobileFooter />
           </ul>
         </nav>
         {
@@ -128,7 +127,7 @@ Menu.contextTypes = {
   langCode: PropTypes.string,
 }
 
-const HomeMobileListItem = ({handleClick, intl}) => (
+const HomeMobileListItem = injectIntl(({handleClick, intl}) => (
   <li onClick={handleClick}
     className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
   >
@@ -136,18 +135,18 @@ const HomeMobileListItem = ({handleClick, intl}) => (
       {intl.formatMessage(i18nMessages.home)}
     </I18nNavLink>
   </li>
-)
+))
 
-const AirportMobileListItem = ({intl}) => (
+const AirportMobileListItem = injectIntl(({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
     <ExternalLink to="http://www.austintexas.gov/airport" aria-label="3 1 1.">
       {intl.formatMessage(i18nMessages.airport)}
     </ExternalLink>
   </li>
-)
+))
 
-const ThreeOneOneMobileListItem = ({intl}) => (
+const ThreeOneOneMobileListItem = injectIntl(({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--flex coa-MenuItem--small d-lg-none">
     <a href="tel:311">
       {intl.formatMessage(i18nMessages.call311)}
@@ -157,17 +156,17 @@ const ThreeOneOneMobileListItem = ({intl}) => (
       {intl.formatMessage(i18nMessages.online311)}
     </ExternalLink>
   </li>
-)
+))
 
-const PrivacyPolicyListItem = ({intl}) => (
+const PrivacyPolicyListItem = injectIntl(({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="#">
       {intl.formatMessage(i18nMessages.privacy)}
     </a>
   </li>
-)
+))
 
-const MobileFooter = ({intl}) => (
+const MobileFooter = injectIntl(({intl}) => (
   <div className="coa-Menu__mobile-footer">
     <p className="coa-Menu__footer-text d-lg-none">
       <FormattedMessage
@@ -181,6 +180,6 @@ const MobileFooter = ({intl}) => (
     </p>
     <img className="d-lg-none" src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
   </div>
-)
+))
 
-export default injectIntl(Menu);
+export default Menu;
