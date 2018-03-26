@@ -28,10 +28,10 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
       onKeyDown={(e) => handleSublistToggle(e, id)}
     >
 
-      <MenuItemHeader id={id}
+      <MenuItemHeader
+        id={id}
         theme={theme}
         openSection={openSection}
-        handleClick={handleSublistToggle}
       />
 
       { !!theme.topics.edges && (
@@ -45,8 +45,8 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
     </li>
 );
 
-const MenuItemHeader = ({ theme, e, id, openSection, handleClick }) => (
-  <div className="coa-MenuItem__header" onClick={(e) => handleClick(e, id)}>
+const MenuItemHeader = ({ theme, id, openSection }) => (
+  <div className="coa-MenuItem__header">
     <span className="coa-MenuItem__text">
       { theme.title }
     </span>
