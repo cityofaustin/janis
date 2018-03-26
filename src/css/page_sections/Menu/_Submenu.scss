@@ -2,7 +2,7 @@
   display: none;
   @include media($coa-large-screen) {
     background-color: $color-white;
-    left: -1px;
+    left: 0;
     z-index: 3;
     border: 1px solid $color-gray-medium;
   }
@@ -13,6 +13,6 @@
 }
 
 .coa-Submenu--align-right {
-  right: -1px;
+  right: 0;
   left: auto;
 }
