@@ -7,6 +7,7 @@ const allTopicPagesQuery = `
           slug,
           text,
           description,
+          callToAction,
           services {
             edges {
               node {
@@ -15,6 +16,10 @@ const allTopicPagesQuery = `
                 slug
               }
             }
+          }
+          theme {
+            text,
+            slug
           }
         }
       }
