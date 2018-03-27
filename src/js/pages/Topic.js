@@ -31,7 +31,7 @@ const Topic = ({ topic }) => {
         <SectionHeader title={callToAction} />
       </div>
 
-      <TileGroup tiles={relatedLinks} />
+      <TileGroup tiles={relatedLinks} tag="service" />
 
       <ThreeOneOne services311={services311} />
     </div>

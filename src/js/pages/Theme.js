@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { get } from 'lodash';
-import { cleanLinks } from 'js/helpers/cleanData';
+import { cleanServiceLinks } from 'js/helpers/cleanData';
 import PropTypes from 'prop-types';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
@@ -12,19 +12,24 @@ import PageHeader from 'js/modules/PageHeader';
 import SectionHeader from 'js/modules/SectionHeader';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import ArrowRight from 'js/svg/ArrowRight';
 
 const Theme = ({ theme }) => {
   const title = get(theme, "text", null);
   const callToAction = get(theme, "callToAction", null);
   const description = get(theme, "description", null);
   const topics = get(theme, "topics", null);
-  // const theme = get(theme, "theme", null);
-  const relatedLinks = cleanLinks(topics, 'services');
   const services311 = get(jsonFileData, "services311", null);
-  console.log(topics)
 
   const themeStyles = {
     display: 'flex',
+  }
+
+  const topicStyles = {
+    border: '4px solid #3282AF',
+    padding: '0 4rem 5rem',
+    borderRadius: '6px',
+    marginTop: '5rem',
   }
 
   return (
@@ -35,19 +40,23 @@ const Theme = ({ theme }) => {
         <PageHeader title={title} description={description} />
       </div>
 
-      <div style={themeStyles}>
+      <div className="wrapper container-fluid" style={themeStyles}>
       {
-        topics && topics.edges.map(({node: topic}) => (
-          <div>
-            <SectionHeader title={topic.text} />
-            <p>{topic.description}</p>
-          </div>
-
-        ))
+        topics && topics.edges.map(({node: topic}, i) => {
+          if (topic.services.edges.length < 1) return false;
+          const links = get(topic, "services", null);
+          const relatedLinks = cleanServiceLinks(links);
+          return (
+            <div key={i} style={topicStyles}>
+              <SectionHeader title={topic.text} arrow={true}/>
+              <p>{topic.description}</p>
+              <TileGroup tiles={relatedLinks} tag="service" />
+            </div>
+          )
+        })
       }
       </div>
 
-      <TileGroup tiles={relatedLinks} />
 
       <ThreeOneOne services311={services311} />
     </div>

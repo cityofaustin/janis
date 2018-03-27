@@ -65,16 +65,4 @@ export const cleanServiceLinks = (links) => {
       text: link.title
     }
   });
-}
-
-export const cleanLinks = (links, subpath) => {
-
-  if(!links || !links.edges) return null;
-
-  return links.edges.map(({node: link}) => {
-    return {
-      url: `/${subpath}/${link.slug}`,
-      text: link.title
-    }
-  });
-}
+};
