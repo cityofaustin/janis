@@ -53,7 +53,7 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSection: null,
+      openSubmenuId: null,
     };
   }
 
@@ -67,15 +67,15 @@ class Menu extends Component {
     }
   }
 
-  toggleSublist = (e, openSection) => {
+  toggleSubmenu = (e, openSubmenuId) => {
     if (e.type === "keydown" && e.key !== 'Enter') return false;
-    if (openSection === this.state.openSection) {
+    if (openSubmenuId === this.state.openSubmenuId) {
       this.setState({
-        openSection: null
+        openSubmenuId: null
       })
     } else {
       this.setState({
-        openSection: openSection,
+        openSubmenuId: openSubmenuId,
       })
     }
   }
@@ -99,10 +99,12 @@ class Menu extends Component {
             <ThreeOneOneMobileListItem />
         {
           allThemes.edges.map(({node: theme}, i) => (
-            <MenuItem key={i} id={i} {...this.state}
+            <MenuItem key={i}
+              id={i}
+              openSubmenuId={this.state.openSubmenuId}
               theme={theme}
               handleMenuToggle={this.props.toggleMenu}
-              handleSublistToggle={this.toggleSublist}
+              handleSubmenuToggle={this.toggleSubmenu}
             />
           ))
         }

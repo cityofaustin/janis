@@ -8,36 +8,36 @@ import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 
 
-const themeClassnames = (id, theme, openSection) => {
+const themeClassnames = (id, theme, openSubmenuId) => {
   const base = `coa-MenuItem`;
-  const openModifier = openSection === id ?
+  const openModifier = openSubmenuId === id ?
     'coa-MenuItem--open' :
     '';
 
   return `${base} ${openModifier}`;
 }
 
-const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle}) => (
-    <li key={id} className={themeClassnames(id, theme, openSection)}
-      aria-expanded={openSection === id}
+const MenuItem = ({theme, id, openSubmenuId, handleSubmenuToggle, handleMenuToggle}) => (
+    <li key={id} className={themeClassnames(id, theme, openSubmenuId)}
+      aria-expanded={openSubmenuId === id}
       aria-haspopup={true}
       aria-controls={`topicMenu${id+1}`}
       tabIndex={0}
       id={`theme${id+1}`}
-      onClick={(e) => handleSublistToggle(e, id)}
-      onKeyDown={(e) => handleSublistToggle(e, id)}
+      onClick={(e) => handleSubmenuToggle(e, id)}
+      onKeyDown={(e) => handleSubmenuToggle(e, id)}
     >
 
       <MenuItemHeader
         id={id}
         theme={theme}
-        openSection={openSection}
+        openSubmenuId={openSubmenuId}
       />
 
       { !!theme.topics.edges && (
         <Submenu
           id={id}
-          openSection={openSection}
+          openSubmenuId={openSubmenuId}
           theme={theme}
           handleMenuToggle={handleMenuToggle}
         />
@@ -45,14 +45,14 @@ const MenuItem = ({theme, id, openSection, handleSublistToggle, handleMenuToggle
     </li>
 );
 
-const MenuItemHeader = ({ theme, id, openSection }) => (
+const MenuItemHeader = ({ theme, id, openSubmenuId }) => (
   <div className="coa-MenuItem__header">
     <span className="coa-MenuItem__text">
       { theme.title }
     </span>
     <div className="coa-MenuItem__plus-sign d-lg-none">
       {
-        openSection === id ?
+        openSubmenuId === id ?
           <MinusSVG size="18" title={`close ${theme.title} section`} /> :
           <PlusSVG size="18" title={`open ${theme.title} section`} />
       }
