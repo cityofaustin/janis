@@ -147,7 +147,7 @@ const AirportMobileListItem = injectIntl(({intl}) => (
 ))
 
 const ThreeOneOneMobileListItem = injectIntl(({intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--flex coa-MenuItem--small d-lg-none">
+  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
     <a href="tel:311">
       {intl.formatMessage(i18nMessages.call311)}
     </a>

@@ -1,18 +1,7 @@
 .coa-MenuItem {
-  text-transform: uppercase;
-  font-size: $coa-font-size-small;
-  font-family: $coa-font-sans;
-  line-height: $coa-line-height-small;
   position: relative;
   margin: 0;
-  cursor: pointer;
   padding: 0;
-  > a {
-    color: $coa-color-blue;
-  }
-  svg {
-    transition-duration: .3s;
-  }
   &:hover, &:focus {
     .coa-MenuItem__text {
       @include media($coa-large-screen) {
@@ -24,20 +13,15 @@
 
 .coa-MenuItem--open {
   .coa-MenuItem__header {
+    border-bottom: 1px solid transparent;
     @include media($coa-large-screen) {
-      border-color: $color-gray-medium;
+      border: 1px solid $color-gray-medium;
       border-bottom: 1px solid transparent;
     }
   }
   .coa-MenuItem__text {
     color: $coa-color-orange;
     border-bottom: 3px solid transparent !important;
-  }
-  .coa-Submenu {
-    display: block;
-    @include media($coa-large-screen) {
-      position: absolute;
-    }
   }
   .coa-MenuItem__arrow-down {
     svg {
@@ -47,19 +31,28 @@
       fill: $coa-color-orange;
     }
   }
-}
-
-.coa-MenuItem--flex {
-  display: flex;
-  a {
-    flex-shrink: 0;
-    text-decoration: underline;
-    color: $coa-color-blue;
+  .coa-Submenu {
+    display: block;
+    @include media($coa-large-screen) {
+      position: absolute;
+    }
   }
 }
 
+@mixin BaseMenuItem() {
+  cursor: pointer;
+  border-bottom: 1px solid $coa-color-gray;
+  font-size: $coa-font-size-small;
+  font-family: $coa-font-sans;
+  line-height: $coa-line-height-small;
+  padding: $coa-space-level2 $coa-space-level3;
+  text-transform: uppercase;
+}
+
 .coa-MenuItem--small {
+  @include BaseMenuItem();
   font-size: $coa-font-size-xsmall;
+  white-space: nowrap;
 }
 
 .coa-MenuItem--home > a {
@@ -68,9 +61,8 @@
 }
 
 .coa-MenuItem__header {
-  border-bottom: 1px solid $coa-color-gray;
+  @include BaseMenuItem();
   display: flex;
-  padding: $coa-space-level2 $coa-space-level3;
   @include media($coa-large-screen) {
     border: 1px solid transparent;
     padding: $coa-space-level4 $coa-space-level2 $coa-space-level3;
@@ -88,6 +80,9 @@
 
 .coa-MenuItem__arrow-down {
   margin: 0 $coa-space-level1;
+  svg {
+    transition-duration: .3s;
+  }
 }
 
 .coa-MenuItem__plus-sign {
