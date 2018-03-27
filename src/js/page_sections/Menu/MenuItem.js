@@ -8,18 +8,13 @@ import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 
 
-const themeClassnames = (id, openSubmenuId) => {
-  const base = `coa-MenuItem`;
-  const openModifier = openSubmenuId === id ?
-    'coa-MenuItem--open' :
-    '';
-
-  return `${base} ${openModifier}`;
-}
+const isSubmenuOpen = (id, openSubmenuId) => (
+  openSubmenuId === id
+)
 
 const MenuItem = ({theme, id, openSubmenuId, handleSubmenuToggle, handleMenuToggle}) => (
-    <li key={id} className={themeClassnames(id, openSubmenuId)}
-      aria-expanded={openSubmenuId === id}
+    <li key={id} className={`coa-MenuItem ${isSubmenuOpen(id, openSubmenuId) ? 'coa-MenuItem--open' : ''}`}
+      aria-expanded={isSubmenuOpen(id, openSubmenuId)}
       aria-haspopup={true}
       aria-controls={`topicMenu${id+1}`}
       tabIndex={0}
@@ -51,7 +46,7 @@ const MenuItemHeader = ({ theme, id, openSubmenuId }) => (
     </span>
     <div className="coa-MenuItem__plus-sign d-lg-none">
       {
-        openSubmenuId === id ?
+        isSubmenuOpen(id, openSubmenuId) ?
           <MinusSVG size="18" title={`close ${theme.title} section`} /> :
           <PlusSVG size="18" title={`open ${theme.title} section`} />
       }
