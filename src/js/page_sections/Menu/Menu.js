@@ -94,7 +94,7 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem handleClick={this.props.toggleMenu} />
+            <HomeMobileListItem />
             <AirportMobileListItem />
             <ThreeOneOneMobileListItem />
         {
@@ -128,9 +128,7 @@ Menu.contextTypes = {
 }
 
 const HomeMobileListItem = injectIntl(({handleClick, intl}) => (
-  <li onClick={handleClick}
-    className="coa-MenuItem--home coa-MenuItem coa-MenuItem--small d-lg-none"
-  >
+  <li className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home d-lg-none">
     <I18nNavLink to="/" exact>
       {intl.formatMessage(i18nMessages.home)}
     </I18nNavLink>
