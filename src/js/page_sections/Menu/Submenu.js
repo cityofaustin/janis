@@ -16,17 +16,12 @@ const isAlignedRight = (direction, id) => {
   return (direction === 'rtl') ? id < SUBMENU_THRESHOLD_ALIGNRIGHT_RTL : id > SUBMENU_THRESHOLD_ALIGNRIGHT_LTR;
 };
 
-const isMenuOpen = (openSection, id) => {
-  return openSection === id;
-}
-
-const Submenu = ({id, openSection, theme, handleMenuToggle, intl}) => {
+const Submenu = ({id, theme, handleMenuToggle, intl}) => {
 
   const langObj = find(SUPPORTED_LANGUAGES, {'code': intl.locale});
   return (
     <ul className={`coa-Submenu
         ${isAlignedRight(langObj.direction, id) && 'coa-Submenu--align-right'}
-        ${isMenuOpen(openSection, id) && 'coa-Submenu--open'}
       `}
       id={`topicMenu${id+1}`}
       role="menu"

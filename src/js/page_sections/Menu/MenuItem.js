@@ -8,7 +8,7 @@ import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 
 
-const themeClassnames = (id, theme, openSubmenuId) => {
+const themeClassnames = (id, openSubmenuId) => {
   const base = `coa-MenuItem`;
   const openModifier = openSubmenuId === id ?
     'coa-MenuItem--open' :
@@ -18,7 +18,7 @@ const themeClassnames = (id, theme, openSubmenuId) => {
 }
 
 const MenuItem = ({theme, id, openSubmenuId, handleSubmenuToggle, handleMenuToggle}) => (
-    <li key={id} className={themeClassnames(id, theme, openSubmenuId)}
+    <li key={id} className={themeClassnames(id, openSubmenuId)}
       aria-expanded={openSubmenuId === id}
       aria-haspopup={true}
       aria-controls={`topicMenu${id+1}`}
@@ -37,7 +37,6 @@ const MenuItem = ({theme, id, openSubmenuId, handleSubmenuToggle, handleMenuTogg
       { !!theme.topics.edges && (
         <Submenu
           id={id}
-          openSubmenuId={openSubmenuId}
           theme={theme}
           handleMenuToggle={handleMenuToggle}
         />
