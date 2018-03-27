@@ -37,31 +37,36 @@ const Submenu = ({id, openSection, theme, handleMenuToggle, intl}) => {
         return topic.slug !== "false" && (
           <SubmenuItem
             key={topicId}
+            className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
             topic={topic}
             handleClick={handleMenuToggle}
           />
         );
       })
     }
-      <li key={id} className="coa-SubmenuItem coa-SubmenuItem--theme" role="menuitem">
-        <I18nNavLink to={`/theme/${theme.slug}`}>
-          {theme.title}
-          <span className="coa-SubmenuItem__arrow-right">
-            <ArrowRightSVG size="13" />
-          </span>
-        </I18nNavLink>
-      </li>
-      <WorkInProgressSubitem />
+      <ThemeSubmenuItem theme={theme} />
+      <WorkInProgressSubmenuItem />
     </ul>
   );
 }
 
-// MenuItem.propTypes = {
-//   : PropTypes.
-// };
+const ThemeSubmenuItem = ({theme}) => (
+  <li className="coa-SubmenuItem" role="menuitem">
+    <I18nNavLink
+      to={`/theme/${theme.slug}`}
+      className="coa-SubmenuItem__block coa-SubmenuItem__block--theme"
+    >
+      {theme.title}
+      <span className="coa-SubmenuItem__arrow-right">
+        <ArrowRightSVG size="13" />
+      </span>
+    </I18nNavLink>
+  </li>
+)
 
-const WorkInProgressSubitem = () => (
-  <li className="coa-SubmenuItem coa-SubmenuItem--coming-soon-message">
+const WorkInProgressSubmenuItem = () => (
+  <li className="coa-SubmenuItem">
+    <span className="coa-SubmenuItem__block coa-SubmenuItem__block--wip">
     <FormattedMessage
       id="Submenu.workInProgress"
       defaultMessage="Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
@@ -69,6 +74,7 @@ const WorkInProgressSubitem = () => (
         citySiteLink: <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>
       }}
     />
+    </span>
   </li>
 )
 
