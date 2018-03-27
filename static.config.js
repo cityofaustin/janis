@@ -6,6 +6,7 @@ import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
+import allThemesQuery from 'js/queries/allThemesQuery';
 
 const { CMS_API } = process.env;
 
@@ -34,21 +35,25 @@ export default {
     const { allTopics } = await enGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments } = await enGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: topServices } = await enGraphQLClient.request(topServicesQuery)
+    const { allThemes } = await enGraphQLClient.request(allThemesQuery)
 
     const { allServicePages: allServicePages_es } = await esGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_es } = await esGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_es } = await esGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: topServices_es } = await esGraphQLClient.request(topServicesQuery)
+    const { allThemes: allThemes_es } = await esGraphQLClient.request(allThemesQuery)
 
     const { allServicePages: allServicePages_vi } = await viGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_vi } = await viGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_vi } = await viGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: topServices_vi } = await viGraphQLClient.request(topServicesQuery)
+    const { allThemes: allThemes_vi } = await viGraphQLClient.request(allThemesQuery)
 
     const { allServicePages: allServicePages_ar } = await arGraphQLClient.request(allServicePagesQuery)
     const { allTopics: allTopics_ar } = await arGraphQLClient.request(allTopicPagesQuery)
     const { allDepartments: allDepartments_ar } = await arGraphQLClient.request(allDepartmentPagesQuery)
     const { allServicePages: topServices_ar } = await arGraphQLClient.request(topServicesQuery)
+    const { allThemes: allThemes_ar } = await arGraphQLClient.request(allThemesQuery)
 
     const serviceQueries = {
       en: allServicePages,
@@ -69,6 +74,13 @@ export default {
       es: allDepartments_es,
       vi: allDepartments_vi,
       ar: allDepartments_ar,
+    }
+
+    const themeQueries = {
+      en: allThemes,
+      es: allThemes_es,
+      vi: allThemes_vi,
+      ar: allThemes_ar,
     }
 
     const allPages = (langCode = 'en') => {
@@ -97,6 +109,20 @@ export default {
           component: 'src/js/pages/Topic',
           getData: async () => ({
             topic: topic,
+          })
+        }))
+      },
+      {
+        path: '/themes',
+        component: 'src/js/pages/Themes',
+        getData: async () => ({
+          allThemes: themeQueries[langCode],
+        }),
+        children: themeQueries[langCode].edges.map(({node:theme}) => ({
+          path: `/${theme.slug}`,
+          component: 'src/js/pages/Theme',
+          getData: async () => ({
+            theme,
           })
         }))
       },
