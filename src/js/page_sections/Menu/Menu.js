@@ -67,15 +67,15 @@ class Menu extends Component {
     }
   }
 
-  toggleSublist = (e, openSectionId) => {
+  toggleSublist = (e, openSection) => {
     if (e.type === "keydown" && e.key !== 'Enter') return false;
-    if (openSectionId === this.state.openSection) {
+    if (openSection === this.state.openSection) {
       this.setState({
         openSection: null
       })
     } else {
       this.setState({
-        openSection: openSectionId,
+        openSection: openSection,
       })
     }
   }
@@ -110,19 +110,12 @@ class Menu extends Component {
             <MobileFooter />
           </ul>
         </nav>
-        {
-          !!this.state.openSection && (
-            <div className="coa-Menu__overlay"
-              onClick={() => this.setState({ openSection: null })}
-            ></div>
-          )
-        }
       </div>
     );
   }
 }
 
-//TODO: temp fix for i18n nav items -- remove once date is collected via graphql
+//TODO: temp fix for i18n nav items -- remove once data is collected via graphql
 Menu.contextTypes = {
   langCode: PropTypes.string,
 }

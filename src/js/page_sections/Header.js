@@ -59,7 +59,7 @@ class Header extends Component {
               </div>
             </div>
             <div className="col-xs-6 coa-Header__right-controls">
-              <div className="d-none d-md-block">
+              <div className="d-none d-lg-block">
                 <ExternalLink to="http://www.austintexas.gov/airport">
                   {intl.formatMessage(i18nMessages.headerAirportText)}
                 </ExternalLink>
