@@ -21,18 +21,24 @@
   }
 }
 
+.coa-Menu--open {
+  left: 0;
+  @include media($coa-large-screen) {
+    left: auto;
+  }
+}
+
 .coa-Menu__list {
   list-style: none;
   @include media($coa-large-screen) {
     display: flex;
     justify-content: space-between;
   }
-}
-
-.coa-Menu--open {
-  left: 0;
-  @include media($coa-large-screen) {
-    left: auto;
+  & > li {
+    margin: 0;
+    @include media($coa-large-screen) {
+      position: relative;
+    }
   }
 }
 

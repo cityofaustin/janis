@@ -62,9 +62,20 @@ class Menu extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isOpen && !prevProps.isOpen) {
+    if (this.props.isMenuOpen && !prevProps.isMenuOpen) {
       this.focusOnClose();
     }
+  }
+
+  isSubmenuOpen = (id) => (
+    this.state.openSubmenuId === id
+  )
+
+  toggleAllMenus = () => {
+    this.props.toggleMenu();
+    this.setState({
+      openSubmenuId: null
+    });
   }
 
   toggleSubmenu = (e, openSubmenuId) => {
@@ -85,30 +96,31 @@ class Menu extends Component {
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
-        <nav className={`coa-Menu ${this.props.isOpen ? 'coa-Menu--open' : ''}`} role="navigation">
+        <nav className={`coa-Menu ${this.props.isMenuOpen ? 'coa-Menu--open' : ''}`} role="navigation">
           <button className="coa-Menu__close-btn d-lg-none"
-            onClick={this.props.toggleMenu}
+            onClick={this.toggleAllMenus}
             ref="closeTrigger"
             tabIndex="0"
           >
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem />
+            <HomeMobileListItem handleToggleAllMenus={this.toggleAllMenus} />
             <AirportMobileListItem />
             <ThreeOneOneMobileListItem />
         {
           allThemes.edges.map(({node: theme}, i) => (
-            <MenuItem key={i}
+            <MenuItem
+              key={i}
               id={i}
-              openSubmenuId={this.state.openSubmenuId}
               theme={theme}
-              handleMenuToggle={this.props.toggleMenu}
+              isSubmenuOpen={this.isSubmenuOpen(i)}
+              handleToggleAllMenus={this.toggleAllMenus}
               handleSubmenuToggle={this.toggleSubmenu}
             />
           ))
         }
-            <PrivacyPolicyListItem />
+            <PrivacyPolicyListItem handleToggleAllMenus={this.toggleAllMenus} />
             <MobileFooter />
           </ul>
         </nav>
@@ -122,8 +134,10 @@ Menu.contextTypes = {
   langCode: PropTypes.string,
 }
 
-const HomeMobileListItem = injectIntl(({handleClick, intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home d-lg-none">
+const HomeMobileListItem = injectIntl(({handleToggleAllMenus, intl}) => (
+  <li className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home d-lg-none"
+    onClick={handleToggleAllMenus}
+  >
     <I18nNavLink to="/" exact>
       {intl.formatMessage(i18nMessages.home)}
     </I18nNavLink>
@@ -132,8 +146,7 @@ const HomeMobileListItem = injectIntl(({handleClick, intl}) => (
 
 const AirportMobileListItem = injectIntl(({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
-    {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
-    <ExternalLink to="http://www.austintexas.gov/airport" aria-label="3 1 1.">
+    <ExternalLink to="http://www.austintexas.gov/airport">
       {intl.formatMessage(i18nMessages.airport)}
     </ExternalLink>
   </li>
@@ -141,7 +154,8 @@ const AirportMobileListItem = injectIntl(({intl}) => (
 
 const ThreeOneOneMobileListItem = injectIntl(({intl}) => (
   <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
-    <a href="tel:311">
+  {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
+    <a href="tel:311" aria-label="3 1 1.">
       {intl.formatMessage(i18nMessages.call311)}
     </a>
     &nbsp;or&nbsp;
@@ -151,8 +165,10 @@ const ThreeOneOneMobileListItem = injectIntl(({intl}) => (
   </li>
 ))
 
-const PrivacyPolicyListItem = injectIntl(({intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
+const PrivacyPolicyListItem = injectIntl(({handleToggleAllMenus, intl}) => (
+  <li className="coa-MenuItem coa-MenuItem--small d-lg-none"
+    onClick={handleToggleAllMenus}
+  >
     <a href="#">
       {intl.formatMessage(i18nMessages.privacy)}
     </a>

@@ -7,46 +7,41 @@ import PlusSVG from 'js/svg/Plus';
 import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 
-
-const isSubmenuOpen = (id, openSubmenuId) => (
-  openSubmenuId === id
-)
-
-const MenuItem = ({theme, id, openSubmenuId, handleSubmenuToggle, handleMenuToggle}) => (
-    <li key={id} className={`coa-MenuItem ${isSubmenuOpen(id, openSubmenuId) ? 'coa-MenuItem--open' : ''}`}
-      aria-expanded={isSubmenuOpen(id, openSubmenuId)}
-      aria-haspopup={true}
-      aria-controls={`topicMenu${id+1}`}
-      tabIndex={0}
-      id={`theme${id+1}`}
-      onClick={(e) => handleSubmenuToggle(e, id)}
-      onKeyDown={(e) => handleSubmenuToggle(e, id)}
-    >
-
-      <MenuItemHeader
-        id={id}
-        theme={theme}
-        openSubmenuId={openSubmenuId}
-      />
-
-      { !!theme.topics.edges && (
-        <Submenu
-          id={id}
-          theme={theme}
-          handleMenuToggle={handleMenuToggle}
-        />
-      )}
-    </li>
+const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAllMenus}) => (
+  <li>
+    <MenuItemHeader
+      id={id}
+      theme={theme}
+      isSubmenuOpen={isSubmenuOpen}
+      handleSubmenuToggle={handleSubmenuToggle}
+    />
+  { !!theme.topics.edges && (
+    <Submenu
+      id={id}
+      theme={theme}
+      isSubmenuOpen={isSubmenuOpen}
+      handleToggleAllMenus={handleToggleAllMenus}
+    />
+  )}
+  </li>
 );
 
-const MenuItemHeader = ({ theme, id, openSubmenuId }) => (
-  <div className="coa-MenuItem__header">
+const MenuItemHeader = ({ theme, id, isSubmenuOpen, handleSubmenuToggle }) => (
+  <div className={`coa-MenuItem coa-MenuItem--flex ${isSubmenuOpen ? 'coa-MenuItem--open' : ''}`}
+    id={`theme${id+1}`}
+    aria-expanded={isSubmenuOpen}
+    aria-haspopup={true}
+    aria-controls={`topicMenu${id+1}`}
+    tabIndex={0}
+    onClick={(e) => handleSubmenuToggle(e, id)}
+    onKeyDown={(e) => handleSubmenuToggle(e, id)}
+  >
     <span className="coa-MenuItem__text">
       { theme.title }
     </span>
     <div className="coa-MenuItem__plus-sign d-lg-none">
       {
-        isSubmenuOpen(id, openSubmenuId) ?
+        isSubmenuOpen ?
           <MinusSVG size="18" title={`close ${theme.title} section`} /> :
           <PlusSVG size="18" title={`open ${theme.title} section`} />
       }

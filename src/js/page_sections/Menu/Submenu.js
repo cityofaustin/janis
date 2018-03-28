@@ -16,13 +16,14 @@ const isAlignedRight = (direction, id) => {
   return (direction === 'rtl') ? id < SUBMENU_THRESHOLD_ALIGNRIGHT_RTL : id > SUBMENU_THRESHOLD_ALIGNRIGHT_LTR;
 };
 
-const Submenu = ({id, theme, handleMenuToggle, intl}) => {
+const Submenu = ({id, theme, isSubmenuOpen, handleToggleAllMenus, intl}) => {
 
   const langObj = find(SUPPORTED_LANGUAGES, {'code': intl.locale});
   return (
     <ul className={`coa-Submenu
-        ${isAlignedRight(langObj.direction, id) && 'coa-Submenu--align-right'}
-      `}
+      ${isAlignedRight(langObj.direction, id) ? 'coa-Submenu--align-right' : ''}
+      ${isSubmenuOpen ? 'coa-Submenu--open' : ''}`
+    }
       id={`topicMenu${id+1}`}
       role="menu"
       aria-labelledby={`theme${id+1}`}
@@ -34,19 +35,22 @@ const Submenu = ({id, theme, handleMenuToggle, intl}) => {
             key={topicId}
             className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
             topic={topic}
-            handleClick={handleMenuToggle}
+            handleToggleAllMenus={handleToggleAllMenus}
           />
         );
       })
     }
-      <ThemeSubmenuItem theme={theme} />
+      <ThemeSubmenuItem theme={theme} handleToggleAllMenus={handleToggleAllMenus}/>
       <WorkInProgressSubmenuItem />
     </ul>
   );
 }
 
-const ThemeSubmenuItem = ({theme}) => (
-  <li className="coa-SubmenuItem" role="menuitem">
+const ThemeSubmenuItem = ({theme, handleToggleAllMenus}) => (
+  <li className="coa-SubmenuItem"
+    role="menuitem"
+    onClick={handleToggleAllMenus}
+  >
     <I18nNavLink
       to={`/theme/${theme.slug}`}
       className="coa-SubmenuItem__block coa-SubmenuItem__block--theme"
