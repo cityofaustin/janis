@@ -71,7 +71,7 @@ class Menu extends Component {
     this.state.openSubmenuId === id
   )
 
-  toggleAllMenus = () => {
+  toggleAllMenus = (e) => {
     this.props.toggleMenu();
     this.setState({
       openSubmenuId: null
@@ -80,7 +80,7 @@ class Menu extends Component {
 
   toggleSubmenu = (e, openSubmenuId) => {
     if (e.type === "keydown" && e.key !== 'Enter') return false;
-    if (openSubmenuId === this.state.openSubmenuId) {
+    if (openSubmenuId && openSubmenuId === this.state.openSubmenuId) {
       this.setState({
         openSubmenuId: null
       })
@@ -96,7 +96,9 @@ class Menu extends Component {
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
-        <nav className={`coa-Menu ${this.props.isMenuOpen ? 'coa-Menu--open' : ''}`} role="navigation">
+        <nav className={`coa-Menu ${this.props.isMenuOpen ? 'coa-Menu--open' : ''}`}
+          role="navigation"
+        >
           <button className="coa-Menu__close-btn d-lg-none"
             onClick={this.toggleAllMenus}
             ref="closeTrigger"
@@ -124,6 +126,13 @@ class Menu extends Component {
             <MobileFooter />
           </ul>
         </nav>
+        {
+          !!this.state.openSubmenuId && (
+            <div className="coa-Menu__click-overlay"
+              onClick={() => this.setState({ openSubmenuId: null })}
+            ></div>
+          )
+        }
       </div>
     );
   }

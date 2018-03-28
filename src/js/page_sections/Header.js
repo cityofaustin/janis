@@ -29,7 +29,7 @@ class Header extends Component {
     };
   }
 
-  toggleMenu = () => {
+  toggleMenu = (e) => {
     if (this.state.menuIsOpen) {
       this.refs.menu.focus();
     }
