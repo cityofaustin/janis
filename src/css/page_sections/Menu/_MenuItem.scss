@@ -15,8 +15,11 @@
 .coa-MenuItem--open {
   border-bottom: 1px solid transparent;
   @include media($coa-large-screen) {
+    background: $coa-color-white;
     border: 1px solid $color-gray-medium;
     border-bottom: none;
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -47,7 +50,7 @@
   }
 }
 
-.coa-MenuItem:hover, .coa-MenuItem:focus {
+.coa-MenuItem:hover {
   .coa-MenuItem__text {
     @include media($coa-large-screen) {
       border-bottom: 3px solid $coa-color-orange;
@@ -65,7 +68,7 @@
 }
 
 .coa-MenuItem__arrow-down {
-  margin: 0 $coa-space-level1;
+  margin-left: $coa-spacing-xsmall;
   svg {
     transition-duration: .3s;
   }

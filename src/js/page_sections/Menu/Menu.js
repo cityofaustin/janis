@@ -105,9 +105,9 @@ class Menu extends Component {
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileListItem handleToggleAllMenus={this.toggleAllMenus} />
-            <AirportMobileListItem />
-            <ThreeOneOneMobileListItem />
+            <HomeMobileMenuItem handleToggleAllMenus={this.toggleAllMenus} />
+            <AirportMobileMenuItem />
+            <ThreeOneOneMobileMenuItem />
         {
           allThemes.edges.map(({node: theme}, i) => (
             <MenuItem
@@ -120,7 +120,7 @@ class Menu extends Component {
             />
           ))
         }
-            <PrivacyPolicyListItem handleToggleAllMenus={this.toggleAllMenus} />
+            <PrivacyPolicyMenuItem handleToggleAllMenus={this.toggleAllMenus} />
             <MobileFooter />
           </ul>
         </nav>
@@ -134,44 +134,48 @@ Menu.contextTypes = {
   langCode: PropTypes.string,
 }
 
-const HomeMobileListItem = injectIntl(({handleToggleAllMenus, intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home d-lg-none"
-    onClick={handleToggleAllMenus}
-  >
-    <I18nNavLink to="/" exact>
-      {intl.formatMessage(i18nMessages.home)}
-    </I18nNavLink>
+const HomeMobileMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
+  <li className="d-lg-none" onClick={handleToggleAllMenus}>
+    <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
+      <I18nNavLink to="/" exact>
+        {intl.formatMessage(i18nMessages.home)}
+      </I18nNavLink>
+    </div>
   </li>
 ))
 
-const AirportMobileListItem = injectIntl(({intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
-    <ExternalLink to="http://www.austintexas.gov/airport">
-      {intl.formatMessage(i18nMessages.airport)}
-    </ExternalLink>
+const AirportMobileMenuItem = injectIntl(({intl}) => (
+  <li className="d-lg-none">
+    <div className="coa-MenuItem coa-MenuItem--small">
+      <ExternalLink to="http://www.austintexas.gov/airport">
+        {intl.formatMessage(i18nMessages.airport)}
+      </ExternalLink>
+    </div>
   </li>
 ))
 
-const ThreeOneOneMobileListItem = injectIntl(({intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small d-lg-none">
+const ThreeOneOneMobileMenuItem = injectIntl(({intl}) => (
+  <li className="d-lg-none">
   {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
-    <a href="tel:311" aria-label="3 1 1.">
-      {intl.formatMessage(i18nMessages.call311)}
-    </a>
-    &nbsp;or&nbsp;
-    <ExternalLink to="http://311.austintexas.gov/">
-      {intl.formatMessage(i18nMessages.online311)}
-    </ExternalLink>
+    <div className="coa-MenuItem coa-MenuItem--small">
+      <a href="tel:311" aria-label="3 1 1.">
+        {intl.formatMessage(i18nMessages.call311)}
+      </a>
+      or
+      <ExternalLink to="http://311.austintexas.gov/">
+        {intl.formatMessage(i18nMessages.online311)}
+      </ExternalLink>
+    </div>
   </li>
 ))
 
-const PrivacyPolicyListItem = injectIntl(({handleToggleAllMenus, intl}) => (
-  <li className="coa-MenuItem coa-MenuItem--small d-lg-none"
-    onClick={handleToggleAllMenus}
-  >
-    <a href="#">
-      {intl.formatMessage(i18nMessages.privacy)}
-    </a>
+const PrivacyPolicyMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
+  <li className="d-lg-none" onClick={handleToggleAllMenus}>
+    <div className="coa-MenuItem coa-MenuItem--small">
+      <a href="#">
+        {intl.formatMessage(i18nMessages.privacy)}
+      </a>
+    </div>
   </li>
 ))
 

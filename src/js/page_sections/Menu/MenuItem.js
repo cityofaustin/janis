@@ -9,12 +9,27 @@ import ChevronDownSVG from 'js/svg/ChevronDown';
 
 const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAllMenus}) => (
   <li>
-    <MenuItemHeader
-      id={id}
-      theme={theme}
-      isSubmenuOpen={isSubmenuOpen}
-      handleSubmenuToggle={handleSubmenuToggle}
-    />
+    <div className={`coa-MenuItem coa-MenuItem--flex ${isSubmenuOpen ? 'coa-MenuItem--open' : ''}`}
+      id={`theme${id+1}`}
+      aria-expanded={isSubmenuOpen}
+      aria-haspopup={true}
+      aria-controls={`topicMenu${id+1}`}
+      tabIndex={0}
+      onClick={(e) => handleSubmenuToggle(e, id)}
+      onKeyDown={(e) => handleSubmenuToggle(e, id)}
+    >
+      <span className="coa-MenuItem__text">{ theme.title }</span>
+      <div className="coa-MenuItem__plus-sign d-lg-none">
+        {
+          isSubmenuOpen
+            ? <MinusSVG size="18" title={`close ${theme.title} section`} />
+            : <PlusSVG size="18" title={`open ${theme.title} section`} />
+        }
+      </div>
+      <div className="coa-MenuItem__arrow-down d-none d-lg-inline">
+        <ChevronDownSVG size="14" />
+      </div>
+    </div>
   { !!theme.topics.edges && (
     <Submenu
       id={id}
@@ -25,31 +40,5 @@ const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAl
   )}
   </li>
 );
-
-const MenuItemHeader = ({ theme, id, isSubmenuOpen, handleSubmenuToggle }) => (
-  <div className={`coa-MenuItem coa-MenuItem--flex ${isSubmenuOpen ? 'coa-MenuItem--open' : ''}`}
-    id={`theme${id+1}`}
-    aria-expanded={isSubmenuOpen}
-    aria-haspopup={true}
-    aria-controls={`topicMenu${id+1}`}
-    tabIndex={0}
-    onClick={(e) => handleSubmenuToggle(e, id)}
-    onKeyDown={(e) => handleSubmenuToggle(e, id)}
-  >
-    <span className="coa-MenuItem__text">
-      { theme.title }
-    </span>
-    <div className="coa-MenuItem__plus-sign d-lg-none">
-      {
-        isSubmenuOpen ?
-          <MinusSVG size="18" title={`close ${theme.title} section`} /> :
-          <PlusSVG size="18" title={`open ${theme.title} section`} />
-      }
-    </div>
-    <div className="coa-MenuItem__arrow-down d-none d-lg-inline">
-      <ChevronDownSVG size="14" />
-    </div>
-  </div>
-)
 
 export default MenuItem;

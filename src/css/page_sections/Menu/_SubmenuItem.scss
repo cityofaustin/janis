@@ -37,8 +37,9 @@
 
 .coa-SubmenuItem__block--wip {
   border-bottom: none;
-  font-family: $coa-font-serif;
+  font-family: $coa-font-sans;
   font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
 }
 
 .coa-SubmenuItem__block--theme {

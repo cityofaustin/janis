@@ -2,13 +2,12 @@
   display: none;
   padding: 0 $coa-spacing-small;
   @include media($coa-large-screen) {
-    background-color: $color-white;
+    background-color: $coa-color-white;
     border: 1px solid $coa-color-gray;
     left: 0;
     margin-top: -1px;
     padding: 0;
     position: absolute;
-    z-index: 3;
   }
 }
 
