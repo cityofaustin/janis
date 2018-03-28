@@ -1,18 +1,22 @@
 .coa-Submenu {
   display: none;
+  padding: 0 $coa-spacing-small;
   @include media($coa-large-screen) {
-    background-color: $color-white;
-    left: -1px;
-    z-index: 3;
-    border: 1px solid $color-gray-medium;
+    background-color: $coa-color-white;
+    border: 1px solid $coa-color-gray;
+    left: 0;
+    margin-top: -1px;
+    padding: 0;
+    position: absolute;
   }
 }
 
 .coa-Submenu--open {
   display: block;
+  border-bottom: 1px solid $coa-color-gray;
 }
 
 .coa-Submenu--align-right {
-  right: -1px;
+  right: 0;
   left: auto;
 }

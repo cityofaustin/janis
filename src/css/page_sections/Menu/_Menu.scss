@@ -9,13 +9,22 @@
   width: 100vw;
   z-index: 2;
   @include media($coa-large-screen) {
+    background: none;
     bottom: auto;
     left: auto;
     margin: $coa-space-level5 auto 0;
     overflow-y: visible;
-    position: static;
+    position: relative;
     top: auto;
     width: 100%;
+    z-index: 2;
+  }
+}
+
+.coa-Menu--open {
+  left: 0;
+  @include media($coa-large-screen) {
+    left: auto;
   }
 }
 
@@ -25,12 +34,11 @@
     display: flex;
     justify-content: space-between;
   }
-}
-
-.coa-Menu--open {
-  left: 0;
-  @include media($coa-large-screen) {
-    left: auto;
+  & > li {
+    margin: 0;
+    @include media($coa-large-screen) {
+      position: relative;
+    }
   }
 }
 
@@ -56,7 +64,8 @@
   font-size: $coa-font-size-xsmall;
 }
 
-.coa-Menu__overlay {
+.coa-Menu__close-submenu-click-target {
+  display: none;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -64,4 +73,7 @@
   top: 0;
   left: 0;
   opacity: 0;
+  @include media($coa-large-screen) {
+    display: block;
+  }
 }
