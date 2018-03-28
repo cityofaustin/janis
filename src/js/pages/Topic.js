@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { get } from 'lodash';
-import { cleanServiceLinks } from 'js/helpers/cleanData';
+import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
@@ -12,18 +11,29 @@ import PageHeader from 'js/modules/PageHeader';
 import SectionHeader from 'js/modules/SectionHeader';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import { cleanServiceLinks } from 'js/helpers/cleanData';
 
-const Topic = ({ topic }) => {
-  const title = get(topic, "text", null);
-  const callToAction = get(topic, "callToAction", null);
-  const description = get(topic, "description", null);
-  const links = get(topic, "services", null);
-  const theme = get(topic, "theme", null);
+const i18nMessages = defineMessages({
+  serviceRelatedlinksTag: {
+    id: 'Service.RelatedLinks.Tag',
+    defaultMessage: 'Service',
+  }
+})
+
+const Topic = ({ topic, intl }) => {
+  const {
+    theme,
+    text: title,
+    description,
+    callToAction,
+    services: links,
+  } = topic;
+
+  const { services311 } = jsonFileData;
   const relatedLinks = cleanServiceLinks(links);
-  const services311 = get(jsonFileData, "services311", null);
 
   return (
-    <div>
+    <div className="wrapper--top-border">
       <PageBreadcrumbs title={title} order={['topic']} topic={theme} />
 
       <div className="wrapper wrapper--sm container-fluid">
@@ -31,7 +41,11 @@ const Topic = ({ topic }) => {
         <SectionHeader title={callToAction} />
       </div>
 
-      <TileGroup tiles={relatedLinks} />
+      <div className="wrapper container-fluid">
+        <TileGroup tiles={relatedLinks}
+          tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
+        />
+      </div>
 
       <ThreeOneOne services311={services311} />
     </div>
@@ -40,12 +54,15 @@ const Topic = ({ topic }) => {
 
 Topic.propTypes = {
   topic: PropTypes.shape({
-    text: PropTypes.string,
+    text: PropTypes.string.isRequired,
     callToAction: PropTypes.string,
     description: PropTypes.string,
-    services: PropTypes.string,
-    theme: PropTypes.string,
+    services: PropTypes.object.isRequired,
+    theme: PropTypes.shape({
+      text: PropTypes.string,
+      slug: PropTypes.string,
+    }).isRequired,
   })
 };
 
-export default withRouteData(Topic);
+export default withRouteData(injectIntl(Topic));
