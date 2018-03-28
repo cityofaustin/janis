@@ -26,8 +26,10 @@
 .coa-MenuItem--small {
   font-size: $coa-font-size-xsmall;
   white-space: nowrap;
+}
 
-  &.coa-MenuItem--home > a {
+.coa-MenuItem--home {
+  & > a {
     color: $coa-color-orange;
     text-decoration: none;
   }

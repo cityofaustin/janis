@@ -127,8 +127,12 @@ class Menu extends Component {
           </ul>
         </nav>
         {
+          /*
+            this provides a full page click target area behind the nav menu
+            which, when clicked, will close the submenu
+          */
           !!this.state.openSubmenuId && (
-            <div className="coa-Menu__click-overlay"
+            <div className="coa-Menu__close-submenu-click-target"
               onClick={() => this.setState({ openSubmenuId: null })}
             ></div>
           )
@@ -170,7 +174,7 @@ const ThreeOneOneMobileMenuItem = injectIntl(({intl}) => (
       <a href="tel:311" aria-label="3 1 1.">
         {intl.formatMessage(i18nMessages.call311)}
       </a>
-      or
+      &nbsp;or&nbsp;
       <ExternalLink to="http://311.austintexas.gov/">
         {intl.formatMessage(i18nMessages.online311)}
       </ExternalLink>
