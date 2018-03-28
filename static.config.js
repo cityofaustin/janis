@@ -93,7 +93,7 @@ export default {
           allTopics: topicQueries[langCode],
         }),
         children: topicQueries[langCode].edges.map(({node:topic}) => ({
-          path: `/${topic.id}`,
+          path: `/${topic.slug}`,
           component: 'src/js/pages/Topic',
           getData: async () => ({
             topic: topic,

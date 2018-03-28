@@ -14,7 +14,7 @@ const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
   const breadcrumbs = order.map(breadcrumb => ({
     className: breadcrumb,
     text: rest[breadcrumb].text,
-    slug: `/${breadcrumb}s/${rest[breadcrumb].id}`,
+    slug: `/${breadcrumb}s/${rest[breadcrumb].slug}`,
   }));
 
   breadcrumbs.unshift({

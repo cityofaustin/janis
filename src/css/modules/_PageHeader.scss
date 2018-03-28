@@ -2,3 +2,8 @@
   text-transform: uppercase;
   text-align: center;
 }
+
+.coa-PageHeader__description {
+  border-bottom: 1px dashed $coa-color-gray;
+  padding-bottom: $coa-space-level7;
+}
