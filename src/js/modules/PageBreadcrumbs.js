@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import I18nNavLink from 'js/modules/I18nNavLink';
+import I18nLink from 'js/modules/I18nLink';
 
 const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
 
@@ -24,13 +24,13 @@ const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
   });
 
   const JSX = breadcrumbs.map((breadcrumb, index) =>
-    <I18nNavLink
+    <I18nLink
       key={index}
       className={`coa-PageBreadcrumbs__${breadcrumb.className}`}
       to={breadcrumb.slug}
     >
       {breadcrumb.text}
-    </I18nNavLink>
+    </I18nLink>
   );
 
   return (
