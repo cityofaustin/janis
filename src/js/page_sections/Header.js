@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import SearchSVG from 'js/svg/Search';
-import AirplaneSVG from 'js/svg/Airplane';
 import Menu from 'js/page_sections/Menu/Menu';
 import I18nLink from 'js/modules/I18nLink';
 import ExternalLink from 'js/modules/ExternalLink';
