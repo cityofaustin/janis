@@ -131,7 +131,7 @@ class Menu extends Component {
             this provides a full page click target area behind the nav menu
             which, when clicked, will close the submenu
           */
-          !!this.state.openSubmenuId && (
+            this.state.openSubmenuId !== null && (
             <div className="coa-Menu__close-submenu-click-target"
               onClick={() => this.setState({ openSubmenuId: null })}
             ></div>
