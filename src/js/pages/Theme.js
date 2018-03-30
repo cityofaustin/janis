@@ -15,8 +15,6 @@ const Theme = ({ theme }) => {
 
   return (
     <div>
-      {/* <PageBreadcrumbs title={title} order={['theme']} theme={theme} /> */}
-
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader title={title} description={description} />
       </div>

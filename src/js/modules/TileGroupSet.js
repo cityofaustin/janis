@@ -13,7 +13,7 @@ const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) =>  {
   const shouldTilesStackVertical = countOfGroups > 1;
 
   return (
-    <div className="coa-TileGroupSet">
+    <div className="coa-TileGroupSet row">
     {
       groups && groups.edges.map(({node: group}) => {
         if (group.services.edges.length < 1) return false;

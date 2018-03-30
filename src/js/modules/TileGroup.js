@@ -7,7 +7,10 @@ import I18nLink from 'js/modules/I18nLink';
 
 
 const TileGroup = ({ tiles, tag, border, title, description, titlePath, direction }) => (
-  <div className={`coa-TileGroup ${border ? 'coa-TileGroup--border' : ''}`}>
+  <div className={`
+    col-xs-12 ${direction ? 'col-md-6 col-lg-3' : ''}
+    coa-TileGroup ${border ? 'coa-TileGroup--border' : ''}
+  `}>
   { title && (
     <div className="coa-TileGroup__title">
       <I18nLink to={titlePath}>
