@@ -16,3 +16,18 @@
     }
   }
 }
+
+.coa-TileGroup--border {
+  border: 4px solid $coa-color-blue;
+  border-radius: 6px;
+  padding: 0 $coa-space-level7 $coa-space-level7;
+  margin-top: $coa-space-level7;
+}
+
+.coa-TileGroup__title {
+  margin: auto;
+  a {
+    text-decoration: none;
+    color: $coa-color-purple-darkest;
+  }
+}

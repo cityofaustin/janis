@@ -7,7 +7,11 @@ const SectionHeader = ({ title, arrow }) => (
   <div>
     <h2 className="coa_SectionHeader">
       {title}
-      {arrow && <ArrowRight size={32}/>}
+      {arrow && (
+        <span className="coa_SectionHeader--arrow">
+          <ArrowRight size={32}/>
+        </span>
+      )}
     </h2>
   </div>
 );
