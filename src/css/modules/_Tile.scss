@@ -4,6 +4,7 @@
   flex-direction: column;
   height: $coa-tile-height;
   margin: $coa-spacing-small;
+  min-width: $coa-tile-min-width;
   padding: $coa-spacing-medium $coa-spacing-medium $coa-spacing-large ;
   text-decoration: none;
   &:hover {

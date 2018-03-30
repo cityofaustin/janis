@@ -6,7 +6,7 @@ import SectionHeader from 'js/modules/SectionHeader';
 import I18nLink from 'js/modules/I18nLink';
 
 
-const TileGroup = ({ tiles, tag, border, title, description, titlePath }) => (
+const TileGroup = ({ tiles, tag, border, title, description, titlePath, direction }) => (
   <div className={`coa-TileGroup ${border ? 'coa-TileGroup--border' : ''}`}>
   { title && (
     <div className="coa-TileGroup__title">
@@ -16,17 +16,21 @@ const TileGroup = ({ tiles, tag, border, title, description, titlePath }) => (
     </div>
   )}
   { description && <p>{description}</p> }
-  { console.log(tiles)}
-  {
-    tiles.map(({ url, text }, index) =>
-      <Tile
-        url={url}
-        text={text}
-        tag={tag}
-        key={index}
-      />
-    )
-  }
+    <div className={`
+      coa-TileGroup__tiles
+      ${direction ? `coa-TileGroup__tiles--${direction}` : ''}
+    `}>
+      {
+        tiles.map(({ url, text }, index) =>
+        <Tile
+          url={url}
+          text={text}
+          tag={tag}
+          key={index}
+        />
+      )
+    }
+    </div>
   </div>
 )
 

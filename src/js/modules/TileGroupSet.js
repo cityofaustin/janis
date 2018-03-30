@@ -3,32 +3,42 @@ import PropTypes from 'prop-types';
 
 import TileGroup from 'js/modules/TileGroup';
 
-const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) => (
-  <div className="coa-TileGroupSet">
-  {
-    groups && groups.edges.map(({node: group}, i) => {
-      if (group.services.edges.length < 1) return false;
 
-      const tiles = group[tileKey].edges.map((tile) => ({
-        url: `/${tileKey}/${tile.node.slug}`,
-        text: tile.node.title,
-      }));
+const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) =>  {
 
-      return (
-        <div key={i}>
+  // gets the number of topics that have active services
+  const countOfGroups = groups.edges
+    .map((g) => g.node.services.edges.length > 0)
+    .reduce((total, amount) => amount ? total + 1 : total, 0);
+  const shouldTilesStackVertical = countOfGroups > 1;
+
+  return (
+    <div className="coa-TileGroupSet">
+    {
+      groups && groups.edges.map(({node: group}) => {
+        if (group.services.edges.length < 1) return false;
+
+        const tiles = group[tileKey].edges.map((tile) => ({
+          url: `/${tileKey}/${tile.node.slug}`,
+          text: tile.node.title,
+        }));
+
+        return (
           <TileGroup tiles={tiles}
             tag="service"
             border={true}
             title={group.text}
+            key={group.id}
             titlePath={`/${groupTitleSubPath}/${group.slug}`}
             description={group.description}
+            direction={shouldTilesStackVertical ? 'column' : false}
           />
-        </div>
-      )
-    })
-  }
-  </div>
-);
+        )
+      })
+    }
+    </div>
+  );
+}
 
 TileGroupSet.propTypes = {
   groups: PropTypes.object.isRequired,
