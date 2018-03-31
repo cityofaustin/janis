@@ -24,20 +24,20 @@
     "react-load-script": "^0.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-static": "^5.1.12",
+    "react-static": "^5.6.8",
     "react-universal-component": "^2.8.1",
     "storybook": "^1.0.0",
     "uswds": "^1.4.5"
   },
   "devDependencies": {
-    "babel-plugin-react-intl": "^2.4.0",
+    "@storybook/addon-a11y": "^3.3.15",
     "@storybook/addon-actions": "^3.3.15",
     "@storybook/addon-links": "^3.3.15",
     "@storybook/addon-viewport": "^3.3.15",
-    "@storybook/addon-a11y": "^3.3.15",
     "@storybook/addons": "^3.3.15",
     "@storybook/react": "^3.3.15",
     "babel-core": "^6.26.0",
+    "babel-plugin-react-intl": "^2.4.0",
     "eslint-config-react-tools": "1.x.x",
     "serve": "^6.1.0"
   },
