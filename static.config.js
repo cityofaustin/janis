@@ -21,16 +21,19 @@ const makeAllPages = async (langCode) => {
   const path = `/${!!langCode ? langCode : ''}`
   console.log(`- Building routes for ${path}...`);
 
+  const client = createGraphQLClientsByLang(langCode);
+  const { allThemes } = await client.request(allThemesQuery);
+
   const data = {
     path: path,
     component: 'src/js/pages/Home',
-    children: await makeChildPages(langCode),
+    children: await makeChildPages(client, allThemes),
     getData: async () => {
-      const client = createGraphQLClientsByLang(langCode);
       const { allServicePages: topServices } = await client.request(topServicesQuery);
 
       return {
         topServices,
+        allThemes,
         image: {
           file: 'original_images/lady-bird-lake.jpg',
           title: 'Lady Bird Lake walking trail'
@@ -42,31 +45,31 @@ const makeAllPages = async (langCode) => {
   return data;
 }
 
-const makeChildPages = (langCode) => {
-  const client = createGraphQLClientsByLang(langCode);
-
+const makeChildPages = (client, allThemes) => {
   return Promise.all([
-    makeServicePages(client),
-    makeTopicPages(client),
-    makeThemePages(client),
-    makeDepartmentPages(client),
+    makeServicePages(client, allThemes),
+    makeTopicPages(client, allThemes),
+    makeThemePages(allThemes),
+    makeDepartmentPages(client, allThemes),
   ]);
 }
 
-const makeServicePages = async (client) => {
+const makeServicePages = async (client, allThemes) => {
   const { allServicePages: allServices } = await client.request(allServicePagesQuery);
 
   const data = {
     path: '/services',
     component: 'src/js/pages/Services',
     getData: async () => ({
-      allServices
+      allServices,
+      allThemes,
     }),
     children: allServices.edges.map(({node: service}) => ({
       path: `/${service.slug}`,
       component: 'src/js/pages/Service',
       getData: async () => ({
         service,
+        allThemes,
       }),
     })),
   };
@@ -74,7 +77,7 @@ const makeServicePages = async (client) => {
   return data;
 }
 
-const makeTopicPages = async (client) => {
+const makeTopicPages = async (client, allThemes) => {
   const { allTopics } = await client.request(allTopicPagesQuery);
 
   const data = {
@@ -82,12 +85,14 @@ const makeTopicPages = async (client) => {
     component: 'src/js/pages/Topics',
     getData: async () => ({
       allTopics,
+      allThemes,
     }),
     children: allTopics.edges.map(({node: topic}) => ({
       path: `/${topic.slug}`,
       component: 'src/js/pages/Topic',
       getData: async () => ({
         topic,
+        allThemes,
       })
     }))
   };
@@ -95,10 +100,7 @@ const makeTopicPages = async (client) => {
   return data;
 }
 
-const makeThemePages = async (client) => {
-  const { allThemes } = await client.request(allThemesQuery);
-
-  const data = {
+const makeThemePages = async (allThemes) => ({
     path: '/themes',
     component: 'src/js/pages/Themes',
     getData: async () => ({
@@ -109,14 +111,12 @@ const makeThemePages = async (client) => {
       component: 'src/js/pages/Theme',
       getData: async () => ({
         theme,
+        allThemes,
       })
     }))
-  };
+});
 
-  return data;
-}
-
-const makeDepartmentPages = async (client) => {
+const makeDepartmentPages = async (client, allThemes) => {
   const { allDepartments } = await client.request(allDepartmentPagesQuery);
 
   const data = {
@@ -124,12 +124,14 @@ const makeDepartmentPages = async (client) => {
     component: 'src/js/pages/Departments',
     getData: async () => ({
       allDepartments,
+      allThemes,
     }),
     children: allDepartments.edges.map(({node: department}) => ({
       path: `${department.id}`,
       component: 'src/js/pages/Department',
       getData: async () => ({
         department,
+        allThemes,
       })
     }))
   };

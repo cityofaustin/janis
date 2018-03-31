@@ -9,7 +9,7 @@ const SubmenuItem = ({ className, topic, handleToggleAllMenus }) => (
       to={`/topics/${topic.slug}`}
       className={className}
     >
-      {topic.title}
+      {topic.text}
     </I18nNavLink>
   </li>
 )

@@ -30,7 +30,7 @@ const Submenu = ({id, theme, isSubmenuOpen, handleToggleAllMenus, intl}) => {
     >
     {
       theme.topics.edges.map(({ node: topic }, topicId) => {
-        return topic.slug !== "false" && (
+        return !!topic.services.edges.length && (
           <SubmenuItem
             key={topicId}
             className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
@@ -52,10 +52,10 @@ const ThemeSubmenuItem = ({theme, handleToggleAllMenus}) => (
     onClick={handleToggleAllMenus}
   >
     <I18nNavLink
-      to={`/theme/${theme.slug}`}
+      to={`/themes/${theme.slug}`}
       className="coa-SubmenuItem__block coa-SubmenuItem__block--theme"
     >
-      {theme.title}
+      {theme.text}
       <span className="coa-SubmenuItem__arrow-right">
         <ArrowRightSVG size="13" />
       </span>

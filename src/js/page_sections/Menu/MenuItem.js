@@ -18,12 +18,12 @@ const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAl
       onClick={(e) => handleSubmenuToggle(e, id)}
       onKeyDown={(e) => handleSubmenuToggle(e, id)}
     >
-      <span className="coa-MenuItem__text">{ theme.title }</span>
+      <span className="coa-MenuItem__text">{ theme.text }</span>
       <div className="coa-MenuItem__plus-sign d-lg-none">
         {
           isSubmenuOpen
-            ? <MinusSVG size="18" title={`close ${theme.title} section`} />
-            : <PlusSVG size="18" title={`open ${theme.title} section`} />
+            ? <MinusSVG size="18" title={`close ${theme.text} section`} />
+            : <PlusSVG size="18" title={`open ${theme.text} section`} />
         }
       </div>
       <div className="coa-MenuItem__arrow-down d-none d-lg-inline">
