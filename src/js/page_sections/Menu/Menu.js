@@ -131,11 +131,6 @@ class Menu extends Component {
   }
 }
 
-//TODO: temp fix for i18n nav items -- remove once data is collected via graphql
-Menu.contextTypes = {
-  langCode: PropTypes.string,
-}
-
 const HomeMobileMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
   <li className="d-lg-none" onClick={handleToggleAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
