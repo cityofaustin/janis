@@ -29,11 +29,15 @@ const i18nMessages = defineMessages({
 });
 
 const Service = ({ service, intl }) => {
-  const { image, title, slug, topic, steps, dynamicContent, additionalContent, contacts, related } = service;
+  const {
+    image, title, slug, topic, steps, dynamicContent, additionalContent,
+    contacts, related
+  } = service;
+  
+  const { theme } = topic;
 
   //TODO: data below should be sourced as above
-  const { servicepage, services311 } = jsonFileData;
-  const { theme } = servicepage;
+  const { services311 } = jsonFileData;
 
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
@@ -42,7 +46,11 @@ const Service = ({ service, intl }) => {
   return (
     <div>
       <PageBanner image={image} />
-      <PageBreadcrumbs title={title} order={['theme', 'topic']} theme={theme} topic={topic} />
+      <PageBreadcrumbs order={['topic', 'theme']}
+        title={title}
+        topic={topic}
+        theme={theme}
+      />
       <div className="wrapper wrapper--sm container-fluid">
 
         <PageHeader title={title} />

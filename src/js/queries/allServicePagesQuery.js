@@ -10,6 +10,11 @@ const allServicePagesQuery = `
             id
             slug
             text
+            theme {
+              id
+              slug
+              text
+            }
           }
           steps
           dynamicContent

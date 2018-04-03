@@ -11,8 +11,8 @@ const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
     }
   });
 
-  const breadcrumbs = order.map(breadcrumb => ({
-    className: breadcrumb,
+  const breadcrumbs = order.map((breadcrumb, i) => ({
+    className: i === 0 ? 'parent' : 'grandparent',
     text: rest[breadcrumb].text,
     slug: `/${breadcrumb}s/${rest[breadcrumb].slug}`,
   }));
