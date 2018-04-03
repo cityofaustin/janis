@@ -15,7 +15,7 @@ const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) =>  {
   return (
     <div className="coa-TileGroupSet row">
     {
-      groups && groups.edges.map(({node: group}) => {
+      groups && groups.edges.map(({node: group}, index) => {
         if (group.services.edges.length < 1) return false;
 
         const tiles = group[tileKey].edges.map((tile) => ({
@@ -28,7 +28,7 @@ const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) =>  {
             tag="service"
             hasBorder={true}
             title={group.text}
-            key={group.id}
+            key={index}
             titlePath={`/${groupTitleSubPath}/${group.slug}`}
             description={group.description}
             direction={shouldTilesStackVertical ? 'column' : false}
