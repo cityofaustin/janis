@@ -1,25 +1,14 @@
 import React, { Component } from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { withSiteData } from 'react-static';
 import PropTypes from 'prop-types'
 
 import I18nNavLink from 'js/modules/I18nNavLink';
 import ExternalLink from 'js/modules/ExternalLink';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
-import navigation_en from '__tmpdata/navigation';
-import navigation_es from '__tmpdata/navigation_es';
-import navigation_vi from '__tmpdata/navigation_vi';
-import navigation_ar from '__tmpdata/navigation_ar';
 
 import CloseSVG from 'js/svg/Close';
 import citySealImg from 'images/coa_seal.png';
-
-//TODO: temp fix for i18n nav items -- remove once date is collected via graphql
-const i18nNavigations = {
-  'en': navigation_en,
-  'es': navigation_es,
-  'vi': navigation_vi,
-  'ar': navigation_ar
-};
 
 const i18nMessages = defineMessages({
   home: {
@@ -92,7 +81,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { allThemes } = i18nNavigations[this.context.langCode].data;
+    const { allThemes } = this.props.navigation[this.props.intl.locale];
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
@@ -140,11 +129,6 @@ class Menu extends Component {
       </div>
     );
   }
-}
-
-//TODO: temp fix for i18n nav items -- remove once data is collected via graphql
-Menu.contextTypes = {
-  langCode: PropTypes.string,
 }
 
 const HomeMobileMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
@@ -208,4 +192,4 @@ const MobileFooter = injectIntl(({intl}) => (
   </div>
 ))
 
-export default Menu;
+export default withSiteData(injectIntl(Menu));
