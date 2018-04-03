@@ -28,12 +28,9 @@
     }
 
     @include media($coa-large-screen) {
-      &.coa-PageBreadcrumbs__grandparent {
-        display: inline;
-      }
+      display: inline;
 
       &.coa-PageBreadcrumbs__home {
-        display: inline;
         &:before {
           content: "";
           padding-right: 0;

@@ -33,7 +33,7 @@ const Service = ({ service, intl }) => {
     image, title, slug, topic, steps, dynamicContent, additionalContent,
     contacts, related
   } = service;
-  
+
   const { theme } = topic;
 
   //TODO: data below should be sourced as above
@@ -46,10 +46,10 @@ const Service = ({ service, intl }) => {
   return (
     <div>
       <PageBanner image={image} />
-      <PageBreadcrumbs order={['topic', 'theme']}
+      <PageBreadcrumbs
+        grandparent={{...theme, subpath: 'theme'}}
+        parent={{...topic, subpath: 'topics'}}
         title={title}
-        topic={topic}
-        theme={theme}
       />
       <div className="wrapper wrapper--sm container-fluid">
 
