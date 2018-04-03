@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 import TileGroupSet from 'js/modules/TileGroupSet';
-import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 

@@ -26,7 +26,7 @@ const TileGroupSet = ({ groups, tileKey, groupTitleSubPath }) =>  {
         return (
           <TileGroup tiles={tiles}
             tag="service"
-            border={true}
+            hasBorder={true}
             title={group.text}
             key={group.id}
             titlePath={`/${groupTitleSubPath}/${group.slug}`}

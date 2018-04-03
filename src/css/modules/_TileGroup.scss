@@ -14,8 +14,8 @@
 }
 
 .coa-TileGroup--border {
-  border: 4px solid $coa-color-blue;
-  border-radius: 6px;
+  border: $coa-tile-group-border solid $coa-color-blue;
+  border-radius: $coa-tile-group-border-radius;
   padding: 0 $coa-space-level4 $coa-space-level4;
   margin: $coa-space-level7 $coa-space-level6;
 }
