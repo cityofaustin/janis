@@ -35,7 +35,7 @@ const Topic = ({ topic, intl }) => {
   return (
     <div className="wrapper--top-border">
       <PageBreadcrumbs
-        parent={{...theme, subpath: 'theme'}}
+        parent={{...theme, subpath: 'themes'}}
         title={title}
       />
 

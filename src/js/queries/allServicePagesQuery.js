@@ -20,7 +20,6 @@ const allServicePagesQuery = `
           dynamicContent
           additionalContent
           related {
-            id
             slug
             title
           }
