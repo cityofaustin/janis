@@ -33,7 +33,7 @@ const Topic = ({ topic, intl }) => {
   const relatedLinks = cleanServiceLinks(links);
 
   return (
-    <div className="wrapper--top-border">
+    <div>
       <PageBreadcrumbs title={title} order={['topic']} topic={theme} />
 
       <div className="wrapper wrapper--sm container-fluid">

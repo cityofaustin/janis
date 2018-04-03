@@ -1,6 +1,7 @@
 .coa-Header {
-  position: relative;
+  border-bottom: 1px solid $coa-color-purple-lighter;
   font-family: $coa-font-sans;
+  position: relative;
 }
 
 .coa-Header--menu-is-open ~ main,
