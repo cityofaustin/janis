@@ -24,7 +24,7 @@
     "react-load-script": "^0.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-static": "^5.6.8",
+    "react-static": "^5.7.1",
     "react-universal-component": "^2.8.1",
     "storybook": "^1.0.0",
     "uswds": "^1.4.5"
