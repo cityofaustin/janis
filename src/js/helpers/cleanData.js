@@ -65,4 +65,4 @@ export const cleanServiceLinks = (links) => {
       text: link.title
     }
   });
-}
+};
