@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
+import { withSiteData } from 'react-static';
+
 import SearchSVG from 'js/svg/Search';
 import Menu from 'js/page_sections/Menu/Menu';
 import I18nLink from 'js/modules/I18nLink';
@@ -73,11 +75,15 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Menu isMenuOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu} />
+        <Menu
+          isMenuOpen={this.state.menuIsOpen}
+          toggleMenu={this.toggleMenu}
+          navigation={this.props.navigation[this.props.intl.locale]}
+        />
       </header>
     );
   }
 
 }
 
-export default injectIntl(Header);
+export default withSiteData(injectIntl(Header));

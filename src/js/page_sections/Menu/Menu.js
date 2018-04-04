@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { withSiteData } from 'react-static';
 import PropTypes from 'prop-types'
 
 import I18nNavLink from 'js/modules/I18nNavLink';
@@ -81,7 +80,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { allThemes } = this.props.navigation[this.props.intl.locale];
+    const { allThemes } = this.props.navigation;
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
@@ -192,4 +191,10 @@ const MobileFooter = injectIntl(({intl}) => (
   </div>
 ))
 
-export default withSiteData(injectIntl(Menu));
+Menu.childContextTypes = {
+  navigation: PropTypes.object,
+  isMenuOpen: PropTypes.bool,
+  toggleMenu: PropTypes.func,
+}
+
+export default injectIntl(Menu);
