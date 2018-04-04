@@ -34,7 +34,10 @@ const Topic = ({ topic, intl }) => {
 
   return (
     <div className="wrapper--top-border">
-      <PageBreadcrumbs title={title} order={['topic']} topic={theme} />
+      <PageBreadcrumbs
+        parent={{...theme, subpath: 'themes'}}
+        title={title}
+      />
 
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader title={title} description={description} />

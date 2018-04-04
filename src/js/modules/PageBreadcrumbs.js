@@ -1,8 +1,21 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import I18nLink from 'js/modules/I18nLink';
+import PropTypes from 'prop-types';
 
-const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
+const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (
+  <I18nLink
+    className={`coa-PageBreadcrumbs__${classNameSuffix}`}
+    to={breadcrumb.subpath ?
+      `/${breadcrumb.subpath}/${breadcrumb.slug}` :
+      `/${breadcrumb.slug}`
+    }
+  >
+    {breadcrumb.text}
+  </I18nLink>
+);
+
+const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => {
 
   const i18nMessages = defineMessages({
     home: {
@@ -11,36 +24,27 @@ const PageBreadcrumbs = ({ intl, title, order, ...rest }) => {
     }
   });
 
-  const breadcrumbs = order.map(breadcrumb => ({
-    className: breadcrumb,
-    text: rest[breadcrumb].text,
-    slug: `/${breadcrumb}s/${rest[breadcrumb].slug}`,
-  }));
-
-  breadcrumbs.unshift({
-    className: 'home',
+  const home = ({
     text: intl.formatMessage(i18nMessages.home),
-    slug: '/',
+    slug: '',
   });
-
-  const JSX = breadcrumbs.map((breadcrumb, index) =>
-    <I18nLink
-      key={index}
-      className={`coa-PageBreadcrumbs__${breadcrumb.className}`}
-      to={breadcrumb.slug}
-    >
-      {breadcrumb.text}
-    </I18nLink>
-  );
 
   return (
     <div className="wrapper container-fluid">
       <div className="coa-PageBreadcrumbs">
-        {JSX}
+        <Breadcrumb breadcrumb={home} classNameSuffix="home" />
+        { grandparent && <Breadcrumb breadcrumb={grandparent} classNameSuffix="grandparent" />}
+        { parent && <Breadcrumb breadcrumb={parent} classNameSuffix="parent" />}
         <span className="coa-PageBreadcrumbs__title">{title}</span>
       </div>
     </div>
   );
 }
+
+PageBreadcrumbs.propTypes = {
+  title: PropTypes.string,
+  parent: PropTypes.object,
+  grandparent: PropTypes.object,
+};
 
 export default injectIntl(PageBreadcrumbs);

@@ -23,17 +23,14 @@
       padding-right: $coa-spacing-small;
     }
 
-    &.coa-PageBreadcrumbs__topic {
+    &.coa-PageBreadcrumbs__parent {
       display: inline;
     }
 
     @include media($coa-large-screen) {
-      &.coa-PageBreadcrumbs__theme {
-        display: inline;
-      }
+      display: inline;
 
       &.coa-PageBreadcrumbs__home {
-        display: inline;
         &:before {
           content: "";
           padding-right: 0;
