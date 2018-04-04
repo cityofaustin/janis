@@ -1,6 +1,7 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import I18nLink from 'js/modules/I18nLink';
+import PropTypes from 'prop-types';
 
 const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (
   <I18nLink
@@ -39,5 +40,12 @@ const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => {
     </div>
   );
 }
+
+PageBreadcrumbs.propTypes = {
+  intl: PropTypes.shape,
+  title: PropTypes.text.isRequired,
+  parent: PropTypes.object.isRequired,
+  grandparent: PropTypes.object,
+};
 
 export default injectIntl(PageBreadcrumbs);

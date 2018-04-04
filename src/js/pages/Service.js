@@ -47,7 +47,7 @@ const Service = ({ service, intl }) => {
     <div>
       <PageBanner image={image} />
       <PageBreadcrumbs
-        grandparent={{...theme, subpath: 'theme'}}
+        grandparent={{...theme, subpath: 'themes'}}
         parent={{...topic, subpath: 'topics'}}
         title={title}
       />
