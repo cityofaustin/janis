@@ -192,9 +192,9 @@ const MobileFooter = injectIntl(({intl}) => (
 ))
 
 Menu.childContextTypes = {
-  navigation: PropTypes.object,
+  navigation: PropTypes.object.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
-  toggleMenu: PropTypes.func,
 }
 
 export default injectIntl(Menu);
