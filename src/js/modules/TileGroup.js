@@ -6,15 +6,15 @@ import SectionHeader from 'js/modules/SectionHeader';
 import I18nLink from 'js/modules/I18nLink';
 
 
-const TileGroup = ({ tiles, tag, border, title, description, titlePath, direction }) => (
+const TileGroup = ({ tiles, tag, hasBorder, title, description, titlePath, direction }) => (
   <div className={`
     col-xs-12 ${direction ? 'col-md-6 col-lg-3' : ''}
-    coa-TileGroup ${border ? 'coa-TileGroup--border' : ''}
+    coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}
   `}>
   { title && (
     <div className="coa-TileGroup__title">
       <I18nLink to={titlePath}>
-        <SectionHeader title={title} arrow={true} />
+        <SectionHeader title={title} hasArrow={true} />
       </I18nLink>
     </div>
   )}
@@ -40,7 +40,7 @@ const TileGroup = ({ tiles, tag, border, title, description, titlePath, directio
 TileGroup.propTypes = {
   tiles: PropTypes.array.isRequired,
   tag: PropTypes.string,
-  border: PropTypes.bool,
+  hasBorder: PropTypes.bool,
   title: PropTypes.string,
   description: PropTypes.string,
   titlePath: PropTypes.string,

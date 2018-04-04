@@ -42,9 +42,8 @@ const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => {
 }
 
 PageBreadcrumbs.propTypes = {
-  intl: PropTypes.shape,
-  title: PropTypes.text.isRequired,
-  parent: PropTypes.object.isRequired,
+  title: PropTypes.string,
+  parent: PropTypes.object,
   grandparent: PropTypes.object,
 };
 

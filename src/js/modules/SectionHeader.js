@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import ArrowRight from 'js/svg/ArrowRight';
 
 
-const SectionHeader = ({ title, arrow }) => (
+const SectionHeader = ({ title, hasArrow }) => (
   <div>
     <h2 className="coa_SectionHeader">
       {title}
-      {arrow && (
-        <span className="coa_SectionHeader--arrow">
+      {hasArrow && (
+        <span className="coa_SectionHeader__arrow">
           <ArrowRight size={32}/>
         </span>
       )}
@@ -17,7 +17,8 @@ const SectionHeader = ({ title, arrow }) => (
 );
 
 SectionHeader.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  hasArrow: PropTypes.bool
 };
 
 export default SectionHeader;
