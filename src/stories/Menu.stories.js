@@ -9,7 +9,7 @@ import { Route, Link, MemoryRouter } from 'react-router-dom';
 
 import Menu from 'js/page_sections/Menu/Menu';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
-import navigation from '__tmpdata/navigation';
+import staticNavData from 'stories/staticNavData';
 
 
 storiesOf('Menu', module)
@@ -20,16 +20,18 @@ storiesOf('Menu', module)
   .add('Menu open', () => (
     <IntlProvider locale="en">
       <Menu
-        isOpen={true}
-        toggleMenu={linkTo('Menu' , 'Menu closed')}
+        isMenuOpen={true}
+        toggleMenu={linkTo('Menu' , 'Menu closed in mobile')}
+        navigation={staticNavData}
       />
     </IntlProvider>
   ))
-  .add('Menu closed', () => (
+  .add('Menu closed in mobile', () => (
     <IntlProvider locale="en">
       <Menu
-        isOpen={false}
-        toggleMenu={linkTo('Menu', 'Menu open')}
+        isMenuOpen={false}
+        toggleMenu={linkTo('Menu' , 'Menu open')}
+        navigation={staticNavData}
       />
     </IntlProvider>
   ))
@@ -38,10 +40,10 @@ storiesOf('Menu', module)
       <ul className="coa-Menu__list">
         <MenuItem
           id={1}
-          theme={navigation.data.allThemes.edges[1].node}
-          openSection={1}
-          handleSublistToggle={linkTo('Menu', 'MenuItem open')}
-          handleMenuToggle={action('handleMenuToggle')}
+          theme={staticNavData.allThemes.edges[1].node}
+          isSubmenuOpen={false}
+          handleToggleAllMenus={action('handleToggleAllMenus')}
+          handleSubmenuToggle={linkTo('Menu', 'MenuItem open')}
         />
       </ul>
     </IntlProvider>
@@ -51,10 +53,10 @@ storiesOf('Menu', module)
       <ul className="coa-Menu__list">
         <MenuItem
           id={1}
-          theme={navigation.data.allThemes.edges[1].node}
-          openSection={10}
-          handleSublistToggle={linkTo('Menu', 'MenuItem closed')}
-          handleMenuToggle={action('handleMenuToggle')}
+          theme={staticNavData.allThemes.edges[1].node}
+          isSubmenuOpen={true}
+          handleToggleAllMenus={action('handleToggleAllMenus')}
+          handleSubmenuToggle={linkTo('Menu', 'MenuItem closed')}
         />
       </ul>
     </IntlProvider>
