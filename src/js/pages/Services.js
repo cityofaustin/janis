@@ -4,7 +4,6 @@ import { get } from 'lodash';
 
 import Hero from 'js/modules/Hero';
 import TileGroup from 'js/modules/TileGroup';
-import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanServiceLinks } from 'js/helpers/cleanData';
@@ -25,12 +24,6 @@ const Services = ({ allServices }) => {
         <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
       </div>
       <TileGroup tiles={relatedLinks} />
-      <div className="coa-section coa-section--lightgrey">
-        <div className="wrapper">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
-        </div>
-      </div>
       <ThreeOneOne services311={services311} />
     </div>
   )

@@ -8,7 +8,6 @@ import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
 import Hero from 'js/modules/Hero';
 import ContactDetails from 'js/modules/ContactDetails';
-import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Department = ({ department }) => {
@@ -46,13 +45,6 @@ const Department = ({ department }) => {
           { contact && <ContactDetails contact={contact} /> }
 
           </div>
-        </div>
-      </div>
-
-      <div className="coa-section coa-section--lightgrey">
-        <div className="wrapper">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
         </div>
       </div>
 

@@ -11,7 +11,7 @@ import ApplicationBlock from 'js/modules/ApplicationBlock';
 import ContactDetails from 'js/modules/ContactDetails';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
-
+import FormFeedback from 'js/modules/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
@@ -64,6 +64,10 @@ const Service = ({ service, intl }) => {
       <div className="wrapper container-fluid">
         <SectionHeader title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)} />
         <TileGroup tiles={cleanedRelated} tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)} />
+      </div>
+
+      <div className="wrapper wrapper--sm container-fluid">
+        <FormFeedback />
       </div>
 
       <ThreeOneOne services311={services311} />
