@@ -65,8 +65,19 @@ class FormFeedback extends Component {
     };
   }
 
+  logEvent(action, label) {
+    logEvent({
+     category: 'FORM__site-feedback',
+     action: `${action}__step-${this.state.step}`,
+     label: label
+    });
+  }
+
   handleEmojiClick = (e) => {
-    //log event in ga
+    this.logEvent('emoji-click', JSON.stringify({
+        'emoji':e.currentTarget.value
+      }) );
+
     this.setState({
       step: 2,
       emoji: e.currentTarget.value
@@ -81,7 +92,11 @@ class FormFeedback extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //log event in ga
+
+    this.logEvent('send-feedback-click', JSON.stringify({
+      'emoji': this.state.emoji,
+      'feedback': this.state.feedback
+    }));
 
     if(!this.state.feedback) {
       this.setState({
@@ -109,12 +124,13 @@ class FormFeedback extends Component {
       })
     })
     .catch((e) => {
+      this.logEvent('send-feedback-error');
       console.log('error submitting form.', e)
     })
   }
 
   handleReset = (e) => {
-    //log event in ga
+    this.logEvent('reset');
     this.setState({
       step: 1,
       loading: false,
@@ -173,7 +189,7 @@ class FormFeedback extends Component {
           <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titlea)} />
           <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titleb)} />
           <form>
-            <label for="site-feedback-textarea"
+            <label htmlFor="site-feedback-textarea"
               className="coa-sr-only"
             >{intl.formatMessage(i18nMessages.step2titleb)}</label>
             <textarea id="site-feedback-textarea"
