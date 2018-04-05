@@ -56,21 +56,22 @@ p {
       text-align: right;
     }
     th:first-child {
-      padding-left: 6rem;
+      padding-left: $coa-spacing-xlarge;
       padding-right: 0;
     }
   }
 }
 
-// .usa-input-error {
-//   margin-top: 1rem;
-//   margin-bottom: 1rem;
-
-//   label {
-//     width: calc(100% + 1.9rem); // 1.5rem left padding + 4px border from input error spacing
-//   }
-// }
-
-// .usa-input-error-message {
-//   margin-bottom: $coa-space-level2;
-// }
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  &:hover {
+    background: none;
+    color: inherit;
+  }
+}

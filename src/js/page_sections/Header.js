@@ -48,7 +48,7 @@ class Header extends Component {
             <div className="col-xs-6 coa-Header__navbar-brand">
               <div className="coa-Header__menu d-lg-none">
                 <button onClick={this.toggleMenu} tabIndex="0"
-                  className="coa-Header__menu-toggle coa-button-reset" ref="menu"
+                  className="coa-Header__menu-toggle" ref="menu"
                 >
                   {intl.formatMessage(i18nMessages.headerMenuButton)}
                 </button>

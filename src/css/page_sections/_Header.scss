@@ -36,9 +36,9 @@
 .coa-Header__logo {
   padding: $coa-space-level3;
   font-family: $coa-font-sans;
-  font-weight: 700;
+  font-weight: $coa-font-semibold;
   a {
-    color: $coa-color-black;
+    color: $coa-color-purple-dark;
     text-decoration: none;
     @include media($coa-large-screen) {
       font-size: $coa-font-size-medium;
@@ -47,16 +47,14 @@
 }
 
 .coa-Header__menu-toggle {
+  font-weight: $coa-font-semibold;
   text-transform: uppercase;
-  font-family: $coa-font-sans;
-  font-weight: 700;
-  cursor: pointer;
 }
 
 .coa-Header__right-controls {
   vertical-align: middle;
   text-align: right;
-  font-size: 1.5rem;
+  font-size: $coa-font-size-xsmall;
   display: flex;
   justify-content: flex-end;
   padding: $coa-space-level3 0;

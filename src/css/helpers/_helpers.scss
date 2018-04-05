@@ -1,32 +1,7 @@
-.nowrap {
-  white-space: nowrap;
-}
-
 .coa-text-spacer--vertical {
-  margin: 0 $coa-space-level3;
-  &:after {
-    content: "|";
-    font-size: $h4-font-size;
+    &:after {
+      content: "|";
+      font-size: $coa-font-size-small;
+      margin: 0 $coa-spacing-md-small;
+    }
   }
-}
-
-.coa-link {
-  text-decoration: underline;
-  color: $color-primary;
-  cursor: pointer;
-}
-
-// This in only necessary as long as we include USWDS css.
-.coa-button-reset {
-  background: transparent;
-  border: none;
-  margin: auto;
-  color: $color-black;
-  font-weight: normal;
-  line-height: normal;
-  padding: initial;
-  &:hover {
-    background: transparent;
-    color: $coa-color-blue;
-  }
-}
