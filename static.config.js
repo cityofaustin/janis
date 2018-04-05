@@ -21,12 +21,13 @@ const makeAllPages = async (langCode) => {
   const path = `/${!!langCode ? langCode : ''}`
   console.log(`- Building routes for ${path}...`);
 
+  const client = createGraphQLClientsByLang(langCode);
+
   const data = {
     path: path,
     component: 'src/js/pages/Home',
-    children: await makeChildPages(langCode),
+    children: await makeChildPages(client),
     getData: async () => {
-      const client = createGraphQLClientsByLang(langCode);
       const { allServicePages: topServices } = await client.request(topServicesQuery);
 
       return {
@@ -42,9 +43,7 @@ const makeAllPages = async (langCode) => {
   return data;
 }
 
-const makeChildPages = (langCode) => {
-  const client = createGraphQLClientsByLang(langCode);
-
+const makeChildPages = (client) => {
   return Promise.all([
     makeServicePages(client),
     makeTopicPages(client),
@@ -60,7 +59,7 @@ const makeServicePages = async (client) => {
     path: '/services',
     component: 'src/js/pages/Services',
     getData: async () => ({
-      allServices
+      allServices,
     }),
     children: allServices.edges.map(({node: service}) => ({
       path: `/${service.slug}`,
@@ -111,6 +110,7 @@ const makeThemePages = async (client) => {
         theme,
       })
     }))
+
   };
 
   return data;
@@ -141,6 +141,20 @@ export default {
   getSiteProps: () => ({
     title: 'City of Austin',
   }),
+  getSiteData: async () => {
+    const data = {
+      navigation: {}
+    };
+
+    const requests = SUPPORTED_LANG_CODES.map((langCode) => createGraphQLClientsByLang(langCode).request(allThemesQuery));
+
+    (await Promise.all(requests)).forEach((response, i) => {
+      const langCode = SUPPORTED_LANG_CODES[i];
+      data.navigation[langCode] = response;
+    });
+
+    return data;
+  },
   getRoutes: async () => {
     const routes = [
       {
