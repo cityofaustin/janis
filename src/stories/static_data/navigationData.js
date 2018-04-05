@@ -446,7 +446,7 @@ const staticNavData = {
                   },
                   {
                      "node":{
-                        "text":"Fudning, grants, & rebates",
+                        "text":"Funding, grants, & rebates",
                         "slug":"funding-grants-rebates",
                         "description":"",
                         "services":{

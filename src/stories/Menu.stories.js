@@ -9,7 +9,7 @@ import { Route, Link, MemoryRouter } from 'react-router-dom';
 
 import Menu from 'js/page_sections/Menu/Menu';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
-import staticNavData from 'stories/staticNavData';
+import navigationData from 'stories/static_data/navigationData';
 
 
 storiesOf('Menu', module)
@@ -22,7 +22,7 @@ storiesOf('Menu', module)
       <Menu
         isMenuOpen={true}
         toggleMenu={linkTo('Menu' , 'Menu closed in mobile')}
-        navigation={staticNavData}
+        navigation={navigationData}
       />
     </IntlProvider>
   ))
@@ -31,7 +31,7 @@ storiesOf('Menu', module)
       <Menu
         isMenuOpen={false}
         toggleMenu={linkTo('Menu' , 'Menu open')}
-        navigation={staticNavData}
+        navigation={navigationData}
       />
     </IntlProvider>
   ))
@@ -40,7 +40,7 @@ storiesOf('Menu', module)
       <ul className="coa-Menu__list">
         <MenuItem
           id={1}
-          theme={staticNavData.allThemes.edges[1].node}
+          theme={navigationData.allThemes.edges[1].node}
           isSubmenuOpen={false}
           handleToggleAllMenus={action('handleToggleAllMenus')}
           handleSubmenuToggle={linkTo('Menu', 'MenuItem open')}
@@ -53,7 +53,7 @@ storiesOf('Menu', module)
       <ul className="coa-Menu__list">
         <MenuItem
           id={1}
-          theme={staticNavData.allThemes.edges[1].node}
+          theme={navigationData.allThemes.edges[1].node}
           isSubmenuOpen={true}
           handleToggleAllMenus={action('handleToggleAllMenus')}
           handleSubmenuToggle={linkTo('Menu', 'MenuItem closed')}
