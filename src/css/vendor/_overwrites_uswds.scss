@@ -31,9 +31,27 @@ p {
   @include responsivetext();
 }
 
-// label, textarea, input, select {
-//   max-width: none;
-// }
+label, textarea, input, select {
+  max-width: none;
+}
+
+input[type="button"] {
+  margin: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  &:hover {
+    background: none;
+    color: inherit;
+  }
+}
 
 .usa-table-borderless {
   margin: 0;
@@ -59,19 +77,5 @@ p {
       padding-left: $coa-spacing-xlarge;
       padding-right: 0;
     }
-  }
-}
-
-button {
-  background: none;
-  border: none;
-  color: inherit;
-  font-weight: normal;
-  line-height: normal;
-  margin: 0;
-  padding: 0;
-  &:hover {
-    background: none;
-    color: inherit;
   }
 }
