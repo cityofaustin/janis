@@ -193,8 +193,8 @@ const PrivacyPolicyMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
 ))
 
 const MobileFooter = injectIntl(({intl}) => (
-  <div className="coa-Menu__mobile-footer">
-    <p className="coa-Menu__footer-text d-lg-none">
+  <div className="coa-Menu__mobile-footer d-lg-none">
+    <p className="coa-Menu__footer-text">
       <FormattedMessage
         id="Footer.bodytext"
         defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
@@ -204,7 +204,7 @@ const MobileFooter = injectIntl(({intl}) => (
         }}
       />
     </p>
-    <img className="d-lg-none" src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
+    <img src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
   </div>
 ))
 

@@ -44,29 +44,24 @@ class Header extends Component {
     return (
       <header className={`coa-Header ${this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''}`} role="banner">
         <div className="container-fluid wrapper">
-          <div className="row coa-Header__top-row">
-            <div className="col-xs-6 coa-Header__navbar-brand">
-              <div className="coa-Header__menu d-lg-none">
-                <button onClick={this.toggleMenu} tabIndex="0"
-                  className="coa-Header__menu-toggle" ref="menu"
-                >
-                  {intl.formatMessage(i18nMessages.headerMenuButton)}
-                </button>
-              </div>
-              <div className="coa-Header__logo">
-                <I18nLink to="/">ALPHA.AUSTIN.GOV</I18nLink>
-              </div>
+          <div className="coa-Header__controls">
+            <div className="coa-Header__left-controls">
+              <button onClick={this.toggleMenu} tabIndex="0"
+                className="coa-Header__menu-toggle d-lg-none" ref="menu"
+              >
+                {intl.formatMessage(i18nMessages.headerMenuButton)}
+              </button>
+              <span className="coa-text-spacer--vertical d-lg-none"></span>
+              <I18nLink className="coa-Header__logo" to="/">ALPHA.AUSTIN.GOV</I18nLink>
             </div>
-            <div className="col-xs-6 coa-Header__right-controls">
-              <div className="d-none d-md-block">
-                <ExternalLink to="http://www.austintexas.gov/airport">
-                  {intl.formatMessage(i18nMessages.headerAirportText)}
-                </ExternalLink>
-                <span className="coa-text-spacer--vertical"></span>
-                <ExternalLink to="http://311.austintexas.gov/">
-                  311
-                </ExternalLink>
-              </div>
+            <div className="coa-Header__right-controls">
+              <ExternalLink to="http://www.austintexas.gov/airport">
+                {intl.formatMessage(i18nMessages.headerAirportText)}
+              </ExternalLink>
+              <span className="coa-text-spacer--vertical"></span>
+              <ExternalLink to="http://311.austintexas.gov/">
+                311
+              </ExternalLink>
               {/* <I18nLink to="/search" className="coa-Header__search">
                 <span className="d-none d-md-block">{intl.formatMessage(i18nMessages.headerSearchButton)}</span> <SearchSVG size="18"/>
               </I18nLink> */}
