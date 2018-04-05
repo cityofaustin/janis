@@ -2,10 +2,12 @@
   font-family: $coa-font-serif;
   font-weight: $coa-font-regular;
   font-size: $coa-font-size-medium;
+  line-height: $coa-line-height-medium;
   margin-top: 0;
   text-align: center;
 
   @include media($coa-small-screen) {
     font-size: $coa-font-size-large;
+    line-height: $coa-line-height-large;
   }
 }
