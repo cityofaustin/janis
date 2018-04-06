@@ -61,7 +61,8 @@ class FormFeedback extends Component {
       step: 1,
       loading: false,
       emoji: null,
-      feedback: null
+      feedback: null,
+      error: null
     };
   }
 
@@ -102,13 +103,14 @@ class FormFeedback extends Component {
       this.setState({
         step: 3,
         emoji: null,
-        feedback: null
+        feedback: null,
+        error: null
       });
       return;
     }
 
     this.setState({
-      loading: true
+      loading: true,
     })
 
     postFeedback({
@@ -120,12 +122,19 @@ class FormFeedback extends Component {
         step: 3,
         loading: false,
         emoji: null,
-        feedback: null
+        feedback: null,
+        error: null
       })
     })
     .catch((e) => {
       this.logEvent('send-feedback-error');
-      console.log('error submitting form.', e)
+      //TODO: better handle error messaging
+      console.log('ERROR:', e);
+
+      this.setState({
+        loading: false,
+        error: true
+      })
     })
   }
 
@@ -135,7 +144,8 @@ class FormFeedback extends Component {
       step: 1,
       loading: false,
       emoji: null,
-      feedback: null
+      feedback: null,
+      error: null
     })
   }
 
@@ -189,6 +199,9 @@ class FormFeedback extends Component {
           <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titlea)} />
           <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titleb)} />
           <form>
+            { this.state.error && (
+              <p className="coa-FormFeedback__error">Oh no, something went wrong! Please, try submitting your feedback again.</p>
+            )}
             <label htmlFor="site-feedback-textarea"
               className="coa-sr-only"
             >{intl.formatMessage(i18nMessages.step2titleb)}</label>
