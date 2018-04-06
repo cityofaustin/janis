@@ -76,7 +76,7 @@ class FormFeedback extends Component {
 
   handleEmojiClick = (e) => {
     this.logEvent('emoji-click', JSON.stringify({
-        'emoji':e.currentTarget.value
+        'emoji': e.currentTarget.value
       }) );
 
     this.setState({
