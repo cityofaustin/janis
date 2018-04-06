@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import SectionHeaderSerif from 'js/modules/SectionHeaderSerif';
+import SectionHeader from 'js/modules/SectionHeader';
 import Phone from 'js/modules/ContactPhone';
 import Email from 'js/modules/ContactEmail';
 import Address from 'js/modules/ContactAddress';
@@ -20,7 +20,7 @@ const Contact = ({ contact, intl }) => {
 
   return (
   <div className="coa-ContactDetails">
-    <SectionHeaderSerif title={intl.formatMessage(i18nMessages.contactDetailsTitle)} />
+    <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
     <div className="coa-ContactDetails__items">
       { phone && (
         <Phone className="coa-ContactDetails__item" phone={phone.default} ttyphone={phone.tty} />

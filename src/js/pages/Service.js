@@ -70,7 +70,7 @@ const Service = ({ service, intl }) => {
       </div>
 
       <div className="wrapper container-fluid">
-        <SectionHeader title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)} />
+        <SectionHeader hasHighlight={true}>{intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)}</SectionHeader>
         <TileGroup tiles={cleanedRelated} tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)} />
       </div>
 

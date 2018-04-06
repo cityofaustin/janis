@@ -39,7 +39,7 @@ const Topic = ({ topic, intl }) => {
       />
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader title={title} description={description} />
-        <SectionHeader title={callToAction} />
+        <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
       </div>
 
       <div className="wrapper container-fluid">

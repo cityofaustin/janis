@@ -14,7 +14,7 @@ const TileGroup = ({ tiles, tag, hasBorder, title, description, titlePath, direc
   { title && (
     <div className="coa-TileGroup__title">
       <I18nLink to={titlePath}>
-        <SectionHeader title={title} hasArrow={true} />
+        <SectionHeader hasHighlight={true} hasArrow={true}>{title}</SectionHeader>
       </I18nLink>
     </div>
   )}

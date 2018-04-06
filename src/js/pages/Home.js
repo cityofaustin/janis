@@ -44,7 +44,7 @@ const Home = ({ topServices, image, intl }) => {
         </p>
       </SecondaryContentBanner>
       <div className="wrapper container-fluid">
-        <SectionHeader title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)} />
+        <SectionHeader hasHighlight={true}>{intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}</SectionHeader>
         <TileGroup tiles={serviceLinks} tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)} />
       </div>
       <ThreeOneOne services311={services311} />

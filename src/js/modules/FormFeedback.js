@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logEvent } from 'js/helpers/googleAnalytics';
-import SectionHeaderSerif from 'js/modules/SectionHeaderSerif';
+import SectionHeader from 'js/modules/SectionHeader';
 
 import emojiDisappointed from 'images/emojis/disappointed.png';
 import emojiSad from 'images/emojis/sad.png';
@@ -158,7 +158,7 @@ class FormFeedback extends Component {
 
       { this.state.step === 1 && (
         <div className="coa-FormFeedback__step1">
-          <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step1title)} />
+          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step1title)}</SectionHeader>
           <div className="coa-FormFeedback__emojis">
             <button onClick={this.handleEmojiClick}
               value="-2"
@@ -196,8 +196,11 @@ class FormFeedback extends Component {
 
       { this.state.step === 2 && (
         <div className="coa-FormFeedback__step2">
-          <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titlea)} />
-          <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step2titleb)} />
+          <SectionHeader isSerif={true}>
+            {intl.formatMessage(i18nMessages.step2titlea)}
+            <br />
+            {intl.formatMessage(i18nMessages.step2titleb)}
+          </SectionHeader>
           <form>
             { this.state.error && (
               <p className="coa-FormFeedback__error">Oh no, something went wrong! Please, try submitting your feedback again.</p>
@@ -218,7 +221,7 @@ class FormFeedback extends Component {
 
       { this.state.step === 3 && (
         <div className="coa-FormFeedback__step3">
-          <SectionHeaderSerif title={intl.formatMessage(i18nMessages.step3title)} />
+          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step3title)}</SectionHeader>
           <input type="button" onClick={this.handleReset} value={intl.formatMessage(i18nMessages.step3button)} />
         </div>
       )}

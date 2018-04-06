@@ -30,11 +30,11 @@ const Department = ({ department }) => {
           <div className="coa-main__left col-xs-12 col-lg-8">
 
             <div className="coa-section">
-              <SectionHeader title={title}/>
+              <SectionHeader hasHighlight={true}>{title}</SectionHeader>
             </div>
 
             <div className="coa-section">
-              <SectionHeader title="Our Mission"/>
+              <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
               <p>{body}</p>
             </div>
 
