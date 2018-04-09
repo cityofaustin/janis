@@ -1,8 +1,8 @@
 import React from 'react';
-//TODO: import correct svg
 import PhoneSVG from 'js/svg/Phone';
+import PropTypes from 'prop-types';
 
-const ContactPhone = ({ className, phone, ttyphone }) => (
+const Phone = ({ className, phone, ttyphone }) => (
   <div className={`${className} coa-ContactPhone`}>
     <PhoneSVG size="20"/>
     <div>
@@ -12,4 +12,10 @@ const ContactPhone = ({ className, phone, ttyphone }) => (
   </div>
 );
 
-export default ContactPhone;
+Phone.propTypes = {
+  phone: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  ttyphone: PropTypes.string,
+};
+
+export default Phone;

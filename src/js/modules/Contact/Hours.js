@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedTime } from 'react-intl';
 import {sortBy, findIndex} from 'lodash';
-//TODO: import correct svg
 import ClockSVG from 'js/svg/ClockO';
 
 
@@ -36,7 +36,7 @@ const i18nMessagesWeekdayMap = {
     />,
 };
 
-class ContactHours extends Component {
+class Hours extends Component {
 
   sort(hours) {
     // TODO: Joplin data MUST include data for all 7 days of week.
@@ -74,4 +74,9 @@ class ContactHours extends Component {
   }
 }
 
-export default ContactHours;
+Hours.propTypes = {
+  className: PropTypes.string,
+  hours: PropTypes.array.isRequired,
+};
+
+export default Hours;

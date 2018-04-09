@@ -8,7 +8,7 @@ import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import ApplicationBlock from 'js/modules/ApplicationBlock';
-import ContactDetails from 'js/modules/ContactDetails';
+import ContactDetails from 'js/modules/Contact/ContactDetails';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
 

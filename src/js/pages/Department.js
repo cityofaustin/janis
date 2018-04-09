@@ -7,7 +7,7 @@ import { withRouteData } from 'react-static';
 import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
 import PageHeader from 'js/modules/PageHeader';
-import ContactDetails from 'js/modules/ContactDetails';
+import ContactDetails from 'js/modules/Contact/ContactDetails';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 

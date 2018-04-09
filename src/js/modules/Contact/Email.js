@@ -1,12 +1,17 @@
 import React from 'react';
-//TODO: import correct svg
 import EnvelopSVG from 'js/svg/EnvelopO';
+import PropTypes from 'prop-types';
 
-const ContactEmail = ({ className, email }) => (
+const Email = ({ className, email }) => (
   <div className={`${className} coa-ContactEmail`}>
     <EnvelopSVG size="20"/>
     <a href={`mailto:${email}`}>{email}</a>
   </div>
 );
 
-export default ContactEmail;
+Email.propTypes = {
+  email: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+export default Email;
