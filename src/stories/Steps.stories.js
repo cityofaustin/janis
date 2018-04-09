@@ -6,7 +6,6 @@ import { IntlProvider } from 'react-intl';
 
 
 import Steps from 'js/modules/Steps';
-import jsonFileData from '__tmpdata/pages';
 
 const stepsHtml = `
   <ul>
