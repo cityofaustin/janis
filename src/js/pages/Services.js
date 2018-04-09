@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
-import Hero from 'js/modules/Hero';
+import PageHeader from 'js/modules/PageHeader';
 import TileGroup from 'js/modules/TileGroup';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
@@ -10,23 +11,36 @@ import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-const title = get(jsonFileData, "servicespage.title", null);
-const body = get(jsonFileData, "servicespage.body", null);
 const services311 = get(jsonFileData, "services311", null);
 
-const Services = ({ allServices }) => {
+const i18nMessages = defineMessages({
+  servicesPageTitle: {
+    id: 'Services.title',
+    defaultMessage: 'Use City of Austin Services',
+  },
+  servicePageDescription: {
+    id: 'Services.description',
+    defaultMessage: 'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
+  }
+})
+
+const Services = ({ allServices, intl }) => {
   const relatedLinks = cleanServiceLinks(allServices)
 
   return (
     <div>
-      <div className="wrapper">
-        <Hero callout={title} />
-        <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
+      <div className="wrapper wrapper--sm container-fluid">
+        <PageHeader
+          title={intl.formatMessage(i18nMessages.servicesPageTitle)}
+          description={intl.formatMessage(i18nMessages.servicePageDescription)}
+        />
       </div>
-      <TileGroup tiles={relatedLinks} />
-      <ThreeOneOne services311={services311} />
+      <div className="wrapper container-fluid">
+        <TileGroup tiles={relatedLinks} />
+        <ThreeOneOne services311={services311} />
+      </div>
     </div>
   )
 }
 
-export default withRouteData(Services)
+export default withRouteData(injectIntl(Services))
