@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouteData } from 'react-static';
 import { get } from 'lodash';
 
-import Hero from 'js/modules/Hero';
+import PageHeader from 'js/modules/PageHeader';
 import TileGroup from 'js/modules/TileGroup';
 import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
@@ -20,8 +20,8 @@ const Services = ({ allServices }) => {
 
   return (
     <div>
-      <div className="wrapper">
-        <Hero callout={title} />
+      <div className="wrapper container-fluid">
+        <PageHeader title={title} />
         <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
       </div>
       <TileGroup tiles={relatedLinks} />

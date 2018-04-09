@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 
-import Hero from 'js/modules/Hero';
+import PageHeader from 'js/modules/PageHeader';
 
 const Departments = ({ allDepartments }) => {
   const links = allDepartments.edges.map(department => ({
@@ -10,8 +10,8 @@ const Departments = ({ allDepartments }) => {
   }));
 
   return (
-    <div className="wrapper">
-      <Hero callout={"All Departments"} />
+    <div className="wrapper container-fluid">
+      <PageHeader title={"All Departments"} />
     </div>
   )
 }
