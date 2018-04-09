@@ -1,17 +1,4 @@
 {
-  "meta": {},
-  "themepage":{},
-  "topicpage":{},
-  "servicespage": {
-    "title": "Use City of Austin Services",
-    "body": "<p>The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.</p>"
-  },
-  "servicepage":{
-    "theme": {
-      "text":"Housing and Utilities",
-      "slug":"/themes/housing-and-utilities"
-    }
-  },
   "departmentpage": {
     "projectsRelated": [
       {

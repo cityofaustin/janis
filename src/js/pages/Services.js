@@ -1,39 +1,46 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import PageHeader from 'js/modules/PageHeader';
 import TileGroup from 'js/modules/TileGroup';
-import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-const title = get(jsonFileData, "servicespage.title", null);
-const body = get(jsonFileData, "servicespage.body", null);
 const services311 = get(jsonFileData, "services311", null);
 
-const Services = ({ allServices }) => {
+const i18nMessages = defineMessages({
+  servicesPageTitle: {
+    id: 'Services.title',
+    defaultMessage: 'Use City of Austin Services',
+  },
+  servicePageDescription: {
+    id: 'Services.description',
+    defaultMessage: 'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
+  }
+})
+
+const Services = ({ allServices, intl }) => {
   const relatedLinks = cleanServiceLinks(allServices)
 
   return (
     <div>
+      <div className="wrapper wrapper--sm container-fluid">
+        <PageHeader 
+          title={intl.formatMessage(i18nMessages.servicesPageTitle)}
+          description={intl.formatMessage(i18nMessages.servicePageDescription)}
+        />
+      </div>
       <div className="wrapper container-fluid">
-        <PageHeader title={title} />
-        <div className="coa-main__body" dangerouslySetInnerHTML={{__html: body}} />
+        <TileGroup tiles={relatedLinks} />
+        <ThreeOneOne services311={services311} />
       </div>
-      <TileGroup tiles={relatedLinks} />
-      <div className="coa-section coa-section--lightgrey">
-        <div className="wrapper">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
-        </div>
-      </div>
-      <ThreeOneOne services311={services311} />
     </div>
   )
 }
 
-export default withRouteData(Services)
+export default withRouteData(injectIntl(Services))
