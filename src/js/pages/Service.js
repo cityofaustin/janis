@@ -25,6 +25,10 @@ const i18nMessages = defineMessages({
   serviceRelatedlinksTag: {
     id: 'Service.RelatedLinks.Tag',
     defaultMessage: 'Service',
+  },
+  htmlFromAdminSectionTitle: {
+    id: 'HtmlFromAdmin.SectionTitle',
+    defaultMessage: 'What else do I need to know?',
   }
 });
 
@@ -66,7 +70,12 @@ const Service = ({ service, intl }) => {
           )
         )}
 
-        { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
+        { additionalContent && (
+            <HtmlFromAdmin
+              title={intl.formatMessage(i18nMessages.htmlFromAdminSectionTitle)}
+              content={additionalContent}
+            />
+        )}
 
         { contact && <ContactDetails contact={contact} /> }
 
