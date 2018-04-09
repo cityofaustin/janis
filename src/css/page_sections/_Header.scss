@@ -16,9 +16,9 @@
   display: flex;
   height: $coa-header-toprow-height;
   justify-content: space-between;
-  padding-right: $coa-spacing-small;
   @include media($coa-large-screen) {
     padding-left:$coa-spacing-small;
+    padding-right:$coa-spacing-small;
   }
 }
 
