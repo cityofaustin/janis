@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
+import { emojis, i18nEmojis } from 'js/helpers/emojis';
 import SectionHeader from 'js/modules/SectionHeader';
-
-import emojiDisappointed from 'images/emojis/disappointed.png';
-import emojiSad from 'images/emojis/sad.png';
-import emojiNeutral from 'images/emojis/neutral.png';
-import emojiSlightlySmiling from 'images/emojis/slightly_smiling.png';
-import emojiGrinning from 'images/emojis/grinning.png';
 
 const i18nMessages = defineMessages({
   step1title: {
@@ -30,52 +25,8 @@ const i18nMessages = defineMessages({
   step3button: {
     id: 'FormFeedback.step3.button',
     defaultMessage: 'Give more feedback',
-  },
-  emojiDisappointed: {
-    id: 'FormFeedback.emojiDisappointed.altText',
-    defaultMessage: 'Disappointed',
-  },
-  emojiSad: {
-    id: 'FormFeedback.emojiSad.altText',
-    defaultMessage: 'Sad',
-  },
-  emojiNeutral: {
-    id: 'FormFeedback.emojiNeutral.altText',
-    defaultMessage: 'Neutral',
-  },
-  emojiSlightlySmiling: {
-    id: 'FormFeedback.emojiSlightlySmiling.altText',
-    defaultMessage: 'Slightly Smiling',
-  },
-  emojiGrinning: {
-    id: 'FormFeedback.emojiGrinning.altText',
-    defaultMessage: 'Grinning',
-  },
+  }
 });
-
-//TODO: see if you can define messages twice? in a loop? how emojis are defined is too fragments
-const emojis = {
-  'emojiDisappointed': {
-      image: emojiDisappointed,
-      value: -2
-    },
-  'emojiSad': {
-      image: emojiSad,
-      value: -1
-    },
-  'emojiNeutral': {
-      image: emojiNeutral,
-      value: 0
-    },
-  'emojiSlightlySmiling': {
-      image: emojiSlightlySmiling,
-      value: 1
-    },
-  'emojiGrinning': {
-      image: emojiGrinning,
-      value: 2
-    }
-};
 
 class FormFeedback extends Component {
   constructor(props) {
@@ -192,7 +143,7 @@ class FormFeedback extends Component {
               <div key={emojiKey} className="coa-FormFeedback__emoji">
                 <input id={`${this.state.name}-radio-${emojiKey}`}
                   type="radio"
-                  className="d-none"
+                  className="coa-sr-only"
                   name={`${this.state.name}-emojis`}
                   value={emojis[emojiKey].value}
                   onChange={this.handleEmojiClick}
@@ -200,7 +151,7 @@ class FormFeedback extends Component {
                 <label htmlFor={`${this.state.name}-radio-${emojiKey}`}>
                   <img className="d-block"
                     src={emojis[emojiKey].image}
-                    alt={intl.formatMessage(i18nMessages[emojiKey])} />
+                    alt={intl.formatMessage(i18nEmojis[emojiKey])} />
                 </label>
               </div>
             )
