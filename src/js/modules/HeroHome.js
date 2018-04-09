@@ -1,35 +1,26 @@
 import React from 'react';
-import { defineMessages, formatMessage, injectIntl } from 'react-intl';
 
-const i18nMessages = defineMessages({
-  homeHeroWelcometext: {
-    id: 'Home.Hero.welcometext',
-    defaultMessage: 'Welcome to',
-  },
-});
-
-
-const HeroHome = ({image, intl}) => (
+const HeroHome = ({imageUrl, imageTitle, preheader}) => (
   <div
     className="coa-HeroHome"
     style={{
       backgroundImage: `
         linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3)),
-        url(${process.env.CMS_MEDIA}/${image.file})
+        url(${imageUrl})
       `,
       backgroundSize: 'cover',
       backgroundPosition: '50%',
     }}
     role="img"
-    aria-label={image.title}
+    aria-label={imageTitle}
   >
     <div className="container-fluid wrapper">
       <span className="coa-HeroHome-preheader">
-        {intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+        {preheader}
       </span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
     </div>
   </div>
 );
 
-export default injectIntl(HeroHome);
+export default HeroHome;
