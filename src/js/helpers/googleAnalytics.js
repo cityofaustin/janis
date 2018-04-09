@@ -34,3 +34,14 @@ export const logEvent = (event) => {
 
   return null;
 };
+
+export const logFormEvent = ({formName='UNSET', formStep='UNSET', formAction='UNSET', optionalData=null}) => {
+
+  logEvent({
+    category: `FORM--${formName}`,
+    action: `FORM-ACTION--${formAction}__FORM-STEP--${formStep}`,
+    label: optionalData ? JSON.stringify(optionalData) : null
+  });
+
+  return null;
+};
