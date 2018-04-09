@@ -6,7 +6,6 @@ import { IntlProvider } from 'react-intl';
 
 
 import PageBanner from 'js/modules/PageBanner';
-import jsonFileData from '__tmpdata/pages';
 
 import dummyImage from 'stories/images/pagebanner_test.jpg';
 
