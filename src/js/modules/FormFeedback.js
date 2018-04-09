@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { postFeedback } from 'js/helpers/fetchData';
-import { logEvent } from 'js/helpers/googleAnalytics';
+import { logFormEvent } from 'js/helpers/googleAnalytics';
 import SectionHeader from 'js/modules/SectionHeader';
 
 import emojiDisappointed from 'images/emojis/disappointed.png';
@@ -53,11 +53,35 @@ const i18nMessages = defineMessages({
   },
 });
 
+//TODO: see if you can define messages twice? in a loop? how emojis are defined is too fragments
+const emojis = {
+  'emojiDisappointed': {
+      image: emojiDisappointed,
+      value: -2
+    },
+  'emojiSad': {
+      image: emojiSad,
+      value: -1
+    },
+  'emojiNeutral': {
+      image: emojiNeutral,
+      value: 0
+    },
+  'emojiSlightlySmiling': {
+      image: emojiSlightlySmiling,
+      value: 1
+    },
+  'emojiGrinning': {
+      image: emojiGrinning,
+      value: 2
+    }
+};
 
 class FormFeedback extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: 'site-feedback',
       step: 1,
       loading: false,
       emoji: null,
@@ -66,18 +90,19 @@ class FormFeedback extends Component {
     };
   }
 
-  logEvent(action, label) {
-    logEvent({
-     category: 'FORM__site-feedback',
-     action: `${action}__step-${this.state.step}`,
-     label: label
+  logEvent(action, optionalData) {
+    logFormEvent({
+      formName: this.state.name,
+      formStep: this.state.step,
+      formAction: action,
+      optionalData: optionalData
     });
   }
 
   handleEmojiClick = (e) => {
-    this.logEvent('emoji-click', JSON.stringify({
-        'emoji': e.currentTarget.value
-      }) );
+    this.logEvent(`emoji-click-${e.currentTarget.value}`, {
+      'emoji': e.currentTarget.value
+    });
 
     this.setState({
       step: 2,
@@ -94,10 +119,10 @@ class FormFeedback extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    this.logEvent('send-feedback-click', JSON.stringify({
+    this.logEvent('send-feedback-click', {
       'emoji': this.state.emoji,
       'feedback': this.state.feedback
-    }));
+    });
 
     if(!this.state.feedback) {
       this.setState({
@@ -127,8 +152,8 @@ class FormFeedback extends Component {
       })
     })
     .catch((e) => {
-      this.logEvent('send-feedback-error');
       //TODO: better handle error messaging
+      this.logEvent('post-error', e.response);
       console.log('ERROR:', e);
 
       this.setState({
@@ -154,79 +179,68 @@ class FormFeedback extends Component {
     const {intl} = this.props;
 
     return (
-      <div className="coa-FormFeedback">
+      <form name={this.state.name} className="coa-FormFeedback">
 
       { this.state.step === 1 && (
-        <div className="coa-FormFeedback__step1">
+        <fieldset className="coa-FormFeedback__step1"
+          name={`${this.state.name}-emojis`}
+        >
           <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step1title)}</SectionHeader>
           <div className="coa-FormFeedback__emojis">
-            <button onClick={this.handleEmojiClick}
-              value="-2"
-              aria-label={intl.formatMessage(i18nMessages.emojiDisappointed)}
-            >
-              <img src={emojiDisappointed} alt={intl.formatMessage(i18nMessages.emojiDisappointed)} />
-            </button>
-            <button onClick={this.handleEmojiClick}
-              value="-1"
-              aria-label={intl.formatMessage(i18nMessages.emojiSad)}
-            >
-              <img src={emojiSad} alt={intl.formatMessage(i18nMessages.emojiSad)} />
-            </button>
-            <button onClick={this.handleEmojiClick}
-              value="0"
-              aria-label={intl.formatMessage(i18nMessages.emojiNeutral)}
-            >
-              <img src={emojiNeutral} alt={intl.formatMessage(i18nMessages.emojiNeutral)} />
-            </button>
-            <button onClick={this.handleEmojiClick}
-              value="1"
-              aria-label={intl.formatMessage(i18nMessages.emojiSlightlySmiling)}
-            >
-              <img src={emojiSlightlySmiling} alt={intl.formatMessage(i18nMessages.emojiSlightlySmiling)} />
-            </button>
-            <button onClick={this.handleEmojiClick}
-              value="2"
-              aria-label={intl.formatMessage(i18nMessages.emojiGrinning)}
-            >
-              <img src={emojiGrinning} alt={intl.formatMessage(i18nMessages.emojiGrinning)} />
-            </button>
+          {
+            Object.keys(emojis).map(emojiKey =>
+              <div key={emojiKey} className="coa-FormFeedback__emoji">
+                <input id={`${this.state.name}-radio-${emojiKey}`}
+                  type="radio"
+                  className="d-none"
+                  name={`${this.state.name}-emojis`}
+                  value={emojis[emojiKey].value}
+                  onChange={this.handleEmojiClick}
+                />
+                <label htmlFor={`${this.state.name}-radio-${emojiKey}`}>
+                  <img className="d-block"
+                    src={emojis[emojiKey].image}
+                    alt={intl.formatMessage(i18nMessages[emojiKey])} />
+                </label>
+              </div>
+            )
+          }
           </div>
-        </div>
+        </fieldset>
       )}
 
       { this.state.step === 2 && (
-        <div className="coa-FormFeedback__step2">
+        <fieldset className="coa-FormFeedback__step2"
+          name={`${this.state.name}-textarea`}
+        >
           <SectionHeader isSerif={true}>
-            {intl.formatMessage(i18nMessages.step2titlea)}
-            <br />
-            {intl.formatMessage(i18nMessages.step2titleb)}
+            {intl.formatMessage(i18nMessages.step2titlea)}<br />{intl.formatMessage(i18nMessages.step2titleb)}
           </SectionHeader>
-          <form>
             { this.state.error && (
               <p className="coa-FormFeedback__error">Oh no, something went wrong! Please, try submitting your feedback again.</p>
             )}
-            <label htmlFor="site-feedback-textarea"
+            <label htmlFor={`${this.state.name}-textarea`}
               className="coa-sr-only"
             >{intl.formatMessage(i18nMessages.step2titleb)}</label>
-            <textarea id="site-feedback-textarea"
+            <textarea id={`${this.state.name}-textarea`}
+              name={`${this.state.name}-textarea`}
               onChange={this.handleTextAreaChange}></textarea>
             <p>Please do not enter private information because your feedback will be public.</p>
             { !this.state.loading
               ? <input type="submit" value="Send Feedback" onClick={this.handleSubmit} />
               : <input type="submit" value="Sending..." disabled />
             }
-          </form>
-        </div>
+        </fieldset>
       )}
 
       { this.state.step === 3 && (
-        <div className="coa-FormFeedback__step3">
+        <fieldset className="coa-FormFeedback__step3">
           <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step3title)}</SectionHeader>
           <input type="button" onClick={this.handleReset} value={intl.formatMessage(i18nMessages.step3button)} />
-        </div>
+        </fieldset>
       )}
 
-      </div>
+      </form>
     );
   }
 }
