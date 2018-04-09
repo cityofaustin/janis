@@ -45,7 +45,10 @@ const Service = ({ service, intl }) => {
 
   return (
     <div>
-      <PageBanner image={image} />
+      <PageBanner
+        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+        imageTitle={image.title}
+      />
       <PageBreadcrumbs
         grandparent={{...theme, subpath: 'themes'}}
         parent={{...topic, subpath: 'topics'}}
