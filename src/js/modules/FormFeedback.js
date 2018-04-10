@@ -51,8 +51,13 @@ class FormFeedback extends Component {
   }
 
   handleEmojiClick = (e) => {
-    this.logEvent(`emoji-click-${e.currentTarget.value}`, {
-      'emoji': e.currentTarget.value
+
+    const emojiText = this.props.intl.formatMessage(i18nEmojis[e.currentTarget.value]);
+    const emojiValue = emojis[e.currentTarget.value].value;
+
+    this.logEvent(`emoji-click-${emojiValue}`, {
+      'emojiValue': emojiValue,
+      'emojiText': emojiText
     });
 
     this.setState({
@@ -70,9 +75,14 @@ class FormFeedback extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
+    const emojiText = this.props.intl.formatMessage(i18nEmojis[this.state.emoji]);
+    const emojiValue = emojis[this.state.emoji].value;
+    const emoji = emojis[this.state.emoji].emoji;
+
     this.logEvent('send-feedback-click', {
-      'emoji': this.state.emoji,
-      'feedback': this.state.feedback
+      'feedback': this.state.feedback,
+      'emojiValue': emojiValue,
+      'emojiText': emojiText
     });
 
     if(!this.state.feedback) {
@@ -90,8 +100,9 @@ class FormFeedback extends Component {
     })
 
     postFeedback({
-      title: 'Alpha Site Feedback',
-      description: `**Emoji rating:**\n${this.state.emoji}\n\n**Text feedback:**\n${this.state.feedback}\n\n`,
+      title: `Alpha Site Feedback ${emoji}`,
+      description: `**Emoji rating (scale of -2 to 2):**\n${emojiValue}: ${emojiText}\n
+        \n**Text feedback:**\n${this.state.feedback}\n\n`,
     })
     .then(({data}) => {
       this.setState({
@@ -145,7 +156,7 @@ class FormFeedback extends Component {
                   type="radio"
                   className="coa-sr-only"
                   name={`${this.state.name}-emojis`}
-                  value={emojis[emojiKey].value}
+                  value={emojiKey}
                   onChange={this.handleEmojiClick}
                 />
                 <label htmlFor={`${this.state.name}-radio-${emojiKey}`}>

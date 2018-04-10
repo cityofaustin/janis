@@ -9,22 +9,27 @@ export const emojis = {
   'disappointed': {
       image: emojiDisappointed,
       value: -2,
+      emoji: '😞',
     },
   'sad': {
       image: emojiSad,
       value: -1,
+      emoji: '🙁',
     },
   'neutral': {
       image: emojiNeutral,
       value: 0,
+      emoji: '😐',
     },
   'slightlySmiling': {
       image: emojiSlightlySmiling,
       value: 1,
+      emoji: '🙂',
     },
   'grinning': {
       image: emojiGrinning,
       value: 2,
+      emoji: '😀',
     }
 };
 
