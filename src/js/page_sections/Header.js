@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { withSiteData } from 'react-static';
 
 import SearchSVG from 'js/svg/Search';
 import Menu from 'js/page_sections/Menu/Menu';
