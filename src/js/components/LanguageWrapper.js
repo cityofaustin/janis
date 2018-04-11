@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import Routes from 'react-static-routes'
-import locale from 'browser-locale'
-import Cookies from 'js-cookie'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import Routes from 'react-static-routes';
+import locale from 'browser-locale';
+import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
+import { withSiteData } from 'react-static';
 import { find } from 'lodash';
 
 
@@ -116,6 +117,7 @@ class LanguageWrapper extends Component {
 
   render() {
     const { lang } = this.state;
+    const { navigation, match } = this.props;
     const messages = localeMessages[lang];
     const direction = this.getDirectionFromLanguage(lang);
 
@@ -124,7 +126,7 @@ class LanguageWrapper extends Component {
         <div style={{ position: 'relative' }} dir={direction} className={`coa-${direction}`}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
           <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
-          <Header />
+          <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
           </main>
@@ -135,8 +137,11 @@ class LanguageWrapper extends Component {
   }
 }
 
+LanguageWrapper.propTypes = {
+  navigation: PropTypes.object.isRequired,
+}
 LanguageWrapper.childContextTypes = {
   langCode: PropTypes.string
 }
 
-export default LanguageWrapper;
+export default withSiteData(LanguageWrapper);

@@ -191,7 +191,7 @@ const MobileFooter = injectIntl(({intl}) => (
   </div>
 ))
 
-Menu.childContextTypes = {
+Menu.propTypes = {
   navigation: PropTypes.object.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,

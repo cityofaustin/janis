@@ -69,21 +69,17 @@ class Header extends Component {
                   311
                 </ExternalLink>
               </div>
-              {/* <I18nLink to="/search" className="coa-Header__search">
-                <span className="d-none d-md-block">{intl.formatMessage(i18nMessages.headerSearchButton)}</span> <SearchSVG size="18"/>
-              </I18nLink> */}
             </div>
           </div>
         </div>
         <Menu
           isMenuOpen={this.state.menuIsOpen}
           toggleMenu={this.toggleMenu}
-          navigation={navigation[this.props.intl.locale]}
+          navigation={navigation}
         />
       </header>
     );
   }
-
 }
 
-export default withSiteData(injectIntl(Header));
+export default injectIntl(Header);
