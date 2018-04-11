@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
+import SectionHeader from 'js/modules/SectionHeader';
 import Phone from 'js/modules/Contact/Phone';
 import Email from 'js/modules/Contact/Email';
 import Address from 'js/modules/Contact/Address';
@@ -18,7 +19,7 @@ const ContactDetails = ({ contact, intl }) => {
 
   return (
     <div className="coa-ContactDetails">
-      <h2 className="coa-ContactDetails__title">{intl.formatMessage(i18nMessages.contactDetailsTitle)}</h2>
+      <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
       <div className="coa-ContactDetails__items">
         { phone && (
           <Phone

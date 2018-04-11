@@ -1,6 +1,7 @@
 .coa-Header {
-  position: relative;
+  border-bottom: 1px solid $coa-color-purple-lighter;
   font-family: $coa-font-sans;
+  position: relative;
 }
 
 .coa-Header--menu-is-open ~ main,
@@ -11,58 +12,56 @@
   }
 }
 
-.coa-Header__navbar-brand {
+.coa-Header__controls {
   display: flex;
-}
-
-.coa-Header__top-row {
-  width: 100%;
-}
-
-.coa-Header__menu {
-  padding: $coa-space-level3 $coa-space-level3 $coa-space-level3 0;
-  border-right: 1px solid $coa-color-purple-lighter;
-}
-
-.coa-rtl {
-  .coa-Header__menu {
-    padding: $coa-space-level3 0 $coa-space-level3 $coa-space-level3;
-    border-right: none;
-    border-left: 1px solid $coa-color-purple-lighter;
+  height: $coa-header-toprow-height;
+  justify-content: space-between;
+  @include media($coa-large-screen) {
+    padding-left:$coa-spacing-small;
+    padding-right:$coa-spacing-small;
   }
 }
 
-.coa-Header__logo {
-  padding: $coa-space-level3;
-  font-family: $coa-font-sans;
-  font-weight: 700;
-  a {
-    color: $coa-color-black;
-    text-decoration: none;
-    @include media($coa-large-screen) {
-      font-size: $coa-font-size-medium;
-    }
+.coa-Header__left-controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  .coa-text-spacer--vertical:after {
+    display: block;
+    height: $coa-header-toprow-height;
+  }
+}
+
+.coa-Header__right-controls {
+  align-items: center;
+  display: none;
+  font-size: $coa-font-size-xsmall;
+  justify-content: flex-end;
+  @include media($coa-medium-screen) {
+    display: flex;
   }
 }
 
 .coa-Header__menu-toggle {
+  font-weight: $coa-font-semibold;
   text-transform: uppercase;
-  font-family: $coa-font-sans;
-  font-weight: 700;
-  cursor: pointer;
 }
 
-.coa-Header__right-controls {
-  vertical-align: middle;
-  text-align: right;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: flex-end;
-  padding: $coa-space-level3 0;
-  svg {
-    vertical-align: middle;
+.coa-Header__logo {
+  color: $coa-color-purple-dark;
+  font-weight: $coa-font-semibold;
+  text-decoration: none;
+  &:visited {
+    color: $coa-color-purple-dark;
+  }
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-medium;
   }
 }
+
+
+
+
 
 .coa-Header__search {
   display: flex;

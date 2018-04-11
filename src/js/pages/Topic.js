@@ -9,7 +9,6 @@ import TileGroup from 'js/modules/TileGroup';
 import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import SectionHeader from 'js/modules/SectionHeader';
-import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 import { cleanServiceLinks } from 'js/helpers/cleanData';
 
@@ -33,15 +32,14 @@ const Topic = ({ topic, intl }) => {
   const relatedLinks = cleanServiceLinks(links);
 
   return (
-    <div className="wrapper--top-border">
+    <div>
       <PageBreadcrumbs
         parent={{...theme, subpath: 'themes'}}
         title={title}
       />
-
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader title={title} description={description} />
-        <SectionHeader title={callToAction} />
+        <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
       </div>
 
       <div className="wrapper container-fluid">

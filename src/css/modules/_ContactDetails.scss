@@ -4,16 +4,6 @@
   border-right: none;
   padding: $coa-spacing-large 0;
 }
-.coa-ContactDetails__title {
-  font-family: $coa-font-serif;
-  font-weight: $coa-font-regular;
-  font-size: $coa-font-size-medium;
-  text-align: center;
-
-  @include media($coa-small-screen) {
-    font-size: $coa-font-size-large;
-  }
-}
 
 .coa-ContactDetails__item {
   border-bottom: 1px dashed $coa-color-purple-dark;

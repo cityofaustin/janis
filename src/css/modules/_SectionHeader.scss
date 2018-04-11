@@ -1,14 +1,28 @@
 .coa_SectionHeader {
   text-transform: uppercase;
   text-align: center;
-  &:after {
-    margin: $coa-spacing-medium auto $coa-spacing-xlarge;
-    width: 40px;
-    background: $coa-color-orange;
-    height: 8px;
-    display: block;
-    content: "";
+}
+
+.coa_SectionHeader--isSerif {
+  font-family: $coa-font-serif;
+  font-weight: $coa-font-regular;
+  font-size: $coa-font-size-medium;
+  line-height: $coa-line-height-medium;
+  margin-top: 0;
+  text-transform: none;
+  @include media($coa-small-screen) {
+    font-size: $coa-font-size-large;
+    line-height: $coa-line-height-large;
   }
+}
+
+.coa_SectionHeader--hasHighlight:after {
+  margin: $coa-spacing-medium auto $coa-spacing-xlarge;
+  width: 40px;
+  background: $coa-color-orange;
+  height: 8px;
+  display: block;
+  content: "";
 }
 
 .coa_SectionHeader__arrow {

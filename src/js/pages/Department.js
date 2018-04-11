@@ -8,7 +8,6 @@ import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
 import PageHeader from 'js/modules/PageHeader';
 import ContactDetails from 'js/modules/Contact/ContactDetails';
-import FormFeedback from 'js/page_sections/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Department = ({ department }) => {
@@ -31,11 +30,11 @@ const Department = ({ department }) => {
           <div className="coa-main__left col-xs-12 col-lg-8">
 
             <div className="coa-section">
-              <SectionHeader title={title}/>
+              <SectionHeader hasHighlight={true}>{title}</SectionHeader>
             </div>
 
             <div className="coa-section">
-              <SectionHeader title="Our Mission"/>
+              <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
               <p>{body}</p>
             </div>
 
@@ -48,14 +47,6 @@ const Department = ({ department }) => {
           </div>
         </div>
       </div>
-
-      <div className="coa-section coa-section--lightgrey">
-        <div className="wrapper container-fluid">
-          <FormFeedback />
-          <a className="coa-section__link" href="#">Return to Top</a>
-        </div>
-      </div>
-
       <ThreeOneOne services311={services311} />
 
     </div>
