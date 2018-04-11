@@ -6,8 +6,8 @@ import { withRouteData } from 'react-static';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
-import Hero from 'js/modules/Hero';
-import ContactDetails from 'js/modules/ContactDetails';
+import PageHeader from 'js/modules/PageHeader';
+import ContactDetails from 'js/modules/Contact/ContactDetails';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Department = ({ department }) => {
@@ -23,9 +23,9 @@ const Department = ({ department }) => {
 
   return (
     <div>
-      <Hero image={image} />
+      <PageHeader image={image} />
 
-      <div className="wrapper">
+      <div className="wrapper container-fluid">
         <div className="row">
           <div className="coa-main__left col-xs-12 col-lg-8">
 
@@ -47,7 +47,6 @@ const Department = ({ department }) => {
           </div>
         </div>
       </div>
-
       <ThreeOneOne services311={services311} />
 
     </div>

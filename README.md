@@ -68,8 +68,13 @@ Resources:
 - When we use `target="_blank"` on an anchor tag, we should add `aria-label="Opens in new window"` and `rel="noopener noreferrer"` for [security](https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/)
 
 a11y Resources:
-- https://accessibility.18f.gov/
+- http://wave.webaim.org/
+- https://www.w3.org/WAI/WCAG20/quickref/
+- [Accessibility section of "Front-End Checklist"](https://github.com/thedaviddias/Front-End-Checklist#accessibility)
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
+- https://developers.google.com/web/fundamentals/accessibility/how-to-review
+- [How we’ve made GOV.UK Elements even more accessible](https://accessibility.blog.gov.uk/2018/02/28/how-weve-made-gov-uk-elements-even-more-accessible/) and https://accessibility.blog.gov.uk/ in general
+- https://accessibility.18f.gov/
 
 ---
 

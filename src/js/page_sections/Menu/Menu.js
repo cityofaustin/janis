@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { withSiteData } from 'react-static';
 import PropTypes from 'prop-types'
 
 import I18nNavLink from 'js/modules/I18nNavLink';
@@ -81,11 +80,12 @@ class Menu extends Component {
   }
 
   render() {
-    const { allThemes } = this.props.navigation[this.props.intl.locale];
+    const { isMenuOpen, navigation: { allThemes }} = this.props;
+    const { openSubmenuId } = this.state;
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
-        <nav className={`coa-Menu ${this.props.isMenuOpen ? 'coa-Menu--open' : ''}`}
+        <nav className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
           role="navigation"
         >
           <button className="coa-Menu__close-btn d-lg-none"
@@ -120,7 +120,7 @@ class Menu extends Component {
             this provides a full page click target area behind the nav menu
             which, when clicked, will close the submenu
           */
-            this.state.openSubmenuId !== null && (
+            openSubmenuId !== null && (
             <div className="coa-Menu__close-submenu-click-target"
               onClick={() => this.setState({ openSubmenuId: null })}
             ></div>
@@ -192,4 +192,10 @@ const MobileFooter = injectIntl(({intl}) => (
   </div>
 ))
 
-export default withSiteData(injectIntl(Menu));
+Menu.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+  isMenuOpen: PropTypes.bool,
+}
+
+export default injectIntl(Menu);
