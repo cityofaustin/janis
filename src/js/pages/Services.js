@@ -30,7 +30,7 @@ const Services = ({ allServices, intl }) => {
   return (
     <div>
       <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader
+        <PageHeader 
           title={intl.formatMessage(i18nMessages.servicesPageTitle)}
           description={intl.formatMessage(i18nMessages.servicePageDescription)}
         />

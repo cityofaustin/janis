@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 
-import Hero from 'js/modules/Hero';
+import PageHeader from 'js/modules/PageHeader';
 import TileGroup from 'js/modules/TileGroup';
 
 const Themes = ({ allThemes }) => {
@@ -11,8 +11,8 @@ const Themes = ({ allThemes }) => {
   }));
 
   return (
-    <div className="wrapper">
-      <Hero callout={"All Themes"} />
+    <div className="wrapper container-fluid">
+      <PageHeader title={"All Themes"} />
       <TileGroup tiles={links} />
     </div>
   )

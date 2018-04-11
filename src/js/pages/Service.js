@@ -8,7 +8,7 @@ import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 import ApplicationBlock from 'js/modules/ApplicationBlock';
-import ContactDetails from 'js/modules/ContactDetails';
+import ContactDetails from 'js/modules/Contact/ContactDetails';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
 
@@ -25,6 +25,10 @@ const i18nMessages = defineMessages({
   serviceRelatedlinksTag: {
     id: 'Service.RelatedLinks.Tag',
     defaultMessage: 'Service',
+  },
+  htmlFromAdminSectionTitle: {
+    id: 'HtmlFromAdmin.SectionTitle',
+    defaultMessage: 'What else do I need to know?',
   }
 });
 
@@ -45,7 +49,10 @@ const Service = ({ service, intl }) => {
 
   return (
     <div>
-      <PageBanner image={image} />
+      <PageBanner
+        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+        imageTitle={image.title}
+      />
       <PageBreadcrumbs
         grandparent={{...theme, subpath: 'themes'}}
         parent={{...topic, subpath: 'topics'}}
@@ -55,7 +62,7 @@ const Service = ({ service, intl }) => {
 
         <PageHeader title={title} />
 
-        { steps && <Steps steps={steps} /> }
+        { steps && <Steps stepsAsHtmlFromAdmin={steps} /> }
 
         { !!dynamicContent && (
           dynamicContent.map(content =>
@@ -63,7 +70,12 @@ const Service = ({ service, intl }) => {
           )
         )}
 
-        { additionalContent && <HtmlFromAdmin content={additionalContent} /> }
+        { additionalContent && (
+            <HtmlFromAdmin
+              title={intl.formatMessage(i18nMessages.htmlFromAdminSectionTitle)}
+              content={additionalContent}
+            />
+        )}
 
         { contact && <ContactDetails contact={contact} /> }
 

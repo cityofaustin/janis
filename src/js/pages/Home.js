@@ -22,7 +22,11 @@ const i18nMessages = defineMessages({
   homeRelatedlinksTag: {
     id: 'Home.RelatedLinks.Tag',
     defaultMessage: 'Service',
-  }
+  },
+  homeHeroWelcometext: {
+    id: 'Home.Hero.welcometext',
+    defaultMessage: 'Welcome to',
+  },
 });
 
 const Home = ({ topServices, image, intl }) => {
@@ -30,7 +34,11 @@ const Home = ({ topServices, image, intl }) => {
 
   return (
     <div>
-      <HeroHome image={image} intl={intl} />
+      <HeroHome
+        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+        imageTitle={image.title}
+        preheader={intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+      />
       <SecondaryContentBanner>
         <p>
           <FormattedMessage

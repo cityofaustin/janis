@@ -19,7 +19,8 @@ const Theme = ({ theme }) => {
       </div>
 
       <div className="wrapper container-fluid">
-        <TileGroupSet groups={topics}
+        <TileGroupSet
+          groups={topics}
           tileKey={'services'}
           groupTitleSubPath={'topics'}
         />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
+
 import SearchSVG from 'js/svg/Search';
 import Menu from 'js/page_sections/Menu/Menu';
 import I18nLink from 'js/modules/I18nLink';
@@ -39,7 +40,7 @@ class Header extends Component {
 
   render() {
 
-    const { intl } = this.props;
+    const { intl, navigation } = this.props;
 
     return (
       <header className={`coa-Header ${this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''}`} role="banner">
@@ -67,17 +68,17 @@ class Header extends Component {
                   311
                 </ExternalLink>
               </div>
-              {/* <I18nLink to="/search" className="coa-Header__search">
-                <span className="d-none d-md-block">{intl.formatMessage(i18nMessages.headerSearchButton)}</span> <SearchSVG size="18"/>
-              </I18nLink> */}
             </div>
           </div>
         </div>
-        <Menu isMenuOpen={this.state.menuIsOpen} toggleMenu={this.toggleMenu} />
+        <Menu
+          isMenuOpen={this.state.menuIsOpen}
+          toggleMenu={this.toggleMenu}
+          navigation={navigation}
+        />
       </header>
     );
   }
-
 }
 
 export default injectIntl(Header);
