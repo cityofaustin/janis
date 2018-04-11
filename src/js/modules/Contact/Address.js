@@ -2,8 +2,8 @@ import React from 'react';
 import MapMarkerSVG from 'js/svg/MapMarker';
 import PropTypes from 'prop-types';
 
-const Address = ({ className, name, location }) => (
-  <div className={`${className} coa-ContactAddress`}>
+const Address = ({ name, location }) => (
+  <div className="coa-ContactDetails__item coa-ContactAddress">
     <MapMarkerSVG size="20"/>
     <div>
       <span>{name}</span>
@@ -15,12 +15,11 @@ const Address = ({ className, name, location }) => (
 
 Address.propTypes = {
   name: PropTypes.string.isRequired,
-  className: PropTypes.string,
   location: PropTypes.shape({
-    street: PropTypes.string,
-    city: PropTypes.string,
-    state: PropTypes.string,
-    zip: PropTypes.string,
+    street: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zip: PropTypes.string.isRequired,
   }),
 };
 

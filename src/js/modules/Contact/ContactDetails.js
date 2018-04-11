@@ -22,26 +22,24 @@ const ContactDetails = ({ contact, intl }) => {
       <div className="coa-ContactDetails__items">
         { phone && (
           <Phone
-            className="coa-ContactDetails__item"
             phone={phone.default}
             ttyphone={phone.tty}
           />
         )}
 
         { email && (
-          <Email className="coa-ContactDetails__item" email={email} />
+          <Email email={email} />
         )}
 
         { location && (
           <Address
-            className="coa-ContactDetails__item"
             name={name}
             location={location}
           />
         )}
 
         { hours && (
-          <Hours className="coa-ContactDetails__item" hours={hours} />
+          <Hours hours={hours} />
         )}
 
       </div>
