@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
 
 import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
 
@@ -25,9 +23,7 @@ const content = `
   </p>
 `
 
-
 storiesOf('HtmlFromAdmin', module)
-  .addDecorator(checkA11y)
   .add('HtmlFromAdmin', () => (
     <div className="wrapper container-fluid">
       <HtmlFromAdmin

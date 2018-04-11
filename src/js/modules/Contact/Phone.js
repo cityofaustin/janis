@@ -14,7 +14,7 @@ const Phone = ({ className, phone, ttyphone }) => (
 
 Phone.propTypes = {
   phone: PropTypes.string.isRequired,
-  ttyphone: PropTypes.string,
+  ttyphone: PropTypes.string.isRequired,
 };
 
 export default Phone;

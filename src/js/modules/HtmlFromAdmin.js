@@ -9,7 +9,7 @@ const HtmlFromAdmin = ({ title, content }) => (
 );
 
 HtmlFromAdmin.contextTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
 }
 

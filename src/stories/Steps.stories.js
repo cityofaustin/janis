@@ -1,9 +1,5 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
-import { IntlProvider } from 'react-intl';
-
 
 import Steps from 'js/modules/Steps';
 
@@ -16,11 +12,8 @@ const stepsHtml = `
 `
 
 storiesOf('Steps', module)
-  .addDecorator(checkA11y)
   .add('Steps', () => (
-    <IntlProvider locale="en">
-      <div className="wrapper container-fluid">
-        <Steps stepsAsHtmlFromAdmin={stepsHtml} />
-      </div>
-    </IntlProvider>
+    <div className="wrapper container-fluid">
+      <Steps stepsAsHtmlFromAdmin={stepsHtml} />
+    </div>
   ))

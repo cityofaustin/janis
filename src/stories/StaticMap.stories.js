@@ -1,9 +1,5 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
-import { IntlProvider } from 'react-intl';
-
 
 import StaticMap from 'js/modules/StaticMap';
 
@@ -20,14 +16,11 @@ const value = {
 }
 
 storiesOf('StaticMap', module)
-  .addDecorator(checkA11y)
   .add('StaticMap', () => (
-    <IntlProvider locale="en">
-      <div className="wrapper container-fluid">
-        <StaticMap
-          title={value.description}
-          location={value.location}
-        />
-      </div>
-    </IntlProvider>
+    <div className="wrapper container-fluid">
+      <StaticMap
+        title={value.description}
+        location={value.location}
+      />
+    </div>
   ))

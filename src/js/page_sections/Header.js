@@ -41,7 +41,7 @@ class Header extends Component {
 
   render() {
 
-    const { intl } = this.props;
+    const { intl, navigation } = this.props;
 
     return (
       <header className={`coa-Header ${this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''}`} role="banner">
@@ -78,7 +78,7 @@ class Header extends Component {
         <Menu
           isMenuOpen={this.state.menuIsOpen}
           toggleMenu={this.toggleMenu}
-          navigation={this.props.navigation[this.props.intl.locale]}
+          navigation={navigation[this.props.intl.locale]}
         />
       </header>
     );

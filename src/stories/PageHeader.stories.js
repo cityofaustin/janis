@@ -1,11 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
 
 import PageHeader from 'js/modules/PageHeader';
 
 storiesOf('PageHeader', module)
-  .addDecorator(checkA11y)
   .add('PageHeader', () => (
     <div className="wrapper container-fluid">
       <PageHeader

@@ -1,13 +1,9 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
-
 
 import ListLink from 'js/modules/ListLink';
 
 storiesOf('ListLink', module)
-  .addDecorator(checkA11y)
   .add('light theme (default)', () => (
     <div className="wrapper container-fluid">
       <ListLink
