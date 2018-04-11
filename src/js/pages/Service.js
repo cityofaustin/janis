@@ -62,7 +62,7 @@ const Service = ({ service, intl }) => {
 
         <PageHeader title={title} />
 
-        { steps && <Steps steps={steps} /> }
+        { steps && <Steps stepsAsHtmlFromAdmin={steps} /> }
 
         { !!dynamicContent && (
           dynamicContent.map(content =>

@@ -20,7 +20,7 @@ storiesOf('Steps', module)
   .add('Steps', () => (
     <IntlProvider locale="en">
       <div className="wrapper container-fluid">
-        <Steps steps={stepsHtml} />
+        <Steps stepsAsHtmlFromAdmin={stepsHtml} />
       </div>
     </IntlProvider>
   ))
