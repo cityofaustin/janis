@@ -80,11 +80,12 @@ class Menu extends Component {
   }
 
   render() {
-    const { allThemes } = this.props.navigation;
+    const { isMenuOpen, navigation: { allThemes }} = this.props;
+    const { openSubmenuId } = this.state;
 
     return allThemes.edges.length && (
       <div className="container-fluid wrapper">
-        <nav className={`coa-Menu ${this.props.isMenuOpen ? 'coa-Menu--open' : ''}`}
+        <nav className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
           role="navigation"
         >
           <button className="coa-Menu__close-btn d-lg-none"
@@ -119,7 +120,7 @@ class Menu extends Component {
             this provides a full page click target area behind the nav menu
             which, when clicked, will close the submenu
           */
-            this.state.openSubmenuId !== null && (
+            openSubmenuId !== null && (
             <div className="coa-Menu__close-submenu-click-target"
               onClick={() => this.setState({ openSubmenuId: null })}
             ></div>

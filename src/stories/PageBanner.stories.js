@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import PageBanner from 'js/modules/PageBanner';
-import dummyImage from 'stories/images/pagebanner_test.jpg';
+import dummyImage from 'stories/static_data/images/pagebanner_test.jpg';
 
 storiesOf('PageBanner', module)
   .add('PageBanner', () => (
