@@ -68,7 +68,7 @@ class Menu extends Component {
 
   toggleSubmenu = (e, openSubmenuId) => {
     if (e.type === "keydown" && e.key !== 'Enter') return false;
-    if (openSubmenuId && openSubmenuId === this.state.openSubmenuId) {
+    if (openSubmenuId === this.state.openSubmenuId) {
       this.setState({
         openSubmenuId: null
       })
