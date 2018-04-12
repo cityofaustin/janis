@@ -40,12 +40,6 @@ class LanguageWrapper extends Component {
     }
   }
 
-  getChildContext() {
-    return {
-      langCode: this.state.lang
-    };
-  }
-
   getInitialLangState() {
     const getLang = [ this.getLangFromProps, this.getLangFromCookie, this.getLangFromLocale, ()=>DEFAULT_LANG ];
     const that = this;
@@ -139,9 +133,6 @@ class LanguageWrapper extends Component {
 
 LanguageWrapper.propTypes = {
   navigation: PropTypes.object.isRequired,
-}
-LanguageWrapper.childContextTypes = {
-  langCode: PropTypes.string
 }
 
 export default withSiteData(LanguageWrapper);
