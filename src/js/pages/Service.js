@@ -48,7 +48,7 @@ const Service = ({ service, intl }) => {
 
   //TODO: mapblock data should include contact data when sent via joplin
   const tempkey = findKey(dynamicContent, { 'type': 'map_block'});
-  dynamicContent[tempkey].value['contact'] = contact;
+  if(tempkey) dynamicContent[tempkey].value['contact'] = contact;
 
 
   return (
