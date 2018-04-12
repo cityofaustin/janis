@@ -48,4 +48,7 @@
 
 .coa-SubmenuItem__arrow-right {
   margin: 0 $coa-spacing-small;
+  svg {
+    height: 13px;
+  }
 }
