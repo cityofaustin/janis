@@ -5,20 +5,18 @@ import Address from 'js/modules/Contact/Address';
 import Phone from 'js/modules/Contact/Phone';
 import Hours from 'js/modules/Contact/Hours';
 
-const ContactMap = ({ contact:{name, phone, hours, location} }) => (
+const ContactMap = ({ contact:{phone, hours, location} }) => (
 
   <div className="coa-ContactMap">
-    <StaticMap location={location} title={name} />
+    <StaticMap location={location} />
 
     <Address
-      name={name}
       location={location}
     />
 
     {phone && (
       <Phone
-        phone={phone.default}
-        ttyphone={phone.tty}
+        phone={phone}
       />
     )}
 
@@ -30,10 +28,9 @@ const ContactMap = ({ contact:{name, phone, hours, location} }) => (
 
 ContactMap.propTypes = {
   contact: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    location: PropTypes.object.isRequired,
-    hours: PropTypes.array,
-    phone: PropTypes.object,
+    location: PropTypes.Address,
+    hours: PropTypes.Hours,
+    phone: PropTypes.Phone,
   }).isRequired,
 };
 

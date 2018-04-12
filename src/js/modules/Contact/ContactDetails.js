@@ -14,13 +14,12 @@ const i18nMessages = defineMessages({
   }
 });
 
-const ContactDetails = ({ contact:{name, phone, email, location, hours}, intl }) => (
+const ContactDetails = ({ contact:{phone, email, location, hours}, intl }) => (
   <div className="coa-ContactDetails">
     <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
     { phone && (
       <Phone
-        phone={phone.default}
-        ttyphone={phone.tty}
+        phone={phone}
       />
     )}
 
@@ -29,10 +28,7 @@ const ContactDetails = ({ contact:{name, phone, email, location, hours}, intl })
     )}
 
     { location && (
-      <Address
-        name={name}
-        location={location}
-      />
+      <Address location={location} />
     )}
 
     { hours && (
@@ -43,11 +39,10 @@ const ContactDetails = ({ contact:{name, phone, email, location, hours}, intl })
 
 ContactDetails.propTypes = {
   contact: PropTypes.shape({
-    phone: PropTypes.object,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    location: PropTypes.object,
-    hours: PropTypes.array,
+    phone: PropTypes.Phone,
+    email: PropTypes.Email,
+    location: PropTypes.Address,
+    hours: PropTypes.Hours,
   }).isRequired,
 };
 
