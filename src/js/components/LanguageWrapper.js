@@ -125,7 +125,7 @@ class LanguageWrapper extends Component {
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }} dir={direction} className={`coa-${direction}`}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
-          <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
+          <LanguageSelectBar path={this.props.match.params.path || ''}/>
           <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
