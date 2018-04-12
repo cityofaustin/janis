@@ -3,7 +3,7 @@ import MapMarkerSVG from 'js/svg/MapMarker';
 import PropTypes from 'prop-types';
 
 const Address = ({ name, location }) => (
-  <div className="coa-ContactDetails__item coa-ContactAddress">
+  <div className="coa-ContactItem coa-ContactAddress">
     <MapMarkerSVG size="20"/>
     <div>
       <span>{name}</span>

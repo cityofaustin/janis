@@ -3,7 +3,7 @@ import PhoneSVG from 'js/svg/Phone';
 import PropTypes from 'prop-types';
 
 const Phone = ({ className, phone, ttyphone }) => (
-  <div className="coa-ContactDetails__item coa-ContactPhone">
+  <div className="coa-ContactItem coa-ContactPhone">
     <PhoneSVG size="20"/>
     <div>
       <span><a href={`tel:${phone}`}>{phone}</a></span>

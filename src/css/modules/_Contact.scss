@@ -2,15 +2,16 @@
   border: 1px solid $coa-color-purple-lighter;
   border-left: none;
   border-right: none;
-  padding: $coa-spacing-large 0;
+  padding: $coa-spacing-xlarge 0 $coa-spacing-large;
 }
 
-.coa-ContactDetails__item {
+.coa-ContactItem {
   border-bottom: 1px dashed $coa-color-purple-dark;
   display: flex;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
   padding: $coa-spacing-md-small 0;
+  text-align: left;
 
   @include media($coa-medium-screen) {
     font-size: $coa-font-size-small;
@@ -42,10 +43,25 @@
 }
 
 .coa-rtl {
-  .coa-ContactDetails__item {
+  .coa-ContactItem {
     & > :first-child {
       margin-right: 0;
       margin-left: $coa-spacing-large;
     }
+    text-align: right;
   }
 }
+
+.coa-ContactHours {
+  td:last-of-type {
+    text-align: right;
+  }
+}
+.coa-rtl {
+  .coa-ContactHours {
+    td:last-of-type {
+      text-align: left;
+    }
+  }
+}
+
