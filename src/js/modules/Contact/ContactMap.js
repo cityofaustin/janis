@@ -27,11 +27,11 @@ const ContactMap = ({ contact:{phone, hours, location} }) => (
 );
 
 ContactMap.propTypes = {
-  contact: PropTypes.shape({
-    location: PropTypes.Address,
-    hours: PropTypes.Hours,
-    phone: PropTypes.Phone,
-  }).isRequired,
+  contact: PropTypes.shape(Object.assign({},
+    Address.propTypes,
+    Phone.propTypes,
+    Hours.propTypes,
+  )).isRequired,
 };
 
 export default ContactMap;

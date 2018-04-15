@@ -38,12 +38,12 @@ const ContactDetails = ({ contact:{phone, email, location, hours}, intl }) => (
 );
 
 ContactDetails.propTypes = {
-  contact: PropTypes.shape({
-    phone: PropTypes.Phone,
-    email: PropTypes.Email,
-    location: PropTypes.Address,
-    hours: PropTypes.Hours,
-  }).isRequired,
+  contact: PropTypes.shape(Object.assign({},
+    Phone.propTypes,
+    Email.propTypes,
+    Address.propTypes,
+    Hours.propTypes,
+  )).isRequired,
 };
 
 export default injectIntl(ContactDetails);
