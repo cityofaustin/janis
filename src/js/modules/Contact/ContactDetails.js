@@ -14,48 +14,36 @@ const i18nMessages = defineMessages({
   }
 });
 
-const ContactDetails = ({ contact, intl }) => {
-  const {name, phone, email, location, hours} = contact;
+const ContactDetails = ({ contact:{phone, email, location, hours}, intl }) => (
+  <div className="coa-ContactDetails">
+    <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
+    { phone && (
+      <Phone
+        phone={phone}
+      />
+    )}
 
-  return (
-    <div className="coa-ContactDetails">
-      <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
-      <div className="coa-ContactDetails__items">
-        { phone && (
-          <Phone
-            phone={phone.default}
-            ttyphone={phone.tty}
-          />
-        )}
+    { email && (
+      <Email email={email} />
+    )}
 
-        { email && (
-          <Email email={email} />
-        )}
+    { location && (
+      <Address location={location} />
+    )}
 
-        { location && (
-          <Address
-            name={name}
-            location={location}
-          />
-        )}
-
-        { hours && (
-          <Hours hours={hours} />
-        )}
-
-      </div>
-    </div>
-  );
-}
+    { hours && (
+      <Hours hours={hours} />
+    )}
+  </div>
+);
 
 ContactDetails.propTypes = {
-  contact: PropTypes.shape({
-    phone: PropTypes.object,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    location: PropTypes.object,
-    hours: PropTypes.array,
-  }).isRequired,
+  contact: PropTypes.shape(Object.assign({},
+    Phone.propTypes,
+    Email.propTypes,
+    Address.propTypes,
+    Hours.propTypes,
+  )).isRequired,
 };
 
 export default injectIntl(ContactDetails);

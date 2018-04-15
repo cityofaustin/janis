@@ -2,19 +2,21 @@ import React from 'react';
 import PhoneSVG from 'js/svg/Phone';
 import PropTypes from 'prop-types';
 
-const Phone = ({ className, phone, ttyphone }) => (
-  <div className="coa-ContactDetails__item coa-ContactPhone">
+const Phone = ({ phone }) => (
+  <div className="coa-ContactItem coa-ContactPhone">
     <PhoneSVG size="20"/>
     <div>
-      <span><a href={`tel:${phone}`}>{phone}</a></span>
-      <span>TDD/TTY: <a href={`tel:${ttyphone}`}>{ttyphone}</a></span>
+      <span><a href={`tel:${phone.default}`}>{phone.default}</a></span>
+      <span>TDD/TTY: <a href={`tel:${phone.tty}`}>{phone.tty}</a></span>
     </div>
   </div>
 );
 
 Phone.propTypes = {
-  phone: PropTypes.string.isRequired,
-  ttyphone: PropTypes.string.isRequired,
+  phone: PropTypes.shape({
+    default: PropTypes.string.isRequired,
+    tty: PropTypes.string.isRequired,
+  })
 };
 
 export default Phone;

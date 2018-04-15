@@ -19,7 +19,6 @@ storiesOf('StaticMap', module)
   .add('StaticMap', () => (
     <div className="wrapper container-fluid">
       <StaticMap
-        title={value.description}
         location={value.location}
       />
     </div>

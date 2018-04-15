@@ -1,5 +1,4 @@
 const contact = {
-  "name":"311",
   "email":"help@austintexas.gov",
   "phone": {
     "default":"512-974-2000",
@@ -41,6 +40,12 @@ const contact = {
     {
       "dayOfWeek":"SATURDAY",
       "dayOfWeekNumeric":6,
+      "startTime":403790400000,
+      "endTime":403808400000
+    },
+    {
+      "dayOfWeek":"SUNDAY",
+      "dayOfWeekNumeric":7,
       "startTime":403790400000,
       "endTime":403808400000
     }

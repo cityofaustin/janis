@@ -49,7 +49,7 @@ class Hours extends Component {
   render() {
     const hours = this.sort(this.props.hours);
     return (
-      <div className="coa-ContactDetails__item coa-ContactHours">
+      <div className="coa-ContactItem coa-ContactHours">
         <ClockSVG size="20"/>
         <table className="usa-table-borderless">
           <thead className="usa-sr-only">

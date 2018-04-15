@@ -1,7 +1,7 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import Recollect from 'js/modules/Recollect';
-import StaticMap from 'js/modules/StaticMap';
+import ContactMap from 'js/modules/Contact/ContactMap';
 
 const i18nMessages = defineMessages({
   applicationBlockRecollectCalendar: {
@@ -35,7 +35,9 @@ const ApplicationBlock = ({ content, intl }) => {
       id = "HashLink-Recollect";
       break;
     case "map_block":
-      app = <StaticMap title={value.description} location={value.location} />;
+      app = <div>
+        <ContactMap contact={value.contact} />
+      </div>;
       title = value.description;
       id = `HashLink-Map-${content.id}`;
       break;

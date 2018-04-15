@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
+import { findKey } from 'lodash';
 
 import PageBanner from 'js/modules/PageBanner';
 import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
@@ -34,11 +35,9 @@ const i18nMessages = defineMessages({
 
 const Service = ({ service, intl }) => {
   const {
-    image, title, slug, topic, steps, dynamicContent, additionalContent,
+    image, title, slug, topic, topic: {theme}, steps, dynamicContent, additionalContent,
     contacts, related
   } = service;
-
-  const { theme } = topic;
 
   //TODO: data below should be sourced as above
   const { services311 } = jsonFileData;
@@ -46,6 +45,11 @@ const Service = ({ service, intl }) => {
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
   const cleanedRelated = cleanRelatedServiceLinks(related);
+
+  //TODO: mapblock data should include contact data when sent via joplin
+  const tempkey = findKey(dynamicContent, { 'type': 'map_block'});
+  if(tempkey) dynamicContent[tempkey].value['contact'] = contact;
+
 
   return (
     <div>
