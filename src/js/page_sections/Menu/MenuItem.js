@@ -7,7 +7,7 @@ import PlusSVG from 'js/svg/Plus';
 import MinusSVG from 'js/svg/Minus';
 import ChevronDownSVG from 'js/svg/ChevronDown';
 
-const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAllMenus}) => (
+const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleCloseAllMenus}) => (
   <li>
     <div className={`coa-MenuItem coa-MenuItem--flex ${isSubmenuOpen ? 'coa-MenuItem--open' : ''}`}
       id={`theme${id+1}`}
@@ -35,7 +35,7 @@ const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleToggleAl
       id={id}
       theme={theme}
       isSubmenuOpen={isSubmenuOpen}
-      handleToggleAllMenus={handleToggleAllMenus}
+      handleCloseAllMenus={handleCloseAllMenus}
     />
   )}
   </li>

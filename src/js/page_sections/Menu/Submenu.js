@@ -16,7 +16,7 @@ const isAlignedRight = (direction, id) => {
   return (direction === 'rtl') ? id < SUBMENU_THRESHOLD_ALIGNRIGHT_RTL : id > SUBMENU_THRESHOLD_ALIGNRIGHT_LTR;
 };
 
-const Submenu = ({id, theme, isSubmenuOpen, handleToggleAllMenus, intl}) => {
+const Submenu = ({id, theme, isSubmenuOpen, handleCloseAllMenus, intl}) => {
 
   const langObj = find(SUPPORTED_LANGUAGES, {'code': intl.locale});
   return (
@@ -35,21 +35,21 @@ const Submenu = ({id, theme, isSubmenuOpen, handleToggleAllMenus, intl}) => {
             key={topicId}
             className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
             topic={topic}
-            handleToggleAllMenus={handleToggleAllMenus}
+            handleCloseAllMenus={handleCloseAllMenus}
           />
         );
       })
     }
-      <ThemeSubmenuItem theme={theme} handleToggleAllMenus={handleToggleAllMenus}/>
+      <ThemeSubmenuItem theme={theme} handleCloseAllMenus={handleCloseAllMenus}/>
       <WorkInProgressSubmenuItem />
     </ul>
   );
 }
 
-const ThemeSubmenuItem = ({theme, handleToggleAllMenus}) => (
+const ThemeSubmenuItem = ({theme, handleCloseAllMenus}) => (
   <li className="coa-SubmenuItem"
     role="menuitem"
-    onClick={handleToggleAllMenus}
+    onClick={handleCloseAllMenus}
   >
     <I18nNavLink
       to={`/themes/${theme.slug}`}

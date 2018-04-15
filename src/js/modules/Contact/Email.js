@@ -3,7 +3,7 @@ import EnvelopSVG from 'js/svg/EnvelopO';
 import PropTypes from 'prop-types';
 
 const Email = ({ email }) => (
-  <div className="coa-ContactDetails__item coa-ContactEmail">
+  <div className="coa-ContactItem coa-ContactEmail">
     <EnvelopSVG size="20"/>
     <a href={`mailto:${email}`}>{email}</a>
   </div>

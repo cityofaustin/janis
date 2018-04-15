@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import ContactMap from 'js/modules/Contact/ContactMap';
 import ContactDetails from 'js/modules/Contact/ContactDetails';
 import ContactPhone from 'js/modules/Contact/Phone';
 import ContactHours from 'js/modules/Contact/Hours';
@@ -10,9 +11,16 @@ import ContactAddress from 'js/modules/Contact/Address';
 import contactData from 'stories/static_data/contactData';
 
 storiesOf('Contact', module)
-  .add('All Contact Details', () => (
+  .add('Contact Details', () => (
     <div className="wrapper container-fluid">
       <ContactDetails
+        contact={contactData}
+      />
+    </div>
+  ))
+  .add('Contact Map', () => (
+    <div className="wrapper container-fluid">
+      <ContactMap
         contact={contactData}
       />
     </div>
@@ -20,16 +28,13 @@ storiesOf('Contact', module)
   .add('Phone', () => (
     <div className="wrapper container-fluid">
       <ContactPhone
-        className="coa-ContactDetails__item"
-        phone={contactData.phone.default}
-        ttyphone={contactData.phone.tty}
+        phone={contactData.phone}
       />
     </div>
   ))
   .add('Hours', () => (
     <div className="wrapper container-fluid">
       <ContactHours
-        className="coa-ContactDetails__item"
         hours={contactData.hours}
       />
     </div>
@@ -37,7 +42,6 @@ storiesOf('Contact', module)
   .add('Email', () => (
     <div className="wrapper container-fluid">
       <ContactEmail
-        className="coa-ContactDetails__item"
         email={contactData.email}
       />
     </div>
@@ -45,8 +49,6 @@ storiesOf('Contact', module)
   .add('Address', () => (
     <div className="wrapper container-fluid">
       <ContactAddress
-        className="coa-ContactDetails__item"
-        name={contactData.name}
         location={contactData.location}
       />
     </div>
