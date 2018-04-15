@@ -59,8 +59,8 @@ class Menu extends Component {
     this.state.openSubmenuId === id
   )
 
-  toggleAllMenus = (e) => {
-    this.props.toggleMenu();
+  closeAllMenus = (e) => {
+    this.props.closeMenu();
     this.setState({
       openSubmenuId: null
     });
@@ -89,14 +89,14 @@ class Menu extends Component {
           role="navigation"
         >
           <button className="coa-Menu__close-btn d-lg-none"
-            onClick={this.toggleAllMenus}
+            onClick={this.closeAllMenus}
             ref="closeTrigger"
             tabIndex="0"
           >
             <CloseSVG size="40" />
           </button>
           <ul className="coa-Menu__list">
-            <HomeMobileMenuItem handleToggleAllMenus={this.toggleAllMenus} />
+            <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
             <AirportMobileMenuItem />
             <ThreeOneOneMobileMenuItem />
         {
@@ -106,12 +106,12 @@ class Menu extends Component {
               id={i}
               theme={theme}
               isSubmenuOpen={this.isSubmenuOpen(i)}
-              handleToggleAllMenus={this.toggleAllMenus}
+              handleCloseAllMenus={this.closeAllMenus}
               handleSubmenuToggle={this.toggleSubmenu}
             />
           ))
         }
-            <PrivacyPolicyMenuItem handleToggleAllMenus={this.toggleAllMenus} />
+            <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
             <MobileFooter />
           </ul>
         </nav>
@@ -131,8 +131,8 @@ class Menu extends Component {
   }
 }
 
-const HomeMobileMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
-  <li className="d-lg-none" onClick={handleToggleAllMenus}>
+const HomeMobileMenuItem = injectIntl(({handleCloseAllMenus, intl}) => (
+  <li className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
       <I18nNavLink to="/" exact>
         {intl.formatMessage(i18nMessages.home)}
@@ -166,8 +166,8 @@ const ThreeOneOneMobileMenuItem = injectIntl(({intl}) => (
   </li>
 ))
 
-const PrivacyPolicyMenuItem = injectIntl(({handleToggleAllMenus, intl}) => (
-  <li className="d-lg-none" onClick={handleToggleAllMenus}>
+const PrivacyPolicyMenuItem = injectIntl(({handleCloseAllMenus, intl}) => (
+  <li className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small">
       <a href="#">
         {intl.formatMessage(i18nMessages.privacy)}
@@ -194,7 +194,7 @@ const MobileFooter = injectIntl(({intl}) => (
 
 Menu.propTypes = {
   navigation: PropTypes.object.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 }
 
