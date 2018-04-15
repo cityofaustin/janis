@@ -40,12 +40,6 @@ class LanguageWrapper extends Component {
     }
   }
 
-  getChildContext() {
-    return {
-      langCode: this.state.lang
-    };
-  }
-
   getInitialLangState() {
     const getLang = [ this.getLangFromProps, this.getLangFromCookie, this.getLangFromLocale, ()=>DEFAULT_LANG ];
     const that = this;
@@ -125,7 +119,7 @@ class LanguageWrapper extends Component {
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }} dir={direction} className={`coa-${direction}`}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
-          <LanguageSelectBar lang={lang} path={this.props.match.params.path || ''}/>
+          <LanguageSelectBar path={this.props.match.params.path || ''}/>
           <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
@@ -139,9 +133,6 @@ class LanguageWrapper extends Component {
 
 LanguageWrapper.propTypes = {
   navigation: PropTypes.object.isRequired,
-}
-LanguageWrapper.childContextTypes = {
-  langCode: PropTypes.string
 }
 
 export default withSiteData(LanguageWrapper);

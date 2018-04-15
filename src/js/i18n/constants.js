@@ -59,7 +59,7 @@ export const LANG_COOKIE_EXPIRES = 10 * 365; //days
 
 export const DEFAULT_LANG = 'en';
 
-export const i18nalizeLinkTo = ({to, langCode=DEFAULT_LANG}) => {
+export const i18nalizeLinkTo = (to, langCode=DEFAULT_LANG) => {
   let location;
   if (!to) return null;
   if (typeof to !== "string") location = to.pathname;

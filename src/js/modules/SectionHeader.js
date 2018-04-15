@@ -11,7 +11,7 @@ const SectionHeader = ({ isSerif, hasHighlight, hasArrow, children }) => (
     {children}
     {hasArrow && (
       <span className="coa_SectionHeader__arrow">
-        <ArrowRight size={32}/>
+        <ArrowRight />
       </span>
     )}
   </h2>

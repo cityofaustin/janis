@@ -1,16 +1,11 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
 import { Link } from 'react-static'
 import PropTypes from 'prop-types'
 import { i18nalizeLinkTo } from 'js/i18n/constants'
 
-const I18nLink = (props, context) => {
-  const { to, ...rest } = props;
-  const { langCode } = context;
-  return <Link to={i18nalizeLinkTo({to, langCode})} {...rest} />
-}
+const I18nLink = ({ intl, to, ...rest }) => (
+  <Link to={i18nalizeLinkTo(to, intl.locale)} {...rest} />
+)
 
-I18nLink.contextTypes = {
-  langCode: PropTypes.string,
-}
-
-export default I18nLink;
+export default injectIntl(I18nLink);
