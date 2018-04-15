@@ -29,13 +29,17 @@ class Header extends Component {
     };
   }
 
-  toggleMenu = (e) => {
-    if (this.state.menuIsOpen) {
-      this.refs.menu.focus();
-    }
+  closeMenu = (e) => {
+    this.refs.menu.focus();
     this.setState({
-      menuIsOpen: !this.state.menuIsOpen,
-    })
+      menuIsOpen: false,
+    });
+  }
+
+  openMenu = (e) => {
+    this.setState({
+      menuIsOpen: true
+    });
   }
 
   render() {
@@ -47,7 +51,7 @@ class Header extends Component {
         <div className="container-fluid wrapper">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
-              <button onClick={this.toggleMenu} tabIndex="0"
+              <button onClick={this.openMenu} tabIndex="0"
                 className="coa-Header__menu-toggle d-lg-none" ref="menu"
               >
                 {intl.formatMessage(i18nMessages.headerMenuButton)}
@@ -68,7 +72,7 @@ class Header extends Component {
         </div>
         <Menu
           isMenuOpen={this.state.menuIsOpen}
-          toggleMenu={this.toggleMenu}
+          closeMenu={this.closeMenu}
           navigation={navigation}
         />
       </header>
