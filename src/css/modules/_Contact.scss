@@ -24,8 +24,18 @@
     line-height: $coa-line-height-md-small;
   }
 
+  svg {
+    height: $coa-font-size-xsmall - .1rem;
+    @include media($coa-medium-screen) {
+      height: $coa-font-size-small - .1rem;
+    }
+
+    @include media($coa-large-screen) {
+      height: $coa-font-size-md-small - .1rem;
+    }
+  }
+
   & > :first-child {
-    flex-basis: 20px;
     margin-right: $coa-spacing-large;
     margin-top: $coa-spacing-xsmall;
   }

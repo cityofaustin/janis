@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Email = ({ email }) => (
   <div className="coa-ContactItem coa-ContactEmail">
-    <EnvelopSVG size="20"/>
+    <EnvelopSVG />
     <a href={`mailto:${email}`}>{email}</a>
   </div>
 );

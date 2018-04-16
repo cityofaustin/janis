@@ -50,7 +50,7 @@ class Hours extends Component {
     const hours = this.sort(this.props.hours);
     return (
       <div className="coa-ContactItem coa-ContactHours">
-        <ClockSVG size="20"/>
+        <ClockSVG />
         <table className="usa-table-borderless">
           <thead className="usa-sr-only">
             <tr>
