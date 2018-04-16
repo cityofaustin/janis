@@ -18,7 +18,7 @@ const createGraphQLClientsByLang = (lang) => {
 }
 
 const makeAllPages = async (langCode) => {
-  const path = !!langCode ? langCode : ''
+  const path = `/${!!langCode ? langCode : ''}`
   console.log(`- Building routes for ${path}...`);
 
   const client = createGraphQLClientsByLang(langCode);
@@ -56,13 +56,13 @@ const makeServicePages = async (client) => {
   const { allServicePages: allServices } = await client.request(allServicePagesQuery);
 
   const data = {
-    path: 'services',
+    path: '/services',
     component: 'src/js/pages/Services',
     getData: async () => ({
       allServices,
     }),
     children: allServices.edges.map(({node: service}) => ({
-      path: `${service.slug}`,
+      path: `/${service.slug}`,
       component: 'src/js/pages/Service',
       getData: async () => ({
         service,
@@ -77,13 +77,13 @@ const makeTopicPages = async (client) => {
   const { allTopics } = await client.request(allTopicPagesQuery);
 
   const data = {
-    path: 'topics',
+    path: '/topics',
     component: 'src/js/pages/Topics',
     getData: async () => ({
       allTopics,
     }),
     children: allTopics.edges.map(({node: topic}) => ({
-      path: `${topic.slug}`,
+      path: `/${topic.slug}`,
       component: 'src/js/pages/Topic',
       getData: async () => ({
         topic,
@@ -98,13 +98,13 @@ const makeThemePages = async (client) => {
   const { allThemes } = await client.request(allThemesQuery);
 
   const data = {
-    path: 'themes',
+    path: '/themes',
     component: 'src/js/pages/Themes',
     getData: async () => ({
       allThemes,
     }),
     children: allThemes.edges.map(({node: theme}) => ({
-      path: `${theme.slug}`,
+      path: `/${theme.slug}`,
       component: 'src/js/pages/Theme',
       getData: async () => ({
         theme,
@@ -120,7 +120,7 @@ const makeDepartmentPages = async (client) => {
   const { allDepartments } = await client.request(allDepartmentPagesQuery);
 
   const data = {
-    path: 'departments',
+    path: '/departments',
     component: 'src/js/pages/Departments',
     getData: async () => ({
       allDepartments,
@@ -158,7 +158,7 @@ export default {
   getRoutes: async () => {
     const routes = [
       {
-        path: 'search',
+        path: '/search',
         component: 'src/js/pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
