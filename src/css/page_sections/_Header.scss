@@ -35,10 +35,15 @@
 .coa-Header__right-controls {
   align-items: center;
   display: none;
-  font-size: $coa-font-size-xsmall;
   justify-content: flex-end;
   @include media($coa-medium-screen) {
     display: flex;
+  }
+  a {
+    font-size: $coa-font-size-xsmall;
+  }
+  svg {
+    height: $coa-font-size-xsmall - .1rem; //based on parent element font-size
   }
 }
 
@@ -56,16 +61,5 @@
   }
   @include media($coa-large-screen) {
     font-size: $coa-font-size-medium;
-  }
-}
-
-
-
-
-
-.coa-Header__search {
-  display: flex;
-  span {
-    margin-right: $coa-space-level2;
   }
 }
