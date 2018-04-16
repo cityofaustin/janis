@@ -93,7 +93,7 @@ class Menu extends Component {
             ref="closeTrigger"
             tabIndex="0"
           >
-            <CloseSVG size="40" />
+            <CloseSVG />
           </button>
           <ul className="coa-Menu__list">
             <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
