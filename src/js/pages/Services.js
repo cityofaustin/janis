@@ -30,15 +30,15 @@ const Services = ({ allServices, intl }) => {
   return (
     <div>
       <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader 
+        <PageHeader
           title={intl.formatMessage(i18nMessages.servicesPageTitle)}
           description={intl.formatMessage(i18nMessages.servicePageDescription)}
         />
       </div>
       <div className="wrapper container-fluid">
         <TileGroup tiles={relatedLinks} />
-        <ThreeOneOne services311={services311} />
       </div>
+      <ThreeOneOne services311={services311} />
     </div>
   )
 }
