@@ -9,19 +9,7 @@ const i18nMessages = defineMessages({
   },
 });
 
-const getIconSize = (textSize) => {
-  switch(textSize) {
-    case 'small':
-      return "13";
-      break;
-    case 'medium':
-    default:
-      return "17";
-        break;
-  }
-}
-
-const ExternalLink = ({to, noIcon, iconSize, children, intl}) => (
+const ExternalLink = ({to, noIcon, children, intl}) => (
   <a
     href={to}
     className="coa-ExternalLink"
@@ -30,7 +18,7 @@ const ExternalLink = ({to, noIcon, iconSize, children, intl}) => (
     aria-label={intl.formatMessage(i18nMessages.externalLinkAriaLabel)}
   >
     {children}
-    {!noIcon && <ExternalLinkSVG size={getIconSize(iconSize)} />}
+    {!noIcon && <ExternalLinkSVG />}
   </a>
 );
 

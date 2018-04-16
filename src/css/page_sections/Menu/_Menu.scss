@@ -62,6 +62,9 @@
 .coa-Menu__footer-text {
   padding: $coa-space-level3 0;
   font-size: $coa-font-size-xsmall;
+  svg {
+    height: $coa-font-size-xsmall - .1rem;
+  }
 }
 
 .coa-Menu__close-submenu-click-target {
