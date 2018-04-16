@@ -14,3 +14,7 @@ body {
     line-height: $coa-line-height-md-small;
   }
 }
+
+svg {
+  height: $coa-base-font-size - .1rem;
+}
