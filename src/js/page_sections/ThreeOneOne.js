@@ -20,9 +20,11 @@ const i18nMessages = defineMessages({
 const ThreeOneOne = ({ services311, intl }) => (
   <div className="coa-ThreeOneOne">
     <div className="container-fluid wrapper">
-      <h2 className="coa-ThreeOneOne__title">
-        <a href="tel:512-974-2000">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleCall)}</a> {intl.formatMessage(i18nMessages.threeoneoneSectionTitleOr)} <a href="http://311.austintexas.gov/reports/list_services">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleSiteRequest)}</a>
-      </h2>
+      <div className="wrapper wrapper--sm">
+        <h2 className="coa-ThreeOneOne__title">
+          <a href="tel:512-974-2000">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleCall)}</a> {intl.formatMessage(i18nMessages.threeoneoneSectionTitleOr)} <a href="http://311.austintexas.gov/reports/list_services">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleSiteRequest)}</a>
+        </h2>
+      </div>
       <div className="coa-ThreeOneOne__listlinks row">
       {
         services311.map((service, index) =>

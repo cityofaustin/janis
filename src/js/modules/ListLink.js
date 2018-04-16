@@ -9,7 +9,7 @@ const ListLink = ({ url, text }) => (
     to={url}
   >
     <span>{text}</span>
-    <ChevronRightSVG size="20" />
+    <ChevronRightSVG />
   </I18nLink>
 );
 

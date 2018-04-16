@@ -1,19 +1,17 @@
 .coa-ThreeOneOne {
   background-color: $coa-color-purple-darkest;
+  font-family: $coa-font-sans;
   margin-top: $coa-spacing-large;
-  padding: 1px 0 $coa-spacing-large 0; //prevent margin stacking
+  padding: 1px 0 $coa-spacing-large 0; //1px to prevent margin stacking
 }
 
 .coa-ThreeOneOne__title {
   color: $coa-color-gray-lightest;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 600px;
   text-transform: uppercase;
   text-align: center;
 }
 
-.coa-ThreeOneOne__listlinks{
+.coa-ThreeOneOne__listlinks {
   .coa-ListLink {
     color: $coa-color-gray-lightest;
     border-color: $coa-color-gray;
