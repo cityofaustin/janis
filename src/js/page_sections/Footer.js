@@ -39,13 +39,13 @@ const Footer = ({ intl }) => (
           <div className="col-xs-12 col-md-3 col-md-offset-3">
             <div className="coa-Footer__icons">
               <ExternalLink to="https://twitter.com/austintexasgov" noIcon={true}>
-                <TwitterSVG size="20" />
+                <TwitterSVG />
               </ExternalLink>
               <ExternalLink to="https://www.facebook.com/austintexasgov" noIcon={true}>
-                <FacebookSVG size="20" />
+                <FacebookSVG />
               </ExternalLink>
               <ExternalLink to="https://github.com/cityofaustin" noIcon={true}>
-                <GithubSVG size="20" />
+                <GithubSVG />
               </ExternalLink>
             </div>
           </div>
