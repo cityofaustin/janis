@@ -1,21 +1,20 @@
 .coa-SecondaryContentBanner {
-  display: inline-block;
   background-color: $coa-color-gray-lightest;
-  width: 100%;
+  padding: $coa-spacing-md-small 0;
   p {
-    text-align: center;
-    font-style: italic;
     font-size: $coa-font-size-xsmall;
-    line-height: $coa-space-level5;
-    margin: $coa-space-level4 auto;
+    font-style: italic;
+    line-height: $coa-line-height-small;
+    text-align: center;
+    svg {
+      height: $coa-font-size-xsmall - .1rem;
+    }
     @include media($coa-medium-screen) {
       font-size: $coa-font-size-md-small;
-      line-height: $coa-space-level6;
-      margin: $coa-space-level6 auto;
-    }
-    @include media($coa-large-screen) {
-      line-height: $coa-space-level7;
-      margin: $coa-space-level7 auto;
+      line-height: $coa-line-height-medium;
+      svg{
+        height: $coa-font-size-md-small - .1rem;
+      }
     }
   }
 }
