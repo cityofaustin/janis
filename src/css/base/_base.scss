@@ -16,5 +16,8 @@ body {
 }
 
 svg {
-  height: $coa-base-font-size - .1rem;
+  height: $coa-font-size-small - .1rem;
+  @include media($coa-medium-screen) {
+    height: $coa-font-size-md-small - .1rem;
+  }
 }
