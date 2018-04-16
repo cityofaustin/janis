@@ -1,9 +1,14 @@
 .coa-PageHeader {
-  text-transform: uppercase;
-  text-align: center;
+
+  margin-bottom: $coa-space-level7;
+
+  h1 {
+    text-transform: uppercase;
+    text-align: center;
+  }
 }
 
-.coa-PageHeader__description {
+.coa-PageHeader--hasBorder {
   border-bottom: 1px dashed $coa-color-gray;
-  padding-bottom: $coa-space-level7;
+  padding-bottom: $coa-spacing-large;
 }
