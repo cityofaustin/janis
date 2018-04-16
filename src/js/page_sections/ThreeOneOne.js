@@ -1,6 +1,7 @@
 import React from "react";
 import { defineMessages, injectIntl } from 'react-intl';
 import ListLink from 'js/modules/ListLink';
+import SectionHeader from 'js/modules/SectionHeader';
 
 const i18nMessages = defineMessages({
   threeoneoneSectionTitleCall: {
@@ -21,9 +22,9 @@ const ThreeOneOne = ({ services311, intl }) => (
   <div className="coa-ThreeOneOne">
     <div className="container-fluid wrapper">
       <div className="wrapper wrapper--sm">
-        <h2 className="coa-ThreeOneOne__title">
+        <SectionHeader>
           <a href="tel:512-974-2000">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleCall)}</a> {intl.formatMessage(i18nMessages.threeoneoneSectionTitleOr)} <a href="http://311.austintexas.gov/reports/list_services">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleSiteRequest)}</a>
-        </h2>
+        </SectionHeader>
       </div>
       <div className="coa-ThreeOneOne__listlinks row">
       {
