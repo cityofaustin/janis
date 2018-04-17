@@ -9,7 +9,7 @@ import HeroHome from 'js/modules/HeroHome';
 import ExternalLink from 'js/modules/ExternalLink';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
-import { cleanServiceLinks } from 'js/helpers/cleanData';
+import { cleanLinks } from 'js/helpers/cleanData';
 
 import jsonFileData from '__tmpdata/pages';
 const services311 = get(jsonFileData, "services311", null);
@@ -30,7 +30,8 @@ const i18nMessages = defineMessages({
 });
 
 const Home = ({ topServices, image, intl }) => {
-  const serviceLinks = cleanServiceLinks(topServices);
+  //TODO: clean data where sourced
+  const serviceLinks = cleanLinks(topServices, '/services');
 
   return (
     <div>
@@ -52,8 +53,11 @@ const Home = ({ topServices, image, intl }) => {
         </p>
       </SecondaryContentBanner>
       <div className="wrapper container-fluid">
-        <SectionHeader hasHighlight={true}>{intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}</SectionHeader>
-        <TileGroup tiles={serviceLinks} tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)} />
+        <TileGroup
+          title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}
+          tiles={serviceLinks}
+          tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)}
+        />
       </div>
       <ThreeOneOne services311={services311} />
     </div>

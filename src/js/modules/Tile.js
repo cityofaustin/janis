@@ -14,6 +14,7 @@ const Tile = ({ url, text, tag }) => (
 Tile.propTypes = {
   url: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  tag: PropTypes.string,
 };
 
 export default Tile;

@@ -1,6 +1,24 @@
 .coa_SectionHeader {
   text-transform: uppercase;
   text-align: center;
+
+  a {
+    color: $coa-color-purple-darkest;
+    text-decoration: none;
+  }
+
+  svg {
+    height: 14px;
+    @include media($coa-small-screen) {
+      height: 20px;
+    }
+    @include media($coa-medium-screen) {
+      height: 30px;
+    }
+    @include media($coa-large-screen) {
+      height: 38px;
+    }
+  }
 }
 
 .coa_SectionHeader--isSerif {
@@ -23,21 +41,4 @@
   height: 8px;
   display: block;
   content: "";
-}
-
-.coa_SectionHeader__arrow {
-  margin: 0 $coa-spacing-xsmall;
-  svg {
-    height: 14px;
-    @include media($coa-small-screen) {
-      height: 20px;
-    }
-    @include media($coa-medium-screen) {
-      height: 30px;
-    }
-    @include media($coa-large-screen) {
-      height: 38px;
-    }
-  }
-
 }

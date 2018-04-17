@@ -55,14 +55,16 @@ export const cleanRelatedServiceLinks = (links) => {
   });
 };
 
-export const cleanServiceLinks = (links) => {
+export const cleanLinks = (links, pathPrefix) => {
 
   if(!links || !links.edges) return null;
 
   return links.edges.map(({node: link}) => {
+    const {title, slug, ...rest} = link;
     return {
-      url: `/services/${link.slug}`,
-      text: link.title
+      url: `${pathPrefix || ''}/${slug}`,
+      text: title,
+      ...rest
     }
   });
 };

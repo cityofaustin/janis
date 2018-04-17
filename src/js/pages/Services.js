@@ -7,7 +7,7 @@ import PageHeader from 'js/modules/PageHeader';
 import TileGroup from 'js/modules/TileGroup';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
-import { cleanServiceLinks } from 'js/helpers/cleanData';
+import { cleanLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
@@ -25,7 +25,8 @@ const i18nMessages = defineMessages({
 })
 
 const Services = ({ allServices, intl }) => {
-  const relatedLinks = cleanServiceLinks(allServices)
+  //TODO: clean data where sourced
+  const relatedLinks = cleanLinks(allServices, '/services');
 
   return (
     <div>
@@ -36,7 +37,7 @@ const Services = ({ allServices, intl }) => {
         />
       </div>
       <div className="wrapper container-fluid">
-        <TileGroup tiles={relatedLinks} />
+        <TileGroup tiles={relatedLinks} tag="service" />
       </div>
       <ThreeOneOne services311={services311} />
     </div>
