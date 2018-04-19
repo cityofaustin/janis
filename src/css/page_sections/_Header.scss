@@ -44,6 +44,7 @@
   }
   svg {
     height: $coa-font-size-xsmall - .1rem; //based on parent element font-size
+    vertical-align: -.2rem;
   }
 }
 
