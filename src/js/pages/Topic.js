@@ -10,7 +10,7 @@ import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import SectionHeader from 'js/modules/SectionHeader';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
-import { cleanServiceLinks } from 'js/helpers/cleanData';
+import { cleanLinks } from 'js/helpers/cleanData';
 
 const i18nMessages = defineMessages({
   serviceRelatedlinksTag: {
@@ -29,7 +29,8 @@ const Topic = ({ topic, intl }) => {
   } = topic;
 
   const { services311 } = jsonFileData;
-  const relatedLinks = cleanServiceLinks(links);
+  //TODO: clean data where sourced
+  const relatedLinks = cleanLinks(links, '/services');
 
   return (
     <div>

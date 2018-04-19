@@ -4,35 +4,37 @@ import PropTypes from 'prop-types';
 import Tile from 'js/modules/Tile';
 import SectionHeader from 'js/modules/SectionHeader';
 import I18nLink from 'js/modules/I18nLink';
+import ArrowRight from 'js/svg/ArrowRight';
 
 
-const TileGroup = ({ tiles, tag, hasBorder, title, description, titlePath, direction }) => (
-  <div className={`
-    col-xs-12 ${direction ? 'col-md-6 col-lg-3' : ''}
-    coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}
-  `}>
-  { title && (
-    <div className="coa-TileGroup__title">
+const TileGroup = ({ tiles, tag, title, titlePath, description, hasBorder }) => (
+  <div className={`coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}`}>
+  { title && titlePath && (
+    <SectionHeader hasHighlight={true}>
       <I18nLink to={titlePath}>
-        <SectionHeader hasHighlight={true} hasArrow={true}>{title}</SectionHeader>
+        {title}&nbsp;<ArrowRight />
       </I18nLink>
-    </div>
+    </SectionHeader>
   )}
-  { description && <p>{description}</p> }
-    <div className={`
-      coa-TileGroup__tiles
-      ${direction ? `coa-TileGroup__tiles--${direction}` : ''}
-    `}>
+  { title && !titlePath && (
+    <SectionHeader hasHighlight={true}>{title}</SectionHeader>
+  )}
+
+  { description && (
+    <p className="coa-TileGroup__description">{description}</p>
+  )}
+    <div className="row">
       {
         tiles.map(({ url, text }, index) =>
-        <Tile
-          url={url}
-          text={text}
-          tag={tag}
-          key={index}
-        />
-      )
-    }
+          <div key={index} className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3">
+            <Tile
+              url={url}
+              text={text}
+              tag={tag}
+            />
+          </div>
+        )
+      }
     </div>
   </div>
 )
@@ -40,10 +42,10 @@ const TileGroup = ({ tiles, tag, hasBorder, title, description, titlePath, direc
 TileGroup.propTypes = {
   tiles: PropTypes.array.isRequired,
   tag: PropTypes.string,
-  hasBorder: PropTypes.bool,
   title: PropTypes.string,
-  description: PropTypes.string,
   titlePath: PropTypes.string,
+  description: PropTypes.string,
+  hasBorder: PropTypes.bool,
 };
 
 export default TileGroup;
