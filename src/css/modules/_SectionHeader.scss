@@ -17,16 +17,18 @@
 }
 
 .coa_SectionHeader--hasHighlight:after {
-  margin: $coa-spacing-medium auto $coa-spacing-xlarge;
-  width: 34px;
   background: $coa-color-orange;
-  height: 8px;
-  display: block;
   content: "";
+  display: block;
+  height: $coa-sectionheader-highlight-height;
+  margin: $coa-spacing-medium auto $coa-spacing-xlarge;
+  width: $coa-sectionheader-highlight-width;
 }
 
 .coa_SectionHeader__arrow {
   margin: 0 $coa-spacing-xsmall;
+
+  //based on SectionHeader h2 height - 6px
   svg {
     height: 14px;
     @include media($coa-small-screen) {

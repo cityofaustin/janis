@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import SearchSVG from 'js/svg/Search';
 import Menu from 'js/page_sections/Menu/Menu';
 import I18nLink from 'js/modules/I18nLink';
 import ExternalLink from 'js/modules/ExternalLink';
@@ -10,10 +9,6 @@ const i18nMessages = defineMessages({
   headerMenuButton: {
     id: 'Header.Menu.button',
     defaultMessage: 'Menu',
-  },
-  headerSearchButton: {
-    id: 'Header.Search.button',
-    defaultMessage: 'Search',
   },
   headerAirportText: {
     id: 'Header.Airport.text',

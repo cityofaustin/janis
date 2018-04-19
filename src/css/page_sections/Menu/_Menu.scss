@@ -43,15 +43,11 @@
 }
 
 .coa-Menu__close-btn {
-  background: transparent;
-  padding: 0;
-  margin: $coa-space-level1;
-  width: auto;
-  &:hover, &:active {
-    background: transparent;
-  }
+  margin: $coa-spacing-xsmall;
+  height: $coa-menu-closebtn-height + (2 * $coa-spacing-small);
   svg {
-    margin: $coa-space-level1 $coa-space-level2;
+    margin: $coa-spacing-small;
+    height: $coa-menu-closebtn-height;
   }
 }
 
@@ -62,6 +58,9 @@
 .coa-Menu__footer-text {
   padding: $coa-space-level3 0;
   font-size: $coa-font-size-xsmall;
+  svg {
+    height: $coa-font-size-xsmall - .1rem;
+  }
 }
 
 .coa-Menu__close-submenu-click-target {

@@ -56,9 +56,7 @@ const ThemeSubmenuItem = ({theme, handleCloseAllMenus}) => (
       className="coa-SubmenuItem__block coa-SubmenuItem__block--theme"
     >
       {theme.text}
-      <span className="coa-SubmenuItem__arrow-right">
-        <ArrowRightSVG size="13" />
-      </span>
+      <ArrowRightSVG />
     </I18nNavLink>
   </li>
 )
