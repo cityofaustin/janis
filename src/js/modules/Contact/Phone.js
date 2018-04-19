@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Phone = ({ phone }) => (
   <div className="coa-ContactItem coa-ContactPhone">
-    <PhoneSVG size="20"/>
+    <PhoneSVG />
     <div>
       <span><a href={`tel:${phone.default}`}>{phone.default}</a></span>
       <span>TDD/TTY: <a href={`tel:${phone.tty}`}>{phone.tty}</a></span>

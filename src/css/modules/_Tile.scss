@@ -27,3 +27,8 @@
   line-height: $coa-line-height-md-small;
   margin: $coa-space-level1 0 $coa-space-level3;
 }
+
+.coa-Tile__icon {
+  height: $coa-font-size-md-small; //based on coa-Tile__text font size
+  width: $coa-font-size-md-small; //based on coa-Tile__text font size
+}

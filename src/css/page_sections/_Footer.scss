@@ -1,10 +1,8 @@
 .coa-Footer {
-  display: inline-block;
   background: $coa-color-purple-darkest;
-  padding: $coa-space-level5 0 $coa-space-level6;
   color: $coa-color-white;
   font-family: $coa-font-sans;
-  width: 100%;
+  padding: $coa-space-level5 0 $coa-space-level6;
 }
 
 .coa-Footer__city-seal-wrapper {
@@ -21,6 +19,7 @@
   a {
     svg {
       fill: $coa-color-blue-darker;
+      height: $coa-font-size-xsmall - .1rem;
       &:hover {
         fill: $coa-color-blue-darkest;
       }

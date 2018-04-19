@@ -14,3 +14,10 @@ body {
     line-height: $coa-line-height-md-small;
   }
 }
+
+svg {
+  height: $coa-font-size-small - .1rem;
+  @include media($coa-medium-screen) {
+    height: $coa-font-size-md-small - .1rem;
+  }
+}

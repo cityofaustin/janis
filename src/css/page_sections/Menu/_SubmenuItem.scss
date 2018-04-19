@@ -40,15 +40,22 @@
   font-family: $coa-font-sans;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
+  svg {
+    height: $coa-font-size-xsmall - .1rem //based on parent element font-size
+  }
 }
 
 .coa-SubmenuItem__block--theme {
+  font-size: $coa-font-size-small;
   font-weight: $coa-font-bold;
-}
-
-.coa-SubmenuItem__arrow-right {
-  margin: 0 $coa-spacing-small;
   svg {
-    height: 13px;
+    height: $coa-font-size-small - .1rem; //based on parent element font-size
+    margin-left: $coa-spacing-small;
+  }
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-xsmall;
+    svg {
+      height: $coa-font-size-xsmall - .1rem; //based on parent element font-size
+    }
   }
 }

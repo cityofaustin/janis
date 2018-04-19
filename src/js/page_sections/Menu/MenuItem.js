@@ -19,15 +19,15 @@ const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleCloseAll
       onKeyDown={(e) => handleSubmenuToggle(e, id)}
     >
       <span className="coa-MenuItem__text">{ theme.text }</span>
-      <div className="coa-MenuItem__plus-sign d-lg-none">
+      <div className="d-lg-none">
         {
           isSubmenuOpen
-            ? <MinusSVG size="18" title={`close ${theme.text} section`} />
-            : <PlusSVG size="18" title={`open ${theme.text} section`} />
+            ? <MinusSVG title={`close ${theme.text} section`} />
+            : <PlusSVG title={`open ${theme.text} section`} />
         }
       </div>
-      <div className="coa-MenuItem__arrow-down d-none d-lg-inline">
-        <ChevronDownSVG size="14" />
+      <div className="d-none d-lg-inline">
+        <ChevronDownSVG />
       </div>
     </div>
   { !!theme.topics.edges && (

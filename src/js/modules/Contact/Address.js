@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Address = ({ location }) => (
   <div className="coa-ContactItem coa-ContactAddress">
-    <MapMarkerSVG size="20"/>
+    <MapMarkerSVG />
     <div>
       <span>{location.name}</span>
       <span>{location.street}</span>

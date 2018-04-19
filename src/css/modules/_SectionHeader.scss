@@ -35,10 +35,10 @@
 }
 
 .coa_SectionHeader--hasHighlight:after {
-  margin: $coa-spacing-medium auto $coa-spacing-xlarge;
-  width: 34px;
   background: $coa-color-orange;
-  height: 8px;
-  display: block;
   content: "";
+  display: block;
+  height: $coa-sectionheader-highlight-height;
+  margin: $coa-spacing-medium auto $coa-spacing-xlarge;
+  width: $coa-sectionheader-highlight-width;
 }
