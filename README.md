@@ -70,11 +70,72 @@ TODO: more on this decision + evaluation
 
 ## Browser Compatibility
 
-`TODO`
+Following the lead of other government digital services groups ([USWDS](https://github.com/uswds/uswds/issues/2071), [UK GDS](https://gds.blog.gov.uk/2012/01/25/support-for-browsers/)), we're committing to support browsers that represent > 2% of all site traffic recorded in Google Analytics for visitors to austintexas.gov.
+
+Based on data from 1/1/2018 to 4/16/2018 these are the browsers with > 2% of all site traffic that we commit to support. This list will be reevaluated again when we drop the `alpha.` subdomain.
+
+- Safari 10 and above
+- Chrome 63 and above
+- Internet Explorer 11 and above
+- Edge 16 and above
+- Firefox 58 and above
+
+Here are Google Analytics screenshots from data range 1/1/2018 to 4/16/2018.
+
+#### Top Browsers as of 2018-04-16
+![Top Browsers as of 2018-04-16](./docs/images/2018-04-16-top-browsers.png)
+
+#### Top Browsers by version number as of 2018-04-16
+![Top Browsers by version number as of 2018-04-16](./docs/images/2018-04-16-top-browsers-by-version.png)
+
+As this project moves forward, we hope to implement even more comprehensive Browser Support guidelines following the examples of other government agencies like the [cfpb](https://github.com/cfpb/development/blob/master/guides/browser-support.md).
+
+### Manual Testing with BrowserStack
+
+Our team uses BrowserStack to manually check for device and browser compatibility. Our checklist of devices includes (subject to update):
+
+- Safari 11 for iOS 10>
+
+- IE 11 for Windows 10
+- Chrome 63 for Windows 10
+- Edge 16 for Windows 10
+
+- IE 11 for Windows 7
+- Chrome 63 for Windows 7
+- Chrome 63> for Android 7
+- Safari 11 for MacOS 10
+- Chrome 63 for MacOS 10
+
+**Mobile**
+- iPhone 6S Safari & Chrome
+- Galaxy S7 Chrome & Samsung Internet
+- Galaxy Note8 Chrome
+- Google Pixel Chrome
+
+**Tablet**
+- iPad 4 Safari
+- Windows Tablet IE 11
+- Kindle Fire HDX 7
+
+**Desktop**
+- Windows 7
+  - IE 11
+  - Firefox 57
+  - Chrome 63
+- Windows 10
+  - Edge 16
+  - IE 11
+  - Chrome 63
+  - Firefox 57
+- MacOS
+  - Safari 11
+  - Chrome 63
+  - Firefox 57
 
 ---
 
 ## Other Documentation for Developers
+
 
 ### Adding dependencies via yarn
 
@@ -132,6 +193,7 @@ more a11y Resources:
 - https://www.w3.org/WAI/WCAG20/quickref/
 - [Accessibility section of "Front-End Checklist"](https://github.com/thedaviddias/Front-End-Checklist#accessibility)
 - https://cfpb.github.io/design-manual/best-practices/accessibility-best-practices.html
+- https://github.com/cfpb/development/blob/master/guides/accessibility.md
 - https://developers.google.com/web/fundamentals/accessibility/how-to-review
 - [How we’ve made GOV.UK Elements even more accessible](https://accessibility.blog.gov.uk/2018/02/28/how-weve-made-gov-uk-elements-even-more-accessible/) and https://accessibility.blog.gov.uk/ in general
 - https://accessibility.18f.gov/
