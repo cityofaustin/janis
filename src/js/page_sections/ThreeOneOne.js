@@ -26,7 +26,7 @@ const ThreeOneOne = ({ services311, intl }) => (
           <a href="tel:512-974-2000">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleCall)}</a> {intl.formatMessage(i18nMessages.threeoneoneSectionTitleOr)} <a href="http://311.austintexas.gov/reports/list_services">{intl.formatMessage(i18nMessages.threeoneoneSectionTitleSiteRequest)}</a>
         </SectionHeader>
       </div>
-      <div className="coa-ThreeOneOne__listlinks row">
+      <div className="row">
       {
         services311.map((service, index) =>
           <div key={index} className="col-xs-12 col-md-6 col-lg-4">

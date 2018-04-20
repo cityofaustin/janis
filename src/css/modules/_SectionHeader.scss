@@ -1,9 +1,9 @@
-.coa_SectionHeader {
+.coa-SectionHeader {
   text-transform: uppercase;
   text-align: center;
 
   a {
-    color: $coa-color-purple-darkest;
+    color: inherit;
     text-decoration: none;
   }
 
@@ -21,7 +21,7 @@
   }
 }
 
-.coa_SectionHeader--isSerif {
+.coa-SectionHeader--isSerif {
   font-family: $coa-font-serif;
   font-weight: $coa-font-regular;
   font-size: $coa-font-size-medium;
@@ -34,7 +34,7 @@
   }
 }
 
-.coa_SectionHeader--hasHighlight:after {
+.coa-SectionHeader--hasHighlight:after {
   background: $coa-color-orange;
   content: "";
   display: block;

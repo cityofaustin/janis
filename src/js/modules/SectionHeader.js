@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SectionHeader = ({ isSerif, hasHighlight, children }) => (
-  <h2 className={`coa_SectionHeader
-    ${hasHighlight ? 'coa_SectionHeader--hasHighlight' : ''}
-    ${isSerif ? 'coa_SectionHeader--isSerif' : ''} `
+  <h2 className={`coa-SectionHeader
+    ${hasHighlight ? 'coa-SectionHeader--hasHighlight' : ''}
+    ${isSerif ? 'coa-SectionHeader--isSerif' : ''} `
   }>
     {children}
   </h2>
