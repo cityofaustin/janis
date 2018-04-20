@@ -21,82 +21,9 @@ export const tileData = [
   }
 ]
 
-export const tileGroupData = {
-  "edges": [
-    {
-      "node": {
-        "text": "Pay utility bills",
-        "slug": "pay-utility-bills",
-        "description": "",
-        "services": {
-          "edges": [
-
-          ]
-        }
-      }
-    },
-    {
-      "node": {
-        "text": "Water & electric service",
-        "slug": "water-electric-service",
-        "description": "",
-        "services": {
-          "edges": [
-
-          ]
-        }
-      }
-    },
-    {
-      "node": {
-        "text": "Recycling, trash, and compost",
-        "slug": "recycling-trash-compost",
-        "description": "The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.",
-        "services": {
-          "edges": [
-            {
-              "node": {
-                "id": "U2VydmljZVBhZ2VOb2RlOjQ=",
-                "title": "Drop off household hazardous waste and other recyclables",
-                "slug": "hazardous-waste-dropoff"
-              }
-            },
-            {
-              "node": {
-                "id": "U2VydmljZVBhZ2VOb2RlOjU=",
-                "title": "Get ready for curbside compost pickup",
-                "slug": "compost-pickup"
-              }
-            },
-            {
-              "node": {
-                "id": "U2VydmljZVBhZ2VOb2RlOjY=",
-                "title": "Pick up free paint and other household items",
-                "slug": "pickup-free-paint"
-              }
-            },
-            {
-              "node": {
-                "id": "U2VydmljZVBhZ2VOb2RlOjc=",
-                "title": "Get ready for curbside bulk item pickup",
-                "slug": "bulk-item-pickup"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "node": {
-        "text": "Housing assistance",
-        "slug": "housing-assistance",
-        "description": "",
-        "services": {
-          "edges": [
-
-          ]
-        }
-      }
-    }
-  ]
-}
+export const tileGroupData = [{
+  "description": "The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.",
+  "text": "Recycling, trash, and compost",
+  "tiles": tileData,
+  "url": "/topics/recycling-trash-compost"
+}];
