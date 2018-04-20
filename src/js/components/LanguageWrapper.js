@@ -6,13 +6,12 @@ import PropTypes from 'prop-types';
 import { withSiteData } from 'react-static';
 import { find } from 'lodash';
 
-
 // react-intl i18n
-import { IntlProvider, addLocaleData } from 'react-intl'
-import en from 'react-intl/locale-data/en'
-import es from 'react-intl/locale-data/es'
-import vi from 'react-intl/locale-data/vi'
-import ar from 'react-intl/locale-data/ar'
+import { IntlProvider, addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import es from 'react-intl/locale-data/es';
+import vi from 'react-intl/locale-data/vi';
+import ar from 'react-intl/locale-data/ar';
 import messages_en from 'js/i18n/locales/en.json';
 import messages_es from 'js/i18n/locales/es.json';
 import messages_vi from 'js/i18n/locales/vi.json';
@@ -27,9 +26,9 @@ const localeMessages = {
 };
 
 // page_sections
-import LanguageSelectBar from "js/page_sections/LanguageSelectBar"
-import Header from "js/page_sections/Header"
-import Footer from "js/page_sections/Footer"
+import LanguageSelectBar from "js/page_sections/LanguageSelectBar";
+import Header from "js/page_sections/Header";
+import Footer from "js/page_sections/Footer";
 
 class LanguageWrapper extends Component {
 
@@ -111,7 +110,7 @@ class LanguageWrapper extends Component {
 
   render() {
     const { lang } = this.state;
-    const { navigation, match } = this.props;
+    const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
     const direction = this.getDirectionFromLanguage(lang);
 
@@ -119,12 +118,12 @@ class LanguageWrapper extends Component {
       <IntlProvider locale={lang} messages={messages} defaultLocale={DEFAULT_LANG} key={lang}>
         <div style={{ position: 'relative' }} dir={direction} className={`coa-${direction}`}>
           <a href="#main" className="usa-skipnav">Skip to main content</a>
-          <LanguageSelectBar path={this.props.match.params.path || ''}/>
+          <LanguageSelectBar path={match.params.path || ''}/>
           <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
           </main>
-          <Footer />
+          <Footer threeoneone={threeoneone[lang]} />
         </div>
       </IntlProvider>
     );

@@ -18,7 +18,7 @@ const i18nMessages = defineMessages({
   }
 });
 
-const ThreeOneOne = ({ services311, intl }) => (
+const ThreeOneOne = ({ threeoneone, intl }) => (
   <div className="coa-ThreeOneOne">
     <div className="container-fluid wrapper">
       <div className="wrapper wrapper--sm">
@@ -28,11 +28,11 @@ const ThreeOneOne = ({ services311, intl }) => (
       </div>
       <div className="row">
       {
-        services311.map((service, index) =>
+        threeoneone.map((link, index) =>
           <div key={index} className="col-xs-12 col-md-6 col-lg-4">
             <ListLink
-              url={service.url}
-              text={service.title}
+              url={link.url}
+              text={link.text}
             />
           </div>
         )

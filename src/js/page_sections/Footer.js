@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
+import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 import TwitterSVG from 'js/svg/Twitter';
 import FacebookSVG from 'js/svg/Facebook';
 import GithubSVG from 'js/svg/Github';
@@ -14,8 +15,9 @@ const i18nMessages = defineMessages({
   },
 });
 
-const Footer = ({ intl }) => (
+const Footer = ({ threeoneone, intl }) => (
   <footer className="coa-Footer">
+    <ThreeOneOne threeoneone={threeoneone} />
     <div className="container-fluid wrapper">
       <div className="coa-section">
         <div className="row">
