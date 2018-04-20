@@ -8,7 +8,6 @@ import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'js/modules/SectionHeader';
 import PageHeader from 'js/modules/PageHeader';
 import ContactDetails from 'js/modules/Contact/ContactDetails';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 const Department = ({ department }) => {
   const title = get(department, "name", null);
@@ -16,7 +15,6 @@ const Department = ({ department }) => {
   const contacts = get(department, "contacts", null);
   const image = get(department, "image", null);
   const relatedLinks = get(jsonFileData, "departmentpage.projectsRelated", []);
-  const services311 = get(jsonFileData, "services311", []);
 
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
@@ -47,7 +45,6 @@ const Department = ({ department }) => {
           </div>
         </div>
       </div>
-      <ThreeOneOne services311={services311} />
 
     </div>
   )

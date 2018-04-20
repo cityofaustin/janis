@@ -1,18 +1,14 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 import HeroHome from 'js/modules/HeroHome';
 import ExternalLink from 'js/modules/ExternalLink';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
-import { cleanLinks } from 'js/helpers/cleanData';
 
-import jsonFileData from '__tmpdata/pages';
-const services311 = get(jsonFileData, "services311", null);
+import { cleanLinks } from 'js/helpers/cleanData';
 
 const i18nMessages = defineMessages({
   homeRelatedlinksSectiontitle: {
@@ -59,7 +55,6 @@ const Home = ({ topServices, image, intl }) => {
           tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)}
         />
       </div>
-      <ThreeOneOne services311={services311} />
     </div>
   );
 }
