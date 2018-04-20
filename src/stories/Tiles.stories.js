@@ -10,9 +10,8 @@ storiesOf('Tiles', module)
   .add('TileGroupSet', () => (
     <div className="wrapper container-fluid">
       <TileGroupSet
-        groups={tileGroupData}
-        tileKey={'services'}
-        groupTitleSubPath={'topics'}
+        tileGroups={tileGroupData}
+        tag="Tile"
       />
     </div>
   ))
