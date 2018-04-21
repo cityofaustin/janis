@@ -20,6 +20,13 @@ if (typeof document !== 'undefined') {
     )
   }
 
+  // Include Intl API polyfill
+  // https://www.npmjs.com/package/intl
+  if (!global.Intl) {
+    require.ensure(['intl'], function (require) { require('intl'); });
+    global.Intl = require('intl');
+  }
+
   // Render!
   render(App)
 
