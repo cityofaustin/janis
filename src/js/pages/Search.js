@@ -4,7 +4,7 @@ class Search extends Component {
 
   render() {
     return (
-      <section className="wrapper coa-section">
+      <section className="wrapper wrapper--sm">
         <h1>🔍 Search Page 🔍</h1>️
         <p>just a placeholder</p>
       </section>
