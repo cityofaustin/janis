@@ -1,7 +1,9 @@
 import React from "react";
 import { defineMessages, injectIntl } from 'react-intl';
-import ListLink from 'js/modules/ListLink';
+import PropTypes from 'prop-types';
+
 import SectionHeader from 'js/modules/SectionHeader';
+import ListLink from 'js/modules/ListLink';
 
 const i18nMessages = defineMessages({
   sectionTitleCall: {
@@ -51,5 +53,9 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
     </div>
   </div>
 )
+
+ThreeOneOne.propTypes = {
+  threeoneone: PropTypes.array.isRequired,
+};
 
 export default injectIntl(ThreeOneOne);
