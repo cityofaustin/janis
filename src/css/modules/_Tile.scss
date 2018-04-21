@@ -2,6 +2,7 @@
   background-color: $coa-color-gray-lighter;
   display: flex;
   flex-direction: column;
+  font-family: $coa-font-sans;
   height: $coa-tile-height;
   min-width: $coa-tile-min-width;
   padding: $coa-spacing-medium $coa-spacing-medium $coa-spacing-large ;
@@ -13,7 +14,6 @@
 
 .coa-Tile__tag {
   color: $coa-color-blue;
-  font-family: $coa-font-sans;
   font-size: $coa-font-size-small;
   font-weight: $coa-font-bold;
   text-transform: uppercase;
@@ -22,7 +22,6 @@
 .coa-Tile__text {
   color: $coa-color-purple-dark;
   flex-grow: 1;
-  font-family: $coa-font-sans;
   font-size: $coa-font-size-md-small;
   line-height: $coa-line-height-md-small;
   margin: $coa-space-level1 0 $coa-space-level3;
