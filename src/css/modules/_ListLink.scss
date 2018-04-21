@@ -1,14 +1,21 @@
 .coa-ListLink {
   @include box-verticalcenter(7.5rem);
   border-bottom: 1px dashed $color-gray-dark;
-  font-size: $coa-font-size-small;
+  font-size: $coa-font-size-xsmall;
   padding: $coa-spacing-medium;
   text-decoration: none;
   text-transform: uppercase;
 
   svg {
     flex-shrink: 0;
-    height: $coa-font-size-small - .1rem;
+    height: $coa-font-size-xsmall - .1rem;
     margin-left: $coa-spacing-small;
+  }
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-small;
+    svg {
+      height: $coa-font-size-small - .1rem;
+    }
   }
 }
