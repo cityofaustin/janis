@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "browser-locale": "^1.0.3",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "graphql-request": "^1.4.1",

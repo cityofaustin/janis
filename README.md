@@ -94,18 +94,6 @@ As this project moves forward, we hope to implement even more comprehensive Brow
 
 Our team uses BrowserStack to manually check for device and browser compatibility. Our checklist of devices includes (subject to update):
 
-- Safari 11 for iOS 10>
-
-- IE 11 for Windows 10
-- Chrome 63 for Windows 10
-- Edge 16 for Windows 10
-
-- IE 11 for Windows 7
-- Chrome 63 for Windows 7
-- Chrome 63> for Android 7
-- Safari 11 for MacOS 10
-- Chrome 63 for MacOS 10
-
 **Mobile**
 - iPhone 6S Safari & Chrome
 - Galaxy S7 Chrome & Samsung Internet
