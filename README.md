@@ -15,6 +15,7 @@ Janis uses data provided by the CMS API service,  [Joplin](https://github.com/ci
 - [Other Documentation for Developers](#other-documentation-for-developers)
  - [Adding dependencies via yarn](#adding-dependencies-via-yarn)
  - [Updating translation export via yarn](#updating-translation-export-via-yarn)
+ - [Static build scripts](#static-build-scripts)
  - [Sass Code Style Guidelines](#sass-code-style-guidelines)
  - [Accessibility Guidelines](#accessibility-guidelines)
 
@@ -29,6 +30,10 @@ Once Docker is installed and you've cloned the code from this repository, you ca
 ./scripts/serve-local.sh
 ```
 Your react app should be running at http://localhost:3000/
+
+**As a static build**
+To run the site locally as a static build, the way it works in production, see the [Static build scripts](#static-build-scripts) section below.
+
 
 ## Project Info
 
@@ -151,6 +156,20 @@ docker exec --interactive --tty janis yarn run build-langs
 
 Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
 
+### Static build scripts
+
+Since we use React-Static as our framework to render our React components as a static progressive website, its important for us to be able to test the final static build locally. In order to do this, we have two scripts.
+
+**To build**
+```
+./scripts/build.sh
+```
+
+**To build and server**
+```
+./scripts/serve-build.sh
+```
+Your site will be running on http://localhost:8080/
 
 ### Sass Code Style Guidelines
 
