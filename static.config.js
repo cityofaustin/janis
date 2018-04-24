@@ -4,10 +4,12 @@ import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import allThemesQuery from 'js/queries/allThemesQuery';
+import all311Query from 'js/queries/all311Query';
 
+import { clean311 } from "js/helpers/cleanData";
 
 const createGraphQLClientsByLang = (lang) => {
   const { CMS_API } = process.env;
@@ -29,7 +31,6 @@ const makeAllPages = async (langCode) => {
     children: await makeChildPages(client),
     getData: async () => {
       const { allServicePages: topServices } = await client.request(topServicesQuery);
-
       return {
         topServices,
         image: {
@@ -142,15 +143,27 @@ export default {
     title: 'City of Austin',
   }),
   getSiteData: async () => {
-    const data = {
-      navigation: {}
-    };
-
-    const requests = SUPPORTED_LANG_CODES.map((langCode) => createGraphQLClientsByLang(langCode).request(allThemesQuery));
+    const queries = [
+      {'query': allThemesQuery, 'dataKey': 'navigation'},
+      {'query': all311Query, 'dataKey': 'threeoneone', 'middleware': clean311}
+    ];
+    const requests = [];
+    const data = {};
+    SUPPORTED_LANG_CODES.map((langCode) => {
+      const client = createGraphQLClientsByLang(langCode);
+      queries.map(query => {
+        requests.push(client.request(query.query));
+        data[query.dataKey] = data[query.dataKey] || {};
+        data[query.dataKey][langCode] = null;
+      })
+    });
 
     (await Promise.all(requests)).forEach((response, i) => {
-      const langCode = SUPPORTED_LANG_CODES[i];
-      data.navigation[langCode] = response;
+      const queryIndex = i % queries.length;
+      const langIndex = (i - queryIndex) / (queries.length);
+      data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] = (typeof queries[queryIndex].middleware === 'function')
+        ? queries[queryIndex].middleware(response)
+        : response;
     });
 
     return data;

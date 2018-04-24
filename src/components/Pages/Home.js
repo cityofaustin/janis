@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { get } from 'lodash';
 
 import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
@@ -10,9 +9,6 @@ import ExternalLink from 'components/ExternalLink/ExternalLink';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
-
-import jsonFileData from '__tmpdata/pages';
-const services311 = get(jsonFileData, "services311", null);
 
 const i18nMessages = defineMessages({
   homeRelatedlinksSectiontitle: {
@@ -59,7 +55,6 @@ const Home = ({ topServices, image, intl }) => {
           tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)}
         />
       </div>
-      <ThreeOneOne services311={services311} />
     </div>
   );
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import PropTypes from 'prop-types';
-import { cleanLinks } from 'js/helpers/cleanData';
 
-// TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/pages';
 import TileGroupSet from 'components/Tiles/TileGroupSet';
 import PageHeader from 'components/PageHeader/PageHeader';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
+import { cleanLinks } from 'js/helpers/cleanData';
 
 const Theme = ({ theme }) => {
   const { text: title, callToAction, description, topics } = theme;
@@ -16,8 +14,6 @@ const Theme = ({ theme }) => {
   cleanedTopics.map(topic => {
     topic.tiles = cleanLinks(topic.services, '/services');
   });
-
-  const { services311 } = jsonFileData;
 
   return (
     <div>
@@ -28,8 +24,6 @@ const Theme = ({ theme }) => {
       <div className="wrapper container-fluid">
         <TileGroupSet tileGroups={cleanedTopics} tag="service" />
       </div>
-
-      <ThreeOneOne services311={services311} />
     </div>
   )
 }

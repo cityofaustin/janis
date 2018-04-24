@@ -16,7 +16,6 @@ import FormFeedback from 'components/FormFeedback/FormFeedback';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
-import jsonFileData from '__tmpdata/pages';
 
 const i18nMessages = defineMessages({
   serviceRelatedlinksSectionheader: {
@@ -39,9 +38,6 @@ const Service = ({ service, intl }) => {
     contacts, related
   } = service;
 
-  //TODO: data below should be sourced as above
-  const { services311 } = jsonFileData;
-
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
   const cleanedRelated = cleanRelatedServiceLinks(related);
@@ -49,7 +45,6 @@ const Service = ({ service, intl }) => {
   //TODO: mapblock data should include contact data when sent via joplin
   const tempkey = findKey(dynamicContent, { 'type': 'map_block'});
   if(tempkey) dynamicContent[tempkey].value['contact'] = contact;
-
 
   return (
     <div>
@@ -96,8 +91,6 @@ const Service = ({ service, intl }) => {
       <div className="wrapper wrapper--sm container-fluid">
         <FormFeedback />
       </div>
-
-      <ThreeOneOne services311={services311} />
 
     </div>
   )

@@ -3,13 +3,10 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-// TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/pages';
-import TileGroup from 'components/Tiles/TileGroup';
 import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader/PageHeader';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
+import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const i18nMessages = defineMessages({
@@ -28,8 +25,6 @@ const Topic = ({ topic, intl }) => {
     services: links,
   } = topic;
 
-  const { services311 } = jsonFileData;
-  //TODO: clean data where sourced
   const relatedLinks = cleanLinks(links, '/services');
 
   return (
@@ -48,8 +43,6 @@ const Topic = ({ topic, intl }) => {
           tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
         />
       </div>
-
-      <ThreeOneOne services311={services311} />
     </div>
   )
 }

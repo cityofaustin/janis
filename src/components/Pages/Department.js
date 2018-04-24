@@ -3,12 +3,13 @@ import { get } from 'lodash';
 import { cleanContacts } from 'js/helpers/cleanData';
 import { withRouteData } from 'react-static';
 
-// TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/pages';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
 import PageHeader from 'components/PageHeader/PageHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
+
+// TODO: this jsonFileData is temporary. Add it to Wagtail API
+import jsonFileData from '__tmpdata/pages';
 
 const Department = ({ department }) => {
   const title = get(department, "name", null);
@@ -16,7 +17,6 @@ const Department = ({ department }) => {
   const contacts = get(department, "contacts", null);
   const image = get(department, "image", null);
   const relatedLinks = get(jsonFileData, "departmentpage.projectsRelated", []);
-  const services311 = get(jsonFileData, "services311", []);
 
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
@@ -25,29 +25,12 @@ const Department = ({ department }) => {
     <div>
       <PageHeader image={image} />
 
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="coa-main__left col-xs-12 col-lg-8">
-
-            <div className="coa-section">
-              <SectionHeader hasHighlight={true}>{title}</SectionHeader>
-            </div>
-
-            <div className="coa-section">
-              <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
-              <p>{body}</p>
-            </div>
-
-          </div>
-
-          <div className="coa-main__right col-xs-12 col-lg-4">
-
-          { contact && <ContactDetails contact={contact} /> }
-
-          </div>
-        </div>
+      <div className="wrapper wrapper--sm container-fluid">
+        <SectionHeader hasHighlight={true}>{title}</SectionHeader>
+        <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
+        <p>{body}</p>
+        { contact && <ContactDetails contact={contact} /> }
       </div>
-      <ThreeOneOne services311={services311} />
 
     </div>
   )

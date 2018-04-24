@@ -5,11 +5,6 @@
   padding-top: 1px; //prevent stacking margins
 }
 
-.coa-Steps__title {
-  text-transform: uppercase;
-  text-align: center;
-}
-
 .coa-rtl {
   .coa-Steps__list > ul > li {
     &:before {

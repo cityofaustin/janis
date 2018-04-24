@@ -1,7 +1,9 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
+
 import Recollect from 'components/Recollect/Recollect';
 import ContactMap from 'components/Contact/ContactMap';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
 
 const i18nMessages = defineMessages({
   applicationBlockRecollectCalendar: {
@@ -46,7 +48,7 @@ const ApplicationBlock = ({ content, intl }) => {
   if (!app) return null;
   return (
     <div id={id} className="coa-ApplicationBlock">
-      <h2 className="coa-ApplicationBlock__title">{title}</h2>
+      <SectionHeader>{title}</SectionHeader>
       {app}
     </div>
   );

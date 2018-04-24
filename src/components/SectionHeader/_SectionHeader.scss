@@ -26,7 +26,6 @@
   font-weight: $coa-font-regular;
   font-size: $coa-font-size-medium;
   line-height: $coa-line-height-medium;
-  margin-top: 0;
   text-transform: none;
   @include media($coa-small-screen) {
     font-size: $coa-font-size-large;
