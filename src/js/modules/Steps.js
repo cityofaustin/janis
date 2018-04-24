@@ -2,6 +2,8 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
+import SectionHeader from 'js/modules/SectionHeader';
+
 const i18nMessages = defineMessages({
   stepsSectionTitle: {
     id: 'Steps.SectionTitle',
@@ -11,7 +13,7 @@ const i18nMessages = defineMessages({
 
 const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
   <div className="coa-Steps">
-    <h2 className="coa-Steps__title">{intl.formatMessage(i18nMessages.stepsSectionTitle)}</h2>
+    <SectionHeader>{intl.formatMessage(i18nMessages.stepsSectionTitle)}</SectionHeader>
     <div className="coa-Steps__list" dangerouslySetInnerHTML={{__html: stepsAsHtmlFromAdmin}} />
   </div>
 );

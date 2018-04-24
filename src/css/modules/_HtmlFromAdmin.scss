@@ -1,10 +1,7 @@
 .coa-HtmlFromAdmin {
   margin: $coa-spacing-large 0;
 }
-.coa-HtmlFromAdmin__title {
-  text-transform: uppercase;
-  text-align: center;
-}
+
 .coa-HtmlFromAdmin__content {
   > br {
     display: none;
