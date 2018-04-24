@@ -3,17 +3,17 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import { findKey } from 'lodash';
 
-import PageBanner from 'js/modules/PageBanner';
-import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
-import PageHeader from 'js/modules/PageHeader';
-import Steps from 'js/modules/Steps';
+import PageBanner from 'components/PageBanner/PageBanner';
+import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
+import PageHeader from 'components/PageHeader/PageHeader';
+import Steps from 'components/Steps/Steps';
 import HtmlFromAdmin from 'components/HtmlFromAdmin/HtmlFromAdmin';
 import ApplicationBlock from 'components/ApplicationBlock/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
-import SectionHeader from 'js/modules/SectionHeader';
-import TileGroup from 'js/modules/TileGroup';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
+import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback/FormFeedback';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 import jsonFileData from '__tmpdata/pages';

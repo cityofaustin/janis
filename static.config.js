@@ -25,7 +25,7 @@ const makeAllPages = async (langCode) => {
 
   const data = {
     path: path,
-    component: 'src/js/pages/Home',
+    component: 'src/components/Pages/Home',
     children: await makeChildPages(client),
     getData: async () => {
       const { allServicePages: topServices } = await client.request(topServicesQuery);
@@ -57,13 +57,13 @@ const makeServicePages = async (client) => {
 
   const data = {
     path: '/services',
-    component: 'src/js/pages/Services',
+    component: 'src/components/Pages/Services',
     getData: async () => ({
       allServices,
     }),
     children: allServices.edges.map(({node: service}) => ({
       path: `/${service.slug}`,
-      component: 'src/js/pages/Service',
+      component: 'src/components/Pages/Service',
       getData: async () => ({
         service,
       }),
@@ -78,13 +78,13 @@ const makeTopicPages = async (client) => {
 
   const data = {
     path: '/topics',
-    component: 'src/js/pages/Topics',
+    component: 'src/components/Pages/Topics',
     getData: async () => ({
       allTopics,
     }),
     children: allTopics.edges.map(({node: topic}) => ({
       path: `/${topic.slug}`,
-      component: 'src/js/pages/Topic',
+      component: 'src/components/Pages/Topic',
       getData: async () => ({
         topic,
       })
@@ -99,13 +99,13 @@ const makeThemePages = async (client) => {
 
   const data = {
     path: '/themes',
-    component: 'src/js/pages/Themes',
+    component: 'src/components/Pages/Themes',
     getData: async () => ({
       allThemes,
     }),
     children: allThemes.edges.map(({node: theme}) => ({
       path: `/${theme.slug}`,
-      component: 'src/js/pages/Theme',
+      component: 'src/components/Pages/Theme',
       getData: async () => ({
         theme,
       })
@@ -121,13 +121,13 @@ const makeDepartmentPages = async (client) => {
 
   const data = {
     path: '/departments',
-    component: 'src/js/pages/Departments',
+    component: 'src/components/Pages/Departments',
     getData: async () => ({
       allDepartments,
     }),
     children: allDepartments.edges.map(({node: department}) => ({
       path: `${department.id}`,
-      component: 'src/js/pages/Department',
+      component: 'src/components/Pages/Department',
       getData: async () => ({
         department,
       })
@@ -159,11 +159,11 @@ export default {
     const routes = [
       {
         path: '/search',
-        component: 'src/js/pages/Search', //TODO: update search page to be conscious of all languages
+        component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
         is404: true,
-        component: 'src/js/pages/404', //TODO: update 404 page to be conscious of all languages
+        component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
     ];
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import Menu from 'js/page_sections/Menu/Menu';
+import Menu from 'components/PageSections/Menu/Menu';
 import I18nLink from 'components/I18nLinks/I18nLink';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
 

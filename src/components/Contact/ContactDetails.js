@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-import SectionHeader from 'js/modules/SectionHeader';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
 import Phone from 'components/Contact/Phone';
 import Email from 'components/Contact/Email';
 import Address from 'components/Contact/Address';

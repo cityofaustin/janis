@@ -3,12 +3,12 @@ import { withRouteData } from 'react-static';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
-import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 import HeroHome from 'components/HeroHome/HeroHome';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
-import SectionHeader from 'js/modules/SectionHeader';
-import TileGroup from 'js/modules/TileGroup';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
+import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 import jsonFileData from '__tmpdata/pages';

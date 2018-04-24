@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import SectionHeader from 'js/modules/SectionHeader';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
 import ArrowRight from 'js/svg/ArrowRight';
 
 storiesOf('SectionHeader', module)

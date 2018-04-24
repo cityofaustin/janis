@@ -5,9 +5,9 @@ import { cleanLinks } from 'js/helpers/cleanData';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-import TileGroupSet from 'js/modules/TileGroupSet';
-import PageHeader from 'js/modules/PageHeader';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import TileGroupSet from 'components/Tiles/TileGroupSet';
+import PageHeader from 'components/PageHeader/PageHeader';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 const Theme = ({ theme }) => {
   const { text: title, callToAction, description, topics } = theme;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 import jsonFileData from 'stories/static_data/pages';
 
 const { services311 } = jsonFileData;

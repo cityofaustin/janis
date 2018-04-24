@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-import TileGroup from 'js/modules/TileGroup';
-import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
-import PageHeader from 'js/modules/PageHeader';
-import SectionHeader from 'js/modules/SectionHeader';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import TileGroup from 'components/Tiles/TileGroup';
+import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
+import PageHeader from 'components/PageHeader/PageHeader';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const i18nMessages = defineMessages({

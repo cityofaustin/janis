@@ -5,10 +5,10 @@ import { withRouteData } from 'react-static';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
-import SectionHeader from 'js/modules/SectionHeader';
-import PageHeader from 'js/modules/PageHeader';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
+import PageHeader from 'components/PageHeader/PageHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 const Department = ({ department }) => {
   const title = get(department, "name", null);

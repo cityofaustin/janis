@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
+import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
 
 const grandparent = {
   slug: "grandparent",

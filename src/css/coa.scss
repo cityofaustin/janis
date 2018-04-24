@@ -17,33 +17,30 @@
 // helpers
 @import 'css/helpers/helpers';
 
-// modules
+// components
 @import 'components/ApplicationBlock/ApplicationBlock';
 @import 'components/Contact/Contact';
 @import 'components/ExternalLink/ExternalLink';
 @import 'components/FormFeedback/FormFeedback';
 @import 'components/HeroHome/HeroHome';
 @import 'components/HtmlFromAdmin/HtmlFromAdmin';
-
-@import 'css/modules/PageBanner';
-@import 'css/modules/PageBreadcrumbs';
-@import 'css/modules/PageHeader';
-@import 'css/modules/Steps';
-@import 'css/modules/Recollect';
-@import 'css/modules/StaticMap';
-@import 'css/modules/SectionHeader';
-@import 'css/modules/Tile';
-@import 'css/modules/TileGroup';
-@import 'css/modules/TileGroupSet';
-@import 'css/modules/ListLink';
-
-// page sections
-@import "css/page_sections/Header";
-@import "css/page_sections/Footer";
-@import "css/page_sections/LanguageSelectBar";
-@import "css/page_sections/Menu/Menu";
-@import "css/page_sections/Menu/MenuItem";
-@import "css/page_sections/Menu/Submenu";
-@import "css/page_sections/Menu/SubmenuItem";
-@import 'css/page_sections/SecondaryContentBanner';
-@import 'css/page_sections/ThreeOneOne';
+@import 'components/ListLink/ListLink';
+@import 'components/PageBanner/PageBanner';
+@import 'components/PageBreadcrumbs/PageBreadcrumbs';
+@import 'components/PageHeader/PageHeader';
+@import "components/PageSections/Footer/Footer";
+@import "components/PageSections/Header/Header";
+@import "components/PageSections/LanguageSelectBar/LanguageSelectBar";
+@import "components/PageSections/Menu/Menu";
+@import "components/PageSections/Menu/MenuItem";
+@import "components/PageSections/Menu/Submenu";
+@import "components/PageSections/Menu/SubmenuItem";
+@import 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
+@import 'components/PageSections/ThreeOneOne/ThreeOneOne';
+@import 'components/Recollect/Recollect';
+@import 'components/SectionHeader/SectionHeader';
+@import 'components/StaticMap/StaticMap';
+@import 'components/Steps/Steps';
+@import 'components/Tiles/Tile';
+@import 'components/Tiles/TileGroup';
+@import 'components/Tiles/TileGroupSet';

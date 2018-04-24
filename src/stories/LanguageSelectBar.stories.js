@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import LanguageSelectBar from 'js/page_sections/LanguageSelectBar';
+import LanguageSelectBar from 'components/PageSections/LanguageSelectBar/LanguageSelectBar';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
 storiesOf('LanguageSelectBar', module)

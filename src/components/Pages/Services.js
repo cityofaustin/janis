@@ -3,9 +3,9 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
-import PageHeader from 'js/modules/PageHeader';
-import TileGroup from 'js/modules/TileGroup';
-import ThreeOneOne from 'js/page_sections/ThreeOneOne';
+import PageHeader from 'components/PageHeader/PageHeader';
+import TileGroup from 'components/Tiles/TileGroup';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 import { cleanLinks } from 'js/helpers/cleanData';
 

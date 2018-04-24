@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
-import MenuItem from 'js/page_sections/Menu/MenuItem';
+import MenuItem from 'components/PageSections/Menu/MenuItem';
 
 import CloseSVG from 'js/svg/Close';
 import citySealImg from 'images/coa_seal.png';

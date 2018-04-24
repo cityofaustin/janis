@@ -1,7 +1,7 @@
 import React from "react";
 import { defineMessages, injectIntl } from 'react-intl';
 import ListLink from 'components/ListLink/ListLink';
-import SectionHeader from 'js/modules/SectionHeader';
+import SectionHeader from 'components/SectionHeader/SectionHeader';
 
 const i18nMessages = defineMessages({
   threeoneoneSectionTitleCall: {

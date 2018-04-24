@@ -27,9 +27,9 @@ const localeMessages = {
 };
 
 // page_sections
-import LanguageSelectBar from "js/page_sections/LanguageSelectBar"
-import Header from "js/page_sections/Header"
-import Footer from "js/page_sections/Footer"
+import LanguageSelectBar from "components/PageSections/LanguageSelectBar/LanguageSelectBar"
+import Header from "components/PageSections/Header/Header"
+import Footer from "components/PageSections/Footer/Footer"
 
 class LanguageWrapper extends Component {
 

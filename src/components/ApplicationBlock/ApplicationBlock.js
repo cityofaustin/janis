@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import Recollect from 'js/modules/Recollect';
+import Recollect from 'components/Recollect/Recollect';
 import ContactMap from 'components/Contact/ContactMap';
 
 const i18nMessages = defineMessages({

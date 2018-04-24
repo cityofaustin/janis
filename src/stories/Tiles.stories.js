@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import TileGroupSet from 'js/modules/TileGroupSet';
-import TileGroup from 'js/modules/TileGroup';
-import Tile from 'js/modules/Tile';
+import TileGroupSet from 'components/Tiles/TileGroupSet';
+import TileGroup from 'components/Tiles/TileGroup';
+import Tile from 'components/Tiles/Tile';
 import { tileData, tileGroupData } from 'stories/static_data/tileData';
 
 storiesOf('Tiles', module)
