@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import I18nLink from 'js/modules/I18nLink';
+import I18nLink from 'components/I18nLinks/I18nLink';
 import PropTypes from 'prop-types';
 
 const i18nMessages = defineMessages({

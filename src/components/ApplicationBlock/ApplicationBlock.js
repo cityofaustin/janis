@@ -1,7 +1,7 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import Recollect from 'js/modules/Recollect';
-import ContactMap from 'js/modules/Contact/ContactMap';
+import ContactMap from 'components/Contact/ContactMap';
 
 const i18nMessages = defineMessages({
   applicationBlockRecollectCalendar: {

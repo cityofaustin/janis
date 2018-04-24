@@ -4,7 +4,7 @@ import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import TwitterSVG from 'js/svg/Twitter';
 import FacebookSVG from 'js/svg/Facebook';
 import GithubSVG from 'js/svg/Github';
-import ExternalLink from 'js/modules/ExternalLink';
+import ExternalLink from 'components/ExternalLink/ExternalLink';
 import citySealImg from 'images/coa_seal_white.png';
 
 const i18nMessages = defineMessages({

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import I18nLink from 'js/modules/I18nLink';
+import I18nLink from 'components/I18nLinks/I18nLink';
 import ChevronRightSVG from 'js/svg/ChevronRight';
 
 const ListLink = ({ url, text }) => (

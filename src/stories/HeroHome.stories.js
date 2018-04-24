@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import HeroHome from 'js/modules/HeroHome';
+import HeroHome from 'components/HeroHome/HeroHome';
 import dummyImage from 'stories/static_data/images/herohome_test.jpg';
 
 storiesOf('HeroHome', module)

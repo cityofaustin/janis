@@ -1,6 +1,6 @@
 import React from "react";
 import { defineMessages, injectIntl } from 'react-intl';
-import ListLink from 'js/modules/ListLink';
+import ListLink from 'components/ListLink/ListLink';
 import SectionHeader from 'js/modules/SectionHeader';
 
 const i18nMessages = defineMessages({

@@ -5,8 +5,8 @@ import { find } from 'lodash';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
 import SubmenuItem from 'js/page_sections/Menu/SubmenuItem';
-import ExternalLink from 'js/modules/ExternalLink';
-import I18nNavLink from 'js/modules/I18nNavLink';
+import ExternalLink from 'components/ExternalLink/ExternalLink';
+import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ArrowRightSVG from 'js/svg/ArrowRight';
 
 const SUBMENU_THRESHOLD_ALIGNRIGHT_RTL = 5;

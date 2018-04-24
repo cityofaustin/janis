@@ -5,8 +5,8 @@ import { get } from 'lodash';
 
 import SecondaryContentBanner from 'js/page_sections/SecondaryContentBanner';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
-import HeroHome from 'js/modules/HeroHome';
-import ExternalLink from 'js/modules/ExternalLink';
+import HeroHome from 'components/HeroHome/HeroHome';
+import ExternalLink from 'components/ExternalLink/ExternalLink';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';

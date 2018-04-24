@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import SectionHeader from 'js/modules/SectionHeader';
-import Phone from 'js/modules/Contact/Phone';
-import Email from 'js/modules/Contact/Email';
-import Address from 'js/modules/Contact/Address';
-import Hours from 'js/modules/Contact/Hours';
+import Phone from 'components/Contact/Phone';
+import Email from 'components/Contact/Email';
+import Address from 'components/Contact/Address';
+import Hours from 'components/Contact/Hours';
 
 const i18nMessages = defineMessages({
   contactDetailsTitle: {

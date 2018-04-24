@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types'
 
-import I18nNavLink from 'js/modules/I18nNavLink';
-import ExternalLink from 'js/modules/ExternalLink';
+import I18nNavLink from 'components/I18nLinks/I18nNavLink';
+import ExternalLink from 'components/ExternalLink/ExternalLink';
 import MenuItem from 'js/page_sections/Menu/MenuItem';
 
 import CloseSVG from 'js/svg/Close';

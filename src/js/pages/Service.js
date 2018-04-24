@@ -7,12 +7,12 @@ import PageBanner from 'js/modules/PageBanner';
 import PageBreadcrumbs from 'js/modules/PageBreadcrumbs';
 import PageHeader from 'js/modules/PageHeader';
 import Steps from 'js/modules/Steps';
-import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
-import ApplicationBlock from 'js/modules/ApplicationBlock';
-import ContactDetails from 'js/modules/Contact/ContactDetails';
+import HtmlFromAdmin from 'components/HtmlFromAdmin/HtmlFromAdmin';
+import ApplicationBlock from 'components/ApplicationBlock/ApplicationBlock';
+import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'js/modules/SectionHeader';
 import TileGroup from 'js/modules/TileGroup';
-import FormFeedback from 'js/modules/FormFeedback';
+import FormFeedback from 'components/FormFeedback/FormFeedback';
 import ThreeOneOne from 'js/page_sections/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';

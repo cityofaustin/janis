@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import ListLink from 'js/modules/ListLink';
+import ListLink from 'components/ListLink/ListLink';
 
 storiesOf('ListLink', module)
   .add('light theme (default)', () => (

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StaticMap from 'js/modules/StaticMap';
-import Address from 'js/modules/Contact/Address';
-import Phone from 'js/modules/Contact/Phone';
-import Hours from 'js/modules/Contact/Hours';
+import Address from 'components/Contact/Address';
+import Phone from 'components/Contact/Phone';
+import Hours from 'components/Contact/Hours';
 
 const ContactMap = ({ contact:{phone, hours, location} }) => (
 

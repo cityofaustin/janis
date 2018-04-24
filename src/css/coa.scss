@@ -18,26 +18,24 @@
 @import 'css/helpers/helpers';
 
 // modules
+@import 'components/ApplicationBlock/ApplicationBlock';
+@import 'components/Contact/Contact';
+@import 'components/ExternalLink/ExternalLink';
+@import 'components/FormFeedback/FormFeedback';
+@import 'components/HeroHome/HeroHome';
+@import 'components/HtmlFromAdmin/HtmlFromAdmin';
+
 @import 'css/modules/PageBanner';
 @import 'css/modules/PageBreadcrumbs';
 @import 'css/modules/PageHeader';
 @import 'css/modules/Steps';
-@import 'css/modules/ApplicationBlock';
 @import 'css/modules/Recollect';
-@import 'css/modules/HtmlFromAdmin';
 @import 'css/modules/StaticMap';
-@import 'css/modules/Contact';
 @import 'css/modules/SectionHeader';
 @import 'css/modules/Tile';
 @import 'css/modules/TileGroup';
 @import 'css/modules/TileGroupSet';
-@import 'css/modules/FormFeedback';
-
 @import 'css/modules/ListLink';
-@import 'css/modules/GlobalSearch';
-@import 'css/modules/ExternalLink';
-@import 'css/modules/Hero';
-@import 'css/modules/HeroHome';
 
 // page sections
 @import "css/page_sections/Header";

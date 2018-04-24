@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Tile from 'js/modules/Tile';
 import SectionHeader from 'js/modules/SectionHeader';
-import I18nLink from 'js/modules/I18nLink';
+import I18nLink from 'components/I18nLinks/I18nLink';
 import ArrowRight from 'js/svg/ArrowRight';
 
 

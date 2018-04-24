@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import I18nNavLink from 'js/modules/I18nNavLink';
+import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import Submenu from 'js/page_sections/Menu/Submenu';
 import PlusSVG from 'js/svg/Plus';
 import MinusSVG from 'js/svg/Minus';
