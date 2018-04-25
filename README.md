@@ -153,16 +153,11 @@ docker exec --interactive --tty janis yarn run build-langs
 
 Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
 
-### Static build scripts
+### Static build script
 
-Since we use React-Static as our framework to render our React components as a static progressive website, it's important for us to be able to test the final static build locally. In order to do this, we have two scripts.
+Since we use React-Static as our framework to render our React components as a static progressive website, it's important for us to be able to test the final static build locally. In order to do this, we have a script.
 
-**To build**
-```
-./scripts/build.sh
-```
-
-**To build and server**
+**To build and serve**
 ```
 ./scripts/serve-build.sh
 ```
