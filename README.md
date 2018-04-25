@@ -37,7 +37,7 @@ To run the site locally as a static build, the way it works in production, see t
 
 ## Project Info
 
-This work began under the he Austin Digital Services Discovery Project. Design, Technology, and Innovation Fellows worked in partnership between two City departments, Communications Public Information and Communications and Technology Management.
+This work began under the Austin Digital Services Discovery Project. Design, Technology, and Innovation Fellows worked in partnership between two City departments, Communications Public Information and Communications and Technology Management.
 
 We set out to learn what’s working for other government service providers, then embark on an iterative research, prototyping, and testing process to identify new designs, methods, and technologies.
 
@@ -61,10 +61,7 @@ For more information about the concepts and architectural decisions guiding this
 
 ### React-Static
 
-This project uses [React-Static](https://github.com/nozzle/react-static) as a base framework for building static-progressive a React application/website. It's designed to with considerations for SEO, site performance, and user/developer experience.
-
-TODO: more on this decision + evaluation
-
+This project uses [React-Static](https://github.com/nozzle/react-static) as a base framework for building static-progressive React applications and websites. It's designed with considerations for SEO, site performance, and user/developer experience.
 
 ### Storybook
 
@@ -158,7 +155,7 @@ Note: if you're running the docker container built by serve-build.sh you'll have
 
 ### Static build scripts
 
-Since we use React-Static as our framework to render our React components as a static progressive website, its important for us to be able to test the final static build locally. In order to do this, we have two scripts.
+Since we use React-Static as our framework to render our React components as a static progressive website, it's important for us to be able to test the final static build locally. In order to do this, we have two scripts.
 
 **To build**
 ```
