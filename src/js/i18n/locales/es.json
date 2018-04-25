@@ -36,5 +36,11 @@
   "Service.RelatedLinks.SectionHeader": "Vea los servicios relacionados",
   "Service.RelatedLinks.Tag": "servicio",
   "Home.RelatedLinks.Tag": "servicio",
-  "Submenu.workInProgress": "Alpha.austin.gov es aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}."
+  "Submenu.workInProgress": "Alpha.austin.gov es aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}.",
+  "FormFeedback.step1.title": "¿Le gustó esta página?",
+  "FormFeedback.step2.title.a": "¡Gracias!",
+  "FormFeedback.step2.title.b": "¿Cómo podemos mejorar esta página?",
+  "FormFeedback.step2.button": "Envíenos su opinión",
+  "FormFeedback.step3.title": "¡Gracias por compartir su opinión!",
+  "FormFeedback.step3.button": "Añada más comentarios"
 }

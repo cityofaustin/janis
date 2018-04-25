@@ -18,6 +18,10 @@ const i18nMessages = defineMessages({
     id: 'FormFeedback.step2.title.b',
     defaultMessage: 'How can we make this page better?',
   },
+  step2button: {
+    id: 'FormFeedback.step2.button',
+    defaultMessage: 'Send feedback',
+  },
   step3title: {
     id: 'FormFeedback.step3.title',
     defaultMessage: 'Thank you for sharing feedback!',
@@ -188,10 +192,7 @@ class FormFeedback extends Component {
               name={`${this.state.name}-textarea`}
               onChange={this.handleTextAreaChange}></textarea>
             <p>Please do not enter private information because your feedback will be public.</p>
-            { !this.state.loading
-              ? <input type="submit" value="Send Feedback" onClick={this.handleSubmit} />
-              : <input type="submit" value="Sending..." disabled />
-            }
+            <input type="submit" value={intl.formatMessage(i18nMessages.step2button)} onClick={this.handleSubmit} disabled={this.state.loading ? true : false} />
         </fieldset>
       )}
 
