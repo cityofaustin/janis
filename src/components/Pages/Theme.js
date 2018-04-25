@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import TileGroupSet from 'components/Tiles/TileGroupSet';
 import PageHeader from 'components/PageHeader/PageHeader';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const Theme = ({ theme }) => {

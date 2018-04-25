@@ -4,7 +4,6 @@ import { defineMessages, injectIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 import { cleanLinks } from 'js/helpers/cleanData';
 

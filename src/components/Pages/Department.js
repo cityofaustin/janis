@@ -6,7 +6,6 @@ import { withRouteData } from 'react-static';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
 import PageHeader from 'components/PageHeader/PageHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';

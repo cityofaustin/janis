@@ -13,7 +13,6 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback/FormFeedback';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 

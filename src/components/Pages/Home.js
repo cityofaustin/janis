@@ -3,7 +3,6 @@ import { withRouteData } from 'react-static';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
 import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
 import HeroHome from 'components/HeroHome/HeroHome';
 import ExternalLink from 'components/ExternalLink/ExternalLink';
 import SectionHeader from 'components/SectionHeader/SectionHeader';
