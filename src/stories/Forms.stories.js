@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import FormFeedback from 'js/modules/FormFeedback';
+import FormFeedback from 'components/FormFeedback';
 
 storiesOf('Forms', module)
   .add('Feedback Form', () => (
