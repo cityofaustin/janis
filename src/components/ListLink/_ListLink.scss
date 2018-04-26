@@ -7,6 +7,14 @@
   text-decoration: none;
   text-transform: uppercase;
 
+  span {
+    display: block;
+    flex-basis: calc(100% - #{$coa-font-size-xsmall - .1rem - $coa-spacing-small}); //based on svg width and margin
+    @include media($coa-small-screen) {
+      flex-basis: calc(100% - #{$coa-font-size-small - .1rem - $coa-spacing-small}); //based on svg width and margin
+    }
+  }
+
   svg {
     flex-shrink: 0;
     height: $coa-font-size-xsmall - .1rem;
