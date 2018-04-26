@@ -18,6 +18,10 @@ const i18nMessages = defineMessages({
     id: 'FormFeedback.step2.title.b',
     defaultMessage: 'How can we make this page better?',
   },
+  step2button: {
+    id: 'FormFeedback.step2.button',
+    defaultMessage: 'Send feedback',
+  },
   step3title: {
     id: 'FormFeedback.step3.title',
     defaultMessage: 'Thank you for sharing feedback!',
@@ -148,7 +152,7 @@ class FormFeedback extends Component {
           name={`${this.state.name}-emojis`}
         >
           <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step1title)}</SectionHeader>
-          <div className="coa-FormFeedback__emojis">
+          <div className="coa-FormFeedback__content">
           {
             Object.keys(emojis).map(emojiKey =>
               <div key={emojiKey} className="coa-FormFeedback__emoji">
@@ -175,30 +179,28 @@ class FormFeedback extends Component {
         <fieldset className="coa-FormFeedback__step2"
           name={`${this.state.name}-textarea`}
         >
-          <SectionHeader isSerif={true}>
-            {intl.formatMessage(i18nMessages.step2titlea)}<br />{intl.formatMessage(i18nMessages.step2titleb)}
-          </SectionHeader>
+          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step2titleb)}</SectionHeader>
             { this.state.error && (
               <p className="coa-FormFeedback__error">Oh no, something went wrong! Please, try submitting your feedback again.</p>
             )}
-            <label htmlFor={`${this.state.name}-textarea`}
-              className="coa-sr-only"
-            >{intl.formatMessage(i18nMessages.step2titleb)}</label>
-            <textarea id={`${this.state.name}-textarea`}
-              name={`${this.state.name}-textarea`}
-              onChange={this.handleTextAreaChange}></textarea>
-            <p>Please do not enter private information because your feedback will be public.</p>
-            { !this.state.loading
-              ? <input type="submit" value="Send Feedback" onClick={this.handleSubmit} />
-              : <input type="submit" value="Sending..." disabled />
-            }
+            <div className="coa-FormFeedback__content">
+              <label htmlFor={`${this.state.name}-textarea`}
+                className="coa-sr-only"
+              >{intl.formatMessage(i18nMessages.step2titleb)}</label>
+              <textarea id={`${this.state.name}-textarea`}
+                name={`${this.state.name}-textarea`}
+                onChange={this.handleTextAreaChange}></textarea>
+              <input type="submit" value={intl.formatMessage(i18nMessages.step2button)} onClick={this.handleSubmit} disabled={this.state.loading ? true : false} />
+            </div>
         </fieldset>
       )}
 
       { this.state.step === 3 && (
         <fieldset className="coa-FormFeedback__step3">
           <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step3title)}</SectionHeader>
-          <input type="button" onClick={this.handleReset} value={intl.formatMessage(i18nMessages.step3button)} />
+          <div className="coa-FormFeedback__content">
+            <input type="button" onClick={this.handleReset} value={intl.formatMessage(i18nMessages.step3button)} />
+          </div>
         </fieldset>
       )}
 
