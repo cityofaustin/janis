@@ -1,0 +1,94 @@
+.coa-Steps {
+  border-bottom: 1px dashed $coa-color-gray;
+  margin-bottom: $coa-spacing-xlarge;
+  padding-bottom: $coa-spacing-large;
+  padding-top: 1px; //prevent stacking margins
+}
+
+.coa-rtl {
+  .coa-Steps__list > ul > li {
+    &:before {
+      margin-left: $coa-space-level3;
+      margin-right: 0;
+    }
+  }
+}
+
+.coa-Steps__list {
+  & > ul {
+    counter-reset: step-item;
+    margin-bottom: $coa-space-level4;
+    list-style-type: none;
+
+    & > li {
+      align-items: flex-start;
+      counter-increment: step-item;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: $coa-spacing-large;
+
+      &:before {
+        background-color: $coa-color-white;
+        border: 1px solid $coa-color-purple-darkest;
+        border-radius: 50%;
+        color: $coa-color-purple-dark;
+        content: counter(step-item);
+        flex: 0 0 ($coa-line-height-small + .2);
+        font-family: $coa-font-serif;
+        font-size: $coa-font-size-small;
+        line-height: $coa-line-height-small;
+        margin-right: $coa-spacing-md-small;
+        text-align: center;
+
+        @include media($coa-medium-screen) {
+          font-size: $coa-font-size-md-small;
+          line-height: $coa-line-height-md-small;
+          flex: 0 0 ($coa-line-height-md-small + .2);
+        }
+
+        @include media($coa-large-screen) {
+          font-size: $coa-font-size-medium;
+          line-height: $coa-line-height-medium;
+          flex: 0 0 ($coa-line-height-medium + .2);
+        }
+      }
+
+      //TODO: adjust styles below when top level steps are not formatted within paragraphs
+      & > p {
+        display: inline;
+        flex: 1 1;
+        font-size: $coa-font-size-md-small;
+        line-height: $coa-line-height-md-small;
+        margin: 0;
+
+        @include media($coa-medium-screen) {
+          font-size: $coa-font-size-medium;
+          line-height: $coa-line-height-medium;
+        }
+
+        @include media($coa-large-screen) {
+          font-size: $coa-font-size-medium + .3;
+          line-height: $coa-line-height-medium + .3;
+        }
+      }
+    }
+
+    ol, ul {
+      padding-bottom: $coa-spacing-xlarge;
+      padding-left: $coa-spacing-xlarge + 2;
+      padding-top: $coa-spacing-md-small;
+      list-style-type: disc;
+      width: 100%;
+
+      //TODO: adjust styles below when nested lists are not formatted within paragraphs
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  //TODO: remove styles below when steps are properly formatted JSON
+  br {
+    display: none;
+  }
+}

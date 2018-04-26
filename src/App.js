@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Router, Route } from 'react-static'
 import ReactGA from 'react-ga'
 import { logPageView } from 'js/helpers/googleAnalytics'
-import LanguageWrapper from "js/components/LanguageWrapper"
+import LanguageWrapper from "components/LanguageWrapper"
 
 import 'css/coa.css'
 

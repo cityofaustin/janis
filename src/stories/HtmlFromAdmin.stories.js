@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import HtmlFromAdmin from 'js/modules/HtmlFromAdmin';
+import HtmlFromAdmin from 'components/HtmlFromAdmin';
 
 const content = `
   <h1>h1: In vel volutpat mi</h1>

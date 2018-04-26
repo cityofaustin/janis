@@ -4,10 +4,12 @@ import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import allThemesQuery from 'js/queries/allThemesQuery';
+import all311Query from 'js/queries/all311Query';
 
+import { clean311 } from "js/helpers/cleanData";
 
 const createGraphQLClientsByLang = (lang) => {
   const { CMS_API } = process.env;
@@ -25,11 +27,10 @@ const makeAllPages = async (langCode) => {
 
   const data = {
     path: path,
-    component: 'src/js/pages/Home',
+    component: 'src/components/Pages/Home',
     children: await makeChildPages(client),
     getData: async () => {
       const { allServicePages: topServices } = await client.request(topServicesQuery);
-
       return {
         topServices,
         image: {
@@ -57,13 +58,13 @@ const makeServicePages = async (client) => {
 
   const data = {
     path: '/services',
-    component: 'src/js/pages/Services',
+    component: 'src/components/Pages/Services',
     getData: async () => ({
       allServices,
     }),
     children: allServices.edges.map(({node: service}) => ({
       path: `/${service.slug}`,
-      component: 'src/js/pages/Service',
+      component: 'src/components/Pages/Service',
       getData: async () => ({
         service,
       }),
@@ -78,13 +79,13 @@ const makeTopicPages = async (client) => {
 
   const data = {
     path: '/topics',
-    component: 'src/js/pages/Topics',
+    component: 'src/components/Pages/Topics',
     getData: async () => ({
       allTopics,
     }),
     children: allTopics.edges.map(({node: topic}) => ({
       path: `/${topic.slug}`,
-      component: 'src/js/pages/Topic',
+      component: 'src/components/Pages/Topic',
       getData: async () => ({
         topic,
       })
@@ -99,13 +100,13 @@ const makeThemePages = async (client) => {
 
   const data = {
     path: '/themes',
-    component: 'src/js/pages/Themes',
+    component: 'src/components/Pages/Themes',
     getData: async () => ({
       allThemes,
     }),
     children: allThemes.edges.map(({node: theme}) => ({
       path: `/${theme.slug}`,
-      component: 'src/js/pages/Theme',
+      component: 'src/components/Pages/Theme',
       getData: async () => ({
         theme,
       })
@@ -121,13 +122,13 @@ const makeDepartmentPages = async (client) => {
 
   const data = {
     path: '/departments',
-    component: 'src/js/pages/Departments',
+    component: 'src/components/Pages/Departments',
     getData: async () => ({
       allDepartments,
     }),
     children: allDepartments.edges.map(({node: department}) => ({
       path: `${department.id}`,
-      component: 'src/js/pages/Department',
+      component: 'src/components/Pages/Department',
       getData: async () => ({
         department,
       })
@@ -142,15 +143,27 @@ export default {
     title: 'City of Austin',
   }),
   getSiteData: async () => {
-    const data = {
-      navigation: {}
-    };
-
-    const requests = SUPPORTED_LANG_CODES.map((langCode) => createGraphQLClientsByLang(langCode).request(allThemesQuery));
+    const queries = [
+      {'query': allThemesQuery, 'dataKey': 'navigation'},
+      {'query': all311Query, 'dataKey': 'threeoneone', 'middleware': clean311}
+    ];
+    const requests = [];
+    const data = {};
+    SUPPORTED_LANG_CODES.map((langCode) => {
+      const client = createGraphQLClientsByLang(langCode);
+      queries.map(query => {
+        requests.push(client.request(query.query));
+        data[query.dataKey] = data[query.dataKey] || {};
+        data[query.dataKey][langCode] = null;
+      })
+    });
 
     (await Promise.all(requests)).forEach((response, i) => {
-      const langCode = SUPPORTED_LANG_CODES[i];
-      data.navigation[langCode] = response;
+      const queryIndex = i % queries.length;
+      const langIndex = (i - queryIndex) / (queries.length);
+      data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] = (typeof queries[queryIndex].middleware === 'function')
+        ? queries[queryIndex].middleware(response)
+        : response;
     });
 
     return data;
@@ -159,11 +172,11 @@ export default {
     const routes = [
       {
         path: '/search',
-        component: 'src/js/pages/Search', //TODO: update search page to be conscious of all languages
+        component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
         is404: true,
-        component: 'src/js/pages/404', //TODO: update 404 page to be conscious of all languages
+        component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
     ];
 
@@ -173,5 +186,15 @@ export default {
     const allRoutes = routes.concat(translatedRoutes)
 
     return allRoutes;
+  },
+  webpack: (config, { stage }) => {
+    // Include babel poyfill for IE 11 and below
+    // https://github.com/nozzle/react-static/blob/811ebe1b5a5b8e24fffec99fcdb3375818383711/docs/concepts.md#browser-support
+    if (stage === 'prod') {
+      config.entry = ['babel-polyfill', config.entry]
+    } else if (stage === 'dev') {
+      config.entry = ['babel-polyfill', ...config.entry]
+    }
+    return config
   },
 }

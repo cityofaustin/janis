@@ -1,0 +1,22 @@
+.coa-ListLink {
+  @include box-verticalcenter(7.5rem);
+  border-bottom: 1px dashed $color-gray-dark;
+  font-family: $coa-font-sans;
+  font-size: $coa-font-size-xsmall;
+  padding: $coa-spacing-medium;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  svg {
+    flex-shrink: 0;
+    height: $coa-font-size-xsmall - .1rem;
+    margin-left: $coa-spacing-small;
+  }
+
+  @include media($coa-small-screen) {
+    font-size: $coa-font-size-small;
+    svg {
+      height: $coa-font-size-small - .1rem;
+    }
+  }
+}

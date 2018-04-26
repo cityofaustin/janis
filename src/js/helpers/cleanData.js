@@ -68,3 +68,18 @@ export const cleanLinks = (links, pathPrefix) => {
     }
   });
 };
+
+export const clean311 = (threeoneone) => {
+
+  const { all311 } = threeoneone;
+
+  if(!all311 || !all311.edges) return null;
+
+  return all311.edges.map(({node: link}) => {
+    const {title, url} = link;
+    return {
+      url: url,
+      text: title
+    };
+  });
+}

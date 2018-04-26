@@ -30,10 +30,17 @@
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
   "ThreeOneOne.sectiontitle.siterequest": "Submit an Online Request",
+  "ThreeOneOne.listlink.allservices": "All 311 Services",
   "Home.RelatedLinks.SectionTitle": "Check out City of Austin services",
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Check out related services",
   "Service.RelatedLinks.Tag": "Service",
   "Home.RelatedLinks.Tag": "Service",
-  "Submenu.workInProgress": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
+  "Submenu.workInProgress": "Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}.",
+  "FormFeedback.step1.title": "How satisfied are you with this page?",
+  "FormFeedback.step2.title.a": "Thank you!",
+  "FormFeedback.step2.title.b": "How can we make this page better?",
+  "FormFeedback.step2.button": "Send Feedback",
+  "FormFeedback.step3.title": "Thank you for sharing feedback!",
+  "FormFeedback.step3.button": "Give more feedback"
 }

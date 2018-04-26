@@ -30,10 +30,17 @@
   "ThreeOneOne.sectiontitle.call": "Call 311",
   "ThreeOneOne.sectiontitle.or": "or",
   "ThreeOneOne.sectiontitle.siterequest": "Submit an Online Request",
+  "ThreeOneOne.listlink.allservices": "Tất cả các dịch vụ 311",
   "Home.RelatedLinks.SectionTitle": "Kiểm điểm các dịch vụ của Thành phố Austin ",
   "Home.Secondarycontent.bodytext": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}. Tìm hiểu thêm về mạng mới tại {projectsSiteLink}.",
   "Service.RelatedLinks.SectionHeader": "Kiểm điểm các dịch vụ liên quan",
   "Service.RelatedLinks.Tag": "Dịch vụ",
   "Home.RelatedLinks.Tag": "Dịch vụ",
-  "Submenu.workInProgress": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}."
+  "Submenu.workInProgress": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}.",
+  "FormFeedback.step1.title": "Mức hài lòng của quý vị về trang này như thế nào?",
+  "FormFeedback.step2.title.a": "Cám ơn quý vị!",
+  "FormFeedback.step2.title.b": "Chúng tôi có thể làm trang này tốt hơn bằng cách nào?",
+  "FormFeedback.step2.button": "Gửi ý kiến phản hồi",
+  "FormFeedback.step3.title": "Cám ơn sự góp ý của quý vị!",
+  "FormFeedback.step3.button": "Xin góp thêm ý kiến phản hồi."
 }
