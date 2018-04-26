@@ -8352,9 +8352,9 @@ react-split-pane@^0.1.74:
     prop-types "^15.5.10"
     react-style-proptype "^3.0.0"
 
-react-static@^5.7.1:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.8.1.tgz#6f665029980d385263a067b2d17008178356e7f5"
+react-static@^5.6.8:
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.8.2.tgz#c1202ddc31e08ea6819b5ba643cf2a4c1a3203d0"
   dependencies:
     "@types/react" "^16.0.18"
     "@types/react-helmet" "^5.0.3"
@@ -10143,7 +10143,7 @@ typescript@^2.4.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 
-ua-parser-js@^0.7.9:
+ua-parser-js@^0.7.17, ua-parser-js@^0.7.9:
   version "0.7.17"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
