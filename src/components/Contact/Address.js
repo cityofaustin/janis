@@ -1,5 +1,5 @@
 import React from 'react';
-import MapMarkerSVG from 'js/svg/MapMarker';
+import MapMarkerSVG from 'components/SVGs/MapMarker';
 import PropTypes from 'prop-types';
 
 const Address = ({ location }) => (

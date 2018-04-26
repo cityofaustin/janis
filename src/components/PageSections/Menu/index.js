@@ -6,7 +6,7 @@ import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
 import MenuItem from 'components/PageSections/Menu/MenuItem';
 
-import CloseSVG from 'js/svg/Close';
+import CloseSVG from 'components/SVGs/Close';
 import citySealImg from 'images/coa_seal.png';
 
 const i18nMessages = defineMessages({

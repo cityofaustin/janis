@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from 'js/svg/Svg';
+import SVG from 'components/SVGs/Svg';
 
 const AirplaneSVG = ({ title="Airplane", ...rest }) => (
   <SVG

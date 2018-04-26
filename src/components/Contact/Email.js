@@ -1,5 +1,5 @@
 import React from 'react';
-import EnvelopSVG from 'js/svg/EnvelopO';
+import EnvelopSVG from 'components/SVGs/EnvelopO';
 import PropTypes from 'prop-types';
 
 const Email = ({ email }) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from 'js/svg/Svg';
+import SVG from 'components/SVGs/Svg';
 
 const MinusSVG = ({ title="Minus", ...rest }) => (
   <SVG

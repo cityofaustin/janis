@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedTime } from 'react-intl';
 import {sortBy, findIndex} from 'lodash';
-import ClockSVG from 'js/svg/ClockO';
+import ClockSVG from 'components/SVGs/ClockO';
 
 
 const i18nMessagesWeekdayMap = {

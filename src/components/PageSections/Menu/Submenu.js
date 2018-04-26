@@ -7,7 +7,7 @@ import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
 import ExternalLink from 'components/ExternalLink';
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
-import ArrowRightSVG from 'js/svg/ArrowRight';
+import ArrowRightSVG from 'components/SVGs/ArrowRight';
 
 const SUBMENU_THRESHOLD_ALIGNRIGHT_RTL = 5;
 const SUBMENU_THRESHOLD_ALIGNRIGHT_LTR = 4;

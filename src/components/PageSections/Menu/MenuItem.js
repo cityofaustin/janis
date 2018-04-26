@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import Submenu from 'components/PageSections/Menu/Submenu';
-import PlusSVG from 'js/svg/Plus';
-import MinusSVG from 'js/svg/Minus';
-import ChevronDownSVG from 'js/svg/ChevronDown';
+import PlusSVG from 'components/SVGs/Plus';
+import MinusSVG from 'components/SVGs/Minus';
+import ChevronDownSVG from 'components/SVGs/ChevronDown';
 
 const MenuItem = ({theme, id, isSubmenuOpen, handleSubmenuToggle, handleCloseAllMenus}) => (
   <li>

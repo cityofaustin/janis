@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from 'js/svg/Svg';
+import SVG from 'components/SVGs/Svg';
 
 const CaretDown = ({ title="Arrow Down", ...rest }) => (
   <SVG

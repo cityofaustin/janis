@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneSVG from 'js/svg/Phone';
+import PhoneSVG from 'components/SVGs/Phone';
 import PropTypes from 'prop-types';
 
 const Phone = ({ phone }) => (

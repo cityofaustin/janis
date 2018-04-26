@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import ExternalLinkSVG from 'js/svg/ExternalLink';
+import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
 const i18nMessages = defineMessages({
   externalLinkAriaLabel: {
