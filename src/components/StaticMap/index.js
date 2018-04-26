@@ -17,7 +17,7 @@ const getEncodedLocation = location => {
   const defaultLocation = 'City Hall, Austin, Texas 78701';
   if (street) {
     return encodeURIComponent(
-      `${street} ${city || 'Austin'}, ${state || 'Texas'} ${zip}`
+      `${street} ${city || 'Austin'}, ${state || 'Texas'} ${zip}`,
     );
   }
   if (latitude && longitude) {

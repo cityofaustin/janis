@@ -24,7 +24,7 @@ const ApplicationBlock = ({ content, intl }) => {
     case 'collection_schedule_block':
       app = <Recollect options={{ name: 'calendar' }} />;
       title = intl.formatMessage(
-        i18nMessages.applicationBlockRecollectCalendar
+        i18nMessages.applicationBlockRecollectCalendar,
       );
       id = 'HashLink-Recollect';
       break;

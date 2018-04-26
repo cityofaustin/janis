@@ -39,8 +39,8 @@ ContactDetails.propTypes = {
       Phone.propTypes,
       Email.propTypes,
       Address.propTypes,
-      Hours.propTypes
-    )
+      Hours.propTypes,
+    ),
   ).isRequired,
 };
 

@@ -31,7 +31,7 @@ const makeAllPages = async langCode => {
     children: await makeChildPages(client),
     getData: async () => {
       const { allServicePages: topServices } = await client.request(
-        topServicesQuery
+        topServicesQuery,
       );
       return {
         topServices,
@@ -57,7 +57,7 @@ const makeChildPages = client => {
 
 const makeServicePages = async client => {
   const { allServicePages: allServices } = await client.request(
-    allServicePagesQuery
+    allServicePagesQuery,
   );
 
   const data = {
@@ -187,7 +187,7 @@ export default {
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode))
+      allLangs.map(langCode => makeAllPages(langCode)),
     );
     const allRoutes = routes.concat(translatedRoutes);
 

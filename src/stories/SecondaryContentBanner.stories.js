@@ -17,5 +17,5 @@ storiesOf('SecondaryContentBanner', module).add(
         </a>.
       </p>
     </SecondaryContentBanner>
-  )
+  ),
 );

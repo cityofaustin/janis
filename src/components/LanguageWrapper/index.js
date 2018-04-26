@@ -100,7 +100,7 @@ class LanguageWrapper extends Component {
     const lang = this.getSupportedLang(
       locale()
         .split('-')[0]
-        .toLowerCase()
+        .toLowerCase(),
     );
 
     if (!lang) return null;

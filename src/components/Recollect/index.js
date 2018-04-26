@@ -10,7 +10,7 @@ class Recollect extends Component {
         area: 'Austin',
         container: '#rCw',
       },
-      this.props.options
+      this.props.options,
     );
     let loader = new window.Recollect.Widget.Loader(options);
     loader.load();
