@@ -18,6 +18,10 @@ const i18nMessages = defineMessages({
     id: 'FormFeedback.step2.title.b',
     defaultMessage: 'How can we make this page better?',
   },
+  step2button: {
+    id: 'FormFeedback.step2.button',
+    defaultMessage: 'Send feedback',
+  },
   step3title: {
     id: 'FormFeedback.step3.title',
     defaultMessage: 'Thank you for sharing feedback!',
@@ -52,7 +56,7 @@ class FormFeedback extends Component {
 
   handleEmojiClick = e => {
     const emojiText = this.props.intl.formatMessage(
-      i18nEmojis[e.currentTarget.value]
+      i18nEmojis[e.currentTarget.value],
     );
     const emojiValue = emojis[e.currentTarget.value].value;
 
@@ -77,7 +81,7 @@ class FormFeedback extends Component {
     e.preventDefault();
 
     const emojiText = this.props.intl.formatMessage(
-      i18nEmojis[this.state.emoji]
+      i18nEmojis[this.state.emoji],
     );
     const emojiValue = emojis[this.state.emoji].value;
     const emoji = emojis[this.state.emoji].emoji;
@@ -152,7 +156,7 @@ class FormFeedback extends Component {
             <SectionHeader isSerif={true}>
               {intl.formatMessage(i18nMessages.step1title)}
             </SectionHeader>
-            <div className="coa-FormFeedback__emojis">
+            <div className="coa-FormFeedback__content">
               {Object.keys(emojis).map(emojiKey => (
                 <div key={emojiKey} className="coa-FormFeedback__emoji">
                   <input
@@ -182,8 +186,6 @@ class FormFeedback extends Component {
             name={`${this.state.name}-textarea`}
           >
             <SectionHeader isSerif={true}>
-              {intl.formatMessage(i18nMessages.step2titlea)}
-              <br />
               {intl.formatMessage(i18nMessages.step2titleb)}
             </SectionHeader>
             {this.state.error && (
@@ -192,30 +194,25 @@ class FormFeedback extends Component {
                 feedback again.
               </p>
             )}
-            <label
-              htmlFor={`${this.state.name}-textarea`}
-              className="coa-sr-only"
-            >
-              {intl.formatMessage(i18nMessages.step2titleb)}
-            </label>
-            <textarea
-              id={`${this.state.name}-textarea`}
-              name={`${this.state.name}-textarea`}
-              onChange={this.handleTextAreaChange}
-            />
-            <p>
-              Please do not enter private information because your feedback will
-              be public.
-            </p>
-            {!this.state.loading ? (
+            <div className="coa-FormFeedback__content">
+              <label
+                htmlFor={`${this.state.name}-textarea`}
+                className="coa-sr-only"
+              >
+                {intl.formatMessage(i18nMessages.step2titleb)}
+              </label>
+              <textarea
+                id={`${this.state.name}-textarea`}
+                name={`${this.state.name}-textarea`}
+                onChange={this.handleTextAreaChange}
+              />
               <input
                 type="submit"
-                value="Send Feedback"
+                value={intl.formatMessage(i18nMessages.step2button)}
                 onClick={this.handleSubmit}
+                disabled={this.state.loading ? true : false}
               />
-            ) : (
-              <input type="submit" value="Sending..." disabled />
-            )}
+            </div>
           </fieldset>
         )}
 
@@ -224,11 +221,13 @@ class FormFeedback extends Component {
             <SectionHeader isSerif={true}>
               {intl.formatMessage(i18nMessages.step3title)}
             </SectionHeader>
-            <input
-              type="button"
-              onClick={this.handleReset}
-              value={intl.formatMessage(i18nMessages.step3button)}
-            />
+            <div className="coa-FormFeedback__content">
+              <input
+                type="button"
+                onClick={this.handleReset}
+                value={intl.formatMessage(i18nMessages.step3button)}
+              />
+            </div>
           </fieldset>
         )}
       </form>

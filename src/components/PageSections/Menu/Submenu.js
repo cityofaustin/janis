@@ -1,29 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { find } from 'lodash';
-import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
 import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
 import ExternalLink from 'components/ExternalLink';
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ArrowRightSVG from 'components/SVGs/ArrowRight';
 
-const SUBMENU_THRESHOLD_ALIGNRIGHT_RTL = 5;
-const SUBMENU_THRESHOLD_ALIGNRIGHT_LTR = 4;
-
-const isAlignedRight = (direction, id) => {
-  return direction === 'rtl'
-    ? id < SUBMENU_THRESHOLD_ALIGNRIGHT_RTL
-    : id > SUBMENU_THRESHOLD_ALIGNRIGHT_LTR;
-};
-
-const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus, intl }) => {
-  const langObj = find(SUPPORTED_LANGUAGES, { code: intl.locale });
+const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
   return (
     <ul
       className={`coa-Submenu
-      ${isAlignedRight(langObj.direction, id) ? 'coa-Submenu--align-right' : ''}
       ${isSubmenuOpen ? 'coa-Submenu--open' : ''}`}
       id={`topicMenu${id + 1}`}
       role="menu"
@@ -80,4 +68,4 @@ const WorkInProgressSubmenuItem = () => (
   </li>
 );
 
-export default injectIntl(Submenu);
+export default Submenu;

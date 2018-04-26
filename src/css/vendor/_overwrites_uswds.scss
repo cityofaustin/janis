@@ -32,10 +32,11 @@ p {
 }
 
 label, textarea, input, select {
+  margin: 0;
   max-width: none;
 }
 
-input[type="button"] {
+input[type="button"], input[type="submit"] {
   margin: 0;
 }
 

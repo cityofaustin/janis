@@ -133,27 +133,27 @@ class Menu extends Component {
 }
 
 const HomeMobileMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
-  <li className="d-lg-none" onClick={handleCloseAllMenus}>
+  <div className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
       <I18nNavLink to="/" exact>
         {intl.formatMessage(i18nMessages.home)}
       </I18nNavLink>
     </div>
-  </li>
+  </div>
 ));
 
 const AirportMobileMenuItem = injectIntl(({ intl }) => (
-  <li className="d-lg-none">
+  <div className="d-lg-none">
     <div className="coa-MenuItem coa-MenuItem--small">
       <ExternalLink to="http://www.austintexas.gov/airport">
         {intl.formatMessage(i18nMessages.airport)}
       </ExternalLink>
     </div>
-  </li>
+  </div>
 ));
 
 const ThreeOneOneMobileMenuItem = injectIntl(({ intl }) => (
-  <li className="d-lg-none">
+  <div className="d-lg-none">
     {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
     <div className="coa-MenuItem coa-MenuItem--small">
       <a href="tel:311" aria-label="3 1 1.">
@@ -164,38 +164,43 @@ const ThreeOneOneMobileMenuItem = injectIntl(({ intl }) => (
         {intl.formatMessage(i18nMessages.online311)}
       </ExternalLink>
     </div>
-  </li>
+  </div>
 ));
 
 const PrivacyPolicyMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
-  <li className="d-lg-none" onClick={handleCloseAllMenus}>
+  <div className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small">
       <a href="#">{intl.formatMessage(i18nMessages.privacy)}</a>
     </div>
-  </li>
+  </div>
 ));
 
 const MobileFooter = injectIntl(({ intl }) => (
-  <div className="coa-Menu__mobile-footer d-lg-none">
-    <p className="coa-Menu__footer-text">
-      <FormattedMessage
-        id="Footer.bodytext"
-        defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-        values={{
-          citySiteLink: (
-            <ExternalLink to="http://austintexas.gov">
-              austintexas.gov
-            </ExternalLink>
-          ),
-          projectsSiteLink: (
-            <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
-              projects.austintexas.io
-            </ExternalLink>
-          ),
-        }}
+  <div className="d-lg-none">
+    <div className="coa-Menu__footer">
+      <p>
+        <FormattedMessage
+          id="Footer.bodytext"
+          defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+          values={{
+            citySiteLink: (
+              <ExternalLink to="http://austintexas.gov">
+                austintexas.gov
+              </ExternalLink>
+            ),
+            projectsSiteLink: (
+              <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
+                projects.austintexas.io
+              </ExternalLink>
+            ),
+          }}
+        />
+      </p>
+      <img
+        src={citySealImg}
+        alt={intl.formatMessage(i18nMessages.sealAltText)}
       />
-    </p>
-    <img src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
+    </div>
   </div>
 ));
 

@@ -36,5 +36,11 @@
   "Service.RelatedLinks.SectionHeader": "الاطلاع على الخدمات ذات الصلة",
   "Service.RelatedLinks.Tag": "الخدمة",
   "Home.RelatedLinks.Tag": "الخدمة",
-  "Submenu.workInProgress": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}."
+  "Submenu.workInProgress": "Alpha.austin.gov هو موقع إلكتروني جديد والعمل قيد التنفيذ. للحصول على كامل موقع مدينة أوستن، قم بزيارة {citySiteLink}.",
+  "FormFeedback.step1.title": "ما مدى رضاك عن هذه الصفحة؟",
+  "FormFeedback.step2.title.a": "شكرا!",
+  "FormFeedback.step2.title.b": "كيف يمكننا تحسين هذه الصفحة؟",
+  "FormFeedback.step2.button": "قم بإرسال الملاحظات",
+  "FormFeedback.step3.title": "شكرا لك على ملاحظاتك!",
+  "FormFeedback.step3.button": "تقديم المزيد من الملاحظات"
 }
