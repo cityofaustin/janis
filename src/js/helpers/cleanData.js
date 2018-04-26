@@ -1,22 +1,21 @@
-export const cleanContacts = (contacts) => {
-
-  if(!contacts || !contacts.edges) return null;
+export const cleanContacts = contacts => {
+  if (!contacts || !contacts.edges) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
   const weekdayMap = {
-    "SUNDAY":   0,
-    "MONDAY":   1,
-    "TUESDAY":  2,
-    "WEDNESDAY":3,
-    "THURSDAY": 4,
-    "FRIDAY":   5,
-    "SATURDAY": 6,
+    SUNDAY: 0,
+    MONDAY: 1,
+    TUESDAY: 2,
+    WEDNESDAY: 3,
+    THURSDAY: 4,
+    FRIDAY: 5,
+    SATURDAY: 6,
   };
 
-  const getWeekday = (day) => (weekdayMap[day]);
+  const getWeekday = day => weekdayMap[day];
 
-  const getTimestamp = (hours) => {
+  const getTimestamp = hours => {
     const splitHours = hours.split(':');
     let timestamp = new Date(dateSeed);
     timestamp.setHours(splitHours[0]);
@@ -24,14 +23,14 @@ export const cleanContacts = (contacts) => {
     return timestamp.getTime();
   };
 
-  return contacts.edges.map(({node: contact}) => {
+  return contacts.edges.map(({ node: contact }) => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
-    if(cleaned.phone) {
+    if (cleaned.phone) {
       cleaned.phone = JSON.parse(cleaned.phone);
     }
-    if(cleaned.hours && cleaned.hours.edges) {
+    if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
         dayOfWeek: hours.dayOfWeek,
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
@@ -43,43 +42,40 @@ export const cleanContacts = (contacts) => {
   });
 };
 
-export const cleanRelatedServiceLinks = (links) => {
-
+export const cleanRelatedServiceLinks = links => {
   if (!links) return null;
 
-  return links.map((link) => {
+  return links.map(link => {
     return {
       url: `/services/${link.slug}`,
-      text: link.title
-    }
+      text: link.title,
+    };
   });
 };
 
 export const cleanLinks = (links, pathPrefix) => {
+  if (!links || !links.edges) return null;
 
-  if(!links || !links.edges) return null;
-
-  return links.edges.map(({node: link}) => {
-    const {title, slug, ...rest} = link;
+  return links.edges.map(({ node: link }) => {
+    const { title, slug, ...rest } = link;
     return {
       url: `${pathPrefix || ''}/${slug}`,
       text: title,
-      ...rest
-    }
+      ...rest,
+    };
   });
 };
 
-export const clean311 = (threeoneone) => {
-
+export const clean311 = threeoneone => {
   const { all311 } = threeoneone;
 
-  if(!all311 || !all311.edges) return null;
+  if (!all311 || !all311.edges) return null;
 
-  return all311.edges.map(({node: link}) => {
-    const {title, url} = link;
+  return all311.edges.map(({ node: link }) => {
+    const { title, url } = link;
     return {
       url: url,
-      text: title
+      text: title,
     };
   });
-}
+};

@@ -9,7 +9,7 @@ const i18nMessages = defineMessages({
   },
 });
 
-const ExternalLink = ({to, noIcon, children, intl}) => (
+const ExternalLink = ({ to, noIcon, children, intl }) => (
   <a
     href={to}
     className="coa-ExternalLink"

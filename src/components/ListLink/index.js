@@ -4,10 +4,7 @@ import I18nLink from 'components/I18nLinks/I18nLink';
 import ChevronRightSVG from 'components/SVGs/ChevronRight';
 
 const ListLink = ({ url, text }) => (
-  <I18nLink
-    className="coa-ListLink"
-    to={url}
-  >
+  <I18nLink className="coa-ListLink" to={url}>
     <span>{text}</span>
     <ChevronRightSVG />
   </I18nLink>
@@ -15,7 +12,7 @@ const ListLink = ({ url, text }) => (
 
 ListLink.propTypes = {
   url: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 export default ListLink;

@@ -9,11 +9,10 @@ const stepsHtml = `
     <li><p>Review the Household Hazardous Waste Do’s and Don’ts below.</p></li>
     <li><p>Drop off your items at the Recycle and ReUse Center at 2514 Business Center Dr, Austin, TX 78744.</p></li>
   </ul>
-`
+`;
 
-storiesOf('Steps', module)
-  .add('Steps', () => (
-    <div className="wrapper container-fluid">
-      <Steps stepsAsHtmlFromAdmin={stepsHtml} />
-    </div>
-  ))
+storiesOf('Steps', module).add('Steps', () => (
+  <div className="wrapper container-fluid">
+    <Steps stepsAsHtmlFromAdmin={stepsHtml} />
+  </div>
+));

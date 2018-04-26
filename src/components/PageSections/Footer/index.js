@@ -23,7 +23,10 @@ const Footer = ({ threeoneone, intl }) => (
       <div className="row">
         <div className="col-xs-12 col-md-2">
           <div className="coa-Footer__city-seal-wrapper">
-            <img src={citySealImg} alt={intl.formatMessage(i18nMessages.sealAltText)} />
+            <img
+              src={citySealImg}
+              alt={intl.formatMessage(i18nMessages.sealAltText)}
+            />
           </div>
         </div>
         <div className="col-xs-12 col-md-4">
@@ -31,9 +34,17 @@ const Footer = ({ threeoneone, intl }) => (
             <FormattedMessage
               id="Footer.bodytext"
               defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-              values ={{
-                citySiteLink: <ExternalLink to="http://austintexas.gov">austintexas.gov</ExternalLink>,
-                projectsSiteLink: <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">projects.austintexas.io</ExternalLink>
+              values={{
+                citySiteLink: (
+                  <ExternalLink to="http://austintexas.gov">
+                    austintexas.gov
+                  </ExternalLink>
+                ),
+                projectsSiteLink: (
+                  <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
+                    projects.austintexas.io
+                  </ExternalLink>
+                ),
               }}
             />
           </p>
@@ -43,7 +54,10 @@ const Footer = ({ threeoneone, intl }) => (
             <ExternalLink to="https://twitter.com/austintexasgov" noIcon={true}>
               <TwitterSVG />
             </ExternalLink>
-            <ExternalLink to="https://www.facebook.com/austintexasgov" noIcon={true}>
+            <ExternalLink
+              to="https://www.facebook.com/austintexasgov"
+              noIcon={true}
+            >
               <FacebookSVG />
             </ExternalLink>
             <ExternalLink to="https://github.com/cityofaustin" noIcon={true}>

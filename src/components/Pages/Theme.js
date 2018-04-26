@@ -24,8 +24,8 @@ const Theme = ({ theme }) => {
         <TileGroupSet tileGroups={cleanedTopics} tag="service" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 Theme.propTypes = {
   theme: PropTypes.shape({
@@ -34,7 +34,7 @@ Theme.propTypes = {
     description: PropTypes.string,
     services: PropTypes.string,
     theme: PropTypes.string,
-  })
+  }),
 };
 
 export default withRouteData(Theme);

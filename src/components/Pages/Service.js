@@ -28,13 +28,21 @@ const i18nMessages = defineMessages({
   htmlFromAdminSectionTitle: {
     id: 'HtmlFromAdmin.SectionTitle',
     defaultMessage: 'What else do I need to know?',
-  }
+  },
 });
 
 const Service = ({ service, intl }) => {
   const {
-    image, title, slug, topic, topic: {theme}, steps, dynamicContent, additionalContent,
-    contacts, related
+    image,
+    title,
+    slug,
+    topic,
+    topic: { theme },
+    steps,
+    dynamicContent,
+    additionalContent,
+    contacts,
+    related,
   } = service;
 
   //TODO: clean data where sourced
@@ -42,8 +50,8 @@ const Service = ({ service, intl }) => {
   const cleanedRelated = cleanRelatedServiceLinks(related);
 
   //TODO: mapblock data should include contact data when sent via joplin
-  const tempkey = findKey(dynamicContent, { 'type': 'map_block'});
-  if(tempkey) dynamicContent[tempkey].value['contact'] = contact;
+  const tempkey = findKey(dynamicContent, { type: 'map_block' });
+  if (tempkey) dynamicContent[tempkey].value['contact'] = contact;
 
   return (
     <div>
@@ -52,36 +60,35 @@ const Service = ({ service, intl }) => {
         imageTitle={image.title}
       />
       <PageBreadcrumbs
-        grandparent={{...theme, subpath: 'themes'}}
-        parent={{...topic, subpath: 'topics'}}
+        grandparent={{ ...theme, subpath: 'themes' }}
+        parent={{ ...topic, subpath: 'topics' }}
         title={title}
       />
       <div className="wrapper wrapper--sm container-fluid">
-
         <PageHeader title={title} />
 
-        { steps && <Steps stepsAsHtmlFromAdmin={steps} /> }
+        {steps && <Steps stepsAsHtmlFromAdmin={steps} />}
 
-        { !!dynamicContent && (
-          dynamicContent.map(content =>
+        {!!dynamicContent &&
+          dynamicContent.map(content => (
             <ApplicationBlock key={content.id} content={content} />
-          )
+          ))}
+
+        {additionalContent && (
+          <HtmlFromAdmin
+            title={intl.formatMessage(i18nMessages.htmlFromAdminSectionTitle)}
+            content={additionalContent}
+          />
         )}
 
-        { additionalContent && (
-            <HtmlFromAdmin
-              title={intl.formatMessage(i18nMessages.htmlFromAdminSectionTitle)}
-              content={additionalContent}
-            />
-        )}
-
-        { contact && <ContactDetails contact={contact} /> }
-
+        {contact && <ContactDetails contact={contact} />}
       </div>
 
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18nMessages.serviceRelatedlinksSectionheader)}
+          title={intl.formatMessage(
+            i18nMessages.serviceRelatedlinksSectionheader
+          )}
           tiles={cleanedRelated}
           tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
         />
@@ -90,9 +97,8 @@ const Service = ({ service, intl }) => {
       <div className="wrapper wrapper--sm container-fluid">
         <FormFeedback />
       </div>
-
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(injectIntl(Service));

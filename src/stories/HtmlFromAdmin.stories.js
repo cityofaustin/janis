@@ -21,14 +21,10 @@ const content = `
   <p>
     Cras eu <b>lectus pellentesque</b>, <i>posuere lectus vel</i>, scelerisque nisi. Donec eget pellentesque eros. Nam nec dui sed mauris posuere volutpat. Aliquam aliquet tortor sed ligula malesuada dictum. Maecenas consequat molestie tortor ac volutpat. Cras felis augue, lobortis at dignissim et, sodales eleifend ex. Morbi et ullamcorper leo.
   </p>
-`
+`;
 
-storiesOf('HtmlFromAdmin', module)
-  .add('HtmlFromAdmin', () => (
-    <div className="wrapper container-fluid">
-      <HtmlFromAdmin
-        title="Lorem ipsum dolor sit amet cume"
-        content={content}
-      />
-    </div>
-  ))
+storiesOf('HtmlFromAdmin', module).add('HtmlFromAdmin', () => (
+  <div className="wrapper container-fluid">
+    <HtmlFromAdmin title="Lorem ipsum dolor sit amet cume" content={content} />
+  </div>
+));

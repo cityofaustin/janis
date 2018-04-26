@@ -13,8 +13,8 @@ const i18nMessages = defineMessages({
   serviceRelatedlinksTag: {
     id: 'Service.RelatedLinks.Tag',
     defaultMessage: 'Service',
-  }
-})
+  },
+});
 
 const Topic = ({ topic, intl }) => {
   const {
@@ -29,23 +29,21 @@ const Topic = ({ topic, intl }) => {
 
   return (
     <div>
-      <PageBreadcrumbs
-        parent={{...theme, subpath: 'themes'}}
-        title={title}
-      />
+      <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader title={title} description={description} hasBorder={true} />
         <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
       </div>
 
       <div className="wrapper container-fluid">
-        <TileGroup tiles={relatedLinks}
+        <TileGroup
+          tiles={relatedLinks}
           tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 Topic.propTypes = {
   topic: PropTypes.shape({
@@ -57,7 +55,7 @@ Topic.propTypes = {
       text: PropTypes.string,
       slug: PropTypes.string,
     }).isRequired,
-  })
+  }),
 };
 
 export default withRouteData(injectIntl(Topic));
