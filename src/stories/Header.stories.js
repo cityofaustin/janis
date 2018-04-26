@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Header from 'js/page_sections/Header';
+import Header from 'components/PageSections/Header';
 import navigationData from 'stories/static_data/navigationData';
 
 storiesOf('Header', module)

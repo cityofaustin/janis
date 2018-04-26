@@ -163,21 +163,18 @@ Since we use React-Static as our framework to render our React components as a s
 ```
 Your site will be running on http://localhost:8080/
 
-### Sass Code Style Guidelines
+## SASS Guidelines
 
-We're using a modified form of the 7-1 pattern, and BEM for CSS naming and organization
-- our css file structure and js file structure should be congruent.
-  EX. You can find css for js modules in the css/modules folder, you can find css for js page_sections in the css/page_sections folder and so on.
-- js/modules our are smallest unit and should not have any additional custom react component imports
+We're using BEM for CSS naming and organization
+
 - our css is namespaced with coa-
 - our css classes should stack. EX. a blue button would look like `<button class="coa-button coa-button--blue">Button</button>`.
 - class names for js components should correspond with the js component name(capitalized and camelCased).
-  EX. LinkList.js markup has styles applied via the class names `coa-LinkList coa-LinkList--boxprimary`.
+  - EX. LinkList.js markup has styles applied via the class names `coa-LinkList coa-LinkList--boxprimary`.
 - class names which are not js components but have multiple words should be separated by a -
   EX. `coa-Footer__body-text`
 
-Sass/BEM Resources:
-- http://vanseodesign.com/css/sass-directory-structures/
+Resources:
 - http://getbem.com/introduction/
 
 
