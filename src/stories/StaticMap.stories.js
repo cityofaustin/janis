@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import StaticMap from 'components/StaticMap/StaticMap';
+import StaticMap from 'components/StaticMap';
 
 const value = {
   description: "This is where we work",

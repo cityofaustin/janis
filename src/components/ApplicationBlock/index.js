@@ -1,9 +1,9 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import Recollect from 'components/Recollect/Recollect';
+import Recollect from 'components/Recollect';
 import ContactMap from 'components/Contact/ContactMap';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 
 const i18nMessages = defineMessages({
   applicationBlockRecollectCalendar: {

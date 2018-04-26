@@ -2,10 +2,10 @@ import React from 'react';
 import { withRouteData } from 'react-static';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
-import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
-import HeroHome from 'components/HeroHome/HeroHome';
-import ExternalLink from 'components/ExternalLink/ExternalLink';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner';
+import HeroHome from 'components/HeroHome';
+import ExternalLink from 'components/ExternalLink';
+import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 

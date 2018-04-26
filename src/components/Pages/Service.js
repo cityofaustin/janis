@@ -3,16 +3,16 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import { findKey } from 'lodash';
 
-import PageBanner from 'components/PageBanner/PageBanner';
-import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
-import PageHeader from 'components/PageHeader/PageHeader';
-import Steps from 'components/Steps/Steps';
-import HtmlFromAdmin from 'components/HtmlFromAdmin/HtmlFromAdmin';
-import ApplicationBlock from 'components/ApplicationBlock/ApplicationBlock';
+import PageBanner from 'components/PageBanner';
+import PageBreadcrumbs from 'components/PageBreadcrumbs';
+import PageHeader from 'components/PageHeader';
+import Steps from 'components/Steps';
+import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import FormFeedback from 'components/FormFeedback/FormFeedback';
+import FormFeedback from 'components/FormFeedback';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
 

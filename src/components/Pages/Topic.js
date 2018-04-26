@@ -3,9 +3,9 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import PageBreadcrumbs from 'components/PageBreadcrumbs/PageBreadcrumbs';
-import PageHeader from 'components/PageHeader/PageHeader';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import PageBreadcrumbs from 'components/PageBreadcrumbs';
+import PageHeader from 'components/PageHeader';
+import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 

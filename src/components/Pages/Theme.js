@@ -3,7 +3,7 @@ import { withRouteData } from 'react-static';
 import PropTypes from 'prop-types';
 
 import TileGroupSet from 'components/Tiles/TileGroupSet';
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from 'components/PageHeader';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const Theme = ({ theme }) => {

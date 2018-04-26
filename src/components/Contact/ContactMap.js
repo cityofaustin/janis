@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StaticMap from 'components/StaticMap/StaticMap';
+import StaticMap from 'components/StaticMap';
 import Address from 'components/Contact/Address';
 import Phone from 'components/Contact/Phone';
 import Hours from 'components/Contact/Hours';

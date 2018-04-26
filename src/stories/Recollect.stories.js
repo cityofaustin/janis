@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Recollect from 'components/Recollect/Recollect';
+import Recollect from 'components/Recollect';
 
 storiesOf('Recollect', module)
   .add('recollect', () => (

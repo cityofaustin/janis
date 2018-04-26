@@ -3,7 +3,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
 import { emojis, i18nEmojis } from 'js/helpers/emojis';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 
 const i18nMessages = defineMessages({
   step1title: {

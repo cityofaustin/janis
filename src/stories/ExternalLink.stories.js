@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import ExternalLink from 'components/ExternalLink/ExternalLink';
+import ExternalLink from 'components/ExternalLink';
 
 storiesOf('ExternalLink', module)
   .add('ExternalLink', () => (

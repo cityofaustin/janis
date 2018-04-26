@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 
-import ExternalLink from 'components/ExternalLink/ExternalLink';
-import ThreeOneOne from 'components/PageSections/ThreeOneOne/ThreeOneOne';
+import ExternalLink from 'components/ExternalLink';
+import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 
 import TwitterSVG from 'js/svg/Twitter';
 import FacebookSVG from 'js/svg/Facebook';

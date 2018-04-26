@@ -5,7 +5,7 @@ import { find } from 'lodash';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
 import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
-import ExternalLink from 'components/ExternalLink/ExternalLink';
+import ExternalLink from 'components/ExternalLink';
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ArrowRightSVG from 'js/svg/ArrowRight';
 

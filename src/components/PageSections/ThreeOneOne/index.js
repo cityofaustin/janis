@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import ListLink from 'components/ListLink/ListLink';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import ListLink from 'components/ListLink';
+import SectionHeader from 'components/SectionHeader';
 
 const i18nMessages = defineMessages({
   sectionTitleCall: {

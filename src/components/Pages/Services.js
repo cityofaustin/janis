@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
 import { cleanLinks } from 'js/helpers/cleanData';

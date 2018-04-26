@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner/SecondaryContentBanner';
+import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner';
 
 storiesOf('SecondaryContentBanner', module)
   .add('SecondaryContentBanner', () => (

@@ -2,7 +2,7 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 
 const i18nMessages = defineMessages({
   stepsSectionTitle: {

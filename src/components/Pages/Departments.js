@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from 'components/PageHeader';
 
 const Departments = ({ allDepartments }) => {
   const links = allDepartments.edges.map(department => ({

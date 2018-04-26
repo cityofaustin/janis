@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import Menu from 'components/PageSections/Menu/Menu';
+import Menu from 'components/PageSections/Menu';
 import MenuItem from 'components/PageSections/Menu/MenuItem';
 import navigationData from 'stories/static_data/navigationData';
 

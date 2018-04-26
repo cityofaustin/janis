@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import Menu from 'components/PageSections/Menu/Menu';
+import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18nLinks/I18nLink';
-import ExternalLink from 'components/ExternalLink/ExternalLink';
+import ExternalLink from 'components/ExternalLink';
 
 const i18nMessages = defineMessages({
   headerMenuButton: {

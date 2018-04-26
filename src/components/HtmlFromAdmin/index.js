@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 
 const HtmlFromAdmin = ({ title, content }) => (
   <div className="coa-HtmlFromAdmin">

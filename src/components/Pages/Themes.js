@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 

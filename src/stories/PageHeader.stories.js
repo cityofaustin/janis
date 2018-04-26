@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import PageHeader from 'components/PageHeader/PageHeader';
+import PageHeader from 'components/PageHeader';
 
 storiesOf('PageHeader', module)
   .add('PageHeader', () => (

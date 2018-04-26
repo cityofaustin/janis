@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tile from 'components/Tiles/Tile';
-import SectionHeader from 'components/SectionHeader/SectionHeader';
+import SectionHeader from 'components/SectionHeader';
 import I18nLink from 'components/I18nLinks/I18nLink';
 import ArrowRight from 'js/svg/ArrowRight';
 
