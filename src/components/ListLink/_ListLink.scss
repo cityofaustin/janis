@@ -10,6 +10,7 @@
   svg {
     flex-shrink: 0;
     height: $coa-font-size-xsmall - .1rem;
+    width: $coa-font-size-xsmall - .1rem;
     margin-left: $coa-spacing-small;
   }
 
@@ -17,6 +18,7 @@
     font-size: $coa-font-size-small;
     svg {
       height: $coa-font-size-small - .1rem;
+      width: $coa-font-size-small - .1rem;
     }
   }
 }
