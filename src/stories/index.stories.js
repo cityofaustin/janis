@@ -6,4 +6,4 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Button, Welcome } from '@storybook/react/demo';
 
-import ExternalLink from 'js/modules/ExternalLink';
+import ExternalLink from 'components/ExternalLink';

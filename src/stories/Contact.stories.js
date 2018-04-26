@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import ContactMap from 'js/modules/Contact/ContactMap';
-import ContactDetails from 'js/modules/Contact/ContactDetails';
-import ContactPhone from 'js/modules/Contact/Phone';
-import ContactHours from 'js/modules/Contact/Hours';
-import ContactEmail from 'js/modules/Contact/Email';
-import ContactAddress from 'js/modules/Contact/Address';
+import ContactMap from 'components/Contact/ContactMap';
+import ContactDetails from 'components/Contact/ContactDetails';
+import ContactPhone from 'components/Contact/Phone';
+import ContactHours from 'components/Contact/Hours';
+import ContactEmail from 'components/Contact/Email';
+import ContactAddress from 'components/Contact/Address';
 
 import contactData from 'stories/static_data/contactData';
 
