@@ -22,6 +22,15 @@
   }
 }
 
+.coa-rtl {
+  .coa-MenuItem {
+    svg {
+      margin-left: 0;
+      margin-right: $coa-spacing-xsmall;
+    }
+  }
+}
+
 .coa-MenuItem--open {
   border-bottom: 1px solid transparent;
   @include media($coa-large-screen) {
