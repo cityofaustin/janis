@@ -21,6 +21,7 @@
     svg {
       fill: $coa-color-blue-darker;
       height: $coa-font-size-xsmall - .1rem;
+      width: $coa-font-size-xsmall - .1rem;
       &:hover {
         fill: $coa-color-blue-darkest;
       }

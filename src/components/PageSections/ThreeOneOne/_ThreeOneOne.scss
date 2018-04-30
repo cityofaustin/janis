@@ -23,20 +23,20 @@
 
     /* 3 links or less */
     &:nth-child(-n+3) {
-      display: initial;
+      display: block;
     }
 
     /* 5 links or less */
     @include media($coa-medium-screen) {
       &:nth-child(-n+5) {
-        display: initial;
+        display: block;
       }
     }
 
     /* 8 links or less */
     @include media($coa-large-screen) {
       &:nth-child(-n+8) {
-        display: initial;
+        display: block;
       }
     }
   }
