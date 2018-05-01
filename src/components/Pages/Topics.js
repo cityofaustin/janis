@@ -11,13 +11,13 @@ const Topics = ({ allTopics }) => {
   return (
     <div>
       <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader title={"All Topics"} />
+        <PageHeader title={'All Topics'} />
       </div>
       <div className="wrapper">
         <TileGroup tiles={links} tag="topic" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(Topics);

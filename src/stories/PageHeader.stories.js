@@ -20,4 +20,4 @@ storiesOf('PageHeader', module)
         hasBorder={true}
       />
     </div>
-  ))
+  ));

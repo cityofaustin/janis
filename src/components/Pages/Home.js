@@ -40,9 +40,17 @@ const Home = ({ topServices, image, intl }) => {
           <FormattedMessage
             id="Home.Secondarycontent.bodytext"
             defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-            values = {{
-              citySiteLink: <ExternalLink to="https://austintexas.gov">austintexas.gov</ExternalLink>,
-              projectsSiteLink: <ExternalLink to="https://bit.ly/atx-digital-services">projects.austintexas.io</ExternalLink>
+            values={{
+              citySiteLink: (
+                <ExternalLink to="https://austintexas.gov">
+                  austintexas.gov
+                </ExternalLink>
+              ),
+              projectsSiteLink: (
+                <ExternalLink to="https://bit.ly/atx-digital-services">
+                  projects.austintexas.io
+                </ExternalLink>
+              ),
             }}
           />
         </p>
@@ -56,6 +64,6 @@ const Home = ({ topServices, image, intl }) => {
       </div>
     </div>
   );
-}
+};
 
 export default withRouteData(injectIntl(Home));

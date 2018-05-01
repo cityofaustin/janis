@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
-const TileGroupSet = ({ tileGroups, tag }) =>  {
+const TileGroupSet = ({ tileGroups, tag }) => {
   return (
     <div className="coa-TileGroupSet">
       <div className="row">
-      {
-        tileGroups.map(({ tiles, text, url, description }, index) => {
+        {tileGroups.map(({ tiles, text, url, description }, index) => {
           if (!tiles.length) return null;
           return (
             <TileGroup
@@ -21,12 +20,11 @@ const TileGroupSet = ({ tileGroups, tag }) =>  {
               hasBorder={true}
             />
           );
-        })
-      }
+        })}
       </div>
     </div>
   );
-}
+};
 
 TileGroupSet.propTypes = {
   tileGroups: PropTypes.array.isRequired,

@@ -30,7 +30,7 @@ const i18nMessages = defineMessages({
   step3button: {
     id: 'FormFeedback.step3.button',
     defaultMessage: 'Give more feedback',
-  }
+  },
 });
 
 class FormFeedback extends Component {
@@ -42,7 +42,7 @@ class FormFeedback extends Component {
       loading: false,
       emoji: null,
       feedback: null,
-      error: null
+      error: null,
     };
   }
 
@@ -51,58 +51,61 @@ class FormFeedback extends Component {
       formName: this.state.name,
       formStep: this.state.step,
       formAction: action,
-      optionalData: optionalData
+      optionalData: optionalData,
     });
   }
 
-  handleEmojiClick = (e) => {
-
-    const emojiText = this.props.intl.formatMessage(i18nEmojis[e.currentTarget.value]);
+  handleEmojiClick = e => {
+    const emojiText = this.props.intl.formatMessage(
+      i18nEmojis[e.currentTarget.value],
+    );
     const emojiValue = emojis[e.currentTarget.value].value;
 
     this.logEvent(`emoji-click-${emojiValue}`, {
-      'emojiValue': emojiValue,
-      'emojiText': emojiText
+      emojiValue: emojiValue,
+      emojiText: emojiText,
     });
 
     this.setState({
       step: 2,
-      emoji: e.currentTarget.value
+      emoji: e.currentTarget.value,
     });
-  }
+  };
 
-  handleTextAreaChange = (e) => {
+  handleTextAreaChange = e => {
     this.setState({
-      feedback: e.currentTarget.value
+      feedback: e.currentTarget.value,
     });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
-    const emojiText = this.props.intl.formatMessage(i18nEmojis[this.state.emoji]);
+    const emojiText = this.props.intl.formatMessage(
+      i18nEmojis[this.state.emoji],
+    );
     const emojiValue = emojis[this.state.emoji].value;
     const emoji = emojis[this.state.emoji].emoji;
 
     this.logEvent('send-feedback-click', {
-      'feedback': this.state.feedback,
-      'emojiValue': emojiValue,
-      'emojiText': emojiText
+      feedback: this.state.feedback,
+      emojiValue: emojiValue,
+      emojiText: emojiText,
     });
 
-    if(!this.state.feedback) {
+    if (!this.state.feedback) {
       this.setState({
         step: 3,
         emoji: null,
         feedback: null,
-        error: null
+        error: null,
       });
       return;
     }
 
     this.setState({
       loading: true,
-    })
+    });
 
     postFeedback({
       title: `Alpha Site Feedback ${emoji}`,
@@ -111,102 +114,125 @@ class FormFeedback extends Component {
         \n**Url:**\n${window.location.href}\n
         \n**Device Information:** \n\`\`\`\n${JSON.stringify(parser(), null, 2)}\n\`\`\`\n\n`,
     })
-    .then(({data}) => {
-      this.setState({
-        step: 3,
-        loading: false,
-        emoji: null,
-        feedback: null,
-        error: null
+      .then(({ data }) => {
+        this.setState({
+          step: 3,
+          loading: false,
+          emoji: null,
+          feedback: null,
+          error: null,
+        });
       })
-    })
-    .catch((e) => {
-      //TODO: better handle error messaging
-      this.logEvent('post-error', e.response);
-      console.log('ERROR:', e);
+      .catch(e => {
+        //TODO: better handle error messaging
+        this.logEvent('post-error', e.response);
+        console.log('ERROR:', e);
 
-      this.setState({
-        loading: false,
-        error: true
-      })
-    })
-  }
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      });
+  };
 
-  handleReset = (e) => {
+  handleReset = e => {
     this.logEvent('reset');
     this.setState({
       step: 1,
       loading: false,
       emoji: null,
       feedback: null,
-      error: null
-    })
-  }
+      error: null,
+    });
+  };
 
   render() {
-
-    const {intl} = this.props;
+    const { intl } = this.props;
 
     return (
       <form name={this.state.name} className="coa-FormFeedback">
+        {this.state.step === 1 && (
+          <fieldset
+            className="coa-FormFeedback__step1"
+            name={`${this.state.name}-emojis`}
+          >
+            <SectionHeader isSerif={true}>
+              {intl.formatMessage(i18nMessages.step1title)}
+            </SectionHeader>
+            <div className="coa-FormFeedback__content">
+              {Object.keys(emojis).map(emojiKey => (
+                <div key={emojiKey} className="coa-FormFeedback__emoji">
+                  <input
+                    id={`${this.state.name}-radio-${emojiKey}`}
+                    type="radio"
+                    className="coa-sr-only"
+                    name={`${this.state.name}-emojis`}
+                    value={emojiKey}
+                    onChange={this.handleEmojiClick}
+                  />
+                  <label htmlFor={`${this.state.name}-radio-${emojiKey}`}>
+                    <img
+                      className="d-block"
+                      src={emojis[emojiKey].image}
+                      alt={intl.formatMessage(i18nEmojis[emojiKey])}
+                    />
+                  </label>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        )}
 
-      { this.state.step === 1 && (
-        <fieldset className="coa-FormFeedback__step1"
-          name={`${this.state.name}-emojis`}
-        >
-          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step1title)}</SectionHeader>
-          <div className="coa-FormFeedback__content">
-          {
-            Object.keys(emojis).map(emojiKey =>
-              <div key={emojiKey} className="coa-FormFeedback__emoji">
-                <input id={`${this.state.name}-radio-${emojiKey}`}
-                  type="radio"
-                  className="coa-sr-only"
-                  name={`${this.state.name}-emojis`}
-                  value={emojiKey}
-                  onChange={this.handleEmojiClick}
-                />
-                <label htmlFor={`${this.state.name}-radio-${emojiKey}`}>
-                  <img className="d-block"
-                    src={emojis[emojiKey].image}
-                    alt={intl.formatMessage(i18nEmojis[emojiKey])} />
-                </label>
-              </div>
-            )
-          }
-          </div>
-        </fieldset>
-      )}
-
-      { this.state.step === 2 && (
-        <fieldset className="coa-FormFeedback__step2"
-          name={`${this.state.name}-textarea`}
-        >
-          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step2titleb)}</SectionHeader>
-            { this.state.error && (
-              <p className="coa-FormFeedback__error">Oh no, something went wrong! Please, try submitting your feedback again.</p>
+        {this.state.step === 2 && (
+          <fieldset
+            className="coa-FormFeedback__step2"
+            name={`${this.state.name}-textarea`}
+          >
+            <SectionHeader isSerif={true}>
+              {intl.formatMessage(i18nMessages.step2titleb)}
+            </SectionHeader>
+            {this.state.error && (
+              <p className="coa-FormFeedback__error">
+                Oh no, something went wrong! Please, try submitting your
+                feedback again.
+              </p>
             )}
             <div className="coa-FormFeedback__content">
-              <label htmlFor={`${this.state.name}-textarea`}
+              <label
+                htmlFor={`${this.state.name}-textarea`}
                 className="coa-sr-only"
-              >{intl.formatMessage(i18nMessages.step2titleb)}</label>
-              <textarea id={`${this.state.name}-textarea`}
+              >
+                {intl.formatMessage(i18nMessages.step2titleb)}
+              </label>
+              <textarea
+                id={`${this.state.name}-textarea`}
                 name={`${this.state.name}-textarea`}
-                onChange={this.handleTextAreaChange}></textarea>
-              <input type="submit" value={intl.formatMessage(i18nMessages.step2button)} onClick={this.handleSubmit} disabled={this.state.loading ? true : false} />
+                onChange={this.handleTextAreaChange}
+              />
+              <input
+                type="submit"
+                value={intl.formatMessage(i18nMessages.step2button)}
+                onClick={this.handleSubmit}
+                disabled={this.state.loading ? true : false}
+              />
             </div>
-        </fieldset>
-      )}
+          </fieldset>
+        )}
 
-      { this.state.step === 3 && (
-        <fieldset className="coa-FormFeedback__step3">
-          <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.step3title)}</SectionHeader>
-          <div className="coa-FormFeedback__content">
-            <input type="button" onClick={this.handleReset} value={intl.formatMessage(i18nMessages.step3button)} />
-          </div>
-        </fieldset>
-      )}
-
+        {this.state.step === 3 && (
+          <fieldset className="coa-FormFeedback__step3">
+            <SectionHeader isSerif={true}>
+              {intl.formatMessage(i18nMessages.step3title)}
+            </SectionHeader>
+            <div className="coa-FormFeedback__content">
+              <input
+                type="button"
+                onClick={this.handleReset}
+                value={intl.formatMessage(i18nMessages.step3button)}
+              />
+            </div>
+          </fieldset>
+        )}
       </form>
     );
   }

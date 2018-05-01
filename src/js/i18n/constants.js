@@ -1,23 +1,27 @@
 export const SUPPORTED_LANGUAGES = [
-  { // Default: English
+  {
+    // Default: English
     title: 'English',
     abbr: 'en',
     code: 'en',
     direction: 'ltr',
   },
-  { // Spanish
+  {
+    // Spanish
     title: 'Español',
     abbr: 'es',
     code: 'es',
     direction: 'ltr',
   },
-  { // Vietnamese
+  {
+    // Vietnamese
     title: 'Tiếng Việt',
     abbr: 'vi',
     code: 'vi',
     direction: 'ltr',
   },
-  { // Arabic
+  {
+    // Arabic
     title: 'العربية',
     abbr: 'ar',
     code: 'ar',
@@ -49,7 +53,7 @@ export const SUPPORTED_LANGUAGES = [
   //   abbr: 'my',
   //   code: 'my',
   // },
-]
+];
 
 export const SUPPORTED_LANG_CODES = SUPPORTED_LANGUAGES.map(lang => lang.code);
 
@@ -59,12 +63,13 @@ export const LANG_COOKIE_EXPIRES = 10 * 365; //days
 
 export const DEFAULT_LANG = 'en';
 
-export const i18nalizeLinkTo = (to, langCode=DEFAULT_LANG) => {
+export const i18nalizeLinkTo = (to, langCode = DEFAULT_LANG) => {
   let location;
   if (!to) return null;
-  if (typeof to !== "string") location = to.pathname;
+  if (typeof to !== 'string') location = to.pathname;
   else location = to;
   if (location.charAt(0) !== '/') location = location;
-  else location = langCode !== DEFAULT_LANG ? `/${langCode}${location}` : location;
+  else
+    location = langCode !== DEFAULT_LANG ? `/${langCode}${location}` : location;
   return location;
-}
+};

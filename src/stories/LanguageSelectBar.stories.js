@@ -5,15 +5,7 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
 storiesOf('LanguageSelectBar', module)
-  .add('english', () => (
-    <LanguageSelectBar lang="en" />
-  ))
-  .add('spanish', () => (
-    <LanguageSelectBar lang="es" />
-  ))
-  .add('arabic', () => (
-    <LanguageSelectBar lang="ar" />
-  ))
-  .add('vietnamese', () => (
-    <LanguageSelectBar lang="vi" />
-  ))
+  .add('english', () => <LanguageSelectBar lang="en" />)
+  .add('spanish', () => <LanguageSelectBar lang="es" />)
+  .add('arabic', () => <LanguageSelectBar lang="ar" />)
+  .add('vietnamese', () => <LanguageSelectBar lang="vi" />);
