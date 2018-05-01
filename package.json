@@ -54,13 +54,10 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "start-storybook -p 80",
     "build-storybook": "build-storybook"
-<<<<<<< Updated upstream
-=======
   },
   "prettier": {
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all"
->>>>>>> Stashed changes
   }
 }
