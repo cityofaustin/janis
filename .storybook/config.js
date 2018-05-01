@@ -4,7 +4,7 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 
-import '../src/css/coa.css';
+import 'css/coa.css';
 
 const IntlDecorator = storyFn => (
   <IntlProvider locale="en">{storyFn()}</IntlProvider>
