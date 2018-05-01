@@ -30,6 +30,7 @@
     "react-static": "^5.6.8",
     "react-universal-component": "^2.8.1",
     "storybook": "^1.0.0",
+    "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "babel-core": "^6.26.0",
     "babel-plugin-react-intl": "^2.4.0",
     "eslint-config-react-tools": "1.x.x",
+    "prettier": "1.12.1",
     "serve": "^6.1.0"
   },
   "scripts": {
@@ -56,5 +58,10 @@
       "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

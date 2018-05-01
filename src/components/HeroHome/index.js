@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HeroHome = ({imageUrl, imageTitle, preheader}) => (
+const HeroHome = ({ imageUrl, imageTitle, preheader }) => (
   <div
     className="coa-HeroHome"
     style={{
@@ -15,9 +15,7 @@ const HeroHome = ({imageUrl, imageTitle, preheader}) => (
     aria-label={imageTitle}
   >
     <div className="container-fluid wrapper">
-      <span className="coa-HeroHome-preheader">
-        {preheader}
-      </span>
+      <span className="coa-HeroHome-preheader">{preheader}</span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
     </div>
   </div>

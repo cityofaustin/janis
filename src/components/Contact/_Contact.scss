@@ -26,12 +26,15 @@
 
   svg {
     height: $coa-font-size-xsmall - .1rem;
+    width: $coa-font-size-xsmall - .1rem;
     @include media($coa-medium-screen) {
       height: $coa-font-size-small - .1rem;
+      width: $coa-font-size-small - .1rem;
     }
 
     @include media($coa-large-screen) {
       height: $coa-font-size-md-small - .1rem;
+      width: $coa-font-size-md-small - .1rem;
     }
   }
 

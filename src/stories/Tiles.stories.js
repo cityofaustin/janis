@@ -9,18 +9,12 @@ import { tileData, tileGroupData } from 'stories/static_data/tileData';
 storiesOf('Tiles', module)
   .add('TileGroupSet', () => (
     <div className="wrapper container-fluid">
-      <TileGroupSet
-        tileGroups={tileGroupData}
-        tag="Tile"
-      />
+      <TileGroupSet tileGroups={tileGroupData} tag="Tile" />
     </div>
   ))
   .add('TileGroup', () => (
     <div className="wrapper container-fluid">
-      <TileGroup
-        tiles={tileData}
-        tag="Tile"
-      />
+      <TileGroup tiles={tileData} tag="Tile" />
     </div>
   ))
   .add('Tile', () => (
@@ -31,4 +25,4 @@ storiesOf('Tiles', module)
         tag="Tile"
       />
     </div>
-  ))
+  ));

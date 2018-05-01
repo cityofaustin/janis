@@ -9,14 +9,18 @@
 
   svg {
     height: 14px;
+    width: 14px;
     @include media($coa-small-screen) {
       height: 20px;
+      width: 20px;
     }
     @include media($coa-medium-screen) {
       height: 30px;
+      width: 30px;
     }
     @include media($coa-large-screen) {
       height: 38px;
+      width: 38px;
     }
   }
 }

@@ -8,12 +8,14 @@
     text-align: center;
     svg {
       height: $coa-font-size-xsmall - .1rem;
+      width: $coa-font-size-xsmall - .1rem;
     }
     @include media($coa-medium-screen) {
       font-size: $coa-font-size-md-small;
       line-height: $coa-line-height-medium;
       svg{
         height: $coa-font-size-md-small - .1rem;
+        width: $coa-font-size-md-small - .1rem;
       }
     }
   }

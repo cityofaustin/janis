@@ -12,11 +12,21 @@
   }
   svg {
     height: $coa-font-size-small - .1rem;
+    width: $coa-font-size-small - .1rem;
     margin-left: $coa-spacing-xsmall;
     transition-duration: .3s;
     vertical-align: middle;
     @include media($coa-large-screen) {
-      vertical-align: unset;
+      vertical-align: baseline;
+    }
+  }
+}
+
+.coa-rtl {
+  .coa-MenuItem {
+    svg {
+      margin-left: 0;
+      margin-right: $coa-spacing-xsmall;
     }
   }
 }
@@ -43,6 +53,7 @@
   white-space: nowrap;
   svg {
     height: $coa-font-size-xsmall - .1rem; //based on parent element font-size
+    width: $coa-font-size-xsmall - .1rem; //based on parent element font-size
   }
 }
 

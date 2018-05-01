@@ -14,9 +14,10 @@ const i18nMessages = defineMessages({
   },
   servicePageDescription: {
     id: 'Services.description',
-    defaultMessage: 'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
-  }
-})
+    defaultMessage:
+      'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
+  },
+});
 
 const Services = ({ allServices, intl }) => {
   //TODO: clean data where sourced
@@ -34,7 +35,7 @@ const Services = ({ allServices, intl }) => {
         <TileGroup tiles={relatedLinks} tag="service" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default withRouteData(injectIntl(Services))
+export default withRouteData(injectIntl(Services));

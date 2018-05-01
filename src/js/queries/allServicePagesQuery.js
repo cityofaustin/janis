@@ -60,6 +60,6 @@ const allServicePagesQuery = `
       }
     }
   }
-`
+`;
 
 export default allServicePagesQuery;
