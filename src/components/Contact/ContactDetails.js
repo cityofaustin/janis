@@ -11,39 +11,37 @@ const i18nMessages = defineMessages({
   contactDetailsTitle: {
     id: 'ContactDetails.title',
     defaultMessage: 'Still have questions? Contact:',
-  }
+  },
 });
 
-const ContactDetails = ({ contact:{phone, email, location, hours}, intl }) => (
+const ContactDetails = ({
+  contact: { phone, email, location, hours },
+  intl,
+}) => (
   <div className="coa-ContactDetails">
-    <SectionHeader isSerif={true}>{intl.formatMessage(i18nMessages.contactDetailsTitle)}</SectionHeader>
-    { phone && (
-      <Phone
-        phone={phone}
-      />
-    )}
+    <SectionHeader isSerif={true}>
+      {intl.formatMessage(i18nMessages.contactDetailsTitle)}
+    </SectionHeader>
+    {phone && <Phone phone={phone} />}
 
-    { email && (
-      <Email email={email} />
-    )}
+    {email && <Email email={email} />}
 
-    { location && (
-      <Address location={location} />
-    )}
+    {location && <Address location={location} />}
 
-    { hours && (
-      <Hours hours={hours} />
-    )}
+    {hours && <Hours hours={hours} />}
   </div>
 );
 
 ContactDetails.propTypes = {
-  contact: PropTypes.shape(Object.assign({},
-    Phone.propTypes,
-    Email.propTypes,
-    Address.propTypes,
-    Hours.propTypes,
-  )).isRequired,
+  contact: PropTypes.shape(
+    Object.assign(
+      {},
+      Phone.propTypes,
+      Email.propTypes,
+      Address.propTypes,
+      Hours.propTypes,
+    ),
+  ).isRequired,
 };
 
 export default injectIntl(ContactDetails);

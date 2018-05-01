@@ -8,19 +8,18 @@ import Menu from 'components/PageSections/Menu';
 import MenuItem from 'components/PageSections/Menu/MenuItem';
 import navigationData from 'stories/static_data/navigationData';
 
-
 storiesOf('Menu', module)
   .add('Menu open', () => (
     <Menu
       isMenuOpen={true}
-      toggleMenu={linkTo('Menu' , 'Menu closed in mobile')}
+      toggleMenu={linkTo('Menu', 'Menu closed in mobile')}
       navigation={navigationData}
     />
   ))
   .add('Menu closed in mobile', () => (
     <Menu
       isMenuOpen={false}
-      toggleMenu={linkTo('Menu' , 'Menu open')}
+      toggleMenu={linkTo('Menu', 'Menu open')}
       navigation={navigationData}
     />
   ))
@@ -45,4 +44,4 @@ storiesOf('Menu', module)
         handleSubmenuToggle={linkTo('Menu', 'MenuItem closed')}
       />
     </ul>
-  ))
+  ));

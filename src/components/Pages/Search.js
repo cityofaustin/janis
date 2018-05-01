@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class Search extends Component {
-
   render() {
     return (
       <section className="wrapper wrapper--sm">
@@ -10,7 +9,6 @@ class Search extends Component {
       </section>
     );
   }
-
 }
 
 export default Search;

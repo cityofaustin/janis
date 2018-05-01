@@ -4,13 +4,13 @@ import { checkA11y } from '@storybook/addon-a11y';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 
-import 'css/coa.css'
+import 'css/coa.css';
 
-const IntlDecorator = (storyFn) => (
+const IntlDecorator = storyFn => (
   <IntlProvider locale="en">{storyFn()}</IntlProvider>
 );
 
-const RouterDecorator = (storyFn) => (
+const RouterDecorator = storyFn => (
   <MemoryRouter initialEntries={['/']}>{storyFn()}</MemoryRouter>
 );
 
@@ -21,7 +21,7 @@ addDecorator(RouterDecorator);
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/stories', true, /.stories.js$/);
 function loadStories() {
-  req.keys().forEach((filename) => req(filename));
+  req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);

@@ -11,9 +11,9 @@ const Departments = ({ allDepartments }) => {
 
   return (
     <div className="wrapper container-fluid">
-      <PageHeader title={"All Departments"} />
+      <PageHeader title={'All Departments'} />
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(Departments);

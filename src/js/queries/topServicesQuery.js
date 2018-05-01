@@ -14,6 +14,6 @@ const topServicesQuery = `
       }
     }
   }
-`
+`;
 
 export default topServicesQuery;

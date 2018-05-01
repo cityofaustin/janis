@@ -8,7 +8,9 @@ const Address = ({ location }) => (
     <div>
       <span>{location.name}</span>
       <span>{location.street}</span>
-      <span>{location.city}, {location.state} {location.zip}</span>
+      <span>
+        {location.city}, {location.state} {location.zip}
+      </span>
     </div>
   </div>
 );

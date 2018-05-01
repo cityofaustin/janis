@@ -11,11 +11,11 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import jsonFileData from '__tmpdata/pages';
 
 const Department = ({ department }) => {
-  const title = get(department, "name", null);
-  const body = get(department, "mission", null);
-  const contacts = get(department, "contacts", null);
-  const image = get(department, "image", null);
-  const relatedLinks = get(jsonFileData, "departmentpage.projectsRelated", []);
+  const title = get(department, 'name', null);
+  const body = get(department, 'mission', null);
+  const contacts = get(department, 'contacts', null);
+  const image = get(department, 'image', null);
+  const relatedLinks = get(jsonFileData, 'departmentpage.projectsRelated', []);
 
   //TODO: clean data where sourced
   const contact = cleanContacts(contacts)[0];
@@ -28,11 +28,10 @@ const Department = ({ department }) => {
         <SectionHeader hasHighlight={true}>{title}</SectionHeader>
         <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
         <p>{body}</p>
-        { contact && <ContactDetails contact={contact} /> }
+        {contact && <ContactDetails contact={contact} />}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(Department);

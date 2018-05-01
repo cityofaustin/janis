@@ -5,12 +5,12 @@ const PageBanner = ({ imageUrl, imageTitle }) => (
   <div
     className="coa-PageBanner"
     style={{
-      backgroundImage: `url(${imageUrl})`
+      backgroundImage: `url(${imageUrl})`,
     }}
     role="img"
     aria-label={imageTitle}
   />
-)
+);
 
 PageBanner.propTypes = {
   imageUrl: PropTypes.string.isRequired,
