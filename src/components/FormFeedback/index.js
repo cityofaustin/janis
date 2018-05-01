@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
+import parser from 'ua-parser-js';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
 import { emojis, i18nEmojis } from 'js/helpers/emojis';
@@ -109,7 +110,9 @@ class FormFeedback extends Component {
     postFeedback({
       title: `Alpha Site Feedback ${emoji}`,
       description: `**Emoji rating (scale of -2 to 2):**\n${emojiValue}: ${emojiText}\n
-        \n**Text feedback:**\n${this.state.feedback}\n\n`,
+        \n**Text feedback:**\n${this.state.feedback}\n
+        \n**Url:**\n${window.location.href}\n
+        \n**Device Information:** \n\`\`\`\n${JSON.stringify(parser(), null, 2)}\n\`\`\`\n\n`,
     })
       .then(({ data }) => {
         this.setState({

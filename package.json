@@ -29,6 +29,7 @@
     "react-static": "^5.6.8",
     "react-universal-component": "^2.8.1",
     "storybook": "^1.0.0",
+    "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"
   },
   "devDependencies": {

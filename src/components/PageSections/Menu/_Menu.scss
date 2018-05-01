@@ -51,6 +51,7 @@
     margin: 0 0 $coa-spacing-medium 0;
     svg {
       height: $coa-font-size-xsmall - .1rem;
+      width: $coa-font-size-xsmall - .1rem;
     }
   }
 }
@@ -61,6 +62,7 @@
   svg {
     margin: $coa-spacing-small;
     height: $coa-menu-closebtn-height;
+    width: $coa-menu-closebtn-height;
   }
 }
 

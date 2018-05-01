@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const postFeedback = data => {
-  const { title, description, email } = data;
+  const { title, description } = data;
 
   return axios
     .create({
