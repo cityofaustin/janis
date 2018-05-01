@@ -8352,9 +8352,9 @@ react-split-pane@^0.1.74:
     prop-types "^15.5.10"
     react-style-proptype "^3.0.0"
 
-react-static@^5.6.8:
-  version "5.8.2"
-  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.8.2.tgz#c1202ddc31e08ea6819b5ba643cf2a4c1a3203d0"
+react-static@5.8.5:
+  version "5.8.5"
+  resolved "https://registry.yarnpkg.com/react-static/-/react-static-5.8.5.tgz#acefacb45152fc252b1bdabf1a5ba9ea3b8bf18f"
   dependencies:
     "@types/react" "^16.0.18"
     "@types/react-helmet" "^5.0.3"
