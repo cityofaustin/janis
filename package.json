@@ -41,6 +41,7 @@
     "@storybook/react": "^3.3.15",
     "babel-core": "^6.26.0",
     "babel-plugin-react-intl": "^2.4.0",
+    "babel-plugin-react-intl-auto": "^1.1.0",
     "eslint-config-react-tools": "1.x.x",
     "prettier": "1.12.1",
     "serve": "^6.1.0"
@@ -48,7 +49,6 @@
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
-    "build-langs": "babel intl.buildlangs.js | node",
     "start-js": "react-static start",
     "build-js": "react-static build",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -56,7 +56,7 @@
     "storybook": "start-storybook -p 80",
     "build-storybook": "build-storybook"
   },
-    "prettier": {
+  "prettier": {
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all"
