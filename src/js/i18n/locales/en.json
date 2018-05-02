@@ -1,4 +1,6 @@
 {
+  "calltoaction.enteraddress": "Type your street address in the box below",
+  "calltoaction.whatdoidowith": "Check the \"What do I do with\" tool below to find out what items are accepted.",
   "ApplicationBlock.recollect.calendar": "Type your street address in the box below",
   "ApplicationBlock.recollect.wizard": "Check the \"What do I do with\" tool below to find out what items are accepted.",
   "ContactDetails.title": "Still have questions? Contact:",

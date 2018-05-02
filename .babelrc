@@ -5,6 +5,7 @@
       "react-intl-auto", {
         "removePrefix": true,
         "filebase": false,
+        "includeExportName": true,
         "extractComments": true
       },
       "react-intl", {

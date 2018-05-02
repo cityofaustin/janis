@@ -1,6 +1,6 @@
 {
-  "ApplicationBlock.recollect.calendar": "Đánh máy địa chỉ của quý vị vào ô bên dưới",
-  "ApplicationBlock.recollect.wizard": "Kiểm tra bằng công cụ \"What do I do with\" dưới đây để xác định những loại nào được chấp nhận",
+  "calltoaction.enteraddress": "Đánh máy địa chỉ của quý vị vào ô bên dưới",
+  "calltoaction.whatdoidowith": "Kiểm tra bằng công cụ \"What do I do with\" dưới đây để xác định những loại nào được chấp nhận",
   "ContactDetails.title": "Vẫn còn có thắc mắc? Xin liên lạc:",
   "Hours.weekday.sunday": "Chủ nhật",
   "Hours.weekday.monday": "Thứ Hai",

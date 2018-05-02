@@ -1,6 +1,6 @@
 {
-  "ApplicationBlock.recollect.calendar": "Escriba su dirección en la casilla abajo",
-  "ApplicationBlock.recollect.wizard": "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
+  "calltoaction.enteraddress": "Escriba su dirección en la casilla abajo",
+  "calltoaction.whatdoidowith": "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
   "ContactDetails.title": "¿Aún tiene preguntas? Contacte a:",
   "Hours.weekday.sunday": "Domingo",
   "Hours.weekday.monday": "Lunes",
