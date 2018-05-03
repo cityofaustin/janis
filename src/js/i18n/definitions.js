@@ -19,3 +19,7 @@ export const contact = defineMessages({
   closed: 'closed',
   phone_ttdtty: 'TDD/TTY',
 });
+
+export const aria = defineMessages({
+  open_in_new_window: 'Opens in new window',
+});

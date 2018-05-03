@@ -1,13 +1,10 @@
 import React from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+
+import { aria } from 'js/i18n/definitions';
+
 import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
-const i18nMessages = defineMessages({
-  externalLinkAriaLabel: {
-    id: 'ExternalLink.arialabel',
-    defaultMessage: 'Opens in new window',
-  },
-});
 
 const ExternalLink = ({ to, noIcon, children, intl }) => (
   <a
@@ -15,7 +12,7 @@ const ExternalLink = ({ to, noIcon, children, intl }) => (
     className="coa-ExternalLink"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={intl.formatMessage(i18nMessages.externalLinkAriaLabel)}
+    aria-label={intl.formatMessage(aria.open_in_new_window)}
   >
     {children}
     {!noIcon && <ExternalLinkSVG />}
