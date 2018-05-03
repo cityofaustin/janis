@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedTime } from 'react-intl';
-import { values, findIndex } from 'lodash';
+import { values, findIndex, capitalize } from 'lodash';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date, contact } from 'js/i18n/definitions';
@@ -47,7 +47,7 @@ class Hours extends Component {
                 const hourIndex = findIndex(hours, {dayOfWeekNumeric: weekday.numeric})
                 return (
                   <tr key={weekday.name}>
-                    <th scope="row">{intl.formatMessage(date['weekday_' + weekday.name])}</th>
+                    <th scope="row">{intl.formatMessage(date['weekday' + capitalize(weekday.name)])}</th>
 
                     { hourIndex > -1 && (
                       <td>

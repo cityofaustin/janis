@@ -1,7 +1,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
-import { call_to_action } from 'js/i18n/definitions';
+import { callToAction } from 'js/i18n/definitions';
 
 import Recollect from 'components/Recollect';
 import ContactMap from 'components/Contact/ContactMap';
@@ -14,18 +14,18 @@ const ApplicationBlock = ({ content, intl }) => {
     case 'collection_schedule_block':
       app = <Recollect options={{ name: 'calendar' }} />;
       title = intl.formatMessage(
-        call_to_action.enter_address,
+        callToAction.enterAddress,
       );
       id = 'HashLink-Recollect';
       break;
     case 'what_do_i_do_with_block':
       app = <Recollect options={{ name: 'wizard' }} />;
-      title = intl.formatMessage(call_to_action.what_do_i_do_with);
+      title = intl.formatMessage(callToAction.whatDoIDoWith);
       id = 'HashLink-Recollect';
       break;
     case 'recollect_block':
       app = <Recollect options={{ page: 'tabbed_widget', name: 'wizard' }} />;
-      title = intl.formatMessage(call_to_action.what_do_i_do_with);
+      title = intl.formatMessage(callToAction.whatDoIDoWith);
       id = 'HashLink-Recollect';
       break;
     case 'map_block':

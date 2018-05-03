@@ -12,7 +12,7 @@ const ExternalLink = ({ to, noIcon, children, intl }) => (
     className="coa-ExternalLink"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={intl.formatMessage(aria.open_in_new_window)}
+    aria-label={intl.formatMessage(aria.openInNewWindow)}
   >
     {children}
     {!noIcon && <ExternalLinkSVG />}
