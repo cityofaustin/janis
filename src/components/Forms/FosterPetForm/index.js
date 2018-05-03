@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import Form from 'react-jsonschema-form';
 
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import Email from 'components/Contact/Email';
 import Phone from 'components/Contact/Phone';
-
-import Form from 'react-jsonschema-form';
+import Progress from 'components/Progress';
 
 const schema = {
   title: 'Tell us how to contact you',
@@ -75,34 +75,47 @@ const uiSchema = {
 
 const log = type => console.log.bind(console, type);
 
-const FosterPetForm = ({}) => {
-  return (
-    <div className="wrapper container-fluid">
-      <div className="row">
-        <PageHeader
-          title="Austin Animal Center Foster Care Application"
-          hasBorder={true}
-          description="test form using react-jsonschema-form"
-        />
-        <div className="col-md-8">
-          <Form
-            schema={schema}
-            uiSchema={uiSchema}
-            onChange={log('changed')}
-            onSubmit={log('submitted')}
-            onError={log('errors')}
+class FosterPetForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      step: 1,
+      formData: {},
+    };
+  }
+  render() {
+    return (
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <PageHeader
+            title="Austin Animal Center Foster Care Application"
+            hasBorder={true}
+            description="test form using react-jsonschema-form"
           />
-        </div>
-        <div className="col-md-4">
-          <SectionHeader>Contact</SectionHeader>
-          <h3>Foster Care Coordinators</h3>
-          <Email email="animal.foster@austintexas.gov" />
-          <Phone phone={{ default: '512-978-0541' }} />
+          <div className="col-md-8">
+            <Progress x={1} y={7} />
+            <Form
+              schema={schema}
+              uiSchema={uiSchema}
+              onChange={log('changed')}
+              onSubmit={log('submitted')}
+              onError={log('errors')}
+            >
+              <button type="submit">Next</button>
+              <button type="button">Back</button>
+            </Form>
+          </div>
+          <div className="col-md-4">
+            <SectionHeader>Contact</SectionHeader>
+            <h3>Foster Care Coordinators</h3>
+            <Email email="animal.foster@austintexas.gov" />
+            <Phone phone={{ default: '512-978-0541' }} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 FosterPetForm.propTypes = {};
 

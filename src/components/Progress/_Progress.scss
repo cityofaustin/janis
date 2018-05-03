@@ -1,0 +1,19 @@
+.Progress {
+  display: flex;
+  height: 2rem;
+  overflow: hidden;
+  background-color: $coa-color-gray-lighter;
+  border-radius: 0.25rem;
+}
+
+.Progress_bar {
+  border-right-style: solid;
+  border-right-color: $coa-color-white;
+  display: -webkit-box;
+  flex-direction: column;
+  justify-content: center;
+  color: $coa-color-white;
+  text-align: center;
+  background-color: $coa-color-blue;
+  transition: width 0.6s ease;
+}
