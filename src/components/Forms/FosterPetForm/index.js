@@ -10,78 +10,30 @@ import Email from 'components/Contact/Email';
 import Phone from 'components/Contact/Phone';
 import Progress from 'components/Progress';
 
-const schema = {
-  title: 'Tell us how to contact you',
-  type: 'object',
-  required: ['firstName', 'lastName'],
-  properties: {
-    firstName: {
-      type: 'string',
-      title: 'First name',
-    },
-    lastName: {
-      type: 'string',
-      title: 'Last name',
-    },
-    email: {
-      type: 'string',
-      title: 'Email',
-      format: 'email',
-    },
-    telephone: {
-      type: 'integer',
-      title: 'Phone Number',
-      minLength: 10,
-    },
-    address1: {
-      type: 'string',
-      title: 'Street Address 1',
-    },
-    address2: {
-      type: 'string',
-      title: 'Street Address 2',
-    },
-    city: {
-      type: 'string',
-      title: 'City',
-    },
-    state: {
-      type: 'string',
-      title: 'State',
-    },
-    zip: {
-      type: 'string',
-      title: 'ZIP',
-    },
-  },
-};
-
-const uiSchema = {
-  firstName: {
-    'ui:autofocus': true,
-    'ui:emptyValue': '',
-  },
-  email: {
-    'ui:widget': 'email',
-    'ui:title': 'Email',
-  },
-  telephone: {
-    'ui:options': {
-      inputType: 'tel',
-    },
-    'ui:help': 'Enter a 10 digit phone number',
-  },
-};
+import { multiStepSchema } from 'components/Forms/FosterPetForm/schema';
 
 const log = type => console.log.bind(console, type);
 
 class FosterPetForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      step: 1,
-      formData: {},
-    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    this.state = { step: 1 };
+  }
+  handleSubmit() {
+    log('submitted');
+    let nextStep = Number(this.state.step) + 1;
+    this.setState({ step: nextStep });
+    return;
+  }
+  handleBack() {
+    log('back');
+    let previousStep = Number(this.state.step) - 1;
+    this.setState({
+      step: previousStep,
+    });
+    return;
   }
   render() {
     return (
@@ -93,16 +45,18 @@ class FosterPetForm extends Component {
             description="test form using react-jsonschema-form"
           />
           <div className="col-md-8">
-            <Progress x={1} y={7} />
+            <Progress x={this.state.step} y={7} />
             <Form
-              schema={schema}
-              uiSchema={uiSchema}
+              schema={multiStepSchema[this.state.step].schema}
+              uiSchema={multiStepSchema[this.state.step].ui}
               onChange={log('changed')}
-              onSubmit={log('submitted')}
+              onSubmit={this.handleSubmit}
               onError={log('errors')}
             >
               <button type="submit">Next</button>
-              <button type="button">Back</button>
+              <button type="button" onClick={this.handleBack}>
+                Back
+              </button>
             </Form>
           </div>
           <div className="col-md-4">
