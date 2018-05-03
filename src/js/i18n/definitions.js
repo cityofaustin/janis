@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl';
 
-export const aria = defineMessages({
+export const navigation = defineMessages({
+  home: 'Home',
   openInNewWindow: 'Opens in new window',
 });
 
