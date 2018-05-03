@@ -16,5 +16,6 @@ export const date = defineMessages({
 });
 
 export const contact = defineMessages({
-  closed: 'closed'
-})
+  closed: 'closed',
+  phone_ttdtty: 'TDD/TTY',
+});
