@@ -5,10 +5,10 @@ const percentComplete = (x, y) => x / y * 100;
 
 const Progress = ({ x, y }) => (
   <div>
-    <span className="coa-sr-only coa-sr-only-focusable" tabindex="0">
+    <span className="coa-sr-only coa-sr-only-focusable" tabIndex="0">
       You are on step {x} of {y}.
     </span>
-    <div class="Progress">
+    <div className="Progress">
       <div
         className="Progress_bar"
         role="progressbar"
