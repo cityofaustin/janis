@@ -16,13 +16,13 @@ export const contact = defineMessages({
 
 
 export const date = defineMessages({
-  weekdaySunday: 'sunday',
-  weekdayMonday: 'monday',
-  weekdayTuesday: 'tuesday',
-  weekdayWednesday: 'wednesday',
-  weekdayThursday: 'thursday',
-  weekdayFriday: 'friday',
-  weekdaySaturday: 'saturday',
+  weekdaySunday: 'Sunday',
+  weekdayMonday: 'Monday',
+  weekdayTuesday: 'Tuesday',
+  weekdayWednesday: 'Wednesday',
+  weekdayThursday: 'Thursday',
+  weekdayFriday: 'Friday',
+  weekdaySaturday: 'Saturday',
 });
 
 export const emoji = defineMessages({
