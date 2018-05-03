@@ -16,7 +16,6 @@ export const contact = defineMessages({
   phoneTTD: 'TDD/TTY',
 });
 
-
 export const date = defineMessages({
   weekdaySunday: 'Sunday',
   weekdayMonday: 'Monday',
@@ -47,3 +46,7 @@ export const form = defineMessages({
   loading: 'Loading...',
   error: 'Oh no, something went wrong! Please, try submitting your information again.',
 });
+
+export const misc = defineMessages({
+  steps: 'Steps',
+})
