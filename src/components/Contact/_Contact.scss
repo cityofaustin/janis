@@ -66,6 +66,9 @@
 }
 
 .coa-ContactHours {
+  th {
+    text-transform: capitalize;
+  }
   td:last-of-type {
     text-align: right;
   }
