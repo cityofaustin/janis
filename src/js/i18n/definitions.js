@@ -43,5 +43,6 @@ export const feedback = defineMessages({
 });
 
 export const form = defineMessages({
+  loading: 'Loading...',
   error: 'Oh no, something went wrong! Please, try submitting your information again.',
-})
+});
