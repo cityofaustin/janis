@@ -1,7 +1,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
-import { navigation } from 'js/i18n/definitions';
+import { navigation as i18n } from 'js/i18n/definitions';
 
 import I18nLink from 'components/I18nLinks/I18nLink';
 import PropTypes from 'prop-types';
@@ -24,7 +24,7 @@ const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => (
     <div className="coa-PageBreadcrumbs">
       <Breadcrumb
         breadcrumb={{
-          text: intl.formatMessage(navigation.home),
+          text: intl.formatMessage(i18n.home),
           slug: '',
         }}
         classNameSuffix="home"

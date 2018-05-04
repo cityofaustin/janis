@@ -2,13 +2,13 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import { misc } from 'js/i18n/definitions';
+import { misc as i18n } from 'js/i18n/definitions';
 import SectionHeader from 'components/SectionHeader';
 
 const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
   <div className="coa-Steps">
     <SectionHeader>
-      {intl.formatMessage(misc.steps)}
+      {intl.formatMessage(i18n.steps)}
     </SectionHeader>
     <div
       className="coa-Steps__list"

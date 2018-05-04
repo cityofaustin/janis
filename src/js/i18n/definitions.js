@@ -34,17 +34,17 @@ export const emoji = defineMessages({
   'slightlySmiling': 'Slightly Smiling',
 });
 
-export const feedback = defineMessages({
+export const form = defineMessages({
+  error: 'Oh no, something went wrong! Please, try submitting your information again.',
+  loading: 'Loading...',
+});
+
+export const formfeedback = defineMessages({
   giveMore: 'Give more feedback',
   howSatisfied: 'How satisfied are you with this page?',
   improvePage: 'How can we make this page better?',
   send: 'Send feedback',
   thankYouForSharing: 'Thank you for sharing feedback!',
-});
-
-export const form = defineMessages({
-  error: 'Oh no, something went wrong! Please, try submitting your information again.',
-  loading: 'Loading...',
 });
 
 export const misc = defineMessages({
