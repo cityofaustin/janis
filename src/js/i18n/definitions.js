@@ -1,10 +1,5 @@
 import { defineMessages } from 'react-intl';
 
-export const navigation = defineMessages({
-  home: 'Home',
-  openInNewWindow: 'Opens in new window',
-});
-
 export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',
   whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
@@ -48,7 +43,15 @@ export const formfeedback = defineMessages({
 });
 
 export const misc = defineMessages({
+  airport: 'airport',
   citySeal: 'City of Austin Seal',
   steps: 'Steps',
   workInProgress: 'Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
 });
+
+export const navigation = defineMessages({
+  home: 'Home',
+  menu: 'Menu',
+  openInNewWindow: 'Opens in new window',
+});
+

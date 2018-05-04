@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+
+import { misc as i18nmisc, navigation as i18nnavigation } from 'js/i18n/definitions';
 
 import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18nLinks/I18nLink';
 import ExternalLink from 'components/ExternalLink';
-
-const i18nMessages = defineMessages({
-  headerMenuButton: {
-    id: 'Header.Menu.button',
-    defaultMessage: 'Menu',
-  },
-  headerAirportText: {
-    id: 'Header.Airport.text',
-    defaultMessage: 'AIRPORT',
-  },
-});
 
 class Header extends Component {
   constructor(props) {
@@ -56,7 +47,7 @@ class Header extends Component {
                 className="coa-Header__menu-toggle d-lg-none"
                 ref="menu"
               >
-                {intl.formatMessage(i18nMessages.headerMenuButton)}
+                {intl.formatMessage(i18nnavigation.menu)}
               </button>
               <span className="coa-text-spacer--vertical d-lg-none" />
               <I18nLink className="coa-Header__logo" to="/">
@@ -65,7 +56,7 @@ class Header extends Component {
             </div>
             <div className="coa-Header__right-controls">
               <ExternalLink to="http://www.austintexas.gov/airport">
-                {intl.formatMessage(i18nMessages.headerAirportText)}
+                {intl.formatMessage(i18nmisc.airport)}
               </ExternalLink>
               <span className="coa-text-spacer--vertical" />
               <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
