@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Routes from 'react-static-routes';
 import locale from 'browser-locale';
 import Cookies from 'js-cookie';
@@ -133,6 +133,7 @@ class LanguageWrapper extends Component {
         locale={lang}
         messages={messages}
         defaultLocale={DEFAULT_LANG}
+        textComponent={Fragment}
         key={lang}
       >
         <div
