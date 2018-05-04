@@ -68,7 +68,7 @@ This project uses [React-Static](https://github.com/nozzle/react-static) as a ba
 
 This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
 
-* the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method to render translations of trusted content which include HTML (but do not include React components).
+* the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method, alongside the dangerouslySetInnerHTML property on React components, to render translations of **trusted content** which include HTML. Note this method will not render React Components and that the corresponding FormattedMessage Component will return NOT unescaped HTML.
 ex. The 311 Section Header includes HTML links.
 
 * the FormattedMessage react-intl component will parse React components from values. We can utilize this method to render translation which have React components as parameters.

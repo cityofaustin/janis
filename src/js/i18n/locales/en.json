@@ -1,6 +1,7 @@
 {
-  "calltoaction.enteraddress": "Type your street address in the box below",
-  "calltoaction.whatdoidowith": "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "callToAction.enteraddress": "Type your street address in the box below",
+  "callToAction.whatdoidowith": "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "callToAction.contact311": "<a href=\"tel:512-974-2000\">Call 311</a> or <a href=\"http://311.austintexas.gov/reports/list_services\">Submit an Online Request</a>",
   "ApplicationBlock.recollect.calendar": "Type your street address in the box below",
   "ApplicationBlock.recollect.wizard": "Check the \"What do I do with\" tool below to find out what items are accepted.",
   "ContactDetails.title": "Still have questions? Contact:",

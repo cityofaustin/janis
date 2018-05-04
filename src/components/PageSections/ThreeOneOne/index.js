@@ -1,41 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+
+import { misc as i18n1, callToAction as i18n2 } from 'js/i18n/definitions';
 
 import ListLink from 'components/ListLink';
 import SectionHeader from 'components/SectionHeader';
-
-const i18nMessages = defineMessages({
-  sectionTitleCall: {
-    id: 'ThreeOneOne.sectiontitle.call',
-    defaultMessage: 'Call 311',
-  },
-  sectionTitleOr: {
-    id: 'ThreeOneOne.sectiontitle.or',
-    defaultMessage: 'or',
-  },
-  sectionTitleSiteRequest: {
-    id: 'ThreeOneOne.sectiontitle.siterequest',
-    defaultMessage: 'Submit an Online Request',
-  },
-  listLinkAllServices: {
-    id: 'ThreeOneOne.listlink.allservices',
-    defaultMessage: 'All 311 Services',
-  },
-});
 
 const ThreeOneOne = ({ threeoneone, intl }) => (
   <div className="coa-ThreeOneOne">
     <div className="container-fluid wrapper">
       <div className="wrapper wrapper--sm">
         <SectionHeader>
-          <a href="tel:512-974-2000">
-            {intl.formatMessage(i18nMessages.sectionTitleCall)}
-          </a>{' '}
-          {intl.formatMessage(i18nMessages.sectionTitleOr)}{' '}
-          <a href="http://311.austintexas.gov/reports/list_services">
-            {intl.formatMessage(i18nMessages.sectionTitleSiteRequest)}
-          </a>
+          <div dangerouslySetInnerHTML={{__html:intl.formatMessage(i18n2.contact311)}} />
         </SectionHeader>
       </div>
       <div className="row">
@@ -50,7 +27,7 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
         <div className="col-xs-12 col-md-6 col-lg-4">
           <ListLink
             url="http://311.austintexas.gov/reports/list_services"
-            text={intl.formatMessage(i18nMessages.listLinkAllServices)}
+            text={intl.formatMessage(i18n1.all311)}
           />
         </div>
       </div>
