@@ -28,25 +28,27 @@ export const date = defineMessages({
 
 export const emoji = defineMessages({
   'disappointed': 'Disappointed',
-  'sad': 'Sad',
-  'neutral': 'Neutral',
-  'slightlySmiling': 'Slightly Smiling',
   'grinning': 'Grinning',
+  'neutral': 'Neutral',
+  'sad': 'Sad',
+  'slightlySmiling': 'Slightly Smiling',
 });
 
 export const feedback = defineMessages({
+  giveMore: 'Give more feedback',
   howSatisfied: 'How satisfied are you with this page?',
   improvePage: 'How can we make this page better?',
   send: 'Send feedback',
   thankYouForSharing: 'Thank you for sharing feedback!',
-  giveMore: 'Give more feedback',
 });
 
 export const form = defineMessages({
-  loading: 'Loading...',
   error: 'Oh no, something went wrong! Please, try submitting your information again.',
+  loading: 'Loading...',
 });
 
 export const misc = defineMessages({
+  citySeal: 'City of Austin Seal',
   steps: 'Steps',
-})
+  workInProgress: 'Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
+});

@@ -1,5 +1,7 @@
 import React from 'react';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+
+import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne';
@@ -8,13 +10,6 @@ import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
 import citySealImg from 'images/coa_seal_white.png';
-
-const i18nMessages = defineMessages({
-  sealAltText: {
-    id: 'Footer.sealAltText',
-    defaultMessage: 'City of Austin Seal',
-  },
-});
 
 const Footer = ({ threeoneone, intl }) => (
   <footer className="coa-Footer">
@@ -25,15 +20,14 @@ const Footer = ({ threeoneone, intl }) => (
           <div className="coa-Footer__city-seal-wrapper">
             <img
               src={citySealImg}
-              alt={intl.formatMessage(i18nMessages.sealAltText)}
+              alt={intl.formatMessage(i18n.citySeal)}
             />
           </div>
         </div>
         <div className="col-xs-12 col-md-4">
           <p className="coa-Footer__body-text">
             <FormattedMessage
-              id="Footer.bodytext"
-              defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+              id="misc.workInProgress"
               values={{
                 citySiteLink: (
                   <ExternalLink to="http://austintexas.gov">
