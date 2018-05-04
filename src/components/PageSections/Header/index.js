@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 
-import { misc as i18nmisc, navigation as i18nnavigation } from 'js/i18n/definitions';
+import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
 import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18nLinks/I18nLink';
@@ -47,7 +47,7 @@ class Header extends Component {
                 className="coa-Header__menu-toggle d-lg-none"
                 ref="menu"
               >
-                {intl.formatMessage(i18nnavigation.menu)}
+                {intl.formatMessage(i18n2.menu)}
               </button>
               <span className="coa-text-spacer--vertical d-lg-none" />
               <I18nLink className="coa-Header__logo" to="/">
@@ -56,7 +56,7 @@ class Header extends Component {
             </div>
             <div className="coa-Header__right-controls">
               <ExternalLink to="http://www.austintexas.gov/airport">
-                {intl.formatMessage(i18nmisc.airport)}
+                {intl.formatMessage(i18n1.airport)}
               </ExternalLink>
               <span className="coa-text-spacer--vertical" />
               <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>

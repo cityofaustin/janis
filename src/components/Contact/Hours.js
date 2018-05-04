@@ -4,7 +4,7 @@ import { injectIntl, FormattedTime } from 'react-intl';
 import { values, findIndex, capitalize } from 'lodash';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
-import { date as i18ndate, contact as i18ncontact } from 'js/i18n/definitions';
+import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
 
 import ClockSVG from 'components/SVGs/ClockO';
 
@@ -47,7 +47,7 @@ class Hours extends Component {
                 const hourIndex = findIndex(hours, {dayOfWeekNumeric: weekday.numeric})
                 return (
                   <tr key={weekday.name}>
-                    <th scope="row">{intl.formatMessage(i18ndate['weekday' + capitalize(weekday.name)])}</th>
+                    <th scope="row">{intl.formatMessage(i18n1['weekday' + capitalize(weekday.name)])}</th>
 
                     { hourIndex > -1 && (
                       <td>
@@ -57,7 +57,7 @@ class Hours extends Component {
                       </td>
                     )}
                     { hourIndex === -1 && (
-                      <td>{intl.formatMessage(i18ncontact.closed)}</td>
+                      <td>{intl.formatMessage(i18n2.closed)}</td>
                     )}
                   </tr>
                 )

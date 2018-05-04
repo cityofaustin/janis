@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
 
-import { form as i18nform, formfeedback as i18nfeedback, emoji as i18nemoji } from 'js/i18n/definitions';
+import { form as i18n1, formfeedback as i18n2, emoji as i18n3 } from 'js/i18n/definitions';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
 import { emojis } from 'js/helpers/emojis';
@@ -32,7 +32,7 @@ class FormFeedback extends Component {
 
   handleEmojiClick = e => {
     const emojiText = this.props.intl.formatMessage(
-      i18nemoji[e.currentTarget.value],
+      i18n3[e.currentTarget.value],
     );
     const emojiValue = emojis[e.currentTarget.value].value;
 
@@ -57,7 +57,7 @@ class FormFeedback extends Component {
     e.preventDefault();
 
     const emojiText = this.props.intl.formatMessage(
-      i18nemoji[this.state.emoji],
+      i18n3[this.state.emoji],
     );
     const emojiValue = emojis[this.state.emoji].value;
     const emoji = emojis[this.state.emoji].emoji;
@@ -132,7 +132,7 @@ class FormFeedback extends Component {
             name={`${this.state.name}-emojis`}
           >
             <SectionHeader isSerif={true}>
-              {intl.formatMessage(i18nfeedback.howSatisfied)}
+              {intl.formatMessage(i18n2.howSatisfied)}
             </SectionHeader>
             <div className="coa-FormFeedback__content">
               {Object.keys(emojis).map(emojiKey => (
@@ -149,7 +149,7 @@ class FormFeedback extends Component {
                     <img
                       className="d-block"
                       src={emojis[emojiKey].image}
-                      alt={intl.formatMessage(i18nemoji[emojiKey])}
+                      alt={intl.formatMessage(i18n3[emojiKey])}
                     />
                   </label>
                 </div>
@@ -164,11 +164,11 @@ class FormFeedback extends Component {
             name={`${this.state.name}-textarea`}
           >
             <SectionHeader isSerif={true}>
-              {intl.formatMessage(i18nfeedback.improvePage)}
+              {intl.formatMessage(i18n2.improvePage)}
             </SectionHeader>
             {this.state.error && (
               <p className="coa-FormFeedback__error">
-                {i18nform.error}
+                {i18n1.error}
               </p>
             )}
             <div className="coa-FormFeedback__content">
@@ -176,7 +176,7 @@ class FormFeedback extends Component {
                 htmlFor={`${this.state.name}-textarea`}
                 className="coa-sr-only"
               >
-                {intl.formatMessage(i18nfeedback.improvePage)}
+                {intl.formatMessage(i18n2.improvePage)}
               </label>
               <textarea
                 id={`${this.state.name}-textarea`}
@@ -185,7 +185,7 @@ class FormFeedback extends Component {
               />
               <input
                 type="submit"
-                value={intl.formatMessage(i18nfeedback.send)}
+                value={intl.formatMessage(i18n2.send)}
                 onClick={this.handleSubmit}
                 disabled={this.state.loading ? true : false}
               />
@@ -196,13 +196,13 @@ class FormFeedback extends Component {
         {this.state.step === 3 && (
           <fieldset className="coa-FormFeedback__step3">
             <SectionHeader isSerif={true}>
-              {intl.formatMessage(i18nfeedback.thankYouForSharing)}
+              {intl.formatMessage(i18n2.thankYouForSharing)}
             </SectionHeader>
             <div className="coa-FormFeedback__content">
               <input
                 type="button"
                 onClick={this.handleReset}
-                value={intl.formatMessage(i18nfeedback.giveMore)}
+                value={intl.formatMessage(i18n2.giveMore)}
               />
             </div>
           </fieldset>

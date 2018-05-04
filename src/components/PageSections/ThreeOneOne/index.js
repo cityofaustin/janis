@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { misc as i18n1, callToAction as i18n2 } from 'js/i18n/definitions';
+import { threeoneone as i18n } from 'js/i18n/definitions';
 
 import ListLink from 'components/ListLink';
 import SectionHeader from 'components/SectionHeader';
@@ -12,7 +12,7 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
     <div className="container-fluid wrapper">
       <div className="wrapper wrapper--sm">
         <SectionHeader>
-          <div dangerouslySetInnerHTML={{__html:intl.formatMessage(i18n2.contact311)}} />
+          <div dangerouslySetInnerHTML={{__html:intl.formatMessage(i18n.contact311)}} />
         </SectionHeader>
       </div>
       <div className="row">
@@ -27,7 +27,7 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
         <div className="col-xs-12 col-md-6 col-lg-4">
           <ListLink
             url="http://311.austintexas.gov/reports/list_services"
-            text={intl.formatMessage(i18n1.all311)}
+            text={intl.formatMessage(i18n.all311)}
           />
         </div>
       </div>
