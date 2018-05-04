@@ -64,6 +64,16 @@ For more information about the concepts and architectural decisions guiding this
 
 This project uses [React-Static](https://github.com/nozzle/react-static) as a base framework for building static-progressive React applications and websites. It's designed with considerations for SEO, site performance, and user/developer experience.
 
+### 🌍 React-Intl
+
+This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
+
+* the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method to render translations of trusted content which include HTML (but do not include React components).
+ex. The 311 Section Header includes HTML links.
+
+* the FormattedMessage react-intl component will parse React components from values. We can utilize this method to render translation which have React components as parameters.
+ex. The footer body text include ExternalLink components.
+
 ### 📚 Storybook
 
 * Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
