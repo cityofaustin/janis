@@ -7,6 +7,7 @@ export const callToAction = defineMessages({
 });
 
 export const contact = defineMessages({
+  questionsTitle: 'Still have questions? Contact:',
   closed: 'Closed',
   map: 'Map',
   phoneTTD: 'TDD/TTY',
