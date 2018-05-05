@@ -1,20 +1,15 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+
+import { services as i18n } from 'js/i18n/definitions';
 
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
-
-const i18nMessages = defineMessages({
-  serviceRelatedlinksTag: {
-    id: 'Service.RelatedLinks.Tag',
-    defaultMessage: 'Service',
-  },
-});
 
 const Topic = ({ topic, intl }) => {
   const {
@@ -24,7 +19,7 @@ const Topic = ({ topic, intl }) => {
     callToAction,
     services: links,
   } = topic;
-
+  //TODO: clean data where sourced
   const relatedLinks = cleanLinks(links, '/services');
 
   return (
@@ -38,7 +33,7 @@ const Topic = ({ topic, intl }) => {
       <div className="wrapper container-fluid">
         <TileGroup
           tiles={relatedLinks}
-          tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
+          tag={intl.formatMessage(i18n.service)}
         />
       </div>
     </div>
@@ -48,8 +43,8 @@ const Topic = ({ topic, intl }) => {
 Topic.propTypes = {
   topic: PropTypes.shape({
     text: PropTypes.string.isRequired,
-    callToAction: PropTypes.string,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    callToAction: PropTypes.string.isRequired,
     services: PropTypes.object.isRequired,
     theme: PropTypes.shape({
       text: PropTypes.string,

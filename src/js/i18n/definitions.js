@@ -58,9 +58,6 @@ export const navigation = defineMessages({
   openInNewWindow: 'Opens in new window',
 });
 
-export const pageType = defineMessages({
-  service: 'Service',
-});
 
 export const services = defineMessages({
   checkOutRelatedServices: 'Check out related services',
@@ -68,7 +65,15 @@ export const services = defineMessages({
   service: 'Service',
 });
 
+export const themes = defineMessages({
+  theme: 'theme',
+});
+
 export const threeoneone = defineMessages({
   all311: 'All 311 Services',
   call311: 'Call 311',
+});
+
+export const topics = defineMessages({
+  topic: 'topic',
 });
