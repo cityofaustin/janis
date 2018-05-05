@@ -3,7 +3,7 @@ import { withRouteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { findKey } from 'lodash';
 
-import { callToAction as i18n1, misc as i18n2, pageType as i18n3 } from 'js/i18n/definitions';
+import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
@@ -73,7 +73,7 @@ const Service = ({ service, intl }) => {
 
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18n1.checkOutRelatedServices)}
+          title={intl.formatMessage(i18n3.checkOutRelatedServices)}
           tiles={cleanedRelated}
           tag={intl.formatMessage(i18n3.service)}
         />

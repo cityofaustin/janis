@@ -1,8 +1,6 @@
 import { defineMessages } from 'react-intl';
 
 export const callToAction = defineMessages({
-  checkOutRelatedServices: 'Check out related services',
-  checkOutServices: 'Check out City of Austin Services',
   enterAddress: 'Type your street address in the box below',
   submitOnlineRequest: 'Submit an Online Request',
   whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
@@ -62,6 +60,14 @@ export const navigation = defineMessages({
 
 export const pageType = defineMessages({
   service: 'Service',
+});
+
+export const services = defineMessages({
+  checkOutRelatedServices: 'Check out related services',
+  checkOutServices: 'Check out City of Austin Services',
+  service: 'Service',
+  servicesBodyText: 'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
+  useServices: 'Use City of Austin Services',
 });
 
 export const threeoneone = defineMessages({
