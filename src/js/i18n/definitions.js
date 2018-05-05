@@ -4,6 +4,7 @@ export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',
   whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
   submitOnlineRequest: 'Submit an Online Request',
+  checkOutServices: 'Check out City of Austin Services',
 });
 
 export const contact = defineMessages({
@@ -35,7 +36,7 @@ export const form = defineMessages({
   loading: 'Loading...',
 });
 
-export const formfeedback = defineMessages({
+export const formFeedback = defineMessages({
   giveMore: 'Give more feedback',
   howSatisfied: 'How satisfied are you with this page?',
   improvePage: 'How can we make this page better?',
@@ -44,16 +45,21 @@ export const formfeedback = defineMessages({
 });
 
 export const misc = defineMessages({
-  airport: 'airport',
+  airport: 'Airport',
   citySeal: 'City of Austin Seal',
   privacy: 'Read About Privacy',
   steps: 'Steps',
+  welcomeTo: 'Welcome to',
 });
 
 export const navigation = defineMessages({
   home: 'Home',
   menu: 'Menu',
   openInNewWindow: 'Opens in new window',
+});
+
+export const pageType = defineMessages({
+  service: 'Service',
 });
 
 export const threeoneone = defineMessages({

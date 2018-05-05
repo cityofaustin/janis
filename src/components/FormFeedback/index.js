@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
 
-import { form as i18n1, formfeedback as i18n2, emoji as i18n3 } from 'js/i18n/definitions';
+import { form as i18n1, formFeedback as i18n2, emoji as i18n3 } from 'js/i18n/definitions';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
 import { emojis } from 'js/helpers/emojis';

@@ -1,29 +1,16 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+
+import { callToAction as i18n1, misc as i18n2, pageType as i18n3 } from 'js/i18n/definitions';
 
 import WorkInProgress from 'components/WorkInProgress';
-import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner';
+import SecondaryContentBanner from 'components/SecondaryContentBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
-
-const i18nMessages = defineMessages({
-  homeRelatedlinksSectiontitle: {
-    id: 'Home.RelatedLinks.SectionTitle',
-    defaultMessage: 'Check out City of Austin services',
-  },
-  homeRelatedlinksTag: {
-    id: 'Home.RelatedLinks.Tag',
-    defaultMessage: 'Service',
-  },
-  homeHeroWelcometext: {
-    id: 'Home.Hero.welcometext',
-    defaultMessage: 'Welcome to',
-  },
-});
 
 const Home = ({ topServices, image, intl }) => {
   //TODO: clean data where sourced
@@ -34,18 +21,16 @@ const Home = ({ topServices, image, intl }) => {
       <HeroHome
         imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
         imageTitle={image.title}
-        preheader={intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+        preheader={intl.formatMessage(i18n2.welcomeTo)}
       />
       <SecondaryContentBanner>
-        <p>
           <WorkInProgress />
-        </p>
       </SecondaryContentBanner>
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}
+          title={intl.formatMessage(i18n1.checkOutServices)}
           tiles={serviceLinks}
-          tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)}
+          tag={intl.formatMessage(i18n3.service)}
         />
       </div>
     </div>
