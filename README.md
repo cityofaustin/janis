@@ -217,3 +217,4 @@ more a11y Resources:
 * [How we’ve made GOV.UK Elements even more accessible](https://accessibility.blog.gov.uk/2018/02/28/how-weve-made-gov-uk-elements-even-more-accessible/) and https://accessibility.blog.gov.uk/ in general
 * https://accessibility.18f.gov/
 * https://developer.mozilla.org/en-US/docs/Learn/Accessibility
+* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting
