@@ -66,8 +66,6 @@ export const services = defineMessages({
   checkOutRelatedServices: 'Check out related services',
   checkOutServices: 'Check out City of Austin Services',
   service: 'Service',
-  servicesBodyText: 'The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.',
-  useServices: 'Use City of Austin Services',
 });
 
 export const threeoneone = defineMessages({

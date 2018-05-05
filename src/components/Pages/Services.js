@@ -12,13 +12,13 @@ import { cleanLinks } from 'js/helpers/cleanData';
 const Services = ({ allServices, intl }) => {
   //TODO: clean data where sourced
   const relatedLinks = cleanLinks(allServices, '/services');
-  //TODO: should PageHeader content be served from CMS, if so remove static translations
+
   return (
     <div>
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader
-          title={intl.formatMessage(i18n.useServices)}
-          description={intl.formatMessage(i18n.servicesBodyText)}
+          title="Use City of Austin Services"
+          description="The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time."
         />
       </div>
       <div className="wrapper container-fluid">
