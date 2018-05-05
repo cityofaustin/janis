@@ -25,7 +25,7 @@ const Footer = ({ threeoneone, intl }) => (
           </div>
         </div>
         <div className="col-xs-12 col-md-4">
-          <p className="coa-Footer__body-text">
+          <p className="coa-Footer__work-in-progress">
             <FormattedMessage
               id="misc.workInProgress"
               values={{

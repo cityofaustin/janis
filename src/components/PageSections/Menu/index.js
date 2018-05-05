@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+
+import { misc as i18n1, navigation as i18n2, threeoneone as i18n3, callToAction as i18n4 } from 'js/i18n/definitions';
 
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
@@ -8,33 +10,6 @@ import MenuItem from 'components/PageSections/Menu/MenuItem';
 
 import CloseSVG from 'components/SVGs/Close';
 import citySealImg from 'images/coa_seal.png';
-
-const i18nMessages = defineMessages({
-  home: {
-    id: 'Menu.HomeMobileListItem.text',
-    defaultMessage: 'Home',
-  },
-  airport: {
-    id: 'Menu.AirportMobileListItem.text',
-    defaultMessage: 'Airport',
-  },
-  call311: {
-    id: 'Menu.ThreeOneOneMobileListItem.callText',
-    defaultMessage: 'Call 311',
-  },
-  online311: {
-    id: 'Menu.ThreeOneOneMobileListItem.onlineText',
-    defaultMessage: 'Submit an Online Request',
-  },
-  privacy: {
-    id: 'Menu.PrivacyPolicyListItem.text',
-    defaultMessage: 'Read About Privacy',
-  },
-  sealAltText: {
-    id: 'Menu.MobileFooter.sealAltText',
-    defaultMessage: 'City of Austin Seal',
-  },
-});
 
 class Menu extends Component {
   constructor(props) {
@@ -136,7 +111,7 @@ const HomeMobileMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
   <div className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
       <I18nNavLink to="/" exact>
-        {intl.formatMessage(i18nMessages.home)}
+        {intl.formatMessage(i18n2.home)}
       </I18nNavLink>
     </div>
   </div>
@@ -146,7 +121,7 @@ const AirportMobileMenuItem = injectIntl(({ intl }) => (
   <div className="d-lg-none">
     <div className="coa-MenuItem coa-MenuItem--small">
       <ExternalLink to="http://www.austintexas.gov/airport">
-        {intl.formatMessage(i18nMessages.airport)}
+        {intl.formatMessage(i18n1.airport)}
       </ExternalLink>
     </div>
   </div>
@@ -154,15 +129,20 @@ const AirportMobileMenuItem = injectIntl(({ intl }) => (
 
 const ThreeOneOneMobileMenuItem = injectIntl(({ intl }) => (
   <div className="d-lg-none">
-    {/* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting */}
     <div className="coa-MenuItem coa-MenuItem--small">
-      <a href="tel:311" aria-label="3 1 1.">
-        {intl.formatMessage(i18nMessages.call311)}
-      </a>
-      &nbsp;or&nbsp;
-      <ExternalLink to="http://311.austintexas.gov/">
-        {intl.formatMessage(i18nMessages.online311)}
-      </ExternalLink>
+      <FormattedMessage
+        id="threeoneone.contact311"
+        values={{
+          call311Link: (
+            <a href="tel:512-974-2000" aria-label="3 1 1.">{intl.formatMessage(i18n3.call311)}</a>
+          ),
+          submit311Link: (
+            <ExternalLink to="http://311.austintexas.gov/reports/list_services">
+              {intl.formatMessage(i18n4.submitOnlineRequest)}
+            </ExternalLink>
+          ),
+        }}
+      />
     </div>
   </div>
 ));
@@ -170,7 +150,7 @@ const ThreeOneOneMobileMenuItem = injectIntl(({ intl }) => (
 const PrivacyPolicyMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
   <div className="d-lg-none" onClick={handleCloseAllMenus}>
     <div className="coa-MenuItem coa-MenuItem--small">
-      <a href="#">{intl.formatMessage(i18nMessages.privacy)}</a>
+      <a href="#">{intl.formatMessage(i18n1.privacy)}</a>
     </div>
   </div>
 ));
@@ -180,8 +160,7 @@ const MobileFooter = injectIntl(({ intl }) => (
     <div className="coa-Menu__footer">
       <p>
         <FormattedMessage
-          id="Footer.bodytext"
-          defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+          id="misc.workInProgress"
           values={{
             citySiteLink: (
               <ExternalLink to="http://austintexas.gov">
@@ -198,7 +177,7 @@ const MobileFooter = injectIntl(({ intl }) => (
       </p>
       <img
         src={citySealImg}
-        alt={intl.formatMessage(i18nMessages.sealAltText)}
+        alt={intl.formatMessage(i18n1.citySeal)}
       />
     </div>
   </div>

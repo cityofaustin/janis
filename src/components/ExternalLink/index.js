@@ -5,7 +5,6 @@ import { navigation as i18n } from 'js/i18n/definitions';
 
 import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
-
 const ExternalLink = ({ to, noIcon, children, intl }) => (
   <a
     href={to}

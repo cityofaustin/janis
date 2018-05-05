@@ -3,6 +3,7 @@ import { defineMessages } from 'react-intl';
 export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',
   whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
+  submitOnlineRequest: 'Submit an Online Request',
 });
 
 export const contact = defineMessages({
@@ -45,9 +46,9 @@ export const formfeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'airport',
   citySeal: 'City of Austin Seal',
+  privacy: 'Read About Privacy',
   steps: 'Steps',
   workInProgress: 'Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
-
 });
 
 export const navigation = defineMessages({
@@ -58,7 +59,6 @@ export const navigation = defineMessages({
 
 export const threeoneone = defineMessages({
   all311: 'All 311 Services',
-  call311: '',
-  contact311: '<a href="tel:512-974-2000">Call 311</a> or <a href="http://311.austintexas.gov/reports/list_services">Submit an Online Request</a>',
-  submit311request: '',
-})
+  call311: 'Call 311',
+  contact311: '{call311Link} or {submit311Link}',
+});
