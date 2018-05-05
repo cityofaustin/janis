@@ -1,10 +1,11 @@
 import { defineMessages } from 'react-intl';
 
 export const callToAction = defineMessages({
-  enterAddress: 'Type your street address in the box below',
-  whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
-  submitOnlineRequest: 'Submit an Online Request',
+  checkOutRelatedServices: 'Check out related services',
   checkOutServices: 'Check out City of Austin Services',
+  enterAddress: 'Type your street address in the box below',
+  submitOnlineRequest: 'Submit an Online Request',
+  whatDoIDoWith: 'Check the "What do I do with" tool below to find out what items are accepted.',
 });
 
 export const contact = defineMessages({
@@ -50,6 +51,7 @@ export const misc = defineMessages({
   privacy: 'Read About Privacy',
   steps: 'Steps',
   welcomeTo: 'Welcome to',
+  whatElse: 'What else do I need to know?',
 });
 
 export const navigation = defineMessages({

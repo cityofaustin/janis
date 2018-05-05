@@ -1,7 +1,9 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { findKey } from 'lodash';
+
+import { callToAction as i18n1, misc as i18n2, pageType as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
@@ -15,21 +17,6 @@ import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback';
 
 import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
-
-const i18nMessages = defineMessages({
-  serviceRelatedlinksSectionheader: {
-    id: 'Service.RelatedLinks.SectionHeader',
-    defaultMessage: 'Check out related services',
-  },
-  serviceRelatedlinksTag: {
-    id: 'Service.RelatedLinks.Tag',
-    defaultMessage: 'Service',
-  },
-  htmlFromAdminSectionTitle: {
-    id: 'HtmlFromAdmin.SectionTitle',
-    defaultMessage: 'What else do I need to know?',
-  },
-});
 
 const Service = ({ service, intl }) => {
   const {
@@ -76,7 +63,7 @@ const Service = ({ service, intl }) => {
 
         {additionalContent && (
           <HtmlFromAdmin
-            title={intl.formatMessage(i18nMessages.htmlFromAdminSectionTitle)}
+            title={intl.formatMessage(i18n2.whatElse)}
             content={additionalContent}
           />
         )}
@@ -86,11 +73,9 @@ const Service = ({ service, intl }) => {
 
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(
-            i18nMessages.serviceRelatedlinksSectionheader,
-          )}
+          title={intl.formatMessage(i18n1.checkOutRelatedServices)}
           tiles={cleanedRelated}
-          tag={intl.formatMessage(i18nMessages.serviceRelatedlinksTag)}
+          tag={intl.formatMessage(i18n3.service)}
         />
       </div>
 
