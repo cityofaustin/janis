@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import { misc as i18n1, navigation as i18n2, threeoneone as i18n3, callToAction as i18n4 } from 'js/i18n/definitions';
+import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
+import WorkInProgress from 'components/WorkInProgress';
+import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
 import MenuItem from 'components/PageSections/Menu/MenuItem';
@@ -127,25 +129,13 @@ const AirportMobileMenuItem = injectIntl(({ intl }) => (
   </div>
 ));
 
-const ThreeOneOneMobileMenuItem = injectIntl(({ intl }) => (
+const ThreeOneOneMobileMenuItem = () => (
   <div className="d-lg-none">
     <div className="coa-MenuItem coa-MenuItem--small">
-      <FormattedMessage
-        id="threeoneone.contact311"
-        values={{
-          call311Link: (
-            <a href="tel:512-974-2000" aria-label="3 1 1.">{intl.formatMessage(i18n3.call311)}</a>
-          ),
-          submit311Link: (
-            <ExternalLink to="http://311.austintexas.gov/reports/list_services">
-              {intl.formatMessage(i18n4.submitOnlineRequest)}
-            </ExternalLink>
-          ),
-        }}
-      />
+      <ThreeOneOneRequest />
     </div>
   </div>
-));
+);
 
 const PrivacyPolicyMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
   <div className="d-lg-none" onClick={handleCloseAllMenus}>
@@ -159,21 +149,7 @@ const MobileFooter = injectIntl(({ intl }) => (
   <div className="d-lg-none">
     <div className="coa-Menu__footer">
       <p>
-        <FormattedMessage
-          id="misc.workInProgress"
-          values={{
-            citySiteLink: (
-              <ExternalLink to="http://austintexas.gov">
-                austintexas.gov
-              </ExternalLink>
-            ),
-            projectsSiteLink: (
-              <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
-                projects.austintexas.io
-              </ExternalLink>
-            ),
-          }}
-        />
+        <WorkInProgress />
       </p>
       <img
         src={citySealImg}

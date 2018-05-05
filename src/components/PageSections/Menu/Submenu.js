@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { find } from 'lodash';
 
+import WorkInProgress from 'components/WorkInProgress';
 import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
-import ExternalLink from 'components/ExternalLink';
 import I18nNavLink from 'components/I18nLinks/I18nNavLink';
 import ArrowRightSVG from 'components/SVGs/ArrowRight';
 
@@ -53,17 +51,7 @@ const ThemeSubmenuItem = ({ theme, handleCloseAllMenus }) => (
 const WorkInProgressSubmenuItem = () => (
   <li className="coa-SubmenuItem">
     <span className="coa-SubmenuItem__block coa-SubmenuItem__block--wip">
-      <FormattedMessage
-        id="Submenu.workInProgress"
-        defaultMessage="Alpha.austin.gov is a work in progress. For the full City of Austin website, visit {citySiteLink}."
-        values={{
-          citySiteLink: (
-            <ExternalLink to="http://austintexas.gov">
-              austintexas.gov
-            </ExternalLink>
-          ),
-        }}
-      />
+      <WorkInProgress isClipped={true} />
     </span>
   </li>
 );

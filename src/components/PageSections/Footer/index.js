@@ -1,9 +1,10 @@
 import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
+import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 
 import TwitterSVG from 'components/SVGs/Twitter';
@@ -26,21 +27,7 @@ const Footer = ({ threeoneone, intl }) => (
         </div>
         <div className="col-xs-12 col-md-4">
           <p className="coa-Footer__work-in-progress">
-            <FormattedMessage
-              id="misc.workInProgress"
-              values={{
-                citySiteLink: (
-                  <ExternalLink to="http://austintexas.gov">
-                    austintexas.gov
-                  </ExternalLink>
-                ),
-                projectsSiteLink: (
-                  <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
-                    projects.austintexas.io
-                  </ExternalLink>
-                ),
-              }}
-            />
+            <WorkInProgress />
           </p>
         </div>
         <div className="col-xs-12 col-md-3 col-md-offset-3">

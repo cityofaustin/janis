@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
+import WorkInProgress from 'components/WorkInProgress';
 import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
@@ -37,22 +38,7 @@ const Home = ({ topServices, image, intl }) => {
       />
       <SecondaryContentBanner>
         <p>
-          <FormattedMessage
-            id="Home.Secondarycontent.bodytext"
-            defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-            values={{
-              citySiteLink: (
-                <ExternalLink to="https://austintexas.gov">
-                  austintexas.gov
-                </ExternalLink>
-              ),
-              projectsSiteLink: (
-                <ExternalLink to="https://bit.ly/atx-digital-services">
-                  projects.austintexas.io
-                </ExternalLink>
-              ),
-            }}
-          />
+          <WorkInProgress />
         </p>
       </SecondaryContentBanner>
       <div className="wrapper container-fluid">

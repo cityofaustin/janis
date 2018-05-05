@@ -48,7 +48,6 @@ export const misc = defineMessages({
   citySeal: 'City of Austin Seal',
   privacy: 'Read About Privacy',
   steps: 'Steps',
-  workInProgress: 'Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
 });
 
 export const navigation = defineMessages({
@@ -60,5 +59,4 @@ export const navigation = defineMessages({
 export const threeoneone = defineMessages({
   all311: 'All 311 Services',
   call311: 'Call 311',
-  contact311: '{call311Link} or {submit311Link}',
 });
