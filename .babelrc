@@ -8,9 +8,6 @@
         "includeExportName": true,
         "extractComments": true
       },
-      "react-intl", {
-        "messagesDir": "./i18n/messages"
-      },
     ]
   ],
 }
