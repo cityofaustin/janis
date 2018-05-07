@@ -83,13 +83,13 @@ ex. The 311 Section Header includes HTML links.
 * the FormattedMessage react-intl component will parse React components from the values property. We can utilize this method to render translations which have React components as parameters.
 ex. The footer body text include ExternalLink components.
 
-## babel-plugin-react-intl-auto
+#### babel-plugin-react-intl-auto
 
 * To simplify management of our static translation ids, we use [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto). This plugin allows simpler translation definitions and automatically generates translated content ids namespaced to module export names, file paths, or a combination based on our babel react-intl-auto settings.
 
 * Translation definitions live in src/js/i18n/definitions.js. Note translations are broken down into separate named exports which can later be moved into their own respective files as static translated content increases. When this is done, be sure to maintain the export name to not have to update imports. Translations are also defined inline when requiring more complex mark-up or JSX (see WorkInProgress component).
 
-## extract-react-intl-messages
+#### extract-react-intl-messages
 
 * We use [extract-react-intl-messages](https://github.com/akameco/extract-react-intl-messages) to automatically extract our static translation definitions and build json files for each supported locale. Translations for each locale (accept the default en.json) needs to be manually entered once received from translators. Translations for each locale live in src/js/i18n/locales/. To extract new definitions run
 
