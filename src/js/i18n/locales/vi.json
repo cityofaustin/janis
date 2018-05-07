@@ -1,6 +1,6 @@
 {
-  "calltoaction.enteraddress": "Đánh máy địa chỉ của quý vị vào ô bên dưới",
-  "calltoaction.whatdoidowith": "Kiểm tra bằng công cụ \"What do I do with\" dưới đây để xác định những loại nào được chấp nhận",
+  "ApplicationBlock.recollect.calendar": "Đánh máy địa chỉ của quý vị vào ô bên dưới",
+  "ApplicationBlock.recollect.wizard": "Kiểm tra bằng công cụ \"What do I do with\" dưới đây để xác định những loại nào được chấp nhận",
   "ContactDetails.title": "Vẫn còn có thắc mắc? Xin liên lạc:",
   "Hours.weekday.sunday": "Chủ nhật",
   "Hours.weekday.monday": "Thứ Hai",
@@ -19,7 +19,7 @@
   "Footer.bodytext": "Alpha.austin.gov là một mạng trực tuyến mới và đang trong thời kỳ khai triển. Để vào mạng đã hoàn tất của Thành phố Austin, xin vào {citySiteLink}. Tìm hiểu thêm về mạng mới tại {projectsSiteLink}.",
   "Header.Menu.button": "Menu",
   "Header.Search.button": "Tra tìm",
-  "Header.Airport.text": "Phi trường",
+  "Header.Airport.text": "PHI TRƯỜNG",
   "PageBreadcrumbs.Home.text": "Nhà ở",
   "Menu.HomeMobileListItem.text": "Nhà ở",
   "Menu.AirportMobileListItem.text": "Phi trường",

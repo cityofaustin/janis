@@ -1,6 +1,6 @@
 {
-  "calltoaction.enteraddress": "Escriba su dirección en la casilla abajo",
-  "calltoaction.whatdoidowith": "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
+  "ApplicationBlock.recollect.calendar": "Escriba su dirección en la casilla abajo",
+  "ApplicationBlock.recollect.wizard": "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
   "ContactDetails.title": "¿Aún tiene preguntas? Contacte a:",
   "Hours.weekday.sunday": "Domingo",
   "Hours.weekday.monday": "Lunes",
@@ -19,7 +19,7 @@
   "Footer.bodytext": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "Header.Menu.button": "Menu",
   "Header.Search.button": "Buscar",
-  "Header.Airport.text": "Aeropuerto",
+  "Header.Airport.text": "AEROPUERTO",
   "PageBreadcrumbs.Home.text": "Inicio",
   "Menu.HomeMobileListItem.text": "Inicio",
   "Menu.AirportMobileListItem.text": "Aeropuerto",

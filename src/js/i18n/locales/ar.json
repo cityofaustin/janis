@@ -1,6 +1,6 @@
 {
-  "calltoaction.enteraddress": "اكتب عنوان شارعك في المربع أدناه",
-  "calltoaction.whatdoidowith": "أطلع على أداة \"What do I do with\" أدناه لمعرفة العناصر المقبولة",
+  "ApplicationBlock.recollect.calendar": "اكتب عنوان شارعك في المربع أدناه",
+  "ApplicationBlock.recollect.wizard": "أطلع على أداة \"What do I do with\" أدناه لمعرفة العناصر المقبولة",
   "ContactDetails.title": "هل ما زال لديك أسئلة? الاتصال:",
   "Hours.weekday.sunday": "الأحد",
   "Hours.weekday.monday": "الاثنين",
