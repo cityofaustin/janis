@@ -85,17 +85,19 @@ ex. The footer body text include ExternalLink components.
 
 ## babel-plugin-react-intl-auto
 
-* To better manage our static translation ids, we use [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto) to automatically generate translated content ids namespaced to module export names, file paths, or a combination based on our babel settings.
+* To simplify management of our static translation ids, we use [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto). This plugin allows simpler translation definitions and automatically generates translated content ids namespaced to module export names, file paths, or a combination based on our babel react-intl-auto settings.
 
-* Translation definitions live in src/js/i18n/definitions.js Note translations are broken down into separate named exports which can later be moved into their own respective files as static translated content increases. When this is done, be sure to maintain the export name to not have to update imports.
+* Translation definitions live in src/js/i18n/definitions.js. Note translations are broken down into separate named exports which can later be moved into their own respective files as static translated content increases. When this is done, be sure to maintain the export name to not have to update imports. Translations are also defined inline when requiring more complex mark-up or JSX (see WorkInProgress component).
 
-* We use babel-plugin-react-intl-auto in combination with [extract-react-intl-messages](https://github.com/akameco/extract-react-intl-messages) to automatically extract our static translation definitions and build json files for each supported locale. Translations for each locale live in src/js/i18n/locales/. To extract new definitions run
+## extract-react-intl-messages
+
+* We use [extract-react-intl-messages](https://github.com/akameco/extract-react-intl-messages) to automatically extract our static translation definitions and build json files for each supported locale. Translations for each locale (accept the default en.json) needs to be manually entered once received from translators. Translations for each locale live in src/js/i18n/locales/. To extract new definitions run
 
 ```
-docker exec --interactive --tty janis yarn run build-translations
+docker exec --interactive --tty <janis or janis-build> yarn run build-translations
 ```
 
-Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
+This plugin will *NOT* remove previously defined translations which are no longer present in the current app definitions. This clean up needs to be done manually at the moment.
 
 ### 📚 Storybook
 
@@ -181,10 +183,8 @@ Your local host machine's yarn.lock and package.json files will also be updated 
 Add a package via yarn (https://yarnpkg.com/lang/en/docs/cli/add/)
 
 ```
-docker exec --interactive --tty janis yarn add <package name>
+docker exec --interactive --tty <janis or janis-build> yarn add <package name>
 ```
-
-Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
 
 ### Static build script
 
