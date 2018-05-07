@@ -57,6 +57,7 @@ export const navigation = defineMessages({
   home: 'Home',
   menu: 'Menu',
   openInNewWindow: 'Opens in new window',
+  search: 'Search',
 });
 
 

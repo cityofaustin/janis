@@ -52,7 +52,7 @@
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "start-js": "react-static start",
     "build-js": "react-static build",
-    "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/test/ --flat 'src/**/*.js'",
+    "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
