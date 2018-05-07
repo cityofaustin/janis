@@ -1,20 +1,28 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
+import { setIntlConfig, withIntl } from 'storybook-addon-intl';
 import { checkA11y } from '@storybook/addon-a11y';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 
+import { SUPPORTED_LANG_CODES, DEFAULT_LANG } from 'js/i18n/constants';
+import localeMessages from 'js/i18n/loadLocaleData';
+
 import 'css/coa.css';
 
-const IntlDecorator = storyFn => (
-  <IntlProvider locale="en">{storyFn()}</IntlProvider>
-);
+const getMessages = (locale) => localeMessages[locale];
 
 const RouterDecorator = storyFn => (
   <MemoryRouter initialEntries={['/']}>{storyFn()}</MemoryRouter>
 );
 
-addDecorator(IntlDecorator);
+setIntlConfig({
+    locales: SUPPORTED_LANG_CODES,
+    defaultLocale: DEFAULT_LANG,
+    getMessages
+});
+
+addDecorator(withIntl);
 addDecorator(checkA11y);
 addDecorator(RouterDecorator);
 

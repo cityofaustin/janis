@@ -1,8 +1,7 @@
 {
   "name": "janis",
   "version": "1.0.1",
-  "description":
-    "Public facing frontend public side of austin.gov using React components.",
+  "description": "Public facing frontend public side of austin.gov using React components.",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -45,7 +44,8 @@
     "eslint-config-react-tools": "1.x.x",
     "extract-react-intl-messages": "^0.8.2",
     "prettier": "1.12.1",
-    "serve": "^6.1.0"
+    "serve": "^6.1.0",
+    "storybook-addon-intl": "^2.3.0"
   },
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
