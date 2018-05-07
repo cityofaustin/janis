@@ -14,11 +14,11 @@ Janis uses data provided by the CMS API service, [Joplin](https://github.com/cit
   * [Storybook](#storybook)
 * [Browser Compatibility](#browser-compatibility)
 * [Other Documentation for Developers](#other-documentation-for-developers)
-* [Adding dependencies via yarn](#adding-dependencies-via-yarn)
-* [Updating translation export via yarn](#updating-translation-export-via-yarn)
-* [Static build script](#static-build-script)
-* [Sass Code Style Guidelines](#sass-code-style-guidelines)
-* [Accessibility Guidelines](#accessibility-guidelines)
+  * [Adding dependencies via yarn](#adding-dependencies-via-yarn)
+  * [Updating translation export via yarn](#updating-translation-export-via-yarn)
+  * [Static build script](#static-build-script)
+  * [Sass Code Style Guidelines](#sass-code-style-guidelines)
+  * [Accessibility Guidelines](#accessibility-guidelines)
 
 ## 😃 Getting Started
 
@@ -44,6 +44,15 @@ This work began under the Austin Digital Services Discovery Project. Design, Tec
 We set out to learn what’s working for other government service providers, then embark on an iterative research, prototyping, and testing process to identify new designs, methods, and technologies.
 
 More high level information about the project from content strategy, user research and design, and development teams is continually updated on [our project page](http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/).
+
+## Project Management
+
+Janis is one piece of a bigger project around content management and technology platforms for the City of Austin.
+
+To manage our roadmap and upcoming issues, we're using a dedicated Github repo, called [TechStack](https://github.com/cityofaustin/techstack), for project management along with Zenhub project boards.
+
+* To see a list of all open issues related to the TechStack project, visit our [TechStack Github Issues page](https://github.com/cityofaustin/techstack/issues).
+* To see a Kanban (Trello-style) task list, visit our [TechStack Zenhub board](https://app.zenhub.com/workspace/o/cityofaustin/techstack/boards).
 
 ## 🎨 Design
 
@@ -91,6 +100,8 @@ Note: if you're running the docker container built by serve-build.sh you'll have
 ### 📚 Storybook
 
 * Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
+* To see our Storybook components:
+  * visit [alpha.austin.gov/storybook/](https://alpha.austin.gov/storybook/)
 * To run Storybooks locally:
   * `./scripts/serve-storybook.sh`
   * open http://localhost:6006/
