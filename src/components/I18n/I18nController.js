@@ -9,19 +9,19 @@ import { find } from 'lodash';
 
 import localeMessages from 'js/i18n/loadLocaleData';
 import {
-  SUPPORTED_LANGUAGES,
   SUPPORTED_LANG_CODES,
   LANG_COOKIE_NAME,
   LANG_COOKIE_EXPIRES,
   DEFAULT_LANG,
 } from 'js/i18n/constants';
 
-// page_sections
+import I18nDecorator from 'components/I18n/I18nDecorator';
+import SkipToMain from 'components/PageSections/SkipToMain';
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
-class LanguageWrapper extends Component {
+class I18nController extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -102,16 +102,10 @@ class LanguageWrapper extends Component {
     if (lang && lang !== this.state.lang) this.setState({ lang: lang });
   }
 
-  getDirectionFromLanguage(lang) {
-    const currentLangObject = find(SUPPORTED_LANGUAGES, { code: lang });
-    return currentLangObject.direction;
-  }
-
   render() {
     const { lang } = this.state;
     const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
-    const direction = this.getDirectionFromLanguage(lang);
 
     return (
       <IntlProvider
@@ -121,28 +115,22 @@ class LanguageWrapper extends Component {
         textComponent={Fragment}
         key={lang}
       >
-        <div
-          style={{ position: 'relative' }}
-          dir={direction}
-          className={`coa-${direction}`}
-        >
-          <a href="#main" className="usa-skipnav">
-            Skip to main content
-          </a>
+        <I18nDecorator>
+          <SkipToMain />
           <LanguageSelectBar path={match.params.path || ''} />
           <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
           </main>
           <Footer threeoneone={threeoneone[lang]} />
-        </div>
+        </I18nDecorator>
       </IntlProvider>
     );
   }
 }
 
-LanguageWrapper.propTypes = {
+I18nController.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default withSiteData(LanguageWrapper);
+export default withSiteData(I18nController);
