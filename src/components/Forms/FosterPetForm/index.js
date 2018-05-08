@@ -11,6 +11,7 @@ import Phone from 'components/Contact/Phone';
 import Progress from 'components/Progress';
 
 import { multiStepSchema } from 'components/Forms/FosterPetForm/schema';
+import '/app/node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const log = type => console.log.bind(console, type);
 
@@ -19,12 +20,22 @@ class FosterPetForm extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleBack = this.handleBack.bind(this);
-    this.state = { step: 1 };
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      step: 1,
+      schema: multiStepSchema[1].schema,
+      uiSchema: multiStepSchema[1].ui,
+    };
   }
   handleSubmit() {
     log('submitted');
     let nextStep = Number(this.state.step) + 1;
-    this.setState({ step: nextStep });
+    this.setState({
+      step: nextStep,
+      schema: multiStepSchema[nextStep].schema,
+      uiSchema: multiStepSchema[nextStep].ui,
+      formData: {},
+    });
     return;
   }
   handleBack() {
@@ -32,12 +43,42 @@ class FosterPetForm extends Component {
     let previousStep = Number(this.state.step) - 1;
     this.setState({
       step: previousStep,
+      schema: multiStepSchema[previousStep].schema,
+      uiSchema: multiStepSchema[previousStep].ui,
+    });
+    return;
+  }
+  handleChange(data) {
+    // Following the example cited in Mozilla docs:
+    // https://jsfiddle.net/69z2wepo/88541/
+    log('changed');
+    let { formData } = data;
+    let schema = { ...this.state.schema };
+    console.log(schema);
+    if (formData.isOver18 === 'No') {
+      schema.properties = Object.assign(schema.properties, {
+        // I really wish this conditional part of the schema lived with the rest of the schema info
+        isNotOver18Warning: {
+          type: 'string',
+          title: ' ',
+        },
+      });
+    } else {
+      schema.properties = Object.assign({}, schema.properties);
+      delete formData.isNotOver18Warning;
+      delete schema.properties.isNotOver18Warning;
+    }
+    console.log(formData);
+    this.setState({
+      formData,
+      schema,
     });
     return;
   }
   render() {
+    console.log(this.state.formData);
     return (
-      <div className="wrapper container-fluid">
+      <div className="wrapper container-fluid FosterPetForm">
         <div className="row">
           <PageHeader
             title="Austin Animal Center Foster Care Application"
@@ -47,11 +88,12 @@ class FosterPetForm extends Component {
           <div className="col-md-8">
             <Progress x={this.state.step} y={7} />
             <Form
-              schema={multiStepSchema[this.state.step].schema}
-              uiSchema={multiStepSchema[this.state.step].ui}
-              onChange={log('changed')}
+              schema={this.state.schema}
+              uiSchema={this.state.uiSchema}
+              onChange={this.handleChange}
               onSubmit={this.handleSubmit}
               onError={log('errors')}
+              formData={this.state.formData}
             >
               <button type="submit">Next</button>
               <button type="button" onClick={this.handleBack}>

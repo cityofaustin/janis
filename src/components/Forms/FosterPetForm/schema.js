@@ -1,3 +1,5 @@
+import React from 'react';
+
 const schemaStep1 = {
   title: 'Tell us how to contact you',
   type: 'object',
@@ -43,17 +45,6 @@ const schemaStep1 = {
   },
 };
 
-const schemaStep2 = {
-  title: 'something new',
-  type: 'object',
-  properties: {
-    hi: {
-      type: 'string',
-      title: 'yo',
-    },
-  },
-};
-
 const uiSchemaStep1 = {
   firstName: {
     'ui:autofocus': true,
@@ -71,10 +62,39 @@ const uiSchemaStep1 = {
   },
 };
 
+const schemaStep2 = {
+  title: 'Tell us about yourself',
+  type: 'object',
+  properties: {
+    isOver18: {
+      type: 'string',
+      title: 'Are you age 18 or older?',
+      enum: ['Yes', 'No'],
+      enumNames: ['Yes', 'No'],
+      uniqueItems: true,
+    },
+  },
+};
+
 const uiSchemaStep2 = {
-  hi: {
+  isOver18: {
     'ui:autofocus': true,
-    'ui:emptyValue': '',
+    'ui:widget': 'radio',
+  },
+  isNotOver18Warning: {
+    'ui:widget': props => {
+      return (
+        <div className="alert alert-danger alert-body">
+          <p>Unfortunately, we cannot accept your application at this time.</p>
+          <p>Please ask a member of your household who is over 18 to apply.</p>
+          <p>
+            If you are applying to fulfill volunteer hours, you can still foster
+            and receive credit even though someone else filled out the
+            application.
+          </p>
+        </div>
+      );
+    },
   },
 };
 
