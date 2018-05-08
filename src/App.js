@@ -28,6 +28,8 @@ class App extends Component {
                 <SkipToMain />
                 <LanguageSelectBar path={match.params.path || ''} />
                 <Header navigation={navigation[lang]} /> <-- with site data and injectIntl to get locale
+                  can add site data from threeoneone and navigation to storybook static data so we can have
+                  translation support for CMS content in storybook too
                 <main role="main" id="main">
                   <Routes />
                 </main>
