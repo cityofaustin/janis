@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import {injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
 
-import { form as i18n1, formFeedback as i18n2, emoji as i18n3 } from 'js/i18n/definitions';
+import {
+  form as i18n1,
+  formFeedback as i18n2,
+  emoji as i18n3,
+} from 'js/i18n/definitions';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
 import { emojis } from 'js/helpers/emojis';
@@ -56,9 +60,7 @@ class FormFeedback extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const emojiText = this.props.intl.formatMessage(
-      i18n3[this.state.emoji],
-    );
+    const emojiText = this.props.intl.formatMessage(i18n3[this.state.emoji]);
     const emojiValue = emojis[this.state.emoji].value;
     const emoji = emojis[this.state.emoji].emoji;
 
@@ -87,7 +89,11 @@ class FormFeedback extends Component {
       description: `**Emoji rating (scale of -2 to 2):**\n${emojiValue}: ${emojiText}\n
         \n**Text feedback:**\n${this.state.feedback}\n
         \n**Url:**\n${window.location.href}\n
-        \n**Device Information:** \n\`\`\`\n${JSON.stringify(parser(), null, 2)}\n\`\`\`\n\n`,
+        \n**Device Information:** \n\`\`\`\n${JSON.stringify(
+          parser(),
+          null,
+          2,
+        )}\n\`\`\`\n\n`,
     })
       .then(({ data }) => {
         this.setState({
@@ -167,9 +173,7 @@ class FormFeedback extends Component {
               {intl.formatMessage(i18n2.improvePage)}
             </SectionHeader>
             {this.state.error && (
-              <p className="coa-FormFeedback__error">
-                {i18n1.error}
-              </p>
+              <p className="coa-FormFeedback__error">{i18n1.error}</p>
             )}
             <div className="coa-FormFeedback__content">
               <label

@@ -7,9 +7,7 @@ import SectionHeader from 'components/SectionHeader';
 
 const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
   <div className="coa-Steps">
-    <SectionHeader>
-      {intl.formatMessage(i18n.steps)}
-    </SectionHeader>
+    <SectionHeader>{intl.formatMessage(i18n.steps)}</SectionHeader>
     <div
       className="coa-Steps__list"
       dangerouslySetInnerHTML={{ __html: stepsAsHtmlFromAdmin }}
@@ -19,7 +17,6 @@ const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
 
 Steps.propTypes = {
   stepsAsHtmlFromAdmin: PropTypes.string.isRequired,
-  intl: PropTypes.object.isRequired,
 };
 
 export default injectIntl(Steps);
