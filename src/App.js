@@ -20,24 +20,7 @@ class App extends Component {
               return null;
             }}
           />
-          {/* regex to split url location into 2 character lang code (if present) and page path
-            Add with SiteData to App export
-            Route
-            render = {props => {
-              <I18nController>
-                <SkipToMain />
-                <LanguageSelectBar path={match.params.path || ''} />
-                <Header navigation={navigation[lang]} /> <-- with site data and injectIntl to get locale
-                  can add site data from threeoneone and navigation to storybook static data so we can have
-                  translation support for CMS content in storybook too
-                <main role="main" id="main">
-                  <Routes />
-                </main>
-                <Footer threeoneone={threeoneone[lang]} /> <-- with site data and injectIntl to get locale
-              </I18nController>
-            }}
-
-          */}
+          {/* regex to split url location into 2 character lang code (if present) and page path */}
           <Route
             path="(/)?:lang([a-z]{2})?/:path*"
             component={I18nController}
