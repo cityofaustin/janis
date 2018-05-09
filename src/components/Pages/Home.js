@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import WorkInProgress from 'components/WorkInProgress';
-import PageSubBanner from 'components/PageSubBanner';
+import PageNotificationBanner from 'components/PageNotificationBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
@@ -23,9 +23,9 @@ const Home = ({ topServices, image, intl }) => {
         imageTitle={image.title}
         preheader={intl.formatMessage(i18n2.welcomeTo)}
       />
-      <PageSubBanner>
-          <WorkInProgress />
-      </PageSubBanner>
+      <PageNotificationBanner>
+        <WorkInProgress />
+      </PageNotificationBanner>
       <div className="wrapper container-fluid">
         <TileGroup
           title={intl.formatMessage(i18n3.checkOutServices)}
