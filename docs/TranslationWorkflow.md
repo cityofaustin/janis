@@ -1,4 +1,4 @@
-# Temporary Translation Workflow
+# Translation Workflow (Let's Iterate!)
 
 This document details how the html for Janis can be downloaded and highlighted to send to translators. This process will also generate a .csv file for translations to be added to, if desired. The intent is to trial a translation workflow and identify opportunities for improvement and then to iterate. 
 
