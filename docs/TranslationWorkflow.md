@@ -24,4 +24,107 @@ You can view a demo of at the [Single File](https://chrome.google.com/webstore/d
 ### If you don't require highlighting, your process ends here. 
 Try loading the page you've downloaded in a browser to ensure the page renders as expected.
 **Remember, this page will not have any javascript functionality** (menus and forms will likely be inoperable, but most links will work).
-Once you've verified everything looks as expected, you can email or send this file as you would any other.
+Once you've verified everything looks as expected, you can email or send this file as you would any other. Also, feel free to rename the file to something more user friendly.
+
+#### 3. Add code to page to allow highlighting
+Open your downloaded file in a text editor. I use SublimeText, but you can use any text editing application (TextEdit or Notepad are default applications for Macs and PCs respectively) that your computer may have.
+
+Paste the code below at the bottom of your file, and then save your file. 
+Note, I am not proud of this code. Do not code like this for your own well-being.
+
+```
+<style type="text/css">
+.selected-for-translation{background-color: #ffff0066 !important}
+#selected-for-translation-DONE{
+  left: 10px;
+  margin: 0;
+  position: fixed;
+  top: 10px;
+  z-index: 999;
+}
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+const CSS_CLASS = 'selected-for-translation';
+const FILENAME_PREFIX = 'for-translations-'+ new Date().getTime();
+
+function download(content, filename, type) {
+  const url = window.URL.createObjectURL(new Blob([content.join('')], {type: type}));
+  const a = window.document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+function js_downloads(element, index) {
+  const content = ['document.write(`\n<!-- COPY START HERE -->\n', element.outerHTML, '\n<!-- COPY TO HERE -->\n`);'].join('');
+
+  download(content, FILENAME_PREFIX + '-c-' + index + '.js','text/javascript');
+  
+  const script = document.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', FILENAME_PREFIX + '-c-'+index+'.js');
+  element.parentNode.replaceChild(script, element)
+}
+
+function clean_document_download() {
+  const content = []
+  const lang = document.documentElement.getAttribute('lang');
+  const head = document.head.outerHTML
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<link\b[^<]*(?:(?!<\/link>)<[^<]*)*<\/link>/gi, '');
+  const button = document.getElementById(CSS_CLASS + '-DONE');
+  button.parentNode.removeChild(button);
+  const body = document.body.outerHTML;
+  content.push('<!DOCTYPE html><html lang="' + lang + '">', head, body, '</html>');
+
+  download(content, FILENAME_PREFIX + '-index.html', 'text/html');
+}
+
+function add_section_highlighter() {
+  document.body.onclick = function(e) {
+    e.preventDefault();
+    if(e.target.classList.contains(CSS_CLASS)) {
+      var shouldDeselect = window.confirm('Unhighlight this section?');
+      if(shouldDeselect) e.target.classList.remove(CSS_CLASS);
+    } else {
+      e.target.classList.add(CSS_CLASS);
+      setTimeout(function(){
+        var shouldSelect = window.confirm('Highlight this section?');
+        if(!shouldSelect)  e.target.classList.remove(CSS_CLASS);
+      }, 200);
+    }
+  };
+}
+
+function add_file_builder() {
+  const a = document.createElement('a');
+  a.setAttribute('id', CSS_CLASS + '-DONE');
+  a.setAttribute('class', 'usa-button usa-button-big');
+  a.innerHTML = 'Translations Selected';
+  a.onclick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    let content = ["en,es,vi,ar\n"];
+    els = document.getElementsByClassName(CSS_CLASS);
+    Array.prototype.forEach.call(els, function(el, index) {
+      content = content.concat(['"'+el.outerHTML.replace(/"/g,'""')+'",,,\n']);
+      //js_downloads(el, index, FILENAME_PREFIX);
+    });
+    download(content, FILENAME_PREFIX + '.csv', 'text/csv');
+    clean_document_download();
+  }
+  document.body.appendChild(a);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  add_file_builder();
+  add_section_highlighter();
+});
+</script>
+```
