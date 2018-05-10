@@ -131,6 +131,7 @@ class I18nController extends Component {
 
 I18nController.propTypes = {
   navigation: PropTypes.object.isRequired,
+  threeoneone: PropTypes.object.isRequired,
 };
 
 export default withSiteData(I18nController);

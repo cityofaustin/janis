@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { navigation as i18n } from 'js/i18n/definitions';
 
 import I18nLink from 'components/I18n/I18nLink';
-import PropTypes from 'prop-types';
 
 const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (
   <I18nLink
@@ -18,6 +18,15 @@ const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (
     {breadcrumb.text}
   </I18nLink>
 );
+
+Breadcrumb.propTypes = {
+  breadcrumb: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    subpath: PropTypes.string,
+    text: PropTypes.string.isRequired,
+  }).isRequired,
+  classNameSuffix: PropTypes.string.isRequired,
+};
 
 const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => (
   <div className="wrapper container-fluid">
@@ -39,7 +48,7 @@ const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => (
 );
 
 PageBreadcrumbs.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   parent: PropTypes.object,
   grandparent: PropTypes.object,
 };

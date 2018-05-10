@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
 
@@ -215,5 +216,7 @@ class FormFeedback extends Component {
     );
   }
 }
+
+FormFeedback.propTypes = {};
 
 export default injectIntl(FormFeedback);
