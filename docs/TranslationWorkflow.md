@@ -139,6 +139,8 @@ As you click on items, you'll see a prompt which asks if you're sure about your 
 
 Once you've completed making selections, click the *Translations Selected* button. This will begin a download of two files. Your browser may ask for your permission to download multiple files. If so, click ok.
 
+Your files will be named something similar to **for-translations-1525922959252-index.html** and **for-translations-1525922959252.csv**
+
 ![Highlight content and Download the Page and CSV](./images/translation_workflow_5.gif)
 
 #### 6. Review Files
