@@ -22,7 +22,7 @@ Address.propTypes = {
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zip: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default Address;

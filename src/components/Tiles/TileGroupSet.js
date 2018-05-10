@@ -14,8 +14,8 @@ const TileGroupSet = ({ tileGroups, tag }) => {
               key={index}
               tiles={tiles}
               tag={tag}
-              title={text}
-              titlePath={url}
+              text={text}
+              url={url}
               description={description}
               hasBorder={true}
             />
@@ -27,7 +27,8 @@ const TileGroupSet = ({ tileGroups, tag }) => {
 };
 
 TileGroupSet.propTypes = {
-  tileGroups: PropTypes.array.isRequired,
+  tileGroups: PropTypes.arrayOf(PropTypes.shape(TileGroup.propTypes))
+    .isRequired,
   tag: PropTypes.string,
 };
 
