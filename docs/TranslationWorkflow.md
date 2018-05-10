@@ -43,11 +43,6 @@ Note, I am not proud of this code. Do not code like this for your own well-being
   z-index: 999;
 }
 </style>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-
 <script>
 const CSS_CLASS = 'selected-for-translation';
 const FILENAME_PREFIX = 'for-translations-'+ new Date().getTime();
@@ -77,10 +72,11 @@ function clean_document_download() {
   const lang = document.documentElement.getAttribute('lang');
   const head = document.head.outerHTML
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/<link\b[^<]*(?:(?!<\/link>)<[^<]*)*<\/link>/gi, '');
+    .replace(/<link rel="preload" as="(script|style)" href="[A-Za-z0-9\-\./]*\.(js|css)">/gi, '');
   const button = document.getElementById(CSS_CLASS + '-DONE');
   button.parentNode.removeChild(button);
-  const body = document.body.outerHTML;
+  const body = document.body.outerHTML
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
   content.push('<!DOCTYPE html><html lang="' + lang + '">', head, body, '</html>');
 
   download(content, FILENAME_PREFIX + '-index.html', 'text/html');
