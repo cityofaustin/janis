@@ -15,6 +15,7 @@ const SVG = ({ title, children, ...rest }) => (
 
 SVG.propTypes = {
   children: PropTypes.element.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default SVG;
