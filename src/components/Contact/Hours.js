@@ -79,10 +79,10 @@ class Hours extends Component {
 Hours.propTypes = {
   hours: PropTypes.arrayOf(
     PropTypes.shape({
-      dayOfWeek: PropTypes.string,
-      dayOfWeekNumeric: PropTypes.number,
-      endTime: PropTypes.number,
-      startTime: PropTypes.number,
+      dayOfWeek: PropTypes.string.isRequired,
+      dayOfWeekNumeric: PropTypes.number.isRequired,
+      endTime: PropTypes.number.isRequired,
+      startTime: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };

@@ -14,7 +14,8 @@ const Phone = ({ phone, intl }) => (
         <a href={`tel:${phone.default}`}>{phone.default}</a>
       </span>
       <span>
-        {intl.formatMessage(i18n.phoneTTD)}: <a href={`tel:${phone.tty}`}>{phone.tty}</a>
+        {intl.formatMessage(i18n.phoneTTD)}:{' '}
+        <a href={`tel:${phone.tty}`}>{phone.tty}</a>
       </span>
     </div>
   </div>
@@ -24,7 +25,7 @@ Phone.propTypes = {
   phone: PropTypes.shape({
     default: PropTypes.string.isRequired,
     tty: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
 };
 
 export default injectIntl(Phone);
