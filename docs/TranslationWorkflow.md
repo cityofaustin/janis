@@ -15,6 +15,7 @@ Once installed, you'll see the Single File Icon ![Single File Icon](https://raw.
 
 #### 1. Navigate to the page you'd like to download and highlight for translations.
 In this sample, I'll use the [Curbside Compost Pickup Page](http://alpha.austin.gov/services/compost-pickup)
+It may be helpful to select the language you're sending to your translator so the non-translated content is more obvious.
 
 #### 2. Download the page 
 You'll click the Single File icon in your browser bar and wait a few minutes. 
@@ -22,11 +23,12 @@ Then click the link labeled *Click here to save the page* which should show in a
 
 ![Download the Page](./images/translation_workflow_2.gif)
   
+### If you don't require highlighting, your process ends here. 
 Try loading the page you've downloaded in a browser to ensure the page renders as expected.
 **Remember, this page will not have any javascript functionality** (menus and forms will likely be inoperable, but most links will work).
 Once you've verified everything looks as expected, you can email or send this file as you would any other. Also, feel free to rename the file to something more user friendly.
 
-### If you don't require highlighting, your process ends here. 
+### Continue, if you require highlighting. 
 
 #### 3. Add code to page to allow highlighting
 Open your downloaded file in a text editor. I use SublimeText, but you can use any text editing application (TextEdit or Notepad are default applications for Macs and PCs respectively) that your computer may have.
@@ -137,5 +139,19 @@ As you click on items, you'll see a prompt which asks if you're sure about your 
 
 Once you've completed making selections, click the *Translations Selected* button. This will begin a download of two files. Your browser may ask for your permission to download multiple files. If so, click ok.
 
-![Download the Page](./images/translation_workflow_2.gif)
+![Highlight content and Download the Page and CSV](./images/translation_workflow_5.gif)
+
+#### 6. Review Files
+Try loading the new page you've downloaded in a browser to ensure the page renders as expected. It should have the content you selected previously highlighted in yellow and should no longer contain the *Translations Selected* button. Remember, this page will not have any javascript functionality (menus and forms will likely be inoperable, but most links will work). 
+
+Try opening the csv in Excel or another spreadsheet application. It should show your selected content to be translated in the left column under the 'en' heading. The columns for 'es', 'vi', and 'ar' should be empty for translators to add to.
+
+#### 7. Add to csv file
+If you have additional content to be translated which does not show up on the site, you may add that content directly to your csv. 
+
+![Update csv](./images/translation_workflow_7.png)
+
+#### 8. Send file
+Once you've verified everything looks as expected, you can email or send these files as you would any other. Also, feel free to rename the files to something more user friendly.
+
 
