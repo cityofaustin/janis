@@ -9,22 +9,24 @@ import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
 import ClockSVG from 'components/SVGs/ClockO';
 
 class Hours extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      today: 7
-    }
+      today: 7,
+    };
   }
 
   componentDidMount() {
     this.setState({
-      today: new Date().getDay()
+      today: new Date().getDay(),
     });
   }
 
   getOrderedWeekdays(day) {
-    let weekday_collection = Object.keys(WEEKDAY_MAP).map( key => ({name: key.toLowerCase(), numeric: WEEKDAY_MAP[key]}) );
+    let weekday_collection = Object.keys(WEEKDAY_MAP).map(key => ({
+      name: key.toLowerCase(),
+      numeric: WEEKDAY_MAP[key],
+    }));
     return weekday_collection.splice(day).concat(weekday_collection);
   }
 
@@ -42,27 +44,31 @@ class Hours extends Component {
             </tr>
           </thead>
           <tbody>
-            {
-              this.getOrderedWeekdays(this.state.today).map(weekday => {
-                const hourIndex = findIndex(hours, {dayOfWeekNumeric: weekday.numeric})
-                return (
-                  <tr key={weekday.name}>
-                    <th scope="row">{intl.formatMessage(i18n1['weekday' + capitalize(weekday.name)])}</th>
+            {this.getOrderedWeekdays(this.state.today).map(weekday => {
+              const hourIndex = findIndex(hours, {
+                dayOfWeekNumeric: weekday.numeric,
+              });
+              return (
+                <tr key={weekday.name}>
+                  <th scope="row">
+                    {intl.formatMessage(
+                      i18n1['weekday' + capitalize(weekday.name)],
+                    )}
+                  </th>
 
-                    { hourIndex > -1 && (
-                      <td>
-                        <FormattedTime value={hours[hourIndex].startTime} />
-                        <span> - </span>
-                        <FormattedTime value={hours[hourIndex].endTime} />
-                      </td>
-                    )}
-                    { hourIndex === -1 && (
-                      <td>{intl.formatMessage(i18n2.closed)}</td>
-                    )}
-                  </tr>
-                )
-              })
-            }
+                  {hourIndex > -1 && (
+                    <td>
+                      <FormattedTime value={hours[hourIndex].startTime} />
+                      <span> - </span>
+                      <FormattedTime value={hours[hourIndex].endTime} />
+                    </td>
+                  )}
+                  {hourIndex === -1 && (
+                    <td>{intl.formatMessage(i18n2.closed)}</td>
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -71,7 +77,14 @@ class Hours extends Component {
 }
 
 Hours.propTypes = {
-  hours: PropTypes.array.isRequired,
+  hours: PropTypes.arrayOf(
+    PropTypes.shape({
+      dayOfWeek: PropTypes.string,
+      dayOfWeekNumeric: PropTypes.number,
+      endTime: PropTypes.number,
+      startTime: PropTypes.number,
+    }),
+  ).isRequired,
 };
 
 export default injectIntl(Hours);
