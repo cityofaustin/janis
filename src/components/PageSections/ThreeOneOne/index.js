@@ -37,7 +37,12 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
 );
 
 ThreeOneOne.propTypes = {
-  threeoneone: PropTypes.array.isRequired,
+  threeoneone: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default injectIntl(ThreeOneOne);

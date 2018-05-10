@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { misc as i18n } from 'js/i18n/definitions';
@@ -19,10 +20,7 @@ const Footer = ({ threeoneone, intl }) => (
       <div className="row">
         <div className="col-xs-12 col-md-2">
           <div className="coa-Footer__city-seal-wrapper">
-            <img
-              src={citySealImg}
-              alt={intl.formatMessage(i18n.citySeal)}
-            />
+            <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
           </div>
         </div>
         <div className="col-xs-12 col-md-4">
@@ -50,5 +48,7 @@ const Footer = ({ threeoneone, intl }) => (
     </div>
   </footer>
 );
+
+Footer.propTypes = Object.assign({}, ThreeOneOne.propTypes);
 
 export default injectIntl(Footer);

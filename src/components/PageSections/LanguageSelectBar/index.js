@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Link } from 'react-static';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
@@ -28,5 +29,9 @@ const LanguageSelectBar = ({ path, intl }) => (
     </div>
   </div>
 );
+
+LanguageSelectBar.propTypes = {
+  path: PropTypes.string.isRequired,
+};
 
 export default injectIntl(LanguageSelectBar);
