@@ -39,7 +39,7 @@ const MenuItem = ({
         <ChevronDownSVG />
       </div>
     </div>
-    {!!theme.topics.edges && (
+    {!!theme.topics.length && (
       <Submenu
         id={id}
         theme={theme}
@@ -49,5 +49,23 @@ const MenuItem = ({
     )}
   </li>
 );
+
+MenuItem.propTypes = {
+  handleCloseAllMenus: PropTypes.func.isRequired,
+  handleSubmenuToggle: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  isSubmenuOpen: PropTypes.bool.isRequired,
+  theme: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    topics: PropTypes.arrayOf(
+      PropTypes.shape({
+        services: PropTypes.array.isRequired,
+        text: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default MenuItem;

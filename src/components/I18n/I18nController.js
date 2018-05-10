@@ -21,6 +21,8 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
+import { cleanLinks } from 'js/helpers/cleanData';
+
 class I18nController extends Component {
   constructor(props) {
     super(props);
@@ -107,6 +109,15 @@ class I18nController extends Component {
     const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
 
+    //TODO: clean data where sourced
+    let cleanedNavigation = cleanLinks(navigation[lang].allThemes, '/themes');
+    cleanedNavigation.map(theme => {
+      theme.topics = cleanLinks(theme.topics, '/topics');
+      theme.topics.map(topic => {
+        topic.services = cleanLinks(topic.services, '/services');
+      });
+    });
+
     return (
       <IntlProvider
         locale={lang}
@@ -118,7 +129,7 @@ class I18nController extends Component {
         <I18nDecorator>
           <SkipToMain />
           <LanguageSelectBar path={match.params.path || ''} />
-          <Header navigation={navigation[lang]} />
+          <Header navigation={cleanedNavigation} />
           <main role="main" id="main">
             <Routes />
           </main>

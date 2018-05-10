@@ -49,10 +49,10 @@ export const cleanLinks = (links, pathPrefix) => {
   if (!links || !links.edges) return null;
 
   return links.edges.map(({ node: link }) => {
-    const { title, slug, ...rest } = link;
+    const { title, text, slug, ...rest } = link;
     return {
       url: `${pathPrefix || ''}/${slug}`,
-      text: title,
+      text: title || text,
       ...rest,
     };
   });

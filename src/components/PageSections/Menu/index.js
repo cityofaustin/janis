@@ -54,57 +54,52 @@ class Menu extends Component {
   };
 
   render() {
-    const {
-      isMenuOpen,
-      navigation: { allThemes },
-    } = this.props;
+    const { isMenuOpen, navigation } = this.props;
     const { openSubmenuId } = this.state;
 
     return (
-      allThemes.edges.length && (
-        <div className="container-fluid wrapper">
-          <nav
-            className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
-            role="navigation"
+      <div className="container-fluid wrapper">
+        <nav
+          className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
+          role="navigation"
+        >
+          <button
+            className="coa-Menu__close-btn d-lg-none"
+            onClick={this.closeAllMenus}
+            ref="closeTrigger"
+            tabIndex="0"
           >
-            <button
-              className="coa-Menu__close-btn d-lg-none"
-              onClick={this.closeAllMenus}
-              ref="closeTrigger"
-              tabIndex="0"
-            >
-              <CloseSVG />
-            </button>
-            <ul className="coa-Menu__list">
-              <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
-              <AirportMobileMenuItem />
-              <ThreeOneOneMobileMenuItem />
-              {allThemes.edges.map(({ node: theme }, i) => (
-                <MenuItem
-                  key={i}
-                  id={i}
-                  theme={theme}
-                  isSubmenuOpen={this.isSubmenuOpen(i)}
-                  handleCloseAllMenus={this.closeAllMenus}
-                  handleSubmenuToggle={this.toggleSubmenu}
-                />
-              ))}
-              <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
-              <MobileFooter />
-            </ul>
-          </nav>
-          {/*
-            this provides a full page click target area behind the nav menu
-            which, when clicked, will close the submenu
-          */
-          openSubmenuId !== null && (
-            <div
-              className="coa-Menu__close-submenu-click-target"
-              onClick={() => this.setState({ openSubmenuId: null })}
-            />
-          )}
-        </div>
-      )
+            <CloseSVG />
+          </button>
+          <ul className="coa-Menu__list">
+            <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
+            <AirportMobileMenuItem />
+            <ThreeOneOneMobileMenuItem />
+            {navigation.map((theme, i) => (
+              <MenuItem
+                key={i}
+                id={i}
+                theme={theme}
+                isSubmenuOpen={this.isSubmenuOpen(i)}
+                handleCloseAllMenus={this.closeAllMenus}
+                handleSubmenuToggle={this.toggleSubmenu}
+              />
+            ))}
+            <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
+            <MobileFooter />
+          </ul>
+        </nav>
+        {/*
+          this provides a full page click target area behind the nav menu
+          which, when clicked, will close the submenu
+        */
+        openSubmenuId !== null && (
+          <div
+            className="coa-Menu__close-submenu-click-target"
+            onClick={() => this.setState({ openSubmenuId: null })}
+          />
+        )}
+      </div>
     );
   }
 }
@@ -157,7 +152,19 @@ const MobileFooter = injectIntl(({ intl }) => (
 ));
 
 Menu.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      topics: PropTypes.arrayOf(
+        PropTypes.shape({
+          services: PropTypes.array.isRequired,
+          text: PropTypes.string.isRequired,
+          url: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+      url: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 };

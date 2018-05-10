@@ -74,4 +74,15 @@ class Header extends Component {
   }
 }
 
+Header.propTypes = {
+  navigation: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+      topics: PropTypes.array.isRequired,
+      url: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
 export default injectIntl(Header);
