@@ -20,11 +20,13 @@ In this sample, I'll use the [Curbside Compost Pickup Page](http://alpha.austin.
 You'll click the Single File icon in your browser bar and wait a few minutes. 
 Then click the link labeled *Click here to save the page* which should show in a yellow-ish bar. 
 
-
-### If you don't require highlighting, your process ends here. 
+![Download the Page](./images/translation_workflow_2.gif)
+  
 Try loading the page you've downloaded in a browser to ensure the page renders as expected.
 **Remember, this page will not have any javascript functionality** (menus and forms will likely be inoperable, but most links will work).
 Once you've verified everything looks as expected, you can email or send this file as you would any other. Also, feel free to rename the file to something more user friendly.
+
+### If you don't require highlighting, your process ends here. 
 
 #### 3. Add code to page to allow highlighting
 Open your downloaded file in a text editor. I use SublimeText, but you can use any text editing application (TextEdit or Notepad are default applications for Macs and PCs respectively) that your computer may have.
