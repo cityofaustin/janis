@@ -14,12 +14,12 @@ Once installed, you'll see the Single File Icon ![Single File Icon](https://raw.
 ### Steps:
 
 #### 1. Navigate to the page you'd like to download and highlight for translations.
-In this sample, I'll use the [Curbside Pickup Page](http://alpha.austin.gov/services/compost-pickup)
+In this sample, I'll use the [Curbside Compost Pickup Page](http://alpha.austin.gov/services/compost-pickup)
 
 #### 2. Download the page 
 You'll click the Single File icon in your browser bar and wait a few minutes. 
 Then click the link labeled *Click here to save the page* which should show in a yellow-ish bar. 
-You can view a demo of at the [Single File](https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle?hl=en) download site.
+
 
 ### If you don't require highlighting, your process ends here. 
 Try loading the page you've downloaded in a browser to ensure the page renders as expected.
@@ -30,7 +30,8 @@ Once you've verified everything looks as expected, you can email or send this fi
 Open your downloaded file in a text editor. I use SublimeText, but you can use any text editing application (TextEdit or Notepad are default applications for Macs and PCs respectively) that your computer may have.
 
 Paste the code below at the bottom of your file, and then save your file. 
-Note, I am not proud of this code. Do not code like this for your own well-being.
+
+Note, I am not proud of this code. Do not write code like this for your own well-being and for preservation of your friendships.
 
 ```
 <style type="text/css">
@@ -124,3 +125,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 </script>
 ```
+
+#### 4. Open your saved file in Chrome
+You should see a button at the top right that that says 'Translations Selected'
+
+#### 5. Select translations
+You can now click on items within the page to highlight them. This will indicate what sections need to be translated.
+As you click on items, you'll see a prompt which asks if you're sure about your selection. You may click an item to deselect it as well. See the demo video below.
+
