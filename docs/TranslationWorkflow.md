@@ -129,9 +129,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 
 #### 4. Open your saved file in Chrome
-You should see a button at the top right that that says 'Translations Selected'
+You should see a button at the top right that that reads *Translations Selected*
 
-#### 5. Select translations
+#### 5. Highlight translations and download csv
 You can now click on items within the page to highlight them. This will indicate what sections need to be translated.
-As you click on items, you'll see a prompt which asks if you're sure about your selection. You may click an item to deselect it as well. See the demo video below.
+As you click on items, you'll see a prompt which asks if you're sure about your selection. You may click an item to deselect it as well. 
+
+Once you've completed making selections, click the *Translations Selected* button. This will begin a download of two files. Your browser may ask for your permission to download multiple files. If so, click ok.
+
+![Download the Page](./images/translation_workflow_2.gif)
 
