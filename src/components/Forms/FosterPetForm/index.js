@@ -34,7 +34,9 @@ class FosterPetForm extends Component {
       step: nextStep,
       schema: multiStepSchema[nextStep].schema,
       uiSchema: multiStepSchema[nextStep].ui,
-      formData: {},
+      formData: {
+        isOver18: null,
+      },
     });
     return;
   }
@@ -49,26 +51,9 @@ class FosterPetForm extends Component {
     return;
   }
   handleChange(data) {
-    // Following the example cited in Mozilla docs:
-    // https://jsfiddle.net/69z2wepo/88541/
     log('changed');
     let { formData } = data;
     let schema = { ...this.state.schema };
-    console.log(schema);
-    if (formData.isOver18 === 'No') {
-      schema.properties = Object.assign(schema.properties, {
-        // I really wish this conditional part of the schema lived with the rest of the schema info
-        isNotOver18Warning: {
-          type: 'string',
-          title: ' ',
-        },
-      });
-    } else {
-      schema.properties = Object.assign({}, schema.properties);
-      delete formData.isNotOver18Warning;
-      delete schema.properties.isNotOver18Warning;
-    }
-    console.log(formData);
     this.setState({
       formData,
       schema,

@@ -1,4 +1,5 @@
 import React from 'react';
+import RadioWithConditionalMessage from 'components/Forms/FormElements/RadioWithConditionalMessage';
 
 const schemaStep1 = {
   title: 'Tell us how to contact you',
@@ -67,9 +68,17 @@ const schemaStep2 = {
   type: 'object',
   properties: {
     isOver18: {
-      type: 'string',
+      type: 'boolean',
       title: 'Are you age 18 or older?',
-      enum: ['Yes', 'No'],
+      enum: [true, false],
+      enumNames: ['Yes', 'No'],
+      uniqueItems: true,
+    },
+    hasReliableTransportation: {
+      type: 'boolean',
+      title:
+        'Do you have reliable transportation, such as your own car or access to a car whenever you need it, to bring your foster animal to the Austin Animal Center for free foster animal veterinary care or in the event of an emergency?',
+      enum: [true, false],
       enumNames: ['Yes', 'No'],
       uniqueItems: true,
     },
@@ -79,22 +88,34 @@ const schemaStep2 = {
 const uiSchemaStep2 = {
   isOver18: {
     'ui:autofocus': true,
-    'ui:widget': 'radio',
-  },
-  isNotOver18Warning: {
     'ui:widget': props => {
+      console.log(props);
       return (
-        <div className="alert alert-danger alert-body">
-          <p>Unfortunately, we cannot accept your application at this time.</p>
-          <p>Please ask a member of your household who is over 18 to apply.</p>
-          <p>
-            If you are applying to fulfill volunteer hours, you can still foster
-            and receive credit even though someone else filled out the
-            application.
-          </p>
-        </div>
+        <RadioWithConditionalMessage
+          message={
+            <div>
+              <p>
+                Unfortunately, we cannot accept your application at this time.
+              </p>
+              <p>
+                Please ask a member of your household who is over 18 to apply.
+              </p>
+              <p>
+                If you are applying to fulfill volunteer hours, you can still
+                foster and receive credit even though someone else filled out
+                the application.
+              </p>
+            </div>
+          }
+          messageType="danger"
+          displayMessageOnValue={false}
+          {...props}
+        />
       );
     },
+  },
+  hasReliableTransportation: {
+    'ui:widget': 'radio',
   },
 };
 
