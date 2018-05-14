@@ -1,14 +1,10 @@
 import React from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
-import I18nLink from 'components/I18nLinks/I18nLink';
-import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 
-const i18nMessages = defineMessages({
-  home: {
-    id: 'PageBreadcrumbs.Home.text',
-    defaultMessage: 'Home',
-  },
-});
+import { navigation as i18n } from 'js/i18n/definitions';
+
+import I18nLink from 'components/I18n/I18nLink';
+import PropTypes from 'prop-types';
 
 const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (
   <I18nLink
@@ -28,7 +24,7 @@ const PageBreadcrumbs = ({ intl, title, grandparent, parent }) => (
     <div className="coa-PageBreadcrumbs">
       <Breadcrumb
         breadcrumb={{
-          text: intl.formatMessage(i18nMessages.home),
+          text: intl.formatMessage(i18n.home),
           slug: '',
         }}
         classNameSuffix="home"

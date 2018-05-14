@@ -4,3 +4,13 @@ export const SCREEN_BREAKPOINTS = {
   MEDIUM: 768,
   SMALL: 480,
 };
+
+export const WEEKDAY_MAP = {
+  SUNDAY: 0,
+  MONDAY: 1,
+  TUESDAY: 2,
+  WEDNESDAY: 3,
+  THURSDAY: 4,
+  FRIDAY: 5,
+  SATURDAY: 6,
+};

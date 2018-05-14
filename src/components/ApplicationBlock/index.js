@@ -1,21 +1,11 @@
 import React from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+
+import { callToAction as i18n } from 'js/i18n/definitions';
 
 import Recollect from 'components/Recollect';
 import ContactMap from 'components/Contact/ContactMap';
 import SectionHeader from 'components/SectionHeader';
-
-const i18nMessages = defineMessages({
-  applicationBlockRecollectCalendar: {
-    id: 'ApplicationBlock.recollect.calendar',
-    defaultMessage: 'Type your street address in the box below',
-  },
-  applicationBlockRecollectWizard: {
-    id: 'ApplicationBlock.recollect.wizard',
-    defaultMessage:
-      'Check the "What do I do with" tool below to find out what items are accepted.',
-  },
-});
 
 const ApplicationBlock = ({ content, intl }) => {
   const { type, value } = content;
@@ -24,18 +14,18 @@ const ApplicationBlock = ({ content, intl }) => {
     case 'collection_schedule_block':
       app = <Recollect options={{ name: 'calendar' }} />;
       title = intl.formatMessage(
-        i18nMessages.applicationBlockRecollectCalendar,
+        i18n.enterAddress,
       );
       id = 'HashLink-Recollect';
       break;
     case 'what_do_i_do_with_block':
       app = <Recollect options={{ name: 'wizard' }} />;
-      title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
+      title = intl.formatMessage(i18n.whatDoIDoWith);
       id = 'HashLink-Recollect';
       break;
     case 'recollect_block':
       app = <Recollect options={{ page: 'tabbed_widget', name: 'wizard' }} />;
-      title = intl.formatMessage(i18nMessages.applicationBlockRecollectWizard);
+      title = intl.formatMessage(i18n.whatDoIDoWith);
       id = 'HashLink-Recollect';
       break;
     case 'map_block':

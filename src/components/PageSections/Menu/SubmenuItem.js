@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import I18nNavLink from 'components/I18nLinks/I18nNavLink';
+import I18nNavLink from 'components/I18n/I18nNavLink';
 
 const SubmenuItem = ({ className, topic, handleCloseAllMenus }) => (
   <li onClick={handleCloseAllMenus} className="coa-SubmenuItem" role="menuitem">

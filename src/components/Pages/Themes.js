@@ -1,11 +1,14 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { injectIntl } from 'react-intl';
+
+import { themes as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 
-const Themes = ({ allThemes }) => {
+const Themes = ({ allThemes, intl }) => {
   const links = cleanLinks(allThemes, '/themes');
 
   return (
@@ -14,10 +17,10 @@ const Themes = ({ allThemes }) => {
         <PageHeader title={'All Themes'} />
       </div>
       <div className="wrapper">
-        <TileGroup tiles={links} tag="theme" />
+        <TileGroup tiles={links} tag={intl.formatMessage(i18n.theme)} />
       </div>
     </div>
   );
 };
 
-export default withRouteData(Themes);
+export default withRouteData(injectIntl(Themes));

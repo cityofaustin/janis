@@ -1,21 +1,13 @@
 import React from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
+import { misc as i18n } from 'js/i18n/definitions';
 import SectionHeader from 'components/SectionHeader';
-
-const i18nMessages = defineMessages({
-  stepsSectionTitle: {
-    id: 'Steps.SectionTitle',
-    defaultMessage: 'Steps',
-  },
-});
 
 const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
   <div className="coa-Steps">
-    <SectionHeader>
-      {intl.formatMessage(i18nMessages.stepsSectionTitle)}
-    </SectionHeader>
+    <SectionHeader>{intl.formatMessage(i18n.steps)}</SectionHeader>
     <div
       className="coa-Steps__list"
       dangerouslySetInnerHTML={{ __html: stepsAsHtmlFromAdmin }}
@@ -25,7 +17,6 @@ const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
 
 Steps.propTypes = {
   stepsAsHtmlFromAdmin: PropTypes.string.isRequired,
-  intl: PropTypes.object.isRequired,
 };
 
 export default injectIntl(Steps);

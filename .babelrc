@@ -2,9 +2,12 @@
   "extends": "react-static/.babelrc",
   "plugins": [
     [
-      "react-intl", {
-        "messagesDir": "./i18n/messages"
-      }
+      "react-intl-auto", {
+        "removePrefix": true,
+        "filebase": false,
+        "includeExportName": true,
+        "extractComments": true
+      },
     ]
   ],
 }

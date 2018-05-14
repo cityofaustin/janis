@@ -1,11 +1,14 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { injectIntl } from 'react-intl';
+
+import { topics as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
 
-const Topics = ({ allTopics }) => {
+const Topics = ({ allTopics, intl }) => {
   const links = cleanLinks(allTopics, '/topics');
 
   return (
@@ -14,10 +17,10 @@ const Topics = ({ allTopics }) => {
         <PageHeader title={'All Topics'} />
       </div>
       <div className="wrapper">
-        <TileGroup tiles={links} tag="topic" />
+        <TileGroup tiles={links} tag={intl.formatMessage(i18n.topic)} />
       </div>
     </div>
   );
 };
 
-export default withRouteData(Topics);
+export default withRouteData(injectIntl(Topics));

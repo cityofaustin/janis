@@ -1,42 +1,27 @@
-import React, { Component } from 'react';
-import Routes from 'react-static-routes';
-import locale from 'browser-locale';
-import Cookies from 'js-cookie';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withSiteData } from 'react-static';
+import Routes from 'react-static-routes';
+import { IntlProvider } from 'react-intl';
+import locale from 'browser-locale';
+import Cookies from 'js-cookie';
 import { find } from 'lodash';
 
-// react-intl i18n
-import { IntlProvider, addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import es from 'react-intl/locale-data/es';
-import vi from 'react-intl/locale-data/vi';
-import ar from 'react-intl/locale-data/ar';
-import messages_en from 'js/i18n/locales/en.json';
-import messages_es from 'js/i18n/locales/es.json';
-import messages_vi from 'js/i18n/locales/vi.json';
-import messages_ar from 'js/i18n/locales/ar.json';
+import localeMessages from 'js/i18n/loadLocaleData';
 import {
-  SUPPORTED_LANGUAGES,
   SUPPORTED_LANG_CODES,
   LANG_COOKIE_NAME,
   LANG_COOKIE_EXPIRES,
   DEFAULT_LANG,
 } from 'js/i18n/constants';
-addLocaleData([...en, ...es, ...vi, ...ar]);
-const localeMessages = {
-  en: messages_en,
-  es: messages_es,
-  vi: messages_vi,
-  ar: messages_ar,
-};
 
-// page_sections
+import I18nDecorator from 'components/I18n/I18nDecorator';
+import SkipToMain from 'components/PageSections/SkipToMain';
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
-class LanguageWrapper extends Component {
+class I18nController extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -117,46 +102,35 @@ class LanguageWrapper extends Component {
     if (lang && lang !== this.state.lang) this.setState({ lang: lang });
   }
 
-  getDirectionFromLanguage(lang) {
-    const currentLangObject = find(SUPPORTED_LANGUAGES, { code: lang });
-    return currentLangObject.direction;
-  }
-
   render() {
     const { lang } = this.state;
     const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
-    const direction = this.getDirectionFromLanguage(lang);
 
     return (
       <IntlProvider
         locale={lang}
         messages={messages}
         defaultLocale={DEFAULT_LANG}
+        textComponent={Fragment}
         key={lang}
       >
-        <div
-          style={{ position: 'relative' }}
-          dir={direction}
-          className={`coa-${direction}`}
-        >
-          <a href="#main" className="usa-skipnav">
-            Skip to main content
-          </a>
+        <I18nDecorator>
+          <SkipToMain />
           <LanguageSelectBar path={match.params.path || ''} />
           <Header navigation={navigation[lang]} />
           <main role="main" id="main">
             <Routes />
           </main>
           <Footer threeoneone={threeoneone[lang]} />
-        </div>
+        </I18nDecorator>
       </IntlProvider>
     );
   }
 }
 
-LanguageWrapper.propTypes = {
+I18nController.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default withSiteData(LanguageWrapper);
+export default withSiteData(I18nController);
