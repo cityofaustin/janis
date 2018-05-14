@@ -6,7 +6,7 @@ import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
 import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
-import I18nNavLink from 'components/I18nLinks/I18nNavLink';
+import I18nNavLink from 'components/I18n/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
 import MenuItem from 'components/PageSections/Menu/MenuItem';
 
@@ -151,10 +151,7 @@ const MobileFooter = injectIntl(({ intl }) => (
       <p>
         <WorkInProgress />
       </p>
-      <img
-        src={citySealImg}
-        alt={intl.formatMessage(i18n1.citySeal)}
-      />
+      <img src={citySealImg} alt={intl.formatMessage(i18n1.citySeal)} />
     </div>
   </div>
 ));

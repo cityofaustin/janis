@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
 import Menu from 'components/PageSections/Menu';
-import I18nLink from 'components/I18nLinks/I18nLink';
+import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
 
 class Header extends Component {

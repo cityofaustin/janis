@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 
 import { navigation as i18n } from 'js/i18n/definitions';
 
-import I18nLink from 'components/I18nLinks/I18nLink';
+import I18nLink from 'components/I18n/I18nLink';
 import PropTypes from 'prop-types';
 
 const Breadcrumb = ({ breadcrumb, classNameSuffix }) => (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import WorkInProgress from 'components/WorkInProgress';
 import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
-import I18nNavLink from 'components/I18nLinks/I18nNavLink';
+import I18nNavLink from 'components/I18n/I18nNavLink';
 import ArrowRightSVG from 'components/SVGs/ArrowRight';
 
 const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
