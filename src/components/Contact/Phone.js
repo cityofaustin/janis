@@ -9,9 +9,11 @@ const Phone = ({ phone }) => (
       <span>
         <a href={`tel:${phone.default}`}>{phone.default}</a>
       </span>
-      <span>
-        TDD/TTY: <a href={`tel:${phone.tty}`}>{phone.tty}</a>
-      </span>
+      {phone.tty && (
+        <span>
+          TDD/TTY: <a href={`tel:${phone.tty}`}>{phone.tty}</a>
+        </span>
+      )}
     </div>
   </div>
 );
@@ -19,7 +21,7 @@ const Phone = ({ phone }) => (
 Phone.propTypes = {
   phone: PropTypes.shape({
     default: PropTypes.string.isRequired,
-    tty: PropTypes.string.isRequired,
+    tty: PropTypes.string,
   }),
 };
 

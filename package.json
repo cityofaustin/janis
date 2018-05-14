@@ -1,13 +1,13 @@
 {
   "name": "janis",
   "version": "1.0.1",
-  "description":
-    "Public facing frontend public side of austin.gov using React components.",
+  "description": "Public facing frontend public side of austin.gov using React components.",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.1.1",
     "browser-locale": "^1.0.3",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "graphql-request": "^1.4.1",
@@ -24,6 +24,7 @@
     "react-ga": "^2.4.1",
     "react-hot-loader": "^3.1.3",
     "react-intl": "^2.4.0",
+    "react-jsonschema-form": "^1.0.3",
     "react-load-script": "^0.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -52,10 +53,8 @@
     "build-langs": "babel intl.buildlangs.js | node",
     "start-js": "react-static start",
     "build-js": "react-static build",
-    "build-css":
-      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
