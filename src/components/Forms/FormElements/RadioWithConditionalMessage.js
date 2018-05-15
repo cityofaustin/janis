@@ -9,13 +9,16 @@ const RadioWithConditionalMessage = props => {
     readonly,
     autofocus,
     onChange,
-    message,
-    messageType,
-    displayMessageOnValue,
   } = props;
   // Generating a unique field name to identify this set of radio buttons
   const name = Math.random().toString();
   const { enumOptions } = options;
+
+  // compare props vs ui:options
+  const message = props.message || options.message;
+  const messageType = props.messageType || options.messageType;
+  const displayMessageOnValue =
+    props.displayMessageOnValue || options.displayMessageOnValue || false;
 
   // checked={checked} has been moved above name={name}, As mentioned in #349;
   // this is a temporary fix for radio button rendering bug in React, facebook/react#7630.

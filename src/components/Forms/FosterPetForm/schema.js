@@ -115,32 +115,30 @@ const uiSchemaStep2 = {
   },
   hasReliableTransportation: {
     'ui:widget': props => {
-      return (
-        <RadioWithConditionalMessage
-          message={
-            <div>
-              <p>
-                You may continue the application, but you must have a reliable
-                transportation plan in place before fostering.
-              </p>
-              <p>
-                Foster animals must receive veterinary care immediately,
-                especially in the event of an emergency.
-              </p>
-              <p>
-                If you cannot get a reliable plan in place, but you would like
-                to help in other ways, please visit{' '}
-                <a href="http://www.austintexas.gov/department/volunteer">
-                  our volunteer page
-                </a>.
-              </p>
-            </div>
-          }
-          messageType="warning"
-          displayMessageOnValue={false}
-          {...props}
-        />
-      );
+      return <RadioWithConditionalMessage {...props} />;
+    },
+    'ui:options': {
+      message: (
+        <div>
+          <p>
+            You may continue the application, but you must have a reliable
+            transportation plan in place before fostering.
+          </p>
+          <p>
+            Foster animals must receive veterinary care immediately, especially
+            in the event of an emergency.
+          </p>
+          <p>
+            If you cannot get a reliable plan in place, but you would like to
+            help in other ways, please visit{' '}
+            <a href="http://www.austintexas.gov/department/volunteer">
+              our volunteer page
+            </a>.
+          </p>
+        </div>
+      ),
+      messageType: 'warning',
+      displayMessageOnValue: false,
     },
   },
 };
