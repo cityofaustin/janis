@@ -28,7 +28,6 @@ class FosterPetForm extends Component {
     };
   }
   handleSubmit() {
-    log('submitted');
     let nextStep = Number(this.state.step) + 1;
     this.setState({
       step: nextStep,
@@ -41,7 +40,6 @@ class FosterPetForm extends Component {
     return;
   }
   handleBack() {
-    log('back');
     let previousStep = Number(this.state.step) - 1;
     this.setState({
       step: previousStep,
@@ -51,7 +49,6 @@ class FosterPetForm extends Component {
     return;
   }
   handleChange(data) {
-    log('changed');
     let { formData } = data;
     let schema = { ...this.state.schema };
     this.setState({
@@ -61,7 +58,6 @@ class FosterPetForm extends Component {
     return;
   }
   render() {
-    console.log(this.state.formData);
     return (
       <div className="wrapper container-fluid FosterPetForm">
         <div className="row">
@@ -77,7 +73,7 @@ class FosterPetForm extends Component {
               uiSchema={this.state.uiSchema}
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
-              onError={log('errors')}
+              onError={console.log('errors')}
               formData={this.state.formData}
             >
               <button type="submit">Next</button>

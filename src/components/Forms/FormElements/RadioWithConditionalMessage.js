@@ -17,16 +17,10 @@ const RadioWithConditionalMessage = props => {
   const name = Math.random().toString();
   const { enumOptions } = options;
 
-  console.log('props', props);
-  console.log('displayMessageOnValue', displayMessageOnValue);
-  console.log('value', value);
-  console.log('hoi', value === displayMessageOnValue);
   // checked={checked} has been moved above name={name}, As mentioned in #349;
   // this is a temporary fix for radio button rendering bug in React, facebook/react#7630.
   return (
     <fieldset className="field-radio-group">
-      {/* <legend /> */}
-      {/* <ul> */}
       {enumOptions.map((option, i) => {
         const checked = option.value === value;
         const disabledCls = disabled || readonly ? 'disabled' : '';
@@ -49,7 +43,7 @@ const RadioWithConditionalMessage = props => {
 
         return radio;
       })}
-      {/* </ul> */}
+
       {value === displayMessageOnValue && (
         <FormAlert type={messageType}>{message}</FormAlert>
       )}
