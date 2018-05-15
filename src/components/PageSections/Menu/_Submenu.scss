@@ -1,5 +1,6 @@
 .coa-Submenu {
   display: none;
+  font-family: $coa-font-sans;
   padding: 0 $coa-spacing-small;
   @include media($coa-large-screen) {
     background-color: $coa-color-white;
@@ -15,8 +16,7 @@
     & > li .coa-Submenu {
       left: 0;
     }
-    & > li:nth-last-of-type(2) .coa-Submenu,
-    & > li:last-of-type .coa-Submenu {
+    & > li:nth-of-type(n + 6) .coa-Submenu {
       right: 0;
       left: auto;
     }
@@ -28,8 +28,7 @@
         left: auto;
         right: 0;
       }
-      & > li:nth-last-of-type(2) .coa-Submenu,
-      & > li:last-of-type .coa-Submenu {
+      & > li:nth-of-type(n + 6) .coa-Submenu {
         left: 0;
         right: auto;
       }

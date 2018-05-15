@@ -12,36 +12,34 @@ storiesOf('Menu', module)
   .add('Menu open', () => (
     <Menu
       isMenuOpen={true}
-      toggleMenu={linkTo('Menu', 'Menu closed in mobile')}
+      closeMenu={linkTo('Menu', 'Menu closed')}
       navigation={navigationData}
     />
   ))
-  .add('Menu closed in mobile', () => (
+  .add('Menu closed', () => (
     <Menu
       isMenuOpen={false}
-      toggleMenu={linkTo('Menu', 'Menu open')}
+      closeMenu={linkTo('Menu', 'Menu closed')}
       navigation={navigationData}
     />
-  ))
-  .add('MenuItem closed', () => (
-    <ul className="coa-Menu__list">
-      <MenuItem
-        id={1}
-        theme={navigationData.allThemes.edges[1].node}
-        isSubmenuOpen={false}
-        handleToggleAllMenus={action('handleToggleAllMenus')}
-        handleSubmenuToggle={linkTo('Menu', 'MenuItem open')}
-      />
-    </ul>
   ))
   .add('MenuItem open', () => (
     <ul className="coa-Menu__list">
       <MenuItem
         id={1}
-        theme={navigationData.allThemes.edges[1].node}
+        theme={navigationData[0]}
         isSubmenuOpen={true}
-        handleToggleAllMenus={action('handleToggleAllMenus')}
         handleSubmenuToggle={linkTo('Menu', 'MenuItem closed')}
+      />
+    </ul>
+  ))
+  .add('MenuItem closed', () => (
+    <ul className="coa-Menu__list">
+      <MenuItem
+        id={1}
+        theme={navigationData[0]}
+        isSubmenuOpen={false}
+        handleSubmenuToggle={linkTo('Menu', 'MenuItem open')}
       />
     </ul>
   ));

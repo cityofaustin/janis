@@ -1,6 +1,7 @@
 .coa-Menu {
   background-color: $coa-color-white;
   bottom: 0;
+  font-family: $coa-font-sans;
   left: -100vw;
   overflow-y: auto;
   position: fixed;
@@ -50,8 +51,8 @@
     font-size: $coa-font-size-xsmall;
     margin: 0 0 $coa-spacing-medium 0;
     svg {
-      height: $coa-font-size-xsmall - .1rem;
-      width: $coa-font-size-xsmall - .1rem;
+      height: $coa-font-size-xsmall - 0.1rem;
+      width: $coa-font-size-xsmall - 0.1rem;
     }
   }
 }

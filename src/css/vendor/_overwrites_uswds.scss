@@ -17,13 +17,14 @@ h2 {
   @include heading2();
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
   padding: 0;
 
   li {
     @include responsivetext();
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
   }
 }
 
@@ -31,12 +32,16 @@ p {
   @include responsivetext();
 }
 
-label, textarea, input, select {
+label,
+textarea,
+input,
+select {
   margin: 0;
   max-width: none;
 }
 
-input[type="button"], input[type="submit"] {
+input[type='button'],
+input[type='submit'] {
   margin: 0;
 }
 
@@ -52,13 +57,15 @@ button {
     background: none;
     color: inherit;
   }
+  width: auto;
 }
 
 .usa-table-borderless {
   margin: 0;
   padding: 0;
 
-  td, th {
+  td,
+  th {
     border: none;
     margin: 0;
     padding: 0;
@@ -71,7 +78,8 @@ button {
 
 .coa-rtl {
   .usa-table-borderless {
-    th, td {
+    th,
+    td {
       text-align: right;
     }
     th:first-child {
