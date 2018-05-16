@@ -17,7 +17,6 @@ import {
 
 import I18nDecorator from 'components/I18n/I18nDecorator';
 import SkipToMain from 'components/PageSections/SkipToMain';
-import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
@@ -128,8 +127,10 @@ class I18nController extends Component {
       >
         <I18nDecorator>
           <SkipToMain />
-          <LanguageSelectBar path={match.params.path || ''} />
-          <Header navigation={cleanedNavigation} />
+          <Header
+            navigation={cleanedNavigation}
+            path={match.params.path || ''}
+          />
           <main role="main" id="main">
             <Routes />
           </main>

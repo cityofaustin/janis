@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
+import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
@@ -30,46 +31,51 @@ class Header extends Component {
   };
 
   render() {
-    const { intl, navigation } = this.props;
+    const { intl, navigation, path } = this.props;
 
     return (
-      <header
-        className={`coa-Header ${
-          this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''
-        }`}
-        role="banner"
-      >
-        <div className="container-fluid wrapper">
-          <div className="coa-Header__controls">
-            <div className="coa-Header__left-controls">
-              <button
-                onClick={this.openMenu}
-                tabIndex="0"
-                className="coa-Header__menu-toggle d-lg-none"
-                ref="menu"
-              >
-                {intl.formatMessage(i18n2.menu)}
-              </button>
-              <span className="coa-text-spacer--vertical d-lg-none" />
-              <I18nLink className="coa-Header__logo" to="/">
-                ALPHA.AUSTIN.GOV
-              </I18nLink>
-            </div>
-            <div className="coa-Header__right-controls">
-              <ExternalLink to="http://www.austintexas.gov/airport">
-                {intl.formatMessage(i18n1.airport)}
-              </ExternalLink>
-              <span className="coa-text-spacer--vertical" />
-              <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
+      <Fragment>
+        <LanguageSelectBar path={path} />
+        <header
+          className={`coa-Header ${
+            this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''
+          }`}
+          role="banner"
+        >
+          <div className="container-fluid wrapper">
+            <div className="coa-Header__controls">
+              <div className="coa-Header__left-controls">
+                <button
+                  onClick={this.openMenu}
+                  tabIndex="0"
+                  className="coa-Header__menu-toggle d-lg-none"
+                  ref="menu"
+                >
+                  {intl.formatMessage(i18n2.menu)}
+                </button>
+                <span className="coa-text-spacer--vertical d-lg-none" />
+                <I18nLink className="coa-Header__logo" to="/">
+                  ALPHA.AUSTIN.GOV
+                </I18nLink>
+              </div>
+              <div className="coa-Header__right-controls">
+                <ExternalLink to="http://www.austintexas.gov/airport">
+                  {intl.formatMessage(i18n1.airport)}
+                </ExternalLink>
+                <span className="coa-text-spacer--vertical" />
+                <ExternalLink to="http://311.austintexas.gov/">
+                  311
+                </ExternalLink>
+              </div>
             </div>
           </div>
-        </div>
-        <Menu
-          isMenuOpen={this.state.menuIsOpen}
-          closeMenu={this.closeMenu}
-          navigation={navigation}
-        />
-      </header>
+          <Menu
+            isMenuOpen={this.state.menuIsOpen}
+            closeMenu={this.closeMenu}
+            navigation={navigation}
+          />
+        </header>
+      </Fragment>
     );
   }
 }
@@ -83,6 +89,7 @@ Header.propTypes = {
       url: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default injectIntl(Header);

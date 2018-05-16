@@ -1,6 +1,5 @@
 .coa-Submenu {
   display: none;
-  font-family: $coa-font-sans;
   padding: 0 $coa-spacing-small;
   @include media($coa-large-screen) {
     background-color: $coa-color-white;
