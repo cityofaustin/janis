@@ -1,8 +1,12 @@
 import React from 'react';
-import PhoneSVG from 'components/SVGs/Phone';
 import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 
-const Phone = ({ phone }) => (
+import { contact as i18n } from 'js/i18n/definitions';
+
+import PhoneSVG from 'components/SVGs/Phone';
+
+const Phone = ({ phone, intl }) => (
   <div className="coa-ContactItem coa-ContactPhone">
     <PhoneSVG />
     <div>
@@ -11,7 +15,8 @@ const Phone = ({ phone }) => (
       </span>
       {phone.tty && (
         <span>
-          TDD/TTY: <a href={`tel:${phone.tty}`}>{phone.tty}</a>
+          {intl.formatMessage(i18n.phoneTTD)}:{' '}
+          <a href={`tel:${phone.tty}`}>{phone.tty}</a>
         </span>
       )}
     </div>
@@ -25,4 +30,4 @@ Phone.propTypes = {
   }),
 };
 
-export default Phone;
+export default injectIntl(Phone);

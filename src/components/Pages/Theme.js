@@ -1,13 +1,16 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+
+import { services as i18n } from 'js/i18n/definitions';
 
 import TileGroupSet from 'components/Tiles/TileGroupSet';
 import PageHeader from 'components/PageHeader';
 import { cleanLinks } from 'js/helpers/cleanData';
 
-const Theme = ({ theme }) => {
-  const { text: title, callToAction, description, topics } = theme;
+const Theme = ({ theme, intl }) => {
+  const { text: title, description, topics } = theme;
   //TODO: clean data where sourced
   let cleanedTopics = cleanLinks(topics, '/topics');
   cleanedTopics.map(topic => {
@@ -21,7 +24,7 @@ const Theme = ({ theme }) => {
       </div>
 
       <div className="wrapper container-fluid">
-        <TileGroupSet tileGroups={cleanedTopics} tag="service" />
+        <TileGroupSet tileGroups={cleanedTopics} tag={intl.formatMessage(i18n.service)} />
       </div>
     </div>
   );
@@ -29,12 +32,10 @@ const Theme = ({ theme }) => {
 
 Theme.propTypes = {
   theme: PropTypes.shape({
-    text: PropTypes.string,
-    callToAction: PropTypes.string,
-    description: PropTypes.string,
-    services: PropTypes.string,
-    theme: PropTypes.string,
-  }),
+    text: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    topics: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
-export default withRouteData(Theme);
+export default withRouteData(injectIntl(Theme));

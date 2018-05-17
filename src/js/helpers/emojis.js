@@ -32,26 +32,3 @@ export const emojis = {
     emoji: '😀',
   },
 };
-
-export const i18nEmojis = defineMessages({
-  disappointed: {
-    id: 'Emoji.Disappointed.toString',
-    defaultMessage: 'Disappointed',
-  },
-  sad: {
-    id: 'Emoji.Sad.toString',
-    defaultMessage: 'Sad',
-  },
-  neutral: {
-    id: 'Emoji.Neutral.toString',
-    defaultMessage: 'Neutral',
-  },
-  slightlySmiling: {
-    id: 'Emoji.SlightlySmiling.toString',
-    defaultMessage: 'Slightly Smiling',
-  },
-  grinning: {
-    id: 'Emoji.Grinning.toString',
-    defaultMessage: 'Grinning',
-  },
-});

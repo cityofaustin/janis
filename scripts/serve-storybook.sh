@@ -17,9 +17,10 @@ docker run \
     --publish 6006:80 \
     --volume "$PWD/src:/app/src" \
     --volume "$PWD/public:/app/public" \
+    --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --volume "$PWD/package.json:/app/package.json" \
-    --volume "$PWD/.storybook:/app/.storybook" \
     --volume "$PWD/.babelrc:/app/.babelrc" \
+     --volume "$PWD/.storybook:/app/.storybook" \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \
     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
     --env "CMS_API=http://$HOST_IP:8000/api/graphql/" \

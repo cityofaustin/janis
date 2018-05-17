@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script';
+import { injectIntl } from 'react-intl';
+
+import { form as i18n } from 'js/i18n/definitions';
 
 class Recollect extends Component {
   handleScriptLoad() {
@@ -21,10 +24,11 @@ class Recollect extends Component {
   }
 
   render() {
+    const { intl } = this.props;
     return (
       <div className="coa-Recollect" id="rCw">
         <img
-          alt="Loading"
+          alt={intl.formatMessage(i18n.loading)}
           src="https://recollect.a.ssl.fastly.net/0.11.1516038288/images/loading.gif"
         />
         <Script
@@ -36,4 +40,4 @@ class Recollect extends Component {
   }
 }
 
-export default Recollect;
+export default injectIntl(Recollect);

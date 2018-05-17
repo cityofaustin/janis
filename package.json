@@ -43,17 +43,20 @@
     "@storybook/addons": "^3.3.15",
     "@storybook/react": "^3.3.15",
     "babel-core": "^6.26.0",
-    "babel-plugin-react-intl": "^2.4.0",
+    "babel-plugin-react-intl-auto": "^1.1.0",
     "eslint-config-react-tools": "1.x.x",
+    "extract-react-intl-messages": "^0.8.2",
     "prettier": "1.12.1",
-    "serve": "^6.1.0"
+    "serve": "^6.1.0",
+    "storybook-addon-intl": "^2.3.0"
   },
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
-    "build-langs": "babel intl.buildlangs.js | node",
     "start-js": "react-static start",
     "build-js": "react-static build",
+    "build-translations":
+      "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
     "build-css":
       "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css":

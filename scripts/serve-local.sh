@@ -18,7 +18,6 @@ docker run \
     --volume "$PWD/public:/app/public" \
     --volume "$PWD/yarn.lock:/app/yarn.lock" \
     --volume "$PWD/package.json:/app/package.json" \
-    --volume "$PWD/intl.buildlangs.js:/app/intl.buildlangs.js" \
     --volume "$PWD/static.config.js:/app/static.config.js" \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \

@@ -12,7 +12,6 @@ COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
 RUN yarn
 
-COPY intl.buildlangs.js /app/intl.buildlangs.js
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 COPY .storybook /app/.storybook

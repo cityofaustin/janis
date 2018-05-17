@@ -1,28 +1,16 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
-import SecondaryContentBanner from 'components/PageSections/SecondaryContentBanner';
+import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+
+import WorkInProgress from 'components/WorkInProgress';
+import PageNotificationBanner from 'components/PageNotificationBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import { cleanLinks } from 'js/helpers/cleanData';
-
-const i18nMessages = defineMessages({
-  homeRelatedlinksSectiontitle: {
-    id: 'Home.RelatedLinks.SectionTitle',
-    defaultMessage: 'Check out City of Austin services',
-  },
-  homeRelatedlinksTag: {
-    id: 'Home.RelatedLinks.Tag',
-    defaultMessage: 'Service',
-  },
-  homeHeroWelcometext: {
-    id: 'Home.Hero.welcometext',
-    defaultMessage: 'Welcome to',
-  },
-});
 
 const Home = ({ topServices, image, intl }) => {
   //TODO: clean data where sourced
@@ -33,33 +21,16 @@ const Home = ({ topServices, image, intl }) => {
       <HeroHome
         imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
         imageTitle={image.title}
-        preheader={intl.formatMessage(i18nMessages.homeHeroWelcometext)}
+        preheader={intl.formatMessage(i18n2.welcomeTo)}
       />
-      <SecondaryContentBanner>
-        <p>
-          <FormattedMessage
-            id="Home.Secondarycontent.bodytext"
-            defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit  {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
-            values={{
-              citySiteLink: (
-                <ExternalLink to="https://austintexas.gov">
-                  austintexas.gov
-                </ExternalLink>
-              ),
-              projectsSiteLink: (
-                <ExternalLink to="https://bit.ly/atx-digital-services">
-                  projects.austintexas.io
-                </ExternalLink>
-              ),
-            }}
-          />
-        </p>
-      </SecondaryContentBanner>
+      <PageNotificationBanner>
+        <WorkInProgress />
+      </PageNotificationBanner>
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18nMessages.homeRelatedlinksSectiontitle)}
+          title={intl.formatMessage(i18n3.checkOutServices)}
           tiles={serviceLinks}
-          tag={intl.formatMessage(i18nMessages.homeRelatedlinksTag)}
+          tag={intl.formatMessage(i18n3.service)}
         />
       </div>
     </div>

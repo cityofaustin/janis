@@ -73,6 +73,32 @@ For more information about the concepts and architectural decisions guiding this
 
 This project uses [React-Static](https://github.com/nozzle/react-static) as a base framework for building static-progressive React applications and websites. It's designed with considerations for SEO, site performance, and user/developer experience.
 
+### 🌍 React-Intl
+
+This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
+
+* the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method, alongside the dangerouslySetInnerHTML property available to React elements, to render translations of **trusted content** which include HTML. Note translated content cannot include React Components (see note below for rendering React Components with translations). Also note that the corresponding FormattedMessage Component will NOT return unescaped HTML.
+ex. The 311 Section Header includes HTML links.
+
+* the FormattedMessage react-intl component will parse React components from the values property. We can utilize this method to render translations which have React components as parameters.
+ex. The footer body text include ExternalLink components.
+
+#### babel-plugin-react-intl-auto
+
+* To simplify management of our static translation ids, we use [babel-plugin-react-intl-auto](https://github.com/akameco/babel-plugin-react-intl-auto). This plugin allows simpler translation definitions and automatically generates translated content ids namespaced to module export names, file paths, or a combination based on our babel react-intl-auto settings.
+
+* Translation definitions live in src/js/i18n/definitions.js. Note translations are broken down into separate named exports which can later be moved into their own respective files as static translated content increases. When this is done, be sure to maintain the export name to not have to update imports. Translations are also defined inline when requiring more complex mark-up or JSX (see WorkInProgress component).
+
+#### extract-react-intl-messages
+
+* We use [extract-react-intl-messages](https://github.com/akameco/extract-react-intl-messages) to automatically extract our static translation definitions and build json files for each supported locale. Translations for each locale (accept the default en.json) needs to be manually entered once received from translators. Translations for each locale live in src/js/i18n/locales/. To extract new definitions run
+
+```
+docker exec --interactive --tty <janis or janis-build> yarn run build-translations
+```
+
+This plugin will *NOT* remove previously defined translations which are no longer present in the current app definitions. This clean up needs to be done manually at the moment.
+
 ### 📚 Storybook
 
 * Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
@@ -157,22 +183,8 @@ Your local host machine's yarn.lock and package.json files will also be updated 
 Add a package via yarn (https://yarnpkg.com/lang/en/docs/cli/add/)
 
 ```
-docker exec --interactive --tty janis yarn add <package name>
+docker exec --interactive --tty <janis or janis-build> yarn add <package name>
 ```
-
-Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
-
-### Updating translation export via yarn
-
-All static translations live in src/js/i18n/locales/ directory.
-These files are versioned and built from the auto-generated default.json file (within that directory) via [babel-plugin-react-intl](https://github.com/yahoo/babel-plugin-react-intl).
-To re-generate default.json to update the static content to be translated, the following command can be run:
-
-```
-docker exec --interactive --tty janis yarn run build-langs
-```
-
-Note: if you're running the docker container built by serve-build.sh you'll have to update the container name from `janis` to `janis-build` in the above command.
 
 ### Static build script
 
@@ -195,7 +207,7 @@ We're using BEM for CSS naming and organization
 * class names for js components should correspond with the js component name(capitalized and camelCased).
   * EX. LinkList.js markup has styles applied via the class names `coa-LinkList coa-LinkList--boxprimary`.
 * class names which are not js components but have multiple words should be separated by a -
-  EX. `coa-Footer__body-text`
+  EX. `coa-Footer__work-in-progress`
 
 Resources:
 
@@ -218,3 +230,4 @@ more a11y Resources:
 * [How we’ve made GOV.UK Elements even more accessible](https://accessibility.blog.gov.uk/2018/02/28/how-weve-made-gov-uk-elements-even-more-accessible/) and https://accessibility.blog.gov.uk/ in general
 * https://accessibility.18f.gov/
 * https://developer.mozilla.org/en-US/docs/Learn/Accessibility
+* tel aria guidance from: http://thatdevgirl.com/blog/accessibility-phone-number-formatting

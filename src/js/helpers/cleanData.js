@@ -1,19 +1,11 @@
+import { WEEKDAY_MAP } from 'js/helpers/constants';
+
 export const cleanContacts = contacts => {
   if (!contacts || !contacts.edges) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
-  const weekdayMap = {
-    SUNDAY: 0,
-    MONDAY: 1,
-    TUESDAY: 2,
-    WEDNESDAY: 3,
-    THURSDAY: 4,
-    FRIDAY: 5,
-    SATURDAY: 6,
-  };
-
-  const getWeekday = day => weekdayMap[day];
+  const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
   const getTimestamp = hours => {
     const splitHours = hours.split(':');
@@ -32,7 +24,7 @@ export const cleanContacts = contacts => {
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
-        dayOfWeek: hours.dayOfWeek,
+        dayOfWeek: hours.dayOfWeek.toLowerCase(),
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
         startTime: getTimestamp(hours.startTime),
         endTime: getTimestamp(hours.endTime),
