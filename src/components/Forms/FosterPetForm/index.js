@@ -3,6 +3,7 @@ import { withRouteData } from 'react-static';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import Form from 'react-jsonschema-form';
+import _ from 'lodash';
 
 import FormWithBlur from 'components/Forms/FormElements/FormWithBlur';
 import PageHeader from 'components/PageHeader';
@@ -22,10 +23,23 @@ class FosterPetForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleBack = this.handleBack.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    const initialStep = 5;
+    const originaFormData = {};
+
+    const initialState = processFormForConditionals(
+      multiStepSchema[initialStep].schema,
+      multiStepSchema[initialStep].ui,
+      multiStepSchema[initialStep].schema,
+      multiStepSchema[initialStep].ui,
+      originaFormData,
+    );
+
+
     this.state = {
-      step: 1,
-      schema: multiStepSchema[1].schema,
-      uiSchema: multiStepSchema[1].ui,
+      step: 5,
+      schema: initialState.schema,
+      uiSchema: initialState.uiSchema,
     };
   }
   handleSubmit() {
@@ -53,15 +67,15 @@ class FosterPetForm extends Component {
     const schema = { ...this.state.schema };
     const uiSchema = { ...this.state.uiSchema };
     const { formData } = data;
-    console.log('inside handleChange');
 
     const newState = processFormForConditionals(
-      this.originalSchema,
-      this.originalUISchema,
+      multiStepSchema[this.state.step].schema,
+      multiStepSchema[this.state.step].ui,
       schema,
       uiSchema,
       formData,
     );
+
     console.log(newState);
 
     this.setState(newState);
@@ -81,7 +95,7 @@ class FosterPetForm extends Component {
               uiSchema={this.state.uiSchema}
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
-              onError={console.log('errors')}
+              onError={log('errors')}
               allowOnBlur={true}
               formData={this.state.formData}
               widgets={multiStepSchema.widgets}
@@ -199,10 +213,12 @@ function processFormForConditionals(
 
   // Update UI Schema UI order
   // react-jsonschema-form cannot handle extra properties found in UI order
-  newUISchema['ui:order'] = _.intersection(
-    originalUISchema['ui:order'],
-    _.keys(newSchema.properties),
-  );
+  if (originalUISchema['ui:order']) {
+    newUISchema['ui:order'] = _.intersection(
+      originalUISchema['ui:order'],
+      _.keys(newSchema.properties),
+    );
+  }
   // Update Schema required fields
   if (originalSchema.hasOwnProperty('required')) {
     newSchema.required = _.intersection(

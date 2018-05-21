@@ -312,11 +312,100 @@ const step5 = {
         enumNames: ['Yes', 'No'],
         uniqueItems: true,
       },
+      hasDogAtHome: {
+        type: 'boolean',
+        title: 'Do any dogs live in your home or visit often?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      dogs: {
+        type: 'array',
+        title: 'Dogs',
+        items: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              title: `Your dog's name`,
+            },
+            age: {
+              type: 'integer',
+              title: `Your dog's age`,
+            },
+            weight: {
+              type: 'string',
+              title: `Your dog's weight`,
+              enum: [
+                `Small (Under 20 lbs)`,
+                `Medium (20-40 lbs)`,
+                `Large (40 lbs and higher)`,
+              ],
+            },
+            sex: {
+              type: 'string',
+              title: `Your dog's sex`,
+              enum: [`Female`, `Male`],
+            },
+          },
+        },
+      },
+      hasCatAtHome: {
+        type: 'boolean',
+        title: 'Do any cats live in your home or visit often?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      hasOtherAnimalsAtHome: {
+        type: 'boolean',
+        title:
+          'Do any other types of animals live in your home or visit often?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      isAbleToSeperateFosterAnimals: {
+        type: 'string',
+        title:
+          'Inside your home, are you able to separate your foster animals from your own animals or the animals that often visit if needed?',
+        help: `Until your animals and foster animals get used to each other or in case one gets sick, they may need to be separated for each other's safety and well-being.`,
+        enum: ['yes', 'no', 'maybe'],
+        enumNames: ['Yes', 'No', 'Maybe'],
+      },
     },
   },
   ui: {
+    'ui:order': [
+      'hasAnimals',
+      'hasDogAtHome',
+      'dogs',
+      'hasCatAtHome',
+      'hasOtherAnimalsAtHome',
+      'isAbleToSeperateFosterAnimals',
+    ],
     hasAnimals: {
       'ui:widget': 'coaRadio',
+    },
+    hasDogAtHome: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasAnimals=true',
+    },
+    dogs: {
+      condition: 'hasDogAtHome=true',
+      items: {},
+      'ui:options': {
+        orderable: false,
+      },
+    },
+    hasCatAtHome: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasAnimals=true',
+    },
+    hasOtherAnimalsAtHome: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasAnimals=true',
+    },
+    isAbleToSeperateFosterAnimals: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasAnimals=true',
     },
   },
 };
