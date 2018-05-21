@@ -19,7 +19,7 @@ const Home = ({ topServices, image, intl }) => {
   return (
     <div>
       <HeroHome
-        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+        imageUrl={`${process.env.CMS_MEDIA}/images/${image.file}.original.jpg`}
         imageTitle={image.title}
         preheader={intl.formatMessage(i18n2.welcomeTo)}
       />
