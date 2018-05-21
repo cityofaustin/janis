@@ -7,6 +7,9 @@ const HeroHome = ({ imageUrl, imageTitle, preheader }) => (
       className="coa-HeroHome"
       role="img"
       aria-label={imageTitle}
+      style={{
+        background: 'linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3))',
+      }}
     >
       <div className="container-fluid wrapper">
         <span className="coa-HeroHome-preheader">{preheader}</span>
