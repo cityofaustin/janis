@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { injectIntl } from 'react-intl';
 
 import Footer from 'components/PageSections/Footer';
 import threeoneoneData from 'stories/static_data/threeoneoneData';

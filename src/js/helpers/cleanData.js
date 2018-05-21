@@ -58,6 +58,22 @@ export const cleanLinks = (links, pathPrefix) => {
   });
 };
 
+export const cleanNavigation = navigation => {
+  const { allThemes } = navigation;
+
+  if (!allThemes || !allThemes.edges) return null;
+
+  let cleanedNavigation = cleanLinks(allThemes, '/themes');
+  cleanedNavigation.map(theme => {
+    theme.topics = cleanLinks(theme.topics, '/topics');
+    theme.topics.map(topic => {
+      topic.services = cleanLinks(topic.services, '/services');
+    });
+  });
+
+  return cleanedNavigation;
+};
+
 export const clean311 = threeoneone => {
   const { all311 } = threeoneone;
 

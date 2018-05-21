@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -34,61 +34,50 @@ class Header extends Component {
     const { intl, navigation, path } = this.props;
 
     return (
-      <Fragment>
+      <header
+        className={`coa-Header ${
+          this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''
+        }`}
+        role="banner"
+      >
         <LanguageSelectBar path={path} />
-        <header
-          className={`coa-Header ${
-            this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''
-          }`}
-          role="banner"
-        >
-          <div className="container-fluid wrapper">
-            <div className="coa-Header__controls">
-              <div className="coa-Header__left-controls">
-                <button
-                  onClick={this.openMenu}
-                  tabIndex="0"
-                  className="coa-Header__menu-toggle d-lg-none"
-                  ref="menu"
-                >
-                  {intl.formatMessage(i18n2.menu)}
-                </button>
-                <span className="coa-text-spacer--vertical d-lg-none" />
-                <I18nLink className="coa-Header__logo" to="/">
-                  ALPHA.AUSTIN.GOV
-                </I18nLink>
-              </div>
-              <div className="coa-Header__right-controls">
-                <ExternalLink to="http://www.austintexas.gov/airport">
-                  {intl.formatMessage(i18n1.airport)}
-                </ExternalLink>
-                <span className="coa-text-spacer--vertical" />
-                <ExternalLink to="http://311.austintexas.gov/">
-                  311
-                </ExternalLink>
-              </div>
+        <div className="container-fluid wrapper">
+          <div className="coa-Header__controls">
+            <div className="coa-Header__left-controls">
+              <button
+                onClick={this.openMenu}
+                tabIndex="0"
+                className="coa-Header__menu-toggle d-lg-none"
+                ref="menu"
+              >
+                {intl.formatMessage(i18n2.menu)}
+              </button>
+              <span className="coa-text-spacer--vertical d-lg-none" />
+              <I18nLink className="coa-Header__logo" to="/">
+                ALPHA.AUSTIN.GOV
+              </I18nLink>
+            </div>
+            <div className="coa-Header__right-controls">
+              <ExternalLink to="http://www.austintexas.gov/airport">
+                {intl.formatMessage(i18n1.airport)}
+              </ExternalLink>
+              <span className="coa-text-spacer--vertical" />
+              <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
             </div>
           </div>
-          <Menu
-            isMenuOpen={this.state.menuIsOpen}
-            closeMenu={this.closeMenu}
-            navigation={navigation}
-          />
-        </header>
-      </Fragment>
+        </div>
+        <Menu
+          isMenuOpen={this.state.menuIsOpen}
+          closeMenu={this.closeMenu}
+          navigation={navigation[intl.locale]}
+        />
+      </header>
     );
   }
 }
 
 Header.propTypes = {
-  navigation: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      topics: PropTypes.array.isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  navigation: PropTypes.object.isRequired,
   path: PropTypes.string.isRequired,
 };
 

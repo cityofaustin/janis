@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withSiteData } from 'react-static';
 import Routes from 'react-static-routes';
 import { IntlProvider } from 'react-intl';
 import locale from 'browser-locale';
@@ -16,11 +15,6 @@ import {
 } from 'js/i18n/constants';
 
 import I18nDecorator from 'components/I18n/I18nDecorator';
-import SkipToMain from 'components/PageSections/SkipToMain';
-import Header from 'components/PageSections/Header';
-import Footer from 'components/PageSections/Footer';
-
-import { cleanLinks } from 'js/helpers/cleanData';
 
 class I18nController extends Component {
   constructor(props) {
@@ -55,7 +49,7 @@ class I18nController extends Component {
 
   getLangFromProps(props) {
     props = props || this.props;
-    const lang = this.getSupportedLang(props.match.params.lang);
+    const lang = this.getSupportedLang(props.lang);
 
     if (!lang) return null;
     //TODO: if not supported, redirect to path without lang
@@ -77,7 +71,7 @@ class I18nController extends Component {
       return lang;
     }
 
-    window.location.href = `/${lang}/${this.props.match.params.path || ''}`;
+    window.location.href = `/${lang}/${this.props.path || ''}`;
   }
 
   getLangFromLocale() {
@@ -95,7 +89,7 @@ class I18nController extends Component {
       return lang;
     }
 
-    window.location.href = `/${lang}/${this.props.match.params.path || ''}`;
+    window.location.href = `/${lang}/${this.props.path || ''}`;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -104,18 +98,9 @@ class I18nController extends Component {
   }
 
   render() {
+    const { children } = this.props;
     const { lang } = this.state;
-    const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
-
-    //TODO: clean data where sourced
-    let cleanedNavigation = cleanLinks(navigation[lang].allThemes, '/themes');
-    cleanedNavigation.map(theme => {
-      theme.topics = cleanLinks(theme.topics, '/topics');
-      theme.topics.map(topic => {
-        topic.services = cleanLinks(topic.services, '/services');
-      });
-    });
 
     return (
       <IntlProvider
@@ -125,25 +110,16 @@ class I18nController extends Component {
         textComponent={Fragment}
         key={lang}
       >
-        <I18nDecorator>
-          <SkipToMain />
-          <Header
-            navigation={cleanedNavigation}
-            path={match.params.path || ''}
-          />
-          <main role="main" id="main">
-            <Routes />
-          </main>
-          <Footer threeoneone={threeoneone[lang]} />
-        </I18nDecorator>
+        <I18nDecorator>{children}</I18nDecorator>
       </IntlProvider>
     );
   }
 }
 
 I18nController.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  threeoneone: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
+  lang: PropTypes.string,
+  path: PropTypes.string,
 };
 
-export default withSiteData(I18nController);
+export default I18nController;

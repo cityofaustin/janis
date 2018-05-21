@@ -15,7 +15,7 @@ import citySealImg from 'images/coa_seal_white.png';
 
 const Footer = ({ threeoneone, intl }) => (
   <footer className="coa-Footer">
-    <ThreeOneOne threeoneone={threeoneone} />
+    <ThreeOneOne threeoneone={threeoneone[intl.locale]} />
     <div className="container-fluid wrapper">
       <div className="row">
         <div className="col-xs-12 col-md-2">
@@ -49,6 +49,8 @@ const Footer = ({ threeoneone, intl }) => (
   </footer>
 );
 
-Footer.propTypes = Object.assign({}, ThreeOneOne.propTypes);
+Footer.propTypes = {
+  threeoneone: PropTypes.object.isRequired,
+};
 
 export default injectIntl(Footer);
