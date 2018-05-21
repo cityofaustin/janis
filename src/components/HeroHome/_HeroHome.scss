@@ -1,3 +1,19 @@
+.coa-HeroHome-container {
+  img {
+    position: absolute;
+    z-index: -1;
+    height: 26rem;
+    width: 100%;
+    object-fit: cover;
+    @include media($coa-medium-screen) {
+      height: 40rem;
+    }
+    @include media($coa-large-screen) {
+      height: 44rem;
+    }
+  }
+}
+
 .coa-HeroHome {
   flex-direction: column;
   padding: $coa-space-level7 0;
