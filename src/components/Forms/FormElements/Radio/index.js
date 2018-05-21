@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RadioWithConditionalMessage = props => {
+const Radio = props => {
   const {
     options,
     value,
@@ -28,7 +28,11 @@ const RadioWithConditionalMessage = props => {
         const checked = option.value === value;
         const disabledCls = disabled || readonly ? 'disabled' : '';
         const radio = (
-          <span className="radio" onClick={_ => onChange(option.value)}>
+          <span
+            className="radio"
+            onClick={_ => onChange(option.value)}
+            key={`${name}-${i}`}
+          >
             <input
               className="coa-Radio"
               type="radio"
@@ -47,14 +51,15 @@ const RadioWithConditionalMessage = props => {
         return radio;
       })}
 
-      {value === displayMessageOnValue && (
-        <FormAlert type={messageType}>{message}</FormAlert>
-      )}
+      {message &&
+        value === displayMessageOnValue && (
+          <FormAlert type={messageType}>{message}</FormAlert>
+        )}
     </fieldset>
   );
 };
 
-export default RadioWithConditionalMessage;
+export default Radio;
 
 const FormAlert = ({ type, children }) => (
   <div className={`alert alert-${type} alert-body`}>{children}</div>

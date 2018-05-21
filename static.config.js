@@ -183,12 +183,8 @@ export default {
         component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
       {
-        path: '/forms/foster-pet-jsonschema',
+        path: '/forms/animal-center-foster-care',
         component: 'src/components/Forms/FosterPetForm',
-      },
-      {
-        path: '/forms/foster-pet-formik',
-        component: 'src/components/Forms/FosterPetFormik',
       },
     ];
 
