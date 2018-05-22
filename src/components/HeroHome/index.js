@@ -2,15 +2,14 @@ import React from 'react';
 
 const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
   <div className="coa-HeroHome-container">
-    <img src={`${imageFilename}.original.jpg`} 
-         srcset={`${imageFilename}.width-320.jpg 320w,
-                  ${imageFilename}.width-375.jpg 375w,
-                  ${imageFilename}.width-414.jpg 414w,
-                  ${imageFilename}.original.jpg 800w,`}
-         sizes="(max-width: 320px) 320px,
-                (max-width: 375px) 375px,
-                (max-width: 414px) 414px,
-                800px"/>
+    <img srcset={`${imageFilename}.width-640.jpg 640w,
+                  ${imageFilename}.width-720.jpg 720w,
+                  ${imageFilename}.width-750.jpg 750w,
+                  ${imageFilename}.width-828.jpg 828w,
+                  ${imageFilename}.width-1080.jpg 1080w,
+                  ${imageFilename}.width-1440.jpg 1440w,
+                  ${imageFilename}.width-2160.jpg 2160w,`} 
+         src={`${imageFilename}.width-1080.jpg`} />
     <div
       className="coa-HeroHome"
       role="img"
