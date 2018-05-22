@@ -8,10 +8,11 @@ import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
 import I18nNavLink from 'components/I18n/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
-import MenuItem from 'components/PageSections/Menu/MenuItem';
-
 import CloseSVG from 'components/SVGs/Close';
 import citySealImg from 'images/coa_seal.png';
+
+import MenuItem from './MenuItem';
+import { themePropTypes } from './proptypes';
 
 class Menu extends Component {
   constructor(props) {
@@ -152,19 +153,7 @@ const MobileFooter = injectIntl(({ intl }) => (
 ));
 
 Menu.propTypes = {
-  navigation: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      topics: PropTypes.arrayOf(
-        PropTypes.shape({
-          services: PropTypes.array.isRequired,
-          text: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
   closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 };

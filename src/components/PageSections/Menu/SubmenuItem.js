@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import I18nNavLink from 'components/I18n/I18nNavLink';
 
+import { topicPropTypes } from './proptypes';
+
 const SubmenuItem = ({ className, topic, handleCloseAllMenus }) => (
   <li onClick={handleCloseAllMenus} className="coa-SubmenuItem" role="menuitem">
     <I18nNavLink to={topic.url} className={className}>
@@ -14,11 +16,7 @@ const SubmenuItem = ({ className, topic, handleCloseAllMenus }) => (
 SubmenuItem.propTypes = {
   className: PropTypes.string,
   handleCloseAllMenus: PropTypes.func.isRequired,
-  topic: PropTypes.shape({
-    services: PropTypes.array.isRequired,
-    text: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
+  topic: topicPropTypes.isRequired,
 };
 
 export default SubmenuItem;

@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import WorkInProgress from 'components/WorkInProgress';
-import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
 import I18nNavLink from 'components/I18n/I18nNavLink';
 import ArrowRightSVG from 'components/SVGs/ArrowRight';
+
+import SubmenuItem from './SubmenuItem';
+import { themePropTypes } from './proptypes';
 
 const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
   return (
@@ -40,17 +42,7 @@ Submenu.propTypes = {
   handleCloseAllMenus: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   isSubmenuOpen: PropTypes.bool.isRequired,
-  theme: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    topics: PropTypes.arrayOf(
-      PropTypes.shape({
-        services: PropTypes.array.isRequired,
-        text: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
+  theme: themePropTypes.isRequired,
 };
 
 const ThemeSubmenuItem = ({ theme, handleCloseAllMenus }) => (

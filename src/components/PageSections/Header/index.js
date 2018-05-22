@@ -4,10 +4,12 @@ import { injectIntl } from 'react-intl';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
-import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
-import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
+
+import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
+import Menu from 'components/PageSections/Menu';
+import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 
 class Header extends Component {
   constructor(props) {
@@ -77,7 +79,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  navigation: PropTypes.array.isRequired,
+  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
   path: PropTypes.string.isRequired,
 };
 

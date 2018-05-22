@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TileGroup from 'components/Tiles/TileGroup';
+import TileGroup from './TileGroup';
+import { tileGroupSetPropTypes } from './proptypes';
 
 const TileGroupSet = ({ tileGroups, tag }) => {
   return (
@@ -26,10 +27,6 @@ const TileGroupSet = ({ tileGroups, tag }) => {
   );
 };
 
-TileGroupSet.propTypes = {
-  tileGroups: PropTypes.arrayOf(PropTypes.shape(TileGroup.propTypes))
-    .isRequired,
-  tag: PropTypes.string,
-};
+TileGroupSet.propTypes = tileGroupSetPropTypes;
 
 export default TileGroupSet;
