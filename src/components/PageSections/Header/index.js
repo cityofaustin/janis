@@ -69,7 +69,7 @@ class Header extends Component {
         <Menu
           isMenuOpen={this.state.menuIsOpen}
           closeMenu={this.closeMenu}
-          navigation={navigation[intl.locale]}
+          navigation={navigation}
         />
       </header>
     );
@@ -77,7 +77,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.array.isRequired,
   path: PropTypes.string.isRequired,
 };
 
