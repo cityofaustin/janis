@@ -2,6 +2,8 @@ import React from 'react';
 import MapMarkerSVG from 'components/SVGs/MapMarker';
 import PropTypes from 'prop-types';
 
+import { addressPropTypes } from './proptypes';
+
 const Address = ({ location }) => (
   <div className="coa-ContactItem coa-ContactAddress">
     <MapMarkerSVG />
@@ -16,13 +18,7 @@ const Address = ({ location }) => (
 );
 
 Address.propTypes = {
-  location: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    street: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    zip: PropTypes.string.isRequired,
-  }).isRequired,
+  location: addressPropTypes,
 };
 
 export default Address;

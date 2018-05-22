@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedTime } from 'react-intl';
-import { values, findIndex, capitalize } from 'lodash';
+import { findIndex, capitalize } from 'lodash';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
 
 import ClockSVG from 'components/SVGs/ClockO';
+
+import { hoursPropTypes } from './proptypes';
 
 class Hours extends Component {
   constructor(props) {
@@ -77,14 +79,7 @@ class Hours extends Component {
 }
 
 Hours.propTypes = {
-  hours: PropTypes.arrayOf(
-    PropTypes.shape({
-      dayOfWeek: PropTypes.string.isRequired,
-      dayOfWeekNumeric: PropTypes.number.isRequired,
-      endTime: PropTypes.number.isRequired,
-      startTime: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  hours: hoursPropTypes,
 };
 
 export default injectIntl(Hours);
