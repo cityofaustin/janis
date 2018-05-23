@@ -81,6 +81,9 @@ const step2 = {
         type: 'boolean',
         title:
           'Do you have reliable transportation, such as your own car or access to a car whenever you need it, to bring your foster animal to the Austin Animal Center for free foster animal veterinary care or in the event of an emergency?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+        uniqueItems: true,
       },
       canPickUpMedications: {
         type: 'boolean',
@@ -129,7 +132,7 @@ const step2 = {
       'ui:widget': props => {
         return (
           <Radio
-            message={
+            html={
               <div>
                 <p>
                   Unfortunately, we cannot accept your application at this time.
@@ -144,7 +147,7 @@ const step2 = {
                 </p>
               </div>
             }
-            messageType="danger"
+            type="danger"
             displayMessageOnValue={false}
             {...props}
           />
@@ -156,7 +159,7 @@ const step2 = {
       'ui:description':
         'Note that city buses only allow service animals on board, and taxi and ride share drivers do not always allow animals. There may be pet transportation companies in your area.',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may continue the application, but you must have a reliable
@@ -175,7 +178,7 @@ const step2 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
@@ -183,7 +186,7 @@ const step2 = {
       'ui:widget': 'coaRadio',
       'ui:description': 'We provide all medications at no cost to you.',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may continue with the application, but if you cannot go get
@@ -196,14 +199,14 @@ const step2 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
     isFosteringFromOtherOrg: {
       'ui:widget': 'coaRadio',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               Fostering with other organizations does not disqualify you from
@@ -218,7 +221,7 @@ const step2 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: true,
       },
     },
@@ -265,15 +268,55 @@ const step3 = {
       'ui:autofocus': true,
       'ui:widget': 'coaRadio',
       'ui:description': `"Alone" means without people to monitor eating, behavior, and going to the bathroom. For example, if you work in an office from 9am-5pm but come home from 12-1pm, then the longest time period alone would be 4 hours.`,
+      'ui:options': {
+        messages: [
+          {
+            displayMessageOnValue: '8-12 hours',
+            type: 'info',
+            html: (
+              <div>
+                <b>
+                  While we won’t limit your foster choices, you’d be a great
+                  candidate for healthy adult or senior dogs or cats.
+                </b>
+                <p>
+                  The dogs can generally be alone 8-12 hours at a time, and the
+                  cats can usually go 10 hours or more as long as they have
+                  access to everything that they need.
+                </p>
+              </div>
+            ),
+          },
+          {
+            displayMessageOnValue: '12+ hours',
+            type: 'info',
+            html: (
+              <div>
+                <b>
+                  Being gone for several hours is okay! While we won’t limit
+                  your foster choices, you’d be a great candidate for healthy
+                  adult and senior cats.
+                </b>
+                <p>
+                  They can usually go 12 hours or more as long as they have
+                  access to everything that they need.
+                </p>
+                <p>
+                  You may also be a good candidate for animal outings or
+                  overnight stays.
+                </p>
+              </div>
+            ),
+          },
+        ],
+      },
     },
     canYouMeet: {
-      'ui:widget': props => {
-        return <Radio {...props} />;
-      },
+      'ui:widget': 'coaRadio',
       'ui:description':
         'These meetings would be scheduled by you, at times and locations of your choice.',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               Promoting the foster animal and meeting with potential adopters is
@@ -285,7 +328,7 @@ const step3 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
@@ -352,7 +395,7 @@ const step4 = {
       'ui:description':
         'These meetings would be scheduled by you, at times and locations of your choice.',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may continue the application, but before bringing home a
@@ -375,7 +418,7 @@ const step4 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
@@ -559,7 +602,7 @@ const step5 = {
       'ui:widget': 'coaRadio',
       condition: 'hasDogAtHome=true',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may still continue the application, but please vaccinate your
@@ -572,7 +615,7 @@ const step5 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
@@ -594,7 +637,7 @@ const step5 = {
       'ui:widget': 'coaRadio',
       condition: 'hasCatAtHome=true',
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may still continue the application, but please vaccinate your
@@ -607,7 +650,7 @@ const step5 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: false,
       },
     },
@@ -624,7 +667,7 @@ const step5 = {
       condition: 'hasAnimals=true',
       'ui:description': `Until your animals and foster animals get used to each other or in case one gets sick, they may need to be separated for each other's safety and well-being.`,
       'ui:options': {
-        message: (
+        html: (
           <div>
             <p>
               You may continue the application, but before taking home a foster
@@ -639,7 +682,7 @@ const step5 = {
             </p>
           </div>
         ),
-        messageType: 'warning',
+        type: 'warning',
         displayMessageOnValue: ['No', 'Maybe'],
       },
     },

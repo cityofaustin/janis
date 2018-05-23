@@ -16,20 +16,46 @@ const Radio = props => {
   const { enumOptions } = options;
 
   // compare props vs ui:options
-  const message = props.message || options.message;
-  const messageType = props.messageType || options.messageType;
+  const messages = props.messages || options.messages;
+  const html = props.html || options.html;
+  const type = props.type || options.type;
   const displayMessageOnValue =
     props.displayMessageOnValue || options.displayMessageOnValue || false;
 
-  const shouldDisplayMessage = () => {
+  const renderConditionalMessage = () => {
+    // Allow ui schema users to pass more than one message for different radio selections.
+    if (messages) {
+      return messages.map((message, i) => {
+        if (message.html && value === message.displayMessageOnValue) {
+          return (
+            <FormAlert key={i} type={message.type}>
+              {message.html}
+            </FormAlert>
+          );
+        }
+      });
+    }
+
     // Allow ui schema users to pass in an array of values that display the conditional message.
     if (
       Array.isArray(displayMessageOnValue) &&
       displayMessageOnValue.length > 1
     ) {
-      return message && includes(displayMessageOnValue, value);
+      return (
+        html &&
+        includes(displayMessageOnValue, value) && (
+          <FormAlert type={type}>{html}</FormAlert>
+        )
+      );
     }
-    return message && value === displayMessageOnValue;
+
+    // Most basic display of conditional alert
+    return (
+      html &&
+      value === displayMessageOnValue && (
+        <FormAlert type={type}>{html}</FormAlert>
+      )
+    );
   };
 
   // checked={checked} has been moved above name={name}, As mentioned in #349;
@@ -63,9 +89,7 @@ const Radio = props => {
         return radio;
       })}
 
-      {shouldDisplayMessage() && (
-        <FormAlert type={messageType}>{message}</FormAlert>
-      )}
+      {renderConditionalMessage()}
     </fieldset>
   );
 };
