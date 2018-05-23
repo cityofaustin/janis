@@ -444,6 +444,7 @@ const step5 = {
       'isAbleToSeperateFosterAnimals',
     ],
     hasAnimals: {
+      'ui:autofocus': true,
       'ui:widget': 'coaRadio',
     },
     hasDogAtHome: {
@@ -532,19 +533,42 @@ const step5 = {
         message: (
           <div>
             <p>
-              You may still continue the application, but please vaccinate your
-              cats or make sure any cats coming into your home often get
-              vaccinated by their owners before bringing home a foster animal.
+              You may continue the application, but before taking home a foster
+              animal, please consider your options and determine how you could
+              separate the animals if needed.
             </p>
             <p>
-              By law in the State of Texas, all cats must be vaccinated for
-              rabies.
+              It is important that you have a plan in place to separate foster
+              pets from the other pets in your home for their safety and
+              well-being. It can be as simple as keeping them in separate rooms,
+              crates, or using a baby gate as a barrier.
             </p>
           </div>
         ),
         messageType: 'warning',
         displayMessageOnValue: ['No', 'Maybe'],
       },
+    },
+  },
+};
+
+const step6 = {
+  schema: {
+    title: 'Tell us how we can help you foster',
+    type: 'object',
+    properties: {
+      concerns: {
+        title:
+          'Do you have any other questions or concerns not covered in this form or is there anything else you would like us to know?',
+        type: 'string',
+      },
+    },
+  },
+  ui: {
+    concerns: {
+      'ui:widget': 'textarea',
+      'ui:description': 'Optional',
+      'ui:autofocus': true,
     },
   },
 };
@@ -559,5 +583,6 @@ export const multiStepSchema = {
   3: step3,
   4: step4,
   5: step5,
+  6: step6,
   widgets,
 };

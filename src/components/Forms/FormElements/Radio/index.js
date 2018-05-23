@@ -22,7 +22,7 @@ const Radio = props => {
     props.displayMessageOnValue || options.displayMessageOnValue || false;
 
   const shouldDisplayMessage = () => {
-    // Allow ui schema users to pass in an array of values that display a warning message.
+    // Allow ui schema users to pass in an array of values that display the conditional message.
     if (
       Array.isArray(displayMessageOnValue) &&
       displayMessageOnValue.length > 1
