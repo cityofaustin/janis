@@ -41,7 +41,7 @@ const step1 = {
         title: 'State',
       },
       zip: {
-        type: 'string',
+        type: 'number',
         title: 'ZIP',
       },
     },
@@ -59,6 +59,7 @@ const step1 = {
       'ui:options': {
         inputType: 'tel',
       },
+      'ui:placeholder': '_ _ _ - _ _ _ - _ _ _ _',
       'ui:description': 'Enter a 10 digit phone number',
     },
   },
@@ -80,9 +81,45 @@ const step2 = {
         type: 'boolean',
         title:
           'Do you have reliable transportation, such as your own car or access to a car whenever you need it, to bring your foster animal to the Austin Animal Center for free foster animal veterinary care or in the event of an emergency?',
+      },
+      canPickUpMedications: {
+        type: 'boolean',
+        title:
+          'If necessary, can you come to the Austin Animal Center once a month to pick up heartworm and parasite prevention medications?',
         enum: [true, false],
         enumNames: ['Yes', 'No'],
+      },
+      isFosteringFromOtherOrg: {
+        type: 'boolean',
+        title:
+          'Are you currently fostering an animal from another organization?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      fosteringExperience: {
+        type: 'array',
+        title: 'Do you have experience with any of the following:',
+        items: {
+          type: 'string',
+          enum: [
+            'Bottle-feeding infant kittens or puppies',
+            'Administering medications (for example, oral, topical, injections, or eye drops)',
+            'Behavior issues, basic obedience training, or socialization',
+            'None of the above',
+          ],
+        },
         uniqueItems: true,
+      },
+      hasInterestInAvailableAnimal: {
+        type: 'boolean',
+        title:
+          'Is there already an Austin Animal Center animal you are interested in fostering?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      infoAboutAnimalOfInterest: {
+        type: 'string',
+        title: 'Which animal is it or where did you hear about it?',
       },
     },
   },
@@ -115,9 +152,9 @@ const step2 = {
       },
     },
     hasReliableTransportation: {
-      'ui:widget': props => {
-        return <Radio {...props} />;
-      },
+      'ui:widget': 'coaRadio',
+      'ui:description':
+        'Note that city buses only allow service animals on board, and taxi and ride share drivers do not always allow animals. There may be pet transportation companies in your area.',
       'ui:options': {
         message: (
           <div>
@@ -131,7 +168,7 @@ const step2 = {
             </p>
             <p>
               If you cannot get a reliable plan in place, but you would like to
-              help in other ways, please visit{' '}
+              help in other ways, please visit
               <a href="http://www.austintexas.gov/department/volunteer">
                 our volunteer page
               </a>.
@@ -141,6 +178,62 @@ const step2 = {
         messageType: 'warning',
         displayMessageOnValue: false,
       },
+    },
+    canPickUpMedications: {
+      'ui:widget': 'coaRadio',
+      'ui:description': 'We provide all medications at no cost to you.',
+      'ui:options': {
+        message: (
+          <div>
+            <p>
+              You may continue with the application, but if you cannot go get
+              medications, you should consider only doing short term foster
+              periods of two weeks or less.
+            </p>
+            <p>
+              It is vital that foster animals receive their medication for their
+              health and the health of animals around them.
+            </p>
+          </div>
+        ),
+        messageType: 'warning',
+        displayMessageOnValue: false,
+      },
+    },
+    isFosteringFromOtherOrg: {
+      'ui:widget': 'coaRadio',
+      'ui:options': {
+        message: (
+          <div>
+            <p>
+              Fostering with other organizations does not disqualify you from
+              fostering, but we do require that when you have one of the Austin
+              Animal Center’s animals in your home, that you do not have foster
+              animals from other organizations at the same time.
+            </p>
+            <p>
+              This is to protect the health, safety, and overall well-being of
+              the animals. If you feel that you have a special circumstance that
+              you would like for us to consider, please let us know.
+            </p>
+          </div>
+        ),
+        messageType: 'warning',
+        displayMessageOnValue: true,
+      },
+    },
+    fosteringExperience: {
+      'ui:widget': 'checkboxes',
+      'ui:description':
+        'You will not be disqualified for not having a certain experience.',
+    },
+    hasInterestInAvailableAnimal: {
+      'ui:widget': 'coaRadio',
+      'ui:description':
+        'For example, if you saw one on a Facebook post. This does not guarantee that the animal will be placed with you, but we will take you into consideration.',
+    },
+    infoAboutAnimalOfInterest: {
+      condition: 'hasInterestInAvailableAnimal=true',
     },
   },
 };
@@ -293,6 +386,7 @@ const step4 = {
       'ui:options': {
         orderable: false,
       },
+      'ui:emptyValue': '',
     },
   },
 };

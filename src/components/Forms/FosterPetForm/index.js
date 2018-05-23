@@ -24,7 +24,7 @@ class FosterPetForm extends Component {
     this.handleBack = this.handleBack.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
-    const initialStep = 5;
+    const initialStep = 1;
     const originaFormData = {};
 
     const initialState = processFormForConditionals(
@@ -35,9 +35,8 @@ class FosterPetForm extends Component {
       originaFormData,
     );
 
-
     this.state = {
-      step: 5,
+      step: initialStep,
       schema: initialState.schema,
       uiSchema: initialState.uiSchema,
     };
