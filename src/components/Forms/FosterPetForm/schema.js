@@ -59,7 +59,7 @@ const step1 = {
       'ui:options': {
         inputType: 'tel',
       },
-      'ui:help': 'Enter a 10 digit phone number',
+      'ui:description': 'Enter a 10 digit phone number',
     },
   },
 };
@@ -155,7 +155,6 @@ const step3 = {
         title:
           'On an average day, what is the longest period of time foster animals will be left alone in the home?',
         enum: ['0-4 hours', '4-8 hours', '8-12 hours', '12+ hours'],
-        // enumNames: ['Yes', 'No'],
         uniqueItems: true,
       },
       canYouMeet: {
@@ -172,14 +171,13 @@ const step3 = {
     longestTimeAlone: {
       'ui:autofocus': true,
       'ui:widget': 'coaRadio',
-      'ui:help':
-        '"Alone" means without people to monitor eating, behavior, and going to the bathroom. For example, if you work in an office from 9am-5pm but come home from 12-1pm, then the longest time period alone would be 4 hours.',
+      'ui:description': `"Alone" means without people to monitor eating, behavior, and going to the bathroom. For example, if you work in an office from 9am-5pm but come home from 12-1pm, then the longest time period alone would be 4 hours.`,
     },
     canYouMeet: {
       'ui:widget': props => {
         return <Radio {...props} />;
       },
-      'ui:help':
+      'ui:description':
         'These meetings would be scheduled by you, at times and locations of your choice.',
       'ui:options': {
         message: (
@@ -258,7 +256,7 @@ const step4 = {
       'ui:widget': props => {
         return <Radio {...props} />;
       },
-      'ui:help':
+      'ui:description':
         'These meetings would be scheduled by you, at times and locations of your choice.',
       'ui:options': {
         message: (
@@ -349,9 +347,64 @@ const step5 = {
           },
         },
       },
+      areAllDogsSpayedOrNeutered: {
+        type: 'boolean',
+        title: 'Are all of the above dogs spayed or neutered?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      areAllDogsVaccinated: {
+        type: 'boolean',
+        title: 'Do all of the above dogs have current rabies vaccinations?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
       hasCatAtHome: {
         type: 'boolean',
         title: 'Do any cats live in your home or visit often?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      cats: {
+        type: 'array',
+        title: 'Cats',
+        items: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              title: `Your dog's name`,
+            },
+            age: {
+              type: 'integer',
+              title: `Your dog's age`,
+            },
+            weight: {
+              type: 'string',
+              title: `Your dog's weight`,
+              enum: [
+                `Small (Under 20 lbs)`,
+                `Medium (20-40 lbs)`,
+                `Large (40 lbs and higher)`,
+              ],
+            },
+            sex: {
+              type: 'string',
+              title: `Your dog's sex`,
+              enum: [`Female`, `Male`],
+            },
+          },
+        },
+      },
+      areAllCatsSpayedOrNeutered: {
+        type: 'boolean',
+        title: 'Are all of the above cats spayed or neutered?',
+        enum: [true, false],
+        enumNames: ['Yes', 'No'],
+      },
+      areAllCatsVaccinated: {
+        type: 'boolean',
+        title: 'Do all of the above cats have current rabies vaccinations?',
         enum: [true, false],
         enumNames: ['Yes', 'No'],
       },
@@ -362,13 +415,16 @@ const step5 = {
         enum: [true, false],
         enumNames: ['Yes', 'No'],
       },
+      otherAnimals: {
+        type: 'string',
+        title: 'Please list the other types of animals.',
+      },
       isAbleToSeperateFosterAnimals: {
         type: 'string',
         title:
           'Inside your home, are you able to separate your foster animals from your own animals or the animals that often visit if needed?',
         help: `Until your animals and foster animals get used to each other or in case one gets sick, they may need to be separated for each other's safety and well-being.`,
-        enum: ['yes', 'no', 'maybe'],
-        enumNames: ['Yes', 'No', 'Maybe'],
+        enum: ['Yes', 'No', 'Maybe'],
       },
     },
   },
@@ -377,8 +433,14 @@ const step5 = {
       'hasAnimals',
       'hasDogAtHome',
       'dogs',
+      'areAllDogsSpayedOrNeutered',
+      'areAllDogsVaccinated',
       'hasCatAtHome',
+      'cats',
+      'areAllCatsSpayedOrNeutered',
+      'areAllCatsVaccinated',
       'hasOtherAnimalsAtHome',
+      'otherAnimals',
       'isAbleToSeperateFosterAnimals',
     ],
     hasAnimals: {
@@ -390,22 +452,99 @@ const step5 = {
     },
     dogs: {
       condition: 'hasDogAtHome=true',
-      items: {},
       'ui:options': {
         orderable: false,
+      },
+    },
+    areAllDogsSpayedOrNeutered: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasDogAtHome=true',
+    },
+    areAllDogsVaccinated: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasDogAtHome=true',
+      'ui:options': {
+        message: (
+          <div>
+            <p>
+              You may still continue the application, but please vaccinate your
+              dogs or make sure any dogs visiting your home often get vaccinated
+              by their owners before bringing home a foster animal.
+            </p>
+            <p>
+              By law in the State of Texas, all dogs must be vaccinated for
+              rabies.
+            </p>
+          </div>
+        ),
+        messageType: 'warning',
+        displayMessageOnValue: false,
       },
     },
     hasCatAtHome: {
       'ui:widget': 'coaRadio',
       condition: 'hasAnimals=true',
     },
+    cats: {
+      condition: 'hasCatAtHome=true',
+      'ui:options': {
+        orderable: false,
+      },
+    },
+    areAllCatsSpayedOrNeutered: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasCatAtHome=true',
+    },
+    areAllCatsVaccinated: {
+      'ui:widget': 'coaRadio',
+      condition: 'hasCatAtHome=true',
+      'ui:options': {
+        message: (
+          <div>
+            <p>
+              You may still continue the application, but please vaccinate your
+              cats or make sure any cats coming into your home often get
+              vaccinated by their owners before bringing home a foster animal.
+            </p>
+            <p>
+              By law in the State of Texas, all cats must be vaccinated for
+              rabies.
+            </p>
+          </div>
+        ),
+        messageType: 'warning',
+        displayMessageOnValue: false,
+      },
+    },
     hasOtherAnimalsAtHome: {
       'ui:widget': 'coaRadio',
       condition: 'hasAnimals=true',
     },
+    otherAnimals: {
+      'ui:widget': 'textarea',
+      condition: 'hasOtherAnimalsAtHome=true',
+    },
     isAbleToSeperateFosterAnimals: {
       'ui:widget': 'coaRadio',
       condition: 'hasAnimals=true',
+      'ui:description': `Until your animals and foster animals get used to each other or in case one gets sick, they may need to be separated for each other's safety and well-being.`,
+      'ui:options': {
+        message: (
+          <div>
+            <p>
+              You may still continue the application, but please vaccinate your
+              cats or make sure any cats coming into your home often get
+              vaccinated by their owners before bringing home a foster animal.
+            </p>
+            <p>
+              By law in the State of Texas, all cats must be vaccinated for
+              rabies.
+            </p>
+          </div>
+        ),
+        messageType: 'warning',
+        displayMessageOnValue: ['No', 'Maybe'],
+      },
     },
   },
 };
