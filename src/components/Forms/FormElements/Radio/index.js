@@ -1,4 +1,5 @@
 import React from 'react';
+import { includes } from 'lodash';
 
 const Radio = props => {
   const {
@@ -19,6 +20,17 @@ const Radio = props => {
   const messageType = props.messageType || options.messageType;
   const displayMessageOnValue =
     props.displayMessageOnValue || options.displayMessageOnValue || false;
+
+  const shouldDisplayMessage = () => {
+    // Allow ui schema users to pass in an array of values that display a warning message.
+    if (
+      Array.isArray(displayMessageOnValue) &&
+      displayMessageOnValue.length > 1
+    ) {
+      return message && includes(displayMessageOnValue, value);
+    }
+    return message && value === displayMessageOnValue;
+  };
 
   // checked={checked} has been moved above name={name}, As mentioned in #349;
   // this is a temporary fix for radio button rendering bug in React, facebook/react#7630.
@@ -51,10 +63,9 @@ const Radio = props => {
         return radio;
       })}
 
-      {message &&
-        value === displayMessageOnValue && (
-          <FormAlert type={messageType}>{message}</FormAlert>
-        )}
+      {shouldDisplayMessage() && (
+        <FormAlert type={messageType}>{message}</FormAlert>
+      )}
     </fieldset>
   );
 };
