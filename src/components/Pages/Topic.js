@@ -9,6 +9,7 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import FormFeedback from 'components/FormFeedback';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const Topic = ({ topic, intl }) => {
@@ -35,6 +36,9 @@ const Topic = ({ topic, intl }) => {
           tiles={relatedLinks}
           tag={intl.formatMessage(i18n.service)}
         />
+      </div>
+      <div className="wrapper wrapper--sm container-fluid">
+        <FormFeedback />
       </div>
     </div>
   );

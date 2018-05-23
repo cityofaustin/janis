@@ -7,6 +7,7 @@ import { services as i18n } from 'js/i18n/definitions';
 
 import TileGroupSet from 'components/Tiles/TileGroupSet';
 import PageHeader from 'components/PageHeader';
+import FormFeedback from 'components/FormFeedback';
 import { cleanLinks } from 'js/helpers/cleanData';
 
 const Theme = ({ theme, intl }) => {
@@ -24,7 +25,14 @@ const Theme = ({ theme, intl }) => {
       </div>
 
       <div className="wrapper container-fluid">
-        <TileGroupSet tileGroups={cleanedTopics} tag={intl.formatMessage(i18n.service)} />
+        <TileGroupSet
+          tileGroups={cleanedTopics}
+          tag={intl.formatMessage(i18n.service)}
+        />
+      </div>
+
+      <div className="wrapper wrapper--sm container-fluid">
+        <FormFeedback />
       </div>
     </div>
   );

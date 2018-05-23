@@ -6,6 +6,7 @@ import { services as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import FormFeedback from 'components/FormFeedback';
 
 import { cleanLinks } from 'js/helpers/cleanData';
 
@@ -22,7 +23,13 @@ const Services = ({ allServices, intl }) => {
         />
       </div>
       <div className="wrapper container-fluid">
-        <TileGroup tiles={relatedLinks} tag={intl.formatMessage(i18n.service)} />
+        <TileGroup
+          tiles={relatedLinks}
+          tag={intl.formatMessage(i18n.service)}
+        />
+      </div>
+      <div className="wrapper wrapper--sm container-fluid">
+        <FormFeedback />
       </div>
     </div>
   );

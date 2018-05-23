@@ -6,6 +6,7 @@ import { withRouteData } from 'react-static';
 import SectionHeader from 'components/SectionHeader';
 import PageHeader from 'components/PageHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
+import FormFeedback from 'components/FormFeedback';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
@@ -29,6 +30,7 @@ const Department = ({ department }) => {
         <SectionHeader hasHighlight={true}>Our Mission</SectionHeader>
         <p>{body}</p>
         {contact && <ContactDetails contact={contact} />}
+        <FormFeedback />
       </div>
     </div>
   );
