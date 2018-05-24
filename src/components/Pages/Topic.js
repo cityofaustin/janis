@@ -10,46 +10,33 @@ import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback';
-import { cleanLinks } from 'js/helpers/cleanData';
 
-const Topic = ({ topic, intl }) => {
-  const {
-    theme,
-    text: title,
-    description,
-    callToAction,
-    services: links,
-  } = topic;
-  //TODO: clean data where sourced
-  const relatedLinks = cleanLinks(links, '/services');
-
-  return (
-    <div>
-      <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
-      <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader title={title} description={description} hasBorder={true} />
-        <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
-      </div>
-
-      <div className="wrapper container-fluid">
-        <TileGroup
-          tiles={relatedLinks}
-          tag={intl.formatMessage(i18n.service)}
-        />
-      </div>
-      <div className="wrapper wrapper--sm container-fluid">
-        <FormFeedback />
-      </div>
+const Topic = ({
+  topic: { theme, text: title, description, callToAction, tiles },
+  intl,
+}) => (
+  <div>
+    <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
+    <div className="wrapper wrapper--sm container-fluid">
+      <PageHeader title={title} description={description} hasBorder={true} />
+      <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
     </div>
-  );
-};
+
+    <div className="wrapper container-fluid">
+      <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} />
+    </div>
+    <div className="wrapper wrapper--sm container-fluid">
+      <FormFeedback />
+    </div>
+  </div>
+);
 
 Topic.propTypes = {
   topic: PropTypes.shape({
     text: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     callToAction: PropTypes.string.isRequired,
-    services: PropTypes.object.isRequired,
+    tiles: PropTypes.array.isRequired,
     theme: PropTypes.shape({
       text: PropTypes.string,
       slug: PropTypes.string,

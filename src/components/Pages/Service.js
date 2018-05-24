@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
 import { injectIntl } from 'react-intl';
-import { findKey } from 'lodash';
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
@@ -16,12 +15,10 @@ import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback';
 
-import { cleanContacts, cleanRelatedServiceLinks } from 'js/helpers/cleanData';
-
-const Service = ({ service, intl }) => {
-  const {
+const Service = ({
+  service: {
     image,
-    title,
+    text: title,
     slug,
     topic,
     topic: { theme },
@@ -30,60 +27,52 @@ const Service = ({ service, intl }) => {
     additionalContent,
     contacts,
     related,
-  } = service;
+  },
+  intl,
+}) => (
+  <div>
+    <PageBanner
+      imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+      imageTitle={image.title}
+    />
+    <PageBreadcrumbs
+      grandparent={{ ...theme, subpath: 'themes' }}
+      parent={{ ...topic, subpath: 'topics' }}
+      title={title}
+    />
+    <div className="wrapper wrapper--sm container-fluid">
+      <PageHeader title={title} />
 
-  //TODO: clean data where sourced
-  const contact = cleanContacts(contacts)[0];
-  const cleanedRelated = cleanRelatedServiceLinks(related);
+      {steps && <Steps stepsAsHtmlFromAdmin={steps} />}
 
-  //TODO: mapblock data should include contact data when sent via joplin
-  const tempkey = findKey(dynamicContent, { type: 'map_block' });
-  if (tempkey) dynamicContent[tempkey].value['contact'] = contact;
+      {!!dynamicContent &&
+        dynamicContent.map(content => (
+          <ApplicationBlock key={content.id} content={content} />
+        ))}
 
-  return (
-    <div>
-      <PageBanner
-        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
-        imageTitle={image.title}
-      />
-      <PageBreadcrumbs
-        grandparent={{ ...theme, subpath: 'themes' }}
-        parent={{ ...topic, subpath: 'topics' }}
-        title={title}
-      />
-      <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader title={title} />
-
-        {steps && <Steps stepsAsHtmlFromAdmin={steps} />}
-
-        {!!dynamicContent &&
-          dynamicContent.map(content => (
-            <ApplicationBlock key={content.id} content={content} />
-          ))}
-
-        {additionalContent && (
-          <HtmlFromAdmin
-            title={intl.formatMessage(i18n2.whatElse)}
-            content={additionalContent}
-          />
-        )}
-
-        {contact && <ContactDetails contact={contact} />}
-      </div>
-
-      <div className="wrapper container-fluid">
-        <TileGroup
-          text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-          tiles={cleanedRelated}
-          tag={intl.formatMessage(i18n3.service)}
+      {additionalContent && (
+        <HtmlFromAdmin
+          title={intl.formatMessage(i18n2.whatElse)}
+          content={additionalContent}
         />
-      </div>
+      )}
 
-      <div className="wrapper wrapper--sm container-fluid">
-        <FormFeedback />
-      </div>
+      {!!contacts &&
+        !!contacts.length && <ContactDetails contact={contacts[0]} />}
     </div>
-  );
-};
+
+    <div className="wrapper container-fluid">
+      <TileGroup
+        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
+        tiles={related}
+        tag={intl.formatMessage(i18n3.service)}
+      />
+    </div>
+
+    <div className="wrapper wrapper--sm container-fluid">
+      <FormFeedback />
+    </div>
+  </div>
+);
 
 export default withRouteData(injectIntl(Service));

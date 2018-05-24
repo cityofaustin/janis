@@ -11,34 +11,28 @@ import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import FormFeedback from 'components/FormFeedback';
-import { cleanLinks } from 'js/helpers/cleanData';
 
-const Home = ({ topServices, image, intl }) => {
-  //TODO: clean data where sourced
-  const serviceLinks = cleanLinks(topServices, '/services');
-
-  return (
-    <div>
-      <HeroHome
-        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
-        imageTitle={image.title}
-        preheader={intl.formatMessage(i18n2.welcomeTo)}
+const Home = ({ topServices, image, intl }) => (
+  <div>
+    <HeroHome
+      imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+      imageTitle={image.title}
+      preheader={intl.formatMessage(i18n2.welcomeTo)}
+    />
+    <PageNotificationBanner>
+      <WorkInProgress />
+    </PageNotificationBanner>
+    <div className="wrapper container-fluid">
+      <TileGroup
+        text={intl.formatMessage(i18n3.checkOutServices)}
+        tiles={topServices}
+        tag={intl.formatMessage(i18n3.service)}
       />
-      <PageNotificationBanner>
-        <WorkInProgress />
-      </PageNotificationBanner>
-      <div className="wrapper container-fluid">
-        <TileGroup
-          text={intl.formatMessage(i18n3.checkOutServices)}
-          tiles={serviceLinks}
-          tag={intl.formatMessage(i18n3.service)}
-        />
-      </div>
-      <div className="wrapper wrapper--sm container-fluid">
-        <FormFeedback />
-      </div>
     </div>
-  );
-};
+    <div className="wrapper wrapper--sm container-fluid">
+      <FormFeedback />
+    </div>
+  </div>
+);
 
 export default withRouteData(injectIntl(Home));
