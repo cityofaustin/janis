@@ -34,7 +34,7 @@
   }
 }
 
-.coa-HeroHome-preheader {
+.coa-HeroHome__preheader {
   font-size: $coa-font-size-md-small;
   font-style: italic;
   @include media($coa-medium-screen) {
@@ -45,7 +45,7 @@
   }
 }
 
-.coa-HeroHome-header {
+.coa-HeroHome__header {
   font-size: $coa-font-size-large;
   text-transform: uppercase;
   line-height: $coa-line-height-large;

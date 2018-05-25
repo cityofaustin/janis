@@ -14,8 +14,8 @@ const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
       }}
     >
       <div className="container-fluid wrapper">
-        <span className="coa-HeroHome-preheader">{preheader}</span>
-        <h2 className="coa-HeroHome-header">Austin, TX</h2>
+        <span className="coa-HeroHome__preheader">{preheader}</span>
+        <h2 className="coa-HeroHome__header">Austin, TX</h2>
       </div>
     </div>
   </div>
