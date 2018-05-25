@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
@@ -61,7 +62,7 @@ class Menu extends Component {
     return (
       <div className="container-fluid wrapper">
         <nav
-          className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
+          className={classNames('coa-Menu', { 'coa-Menu--open': isMenuOpen })}
           role="navigation"
         >
           <button

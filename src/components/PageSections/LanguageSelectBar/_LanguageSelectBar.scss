@@ -4,7 +4,7 @@
   font-family: $coa-font-sans;
 }
 
-.coa-LanguageSelectBar__language-list {
+.coa-LanguageSelectBar__list {
   color: $coa-color-white;
   list-style: none;
   height: $coa-languageselectbar-height;
@@ -19,12 +19,12 @@
 }
 
 .coa-rtl {
-  .coa-LanguageSelectBar__language-list {
+  .coa-LanguageSelectBar__list {
     flex-direction: row-reverse;
   }
 }
 
-.coa-LanguageSelectBar__language-item {
+.coa-LanguageSelectBar__item {
   color: $coa-color-white;
   cursor: pointer;
   display: inline-block;
@@ -41,7 +41,7 @@
   &:visited {
     color: $coa-color-white;
   }
-  &.coa-LanguageSelectBar__language-item--active {
+  &.coa-LanguageSelectBar__item--active {
     background-color: $color-gray-lighter;
     color: $coa-color-purple-dark;
   }
