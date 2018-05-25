@@ -1,15 +1,9 @@
 import React from 'react';
+import ResponsiveImage from 'components/ResponsiveImage';
 
 const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
-  <div className="coa-HeroHome-container">
-    <img srcset={`${imageFilename}.width-640.jpg 640w,
-                  ${imageFilename}.width-720.jpg 720w,
-                  ${imageFilename}.width-750.jpg 750w,
-                  ${imageFilename}.width-828.jpg 828w,
-                  ${imageFilename}.width-1080.jpg 1080w,
-                  ${imageFilename}.width-1440.jpg 1440w,
-                  ${imageFilename}.width-2160.jpg 2160w,`} 
-         src={`${imageFilename}.width-1080.jpg`} />
+  <div className="coa-HeroHome__container">
+    <ResponsiveImage filename={imageFilename}/>
     <div
       className="coa-HeroHome"
       role="img"
