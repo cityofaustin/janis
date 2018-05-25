@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const HeroHome = ({ imageUrl, imageTitle, preheader }) => (
   <div
@@ -20,5 +21,11 @@ const HeroHome = ({ imageUrl, imageTitle, preheader }) => (
     </div>
   </div>
 );
+
+HeroHome.propTypes = {
+  imageTitle: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  preheader: PropTypes.string.isRequired,
+};
 
 export default HeroHome;

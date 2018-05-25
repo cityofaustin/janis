@@ -73,7 +73,7 @@ const Service = ({ service, intl }) => {
 
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18n3.checkOutRelatedServices)}
+          text={intl.formatMessage(i18n3.checkOutRelatedServices)}
           tiles={cleanedRelated}
           tag={intl.formatMessage(i18n3.service)}
         />

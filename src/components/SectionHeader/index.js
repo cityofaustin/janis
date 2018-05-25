@@ -12,6 +12,7 @@ const SectionHeader = ({ isSerif, hasHighlight, children }) => (
 );
 
 SectionHeader.propTypes = {
+  children: PropTypes.node.isRequired,
   isSerif: PropTypes.bool,
   hasHighlight: PropTypes.bool,
 };

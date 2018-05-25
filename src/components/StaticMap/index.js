@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { contact as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
@@ -37,6 +38,18 @@ const StaticMap = ({ location, intl }) => {
       </a>
     </div>
   );
+};
+
+StaticMap.propTypes = {
+  location: PropTypes.shape({
+    name: PropTypes.string,
+    street: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    zip: PropTypes.string,
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }).isRequired,
 };
 
 export default injectIntl(StaticMap);

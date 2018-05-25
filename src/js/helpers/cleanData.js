@@ -49,13 +49,29 @@ export const cleanLinks = (links, pathPrefix) => {
   if (!links || !links.edges) return null;
 
   return links.edges.map(({ node: link }) => {
-    const { title, slug, ...rest } = link;
+    const { title, text, slug, ...rest } = link;
     return {
       url: `${pathPrefix || ''}/${slug}`,
-      text: title,
+      text: title || text,
       ...rest,
     };
   });
+};
+
+export const cleanNavigation = navigation => {
+  const { allThemes } = navigation;
+
+  if (!allThemes || !allThemes.edges) return null;
+
+  let cleanedNavigation = cleanLinks(allThemes, '/themes');
+  cleanedNavigation.map(theme => {
+    theme.topics = cleanLinks(theme.topics, '/topics');
+    theme.topics.map(topic => {
+      topic.services = cleanLinks(topic.services, '/services');
+    });
+  });
+
+  return cleanedNavigation;
 };
 
 export const clean311 = threeoneone => {

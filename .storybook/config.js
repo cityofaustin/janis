@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { configure, addDecorator } from '@storybook/react';
 import { setIntlConfig, withIntl } from 'storybook-addon-intl';
 import { checkA11y } from '@storybook/addon-a11y';
@@ -10,6 +11,13 @@ import { SUPPORTED_LANG_CODES, DEFAULT_LANG } from 'js/i18n/constants';
 import localeMessages from 'js/i18n/loadLocaleData';
 
 import 'css/coa.css';
+
+//Fragment support hack (https://github.com/storybooks/addon-jsx/issues/34)
+React.Fragment = ({ children }) => children;
+React.Fragment.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+React.Fragment.displayName = 'React.Fragment';
 
 const getMessages = locale => localeMessages[locale];
 

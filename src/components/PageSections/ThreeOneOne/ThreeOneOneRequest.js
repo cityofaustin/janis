@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import {
@@ -26,5 +27,7 @@ const ThreeOneOneRequest = ({ intl }) => (
     defaultMessage="{call311Link} or {submit311Link}"
   />
 );
+
+ThreeOneOneRequest.propTypes = {};
 
 export default injectIntl(ThreeOneOneRequest);

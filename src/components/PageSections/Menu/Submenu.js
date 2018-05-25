@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import WorkInProgress from 'components/WorkInProgress';
-import SubmenuItem from 'components/PageSections/Menu/SubmenuItem';
 import I18nNavLink from 'components/I18n/I18nNavLink';
 import ArrowRightSVG from 'components/SVGs/ArrowRight';
+
+import SubmenuItem from './SubmenuItem';
+import { themePropTypes } from './proptypes';
 
 const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
   return (
@@ -15,9 +17,9 @@ const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
       role="menu"
       aria-labelledby={`theme${id + 1}`}
     >
-      {theme.topics.edges.map(({ node: topic }, topicId) => {
+      {theme.topics.map((topic, topicId) => {
         return (
-          !!topic.services.edges.length && (
+          !!topic.services.length && (
             <SubmenuItem
               key={topicId}
               className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
@@ -36,10 +38,17 @@ const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
   );
 };
 
+Submenu.propTypes = {
+  handleCloseAllMenus: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  isSubmenuOpen: PropTypes.bool.isRequired,
+  theme: themePropTypes.isRequired,
+};
+
 const ThemeSubmenuItem = ({ theme, handleCloseAllMenus }) => (
   <li className="coa-SubmenuItem" role="menuitem" onClick={handleCloseAllMenus}>
     <I18nNavLink
-      to={`/themes/${theme.slug}`}
+      to={theme.url}
       className="coa-SubmenuItem__block coa-SubmenuItem__block--theme"
     >
       {theme.text}
@@ -48,6 +57,14 @@ const ThemeSubmenuItem = ({ theme, handleCloseAllMenus }) => (
   </li>
 );
 
+ThemeSubmenuItem.propTypes = {
+  handleCloseAllMenus: PropTypes.func.isRequired,
+  theme: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 const WorkInProgressSubmenuItem = () => (
   <li className="coa-SubmenuItem">
     <span className="coa-SubmenuItem__block coa-SubmenuItem__block--wip">
@@ -55,5 +72,7 @@ const WorkInProgressSubmenuItem = () => (
     </span>
   </li>
 );
+
+WorkInProgressSubmenuItem.propTypes = {};
 
 export default Submenu;

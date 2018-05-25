@@ -5,10 +5,17 @@ import { injectIntl } from 'react-intl';
 import { contact as i18n } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
-import Phone from 'components/Contact/Phone';
-import Email from 'components/Contact/Email';
-import Address from 'components/Contact/Address';
-import Hours from 'components/Contact/Hours';
+import Phone from './Phone';
+import Email from './Email';
+import Address from './Address';
+import Hours from './Hours';
+
+import {
+  addressPropTypes,
+  emailPropTypes,
+  hoursPropTypes,
+  phonePropTypes,
+} from './proptypes';
 
 const ContactDetails = ({
   contact: { phone, email, location, hours },
@@ -29,15 +36,12 @@ const ContactDetails = ({
 );
 
 ContactDetails.propTypes = {
-  contact: PropTypes.shape(
-    Object.assign(
-      {},
-      Phone.propTypes,
-      Email.propTypes,
-      Address.propTypes,
-      Hours.propTypes,
-    ),
-  ).isRequired,
+  contact: PropTypes.shape({
+    location: addressPropTypes,
+    email: emailPropTypes,
+    hours: hoursPropTypes,
+    phone: phonePropTypes,
+  }).isRequired,
 };
 
 export default injectIntl(ContactDetails);
