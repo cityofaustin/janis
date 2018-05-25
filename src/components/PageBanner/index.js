@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ResponsiveImage from 'components/ResponsiveImage';
+import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle }) => (
-  <img
+  <ResponsiveImage
     className="coa-PageBanner"
-    srcset={`${imagesPath}/${imageFilename}.width-640${imageExtension} 640w,
-             ${imagesPath}/${imageFilename}.width-720${imageExtension} 720w,
-             ${imagesPath}/${imageFilename}.width-750${imageExtension} 750w,
-             ${imagesPath}/${imageFilename}.width-828${imageExtension} 828w,
-             ${imagesPath}/${imageFilename}.width-1080${imageExtension} 1080w,
-             ${imagesPath}/${imageFilename}.width-1440${imageExtension} 1440w,
-             ${imagesPath}/${imageFilename}.width-2160${imageExtension} 2160w,`}
-    src={`${imagesPath}/${imageFilename}.width-1080${imageExtension}`}
+    filename={`${imagesPath}/${imageFilename}`}
+    widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
+    extension={imageExtension}
     aria-label={imageTitle}
   />
 );

@@ -1,9 +1,10 @@
 import React from 'react';
 import ResponsiveImage from 'components/ResponsiveImage';
+import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
   <div className="coa-HeroHome__container">
-    <ResponsiveImage filename={imageFilename}/>
+    <ResponsiveImage filename={imageFilename} extension=".jpg" widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES} />
     <div
       className="coa-HeroHome"
       role="img"
