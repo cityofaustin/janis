@@ -2,14 +2,14 @@
   img {
     position: absolute;
     z-index: -1;
-    height: 26rem;
+    height: $coa-herohome-height--default;
     width: 100%;
     object-fit: cover;
     @include media($coa-medium-screen) {
-      height: 40rem;
+      height: $coa-herohome-height--medium;
     }
     @include media($coa-large-screen) {
-      height: 44rem;
+      height: $coa-herohome-height--large;
     }
   }
 }
@@ -17,17 +17,17 @@
 .coa-HeroHome {
   flex-direction: column;
   padding: $coa-space-level7 0;
-  height: 26rem;
+  height: $coa-herohome-height--default;
   color: $coa-color-white;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   @include media($coa-medium-screen) {
-    height: 40rem;
+    height: $coa-herohome-height--medium;
   }
   @include media($coa-large-screen) {
-    height: 44rem;
+    height: $coa-herohome-height--large;
   }
   .usa-search {
     margin-top: $coa-space-level6;
