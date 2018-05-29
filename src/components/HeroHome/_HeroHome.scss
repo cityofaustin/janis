@@ -23,6 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: $coa-herohome-gradient;
   @include media($coa-medium-screen) {
     height: $coa-herohome-height--medium;
   }
