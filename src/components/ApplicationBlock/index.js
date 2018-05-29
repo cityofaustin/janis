@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { callToAction as i18n } from 'js/i18n/definitions';
@@ -13,9 +14,7 @@ const ApplicationBlock = ({ content, intl }) => {
   switch (type) {
     case 'collection_schedule_block':
       app = <Recollect options={{ name: 'calendar' }} />;
-      title = intl.formatMessage(
-        i18n.enterAddress,
-      );
+      title = intl.formatMessage(i18n.enterAddress);
       id = 'HashLink-Recollect';
       break;
     case 'what_do_i_do_with_block':
@@ -46,6 +45,14 @@ const ApplicationBlock = ({ content, intl }) => {
       {app}
     </div>
   );
+};
+
+ApplicationBlock.propTypes = {
+  content: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.object,
+  }).isRequired,
 };
 
 export default injectIntl(ApplicationBlock);

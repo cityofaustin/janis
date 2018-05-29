@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
-import Menu from 'components/PageSections/Menu';
 import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
+
+import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
+import Menu from 'components/PageSections/Menu';
+import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 
 class Header extends Component {
   constructor(props) {
@@ -29,7 +33,7 @@ class Header extends Component {
   };
 
   render() {
-    const { intl, navigation } = this.props;
+    const { intl, navigation, path } = this.props;
 
     return (
       <header
@@ -38,6 +42,7 @@ class Header extends Component {
         }`}
         role="banner"
       >
+        <LanguageSelectBar path={path} />
         <div className="container-fluid wrapper">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
@@ -72,5 +77,10 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
+  path: PropTypes.string.isRequired,
+};
 
 export default injectIntl(Header);

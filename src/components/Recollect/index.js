@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Script from 'react-load-script';
 import { injectIntl } from 'react-intl';
 
 import { form as i18n } from 'js/i18n/definitions';
 
 class Recollect extends Component {
-  handleScriptLoad() {
+  handleScriptLoad(options) {
     // Recollect is a third party script that isn't an import-able node module
     // rCw is the required container id to ensure styles are shown correctly
-    const options = Object.assign(
+    const widgetOptions = Object.assign(
       {
         area: 'Austin',
         container: '#rCw',
       },
-      this.props.options,
+      options,
     );
-    let loader = new window.Recollect.Widget.Loader(options);
+    let loader = new window.Recollect.Widget.Loader(widgetOptions);
     loader.load();
   }
 
@@ -24,7 +25,7 @@ class Recollect extends Component {
   }
 
   render() {
-    const { intl } = this.props;
+    const { intl, options } = this.props;
     return (
       <div className="coa-Recollect" id="rCw">
         <img
@@ -33,11 +34,15 @@ class Recollect extends Component {
         />
         <Script
           url="https://recollect.net/api/widget.js"
-          onLoad={this.handleScriptLoad.bind(this)}
+          onLoad={this.handleScriptLoad.bind(this, options)}
         />
       </div>
     );
   }
 }
+
+Recollect.propTypes = {
+  options: PropTypes.object.isRequired,
+};
 
 export default injectIntl(Recollect);

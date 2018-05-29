@@ -9,7 +9,7 @@ import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
-import { clean311 } from 'js/helpers/cleanData';
+import { clean311, cleanNavigation } from 'js/helpers/cleanData';
 
 const createGraphQLClientsByLang = lang => {
   const { CMS_API } = process.env;
@@ -147,8 +147,16 @@ export default {
   }),
   getSiteData: async () => {
     const queries = [
-      { query: allThemesQuery, dataKey: 'navigation' },
-      { query: all311Query, dataKey: 'threeoneone', middleware: clean311 },
+      {
+        query: allThemesQuery,
+        dataKey: 'navigation',
+        middleware: cleanNavigation,
+      },
+      {
+        query: all311Query,
+        dataKey: 'threeoneone',
+        middleware: clean311,
+      },
     ];
     const requests = [];
     const data = {};

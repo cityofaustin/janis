@@ -28,7 +28,7 @@ const Home = ({ topServices, image, intl }) => {
       </PageNotificationBanner>
       <div className="wrapper container-fluid">
         <TileGroup
-          title={intl.formatMessage(i18n3.checkOutServices)}
+          text={intl.formatMessage(i18n3.checkOutServices)}
           tiles={serviceLinks}
           tag={intl.formatMessage(i18n3.service)}
         />

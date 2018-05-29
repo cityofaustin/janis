@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
@@ -17,5 +18,11 @@ const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
     </div>
   </div>
 );
+
+HeroHome.propTypes = {
+  imageTitle: PropTypes.string.isRequired,
+  imageFilename: PropTypes.string.isRequired,
+  preheader: PropTypes.string.isRequired,
+};
 
 export default HeroHome;

@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import I18nNavLink from 'components/I18n/I18nNavLink';
-import Submenu from 'components/PageSections/Menu/Submenu';
 import PlusSVG from 'components/SVGs/Plus';
 import MinusSVG from 'components/SVGs/Minus';
 import ChevronDownSVG from 'components/SVGs/ChevronDown';
+
+import Submenu from './Submenu';
+import { themePropTypes } from './proptypes';
 
 const MenuItem = ({
   theme,
@@ -39,7 +41,7 @@ const MenuItem = ({
         <ChevronDownSVG />
       </div>
     </div>
-    {!!theme.topics.edges && (
+    {!!theme.topics.length && (
       <Submenu
         id={id}
         theme={theme}
@@ -49,5 +51,13 @@ const MenuItem = ({
     )}
   </li>
 );
+
+MenuItem.propTypes = {
+  handleCloseAllMenus: PropTypes.func.isRequired,
+  handleSubmenuToggle: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  isSubmenuOpen: PropTypes.bool.isRequired,
+  theme: themePropTypes.isRequired,
+};
 
 export default MenuItem;

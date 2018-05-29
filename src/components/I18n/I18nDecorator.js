@@ -1,6 +1,6 @@
 import React from 'react';
-import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 import { find } from 'lodash';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withSiteData } from 'react-static';
 import Routes from 'react-static-routes';
 import { IntlProvider } from 'react-intl';
 import locale from 'browser-locale';
@@ -16,10 +15,6 @@ import {
 } from 'js/i18n/constants';
 
 import I18nDecorator from 'components/I18n/I18nDecorator';
-import SkipToMain from 'components/PageSections/SkipToMain';
-import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
-import Header from 'components/PageSections/Header';
-import Footer from 'components/PageSections/Footer';
 
 class I18nController extends Component {
   constructor(props) {
@@ -54,7 +49,7 @@ class I18nController extends Component {
 
   getLangFromProps(props) {
     props = props || this.props;
-    const lang = this.getSupportedLang(props.match.params.lang);
+    const lang = this.getSupportedLang(props.lang);
 
     if (!lang) return null;
     //TODO: if not supported, redirect to path without lang
@@ -76,7 +71,7 @@ class I18nController extends Component {
       return lang;
     }
 
-    window.location.href = `/${lang}/${this.props.match.params.path || ''}`;
+    window.location.href = `/${lang}/${this.props.path || ''}`;
   }
 
   getLangFromLocale() {
@@ -94,7 +89,7 @@ class I18nController extends Component {
       return lang;
     }
 
-    window.location.href = `/${lang}/${this.props.match.params.path || ''}`;
+    window.location.href = `/${lang}/${this.props.path || ''}`;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -103,8 +98,8 @@ class I18nController extends Component {
   }
 
   render() {
+    const { children } = this.props;
     const { lang } = this.state;
-    const { threeoneone, navigation, match } = this.props;
     const messages = localeMessages[lang];
 
     return (
@@ -115,22 +110,16 @@ class I18nController extends Component {
         textComponent={Fragment}
         key={lang}
       >
-        <I18nDecorator>
-          <SkipToMain />
-          <LanguageSelectBar path={match.params.path || ''} />
-          <Header navigation={navigation[lang]} />
-          <main role="main" id="main">
-            <Routes />
-          </main>
-          <Footer threeoneone={threeoneone[lang]} />
-        </I18nDecorator>
+        <I18nDecorator>{children}</I18nDecorator>
       </IntlProvider>
     );
   }
 }
 
 I18nController.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
+  lang: PropTypes.string,
+  path: PropTypes.string,
 };
 
-export default withSiteData(I18nController);
+export default I18nController;
