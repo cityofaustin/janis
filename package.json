@@ -59,7 +59,8 @@
       "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css":
       "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "storybook": "build-storybook && start-storybook -p 80",
+    "storybook":
+      "build-storybook && start-storybook -s ./src/stories/static_data -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "prettier": {

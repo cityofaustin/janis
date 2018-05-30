@@ -2,11 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import HeroHome from 'components/HeroHome';
-import dummyImage from 'stories/static_data/images/herohome_test.jpg';
 
 storiesOf('HeroHome', module).add('HeroHome', () => (
   <HeroHome
-    imageUrl={dummyImage}
+    imageFilename="/images/herohome_test"
     imageTitle="Lady Bird Lake walking trail"
     preheader="Welcome to"
   />
