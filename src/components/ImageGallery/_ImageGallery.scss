@@ -1,0 +1,19 @@
+.coa-ImageGallery__container {
+  max-width: 1200px;
+}
+
+.coa-ImageGallery__images {
+  display: flex;
+  max-width: 1000px;
+}
+
+.coa-ImageGallery__imageitem {
+  flex: auto;
+  width: 303px;
+  text-align: center;
+  img {
+    height: 238px;
+    object-fit: cover;
+    width: 100%;
+  }
+}

@@ -4,16 +4,22 @@ import ResponsiveImage from 'components/ResponsiveImage';
 import { IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const ImageGallery = ({ heading, subheading, images }) => (
-  <div className="coa-ImageGallery">
+  <div className="coa-ImageGallery__container">
     <h1>{heading}</h1>
     <p>{subheading}</p>
-    {images.map(image => (
-      <ResponsiveImage
-        filename={image.filename}
-        extension={image.extension}
-        widths={IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES}
-      />
-    ))}
+    <div className="coa-ImageGallery__images">
+      {images.map((image, key) => (
+        <div className="coa-ImageGallery__imageitem">
+          <ResponsiveImage
+            key={key}
+            filename={image.filename}
+            extension={image.extension}
+            widths={IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES}
+          />
+          <p>{image.description}</p>
+        </div>
+      ))}
+    </div>
   </div>
 );
 

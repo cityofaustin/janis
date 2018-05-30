@@ -7,14 +7,17 @@ const gameboyAdvances = [
   {
     filename: '/images/gba',
     extension: '.jpg',
+    description: 'Game Boy Advance',
   },
   {
     filename: '/images/gbasp',
     extension: '.png',
+    description: 'Game Boy Advance SP',
   },
   {
     filename: '/images/gbam',
     extension: '.png',
+    description: 'Game Boy Micro',
   },
 ];
 
@@ -22,26 +25,32 @@ const gameboys = [
   {
     filename: '/images/gb',
     extension: '.jpg',
+    description: 'Game Boy',
   },
   {
     filename: '/images/gbp',
     extension: '.jpg',
+    description: 'Game Boy Pocket',
   },
   {
     filename: '/images/gbc',
     extension: '.jpg',
+    description: 'Game Boy Color',
   },
   {
     filename: '/images/gba',
     extension: '.jpg',
+    description: 'Game Boy Advance',
   },
   {
     filename: '/images/gbasp',
     extension: '.png',
+    description: 'Game Boy Advance SP',
   },
   {
     filename: '/images/gbam',
     extension: '.png',
+    description: 'Game Boy Micro',
   },
 ];
 
