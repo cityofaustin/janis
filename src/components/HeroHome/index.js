@@ -5,12 +5,12 @@ import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
   <div className="coa-HeroHome__container">
-    <ResponsiveImage filename={imageFilename} extension=".jpg" widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES} />
-    <div
-      className="coa-HeroHome"
-      role="img"
-      aria-label={imageTitle}
-    >
+    <ResponsiveImage
+      filename={imageFilename}
+      extension=".jpg"
+      widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
+    />
+    <div className="coa-HeroHome" role="img" aria-label={imageTitle}>
       <div className="container-fluid wrapper">
         <span className="coa-HeroHome__preheader">{preheader}</span>
         <h2 className="coa-HeroHome__header">Austin, TX</h2>
