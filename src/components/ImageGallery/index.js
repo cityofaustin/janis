@@ -8,6 +8,7 @@ const ImageGallery = ({ heading, subheading, images }) => (
     <h2>{heading}</h2>
     <p>{subheading}</p>
     <div className="coa-ImageGallery__images">
+      {images.length > 3 && <div>LEFT</div>}
       {images.map((image, key) => (
         <div className="coa-ImageGallery__imageitem">
           <ResponsiveImage
@@ -21,6 +22,7 @@ const ImageGallery = ({ heading, subheading, images }) => (
           </div>
         </div>
       ))}
+      {images.length > 3 && <div>RIGHT</div>}
     </div>
   </div>
 );

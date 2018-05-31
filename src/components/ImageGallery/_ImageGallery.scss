@@ -7,6 +7,10 @@
   display: flex;
   max-width: 1000px;
   justify-content: space-evenly;
+  margin: auto;
+  @media screen and (max-width: $coa-small-screen) {
+    flex-direction: column;
+  }
 }
 
 .coa-ImageGallery__imageitem {
@@ -15,6 +19,9 @@
   img {
     height: 238px;
     object-fit: cover;
+    width: 100%;
+  }
+  @media screen and (max-width: $coa-small-screen) {
     width: 100%;
   }
 }
