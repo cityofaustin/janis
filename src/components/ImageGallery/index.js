@@ -35,12 +35,16 @@ const ImageGallery = ({ heading, subheading, images }) => (
         {images.map((image, key) => <ImageItem image={image} imagekey={key} />)}
       </MediaQuery>
       <MediaQuery minDeviceWidth={mediumScreen} maxWidth={largeScreen}>
-        {images.length > maxMediumScreenItems && <div>LEFT</div>}
-        {images.length > maxMediumScreenItems && <div>RIGHT</div>}
+        {images.length <= maxMediumScreenItems &&
+          images.map((image, key) => (
+            <ImageItem image={image} imagekey={key} />
+          ))}
       </MediaQuery>
       <MediaQuery minDeviceWidth={largeScreen}>
-        {images.length > maxLargeScreenItems && <div>LEFT</div>}
-        {images.length > maxLargeScreenItems && <div>RIGHT</div>}
+        {images.length <= maxLargeScreenItems &&
+          images.map((image, key) => (
+            <ImageItem image={image} imagekey={key} />
+          ))}
       </MediaQuery>
     </div>
   </div>

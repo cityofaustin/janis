@@ -3,6 +3,19 @@ import { storiesOf } from '@storybook/react';
 
 import ImageGallery from 'components/ImageGallery';
 
+const bwGameboys = [
+  {
+    filename: '/images/gb',
+    extension: '.jpg',
+    description: 'Game Boy',
+  },
+  {
+    filename: '/images/gbp',
+    extension: '.jpg',
+    description: 'Game Boy Pocket',
+  },
+];
+
 const gameboyAdvances = [
   {
     filename: '/images/gba',
@@ -55,6 +68,15 @@ const gameboys = [
 ];
 
 storiesOf('ImageGallery', module)
+  .add('2 Images', () => (
+    <div className="wrapper container-fluid">
+      <ImageGallery
+        heading="B&W Game Boy Models"
+        subheading="Handheld video game consoles released by Nintendo under their Game Boy line without color displays."
+        images={bwGameboys}
+      />
+    </div>
+  ))
   .add('3 Images', () => (
     <div className="wrapper container-fluid">
       <ImageGallery
