@@ -5,6 +5,7 @@
 
 .coa-ImageGallery__images {
   display: flex;
+  flex: auto;
   max-width: 1000px;
   justify-content: space-evenly;
   margin: auto;
@@ -43,4 +44,13 @@
     vertical-align: middle;
     line-height: normal;
   }
+}
+
+.coa-ImageGallery__scroller-nav {
+  font-size: 4rem;
+  line-height: 326px;
+}
+
+.coa-ImageGallery__scroller {
+  display: flex;
 }
