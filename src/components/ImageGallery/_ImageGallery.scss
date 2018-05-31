@@ -31,6 +31,10 @@
   }
 }
 
+.coa-ImageGallery__imageitem--hidden {
+  display: none;
+}
+
 .coa-ImageGallery__imageitem-description {
   height: 80px;
   line-height: 80px;

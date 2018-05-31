@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
-import ResponsiveImage from 'components/ResponsiveImage';
 import ImageItem from 'components/ImageGallery/ImageItem';
 import ImageScroller from 'components/ImageGallery/ImageScroller';
-import { IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const smallScreen = 479;
 const mediumScreen = 767;
@@ -19,7 +17,9 @@ const ImageGallery = ({ heading, subheading, images }) => (
     <h2>{heading}</h2>
     <p>{subheading}</p>
     <MediaQuery className="coa-ImageGallery__images" maxWidth={mediumScreen}>
-      {images.map((image, key) => <ImageItem image={image} imagekey={key} />)}
+      {images.map((image, key) => (
+        <ImageItem image={image} imagekey={key} hidden={false} />
+      ))}
     </MediaQuery>
     <MediaQuery minDeviceWidth={mediumScreen} maxWidth={largeScreen}>
       <ImageScroller images={images} maxItems={maxMediumScreenItems} />

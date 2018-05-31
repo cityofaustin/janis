@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
-const ImageItem = ({ image, imagekey }) => (
-  <div className="coa-ImageGallery__imageitem">
+const ImageItem = ({ image, imagekey, hidden }) => (
+  <div className={`coa-ImageGallery__imageitem${hidden ? '--hidden' : ''}`}>
     <ResponsiveImage
       key={imagekey}
       filename={image.filename}
@@ -20,6 +20,7 @@ const ImageItem = ({ image, imagekey }) => (
 ImageItem.propTypes = {
   image: PropTypes.object.isRequired,
   imagekey: PropTypes.number.isRequired,
+  hidden: PropTypes.bool.isRequired,
 };
 
 export default ImageItem;

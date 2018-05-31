@@ -16,11 +16,9 @@ class ImageScroller extends Component {
           <div className="coa-ImageGallery__scroller-nav">{'<'}</div>
         )}
         <div className="coa-ImageGallery__images">
-          {images.length <= maxItems &&
-            images.map((image, key) => (
-              <ImageItem image={image} imagekey={key} />
-            ))}
-          {images.length > maxItems && <div>blarg</div>}
+          {images.map((image, key) => (
+            <ImageItem image={image} imagekey={key} hidden={false} />
+          ))}
         </div>
         {images.length > maxItems && (
           <div className="coa-ImageGallery__scroller-nav">></div>
