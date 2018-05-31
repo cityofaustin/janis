@@ -5,23 +5,72 @@ import ImageItem from 'components/ImageGallery/ImageItem';
 class ImageScroller extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      visibleKeys: [...Array(props.maxItems).keys()],
+    };
   }
+
+  onNavLeft = () => {
+    const newVisibleKeys = this.state.visibleKeys;
+    const newImageKey = newVisibleKeys[0] - 1;
+
+    newVisibleKeys.pop();
+    newVisibleKeys.unshift(newImageKey);
+
+    this.setState({ visibleKeys: newVisibleKeys });
+  };
+
+  onNavRight = () => {
+    const newVisibleKeys = this.state.visibleKeys;
+    const newImageKey = newVisibleKeys[this.props.maxItems - 1] + 1;
+
+    newVisibleKeys.shift();
+    newVisibleKeys.push(newImageKey);
+
+    this.setState({ visibleKeys: newVisibleKeys });
+  };
 
   render() {
     const { images, maxItems } = this.props;
+    const { visibleKeys } = this.state;
 
-    return (
-      <div className="coa-ImageGallery__scroller">
-        {images.length > maxItems && (
-          <div className="coa-ImageGallery__scroller-nav">{'<'}</div>
-        )}
+    // Make sure we don't do any scrolling logic stuff it we don't need to
+    if (images.length <= maxItems)
+      return (
         <div className="coa-ImageGallery__images">
           {images.map((image, key) => (
             <ImageItem image={image} imagekey={key} hidden={false} />
           ))}
         </div>
-        {images.length > maxItems && (
-          <div className="coa-ImageGallery__scroller-nav">></div>
+      );
+
+    return (
+      <div className="coa-ImageGallery__scroller">
+        {!visibleKeys.includes(0) && (
+          <div
+            className="coa-ImageGallery__scroller-nav"
+            onClick={this.onNavLeft}
+          >
+            {'<'}
+          </div>
+        )}
+        <div className="coa-ImageGallery__images">
+          {images.map((image, key) => (
+            <ImageItem
+              image={image}
+              imagekey={key}
+              hidden={!visibleKeys.includes(key)}
+            />
+          ))}
+        </div>
+        {!visibleKeys.includes(images.length - 1) && (
+          <div
+            className="coa-ImageGallery__scroller-nav"
+            onClick={this.onNavRight}
+          >
+            >
+          </div>
         )}
       </div>
     );

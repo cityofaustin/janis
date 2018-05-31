@@ -17,6 +17,8 @@
 .coa-ImageGallery__imageitem {
   width: 303px;
   text-align: center;
+  line-height: 0;
+  border: solid 2px #f4f4f4;
   img {
     height: 238px;
     object-fit: cover;
@@ -25,7 +27,7 @@
   @media screen and (max-width: $coa-small-screen) {
     width: 100%;
     max-width: 303px;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;
   }
