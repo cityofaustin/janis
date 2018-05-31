@@ -1,19 +1,35 @@
 .coa-ImageGallery__container {
   max-width: 1200px;
+  text-align: center;
 }
 
 .coa-ImageGallery__images {
   display: flex;
   max-width: 1000px;
+  justify-content: space-evenly;
 }
 
 .coa-ImageGallery__imageitem {
-  flex: auto;
   width: 303px;
   text-align: center;
   img {
     height: 238px;
     object-fit: cover;
     width: 100%;
+  }
+}
+
+.coa-ImageGallery__imageitem-description {
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  background: #f4f4f4;
+  p {
+    font-family: 'Open Sans';
+    color: #240b33;
+    font-size: 1.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
   }
 }

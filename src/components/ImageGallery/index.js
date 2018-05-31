@@ -5,7 +5,7 @@ import { IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const ImageGallery = ({ heading, subheading, images }) => (
   <div className="coa-ImageGallery__container">
-    <h1>{heading}</h1>
+    <h2>{heading}</h2>
     <p>{subheading}</p>
     <div className="coa-ImageGallery__images">
       {images.map((image, key) => (
@@ -16,7 +16,9 @@ const ImageGallery = ({ heading, subheading, images }) => (
             extension={image.extension}
             widths={IMAGE_GALLERY_RESPONSIVE_IMAGE_SIZES}
           />
-          <p>{image.description}</p>
+          <div className="coa-ImageGallery__imageitem-description">
+            <p>{image.description}</p>
+          </div>
         </div>
       ))}
     </div>
