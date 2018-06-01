@@ -64,10 +64,30 @@
   }
 }
 
-.coa-ImageGallery__scroller-nav {
+.coa-ImageGallery__scroller-nav-left {
   font-size: 4rem;
   line-height: 326px;
   width: 25px;
+  position: relative;
+  @media (min-width: 769px) and (max-width: $coa-large-screen) {
+    left: 10%;
+  }
+  @media (min-width: $coa-large-screen) {
+    left: 5%;
+  }
+}
+
+.coa-ImageGallery__scroller-nav-right {
+  font-size: 4rem;
+  line-height: 326px;
+  width: 25px;
+  position: relative;
+  @media (min-width: 769px) and (max-width: $coa-large-screen) {
+    right: 10%;
+  }
+  @media (min-width: $coa-large-screen) {
+    right: 5%;
+  }
 }
 
 .coa-ImageGallery__scroller {

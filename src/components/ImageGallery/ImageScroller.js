@@ -48,7 +48,7 @@ class ImageScroller extends Component {
     return (
       <div className="coa-ImageGallery__scroller">
         <div
-          className="coa-ImageGallery__scroller-nav"
+          className="coa-ImageGallery__scroller-nav-left"
           onClick={this.onNavLeft}
         >
           {!visibleKeys.includes(0) && '<'}
@@ -63,7 +63,7 @@ class ImageScroller extends Component {
           ))}
         </div>
         <div
-          className="coa-ImageGallery__scroller-nav"
+          className="coa-ImageGallery__scroller-nav-right"
           onClick={this.onNavRight}
         >
           {!visibleKeys.includes(images.length - 1) && '>'}
