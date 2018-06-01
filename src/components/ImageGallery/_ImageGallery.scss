@@ -21,7 +21,7 @@
   @media (max-width: $coa-large-screen) {
     max-width: 720px;
   }
-  @media (max-width: $coa-small-screen) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 }
@@ -37,7 +37,7 @@
     width: 100%;
     user-select: none;
   }
-  @media (max-width: $coa-small-screen) {
+  @media (max-width: $coa-medium-screen) {
     width: 100%;
     max-width: 303px;
     margin-bottom: 3rem;
