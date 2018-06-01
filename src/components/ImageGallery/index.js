@@ -21,10 +21,12 @@ const ImageGallery = ({ heading, subheading, images }) => (
         <ImageItem image={image} imagekey={key} hidden={false} />
       ))}
     </MediaQuery>
-    <MediaQuery minDeviceWidth={mediumScreen} maxWidth={largeScreen}>
+    <MediaQuery
+      query={`(min-width: ${mediumScreen}px) and (max-width: ${largeScreen}px)`}
+    >
       <ImageScroller images={images} maxItems={maxMediumScreenItems} />
     </MediaQuery>
-    <MediaQuery minDeviceWidth={largeScreen}>
+    <MediaQuery query={`(min-width: ${largeScreen}px)`}>
       <ImageScroller images={images} maxItems={maxLargeScreenItems} />
     </MediaQuery>
   </div>

@@ -47,14 +47,12 @@ class ImageScroller extends Component {
 
     return (
       <div className="coa-ImageGallery__scroller">
-        {!visibleKeys.includes(0) && (
-          <div
-            className="coa-ImageGallery__scroller-nav"
-            onClick={this.onNavLeft}
-          >
-            {'<'}
-          </div>
-        )}
+        <div
+          className="coa-ImageGallery__scroller-nav"
+          onClick={this.onNavLeft}
+        >
+          {!visibleKeys.includes(0) && '<'}
+        </div>
         <div className="coa-ImageGallery__images">
           {images.map((image, key) => (
             <ImageItem
@@ -64,14 +62,12 @@ class ImageScroller extends Component {
             />
           ))}
         </div>
-        {!visibleKeys.includes(images.length - 1) && (
-          <div
-            className="coa-ImageGallery__scroller-nav"
-            onClick={this.onNavRight}
-          >
-            >
-          </div>
-        )}
+        <div
+          className="coa-ImageGallery__scroller-nav"
+          onClick={this.onNavRight}
+        >
+          {!visibleKeys.includes(images.length - 1) && '>'}
+        </div>
       </div>
     );
   }

@@ -1,6 +1,15 @@
 .coa-ImageGallery__container {
   max-width: 1200px;
   text-align: center;
+  h2 {
+    margin: auto;
+    max-width: 720px;
+  }
+  p {
+    margin: auto;
+    max-width: 720px;
+    margin-bottom: 2.5rem;
+  }
 }
 
 .coa-ImageGallery__images {
@@ -9,7 +18,10 @@
   max-width: 1000px;
   justify-content: space-evenly;
   margin: auto;
-  @media screen and (max-width: $coa-small-screen) {
+  @media (max-width: $coa-large-screen) {
+    max-width: 720px;
+  }
+  @media (max-width: $coa-small-screen) {
     flex-direction: column;
   }
 }
@@ -24,7 +36,7 @@
     object-fit: cover;
     width: 100%;
   }
-  @media screen and (max-width: $coa-small-screen) {
+  @media (max-width: $coa-small-screen) {
     width: 100%;
     max-width: 303px;
     margin-bottom: 3rem;
@@ -55,6 +67,7 @@
 .coa-ImageGallery__scroller-nav {
   font-size: 4rem;
   line-height: 326px;
+  width: 25px;
 }
 
 .coa-ImageGallery__scroller {
