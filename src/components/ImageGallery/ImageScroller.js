@@ -12,6 +12,8 @@ class ImageScroller extends Component {
   }
 
   onNavLeft = () => {
+    if (this.state.visibleKeys[0] === 0) return;
+
     const newVisibleKeys = this.state.visibleKeys;
     const newImageKey = newVisibleKeys[0] - 1;
 
@@ -22,6 +24,12 @@ class ImageScroller extends Component {
   };
 
   onNavRight = () => {
+    if (
+      this.state.visibleKeys[this.props.maxItems - 1] ===
+      this.props.images.length - 1
+    )
+      return;
+
     const newVisibleKeys = this.state.visibleKeys;
     const newImageKey = newVisibleKeys[this.props.maxItems - 1] + 1;
 
