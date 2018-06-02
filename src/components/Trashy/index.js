@@ -5,21 +5,12 @@ import TrashySchedule from 'components/Trashy/TrashySchedule';
 import TrashyAddress from 'components/Trashy/TrashyAddress';
 
 const nextBulkPickupDate = new Date().toString();
-const pickupDates = [
-  {
-    date: 'june 1',
-    services: ['Trash', 'Recycling'],
-  },
-  {
-    date: 'june 2',
-    services: ['textiles', 'Compost'],
-  },
-];
 
 class Trashy extends Component {
   state = {
     address: null,
     addressSuggestions: [],
+    pickupDates: [],
   };
 
   getAddressSuggestions = addressText => {
@@ -36,7 +27,8 @@ class Trashy extends Component {
       .post('https://recollect-wrapper.herokuapp.com/api/calendar', {
         id: addressId,
       })
-      .then(response => console.log(response));
+      .then(response => this.setState({ pickupDates: response.data }))
+      .catch(error => console.log(error));
   };
 
   getAddressId = address => {
@@ -64,7 +56,7 @@ class Trashy extends Component {
         {this.state.address && (
           <TrashySchedule
             address={this.state.address.name}
-            pickupDates={pickupDates}
+            pickupDates={this.state.pickupDates}
             nextBulkPickupDate={nextBulkPickupDate}
           />
         )}

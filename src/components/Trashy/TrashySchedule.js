@@ -14,6 +14,7 @@ const TrashySchedule = props => {
         yardtrimmings: 'Yard Trimmings',
         trash: 'Trash',
         compost: 'Compost',
+        bulkitemcollection: 'Bulk Item Collection',
       };
       return cases[service];
     }
@@ -30,6 +31,7 @@ const TrashySchedule = props => {
         <h4>
           <FormattedDate
             value={item.date}
+            timeZone="UTC"
             weekday="long"
             year="numeric"
             month="long"
