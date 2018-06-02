@@ -1,17 +1,10 @@
 import React from 'react';
 import Downshift from 'downshift';
 
-const items = [
-  {value: 'apple'},
-  {value: 'pear'},
-  {value: 'orange'},
-  {value: 'grape'},
-  {value: 'banana'},
-]
-
-const TrashyAddress = () => <Downshift
-    onChange={selection => alert(`You selected ${selection.value}`)}
-    itemToString={item => (item ? item.value : '')}
+const TrashyAddress = ({ suggestions, setParcelId }) => (
+  <Downshift
+    onChange={selection => setParcelId(selection.parcelId)}
+    itemToString={item => (item ? item.displayName : '')}
   >
     {({
       getInputProps,
@@ -23,16 +16,18 @@ const TrashyAddress = () => <Downshift
       selectedItem,
     }) => (
       <div>
-        <label {...getLabelProps()}>Enter a fruit</label>
+        <label {...getLabelProps()}>Type your street address in the box</label>
         <input {...getInputProps()} />
         {isOpen ? (
           <div>
-            {items
-              .filter(item => !inputValue || item.value.includes(inputValue))
+            {suggestions
+              .filter(
+                item => !inputValue || item.displayName.includes(inputValue),
+              )
               .map((item, index) => (
                 <div
                   {...getItemProps({
-                    key: item.value,
+                    key: item.parcelId,
                     index,
                     item,
                     style: {
@@ -42,7 +37,7 @@ const TrashyAddress = () => <Downshift
                     },
                   })}
                 >
-                  {item.value}
+                  {item.displayName}
                 </div>
               ))}
           </div>
@@ -50,8 +45,6 @@ const TrashyAddress = () => <Downshift
       </div>
     )}
   </Downshift>
-;
-
-
+);
 
 export default TrashyAddress;
