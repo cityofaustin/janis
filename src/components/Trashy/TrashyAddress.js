@@ -1,9 +1,9 @@
 import React from 'react';
 import Downshift from 'downshift';
 
-const TrashyAddress = ({ suggestions, setParcelId, setEnteredText }) => (
+const TrashyAddress = ({ suggestions, setAddress, setEnteredText }) => (
   <Downshift
-    onChange={selection => setParcelId(selection.parcelId)}
+    onChange={selection => setAddress(selection)}
     itemToString={item => (item ? item.displayName : '')}
   >
     {({

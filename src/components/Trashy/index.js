@@ -7,7 +7,6 @@ const addressSuggestions = [
   { displayName: '1702 Taylor Gaines St, Austin', parcelId: '28855442' },
 ];
 
-const address = '1000 Congress Ave, Austin, TX';
 const nextBulkPickupDate = new Date().toString();
 const pickupDates = [
   {
@@ -23,15 +22,15 @@ const pickupDates = [
 class Trashy extends Component {
   state = {
     addressText: '',
-    parcelId: null,
+    address: null,
   };
 
   setEnteredText = text => {
     this.setState({ addressText: text });
   };
 
-  setParcelId = id => {
-    this.setState({ parcelId: id });
+  setAddress = address => {
+    this.setState({ address: address });
   };
 
   render() {
@@ -40,17 +39,19 @@ class Trashy extends Component {
       <div className="coa-Trashy">
         <TrashyAddress
           suggestions={addressSuggestions}
-          setParcelId={this.setParcelId}
+          setAddress={this.setAddress}
           setEnteredText={this.setEnteredText}
         />
         <div>
           {this.state.addressText}, {this.state.parcelId}
         </div>
-        <TrashySchedule
-          address={address}
-          pickupDates={pickupDates}
-          nextBulkPickupDate={nextBulkPickupDate}
-        />
+        {this.state.address && (
+          <TrashySchedule
+            address={this.state.address.displayName}
+            pickupDates={pickupDates}
+            nextBulkPickupDate={nextBulkPickupDate}
+          />
+        )}
       </div>
     );
   }
