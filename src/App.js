@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import ReactGA from 'react-ga';
 import { logPageView } from 'js/helpers/googleAnalytics';
 import I18nController from 'components/I18n/I18nController';
+import EditController from 'components/Edit/EditController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
@@ -43,7 +44,9 @@ const App = ({ navigation, threeoneone }) => (
             lang={props.match.params.lang}
             path={props.match.params.path}
           >
-            <AppView path={props.match.params.path || ''} />
+            <EditController>
+              <AppView path={props.match.params.path || ''} />
+            </EditController>
           </I18nController>
         )}
       />

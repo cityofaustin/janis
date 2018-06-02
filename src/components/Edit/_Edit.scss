@@ -1,0 +1,20 @@
+.coa-editing {
+  .coa-isEditable {
+    &:hover {
+      border: 3px solid $coa-color-orange-dark;
+    }
+  }
+}
+
+.coa-EditButton {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  background: $coa-color-blue-darkest;
+  color: $coa-color-white;
+  padding: 1rem;
+  &:hover {
+    background-color: lighten($coa-color-blue-darkest, 10%);
+    color: $coa-color-white;
+  }
+}

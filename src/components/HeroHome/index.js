@@ -15,7 +15,7 @@ const HeroHome = ({ imageUrl, imageTitle, preheader }) => (
     role="img"
     aria-label={imageTitle}
   >
-    <div className="container-fluid wrapper">
+    <div className="container-fluid wrapper coa-isEditable">
       <span className="coa-HeroHome-preheader">{preheader}</span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
     </div>
