@@ -43,7 +43,9 @@ class Trashy extends Component {
           setEnteredText={this.setEnteredText}
         />
         <div>
-          {this.state.addressText}, {this.state.parcelId}
+          {this.state.addressText}
+          {this.state.addressText && ','}
+          {this.state.parcelId}
         </div>
         {this.state.address && (
           <TrashySchedule
