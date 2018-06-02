@@ -31,8 +31,25 @@ class Trashy extends Component {
       .catch(error => console.log(error));
   };
 
+  getCalendar = addressId => {
+    axios
+      .post('https://recollect-wrapper.herokuapp.com/api/calendar', {
+        id: addressId,
+      })
+      .then(response => console.log(response));
+  };
+
+  getAddressId = address => {
+    axios
+      .post('https://recollect-wrapper.herokuapp.com/api/address', address)
+      .then(response => response.data)
+      .then(addressId => this.getCalendar(addressId))
+      .catch(error => console.log(error));
+  };
+
   setAddress = address => {
     this.setState({ address: address });
+    this.getAddressId(address);
   };
 
   render() {
