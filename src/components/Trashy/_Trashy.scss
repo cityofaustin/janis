@@ -1,0 +1,47 @@
+.coa-Trashy {
+  border-left: none;
+  border-right: none;
+  margin: auto;
+  padding: $coa-spacing-large $coa-spacing-medium;
+  max-width: $coa-medium-screen;
+}
+
+.coa-Trashy__autosuggestion {
+  border: solid 1px gray;
+  padding: 1rem;
+}
+
+// schedule styles
+.coa-Trashy__schedule-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.coa-Trashy__schedule-header {
+  margin-bottom: 3rem;
+}
+
+.coa-Trashy__schedule-list-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 1.5rem;
+
+  h4 {
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}
+
+.coa-Trashy__schedule-list-pickup-item {
+  margin-bottom: 2rem;
+}
+
+.coa-Trashy__schedule-bulk-pickup {
+}

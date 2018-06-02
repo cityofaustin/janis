@@ -14,6 +14,7 @@ const TrashySchedule = props => {
         yardtrimmings: 'Yard Trimmings',
         trash: 'Trash',
         compost: 'Compost',
+        bulkitemcollection: 'Bulk Item Collection',
       };
       return cases[service];
     }
@@ -26,10 +27,11 @@ const TrashySchedule = props => {
     });
 
     return (
-      <React.Fragment>
+      <div className="coa-Trashy__schedule-list-pickup-item">
         <h4>
           <FormattedDate
             value={item.date}
+            timeZone="UTC"
             weekday="long"
             year="numeric"
             month="long"
@@ -37,7 +39,7 @@ const TrashySchedule = props => {
           />
         </h4>
         <ul>{services}</ul>
-      </React.Fragment>
+      </div>
     );
   });
 
@@ -52,8 +54,8 @@ const TrashySchedule = props => {
   );
 
   return (
-    <div>
-      <div className="scheduleHeader">
+    <div className="coa-Trashy__schedule-container">
+      <div className="coa-Trashy__schedule-header">
         <h3>
           <FormattedMessage
             id="trashSchedule.pickup_schedule"
@@ -62,15 +64,17 @@ const TrashySchedule = props => {
           />
         </h3>
       </div>
-      <div className="schedule">{pickUpList}</div>
-      <div className="bulkPickUp">
-        <h4>
-          <FormattedMessage
-            id="trashSchedule.bulkPickUp"
-            defaultMessage={'Next bulk item pickup: {bulkPickupDate}'}
-            values={{ bulkPickupDate }}
-          />
-        </h4>
+      <div className="coa-Trashy__schedule-list-container">
+        {pickUpList}
+        <div className="coa-Trashy__schedule-bulk-pickup">
+          <h4>
+            <FormattedMessage
+              id="trashSchedule.bulkPickUp"
+              defaultMessage={'Next bulk item pickup: {bulkPickupDate}'}
+              values={{ bulkPickupDate }}
+            />
+          </h4>
+        </div>
       </div>
     </div>
   );
