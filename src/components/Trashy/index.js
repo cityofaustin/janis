@@ -3,7 +3,7 @@ import TrashySchedule from 'components/Trashy/TrashySchedule';
 
 const Trashy = () => {
   const address = '1000 Congress Ave, Austin, TX';
-  const nextBulkPickupDate = new Date();
+  const nextBulkPickupDate = new Date().toString();
   const pickupDates = [
     {
       date: 'june 1',

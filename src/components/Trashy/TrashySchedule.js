@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 
 const TrashySchedule = props => {
@@ -24,7 +25,6 @@ const TrashySchedule = props => {
       return <li>{s}</li>;
     });
 
-    console.log(item);
     return (
       <React.Fragment>
         <h4>
@@ -74,6 +74,12 @@ const TrashySchedule = props => {
       </div>
     </div>
   );
+};
+
+TrashySchedule.propTypes = {
+  address: PropTypes.string,
+  nextBulkPickupDate: PropTypes.string,
+  pickupDates: PropTypes.array,
 };
 
 export default TrashySchedule;
