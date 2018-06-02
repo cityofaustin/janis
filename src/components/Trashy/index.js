@@ -7,6 +7,19 @@ const addressSuggestions = [
   { displayName: '1702 Taylor Gaines St, Austin', parcelId: '28855442' },
 ];
 
+const address = '1000 Congress Ave, Austin, TX';
+const nextBulkPickupDate = new Date().toString();
+const pickupDates = [
+  {
+    date: 'june 1',
+    services: ['Trash', 'Recycling'],
+  },
+  {
+    date: 'june 2',
+    services: ['textiles', 'Compost'],
+  },
+];
+
 class Trashy extends Component {
   state = {
     addressText: '',
@@ -33,7 +46,11 @@ class Trashy extends Component {
         <div>
           {this.state.addressText}, {this.state.parcelId}
         </div>
-        <TrashySchedule />
+        <TrashySchedule
+          address={address}
+          pickupDates={pickupDates}
+          nextBulkPickupDate={nextBulkPickupDate}
+        />
       </div>
     );
   }
