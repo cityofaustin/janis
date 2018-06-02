@@ -1,7 +1,7 @@
 import React from 'react';
 import Downshift from 'downshift';
 
-const TrashyAddress = ({ suggestions, setParcelId }) => (
+const TrashyAddress = ({ suggestions, setParcelId, setEnteredText }) => (
   <Downshift
     onChange={selection => setParcelId(selection.parcelId)}
     itemToString={item => (item ? item.displayName : '')}
@@ -17,7 +17,11 @@ const TrashyAddress = ({ suggestions, setParcelId }) => (
     }) => (
       <div>
         <label {...getLabelProps()}>Type your street address in the box</label>
-        <input {...getInputProps()} />
+        <input
+          {...getInputProps({
+            onChange: e => setEnteredText(e.target.value),
+          })}
+        />
         {isOpen ? (
           <div>
             {suggestions

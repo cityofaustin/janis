@@ -9,7 +9,12 @@ const addressSuggestions = [
 
 class Trashy extends Component {
   state = {
+    addressText: '',
     parcelId: null,
+  };
+
+  setEnteredText = text => {
+    this.setState({ addressText: text });
   };
 
   setParcelId = id => {
@@ -23,8 +28,11 @@ class Trashy extends Component {
         <TrashyAddress
           suggestions={addressSuggestions}
           setParcelId={this.setParcelId}
+          setEnteredText={this.setEnteredText}
         />
-        <div>{this.state.parcelId}</div>
+        <div>
+          {this.state.addressText}, {this.state.parcelId}
+        </div>
         <TrashySchedule />
       </div>
     );
