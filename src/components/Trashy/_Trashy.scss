@@ -1,0 +1,12 @@
+.coa-Trashy {
+  border-left: none;
+  border-right: none;
+  margin: auto;
+  padding: $coa-spacing-large $coa-spacing-medium;
+  max-width: $coa-medium-screen;
+}
+
+.coa-Trashy__autosuggestion {
+  border: solid 1px gray;
+  padding: 1rem;
+}

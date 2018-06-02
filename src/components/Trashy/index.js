@@ -19,14 +19,13 @@ class Trashy extends Component {
   render() {
     const { intl, options } = this.props;
     return (
-      <div>
-        <div>TODO: Implement the Recycling Schedule component.</div>
-        <TrashySchedule />
-        <div>{this.state.parcelId}</div>
+      <div className="coa-Trashy">
         <TrashyAddress
           suggestions={addressSuggestions}
           setParcelId={this.setParcelId}
         />
+        <div>{this.state.parcelId}</div>
+        <TrashySchedule />
       </div>
     );
   }

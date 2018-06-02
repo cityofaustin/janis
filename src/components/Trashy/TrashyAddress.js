@@ -26,6 +26,7 @@ const TrashyAddress = ({ suggestions, setParcelId }) => (
               )
               .map((item, index) => (
                 <div
+                  className="coa-Trashy__autosuggestion"
                   {...getItemProps({
                     key: item.parcelId,
                     index,
