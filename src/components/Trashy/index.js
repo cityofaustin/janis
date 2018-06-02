@@ -28,9 +28,7 @@ class Trashy extends Component {
         address: addressText,
       })
       .then(response => this.setState({ addressSuggestions: response.data }))
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => console.log(error));
   };
 
   setAddress = address => {
@@ -46,12 +44,9 @@ class Trashy extends Component {
           setAddress={this.setAddress}
           getSuggestions={this.getAddressSuggestions}
         />
-        <div>
-          {this.state.addressText}, {this.state.parcelId}
-        </div>
         {this.state.address && (
           <TrashySchedule
-            address={this.state.address.displayName}
+            address={this.state.address.name}
             pickupDates={pickupDates}
             nextBulkPickupDate={nextBulkPickupDate}
           />
