@@ -1,10 +1,10 @@
 import React from 'react';
 import Downshift from 'downshift';
 
-const TrashyAddress = ({ suggestions, setAddress, setEnteredText }) => (
+const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
   <Downshift
     onChange={selection => setAddress(selection)}
-    itemToString={item => (item ? item.displayName : '')}
+    itemToString={item => (item ? item.name : '')}
   >
     {({
       getInputProps,
@@ -19,20 +19,18 @@ const TrashyAddress = ({ suggestions, setAddress, setEnteredText }) => (
         <label {...getLabelProps()}>Type your street address in the box</label>
         <input
           {...getInputProps({
-            onChange: e => setEnteredText(e.target.value),
+            onChange: e => getSuggestions(e.target.value),
           })}
         />
         {isOpen ? (
           <div>
             {suggestions
-              .filter(
-                item => !inputValue || item.displayName.includes(inputValue),
-              )
+              .filter(item => !inputValue || item.name.includes(inputValue))
               .map((item, index) => (
                 <div
                   className="coa-Trashy__autosuggestion"
                   {...getItemProps({
-                    key: item.parcelId,
+                    key: item.parcel_id,
                     index,
                     item,
                     style: {
@@ -42,7 +40,7 @@ const TrashyAddress = ({ suggestions, setAddress, setEnteredText }) => (
                     },
                   })}
                 >
-                  {item.displayName}
+                  {item.name}
                 </div>
               ))}
           </div>

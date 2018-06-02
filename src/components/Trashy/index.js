@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import TrashySchedule from 'components/Trashy/TrashySchedule';
 import TrashyAddress from 'components/Trashy/TrashyAddress';
-
-const addressSuggestions = [
-  { displayName: '1702 Taylor Gaines St Unit B, Austin', parcelId: '39514805' },
-  { displayName: '1702 Taylor Gaines St, Austin', parcelId: '28855442' },
-];
 
 const nextBulkPickupDate = new Date().toString();
 const pickupDates = [
@@ -21,12 +18,19 @@ const pickupDates = [
 
 class Trashy extends Component {
   state = {
-    addressText: '',
     address: null,
+    addressSuggestions: [],
   };
 
-  setEnteredText = text => {
-    this.setState({ addressText: text });
+  getAddressSuggestions = addressText => {
+    axios
+      .post('https://recollect-wrapper.herokuapp.com/api/suggest', {
+        address: addressText,
+      })
+      .then(response => this.setState({ addressSuggestions: response.data }))
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   setAddress = address => {
@@ -38,9 +42,9 @@ class Trashy extends Component {
     return (
       <div className="coa-Trashy">
         <TrashyAddress
-          suggestions={addressSuggestions}
+          suggestions={this.state.addressSuggestions}
           setAddress={this.setAddress}
-          setEnteredText={this.setEnteredText}
+          getSuggestions={this.getAddressSuggestions}
         />
         <div>
           {this.state.addressText}, {this.state.parcelId}
