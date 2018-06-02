@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RecyclingSchedule = () => (
+const Trashy = () => (
   <div>TODO: Implement the Recycling Schedule component.</div>
 );
 
-export default RecyclingSchedule;
+export default Trashy;
