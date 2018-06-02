@@ -358,8 +358,7 @@ const step4 = {
       willHaveAnimalIndoors: {
         type: 'string',
         title: 'Are you planning to have your foster animal live indoors?',
-        enum: ['yes', 'no', 'maybe'],
-        enumNames: ['Yes', 'No', 'Maybe'],
+        enum: ['Yes', 'No', 'Maybe'],
         uniqueItems: true,
       },
       hasChildrenUnder18: {
@@ -367,16 +366,11 @@ const step4 = {
         title: 'Do any children under 18 live in your home or visit often?',
         enum: [true, false],
         enumNames: ['Yes', 'No'],
-        uniqueItems: true,
       },
       listOfChildrensAges: {
-        type: 'array',
+        type: 'string',
         title:
           'Please list the ages of all children under 18 living in or often visiting your home.',
-        items: {
-          type: 'string',
-        },
-        uniqueItems: true,
       },
     },
   },
@@ -389,9 +383,7 @@ const step4 = {
       'ui:widget': 'coaRadio',
     },
     willHaveAnimalIndoors: {
-      'ui:widget': props => {
-        return <Radio {...props} />;
-      },
+      'ui:widget': 'coaRadio',
       'ui:description':
         'These meetings would be scheduled by you, at times and locations of your choice.',
       'ui:options': {
@@ -419,17 +411,15 @@ const step4 = {
           </div>
         ),
         type: 'warning',
-        displayMessageOnValue: false,
+        displayMessageOnValue: ['No', 'Maybe'],
       },
     },
     hasChildrenUnder18: {
       'ui:widget': 'coaRadio',
+      'ui:emptyValue': false,
     },
     listOfChildrensAges: {
-      'ui:options': {
-        orderable: false,
-      },
-      'ui:emptyValue': '',
+      condition: 'hasChildrenUnder18=true',
     },
   },
 };
