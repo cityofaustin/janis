@@ -46,6 +46,7 @@ const TrashySchedule = props => {
   const bulkPickupDate = (
     <FormattedDate
       value={nextBulkPickupDate}
+      timeZone="UTC"
       weekday="long"
       year="numeric"
       month="long"
