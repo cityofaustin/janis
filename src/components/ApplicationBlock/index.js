@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import { callToAction as i18n } from 'js/i18n/definitions';
 
 import Recollect from 'components/Recollect';
+import Trashy from 'components/Trashy';
 import ContactMap from 'components/Contact/ContactMap';
 import SectionHeader from 'components/SectionHeader';
 
@@ -13,7 +14,7 @@ const ApplicationBlock = ({ content, intl }) => {
   let app, title, id;
   switch (type) {
     case 'collection_schedule_block':
-      app = <Recollect options={{ name: 'calendar' }} />;
+      app = <Trashy />;
       title = intl.formatMessage(i18n.enterAddress);
       id = 'HashLink-Recollect';
       break;
