@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isEditable from 'components/Edit/isEditable';
+import EditableComponent from 'components/Edit/EditableComponent';
 import { AppContext } from 'App';
 
-const HeroHome = ({ imageUrl, imageTitle, preheader, isEditing }) => (
+const HeroHome = ({ imageUrl, imageTitle, preheader, isInEditMode }) => (
   <div
     className="coa-HeroHome"
     style={{
@@ -17,10 +18,11 @@ const HeroHome = ({ imageUrl, imageTitle, preheader, isEditing }) => (
     role="img"
     aria-label={imageTitle}
   >
-    <div className="container-fluid wrapper coa-isEditable">
-      <span className="coa-HeroHome-preheader">{preheader}</span>
-      <h2 className="coa-HeroHome-header">Austin, TX</h2>
-      <h3>{JSON.stringify(isEditing)}</h3>
+    <div className="container-fluid wrapper">
+      <EditableComponent isInEditMode={isInEditMode}>
+        <span className="coa-HeroHome-preheader">{preheader}</span>
+        <h2 className="coa-HeroHome-header">Austin, TX</h2>
+      </EditableComponent>
     </div>
   </div>
 );

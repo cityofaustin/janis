@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PageNotificationBanner = ({ children }) => (
   <div className="coa-PageNotificationBanner">
     <div className="container-fluid wrapper wrapper--sm">
-      <p>{children}</p>
+      <p className="coa-isEditable">{children}</p>
     </div>
   </div>
 );

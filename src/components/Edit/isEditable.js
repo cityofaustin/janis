@@ -14,7 +14,7 @@ function isEditable(Component) {
       return (
         <AppContext.Consumer>
           {context => (
-            <Component {...this.props} isEditing={context.isEditing} />
+            <Component {...this.props} isInEditMode={context.isEditing} />
           )}
         </AppContext.Consumer>
       );
