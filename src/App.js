@@ -35,7 +35,7 @@ class App extends Component {
       isEditing: false,
     };
   }
-  handleEditButtonClick = e => {
+  toggleEditingMode = e => {
     this.setState({ isEditing: !this.state.isEditing });
   };
 
@@ -60,7 +60,7 @@ class App extends Component {
               >
                 <EditController
                   isEditing={this.state.isEditing}
-                  handleClick={this.handleEditButtonClick}
+                  toggleEditingMode={this.toggleEditingMode}
                 >
                   <AppContext.Provider
                     value={{ isEditing: this.state.isEditing }}
