@@ -1,0 +1,41 @@
+.coa-editing {
+  .coa-isEditable {
+    &:hover {
+      border: 3px solid $coa-color-orange-dark;
+    }
+  }
+}
+
+.coa-EditButton__wrapper {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+}
+
+.coa-EditButton__text {
+  display: block;
+}
+
+.coa-EditButton {
+  background: $coa-color-blue-darkest;
+  color: $coa-color-white;
+  padding: 1rem;
+  &:hover {
+    background-color: lighten($coa-color-blue-darkest, 10%);
+    color: $coa-color-white;
+  }
+}
+
+.coa-FixedEditBar {
+  width: 100%;
+  background-color: #2e2e2d;
+  height: 4rem;
+  position: fixed;
+  bottom: 0;
+}
+
+.coa-FixedEditBar__submit {
+  color: white;
+  float: right;
+  margin-right: 1rem;
+}
