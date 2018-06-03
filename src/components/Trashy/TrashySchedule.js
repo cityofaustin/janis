@@ -64,7 +64,7 @@ const TrashySchedule = props => {
   );
 
   const bulkItemPickupLink = (
-    <I18nLink to="services/bulk-item-pickup">
+    <I18nLink to="bulk-item-pickup">
       {intl.formatMessage(i18n.bulkitemcollection)}
     </I18nLink>
   );
