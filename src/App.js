@@ -25,14 +25,24 @@ const AppView = withSiteData(
       threeoneone,
       intl,
       toggleEditModal,
+      isModalOpen,
       showEditModal,
+      hideEditModal,
+      grabItemContent,
+      itemContent,
     }) => (
-      <div>
+      <div onClick={grabItemContent}>
         <SkipToMain />
         <Header navigation={navigation[intl.locale]} path={path} />
         <main role="main" id="main">
           <Routes />
-          {showEditModal && <EditModal toggleEditModal={toggleEditModal} />}
+          {isModalOpen && (
+            <EditModal
+              itemContent={itemContent}
+              showEditModal={showEditModal}
+              hideEditModal={hideEditModal}
+            />
+          )}
         </main>
         <Footer threeoneone={threeoneone[intl.locale]} />
       </div>
@@ -46,17 +56,37 @@ class App extends Component {
     this.state = {
       isInEditMode: false,
       isModalOpen: false,
+      itemContent: '',
     };
   }
   toggleEditingMode = e => {
     this.setState({ isInEditMode: !this.state.isInEditMode });
-    this.toggleEditModal();
   };
 
-  toggleEditModal = e =>
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+  showEditModal = () => {
+    this.setState({ isModalOpen: true });
+  };
+
+  hideEditModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
+  grabItemContent = e => {
+    const itemToEdit = e.target;
+
+    if (itemToEdit.classList.contains('coa-isEditable')) {
+      console.log('grabbing item content', e.target);
+      this.showEditModal();
+      e.preventDefault();
+      this.setState({
+        itemContent: itemToEdit.innerText,
+      });
+    }
+  };
 
   render() {
+    console.log(this.state.itemContent, 'item content');
+
     return (
       <Router>
         <div>
@@ -83,9 +113,12 @@ class App extends Component {
                     value={{ isInEditMode: this.state.isInEditMode }}
                   >
                     <AppView
+                      itemContent={this.state.itemContent}
+                      grabItemContent={this.grabItemContent}
                       path={props.match.params.path || ''}
-                      toggleEditModal={this.toggleEditModal}
-                      showEditModal={this.state.isModalOpen}
+                      isModalOpen={this.state.isModalOpen}
+                      showEditModal={this.showEditModal}
+                      hideEditModal={this.hideEditModal}
                     />
                   </AppContext.Provider>
                 </EditController>
