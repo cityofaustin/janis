@@ -11,6 +11,7 @@ class Trashy extends Component {
     address: null,
     addressSuggestions: [],
     pickupDates: [],
+    nextBulkPickupDate: null,
   };
 
   getAddressSuggestions = addressText => {
@@ -31,11 +32,23 @@ class Trashy extends Component {
       .catch(error => console.log(error));
   };
 
+  getNextBulkPickupDate = addressId => {
+    axios
+      .post('https://recollect-wrapper.herokuapp.com/api/nextbulkpickup', {
+        id: addressId,
+      })
+      .then(response => this.setState({ nextBulkPickupDate: response.data[0] }))
+      .catch(error => console.log(error));
+  };
+
   getAddressId = address => {
     axios
       .post('https://recollect-wrapper.herokuapp.com/api/address', address)
       .then(response => response.data)
-      .then(addressId => this.getCalendar(addressId))
+      .then(addressId => {
+        this.getCalendar(addressId);
+        this.getNextBulkPickupDate(addressId);
+      })
       .catch(error => console.log(error));
   };
 
@@ -57,7 +70,7 @@ class Trashy extends Component {
           <TrashySchedule
             address={this.state.address.name}
             pickupDates={this.state.pickupDates}
-            nextBulkPickupDate={nextBulkPickupDate}
+            nextBulkPickupDate={this.state.nextBulkPickupDate}
           />
         )}
       </div>
