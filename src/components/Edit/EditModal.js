@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class EditModal extends Component {
   constructor(props) {
@@ -6,6 +8,8 @@ class EditModal extends Component {
 
     this.state = {
       textAreaContent: props.itemContent,
+      reason: '',
+      email: '',
     };
   }
 
@@ -13,6 +17,27 @@ class EditModal extends Component {
     e.preventDefault();
     this.props.hideEditModal();
     alert('submitted');
+    const YETI_ENDPOINT = 'https://coa-yeti-staging.herokuapp.com/wiki/';
+    debugger;
+    axios
+      .create({
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .post(YETI_ENDPOINT, {
+        email: this.state.email,
+        url: window.location.href,
+        suggestions: [
+          {
+            name_of_component: 'textbox',
+            original_text: this.props.itemContent,
+            altered_text: this.state.textAreaContent,
+            language: Cookies.get('lang'),
+            reason: this.state.reason,
+          },
+        ],
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   };
 
   render() {
@@ -93,13 +118,27 @@ class EditModal extends Component {
         </div>
         <div className="form-group row">
           <label for="addComment" className="col-sm-2 col-form-label">
-            <img src="#" />
+            Add a reason
           </label>
           <div className="col-sm-10">
             <input
               className="form-control"
               id="addComment"
-              placeholder="Add Comment..."
+              placeholder="Add Reason..."
+              onChange={e => this.setState({ reason: e.target.value })}
+            />
+          </div>
+        </div>
+        <div className="form-group row">
+          <label for="email" className="col-sm-2 col-form-label">
+            Email (Optional)
+          </label>
+          <div className="col-sm-10">
+            <input
+              className="form-control"
+              id="email"
+              placeholder="mayor.adler@austintexas.gov"
+              onChange={e => this.setState({ email: e.target.value })}
             />
           </div>
         </div>

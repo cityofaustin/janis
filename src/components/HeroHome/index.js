@@ -18,9 +18,8 @@ const HeroHome = ({ imageUrl, imageTitle, preheader, isInEditMode }) => (
     aria-label={imageTitle}
   >
     <div className="container-fluid wrapper coa-isEditable">
-      <span className="coa-HeroHome-preheader">{preheader}</span>
-      <h2 className="coa-HeroHome-header">Austin, TX</h2>
-      <h3>{JSON.stringify(isInEditMode)}</h3>
+      <span className="coa-HeroHome-preheader coa-isEditable">{preheader}</span>
+      <h2 className="coa-HeroHome-header coa-isEditable">Austin, TX</h2>
     </div>
   </div>
 );
