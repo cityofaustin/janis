@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 
-const EditController = ({ children, isEditing, toggleEditingMode }) => (
+const EditController = ({ children, isInEditMode, toggleEditingMode }) => (
   <Fragment>
-    <div className={isEditing ? 'coa-editing' : ''}>{children}</div>
-    {isEditing ? (
+    <div className={isInEditMode ? 'coa-editing' : ''}>{children}</div>
+    {isInEditMode ? (
       <div className="coa-FixedEditBar">
         <button
           className="coa-FixedEditBar__submit"
