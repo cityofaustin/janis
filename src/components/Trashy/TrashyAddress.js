@@ -14,12 +14,16 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
       inputValue,
       highlightedIndex,
       selectedItem,
+      clearSelection,
     }) => (
       <div>
         <label {...getLabelProps()}>Type your street address in the box</label>
         <input
           {...getInputProps({
-            onChange: e => getSuggestions(e.target.value),
+            onChange: e => {
+              getSuggestions(e.target.value);
+              clearSelection();
+            },
           })}
         />
         {isOpen ? (
