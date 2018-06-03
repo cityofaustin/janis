@@ -74,7 +74,10 @@ class App extends Component {
   grabItemContent = e => {
     const itemToEdit = e.target;
 
-    if (itemToEdit.classList.contains('coa-isEditable')) {
+    if (
+      this.state.isInEditMode &&
+      itemToEdit.classList.contains('coa-isEditable')
+    ) {
       console.log('grabbing item content', e.target);
       this.showEditModal();
       e.preventDefault();
