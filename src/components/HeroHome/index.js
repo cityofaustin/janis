@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import isEditable from 'components/Edit/isEditable';
 import { AppContext } from 'App';
 
-const HeroHome = ({ imageUrl, imageTitle, preheader, isEditing }) => (
+const HeroHome = ({ imageUrl, imageTitle, preheader, isInEditMode }) => (
   <div
     className="coa-HeroHome"
     style={{
@@ -20,7 +20,7 @@ const HeroHome = ({ imageUrl, imageTitle, preheader, isEditing }) => (
     <div className="container-fluid wrapper coa-isEditable">
       <span className="coa-HeroHome-preheader">{preheader}</span>
       <h2 className="coa-HeroHome-header">Austin, TX</h2>
-      <h3>{JSON.stringify(isEditing)}</h3>
+      <h3>{JSON.stringify(isInEditMode)}</h3>
     </div>
   </div>
 );

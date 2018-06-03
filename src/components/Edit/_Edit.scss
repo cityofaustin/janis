@@ -1,5 +1,6 @@
 .coa-editing {
   .coa-isEditable {
+    border: 1px dashed red;
     &:hover {
       border: 3px solid $coa-color-orange-dark;
     }

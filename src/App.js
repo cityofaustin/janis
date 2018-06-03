@@ -11,33 +11,50 @@ import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 import 'css/coa.css';
 
+import EditModal from 'components/Edit/EditModal';
+
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS, { titleCase: false });
 
 export const AppContext = React.createContext();
 
 const AppView = withSiteData(
-  injectIntl(({ path, navigation, threeoneone, intl }) => (
-    <div>
-      <SkipToMain />
-      <Header navigation={navigation[intl.locale]} path={path} />
-      <main role="main" id="main">
-        <Routes />
-      </main>
-      <Footer threeoneone={threeoneone[intl.locale]} />
-    </div>
-  )),
+  injectIntl(
+    ({
+      path,
+      navigation,
+      threeoneone,
+      intl,
+      toggleEditModal,
+      showEditModal,
+    }) => (
+      <div>
+        <SkipToMain />
+        <Header navigation={navigation[intl.locale]} path={path} />
+        <main role="main" id="main">
+          <Routes />
+          {showEditModal && <EditModal toggleEditModal={toggleEditModal} />}
+        </main>
+        <Footer threeoneone={threeoneone[intl.locale]} />
+      </div>
+    ),
+  ),
 );
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEditing: false,
+      isInEditMode: false,
+      isModalOpen: false,
     };
   }
   toggleEditingMode = e => {
-    this.setState({ isEditing: !this.state.isEditing });
+    this.setState({ isInEditMode: !this.state.isInEditMode });
+    this.toggleEditModal();
   };
+
+  toggleEditModal = e =>
+    this.setState({ isModalOpen: !this.state.isModalOpen });
 
   render() {
     return (
@@ -59,13 +76,17 @@ class App extends Component {
                 path={props.match.params.path}
               >
                 <EditController
-                  isEditing={this.state.isEditing}
+                  isInEditMode={this.state.isInEditMode}
                   toggleEditingMode={this.toggleEditingMode}
                 >
                   <AppContext.Provider
-                    value={{ isEditing: this.state.isEditing }}
+                    value={{ isInEditMode: this.state.isInEditMode }}
                   >
-                    <AppView path={props.match.params.path || ''} />
+                    <AppView
+                      path={props.match.params.path || ''}
+                      toggleEditModal={this.toggleEditModal}
+                      showEditModal={this.state.isModalOpen}
+                    />
                   </AppContext.Provider>
                 </EditController>
               </I18nController>
