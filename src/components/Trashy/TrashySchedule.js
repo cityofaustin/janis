@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import ExternalLink from 'components/ExternalLink';
+import I18nLink from 'components/I18n/I18nLink';
 import { curbsideServices as i18n } from 'js/i18n/definitions';
 import { injectIntl } from 'react-intl';
 
@@ -19,9 +20,9 @@ const TrashySchedule = props => {
         compost: intl.formatMessage(i18n.compost),
         brushcollection: intl.formatMessage(i18n.brushcollection),
         bulkitemcollection: (
-          <ExternalLink to="http://www.austintexas.gov/department/residential-bulk-collection">
+          <I18nLink to="services/bulk-item-pickup">
             {intl.formatMessage(i18n.bulkitemcollection)}
-          </ExternalLink>
+          </I18nLink>
         ),
       };
       return cases[service];
@@ -46,7 +47,6 @@ const TrashySchedule = props => {
           />
         </h4>
         <ul>{services}</ul>
-        {/* {link} */}
       </div>
     );
   });
@@ -62,9 +62,9 @@ const TrashySchedule = props => {
   );
 
   const bulkItemPickupLink = (
-    <ExternalLink to="http://www.austintexas.gov/department/residential-bulk-collection">
+    <I18nLink to="services/bulk-item-pickup">
       {intl.formatMessage(i18n.bulkitemcollection)}
-    </ExternalLink>
+    </I18nLink>
   );
 
   return (
