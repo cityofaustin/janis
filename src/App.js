@@ -28,34 +28,53 @@ const AppView = withSiteData(
   )),
 );
 
-const App = ({ navigation, threeoneone }) => (
-  <Router>
-    <div>
-      <Route
-        path="*"
-        render={props => {
-          logPageView();
-          return null;
-        }}
-      />
-      {/* regex to split url location into 2 character lang code (if present) and page path */}
-      <Route
-        path="(/)?:lang([a-z]{2})?/:path*"
-        render={props => (
-          <AppContext.Provider value={{ isEditing: true }}>
-            <I18nController
-              lang={props.match.params.lang}
-              path={props.match.params.path}
-            >
-              <EditController>
-                <AppView path={props.match.params.path || ''} />
-              </EditController>
-            </I18nController>
-          </AppContext.Provider>
-        )}
-      />
-    </div>
-  </Router>
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+    };
+  }
+  handleEditButtonClick = e => {
+    this.setState({ isEditing: !this.state.isEditing });
+  };
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route
+            path="*"
+            render={props => {
+              logPageView();
+              return null;
+            }}
+          />
+          {/* regex to split url location into 2 character lang code (if present) and page path */}
+          <Route
+            path="(/)?:lang([a-z]{2})?/:path*"
+            render={props => (
+              <I18nController
+                lang={props.match.params.lang}
+                path={props.match.params.path}
+              >
+                <EditController
+                  isEditing={this.state.isEditing}
+                  handleClick={this.handleEditButtonClick}
+                >
+                  <AppContext.Provider
+                    value={{ isEditing: this.state.isEditing }}
+                  >
+                    <AppView path={props.match.params.path || ''} />
+                  </AppContext.Provider>
+                </EditController>
+              </I18nController>
+            )}
+          />
+        </div>
+      </Router>
+    );
+  }
+}
 
 export default App;
