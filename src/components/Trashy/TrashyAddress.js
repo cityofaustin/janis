@@ -1,6 +1,8 @@
 import React from 'react';
 import Downshift from 'downshift';
 
+import CloseSVG from 'components/SVGs/Close';
+
 const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
   <Downshift
     onChange={selection => setAddress(selection)}
@@ -26,6 +28,12 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
             },
           })}
         />
+        {selectedItem && (
+          <CloseSVG
+            className="coa-Trashy__autosuggestion-clear"
+            onClick={clearSelection}
+          />
+        )}
         {isOpen ? (
           <div>
             {suggestions
