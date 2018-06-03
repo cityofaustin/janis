@@ -81,3 +81,13 @@ export const threeoneone = defineMessages({
 export const topics = defineMessages({
   topic: 'topic',
 });
+
+export const curbsideServices = defineMessages({
+  textiles: 'Clothing & Housewares Recycling',
+  recycling: 'Recycling',
+  yardtrimmings: 'Yard Trimmings',
+  trash: 'Trash',
+  compost: 'Compost',
+  brushcollection: 'Large Brush Collection',
+  bulkitemcollection: 'Bulk Item Collection',
+});

@@ -1,20 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedDate } from 'react-intl';
+import ExternalLink from 'components/ExternalLink';
+import { curbsideServices as i18n } from 'js/i18n/definitions';
+import { injectIntl } from 'react-intl';
 
 const TrashySchedule = props => {
-  const { address, nextBulkPickupDate, pickupDates } = props;
+  const { address, nextBulkPickupDate, pickupDates, intl } = props;
 
   const mapService = s => {
     let service = s.toLowerCase();
     {
       var cases = {
-        textiles: 'Clothing & Housewares Recycling',
-        recycling: 'Recycling',
-        yardtrimmings: 'Yard Trimmings',
-        trash: 'Trash',
-        compost: 'Compost',
-        bulkitemcollection: 'Bulk Item Collection',
+        textiles: intl.formatMessage(i18n.textiles),
+        recycling: intl.formatMessage(i18n.recycling),
+        yardtrimmings: intl.formatMessage(i18n.yardtrimmings),
+        trash: intl.formatMessage(i18n.trash),
+        compost: intl.formatMessage(i18n.compost),
+        brushcollection: intl.formatMessage(i18n.brushcollection),
+        bulkitemcollection: (
+          <ExternalLink to="http://www.austintexas.gov/department/residential-bulk-collection">
+            {intl.formatMessage(i18n.bulkitemcollection)}
+          </ExternalLink>
+        ),
       };
       return cases[service];
     }
@@ -31,7 +39,6 @@ const TrashySchedule = props => {
         <h4>
           <FormattedDate
             value={item.date}
-            timeZone="UTC"
             weekday="long"
             year="numeric"
             month="long"
@@ -39,6 +46,7 @@ const TrashySchedule = props => {
           />
         </h4>
         <ul>{services}</ul>
+        {/* {link} */}
       </div>
     );
   });
@@ -51,6 +59,12 @@ const TrashySchedule = props => {
       month="long"
       day="2-digit"
     />
+  );
+
+  const bulkItemPickupLink = (
+    <ExternalLink to="http://www.austintexas.gov/department/residential-bulk-collection">
+      {intl.formatMessage(i18n.bulkitemcollection)}
+    </ExternalLink>
   );
 
   return (
@@ -70,8 +84,8 @@ const TrashySchedule = props => {
           <h4>
             <FormattedMessage
               id="trashSchedule.bulkPickUp"
-              defaultMessage={'Next bulk item pickup: {bulkPickupDate}'}
-              values={{ bulkPickupDate }}
+              defaultMessage={'Next {bulkItemPickupLink}: {bulkPickupDate}'}
+              values={{ bulkPickupDate, bulkItemPickupLink }}
             />
           </h4>
         </div>
@@ -86,4 +100,4 @@ TrashySchedule.propTypes = {
   pickupDates: PropTypes.array,
 };
 
-export default TrashySchedule;
+export default injectIntl(TrashySchedule);
