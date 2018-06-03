@@ -13,6 +13,8 @@ import 'css/coa.css';
 
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS, { titleCase: false });
 
+export const AppContext = React.createContext();
+
 const AppView = withSiteData(
   injectIntl(({ path, navigation, threeoneone, intl }) => (
     <div>
@@ -40,14 +42,16 @@ const App = ({ navigation, threeoneone }) => (
       <Route
         path="(/)?:lang([a-z]{2})?/:path*"
         render={props => (
-          <I18nController
-            lang={props.match.params.lang}
-            path={props.match.params.path}
-          >
-            <EditController>
-              <AppView path={props.match.params.path || ''} />
-            </EditController>
-          </I18nController>
+          <AppContext.Provider value={{ isEditing: true }}>
+            <I18nController
+              lang={props.match.params.lang}
+              path={props.match.params.path}
+            >
+              <EditController>
+                <AppView path={props.match.params.path || ''} />
+              </EditController>
+            </I18nController>
+          </AppContext.Provider>
         )}
       />
     </div>
