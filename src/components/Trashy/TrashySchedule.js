@@ -20,7 +20,7 @@ const TrashySchedule = props => {
         compost: intl.formatMessage(i18n.compost),
         brushcollection: intl.formatMessage(i18n.brushcollection),
         bulkitemcollection: (
-          <I18nLink to="services/bulk-item-pickup">
+          <I18nLink to="bulk-item-pickup">
             {intl.formatMessage(i18n.bulkitemcollection)}
           </I18nLink>
         ),
