@@ -9,7 +9,6 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import FormFeedback from 'components/FormFeedback';
 
 const Topic = ({
   topic: { theme, text: title, description, callToAction, tiles },
@@ -24,9 +23,6 @@ const Topic = ({
 
     <div className="wrapper container-fluid">
       <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} />
-    </div>
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
     </div>
   </div>
 );

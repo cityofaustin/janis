@@ -10,7 +10,6 @@ import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import FormFeedback from 'components/FormFeedback';
 
 const Home = ({ topServices, image, intl }) => (
   <div>
@@ -28,9 +27,6 @@ const Home = ({ topServices, image, intl }) => (
         tiles={topServices}
         tag={intl.formatMessage(i18n3.service)}
       />
-    </div>
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
     </div>
   </div>
 );

@@ -7,7 +7,6 @@ import { services as i18n } from 'js/i18n/definitions';
 
 import TileGroupSet from 'components/Tiles/TileGroupSet';
 import PageHeader from 'components/PageHeader';
-import FormFeedback from 'components/FormFeedback';
 
 const Theme = ({ theme: { text: title, description, topics }, intl }) => (
   <div>
@@ -20,10 +19,6 @@ const Theme = ({ theme: { text: title, description, topics }, intl }) => (
         tileGroups={topics}
         tag={intl.formatMessage(i18n.service)}
       />
-    </div>
-
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
     </div>
   </div>
 );

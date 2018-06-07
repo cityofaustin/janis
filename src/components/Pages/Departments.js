@@ -3,7 +3,6 @@ import { withRouteData } from 'react-static';
 
 import PageHeader from 'components/PageHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import FormFeedback from 'components/FormFeedback';
 
 const Departments = ({ departments }) => (
   <div>
@@ -12,9 +11,6 @@ const Departments = ({ departments }) => (
     </div>
     <div className="wrapper container-fluid">
       <TileGroup tiles={departments} tag="department" />
-    </div>
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
     </div>
   </div>
 );

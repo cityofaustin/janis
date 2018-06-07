@@ -13,7 +13,6 @@ import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import FormFeedback from 'components/FormFeedback';
 
 const Service = ({
   service: {
@@ -67,10 +66,6 @@ const Service = ({
         tiles={related}
         tag={intl.formatMessage(i18n3.service)}
       />
-    </div>
-
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
     </div>
   </div>
 );
