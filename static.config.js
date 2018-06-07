@@ -3,6 +3,7 @@ import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import allProcessPagesQuery from 'js/queries/allProcessPagesQuery';
 import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
@@ -48,10 +49,11 @@ const makeAllPages = async langCode => {
 
 const makeChildPages = client => {
   return Promise.all([
-    makeServicePages(client),
-    makeTopicPages(client),
-    makeThemePages(client),
-    makeDepartmentPages(client),
+    // makeServicePages(client),
+    makeProcessPages(client),
+    // makeTopicPages(client),
+    // makeThemePages(client),
+    // makeDepartmentPages(client),
   ]);
 };
 
@@ -72,6 +74,39 @@ const makeServicePages = async client => {
       getData: async () => ({
         service,
       }),
+    })),
+  };
+
+  return data;
+};
+
+
+const makeProcessPages = async client => {
+  const { allProcessPages } = await client.request(
+    allProcessPagesQuery,
+  );
+
+  console.log(JSON.stringify(allProcessPages, null, 2));
+
+  const data = {
+    path: '/processes',
+    component: 'src/components/Pages/Processes',
+    getData: async () => ({
+      allProcessPages,
+    }),
+    children: allProcessPages.edges.map(({ node: processPage }) => ({
+      path: `/${processPage.slug}`,
+      component: 'src/components/Pages/Process',
+      getData: async () => ({
+        processPage,
+      }),
+      children: processPage.processSteps.edges.map(({ node: processStep }) => ({
+        path: `/${processStep.sortOrder}`,
+        component: 'src/components/Pages/ProcessStep',
+        getData: async () => ({
+          processStep,
+        }),
+      })),
     })),
   };
 
