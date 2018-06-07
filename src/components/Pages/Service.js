@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { findKey } from 'lodash';
+import path from 'path';
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
@@ -43,7 +44,9 @@ const Service = ({ service, intl }) => {
   return (
     <div>
       <PageBanner
-        imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+        imagesPath={`${process.env.CMS_MEDIA}/images`}
+        imageFilename={path.basename(image.filename, path.extname(image.filename))}
+        imageExtension={path.extname(image.filename)}
         imageTitle={image.title}
       />
       <PageBreadcrumbs
