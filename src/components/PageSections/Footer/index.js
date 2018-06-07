@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -17,12 +17,12 @@ import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
 
 const Footer = ({ threeoneone, intl }) => (
-  <footer>
+  <Fragment>
     <div className="wrapper wrapper--sm container-fluid">
       <FormFeedback />
     </div>
     <ThreeOneOne threeoneone={threeoneone} />
-    <div className="coa-Footer">
+    <footer className="coa-Footer">
       <div className="container-fluid wrapper">
         <div className="row">
           <div className="col-xs-12 col-md-2">
@@ -53,8 +53,8 @@ const Footer = ({ threeoneone, intl }) => (
           </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </Fragment>
 );
 
 Footer.propTypes = {
