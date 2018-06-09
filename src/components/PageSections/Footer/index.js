@@ -17,13 +17,12 @@ import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
 
 const Footer = ({ threeoneone, intl }) => (
-  //wrapping component in Fragment results in a react static build error
-  <div>
+  <footer>
     <div className="wrapper wrapper--sm container-fluid">
       <FormFeedback />
     </div>
     <ThreeOneOne threeoneone={threeoneone} />
-    <footer className="coa-Footer">
+    <div className="coa-Footer">
       <div className="container-fluid wrapper">
         <div className="row">
           <div className="col-xs-12 col-md-2">
@@ -54,8 +53,8 @@ const Footer = ({ threeoneone, intl }) => (
           </div>
         </div>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 );
 
 Footer.propTypes = {
