@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import I18nNavLink from 'components/I18n/I18nNavLink';
 import PlusSVG from 'components/SVGs/Plus';
@@ -18,9 +19,9 @@ const MenuItem = ({
 }) => (
   <li>
     <div
-      className={`coa-MenuItem coa-MenuItem--flex ${
-        isSubmenuOpen ? 'coa-MenuItem--open' : ''
-      }`}
+      className={classNames('coa-MenuItem', 'coa-MenuItem--flex', {
+        'coa-MenuItem--open': isSubmenuOpen,
+      })}
       id={`theme${id + 1}`}
       aria-expanded={isSubmenuOpen}
       aria-haspopup={true}
