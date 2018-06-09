@@ -14,7 +14,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 const Home = ({ topServices, image, intl }) => (
   <div>
     <HeroHome
-      imageUrl={`${process.env.CMS_MEDIA}/${image.file}`}
+      imageFilename={`${process.env.CMS_MEDIA}/images/${image.file}`}
       imageTitle={image.title}
       preheader={intl.formatMessage(i18n2.welcomeTo)}
     />

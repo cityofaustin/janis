@@ -43,7 +43,7 @@ const makeAllPages = async langCode => {
       return {
         topServices,
         image: {
-          file: 'original_images/lady-bird-lake.jpg',
+          file: 'lady-bird-lake',
           title: 'Lady Bird Lake walking trail',
         },
       };

@@ -56,8 +56,15 @@ To manage our roadmap and upcoming issues, we're using a dedicated Github repo, 
 
 ## 🎨 Design
 
-Current design mockups are stored in Google Drive as Sketch Files:
-https://drive.google.com/drive/u/1/folders/1Xg6739ixhIDrb7MdJAnO4_zCRu3kDmZQ
+The design team uses sketch to mock up wireframe and high fidelity comps. The most up to date files can be linked here from Google drive. The parent file for current public interface/janis design files is https://drive.google.com/drive/folders/1J1AXm9bDgT0kO_2lugg4mnV4koZHpDO-?usp=sharing.
+
+- [Alpha.austin.gov comprehensive user flow including home, theme, topic, service, process, and department templates](https://drive.google.com/file/d/1wtiU9LqpvU2KTu362bCPMfS7tfYgjyuf/view?usp=sharing)
+- [Alpha.austin.gov design library documenting all current components](https://drive.google.com/file/d/1v95Zwm7aaXpD45jUCE70vuCtMv9JMedM/view?usp=sharing)
+- [You can use one sketch library as a single source of truth across multiple designer's and developer's files. Never used sketch librairies before? Check out this introduction and detailed how-to's](https://www.sketchapp.com/docs/libraries/)
+- [Alpha.austin.gov EMS process page](https://drive.google.com/file/d/1rqELW2K4ZI-BjV9Tecj-49UUzujVvLYr/view?usp=sharing)
+- [Alpha.austin.gov Animal Center foster process page and form](https://drive.google.com/file/d/1nJePAA3EI1APmdFK8zcBjh4OuajyjElG/view?usp=sharing)
+- [Alpha.austin.gov Search flow](https://drive.google.com/file/d/1V4VN1Q-_C2A87LRHRf4bgEv5iVFGBEnb/view?usp=sharing)
+- [Alpha.austin.gov Permittingatx transition process page](https://drive.google.com/file/d/1EZ1_hdj30ebmWZuve-tpvw3Rl8ioN9kX/view?usp=sharing)
 
 ## Frameworks and Libraries Used
 

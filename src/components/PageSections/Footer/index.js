@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -17,7 +17,8 @@ import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
 
 const Footer = ({ threeoneone, intl }) => (
-  <Fragment>
+  //wrapping component in Fragment results in a react static build error
+  <div>
     <div className="wrapper wrapper--sm container-fluid">
       <FormFeedback />
     </div>
@@ -54,7 +55,7 @@ const Footer = ({ threeoneone, intl }) => (
         </div>
       </div>
     </footer>
-  </Fragment>
+  </div>
 );
 
 Footer.propTypes = {
