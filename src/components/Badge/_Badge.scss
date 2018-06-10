@@ -8,6 +8,11 @@
   overflow: hidden;
   position: relative;
   width: $coa-badge-width;
+
+  @include media($coa-medium-screen) {
+    height: $coa-badgelarge-height + $coa-badgelarge-step-radius;
+    width: $coa-badgelarge-width;
+  }
 }
 
 .coa-Badge__background {
@@ -23,13 +28,23 @@
   polygon {
     fill: $coa-color-green-light;
   }
+
+  @include media($coa-medium-screen) {
+    height: $coa-badgelarge-height;
+    width: $coa-badgelarge-width;
+  }
 }
 
 .coa-Badge__title {
-  font-size: $coa-font-size-md-small;
-  line-height: $coa-line-height-small;
-  padding: 2rem;
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+  padding: 1rem;
   text-align: center;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-small;
+    padding: 2rem;
+  }
 }
 
 .coa-Badge__step {
@@ -38,12 +53,18 @@
   border: ($coa-badge-stroke - 1) solid $coa-color-purple-dark;
   border-radius: 50%;
   display: flex;
-  font-size: $coa-font-size-medium;
+  font-size: $coa-font-size-md-small;
+  font-weight: $coa-font-bold;
   height: $coa-badge-step-radius * 2;
   justify-content: center;
   position: absolute;
   top: 0;
   width: $coa-badge-step-radius * 2;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-medium;
+    height: $coa-badgelarge-step-radius * 2;
+    width: $coa-badgelarge-step-radius * 2;
+  }
 }
 
 .coa-Badge--isActive {

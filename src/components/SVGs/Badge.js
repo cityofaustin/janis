@@ -3,6 +3,7 @@ import SVG from 'components/SVGs/Svg';
 
 const BadgeSVG = ({ title = 'Badge', ...rest }) => (
   <SVG
+    preserveAspectRatio="none"
     viewBox="0 0 180 165"
     title={title}
     {...rest}
