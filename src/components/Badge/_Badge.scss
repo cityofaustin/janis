@@ -1,0 +1,60 @@
+.coa-Badge {
+  align-items: center;
+  display: flex;
+  font-family: $coa-font-sans;
+  font-weight: $coa-font-semibold;
+  height: $coa-badge-height + $coa-badge-step-radius;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: $coa-badge-width;
+}
+
+.coa-Badge__background {
+  bottom: 0;
+  height: $coa-badge-height;
+  position: absolute;
+  width: $coa-badge-width;
+  path {
+    fill: transparent;
+    stroke: $coa-color-gray-light;
+    stroke-width: $coa-badge-stroke;
+  }
+  polygon {
+    fill: $coa-color-green-light;
+  }
+}
+
+.coa-Badge__title {
+  font-size: $coa-font-size-md-small;
+  line-height: $coa-line-height-small;
+  padding: 2rem;
+  text-align: center;
+}
+
+.coa-Badge__step {
+  align-items: center;
+  background: $coa-color-white;
+  border: ($coa-badge-stroke - 1) solid $coa-color-purple-dark;
+  border-radius: 50%;
+  display: flex;
+  font-size: $coa-font-size-medium;
+  height: $coa-badge-step-radius * 2;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: $coa-badge-step-radius * 2;
+}
+
+.coa-Badge--isActive {
+  .coa-Badge__background {
+    path {
+      stroke: $coa-color-purple-dark;
+      stroke-width: $coa-badge-stroke + 2px;
+    }
+  }
+  .coa-Badge__title {
+    text-decoration-color: $coa-color-green-light; /* limited browser compat */
+    text-decoration: underline;
+  }
+}
