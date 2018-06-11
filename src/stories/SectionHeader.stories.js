@@ -26,6 +26,13 @@ storiesOf('SectionHeader', module)
       </SectionHeader>
     </div>
   ))
+  .add('SectionHeader symbol', () => (
+    <div className="wrapper container-fluid">
+      <SectionHeader hasSymbol={1}>
+        Lorem ipsum dolor sit amet cume
+      </SectionHeader>
+    </div>
+  ))
   .add('SectionHeader serif', () => (
     <div className="wrapper container-fluid">
       <SectionHeader isSerif={true}>

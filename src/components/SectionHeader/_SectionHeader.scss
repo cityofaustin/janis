@@ -45,3 +45,27 @@
   margin: $coa-spacing-medium auto $coa-spacing-xlarge;
   width: $coa-sectionheader-highlight-width;
 }
+
+.coa-SectionHeader--hasSymbol {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.coa-SectionHeader__symbol {
+  height: $coa-sectionheader-symbol-radius * 2;
+  line-height: $coa-sectionheader-symbol-radius * 2;
+  margin-bottom: $coa-spacing-large;
+  position: relative;
+  width: $coa-sectionheader-symbol-radius * 2;
+}
+.coa-SectionHeader__symbol:before {
+  border: $coa-sectionheader-symbol-stroke solid $coa-color-green-light;
+  border-radius: $coa-sectionheader-symbol-radius;
+  content: "";
+  height: $coa-sectionheader-symbol-radius * 2;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: $coa-sectionheader-symbol-radius * 2;
+}
+
