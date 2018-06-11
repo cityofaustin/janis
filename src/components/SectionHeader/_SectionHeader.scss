@@ -51,13 +51,17 @@
   display: flex;
   flex-direction: column;
 }
+
 .coa-SectionHeader__symbol {
+  align-items: center;
+  display: flex;
   height: $coa-sectionheader-symbol-radius * 2;
-  line-height: $coa-sectionheader-symbol-radius * 2;
+  justify-content: center;
   margin-bottom: $coa-spacing-large;
   position: relative;
   width: $coa-sectionheader-symbol-radius * 2;
 }
+
 .coa-SectionHeader__symbol:before {
   border: $coa-sectionheader-symbol-stroke solid $coa-color-green-light;
   border-radius: $coa-sectionheader-symbol-radius;
