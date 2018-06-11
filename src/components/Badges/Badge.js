@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import BadgeSVG from 'components/SVGs/Badge';
 
+import { badgePropTypes } from './proptypes';
+
 const Badge = ({ title, step, isActive }) => (
   <div className={classNames('coa-Badge', {
       'coa-Badge--isActive': isActive
@@ -15,10 +17,6 @@ const Badge = ({ title, step, isActive }) => (
   </div>
 )
 
-Badge.propTypes = {
-  title: PropTypes.string.isRequired,
-  step: PropTypes.number,
-  isActive: PropTypes.bool,
-};
+Badge.propTypes = badgePropTypes;
 
 export default Badge;

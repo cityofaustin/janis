@@ -5,12 +5,14 @@
   font-weight: $coa-font-semibold;
   height: $coa-badge-height + $coa-badge-step-radius;
   justify-content: center;
+  margin: $coa-badge-margin-tb $coa-badge-margin-lr;
   overflow: hidden;
   position: relative;
   width: $coa-badge-width;
 
   @include media($coa-medium-screen) {
     height: $coa-badgelarge-height + $coa-badgelarge-step-radius;
+    margin: $coa-badgelarge-margin-tb $coa-badgelarge-margin-lr;
     width: $coa-badgelarge-width;
   }
 }
