@@ -1,10 +1,7 @@
 .coa-Badge {
-  align-items: center;
-  display: flex;
   font-family: $coa-font-sans;
   font-weight: $coa-font-semibold;
   height: $coa-badge-height + $coa-badge-step-radius;
-  justify-content: center;
   margin: $coa-badge-margin-tb $coa-badge-margin-lr;
   overflow: hidden;
   position: relative;
@@ -38,14 +35,23 @@
 }
 
 .coa-Badge__title {
+  align-items: center;
+  display: flex;
   font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
-  padding: 1rem;
+  height: $coa-badge-height / 2;
+  line-height: $coa-line-height-xsmall - .4rem;
+  justify-content: center;
+  padding: 0 $coa-spacing-md-small;
+  position: absolute;
   text-align: center;
+  top: $coa-badge-step-radius * 2;
+  width: $coa-badge-width;
   @include media($coa-medium-screen) {
     font-size: $coa-font-size-md-small;
-    line-height: $coa-line-height-small;
-    padding: 2rem;
+    height: $coa-badgelarge-height / 2;
+    line-height: $coa-line-height-md-small;
+    top: $coa-badgelarge-step-radius * 2;
+    width: $coa-badgelarge-width;
   }
 }
 
@@ -59,12 +65,14 @@
   font-weight: $coa-font-bold;
   height: $coa-badge-step-radius * 2;
   justify-content: center;
+  left: $coa-badge-width / 2 - $coa-badge-step-radius;
   position: absolute;
   top: 0;
   width: $coa-badge-step-radius * 2;
   @include media($coa-medium-screen) {
     font-size: $coa-font-size-medium;
     height: $coa-badgelarge-step-radius * 2;
+    left: $coa-badgelarge-width / 2 - $coa-badgelarge-step-radius;
     width: $coa-badgelarge-step-radius * 2;
   }
 }
@@ -73,7 +81,7 @@
   .coa-Badge__background {
     path {
       stroke: $coa-color-purple-dark;
-      stroke-width: $coa-badge-stroke + 2px;
+      stroke-width: $coa-badgelarge-stroke;
     }
   }
   .coa-Badge__title {
