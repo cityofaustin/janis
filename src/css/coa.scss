@@ -8,6 +8,7 @@
 @import 'css/vendor/variables_flexboxgrid';
 @import 'node_modules/flexboxgrid-sass/flexboxgrid';
 @import 'css/vendor/bootstrap_utilities_display';
+@import 'css/vendor/bootstrap_utilities_screen-reader';
 
 // base
 @import 'css/base/base';
@@ -35,7 +36,7 @@
 @import 'components/PageSections/Menu/Submenu';
 @import 'components/PageSections/Menu/SubmenuItem';
 @import 'components/PageSections/ThreeOneOne/ThreeOneOne';
-@import 'components/PageNotificationBanner/PageNotificationBanner';
+@import 'components/Progress/Progress';
 @import 'components/Recollect/Recollect';
 @import 'components/SectionHeader/SectionHeader';
 @import 'components/StaticMap/StaticMap';

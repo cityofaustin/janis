@@ -1,10 +1,13 @@
 .coa-text-spacer--vertical:after {
   border-left: 1px solid $coa-color-purple-dark;
-  content: " ";
+  content: ' ';
   margin: 0 $coa-spacing-medium;
 }
 
 .coa-sr-only {
-  position: absolute;
-  left: -999em;
+  @include sr-only();
+}
+
+.coa-sr-only-focusable {
+  @include sr-only-focusable();
 }
