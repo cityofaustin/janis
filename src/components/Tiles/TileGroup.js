@@ -1,30 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Tile from 'components/Tiles/Tile';
 import SectionHeader from 'components/SectionHeader';
 import I18nLink from 'components/I18n/I18nLink';
 import ArrowRight from 'components/SVGs/ArrowRight';
 
-const TileGroup = ({
-  tiles,
-  tag,
-  title,
-  titlePath,
-  description,
-  hasBorder,
-}) => (
+import Tile from './Tile';
+import { tileGroupPropTypes } from './proptypes';
+
+const TileGroup = ({ tiles, tag, text, url, description, hasBorder }) => (
   <div className={`coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}`}>
-    {title &&
-      titlePath && (
+    {text &&
+      url && (
         <SectionHeader hasHighlight={true}>
-          <I18nLink to={titlePath}>
-            {title}&nbsp;<ArrowRight />
+          <I18nLink to={url}>
+            {text}&nbsp;<ArrowRight />
           </I18nLink>
         </SectionHeader>
       )}
-    {title &&
-      !titlePath && <SectionHeader hasHighlight={true}>{title}</SectionHeader>}
+
+    {text && !url && <SectionHeader hasHighlight={true}>{text}</SectionHeader>}
 
     {description && <p className="coa-TileGroup__description">{description}</p>}
     <div className="row">
@@ -40,13 +35,6 @@ const TileGroup = ({
   </div>
 );
 
-TileGroup.propTypes = {
-  tiles: PropTypes.array.isRequired,
-  tag: PropTypes.string,
-  title: PropTypes.string,
-  titlePath: PropTypes.string,
-  description: PropTypes.string,
-  hasBorder: PropTypes.bool,
-};
+TileGroup.propTypes = tileGroupPropTypes;
 
 export default TileGroup;

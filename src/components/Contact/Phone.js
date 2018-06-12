@@ -6,6 +6,8 @@ import { contact as i18n } from 'js/i18n/definitions';
 
 import PhoneSVG from 'components/SVGs/Phone';
 
+import { phonePropTypes } from './proptypes';
+
 const Phone = ({ phone, intl }) => (
   <div className="coa-ContactItem coa-ContactPhone">
     <PhoneSVG />
@@ -24,10 +26,7 @@ const Phone = ({ phone, intl }) => (
 );
 
 Phone.propTypes = {
-  phone: PropTypes.shape({
-    default: PropTypes.string.isRequired,
-    tty: PropTypes.string,
-  }),
+  phone: phonePropTypes,
 };
 
 export default injectIntl(Phone);

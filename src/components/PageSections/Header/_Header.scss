@@ -1,7 +1,6 @@
 .coa-Header {
   border-bottom: 1px solid $coa-color-purple-lighter;
   font-family: $coa-font-sans;
-  position: relative;
 }
 
 .coa-Header--menu-is-open ~ main,
@@ -17,8 +16,8 @@
   height: $coa-header-toprow-height;
   justify-content: space-between;
   @include media($coa-large-screen) {
-    padding-left:$coa-spacing-small;
-    padding-right:$coa-spacing-small;
+    padding-left: $coa-spacing-small;
+    padding-right: $coa-spacing-small;
   }
 }
 
@@ -44,9 +43,9 @@
     text-transform: uppercase;
   }
   svg {
-    height: $coa-font-size-xsmall - .1rem; //based on parent element font-size
-    width: $coa-font-size-xsmall - .1rem; //based on parent element font-size
-    vertical-align: -.2rem;
+    height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+    width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+    vertical-align: -0.2rem;
   }
 }
 

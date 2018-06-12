@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
@@ -8,10 +9,11 @@ import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
 import I18nNavLink from 'components/I18n/I18nNavLink';
 import ExternalLink from 'components/ExternalLink';
-import MenuItem from 'components/PageSections/Menu/MenuItem';
-
 import CloseSVG from 'components/SVGs/Close';
 import citySealImg from 'images/coa_seal.png';
+
+import MenuItem from './MenuItem';
+import { themePropTypes } from './proptypes';
 
 class Menu extends Component {
   constructor(props) {
@@ -54,57 +56,52 @@ class Menu extends Component {
   };
 
   render() {
-    const {
-      isMenuOpen,
-      navigation: { allThemes },
-    } = this.props;
+    const { isMenuOpen, navigation } = this.props;
     const { openSubmenuId } = this.state;
 
     return (
-      allThemes.edges.length && (
-        <div className="container-fluid wrapper">
-          <nav
-            className={`coa-Menu ${isMenuOpen ? 'coa-Menu--open' : ''}`}
-            role="navigation"
+      <div className="container-fluid wrapper">
+        <nav
+          className={classNames('coa-Menu', { 'coa-Menu--open': isMenuOpen })}
+          role="navigation"
+        >
+          <button
+            className="coa-Menu__close-btn d-lg-none"
+            onClick={this.closeAllMenus}
+            ref="closeTrigger"
+            tabIndex="0"
           >
-            <button
-              className="coa-Menu__close-btn d-lg-none"
-              onClick={this.closeAllMenus}
-              ref="closeTrigger"
-              tabIndex="0"
-            >
-              <CloseSVG />
-            </button>
-            <ul className="coa-Menu__list">
-              <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
-              <AirportMobileMenuItem />
-              <ThreeOneOneMobileMenuItem />
-              {allThemes.edges.map(({ node: theme }, i) => (
-                <MenuItem
-                  key={i}
-                  id={i}
-                  theme={theme}
-                  isSubmenuOpen={this.isSubmenuOpen(i)}
-                  handleCloseAllMenus={this.closeAllMenus}
-                  handleSubmenuToggle={this.toggleSubmenu}
-                />
-              ))}
-              <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
-              <MobileFooter />
-            </ul>
-          </nav>
-          {/*
-            this provides a full page click target area behind the nav menu
-            which, when clicked, will close the submenu
-          */
-          openSubmenuId !== null && (
-            <div
-              className="coa-Menu__close-submenu-click-target"
-              onClick={() => this.setState({ openSubmenuId: null })}
-            />
-          )}
-        </div>
-      )
+            <CloseSVG />
+          </button>
+          <ul className="coa-Menu__list">
+            <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
+            <AirportMobileMenuItem />
+            <ThreeOneOneMobileMenuItem />
+            {navigation.map((theme, i) => (
+              <MenuItem
+                key={i}
+                id={i}
+                theme={theme}
+                isSubmenuOpen={this.isSubmenuOpen(i)}
+                handleCloseAllMenus={this.closeAllMenus}
+                handleSubmenuToggle={this.toggleSubmenu}
+              />
+            ))}
+            <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
+            <MobileFooter />
+          </ul>
+        </nav>
+        {/*
+          this provides a full page click target area behind the nav menu
+          which, when clicked, will close the submenu
+        */
+        openSubmenuId !== null && (
+          <div
+            className="coa-Menu__close-submenu-click-target"
+            onClick={() => this.setState({ openSubmenuId: null })}
+          />
+        )}
+      </div>
     );
   }
 }
@@ -157,7 +154,7 @@ const MobileFooter = injectIntl(({ intl }) => (
 ));
 
 Menu.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
   closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 };

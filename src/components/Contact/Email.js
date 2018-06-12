@@ -2,6 +2,8 @@ import React from 'react';
 import EnvelopSVG from 'components/SVGs/EnvelopO';
 import PropTypes from 'prop-types';
 
+import { emailPropTypes } from './proptypes';
+
 const Email = ({ email }) => (
   <div className="coa-ContactItem coa-ContactEmail">
     <EnvelopSVG />
@@ -10,7 +12,7 @@ const Email = ({ email }) => (
 );
 
 Email.propTypes = {
-  email: PropTypes.string.isRequired,
+  email: emailPropTypes,
 };
 
 export default Email;

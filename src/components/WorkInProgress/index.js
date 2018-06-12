@@ -36,4 +36,8 @@ const WorkInProgress = ({ isClipped }) =>
     />
   );
 
+WorkInProgress.propTypes = {
+  isClipped: PropTypes.bool,
+};
+
 export default WorkInProgress;

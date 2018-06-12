@@ -4,9 +4,11 @@ import { injectIntl } from 'react-intl';
 
 import { threeoneone as i18n } from 'js/i18n/definitions';
 
-import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
 import ListLink from 'components/ListLink';
 import SectionHeader from 'components/SectionHeader';
+
+import ThreeOneOneRequest from './ThreeOneOneRequest';
+import { threeoneonePropTypes } from './proptypes';
 
 const ThreeOneOne = ({ threeoneone, intl }) => (
   <div className="coa-ThreeOneOne">
@@ -37,7 +39,7 @@ const ThreeOneOne = ({ threeoneone, intl }) => (
 );
 
 ThreeOneOne.propTypes = {
-  threeoneone: PropTypes.array.isRequired,
+  threeoneone: threeoneonePropTypes.isRequired,
 };
 
 export default injectIntl(ThreeOneOne);

@@ -25,7 +25,7 @@ const allServicePagesQuery = `
           }
           image {
             id
-            file
+            filename
             title
           }
           contacts {

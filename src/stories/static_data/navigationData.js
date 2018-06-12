@@ -1,494 +1,1065 @@
 const staticNavData = {
-  allThemes: {
-    edges: [
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjE=',
-          slug: 'permits-tickets',
-          text: 'Permits & Tickets',
+  en: [
+    {
+      url: '/themes/permits-tickets',
+      text: 'Permits & Tickets',
+      id: 'VGhlbWVOb2RlOjE=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/building-permits',
+          text: 'Building permits',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Building permits',
-                  slug: 'building-permits',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Business permits & licenses',
-                  slug: 'business-permits-licenses',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Event permits',
-                  slug: 'event-permits',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Pay tickets',
-                  slug: 'pay-tickets',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjI=',
-          slug: 'housing-utilities',
-          text: 'Housing & Utilities',
+        {
+          url: '/topics/business-permits-licenses',
+          text: 'Business permits & licenses',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/event-permits',
+          text: 'Event permits',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/pay-tickets',
+          text: 'Pay tickets',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/housing-utilities',
+      text: 'Housing & Utilities',
+      id: 'VGhlbWVOb2RlOjI=',
+      description:
+        'Find the resources to keep your home, apartment, or condo running smoothly.',
+      topics: [
+        {
+          url: '/topics/pay-utility-bills',
+          text: 'Pay utility bills',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/water-electric-service',
+          text: 'Water & electric service',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/recycling-trash-compost',
+          text: 'Recycling, trash, and compost',
           description:
-            'Find the resources to keep your home, apartment, or condo running smoothly.',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Pay utility bills',
-                  slug: 'pay-utility-bills',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Water & electric service',
-                  slug: 'water-electric-service',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Recycling, trash, and compost',
-                  slug: 'recycling-trash-compost',
-                  description:
-                    'The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.',
-                  services: {
-                    edges: [
-                      {
-                        node: {
-                          id: 'U2VydmljZVBhZ2VOb2RlOjQ=',
-                          title:
-                            'Drop off household hazardous waste and other recyclables',
-                          slug: 'hazardous-waste-dropoff',
-                        },
-                      },
-                      {
-                        node: {
-                          id: 'U2VydmljZVBhZ2VOb2RlOjU=',
-                          title: 'Get ready for curbside compost pickup',
-                          slug: 'compost-pickup',
-                        },
-                      },
-                      {
-                        node: {
-                          id: 'U2VydmljZVBhZ2VOb2RlOjY=',
-                          title: 'Pick up free paint and other household items',
-                          slug: 'pickup-free-paint',
-                        },
-                      },
-                      {
-                        node: {
-                          id: 'U2VydmljZVBhZ2VOb2RlOjc=',
-                          title: 'Get ready for curbside bulk item pickup',
-                          slug: 'bulk-item-pickup',
-                        },
-                      },
-                    ],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Housing assistance',
-                  slug: 'housing-assistance',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+            'The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.',
+          services: [
+            {
+              url: '/services/bulk-item-pickup',
+              text: 'Get ready for curbside bulk item pickup',
+              id: 'U2VydmljZVBhZ2VOb2RlOjQ=',
+            },
+            {
+              url: '/services/compost-pickup',
+              text: 'Get ready for curbside compost pickup',
+              id: 'U2VydmljZVBhZ2VOb2RlOjU=',
+            },
+            {
+              url: '/services/hazardous-waste-dropoff',
+              text: 'Drop off household hazardous waste and other recyclables',
+              id: 'U2VydmljZVBhZ2VOb2RlOjY=',
+            },
+            {
+              url: '/services/pickup-free-paint',
+              text: 'Pick up free paint and other household items',
+              id: 'U2VydmljZVBhZ2VOb2RlOjc=',
+            },
+          ],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjM=',
-          slug: 'pets',
-          text: 'Pets',
+        {
+          url: '/topics/housing-assistance',
+          text: 'Housing assistance',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Pet adoption',
-                  slug: 'pet-adoption',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Foster an animal',
-                  slug: 'foster-animal',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Report a loose animal',
-                  slug: 'report-loose-animal',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Lots & found pets',
-                  slug: 'lost-found-pets',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjQ=',
-          slug: 'health-safety',
-          text: 'Health & Safety',
+      ],
+    },
+    {
+      url: '/themes/pets',
+      text: 'Pets',
+      id: 'VGhlbWVOb2RlOjM=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pet-adoption',
+          text: 'Pet adoption',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Birth certificates',
-                  slug: 'birth-certificates',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Healthcare & prevention',
-                  slug: 'healthcare-prevention',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Find childcare',
-                  slug: 'find-childcare',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Child & senior safety',
-                  slug: 'child-senior-safety',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Disaster safety & relief',
-                  slug: 'disaster-safety-relief',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Police reports & records',
-                  slug: 'police-reports-records',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjU=',
-          slug: 'explore-visit',
-          text: 'Explore & Visit',
+        {
+          url: '/topics/foster-animal',
+          text: 'Foster an animal',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Events & classes',
-                  slug: 'events-classes',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Hike, bike, swim, & play',
-                  slug: 'hike-bike-swim-play',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Arts & culture',
-                  slug: 'arts-culture',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Libraries',
-                  slug: 'libraries',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Transportation & parking',
-                  slug: 'transportation-parking',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Airport',
-                  slug: 'airport',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjY=',
-          slug: 'government-business',
-          text: 'Government & Business',
+        {
+          url: '/topics/report-loose-animal',
+          text: 'Report a loose animal',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'Departments',
-                  slug: 'departments',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Court dates & times',
-                  slug: 'court-dates',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Business development',
-                  slug: 'business-development',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'City code & ordinance',
-                  slug: 'city-code',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Budget, performance, & open records',
-                  slug: 'budget-performance-open-records',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Funding, grants, & rebates',
-                  slug: 'funding-grants-rebates',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Resident participation',
-                  slug: 'resident-participation',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'Mayor & Council',
-                  slug: 'mayor-council',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-      {
-        node: {
-          id: 'VGhlbWVOb2RlOjc=',
-          slug: 'jobs',
-          text: 'Jobs',
+        {
+          url: '/topics/lost-found-pets',
+          text: 'Lots & found pets',
           description: '',
-          topics: {
-            edges: [
-              {
-                node: {
-                  text: 'City job titles & pay',
-                  slug: 'job-titles-pay',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'City benefits',
-                  slug: 'benefits',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: '[Job type 1]',
-                  slug: 'rando-job-1',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: '[Job type 2]',
-                  slug: 'rando-job-2',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-              {
-                node: {
-                  text: 'All jobs',
-                  slug: 'all-jobs',
-                  description: '',
-                  services: {
-                    edges: [],
-                  },
-                },
-              },
-            ],
-          },
+          services: [],
         },
-      },
-    ],
-  },
+      ],
+    },
+    {
+      url: '/themes/health-safety',
+      text: 'Health & Safety',
+      id: 'VGhlbWVOb2RlOjQ=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/birth-certificates',
+          text: 'Birth certificates',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/healthcare-prevention',
+          text: 'Healthcare & prevention',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/find-childcare',
+          text: 'Find childcare',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/child-senior-safety',
+          text: 'Child & senior safety',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/disaster-safety-relief',
+          text: 'Disaster safety & relief',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/police-reports-records',
+          text: 'Police reports & records',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/explore-visit',
+      text: 'Explore & Visit',
+      id: 'VGhlbWVOb2RlOjU=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/events-classes',
+          text: 'Events & classes',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/hike-bike-swim-play',
+          text: 'Hike, bike, swim, & play',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/arts-culture',
+          text: 'Arts & culture',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/libraries',
+          text: 'Libraries',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/transportation-parking',
+          text: 'Transportation & parking',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/airport',
+          text: 'Airport',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/government-business',
+      text: 'Government & Business',
+      id: 'VGhlbWVOb2RlOjY=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/departments',
+          text: 'Departments',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/court-dates',
+          text: 'Court dates & times',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/business-development',
+          text: 'Business development',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/city-code',
+          text: 'City code & ordinance',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/budget-performance-open-records',
+          text: 'Budget, performance, & open records',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/funding-grants-rebates',
+          text: 'Fudning, grants, & rebates',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/resident-participation',
+          text: 'Resident participation',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/mayor-council',
+          text: 'Mayor & Council',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/jobs',
+      text: 'Jobs',
+      id: 'VGhlbWVOb2RlOjc=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/job-titles-pay',
+          text: 'City job titles & pay',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/benefits',
+          text: 'City benefits',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/rando-job-1',
+          text: '[Job type 1]',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/rando-job-2',
+          text: '[Job type 2]',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/all-jobs',
+          text: 'All jobs',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+  ],
+  es: [
+    {
+      url: '/themes/permits-tickets',
+      text: 'Permisos y multas',
+      id: 'VGhlbWVOb2RlOjE=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/building-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/business-permits-licenses',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/event-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/pay-tickets', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/housing-utilities',
+      text: 'Vivienda y servicios públicos',
+      id: 'VGhlbWVOb2RlOjI=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pay-utility-bills',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/water-electric-service',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/recycling-trash-compost',
+          text: 'Reciclaje, basura y compostaje',
+          description: '',
+          services: [
+            {
+              url: '/services/bulk-item-pickup',
+              text:
+                'Prepárese para la recolección de artículos grandes al borde de la acera',
+              id: 'U2VydmljZVBhZ2VOb2RlOjQ=',
+            },
+            {
+              url: '/services/compost-pickup',
+              text: 'Prepárese para la recolección de compost',
+              id: 'U2VydmljZVBhZ2VOb2RlOjU=',
+            },
+            {
+              url: '/services/hazardous-waste-dropoff',
+              text:
+                'Entregue sus desechos peligrosos del hogar y otros artículos reciclables',
+              id: 'U2VydmljZVBhZ2VOb2RlOjY=',
+            },
+            {
+              url: '/services/pickup-free-paint',
+              text: 'Recoja pintura y otros artículos del hogar gratis',
+              id: 'U2VydmljZVBhZ2VOb2RlOjc=',
+            },
+          ],
+        },
+        {
+          url: '/topics/housing-assistance',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/pets',
+      text: 'Mascotas',
+      id: 'VGhlbWVOb2RlOjM=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pet-adoption',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/foster-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/report-loose-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/lost-found-pets',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/health-safety',
+      text: 'Salud y seguridad',
+      id: 'VGhlbWVOb2RlOjQ=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/birth-certificates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/healthcare-prevention',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/find-childcare',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/child-senior-safety',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/disaster-safety-relief',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/police-reports-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/explore-visit',
+      text: 'Explore y visite',
+      id: 'VGhlbWVOb2RlOjU=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/events-classes',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/hike-bike-swim-play',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/arts-culture',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/libraries', text: '', description: '', services: [] },
+        {
+          url: '/topics/transportation-parking',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/airport', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/government-business',
+      text: 'Gobierno y negocios',
+      id: 'VGhlbWVOb2RlOjY=',
+      description: '',
+      topics: [
+        { url: '/topics/departments', text: '', description: '', services: [] },
+        { url: '/topics/court-dates', text: '', description: '', services: [] },
+        {
+          url: '/topics/business-development',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/city-code', text: '', description: '', services: [] },
+        {
+          url: '/topics/budget-performance-open-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/funding-grants-rebates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/resident-participation',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/mayor-council',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/jobs',
+      text: 'Empleos',
+      id: 'VGhlbWVOb2RlOjc=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/job-titles-pay',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/benefits', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-1', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-2', text: '', description: '', services: [] },
+        { url: '/topics/all-jobs', text: '', description: '', services: [] },
+      ],
+    },
+  ],
+  vi: [
+    {
+      url: '/themes/permits-tickets',
+      text: 'Giấy phép & Giấy phạt',
+      id: 'VGhlbWVOb2RlOjE=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/building-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/business-permits-licenses',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/event-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/pay-tickets', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/housing-utilities',
+      text: 'Nhà ở & Tiện ích',
+      id: 'VGhlbWVOb2RlOjI=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pay-utility-bills',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/water-electric-service',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/recycling-trash-compost',
+          text: 'Tái chế, rác, và phân ủ',
+          description: '',
+          services: [
+            {
+              url: '/services/bulk-item-pickup',
+              text: 'Chuẩn bị cho việc bốc rác khối để lề đường',
+              id: 'U2VydmljZVBhZ2VOb2RlOjQ=',
+            },
+            {
+              url: '/services/compost-pickup',
+              text: 'Chuẩn bị cho việc bốc rác phân ủ hữu cơ thường lệ',
+              id: 'U2VydmljZVBhZ2VOb2RlOjU=',
+            },
+            {
+              url: '/services/hazardous-waste-dropoff',
+              text:
+                'Bỏ đi các loại rác nhà nguy hiểm và các loại rác tái chế khác',
+              id: 'U2VydmljZVBhZ2VOb2RlOjY=',
+            },
+            {
+              url: '/services/pickup-free-paint',
+              text: 'Lấy miễn phí sơn và các đồ dùng cho việc nhà khác',
+              id: 'U2VydmljZVBhZ2VOb2RlOjc=',
+            },
+          ],
+        },
+        {
+          url: '/topics/housing-assistance',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/pets',
+      text: 'Thú vật nuôi',
+      id: 'VGhlbWVOb2RlOjM=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pet-adoption',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/foster-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/report-loose-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/lost-found-pets',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/health-safety',
+      text: 'Sức khỏe $ An toàn',
+      id: 'VGhlbWVOb2RlOjQ=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/birth-certificates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/healthcare-prevention',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/find-childcare',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/child-senior-safety',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/disaster-safety-relief',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/police-reports-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/explore-visit',
+      text: 'Khám phá $ Thăm viếng',
+      id: 'VGhlbWVOb2RlOjU=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/events-classes',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/hike-bike-swim-play',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/arts-culture',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/libraries', text: '', description: '', services: [] },
+        {
+          url: '/topics/transportation-parking',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/airport', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/government-business',
+      text: 'Chính phủ $ Doanh nghiệp',
+      id: 'VGhlbWVOb2RlOjY=',
+      description: '',
+      topics: [
+        { url: '/topics/departments', text: '', description: '', services: [] },
+        { url: '/topics/court-dates', text: '', description: '', services: [] },
+        {
+          url: '/topics/business-development',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/city-code', text: '', description: '', services: [] },
+        {
+          url: '/topics/budget-performance-open-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/funding-grants-rebates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/resident-participation',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/mayor-council',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/jobs',
+      text: 'Công việc',
+      id: 'VGhlbWVOb2RlOjc=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/job-titles-pay',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/benefits', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-1', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-2', text: '', description: '', services: [] },
+        { url: '/topics/all-jobs', text: '', description: '', services: [] },
+      ],
+    },
+  ],
+  ar: [
+    {
+      url: '/themes/permits-tickets',
+      text: 'التصاريح والتذاكر',
+      id: 'VGhlbWVOb2RlOjE=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/building-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/business-permits-licenses',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/event-permits',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/pay-tickets', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/housing-utilities',
+      text: 'الإسكان والمنافع',
+      id: 'VGhlbWVOb2RlOjI=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pay-utility-bills',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/water-electric-service',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/recycling-trash-compost',
+          text: 'إعادة التدوير والنفايات والسماد',
+          description: '',
+          services: [
+            {
+              url: '/services/bulk-item-pickup',
+              text:
+                'كُن على استعداد لجمع العناصر كبيرة الحجم التي يُراد التخلص منها على جانب الرصيف',
+              id: 'U2VydmljZVBhZ2VOb2RlOjQ=',
+            },
+            {
+              url: '/services/compost-pickup',
+              text: 'كُن على استعداد لخدمة جمع السماد على جانب الرصيف',
+              id: 'U2VydmljZVBhZ2VOb2RlOjU=',
+            },
+            {
+              url: '/services/hazardous-waste-dropoff',
+              text:
+                'التخلص من النفايات الخطرة المنزلية وغيرها من المواد القابلة للتدوير',
+              id: 'U2VydmljZVBhZ2VOb2RlOjY=',
+            },
+            {
+              url: '/services/pickup-free-paint',
+              text: 'اختيار الدهانات وغيرها من الأدوات المنزلية مجانا',
+              id: 'U2VydmljZVBhZ2VOb2RlOjc=',
+            },
+          ],
+        },
+        {
+          url: '/topics/housing-assistance',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/pets',
+      text: 'لحيوانات الأليفة',
+      id: 'VGhlbWVOb2RlOjM=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/pet-adoption',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/foster-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/report-loose-animal',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/lost-found-pets',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/health-safety',
+      text: 'الصحة والسلامة',
+      id: 'VGhlbWVOb2RlOjQ=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/birth-certificates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/healthcare-prevention',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/find-childcare',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/child-senior-safety',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/disaster-safety-relief',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/police-reports-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/explore-visit',
+      text: 'الاستكشاف والزيارة',
+      id: 'VGhlbWVOb2RlOjU=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/events-classes',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/hike-bike-swim-play',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/arts-culture',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/libraries', text: '', description: '', services: [] },
+        {
+          url: '/topics/transportation-parking',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/airport', text: '', description: '', services: [] },
+      ],
+    },
+    {
+      url: '/themes/government-business',
+      text: 'الحكومة والأعمال',
+      id: 'VGhlbWVOb2RlOjY=',
+      description: '',
+      topics: [
+        { url: '/topics/departments', text: '', description: '', services: [] },
+        { url: '/topics/court-dates', text: '', description: '', services: [] },
+        {
+          url: '/topics/business-development',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/city-code', text: '', description: '', services: [] },
+        {
+          url: '/topics/budget-performance-open-records',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/funding-grants-rebates',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/resident-participation',
+          text: '',
+          description: '',
+          services: [],
+        },
+        {
+          url: '/topics/mayor-council',
+          text: '',
+          description: '',
+          services: [],
+        },
+      ],
+    },
+    {
+      url: '/themes/jobs',
+      text: 'الوظائف',
+      id: 'VGhlbWVOb2RlOjc=',
+      description: '',
+      topics: [
+        {
+          url: '/topics/job-titles-pay',
+          text: '',
+          description: '',
+          services: [],
+        },
+        { url: '/topics/benefits', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-1', text: '', description: '', services: [] },
+        { url: '/topics/rando-job-2', text: '', description: '', services: [] },
+        { url: '/topics/all-jobs', text: '', description: '', services: [] },
+      ],
+    },
+  ],
 };
 
 export default staticNavData;
