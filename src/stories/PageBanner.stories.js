@@ -5,7 +5,7 @@ import PageBanner from 'components/PageBanner';
 
 storiesOf('PageBanner', module).add('PageBanner', () => (
   <PageBanner
-    imagesPath="/images/"
+    imagesPath="images"
     imageFilename="pagebanner_test"
     imageExtension=".jpg"
     imageTitle={'test'}

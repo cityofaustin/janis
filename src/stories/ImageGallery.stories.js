@@ -5,12 +5,12 @@ import ImageGallery from 'components/ImageGallery';
 
 const bwGameboys = [
   {
-    filename: '/images/gb',
+    filename: 'images/gb',
     extension: '.jpg',
     description: 'Game Boy',
   },
   {
-    filename: '/images/gbp',
+    filename: 'images/gbp',
     extension: '.jpg',
     description: 'Game Boy Pocket',
   },
@@ -18,17 +18,17 @@ const bwGameboys = [
 
 const gameboyAdvances = [
   {
-    filename: '/images/gba',
+    filename: 'images/gba',
     extension: '.jpg',
     description: 'Game Boy Advance',
   },
   {
-    filename: '/images/gbasp',
+    filename: 'images/gbasp',
     extension: '.png',
     description: 'Game Boy Advance SP',
   },
   {
-    filename: '/images/gbam',
+    filename: 'images/gbam',
     extension: '.png',
     description: 'Game Boy Micro',
   },
@@ -36,32 +36,32 @@ const gameboyAdvances = [
 
 const gameboys = [
   {
-    filename: '/images/gb',
+    filename: 'images/gb',
     extension: '.jpg',
     description: 'Game Boy',
   },
   {
-    filename: '/images/gbp',
+    filename: 'images/gbp',
     extension: '.jpg',
     description: 'Game Boy Pocket',
   },
   {
-    filename: '/images/gbc',
+    filename: 'images/gbc',
     extension: '.jpg',
     description: 'Game Boy Color',
   },
   {
-    filename: '/images/gba',
+    filename: 'images/gba',
     extension: '.jpg',
     description: 'Game Boy Advance',
   },
   {
-    filename: '/images/gbasp',
+    filename: 'images/gbasp',
     extension: '.png',
     description: 'Game Boy Advance SP',
   },
   {
-    filename: '/images/gbam',
+    filename: 'images/gbam',
     extension: '.png',
     description: 'Game Boy Micro',
   },
