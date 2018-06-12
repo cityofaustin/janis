@@ -57,9 +57,27 @@
   display: flex;
   height: $coa-sectionheader-symbol-radius * 2;
   justify-content: center;
-  margin-bottom: $coa-spacing-large;
+  margin-bottom: $coa-spacing-small;
   position: relative;
   width: $coa-sectionheader-symbol-radius * 2;
+
+  @include media($coa-small-screen) {
+    height: $coa-sectionheadersmall-symbol-radius * 2;
+    margin-bottom: $coa-spacing-medium;
+    width: $coa-sectionheadersmall-symbol-radius * 2;
+  }
+
+  @include media($coa-medium-screen) {
+    height: $coa-sectionheadermedium-symbol-radius * 2;
+    margin-bottom: $coa-spacing-large;
+    width: $coa-sectionheadermedium-symbol-radius * 2;
+  }
+
+  @include media($coa-large-screen) {
+    height: $coa-sectionheaderlarge-symbol-radius * 2;
+    margin-bottom: $coa-spacing-xlarge;
+    width: $coa-sectionheaderlarge-symbol-radius * 2;
+  }
 }
 
 .coa-SectionHeader__symbol:before {
@@ -71,5 +89,23 @@
   position: absolute;
   top: 0;
   width: $coa-sectionheader-symbol-radius * 2;
+
+  @include media($coa-small-screen) {
+    border-radius: $coa-sectionheadersmall-symbol-radius;
+    height: $coa-sectionheadersmall-symbol-radius * 2;
+    width: $coa-sectionheadersmall-symbol-radius * 2;
+  }
+
+  @include media($coa-medium-screen) {
+    border-radius: $coa-sectionheadermedium-symbol-radius;
+    height: $coa-sectionheadermedium-symbol-radius * 2;
+    width: $coa-sectionheadermedium-symbol-radius * 2;
+  }
+
+  @include media($coa-large-screen) {
+    border-radius: $coa-sectionheaderlarge-symbol-radius;
+    height: $coa-sectionheaderlarge-symbol-radius * 2;
+    width: $coa-sectionheaderlarge-symbol-radius * 2;
+  }
 }
 
