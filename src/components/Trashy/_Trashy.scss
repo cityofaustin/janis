@@ -22,10 +22,10 @@
 .coa-Trashy__autosuggestion-clear {
   position: relative;
   float: right;
-  bottom: 3.5rem;
-  right: 1rem;
+  bottom: $coa-spacing-large + $coa-spacing-xsmall;
+  right: $coa-spacing-small;
   background: white;
-  height: 2.5rem;
+  height: $coa-font-size-medium;
 }
 
 // schedule styles
@@ -33,11 +33,11 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: $coa-spacing-medium;
 }
 
 .coa-Trashy__schedule-header {
-  margin-bottom: 3rem;
+  margin-bottom: $coa-spacing-large;
 }
 
 .coa-Trashy__schedule-list-container {
@@ -45,10 +45,10 @@
   flex-direction: column;
   border: 1px solid #ddd;
   border-radius: 2px;
-  padding: 1.5rem;
+  padding: $coa-spacing-md-small;
 
   h4 {
-    margin-bottom: 1rem;
+    margin-bottom: $coa-spacing-small;
   }
 
   ul {
@@ -57,7 +57,7 @@
 }
 
 .coa-Trashy__schedule-list-pickup-item {
-  margin-bottom: 2rem;
+  margin-bottom: $coa-spacing-medium;
 
   li {
     text-decoration: none;

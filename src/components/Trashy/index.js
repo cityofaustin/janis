@@ -4,8 +4,6 @@ import axios from 'axios';
 import TrashySchedule from 'components/Trashy/TrashySchedule';
 import TrashyAddress from 'components/Trashy/TrashyAddress';
 
-const nextBulkPickupDate = new Date().toString();
-
 class Trashy extends Component {
   state = {
     address: null,
