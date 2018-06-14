@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import WorkInProgress from 'components/WorkInProgress';
 import I18nNavLink from 'components/I18n/I18nNavLink';
@@ -11,8 +12,9 @@ import { themePropTypes } from './proptypes';
 const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
   return (
     <ul
-      className={`coa-Submenu
-      ${isSubmenuOpen ? 'coa-Submenu--open' : ''}`}
+      className={classNames('coa-Submenu', {
+        'coa-Submenu--open': isSubmenuOpen,
+      })}
       id={`topicMenu${id + 1}`}
       role="menu"
       aria-labelledby={`theme${id + 1}`}
@@ -22,7 +24,6 @@ const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
           !!topic.services.length && (
             <SubmenuItem
               key={topicId}
-              className="coa-SubmenuItem__block coa-SubmenuItem__block--link"
               topic={topic}
               handleCloseAllMenus={handleCloseAllMenus}
             />

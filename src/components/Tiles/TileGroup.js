@@ -18,6 +18,7 @@ const TileGroup = ({ tiles, tag, text, url, description, hasBorder }) => (
           </I18nLink>
         </SectionHeader>
       )}
+
     {text && !url && <SectionHeader hasHighlight={true}>{text}</SectionHeader>}
 
     {description && <p className="coa-TileGroup__description">{description}</p>}
