@@ -14,6 +14,11 @@
 .coa-Trashy__autosuggestion {
   border: solid 1px gray;
   padding: 1rem;
+  background-color: white;
+}
+
+.coa-Trashy__autosuggestion--highlighted {
+  background-color: lightgray;
 }
 
 .coa-Trashy__autosuggestion-clear {

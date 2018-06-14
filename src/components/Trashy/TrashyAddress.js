@@ -1,6 +1,7 @@
 import React from 'react';
 import Downshift from 'downshift';
 import { injectIntl } from 'react-intl';
+import classNames from 'classnames';
 
 import { callToAction as i18n } from 'js/i18n/definitions';
 import CloseSVG from 'components/SVGs/Close';
@@ -48,16 +49,14 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions, intl }) => (
               )
               .map((item, index) => (
                 <div
-                  className="coa-Trashy__autosuggestion"
                   {...getItemProps({
                     key: item.parcel_id,
                     index,
                     item,
-                    style: {
-                      backgroundColor:
-                        highlightedIndex === index ? 'lightgray' : 'white',
-                      fontWeight: selectedItem === item ? 'bold' : 'normal',
-                    },
+                    className: classNames('coa-Trashy__autosuggestion', {
+                      'coa-Trashy__autosuggestion--highlighted':
+                        highlightedIndex === index,
+                    }),
                   })}
                 >
                   {item.name}
