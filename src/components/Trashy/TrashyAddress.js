@@ -1,9 +1,11 @@
 import React from 'react';
 import Downshift from 'downshift';
+import { injectIntl } from 'react-intl';
 
+import { callToAction as i18n } from 'js/i18n/definitions';
 import CloseSVG from 'components/SVGs/Close';
 
-const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
+const TrashyAddress = ({ suggestions, setAddress, getSuggestions, intl }) => (
   <Downshift
     onChange={selection => setAddress(selection)}
     itemToString={item => (item ? item.name : '')}
@@ -19,7 +21,9 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
       clearSelection,
     }) => (
       <div>
-        <label {...getLabelProps()}>Type your street address in the box</label>
+        <label {...getLabelProps()}>
+          {intl.formatMessage(i18n.enterAddress)}
+        </label>
         <input
           {...getInputProps({
             onChange: e => {
@@ -66,4 +70,4 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions }) => (
   </Downshift>
 );
 
-export default TrashyAddress;
+export default injectIntl(TrashyAddress);
