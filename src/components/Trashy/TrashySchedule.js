@@ -72,13 +72,7 @@ const TrashySchedule = props => {
   return (
     <div className="coa-Trashy__schedule-container">
       <div className="coa-Trashy__schedule-header">
-        <h3>
-          <FormattedMessage
-            id="trashSchedule.pickup_schedule"
-            defaultMessage={"Here's the pickup schedule for {address} "}
-            values={{ address }}
-          />
-        </h3>
+        <h3>{intl.formatMessage(i18n.pickupschedule, { address })}</h3>
       </div>
       <div className="coa-Trashy__schedule-list-container">
         {pickUpList}

@@ -90,4 +90,5 @@ export const curbsideServices = defineMessages({
   compost: 'Compost',
   brushcollection: 'Large Brush Collection',
   bulkitemcollection: 'Bulk Item Collection',
+  pickupschedule: "Here's the pickup schedule for {address}",
 });
