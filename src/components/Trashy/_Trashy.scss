@@ -4,6 +4,11 @@
   margin: auto;
   padding: $coa-spacing-large $coa-spacing-medium;
   max-width: $coa-medium-screen;
+
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 
 .coa-Trashy__autosuggestion {
