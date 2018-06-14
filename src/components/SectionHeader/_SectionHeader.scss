@@ -39,7 +39,7 @@
 
 .coa-SectionHeader--hasHighlight:after {
   background: $coa-color-orange;
-  content: "";
+  content: '';
   display: block;
   height: $coa-sectionheader-highlight-height;
   margin: $coa-spacing-medium auto $coa-spacing-xlarge;
@@ -83,7 +83,7 @@
 .coa-SectionHeader__symbol:before {
   border: $coa-sectionheader-symbol-stroke solid $coa-color-green-light;
   border-radius: $coa-sectionheader-symbol-radius;
-  content: "";
+  content: '';
   height: $coa-sectionheader-symbol-radius * 2;
   left: 0;
   position: absolute;
@@ -108,4 +108,3 @@
     width: $coa-sectionheaderlarge-symbol-radius * 2;
   }
 }
-
