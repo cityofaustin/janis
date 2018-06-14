@@ -9,7 +9,15 @@ import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
-import { clean311, cleanNavigation } from 'js/helpers/cleanData';
+import {
+  cleanLinks,
+  cleanDepartments,
+  cleanTopics,
+  cleanThemes,
+  cleanServices,
+  clean311,
+  cleanNavigation,
+} from 'js/helpers/cleanData';
 
 const createGraphQLClientsByLang = lang => {
   const { CMS_API } = process.env;
@@ -30,9 +38,8 @@ const makeAllPages = async langCode => {
     component: 'src/components/Pages/Home',
     children: await makeChildPages(client),
     getData: async () => {
-      const { allServicePages: topServices } = await client.request(
-        topServicesQuery,
-      );
+      const { allServicePages } = await client.request(topServicesQuery);
+      const topServices = cleanLinks(allServicePages, '/services');
       return {
         topServices,
         image: {
@@ -59,14 +66,14 @@ const makeServicePages = async client => {
   const { allServicePages: allServices } = await client.request(
     allServicePagesQuery,
   );
-
+  const services = cleanServices(allServices);
   const data = {
     path: '/services',
     component: 'src/components/Pages/Services',
     getData: async () => ({
-      allServices,
+      services,
     }),
-    children: allServices.edges.map(({ node: service }) => ({
+    children: services.map(service => ({
       path: `/${service.slug}`,
       component: 'src/components/Pages/Service',
       getData: async () => ({
@@ -80,14 +87,15 @@ const makeServicePages = async client => {
 
 const makeTopicPages = async client => {
   const { allTopics } = await client.request(allTopicPagesQuery);
+  const topics = cleanTopics(allTopics);
 
   const data = {
     path: '/topics',
     component: 'src/components/Pages/Topics',
     getData: async () => ({
-      allTopics,
+      topics,
     }),
-    children: allTopics.edges.map(({ node: topic }) => ({
+    children: topics.map(topic => ({
       path: `/${topic.slug}`,
       component: 'src/components/Pages/Topic',
       getData: async () => ({
@@ -101,14 +109,15 @@ const makeTopicPages = async client => {
 
 const makeThemePages = async client => {
   const { allThemes } = await client.request(allThemesQuery);
+  const themes = cleanThemes(allThemes);
 
   const data = {
     path: '/themes',
     component: 'src/components/Pages/Themes',
     getData: async () => ({
-      allThemes,
+      themes,
     }),
-    children: allThemes.edges.map(({ node: theme }) => ({
+    children: themes.map(theme => ({
       path: `/${theme.slug}`,
       component: 'src/components/Pages/Theme',
       getData: async () => ({
@@ -122,14 +131,15 @@ const makeThemePages = async client => {
 
 const makeDepartmentPages = async client => {
   const { allDepartments } = await client.request(allDepartmentPagesQuery);
+  const departments = cleanDepartments(allDepartments);
 
   const data = {
     path: '/departments',
     component: 'src/components/Pages/Departments',
     getData: async () => ({
-      allDepartments,
+      departments,
     }),
-    children: allDepartments.edges.map(({ node: department }) => ({
+    children: departments.map(department => ({
       path: `${department.id}`,
       component: 'src/components/Pages/Department',
       getData: async () => ({

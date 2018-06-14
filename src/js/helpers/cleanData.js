@@ -1,3 +1,4 @@
+import { findKey } from 'lodash';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
@@ -51,11 +52,63 @@ export const cleanLinks = (links, pathPrefix) => {
   return links.edges.map(({ node: link }) => {
     const { title, text, slug, ...rest } = link;
     return {
+      slug: slug,
       url: `${pathPrefix || ''}/${slug}`,
       text: title || text,
       ...rest,
     };
   });
+};
+
+export const cleanServices = allServices => {
+  if (!allServices || !allServices.edges) return null;
+
+  let cleanedServices = cleanLinks(allServices, '/services');
+  cleanedServices.map(service => {
+    service.contacts = cleanContacts(service.contacts);
+    service.related = cleanRelatedServiceLinks(service.related);
+
+    //TODO: mapblock data should include contact data when sent via joplin
+    const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
+    if (tempkey)
+      service.dynamicContent[tempkey].value['contact'] = service.contacts.length
+        ? service.contacts[0]
+        : null;
+  });
+  return cleanedServices;
+};
+
+export const cleanDepartments = allDepartments => {
+  if (!allDepartments || !allDepartments.edges) return null;
+
+  return allDepartments.edges.map(({ node: department }) => {
+    department.url = `/departments/${department.id}`;
+    department.text = department.name;
+    department.contacts = cleanContacts(department.contacts);
+    return department;
+  });
+};
+
+export const cleanTopics = allTopics => {
+  if (!allTopics || !allTopics.edges) return null;
+
+  let cleanedTopics = cleanLinks(allTopics, '/topics');
+  cleanedTopics.map(topic => {
+    topic.services = cleanLinks(topic.services, '/services'); //for navigation
+    topic.tiles = topic.services; //for theme page
+  });
+  return cleanedTopics;
+};
+
+export const cleanThemes = allThemes => {
+  if (!allThemes || !allThemes.edges) return null;
+
+  let cleanedThemes = cleanLinks(allThemes, '/themes');
+  cleanedThemes.map(theme => {
+    theme.topics = cleanTopics(theme.topics);
+  });
+
+  return cleanedThemes;
 };
 
 export const cleanNavigation = navigation => {
@@ -65,10 +118,7 @@ export const cleanNavigation = navigation => {
 
   let cleanedNavigation = cleanLinks(allThemes, '/themes');
   cleanedNavigation.map(theme => {
-    theme.topics = cleanLinks(theme.topics, '/topics');
-    theme.topics.map(topic => {
-      topic.services = cleanLinks(topic.services, '/services');
-    });
+    theme.topics = cleanTopics(theme.topics);
   });
 
   return cleanedNavigation;

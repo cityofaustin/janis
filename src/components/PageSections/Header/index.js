@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import classNames from 'classnames';
 
 import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
@@ -37,9 +38,9 @@ class Header extends Component {
 
     return (
       <header
-        className={`coa-Header ${
-          this.state.menuIsOpen ? 'coa-Header--menu-is-open' : ''
-        }`}
+        className={classNames('coa-Header', {
+          'coa-Header--menu-is-open': this.state.menuIsOpen,
+        })}
         role="banner"
       >
         <LanguageSelectBar path={path} />
