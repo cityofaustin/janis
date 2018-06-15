@@ -1,33 +1,22 @@
 const allThemesQuery = `
   query allThemesQuery {
     allThemes {
-      edges {
-        node {
+      id
+      slug
+      text
+      description
+      topics {
+        text
+        slug
+        description
+        servicePages(first: 4) {
           id
+          title
           slug
-          text
-          description
-          topics {
-            edges {
-              node {
-                text
-                slug
-                description
-                services(first: 4) {
-                  edges {
-                    node {
-                      id
-                      title
-                      slug
-                    }
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
-  }`;
+  }
+`;
 
 export default allThemesQuery;
