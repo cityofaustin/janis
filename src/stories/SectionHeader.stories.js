@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import SectionHeader from 'components/SectionHeader';
 import ArrowRight from 'components/SVGs/ArrowRight';
+import ListSVG from 'components/SVGs/List';
 
 storiesOf('SectionHeader', module)
   .add('SectionHeader', () => (
@@ -23,6 +24,13 @@ storiesOf('SectionHeader', module)
         <a href="#">
           Lorem ipsum dolor sit amet cume&nbsp;<ArrowRight />
         </a>
+      </SectionHeader>
+    </div>
+  ))
+  .add('SectionHeader symbol', () => (
+    <div className="wrapper container-fluid">
+      <SectionHeader hasSymbol={<ListSVG />}>
+        Lorem ipsum dolor sit amet cume
       </SectionHeader>
     </div>
   ))

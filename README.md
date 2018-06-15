@@ -59,7 +59,7 @@ To manage our roadmap and upcoming issues, we're using a dedicated Github repo, 
 The design team uses sketch to mock up wireframe and high fidelity comps. The most up to date files can be linked here from Google drive. The parent file for current public interface/janis design files is https://drive.google.com/drive/folders/1J1AXm9bDgT0kO_2lugg4mnV4koZHpDO-?usp=sharing.
 
 - [Alpha.austin.gov comprehensive user flow including home, theme, topic, service, process, and department templates](https://drive.google.com/file/d/1wtiU9LqpvU2KTu362bCPMfS7tfYgjyuf/view?usp=sharing)
-- [Alpha.austin.gov design library documenting all current components](https://drive.google.com/file/d/1v95Zwm7aaXpD45jUCE70vuCtMv9JMedM/view?usp=sharing)
+- [Alpha.austin.gov design library documenting all current components](https://drive.google.com/file/d/1hGAZZ6ZPkDCZobEiC_7egCBrACUzKxWt/view?usp=sharing)
 - [You can use one sketch library as a single source of truth across multiple designer's and developer's files. Never used sketch librairies before? Check out this introduction and detailed how-to's](https://www.sketchapp.com/docs/libraries/)
 - [Alpha.austin.gov EMS process page](https://drive.google.com/file/d/1rqELW2K4ZI-BjV9Tecj-49UUzujVvLYr/view?usp=sharing)
 - [Alpha.austin.gov Animal Center foster process page and form](https://drive.google.com/file/d/1nJePAA3EI1APmdFK8zcBjh4OuajyjElG/view?usp=sharing)
@@ -85,10 +85,29 @@ This project uses [React-Static](https://github.com/nozzle/react-static) as a ba
 This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
 
 * the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method, alongside the dangerouslySetInnerHTML property available to React elements, to render translations of **trusted content** which include HTML. Note translated content cannot include React Components (see note below for rendering React Components with translations). Also note that the corresponding FormattedMessage Component will NOT return unescaped HTML.
-ex. The 311 Section Header includes HTML links.
+```
+import { defineMessages } from 'react-intl';
+const messages = defineMessages({
+  some_message_key: 'some message with html content and a <h1>{variable}</h1>'
+})
+...
+<div dangerouslySetInnerHTML={{ __html: intl.formatMessage(messages.some_message_key,  {variable: 'variable definition'}) }}/>
+```
 
 * the FormattedMessage react-intl component will parse React components from the values property. We can utilize this method to render translations which have React components as parameters.
-ex. The footer body text include ExternalLink components.
+```
+<FormattedMessage
+  id="misc.workInProgressClipped"
+  values={{
+    citySiteLink: (
+      <ExternalLink to="http://austintexas.gov">
+        austintexas.gov
+     </ExternalLink>
+    ),
+  }}
+  defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}."
+/>
+```
 
 #### babel-plugin-react-intl-auto
 

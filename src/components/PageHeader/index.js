@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const PageHeader = ({ title, description, hasBorder }) => (
   <div
-    className={`coa-PageHeader ${hasBorder ? 'coa-PageHeader--hasBorder' : ''}`}
+    className={classNames('coa-PageHeader', {
+      'coa-PageHeader--hasBorder': hasBorder,
+    })}
   >
     <h1>{title}</h1>
     {description && (

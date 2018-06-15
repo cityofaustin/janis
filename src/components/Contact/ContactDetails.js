@@ -25,6 +25,7 @@ const ContactDetails = ({
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
+
     {phone && <Phone phone={phone} />}
 
     {email && <Email email={email} />}

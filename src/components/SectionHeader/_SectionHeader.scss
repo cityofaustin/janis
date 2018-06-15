@@ -39,9 +39,72 @@
 
 .coa-SectionHeader--hasHighlight:after {
   background: $coa-color-orange;
-  content: "";
+  content: '';
   display: block;
   height: $coa-sectionheader-highlight-height;
   margin: $coa-spacing-medium auto $coa-spacing-xlarge;
   width: $coa-sectionheader-highlight-width;
+}
+
+.coa-SectionHeader--hasSymbol {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.coa-SectionHeader__symbol {
+  align-items: center;
+  display: flex;
+  height: $coa-sectionheader-symbol-radius * 2;
+  justify-content: center;
+  margin-bottom: $coa-spacing-small;
+  position: relative;
+  width: $coa-sectionheader-symbol-radius * 2;
+
+  @include media($coa-small-screen) {
+    height: $coa-sectionheadersmall-symbol-radius * 2;
+    margin-bottom: $coa-spacing-medium;
+    width: $coa-sectionheadersmall-symbol-radius * 2;
+  }
+
+  @include media($coa-medium-screen) {
+    height: $coa-sectionheadermedium-symbol-radius * 2;
+    margin-bottom: $coa-spacing-large;
+    width: $coa-sectionheadermedium-symbol-radius * 2;
+  }
+
+  @include media($coa-large-screen) {
+    height: $coa-sectionheaderlarge-symbol-radius * 2;
+    margin-bottom: $coa-spacing-xlarge;
+    width: $coa-sectionheaderlarge-symbol-radius * 2;
+  }
+}
+
+.coa-SectionHeader__symbol:before {
+  border: $coa-sectionheader-symbol-stroke solid $coa-color-green-light;
+  border-radius: $coa-sectionheader-symbol-radius;
+  content: '';
+  height: $coa-sectionheader-symbol-radius * 2;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: $coa-sectionheader-symbol-radius * 2;
+
+  @include media($coa-small-screen) {
+    border-radius: $coa-sectionheadersmall-symbol-radius;
+    height: $coa-sectionheadersmall-symbol-radius * 2;
+    width: $coa-sectionheadersmall-symbol-radius * 2;
+  }
+
+  @include media($coa-medium-screen) {
+    border-radius: $coa-sectionheadermedium-symbol-radius;
+    height: $coa-sectionheadermedium-symbol-radius * 2;
+    width: $coa-sectionheadermedium-symbol-radius * 2;
+  }
+
+  @include media($coa-large-screen) {
+    border-radius: $coa-sectionheaderlarge-symbol-radius;
+    height: $coa-sectionheaderlarge-symbol-radius * 2;
+    width: $coa-sectionheaderlarge-symbol-radius * 2;
+  }
 }

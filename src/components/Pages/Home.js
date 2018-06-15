@@ -10,31 +10,25 @@ import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
-import { cleanLinks } from 'js/helpers/cleanData';
 
-const Home = ({ topServices, image, intl }) => {
-  //TODO: clean data where sourced
-  const serviceLinks = cleanLinks(topServices, '/services');
-
-  return (
-    <div>
-      <HeroHome
-        imageFilename={`${process.env.CMS_MEDIA}/images/${image.file}`}
-        imageTitle={image.title}
-        preheader={intl.formatMessage(i18n2.welcomeTo)}
+const Home = ({ topServices, image, intl }) => (
+  <div>
+    <HeroHome
+      imageFilename={`${process.env.CMS_MEDIA}/images/${image.file}`}
+      imageTitle={image.title}
+      preheader={intl.formatMessage(i18n2.welcomeTo)}
+    />
+    <PageNotificationBanner>
+      <WorkInProgress />
+    </PageNotificationBanner>
+    <div className="wrapper container-fluid">
+      <TileGroup
+        text={intl.formatMessage(i18n3.checkOutServices)}
+        tiles={topServices}
+        tag={intl.formatMessage(i18n3.service)}
       />
-      <PageNotificationBanner>
-        <WorkInProgress />
-      </PageNotificationBanner>
-      <div className="wrapper container-fluid">
-        <TileGroup
-          text={intl.formatMessage(i18n3.checkOutServices)}
-          tiles={serviceLinks}
-          tag={intl.formatMessage(i18n3.service)}
-        />
-      </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default withRouteData(injectIntl(Home));
