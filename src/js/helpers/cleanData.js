@@ -2,7 +2,7 @@ import { findKey } from 'lodash';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
-  if (!contacts || !contacts.edges) return null;
+  if (!contacts) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
@@ -16,15 +16,15 @@ export const cleanContacts = contacts => {
     return timestamp.getTime();
   };
 
-  return contacts.edges.map(({ node: contact }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
-    let cleaned = Object.assign({}, contact.contact);
+  return contacts.map(contact => {
+    let cleaned = Object.assign({}, contact);
 
-    if (cleaned.phone) {
-      cleaned.phone = JSON.parse(cleaned.phone);
-    }
-    if (cleaned.hours && cleaned.hours.edges) {
-      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
+    // if (cleaned.phone) {
+    //   console.log(cleaned.phone);
+    //   cleaned.phone = JSON.parse(cleaned.phone);
+    // }
+    if (cleaned.hours) {
+      cleaned.hours = cleaned.hours.map(hours => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
         startTime: getTimestamp(hours.startTime),
@@ -47,9 +47,10 @@ export const cleanRelatedServiceLinks = links => {
 };
 
 export const cleanLinks = (links, pathPrefix) => {
-  if (!links || !links.edges) return null;
+  if (!links) return null;
 
-  return links.edges.map(({ node: link }) => {
+  return links.map(link => {
+    console.log(link);
     const { title, text, slug, ...rest } = link;
     return {
       slug: slug,
@@ -61,7 +62,7 @@ export const cleanLinks = (links, pathPrefix) => {
 };
 
 export const cleanServices = allServices => {
-  if (!allServices || !allServices.edges) return null;
+  if (!allServices) return null;
 
   let cleanedServices = cleanLinks(allServices, '/services');
   cleanedServices.map(service => {
@@ -79,9 +80,9 @@ export const cleanServices = allServices => {
 };
 
 export const cleanDepartments = allDepartments => {
-  if (!allDepartments || !allDepartments.edges) return null;
+  if (!allDepartments) return null;
 
-  return allDepartments.edges.map(({ node: department }) => {
+  return allDepartments.map(department => {
     department.url = `/departments/${department.id}`;
     department.text = department.name;
     department.contacts = cleanContacts(department.contacts);
@@ -90,7 +91,7 @@ export const cleanDepartments = allDepartments => {
 };
 
 export const cleanTopics = allTopics => {
-  if (!allTopics || !allTopics.edges) return null;
+  if (!allTopics) return null;
 
   let cleanedTopics = cleanLinks(allTopics, '/topics');
   cleanedTopics.map(topic => {
@@ -101,7 +102,7 @@ export const cleanTopics = allTopics => {
 };
 
 export const cleanThemes = allThemes => {
-  if (!allThemes || !allThemes.edges) return null;
+  if (!allThemes) return null;
 
   let cleanedThemes = cleanLinks(allThemes, '/themes');
   cleanedThemes.map(theme => {
@@ -114,7 +115,7 @@ export const cleanThemes = allThemes => {
 export const cleanNavigation = navigation => {
   const { allThemes } = navigation;
 
-  if (!allThemes || !allThemes.edges) return null;
+  if (!allThemes) return null;
 
   let cleanedNavigation = cleanLinks(allThemes, '/themes');
   cleanedNavigation.map(theme => {
@@ -127,7 +128,7 @@ export const cleanNavigation = navigation => {
 export const clean311 = threeoneone => {
   const { all311 } = threeoneone;
 
-  if (!all311 || !all311.edges) return null;
+  if (!all311) return null;
 
   return all311.edges.map(({ node: link }) => {
     const { title, url } = link;

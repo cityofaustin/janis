@@ -1,6 +1,6 @@
 const allDepartmentPagesQuery = `
-  query allDepartmentPagesQuery($id: ID) {
-    Department(id: $id) {
+  query allDepartmentPagesQuery {
+    allDepartments {
       id
       name
       mission
