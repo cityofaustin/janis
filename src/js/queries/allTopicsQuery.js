@@ -1,5 +1,5 @@
-const allTopicPagesQuery = `
-  query allTopicPagesQuery {
+const allTopicsQuery = `
+  query allTopicsQuery {
     allTopics{
       edges {
         node {
@@ -26,4 +26,4 @@ const allTopicPagesQuery = `
     }
   }`;
 
-export default allTopicPagesQuery;
+export default allTopicsQuery;

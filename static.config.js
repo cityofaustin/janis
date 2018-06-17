@@ -3,10 +3,10 @@ import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import allProcessPagesQuery from 'js/queries/allProcessPagesQuery';
-import allTopicPagesQuery from 'js/queries/allTopicPagesQuery';
+import allProcessesQuery from 'js/queries/allProcessesQuery';
+import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
-import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
+import allDepartmentsQuery from 'js/queries/allDepartmentsQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
@@ -15,6 +15,7 @@ import {
   cleanDepartments,
   cleanTopics,
   cleanThemes,
+  cleanProcesses,
   cleanServices,
   clean311,
   cleanNavigation,
@@ -56,11 +57,11 @@ const makeAllPages = async langCode => {
 
 const makeChildPages = client => {
   return Promise.all([
-    // makeServicePages(client),
+    makeServicePages(client),
     makeProcessPages(client),
-    // makeTopicPages(client),
-    // makeThemePages(client),
-    // makeDepartmentPages(client),
+    makeTopicPages(client),
+    makeThemePages(client),
+    makeDepartmentPages(client),
   ]);
 };
 
@@ -87,28 +88,24 @@ const makeServicePages = async client => {
   return data;
 };
 
-
 const makeProcessPages = async client => {
-  const { allProcessPages } = await client.request(
-    allProcessPagesQuery,
-  );
-
-  console.log(JSON.stringify(allProcessPages, null, 2));
+  const { allProcesses } = await client.request(allProcessesQuery);
+  const processes = cleanProcesses(allProcesses);
 
   const data = {
     path: '/processes',
     component: 'src/components/Pages/Processes',
     getData: async () => ({
-      allProcessPages,
+      processes,
     }),
-    children: allProcessPages.edges.map(({ node: processPage }) => ({
-      path: `/${processPage.slug}`,
+    children: processes.map(process => ({
+      path: `/${process.slug}`,
       component: 'src/components/Pages/Process',
       getData: async () => ({
-        processPage,
+        process,
       }),
-      children: processPage.processSteps.edges.map(({ node: processStep }) => ({
-        path: `/${processStep.sortOrder}`,
+      children: process.processSteps.map(processStep => ({
+        path: `/${processStep.slug}`,
         component: 'src/components/Pages/ProcessStep',
         getData: async () => ({
           processStep,
@@ -121,7 +118,7 @@ const makeProcessPages = async client => {
 };
 
 const makeTopicPages = async client => {
-  const { allTopics } = await client.request(allTopicPagesQuery);
+  const { allTopics } = await client.request(allTopicsQuery);
   const topics = cleanTopics(allTopics);
 
   const data = {
@@ -165,7 +162,7 @@ const makeThemePages = async client => {
 };
 
 const makeDepartmentPages = async client => {
-  const { allDepartments } = await client.request(allDepartmentPagesQuery);
+  const { allDepartments } = await client.request(allDepartmentsQuery);
   const departments = cleanDepartments(allDepartments);
 
   const data = {

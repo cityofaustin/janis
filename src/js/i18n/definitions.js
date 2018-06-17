@@ -63,6 +63,11 @@ export const navigation = defineMessages({
   skipToMain: 'Skip to main content',
 });
 
+export const processes = defineMessages({
+  checkOutRelatedServices: 'Check out related processes',
+  process: 'Process',
+});
+
 export const services = defineMessages({
   checkOutRelatedServices: 'Check out related services',
   checkOutServices: 'Check out City of Austin Services',

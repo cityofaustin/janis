@@ -1,34 +1,35 @@
-const allProcessPagesQuery = `
-  query allProcessPages {
-    allProcessPages {
+const allProcessesQuery = `
+  query allProcesses {
+    allProcesses {
       edges {
         node {
-          id
           title
           slug
           topic {
-            id
             slug
             text
             theme {
-              id
               slug
               text
             }
           }
           image {
-            id
             filename
             title
           }
           processSteps {
             edges {
               node {
-                id
-                name
-                url
                 sortOrder
-                page {
+                title
+                shortTitle
+                linkTitle
+                description
+                overviewSteps
+                detailedContent
+                quote
+                image {
+                  filename
                   title
                 }
               }
@@ -40,4 +41,4 @@ const allProcessPagesQuery = `
   }
 `;
 
-export default allProcessPagesQuery;
+export default allProcessesQuery;
