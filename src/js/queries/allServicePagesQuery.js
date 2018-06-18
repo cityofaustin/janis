@@ -13,14 +13,15 @@ const allServicePagesQuery = `
           slug
           text
         }
+        servicePages {
+          id
+          slug
+          title
+        }
       }
       steps
       dynamicContent
       additionalContent
-      relatedServicePages {
-        slug
-        title
-      }
       image {
         id
         filename

@@ -62,7 +62,7 @@ export const cleanServices = allServices => {
   let cleanedServices = cleanLinks(allServices, '/services');
   cleanedServices.map(service => {
     service.contacts = cleanContacts(service.contacts);
-    service.related = cleanRelatedServiceLinks(service.related);
+    service.related = cleanRelatedServiceLinks(service.topic.servicePages);
 
     //TODO: mapblock data should include contact data when sent via joplin
     const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
