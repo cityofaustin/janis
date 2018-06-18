@@ -4,6 +4,7 @@ const allProcessesQuery = `
       edges {
         node {
           title
+          description
           slug
           topic {
             slug
