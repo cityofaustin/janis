@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Badge from 'components/Badges/Badge';
 import BadgeGroup from 'components/Badges/BadgeGroup';
+import ListSVG from 'components/SVGs/List';
 
 const badges = [
   {
@@ -10,41 +11,41 @@ const badges = [
   },
   {
     title: 'Badge Title One',
-    step: 1,
+    symbol: 1,
   },
   {
     title: 'Badge Title Two',
-    step: 2,
+    symbol: 2,
   },
   {
     title: 'Badge Title Three',
-    step: 3,
+    symbol: 3,
   },
   {
     title: 'Badge Title Four',
-    step: 4,
+    symbol: 4,
   },
 ];
 
 storiesOf('Badges', module)
   .add('Badge', () => (
     <div className="wrapper container-fluid">
-      <Badge title="Badge Title"/>
+      <Badge title="Badge Title" />
     </div>
   ))
   .add('Badge active', () => (
     <div className="wrapper container-fluid">
-      <Badge title="Badge Title" isActive={true}/>
+      <Badge title="Badge Title" isActive={true} />
     </div>
   ))
-  .add('Badge with step', () => (
+  .add('Badge with symbol', () => (
     <div className="wrapper container-fluid">
-      <Badge title="Badge Title" step={1}/>
+      <Badge title="Badge Title" symbol={<ListSVG />} />
     </div>
   ))
-  .add('Badge active with step', () => (
+  .add('Badge active with symbol', () => (
     <div className="wrapper container-fluid">
-      <Badge title="Badge Title" step={1} isActive={true}/>
+      <Badge title="Badge Title" symbol={<ListSVG />} isActive={true} />
     </div>
   ))
   .add('Badge Group', () => (

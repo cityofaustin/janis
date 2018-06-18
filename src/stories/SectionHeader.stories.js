@@ -29,7 +29,7 @@ storiesOf('SectionHeader', module)
   ))
   .add('SectionHeader symbol', () => (
     <div className="wrapper container-fluid">
-      <SectionHeader hasSymbol={<ListSVG />}>
+      <SectionHeader symbol={<ListSVG />}>
         Lorem ipsum dolor sit amet cume
       </SectionHeader>
     </div>

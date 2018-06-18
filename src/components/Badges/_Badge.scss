@@ -39,7 +39,7 @@
   display: flex;
   font-size: $coa-font-size-xsmall;
   height: $coa-badge-height / 2;
-  line-height: $coa-line-height-xsmall - .4rem;
+  line-height: $coa-line-height-xsmall - 0.4rem;
   justify-content: center;
   padding: 0 $coa-spacing-md-small;
   position: absolute;
@@ -55,7 +55,7 @@
   }
 }
 
-.coa-Badge__step {
+.coa-Badge__symbol {
   align-items: center;
   background: $coa-color-white;
   border: ($coa-badge-stroke - 1) solid $coa-color-purple-dark;
@@ -74,6 +74,14 @@
     height: $coa-badgelarge-step-radius * 2;
     left: $coa-badgelarge-width / 2 - $coa-badgelarge-step-radius;
     width: $coa-badgelarge-step-radius * 2;
+  }
+  svg {
+    height: $coa-font-size-md-small;
+    width: $coa-font-size-md-small;
+    @include media($coa-medium-screen) {
+      height: $coa-font-size-medium;
+      width: $coa-font-size-medium;
+    }
   }
 }
 
