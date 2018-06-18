@@ -23,5 +23,5 @@ docker run \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \
     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
     --env "CMS_API=https://api.graph.cool/simple/v1/cjiko0lxw7cxf01886zbc1u9h" \
-    --env "CMS_MEDIA=http://$HOST_IP:8000/media" \
+    --env "CMS_MEDIA=https://joplin-staging.herokuapp.com/media" \
     "$TAG" "$@"

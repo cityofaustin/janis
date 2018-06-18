@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ResponsiveImage = ({ filename, extension, widths, ...rest }) => {
-  const sources = widths.map(w => `${filename}.width-${w}${extension} ${w}w`).toString();
+  const sources = widths
+    .map(w => `${filename}.width-${w}.jpg ${w}w`)
+    .toString();
 
-  return (
-    <img srcSet={sources} 
-         src={`${filename}.width-1080${extension}`} 
-         {...rest} />
-  );
+  return <img srcSet={sources} src={`${filename}.width-1080.jpg`} {...rest} />;
 };
 
 ResponsiveImage.propTypes = {
