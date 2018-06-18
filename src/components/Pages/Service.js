@@ -33,7 +33,10 @@ const Service = ({
   <div>
     <PageBanner
       imagesPath={`${process.env.CMS_MEDIA}/images`}
-      imageFilename={path.basename(image.filename, path.extname(image.filename))}
+      imageFilename={path.basename(
+        image.filename,
+        path.extname(image.filename),
+      )}
       imageExtension={path.extname(image.filename)}
       imageTitle={image.title}
     />
@@ -45,7 +48,7 @@ const Service = ({
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader title={title} />
 
-      {steps && <Steps stepsAsHtmlFromAdmin={steps} />}
+      {steps && <Steps steps={steps} />}
 
       {!!dynamicContent &&
         dynamicContent.map(content => (
