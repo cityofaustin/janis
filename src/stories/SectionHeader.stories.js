@@ -34,6 +34,13 @@ storiesOf('SectionHeader', module)
       </SectionHeader>
     </div>
   ))
+  .add('SectionHeader with description', () => (
+    <div className="wrapper container-fluid">
+      <SectionHeader description="The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.">
+        Lorem ipsum dolor sit amet cume
+      </SectionHeader>
+    </div>
+  ))
   .add('SectionHeader serif', () => (
     <div className="wrapper container-fluid">
       <SectionHeader isSerif={true}>

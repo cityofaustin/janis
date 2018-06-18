@@ -16,10 +16,10 @@ const Topic = ({
 }) => (
   <div>
     <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
-    <div className="wrapper wrapper--sm wrapper--hasDashedBorder container-fluid">
+    <div className="wrapper wrapper--sm container-fluid">
       <PageHeader title={title} description={description} />
     </div>
-    <div className="wrapper wrapper--sm container-fluid">
+    <div className="wrapper wrapper--sm wrapper--hasDashedBorder container-fluid">
       <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
     </div>
 

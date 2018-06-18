@@ -1,8 +1,8 @@
 .coa-PageHeader {
-  margin-bottom: $coa-space-level7;
+  margin-bottom: $coa-spacing-large;
+  padding-bottom: 1px; //prevent margin-stacking
 
   h1 {
-    text-transform: uppercase;
     text-align: center;
   }
 }

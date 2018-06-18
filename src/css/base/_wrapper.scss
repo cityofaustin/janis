@@ -3,11 +3,9 @@
     max-width: $coa-wrapper-sm-maxwidth;
   }
   &.wrapper--hasBorder {
-    border-bottom: 1px solid $coa-color-purple-lighter;
-    padding-bottom: $coa-spacing-large;
+    border-top: 1px solid $coa-color-purple-lighter;
   }
   &.wrapper--hasDashedBorder {
-    border-bottom: 1px dashed $coa-color-purple-lighter;
-    padding-bottom: $coa-spacing-large;
+    border-top: 1px dashed $coa-color-purple-lighter;
   }
 }
