@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
@@ -33,7 +33,10 @@ const Service = ({
   <div>
     <PageBanner
       imagesPath={`${process.env.CMS_MEDIA}/images`}
-      imageFilename={path.basename(image.filename, path.extname(image.filename))}
+      imageFilename={path.basename(
+        image.filename,
+        path.extname(image.filename),
+      )}
       imageExtension={path.extname(image.filename)}
       imageTitle={image.title}
     />
@@ -45,7 +48,13 @@ const Service = ({
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader title={title} />
 
-      {steps && <Steps stepsAsHtmlFromAdmin={steps} />}
+      {steps &&
+        !!steps.length && (
+          <Fragment>
+            <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
+            <Steps stepsAsHtmlFromAdmin={steps} />
+          </Fragment>
+        )}
 
       {!!dynamicContent &&
         dynamicContent.map(content => (

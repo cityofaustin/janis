@@ -2,7 +2,6 @@
   border-bottom: 1px dashed $coa-color-gray;
   margin-bottom: $coa-spacing-xlarge;
   padding-bottom: $coa-spacing-large;
-  padding-top: 1px; //prevent stacking margins
 }
 
 .coa-rtl {
@@ -33,7 +32,7 @@
         border-radius: 50%;
         color: $coa-color-purple-dark;
         content: counter(step-item);
-        flex: 0 0 ($coa-line-height-small + .2);
+        flex: 0 0 ($coa-line-height-small + 0.2);
         font-family: $coa-font-serif;
         font-size: $coa-font-size-small;
         line-height: $coa-line-height-small;
@@ -43,13 +42,13 @@
         @include media($coa-medium-screen) {
           font-size: $coa-font-size-md-small;
           line-height: $coa-line-height-md-small;
-          flex: 0 0 ($coa-line-height-md-small + .2);
+          flex: 0 0 ($coa-line-height-md-small + 0.2);
         }
 
         @include media($coa-large-screen) {
           font-size: $coa-font-size-medium;
           line-height: $coa-line-height-medium;
-          flex: 0 0 ($coa-line-height-medium + .2);
+          flex: 0 0 ($coa-line-height-medium + 0.2);
         }
       }
 
@@ -67,13 +66,14 @@
         }
 
         @include media($coa-large-screen) {
-          font-size: $coa-font-size-medium + .3;
-          line-height: $coa-line-height-medium + .3;
+          font-size: $coa-font-size-medium + 0.3;
+          line-height: $coa-line-height-medium + 0.3;
         }
       }
     }
 
-    ol, ul {
+    ol,
+    ul {
       padding-bottom: $coa-spacing-xlarge;
       padding-left: $coa-spacing-xlarge + 2;
       padding-top: $coa-spacing-md-small;
