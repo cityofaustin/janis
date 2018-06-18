@@ -5,18 +5,23 @@ import PropTypes from 'prop-types';
 import { misc as i18n } from 'js/i18n/definitions';
 import SectionHeader from 'components/SectionHeader';
 
-const Steps = ({ stepsAsHtmlFromAdmin, intl }) => (
+const Steps = ({ steps, intl }) => (
   <div className="coa-Steps">
     <SectionHeader>{intl.formatMessage(i18n.steps)}</SectionHeader>
-    <div
-      className="coa-Steps__list"
-      dangerouslySetInnerHTML={{ __html: stepsAsHtmlFromAdmin }}
-    />
+    <div className="coa-Steps__list">
+      <ul>
+        {steps.map(step => (
+          <li>
+            <p dangerouslySetInnerHTML={{ __html: step }} />
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 );
 
 Steps.propTypes = {
-  stepsAsHtmlFromAdmin: PropTypes.string.isRequired,
+  steps: PropTypes.array.isRequired,
 };
 
 export default injectIntl(Steps);

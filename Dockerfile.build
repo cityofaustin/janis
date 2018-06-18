@@ -23,7 +23,7 @@ ARG FEEDBACK_API
 ENV FEEDBACK_API=${FEEDBACK_API:-https://coa-test-form-api.herokuapp.com/process/}
 
 ARG CMS_API
-ENV CMS_API=${CMS_API:-https://joplin-staging.herokuapp.com/api/graphql}
+ENV CMS_API=${CMS_API:-https://api.graph.cool/simple/v1/cjiko0lxw7cxf01886zbc1u9h}
 
 ARG CMS_MEDIA
 ENV CMS_MEDIA=${CMS_MEDIA:-https://joplin-staging.herokuapp.com/media}
