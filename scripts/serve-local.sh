@@ -22,6 +22,6 @@ docker run \
     --volume "$PWD/.babelrc:/app/.babelrc" \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \
     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
-    --env "CMS_API=http://$HOST_IP:60000/simple/v1/cjiggt9e500080199awihnivr" \
+    --env "CMS_API=https://api.graph.cool/simple/v1/cjiko0lxw7cxf01886zbc1u9h" \
     --env "CMS_MEDIA=http://$HOST_IP:8000/media" \
     "$TAG" "$@"
