@@ -21,7 +21,7 @@ const Submenu = ({ id, theme, isSubmenuOpen, handleCloseAllMenus }) => {
     >
       {theme.topics.map((topic, topicId) => {
         return (
-          !!topic.services.length && (
+          !!topic.servicePages.length && (
             <SubmenuItem
               key={topicId}
               topic={topic}

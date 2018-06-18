@@ -19,10 +19,6 @@ export const cleanContacts = contacts => {
   return contacts.map(contact => {
     let cleaned = Object.assign({}, contact);
 
-    // if (cleaned.phone) {
-    //   console.log(cleaned.phone);
-    //   cleaned.phone = JSON.parse(cleaned.phone);
-    // }
     if (cleaned.hours) {
       cleaned.hours = cleaned.hours.map(hours => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
@@ -50,7 +46,6 @@ export const cleanLinks = (links, pathPrefix) => {
   if (!links) return null;
 
   return links.map(link => {
-    console.log(link);
     const { title, text, slug, ...rest } = link;
     return {
       slug: slug,
@@ -95,8 +90,8 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, '/topics');
   cleanedTopics.map(topic => {
-    topic.services = cleanLinks(topic.services, '/services'); //for navigation
-    topic.tiles = topic.services; //for theme page
+    topic.services = cleanLinks(topic.servicePages, '/services'); //for navigation
+    topic.tiles = topic.servicePages; //for theme page
   });
   return cleanedTopics;
 };
@@ -126,11 +121,11 @@ export const cleanNavigation = navigation => {
 };
 
 export const clean311 = threeoneone => {
-  const { all311 } = threeoneone;
+  const { allThreeOneOnes } = threeoneone;
 
-  if (!all311) return null;
+  if (!allThreeOneOnes) return null;
 
-  return all311.edges.map(({ node: link }) => {
+  return allThreeOneOnes.map(link => {
     const { title, url } = link;
     return {
       url: url,
