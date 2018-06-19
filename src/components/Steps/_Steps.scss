@@ -7,8 +7,15 @@
 .coa-rtl {
   .coa-Steps__list > ul > li {
     &:before {
-      margin-left: $coa-space-level3;
+      margin-left: $coa-spacing-md-small;
       margin-right: 0;
+    }
+  }
+  .coa-Steps__list > ul {
+    ol,
+    ul {
+      padding-left: 0;
+      padding-right: $coa-spacing-xlarge + 2;
     }
   }
 }
