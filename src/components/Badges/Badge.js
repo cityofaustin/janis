@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import I18nLink from 'components/I18n/I18nLink';
 import BadgeSVG from 'components/SVGs/Badge';
 
 import { badgePropTypes } from './proptypes';
 
-const Badge = ({ title, symbol, isActive }) => (
+const Badge = ({ text, url, symbol, isActive }) => (
   <div
     className={classNames('coa-Badge', {
       'coa-Badge--isActive': isActive,
@@ -19,7 +20,12 @@ const Badge = ({ title, symbol, isActive }) => (
         {symbol}
       </span>
     )}
-    <span className="coa-Badge__title">{title}</span>
+    {!!url && (
+      <I18nLink className="coa-Badge__title" to={url}>
+        {text}
+      </I18nLink>
+    )}
+    {!url && <span className="coa-Badge__title">{text}</span>}
   </div>
 );
 

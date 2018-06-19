@@ -36,6 +36,7 @@
 
 .coa-Badge__title {
   align-items: center;
+  color: $coa-color-purple-dark;
   display: flex;
   font-size: $coa-font-size-xsmall;
   height: $coa-badge-height / 2;
@@ -53,6 +54,16 @@
     top: $coa-badgelarge-step-radius * 2;
     width: $coa-badgelarge-width;
   }
+}
+a.coa-Badge__title {
+  text-decoration: none;
+}
+a.coa-Badge__title:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+a.coa-Badge__title:visited {
+  color: inherit;
 }
 
 .coa-Badge__symbol {
