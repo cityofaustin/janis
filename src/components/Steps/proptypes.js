@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 export const stepDetailGroupPropTypes = {
   steps: PropTypes.arrayOf(PropTypes.shape(stepDetailPropTypes)).isRequired,
+  stepClassName: PropTypes.string,
 };
 
 export const stepDetailPropTypes = {

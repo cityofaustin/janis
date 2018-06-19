@@ -19,11 +19,12 @@
     text-align: center;
   }
 
-  > ul, > ol {
+  > ul,
+  > ol {
     list-style-position: outside;
-    margin-bottom: $coa-space-level4;
-    margin-top: $coa-space-level4;
-    padding-left: $coa-space-level4;
+    margin-bottom: $coa-spacing-medium;
+    margin-top: $coa-spacing-medium;
+    padding-left: $coa-spacing-medium;
 
     p {
       display: inline;
