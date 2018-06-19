@@ -1,4 +1,5 @@
 import { findKey } from 'lodash';
+import moment from 'moment';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
@@ -8,14 +9,6 @@ export const cleanContacts = contacts => {
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  const getTimestamp = hours => {
-    const splitHours = hours.split(':');
-    let timestamp = new Date(dateSeed);
-    timestamp.setHours(splitHours[0]);
-    timestamp.setMinutes(splitHours[1]);
-    return timestamp.getTime();
-  };
-
   return contacts.map(contact => {
     let cleaned = Object.assign({}, contact);
 
@@ -23,8 +16,8 @@ export const cleanContacts = contacts => {
       cleaned.hours = cleaned.hours.map(hours => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
-        startTime: getTimestamp(hours.startTime),
-        endTime: getTimestamp(hours.endTime),
+        startTime: moment(hours.startTime),
+        endTime: moment(hours.endTime),
       }));
     }
     return cleaned;

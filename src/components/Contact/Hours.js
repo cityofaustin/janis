@@ -60,9 +60,15 @@ class Hours extends Component {
 
                   {hourIndex > -1 && (
                     <td>
-                      <FormattedTime value={hours[hourIndex].startTime} />
+                      <FormattedTime
+                        value={hours[hourIndex].startTime}
+                        timeZone="UTC"
+                      />
                       <span> - </span>
-                      <FormattedTime value={hours[hourIndex].endTime} />
+                      <FormattedTime
+                        value={hours[hourIndex].endTime}
+                        timeZone="UTC"
+                      />
                     </td>
                   )}
                   {hourIndex === -1 && (
