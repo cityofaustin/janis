@@ -3,6 +3,8 @@ import { withRouteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
+import { misc as i18n } from 'js/i18n/definitions';
+
 import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
@@ -29,7 +31,11 @@ const Process = ({
     url: url,
     symbol: sortOrder,
   }));
-  badges.unshift({ text: 'Overview', url: url, isActive: true });
+  badges.unshift({
+    text: intl.formatMessage(i18n.overview),
+    url: url,
+    isActive: true,
+  });
   const stepDetailGroup = processSteps.map(
     ({ title, sortOrder, linkTitle, url, overviewSteps }) => ({
       title: `${sortOrder}. ${title}`,
@@ -61,7 +67,7 @@ const Process = ({
       </div>
       <div className="wrapper wrapper--sm wrapper--hasBorder container-fluid">
         <SectionHeader description={description} symbol={<ListSVG />}>
-          Overview
+          {intl.formatMessage(i18n.overview)}
         </SectionHeader>
       </div>
       <StepDetailGroup steps={stepDetailGroup} stepClassName="wrapper--sm" />

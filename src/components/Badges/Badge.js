@@ -14,12 +14,7 @@ const Badge = ({ text, url, symbol, isActive }) => (
     })}
   >
     <BadgeSVG className="coa-Badge__background" />
-    {!!symbol && (
-      <span className="coa-Badge__symbol">
-        <span className="coa-sr-only">Step </span>
-        {symbol}
-      </span>
-    )}
+    {!!symbol && <span className="coa-Badge__symbol">{symbol}</span>}
     {!!url && (
       <I18nLink className="coa-Badge__title" to={url}>
         {text}
