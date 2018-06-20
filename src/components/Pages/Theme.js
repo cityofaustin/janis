@@ -11,7 +11,7 @@ import PageHeader from 'components/PageHeader';
 const Theme = ({ theme: { text: title, description, topics }, intl }) => (
   <div>
     <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader title={title} description={description} />
+      <PageHeader description={description}>{title}</PageHeader>
     </div>
 
     <div className="wrapper container-fluid">

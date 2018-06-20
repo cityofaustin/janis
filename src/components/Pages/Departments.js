@@ -7,7 +7,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 const Departments = ({ departments }) => (
   <div>
     <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader title={'All Departments'} />
+      <PageHeader>All Departments</PageHeader>
     </div>
     <div className="wrapper container-fluid">
       <TileGroup tiles={departments} tag="department" />

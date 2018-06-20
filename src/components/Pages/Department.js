@@ -3,7 +3,6 @@ import { get } from 'lodash';
 import { withRouteData } from 'react-static';
 
 import SectionHeader from 'components/SectionHeader';
-import PageHeader from 'components/PageHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
