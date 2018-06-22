@@ -50,14 +50,21 @@ export const cleanLinks = (links, pathPrefix) => {
   if (!links || !links.edges) return null;
 
   return links.edges.map(({ node: link }) => {
-    const { title, text, slug, ...rest } = link;
-    return {
-      slug: slug,
-      url: `${pathPrefix || ''}/${slug}`,
-      text: title || text,
-      ...rest,
-    };
+    link.slug = link.slug || link.sortOrder;
+    link.url = `${pathPrefix || ''}/${link.slug}`;
+    link.text = link.text || link.title;
+    return link;
   });
+};
+
+export const cleanProcesses = allProcesses => {
+  if (!allProcesses || !allProcesses.edges) return null;
+
+  let cleanedProcesses = cleanLinks(allProcesses, '/processes');
+  cleanedProcesses.map(process => {
+    process.processSteps = cleanLinks(process.processSteps, process.url);
+  });
+  return cleanedProcesses;
 };
 
 export const cleanServices = allServices => {

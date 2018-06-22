@@ -49,6 +49,7 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
+  overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
   welcomeTo: 'Welcome to',
@@ -61,6 +62,11 @@ export const navigation = defineMessages({
   openInNewWindow: 'Opens in new window',
   search: 'Search',
   skipToMain: 'Skip to main content',
+});
+
+export const processes = defineMessages({
+  checkOutRelatedProcesses: 'Check out related processes',
+  process: 'Process',
 });
 
 export const services = defineMessages({

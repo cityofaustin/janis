@@ -2,24 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const SectionHeader = ({ isSerif, hasHighlight, hasSymbol, children }) => (
-  <h2
+const SectionHeader = ({
+  isSerif,
+  hasHighlight,
+  description,
+  symbol,
+  children,
+}) => (
+  <div
     className={classNames('coa-SectionHeader', {
       'coa-SectionHeader--hasHighlight': hasHighlight,
       'coa-SectionHeader--isSerif': isSerif,
-      'coa-SectionHeader--hasSymbol': !!hasSymbol,
+      'coa-SectionHeader--hasSymbol': !!symbol,
     })}
   >
-    { !!hasSymbol &&
-      <span className="coa-SectionHeader__symbol"><span className="coa-sr-only">Step </span>{hasSymbol}</span>
-    }
-    {children}
-  </h2>
+    <h2>
+      {!!symbol && <span className="coa-SectionHeader__symbol">{symbol}</span>}
+      {children}
+    </h2>
+    {!!description && (
+      <p className="coa-SectionHeader__description">{description}</p>
+    )}
+  </div>
 );
 
 SectionHeader.propTypes = {
   children: PropTypes.node.isRequired,
-  hasSymbol: PropTypes.node,
+  symbol: PropTypes.node,
+  description: PropTypes.string,
   isSerif: PropTypes.bool,
   hasHighlight: PropTypes.bool,
 };

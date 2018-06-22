@@ -12,16 +12,20 @@ const TileGroup = ({ tiles, tag, text, url, description, hasBorder }) => (
   <div className={`coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}`}>
     {text &&
       url && (
-        <SectionHeader hasHighlight={true}>
+        <SectionHeader hasHighlight={true} description={description}>
           <I18nLink to={url}>
             {text}&nbsp;<ArrowRight />
           </I18nLink>
         </SectionHeader>
       )}
 
-    {text && !url && <SectionHeader hasHighlight={true}>{text}</SectionHeader>}
+    {text &&
+      !url && (
+        <SectionHeader hasHighlight={true} description={description}>
+          {text}
+        </SectionHeader>
+      )}
 
-    {description && <p className="coa-TileGroup__description">{description}</p>}
     <div className="row">
       {tiles.map(({ url, text }, index) => (
         <div

@@ -1,5 +1,4 @@
-.coa-SectionHeader {
-  text-transform: uppercase;
+.coa-SectionHeader h2 {
   text-align: center;
 
   a {
@@ -22,10 +21,13 @@
       height: 38px;
       width: 38px;
     }
+    path {
+      fill: $coa-color-purple-dark;
+    }
   }
 }
 
-.coa-SectionHeader--isSerif {
+.coa-SectionHeader--isSerif h2 {
   font-family: $coa-font-serif;
   font-weight: $coa-font-regular;
   font-size: $coa-font-size-medium;
@@ -37,7 +39,7 @@
   }
 }
 
-.coa-SectionHeader--hasHighlight:after {
+.coa-SectionHeader--hasHighlight h2:after {
   background: $coa-color-orange;
   content: '';
   display: block;
@@ -46,7 +48,7 @@
   width: $coa-sectionheader-highlight-width;
 }
 
-.coa-SectionHeader--hasSymbol {
+.coa-SectionHeader--hasSymbol h2 {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -107,4 +109,9 @@
     height: $coa-sectionheaderlarge-symbol-radius * 2;
     width: $coa-sectionheaderlarge-symbol-radius * 2;
   }
+}
+
+.coa-SectionHeader__description {
+  padding-bottom: $coa-spacing-large;
+  text-align: center;
 }

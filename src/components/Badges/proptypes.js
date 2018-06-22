@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 
 export const badgePropTypes = {
-  title: PropTypes.string.isRequired,
-  step: PropTypes.number,
+  text: PropTypes.string.isRequired,
+  url: PropTypes.string,
+  symbol: PropTypes.node,
   isActive: PropTypes.bool,
 };
 

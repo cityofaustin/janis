@@ -17,6 +17,16 @@ storiesOf('Tiles', module)
       <TileGroup tiles={tileData} tag="Tile" />
     </div>
   ))
+  .add('TileGroup with header and description', () => (
+    <div className="wrapper container-fluid">
+      <TileGroup
+        tiles={tileData}
+        tag="Tile"
+        text="Recycling, trash, and compost"
+        description="The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time."
+      />
+    </div>
+  ))
   .add('Tile', () => (
     <div className="wrapper container-fluid">
       <Tile

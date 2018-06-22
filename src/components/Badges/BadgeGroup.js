@@ -7,9 +7,7 @@ import { badgeGroupPropTypes } from './proptypes';
 
 const BadgeGroup = ({ badges }) => (
   <div className="coa-BadgeGroup">
-    {badges.map(({ ...rest }, index) => (
-      <Badge {...rest} />
-    ))}
+    {badges.map(({ ...rest }, index) => <Badge key={index} {...rest} />)}
   </div>
 );
 

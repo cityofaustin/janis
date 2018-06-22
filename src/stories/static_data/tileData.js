@@ -29,4 +29,11 @@ export const tileGroupData = [
     tiles: tileData,
     url: '/topics/recycling-trash-compost',
   },
+  {
+    description:
+      'The City of Austin provides hundreds of services to residents to help them manage things like recycling, trash, energy, and water. This is a short list of services that will grow over time.',
+    text: 'Some other tile group',
+    tiles: tileData,
+    url: '/topics/recycling-trash-compost',
+  },
 ];
