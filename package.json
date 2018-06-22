@@ -2,7 +2,7 @@
   "name": "janis",
   "version": "1.0.1",
   "description":
-    "Public facing frontend public side of Austin.gov using React components.",
+    "Public facing frontend public side of austin.gov using React components.",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
