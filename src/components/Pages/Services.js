@@ -10,10 +10,9 @@ import TileGroup from 'components/Tiles/TileGroup';
 const Services = ({ services, intl }) => (
   <div>
     <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader
-        title="Use City of Austin Services"
-        description="The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time."
-      />
+      <PageHeader description="The City of Austin provides hundreds of services to people. This is a short list of services that will grow over time.">
+        Use City of Austin Services
+      </PageHeader>
     </div>
     <div className="wrapper container-fluid">
       <TileGroup tiles={services} tag={intl.formatMessage(i18n.service)} />

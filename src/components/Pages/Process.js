@@ -60,7 +60,7 @@ const Process = ({
         title={title}
       />
       <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader title={title} />
+        <PageHeader>{title}</PageHeader>
       </div>
       <div className="wrapper container-fluid">
         <BadgeGroup badges={badges} hasBorder={true} />

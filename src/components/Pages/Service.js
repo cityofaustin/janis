@@ -46,7 +46,7 @@ const Service = ({
       title={title}
     />
     <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader title={title} />
+      <PageHeader>{title}</PageHeader>
 
       {steps &&
         !!steps.length && (

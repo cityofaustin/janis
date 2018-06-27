@@ -10,7 +10,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 const Topics = ({ topics, intl }) => (
   <div>
     <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader title={'All Topics'} />
+      <PageHeader>All Topics</PageHeader>
     </div>
     <div className="wrapper container-fluid">
       <TileGroup tiles={topics} tag={intl.formatMessage(i18n.topic)} />
