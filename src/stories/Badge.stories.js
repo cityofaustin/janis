@@ -7,7 +7,6 @@ import ListSVG from 'components/SVGs/List';
 const badges = [
   {
     text: 'Overview',
-    isActive: true,
     url: '#',
   },
   {
@@ -60,6 +59,6 @@ storiesOf('Badges', module)
   ))
   .add('Badge Group', () => (
     <div className="wrapper container-fluid">
-      <BadgeGroup badges={badges} />
+      <BadgeGroup badges={badges} activeIndex={0} />
     </div>
   ));

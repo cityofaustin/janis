@@ -9,4 +9,5 @@ export const badgePropTypes = {
 
 export const badgeGroupPropTypes = {
   badges: PropTypes.arrayOf(PropTypes.shape(badgePropTypes)).isRequired,
+  activeIndex: PropTypes.number,
 };
