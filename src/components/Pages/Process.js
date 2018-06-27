@@ -16,44 +16,37 @@ import ListSVG from 'components/SVGs/List';
 const Process = ({
   process: {
     title,
+    badges,
     text,
     url,
-    image,
+    image = {},
     topic,
     topic: { theme },
     description,
-    processSteps,
+    stepDetailGroup,
   },
   intl,
 }) => {
-  const badges = processSteps.map(({ shortTitle, url, sortOrder }) => ({
-    text: shortTitle,
-    url: url,
-    symbol: sortOrder,
-  }));
-  badges.unshift({
-    text: intl.formatMessage(i18n.overview),
-    url: url,
-    isActive: true,
-  });
-  const stepDetailGroup = processSteps.map(
-    ({ title, sortOrder, linkTitle, url, overviewSteps }) => ({
-      title: `${sortOrder}. ${title}`,
-      link: { text: linkTitle, url: url },
-      content: overviewSteps,
-    }),
-  );
+  const updatedBadges = [
+    {
+      text: intl.formatMessage(i18n.overview),
+      url: url,
+    },
+  ].concat(badges);
+
   return (
     <div>
-      <PageBanner
-        imagesPath={`${process.env.CMS_MEDIA}/images`}
-        imageFilename={path.basename(
-          image.filename,
-          path.extname(image.filename),
-        )}
-        imageExtension={path.extname(image.filename)}
-        imageTitle={image.title}
-      />
+      {image && (
+        <PageBanner
+          imagesPath={`${process.env.CMS_MEDIA}/images`}
+          imageFilename={path.basename(
+            image.filename,
+            path.extname(image.filename),
+          )}
+          imageExtension={path.extname(image.filename)}
+          imageTitle={image.title}
+        />
+      )}
       <PageBreadcrumbs
         grandparent={{ ...theme, subpath: 'themes' }}
         parent={{ ...topic, subpath: 'topics' }}
@@ -63,7 +56,7 @@ const Process = ({
         <PageHeader>{title}</PageHeader>
       </div>
       <div className="wrapper container-fluid">
-        <BadgeGroup badges={badges} hasBorder={true} />
+        <BadgeGroup badges={updatedBadges} activeIndex={0} />
       </div>
       <div className="wrapper wrapper--sm wrapper--hasBorder container-fluid">
         <SectionHeader description={description} symbol={<ListSVG />}>

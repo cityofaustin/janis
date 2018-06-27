@@ -1,6 +1,9 @@
 import React from 'react';
 import { withRouteData } from 'react-static';
+import { injectIntl } from 'react-intl';
 import path from 'path';
+
+import { misc as i18n } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
@@ -11,52 +14,60 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 
 const ProcessStep = ({
   processStep: {
-    processTitle = 'Test Page Title',
-    badges = [],
+    processTitle,
+    processUrl,
+    badges,
     title,
     sortOrder,
     description,
     image,
-    topic = {
-      slug: 'foster-animal',
-      text: 'Foster an animal',
-      theme: { slug: 'pets', text: 'Pets' },
-    },
-    // topic: { theme = { slug: 'pets', text: 'Pets' } },
-    theme = { slug: 'pets', text: 'Pets' },
+    topic,
+    topic: { theme },
     detailedContent,
   },
-}) => (
-  <div>
-    <PageBanner
-      imagesPath={`${process.env.CMS_MEDIA}/images`}
-      imageFilename={path.basename(
-        image.filename,
-        path.extname(image.filename),
-      )}
-      imageExtension={path.extname(image.filename)}
-      imageTitle={image.title}
-    />
-    <PageBreadcrumbs
-      grandparent={{ ...theme, subpath: 'themes' }}
-      parent={{ ...topic, subpath: 'topics' }}
-      title={processTitle}
-    />
-    <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader>{processTitle}</PageHeader>
-    </div>
-    <div className="wrapper container-fluid">
-      <BadgeGroup badges={badges} hasBorder={true} />
-    </div>
-    <div className="wrapper wrapper--sm wrapper--hasBorder container-fluid">
-      <SectionHeader description={description} symbol={sortOrder}>
-        {title}
-      </SectionHeader>
-    </div>
-    <div className="wrapper wrapper--sm container-fluid">
-      <HtmlFromAdmin content={detailedContent} />
-    </div>
-  </div>
-);
+  intl,
+}) => {
+  const updatedBadges = [
+    {
+      text: intl.formatMessage(i18n.overview),
+      url: processUrl,
+    },
+  ].concat(badges);
 
-export default withRouteData(ProcessStep);
+  return (
+    <div>
+      {image && (
+        <PageBanner
+          imagesPath={`${process.env.CMS_MEDIA}/images`}
+          imageFilename={path.basename(
+            image.filename,
+            path.extname(image.filename),
+          )}
+          imageExtension={path.extname(image.filename)}
+          imageTitle={image.title}
+        />
+      )}
+      <PageBreadcrumbs
+        grandparent={{ ...theme, subpath: 'themes' }}
+        parent={{ ...topic, subpath: 'topics' }}
+        title={processTitle}
+      />
+      <div className="wrapper wrapper--sm container-fluid">
+        <PageHeader>{processTitle}</PageHeader>
+      </div>
+      <div className="wrapper container-fluid">
+        <BadgeGroup badges={updatedBadges} activeIndex={sortOrder} />
+      </div>
+      <div className="wrapper wrapper--sm wrapper--hasBorder container-fluid">
+        <SectionHeader description={description} symbol={sortOrder}>
+          {title}
+        </SectionHeader>
+      </div>
+      <div className="wrapper wrapper--sm container-fluid">
+        <HtmlFromAdmin content={detailedContent} />
+      </div>
+    </div>
+  );
+};
+
+export default withRouteData(injectIntl(ProcessStep));

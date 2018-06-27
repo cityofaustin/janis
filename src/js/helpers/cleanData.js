@@ -63,6 +63,30 @@ export const cleanProcesses = allProcesses => {
   let cleanedProcesses = cleanLinks(allProcesses, '/processes');
   cleanedProcesses.map(process => {
     process.processSteps = cleanLinks(process.processSteps, process.url);
+
+    //build step details for overview page
+    process.stepDetailGroup = process.processSteps.map(
+      ({ title, sortOrder, linkTitle, url, overviewSteps }) => ({
+        title: `${sortOrder}. ${title}`,
+        link: { text: linkTitle, url: url },
+        content: overviewSteps,
+      }),
+    );
+
+    //build badges for process and processStep pages
+    process.badges = process.processSteps.map(
+      ({ shortTitle, url, sortOrder }) => ({
+        text: shortTitle,
+        url: url,
+        symbol: sortOrder,
+      }),
+    );
+    process.processSteps.map(processStep => {
+      processStep.processTitle = process.title;
+      processStep.processUrl = process.url;
+      processStep.badges = process.badges;
+      processStep.topic = process.topic;
+    });
   });
   return cleanedProcesses;
 };
