@@ -62,6 +62,7 @@ export const cleanProcesses = allProcesses => {
 
   let cleanedProcesses = cleanLinks(allProcesses, '/processes');
   cleanedProcesses.map(process => {
+    process.contacts = cleanContacts(process.contacts);
     process.processSteps = cleanLinks(process.processSteps, process.url);
 
     //build step details for overview page
@@ -86,6 +87,7 @@ export const cleanProcesses = allProcesses => {
       processStep.processUrl = process.url;
       processStep.badges = process.badges;
       processStep.topic = process.topic;
+      processStep.contact = process.contact;
     });
   });
   return cleanedProcesses;

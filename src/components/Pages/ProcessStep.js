@@ -11,6 +11,7 @@ import PageHeader from 'components/PageHeader';
 import BadgeGroup from 'components/Badges/BadgeGroup';
 import SectionHeader from 'components/SectionHeader';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import ContactDetails from 'components/Contact/ContactDetails';
 
 const ProcessStep = ({
   processStep: {
@@ -24,6 +25,7 @@ const ProcessStep = ({
     topic,
     topic: { theme },
     detailedContent,
+    contacts,
   },
   intl,
 }) => {
@@ -65,6 +67,8 @@ const ProcessStep = ({
       </div>
       <div className="wrapper wrapper--sm container-fluid">
         <HtmlFromAdmin content={detailedContent} />
+        {!!contacts &&
+          !!contacts.length && <ContactDetails contact={contacts[0]} />}
       </div>
     </div>
   );

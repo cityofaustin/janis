@@ -18,6 +18,34 @@ const allProcessesQuery = `
             filename
             title
           }
+          contacts {
+            edges {
+              node {
+                contact {
+                  name
+                  email
+                  phone
+                  hours {
+                    edges {
+                      node {
+                        dayOfWeek
+                        startTime
+                        endTime
+                      }
+                    }
+                  }
+                  location {
+                    name
+                    street
+                    city
+                    state
+                    zip
+                    country
+                  }
+                }
+              }
+            }
+          }
           processSteps {
             edges {
               node {

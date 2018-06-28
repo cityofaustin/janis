@@ -12,6 +12,7 @@ import BadgeGroup from 'components/Badges/BadgeGroup';
 import SectionHeader from 'components/SectionHeader';
 import StepDetailGroup from 'components/Steps/StepDetailGroup';
 import ListSVG from 'components/SVGs/List';
+import ContactDetails from 'components/Contact/ContactDetails';
 
 const Process = ({
   process: {
@@ -24,6 +25,7 @@ const Process = ({
     topic: { theme },
     description,
     stepDetailGroup,
+    contacts,
   },
   intl,
 }) => {
@@ -64,6 +66,12 @@ const Process = ({
         </SectionHeader>
       </div>
       <StepDetailGroup steps={stepDetailGroup} stepClassName="wrapper--sm" />
+      {!!contacts &&
+        !!contacts.length && (
+          <div className="wrapper wrapper--sm container-fluid">
+            <ContactDetails contact={contacts[0]} />
+          </div>
+        )}
     </div>
   );
 };
