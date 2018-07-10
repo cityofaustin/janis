@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Router, Route, withSiteData } from 'react-static';
+import { Router, Route, Switch, withSiteData } from 'react-static';
 import Routes from 'react-static-routes';
 import { injectIntl } from 'react-intl';
 import ReactGA from 'react-ga';
@@ -22,11 +22,13 @@ const AppView = withSiteData(
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
       <main role="main" id="main">
-        <Route
-          path={`${pathLangRegex}:preview/:page_type/:revision_id`}
-          component={CMSPreview}
-        />
-        <Routes />
+        <Switch>
+          <Route
+            path={`${pathLangRegex}preview/:page_type/:revision_id`}
+            component={CMSPreview}
+          />
+          <Routes />
+        </Switch>
       </main>
       <Footer threeoneone={threeoneone[intl.locale]} />
     </div>
