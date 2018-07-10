@@ -1,5 +1,5 @@
-import { GraphQLClient } from 'graphql-request';
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
+import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
@@ -20,14 +20,6 @@ import {
   clean311,
   cleanNavigation,
 } from 'js/helpers/cleanData';
-
-const createGraphQLClientsByLang = lang => {
-  const { CMS_API } = process.env;
-
-  return new GraphQLClient(CMS_API, {
-    headers: { 'Accept-Language': lang },
-  });
-};
 
 const makeAllPages = async langCode => {
   const path = `/${!!langCode ? langCode : ''}`;

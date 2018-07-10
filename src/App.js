@@ -14,6 +14,8 @@ import 'css/coa.css';
 
 const pathLangRegex = '(/)?:lang([a-z]{2})?/';
 
+//TODO: make CMSLive controller for static routes
+//add GA to this controller
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS, { titleCase: false });
 
 const AppView = withSiteData(
