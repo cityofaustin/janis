@@ -3,6 +3,7 @@ import { Router, Route, Switch, withSiteData } from 'react-static';
 import Routes from 'react-static-routes';
 import { injectIntl } from 'react-intl';
 import ReactGA from 'react-ga';
+import { LANG_URL_REGEX } from 'js/i18n/constants';
 import { logPageView } from 'js/helpers/googleAnalytics';
 import CMSPreview from 'components/CMSPreview';
 import I18nController from 'components/I18n/I18nController';
@@ -11,8 +12,6 @@ import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
-
-const pathLangRegex = '(/)?:lang([a-z]{2})?/';
 
 //TODO: make CMSLive controller for static routes
 //add GA to this controller
@@ -26,7 +25,7 @@ const AppView = withSiteData(
       <main role="main" id="main">
         <Switch>
           <Route
-            path={`${pathLangRegex}preview/:page_type/:revision_id`}
+            path={`${LANG_URL_REGEX}preview/:page_type/:revision_id`}
             component={CMSPreview}
           />
           <Routes />
@@ -47,9 +46,8 @@ const App = ({ navigation, threeoneone }) => (
           return null;
         }}
       />
-      {/* regex to split url location into 2 character lang code (if present) and page path */}
       <Route
-        path={`${pathLangRegex}:path*`}
+        path={`${LANG_URL_REGEX}:path*`}
         render={props => (
           <I18nController
             lang={props.match.params.lang}
