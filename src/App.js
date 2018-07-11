@@ -1,21 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { Router, Route, Switch, withSiteData } from 'react-static';
-import Routes from 'react-static-routes';
 import { injectIntl } from 'react-intl';
-import ReactGA from 'react-ga';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
-import { logPageView } from 'js/helpers/googleAnalytics';
-import CMSPreview from 'components/CMSPreview';
+import CMSPreview from 'components/_Controllers/CMSPreview';
+import CMSLive from 'components/_Controllers/CMSLive';
 import I18nController from 'components/I18n/I18nController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
-
-//TODO: make CMSLive controller for static routes
-//add GA to this controller
-ReactGA.initialize(process.env.GOOGLE_ANALYTICS, { titleCase: false });
 
 const AppView = withSiteData(
   injectIntl(({ path, navigation, threeoneone, intl }) => (
@@ -28,7 +22,7 @@ const AppView = withSiteData(
             path={`${LANG_URL_REGEX}preview/:page_type/:revision_id`}
             component={CMSPreview}
           />
-          <Routes />
+          <Route component={CMSLive} />
         </Switch>
       </main>
       <Footer threeoneone={threeoneone[intl.locale]} />
@@ -39,13 +33,6 @@ const AppView = withSiteData(
 const App = ({ navigation, threeoneone }) => (
   <Router>
     <div>
-      <Route
-        path="*"
-        render={props => {
-          logPageView();
-          return null;
-        }}
-      />
       <Route
         path={`${LANG_URL_REGEX}:path*`}
         render={props => (
