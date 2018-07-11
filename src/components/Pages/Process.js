@@ -34,7 +34,8 @@ const Process = ({
       text: intl.formatMessage(i18n.overview),
       url: url,
     },
-  ].concat(badges);
+    ...badges,
+  ];
 
   return (
     <div>
