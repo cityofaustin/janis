@@ -85,6 +85,23 @@ export const cleanServices = allServices => {
   return cleanedServices;
 };
 
+export const cleanService = service => {
+  debugger;
+  const serviceData = JSON.parse(
+    service.allPageRevisions.edges[0].node.contentJson,
+  );
+
+  serviceData.image = {
+    id: 1,
+    filename: 'blarg',
+    title: 'blarg',
+  };
+
+  serviceData.related = [{ url: 'blarg', text: 'blarg' }];
+
+  return serviceData;
+};
+
 export const cleanDepartments = allDepartments => {
   if (!allDepartments || !allDepartments.edges) return null;
 

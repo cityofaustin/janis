@@ -6,8 +6,14 @@ import { request } from 'graphql-request';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
-import { cleanProcesses, cleanServices } from 'js/helpers/cleanData';
+import getRevisionQuery from 'js/queries/getRevisionQuery';
+import {
+  cleanProcesses,
+  cleanServices,
+  cleanService,
+} from 'js/helpers/cleanData';
 import Services from 'components/Pages/Services';
+import Service from 'components/Pages/Service';
 import Processes from 'components/Pages/Processes';
 
 class CMSPreview extends Component {
@@ -35,6 +41,9 @@ class CMSPreview extends Component {
     //TODO: one endpoint for revisions data requests
     let req;
     switch (page_type) {
+      case 'service':
+        req = client.request(getRevisionQuery, { id: revision_id });
+        break;
       case 'services':
         req = client.request(allServicePagesQuery);
         break;
@@ -55,6 +64,7 @@ class CMSPreview extends Component {
     } = this.props;
     const { data } = this.state;
     if (!this.state.data) return <h1>⏱️LoAdInG⏱️...</h1>;
+    debugger;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
@@ -64,6 +74,10 @@ class CMSPreview extends Component {
         <Route
           path="/processes"
           render={props => <Processes processes={cleanProcesses(data)} />}
+        />
+        <Route
+          path="/service"
+          render={props => <Service service={cleanService(data)} />}
         />
       </Switch>
     );
