@@ -85,21 +85,22 @@ export const cleanServices = allServices => {
   return cleanedServices;
 };
 
-export const cleanService = service => {
+export const cleanServiceRevision = (service, locale) => {
   debugger;
-  const serviceData = JSON.parse(
+  const serviceRevisionData = JSON.parse(
     service.allPageRevisions.edges[0].node.contentJson,
   );
 
-  serviceData.image = {
-    id: 1,
-    filename: 'blarg',
-    title: 'blarg',
+  return {
+    title: serviceRevisionData[`title_${locale}`],
+    topic: serviceRevisionData.topic,
+    image: {
+      id: 1,
+      filename: 'blarg',
+      title: 'blarg',
+    },
+    related: [{ url: 'blarg', text: 'blarg' }],
   };
-
-  serviceData.related = [{ url: 'blarg', text: 'blarg' }];
-
-  return serviceData;
 };
 
 export const cleanDepartments = allDepartments => {

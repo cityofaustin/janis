@@ -10,7 +10,7 @@ import getRevisionQuery from 'js/queries/getRevisionQuery';
 import {
   cleanProcesses,
   cleanServices,
-  cleanService,
+  cleanServiceRevision,
 } from 'js/helpers/cleanData';
 import Services from 'components/Pages/Services';
 import Service from 'components/Pages/Service';
@@ -64,7 +64,6 @@ class CMSPreview extends Component {
     } = this.props;
     const { data } = this.state;
     if (!this.state.data) return <h1>⏱️LoAdInG⏱️...</h1>;
-    debugger;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
@@ -77,7 +76,11 @@ class CMSPreview extends Component {
         />
         <Route
           path="/service"
-          render={props => <Service service={cleanService(data)} />}
+          render={props => (
+            <Service
+              service={cleanServiceRevision(data, this.props.intl.locale)}
+            />
+          )}
         />
       </Switch>
     );
