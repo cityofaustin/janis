@@ -1,6 +1,10 @@
 import { findKey } from 'lodash';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
+// TODO: Figure out a good place for these
+import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
+import { request } from 'graphql-request';
+
 export const cleanContacts = contacts => {
   if (!contacts || !contacts.edges) return null;
 
@@ -83,24 +87,6 @@ export const cleanServices = allServices => {
         : null;
   });
   return cleanedServices;
-};
-
-export const cleanServiceRevision = (service, locale) => {
-  debugger;
-  const serviceRevisionData = JSON.parse(
-    service.allPageRevisions.edges[0].node.contentJson,
-  );
-
-  return {
-    title: serviceRevisionData[`title_${locale}`],
-    topic: serviceRevisionData.topic,
-    image: {
-      id: 1,
-      filename: 'blarg',
-      title: 'blarg',
-    },
-    related: [{ url: 'blarg', text: 'blarg' }],
-  };
 };
 
 export const cleanDepartments = allDepartments => {
