@@ -6,6 +6,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import { request } from 'graphql-request';
 
 export const cleanContacts = contacts => {
+  debugger;
   if (!contacts || !contacts.edges) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
@@ -21,8 +22,12 @@ export const cleanContacts = contacts => {
   };
 
   return contacts.edges.map(({ node: contact }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
-    let cleaned = Object.assign({}, contact.contact);
+    // It's `contact.contact` because of the way the API returns data
+    // when getting servicePageContacts, but it's just contact when
+    // getting data from allContacts
+    let cleaned;
+    if (contact.contact) cleaned = Object.assign({}, contact.contact);
+    else cleaned = Object.assign({}, contact);
 
     if (cleaned.phone) {
       cleaned.phone = JSON.parse(cleaned.phone);

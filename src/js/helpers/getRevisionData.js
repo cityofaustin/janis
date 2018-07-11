@@ -1,5 +1,6 @@
 import getRevisionQuery from 'js/queries/getRevisionQuery';
 import getContactQuery from 'js/queries/getContactQuery';
+import { cleanContacts } from 'js/helpers/cleanData';
 
 const getRevision = async (client, id, locale) => {
   debugger;
@@ -26,6 +27,7 @@ const getRevision = async (client, id, locale) => {
     slug: serviceRevisionData.slug,
     steps: serviceRevisionData[`steps_${locale}`],
     dynamicContent: JSON.parse(serviceRevisionData.dynamic_content),
+    contacts: cleanContacts(contactData.allContacts),
   };
 };
 
