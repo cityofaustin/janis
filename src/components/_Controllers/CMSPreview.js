@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import getRevision from 'js/helpers/getRevisionData';
+import getServicePageRevisionQuery from 'js/queries/getRevisionQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import { cleanProcesses, cleanServices } from 'js/helpers/cleanData';
 import Services from 'components/Pages/Services';
@@ -39,10 +39,8 @@ class CMSPreview extends Component {
     let req;
     switch (page_type) {
       case 'service':
-        getRevision(client, revision_id, intl.locale).then(data => {
-          this.setState({ data: data });
-        });
-        return;
+        req = client.request(getServicePageRevisionQuery, { id: revision_id });
+        break;
       case 'services':
         req = client.request(allServicePagesQuery);
         break;
@@ -51,7 +49,18 @@ class CMSPreview extends Component {
         break;
     }
     req.then(data => {
-      this.setState({ data: data });
+      if (page_type === 'service') {
+        const allServices = {
+          edges: [
+            {
+              node: data.pageRevision.asServicePage,
+            },
+          ],
+        };
+        this.setState({ data: allServices });
+      } else {
+        this.setState({ data: data });
+      }
     });
   }
 
@@ -73,7 +82,10 @@ class CMSPreview extends Component {
           path="/processes"
           render={props => <Processes processes={cleanProcesses(data)} />}
         />
-        <Route path="/service" render={props => <Service service={data} />} />
+        <Route
+          path="/service"
+          render={props => <Service service={cleanServices(data)[0]} />}
+        />
       </Switch>
     );
   }
