@@ -26,7 +26,6 @@ class CMSPreview extends Component {
   }
 
   fetchData() {
-    debugger;
     const {
       intl,
       match: {
