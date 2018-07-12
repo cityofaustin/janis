@@ -49,6 +49,7 @@ class CMSPreview extends Component {
     }
     req.then(data => {
       if (page_type === 'service') {
+        // Unitl we refactor cleanServices, reshape the object to work with it
         const allServices = {
           edges: [
             {
