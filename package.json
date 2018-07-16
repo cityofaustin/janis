@@ -1,8 +1,7 @@
 {
   "name": "janis",
   "version": "1.0.1",
-  "description":
-    "Public facing frontend public side of austin.gov using React components.",
+  "description": "Public facing frontend public side of austin.gov using React components.",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -29,7 +28,7 @@
     "react-load-script": "^0.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-static": "5.8.5",
+    "react-static": "^5.9.7",
     "react-universal-component": "^2.8.1",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
@@ -55,12 +54,9 @@
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "start-js": "react-static start",
     "build-js": "react-static build",
-    "build-translations":
-      "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
-    "build-css":
-      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
