@@ -58,13 +58,13 @@ To manage our roadmap and upcoming issues, we're using a dedicated Github repo, 
 
 The design team uses sketch to mock up wireframe and high fidelity comps. The most up to date files can be linked here from Google drive. The parent file for current public interface/janis design files is https://drive.google.com/drive/folders/1J1AXm9bDgT0kO_2lugg4mnV4koZHpDO-?usp=sharing.
 
-- [Alpha.austin.gov comprehensive user flow including home, theme, topic, service, process, and department templates](https://drive.google.com/file/d/1wtiU9LqpvU2KTu362bCPMfS7tfYgjyuf/view?usp=sharing)
-- [Alpha.austin.gov design library documenting all current components](https://drive.google.com/file/d/1hGAZZ6ZPkDCZobEiC_7egCBrACUzKxWt/view?usp=sharing)
-- [You can use one sketch library as a single source of truth across multiple designer's and developer's files. Never used sketch librairies before? Check out this introduction and detailed how-to's](https://www.sketchapp.com/docs/libraries/)
-- [Alpha.austin.gov EMS process page](https://drive.google.com/file/d/1rqELW2K4ZI-BjV9Tecj-49UUzujVvLYr/view?usp=sharing)
-- [Alpha.austin.gov Animal Center foster process page and form](https://drive.google.com/file/d/1nJePAA3EI1APmdFK8zcBjh4OuajyjElG/view?usp=sharing)
-- [Alpha.austin.gov Search flow](https://drive.google.com/file/d/1V4VN1Q-_C2A87LRHRf4bgEv5iVFGBEnb/view?usp=sharing)
-- [Alpha.austin.gov Permittingatx transition process page](https://drive.google.com/file/d/1EZ1_hdj30ebmWZuve-tpvw3Rl8ioN9kX/view?usp=sharing)
+* [Alpha.austin.gov comprehensive user flow including home, theme, topic, service, process, and department templates](https://drive.google.com/file/d/1wtiU9LqpvU2KTu362bCPMfS7tfYgjyuf/view?usp=sharing)
+* [Alpha.austin.gov design library documenting all current components](https://drive.google.com/file/d/1hGAZZ6ZPkDCZobEiC_7egCBrACUzKxWt/view?usp=sharing)
+* [You can use one sketch library as a single source of truth across multiple designer's and developer's files. Never used sketch librairies before? Check out this introduction and detailed how-to's](https://www.sketchapp.com/docs/libraries/)
+* [Alpha.austin.gov EMS process page](https://drive.google.com/file/d/1rqELW2K4ZI-BjV9Tecj-49UUzujVvLYr/view?usp=sharing)
+* [Alpha.austin.gov Animal Center foster process page and form](https://drive.google.com/file/d/1nJePAA3EI1APmdFK8zcBjh4OuajyjElG/view?usp=sharing)
+* [Alpha.austin.gov Search flow](https://drive.google.com/file/d/1V4VN1Q-_C2A87LRHRf4bgEv5iVFGBEnb/view?usp=sharing)
+* [Alpha.austin.gov Permittingatx transition process page](https://drive.google.com/file/d/1EZ1_hdj30ebmWZuve-tpvw3Rl8ioN9kX/view?usp=sharing)
 
 ## Frameworks and Libraries Used
 
@@ -85,6 +85,7 @@ This project uses [React-Static](https://github.com/nozzle/react-static) as a ba
 This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
 
 * the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method, alongside the dangerouslySetInnerHTML property available to React elements, to render translations of **trusted content** which include HTML. Note translated content cannot include React Components (see note below for rendering React Components with translations). Also note that the corresponding FormattedMessage Component will NOT return unescaped HTML.
+
 ```
 import { defineMessages } from 'react-intl';
 const messages = defineMessages({
@@ -95,6 +96,7 @@ const messages = defineMessages({
 ```
 
 * the FormattedMessage react-intl component will parse React components from the values property. We can utilize this method to render translations which have React components as parameters.
+
 ```
 <FormattedMessage
   id="misc.workInProgressClipped"
@@ -123,7 +125,7 @@ const messages = defineMessages({
 docker exec --interactive --tty <janis or janis-build> yarn run build-translations
 ```
 
-This plugin will *NOT* remove previously defined translations which are no longer present in the current app definitions. This clean up needs to be done manually at the moment.
+This plugin will _NOT_ remove previously defined translations which are no longer present in the current app definitions. This clean up needs to be done manually at the moment.
 
 ### 📚 Storybook
 
@@ -223,6 +225,16 @@ Since we use React-Static as our framework to render our React components as a s
 ```
 
 Your site will be running on http://localhost:8080/
+
+## CMS Integration Guidelines
+
+For each new content-type added:
+
+1.  create a graphQL fragment/query for published content here: src/js/queries
+2.  create a graphQL fragment/query for revision content here: src/js/queries
+3.  add route, component to render and published content fetching to static.config.js
+4.  add route, component to render and revision content fetching to src/components/\_Controllers/CMSPreview.js
+5.  add data parsing functions to src/js/helpers/cleanData.js
 
 ## SASS Guidelines
 
