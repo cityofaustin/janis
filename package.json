@@ -47,7 +47,7 @@
     "eslint-config-react-tools": "1.x.x",
     "extract-react-intl-messages": "^0.8.2",
     "prettier": "1.12.1",
-    "serve": "^6.1.0",
+    "serve": "^7.0.0",
     "storybook-addon-intl": "^2.3.0"
   },
   "scripts": {
