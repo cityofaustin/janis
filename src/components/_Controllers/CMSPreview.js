@@ -37,18 +37,15 @@ class CMSPreview extends Component {
     //TODO: one endpoint for revisions data requests
     let req;
     switch (page_type) {
-      case 'service':
-        req = client.request(getServicePageRevisionQuery, { id: revision_id });
-        break;
       case 'services':
-        req = client.request(allServicePagesQuery);
+        req = client.request(getServicePageRevisionQuery, { id: revision_id });
         break;
       case 'processes':
         req = client.request(allProcessesQuery);
         break;
     }
     req.then(data => {
-      if (page_type === 'service') {
+      if (page_type === 'services') {
         // Unitl we refactor cleanServices, reshape the object to work with it
         const allServices = {
           edges: [
@@ -75,15 +72,11 @@ class CMSPreview extends Component {
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
-          path="/services"
-          render={props => <Services services={cleanServices(data)} />}
-        />
-        <Route
           path="/processes"
           render={props => <Processes processes={cleanProcesses(data)} />}
         />
         <Route
-          path="/service"
+          path="/services"
           render={props => <Service service={cleanServices(data)[0]} />}
         />
       </Switch>
