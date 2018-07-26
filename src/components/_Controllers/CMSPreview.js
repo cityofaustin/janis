@@ -4,13 +4,11 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import getServicePageRevisionQuery from 'js/queries/getRevisionQuery';
-import allProcessesQuery from 'js/queries/allProcessesQuery';
+import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
+import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery';
 import { cleanProcesses, cleanServices } from 'js/helpers/cleanData';
-import Services from 'components/Pages/Services';
 import Service from 'components/Pages/Service';
-import Processes from 'components/Pages/Processes';
+import Process from 'components/Pages/Process';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -41,22 +39,33 @@ class CMSPreview extends Component {
         req = client.request(getServicePageRevisionQuery, { id: revision_id });
         break;
       case 'processes':
-        req = client.request(allProcessesQuery);
+        req = client.request(getProcessPageRevisionQuery, { id: revision_id });
         break;
     }
     req.then(data => {
-      if (page_type === 'services') {
-        // Unitl we refactor cleanServices, reshape the object to work with it
-        const allServices = {
-          edges: [
-            {
-              node: data.pageRevision.asServicePage,
+      switch (page_type) {
+        case 'services':
+          this.setState({
+            data: {
+              edges: [
+                {
+                  node: data.pageRevision.asServicePage,
+                },
+              ],
             },
-          ],
-        };
-        this.setState({ data: allServices });
-      } else {
-        this.setState({ data: data });
+          });
+          break;
+        case 'processes':
+          this.setState({
+            data: {
+              edges: [
+                {
+                  node: data.pageRevision.asProcessPage,
+                },
+              ],
+            },
+          });
+          break;
       }
     });
   }
@@ -73,7 +82,7 @@ class CMSPreview extends Component {
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
           path="/processes"
-          render={props => <Processes processes={cleanProcesses(data)} />}
+          render={props => <Process process={cleanProcesses(data)[0]} />}
         />
         <Route
           path="/services"
