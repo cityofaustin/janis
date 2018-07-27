@@ -57,6 +57,9 @@ export const SUPPORTED_LANGUAGES = [
 
 export const SUPPORTED_LANG_CODES = SUPPORTED_LANGUAGES.map(lang => lang.code);
 
+/* regex to find 2 character lang code (if present) */
+export const LANG_URL_REGEX = '(/)?:lang([a-z]{2})?/';
+
 export const LANG_COOKIE_NAME = 'lang';
 
 export const LANG_COOKIE_EXPIRES = 10 * 365; //days
