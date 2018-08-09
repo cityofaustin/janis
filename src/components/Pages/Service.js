@@ -31,15 +31,17 @@ const Service = ({
   intl,
 }) => (
   <div>
-    <PageBanner
-      imagesPath={`${process.env.CMS_MEDIA}/images`}
-      imageFilename={path.basename(
-        image.filename,
-        path.extname(image.filename),
-      )}
-      imageExtension={path.extname(image.filename)}
-      imageTitle={image.title}
-    />
+    {image && (
+      <PageBanner
+        imagesPath={`${process.env.CMS_MEDIA}/images`}
+        imageFilename={path.basename(
+          image.filename,
+          path.extname(image.filename),
+        )}
+        imageExtension={path.extname(image.filename)}
+        imageTitle={image.title}
+      />
+    )}
     <PageBreadcrumbs
       grandparent={{ ...theme, subpath: 'themes' }}
       parent={{ ...topic, subpath: 'topics' }}
