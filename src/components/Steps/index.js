@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Steps = ({ stepsAsHtmlFromAdmin }) => (
+const Step = ({ stepAsHtmlFromAdmin }) => (
+  <li>
+    <p dangerouslySetInnerHTML={{ __html: stepAsHtmlFromAdmin }} />
+  </li>
+);
+
+const Steps = ({ steps }) => (
   <div className="coa-Steps">
-    <div
-      className="coa-Steps__list"
-      dangerouslySetInnerHTML={{ __html: stepsAsHtmlFromAdmin }}
-    />
+    <div className="coa-Steps__list">
+      <ul>
+        {steps.map(step => <Step stepAsHtmlFromAdmin={step.stepDescription} />)}
+      </ul>
+    </div>
   </div>
 );
 
 Steps.propTypes = {
-  stepsAsHtmlFromAdmin: PropTypes.string.isRequired,
+  steps: PropTypes.object.isRequired,
 };
 
 export default Steps;

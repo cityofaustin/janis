@@ -54,7 +54,7 @@ const Service = ({
         !!steps.length && (
           <Fragment>
             <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
-            <Steps stepsAsHtmlFromAdmin={steps} />
+            <Steps steps={steps} />
           </Fragment>
         )}
 
