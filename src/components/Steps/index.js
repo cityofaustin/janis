@@ -11,9 +11,7 @@ const Steps = ({ steps }) => (
   <div className="coa-Steps">
     <div className="coa-Steps__list">
       <ul>
-        {steps.map(step => (
-          <Step stepAsHtmlFromAdmin={step.node.stepDescription} />
-        ))}
+        {steps.map(step => <Step stepAsHtmlFromAdmin={step.stepDescription} />)}
       </ul>
     </div>
   </div>

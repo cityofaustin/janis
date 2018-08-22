@@ -22,7 +22,7 @@ const Service = ({
     slug,
     topic,
     topic: { theme },
-    serviceSteps,
+    steps,
     dynamicContent,
     additionalContent,
     contacts,
@@ -50,11 +50,11 @@ const Service = ({
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader>{title}</PageHeader>
 
-      {serviceSteps &&
-        !!serviceSteps.edges.length && (
+      {steps &&
+        !!steps.length && (
           <Fragment>
             <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
-            <Steps steps={serviceSteps.edges} />
+            <Steps steps={steps} />
           </Fragment>
         )}
 
