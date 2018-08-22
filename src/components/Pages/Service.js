@@ -50,7 +50,7 @@ const Service = ({
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader>{title}</PageHeader>
 
-      {serviceSteps b &&
+      {serviceSteps &&
         !!serviceSteps.edges.length && (
           <Fragment>
             <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
