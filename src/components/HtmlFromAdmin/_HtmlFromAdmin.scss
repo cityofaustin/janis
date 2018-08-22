@@ -26,8 +26,25 @@
     margin-top: $coa-spacing-medium;
     padding-left: $coa-spacing-medium;
 
-    p {
-      display: inline;
+    ol,
+    ul {
+      padding-left: $coa-spacing-xlarge + 2;
+    }
+  }
+}
+
+.coa-rtl {
+  .coa-HtmlFromAdmin__content {
+    > ul,
+    > ol {
+      padding-left: 0;
+      padding-right: $coa-spacing-medium;
+
+      ol,
+      ul {
+        padding-left: 0;
+        padding-right: $coa-spacing-xlarge + 2;
+      }
     }
   }
 }
