@@ -13,7 +13,7 @@ const allThemesQuery = `
                 text
                 slug
                 description
-                services(first: 4) {
+                servicepageSet(first: 4) {
                   edges {
                     node {
                       id
