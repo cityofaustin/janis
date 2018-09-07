@@ -8,7 +8,7 @@ const allTopicsQuery = `
           text,
           description,
           callToAction,
-          services {
+          servicepageSet {
             edges {
               node {
                 id,

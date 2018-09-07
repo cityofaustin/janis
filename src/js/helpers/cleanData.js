@@ -128,7 +128,7 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, '/topics');
   cleanedTopics.map(topic => {
-    topic.services = cleanLinks(topic.services, '/services'); //for navigation
+    topic.services = cleanLinks(topic.servicepageSet, '/services'); //for navigation
     topic.tiles = topic.services; //for theme page
   });
   return cleanedTopics;
