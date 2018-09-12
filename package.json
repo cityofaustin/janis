@@ -35,6 +35,7 @@
     "redux": "3.5.2",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
+    "us-forms-system": "https://github.com/usds/us-forms-system.git",
     "uswds": "^1.4.5"
   },
   "devDependencies": {
