@@ -7,13 +7,13 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import createHistory from 'history/createBrowserHistory';
 
-import 'us-forms-system/lib/css/styles.css';
-
 // US FORMS FILES
 import { makeRoutes } from './routes.jsx';
 import reducer from './reducers';
-import Form from './Form.jsx';
+import FormApp from './Form.jsx';
 import Introduction from './Introduction.jsx';
+import formConfig from './config/form';
+import 'us-forms-system/lib/css/styles.css';
 
 const store = createStore(combineReducers(reducer));
 const browserHistory = createHistory({
@@ -30,7 +30,16 @@ class ResidentialParkingPermit extends Component {
           <div className="col-md-12">
             <Provider store={store}>
               <Router history={browserHistory}>
-                <Route path="/" component={Introduction} />
+                <Route
+                  path="/"
+                  render={props => (
+                    <FormApp
+                      currentLocation={browserHistory.location}
+                      children={withRouter(makeRoutes)}
+                      formConfig={formConfig}
+                    />
+                  )}
+                />
               </Router>
             </Provider>
           </div>
