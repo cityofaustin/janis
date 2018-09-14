@@ -1,16 +1,17 @@
 import Introduction from '../Introduction.jsx';
+import ReviewPage from 'us-forms-system/lib/js/review/ReviewPage';
 import { phoneConfig } from 'us-forms-system/lib/js/definitions/phone';
 
 const formConfig = {
   title: 'Apply for a Residential Parking Permit',
   //subTitle: 'This is a test.',
   formId: '',
-  urlPrefix: '/',
+  urlPrefix: '/form/residential-parking-permit',
   trackingPrefix: 'form-',
   transformForSubmit: '',
   submitUrl: '',
   introduction: Introduction,
-  confirmation: '',
+  confirmation: ReviewPage,
   defaultDefinitions: {},
   chapters: {
     firstChapter: {
