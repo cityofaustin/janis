@@ -13,13 +13,7 @@ const servicePageFragment = `
         text
       }
     }
-    serviceSteps {
-      edges {
-        node {
-          stepDescription
-        }
-      }
-    }
+    steps
     dynamicContent
     additionalContent
     related {

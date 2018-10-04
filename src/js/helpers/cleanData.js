@@ -100,7 +100,6 @@ export const cleanServices = allServices => {
   cleanedServices.map(service => {
     service.contacts = cleanContacts(service.contacts);
     service.related = cleanRelatedServiceLinks(service.related);
-    service.steps = service.serviceSteps.edges.map(edge => edge.node);
 
     //TODO: mapblock data should include contact data when sent via joplin
     const tempkey = findKey(service.dynamicContent, { type: 'map_block' });

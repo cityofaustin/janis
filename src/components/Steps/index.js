@@ -10,9 +10,7 @@ const Step = ({ stepAsHtmlFromAdmin }) => (
 const Steps = ({ steps }) => (
   <div className="coa-Steps">
     <div className="coa-Steps__list">
-      <ul>
-        {steps.map(step => <Step stepAsHtmlFromAdmin={step.stepDescription} />)}
-      </ul>
+      <ul>{steps.map(step => <Step stepAsHtmlFromAdmin={step.value} />)}</ul>
     </div>
   </div>
 );
