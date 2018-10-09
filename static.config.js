@@ -221,6 +221,10 @@ export default {
         component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
+        path: '/forms/residential-parking-permit',
+        component: 'src/components/Pages/ResidentialParkingPermit',
+      },
+      {
         is404: true,
         component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
