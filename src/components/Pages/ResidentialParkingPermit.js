@@ -6,7 +6,7 @@ class ResidentialParkingPermit extends Component {
     super(props);
 
     window.app_id = '59d6d719ca658c3c38ba7191';
-    window.distribution_key = 'dist_2';
+    window.distribution_key = 'dist_3';
   }
 
   handleScriptLoad = () => {
@@ -18,17 +18,10 @@ class ResidentialParkingPermit extends Component {
       <section className="wrapper wrapper--sm">
         <h1>🅿️ Residential Parking Permit Page</h1>️
         <Script
-          url="https://loader.knack.com/59d6d719ca658c3c38ba7191/dist_2/knack.js"
+          url="https://loader.knack.com/59d6d719ca658c3c38ba7191/dist_3/knack.js"
           onLoad={this.handleScriptLoad}
         />
-        {/* <script type="text/javascript">
-          app_id="59d6d719ca658c3c38ba7191";distribution_key="dist_2";
-        </script>
-        <script
-          type="text/javascript"
-          src="https://loader.knack.com/59d6d719ca658c3c38ba7191/dist_2/knack.js"
-        /> */}
-        <div id="knack-dist_2">Loading...</div>
+        <div id="knack-dist_3">Loading...</div>
       </section>
     );
   }
