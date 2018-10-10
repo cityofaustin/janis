@@ -225,7 +225,7 @@ export default {
         component: 'src/components/Pages/ResidentialParkingPermit',
       },
       {
-        is404: true,
+        path: '404',
         component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
     ];
