@@ -242,11 +242,11 @@ export default {
   webpack: (config, { stage }) => {
     // Include babel poyfill for IE 11 and below
     // https://github.com/nozzle/react-static/blob/811ebe1b5a5b8e24fffec99fcdb3375818383711/docs/concepts.md#browser-support
-    if (stage === 'prod') {
-      config.entry = ['idempotent-babel-polyfill', config.entry];
-    } else if (stage === 'dev') {
-      config.entry = ['idempotent-babel-polyfill', ...config.entry];
-    }
+    // if (stage === 'prod') {
+    //   config.entry = ['babel-polyfill', config.entry];
+    // } else if (stage === 'dev') {
+    //   config.entry = ['babel-polyfill', ...config.entry];
+    // }
     return config;
   },
 };
