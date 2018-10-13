@@ -240,6 +240,11 @@ export default {
     return allRoutes;
   },
   webpack: (config, { stage }) => {
+    // Currently, we aren't running babel-polyfill because a 3rd party form
+    // embed has a conflict. See this Pull Request for more details:
+    // https://github.com/cityofaustin/janis/pull/271
+
+    // TODO: Reconfigure babel-polyfill so we support IE11
     // Include babel poyfill for IE 11 and below
     // https://github.com/nozzle/react-static/blob/811ebe1b5a5b8e24fffec99fcdb3375818383711/docs/concepts.md#browser-support
     // if (stage === 'prod') {
