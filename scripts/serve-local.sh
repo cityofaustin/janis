@@ -23,9 +23,9 @@ fi;
 
 # Output to console for debugging
 echo -ne "\e[33m\e[1m"
-echo -e "> Using Host:       ${FINAL_HOST}"
-echo -e "        CMS_API:    http://${FINAL_HOST}/api/graphql"
-echo -e "        CMS_MEDIA:  http://${FINAL_HOST}/media"
+echo -e "> Using Joplin Host:   http://${FINAL_HOST}/"
+echo -e "        CMS_API:       http://${FINAL_HOST}/api/graphql"
+echo -e "        CMS_MEDIA:     http://${FINAL_HOST}/media"
 echo -ne "\e[0m"
 
 docker run \
