@@ -11,7 +11,7 @@ echo "running docker image..."
 # Determine local machine IP (OSX & Linux only)
 case "$OSTYPE" in
   darwin*)  HOST_IP=$(ifconfig en0 | awk '$1 == "inet" {print $2}');;
-  *)        HOST_IP=$(hostname  -I | awk '{ print '$1' }');;
+  *)        HOST_IP=$(hostname  -I | awk '{ print $1 }');;
 esac
 
 # Allow overriding the host we want to use, use IP if none specified.
