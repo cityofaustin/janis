@@ -6,9 +6,7 @@ import stockImg from 'images/temp/clem-onojeghuo-102750-unsplash.jpg';
 import path from 'path';
 
 class ResidentialParkingPermit extends Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     window.app_id = '59d6d719ca658c3c38ba7191';
     window.distribution_key = 'dist_3';
   }
