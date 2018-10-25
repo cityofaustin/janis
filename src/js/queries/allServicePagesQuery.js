@@ -1,8 +1,8 @@
 import servicePageFragment from './servicePageFragment';
 
 const allServicePagesQuery = `
-  query allServicePages(live:true) {
-    allServicePages {
+  query allServicePages {
+    allServicePages(live:true) {
       edges {
         node {
           ...servicePageInfo
