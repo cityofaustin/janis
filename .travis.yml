@@ -1,6 +1,17 @@
 language: node_js
-node_js:
-  - "8"
+ - "8.12"
+matrix:
+  include:
+    - node_js: "9"
+      env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
+    - node_js: "10"
+      env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
+  allow_failures:
+    # Allow the nightly installs to fail
+    - env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
+cache:
+  directories:
+    - node_modules
 
 dist: trusty
 
@@ -45,6 +56,8 @@ jobs:
     - aws s3api list-buckets --query "Buckets[].Name"
     - echo "Testing the Heroku CLI is installed"
     - heroku --version
+    - echo "Testing the Node Version:"
+    - node --version
     # Also, let's try to test yarn ...
   - stage: Build Production With Yarn
     env:
