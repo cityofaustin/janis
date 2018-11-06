@@ -52,6 +52,7 @@ jobs:
   - stage: Build Docker Containers
     script:
     - janis_resolve_tags $TRAVIS_BRANCH
+    - janis_create_pr_app $TRAVIS_BRANCH
     - janis_build $TRAVIS_BRANCH
     # Once built we release
     after_success:

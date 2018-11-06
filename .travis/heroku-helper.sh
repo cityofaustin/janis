@@ -9,6 +9,12 @@ TAG_CMS_MEDIA=""
 TAG_AWS_BUCKET=""
 TAG_APPMODE=""
 
+
+# The team name (a sort of sub-account in heroku)
+PIPELINE_TEAM=$PIPELINE_TEAM_DEFAULT
+# The name of the pipeline in the team account.
+PIPELINE_NAME=$PIPELINE_NAME_DEFAULT
+
 #
 # Prints an indention based on the calling function
 # $1 (string) name of the function
@@ -122,6 +128,21 @@ function janis_resolve_bucket {
     echo "${BUCKETNAME}"
 }
 
+#
+# Returns "True" if a given app name exists in heroku.
+# $1 (string) The name of the app (ie. janis-staging, janis-pr-160)
+#
+
+function janis_app_exists {
+    HEROKU_TEAM_APPS=$(heroku apps --team $PIPELINE_TEAM | grep $1)
+
+    if [ "${HEROKU_TEAM_APPS}" != "" ]; then
+        echo "true";
+    else
+        echo "false"
+    fi;
+}
+
 
 #
 # Finds out value for global variables
@@ -221,6 +242,77 @@ function janis_create_heroku_preview_app {
     heroku pipelines:add $PIPELINE_NAME --app $HEROKU_NEW_APP_NAME --stage review
 }
 
+#
+# Creates a pull request application and puts it in the specified pipeline.
+# Requires no input variables.
+#
+
+function janis_create_pr_app {
+
+    # Build Header,
+    janis_print_header "Build PR Application"
+
+
+    # We need a Pull request number that can be altered if necessary: PIPELINE_PULL_REQUEST
+    # If empty, then copy the value from TRAVIS_PULL_REQUEST
+    # If not empty, then we take PIPELINE_PULL_REQUEST over TRAVIS_PULL_REQUEST
+
+    ## If empty, assume TRAVIS_PULL_REQUEST
+    if [ "${PIPELINE_PULL_REQUEST}" = "" ]; then
+        PIPELINE_PULL_REQUEST=$TRAVIS_PULL_REQUEST;
+
+    ## else, we proceed with whatever value is in PIPELINE_PULL_REQUEST
+    fi;
+
+    janis_log ${FUNCNAME[0]} 0 "Beginning PR app creation process (PIPELINE_PULL_REQUEST: ${PIPELINE_PULL_REQUEST})"
+
+    # If this is not a PR request, then move on to a regular deployment.
+    if [ "${PIPELINE_PULL_REQUEST}" = "false" ]; then
+        # This is not a new pr branch
+        janis_log ${FUNCNAME[0]} 0 "This is not a new PR branch: (PIPELINE_PULL_REQUEST: ${PIPELINE_PULL_REQUEST}, TRAVIS_PULL_REQUEST: ${TRAVIS_PULL_REQUEST})."
+        janis_log ${FUNCNAME[0]} 0 "Moving on, nothing to do here."
+
+    # Else, we need to create a new PR review app.
+    else
+        # We have a legitimate pull request, so print out some details for logging.
+        janis_log ${FUNCNAME[0]} 1 ">>> PR REQUEST"
+
+
+        # If no name specified for the new app in the commit message command,
+        # then generate a new name automatically.
+        if [ "${PIPELINE_DEPLOYMENT_APP}" = "" ]; then
+            PIPELINE_DEPLOYMENT_APP="janis-staging-pr-${PIPELINE_PULL_REQUEST}"
+        fi;
+
+        # Show current values
+        janis_log ${FUNCNAME[0]} 1 ">>> Deployment details:"
+        janis_log ${FUNCNAME[0]} 1 "Deploying new app:         ${PIPELINE_DEPLOYMENT_APP}"
+        janis_log ${FUNCNAME[0]} 1 "Into Pipeline:             ${PIPELINE_NAME}"
+
+
+        # We now must check if the current PR already exists.
+        janis_log ${FUNCNAME[0]} 1 "Checking if review app already exists";
+        APP_EXISTS=$(janis_app_exists $PIPELINE_DEPLOYMENT_APP)
+
+        # If the review app exists, then check
+        if [ "$APP_EXISTS" = "true" ]; then
+            janis_log ${FUNCNAME[0]} 2 "App ${PIPELINE_DEPLOYMENT_APP} already exists.";
+
+            janis_tag_application $PIPELINE_DEPLOYMENT_APP;
+
+        # Let's go ahead and build the new review app with the new name
+        else
+            janis_log ${FUNCNAME[0]} 2 "Creating app ${PIPELINE_DEPLOYMENT_APP} one moment.";
+
+            janis_create_heroku_preview_app $PIPELINE_DEPLOYMENT_APP
+        fi;
+
+        janis_log ${FUNCNAME[0]} 1 "Done Creating PR Review App"
+    fi;
+
+    janis_log ${FUNCNAME[0]} 0 "Done Building App"
+
+}
 
 #
 # Builds the docker container and pushes the image to the heroku repository
@@ -246,9 +338,10 @@ function janis_build {
     fi;
 
     janis_log ${FUNCNAME[0]} 1 "Building:"
-    janis_log ${FUNCNAME[0]} 2 "Image Name:        ${JOPLIN_IMAGE_NAME}"
-    janis_log ${FUNCNAME[0]} 2 "Branch:            ${TRAVIS_BRANCH} (PR=${TRAVIS_PULL_REQUEST}, PRBRANCH=${TRAVIS_PULL_REQUEST_BRANCH})"
-    janis_log ${FUNCNAME[0]} 2 "Application Name:  ${APPNAME}"
+    janis_log ${FUNCNAME[0]} 2 "Image Name (WEB):    ${JANIS_IMAGE_NAME_WEB}"
+    janis_log ${FUNCNAME[0]} 2 "Image Name (WORKER): ${JANIS_IMAGE_NAME_WEB}"
+    janis_log ${FUNCNAME[0]} 2 "Branch:              ${TRAVIS_BRANCH} (PR=${TRAVIS_PULL_REQUEST}, PRBRANCH=${TRAVIS_PULL_REQUEST_BRANCH})"
+    janis_log ${FUNCNAME[0]} 2 "Application Name:    ${APPNAME}"
 
 
     janis_log ${FUNCNAME[0]} 2 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WORKER} ."
@@ -334,6 +427,8 @@ function janis_release {
       -H "Content-Type: application/json" \
       -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
       -H "Authorization: Bearer ${HEROKU_API_KEY}"
+
+  echo "JSON_PAYLOAD: ${JSON_PAYLOAD}"
 
   janis_log ${FUNCNAME[0]} 0 "Release process finished";
 }
