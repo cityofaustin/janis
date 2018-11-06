@@ -1,9 +1,6 @@
-language: node_js
-node_js:
- - "10"
-cache:
-  directories:
-    - node_modules
+language: python
+python:
+- '3.6'
 
 dist: trusty
 
@@ -50,17 +47,17 @@ jobs:
     - heroku --version
     - echo "Testing the Node Version:"
     - node --version
-    # Also, let's try to test yarn ...
-  - stage: Build Production With Yarn
-    env:
-        - FOO=foo
+
+  # We now build the web & worker images ...
+  - stage: Build Docker Containers
     script:
+    - janis_resolve_tags $TRAVIS_BRANCH
     - janis_build $TRAVIS_BRANCH
-
+    # Once built we release
     after_success:
-    # We now sync the contents of _dist with s3 bucket
-    - janis_bucket_sync
+    - janis_release $TRAVIS_BRANCH
 
-  - stage: Build PR
-    script:
-    - janis_build_image $TRAVIS_BRANCH
+  # We run a worker based on our environment
+  #- stage: Run Worker
+  #  script:
+  #  - janis_run_worker $TRAVIS_BRANCH
