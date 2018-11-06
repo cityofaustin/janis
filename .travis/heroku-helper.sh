@@ -344,47 +344,70 @@ function janis_build {
     janis_log ${FUNCNAME[0]} 2 "Application Name:    ${APPNAME}"
 
 
-    janis_log ${FUNCNAME[0]} 2 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WORKER} ."
+    #
+    # First: we build, tag & push the worker image.
+    #
 
+    janis_log ${FUNCNAME[0]} 1 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WORKER} ."
     docker build -f "Dockerfile.worker" -t $JANIS_IMAGE_NAME_WORKER .
-
-    janis_log ${FUNCNAME[0]} 2 "docker build -f \"Dockerfile.build\" -t ${JANIS_IMAGE_NAME_WEB} ."
-
-    docker build -f "Dockerfile.build" -t $JANIS_IMAGE_NAME_WEB .
 
     OUTPUT_STATUS="$?"
     janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
     if [ "${OUTPUT_STATUS}" = "1" ]; then
-        helper_halt_deployment "Could not build docker image for '${APPNAME}' "
+        helper_halt_deployment "Could not build docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
     fi;
 
-    janis_log ${FUNCNAME[0]} 1 "Tagging Image"
-
-    janis_log ${FUNCNAME[0]} 3 "docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web"
-    docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web
-
-    janis_log ${FUNCNAME[0]} 2 "docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker"
+    janis_log ${FUNCNAME[0]} 1 "docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker"
     docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker
 
     OUTPUT_STATUS="$?"
     janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
     if [ "${OUTPUT_STATUS}" = "1" ]; then
-        helper_halt_deployment "Could not tag docker image for '${APPNAME}' "
+        helper_halt_deployment "Could not build docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
     fi;
 
-    janis_log ${FUNCNAME[0]} 1 "Pushing to Heroku Repository"
-    janis_log ${FUNCNAME[0]} 1 "docker push registry.heroku.com/$APPNAME/web"
-    docker push registry.heroku.com/$APPNAME/web
+
     janis_log ${FUNCNAME[0]} 1 "docker push registry.heroku.com/$APPNAME/worker"
     docker push registry.heroku.com/$APPNAME/worker
 
     OUTPUT_STATUS="$?"
     janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
     if [ "${OUTPUT_STATUS}" = "1" ]; then
-        helper_halt_deployment "Could not push docker image to Heroku registry for '${APPNAME}'."
+        helper_halt_deployment "Could not push docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
     fi;
 
+    #
+    # Now the web image
+    #
 
+    janis_log ${FUNCNAME[0]} 1 "docker build -f \"Dockerfile.build\" -t ${JANIS_IMAGE_NAME_WEB} ."
+
+    docker build -f "Dockerfile.build" -t $JANIS_IMAGE_NAME_WEB .
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not build docker image '${JANIS_IMAGE_NAME_WEB}' for '${APPNAME}' "
+    fi;
+
+    janis_log ${FUNCNAME[0]} 1 "Tagging Image"
+    janis_log ${FUNCNAME[0]} 1 "docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web"
+    docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not build docker image '${JANIS_IMAGE_NAME_WEB}' for '${APPNAME}' "
+    fi;
+
+    janis_log ${FUNCNAME[0]} 1 "docker push registry.heroku.com/$APPNAME/web"
+    docker push registry.heroku.com/$APPNAME/web
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not push docker image to Heroku registry for '${APPNAME}'."
+    fi;
 
     janis_log ${FUNCNAME[0]} 0 "Finished Building Container";
 
@@ -421,6 +444,8 @@ function janis_release {
   # Gemerate json payload to upload via API
   JSON_PAYLOAD='{"updates":[{"type":"web","docker_image":"'"${DOCKER_IMAGE_ID_WEB}"'"},{"type":"worker","docker_image":"'"${DOCKER_IMAGE_ID_WORKER}"'"}]}'
 
+  echo "JSON_PAYLOAD: ${JSON_PAYLOAD}"
+
   # Make 'Release' API Call
   curl -n -X PATCH https://api.heroku.com/apps/$APPNAME/formation \
       -d "${JSON_PAYLOAD}" \
@@ -428,7 +453,7 @@ function janis_release {
       -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
       -H "Authorization: Bearer ${HEROKU_API_KEY}"
 
-  echo "JSON_PAYLOAD: ${JSON_PAYLOAD}"
+
 
   janis_log ${FUNCNAME[0]} 0 "Release process finished";
 }
