@@ -206,16 +206,16 @@ function janis_create_heroku_preview_app {
     # The new app name
     HEROKU_NEW_APP_NAME=$1
 
-    joplin_log ${FUNCNAME[0]} 1 "Creating new app on heroku: ${HEROKU_NEW_APP_NAME}  and attaching to pipeline: ${PIPELINE_NAME}"
+    janis_log ${FUNCNAME[0]} 1 "Creating new app on heroku: ${HEROKU_NEW_APP_NAME}  and attaching to pipeline: ${PIPELINE_NAME}"
 
     # Create app with specified name
     heroku create $HEROKU_NEW_APP_NAME --team $PIPELINE_TEAM
 
     # Add postgresql to the new app.
-    joplin_attach_heroku_database $HEROKU_NEW_APP_NAME
+    janis_attach_heroku_database $HEROKU_NEW_APP_NAME
 
     # Set Environment Variables
-    joplin_tag_application $HEROKU_NEW_APP_NAME
+    janis_tag_application $HEROKU_NEW_APP_NAME
 
     # Couple New app to pipeline (assign review (PR) stage):
     heroku pipelines:add $PIPELINE_NAME --app $HEROKU_NEW_APP_NAME --stage review
@@ -232,17 +232,17 @@ function janis_build {
 
     # Retrieve App Name
     janis_log ${FUNCNAME[0]} 0 "Resolving App Name for branch: $TRAVIS_BRANCH";
-    APPNAME=$(joplin_resolve_heroku_appname $TRAVIS_BRANCH);
+    APPNAME=$(janis_resolve_heroku_appname);
     janis_log ${FUNCNAME[0]} 1 "App name resolved: ${APPNAME}";
 
 
     janis_log ${FUNCNAME[0]} 1 "Logging in to Services ...";
     docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-    janis_log ${FUNCNAME[0]} 2 "Output Status: $?"
-
-    if [ "$?" = "1" ]; then
-        helper_halt_deployment "Could not log in to heroky registry for '${APPNAME}' "
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not log in to heroku registry for '${APPNAME}' "
     fi;
 
     janis_log ${FUNCNAME[0]} 1 "Building:"
@@ -251,7 +251,7 @@ function janis_build {
     janis_log ${FUNCNAME[0]} 2 "Application Name:  ${APPNAME}"
 
 
-    janis_log ${FUNCNAME[0]} 2 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WEB} ."
+    janis_log ${FUNCNAME[0]} 2 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WORKER} ."
 
     docker build -f "Dockerfile.worker" -t $JANIS_IMAGE_NAME_WORKER .
 
@@ -259,24 +259,23 @@ function janis_build {
 
     docker build -f "Dockerfile.build" -t $JANIS_IMAGE_NAME_WEB .
 
-
-    janis_log ${FUNCNAME[0]} 2 "Output Status: $?"
-
-    if [ "$?" = "1" ]; then
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
         helper_halt_deployment "Could not build docker image for '${APPNAME}' "
     fi;
 
     janis_log ${FUNCNAME[0]} 1 "Tagging Image"
 
-    janis_log ${FUNCNAME[0]} 3 "docker tag $JOPLIN_IMAGE_NAME registry.heroku.com/$APPNAME/web"
+    janis_log ${FUNCNAME[0]} 3 "docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web"
     docker tag $JANIS_IMAGE_NAME_WEB registry.heroku.com/$APPNAME/web
 
-    janis_log ${FUNCNAME[0]} 2 "docker tag $JOPLIN_IMAGE_NAME registry.heroku.com/$APPNAME/web"
+    janis_log ${FUNCNAME[0]} 2 "docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker"
     docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker
 
-    janis_log ${FUNCNAME[0]} 3 "Output Status: $?"
-
-    if [ "$?" = "1" ]; then
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
         helper_halt_deployment "Could not tag docker image for '${APPNAME}' "
     fi;
 
@@ -286,9 +285,9 @@ function janis_build {
     janis_log ${FUNCNAME[0]} 1 "docker push registry.heroku.com/$APPNAME/worker"
     docker push registry.heroku.com/$APPNAME/worker
 
-    janis_log ${FUNCNAME[0]} 2 "Output Status: $?"
-
-    if [ "$?" = "1" ]; then
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
         helper_halt_deployment "Could not push docker image to Heroku registry for '${APPNAME}'."
     fi;
 
