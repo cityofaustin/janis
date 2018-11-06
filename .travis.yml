@@ -1,0 +1,61 @@
+language: node_js
+node_js:
+  - "7.4.0"
+
+dist: trusty
+
+# Deployment Conditions
+#   PRs, master and production will be automatically updated and rebuilt on git push.
+#   Regular branches will not be built, they can be updated and commited at any time without disturbing PRs, master or staging.
+if: |
+  (branch IN (master, production) AND type = push) OR (type = pull_request)
+
+# We will need these services:
+services:
+- docker
+
+sudo: required
+
+# Environment Vars
+env:
+  global:
+  - PATH=$HOME/.local/bin:$PATH
+
+# We are going to install AWS Cli, Heroku Cli and source our helper scripts
+before_install:
+    - source ./.travis/heroku-helper.sh
+    - sudo pip install awscli
+    - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+# Jobs
+jobs:
+  include:
+  - stage: Running Tests
+    script:
+    - echo "Deployment Details ( TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$TRAVIS_PULL_REQUEST,
+      TRAVIS_PULL_REQUEST_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH, MESSAGE=$TRAVIS_COMMIT_MESSAGE,
+      TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG=$TRAVIS_PULL_REQUEST_SLUG,
+      TRAVIS_PULL_REQUEST_SHA=$TRAVIS_PULL_REQUEST_SHA, TRAVIS_BUILD_DIR=$TRAVIS_BUILD_DIR,
+      TRAVIS_BUILD_ID=$TRAVIS_BUILD_ID, TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER,
+      TRAVIS_COMMIT=$TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE=$TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE,
+      TRAVIS_JOB_ID=$TRAVIS_JOB_ID, TRAVIS_JOB_NUMBER=$TRAVIS_JOB_NUMBER, TRAVIS_TAG=$TRAVIS_TAG )"
+    - echo "Testing AWS CLI is installed"
+    - aws --version
+    - echo "Testing AWS has access to the buckets list"
+    - aws s3api list-buckets --query "Buckets[].Name"
+    - echo "Testing the Heroku CLI is installed"
+    - heroku --version
+    # Also, let's try to test yarn ...
+  - stage: Build Production With Yarn
+    env:
+        - FOO=foo
+    script:
+    - janis_build $TRAVIS_BRANCH
+
+    after_success:
+    # We now sync the contents of _dist with s3 bucket
+    - janis_bucket_sync
+
+  - stage: Build PR
+    script:
+    - janis_build_image $TRAVIS_BRANCH
