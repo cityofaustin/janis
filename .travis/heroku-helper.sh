@@ -345,6 +345,37 @@ function janis_build {
 
 
     #
+    # First: we build, tag & push the worker image.
+    #
+
+    janis_log ${FUNCNAME[0]} 1 "docker build -f \"Dockerfile.worker\" -t ${JANIS_IMAGE_NAME_WORKER} ."
+    docker build -f "Dockerfile.worker" -t $JANIS_IMAGE_NAME_WORKER .
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not build docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
+    fi;
+
+    janis_log ${FUNCNAME[0]} 1 "docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker"
+    docker tag $JANIS_IMAGE_NAME_WORKER registry.heroku.com/$APPNAME/worker
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not tag docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
+    fi;
+
+    janis_log ${FUNCNAME[0]} 1 "docker push registry.heroku.com/$APPNAME/worker"
+    docker push registry.heroku.com/$APPNAME/worker
+
+    OUTPUT_STATUS="$?"
+    janis_log ${FUNCNAME[0]} 2 "Output Status: ${OUTPUT_STATUS}"
+    if [ "${OUTPUT_STATUS}" = "1" ]; then
+        helper_halt_deployment "Could not push docker image '${JANIS_IMAGE_NAME_WORKER}' for '${APPNAME}' "
+    fi;
+
+    #
     # Now the web image
     #
 

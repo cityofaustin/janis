@@ -12,7 +12,7 @@ COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
 RUN yarn
 
-COPY "$PWD/docker-entrypoint.sh" /app/docker-entrypoint.sh
+COPY "$PWD/deploy/docker-entrypoint-worker.sh" /app/docker-entrypoint-worker.sh
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 COPY .storybook /app/.storybook
@@ -20,4 +20,5 @@ COPY .storybook /app/.storybook
 COPY public /app/public
 COPY src /app/src
 
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint-worker.sh"]
+CMD ["bash"]
