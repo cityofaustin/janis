@@ -213,11 +213,6 @@ function janis_tag_application {
 }
 
 #
-#
-#
-
-
-#
 # Builds a new review application and attaches the app to a pipeline with (review) status.
 # $1 (string) The name of the app to create.
 # $2 (string) The name of the pipeline
