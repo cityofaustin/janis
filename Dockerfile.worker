@@ -12,7 +12,7 @@ COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
 RUN yarn
 
-COPY "$PWD/docker-entrypoint-prod.sh" /app/docker-entrypoint-prod.sh
+COPY "$PWD/docker-entrypoint.sh" /app/docker-entrypoint.sh
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 COPY .storybook /app/.storybook

@@ -339,7 +339,7 @@ function janis_build {
 
     janis_log ${FUNCNAME[0]} 1 "Building:"
     janis_log ${FUNCNAME[0]} 2 "Image Name (WEB):    ${JANIS_IMAGE_NAME_WEB}"
-    janis_log ${FUNCNAME[0]} 2 "Image Name (WORKER): ${JANIS_IMAGE_NAME_WEB}"
+    janis_log ${FUNCNAME[0]} 2 "Image Name (WORKER): ${JANIS_IMAGE_NAME_WORKER}"
     janis_log ${FUNCNAME[0]} 2 "Branch:              ${TRAVIS_BRANCH} (PR=${TRAVIS_PULL_REQUEST}, PRBRANCH=${TRAVIS_PULL_REQUEST_BRANCH})"
     janis_log ${FUNCNAME[0]} 2 "Application Name:    ${APPNAME}"
 
