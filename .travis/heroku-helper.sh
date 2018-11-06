@@ -170,8 +170,9 @@ function janis_bucket_sync {
 
 
 function janis_build {
-  RUN yarn build
-  RUN yarn build-storybook
+  yarn build
+  yarn build-storybook
+  find . -type f
 }
 
 function janis_build_image {
