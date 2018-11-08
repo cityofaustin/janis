@@ -7,12 +7,17 @@ RUN mkdir -p /app/_dist
 WORKDIR /app
 
 ENV NODE_PATH=src
+ENV PATH="~/.local/bin:${PATH}"
+
+RUN apt-get update && \
+    apt-get install python-pip -y && \
+    pip install awscli --upgrade --user
 
 COPY yarn.lock /app/yarn.lock
 COPY package.json /app/package.json
 RUN yarn
 
-COPY "$PWD/deploy/docker-entrypoint-worker.sh" /app/docker-entrypoint-worker.sh
+COPY "$PWD/deploy" /app/deploy
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
 COPY .storybook /app/.storybook
@@ -20,5 +25,5 @@ COPY .storybook /app/.storybook
 COPY public /app/public
 COPY src /app/src
 
-ENTRYPOINT ["/app/docker-entrypoint-worker.sh"]
+ENTRYPOINT ["/app/deploy/docker-entrypoint-worker.sh"]
 CMD ["bash"]

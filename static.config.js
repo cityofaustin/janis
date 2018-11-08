@@ -176,6 +176,9 @@ const makeDepartmentPages = async client => {
 };
 
 export default {
+  siteRoot: process.env.APPLICATION_URL,
+  basePath: process.env.DEPLOYMENT_MODE === 'PREVIEW' ? process.env.APPLICATION_NAME : '',
+
   getSiteProps: () => ({
     title: 'City of Austin',
   }),

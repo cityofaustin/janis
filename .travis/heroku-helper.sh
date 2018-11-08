@@ -8,6 +8,7 @@ TAG_CMS_API=""
 TAG_CMS_MEDIA=""
 TAG_AWS_BUCKET=""
 TAG_APPMODE=""
+TAG_APPURL=""
 
 
 # The team name (a sort of sub-account in heroku)
@@ -151,6 +152,7 @@ function janis_app_exists {
 function janis_resolve_tags {
   # Set Bucket Variable
   TAG_AWS_BUCKET=$(janis_resolve_bucket)
+  APPLICATION_NAME=$(janis_resolve_heroku_appname)
 
   # Staging (master)
   if [ "${TRAVIS_BRANCH}" = "production" ]; then
@@ -159,12 +161,15 @@ function janis_resolve_tags {
     TAG_CMS_API="${CMS_API_PRODUCTION}"
     TAG_CMS_MEDIA="${CMS_MEDIA_PRODUCTION}"
     TAG_APPMODE="PRODUCTION"
+    TAG_APPURL=$APPLICATION_URL_PRODUCTION
   # Staging & PRs
   else
     if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
       TAG_APPMODE="PREVIEW"
+      TAG_APPURL="${APPLICATION_URL_PREVIEW}"
     else
       TAG_APPMODE="STAGING"
+      TAG_APPURL=$APPLICATION_URL_STAGING
     fi;
 
     TAG_GOOGLE_ANALYTICS="${GOOGLE_ANALYTICS_STAGING}"
@@ -181,6 +186,7 @@ function janis_resolve_tags {
   echo "TAG_CMS_API: ${TAG_CMS_API}"
   echo "TAG_CMS_MEDIA: ${TAG_CMS_MEDIA}"
   echo "TAG_APPMODE: ${TAG_APPMODE}"
+  echo "TAG_APPNAME: ${TAG_APPURL}"
   echo "------------------------------------------------"
 }
 
@@ -199,6 +205,7 @@ function janis_tag_application {
     heroku config:set   \
             DEPLOYMENT_MODE=$TAG_APPMODE \
             APPLICATION_NAME=$HEROKU_NEW_APP_NAME \
+            APPLICATION_URL=$TAG_APPURL \
             AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
             AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
             AWS_S3_BUCKET=$TAG_AWS_BUCKET \
