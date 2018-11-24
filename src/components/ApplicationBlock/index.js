@@ -28,9 +28,18 @@ const ApplicationBlock = ({ content: { id, type, value }, intl }) => {
       pageanchorId = 'HashLink-Recollect';
       break;
     case 'map_block':
+      let contact;
+      if (value.contact) {
+        contact = value.contact;
+      } else {
+        contact = {
+          location: value.location,
+        };
+      }
+
       app = (
         <div>
-          <ContactMap contact={value.contact} />
+          <ContactMap contact={contact} />
         </div>
       );
       title = value.description;
