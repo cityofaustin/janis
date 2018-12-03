@@ -24,6 +24,7 @@ COPY .storybook /app/.storybook
 
 COPY public /app/public
 COPY src /app/src
+COPY test /app/test
 
 ENTRYPOINT ["/app/deploy/docker-entrypoint-worker.sh"]
 CMD ["bash"]

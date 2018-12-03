@@ -12,9 +12,20 @@ fi
 echo $DEPLOYMENT_PATH;
 
 # 2. Perform sync
-aws s3 sync _dist/ $DEPLOYMENT_PATH;
+#aws s3 sync _dist/ $DEPLOYMENT_PATH;
 
 # 3. Print URL
 
 echo "You may now see the site here:"
 echo "-- ${S3_APPURL}";
+
+# 4. Test
+#yarn test
+OUTPUT=$(yarn test | tee /dev/stderr)
+
+if [[ "${OUTPUT}" =~ "ERROR" ]]; then
+  echo "There has been an error in the testing stage. Stopping Deployment Process."
+  exit 1;
+else
+  echo "All tests passed. Proceeding.";
+fi;

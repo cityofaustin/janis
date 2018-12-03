@@ -7,7 +7,10 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
+    "bluebird": "^3.5.1",
     "browser-locale": "^1.0.3",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "classnames": "^2.2.5",
     "downshift": "^1.31.15",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
@@ -15,6 +18,7 @@
     "intl": "^1.2.5",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
+    "mocha": "^5.2.0",
     "moment": "^2.20.1",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
@@ -30,6 +34,8 @@
     "react-router-dom": "^4.2.2",
     "react-static": "^5.9.7",
     "react-universal-component": "^2.8.1",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"
@@ -59,7 +65,8 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out",
-    "deploy": "bash /app/deploy/aws-deploy.sh"
+    "deploy": "bash /app/deploy/aws-deploy.sh",
+    "test": "mocha test"
   },
   "prettier": {
     "semi": true,
