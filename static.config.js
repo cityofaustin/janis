@@ -3,6 +3,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
@@ -17,6 +18,7 @@ import {
   cleanThemes,
   cleanProcesses,
   cleanServices,
+  cleanInformationPages,
   clean311,
   cleanNavigation,
 } from 'js/helpers/cleanData';
@@ -50,6 +52,7 @@ const makeAllPages = async langCode => {
 const makeChildPages = client => {
   return Promise.all([
     makeServicePages(client),
+    makeInformationPages(client),
     makeProcessPages(client),
     makeTopicPages(client),
     makeThemePages(client),
@@ -73,6 +76,29 @@ const makeServicePages = async client => {
       component: 'src/components/Pages/Service',
       getData: async () => ({
         service,
+      }),
+    })),
+  };
+
+  return data;
+};
+
+const makeInformationPages = async client => {
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanServices(allInformationPages);
+  const data = {
+    path: '/information',
+    component: 'src/components/Pages/Services',
+    getData: async () => ({
+      informationPages,
+    }),
+    children: informationPages.map(informationPage => ({
+      path: `/${informationPage.slug}`,
+      component: 'src/components/Pages/Information',
+      getData: async () => ({
+        informationPage,
       }),
     })),
   };
