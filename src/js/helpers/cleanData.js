@@ -130,8 +130,8 @@ export const cleanDepartments = allDepartments => {
   if (!allDepartments || !allDepartments.edges) return null;
 
   return allDepartments.edges.map(({ node: department }) => {
-    department.url = `/departments/${department.id}`;
-    department.text = department.name;
+    department.url = `/departments/${department.slug}`;
+    department.text = department.title;
     department.contacts = cleanContacts(department.contacts);
     return department;
   });

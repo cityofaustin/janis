@@ -11,7 +11,20 @@ const allDepartmentPagesQuery = `
             id
           },
           mission,
-          directors,
+          departmentDirectors {
+            edges {
+              node {
+                name
+                photo {
+                  id
+                  filename
+                }
+                about
+                email
+                phone
+              }
+            }
+          },
           socialMedia,
           jobListings,
           contacts {

@@ -7,7 +7,7 @@ import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
-import allDepartmentsQuery from 'js/queries/allDepartmentsQuery';
+import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
@@ -180,8 +180,8 @@ const makeThemePages = async client => {
 };
 
 const makeDepartmentPages = async client => {
-  const { allDepartments } = await client.request(allDepartmentsQuery);
-  const departments = cleanDepartments(allDepartments);
+  const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
+  const departments = cleanDepartments(allDepartmentPages);
 
   const data = {
     path: '/departments',
@@ -190,7 +190,7 @@ const makeDepartmentPages = async client => {
       departments,
     }),
     children: departments.map(department => ({
-      path: `${department.id}`,
+      path: `${department.slug}`,
       component: 'src/components/Pages/Department',
       getData: async () => ({
         department,
