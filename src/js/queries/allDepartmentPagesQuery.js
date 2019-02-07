@@ -9,6 +9,8 @@ const allDepartmentPagesQuery = `
           whatWeDo,
           image {
             id
+            filename
+            title
           },
           mission,
           departmentDirectors {

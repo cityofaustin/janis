@@ -126,6 +126,17 @@ export const cleanInformationPages = allInformationPages => {
   return cleanedInformationPages;
 };
 
+export const cleanDepartmentDirectors = directors => {
+  if (!directors || !directors.edges) return null;
+
+  return directors.edges.map(({ node: director }) => {
+    // Yes, it's `contact.contact` because of the way the API returns data
+    let cleaned = Object.assign({}, director);
+
+    return cleaned;
+  });
+};
+
 export const cleanDepartments = allDepartments => {
   if (!allDepartments || !allDepartments.edges) return null;
 
@@ -133,6 +144,9 @@ export const cleanDepartments = allDepartments => {
     department.url = `/departments/${department.slug}`;
     department.text = department.title;
     department.contacts = cleanContacts(department.contacts);
+    department.directors = cleanDepartmentDirectors(
+      department.departmentDirectors,
+    );
     return department;
   });
 };
