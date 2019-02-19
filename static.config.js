@@ -87,10 +87,10 @@ const makeInformationPages = async client => {
   const { allInformationPages: allInformationPages } = await client.request(
     allInformationPagesQuery,
   );
-  const informationPages = cleanServices(allInformationPages);
+  const informationPages = cleanInformationPages(allInformationPages);
   const data = {
     path: '/information',
-    component: 'src/components/Pages/Services',
+    component: 'src/components/Pages/404',
     getData: async () => ({
       informationPages,
     }),

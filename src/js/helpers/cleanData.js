@@ -112,15 +112,10 @@ export const cleanServices = allServices => {
 };
 
 export const cleanInformationPages = allInformationPages => {
-  console.log(allInformationPages.length);
-  for (var p in allInformationPages) {
-    console.log(p.slug);
-  }
-
   if (!allInformationPages || !allInformationPages.edges) return null;
 
   let cleanedInformationPages = cleanLinks(allInformationPages, '/information');
-  allInformationPages.map(informationPage => {
+  cleanedInformationPages.map(informationPage => {
     informationPage.contacts = cleanContacts(informationPage.contacts);
   });
   return cleanedInformationPages;
