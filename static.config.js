@@ -29,10 +29,13 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
+  const children = await makeChildPages(client);
+  const deptChildren = await makeDepartmentPages(client);
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: await makeChildPages(client),
+    children: children.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       const topServices = cleanLinks(allServicePages, '/services');
@@ -52,11 +55,9 @@ const makeAllPages = async langCode => {
 const makeChildPages = client => {
   return Promise.all([
     makeServicePages(client),
-    makeInformationPages(client),
     makeProcessPages(client),
     makeTopicPages(client),
     makeThemePages(client),
-    makeDepartmentPages(client),
   ]);
 };
 
@@ -76,29 +77,6 @@ const makeServicePages = async client => {
       component: 'src/components/Pages/Service',
       getData: async () => ({
         service,
-      }),
-    })),
-  };
-
-  return data;
-};
-
-const makeInformationPages = async client => {
-  const { allInformationPages: allInformationPages } = await client.request(
-    allInformationPagesQuery,
-  );
-  const informationPages = cleanInformationPages(allInformationPages);
-  const data = {
-    path: '/information',
-    component: 'src/components/Pages/404',
-    getData: async () => ({
-      informationPages,
-    }),
-    children: informationPages.map(informationPage => ({
-      path: `/${informationPage.slug}`,
-      component: 'src/components/Pages/Information',
-      getData: async () => ({
-        informationPage,
       }),
     })),
   };
@@ -183,20 +161,25 @@ const makeDepartmentPages = async client => {
   const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
   const departments = cleanDepartments(allDepartmentPages);
 
-  const data = {
-    path: '/departments',
-    component: 'src/components/Pages/Departments',
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanInformationPages(allInformationPages);
+
+  const data = departments.map(department => ({
+    path: `/${department.slug}`,
+    component: 'src/components/Pages/Department',
     getData: async () => ({
-      departments,
+      department,
     }),
-    children: departments.map(department => ({
-      path: `${department.slug}`,
-      component: 'src/components/Pages/Department',
+    children: informationPages.map(informationPage => ({
+      path: `/${informationPage.slug}`,
+      component: 'src/components/Pages/Information',
       getData: async () => ({
-        department,
+        informationPage,
       }),
     })),
-  };
+  }));
 
   return data;
 };
