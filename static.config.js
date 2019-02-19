@@ -29,10 +29,13 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
+  const children = await makeChildPages(client);
+  const deptChildren = await makeDepartmentPages(client);
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: await makeChildPages(client),
+    children: children.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       const topServices = cleanLinks(allServicePages, '/services');
@@ -56,7 +59,6 @@ const makeChildPages = client => {
     makeProcessPages(client),
     makeTopicPages(client),
     makeThemePages(client),
-    makeDepartmentPages(client),
   ]);
 };
 
@@ -183,20 +185,13 @@ const makeDepartmentPages = async client => {
   const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
   const departments = cleanDepartments(allDepartmentPages);
 
-  const data = {
-    path: '/departments',
-    component: 'src/components/Pages/Departments',
+  const data = departments.map(department => ({
+    path: `/${department.slug}`,
+    component: 'src/components/Pages/Department',
     getData: async () => ({
-      departments,
+      department,
     }),
-    children: departments.map(department => ({
-      path: `${department.slug}`,
-      component: 'src/components/Pages/Department',
-      getData: async () => ({
-        department,
-      }),
-    })),
-  };
+  }));
 
   return data;
 };
