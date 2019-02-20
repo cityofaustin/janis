@@ -1,8 +1,8 @@
 //typography
-@import url('https://fonts.googleapis.com/css?family=Lora:400,400i|Open+Sans:400,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i|Open+Sans:400,600,700,800');
 /* TODO: determine fallback fonts */
-$coa-font-sans: 'Open Sans';
-$coa-font-serif: 'Lora';
+$coa-font-sans: 'Ibm Plex Sans';
+$coa-font-serif: $coa-font-sans;
 $coa-font-regular: 400;
 $coa-font-semibold: 600;
 $coa-font-bold: 700;
@@ -62,10 +62,17 @@ $coa-wrapper-sm-maxwidth: 720px;
 $coa-color-white: #FFFFFF;
 $coa-color-black: #000000;
 
+
 $coa-color-blue: #3282AF;
 $coa-color-blue-dark: #2D759F;
 $coa-color-blue-darker: #065889;
 $coa-color-blue-darkest: #023654;
+
+//new COA brand color
+$coa-color-primary: #0050D8;
+$coa-color-almost-black: rgba(23, 23, 23, 1);
+
+
 
 $coa-color-green-light: #02EAA4;
 
