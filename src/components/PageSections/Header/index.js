@@ -57,11 +57,11 @@ class Header extends Component {
               </button>
               <span className="coa-text-spacer--vertical d-lg-none" />
               <I18nLink className="coa-Header__logo" to="/">
-                ALPHA.AUSTIN.GOV
+                City of Austin
               </I18nLink>
             </div>
             <div className="coa-Header__right-controls">
-              <ExternalLink to="http://www.austintexas.gov/airport">
+              <ExternalLink to="http://www.austintexas.gov/airport" >
                 {intl.formatMessage(i18n1.airport)}
               </ExternalLink>
               <span className="coa-text-spacer--vertical" />

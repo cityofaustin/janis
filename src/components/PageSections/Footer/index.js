@@ -19,9 +19,9 @@ import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/propty
 const Footer = ({ threeoneone, intl }) => (
   <footer>
     <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
+      {/*<FormFeedback />*/}
     </div>
-    <ThreeOneOne threeoneone={threeoneone} />
+    {/*<ThreeOneOne threeoneone={threeoneone} />*/}
     <div className="coa-Footer">
       <div className="container-fluid wrapper">
         <div className="row">

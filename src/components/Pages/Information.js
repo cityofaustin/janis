@@ -42,11 +42,11 @@ const InformationPage = ({
         imageTitle={image.title}
       />
     )}
-    <PageBreadcrumbs
+    {/* to likely replace with microsite breadcrumb <PageBreadcrumbs
       grandparent={{ ...theme, subpath: 'themes' }}
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
-    />
+    /> */}
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader>{title}</PageHeader>
       <div>{toplink}</div>
