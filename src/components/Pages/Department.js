@@ -71,9 +71,13 @@ const Department = ({
         <p dangerouslySetInnerHTML={{ __html: whatWeDo }} />
         <div className="coa-SectionHeader">Our mission</div>
         <p>{mission}</p>
+        {!!contacts &&
+          !!contacts.length && (
+            <ContactDetails contact={contacts[0]} />
+        )}
         <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
         {directors.map(director => (
-          <div className="wrapper wrapper--sm container-fluid">
+          <div>
             <p>Name: {director.name}</p>
             <p>Photo: {director.photo.filename}</p>
             <p>About: {director.about}</p>
@@ -82,12 +86,6 @@ const Department = ({
           </div>
         ))}
       </div>
-      {!!contacts &&
-        !!contacts.length && (
-          <div className="wrapper wrapper--sm container-fluid">
-            <ContactDetails contact={contacts[0]} />
-          </div>
-        )}
     </div>
   );
 };
