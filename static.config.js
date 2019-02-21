@@ -3,10 +3,11 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
-import allDepartmentsQuery from 'js/queries/allDepartmentsQuery';
+import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
@@ -17,6 +18,7 @@ import {
   cleanThemes,
   cleanProcesses,
   cleanServices,
+  cleanInformationPages,
   clean311,
   cleanNavigation,
 } from 'js/helpers/cleanData';
@@ -27,10 +29,13 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
+  const children = await makeChildPages(client);
+  const deptChildren = await makeDepartmentPages(client);
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: await makeChildPages(client),
+    children: children.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       const topServices = cleanLinks(allServicePages, '/services');
@@ -53,7 +58,6 @@ const makeChildPages = client => {
     makeProcessPages(client),
     makeTopicPages(client),
     makeThemePages(client),
-    makeDepartmentPages(client),
   ]);
 };
 
@@ -154,23 +158,28 @@ const makeThemePages = async client => {
 };
 
 const makeDepartmentPages = async client => {
-  const { allDepartments } = await client.request(allDepartmentsQuery);
-  const departments = cleanDepartments(allDepartments);
+  const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
+  const departments = cleanDepartments(allDepartmentPages);
 
-  const data = {
-    path: '/departments',
-    component: 'src/components/Pages/Departments',
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanInformationPages(allInformationPages);
+
+  const data = departments.map(department => ({
+    path: `/${department.slug}`,
+    component: 'src/components/Pages/Department',
     getData: async () => ({
-      departments,
+      department,
     }),
-    children: departments.map(department => ({
-      path: `${department.id}`,
-      component: 'src/components/Pages/Department',
+    children: informationPages.map(informationPage => ({
+      path: `/${informationPage.slug}`,
+      component: 'src/components/Pages/Information',
       getData: async () => ({
-        department,
+        informationPage,
       }),
     })),
-  };
+  }));
 
   return data;
 };
