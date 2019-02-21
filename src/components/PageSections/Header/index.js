@@ -52,7 +52,7 @@ class Header extends Component {
               <button
                 onClick={this.openMenu}
                 tabIndex="0"
-                className="coa-Header__menu-toggle d-lg-none"
+                className="coa-Header__menu-toggle"
                 ref="menu"
               >
                 {intl.formatMessage(i18n2.menu)}
