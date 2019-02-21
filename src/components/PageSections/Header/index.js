@@ -43,7 +43,9 @@ class Header extends Component {
         })}
         role="banner"
       >
-        <LanguageSelectBar path={path} />
+        <div className="coa-Header__mobile-languages">
+          <LanguageSelectBar path={path} />
+        </div>
         <div className="container-fluid wrapper">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
@@ -55,17 +57,23 @@ class Header extends Component {
               >
                 {intl.formatMessage(i18n2.menu)}
               </button>
-              <span className="coa-text-spacer--vertical d-lg-none" />
+              <div className="coa-Header__desktop-languages">
+                <LanguageSelectBar path={path} />
+              </div>
+            </div>
+            <div className="coa-Header__center-controls">
               <I18nLink className="coa-Header__logo" to="/">
                 City of Austin
               </I18nLink>
             </div>
-            <div className="coa-Header__right-controls">
-              <ExternalLink to="http://www.austintexas.gov/airport" >
-                {intl.formatMessage(i18n1.airport)}
-              </ExternalLink>
-              <span className="coa-text-spacer--vertical" />
-              <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
+            <div className="coa-Header__right-controls-wrapper">
+              <div className="coa-Header__right-controls">
+                <ExternalLink to="http://www.austintexas.gov/airport">
+                  {intl.formatMessage(i18n1.airport)}
+                </ExternalLink>
+                <span className="coa-text-spacer--vertical" />
+                <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
+              </div>
             </div>
           </div>
         </div>
