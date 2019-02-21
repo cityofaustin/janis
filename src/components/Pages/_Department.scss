@@ -8,6 +8,7 @@
 .coa-DepartmentPage__topservices--desktop {
   background: $coa-color-primary;
   display: none;
+  margin-bottom: 4rem;
   @include media($coa-medium-screen) {
     margin-top: -4rem;
     display: inherit;
@@ -53,4 +54,13 @@
     line-height: 2rem;
     padding: 2rem;
     font-size: 1.5rem;
+}
+
+.coa-SectionHeader {
+  color: $coa-color-primary;
+  border-bottom: 2px solid $coa-color-half-primary;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: bold;
 }

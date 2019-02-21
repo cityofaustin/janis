@@ -67,9 +67,11 @@ const Department = ({
             </div>
           </div>
         </div>
-        <p>Mission: {mission}</p>
-        <p>What we do: {whatWeDo}</p>
-        <h3>Directors:</h3>
+        <div className="coa-SectionHeader">What we do</div>
+        <p>{whatWeDo}</p>
+        <div className="coa-SectionHeader">Our mission</div>
+        <p>{mission}</p>
+        <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
         {directors.map(director => (
           <div className="wrapper wrapper--sm container-fluid">
             <p>Name: {director.name}</p>
@@ -79,13 +81,6 @@ const Department = ({
             <p>Phone: {director.phone}</p>
           </div>
         ))}
-        <h3>Social Media URLs</h3>
-        {socialMedia.map(smlink => (
-          <div className="wrapper wrapper--sm container-fluid">
-            <p>URL: {smlink.value}</p>
-          </div>
-        ))}
-        <p>Job Listing link: {jobListings}</p>
       </div>
       {!!contacts &&
         !!contacts.length && (
@@ -98,3 +93,16 @@ const Department = ({
 };
 
 export default withRouteData(Department);
+
+
+/*
+Taking these out instead of doing actual conditional stuff because we don't need them for OPO
+
+        <h3>Social Media URLs</h3>
+        {socialMedia.map(smlink => (
+          <div className="wrapper wrapper--sm container-fluid">
+            <p>URL: {smlink.value}</p>
+          </div>
+        ))}
+        <p>Job Listing link: {jobListings}</p>
+*/
