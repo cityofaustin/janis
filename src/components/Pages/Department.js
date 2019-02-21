@@ -78,11 +78,17 @@ const Department = ({
         <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
         {directors.map(director => (
           <div>
-            <p>Name: {director.name}</p>
-            <p>Photo: {director.photo.filename}</p>
-            <p>About: {director.about}</p>
-            <p>Email: {director.email}</p>
-            <p>Phone: {director.phone}</p>
+            <div className="coa-DepartmentPage__directorcard">
+              <div className="coa-DepartmentPage__directorcard-headshot">
+              <img src={`${process.env.CMS_MEDIA}/images/generic-headshot.max-165x165.jpg`}></img>
+              </div>
+              <div className="coa-DepartmentPage__directorcard-info">
+                <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
+                <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
+                <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
+              </div>
+            </div>
+            <p>{director.about}</p>
           </div>
         ))}
       </div>

@@ -64,3 +64,54 @@
   font-size: 2.4rem;
   font-weight: bold;
 }
+
+.coa-DepartmentPage__directorcard {
+  display: flex;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
+}
+
+.coa-DepartmentPage__directorcard-name {
+  color: $coa-color-primary;
+  font-size: 2.4rem;
+}
+
+.coa-DepartmentPage__directorcard-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.coa-DepartmentPage__directorcard-coamaybe {
+  font-size: 1.5rem;
+  line-height: 1.4rem;
+}
+
+.coa-DepartmentPage__directorcard-info {
+  margin-top: 5rem;
+  margin-right: 2.5rem;
+  margin-bottom: 2.5rem;
+  margin-left: 2.5rem;
+}
+
+.coa-DepartmentPage__directorcard-headshot {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media($coa-medium-screen) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  overflow: hidden;
+  margin-top: 2rem;
+  img {
+    width: 150px;
+    float: left;
+    float: right;
+  }
+}
