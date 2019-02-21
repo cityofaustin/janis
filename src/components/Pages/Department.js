@@ -37,12 +37,9 @@ const Department = ({
           )}
           imageExtension={path.extname(image.filename)}
           imageTitle={image.title}
+          headerText={title}
         />
       )}
-      <PageBreadcrumbs title={title} />
-      <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader>{title}</PageHeader>
-      </div>
       <div className="wrapper wrapper--sm container-fluid">
         <p>Mission: {mission}</p>
         <p>What we do: {whatWeDo}</p>
