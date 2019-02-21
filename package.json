@@ -12,6 +12,7 @@
     "downshift": "^1.31.15",
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "graphql-request": "^1.4.1",
+    "html-react-parser": "^0.6.1",
     "intl": "^1.2.5",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",

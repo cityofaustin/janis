@@ -2,6 +2,7 @@ import React from 'react';
 import { get } from 'lodash';
 import { withRouteData } from 'react-static';
 import path from 'path';
+import Parser from 'html-react-parser';
 
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
@@ -68,7 +69,7 @@ const Department = ({
           </div>
         </div>
         <div className="coa-SectionHeader">What we do</div>
-        <p dangerouslySetInnerHTML={{ __html: whatWeDo }} />
+        <p>{Parser(whatWeDo)}</p>
         <div className="coa-SectionHeader">Our mission</div>
         <p>{mission}</p>
         {!!contacts &&
