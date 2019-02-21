@@ -40,7 +40,33 @@ const Department = ({
           headerText={title}
         />
       )}
+      <div className="coa-DepartmentPage__topservices--mobile">
+        <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
+          <h3 className="coa-DepartmentPage__topservices-header--mobile">Top Services</h3>
+            <div className="coa-DepartmentPage__topServiceButtons">
+              <div className="coa-DepartmentPage__topServiceButton">
+                File a complaint against an Austin Police Officer
+              </div>
+              <div className="coa-DepartmentPage__topServiceButton">
+                Thank the Austin Police Department
+              </div>
+            </div>
+        </div>
+      </div>
       <div className="wrapper wrapper--sm container-fluid">
+        <div className="coa-DepartmentPage__topservices--desktop">
+          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
+            <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
+            <div className="coa-DepartmentPage__topServiceButtons">
+              <div className="coa-DepartmentPage__topServiceButton">
+                File a complaint against an Austin Police Officer
+              </div>
+              <div className="coa-DepartmentPage__topServiceButton">
+                Thank the Austin Police Department
+              </div>
+            </div>
+          </div>
+        </div>
         <p>Mission: {mission}</p>
         <p>What we do: {whatWeDo}</p>
         <h3>Directors:</h3>
