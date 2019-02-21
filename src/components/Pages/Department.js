@@ -68,7 +68,7 @@ const Department = ({
           </div>
         </div>
         <div className="coa-SectionHeader">What we do</div>
-        <p>{whatWeDo}</p>
+        <p dangerouslySetInnerHTML={{ __html: whatWeDo }} />
         <div className="coa-SectionHeader">Our mission</div>
         <p>{mission}</p>
         <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
