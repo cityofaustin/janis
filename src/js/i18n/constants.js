@@ -13,20 +13,20 @@ export const SUPPORTED_LANGUAGES = [
     code: 'es',
     direction: 'ltr',
   },
-  {
-    // Vietnamese
-    title: 'Tiếng Việt',
-    abbr: 'vi',
-    code: 'vi',
-    direction: 'ltr',
-  },
-  {
-    // Arabic
-    title: 'العربية',
-    abbr: 'ar',
-    code: 'ar',
-    direction: 'rtl',
-  },
+  // {
+  //   // Vietnamese
+  //   title: 'Tiếng Việt',
+  //   abbr: 'vi',
+  //   code: 'vi',
+  //   direction: 'ltr',
+  // },
+  // {
+  //   // Arabic
+  //   title: 'العربية',
+  //   abbr: 'ar',
+  //   code: 'ar',
+  //   direction: 'rtl',
+  // },
   //   // Simplified Chinese
   //   title: '简体中文',
   //   abbr: 'zh',
