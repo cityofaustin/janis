@@ -98,3 +98,8 @@ export const curbsideServices = defineMessages({
   bulkitemcollection: 'Bulk Item Collection',
   pickupschedule: "Here's the pickup schedule for {address}",
 });
+
+export const departmentPage = defineMessages({
+  complaintFormButtonText: "File a complaint against an Austin Police Officer",
+  complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint"
+});

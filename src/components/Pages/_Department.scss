@@ -46,14 +46,16 @@
 }
 
 .coa-DepartmentPage__topServiceButton {
-    background: $coa-color-gray-lightest;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    flex: auto;
-    width: 25rem;
-    line-height: 2rem;
-    padding: 2rem;
-    font-size: 1.5rem;
+  background: $coa-color-gray-lightest;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  flex: auto;
+  width: 25rem;
+  line-height: 2rem;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: $coa-color-almost-black !important;
+  text-decoration: none;
 }
 
 .coa-SectionHeader {

@@ -1,8 +1,11 @@
 import React from 'react';
 import { get } from 'lodash';
 import { withRouteData } from 'react-static';
+import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
+
+import { departmentPage as i18n } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
@@ -24,6 +27,7 @@ const Department = ({
     socialMedia,
     jobListings,
   },
+  intl,
 }) => {
   const relatedLinks = get(jsonFileData, 'departmentpage.projectsRelated', []);
 
@@ -45,9 +49,9 @@ const Department = ({
         <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
           <h3 className="coa-DepartmentPage__topservices-header--mobile">Top Services</h3>
             <div className="coa-DepartmentPage__topServiceButtons">
-              <div className="coa-DepartmentPage__topServiceButton">
-                File a complaint against an Austin Police Officer
-              </div>
+              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n.complaintFormButtonText)}
+              </a>
               <div className="coa-DepartmentPage__topServiceButton">
                 Thank the Austin Police Department
               </div>
@@ -59,9 +63,9 @@ const Department = ({
           <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
             <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
             <div className="coa-DepartmentPage__topServiceButtons">
-              <div className="coa-DepartmentPage__topServiceButton">
-                File a complaint against an Austin Police Officer
-              </div>
+              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n.complaintFormButtonText)}
+              </a>
               <div className="coa-DepartmentPage__topServiceButton">
                 Thank the Austin Police Department
               </div>
@@ -97,8 +101,7 @@ const Department = ({
   );
 };
 
-export default withRouteData(Department);
-
+export default withRouteData(injectIntl(Department));
 
 /*
 Taking these out instead of doing actual conditional stuff because we don't need them for OPO

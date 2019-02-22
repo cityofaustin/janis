@@ -45,5 +45,7 @@
   "threeoneone.all311": "Todos los servicios del 311",
   "threeoneone.call311": "Llame al 311",
   "threeoneone.contact311": "",
-  "topics.topic": ""
+  "topics.topic": "",
+  "departmentPage.complaintFormButtonText": "Presente Una Queja",
+  "departmentPage.complaintFormUrl": "https://forms.austin.gov/fiscalizacion-de-policia/queja"
 }
