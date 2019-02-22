@@ -66,7 +66,7 @@ class Menu extends Component {
           role="navigation"
         >
           <button
-            className="coa-Menu__close-btn d-lg-none"
+            className="coa-Menu__close-btn"
             onClick={this.closeAllMenus}
             ref="closeTrigger"
             tabIndex="0"

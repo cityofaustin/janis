@@ -24,7 +24,7 @@ ul {
 
   li {
     @include responsivetext();
-    margin-bottom: 0.25rem;
+    @include ulli();
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { get } from 'lodash';
 import { withRouteData } from 'react-static';
 import path from 'path';
+import Parser from 'html-react-parser';
 
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
@@ -37,25 +38,71 @@ const Department = ({
           )}
           imageExtension={path.extname(image.filename)}
           imageTitle={image.title}
+          headerText={title}
         />
       )}
-      <PageBreadcrumbs title={title} />
-      <div className="wrapper wrapper--sm container-fluid">
-        <PageHeader>{title}</PageHeader>
+      <div className="coa-DepartmentPage__topservices--mobile">
+        <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
+          <h3 className="coa-DepartmentPage__topservices-header--mobile">Top Services</h3>
+            <div className="coa-DepartmentPage__topServiceButtons">
+              <div className="coa-DepartmentPage__topServiceButton">
+                File a complaint against an Austin Police Officer
+              </div>
+              <div className="coa-DepartmentPage__topServiceButton">
+                Thank the Austin Police Department
+              </div>
+            </div>
+        </div>
       </div>
       <div className="wrapper wrapper--sm container-fluid">
-        <p>Mission: {mission}</p>
-        <p>What we do: {whatWeDo}</p>
-        <h3>Directors:</h3>
+        <div className="coa-DepartmentPage__topservices--desktop">
+          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
+            <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
+            <div className="coa-DepartmentPage__topServiceButtons">
+              <div className="coa-DepartmentPage__topServiceButton">
+                File a complaint against an Austin Police Officer
+              </div>
+              <div className="coa-DepartmentPage__topServiceButton">
+                Thank the Austin Police Department
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="coa-SectionHeader">What we do</div>
+        <p>{Parser(whatWeDo)}</p>
+        <div className="coa-SectionHeader">Our mission</div>
+        <p>{mission}</p>
+        {!!contacts &&
+          !!contacts.length && (
+            <ContactDetails contact={contacts[0]} />
+        )}
+        <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
         {directors.map(director => (
-          <div className="wrapper wrapper--sm container-fluid">
-            <p>Name: {director.name}</p>
-            <p>Photo: {director.photo.filename}</p>
-            <p>About: {director.about}</p>
-            <p>Email: {director.email}</p>
-            <p>Phone: {director.phone}</p>
+          <div>
+            <div className="coa-DepartmentPage__directorcard">
+              <div className="coa-DepartmentPage__directorcard-headshot">
+              <img src={`${process.env.CMS_MEDIA}/images/generic-headshot.max-165x165.jpg`}></img>
+              </div>
+              <div className="coa-DepartmentPage__directorcard-info">
+                <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
+                <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
+                <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
+              </div>
+            </div>
+            <p>{director.about}</p>
           </div>
         ))}
+      </div>
+    </div>
+  );
+};
+
+export default withRouteData(Department);
+
+
+/*
+Taking these out instead of doing actual conditional stuff because we don't need them for OPO
+
         <h3>Social Media URLs</h3>
         {socialMedia.map(smlink => (
           <div className="wrapper wrapper--sm container-fluid">
@@ -63,15 +110,4 @@ const Department = ({
           </div>
         ))}
         <p>Job Listing link: {jobListings}</p>
-      </div>
-      {!!contacts &&
-        !!contacts.length && (
-          <div className="wrapper wrapper--sm container-fluid">
-            <ContactDetails contact={contacts[0]} />
-          </div>
-        )}
-    </div>
-  );
-};
-
-export default withRouteData(Department);
+*/

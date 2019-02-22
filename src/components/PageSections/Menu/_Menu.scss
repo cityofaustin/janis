@@ -8,39 +8,39 @@
   top: $coa-languageselectbar-height;
   width: 100vw;
   z-index: 2;
-  @include media($coa-large-screen) {
-    background: none;
-    bottom: auto;
-    left: auto;
-    margin: $coa-space-level5 auto 0;
-    overflow-y: visible;
-    position: relative;
-    top: auto;
-    width: 100%;
-    z-index: 2;
-  }
+  // @include media($coa-large-screen) {
+  //   background: none;
+  //   bottom: auto;
+  //   left: auto;
+  //   margin: $coa-space-level5 auto 0;
+  //   overflow-y: visible;
+  //   position: relative;
+  //   top: auto;
+  //   width: 100%;
+  //   z-index: 2;
+  // }
 }
 
 .coa-Menu--open {
   left: 0;
-  @include media($coa-large-screen) {
-    left: auto;
-  }
+  // @include media($coa-large-screen) {
+  //   left: auto;
+  // }
 }
 
 .coa-Menu__list {
   display: flex;
   flex-direction: column;
   list-style: none;
-  @include media($coa-large-screen) {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  // @include media($coa-large-screen) {
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  // }
   & > li {
     margin: 0;
-    @include media($coa-large-screen) {
-      position: relative;
-    }
+    // @include media($coa-large-screen) {
+    //   position: relative;
+    // }
   }
 }
 
@@ -75,7 +75,7 @@
   top: 0;
   left: 0;
   opacity: 0;
-  @include media($coa-large-screen) {
-    display: block;
-  }
+  // @include media($coa-large-screen) {
+  //   display: block;
+  // }
 }
