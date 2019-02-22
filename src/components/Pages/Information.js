@@ -56,7 +56,7 @@ const InformationPage = ({
       ))}
       {additionalContent && (
         <HtmlFromAdmin
-          title={intl.formatMessage(i18n2.whatElse)}
+          title={' '}
           content={additionalContent}
         />
       )}
