@@ -81,7 +81,7 @@ const Department = ({
           <div>
             <div className="coa-DepartmentPage__directorcard">
               <div className="coa-DepartmentPage__directorcard-headshot">
-              <img src={`${process.env.CMS_MEDIA}/images/generic-headshot.max-165x165.jpg`}></img>
+              <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`}></img>
               </div>
               <div className="coa-DepartmentPage__directorcard-info">
                 <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
