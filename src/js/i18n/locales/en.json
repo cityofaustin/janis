@@ -34,6 +34,7 @@
   "misc.workInProgress": "{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
   "misc.workInProgressClipped": "{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}.",
   "misc.opoName": "Office of Police Oversight",
+  "misc.opoDeptUrl": "https://alpha.austin.gov/police-oversight",
   "navigation.home": "Home",
   "navigation.menu": "Menu",
   "navigation.openInNewWindow": "Opens in new window",
