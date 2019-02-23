@@ -55,7 +55,7 @@ class Header extends Component {
               </div>
             </div>
             <div className="coa-Header__center-controls">
-              <I18nLink className="coa-Header__logo" to="/">
+              <I18nLink className="coa-Header__logo" to="#">
                 City of Austin
               </I18nLink>
             </div>

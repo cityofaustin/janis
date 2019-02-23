@@ -67,7 +67,7 @@ class Menu extends Component {
         >
           <div className="container-fluid wrapper">
             <div className="coa-Menu__header">
-              <h2>{intl.formatMessage(i18n1.opoName)}</h2>
+              <h2><a href={intl.formatMessage(i18n1.opoDeptUrl)}>{intl.formatMessage(i18n1.opoName)}</a></h2>
             </div>
             <div className="coa-Menu__subheading">Services</div>
             <div className="coa-Menu__link coa-Menu__service-link">
