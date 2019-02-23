@@ -1,11 +1,16 @@
 .coa-Menu {
-  background-color: $coa-color-primary;
+  // background-color: $coa-color-primary;
+  background-color: $coa-color-white;
+  color: $coa-color-primary;
   bottom: 0;
   left: -100vw;
   overflow-y: auto;
   position: fixed;
-  transition: left 0.5s;
-  top: $coa-languageselectbar-height;
+  // transition: left 0.5s;
+  top: 10.5rem;
+  @include media($coa-medium-screen) {
+    top: 5.5rem;
+  }
   width: 100vw;
   z-index: 2;
   // @include media($coa-large-screen) {

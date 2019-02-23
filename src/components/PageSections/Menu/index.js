@@ -56,7 +56,7 @@ class Menu extends Component {
   };
 
   render() {
-    const { isMenuOpen, navigation } = this.props;
+    const { isMenuOpen, navigation, intl } = this.props;
     const { openSubmenuId } = this.state;
 
     return (
@@ -65,93 +65,12 @@ class Menu extends Component {
           className={classNames('coa-Menu', { 'coa-Menu--open': isMenuOpen })}
           role="navigation"
         >
-          <button
-            className="coa-Menu__close-btn"
-            onClick={this.closeAllMenus}
-            ref="closeTrigger"
-            tabIndex="0"
-          >
-            <CloseSVG />
-          </button>
-          <ul className="coa-Menu__list">
-            <HomeMobileMenuItem handleCloseAllMenus={this.closeAllMenus} />
-            <AirportMobileMenuItem />
-            <ThreeOneOneMobileMenuItem />
-            {navigation.map((theme, i) => (
-              <MenuItem
-                key={i}
-                id={i}
-                theme={theme}
-                isSubmenuOpen={this.isSubmenuOpen(i)}
-                handleCloseAllMenus={this.closeAllMenus}
-                handleSubmenuToggle={this.toggleSubmenu}
-              />
-            ))}
-            <PrivacyPolicyMenuItem handleCloseAllMenus={this.closeAllMenus} />
-            <MobileFooter />
-          </ul>
+          <h1>{intl.formatMessage(i18n1.opoName)}</h1>
         </nav>
-        {/*
-          this provides a full page click target area behind the nav menu
-          which, when clicked, will close the submenu
-        */
-        openSubmenuId !== null && (
-          <div
-            className="coa-Menu__close-submenu-click-target"
-            onClick={() => this.setState({ openSubmenuId: null })}
-          />
-        )}
       </div>
     );
   }
 }
-
-const HomeMobileMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
-  <div className="d-lg-none" onClick={handleCloseAllMenus}>
-    <div className="coa-MenuItem coa-MenuItem--small coa-MenuItem--home">
-      <I18nNavLink to="/" exact>
-        {intl.formatMessage(i18n2.home)}
-      </I18nNavLink>
-    </div>
-  </div>
-));
-
-const AirportMobileMenuItem = injectIntl(({ intl }) => (
-  <div className="d-lg-none">
-    <div className="coa-MenuItem coa-MenuItem--small">
-      <ExternalLink to="http://www.austintexas.gov/airport">
-        {intl.formatMessage(i18n1.airport)}
-      </ExternalLink>
-    </div>
-  </div>
-));
-
-const ThreeOneOneMobileMenuItem = () => (
-  <div className="d-lg-none">
-    <div className="coa-MenuItem coa-MenuItem--small">
-      <ThreeOneOneRequest />
-    </div>
-  </div>
-);
-
-const PrivacyPolicyMenuItem = injectIntl(({ handleCloseAllMenus, intl }) => (
-  <div className="d-lg-none" onClick={handleCloseAllMenus}>
-    <div className="coa-MenuItem coa-MenuItem--small">
-      <a href="#">{intl.formatMessage(i18n1.privacy)}</a>
-    </div>
-  </div>
-));
-
-const MobileFooter = injectIntl(({ intl }) => (
-  <div className="d-lg-none">
-    <div className="coa-Menu__footer">
-      <p>
-        <WorkInProgress />
-      </p>
-      <img src={citySealImg} alt={intl.formatMessage(i18n1.citySeal)} />
-    </div>
-  </div>
-));
 
 Menu.propTypes = {
   navigation: PropTypes.arrayOf(themePropTypes).isRequired,

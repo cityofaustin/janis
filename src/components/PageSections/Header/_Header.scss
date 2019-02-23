@@ -5,13 +5,10 @@
   color: $coa-color-white;
 }
 
-.coa-Header--menu-is-open ~ main,
-.coa-Header--menu-is-open ~ footer {
-  display: none;
-  @include media($coa-large-screen) {
-    display: block;
-  }
-}
+// .coa-Header--menu-is-open ~ main,
+// .coa-Header--menu-is-open ~ footer {
+//   display: block;
+// }
 
 .coa-Header__controls {
   display: flex;
