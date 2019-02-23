@@ -23,5 +23,5 @@ docker run \
     --env "GOOGLE_ANALYTICS=UA-110716917-2" \
     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
     --env "CMS_API=https://joplin.herokuapp.com/api/graphql" \
-    --env "CMS_MEDIA=https://joplin.herokuapp.com/media" \
+    --env "CMS_MEDIA=https://joplin-austin-gov.s3.amazonaws.com/media" \
     "$TAG" "$@"
