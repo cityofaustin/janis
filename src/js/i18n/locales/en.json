@@ -48,5 +48,11 @@
   "threeoneone.contact311": "{call311Link} or {submit311Link}",
   "topics.topic": "topic",
   "departmentPage.complaintFormButtonText": "File a complaint against an Austin Police Officer",
-  "departmentPage.complaintFormUrl": "https://forms.austin.gov/police-oversight/complaint"
+  "departmentPage.complaintFormUrl": "https://forms.austin.gov/police-oversight/complaint",
+  "departmentPage.thankFormButtonText": "Thank an Austin Police Officer",
+  "departmentPage.thankFormUrl": "https://forms.austin.gov/police-oversight/thank",
+  "departmentPage.yourDataLinkText": "How we store and use your data",
+  "departmentPage.yourDataUrl": "http://alpha.austin.gov/police-oversight/how-we-store-and-use-your-data",
+  "departmentPage.investigationProcessLinkText": "Complaint investigation process",
+  "departmentPage.investigationProcessUrl": "http://alpha.austin.gov/police-oversight/complaint-investigation-process"
 }

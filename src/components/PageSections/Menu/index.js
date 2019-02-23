@@ -74,22 +74,22 @@ class Menu extends Component {
               <a href={intl.formatMessage(i18n3.complaintFormUrl)}>{intl.formatMessage(i18n3.complaintFormButtonText)}</a>
             </div>
             <div className="coa-Menu__link coa-Menu__service-link">
-              <a href="blarg">Service thing</a>
+              <a href={intl.formatMessage(i18n3.thankFormUrl)}>{intl.formatMessage(i18n3.thankFormButtonText)}</a>
             </div>
             <div className="coa-DepartmentPage__topServiceButtons coa-Menu__serviceButtons-desktop">
               <a href={intl.formatMessage(i18n3.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
                 {intl.formatMessage(i18n3.complaintFormButtonText)}
               </a>
-              <div className="coa-DepartmentPage__topServiceButton">
-                Thank the Austin Police Department
-              </div>
+              <a href={intl.formatMessage(i18n3.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n3.thankFormButtonText)}
+              </a>
             </div>
             <div className="coa-Menu__subheading">Information</div>
             <div className="coa-Menu__link">
-              <a href="blarg">Info thing</a>
+              <a href={intl.formatMessage(i18n3.yourDataUrl)}>{intl.formatMessage(i18n3.yourDataLinkText)}</a>
             </div>
             <div className="coa-Menu__link">
-              <a href="blarg">Info thing</a>
+              <a href={intl.formatMessage(i18n3.investigationProcessUrl)}>{intl.formatMessage(i18n3.investigationProcessLinkText)}</a>
             </div>
           </div>
 
