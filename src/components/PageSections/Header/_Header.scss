@@ -10,6 +10,11 @@
 //   display: block;
 // }
 
+.coa-Header--menu-is-open {
+  position: fixed;
+  width: 100%;
+}
+
 .coa-Header__controls {
   display: flex;
   height: $coa-header-toprow-height;
