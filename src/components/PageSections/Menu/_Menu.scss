@@ -86,6 +86,10 @@
 }
 
 .coa-Menu__header {
+  a {
+    color: $coa-color-primary !important;
+    text-decoration: none !important;
+  }
   h2 {
     font-size: 3rem;
   }

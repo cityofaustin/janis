@@ -56,7 +56,8 @@ export const misc = defineMessages({
   steps: 'Steps',
   welcomeTo: 'Welcome to',
   whatElse: 'What else do I need to know?',
-  opoName: 'Office of Police Oversight'
+  opoName: 'Office of Police Oversight',
+  opoDeptUrl: 'https://alpha.austin.gov/police-oversight'
 });
 
 export const navigation = defineMessages({
