@@ -46,6 +46,10 @@
 
 .coa-Footer__more_text_boxes {
   display: flex;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
   justify-content: center;
 }
 
