@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
+import { misc as i18n1, navigation as i18n2, departmentPage as i18n3 } from 'js/i18n/definitions';
 
 import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
@@ -71,14 +71,14 @@ class Menu extends Component {
             </div>
             <div className="coa-Menu__subheading">Services</div>
             <div className="coa-Menu__link coa-Menu__service-link">
-              <a href="blarg">Service thing</a>
+              <a href={intl.formatMessage(i18n3.complaintFormUrl)}>{intl.formatMessage(i18n3.complaintFormButtonText)}</a>
             </div>
             <div className="coa-Menu__link coa-Menu__service-link">
               <a href="blarg">Service thing</a>
             </div>
             <div className="coa-DepartmentPage__topServiceButtons coa-Menu__serviceButtons-desktop">
-              <a href="blarg" className="coa-DepartmentPage__topServiceButton">
-                blarg
+              <a href={intl.formatMessage(i18n3.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n3.complaintFormButtonText)}
               </a>
               <div className="coa-DepartmentPage__topServiceButton">
                 Thank the Austin Police Department

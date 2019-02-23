@@ -108,11 +108,27 @@
 
 .coa-Menu__subheading {
   text-transform: uppercase;
+  font-size: 1.6rem;
+  padding-top: 4rem;
   color: $coa-color-gray-dark;
+  border-bottom: 2px solid $coa-color-half-primary;
+  @include media($coa-medium-screen) {
+    border-bottom: none;
+  }
 }
 
 .coa-Menu__service-link {
   @include media($coa-medium-screen) {
     display: none;
+  } 
+}
+
+.coa-Menu__link {
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  padding-top: 1.5rem;
+  @include media($coa-medium-screen) {
+    font-size: 2rem;
+    line-height: 2rem;
   } 
 }
