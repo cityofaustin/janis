@@ -1,5 +1,4 @@
 .coa-ContactDetails {
-  border: 1px solid $coa-color-purple-lighter;
   border-left: none;
   border-right: none;
   padding-bottom: $coa-spacing-large;
@@ -14,28 +13,28 @@
   text-align: left;
 
   @include media($coa-medium-screen) {
-    font-size: $coa-font-size-small;
-    line-height: $coa-line-height-small;
+    // font-size: $coa-font-size-small;
+    // line-height: $coa-line-height-small;
     padding: $coa-spacing-medium 0;
   }
 
   @include media($coa-large-screen) {
-    font-size: $coa-font-size-md-small;
-    line-height: $coa-line-height-md-small;
+    // font-size: $coa-font-size-md-small;
+    // line-height: $coa-line-height-md-small;
   }
 
   svg {
     height: $coa-font-size-xsmall - .1rem;
     width: $coa-font-size-xsmall - .1rem;
-    @include media($coa-medium-screen) {
-      height: $coa-font-size-small - .1rem;
-      width: $coa-font-size-small - .1rem;
-    }
+    // @include media($coa-medium-screen) {
+    //   height: $coa-font-size-small - .1rem;
+    //   width: $coa-font-size-small - .1rem;
+    // }
 
-    @include media($coa-large-screen) {
-      height: $coa-font-size-md-small - .1rem;
-      width: $coa-font-size-md-small - .1rem;
-    }
+    // @include media($coa-large-screen) {
+    //   height: $coa-font-size-md-small - .1rem;
+    //   width: $coa-font-size-md-small - .1rem;
+    // }
   }
 
   & > :first-child {

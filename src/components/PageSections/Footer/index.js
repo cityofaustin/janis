@@ -18,38 +18,20 @@ import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/propty
 
 const Footer = ({ threeoneone, intl }) => (
   <footer>
-    <div className="wrapper wrapper--sm container-fluid">
-      <FormFeedback />
-    </div>
-    <ThreeOneOne threeoneone={threeoneone} />
     <div className="coa-Footer">
       <div className="container-fluid wrapper">
-        <div className="row">
-          <div className="col-xs-12 col-md-2">
-            <div className="coa-Footer__city-seal-wrapper">
-              <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
-            </div>
+        <div className="coa-Footer__city-seal-wrapper">
+          <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
+        </div>
+        <div className="coa-Footer__work-in-progress">
+          {intl.formatMessage(i18n.workInProgress)}
+        </div>
+        <div className="coa-Footer__more_text_boxes">
+          <div className="coa-Footer__more_text_box">
+            For the full City of Austin website visit austintexas.gov.
           </div>
-          <div className="col-xs-12 col-md-4">
-            <p className="coa-Footer__work-in-progress">
-              <WorkInProgress />
-            </p>
-          </div>
-          <div className="col-xs-12 col-md-3 col-md-offset-3">
-            <div className="coa-Footer__icons">
-              <ExternalLink to="https://twitter.com/austintexasgov" noIcon={true}>
-                <TwitterSVG />
-              </ExternalLink>
-              <ExternalLink
-                to="https://www.facebook.com/austintexasgov"
-                noIcon={true}
-              >
-                <FacebookSVG />
-              </ExternalLink>
-              <ExternalLink to="https://github.com/cityofaustin" noIcon={true}>
-                <GithubSVG />
-              </ExternalLink>
-            </div>
+          <div className="coa-Footer__more_text_box">
+            Learn more about the new website at projects.austintexas.io.
           </div>
         </div>
       </div>

@@ -14,9 +14,14 @@
   }
 
   > h2 {
-    @include heading3();
-    text-transform: uppercase;
-    text-align: center;
+    
+  color: $coa-color-primary;
+  border-bottom: 2px solid $coa-color-half-primary;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: bold;
+    
   }
 
   > ul,

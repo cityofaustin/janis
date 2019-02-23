@@ -1,0 +1,139 @@
+.coa-DepartmentPage__topservices--mobile {
+  background: $coa-color-primary;
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-DepartmentPage__topservices--desktop {
+  background: $coa-color-primary;
+  display: none;
+  margin-bottom: 4rem;
+  @include media($coa-medium-screen) {
+    margin-top: -4rem;
+    display: inherit;
+  }
+}
+
+.coa-DepartmentPage__topservices-contentcontainer--mobile {
+  padding: 2rem;
+}
+
+.coa-DepartmentPage__topservices-contentcontainer--desktop {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.coa-DepartmentPage__topservices-header--mobile {
+  color: $coa-color-white;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: .15rem;
+}
+
+.coa-DepartmentPage__topservices-header--desktop {
+  color: $coa-color-white;
+}
+
+.coa-DepartmentPage__topServiceButtons {
+  display: flex;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
+}
+
+.coa-DepartmentPage__topServiceButton {
+  background: $coa-color-gray-lightest;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  width: 25rem;
+  line-height: 2rem;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: $coa-color-almost-black !important;
+  text-decoration: none;
+}
+
+.coa-SectionHeader {
+  color: $coa-color-primary;
+  border-bottom: 2px solid $coa-color-half-primary;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.coa-DepartmentPage__directorcard {
+  display: flex;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
+}
+
+.coa-DepartmentPage__directorcard-name {
+  color: $coa-color-primary;
+  font-size: 2.4rem;
+}
+
+.coa-DepartmentPage__directorcard-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.coa-DepartmentPage__directorcard-coamaybe {
+  font-size: 1.5rem;
+  line-height: 1.4rem;
+}
+
+.coa-DepartmentPage__directorcard-info {
+  margin-top: 5rem;
+  margin-right: 2.5rem;
+  margin-bottom: 2.5rem;
+  margin-left: 2.5rem;
+}
+
+.coa-DepartmentPage__directorcard-headshot {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media($coa-medium-screen) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  overflow: hidden;
+  margin-top: 2rem;
+  img {
+    width: 150px;
+    float: left;
+    float: right;
+  }
+}
+
+.coa-DepartmentPage__all-of-the-content {
+  display: flex;
+  max-width: 1080px;
+  margin: auto;
+}
+
+.coa-DepartmentPage__side-content {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: inherit;
+  }
+  // padding-right: 10%;
+  padding-left: 2rem;
+}
+
+.coa-DepartmentPage__contacts-mobile {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
