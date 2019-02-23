@@ -117,3 +117,24 @@
     float: right;
   }
 }
+
+.coa-DepartmentPage__all-of-the-content {
+  display: flex;
+  max-width: 1080px;
+  margin: auto;
+}
+
+.coa-DepartmentPage__side-content {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: inherit;
+  }
+  // padding-right: 10%;
+  padding-left: 2rem;
+}
+
+.coa-DepartmentPage__contacts-mobile {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}

@@ -58,44 +58,58 @@ const Department = ({
             </div>
         </div>
       </div>
-      <div className="wrapper wrapper--sm container-fluid">
-        <div className="coa-DepartmentPage__topservices--desktop">
-          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-            <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
-            <div className="coa-DepartmentPage__topServiceButtons">
-              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
-                {intl.formatMessage(i18n.complaintFormButtonText)}
-              </a>
-              <div className="coa-DepartmentPage__topServiceButton">
-                Thank the Austin Police Department
+      <div className="coa-DepartmentPage__all-of-the-content">
+        <div className="coa-DepartmentPage__main-content">
+          <div className="wrapper wrapper--sm container-fluid">
+          <div className="coa-DepartmentPage__topservices--desktop">
+            <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
+              <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
+              <div className="coa-DepartmentPage__topServiceButtons">
+                <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                  {intl.formatMessage(i18n.complaintFormButtonText)}
+                </a>
+                <div className="coa-DepartmentPage__topServiceButton">
+                  Thank the Austin Police Department
+                </div>
               </div>
             </div>
+          </div>
+          <div className="coa-SectionHeader">What we do</div>
+          <p>{Parser(whatWeDo)}</p>
+          <div className="coa-SectionHeader">Our mission</div>
+          <p>{mission}</p>
+          <div className="coa-DepartmentPage__contacts-mobile">
+            {!!contacts &&
+              !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+            )}
+          </div>
+          <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
+          {directors.map(director => (
+            <div>
+              <div className="coa-DepartmentPage__directorcard">
+                <div className="coa-DepartmentPage__directorcard-headshot">
+                <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`}></img>
+                </div>
+                <div className="coa-DepartmentPage__directorcard-info">
+                  <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
+                  <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
+                  <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
+                </div>
+              </div>
+              <p>{director.about}</p>
+            </div>
+          ))}
           </div>
         </div>
-        <div className="coa-SectionHeader">What we do</div>
-        <p>{Parser(whatWeDo)}</p>
-        <div className="coa-SectionHeader">Our mission</div>
-        <p>{mission}</p>
-        {!!contacts &&
-          !!contacts.length && (
-            <ContactDetails contact={contacts[0]} />
-        )}
-        <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
-        {directors.map(director => (
-          <div>
-            <div className="coa-DepartmentPage__directorcard">
-              <div className="coa-DepartmentPage__directorcard-headshot">
-              <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`}></img>
-              </div>
-              <div className="coa-DepartmentPage__directorcard-info">
-                <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
-                <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
-                <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
-              </div>
-            </div>
-            <p>{director.about}</p>
+        <div className="coa-DepartmentPage__side-content">
+          <div className="coa-DepartmentPage__contacts-desktop">
+            {!!contacts &&
+              !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+            )}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
