@@ -65,7 +65,34 @@ class Menu extends Component {
           className={classNames('coa-Menu', { 'coa-Menu--open': isMenuOpen })}
           role="navigation"
         >
-          <h1>{intl.formatMessage(i18n1.opoName)}</h1>
+          <div className="container-fluid wrapper">
+            <div className="coa-Menu__header">
+              <h2>{intl.formatMessage(i18n1.opoName)}</h2>
+            </div>
+            <div className="coa-Menu__subheading">Services</div>
+            <div className="coa-Menu__link coa-Menu__service-link">
+              <a href="blarg">Service thing</a>
+            </div>
+            <div className="coa-Menu__link coa-Menu__service-link">
+              <a href="blarg">Service thing</a>
+            </div>
+            <div className="coa-DepartmentPage__topServiceButtons coa-Menu__serviceButtons-desktop">
+              <a href="blarg" className="coa-DepartmentPage__topServiceButton">
+                blarg
+              </a>
+              <div className="coa-DepartmentPage__topServiceButton">
+                Thank the Austin Police Department
+              </div>
+            </div>
+            <div className="coa-Menu__subheading">Information</div>
+            <div className="coa-Menu__link">
+              <a href="blarg">Info thing</a>
+            </div>
+            <div className="coa-Menu__link">
+              <a href="blarg">Info thing</a>
+            </div>
+          </div>
+
         </nav>
       </div>
     );

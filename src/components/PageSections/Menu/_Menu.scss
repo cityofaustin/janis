@@ -84,3 +84,35 @@
   //   display: block;
   // }
 }
+
+.coa-Menu__header {
+  h2 {
+    font-size: 3rem;
+  }
+  text-align: center;
+  @include media($coa-medium-screen) {
+    text-align: left;
+    border-bottom: 4px solid $coa-color-primary;
+    h2 {
+      font-size: 3.6rem;
+    }
+  }
+}
+
+.coa-Menu__serviceButtons-desktop {
+  display: none !important;
+  @include media($coa-medium-screen) {
+    display: flex !important;
+  } 
+}
+
+.coa-Menu__subheading {
+  text-transform: uppercase;
+  color: $coa-color-gray-dark;
+}
+
+.coa-Menu__service-link {
+  @include media($coa-medium-screen) {
+    display: none;
+  } 
+}
