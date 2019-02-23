@@ -66,8 +66,6 @@ const InformationPage = ({
           content={additionalContent}
         />
       )}
-      {!!contacts &&
-        !!contacts.length && <ContactDetails contact={contacts[0]} />}
     </div>
   </div>
 );

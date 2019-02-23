@@ -107,4 +107,10 @@ export const departmentPage = defineMessages({
   complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint",
   thankFormButtonText: "Thank the Austin Police Department",
   thankFormButtonUrl: "https://forms.austin.gov/police-oversight/complaint",
+  thankFormButtonText: "Thank an Austin Police Officer",
+  thankFormUrl: "https://forms.austin.gov/police-oversight/thank",
+  yourDataLinkText: "How we store and use your data",
+  yourDataUrl: "http://alpha.austin.gov/police-oversight/how-we-store-and-use-your-data",
+  investigationProcessLinkText: "Complaint Investigation Process",
+  investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process"
 });

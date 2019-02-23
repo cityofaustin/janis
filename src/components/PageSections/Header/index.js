@@ -20,16 +20,9 @@ class Header extends Component {
     };
   }
 
-  closeMenu = e => {
-    this.refs.menu.focus();
+  toggleMenu = e => {
     this.setState({
-      menuIsOpen: false,
-    });
-  };
-
-  openMenu = e => {
-    this.setState({
-      menuIsOpen: true,
+      menuIsOpen: !this.state.menuIsOpen,
     });
   };
 
@@ -50,7 +43,7 @@ class Header extends Component {
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
               <button
-                onClick={this.openMenu}
+                onClick={this.toggleMenu}
                 tabIndex="0"
                 className="coa-Header__menu-toggle"
                 ref="menu"
@@ -79,7 +72,6 @@ class Header extends Component {
         </div>
         <Menu
           isMenuOpen={this.state.menuIsOpen}
-          closeMenu={this.closeMenu}
           navigation={navigation}
         />
       </header>
