@@ -31,8 +31,9 @@
   "misc.steps": "Steps",
   "misc.welcomeTo": "Welcome to",
   "misc.whatElse": "What else do I need to know?",
-  "misc.workInProgress": "Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
+  "misc.workInProgress": "alpha.austin.gov is a new website & work in progress.",
   "misc.workInProgressClipped": "Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}.",
+  "misc.opoName": "Office of Police Oversight",
   "navigation.home": "Home",
   "navigation.menu": "Menu",
   "navigation.openInNewWindow": "Opens in new window",
@@ -45,5 +46,7 @@
   "threeoneone.all311": "All 311 Services",
   "threeoneone.call311": "Call 311",
   "threeoneone.contact311": "{call311Link} or {submit311Link}",
-  "topics.topic": "topic"
+  "topics.topic": "topic",
+  "departmentPage.complaintFormButtonText": "File a complaint against an Austin Police Officer",
+  "departmentPage.complaintFormUrl": "https://forms.austin.gov/police-oversight/complaint"
 }

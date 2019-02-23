@@ -49,11 +49,13 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
+  workInProgress: 'alpha.austin.gov is a new website & work in progress.',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
   welcomeTo: 'Welcome to',
   whatElse: 'What else do I need to know?',
+  opoName: 'Office of Police Oversight'
 });
 
 export const navigation = defineMessages({
@@ -97,4 +99,9 @@ export const curbsideServices = defineMessages({
   brushcollection: 'Large Brush Collection',
   bulkitemcollection: 'Bulk Item Collection',
   pickupschedule: "Here's the pickup schedule for {address}",
+});
+
+export const departmentPage = defineMessages({
+  complaintFormButtonText: "File a complaint against an Austin Police Officer",
+  complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint"
 });
