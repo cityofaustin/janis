@@ -20,18 +20,19 @@ const Footer = ({ threeoneone, intl }) => (
   <footer>
     <div className="coa-Footer">
       <div className="container-fluid wrapper">
+
         <div className="coa-Footer__city-seal-wrapper">
           <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
         </div>
+
         <div className="coa-Footer__work-in-progress">
-          {intl.formatMessage(i18n.workInProgress)}
+          <WorkInProgress isClipped={true} />
         </div>
         <div className="coa-Footer__more_text_boxes">
           <div className="coa-Footer__more_text_box">
-            For the full City of Austin website visit austintexas.gov.
-          </div>
-          <div className="coa-Footer__more_text_box">
-            Learn more about the new website at projects.austintexas.io.
+            For the full City of Austin website visit <ExternalLink to={"https://www.austintexas.gov/"}>
+              austintexas.gov.
+            </ExternalLink>
           </div>
         </div>
       </div>

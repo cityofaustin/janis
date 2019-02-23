@@ -17,10 +17,10 @@
   text-align: center;
   font-size: $coa-font-size-medium;
   line-height: $coa-line-height-medium;
-  @include media($coa-medium-screen) {
-    font-size: $coa-font-size-xxlarge;
-    line-height: $coa-line-height-xxlarge;
-  }
+  // @include media($coa-medium-screen) {
+  //   font-size: $coa-font-size-xxlarge;
+  //   line-height: $coa-line-height-xxlarge;
+  // }
   max-width: 660px;
   margin: auto;
 }
@@ -55,6 +55,14 @@
 
 .coa-Footer__more_text_box {
   justify-content: center;
-  max-width: 25rem;
+  text-align: center;
+  max-width: 37.5rem;
   margin: 3rem;
+}
+
+.coa-Footer__link {
+  color: $coa-color-white;
+  &:visited {
+    color: $coa-color-white;
+  }
 }

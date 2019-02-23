@@ -12,6 +12,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
+import WorkInProgress from 'components/WorkInProgress';
 
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
