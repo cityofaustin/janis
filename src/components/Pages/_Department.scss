@@ -55,6 +55,12 @@
   font-size: 1.5rem;
   color: $coa-color-almost-black !important;
   text-decoration: none;
+  display: flex;
+}
+
+.coa-DepartmentPage__topServiceButtonArrow {
+  line-height: 4rem;
+  padding-left: 1rem;
 }
 
 .coa-SectionHeader {

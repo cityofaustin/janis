@@ -52,13 +52,12 @@ const Department = ({
             <div className="coa-DepartmentPage__topServiceButtons">
               <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
                 {intl.formatMessage(i18n.complaintFormButtonText)}
-                <i class="material-icons">arrow_forward</i>
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
               </a>
-              <div className="coa-DepartmentPage__topServiceButton">
+              <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
                 {intl.formatMessage(i18n.thankFormButtonText)}
-                Thank the Austin Police Department
-                <i class="material-icons">arrow_forward</i>
-              </div>
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+              </a>
             </div>
         </div>
       </div>
@@ -71,12 +70,12 @@ const Department = ({
               <div className="coa-DepartmentPage__topServiceButtons">
                 <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
                   {intl.formatMessage(i18n.complaintFormButtonText)}
-                  <i class="material-icons">arrow_forward</i>
+                  <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
                 </a>
-                <div className="coa-DepartmentPage__topServiceButton">
-                  Thank the Austin Police Department
-                  <i class="material-icons">arrow_forward</i>
-                </div>
+                <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                  {intl.formatMessage(i18n.thankFormButtonText)}
+                  <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+                </a>
               </div>
             </div>
           </div>
