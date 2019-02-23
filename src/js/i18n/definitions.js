@@ -49,7 +49,8 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
-  workInProgress: 'alpha.austin.gov is a new website & work in progress.',
+  workInProgress: '{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
+  workInProgressClipped: '{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}.',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
@@ -104,6 +105,8 @@ export const curbsideServices = defineMessages({
 export const departmentPage = defineMessages({
   complaintFormButtonText: "File a complaint against an Austin Police Officer",
   complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint",
+  thankFormButtonText: "Thank the Austin Police Department",
+  thankFormButtonUrl: "https://forms.austin.gov/police-oversight/complaint",
   thankFormButtonText: "Thank an Austin Police Officer",
   thankFormUrl: "https://forms.austin.gov/police-oversight/thank",
   yourDataLinkText: "How we store and use your data",
