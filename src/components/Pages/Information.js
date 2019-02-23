@@ -33,8 +33,10 @@ const InformationPage = ({
   <div>
     <div className="coa_InformationPage__back-to-dept">
       <div className="wrapper container-fluid">
-        <i class="material-icons">arrow_back</i>
-        {`${intl.formatMessage(i18n2.opoName)}`}
+        <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
+          <i className="material-icons coa_InformationPage__arrow">arrow_back</i>
+          <span>{intl.formatMessage(i18n2.opoName)}</span>
+        </a>
       </div>
     </div>
     {image && (
