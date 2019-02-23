@@ -103,5 +103,7 @@ export const curbsideServices = defineMessages({
 
 export const departmentPage = defineMessages({
   complaintFormButtonText: "File a complaint against an Austin Police Officer",
-  complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint"
+  complaintFormUrl: "https://forms.austin.gov/police-oversight/complaint",
+  thankFormButtonText: "Thank the Austin Police Department",
+  thankFormButtonUrl: "https://forms.austin.gov/police-oversight/complaint",
 });
