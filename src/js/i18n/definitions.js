@@ -55,6 +55,7 @@ export const misc = defineMessages({
   steps: 'Steps',
   welcomeTo: 'Welcome to',
   whatElse: 'What else do I need to know?',
+  opoName: 'Office of Police Oversight'
 });
 
 export const navigation = defineMessages({

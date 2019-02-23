@@ -1,0 +1,11 @@
+.coa_InformationPage__back-to-dept {
+  text-transform: uppercase;
+  color: $coa-color-primary;
+  background: $coa-color-gray-lightest;
+  line-height: 6rem;
+  font-size: 1.7rem;
+  border-bottom: 1px solid $coa-color-half-primary;
+  @include media($coa-medium-screen) {
+    background: $coa-color-white;
+  }
+}

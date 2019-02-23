@@ -31,6 +31,11 @@ const InformationPage = ({
   intl,
 }) => (
   <div>
+    <div className="coa_InformationPage__back-to-dept">
+      <div className="wrapper container-fluid">
+        {`< | ${intl.formatMessage(i18n2.opoName)}`}
+      </div>
+    </div>
     {image && (
       <PageBanner
         imagesPath={`${process.env.CMS_MEDIA}/images`}
