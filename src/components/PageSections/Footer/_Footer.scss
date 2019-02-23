@@ -6,26 +6,23 @@
 }
 
 .coa-Footer__city-seal-wrapper {
-  padding: $coa-space-level1 0 $coa-space-level3;
+  text-align: center;
+  padding: $coa-space-level7 0 $coa-space-level3;
   @include media($coa-medium-screen) {
-    text-align: center;
+    padding: $coa-space-level8 0 $coa-space-level3;
   }
 }
 
 .coa-Footer__work-in-progress {
-  font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
-  margin: 0 0 $coa-space-level5;
-  a {
-    svg {
-      fill: $coa-color-blue-darker;
-      height: $coa-font-size-xsmall - .1rem;
-      width: $coa-font-size-xsmall - .1rem;
-      &:hover {
-        fill: $coa-color-blue-darkest;
-      }
-    }
+  text-align: center;
+  font-size: $coa-font-size-medium;
+  line-height: $coa-line-height-medium;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-xxlarge;
+    line-height: $coa-line-height-xxlarge;
   }
+  max-width: 660px;
+  margin: auto;
 }
 
 .coa-Footer__icons {
@@ -45,4 +42,15 @@
   @include media($coa-medium-screen) {
     text-align: right;
   }
+}
+
+.coa-Footer__more_text_boxes {
+  display: flex;
+  justify-content: center;
+}
+
+.coa-Footer__more_text_box {
+  justify-content: center;
+  max-width: 25rem;
+  margin: 3rem;
 }

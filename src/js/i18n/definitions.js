@@ -49,6 +49,7 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
+  workInProgress: 'alpha.austin.gov is a new website & work in progress.',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
