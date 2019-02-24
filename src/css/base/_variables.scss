@@ -1,10 +1,18 @@
 //typography
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i|Open+Sans:400,600,700,800');
 
+// Get IBM Plex Sans working in IE
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('IBM Plex Sans'), local('IBMPlexSans'), url(https://fonts.gstatic.com/s/ibmplexsans/v4/zYXgKVElMYYaJe8bpLHnCwDKhdHeEw.woff) format('woff');
+}
+
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 /* TODO: determine fallback fonts */
-$coa-font-sans: 'Ibm Plex Sans';
+$coa-font-sans: 'IBM Plex Sans';
 $coa-font-serif: $coa-font-sans;
 $coa-font-regular: 400;
 $coa-font-semibold: 600;
