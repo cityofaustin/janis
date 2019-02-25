@@ -10,19 +10,28 @@ import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Menu from 'components/PageSections/Menu';
+import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
+import DomeSVG from 'components/SVGs/Dome';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       menuIsOpen: false,
+      howYouKnowmenuIsOpen: false,
     };
   }
 
   toggleMenu = e => {
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
+    });
+  };
+
+  toggleHowYouKnowMenu = e => {
+    this.setState({
+      howYouKnowmenuIsOpen: !this.state.howYouKnowmenuIsOpen,
     });
   };
 
@@ -36,6 +45,16 @@ class Header extends Component {
         })}
         role="banner"
       >
+        <div className="coa-Header__gov-site">
+          <div className="container-fluid wrapper">
+            <DomeSVG />
+            {intl.formatMessage(i18n1.coaOfficialWeb)}
+            <span className="coa-Header__gov-site-toggle" onClick={this.toggleHowYouKnowMenu}>
+              {intl.formatMessage(i18n1.officialHowYouKnow)}
+            </span>
+            {this.state.howYouKnowmenuIsOpen ? "-" : "+"}
+          </div>
+        </div>
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
@@ -48,6 +67,11 @@ class Header extends Component {
                 className="coa-Header__menu-toggle"
                 ref="menu"
               >
+                { this.state.menuIsOpen ? 
+                  <i class="material-icons coa-Header__menuIcon">close</i> :
+                  <i class="material-icons coa-Header__menuIcon">menu</i> 
+                }
+                
                 {intl.formatMessage(i18n2.menu)}
               </button>
               <div className="coa-Header__desktop-languages">
@@ -74,6 +98,7 @@ class Header extends Component {
           isMenuOpen={this.state.menuIsOpen}
           navigation={navigation}
         />
+        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} />
       </header>
     );
   }
