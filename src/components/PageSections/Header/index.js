@@ -66,6 +66,11 @@ class Header extends Component {
                 className="coa-Header__menu-toggle"
                 ref="menu"
               >
+                { this.state.menuIsOpen ? 
+                  <i class="material-icons coa-Header__menuIcon">close</i> :
+                  <i class="material-icons coa-Header__menuIcon">menu</i> 
+                }
+                
                 {intl.formatMessage(i18n2.menu)}
               </button>
               <div className="coa-Header__desktop-languages">
