@@ -102,3 +102,23 @@
     font-size: $coa-font-size-medium;
   }
 }
+
+.coa-Header__gov-site {
+  background: $coa-color-blue-darkest;
+  font-size: 1.2rem;
+  svg {
+    vertical-align: middle;
+    height: 1.6rem;
+    margin-top: -.4rem;
+    margin-right: .4rem;
+    margin-left: .4rem;
+  }
+}
+
+.coa-Header__gov-site-toggle {
+  text-decoration: underline;
+  margin-left: 1.3rem;
+  margin-right: .5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}

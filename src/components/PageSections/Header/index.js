@@ -11,18 +11,26 @@ import ExternalLink from 'components/ExternalLink';
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Menu from 'components/PageSections/Menu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
+import DomeSVG from 'components/SVGs/Dome';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       menuIsOpen: false,
+      howYouKnowmenuIsOpen: false,
     };
   }
 
   toggleMenu = e => {
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
+    });
+  };
+
+  toggleHowYouKnowMenu = e => {
+    this.setState({
+      howYouKnowmenuIsOpen: !this.state.howYouKnowmenuIsOpen,
     });
   };
 
@@ -36,6 +44,16 @@ class Header extends Component {
         })}
         role="banner"
       >
+        <div className="coa-Header__gov-site">
+          <div className="container-fluid wrapper">
+            <DomeSVG />
+            {intl.formatMessage(i18n1.coaOfficialWeb)}
+            <span className="coa-Header__gov-site-toggle" onClick={this.toggleHowYouKnowMenu}>
+              {intl.formatMessage(i18n1.officialHowYouKnow)}
+            </span>
+            {this.state.howYouKnowmenuIsOpen ? "-" : "+"}
+          </div>
+        </div>
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
