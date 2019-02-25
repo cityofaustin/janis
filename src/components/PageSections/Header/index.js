@@ -10,6 +10,7 @@ import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Menu from 'components/PageSections/Menu';
+import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import DomeSVG from 'components/SVGs/Dome';
 
@@ -97,6 +98,7 @@ class Header extends Component {
           isMenuOpen={this.state.menuIsOpen}
           navigation={navigation}
         />
+        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} />
       </header>
     );
   }
