@@ -61,24 +61,26 @@ const Department = ({
             </div>
         </div>
       </div>
+      <div className="wrapper container-fluid">
+        <div className="coa-DepartmentPage__topservices--desktop">
+          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
+            <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
+            <div className="coa-DepartmentPage__topServiceButtons">
+              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n.complaintFormButtonText)}
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+              </a>
+              <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
+                {intl.formatMessage(i18n.thankFormButtonText)}
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-          <div className="coa-DepartmentPage__topservices--desktop">
-            <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-              <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
-              <div className="coa-DepartmentPage__topServiceButtons">
-                <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
-                  {intl.formatMessage(i18n.complaintFormButtonText)}
-                  <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
-                </a>
-                <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
-                  {intl.formatMessage(i18n.thankFormButtonText)}
-                  <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
-                </a>
-              </div>
-            </div>
-          </div>
           <div className="coa-SectionHeader">What we do</div>
           <p>{Parser(whatWeDo)}</p>
           <div className="coa-SectionHeader">Our mission</div>

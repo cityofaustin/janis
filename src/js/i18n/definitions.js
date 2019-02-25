@@ -57,7 +57,10 @@ export const misc = defineMessages({
   welcomeTo: 'Welcome to',
   whatElse: 'What else do I need to know?',
   opoName: 'Office of Police Oversight',
-  opoDeptUrl: 'https://alpha.austin.gov/police-oversight'
+  opoDeptUrl: 'https://alpha.austin.gov/police-oversight',
+  coaOfficialWeb: 'An official website of the City of Austin',
+  officialHowYouKnow: 'Here’s how you know.'
+
 });
 
 export const navigation = defineMessages({
