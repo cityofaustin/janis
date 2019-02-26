@@ -4,6 +4,8 @@ import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import GovSVG from 'components/SVGs/Gov';
 
+import { howYouKnowMenu as i18n } from 'js/i18n/definitions';
+
 const HowYouKnowMenu = ({ open, intl }) => (
   <div className={classNames('coa-HowYouKnowMenu', {'coa-HowYouKnowMenu--is-open': open})}>
     <div className="container-fluid wrapper">
@@ -11,15 +13,15 @@ const HowYouKnowMenu = ({ open, intl }) => (
         <div className="coa-HowYouKnowMenu__info-block">
           <GovSVG fill="white"/>
           <div className="coa-HowYouKnowMenu__info-block-text">
-            <div className="coa-HowYouKnowMenu__info-block-header">The .gov means it’s official.</div>
-            <div>Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a federal government site.</div>
+            <div className="coa-HowYouKnowMenu__info-block-header">{intl.formatMessage(i18n.dotGovHeader)}</div>
+            <div>{intl.formatMessage(i18n.dotGovText)}</div>
           </div>
         </div>
         <div className="coa-HowYouKnowMenu__info-block">
           <i class="material-icons coa-HowYouKnowMenu__icon">lock</i>
           <div className="coa-HowYouKnowMenu__info-block-text">
-            <div className="coa-HowYouKnowMenu__info-block-header">The site is secure.</div>
-            <div>The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.</div>
+            <div className="coa-HowYouKnowMenu__info-block-header">{intl.formatMessage(i18n.httpsHeader)}</div>
+            <div>{intl.formatMessage(i18n.httpsText)}</div>
           </div>
         </div>
       </div>

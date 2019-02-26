@@ -30,7 +30,7 @@ const Footer = ({ threeoneone, intl }) => (
         </div>
         <div className="coa-Footer__more_text_boxes">
           <div className="coa-Footer__more_text_box">
-            For the full City of Austin website visit <ExternalLink to={"https://www.austintexas.gov/"}>
+            {intl.formatMessage(i18n.forFullVisit)} <ExternalLink to={"https://www.austintexas.gov/"}>
               austintexas.gov.
             </ExternalLink>
           </div>

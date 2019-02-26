@@ -51,6 +51,7 @@ export const misc = defineMessages({
   citySeal: 'City of Austin Seal',
   workInProgress: '{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
   workInProgressClipped: '{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}.',
+  forFullVisit: 'For the full City of Austin website, visit ',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
@@ -116,5 +117,15 @@ export const departmentPage = defineMessages({
   yourDataLinkText: "How we store and use your data",
   yourDataUrl: "http://alpha.austin.gov/police-oversight/how-we-store-and-use-your-data",
   investigationProcessLinkText: "Complaint Investigation Process",
-  investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process"
+  investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process",
+  directorTitle: "Director, Office of Police Oversight",
+  coa: "City of Austin",
+  mission: "Our mission"
+});
+
+export const howYouKnowMenu = defineMessages({
+  dotGovHeader: "The .gov means it’s official.",
+  dotGovText: "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a federal government site.",
+  httpsHeader: "The site is secure.",
+  httpsText: "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
 });
