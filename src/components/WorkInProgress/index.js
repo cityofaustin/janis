@@ -21,7 +21,7 @@ const WorkInProgress = ({ isClipped }) =>
           </Link>
         ),
         projectsSiteLink: (
-          <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
+          <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
             project site.
           </ExternalLink>
         ),
@@ -38,7 +38,7 @@ const WorkInProgress = ({ isClipped }) =>
           </ExternalLink>
         ),
         projectsSiteLink: (
-          <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
+          <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
             projects.austintexas.io
           </ExternalLink>
         ),
