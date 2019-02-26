@@ -119,7 +119,8 @@ export const departmentPage = defineMessages({
   investigationProcessLinkText: "Complaint Investigation Process",
   investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process",
   directorTitle: "Director, Office of Police Oversight",
-  coa: "City of Austin"
+  coa: "City of Austin",
+  mission: "Our mission"
 });
 
 export const howYouKnowMenu = defineMessages({

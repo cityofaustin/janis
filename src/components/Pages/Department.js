@@ -83,7 +83,7 @@ const Department = ({
           <div className="wrapper wrapper--sm container-fluid">
           <div className="coa-SectionHeader">What we do</div>
           <p>{Parser(whatWeDo)}</p>
-          <div className="coa-SectionHeader">Our mission</div>
+          <div className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</div>
           <p>{mission}</p>
           <div className="coa-DepartmentPage__contacts-mobile">
             {!!contacts &&
