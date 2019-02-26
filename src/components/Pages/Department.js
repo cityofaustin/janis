@@ -48,7 +48,7 @@ const Department = ({
       )}
       <div className="coa-DepartmentPage__topservices--mobile">
         <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
-          <h3 className="coa-DepartmentPage__topservices-header--mobile">Top Services</h3>
+          <h3 className="coa-DepartmentPage__topservices-header--mobile">{intl.formatMessage(i18n.topServices)}</h3>
             <div className="coa-DepartmentPage__topServiceButtons">
               <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
                 {intl.formatMessage(i18n.complaintFormButtonText)}
@@ -64,7 +64,7 @@ const Department = ({
       <div className="wrapper container-fluid">
         <div className="coa-DepartmentPage__topservices--desktop">
           <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-            <h3 className="coa-DepartmentPage__topservices-header--desktop">Top Services:</h3>
+            <h3 className="coa-DepartmentPage__topservices-header--desktop">{intl.formatMessage(i18n.topServices)}</h3>
             <div className="coa-DepartmentPage__topServiceButtons">
               <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
                 {intl.formatMessage(i18n.complaintFormButtonText)}
@@ -81,7 +81,7 @@ const Department = ({
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-          <div className="coa-SectionHeader">What we do</div>
+          <div className="coa-SectionHeader">{intl.formatMessage(i18n.whatWeDo)}</div>
           <p>{Parser(whatWeDo)}</p>
           <div className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</div>
           <p>{mission}</p>
@@ -91,7 +91,7 @@ const Department = ({
                 <ContactDetails contact={contacts[0]} />
             )}
           </div>
-          <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
+          <div className="coa-SectionHeader">{directors.length > 1 ? intl.formatMessage(i18n.meetDirectors) : intl.formatMessage(i18n.meetDirector)}</div>
           {directors.map(director => (
             <div>
               <div className="coa-DepartmentPage__directorcard">
