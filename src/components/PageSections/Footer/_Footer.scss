@@ -3,6 +3,11 @@
   color: $coa-color-white;
   font-family: $coa-font-sans;
   padding-bottom: $coa-spacing-large;
+  a {
+    &:hover {
+      color: #D9E8F6;
+    }
+  }
 }
 
 .coa-Footer__city-seal-wrapper {
