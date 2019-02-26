@@ -7,9 +7,13 @@
 
 .coa-Footer__city-seal-wrapper {
   text-align: center;
-  padding: $coa-space-level7 0 $coa-space-level3;
-  @include media($coa-medium-screen) {
-    padding: $coa-space-level8 0 $coa-space-level3;
+  // padding: $coa-space-level5 0 $coa-space-level3;
+  // @include media($coa-medium-screen) {
+  //   padding: $coa-space-level6 0 $coa-space-level3;
+  // }
+  svg {
+    height: 180px !important;
+    width: 180px !important;
   }
 }
 
