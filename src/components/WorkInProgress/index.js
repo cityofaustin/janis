@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Link } from 'react-static';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
 
-const WorkInProgress = ({ isClipped }) =>
+const WorkInProgress = ({ isClipped, intl }) =>
   isClipped ? (
     <FormattedMessage
       id="misc.workInProgressClipped"
@@ -16,17 +17,17 @@ const WorkInProgress = ({ isClipped }) =>
           </ExternalLink>
         ),
         alphaSiteLink: (
-          <Link className="coa-Footer__link" to="http://alpha.austin.gov">
+          <Link className="coa-Footer__link" to="https://alpha.austin.gov">
             Alpha.austin.gov
           </Link>
         ),
         projectsSiteLink: (
-          <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
-            project site.
+          <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
+            {intl.formatMessage(i18n.projectsSiteLinkText)}
           </ExternalLink>
         ),
       }}
-      defaultMessage="{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}."
+      defaultMessage="{alphaSiteLink} is a work in progress. Learn more on our {projectsSiteLink}"
     />
   ) : (
     <FormattedMessage
@@ -38,7 +39,7 @@ const WorkInProgress = ({ isClipped }) =>
           </ExternalLink>
         ),
         projectsSiteLink: (
-          <ExternalLink to="http://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/">
+          <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
             projects.austintexas.io
           </ExternalLink>
         ),
@@ -51,4 +52,4 @@ WorkInProgress.propTypes = {
   isClipped: PropTypes.bool,
 };
 
-export default WorkInProgress;
+export default injectIntl(WorkInProgress);
