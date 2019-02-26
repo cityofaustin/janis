@@ -26,6 +26,7 @@
   text-align: center;
   font-size: $coa-font-size-medium;
   line-height: $coa-line-height-medium;
+  white-space: pre-line;
   // @include media($coa-medium-screen) {
   //   font-size: $coa-font-size-xxlarge;
   //   line-height: $coa-line-height-xxlarge;
@@ -65,7 +66,7 @@
 .coa-Footer__more_text_box {
   justify-content: center;
   text-align: center;
-  max-width: 37.5rem;
+  max-width: 40rem;
   margin: 3rem;
 }
 

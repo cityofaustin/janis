@@ -34,6 +34,8 @@
   "misc.whatElse": "¿Qué más necesito saber?",
   "misc.workInProgress": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "misc.workInProgressClipped": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
+  "misc.workInProgressClipped": "{alphaSiteLink} está en proceso de desarrollo.\n{projectsSiteLink}",
+  "misc.projectsSiteLinkText": "Aprenda más sobre el proyecto.",
   "misc.forFullVisit": "Para ver el sitio web completo de la Ciudad de Austin, visite ",
   "misc.coaOfficialWeb": "Un sitio oficial de la Ciudad de Austin.",
   "misc.officialHowYouKnow": "Así es como usted puede verificarlo.",

@@ -50,7 +50,7 @@ export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
   workInProgress: '{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
-  workInProgressClipped: '{alphaSiteLink} is a work in progress. Learn more on our {projectsSiteLink}',
+  workInProgressClipped: '{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}',
   forFullVisit: 'For the full City of Austin website, visit ',
   overview: 'Overview',
   privacy: 'Read About Privacy',
@@ -62,7 +62,8 @@ export const misc = defineMessages({
   coaOfficialWeb: 'An official website of the City of Austin',
   officialHowYouKnow: 'Here’s how you know.',
   services: "Services",
-  info: "Information"
+  info: "Information",
+  projectsSiteLinkText: "project site."
 });
 
 export const navigation = defineMessages({

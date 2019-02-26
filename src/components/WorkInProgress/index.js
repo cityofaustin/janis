@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Link } from 'react-static';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
 
-const WorkInProgress = ({ isClipped }) =>
+const WorkInProgress = ({ isClipped, intl }) =>
   isClipped ? (
     <FormattedMessage
       id="misc.workInProgressClipped"
@@ -22,7 +23,7 @@ const WorkInProgress = ({ isClipped }) =>
         ),
         projectsSiteLink: (
           <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
-            project site.
+            {intl.formatMessage(i18n.projectsSiteLinkText)}
           </ExternalLink>
         ),
       }}
@@ -51,4 +52,4 @@ WorkInProgress.propTypes = {
   isClipped: PropTypes.bool,
 };
 
-export default WorkInProgress;
+export default injectIntl(WorkInProgress);
