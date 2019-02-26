@@ -53,5 +53,6 @@
   "howYouKnowMenu.dotGovHeader": "El dominio .gov significa que es oficial.",
   "howYouKnowMenu.dotGovText": "Los sitios del gobierno frecuentemente terminan en dominios .gov o .mil. Antes de compartir información confidencial, asegúrese de que está en un sitio del gobierno.",
   "howYouKnowMenu.httpsHeader": "Este sitio es seguro.",
-  "howYouKnowMenu.httpsText": "El protocolo https:// le asegura que se está conectando al sitio web oficial y que cualquier información que usted proporcione está encriptada y será transmitida de forma segura."
+  "howYouKnowMenu.httpsText": "El protocolo https:// le asegura que se está conectando al sitio web oficial y que cualquier información que usted proporcione está encriptada y será transmitida de forma segura.",
+  "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin"
 }
