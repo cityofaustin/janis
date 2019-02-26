@@ -118,3 +118,10 @@ export const departmentPage = defineMessages({
   investigationProcessLinkText: "Complaint Investigation Process",
   investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process"
 });
+
+export const howYouKnowMenu = defineMessages({
+  dotGovHeader: "The .gov means it’s official.",
+  dotGovText: "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a federal government site.",
+  httpsHeader: "The site is secure.",
+  httpsText: "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
+});

@@ -57,5 +57,9 @@
   "departmentPage.yourDataLinkText": "How we store and use your data",
   "departmentPage.yourDataUrl": "http://alpha.austin.gov/police-oversight/how-we-store-and-use-your-data",
   "departmentPage.investigationProcessLinkText": "Complaint investigation process",
-  "departmentPage.investigationProcessUrl": "http://alpha.austin.gov/police-oversight/complaint-investigation-process"
+  "departmentPage.investigationProcessUrl": "http://alpha.austin.gov/police-oversight/complaint-investigation-process",
+  "howYouKnowMenu.dotGovHeader": "The .gov means it’s official.",
+  "howYouKnowMenu.dotGovText": "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a federal government site.",
+  "howYouKnowMenu.httpsHeader": "The site is secure.",
+  "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
 }

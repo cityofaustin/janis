@@ -5,7 +5,7 @@
   "contact.closed": "",
   "contact.map": "",
   "contact.phoneTTD": "",
-  "contact.questionsTitle": "¿Aún tiene preguntas? Contacte a:",
+  "contact.questionsTitle": "Información de contacto",
   "date.weekdayFriday": "Viernes",
   "date.weekdayMonday": "Lunes",
   "date.weekdaySaturday": "Sábado",
@@ -33,8 +33,10 @@
   "misc.whatElse": "¿Qué más necesito saber?",
   "misc.workInProgress": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "misc.workInProgressClipped": "Alpha.austin.gov es aún en desarrollo. Para ver el sitio web completo de la Ciudad de Austin, visite {citySiteLink}.",
+  "misc.coaOfficialWeb": "Un sitio oficial del Ciudad de Austin.",
+  "misc.officialHowYouKnow": "Así es como usted puede verificarlo.",
   "navigation.home": "Inicio",
-  "navigation.menu": "",
+  "navigation.menu": "Menú",
   "navigation.openInNewWindow": "",
   "navigation.search": "Buscar",
   "navigation.skipToMain": "",
@@ -47,5 +49,9 @@
   "threeoneone.contact311": "",
   "topics.topic": "",
   "departmentPage.complaintFormButtonText": "Presente Una Queja",
-  "departmentPage.complaintFormUrl": "https://forms.austin.gov/fiscalizacion-de-policia/queja"
+  "departmentPage.complaintFormUrl": "https://forms.austin.gov/fiscalizacion-de-policia/queja",
+  "howYouKnowMenu.dotGovHeader": "El dominio .gov significa que es oficial.",
+  "howYouKnowMenu.dotGovText": "Los sitios del gobierno frecuentemente terminan en dominios .gov o .mil. Antes de compartir información confidencial, asegúrese de que está en un sitio del gobierno.",
+  "howYouKnowMenu.httpsHeader": "Este sitio es seguro.",
+  "howYouKnowMenu.httpsText": "El protocolo https:// le asegura que se está conectando al sitio web oficial y que cualquier información que usted proporcione está encriptada y será transmitida de forma segura."
 }
