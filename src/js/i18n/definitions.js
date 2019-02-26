@@ -60,8 +60,9 @@ export const misc = defineMessages({
   opoName: 'Office of Police Oversight',
   opoDeptUrl: 'https://alpha.austin.gov/police-oversight',
   coaOfficialWeb: 'An official website of the City of Austin',
-  officialHowYouKnow: 'Here’s how you know.'
-
+  officialHowYouKnow: 'Here’s how you know.',
+  services: "Services",
+  info: "Information"
 });
 
 export const navigation = defineMessages({
@@ -120,7 +121,11 @@ export const departmentPage = defineMessages({
   investigationProcessUrl: "http://alpha.austin.gov/police-oversight/complaint-investigation-process",
   directorTitle: "Director, Office of Police Oversight",
   coa: "City of Austin",
-  mission: "Our mission"
+  mission: "Our mission",
+  whatWeDo: "What we do",
+  meetDirector: "Meet our director",
+  meetDirectors: "Meet our directors",
+  topServices: "Top Services:"
 });
 
 export const howYouKnowMenu = defineMessages({

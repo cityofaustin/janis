@@ -36,6 +36,9 @@
   "misc.forFullVisit": "Para ver el sitio web completo de la Ciudad de Austin, visite ",
   "misc.coaOfficialWeb": "Un sitio oficial del Ciudad de Austin.",
   "misc.officialHowYouKnow": "Así es como usted puede verificarlo.",
+  "misc.opoName": "Oficina de Fiscalización de la Policía",
+  "misc.services": "Servicios",
+  "misc.info": "Información",
   "navigation.home": "Inicio",
   "navigation.menu": "Menú",
   "navigation.openInNewWindow": "",
@@ -49,7 +52,7 @@
   "threeoneone.call311": "Llame al 311",
   "threeoneone.contact311": "",
   "topics.topic": "",
-  "departmentPage.complaintFormButtonText": "Presente Una Queja",
+  "departmentPage.complaintFormButtonText": "Presente una queja contra un oficial de policía de Austin",
   "departmentPage.complaintFormUrl": "https://forms.austin.gov/fiscalizacion-de-policia/queja",
   "howYouKnowMenu.dotGovHeader": "El dominio .gov significa que es oficial.",
   "howYouKnowMenu.dotGovText": "Los sitios del gobierno frecuentemente terminan en dominios .gov o .mil. Antes de compartir información confidencial, asegúrese de que está en un sitio del gobierno.",
@@ -58,5 +61,10 @@
   "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin",
   "departmentPage.directorTitle": "Directora, Oficina de Fiscalización de la Policía",
   "departmentPage.coa": "Ciudad de Austin",
-  "departmentPage.mission": "Nuestra misión"
+  "departmentPage.mission": "Nuestra misión",
+  "departmentPage.whatWeDo": "Lo que hacemos",
+  "departmentPage.meetDirector": "Conoce a nuestra directora",
+  "departmentPage.topServices": "Servicios principales",
+  "departmentPage.yourDataLinkText": "Cómo almacenamos y usamos su información",
+  "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas"
 }
