@@ -83,7 +83,7 @@ const Department = ({
           <div className="wrapper wrapper--sm container-fluid">
           <div className="coa-SectionHeader">What we do</div>
           <p>{Parser(whatWeDo)}</p>
-          <div className="coa-SectionHeader">Our mission</div>
+          <div className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</div>
           <p>{mission}</p>
           <div className="coa-DepartmentPage__contacts-mobile">
             {!!contacts &&
@@ -100,8 +100,8 @@ const Department = ({
                 </div>
                 <div className="coa-DepartmentPage__directorcard-info">
                   <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
-                  <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
-                  <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
+                  <div className="coa-DepartmentPage__directorcard-title">{intl.formatMessage(i18n.directorTitle)}</div>
+                  <div className="coa-DepartmentPage__directorcard-coamaybe">{intl.formatMessage(i18n.coa)}</div>
                 </div>
               </div>
               <p>{director.about}</p>
