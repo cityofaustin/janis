@@ -81,7 +81,7 @@ const Department = ({
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-          <div className="coa-SectionHeader">What we do</div>
+          <div className="coa-SectionHeader">{intl.formatMessage(i18n.whatWeDo)}</div>
           <p>{Parser(whatWeDo)}</p>
           <div className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</div>
           <p>{mission}</p>
