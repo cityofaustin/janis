@@ -16,7 +16,7 @@ const WorkInProgress = ({ isClipped }) =>
           </ExternalLink>
         ),
         alphaSiteLink: (
-          <Link className="coa-Footer__link" to="http://alpha.austin.gov">
+          <Link className="coa-Footer__link" to="https://alpha.austin.gov">
             Alpha.austin.gov
           </Link>
         ),
@@ -26,7 +26,7 @@ const WorkInProgress = ({ isClipped }) =>
           </ExternalLink>
         ),
       }}
-      defaultMessage="{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}."
+      defaultMessage="{alphaSiteLink} is a work in progress. Learn more on our {projectsSiteLink}"
     />
   ) : (
     <FormattedMessage

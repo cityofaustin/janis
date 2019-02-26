@@ -32,7 +32,7 @@
   "misc.welcomeTo": "Welcome to",
   "misc.whatElse": "What else do I need to know?",
   "misc.workInProgress": "{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
-  "misc.workInProgressClipped": "{alphaSiteLink} is a work in progress. Learn more on our project site {projectsSiteLink}.",
+  "misc.workInProgressClipped": "{alphaSiteLink} is a work in progress. Learn more on our {projectsSiteLink}",
   "misc.forFullVisit": "For the full City of Austin website, visit ",
   "misc.opoName": "Office of Police Oversight",
   "misc.opoDeptUrl": "https://alpha.austin.gov/police-oversight",
