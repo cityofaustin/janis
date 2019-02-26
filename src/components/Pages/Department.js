@@ -100,7 +100,7 @@ const Department = ({
                 </div>
                 <div className="coa-DepartmentPage__directorcard-info">
                   <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
-                  <div className="coa-DepartmentPage__directorcard-title">Director, Office of Police Oversight</div>
+                  <div className="coa-DepartmentPage__directorcard-title">{intl.formatMessage(i18n.directorTitle)}</div>
                   <div className="coa-DepartmentPage__directorcard-coamaybe">City of Austin</div>
                 </div>
               </div>

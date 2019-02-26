@@ -55,5 +55,6 @@
   "howYouKnowMenu.dotGovText": "Los sitios del gobierno frecuentemente terminan en dominios .gov o .mil. Antes de compartir información confidencial, asegúrese de que está en un sitio del gobierno.",
   "howYouKnowMenu.httpsHeader": "Este sitio es seguro.",
   "howYouKnowMenu.httpsText": "El protocolo https:// le asegura que se está conectando al sitio web oficial y que cualquier información que usted proporcione está encriptada y será transmitida de forma segura.",
-  "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin"
+  "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin",
+  "departmentPage.directorTitle": "Directora, Oficina de Fiscalización de la Policía"
 }
