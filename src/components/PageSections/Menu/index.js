@@ -69,7 +69,7 @@ class Menu extends Component {
             <div className="coa-Menu__header">
               <h2><a href={intl.formatMessage(i18n1.opoDeptUrl)}>{intl.formatMessage(i18n1.opoName)}</a></h2>
             </div>
-            <div className="coa-Menu__subheading">Services</div>
+            <div className="coa-Menu__subheading">{intl.formatMessage(i18n1.services)}</div>
             <div className="coa-Menu__link coa-Menu__service-link">
               <a href={intl.formatMessage(i18n3.complaintFormUrl)}>{intl.formatMessage(i18n3.complaintFormButtonText)}</a>
             </div>
@@ -84,7 +84,7 @@ class Menu extends Component {
                 {intl.formatMessage(i18n3.thankFormButtonText)}
               </a>
             </div>
-            <div className="coa-Menu__subheading">Information</div>
+            <div className="coa-Menu__subheading">{intl.formatMessage(i18n1.info)}</div>
             <div className="coa-Menu__link">
               <a href={intl.formatMessage(i18n3.yourDataUrl)}>{intl.formatMessage(i18n3.yourDataLinkText)}</a>
             </div>
