@@ -122,7 +122,9 @@ export const departmentPage = defineMessages({
   directorTitle: "Director, Office of Police Oversight",
   coa: "City of Austin",
   mission: "Our mission",
-  whatWeDo: "What we do"
+  whatWeDo: "What we do",
+  meetDirector: "Meet our director",
+  meetDirectors: "Meet our directors"
 });
 
 export const howYouKnowMenu = defineMessages({

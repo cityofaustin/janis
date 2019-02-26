@@ -91,7 +91,7 @@ const Department = ({
                 <ContactDetails contact={contacts[0]} />
             )}
           </div>
-          <div className="coa-SectionHeader">Meet our {directors.length > 1 ? "directors" : "director"}</div>
+          <div className="coa-SectionHeader">{directors.length > 1 ? intl.formatMessage(i18n.meetDirectors) : intl.formatMessage(i18n.meetDirector)}</div>
           {directors.map(director => (
             <div>
               <div className="coa-DepartmentPage__directorcard">
