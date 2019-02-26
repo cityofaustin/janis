@@ -36,6 +36,7 @@
   "misc.forFullVisit": "Para ver el sitio web completo de la Ciudad de Austin, visite ",
   "misc.coaOfficialWeb": "Un sitio oficial del Ciudad de Austin.",
   "misc.officialHowYouKnow": "Así es como usted puede verificarlo.",
+  "misc.opoName": "Oficina de Fiscalización de la Policía",
   "navigation.home": "Inicio",
   "navigation.menu": "Menú",
   "navigation.openInNewWindow": "",
@@ -58,5 +59,7 @@
   "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin",
   "departmentPage.directorTitle": "Directora, Oficina de Fiscalización de la Policía",
   "departmentPage.coa": "Ciudad de Austin",
-  "departmentPage.mission": "Nuestra misión"
+  "departmentPage.mission": "Nuestra misión",
+  "departmentPage.yourDataLinkText": "Cómo almacenamos y usamos su información",
+  "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas"
 }
