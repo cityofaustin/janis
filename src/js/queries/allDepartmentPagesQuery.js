@@ -35,6 +35,7 @@ const allDepartmentPagesQuery = `
                 contact {
                   name,
                   phone,
+                  email,
                   location {
                     id,
                     name,
