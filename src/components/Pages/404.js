@@ -26,7 +26,7 @@ export default class extends React.Component {
   render() {
     return this.state.ready ? (
       <div>
-        <h1>404 - Oh no's! We couldn't find that page :(</h1>
+        <h1>Sorry, we couldn't find that page.</h1>
       </div>
     ) : null;
   }
