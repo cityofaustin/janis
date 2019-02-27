@@ -33,6 +33,22 @@
   // }
   max-width: 660px;
   margin: auto;
+
+  a {
+    color: $coa-color-white;
+    &:visited {
+      color: $coa-color-white;
+    }
+      svg {
+      margin-left: $coa-space-level1;
+      vertical-align: middle;
+      path {
+        fill: $coa-color-white;
+      }
+    }
+  }
+
+
 }
 
 .coa-Footer__icons {
@@ -68,6 +84,20 @@
   text-align: center;
   max-width: 40rem;
   margin: 3rem;
+
+  a {
+    color: $coa-color-white;
+    &:visited {
+      color: $coa-color-white;
+    }
+      svg {
+      margin-left: $coa-space-level1;
+      vertical-align: middle;
+      path {
+        fill: $coa-color-white;
+      }
+    }
+  }
 }
 
 .coa-Footer__link {
