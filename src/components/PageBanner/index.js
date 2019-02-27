@@ -11,6 +11,7 @@ const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, hea
       widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
       extension={imageExtension}
       aria-label={imageTitle}
+      altText={imageTitle}
     />
     <div
       className="coa-PageBannerCover"

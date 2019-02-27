@@ -96,7 +96,7 @@ const Department = ({
             <div>
               <div className="coa-DepartmentPage__directorcard">
                 <div className="coa-DepartmentPage__directorcard-headshot">
-                <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`}></img>
+                <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`} alt="Headshot of Farah Muscadin"></img>
                 </div>
                 <div className="coa-DepartmentPage__directorcard-info">
                   <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
@@ -104,7 +104,7 @@ const Department = ({
                   <div className="coa-DepartmentPage__directorcard-coamaybe">{intl.formatMessage(i18n.coa)}</div>
                 </div>
               </div>
-              <p>{director.about}</p>
+              <p className="coa-DepartmentPage__directorAbout">{director.about}</p>
             </div>
           ))}
           </div>

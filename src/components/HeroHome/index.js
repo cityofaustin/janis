@@ -5,7 +5,7 @@ import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
   <div className="coa-HeroHome__container">
-    <ResponsiveImage filename={imageFilename} extension=".jpg" widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES} />
+    <ResponsiveImage filename={imageFilename} extension=".jpg" widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES} altText={imageTitle}/>
     <div
       className="coa-HeroHome"
       role="img"
