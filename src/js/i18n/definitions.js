@@ -126,7 +126,7 @@ export const departmentPage = defineMessages({
   whatWeDo: "What we do",
   meetDirector: "Meet our director",
   meetDirectors: "Meet our directors",
-  topServices: "Top Services:"
+  topServices: "Top services"
 });
 
 export const howYouKnowMenu = defineMessages({
