@@ -104,7 +104,7 @@ const Department = ({
                   <div className="coa-DepartmentPage__directorcard-coamaybe">{intl.formatMessage(i18n.coa)}</div>
                 </div>
               </div>
-              <p>{director.about}</p>
+              <p className="coa-DepartmentPage__directorAbout">{director.about}</p>
             </div>
           ))}
           </div>
