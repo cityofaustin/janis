@@ -5,17 +5,18 @@
 }
 
 .coa-ContactItem {
-  border-bottom: 1px dashed $coa-color-purple-dark;
+  // border-bottom: 1px dashed $coa-color-purple-dark;
   display: flex;
-  font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
-  padding: $coa-spacing-md-small 0;
+  align-items: flex-start;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  padding-top: $coa-spacing-medium;
   text-align: left;
 
   @include media($coa-medium-screen) {
     // font-size: $coa-font-size-small;
     // line-height: $coa-line-height-small;
-    padding: $coa-spacing-medium 0;
+    // padding: $coa-spacing-medium 0;
   }
 
   @include media($coa-large-screen) {
@@ -23,23 +24,9 @@
     // line-height: $coa-line-height-md-small;
   }
 
-  svg {
-    height: $coa-font-size-xsmall - .1rem;
-    width: $coa-font-size-xsmall - .1rem;
-    // @include media($coa-medium-screen) {
-    //   height: $coa-font-size-small - .1rem;
-    //   width: $coa-font-size-small - .1rem;
-    // }
-
-    // @include media($coa-large-screen) {
-    //   height: $coa-font-size-md-small - .1rem;
-    //   width: $coa-font-size-md-small - .1rem;
-    // }
-  }
-
   & > :first-child {
     margin-right: $coa-spacing-large;
-    margin-top: $coa-spacing-xsmall;
+    // margin-top: $coa-spacing-xsmall;
   }
 
   & > :last-child {
@@ -51,6 +38,43 @@
 
   &:last-child {
     border: none;
+  }
+
+  .material-icons {
+    color: $coa-color-primary;
+    // vertical-align: middle;
+  }
+
+  .coa-ExternalLink {
+    color: $coa-color-primary;
+    &:visited {
+      color: $coa-color-primary;
+    }
+    svg {
+      path {
+        fill: $coa-color-primary;
+      }
+    }
+  }
+}
+
+.coa-ContactItem__svg {
+  svg {
+    height: $coa-font-size-medium;
+    width: $coa-font-size-medium;
+
+    path {
+      fill: $coa-color-primary;
+    }
+    // @include media($coa-medium-screen) {
+    //   height: $coa-font-size-small - .1rem;
+    //   width: $coa-font-size-small - .1rem;
+    // }
+
+    // @include media($coa-large-screen) {
+    //   height: $coa-font-size-md-small - .1rem;
+    //   width: $coa-font-size-md-small - .1rem;
+    // }
   }
 }
 
@@ -79,4 +103,3 @@
     }
   }
 }
-
