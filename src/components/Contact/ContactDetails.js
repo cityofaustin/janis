@@ -36,9 +36,9 @@ const ContactDetails = ({
 
     {hours && <Hours hours={hours} />}
 
-    <Facebook />
-
     <Twitter />
+
+    <Facebook />
   </div>
 );
 
