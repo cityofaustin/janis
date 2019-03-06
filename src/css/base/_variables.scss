@@ -1,5 +1,5 @@
 //typography
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i|Open+Sans:400,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600|Open+Sans:400,600,700,800');
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
@@ -39,13 +39,13 @@ $coa-xlarge-screen: 1250px;
 
 //padding / margin
 $coa-space-level1: 0.5rem;
-$coa-space-level2: 1.0rem;
+$coa-space-level2: 1rem;
 $coa-space-level3: 1.5rem;
-$coa-space-level4: 2.0rem;
+$coa-space-level4: 2rem;
 $coa-space-level5: 2.5rem;
-$coa-space-level6: 3.0rem;
-$coa-space-level7: 4.0rem;
-$coa-space-level8: 6.0rem;
+$coa-space-level6: 3rem;
+$coa-space-level7: 4rem;
+$coa-space-level8: 6rem;
 
 $coa-spacing-xsmall: $coa-space-level1;
 $coa-spacing-small: $coa-space-level2;
@@ -62,37 +62,35 @@ $coa-wrapper-maxwidth: 1325px;
 $coa-wrapper-sm-maxwidth: 720px;
 
 //colors
-$coa-color-white: #FFFFFF;
+$coa-color-white: #ffffff;
 $coa-color-black: #000000;
 
-
-$coa-color-blue: #3282AF;
-$coa-color-blue-dark: #2D759F;
+$coa-color-blue: #3282af;
+$coa-color-blue-dark: #2d759f;
 $coa-color-blue-darker: #065889;
 $coa-color-blue-darkest: #023654;
 
 //new COA brand color
-$coa-color-primary: #0050D8;
-$coa-color-half-primary: rgba(0, 80, 216, .5);
+$coa-color-primary: #0050d8;
+$coa-color-half-primary: rgba(0, 80, 216, 0.5);
 $coa-color-almost-black: rgba(23, 23, 23, 1);
 $coa-color-decently-black: #212121;
 
+$coa-color-green-light: #02eaa4;
 
-$coa-color-green-light: #02EAA4;
+$coa-color-orange: #e03400;
+$coa-color-orange-dark: #b82b00;
 
-$coa-color-orange: #E03400;
-$coa-color-orange-dark: #B82B00;
-
-$coa-color-purple-lightest: #D7D2D9;
-$coa-color-purple-lighter: #9B90A2;
-$coa-color-purple-light: #5F4D68;
+$coa-color-purple-lightest: #d7d2d9;
+$coa-color-purple-lighter: #9b90a2;
+$coa-color-purple-light: #5f4d68;
 $coa-color-purple: #372145;
-$coa-color-purple-dark: #240B33;
+$coa-color-purple-dark: #240b33;
 $coa-color-purple-darkest: #170821;
 
-$coa-color-gray-lightest: #F4F4F4;
-$coa-color-gray-lighter: #EAEAEA;
-$coa-color-gray-light: #CBCBCB;
+$coa-color-gray-lightest: #f4f4f4;
+$coa-color-gray-lighter: #eaeaea;
+$coa-color-gray-light: #cbcbcb;
 $coa-color-gray: #919191;
 $coa-color-gray-dark: #363636;
 
@@ -128,4 +126,7 @@ $coa-menu-closebtn-height: 4rem;
 $coa-herohome-height--default: 26rem;
 $coa-herohome-height--medium: 40rem;
 $coa-herohome-height--large: 44rem;
-$coa-herohome-gradient: linear-gradient(rgba(36, 11, 51, .3), rgba(36, 11, 51, .3));
+$coa-herohome-gradient: linear-gradient(
+  rgba(36, 11, 51, 0.3),
+  rgba(36, 11, 51, 0.3)
+);
