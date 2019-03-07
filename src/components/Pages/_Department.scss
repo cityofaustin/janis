@@ -29,7 +29,7 @@
 .coa-DepartmentPage__topservices-header--mobile {
   color: $coa-color-white;
   font-size: 1.5rem;
-  letter-spacing: .15rem;
+  letter-spacing: 0.15rem;
 }
 
 .coa-DepartmentPage__topservices-header--desktop {
@@ -64,9 +64,10 @@
 
 .coa-SectionHeader {
   color: $coa-color-primary;
-  border-bottom: 2px solid $coa-color-half-primary;
+  border-bottom: 4px solid $coa-color-half-primary;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: $coa-spacing-xlarge;
   font-size: 2.4rem;
   font-weight: bold;
 }

@@ -34,7 +34,9 @@ const InformationPage = ({
     <div className="coa_InformationPage__back-to-dept">
       <div className="wrapper container-fluid">
         <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
-          <i className="material-icons coa_InformationPage__arrow">arrow_back</i>
+          <i className="material-icons coa_InformationPage__arrow">
+            arrow_back
+          </i>
           <span>{intl.formatMessage(i18n2.opoName)}</span>
         </a>
       </div>
@@ -55,18 +57,17 @@ const InformationPage = ({
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
     /> */}
-    <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader>{title}</PageHeader>
+    <div className="wrapper container-fluid">
+      <PageHeader description={description}>{title}</PageHeader>
       <div>{toplink}</div>
-      <div>{description}</div>
+    </div>
+
+    <div className="wrapper wrapper--sm container-fluid">
       {options.map((option, index) => (
         <HtmlFromAdmin title={''} content={option.value} />
       ))}
       {additionalContent && (
-        <HtmlFromAdmin
-          title={' '}
-          content={additionalContent}
-        />
+        <HtmlFromAdmin title={' '} content={additionalContent} />
       )}
     </div>
   </div>
