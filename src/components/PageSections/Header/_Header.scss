@@ -67,7 +67,7 @@
 }
 
 .coa-Header__right-controls {
-    display: none;
+  display: none;
   @include media($coa-medium-screen) {
     display: flex;
   }
@@ -77,7 +77,7 @@
     &:visited {
       color: $coa-color-white;
     }
-      svg {
+    svg {
       margin-left: $coa-space-level1;
       vertical-align: middle;
       path {
@@ -109,6 +109,12 @@
   color: $coa-color-white;
   font-weight: $coa-font-semibold;
   text-decoration: none;
+  cursor: default;
+  // Instead of making it not a link let's just pretend it's not one with style
+  &:hover {
+    color: $coa-color-white;
+    cursor: default;
+  }
   &:visited {
     color: $coa-color-white;
   }
@@ -127,16 +133,16 @@
   svg {
     vertical-align: middle;
     height: 1.6rem;
-    margin-top: -.4rem;
-    margin-right: .4rem;
-    margin-left: .4rem;
+    margin-top: -0.4rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
   }
 }
 
 .coa-Header__gov-site-toggle {
   text-decoration: underline;
   margin-left: 1.3rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   font-size: 1.1rem;
   cursor: pointer;
 }
@@ -145,5 +151,5 @@
   display: inline;
   vertical-align: middle;
   font-size: 1.8rem;
-  margin-right: .4rem;
+  margin-right: 0.4rem;
 }
