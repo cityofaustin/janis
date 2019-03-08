@@ -29,10 +29,10 @@ Once Docker is installed and you've cloned the code from this repository, you ca
 #### As a React App (Developer Mode):
 
 ```
-./scripts/serve-local.sh
+yarn start-local
 ```
 
-Your react app should be running at http://localhost:3000/
+Your react app should be running at http://localhost:3000/ and pointing to your local Joplin backend. To run against staging Joplin, use `yarn start-staging`.
 
 **As a static build**
 To run the site locally as a static build, the way it works in production, see the [Static build script](#static-build-script) section below.

@@ -51,7 +51,9 @@
     "storybook-addon-intl": "^2.3.0"
   },
   "scripts": {
-    "start-local": "./scripts/serve-local.sh -P",
+    "start-local": "./scripts/serve-local.sh",
+    "start-staging": "./scripts/serve-local.sh -S",
+    "start-prod": "./scripts/serve-local.sh -P",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "start-js": "react-static start",

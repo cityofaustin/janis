@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # -P : flag to run against production CMS_API and CMS_MEDIA endpoints
+# -S : flag to run against staging endpoints
 # -e <<EXECUTABLE>> : the command you want to run in docker container upon startup
 
 # Run Janis container against local Joplin:
@@ -29,11 +30,15 @@ unset EXEC
 
 # Process Parameters
 # if -P prod flag is used, then point to prod graphql and CMS
-while getopts ":P:e" opt; do
+while getopts ":P:S:e" opt; do
   case $opt in
     P )
       CMS_API="https://joplin.herokuapp.com/api/graphql"
       CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+      ;;
+    S)
+      CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
+      CMS_MEDIA="https://joplin-staging.herokuapp.com/media"
       ;;
     e )
       EXEC=$OPTARG
