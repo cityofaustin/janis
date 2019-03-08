@@ -47,31 +47,35 @@ const Service = ({
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
     /> */}
-    <div className="wrapper wrapper--sm container-fluid">
+    <div className="wrapper container-fluid">
       <PageHeader>{title}</PageHeader>
 
-      {steps &&
-        !!steps.length && (
-          <Fragment>
-            <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
-            <Steps steps={steps} />
-          </Fragment>
-        )}
+      <div className="row">
+        <div className="col-md-8">
+          {steps &&
+            !!steps.length && (
+              <Fragment>
+                <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
+                <Steps steps={steps} />
+              </Fragment>
+            )}
 
-      {!!dynamicContent &&
-        dynamicContent.map(content => (
-          <ApplicationBlock key={content.id} content={content} />
-        ))}
+          {!!dynamicContent &&
+            dynamicContent.map(content => (
+              <ApplicationBlock key={content.id} content={content} />
+            ))}
 
-      {additionalContent && (
-        <HtmlFromAdmin
-          title={intl.formatMessage(i18n2.whatElse)}
-          content={additionalContent}
-        />
-      )}
+          {additionalContent && (
+            <HtmlFromAdmin
+              title={intl.formatMessage(i18n2.whatElse)}
+              content={additionalContent}
+            />
+          )}
 
-      {!!contacts &&
-        !!contacts.length && <ContactDetails contact={contacts[0]} />}
+          {!!contacts &&
+            !!contacts.length && <ContactDetails contact={contacts[0]} />}
+        </div>
+      </div>
     </div>
 
     <div className="wrapper container-fluid">
