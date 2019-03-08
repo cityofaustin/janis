@@ -47,9 +47,11 @@
 
   .coa-ExternalLink {
     color: $coa-color-primary;
+
     &:visited {
       color: $coa-color-primary;
     }
+
     svg {
       path {
         fill: $coa-color-primary;

@@ -5,7 +5,7 @@ import ExternalLink from 'components/ExternalLink';
 const Twitter = () => (
   <div className="coa-ContactItem coa-ContactTwitter">
     <div className="coa-ContactItem__svg">
-      <TwitterSVG />
+      <TwitterSVG viewbox={'0 0 1024 1024'} />
     </div>
     <ExternalLink to="http://austintexas.gov">@ATX_OPO</ExternalLink>
   </div>
