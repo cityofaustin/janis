@@ -38,20 +38,20 @@
       &:before {
         background-color: $coa-color-secondary;
         border-radius: 50%;
+        flex: 0 0 ($coa-line-height-medium + 0.2);
         color: $coa-color-primary;
         content: counter(step-item);
-        flex: 0 0 ($coa-line-height-medium + 0.2);
         font-size: $coa-font-size-medium;
         font-weight: $coa-font-bold;
         line-height: $coa-line-height-medium + 0.2;
-        margin-right: $coa-spacing-large;
         text-align: center;
+        margin-right: 100%;
+        margin-bottom: $coa-spacing-md-small;
 
-        // @include media($coa-medium-screen) {
-        //   font-size: $coa-font-size-md-small;
-        //   line-height: $coa-line-height-md-small;
-        //   flex: 0 0 ($coa-line-height-md-small + 0.2);
-        // }
+        @include media($coa-medium-screen) {
+          margin-right: $coa-spacing-large;
+          margin-bottom: 0;
+        }
 
         // @include media($coa-large-screen) {
         //   font-size: $coa-font-size-md-small;
