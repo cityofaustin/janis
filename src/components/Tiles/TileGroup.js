@@ -8,7 +8,7 @@ import ArrowRight from 'components/SVGs/ArrowRight';
 import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ tiles, tag, text, url, description, hasBorder }) => (
+const TileGroup = ({ tiles, text, url, description, hasBorder }) => (
   <div className={`coa-TileGroup ${hasBorder ? 'coa-TileGroup--border' : ''}`}>
     {text &&
       url && (
@@ -32,7 +32,7 @@ const TileGroup = ({ tiles, tag, text, url, description, hasBorder }) => (
           key={index}
           className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
         >
-          <Tile url={url} text={text} tag={tag} />
+          <Tile url={url} text={text} />
         </div>
       ))}
     </div>

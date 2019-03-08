@@ -1,5 +1,4 @@
 .coa-TileGroup {
-
   .coa-TileGroup__description {
     text-align: center;
   }
@@ -15,4 +14,8 @@
   border-radius: $coa-tile-group-border-radius;
   padding: 0 $coa-space-level4 $coa-space-level4;
   margin: $coa-space-level7 $coa-space-level6;
+}
+
+.coa-TileGroup__tile {
+  display: flex;
 }
