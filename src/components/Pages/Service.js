@@ -78,13 +78,12 @@ const Service = ({
       </div>
     </div>
 
-    <div className="wrapper container-fluid">
-      <TileGroup
-        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-        tiles={related}
-        tag={intl.formatMessage(i18n3.service)}
-      />
-    </div>
+    <TileGroup
+      text={intl.formatMessage(i18n3.checkOutRelatedServices)}
+      tiles={related}
+      tag={intl.formatMessage(i18n3.service)}
+      contentType={intl.formatMessage(i18n3.service)}
+    />
   </div>
 );
 
