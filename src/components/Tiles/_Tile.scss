@@ -4,6 +4,7 @@
   border-radius: $coa-button-border-radius;
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
   font-family: $coa-font-sans;
   min-width: $coa-tile-min-width;
   padding: $coa-spacing-md-small $coa-spacing-small;
@@ -25,6 +26,7 @@
 .coa-Tile__content {
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 
 .coa-Tile__text {
