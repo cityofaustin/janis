@@ -4,18 +4,12 @@ import { injectIntl } from 'react-intl';
 
 import { contact as i18n } from 'js/i18n/definitions';
 
-import PhoneSVG from 'components/SVGs/Phone';
-
 import { phonePropTypes } from './proptypes';
 
 const Phone = ({ phone, intl }) => (
   <div className="coa-ContactItem coa-ContactPhone">
-    <PhoneSVG />
-    <div>
-      <span>
-        <a href={`tel:${phone.default}`}>{phone.default}</a>
-      </span>
-    </div>
+    <i className="material-icons">contact_phone</i>
+    <a href={`tel:${phone.default}`}>{phone.default}</a>
   </div>
 );
 
