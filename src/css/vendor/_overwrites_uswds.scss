@@ -17,6 +17,10 @@ h2 {
   @include heading2();
 }
 
+h3 {
+  @include heading3();
+}
+
 h4 {
   @include heading4();
 }
