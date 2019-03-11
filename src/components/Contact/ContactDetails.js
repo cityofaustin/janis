@@ -9,6 +9,8 @@ import Phone from './Phone';
 import Email from './Email';
 import Address from './Address';
 import Hours from './Hours';
+import Facebook from './Facebook';
+import Twitter from './Twitter';
 
 import {
   addressPropTypes,
@@ -26,13 +28,17 @@ const ContactDetails = ({
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
 
-    {phone && <Phone phone={phone} />}
-
     {email && <Email email={email} />}
 
     {location && <Address location={location} />}
 
+    {phone && <Phone phone={phone} />}
+
     {hours && <Hours hours={hours} />}
+
+    <Twitter />
+
+    <Facebook />
   </div>
 );
 

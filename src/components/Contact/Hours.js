@@ -7,7 +7,6 @@ import moment from 'moment';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
 
-import ClockSVG from 'components/SVGs/ClockO';
 
 import { hoursPropTypes } from './proptypes';
 
@@ -34,7 +33,7 @@ class Hours extends Component {
 
     return (
       <div className="coa-ContactItem coa-ContactHours">
-        <ClockSVG />
+        <i className="material-icons">access_time</i>
         <table className="usa-table-borderless">
           <thead className="usa-sr-only">
             <tr>
