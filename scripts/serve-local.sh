@@ -30,7 +30,7 @@ unset EXEC
 
 # Process Parameters
 # if -P prod flag is used, then point to prod graphql and CMS
-while getopts ":P:S:e" opt; do
+while getopts "PSe:" opt; do
   case $opt in
     P )
       CMS_API="https://joplin.herokuapp.com/api/graphql"
