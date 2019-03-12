@@ -29,7 +29,7 @@
 .coa-DepartmentPage__topservices-header--mobile {
   color: $coa-color-white;
   font-size: 1.5rem;
-  letter-spacing: .15rem;
+  letter-spacing: 0.15rem;
 }
 
 .coa-DepartmentPage__topservices-header--desktop {
@@ -82,6 +82,7 @@
 .coa-DepartmentPage__directorcard-name {
   color: $coa-color-primary;
   font-size: 2.4rem;
+  font-weight: normal;
 }
 
 .coa-DepartmentPage__directorcard-title {
