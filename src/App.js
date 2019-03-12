@@ -1,12 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {
-  Router,
-  Route,
-  Switch,
-  withSiteData,
-  SiteData,
-  Head,
-} from 'react-static';
+import { Router, Route, Switch, withSiteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
 import CMSPreview from 'components/_Controllers/CMSPreview';
@@ -21,9 +14,6 @@ import 'css/coa.css';
 const AppView = withSiteData(
   injectIntl(({ path, navigation, threeoneone, intl }) => (
     <div>
-      <Head>
-        <title>{'Test'}</title>
-      </Head>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
       <main role="main" id="main">
