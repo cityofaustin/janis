@@ -9,7 +9,7 @@ $coa-font-serif: $coa-font-sans;
 $coa-font-regular: 400;
 $coa-font-semibold: 600;
 $coa-font-bold: 700;
-$coa-font-extrabold: 800;
+$coa-font-extrabold: 800; //not available with IBM Plex Sans, use coa-font-bold
 $coa-em-base: 10px;
 
 $coa-font-size-xsmall: 1.4rem;
@@ -75,6 +75,7 @@ $coa-color-primary: #0050d8;
 $coa-color-half-primary: rgba(0, 80, 216, 0.5);
 $coa-color-almost-black: rgba(23, 23, 23, 1);
 $coa-color-decently-black: #212121;
+$coa-color-dark-blue: #162e51;
 
 $coa-color-green-light: #02eaa4;
 
