@@ -81,9 +81,9 @@ const Department = ({
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-          <div className="coa-SectionHeader">{intl.formatMessage(i18n.whatWeDo)}</div>
+          <h2 className="coa-SectionHeader">{intl.formatMessage(i18n.whatWeDo)}</h2>
           <p>{Parser(whatWeDo)}</p>
-          <div className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</div>
+          <h2 className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</h2>
           <p>{mission}</p>
           <div className="coa-DepartmentPage__contacts-mobile">
             {!!contacts &&
@@ -91,7 +91,7 @@ const Department = ({
                 <ContactDetails contact={contacts[0]} />
             )}
           </div>
-          <div className="coa-SectionHeader">{directors.length > 1 ? intl.formatMessage(i18n.meetDirectors) : intl.formatMessage(i18n.meetDirector)}</div>
+          <h2 className="coa-SectionHeader">{directors.length > 1 ? intl.formatMessage(i18n.meetDirectors) : intl.formatMessage(i18n.meetDirector)}</h2>
           {directors.map(director => (
             <div>
               <div className="coa-DepartmentPage__directorcard">
@@ -99,7 +99,7 @@ const Department = ({
                 <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`} alt="Headshot of Farah Muscadin"></img>
                 </div>
                 <div className="coa-DepartmentPage__directorcard-info">
-                  <div className="coa-DepartmentPage__directorcard-name">{director.name}</div>
+                  <h3 className="coa-DepartmentPage__directorcard-name">{director.name}</h3>
                   <div className="coa-DepartmentPage__directorcard-title">{intl.formatMessage(i18n.directorTitle)}</div>
                   <div className="coa-DepartmentPage__directorcard-coamaybe">{intl.formatMessage(i18n.coa)}</div>
                 </div>

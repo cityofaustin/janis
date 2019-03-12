@@ -109,6 +109,12 @@
   color: $coa-color-white;
   font-weight: $coa-font-semibold;
   text-decoration: none;
+  cursor: default;
+  // Instead of making it not a link let's just pretend it's not one with style
+  &:hover {
+    color: $coa-color-white;
+    cursor: default;
+  }
   &:visited {
     color: $coa-color-white;
   }

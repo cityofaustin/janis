@@ -8,7 +8,7 @@
     background: $coa-color-purple-darkest;
     #rCw-title {
       font-size: $coa-font-size-xsmall !important;
-      font-weight: $coa-font-extrabold;
+      font-weight: $coa-font-bold;
       line-height: $coa-line-height-large;
       text-transform: uppercase;
     }
@@ -16,7 +16,7 @@
       display: none !important;
     }
     .rChelp.btn-link {
-      display:none;
+      display: none;
     }
     .rClocale.btn-link .ri-l10n {
       display: none;
@@ -39,7 +39,7 @@
           border-color: $coa-color-gray;
         }
         &:hover {
-          background-color:$coa-color-gray-lighter;
+          background-color: $coa-color-gray-lighter;
         }
         & > a {
           align-items: center;
@@ -74,26 +74,24 @@
       .page-section {
         padding: 0;
       }
-      .page-row-content[data-type=search] {
+      .page-row-content[data-type='search'] {
         padding: $coa-spacing-medium;
 
         & > label {
-          font-size:$coa-font-size-small;
-          font-weight: $coa-font-extrabold;
+          font-size: $coa-font-size-small;
+          font-weight: $coa-font-bold;
           padding: 0 0 $coa-spacing-small;
           text-transform: uppercase;
         }
-        & > .rCsearch[data-type=Address],
-        & > .rCsearch[data-type=Material] {
-
-
+        & > .rCsearch[data-type='Address'],
+        & > .rCsearch[data-type='Material'] {
           > .form-group {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             width: 100%;
 
-            input[type=search] {
+            input[type='search'] {
               border-radius: 0;
               border: 1px solid $coa-color-purple-darkest;
               flex-basis: 100%;
@@ -133,9 +131,9 @@
                 font-size: $coa-font-size-xsmall;
                 font-style: normal;
               }
-            }//.example
-          }//.form-group
-        }//.rCsearch[data-type=Address], .rCsearch[data-type=Material]
+            } //.example
+          } //.form-group
+        } //.rCsearch[data-type=Address], .rCsearch[data-type=Material]
       }
     }
   }
