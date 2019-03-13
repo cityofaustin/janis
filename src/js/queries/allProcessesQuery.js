@@ -10,6 +10,7 @@ const allProcessesQuery = `
             id
           }
           topic {
+            id
             slug
             text
             theme {
