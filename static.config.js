@@ -172,7 +172,7 @@ const makeDepartmentPages = async client => {
     getData: async () => ({
       department,
     }),
-    children: informationPages.map(informationPage => ({
+    children: informationPages.filter(i => i.department != null && i.department.id == department.id).map(informationPage => ({
       path: `/${informationPage.slug}`,
       component: 'src/components/Pages/Information',
       getData: async () => ({
