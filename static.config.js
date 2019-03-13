@@ -129,10 +129,10 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
-  const { allServicePages: allServices } = await client.request(
-    allServicePagesQuery,
-  );
-  const services = cleanServices(allServices);
+  // const { allServicePages: allServices } = await client.request(
+  //   allServicePagesQuery,
+  // );
+  // const services = cleanServices(allServices);
 
   const { allProcesses } = await client.request(allProcessesQuery);
   const processes = cleanProcesses(allProcesses);
@@ -149,15 +149,17 @@ const makeDepartmentPages = async client => {
       getData: async () => ({
         informationPage,
       }),
-    })).concat(
-      services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-        path: `/${service.slug}`,
-        component: 'src/components/Pages/Service',
-        getData: async () => ({
-          service,
-        }),
-      }))
-    ).concat(
+    }))
+    // .concat(
+    //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+    //     path: `/${service.slug}`,
+    //     component: 'src/components/Pages/Service',
+    //     getData: async () => ({
+    //       service,
+    //     }),
+    //   }))
+    // )
+    .concat(
       processes.filter(p => p.department != null && p.department.id == department.id).map(process => ({
         path: `/${process.slug}`,
         component: 'src/components/Pages/Process',
