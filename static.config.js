@@ -171,6 +171,9 @@ const makeDepartmentPages = async client => {
   );
   const services = cleanServices(allServices);
 
+  const { allProcesses } = await client.request(allProcessesQuery);
+  const processes = cleanProcesses(allProcesses);
+
   const data = departments.map(department => ({
     path: `/${department.slug}`,
     component: 'src/components/Pages/Department',
@@ -190,6 +193,21 @@ const makeDepartmentPages = async client => {
         getData: async () => ({
           service,
         }),
+      }))
+    ).concat(
+      processes.filter(p => p.department != null && p.department.id == department.id).map(process => ({
+        path: `/${process.slug}`,
+        component: 'src/components/Pages/Process',
+        getData: async () => ({
+          process,
+        }),
+        children: process.processSteps.map(processStep => ({
+          path: `/${processStep.slug}`,
+          component: 'src/components/Pages/ProcessStep',
+          getData: async () => ({
+            processStep,
+          }),
+        })),
       }))
     ),
   }));
