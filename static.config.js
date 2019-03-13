@@ -185,6 +185,8 @@ const makeDepartmentPages = async client => {
 };
 
 export default {
+  siteRoot: 'https://alpha.austin.gov',
+  stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
     title: 'City of Austin',
   }),
