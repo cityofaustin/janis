@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
@@ -31,10 +31,15 @@ const InformationPage = ({
   intl,
 }) => (
   <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
     <div className="coa_InformationPage__back-to-dept">
       <div className="wrapper container-fluid">
         <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
-          <i className="material-icons coa_InformationPage__arrow">arrow_back</i>
+          <i className="material-icons coa_InformationPage__arrow">
+            arrow_back
+          </i>
           <span>{intl.formatMessage(i18n2.opoName)}</span>
         </a>
       </div>
@@ -63,10 +68,7 @@ const InformationPage = ({
         <HtmlFromAdmin title={''} content={option.value} />
       ))}
       {additionalContent && (
-        <HtmlFromAdmin
-          title={' '}
-          content={additionalContent}
-        />
+        <HtmlFromAdmin title={' '} content={additionalContent} />
       )}
     </div>
   </div>
