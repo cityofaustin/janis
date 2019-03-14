@@ -108,9 +108,9 @@
 }
 
 @mixin heading4() {
-  font-size: $coa-font-size-medium;
+  font-size: $coa-font-size-md-small;
   font-weight: $coa-font-regular;
-  line-height: $coa-line-height-small;
+  line-height: $coa-line-height-md-small;
   margin-bottom: $coa-spacing-large;
 
   // @include media($coa-small-screen) {
@@ -133,34 +133,6 @@
   //   margin-bottom: $coa-spacing-large;
   //   margin-top: $coa-spacing-xlarge;
   // }
-}
-
-@mixin heading4() {
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
-  margin-bottom: $coa-spacing-small;
-  margin-top: $coa-spacing-medium;
-
-  @include media($coa-small-screen) {
-    font-size: $coa-font-size-md-small;
-    line-height: $coa-line-height-md-small;
-    margin-bottom: $coa-spacing-medium;
-    margin-top: $coa-spacing-large;
-  }
-
-  @include media($coa-medium-screen) {
-    font-size: $coa-font-size-medium;
-    line-height: $coa-line-height-medium;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
-
-  @include media($coa-large-screen) {
-    font-size: $coa-font-size-medium;
-    line-height: $coa-line-height-medium;
-    margin-bottom: $coa-spacing-large;
-    margin-top: $coa-spacing-xlarge;
-  }
 }
 
 //other mixin helpers
