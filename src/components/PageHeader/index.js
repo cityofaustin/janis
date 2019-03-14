@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import SectionHeader from 'components/SectionHeader';
 
 const PageHeader = ({ description, children }) => (
   <div className="coa-PageHeader">
@@ -8,6 +9,7 @@ const PageHeader = ({ description, children }) => (
     {description && (
       <p className="coa-PageHeader__description">{description}</p>
     )}
+    <SectionHeader />
   </div>
 );
 

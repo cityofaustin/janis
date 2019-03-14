@@ -108,23 +108,23 @@ const Department = ({
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-            <div className="coa-SectionHeader">
+            <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
-            </div>
+            </h2>
             <p>{Parser(whatWeDo)}</p>
-            <div className="coa-SectionHeader">
+            <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.mission)}
-            </div>
+            </h2>
             <p>{mission}</p>
             <div className="coa-DepartmentPage__contacts-mobile">
               {!!contacts &&
                 !!contacts.length && <ContactDetails contact={contacts[0]} />}
             </div>
-            <div className="coa-SectionHeader">
+            <h2 className="coa-SectionHeader">
               {directors.length > 1
                 ? intl.formatMessage(i18n.meetDirectors)
                 : intl.formatMessage(i18n.meetDirector)}
-            </div>
+            </h2>
             {directors.map(director => (
               <div>
                 <div className="coa-DepartmentPage__directorcard">
@@ -137,9 +137,9 @@ const Department = ({
                     />
                   </div>
                   <div className="coa-DepartmentPage__directorcard-info">
-                    <div className="coa-DepartmentPage__directorcard-name">
+                    <h3 className="coa-DepartmentPage__directorcard-name">
                       {director.name}
-                    </div>
+                    </h3>
                     <div className="coa-DepartmentPage__directorcard-title">
                       {intl.formatMessage(i18n.directorTitle)}
                     </div>
@@ -147,10 +147,10 @@ const Department = ({
                       {intl.formatMessage(i18n.coa)}
                     </div>
                   </div>
+                  <p className="coa-DepartmentPage__directorAbout">
+                    {director.about}
+                  </p>
                 </div>
-                <p className="coa-DepartmentPage__directorAbout">
-                  {director.about}
-                </p>
               </div>
             ))}
           </div>

@@ -1,8 +1,17 @@
 .coa-PageHeader {
-  margin-bottom: $coa-spacing-large;
-  padding-bottom: 1px; //prevent margin-stacking
-
   h1 {
-    text-align: left;
+    color: $coa-color-dark-blue;
+    font-size: $coa-font-size-xlarge;
+    line-height: $coa-line-height-xlarge;
+    margin-bottom: $coa-spacing-xsmall;
+  }
+}
+
+.coa-PageHeader__description {
+  margin-top: 0;
+  margin-bottom: $coa-spacing-small;
+
+  @include media($coa-medium-screen) {
+    margin-bottom: $coa-spacing-xlarge;
   }
 }
