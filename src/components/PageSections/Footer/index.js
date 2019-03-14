@@ -17,12 +17,15 @@ import citySealImg from 'images/coa_seal_white.png';
 import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
 
+import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
+
 const Footer = ({ threeoneone, intl }) => (
   <footer className="coa-FooterContainer">
     <div className="container-fluid wrapper">
-      <div className="row">
-        <div className="col-xs-12">
-          <div className="coa-Footer">
+      <FooterSiteMap />
+      <div className="coa-Footer">
+        <div className="row">
+          <div className="col-xs-12">
             <div className="coa-Footer__city-seal-wrapper">
               <CitySealSVG />
             </div>
