@@ -1,18 +1,31 @@
 .coa-Tile {
-  background-color: $coa-color-white;
-  border: 1px solid $coa-color-primary;
+  background-color: $coa-color-grey;
   border-radius: $coa-button-border-radius;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   font-family: $coa-font-sans;
   min-width: $coa-tile-min-width;
-  padding: $coa-spacing-md-small $coa-spacing-small;
+  padding: $coa-spacing-medium;
   text-decoration: none;
   align-items: stretch;
 
   &:hover {
-    background-color: $coa-color-gray-lightest;
+    background-color: $coa-color-primary;
+    color: $coa-color-white;
+
+    .coa-Tile__text {
+      color: $coa-color-white;
+    }
+  }
+
+  &:active {
+    background-color: $coa-color-darker-blue;
+    color: $coa-color-white;
+
+    .coa-Tile__text {
+      color: $coa-color-white;
+    }
   }
 }
 
@@ -32,9 +45,9 @@
 .coa-Tile__text {
   color: $coa-color-almost-black;
   flex-basis: 85%;
-  font-size: $coa-font-size-xsmall;
+  font-size: $coa-font-size-xsmall - 0.1;
   font-weight: $coa-font-medium;
-  line-height: $coa-line-height-xsmall - 0.4;
+  line-height: $coa-line-height-xsmall - 0.3;
   margin: 0;
   padding-right: $coa-spacing-md-small;
   margin-right: $coa-spacing-md-small;

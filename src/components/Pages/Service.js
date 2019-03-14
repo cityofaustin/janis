@@ -82,7 +82,6 @@ const Service = ({
       text={intl.formatMessage(i18n3.checkOutRelatedServices)}
       tiles={related}
       tag={intl.formatMessage(i18n3.service)}
-      contentType={intl.formatMessage(i18n3.service)}
     />
   </div>
 );

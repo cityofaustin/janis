@@ -8,14 +8,8 @@ import ArrowRight from 'components/SVGs/ArrowRight';
 import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ tiles, text, url, description, contentType, intl }) => (
-  <div
-    className={`coa-TileGroup ${
-      contentType === intl.formatMessage(i18n3.service)
-        ? 'coa-TileGroup--service'
-        : ''
-    }`}
-  >
+const TileGroup = ({ tiles, text, url, description, intl }) => (
+  <div className="coa-TileGroup">
     <div className="wrapper container-fluid">
       {text &&
         url && (

@@ -1,4 +1,6 @@
 .coa-TileGroup {
+  padding: $coa-spacing-xlarge 0;
+
   .coa-TileGroup__description {
     text-align: center;
   }
@@ -27,5 +29,6 @@
 
 .coa-TileGroup__title {
   font-weight: $coa-font-semibold;
-  color: $coa-color-primary;
+  font-size: $coa-font-size-medium;
+  color: $coa-color-almost-black;
 }
