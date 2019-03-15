@@ -21,10 +21,10 @@
 
 //headings
 @mixin heading1() {
-  font-size: $coa-font-size-xlarge;
+  font-size: $coa-font-size-medium;
   font-weight: $coa-font-medium;
-  line-height: $coa-line-height-xlarge;
-  margin-bottom: $coa-spacing-large;
+  line-height: $coa-line-height-medium;
+  margin-bottom: $coa-spacing-medium;
   // margin-top: $coa-spacing-medium;
 
   // @include media($coa-small-screen) {
@@ -34,12 +34,11 @@
   //   margin-top: $coa-spacing-large;
   // }
 
-  // @include media($coa-medium-screen) {
-  //   font-size: $coa-font-size-large;
-  //   line-height: $coa-line-height-large;
-  //   margin-bottom: $coa-spacing-large;
-  //   margin-top: $coa-spacing-xlarge;
-  // }
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-xlarge;
+    line-height: $coa-line-height-xlarge;
+    margin-bottom: $coa-spacing-large;
+  }
 
   // @include media($coa-large-screen) {
   //   font-size: $coa-font-size-large;

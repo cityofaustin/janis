@@ -44,14 +44,14 @@
 
 .coa-Tile__text {
   color: $coa-color-almost-black;
-  flex-basis: 85%;
+  flex-basis: 90%;
   font-size: $coa-font-size-xsmall - 0.1;
   font-weight: $coa-font-medium;
   line-height: $coa-line-height-xsmall - 0.3;
   margin: 0;
   padding-right: $coa-spacing-md-small;
   margin-right: $coa-spacing-md-small;
-  border-right: 1px solid $coa-color-grey;
+  border-right: 1px solid $coa-color-dark-grey;
 }
 
 .coa-Tile__icon {
