@@ -22,7 +22,10 @@ import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 const Footer = ({ threeoneone, intl }) => (
   <footer className="coa-FooterContainer">
     <div className="container-fluid wrapper">
+      {/*
+        Commenting out until we finalize IA and FooterSiteMap menu data + sections
       <FooterSiteMap />
+      */}
       <div className="coa-Footer">
         <div className="row">
           <div className="col-xs-12">
