@@ -1,14 +1,31 @@
 .coa-Tile {
-  background-color: $coa-color-gray-lighter;
+  background-color: $coa-color-grey;
+  border-radius: $coa-button-border-radius;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-grow: 1;
   font-family: $coa-font-sans;
-  height: $coa-tile-height;
   min-width: $coa-tile-min-width;
-  padding: $coa-spacing-medium $coa-spacing-medium $coa-spacing-large ;
+  padding: $coa-spacing-medium;
   text-decoration: none;
+  align-items: stretch;
+
   &:hover {
-    background-color: $coa-color-gray-lightest;
+    background-color: $coa-color-primary;
+    color: $coa-color-white;
+
+    .coa-Tile__text {
+      color: $coa-color-white;
+    }
+  }
+
+  &:active {
+    background-color: $coa-color-darker-blue;
+    color: $coa-color-white;
+
+    .coa-Tile__text {
+      color: $coa-color-white;
+    }
   }
 }
 
@@ -19,12 +36,22 @@
   text-transform: uppercase;
 }
 
-.coa-Tile__text {
-  color: $coa-color-purple-dark;
+.coa-Tile__content {
+  display: flex;
+  align-items: center;
   flex-grow: 1;
-  font-size: $coa-font-size-md-small;
-  line-height: $coa-line-height-md-small;
-  margin: $coa-space-level1 0 $coa-space-level3;
+}
+
+.coa-Tile__text {
+  color: $coa-color-almost-black;
+  flex-basis: 90%;
+  font-size: $coa-font-size-xsmall - 0.1;
+  font-weight: $coa-font-medium;
+  line-height: $coa-line-height-xsmall - 0.3;
+  margin: 0;
+  padding-right: $coa-spacing-md-small;
+  margin-right: $coa-spacing-md-small;
+  border-right: 1px solid $coa-color-dark-grey;
 }
 
 .coa-Tile__icon {

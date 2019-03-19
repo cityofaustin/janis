@@ -119,7 +119,7 @@
     color: $coa-color-white;
   }
   @include media($coa-large-screen) {
-    font-size: $coa-font-size-medium;
+    font-size: $coa-font-size-md-small;
   }
 }
 
