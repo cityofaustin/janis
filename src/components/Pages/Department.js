@@ -129,11 +129,9 @@ const Department = ({
             {directors.map(director => (
               <div>
                 <div className="coa-DepartmentPage__directorcard">
-                {director.photo && (
-                  <DirectorHeadshot
-                    photo={director.photo}
-                  />
-                )}
+                  {director.photo && (
+                    <DirectorHeadshot photo={director.photo} />
+                  )}
 
                   <div className="coa-DepartmentPage__directorcard-info">
                     <h3 className="coa-DepartmentPage__directorcard-name">
