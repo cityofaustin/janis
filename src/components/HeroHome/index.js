@@ -8,7 +8,7 @@ const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
     <ResponsiveImage
       filename={imageFilename}
       defaultWidth="width-1080"
-      extension=".jpg"
+      extension="jpg"
       widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
       altText={imageTitle}
     />
