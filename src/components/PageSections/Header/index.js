@@ -50,9 +50,8 @@ class Header extends Component {
             <DomeSVG />
             {intl.formatMessage(i18n1.coaOfficialWeb)}
             <span className="coa-Header__gov-site-toggle" onClick={this.toggleHowYouKnowMenu}>
-              {intl.formatMessage(i18n1.officialHowYouKnow)}
+              {this.state.howYouKnowmenuIsOpen ? <i className="material-icons">remove</i> : <i className="material-icons">add</i>}
             </span>
-            {this.state.howYouKnowmenuIsOpen ? "-" : "+"}
           </div>
         </div>
         <div className="coa-Header__mobile-languages">
