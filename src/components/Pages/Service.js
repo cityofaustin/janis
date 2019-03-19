@@ -41,7 +41,7 @@ const Service = ({
           image.filename,
           path.extname(image.filename),
         )}
-        imageExtension={path.extname(image.filename)}
+        imageExtension={path.extname(image.filename).substring(1)}
         imageTitle={image.title}
       />
     )}
