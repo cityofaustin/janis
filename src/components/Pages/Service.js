@@ -50,42 +50,45 @@ const Service = ({
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
     /> */}
-    <div className="wrapper container-fluid">
-      <PageHeader>{title}</PageHeader>
+    <div>
+      <PageHeader contentType={'service'}>{title}</PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-md-8">
+            {steps &&
+              !!steps.length && (
+                <Fragment>
+                  <SectionHeader>
+                    {intl.formatMessage(i18n2.steps)}
+                  </SectionHeader>
+                  <Steps steps={steps} />
+                </Fragment>
+              )}
 
-      <div className="row">
-        <div className="col-md-8">
-          {steps &&
-            !!steps.length && (
-              <Fragment>
-                <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
-                <Steps steps={steps} />
-              </Fragment>
+            {!!dynamicContent &&
+              dynamicContent.map(content => (
+                <ApplicationBlock key={content.id} content={content} />
+              ))}
+
+            {additionalContent && (
+              <HtmlFromAdmin
+                title={intl.formatMessage(i18n2.whatElse)}
+                content={additionalContent}
+              />
             )}
 
-          {!!dynamicContent &&
-            dynamicContent.map(content => (
-              <ApplicationBlock key={content.id} content={content} />
-            ))}
-
-          {additionalContent && (
-            <HtmlFromAdmin
-              title={intl.formatMessage(i18n2.whatElse)}
-              content={additionalContent}
-            />
-          )}
-
-          {!!contacts &&
-            !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+          </div>
         </div>
       </div>
-    </div>
 
-    <TileGroup
-      text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-      tiles={related}
-      tag={intl.formatMessage(i18n3.service)}
-    />
+      <TileGroup
+        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
+        tiles={related}
+        tag={intl.formatMessage(i18n3.service)}
+      />
+    </div>
   </div>
 );
 
