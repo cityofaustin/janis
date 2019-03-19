@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Parser from 'html-react-parser';
 import { optionPropTypes, stepWithOptionsPropTypes } from './proptypes';
 
 const Option = ({ option_name, option_description }) => (
   <div>
     <span>{option_name}</span>
-    <span dangerouslySetInnerHTML={{ __html: option_description }} />
+    <span>{Parser(option_description)}</span>
   </div>
 );
 
