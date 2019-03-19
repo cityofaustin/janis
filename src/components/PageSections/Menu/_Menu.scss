@@ -7,7 +7,7 @@
   overflow-y: auto;
   position: fixed;
   // transition: left 0.5s;
-  top: 10.5rem;
+  top: 13.5rem;
   @include media($coa-medium-screen) {
     top: 8.5rem;
   }
@@ -86,6 +86,8 @@
 }
 
 .coa-Menu__header {
+  padding-top: $coa-spacing-large;
+
   a {
     color: $coa-color-primary !important;
     text-decoration: none !important;
@@ -107,7 +109,7 @@
   display: none !important;
   @include media($coa-medium-screen) {
     display: flex !important;
-  } 
+  }
 }
 
 .coa-Menu__subheading {
@@ -124,7 +126,7 @@
 .coa-Menu__service-link {
   @include media($coa-medium-screen) {
     display: none;
-  } 
+  }
 }
 
 .coa-Menu__link {
@@ -134,5 +136,5 @@
   @include media($coa-medium-screen) {
     font-size: 2rem;
     line-height: 2rem;
-  } 
+  }
 }

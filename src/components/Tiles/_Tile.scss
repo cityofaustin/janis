@@ -15,7 +15,8 @@
     background-color: $coa-color-primary;
     color: $coa-color-white;
 
-    .coa-Tile__text {
+    .coa-Tile__text,
+    i {
       color: $coa-color-white;
     }
   }
@@ -26,12 +27,6 @@
 
     .coa-Tile__text {
       color: $coa-color-white;
-    }
-  }
-
-  &:visited {
-    i {
-      color: $coa-color-primary;
     }
   }
 }
