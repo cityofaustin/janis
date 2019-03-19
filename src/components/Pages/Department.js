@@ -10,6 +10,7 @@ import { departmentPage as i18n } from 'js/i18n/definitions';
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
+import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import WorkInProgress from 'components/WorkInProgress';
@@ -128,14 +129,12 @@ const Department = ({
             {directors.map(director => (
               <div>
                 <div className="coa-DepartmentPage__directorcard">
-                  <div className="coa-DepartmentPage__directorcard-headshot">
-                    <img
-                      src={`${
-                        process.env.CMS_MEDIA
-                      }/images/Farah-2.original.jpg`}
-                      alt="Headshot of Farah Muscadin"
-                    />
-                  </div>
+                {director.photo && (
+                  <DirectorHeadshot
+                    photo={director.photo}
+                  />
+                )}
+
                   <div className="coa-DepartmentPage__directorcard-info">
                     <h3 className="coa-DepartmentPage__directorcard-name">
                       {director.name}

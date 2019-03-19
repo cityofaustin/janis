@@ -38,7 +38,7 @@ while getopts "PSe:" opt; do
       ;;
     S)
       CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
-      CMS_MEDIA="https://joplin-staging.herokuapp.com/media"
+      CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
       ;;
     e )
       EXEC=$OPTARG
