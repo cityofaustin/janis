@@ -7,7 +7,7 @@ const Twitter = () => (
     <div className="coa-ContactItem__svg">
       <TwitterSVG />
     </div>
-    <ExternalLink to="http://austintexas.gov">@ATX_OPO</ExternalLink>
+    <ExternalLink to="https://twitter.com/atx_opo">@ATX_OPO</ExternalLink>
   </div>
 );
 
