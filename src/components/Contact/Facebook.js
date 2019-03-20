@@ -7,9 +7,11 @@ const Facebook = () => (
     <div className="coa-ContactItem__svg">
       <FacebookAltSVG viewBox={'0 0 1024 1024'} />
     </div>
-    <ExternalLink to="https://www.facebook.com/atxpoliceoversight/">
-      fb.com/atxpoliceoversight/
-    </ExternalLink>
+    <div className="coa-ContactItem_content">
+      <ExternalLink to="https://www.facebook.com/atxpoliceoversight/">
+        fb.com/atxpoliceoversight/
+      </ExternalLink>
+    </div>
   </div>
 );
 
