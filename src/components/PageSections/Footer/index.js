@@ -20,8 +20,8 @@ import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/propty
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
 const Footer = ({ threeoneone, intl }) => (
-  <footer className="coa-FooterContainer">
-    <div className="container-fluid wrapper">
+  <footer> {/* className="coa-FooterContainer" */}
+    {/* <div className="container-fluid wrapper"> */}
       {/*
         Commenting out until we finalize IA and FooterSiteMap menu data + sections
       <FooterSiteMap />
@@ -47,7 +47,7 @@ const Footer = ({ threeoneone, intl }) => (
           </div>
         </div>
       </div>
-    </div>
+    {/* </div> */}
   </footer>
 );
 
