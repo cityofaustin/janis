@@ -25,7 +25,14 @@ class Hours extends Component {
   }
 
   formatTime(time) {
-    return moment(time).format("h:mm A");
+    let style;
+    // Only include minutes in display if there are minutes
+    if (moment(time).minutes()) {
+      style = "h:mma";
+    } else {
+      style = "ha";
+    }
+    return moment(time).format(style);
   }
 
   render() {
@@ -56,7 +63,7 @@ class Hours extends Component {
 
                   {hourIndex > -1 && (
                     <td>
-                      {`${this.formatTime(hours[hourIndex].startTime)} - ${this.formatTime(hours[hourIndex].endTime)}`}
+                      {`${this.formatTime(hours[hourIndex].startTime)}-${this.formatTime(hours[hourIndex].endTime)}`}
                     </td>
                   )}
                   {hourIndex === -1 && (
