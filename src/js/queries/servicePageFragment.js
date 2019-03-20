@@ -19,6 +19,12 @@ const servicePageFragment = `
     related {
       slug
       title
+      topic {
+        slug
+        theme {
+          slug
+        }
+      }
     }
     image {
       id

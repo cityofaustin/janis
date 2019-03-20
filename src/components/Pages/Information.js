@@ -19,8 +19,8 @@ const InformationPage = ({
   informationPage: {
     text: title,
     slug,
-    topic,
-    topic: { theme },
+    // topic,
+    // topic: { theme },
     toplink,
     description,
     options,

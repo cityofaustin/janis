@@ -8,6 +8,10 @@ const topServicesQuery = `
           slug
           topic {
             id
+            slug
+            theme {
+              slug
+            }
             text
           }
         }
