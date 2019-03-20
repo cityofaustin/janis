@@ -95,6 +95,9 @@
     font-size: $coa-font-size-xsmall;
     padding-right: 0 !important;
     text-transform: capitalize;
+    /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
+    padding-right: 1rem !important;
+    font-weight: bold;
   }
   td:last-of-type {
     font-size: $coa-font-size-xsmall;

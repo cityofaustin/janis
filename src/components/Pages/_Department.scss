@@ -133,8 +133,8 @@
   @include media($coa-medium-screen) {
     display: inherit;
   }
-  // padding-right: 10%;
   padding-left: 2rem;
+  min-width: 325px; /* 305px + 20px left padding added by us-design-system */
 }
 
 .coa-DepartmentPage__contacts-mobile {
