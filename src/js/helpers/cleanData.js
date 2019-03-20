@@ -40,7 +40,7 @@ export const cleanRelatedServiceLinks = links => {
 
   return links.map(link => {
     return {
-      url: `/services/${link.slug}`,
+      url: `/${link.topic.theme.slug}/${link.topic.slug}/${link.slug}`,
       text: link.title,
     };
   });
