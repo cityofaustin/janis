@@ -30,10 +30,14 @@
   color: $coa-color-white;
   font-size: 1.5rem;
   letter-spacing: 0.15rem;
+  font-weight: $coa-font-semibold;
+  margin-bottom: 0;
 }
 
 .coa-DepartmentPage__topservices-header--desktop {
   color: $coa-color-white;
+  font-weight: $coa-font-semibold;
+  margin-bottom: $coa-spacing-small;
 }
 
 .coa-DepartmentPage__topServiceButtons {
@@ -60,16 +64,6 @@
 .coa-DepartmentPage__topServiceButtonArrow {
   line-height: 4rem;
   padding-left: 1rem;
-}
-
-.coa-SectionHeader {
-  color: $coa-color-primary;
-  border-bottom: 4px solid $coa-color-half-primary;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-bottom: $coa-spacing-xlarge;
-  font-size: 2.4rem;
-  font-weight: bold;
 }
 
 .coa-DepartmentPage__directorcard {

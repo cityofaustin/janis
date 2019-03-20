@@ -1,6 +1,6 @@
 import React from 'react';
 import { get } from 'lodash';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
@@ -10,6 +10,7 @@ import { departmentPage as i18n } from 'js/i18n/definitions';
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
+import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import WorkInProgress from 'components/WorkInProgress';
@@ -34,6 +35,9 @@ const Department = ({
 
   return (
     <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
       {image && (
         <PageBanner
           imagesPath={`${process.env.CMS_MEDIA}/images`}
@@ -41,38 +45,62 @@ const Department = ({
             image.filename,
             path.extname(image.filename),
           )}
-          imageExtension={path.extname(image.filename)}
+          imageExtension={path.extname(image.filename).substring(1)}
           imageTitle={image.title}
           headerText={title}
         />
       )}
       <div className="coa-DepartmentPage__topservices--mobile">
         <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
-          <h3 className="coa-DepartmentPage__topservices-header--mobile">{intl.formatMessage(i18n.topServices)}</h3>
-            <div className="coa-DepartmentPage__topServiceButtons">
-              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
-                {intl.formatMessage(i18n.complaintFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
-              </a>
-              <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
-                {intl.formatMessage(i18n.thankFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
-              </a>
-            </div>
+          <h3 className="coa-DepartmentPage__topservices-header--mobile">
+            {intl.formatMessage(i18n.topServices)}
+          </h3>
+          <div className="coa-DepartmentPage__topServiceButtons">
+            <a
+              href={intl.formatMessage(i18n.complaintFormUrl)}
+              className="coa-DepartmentPage__topServiceButton"
+            >
+              {intl.formatMessage(i18n.complaintFormButtonText)}
+              <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
+                arrow_forward
+              </i>
+            </a>
+            <a
+              href={intl.formatMessage(i18n.thankFormUrl)}
+              className="coa-DepartmentPage__topServiceButton"
+            >
+              {intl.formatMessage(i18n.thankFormButtonText)}
+              <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
+                arrow_forward
+              </i>
+            </a>
+          </div>
         </div>
       </div>
       <div className="wrapper container-fluid">
         <div className="coa-DepartmentPage__topservices--desktop">
           <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-            <h3 className="coa-DepartmentPage__topservices-header--desktop">{intl.formatMessage(i18n.topServices)}</h3>
+            <h3 className="coa-DepartmentPage__topservices-header--desktop">
+              {intl.formatMessage(i18n.topServices)}
+            </h3>
             <div className="coa-DepartmentPage__topServiceButtons">
-              <a href={intl.formatMessage(i18n.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+              <a
+                href={intl.formatMessage(i18n.complaintFormUrl)}
+                className="coa-DepartmentPage__topServiceButton"
+              >
                 {intl.formatMessage(i18n.complaintFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
+                  arrow_forward
+                </i>
               </a>
-              <a href={intl.formatMessage(i18n.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
+              <a
+                href={intl.formatMessage(i18n.thankFormUrl)}
+                className="coa-DepartmentPage__topServiceButton"
+              >
                 {intl.formatMessage(i18n.thankFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">arrow_forward</i>
+                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
+                  arrow_forward
+                </i>
               </a>
             </div>
           </div>
@@ -81,40 +109,53 @@ const Department = ({
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
-          <h2 className="coa-SectionHeader">{intl.formatMessage(i18n.whatWeDo)}</h2>
-          <p>{Parser(whatWeDo)}</p>
-          <h2 className="coa-SectionHeader">{intl.formatMessage(i18n.mission)}</h2>
-          <p>{mission}</p>
-          <div className="coa-DepartmentPage__contacts-mobile">
-            {!!contacts &&
-              !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
-            )}
-          </div>
-          <h2 className="coa-SectionHeader">{directors.length > 1 ? intl.formatMessage(i18n.meetDirectors) : intl.formatMessage(i18n.meetDirector)}</h2>
-          {directors.map(director => (
-            <div>
-              <div className="coa-DepartmentPage__directorcard">
-                <div className="coa-DepartmentPage__directorcard-headshot">
-                <img src={`${process.env.CMS_MEDIA}/images/Farah-2.original.jpg`} alt="Headshot of Farah Muscadin"></img>
-                </div>
-                <div className="coa-DepartmentPage__directorcard-info">
-                  <h3 className="coa-DepartmentPage__directorcard-name">{director.name}</h3>
-                  <div className="coa-DepartmentPage__directorcard-title">{intl.formatMessage(i18n.directorTitle)}</div>
-                  <div className="coa-DepartmentPage__directorcard-coamaybe">{intl.formatMessage(i18n.coa)}</div>
-                </div>
-              </div>
-              <p className="coa-DepartmentPage__directorAbout">{director.about}</p>
+            <h2 className="coa-SectionHeader">
+              {intl.formatMessage(i18n.whatWeDo)}
+            </h2>
+            <p>{Parser(whatWeDo)}</p>
+            <h2 className="coa-SectionHeader">
+              {intl.formatMessage(i18n.mission)}
+            </h2>
+            <p>{mission}</p>
+            <div className="coa-DepartmentPage__contacts-mobile">
+              {!!contacts &&
+                !!contacts.length && <ContactDetails contact={contacts[0]} />}
             </div>
-          ))}
+            <h2 className="coa-SectionHeader">
+              {directors.length > 1
+                ? intl.formatMessage(i18n.meetDirectors)
+                : intl.formatMessage(i18n.meetDirector)}
+            </h2>
+            {directors.map(director => (
+              <div>
+                <div className="coa-DepartmentPage__directorcard">
+                  {director.photo && (
+                    <DirectorHeadshot photo={director.photo} />
+                  )}
+
+                  <div className="coa-DepartmentPage__directorcard-info">
+                    <h3 className="coa-DepartmentPage__directorcard-name">
+                      {director.name}
+                    </h3>
+                    <div className="coa-DepartmentPage__directorcard-title">
+                      {intl.formatMessage(i18n.directorTitle)}
+                    </div>
+                    <div className="coa-DepartmentPage__directorcard-coamaybe">
+                      {intl.formatMessage(i18n.coa)}
+                    </div>
+                  </div>
+                </div>
+                <p className="coa-DepartmentPage__directorAbout">
+                  {director.about}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="coa-DepartmentPage__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
             {!!contacts &&
-              !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
-            )}
+              !!contacts.length && <ContactDetails contact={contacts[0]} />}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </ExternalLink>
         ),
         alphaSiteLink: (
-          <Link className="coa-Footer__link" to="https://alpha.austin.gov">
+          <Link className="coa-Footer__link" to="/">
             Alpha.austin.gov
           </Link>
         ),

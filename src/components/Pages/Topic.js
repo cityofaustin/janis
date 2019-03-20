@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -15,6 +15,9 @@ const Topic = ({
   intl,
 }) => (
   <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
     <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
     <div className="wrapper wrapper--sm container-fluid">
       <PageHeader description={description}>{title}</PageHeader>
