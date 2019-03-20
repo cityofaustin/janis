@@ -1,10 +1,13 @@
 .coa-SectionHeader {
   color: $coa-color-primary;
   border-bottom: 4px solid $coa-color-half-primary;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: $coa-spacing-large;
   font-size: 2.4rem;
   font-weight: bold;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+  }
 }
 
 .coa-SectionHeader h2 {

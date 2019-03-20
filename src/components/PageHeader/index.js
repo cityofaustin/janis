@@ -6,10 +6,7 @@ import SectionHeader from 'components/SectionHeader';
 const PageHeader = ({ description, children, contentType }) => (
   <div
     className={
-      'coa-PageHeader ' +
-      (contentType && contentType === 'service'
-        ? 'coa-PageHeader--service'
-        : '')
+      'coa-PageHeader ' + (contentType ? `coa-PageHeader--${contentType}` : '')
     }
   >
     <div className="wrapper container-fluid">
@@ -18,7 +15,7 @@ const PageHeader = ({ description, children, contentType }) => (
         <p className="coa-PageHeader__description">{description}</p>
       )}
 
-      {!contentType && !contentType === 'service' ? <SectionHeader /> : null}
+      {contentType && contentType === 'information' ? <SectionHeader /> : null}
     </div>
   </div>
 );

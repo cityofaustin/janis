@@ -24,6 +24,12 @@
 
   > h3 {
     @include heading3();
+    margin-bottom: 0;
+    font-size: $coa-font-size-small;
+
+    & + p {
+      margin-top: $coa-spacing-small;
+    }
   }
 
   > h4 {
