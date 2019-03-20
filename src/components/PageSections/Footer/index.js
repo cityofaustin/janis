@@ -27,8 +27,12 @@ const Footer = ({ threeoneone, intl }) => (
       <FooterSiteMap />
       */}
       <div className="coa-Footer">
+        {/* Commenting this out because it's causing issues with oversized footer stuff
+
         <div className="row">
           <div className="col-xs-12">
+
+        */}
             <div className="coa-Footer__city-seal-wrapper">
               <CitySealSVG />
             </div>
@@ -45,9 +49,8 @@ const Footer = ({ threeoneone, intl }) => (
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    {/* </div> */}
+    {/*         </div>
+      </div></div> */}
   </footer>
 );
 

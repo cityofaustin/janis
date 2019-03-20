@@ -8,7 +8,7 @@
   // border-bottom: 1px dashed $coa-color-purple-dark;
   display: flex;
   align-items: flex-start;
-  font-size: $coa-font-size-small;
+  font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-small;
   padding-top: $coa-spacing-medium;
   text-align: left;
@@ -25,12 +25,12 @@
   }
 
   & > :first-child {
-    margin-right: $coa-spacing-large;
+    margin-right: $coa-spacing-small;
     // margin-top: $coa-spacing-xsmall;
   }
 
   & > :last-child {
-    // flex: 1 0 auto;
+    flex: 1 0 auto;
     & > span {
       display: block;
     }
@@ -92,9 +92,12 @@
 
 .coa-ContactHours {
   th {
+    font-size: $coa-font-size-xsmall;
+    padding-right: 0 !important;
     text-transform: capitalize;
   }
   td:last-of-type {
+    font-size: $coa-font-size-xsmall;
     text-align: right;
   }
 }
