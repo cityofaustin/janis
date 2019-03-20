@@ -46,10 +46,17 @@ export const cleanRelatedServiceLinks = links => {
   });
 };
 
-export const cleanLinks = (links, pathPrefix) => {
+export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
 
   return links.edges.map(({ node: link }) => {
+    // Instead of using a prefix, we need to generate urls based on page type
+    var pathPrefix = '';
+    if (pageType === 'service') {
+      // Service page links are always theme/topic based
+      pathPrefix = `${link.topic.theme.slug}/${link.topic.slug}`
+    }
+
     link.slug = link.slug || link.sortOrder;
     link.url = `${pathPrefix || ''}/${link.slug}`;
     link.text = link.text || link.title;

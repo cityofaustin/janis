@@ -38,7 +38,7 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      const topServices = cleanLinks(allServicePages, '/services');
+      const topServices = cleanLinks(allServicePages, 'service');
       return {
         topServices,
         image: {
