@@ -1,7 +1,5 @@
 .coa-PageHeader {
-  padding-top: $coa-spacing-xlarge;
-  padding-bottom: $coa-spacing-xlarge;
-  margin-bottom: $coa-spacing-large;
+  padding-top: $coa-spacing-large;
 
   h1 {
     color: $coa-color-dark-blue;
@@ -15,5 +13,9 @@
 }
 
 .coa-PageHeader--service {
+  padding-top: $coa-spacing-xlarge;
+  padding-bottom: $coa-spacing-xlarge;
+  margin-bottom: $coa-spacing-large;
+
   background: $coa-color-secondary;
 }
