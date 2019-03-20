@@ -60,18 +60,20 @@ const InformationPage = ({
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
     /> */}
-    <div className="wrapper container-fluid">
-      <PageHeader description={description}>{title}</PageHeader>
-      <div>{toplink}</div>
-    </div>
-
-    <div className="wrapper wrapper--sm container-fluid">
-      {options.map((option, index) => (
-        <HtmlFromAdmin title={''} content={option.value} />
-      ))}
-      {additionalContent && (
-        <HtmlFromAdmin title={' '} content={additionalContent} />
-      )}
+    <div>
+      <PageHeader contentType={'information'} description={description}>{title}</PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-md-8">
+            {options.map((option, index) => (
+              <HtmlFromAdmin title={''} content={option.value} />
+            ))}
+            {additionalContent && (
+              <HtmlFromAdmin title={' '} content={additionalContent} />
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
