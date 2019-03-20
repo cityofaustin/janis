@@ -1,9 +1,17 @@
+.coa-DepartmentPage__contacts-desktop {
+  width: 315px;
+}
+
 .coa-ContactDetails {
   border-left: none;
   border-right: none;
   padding-bottom: $coa-spacing-large;
 }
 
+/*
+Assumes that there are 2 children for each .coa-ContactItem.
+This will enable proper line wrapping for the :last-child.
+*/
 .coa-ContactItem {
   // border-bottom: 1px dashed $coa-color-purple-dark;
   display: flex;
@@ -30,7 +38,7 @@
   }
 
   & > :last-child {
-    flex: 1 0 auto;
+    flex: 1; /* allows line wrap for long contact values. */
     & > span {
       display: block;
     }
@@ -95,6 +103,9 @@
     font-size: $coa-font-size-xsmall;
     padding-right: 0 !important;
     text-transform: capitalize;
+    /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
+    padding-right: 1rem !important;
+    font-weight: bold;
   }
   td:last-of-type {
     font-size: $coa-font-size-xsmall;
@@ -107,4 +118,12 @@
       text-align: left;
     }
   }
+}
+
+.coa-ContactItem_content {
+  /* Flexbox hack to allow long content to wrap to next line */
+  min-width: 1%;
+  /* Yes, you need both. "word-break" fixes mobile styling */
+  word-wrap: break-word;
+  word-break: break-word;
 }
