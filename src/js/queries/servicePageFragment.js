@@ -3,9 +3,6 @@ const servicePageFragment = `
     id
     title
     slug
-    department {
-      id
-    }
     topic {
       id
       slug
