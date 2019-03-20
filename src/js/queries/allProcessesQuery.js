@@ -6,7 +6,11 @@ const allProcessesQuery = `
           title
           description
           slug
+          department {
+            id
+          }
           topic {
+            id
             slug
             text
             theme {

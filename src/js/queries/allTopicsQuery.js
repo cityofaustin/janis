@@ -19,7 +19,8 @@ const allTopicsQuery = `
           }
           theme {
             text,
-            slug
+            slug,
+            id
           }
         }
       }
