@@ -31,13 +31,17 @@
 
 .coa-Footer__work-in-progress {
   text-align: center;
-  font-size: $coa-font-size-medium;
-  line-height: $coa-line-height-medium;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  font-weight: $coa-font-bold;
   white-space: pre-line;
-  // @include media($coa-medium-screen) {
-  //   font-size: $coa-font-size-xxlarge;
-  //   line-height: $coa-line-height-xxlarge;
-  // }
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-medium;
+    line-height: $coa-line-height-medium;
+    font-weight: $coa-font-regular;
+  }
+
   max-width: 660px;
   margin: auto;
 
@@ -86,11 +90,17 @@
 
 .coa-Footer__more_text_box {
   justify-content: center;
-  font-size: $coa-font-size-smedium;
-  line-height: $coa-line-height-smedium;
   text-align: center;
   max-width: 40rem;
   margin: 3rem;
+
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-smedium;
+    line-height: $coa-line-height-smedium;
+  }
 
   a {
     color: $coa-color-white;
