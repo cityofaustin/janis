@@ -24,7 +24,7 @@
   font-size: $coa-font-size-medium;
   font-weight: $coa-font-medium;
   line-height: $coa-line-height-medium;
-  margin-bottom: $coa-spacing-medium;
+  // margin-bottom: $coa-spacing-medium; Removing the bottom margin here centers the h1 on service pages
   // margin-top: $coa-spacing-medium;
 
   // @include media($coa-small-screen) {
@@ -37,7 +37,7 @@
   @include media($coa-medium-screen) {
     font-size: $coa-font-size-xlarge;
     line-height: $coa-line-height-xlarge;
-    margin-bottom: $coa-spacing-large;
+    // margin-bottom: $coa-spacing-large; Removing the bottom margin here centers the h1 on service pages
   }
 
   // @include media($coa-large-screen) {
