@@ -11,6 +11,8 @@ import Address from './Address';
 import Hours from './Hours';
 import Facebook from './Facebook';
 import Twitter from './Twitter';
+import ExternalLink from 'components/ExternalLink';
+import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
 import {
   addressPropTypes,
@@ -19,8 +21,29 @@ import {
   phonePropTypes,
 } from './proptypes';
 
+const ContactSocialMediaLink = ({ url }) => {
+  const facebookRegex = /http(s)?:\/\/(www\.)?(facebook|fb)\.com\/[A-z0-9_\-\.]+\/?/g;
+  if(facebookRegex.test(url)) {
+    return <Facebook url={url} />
+  }
+
+  const twitterRegex = /http(s)?:\/\/(.*\.)?twitter\.com\/[A-z0-9_]+\/?/g;
+  if(twitterRegex.test(url)) {
+    return <Twitter url={url} />
+  }
+
+  return(
+    <div className="coa-ContactItem">
+      <i className="material-icons">public</i>
+      <div className="coa-ContactItem_content">
+        <ExternalLink to={url}>{url}</ExternalLink>
+      </div>
+  </div>
+  );
+};
+
 const ContactDetails = ({
-  contact: { phone, email, location, hours },
+  contact: { phone, email, location, hours, socialMedia },
   intl,
 }) => (
   <div className="coa-ContactDetails">
@@ -36,9 +59,8 @@ const ContactDetails = ({
 
     {hours && <Hours hours={hours} />}
 
-    <Twitter />
+    {socialMedia && socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
 
-    <Facebook />
   </div>
 );
 

@@ -38,6 +38,7 @@ const servicePageFragment = `
             name
             email
             phone
+            socialMedia
             hours {
               edges {
                 node {

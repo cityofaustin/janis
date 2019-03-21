@@ -27,7 +27,6 @@ const allDepartmentPagesQuery = `
               }
             }
           },
-          socialMedia,
           jobListings,
           contacts {
             edges {
@@ -36,6 +35,7 @@ const allDepartmentPagesQuery = `
                   name,
                   phone,
                   email,
+                  socialMedia,
                   location {
                     id,
                     name,

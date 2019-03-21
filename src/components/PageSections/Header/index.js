@@ -12,7 +12,9 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import Menu from 'components/PageSections/Menu';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
-import DomeSVG from 'components/SVGs/Dome';
+import GovSite from 'components/PageSections/Header/GovSite';
+
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 class Header extends Component {
   constructor(props) {
@@ -23,7 +25,17 @@ class Header extends Component {
     };
   }
 
+  componentDidMount() {
+    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav). 
+    this.menuElement = document.querySelector('#navMenu');
+  }
+
   toggleMenu = e => {
+    // If we're closing the menu, enable body scroll again
+    if(this.state.menuIsOpen) enableBodyScroll(this.targetElement);
+    // If we're opening the menu, disable body scroll
+    if(!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
+
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
     });
@@ -45,15 +57,7 @@ class Header extends Component {
         })}
         role="banner"
       >
-        <div className="coa-Header__gov-site">
-          <div className="container-fluid wrapper">
-            <DomeSVG />
-            {intl.formatMessage(i18n1.coaOfficialWeb)}
-            <span className="coa-Header__gov-site-toggle" onClick={this.toggleHowYouKnowMenu}>
-              {this.state.howYouKnowmenuIsOpen ? <i className="material-icons">remove</i> : <i className="material-icons">add</i>}
-            </span>
-          </div>
-        </div>
+        <GovSite toggleHowYouKnowMenu={this.toggleHowYouKnowMenu} menuIsOpen={this.state.howYouKnowmenuIsOpen}/>
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
@@ -97,7 +101,7 @@ class Header extends Component {
           isMenuOpen={this.state.menuIsOpen}
           navigation={navigation}
         />
-        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} />
+        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}/>
       </header>
     );
   }
