@@ -23,14 +23,12 @@ import {
 
 const ContactSocialMediaLink = ({ url }) => {
   const facebookRegex = /http(s)?:\/\/(www\.)?(facebook|fb)\.com\/[A-z0-9_\-\.]+\/?/g;
-  const facebookMatch = url.match(facebookRegex);
-  if(facebookMatch !== null) {
+  if(facebookRegex.test(url)) {
     return <Facebook url={url} />
   }
 
   const twitterRegex = /http(s)?:\/\/(.*\.)?twitter\.com\/[A-z0-9_]+\/?/g;
-  const twitterMatch = url.match(twitterRegex);
-  if(twitterMatch !== null) {
+  if(twitterRegex.test(url)) {
     return <Twitter url={url} />
   }
 
