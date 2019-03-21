@@ -3,8 +3,8 @@ import TwitterSVG from 'components/SVGs/Twitter';
 import ExternalLink from 'components/ExternalLink';
 
 const Twitter = ({ url }) => {
-  const regex = /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([^\/]+)(\/\w+)*$/;
-  const twitterMatch = url.match(regex);
+  const regex = /^https?:\/\/(www\.)?twitter\.com\/(#!\/)?([^\/]+)(\/\w+)*\/?$/;
+  const matches = url.match(regex);
 
   return (
     <div className="coa-ContactItem coa-ContactTwitter">
@@ -12,7 +12,7 @@ const Twitter = ({ url }) => {
         <TwitterSVG />
       </div>
       <div className="coa-ContactItem_content">
-        <ExternalLink to="https://twitter.com/atx_opo">@{twitterMatch[3]}</ExternalLink>
+        <ExternalLink to="https://twitter.com/atx_opo">@{matches[3]}</ExternalLink>
       </div>
     </div>
   );

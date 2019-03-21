@@ -3,11 +3,8 @@ import FacebookAltSVG from 'components/SVGs/FacebookAlt';
 import ExternalLink from 'components/ExternalLink';
 
 const Facebook = ({ url }) => {
-  const twitterRegex = /m[twitter\.com/+(?:#!/+)?(\w+)]/g;
-  const twitterMatch = url.match(twitterRegex);
-  // debugger;
-  const fbProfileName = "blarg";
-
+  const regex = /^(?:http\:\/\/|https\:\/\/)?(?:www\.)?facebook\.com\/((?:\w\.)*#!\/)?([\w\-\.]*\/)*([\w\-\.]*)/;
+  const matches = url.match(regex);
 
   return (
     <div className="coa-ContactItem coa-ContactFacebook">
@@ -16,7 +13,7 @@ const Facebook = ({ url }) => {
       </div>
       <div className="coa-ContactItem_content">
         <ExternalLink to={url}>
-          @{fbProfileName}
+          @{matches[2].replace('/', '')}
         </ExternalLink>
       </div>
     </div>
