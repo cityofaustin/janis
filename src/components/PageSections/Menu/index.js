@@ -63,6 +63,7 @@ class Menu extends Component {
       <div className="container-fluid wrapper">
         <nav
           className={classNames('coa-Menu', { 'coa-Menu--open': isMenuOpen })}
+          id="navMenu"
           role="navigation"
         >
           <div className="container-fluid wrapper">

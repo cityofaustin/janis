@@ -14,6 +14,8 @@ import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import GovSite from 'components/PageSections/Header/GovSite';
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,17 @@ class Header extends Component {
     };
   }
 
+  componentDidMount() {
+    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav). 
+    this.menuElement = document.querySelector('#navMenu');
+  }
+
   toggleMenu = e => {
+    // If we're closing the menu, enable body scroll again
+    if(this.state.menuIsOpen) enableBodyScroll(this.targetElement);
+    // If we're opening the menu, disable body scroll
+    if(!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
+
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
     });
