@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import GovSVG from 'components/SVGs/Gov';
+import GovSite from 'components/PageSections/Header/GovSite';
 
 import { howYouKnowMenu as i18n } from 'js/i18n/definitions';
 
-const HowYouKnowMenu = ({ open, intl }) => (
+const HowYouKnowMenu = ({ open, toggleHowYouKnowMenu, intl }) => (
   <div className={classNames('coa-HowYouKnowMenu', {'coa-HowYouKnowMenu--is-open': open})}>
+    <GovSite menuIsOpen={open} toggleHowYouKnowMenu={toggleHowYouKnowMenu} />
     <div className="container-fluid wrapper">
       <div className="coa-HowYouKnowMenu__info-blocks">
         <div className="coa-HowYouKnowMenu__info-block">
