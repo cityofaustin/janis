@@ -13,9 +13,39 @@
 }
 
 .coa-PageHeader--service {
-  padding-top: $coa-spacing-xlarge;
-  padding-bottom: $coa-spacing-xlarge;
-  margin-bottom: $coa-spacing-large;
-
+  padding-top: $coa-spacing-large;
+  padding-bottom: $coa-spacing-large;
+  margin-bottom: $coa-spacing-md-small;
   background: $coa-color-secondary;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+    padding-bottom: $coa-spacing-xlarge;
+    margin-bottom: $coa-spacing-large;
+  }
+}
+
+.coa-PageHeader--information {
+  padding-top: $coa-spacing-large;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+  }
+
+  h1 {
+    font-weight: $coa-font-semibold;
+
+    @include media($coa-medium-screen) {
+      font-weight: $coa-font-bold;
+    }
+  }
+
+  .coa-PageHeader__description {
+    margin-top: $coa-spacing-small;
+    margin-bottom: 0;
+  }
+
+  .coa-SectionHeader {
+    margin-bottom: 0;
+  }
 }
