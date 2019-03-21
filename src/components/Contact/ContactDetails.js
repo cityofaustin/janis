@@ -33,10 +33,8 @@ const ContactSocialMediaLink = ({ url }) => {
   }
 
   return(
-    <div className="coa-ContactItem coa-ContactTwitter">
-      <div className="coa-ContactItem__svg">
-        <ExternalLinkSVG />
-      </div>
+    <div className="coa-ContactItem">
+      <i className="material-icons">public</i>
       <div className="coa-ContactItem_content">
         <ExternalLink to={url}>{url}</ExternalLink>
       </div>
