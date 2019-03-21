@@ -59,7 +59,7 @@ const ContactDetails = ({
 
     {hours && <Hours hours={hours} />}
 
-    {socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
+    {socialMedia && socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
 
   </div>
 );
