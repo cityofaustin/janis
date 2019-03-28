@@ -127,7 +127,7 @@ const Department = ({
                       {director.name}
                     </h3>
                     <div className="coa-DepartmentPage__directorcard-title">
-                      {intl.formatMessage(i18n.directorTitle)}
+                      {director.title}
                     </div>
                     <div className="coa-DepartmentPage__directorcard-coamaybe">
                       {intl.formatMessage(i18n.coa)}
