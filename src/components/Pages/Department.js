@@ -18,6 +18,32 @@ import WorkInProgress from 'components/WorkInProgress';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 
+const TopServiceButtons = ({ topServices, locale }) => (
+  <div className="coa-DepartmentPage__topServiceButtons">
+    {topServices && topServices.map(service => {
+        // If our link type matches our locale, render it
+        if(service.type.substr(-2) === locale) {
+          return (
+            <a
+              href={service.value.url}
+              className="coa-DepartmentPage__topServiceButton"
+            >
+              <div className="coa-DepartmentPage__topServiceButtonText"> 
+                {service.value.title}
+              </div>
+              <div className="coa-DepartmentPage__topServiceButtonArrow">
+                <i className="material-icons">
+                  arrow_forward
+                </i>
+              </div>
+            </a>
+          );
+        }
+      }
+    )}
+  </div>
+)
+
 const Department = ({
   department: {
     title,
@@ -28,6 +54,7 @@ const Department = ({
     whatWeDo,
     socialMedia,
     jobListings,
+    topServices
   },
   intl,
 }) => {
@@ -55,26 +82,7 @@ const Department = ({
           <h3 className="coa-DepartmentPage__topservices-header--mobile">
             {intl.formatMessage(i18n.topServices)}
           </h3>
-          <div className="coa-DepartmentPage__topServiceButtons">
-            <a
-              href={intl.formatMessage(i18n.complaintFormUrl)}
-              className="coa-DepartmentPage__topServiceButton"
-            >
-              {intl.formatMessage(i18n.complaintFormButtonText)}
-              <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
-                arrow_forward
-              </i>
-            </a>
-            <a
-              href={intl.formatMessage(i18n.thankFormUrl)}
-              className="coa-DepartmentPage__topServiceButton"
-            >
-              {intl.formatMessage(i18n.thankFormButtonText)}
-              <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
-                arrow_forward
-              </i>
-            </a>
-          </div>
+          <TopServiceButtons topServices={topServices} locale={intl.locale} />
         </div>
       </div>
       <div className="wrapper container-fluid">
@@ -83,26 +91,7 @@ const Department = ({
             <h3 className="coa-DepartmentPage__topservices-header--desktop">
               {intl.formatMessage(i18n.topServices)}
             </h3>
-            <div className="coa-DepartmentPage__topServiceButtons">
-              <a
-                href={intl.formatMessage(i18n.complaintFormUrl)}
-                className="coa-DepartmentPage__topServiceButton"
-              >
-                {intl.formatMessage(i18n.complaintFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
-                  arrow_forward
-                </i>
-              </a>
-              <a
-                href={intl.formatMessage(i18n.thankFormUrl)}
-                className="coa-DepartmentPage__topServiceButton"
-              >
-                {intl.formatMessage(i18n.thankFormButtonText)}
-                <i class="material-icons coa-DepartmentPage__topServiceButtonArrow">
-                  arrow_forward
-                </i>
-              </a>
-            </div>
+            <TopServiceButtons topServices={topServices} locale={intl.locale} />
           </div>
         </div>
       </div>
@@ -138,7 +127,7 @@ const Department = ({
                       {director.name}
                     </h3>
                     <div className="coa-DepartmentPage__directorcard-title">
-                      {intl.formatMessage(i18n.directorTitle)}
+                      {director.title}
                     </div>
                     <div className="coa-DepartmentPage__directorcard-coamaybe">
                       {intl.formatMessage(i18n.coa)}

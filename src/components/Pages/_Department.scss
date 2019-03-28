@@ -61,9 +61,17 @@
   display: flex;
 }
 
+.coa-DepartmentPage__topServiceButtonText {
+  line-height: 2rem;
+  font-size: 1.5rem;
+  width: 18rem;
+}
+
 .coa-DepartmentPage__topServiceButtonArrow {
-  line-height: 4rem;
   padding-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .coa-DepartmentPage__directorcard {
