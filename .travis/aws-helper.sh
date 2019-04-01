@@ -130,7 +130,7 @@ function resolve_bucket {
 function resolve_pr_name {
   IS_PR=$(is_pull_request);
   if [ "${IS_PR}" = "TRUE" ]; then
-    echo "janis-pr-${TRAVIS_PULL_REQUEST}";
+    echo "${TRAVIS_PULL_REQUEST}";
   else
     echo "";
   fi;
@@ -163,9 +163,10 @@ function janis_build {
   # Patch the static.config.js file, switch "//basePath" to "basePath: 'janis-pr-123/',"
   IS_PR=$(is_pull_request);
   if [[ "${IS_PR}" = "TRUE" ]]; then
+    PR_SLUG=$(resolve_pr_name)
     echo "Patching static.config.js file 'basePath' attribute...";
     sed -i -e "s|\/\/siteRoot|siteRoot: 'https:\/\/janis-pr.austin.gov',|g" static.config.js;
-    sed -i -e "s|\/\/basePath|basePath: 'janis-pr-${TRAVIS_PULL_REQUEST}\/',|g" static.config.js;
+    sed -i -e "s|\/\/basePath|basePath: '/${PR_SLUG}\/',|g" static.config.js;
   fi;
 
   janis_print_header "Installing Janis Dependencies";
