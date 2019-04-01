@@ -164,6 +164,7 @@ function janis_build {
   IS_PR=$(is_pull_request);
   if [[ "${IS_PR}" = "TRUE" ]]; then
     echo "Patching static.config.js file 'basePath' attribute...";
+    sed -i -e "s|\/\/siteRoot|siteRoot: 'https:\/\/janis-pr.austin.gov',|g" static.config.js;
     sed -i -e "s|\/\/basePath|basePath: 'janis-pr-${TRAVIS_PULL_REQUEST}\/',|g" static.config.js;
   fi;
 
