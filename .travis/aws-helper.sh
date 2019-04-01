@@ -166,7 +166,7 @@ function janis_build {
     PR_SLUG=$(resolve_pr_name)
     echo "Patching static.config.js file 'basePath' attribute...";
     sed -i -e "s|\/\/siteRoot|siteRoot: 'https:\/\/janis-pr.austin.gov',|g" static.config.js;
-    sed -i -e "s|\/\/basePath|basePath: '/${PR_SLUG}\/',|g" static.config.js;
+    sed -i -e "s|\/\/basePath|basePath: '\/${PR_SLUG}\/',|g" static.config.js;
   fi;
 
   janis_print_header "Installing Janis Dependencies";
