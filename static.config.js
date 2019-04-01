@@ -181,7 +181,7 @@ const makeDepartmentPages = async client => {
 };
 
 export default {
-  //siteRoot // Do not alter this line if you want a working PR
+  // siteRoot: 'https://alpha.austin.gov',
   //basePath // Do not alter this line if you want a working PR
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
