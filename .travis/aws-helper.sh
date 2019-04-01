@@ -8,15 +8,6 @@
     RED='\033[0;31m'
     NC='\033[0m' # No Color
 
-# export GOOGLE_ANALYTICS="UA-110716917-2"
-# export FEEDBACK_API="https://coa-test-form-api.herokuapp.com/process/"
-# export CMS_API="https://joplin.herokuapp.com/api/graphql"
-# export CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
-# export NODE_PATH=src
-# export TRAVIS_BRANCH="master"
-# export TRAVIS_PULL_REQUEST="9999"
-# export AWS_BUCKET_PREVIEW="janis-austin-gov-preview"
-
 #
 # Prints error message and stops deployment by returing exit 1
 # $1 (string) - Error message to display
@@ -142,6 +133,19 @@ function resolve_pr_name {
   fi;
 }
 
+
+#
+# Prints Environment Variables
+#
+function janis_envars {
+  janis_print_header "Janis Environment Variables";
+
+  echo "GOOGLE_ANALYTICS: '${GOOGLE_ANALYTICS}'";
+  echo "FEEDBACK_API:     '${FEEDBACK_API}'";
+  echo "CMS_API:          '${CMS_API}'";
+  echo "CMS_MEDIA:        '${CMS_MEDIA}'";
+  echo "NODE_PATH:        '${NODE_PATH}'";
+}
 
 
 #
