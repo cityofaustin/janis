@@ -165,9 +165,7 @@ function janis_build {
   if [[ "${IS_PR}" = "TRUE" ]]; then
     PR_SLUG=$(resolve_pr_name)
     echo "Patching static.config.js file 'basePath' attribute...";
-#    sed -i -e "s|\/\/siteRoot|siteRoot: 'https:\/\/janis-pr.austin.gov',|g" static.config.js;
-#    sed -i -e "s|\/\/basePath|basePath: '\/${PR_SLUG}\/',|g" static.config.js;
-    echo -ne "After patch, siteRoot: "; grep "siteRoot" static.config.js;
+    sed -i -e "s|\/\/basePath|basePath: '\/${PR_SLUG}\/',|g" static.config.js;
     echo -ne "After patch, basePath: "; grep "basePath" static.config.js;
   fi;
 
