@@ -181,8 +181,8 @@ const makeDepartmentPages = async client => {
 };
 
 export default {
-  siteRoot: 'https://janis-pr.austin.gov',
-  basePath: '/janis-pr-347/',
+  // siteRoot: 'https://alpha.austin.gov',
+  //basePath // Do not alter this line if you want a working PR
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
     title: 'City of Austin',

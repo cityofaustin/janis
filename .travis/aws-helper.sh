@@ -160,6 +160,13 @@ function janis_build {
   janis_print_header "Building Janis";
   mkdir _dist;
 
+  # Patch the static.config.js file, switch "//basePath" to "basePath: 'janis-pr-123/',"
+  IS_PR=$(is_pull_request);
+  if [[ "${IS_PR}" = "TRUE" ]]; then
+    echo "Patching static.config.js file 'basePath' attribute...";
+    sed -i -e "s|\/\/basePath|basePath: 'janis-pr-${TRAVIS_PULL_REQUEST}\/',|g" static.config.js;
+  fi;
+
   janis_print_header "Installing Janis Dependencies";
   # First we install dependencies
   yarn;
