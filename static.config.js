@@ -181,7 +181,7 @@ const makeDepartmentPages = async client => {
 };
 
 export default {
-  siteRoot: 'https://janis-pr.austin.gov',
+  // siteRoot: 'https://janis-pr.austin.gov',
   basePath: '/347/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
