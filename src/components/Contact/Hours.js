@@ -2,34 +2,37 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedTime } from 'react-intl';
 import { findIndex, capitalize } from 'lodash';
+import moment from 'moment';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
 
-import ClockSVG from 'components/SVGs/ClockO';
 
 import { hoursPropTypes } from './proptypes';
 
 class Hours extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      today: 7,
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      today: new Date().getDay(),
-    });
+    this.today = new Date().getDay();
   }
 
   getOrderedWeekdays(day) {
     let weekday_collection = Object.keys(WEEKDAY_MAP).map(key => ({
-      name: key.toLowerCase(),
+      name: key,
       numeric: WEEKDAY_MAP[key],
     }));
     return weekday_collection.splice(day).concat(weekday_collection);
+  }
+
+  formatTime(time) {
+    let style;
+    // Only include minutes in display if there are minutes
+    if (moment(time).minutes()) {
+      style = "h:mma";
+    } else {
+      style = "ha";
+    }
+    return moment(time).format(style);
   }
 
   render() {
@@ -37,7 +40,7 @@ class Hours extends Component {
 
     return (
       <div className="coa-ContactItem coa-ContactHours">
-        <ClockSVG />
+        <i className="material-icons">access_time</i>
         <table className="usa-table-borderless">
           <thead className="usa-sr-only">
             <tr>
@@ -46,12 +49,12 @@ class Hours extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.getOrderedWeekdays(this.state.today).map(weekday => {
+            {this.getOrderedWeekdays(this.today).map(weekday => {
               const hourIndex = findIndex(hours, {
                 dayOfWeekNumeric: weekday.numeric,
               });
               return (
-                <tr key={weekday.name}>
+                <tr key={weekday.name} >
                   <th scope="row">
                     {intl.formatMessage(
                       i18n1['weekday' + capitalize(weekday.name)],
@@ -60,9 +63,7 @@ class Hours extends Component {
 
                   {hourIndex > -1 && (
                     <td>
-                      <FormattedTime value={hours[hourIndex].startTime} />
-                      <span> - </span>
-                      <FormattedTime value={hours[hourIndex].endTime} />
+                      {`${this.formatTime(hours[hourIndex].startTime)}-${this.formatTime(hours[hourIndex].endTime)}`}
                     </td>
                   )}
                   {hourIndex === -1 && (

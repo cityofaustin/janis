@@ -3,16 +3,16 @@ const allDepartmentPagesQuery = `
     allDepartmentPages(id: $id) {
       edges {
         node {
-          id,
-          slug,
-          title,
-          whatWeDo,
+          id
+          slug
+          title
+          whatWeDo
           image {
             id
             filename
             title
-          },
-          mission,
+          }
+          mission
           departmentDirectors {
             edges {
               node {
@@ -22,34 +22,34 @@ const allDepartmentPagesQuery = `
                   filename
                 }
                 about
-                email
-                phone
+                title
               }
             }
-          },
-          socialMedia,
-          jobListings,
+          }
+          jobListings
+          topServices
           contacts {
             edges {
               node {
                 contact {
-                  name,
-                  phone,
-                  email,
+                  name
+                  phone
+                  email
+                  socialMedia
                   location {
-                    id,
-                    name,
-                    street,
-                    city,
-                    state,
-                    country,
+                    id
+                    name
+                    street
+                    city
+                    state
+                    country
                     zip
-                  },
+                  }
                   hours {
                     edges {
                       node {
-                        dayOfWeek,
-                        startTime,
+                        dayOfWeek
+                        startTime
                         endTime
                       }
                     }

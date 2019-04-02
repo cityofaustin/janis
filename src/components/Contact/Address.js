@@ -1,12 +1,11 @@
 import React from 'react';
-import MapMarkerSVG from 'components/SVGs/MapMarker';
 import PropTypes from 'prop-types';
 
 import { addressPropTypes } from './proptypes';
 
 const Address = ({ location }) => (
   <div className="coa-ContactItem coa-ContactAddress">
-    <MapMarkerSVG />
+    <i className="material-icons">place</i>
     <div>
       <span>{location.name}</span>
       <span>{location.street}</span>

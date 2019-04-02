@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
@@ -19,8 +19,8 @@ const InformationPage = ({
   informationPage: {
     text: title,
     slug,
-    topic,
-    topic: { theme },
+    // topic,
+    // topic: { theme },
     toplink,
     description,
     options,
@@ -31,10 +31,15 @@ const InformationPage = ({
   intl,
 }) => (
   <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
     <div className="coa_InformationPage__back-to-dept">
       <div className="wrapper container-fluid">
         <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
-          <i className="material-icons coa_InformationPage__arrow">arrow_back</i>
+          <i className="material-icons coa_InformationPage__arrow">
+            arrow_back
+          </i>
           <span>{intl.formatMessage(i18n2.opoName)}</span>
         </a>
       </div>
@@ -46,7 +51,7 @@ const InformationPage = ({
           image.filename,
           path.extname(image.filename),
         )}
-        imageExtension={path.extname(image.filename)}
+        imageExtension={path.extname(image.filename).substring(1)}
         imageTitle={image.title}
       />
     )}
@@ -55,19 +60,20 @@ const InformationPage = ({
       parent={{ ...topic, subpath: 'topics' }}
       title={title}
     /> */}
-    <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader>{title}</PageHeader>
-      <div>{toplink}</div>
-      <div>{description}</div>
-      {options.map((option, index) => (
-        <HtmlFromAdmin title={''} content={option.value} />
-      ))}
-      {additionalContent && (
-        <HtmlFromAdmin
-          title={' '}
-          content={additionalContent}
-        />
-      )}
+    <div>
+      <PageHeader contentType={'information'} description={description}>{title}</PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-md-8">
+            {options.map((option, index) => (
+              <HtmlFromAdmin title={''} content={option.value} />
+            ))}
+            {additionalContent && (
+              <HtmlFromAdmin title={' '} content={additionalContent} />
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );

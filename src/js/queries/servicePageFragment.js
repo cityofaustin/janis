@@ -19,6 +19,12 @@ const servicePageFragment = `
     related {
       slug
       title
+      topic {
+        slug
+        theme {
+          slug
+        }
+      }
     }
     image {
       id
@@ -32,6 +38,7 @@ const servicePageFragment = `
             name
             email
             phone
+            socialMedia
             hours {
               edges {
                 node {

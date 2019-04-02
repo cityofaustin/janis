@@ -29,11 +29,15 @@
 .coa-DepartmentPage__topservices-header--mobile {
   color: $coa-color-white;
   font-size: 1.5rem;
-  letter-spacing: .15rem;
+  letter-spacing: 0.15rem;
+  font-weight: $coa-font-semibold;
+  margin-bottom: 0;
 }
 
 .coa-DepartmentPage__topservices-header--desktop {
   color: $coa-color-white;
+  font-weight: $coa-font-semibold;
+  margin-bottom: $coa-spacing-small;
 }
 
 .coa-DepartmentPage__topServiceButtons {
@@ -57,18 +61,17 @@
   display: flex;
 }
 
-.coa-DepartmentPage__topServiceButtonArrow {
-  line-height: 4rem;
-  padding-left: 1rem;
+.coa-DepartmentPage__topServiceButtonText {
+  line-height: 2rem;
+  font-size: 1.5rem;
+  width: 18rem;
 }
 
-.coa-SectionHeader {
-  color: $coa-color-primary;
-  border-bottom: 2px solid $coa-color-half-primary;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  font-size: 2.4rem;
-  font-weight: bold;
+.coa-DepartmentPage__topServiceButtonArrow {
+  padding-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .coa-DepartmentPage__directorcard {
@@ -82,6 +85,7 @@
 .coa-DepartmentPage__directorcard-name {
   color: $coa-color-primary;
   font-size: 2.4rem;
+  font-weight: normal;
 }
 
 .coa-DepartmentPage__directorcard-title {
@@ -137,8 +141,8 @@
   @include media($coa-medium-screen) {
     display: inherit;
   }
-  // padding-right: 10%;
   padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .coa-DepartmentPage__contacts-mobile {

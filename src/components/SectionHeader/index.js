@@ -9,7 +9,7 @@ const SectionHeader = ({
   symbol,
   children,
 }) => (
-  <div
+  <h2
     className={classNames('coa-SectionHeader', {
       'coa-SectionHeader--hasHighlight': hasHighlight,
       'coa-SectionHeader--isSerif': isSerif,
@@ -21,7 +21,7 @@ const SectionHeader = ({
     {!!description && (
       <p className="coa-SectionHeader__description">{description}</p>
     )}
-  </div>
+  </h2>
 );
 
 SectionHeader.propTypes = {

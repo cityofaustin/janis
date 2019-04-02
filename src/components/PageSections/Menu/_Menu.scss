@@ -7,12 +7,13 @@
   overflow-y: auto;
   position: fixed;
   // transition: left 0.5s;
-  top: 10.5rem;
+  top: 13.5rem;
   @include media($coa-medium-screen) {
     top: 8.5rem;
   }
   width: 100vw;
-  z-index: 2;
+  padding-bottom: 3rem;
+  // z-index: 2; This interacts badly with the gov site menu
   // @include media($coa-large-screen) {
   //   background: none;
   //   bottom: auto;
@@ -86,6 +87,8 @@
 }
 
 .coa-Menu__header {
+  padding-top: $coa-spacing-large;
+
   a {
     color: $coa-color-primary !important;
     text-decoration: none !important;
@@ -107,13 +110,13 @@
   display: none !important;
   @include media($coa-medium-screen) {
     display: flex !important;
-  } 
+  }
 }
 
 .coa-Menu__subheading {
   text-transform: uppercase;
   font-size: 1.6rem;
-  padding-top: 4rem;
+  padding-top: 3rem;
   color: $coa-color-gray-dark;
   border-bottom: 2px solid $coa-color-half-primary;
   @include media($coa-medium-screen) {
@@ -124,7 +127,7 @@
 .coa-Menu__service-link {
   @include media($coa-medium-screen) {
     display: none;
-  } 
+  }
 }
 
 .coa-Menu__link {
@@ -134,5 +137,5 @@
   @include media($coa-medium-screen) {
     font-size: 2rem;
     line-height: 2rem;
-  } 
+  }
 }

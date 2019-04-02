@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
@@ -13,6 +13,9 @@ import TileGroup from 'components/Tiles/TileGroup';
 
 const Home = ({ topServices, image, intl }) => (
   <div>
+    <Head>
+      <title>{'City of Austin'}</title>
+    </Head>
     <HeroHome
       imageFilename={`${process.env.CMS_MEDIA}/images/${image.file}`}
       imageTitle={image.title}

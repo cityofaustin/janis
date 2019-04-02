@@ -5,7 +5,7 @@ h4,
 h5,
 h6 {
   font-family: $coa-font-sans;
-  font-weight: $coa-font-extrabold;
+  font-weight: $coa-font-bold;
   margin: 0;
 }
 
@@ -15,6 +15,14 @@ h1 {
 
 h2 {
   @include heading2();
+}
+
+h3 {
+  @include heading3();
+}
+
+h4 {
+  @include heading4();
 }
 
 ol,

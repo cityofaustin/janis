@@ -2,7 +2,7 @@
   background: $coa-color-blue-darkest;
   display: none;
   position: fixed;
-  top: 3rem;
+  top: 0;
   width: 100vw;
 }
 
@@ -18,19 +18,27 @@
   margin-bottom: 1.5rem;
   margin-right: 3rem;
   svg {
-    width: 5rem;
-    margin-top: .2rem;
+    // @include media($coa-medium-screen) {
+    //   width: 5rem;
+    // }
+    width: 60px;
+    height: 40px;
+    margin-top: 0.2rem;
   }
 }
 
 .coa-HowYouKnowMenu__info-blocks {
   display: flex;
   margin-top: 1.5rem;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
 }
 
 .coa-HowYouKnowMenu__info-block-header {
   font-weight: 600;
-  margin-bottom: .8rem;
+  margin-bottom: 0.8rem;
   font-size: 1.4rem;
 }
 

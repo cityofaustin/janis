@@ -1,11 +1,18 @@
+.coa-FooterContainer {
+  background: $coa-color-grey;
+  padding: $coa-spacing-xlarge 0;
+}
+
 .coa-Footer {
   background: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
   padding-bottom: $coa-spacing-large;
+  border-radius: $coa-button-border-radius;
+
   a {
     &:hover {
-      color: #D9E8F6;
+      color: #d9e8f6;
     }
   }
 }
@@ -24,13 +31,17 @@
 
 .coa-Footer__work-in-progress {
   text-align: center;
-  font-size: $coa-font-size-medium;
-  line-height: $coa-line-height-medium;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  font-weight: $coa-font-bold;
   white-space: pre-line;
-  // @include media($coa-medium-screen) {
-  //   font-size: $coa-font-size-xxlarge;
-  //   line-height: $coa-line-height-xxlarge;
-  // }
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-medium;
+    line-height: $coa-line-height-medium;
+    font-weight: $coa-font-regular;
+  }
+
   max-width: 660px;
   margin: auto;
 
@@ -39,7 +50,7 @@
     &:visited {
       color: $coa-color-white;
     }
-      svg {
+    svg {
       margin-left: $coa-space-level1;
       vertical-align: middle;
       path {
@@ -47,8 +58,6 @@
       }
     }
   }
-
-
 }
 
 .coa-Footer__icons {
@@ -85,12 +94,20 @@
   max-width: 40rem;
   margin: 3rem;
 
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-smedium;
+    line-height: $coa-line-height-smedium;
+  }
+
   a {
     color: $coa-color-white;
     &:visited {
       color: $coa-color-white;
     }
-      svg {
+    svg {
       margin-left: $coa-space-level1;
       vertical-align: middle;
       path {
@@ -104,5 +121,32 @@
   color: $coa-color-white;
   &:visited {
     color: $coa-color-white;
+  }
+}
+
+.coa-FooterSiteMap__title {
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  font-weight: $coa-font-medium;
+  margin-bottom: $coa-spacing-small;
+}
+
+.coa-FooterSiteMap__list {
+  margin-left: 0;
+}
+
+.coa-FooterSiteMap__item {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: $coa-spacing-xsmall;
+}
+
+.coa-FooterSiteMap__link {
+  text-decoration: none;
+  color: $coa-color-decently-black;
+  font-size: $coa-font-size-xsmall;
+  &:hover,
+  &:visited {
+    color: $coa-color-decently-black;
   }
 }

@@ -8,6 +8,7 @@ const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, hea
     <ResponsiveImage
       className="coa-PageBannerImage"
       filename={`${imagesPath}/${imageFilename}`}
+      defaultWidth="width-1080"
       widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
       extension={imageExtension}
       aria-label={imageTitle}

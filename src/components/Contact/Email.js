@@ -1,13 +1,14 @@
 import React from 'react';
-import EnvelopSVG from 'components/SVGs/EnvelopO';
 import PropTypes from 'prop-types';
 
 import { emailPropTypes } from './proptypes';
 
 const Email = ({ email }) => (
   <div className="coa-ContactItem coa-ContactEmail">
-    <EnvelopSVG />
-    <a href={`mailto:${email}`}>{email}</a>
+    <i className="material-icons">mail_outline</i>
+    <div className="coa-ContactItem_content">
+      <a href={`mailto:${email}`}>{email}</a>
+    </div>
   </div>
 );
 
