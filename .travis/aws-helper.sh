@@ -58,6 +58,7 @@ if [ "${TRAVIS_BRANCH}" == "production" ]; then
   export FEEDBACK_API=$FEEDBACK_API_PRODUCTION
   export CMS_API=$CMS_API_PRODUCTION
   export CMS_MEDIA=$CMS_MEDIA_PRODUCTION
+  export BASE_PATH_PR="/"
 elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export DEPLOYMENT_MODE="STAGING"
   # GOOGLE_ANALYTICS=$GOOGLE_ANALYTICS_STAGING
@@ -68,6 +69,7 @@ elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export FEEDBACK_API=$FEEDBACK_API_PRODUCTION
   export CMS_API=$CMS_API_PRODUCTION
   export CMS_MEDIA=$CMS_MEDIA_PRODUCTION
+  export BASE_PATH_PR="/"
 else
   helper_halt_deployment "TRAVIS_BRANCH: '${TRAVIS_BRANCH}' cannot be deployed to staging or production."
 fi;
@@ -163,10 +165,10 @@ function janis_build {
   # Patch the static.config.js file, switch "//basePath" to "basePath: 'janis-pr-123/',"
   IS_PR=$(is_pull_request);
   if [[ "${IS_PR}" = "TRUE" ]]; then
-    PR_SLUG=$(resolve_pr_name)
-    echo "Patching static.config.js file 'basePath' attribute...";
-    sed -i -e "s|\/\/basePath|basePath: '\/${PR_SLUG}\/',|g" static.config.js;
-    echo -ne "After patch, basePath: "; grep "basePath" static.config.js;
+    BASE_PATH_PR=$(resolve_pr_name)
+#    echo "Patching static.config.js file 'basePath' attribute...";
+#    sed -i -e "s|\/\/basePath|basePath: '\/${PR_SLUG}\/',|g" static.config.js;
+#    echo -ne "After patch, basePath: "; grep "basePath" static.config.js;
   fi;
 
   janis_print_header "Installing Janis Dependencies";
