@@ -54,7 +54,7 @@ export const cleanLinks = (links, pageType) => {
     var pathPrefix = '';
     if (pageType === 'service') {
       // Service page links are always theme/topic based
-      pathPrefix = `${link.topic.theme.slug}/${link.topic.slug}`
+      pathPrefix = `/${link.topic.theme.slug}/${link.topic.slug}`;
     }
 
     link.slug = link.slug || link.sortOrder;
