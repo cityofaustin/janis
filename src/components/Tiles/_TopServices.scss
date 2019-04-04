@@ -1,0 +1,18 @@
+.coa-TopServices {
+  background: $coa-color-primary;
+  padding: $coa-spacing-large 0;
+  margin-left: -2rem; // full-width on mobile, override parent applied padding .wrapper .container-fluid
+  margin-right: -2rem; // full-width on mobile, override parent applied padding .wrapper .container-fluid
+
+  @include media($coa-medium-screen) {
+    margin-top: -$coa-spacing-large;
+    border-radius: $coa-button-border-radius;
+  }
+}
+
+.coa-TopServices__title {
+  font-weight: $coa-font-semibold;
+  font-size: $coa-font-size-md-small;
+  line-height: $coa-font-size-md-small;
+  color: $coa-color-white;
+}

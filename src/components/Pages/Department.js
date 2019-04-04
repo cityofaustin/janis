@@ -18,31 +18,33 @@ import WorkInProgress from 'components/WorkInProgress';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 
+//rmv
+import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import TopServices from 'components/Tiles/TopServices';
+
 const TopServiceButtons = ({ topServices, locale }) => (
   <div className="coa-DepartmentPage__topServiceButtons">
-    {topServices && topServices.map(service => {
+    {topServices &&
+      topServices.map(service => {
         // If our link type matches our locale, render it
-        if(service.type.substr(-2) === locale) {
+        if (service.type.substr(-2) === locale) {
           return (
             <a
               href={service.value.url}
               className="coa-DepartmentPage__topServiceButton"
             >
-              <div className="coa-DepartmentPage__topServiceButtonText"> 
+              <div className="coa-DepartmentPage__topServiceButtonText">
                 {service.value.title}
               </div>
               <div className="coa-DepartmentPage__topServiceButtonArrow">
-                <i className="material-icons">
-                  arrow_forward
-                </i>
+                <i className="material-icons">arrow_forward</i>
               </div>
             </a>
           );
         }
-      }
-    )}
+      })}
   </div>
-)
+);
 
 const Department = ({
   department: {
@@ -54,7 +56,7 @@ const Department = ({
     whatWeDo,
     socialMedia,
     jobListings,
-    topServices
+    topServices,
   },
   intl,
 }) => {
@@ -77,7 +79,18 @@ const Department = ({
           headerText={title}
         />
       )}
-      <div className="coa-DepartmentPage__topservices--mobile">
+
+      <div className="coa-DepartmentPage__topservices">
+        <div className="wrapper container-fluid">
+          <TopServices
+            text={intl.formatMessage(i18n.topServices)}
+            tiles={topServices}
+            locale={intl.locale}
+          />
+        </div>
+      </div>
+
+      {/* <div className="coa-DepartmentPage__topservices--mobile">
         <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
           <h3 className="coa-DepartmentPage__topservices-header--mobile">
             {intl.formatMessage(i18n.topServices)}
@@ -94,7 +107,8 @@ const Department = ({
             <TopServiceButtons topServices={topServices} locale={intl.locale} />
           </div>
         </div>
-      </div>
+      </div> */}
+
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
