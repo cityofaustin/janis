@@ -54,7 +54,7 @@ const Service = ({
       <PageHeader contentType={'service'}>{title}</PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-xs-12 col-md-8">
             {steps &&
               !!steps.length && (
                 <Fragment>
