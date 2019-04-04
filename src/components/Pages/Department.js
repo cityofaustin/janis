@@ -20,29 +20,27 @@ import jsonFileData from '__tmpdata/pages';
 
 const TopServiceButtons = ({ topServices, locale }) => (
   <div className="coa-DepartmentPage__topServiceButtons">
-    {topServices && topServices.map(service => {
+    {topServices &&
+      topServices.map(service => {
         // If our link type matches our locale, render it
-        if(service.type.substr(-2) === locale) {
+        if (service.type.substr(-2) === locale) {
           return (
             <a
               href={service.value.url}
               className="coa-DepartmentPage__topServiceButton"
             >
-              <div className="coa-DepartmentPage__topServiceButtonText"> 
+              <div className="coa-DepartmentPage__topServiceButtonText">
                 {service.value.title}
               </div>
               <div className="coa-DepartmentPage__topServiceButtonArrow">
-                <i className="material-icons">
-                  arrow_forward
-                </i>
+                <i className="material-icons">arrow_forward</i>
               </div>
             </a>
           );
         }
-      }
-    )}
+      })}
   </div>
-)
+);
 
 const Department = ({
   department: {
@@ -54,7 +52,7 @@ const Department = ({
     whatWeDo,
     socialMedia,
     jobListings,
-    topServices
+    topServices,
   },
   intl,
 }) => {
@@ -110,11 +108,13 @@ const Department = ({
               {!!contacts &&
                 !!contacts.length && <ContactDetails contact={contacts[0]} />}
             </div>
-            <h2 className="coa-SectionHeader">
-              {directors.length > 1
-                ? intl.formatMessage(i18n.meetDirectors)
-                : intl.formatMessage(i18n.meetDirector)}
-            </h2>
+            {directors.length > 0 && (
+              <h2 className="coa-SectionHeader">
+                {directors.length > 1
+                  ? intl.formatMessage(i18n.meetDirectors)
+                  : intl.formatMessage(i18n.meetDirector)}
+              </h2>
+            )}
             {directors.map(director => (
               <div>
                 <div className="coa-DepartmentPage__directorcard">
