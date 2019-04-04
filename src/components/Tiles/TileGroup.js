@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { services as i18n3 } from 'js/i18n/definitions';
-import I18nLink from 'components/I18n/I18nLink';
+import { Link } from 'react-static';
 import ArrowRight from 'components/SVGs/ArrowRight';
 
 import Tile from './Tile';
@@ -11,14 +11,14 @@ import { tileGroupPropTypes } from './proptypes';
 const TileGroup = ({ tiles, text, url, description, intl }) => (
   <div className="coa-TileGroup">
     <div className="wrapper container-fluid">
-      {text &&
-        url && (
-          <h4 className="coa-TileGroup__title">
-            <I18nLink to={url}>
-              {text}&nbsp;<ArrowRight />
-            </I18nLink>
-          </h4>
-        )}
+      {text && url && (
+        <h4 className="coa-TileGroup__title">
+          <Link to={url}>
+            {text}&nbsp;
+            <ArrowRight />
+          </Link>
+        </h4>
+      )}
 
       {text && !url && <h4 className="coa-TileGroup__title">{text}</h4>}
 
