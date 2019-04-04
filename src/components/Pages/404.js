@@ -25,8 +25,11 @@ export default class extends React.Component {
   };
   render() {
     return this.state.ready ? (
-      <div>
-        <h1>Sorry, we couldn't find that page.</h1>
+      <div className="coa-404">
+        <div className="wrapper container-fluid">
+          <h1 className="coa-404__title">404</h1>
+          <p>Sorry, we couldn't find that page.</p>
+        </div>
       </div>
     ) : null;
   }
