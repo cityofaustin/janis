@@ -1,5 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
 
 const ThemesNav = props => {
   return (
@@ -15,6 +16,11 @@ const ThemesNav = props => {
       </ul>
     </nav>
   );
+};
+
+ThemesNav.propTypes = {
+  handleOnClick: PropTypes.func.isRequired,
+  themes: PropTypes.object.isRequired,
 };
 
 export default injectIntl(ThemesNav);

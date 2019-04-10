@@ -1,5 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
 
 const TopicsLinks = props => {
   if (props.topics.length > 0) {
@@ -33,5 +34,13 @@ const ThemesTopicsMenu = props => (
     </ul>
   </nav>
 );
+
+TopicsLinks.propTypes = {
+  topics: PropTypes.array.isRequired,
+};
+
+ThemesTopicsMenu.propTypes = {
+  menu: PropTypes.object.isRequired,
+};
 
 export default injectIntl(ThemesTopicsMenu);
