@@ -80,34 +80,11 @@ const Department = ({
         />
       )}
 
-      <div className="coa-DepartmentPage__topservices">
-        <div className="wrapper container-fluid">
-          <TopServices
-            text={intl.formatMessage(i18n.topServices)}
-            tiles={topServices}
-            locale={intl.locale}
-          />
-        </div>
-      </div>
-
-      {/* <div className="coa-DepartmentPage__topservices--mobile">
-        <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
-          <h3 className="coa-DepartmentPage__topservices-header--mobile">
-            {intl.formatMessage(i18n.topServices)}
-          </h3>
-          <TopServiceButtons topServices={topServices} locale={intl.locale} />
-        </div>
-      </div>
-      <div className="wrapper container-fluid">
-        <div className="coa-DepartmentPage__topservices--desktop">
-          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-            <h3 className="coa-DepartmentPage__topservices-header--desktop">
-              {intl.formatMessage(i18n.topServices)}
-            </h3>
-            <TopServiceButtons topServices={topServices} locale={intl.locale} />
-          </div>
-        </div>
-      </div> */}
+      <TopServices
+        title={intl.formatMessage(i18n.topServices)}
+        tiles={topServices}
+        locale={intl.locale}
+      />
 
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">

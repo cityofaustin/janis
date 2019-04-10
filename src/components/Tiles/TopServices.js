@@ -1,26 +1,23 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { services as i18n3 } from 'js/i18n/definitions';
 import I18nLink from 'components/I18n/I18nLink';
 import ArrowRight from 'components/SVGs/ArrowRight';
-
 import Tile from './Tile';
-import { tileGroupPropTypes } from './proptypes';
 
-const TopServices = ({ tiles, text, url, description, intl, locale }) => (
+const TopServices = ({ tiles, title, url, locale }) => (
   <div className="coa-TopServices">
     <div className="wrapper container-fluid">
-      {text &&
+      {title &&
         url && (
           <h4 className="coa-TopServices__title">
             <I18nLink to={url}>
-              {text}&nbsp;<ArrowRight />
+              {title}&nbsp;<ArrowRight />
             </I18nLink>
           </h4>
         )}
 
-      {text && !url && <h4 className="coa-TopServices__title">{text}</h4>}
+      {title && !url && <h4 className="coa-TopServices__title">{title}</h4>}
 
       <div className="row">
         {tiles.map(
@@ -40,6 +37,10 @@ const TopServices = ({ tiles, text, url, description, intl, locale }) => (
   </div>
 );
 
-// TopServices.propTypes = tileGroupPropTypes;
+TopServices.propTypes = {
+  title: PropTypes.string.isRequired,
+  tiles: PropTypes.array.isRequired,
+  locale: PropTypes.string.isRequired,
+};
 
 export default injectIntl(TopServices);

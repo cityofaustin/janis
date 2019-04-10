@@ -8,7 +8,7 @@ const Tile = ({ url, text }) => (
   <I18nLink className="coa-Tile" to={url}>
     <div className="coa-Tile__content">
       <p className="coa-Tile__text">{text}</p>
-      <i class="material-icons">arrow_forward</i>
+      <i className="material-icons">arrow_forward</i>
     </div>
   </I18nLink>
 );
