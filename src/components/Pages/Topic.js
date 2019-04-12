@@ -27,7 +27,7 @@ const Topic = ({
     </div>
 
     <div className="wrapper container-fluid">
-      <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} />
+      {/* <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} /> */}
     </div>
   </div>
 );
