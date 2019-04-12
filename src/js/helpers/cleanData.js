@@ -53,6 +53,16 @@ export const cleanLinks = (links, pageType) => {
   // Themes
   if (pageType === 'theme') {
     return links.edges.map(({ node: link }) => {
+      link.topics = link.topicPages.edges.map(e => e.node);
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
+  // Topics
+  if (pageType === 'topic') {
+    return links.edges.map(({ node: link }) => {
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
       return link;
@@ -72,6 +82,8 @@ export const cleanLinks = (links, pageType) => {
         link.slug = link.slug || link.sortOrder;
         link.url = `${pathPrefix || ''}/${link.slug}`;
         link.text = link.title;
+        link.topic = topic;
+
         cleanedLinks.push(link);
       }
     }
@@ -182,18 +194,14 @@ export const cleanDepartments = allDepartments => {
 export const cleanTopics = allTopics => {
   if (!allTopics || !allTopics.edges) return null;
 
-  let cleanedTopics = cleanLinks(allTopics, '/topics');
-  cleanedTopics.map(topic => {
-    topic.services = cleanLinks(topic.servicepageSet, '/services'); //for navigation
-    topic.tiles = topic.services; //for theme page
-  });
+  let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
 };
 
 export const cleanThemes = allThemes => {
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedThemes = cleanLinks(allThemes, '/themes');
+  let cleanedThemes = cleanLinks(allThemes, 'theme');
   cleanedThemes.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });
@@ -206,7 +214,7 @@ export const cleanNavigation = navigation => {
 
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedNavigation = cleanLinks(allThemes, '/themes');
+  let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });
