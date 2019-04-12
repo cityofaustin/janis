@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, FormattedTime } from 'react-intl';
 import { findIndex, capitalize } from 'lodash';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
@@ -32,7 +32,7 @@ class Hours extends Component {
     } else {
       style = "ha";
     }
-    return moment(time).format(style);
+    return moment(time).tz('America/Chicago').format(style);
   }
 
   render() {
