@@ -14,9 +14,26 @@
   }
 
   > h2 {
+    color: $coa-color-primary;
+    border-bottom: 4px solid $coa-color-half-primary;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
+  > h3 {
     @include heading3();
-    text-transform: uppercase;
-    text-align: center;
+    margin-bottom: 0;
+    font-size: $coa-font-size-small;
+
+    & + p {
+      margin-top: $coa-spacing-small;
+    }
+  }
+
+  > h4 {
+    @include heading4();
   }
 
   > ul,

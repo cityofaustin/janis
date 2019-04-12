@@ -3,10 +3,11 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
+import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
-import allDepartmentsQuery from 'js/queries/allDepartmentsQuery';
+import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 
@@ -17,6 +18,7 @@ import {
   cleanThemes,
   cleanProcesses,
   cleanServices,
+  cleanInformationPages,
   clean311,
   cleanNavigation,
 } from 'js/helpers/cleanData';
@@ -27,13 +29,16 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
+  const themeChildren = await makeThemePages(client);
+  const deptChildren = await makeDepartmentPages(client);
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: await makeChildPages(client),
+    children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      const topServices = cleanLinks(allServicePages, '/services');
+      const topServices = cleanLinks(allServicePages, 'service');
       return {
         topServices,
         image: {
@@ -47,135 +52,153 @@ const makeAllPages = async langCode => {
   return data;
 };
 
-const makeChildPages = client => {
-  return Promise.all([
-    makeServicePages(client),
-    makeProcessPages(client),
-    makeTopicPages(client),
-    makeThemePages(client),
-    makeDepartmentPages(client),
-  ]);
-};
-
-const makeServicePages = async client => {
-  const { allServicePages: allServices } = await client.request(
-    allServicePagesQuery,
-  );
-  const services = cleanServices(allServices);
-  const data = {
-    path: '/services',
-    component: 'src/components/Pages/Services',
-    getData: async () => ({
-      services,
-    }),
-    children: services.map(service => ({
-      path: `/${service.slug}`,
-      component: 'src/components/Pages/Service',
-      getData: async () => ({
-        service,
-      }),
-    })),
-  };
-
-  return data;
-};
-
-const makeProcessPages = async client => {
-  const { allProcesses } = await client.request(allProcessesQuery);
-  const processes = cleanProcesses(allProcesses);
-
-  const data = {
-    path: '/processes',
-    component: 'src/components/Pages/Processes',
-    getData: async () => ({
-      processes,
-    }),
-    children: processes.map(process => ({
-      path: `/${process.slug}`,
-      component: 'src/components/Pages/Process',
-      getData: async () => ({
-        process,
-      }),
-      children: process.processSteps.map(processStep => ({
-        path: `/${processStep.slug}`,
-        component: 'src/components/Pages/ProcessStep',
-        getData: async () => ({
-          processStep,
-        }),
-      })),
-    })),
-  };
-
-  return data;
-};
-
-const makeTopicPages = async client => {
-  const { allTopics } = await client.request(allTopicsQuery);
-  const topics = cleanTopics(allTopics);
-
-  const data = {
-    path: '/topics',
-    component: 'src/components/Pages/Topics',
-    getData: async () => ({
-      topics,
-    }),
-    children: topics.map(topic => ({
-      path: `/${topic.slug}`,
-      component: 'src/components/Pages/Topic',
-      getData: async () => ({
-        topic,
-      }),
-    })),
-  };
-
-  return data;
-};
-
 const makeThemePages = async client => {
   const { allThemes } = await client.request(allThemesQuery);
   const themes = cleanThemes(allThemes);
 
-  const data = {
-    path: '/themes',
-    component: 'src/components/Pages/Themes',
+  const { allTopics } = await client.request(allTopicsQuery);
+  const topics = cleanTopics(allTopics);
+
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanInformationPages(allInformationPages);
+
+  const { allServicePages: allServices } = await client.request(
+    allServicePagesQuery,
+  );
+  const services = cleanServices(allServices);
+
+  const { allProcesses } = await client.request(allProcessesQuery);
+  const processes = cleanProcesses(allProcesses);
+
+  const data = themes.map(theme => ({
+    path: `/${theme.slug}`,
+    component: 'src/components/Pages/Theme',
     getData: async () => ({
-      themes,
+      theme,
     }),
-    children: themes.map(theme => ({
-      path: `/${theme.slug}`,
-      component: 'src/components/Pages/Theme',
-      getData: async () => ({
-        theme,
-      }),
-    })),
-  };
+    children: topics
+      .filter(top => top.theme != null && top.theme.id == theme.id)
+      .map(topic => ({
+        path: `/${topic.slug}`,
+        component: 'src/components/Pages/Topic',
+        getData: async () => ({
+          topic,
+        }),
+        children: informationPages
+          .filter(i => i.topic != null && i.topic.id == topic.id)
+          .map(informationPage => ({
+            path: `/${informationPage.slug}`,
+            component: 'src/components/Pages/Information',
+            getData: async () => ({
+              informationPage,
+            }),
+          }))
+          .concat(
+            services
+              .filter(s => s.topic != null && s.topic.id == topic.id)
+              .map(service => ({
+                path: `/${service.slug}`,
+                component: 'src/components/Pages/Service',
+                getData: async () => ({
+                  service,
+                }),
+              })),
+          )
+          .concat(
+            processes
+              .filter(p => p.topic != null && p.topic.id == topic.id)
+              .map(process => ({
+                path: `/${process.slug}`,
+                component: 'src/components/Pages/Process',
+                getData: async () => ({
+                  process,
+                }),
+                children: process.processSteps.map(processStep => ({
+                  path: `/${processStep.slug}`,
+                  component: 'src/components/Pages/ProcessStep',
+                  getData: async () => ({
+                    processStep,
+                  }),
+                })),
+              })),
+          ),
+      })),
+  }));
 
   return data;
 };
 
 const makeDepartmentPages = async client => {
-  const { allDepartments } = await client.request(allDepartmentsQuery);
-  const departments = cleanDepartments(allDepartments);
+  const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
+  const departments = cleanDepartments(allDepartmentPages);
 
-  const data = {
-    path: '/departments',
-    component: 'src/components/Pages/Departments',
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanInformationPages(allInformationPages);
+
+  // const { allServicePages: allServices } = await client.request(
+  //   allServicePagesQuery,
+  // );
+  // const services = cleanServices(allServices);
+
+  const { allProcesses } = await client.request(allProcessesQuery);
+  const processes = cleanProcesses(allProcesses);
+
+  const data = departments.map(department => ({
+    path: `/${department.slug}`,
+    component: 'src/components/Pages/Department',
     getData: async () => ({
-      departments,
+      department,
     }),
-    children: departments.map(department => ({
-      path: `${department.id}`,
-      component: 'src/components/Pages/Department',
-      getData: async () => ({
-        department,
-      }),
-    })),
-  };
+    children: informationPages
+      .filter(i => i.department != null && i.department.id == department.id)
+      .map(informationPage => ({
+        path: `/${informationPage.slug}`,
+        component: 'src/components/Pages/Information',
+        getData: async () => ({
+          informationPage,
+        }),
+      }))
+      // .concat(
+      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+      //     path: `/${service.slug}`,
+      //     component: 'src/components/Pages/Service',
+      //     getData: async () => ({
+      //       service,
+      //     }),
+      //   }))
+      // )
+      .concat(
+        processes
+          .filter(p => p.department != null && p.department.id == department.id)
+          .map(process => ({
+            path: `/${process.slug}`,
+            component: 'src/components/Pages/Process',
+            getData: async () => ({
+              process,
+            }),
+            children: process.processSteps.map(processStep => ({
+              path: `/${processStep.slug}`,
+              component: 'src/components/Pages/ProcessStep',
+              getData: async () => ({
+                processStep,
+              }),
+            })),
+          })),
+      ),
+  }));
 
   return data;
 };
 
 export default {
+  // siteRoot: 'https://alpha.austin.gov',
+  //basePath // Do not alter this line if you want a working PR
+  basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
+  stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
     title: 'City of Austin',
   }),

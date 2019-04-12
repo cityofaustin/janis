@@ -1,50 +1,44 @@
+.coa-DepartmentPage__contacts-desktop {
+  width: 315px;
+}
+
 .coa-ContactDetails {
-  border: 1px solid $coa-color-purple-lighter;
   border-left: none;
   border-right: none;
   padding-bottom: $coa-spacing-large;
 }
 
+/*
+Assumes that there are 2 children for each .coa-ContactItem.
+This will enable proper line wrapping for the :last-child.
+*/
 .coa-ContactItem {
-  border-bottom: 1px dashed $coa-color-purple-dark;
+  // border-bottom: 1px dashed $coa-color-purple-dark;
   display: flex;
+  align-items: flex-start;
   font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
-  padding: $coa-spacing-md-small 0;
+  line-height: $coa-line-height-small;
+  padding-top: $coa-spacing-medium;
   text-align: left;
 
   @include media($coa-medium-screen) {
-    font-size: $coa-font-size-small;
-    line-height: $coa-line-height-small;
-    padding: $coa-spacing-medium 0;
+    // font-size: $coa-font-size-small;
+    // line-height: $coa-line-height-small;
+    // padding: $coa-spacing-medium 0;
   }
 
   @include media($coa-large-screen) {
-    font-size: $coa-font-size-md-small;
-    line-height: $coa-line-height-md-small;
-  }
-
-  svg {
-    height: $coa-font-size-xsmall - .1rem;
-    width: $coa-font-size-xsmall - .1rem;
-    @include media($coa-medium-screen) {
-      height: $coa-font-size-small - .1rem;
-      width: $coa-font-size-small - .1rem;
-    }
-
-    @include media($coa-large-screen) {
-      height: $coa-font-size-md-small - .1rem;
-      width: $coa-font-size-md-small - .1rem;
-    }
+    // font-size: $coa-font-size-md-small;
+    // line-height: $coa-line-height-md-small;
   }
 
   & > :first-child {
-    margin-right: $coa-spacing-large;
-    margin-top: $coa-spacing-xsmall;
+    margin-right: $coa-spacing-small;
+    // margin-top: $coa-spacing-xsmall;
   }
 
   & > :last-child {
-    flex: 1 0 auto;
+    flex: 1; /* allows line wrap for long contact values. */
     & > span {
       display: block;
     }
@@ -52,6 +46,48 @@
 
   &:last-child {
     border: none;
+  }
+
+  .material-icons {
+    color: $coa-color-primary;
+    // vertical-align: middle;
+  }
+
+  .coa-ExternalLink {
+    color: $coa-color-primary;
+
+    &:visited {
+      color: $coa-color-primary;
+    }
+
+    svg {
+      width: $coa-font-size-small;
+      path {
+        fill: $coa-color-primary;
+      }
+    }
+  }
+}
+
+.coa-ContactItem__svg {
+  svg {
+    // height: $coa-font-size-medium; fb icon looks better this way, twitter is a little small
+    //   maybe figure out an icon set for these in the future to suppliment material-icons
+    width: $coa-font-size-medium;
+    height: $coa-font-size-smedium;
+
+    path {
+      fill: $coa-color-primary;
+    }
+    // @include media($coa-medium-screen) {
+    //   height: $coa-font-size-small - .1rem;
+    //   width: $coa-font-size-small - .1rem;
+    // }
+
+    // @include media($coa-large-screen) {
+    //   height: $coa-font-size-md-small - .1rem;
+    //   width: $coa-font-size-md-small - .1rem;
+    // }
   }
 }
 
@@ -67,9 +103,15 @@
 
 .coa-ContactHours {
   th {
+    font-size: $coa-font-size-xsmall;
+    padding-right: 0 !important;
     text-transform: capitalize;
+    /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
+    padding-right: 1rem !important;
+    font-weight: bold;
   }
   td:last-of-type {
+    font-size: $coa-font-size-xsmall;
     text-align: right;
   }
 }
@@ -81,3 +123,10 @@
   }
 }
 
+.coa-ContactItem_content {
+  /* Flexbox hack to allow long content to wrap to next line */
+  min-width: 1%;
+  /* Yes, you need both. "word-break" fixes mobile styling */
+  word-wrap: break-word;
+  word-break: break-word;
+}

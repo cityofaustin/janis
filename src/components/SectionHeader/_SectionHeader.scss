@@ -1,5 +1,17 @@
+.coa-SectionHeader {
+  color: $coa-color-primary;
+  border-bottom: 4px solid $coa-color-half-primary;
+  padding-top: $coa-spacing-large;
+  font-size: 2.4rem;
+  font-weight: bold;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+  }
+}
+
 .coa-SectionHeader h2 {
-  text-align: center;
+  text-align: left;
 
   a {
     color: inherit;
@@ -22,7 +34,7 @@
       width: 38px;
     }
     path {
-      fill: $coa-color-purple-dark;
+      fill: $coa-color-white;
     }
   }
 }

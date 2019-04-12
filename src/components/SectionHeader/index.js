@@ -9,21 +9,19 @@ const SectionHeader = ({
   symbol,
   children,
 }) => (
-  <div
+  <h2
     className={classNames('coa-SectionHeader', {
       'coa-SectionHeader--hasHighlight': hasHighlight,
       'coa-SectionHeader--isSerif': isSerif,
       'coa-SectionHeader--hasSymbol': !!symbol,
     })}
   >
-    <h2>
-      {!!symbol && <span className="coa-SectionHeader__symbol">{symbol}</span>}
-      {children}
-    </h2>
+    {!!symbol && <span className="coa-SectionHeader__symbol">{symbol}</span>}
+    {children}
     {!!description && (
       <p className="coa-SectionHeader__description">{description}</p>
     )}
-  </div>
+  </h2>
 );
 
 SectionHeader.propTypes = {

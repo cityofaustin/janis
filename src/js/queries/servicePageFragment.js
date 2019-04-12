@@ -3,29 +3,25 @@ const servicePageFragment = `
     id
     title
     slug
-    topic {
-      id
-      slug
-      text
-      theme {
-        id
-        slug
-        text
-      }
-    }
-    serviceSteps {
+    topics {
       edges {
         node {
-          stepDescription
+          topic {
+            id
+            slug
+            title
+            theme {
+              id
+              slug
+              text
+            }
+          }
         }
       }
     }
+    steps
     dynamicContent
     additionalContent
-    related {
-      slug
-      title
-    }
     image {
       id
       filename
@@ -38,6 +34,7 @@ const servicePageFragment = `
             name
             email
             phone
+            socialMedia
             hours {
               edges {
                 node {

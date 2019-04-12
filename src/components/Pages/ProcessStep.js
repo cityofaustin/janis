@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
@@ -38,6 +38,9 @@ const ProcessStep = ({
 
   return (
     <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
       {image && (
         <PageBanner
           imagesPath={`${process.env.CMS_MEDIA}/images`}

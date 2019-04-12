@@ -43,7 +43,7 @@
   svg {
     transform: rotate(-180deg);
     path {
-      fill: $coa-color-orange;
+      fill: $coa-color-almost-black;
     }
   }
 }
@@ -59,7 +59,7 @@
 
 .coa-MenuItem--home {
   & > a {
-    color: $coa-color-orange;
+    color: $coa-color-almost-black;
     text-decoration: none;
   }
 }
@@ -86,14 +86,14 @@
 .coa-MenuItem:hover {
   .coa-MenuItem__text {
     @include media($coa-large-screen) {
-      border-bottom: 3px solid $coa-color-orange;
+      border-bottom: 3px solid $coa-color-white;
     }
   }
 }
 
 .coa-MenuItem--open {
   .coa-MenuItem__text {
-    color: $coa-color-orange;
+    color: $coa-color-almost-black;
     @include media($coa-large-screen) {
       border-bottom: 3px solid transparent;
     }

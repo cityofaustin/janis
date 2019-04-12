@@ -1,9 +1,10 @@
 html {
-  color: $coa-color-purple-dark;
+  color: $coa-color-almost-black;
   font-family: $coa-font-serif;
   font-size: $coa-em-base;
   font-weight: $coa-font-regular;
   line-height: $coa-base-line-height;
+  -webkit-font-smoothing: antialiased;
 }
 body {
   font-size: $coa-font-size-small;
@@ -16,10 +17,10 @@ body {
 }
 
 svg {
-  height: $coa-font-size-small - .1rem;
-  width: $coa-font-size-small - .1rem;
+  height: $coa-font-size-small - 0.1rem;
+  width: $coa-font-size-small - 0.1rem;
   @include media($coa-medium-screen) {
-    height: $coa-font-size-md-small - .1rem;
-    width: $coa-font-size-md-small - .1rem;
+    height: $coa-font-size-md-small - 0.1rem;
+    width: $coa-font-size-md-small - 0.1rem;
   }
 }

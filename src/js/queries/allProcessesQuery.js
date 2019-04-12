@@ -6,12 +6,23 @@ const allProcessesQuery = `
           title
           description
           slug
-          topic {
-            slug
-            text
-            theme {
-              slug
-              text
+          department {
+            id
+          }
+          topics {
+            edges {
+              node {
+                topic {
+                  id
+                  slug
+                  title
+                  theme {
+                    id
+                    slug
+                    text
+                  }
+                }
+              }
             }
           }
           image {

@@ -40,21 +40,66 @@ export const cleanRelatedServiceLinks = links => {
 
   return links.map(link => {
     return {
-      url: `/services/${link.slug}`,
+      url: `/${link.topic.theme.slug}/${link.topic.slug}/${link.slug}`,
       text: link.title,
     };
   });
 };
 
-export const cleanLinks = (links, pathPrefix) => {
+export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
+  let pathPrefix = '';
 
-  return links.edges.map(({ node: link }) => {
-    link.slug = link.slug || link.sortOrder;
-    link.url = `${pathPrefix || ''}/${link.slug}`;
-    link.text = link.text || link.title;
-    return link;
-  });
+  // Themes
+  if (pageType === 'theme') {
+    return links.edges.map(({ node: link }) => {
+      link.topics = link.topicPages.edges.map(e => e.node);
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
+  // Topics
+  if (pageType === 'topic') {
+    return links.edges.map(({ node: link }) => {
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
+  let cleanedLinks = [];
+  for (const edge of links.edges) {
+    const link = edge.node;
+
+    // If it's under a topic make it in all the right places
+    if (link.topics && link.topics.edges.length) {
+      for (const edge of link.topics.edges) {
+        const { topic } = edge.node;
+        pathPrefix = `/${topic.theme.slug}/${topic.slug}`;
+
+        link.slug = link.slug || link.sortOrder;
+        link.url = `${pathPrefix || ''}/${link.slug}`;
+        link.text = link.title;
+        link.topic = topic;
+
+        cleanedLinks.push(link);
+      }
+    }
+
+    // If it's under a department make sure it's there
+    if (link.department) {
+      pathPrefix = `/${link.department.slug}`;
+
+      link.slug = link.slug || link.sortOrder;
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      cleanedLinks.push(link);
+    }
+  }
+
+  return cleanedLinks;
 };
 
 export const cleanProcesses = allProcesses => {
@@ -100,7 +145,6 @@ export const cleanServices = allServices => {
   cleanedServices.map(service => {
     service.contacts = cleanContacts(service.contacts);
     service.related = cleanRelatedServiceLinks(service.related);
-    service.steps = service.serviceSteps.edges.map(edge => edge.node);
 
     //TODO: mapblock data should include contact data when sent via joplin
     const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
@@ -112,13 +156,37 @@ export const cleanServices = allServices => {
   return cleanedServices;
 };
 
+export const cleanInformationPages = allInformationPages => {
+  if (!allInformationPages || !allInformationPages.edges) return null;
+
+  let cleanedInformationPages = cleanLinks(allInformationPages, '/information');
+  cleanedInformationPages.map(informationPage => {
+    informationPage.contacts = cleanContacts(informationPage.contacts);
+  });
+  return cleanedInformationPages;
+};
+
+export const cleanDepartmentDirectors = directors => {
+  if (!directors || !directors.edges) return null;
+
+  return directors.edges.map(({ node: director }) => {
+    // Yes, it's `contact.contact` because of the way the API returns data
+    let cleaned = Object.assign({}, director);
+
+    return cleaned;
+  });
+};
+
 export const cleanDepartments = allDepartments => {
   if (!allDepartments || !allDepartments.edges) return null;
 
   return allDepartments.edges.map(({ node: department }) => {
-    department.url = `/departments/${department.id}`;
-    department.text = department.name;
+    department.url = `/departments/${department.slug}`;
+    department.text = department.title;
     department.contacts = cleanContacts(department.contacts);
+    department.directors = cleanDepartmentDirectors(
+      department.departmentDirectors,
+    );
     return department;
   });
 };
@@ -126,18 +194,14 @@ export const cleanDepartments = allDepartments => {
 export const cleanTopics = allTopics => {
   if (!allTopics || !allTopics.edges) return null;
 
-  let cleanedTopics = cleanLinks(allTopics, '/topics');
-  cleanedTopics.map(topic => {
-    topic.services = cleanLinks(topic.services, '/services'); //for navigation
-    topic.tiles = topic.services; //for theme page
-  });
+  let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
 };
 
 export const cleanThemes = allThemes => {
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedThemes = cleanLinks(allThemes, '/themes');
+  let cleanedThemes = cleanLinks(allThemes, 'theme');
   cleanedThemes.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });
@@ -150,7 +214,7 @@ export const cleanNavigation = navigation => {
 
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedNavigation = cleanLinks(allThemes, '/themes');
+  let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });

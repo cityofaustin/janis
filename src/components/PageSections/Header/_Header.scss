@@ -1,14 +1,18 @@
 .coa-Header {
-  border-bottom: 1px solid $coa-color-purple-lighter;
+  border-bottom: 1px solid lighten($coa-color-white, 10%);
   font-family: $coa-font-sans;
+  background-color: $coa-color-primary;
+  color: $coa-color-white;
 }
 
-.coa-Header--menu-is-open ~ main,
-.coa-Header--menu-is-open ~ footer {
-  display: none;
-  @include media($coa-large-screen) {
-    display: block;
-  }
+// .coa-Header--menu-is-open ~ main,
+// .coa-Header--menu-is-open ~ footer {
+//   display: block;
+// }
+
+.coa-Header--menu-is-open {
+  position: fixed;
+  width: 100%;
 }
 
 .coa-Header__controls {
@@ -25,19 +29,32 @@
   align-items: center;
   display: flex;
   justify-content: flex-start;
+  width: 50px;
+  @include media($coa-medium-screen) {
+    width: 200px;
+  }
+
   .coa-text-spacer--vertical:after {
     display: block;
     height: $coa-header-toprow-height;
   }
 }
 
-.coa-Header__right-controls {
+.coa-Header__center-controls {
   align-items: center;
-  display: none;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.coa-Header__right-controls-wrapper {
+  align-items: center;
   justify-content: flex-end;
+  width: 50px;
   @include media($coa-medium-screen) {
-    display: flex;
+    width: 200px;
   }
+
+  display: flex;
   a {
     font-size: $coa-font-size-xsmall;
     text-transform: uppercase;
@@ -49,19 +66,88 @@
   }
 }
 
+.coa-Header__right-controls {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: flex;
+  }
+
+  a {
+    color: $coa-color-white;
+    &:visited {
+      color: $coa-color-white;
+    }
+    svg {
+      margin-left: $coa-space-level1;
+      vertical-align: middle;
+      path {
+        fill: $coa-color-white;
+      }
+    }
+  }
+}
+
+.coa-Header__mobile-languages {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-Header__desktop-languages {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: flex;
+  }
+}
+
 .coa-Header__menu-toggle {
   font-weight: $coa-font-semibold;
-  text-transform: uppercase;
+  opacity: 0.75;
 }
 
 .coa-Header__logo {
-  color: $coa-color-purple-dark;
+  color: $coa-color-white;
   font-weight: $coa-font-semibold;
   text-decoration: none;
+  cursor: default;
+  // Instead of making it not a link let's just pretend it's not one with style
+  &:hover {
+    color: $coa-color-white;
+    cursor: default;
+  }
   &:visited {
-    color: $coa-color-purple-dark;
+    color: $coa-color-white;
   }
   @include media($coa-large-screen) {
-    font-size: $coa-font-size-medium;
+    font-size: $coa-font-size-md-small;
   }
+}
+
+.coa-Header__gov-site {
+  background: $coa-color-blue-darkest;
+  font-size: 1.2rem;
+  line-height: 3.1rem;
+  svg {
+    vertical-align: middle;
+    height: 1.6rem;
+    margin-top: -0.4rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+  }
+}
+
+.coa-Header__gov-site-toggle {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+    margin-top: -0.4rem;
+  }
+}
+
+.coa-Header__menuIcon {
+  display: inline;
+  vertical-align: middle;
+  font-size: 1.8rem;
+  margin-right: 0.4rem;
 }

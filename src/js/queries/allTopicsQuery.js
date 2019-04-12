@@ -5,21 +5,13 @@ const allTopicsQuery = `
         node {
           id,
           slug,
-          text,
+          title,
           description,
           callToAction,
-          services {
-            edges {
-              node {
-                id,
-                title,
-                slug
-              }
-            }
-          }
           theme {
             text,
-            slug
+            slug,
+            id
           }
         }
       }

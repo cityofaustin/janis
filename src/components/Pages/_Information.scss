@@ -1,0 +1,37 @@
+.coa_InformationPage__back-to-dept {
+  text-transform: uppercase;
+  color: $coa-color-primary;
+  background: $coa-color-grey;
+  border-bottom: none;
+
+  @include media($coa-medium-screen) {
+    background: $coa-color-white;
+    border-bottom: 1px solid $coa-color-half-primary;
+  }
+
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $coa-spacing-medium 0;
+    font-size: $coa-font-size-xsmall;
+    line-height: $coa-line-height-xsmall;
+    font-weight: $coa-font-bold;
+    color: $coa-color-primary !important;
+    text-decoration: none !important;
+  }
+}
+
+.coa_InformationPage__arrow {
+  display: flex;
+  align-items: center;
+
+  &:after {
+    content: '';
+    border-left: 1px solid $coa-color-dark-grey;
+    vertical-align: middle;
+    height: $coa-font-size-large;
+    margin-left: $coa-spacing-md-small;
+    margin-right: $coa-spacing-md-small;
+  }
+}
