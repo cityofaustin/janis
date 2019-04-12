@@ -75,6 +75,16 @@ export const cleanLinks = (links, pageType) => {
         cleanedLinks.push(link);
       }
     }
+
+    // If it's under a department make sure it's there
+    if (link.department) {
+      pathPrefix = `/${link.department.slug}`;
+
+      link.slug = link.slug || link.sortOrder;
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      cleanedLinks.push(link);
+    }
   }
 
   return cleanedLinks;
