@@ -7,21 +7,12 @@ const allThemesQuery = `
           slug
           text
           description
-          topics {
+          topicPages {
             edges {
               node {
-                text
+                title
                 slug
                 description
-                servicepageSet(first: 4) {
-                  edges {
-                    node {
-                      id
-                      title
-                      slug
-                    }
-                  }
-                }
               }
             }
           }
