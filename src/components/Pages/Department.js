@@ -109,11 +109,13 @@ const Department = ({
                 <ContactDetails contact={contacts[0]} />
               )}
             </div>
-            <h2 className="coa-SectionHeader">
-              {directors.length > 1
-                ? intl.formatMessage(i18n.meetDirectors)
-                : intl.formatMessage(i18n.meetDirector)}
-            </h2>
+            {directors.length > 0 && (
+              <h2 className="coa-SectionHeader">
+                {directors.length > 1
+                  ? intl.formatMessage(i18n.meetDirectors)
+                  : intl.formatMessage(i18n.meetDirector)}
+              </h2>
+            )}
             {directors.map(director => (
               <div>
                 <div className="coa-DepartmentPage__directorcard">
