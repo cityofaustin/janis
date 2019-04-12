@@ -105,8 +105,9 @@ const Department = ({
             </h2>
             <p>{mission}</p>
             <div className="coa-DepartmentPage__contacts-mobile">
-              {!!contacts &&
-                !!contacts.length && <ContactDetails contact={contacts[0]} />}
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+              )}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -143,8 +144,9 @@ const Department = ({
         </div>
         <div className="coa-DepartmentPage__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>
