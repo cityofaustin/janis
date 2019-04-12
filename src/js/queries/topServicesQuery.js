@@ -6,13 +6,21 @@ const topServicesQuery = `
           id
           title
           slug
-          topic {
-            id
-            slug
-            theme {
-              slug
+          topics {
+            edges {
+              node {
+                topic {
+                  id
+                  slug
+                  title
+                  theme {
+                    id
+                    slug
+                    text
+                  }
+                }
+              }
             }
-            text
           }
         }
       }
