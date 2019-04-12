@@ -5,18 +5,9 @@ const allTopicsQuery = `
         node {
           id,
           slug,
-          text,
+          title,
           description,
           callToAction,
-          servicepageSet {
-            edges {
-              node {
-                id,
-                title,
-                slug
-              }
-            }
-          }
           theme {
             text,
             slug,
