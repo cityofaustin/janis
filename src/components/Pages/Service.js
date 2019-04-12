@@ -55,15 +55,12 @@ const Service = ({
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            {steps &&
-              !!steps.length && (
-                <Fragment>
-                  <SectionHeader>
-                    {intl.formatMessage(i18n2.steps)}
-                  </SectionHeader>
-                  <Steps steps={steps} />
-                </Fragment>
-              )}
+            {steps && !!steps.length && (
+              <Fragment>
+                <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
+                <Steps steps={steps} />
+              </Fragment>
+            )}
 
             {!!dynamicContent &&
               dynamicContent.map(content => (
