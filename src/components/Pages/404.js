@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from 'components/ExternalLink';
 //
 
 // The secret to using non-static routes is here.
@@ -25,8 +26,19 @@ export default class extends React.Component {
   };
   render() {
     return this.state.ready ? (
-      <div>
-        <h1>Sorry, we couldn't find that page.</h1>
+      <div className="coa-404">
+        <div className="wrapper container-fluid">
+          <h1 className="coa-404__title">404</h1>
+          <div className="coa-404__copy">
+            <p>Sorry, this isn't the page you were hoping to find.</p>
+            <p>
+              You can browse from the <a href="/">home page</a>, or{' '}
+              <ExternalLink to={'https://projects.austintexas.io/contact/'}>
+                contact us
+              </ExternalLink>.
+            </p>
+          </div>
+        </div>
       </div>
     ) : null;
   }
