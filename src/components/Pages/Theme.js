@@ -15,10 +15,12 @@ const Theme = ({ theme: { text: title, description, topics }, intl }) => (
     </div>
 
     <div className="wrapper container-fluid">
-      <TileGroupSet
-        tileGroups={topics}
-        tag={intl.formatMessage(i18n.service)}
-      />
+      {
+        // <TileGroupSet
+        //   tileGroups={topics}
+        //   tag={intl.formatMessage(i18n.service)}
+        // />
+      }
     </div>
   </div>
 );

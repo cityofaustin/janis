@@ -9,13 +9,20 @@ const allProcessesQuery = `
           department {
             id
           }
-          topic {
-            id
-            slug
-            text
-            theme {
-              slug
-              text
+          topics {
+            edges {
+              node {
+                topic {
+                  id
+                  slug
+                  title
+                  theme {
+                    id
+                    slug
+                    text
+                  }
+                }
+              }
             }
           }
           image {
