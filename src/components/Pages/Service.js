@@ -77,17 +77,20 @@ const Service = ({
               />
             )}
 
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>
 
+      {/*}
       <TileGroup
         text={intl.formatMessage(i18n3.checkOutRelatedServices)}
         tiles={related}
         tag={intl.formatMessage(i18n3.service)}
       />
+      */}
     </div>
   </div>
 );
