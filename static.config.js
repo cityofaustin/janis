@@ -78,43 +78,53 @@ const makeThemePages = async client => {
     getData: async () => ({
       theme,
     }),
-    children: topics.filter(top => top.theme != null && top.theme.id == theme.id).map(topic => ({
-      path: `/${topic.slug}`,
-      component: 'src/components/Pages/Topic',
-      getData: async () => ({
-        topic,
-      }),
-      children: informationPages.filter(i => i.topic != null && i.topic.id == topic.id).map(informationPage => ({
-        path: `/${informationPage.slug}`,
-        component: 'src/components/Pages/Information',
+    children: topics
+      .filter(top => top.theme != null && top.theme.id == theme.id)
+      .map(topic => ({
+        path: `/${topic.slug}`,
+        component: 'src/components/Pages/Topic',
         getData: async () => ({
-          informationPage,
+          topic,
         }),
-      })).concat(
-        services.filter(s => s.topic != null && s.topic.id == topic.id).map(service => ({
-          path: `/${service.slug}`,
-          component: 'src/components/Pages/Service',
-          getData: async () => ({
-            service,
-          }),
-        }))
-      ).concat(
-        processes.filter(p => p.topic != null && p.topic.id == topic.id).map(process => ({
-          path: `/${process.slug}`,
-          component: 'src/components/Pages/Process',
-          getData: async () => ({
-            process,
-          }),
-          children: process.processSteps.map(processStep => ({
-            path: `/${processStep.slug}`,
-            component: 'src/components/Pages/ProcessStep',
+        children: informationPages
+          .filter(i => i.topic != null && i.topic.id == topic.id)
+          .map(informationPage => ({
+            path: `/${informationPage.slug}`,
+            component: 'src/components/Pages/Information',
             getData: async () => ({
-              processStep,
+              informationPage,
             }),
-          })),
-        }))
-      ),
-    }))
+          }))
+          .concat(
+            services
+              .filter(s => s.topic != null && s.topic.id == topic.id)
+              .map(service => ({
+                path: `/${service.slug}`,
+                component: 'src/components/Pages/Service',
+                getData: async () => ({
+                  service,
+                }),
+              })),
+          )
+          .concat(
+            processes
+              .filter(p => p.topic != null && p.topic.id == topic.id)
+              .map(process => ({
+                path: `/${process.slug}`,
+                component: 'src/components/Pages/Process',
+                getData: async () => ({
+                  process,
+                }),
+                children: process.processSteps.map(processStep => ({
+                  path: `/${processStep.slug}`,
+                  component: 'src/components/Pages/ProcessStep',
+                  getData: async () => ({
+                    processStep,
+                  }),
+                })),
+              })),
+          ),
+      })),
   }));
 
   return data;
@@ -143,38 +153,42 @@ const makeDepartmentPages = async client => {
     getData: async () => ({
       department,
     }),
-    children: informationPages.filter(i => i.department != null && i.department.id == department.id).map(informationPage => ({
-      path: `/${informationPage.slug}`,
-      component: 'src/components/Pages/Information',
-      getData: async () => ({
-        informationPage,
-      }),
-    }))
-    // .concat(
-    //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-    //     path: `/${service.slug}`,
-    //     component: 'src/components/Pages/Service',
-    //     getData: async () => ({
-    //       service,
-    //     }),
-    //   }))
-    // )
-    .concat(
-      processes.filter(p => p.department != null && p.department.id == department.id).map(process => ({
-        path: `/${process.slug}`,
-        component: 'src/components/Pages/Process',
+    children: informationPages
+      .filter(i => i.department != null && i.department.id == department.id)
+      .map(informationPage => ({
+        path: `/${informationPage.slug}`,
+        component: 'src/components/Pages/Information',
         getData: async () => ({
-          process,
+          informationPage,
         }),
-        children: process.processSteps.map(processStep => ({
-          path: `/${processStep.slug}`,
-          component: 'src/components/Pages/ProcessStep',
-          getData: async () => ({
-            processStep,
-          }),
-        })),
       }))
-    ),
+      // .concat(
+      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+      //     path: `/${service.slug}`,
+      //     component: 'src/components/Pages/Service',
+      //     getData: async () => ({
+      //       service,
+      //     }),
+      //   }))
+      // )
+      .concat(
+        processes
+          .filter(p => p.department != null && p.department.id == department.id)
+          .map(process => ({
+            path: `/${process.slug}`,
+            component: 'src/components/Pages/Process',
+            getData: async () => ({
+              process,
+            }),
+            children: process.processSteps.map(processStep => ({
+              path: `/${processStep.slug}`,
+              component: 'src/components/Pages/ProcessStep',
+              getData: async () => ({
+                processStep,
+              }),
+            })),
+          })),
+      ),
   }));
 
   return data;
@@ -182,6 +196,8 @@ const makeDepartmentPages = async client => {
 
 export default {
   // siteRoot: 'https://alpha.austin.gov',
+  //basePath // Do not alter this line if you want a working PR
+  basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
     title: 'City of Austin',

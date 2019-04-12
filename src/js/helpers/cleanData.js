@@ -48,20 +48,58 @@ export const cleanRelatedServiceLinks = links => {
 
 export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
+  let pathPrefix = '';
 
-  return links.edges.map(({ node: link }) => {
-    // Instead of using a prefix, we need to generate urls based on page type
-    var pathPrefix = '';
-    if (pageType === 'service') {
-      // Service page links are always theme/topic based
-      pathPrefix = `${link.topic.theme.slug}/${link.topic.slug}`
+  // Themes
+  if (pageType === 'theme') {
+    return links.edges.map(({ node: link }) => {
+      link.topics = link.topicPages.edges.map(e => e.node);
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
+  // Topics
+  if (pageType === 'topic') {
+    return links.edges.map(({ node: link }) => {
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
+  let cleanedLinks = [];
+  for (const edge of links.edges) {
+    const link = edge.node;
+
+    // If it's under a topic make it in all the right places
+    if (link.topics && link.topics.edges.length) {
+      for (const edge of link.topics.edges) {
+        const { topic } = edge.node;
+        pathPrefix = `/${topic.theme.slug}/${topic.slug}`;
+
+        link.slug = link.slug || link.sortOrder;
+        link.url = `${pathPrefix || ''}/${link.slug}`;
+        link.text = link.title;
+        link.topic = topic;
+
+        cleanedLinks.push(link);
+      }
     }
 
-    link.slug = link.slug || link.sortOrder;
-    link.url = `${pathPrefix || ''}/${link.slug}`;
-    link.text = link.text || link.title;
-    return link;
-  });
+    // If it's under a department make sure it's there
+    if (link.department) {
+      pathPrefix = `/${link.department.slug}`;
+
+      link.slug = link.slug || link.sortOrder;
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      cleanedLinks.push(link);
+    }
+  }
+
+  return cleanedLinks;
 };
 
 export const cleanProcesses = allProcesses => {
@@ -156,18 +194,14 @@ export const cleanDepartments = allDepartments => {
 export const cleanTopics = allTopics => {
   if (!allTopics || !allTopics.edges) return null;
 
-  let cleanedTopics = cleanLinks(allTopics, '/topics');
-  cleanedTopics.map(topic => {
-    topic.services = cleanLinks(topic.servicepageSet, '/services'); //for navigation
-    topic.tiles = topic.services; //for theme page
-  });
+  let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
 };
 
 export const cleanThemes = allThemes => {
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedThemes = cleanLinks(allThemes, '/themes');
+  let cleanedThemes = cleanLinks(allThemes, 'theme');
   cleanedThemes.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });
@@ -180,7 +214,7 @@ export const cleanNavigation = navigation => {
 
   if (!allThemes || !allThemes.edges) return null;
 
-  let cleanedNavigation = cleanLinks(allThemes, '/themes');
+  let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
   });
