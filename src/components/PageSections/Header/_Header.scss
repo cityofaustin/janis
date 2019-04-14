@@ -17,10 +17,14 @@
 
 .coa-Header__controls {
   display: flex;
-  height: $coa-header-toprow-height;
+  // height: $coa-header-toprow-height;
+  padding-top: $coa-spacing-small;
+  padding-bottom: $coa-spacing-small;
   justify-content: space-between;
+  flex-wrap: wrap;
+
   @include media($coa-large-screen) {
-    padding-left: $coa-spacing-small;
+    // padding-left: $coa-spacing-small;
     padding-right: $coa-spacing-small;
   }
 }
@@ -44,6 +48,14 @@
   align-items: center;
   display: flex;
   justify-content: flex-start;
+  order: 3;
+  width: 100%;
+  position: relative;
+
+  @include media($coa-large-screen) {
+    order: unset;
+    width: initial;
+  }
 }
 
 .coa-Header__right-controls-wrapper {
@@ -109,8 +121,11 @@
   color: $coa-color-white;
   font-weight: $coa-font-semibold;
   text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
   cursor: default;
   // Instead of making it not a link let's just pretend it's not one with style
+
   &:hover {
     color: $coa-color-white;
     cursor: default;
@@ -118,8 +133,10 @@
   &:visited {
     color: $coa-color-white;
   }
+
   @include media($coa-large-screen) {
     font-size: $coa-font-size-md-small;
+    margin: initial;
   }
 }
 
@@ -146,8 +163,17 @@
 }
 
 .coa-Header__menuIcon {
-  display: inline;
-  vertical-align: middle;
-  font-size: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-small;
   margin-right: 0.4rem;
+  color: $coa-color-white;
+  position: absolute;
+
+  @include media($coa-large-screen) {
+    display: none;
+  }
 }

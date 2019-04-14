@@ -11,9 +11,15 @@ class FullSiteMenu extends React.Component {
     topMenuActive: false,
   };
 
-  handleOnClick = () => {
+  handleFullSiteMenuOpen = () => {
     this.setState({
-      topMenuActive: !this.state.topMenuActive,
+      topMenuActive: true,
+    });
+  };
+
+  handleFullSiteMenuClose = () => {
+    this.setState({
+      topMenuActive: false,
     });
   };
 
@@ -24,10 +30,25 @@ class FullSiteMenu extends React.Component {
           'coa-FullSiteMenu ' +
           (this.state.topMenuActive ? 'coa-FullSiteMenu--active' : '')
         }
+        onMouseLeave={this.handleFullSiteMenuClose}
       >
-        <ThemesNav handleOnClick={this.handleOnClick} themes={staticNavData} />
+        <div class="wrapper container-fluid">
+          <ThemesNav
+            handleOnClick={this.handleFullSiteMenuOpen}
+            handleOnMouseEnter={this.handleFullSiteMenuOpen}
+            themes={staticNavData}
+          />
+        </div>
         <section className="coa-FullSiteMenu__subNav">
-          <ThemesTopicsMenu menu={staticNavData} />
+          <a
+            className="coa-FullSiteMenu__close"
+            onClick={this.handleFullSiteMenuClose}
+          >
+            <i className="material-icons">close</i>
+          </a>
+          <div class="wrapper container-fluid">
+            <ThemesTopicsMenu menu={staticNavData} />
+          </div>
           <MenuInfo />
         </section>
       </div>
