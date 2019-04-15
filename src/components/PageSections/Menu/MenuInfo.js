@@ -2,6 +2,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import CitySeal from 'components/SVGs/CitySeal.js';
 import LoveChicken from 'components/SVGs/LoveChicken';
+import CoaSeal from '../../SVGs/CoaSeal';
 
 const MenuInfo = () => (
   <div className="coa-MenuInfo">
@@ -12,7 +13,7 @@ const MenuInfo = () => (
         </div>
         <div className="coa-MenuInfo__resource">
           <div className="coa-MenuInfo__svg">
-            <CitySeal />
+            <CoaSeal />
           </div>
           <a className="coa-MenuInfo__link">
             Visit austintexas.gov for the current city website.
