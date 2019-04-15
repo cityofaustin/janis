@@ -6,14 +6,20 @@ const informationPageFragment = `
     department {
       id
     }
-    topic {
-      id
-      slug
-      text
-      theme {
-        id
-        slug
-        text
+    topics {
+      edges {
+        node {
+          topic {
+            id
+            slug
+            title
+            theme {
+              id
+              slug
+              text
+            }
+          }
+        }
       }
     }
     toplink
