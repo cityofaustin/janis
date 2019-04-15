@@ -14,7 +14,7 @@
 
 .coa-ThemesNav {
   @include media($coa-large-screen) {
-    border-top: 1px solid $coa-color-secondary;
+    border-top: 1px solid rgba($coa-color-white, 0.5);
   }
 }
 

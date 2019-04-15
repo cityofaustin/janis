@@ -65,7 +65,7 @@ class Header extends Component {
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
-        <div className="container-fluid wrapper">
+        <div className="coa-Header__container">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
               {/* <button
