@@ -6,7 +6,6 @@ import path from 'path';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
-// import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
@@ -14,6 +13,7 @@ import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import ContextualNav from '../PageSections/ContextualNav';
 
 const Service = ({
   service: {
@@ -22,6 +22,7 @@ const Service = ({
     slug,
     topic,
     topic: { theme },
+    topics,
     steps,
     dynamicContent,
     additionalContent,
@@ -45,22 +46,21 @@ const Service = ({
         imageTitle={image.title}
       />
     )}
-    {/* <PageBreadcrumbs
-      grandparent={{ ...theme, subpath: 'themes' }}
-      parent={{ ...topic, subpath: 'topics' }}
-      title={title}
-    /> */}
     <div>
+      <ContextualNav parent={topic} related={topics} />
       <PageHeader contentType={'service'}>{title}</PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            {steps && !!steps.length && (
-              <Fragment>
-                <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
-                <Steps steps={steps} />
-              </Fragment>
-            )}
+            {steps &&
+              !!steps.length && (
+                <Fragment>
+                  <SectionHeader>
+                    {intl.formatMessage(i18n2.steps)}
+                  </SectionHeader>
+                  <Steps steps={steps} />
+                </Fragment>
+              )}
 
             {!!dynamicContent &&
               dynamicContent.map(content => (
@@ -74,13 +74,11 @@ const Service = ({
               />
             )}
 
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contact={contacts[0]} />
-            )}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contact={contacts[0]} />}
           </div>
         </div>
       </div>
-
       {/*}
       <TileGroup
         text={intl.formatMessage(i18n3.checkOutRelatedServices)}
