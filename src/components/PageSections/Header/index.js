@@ -21,8 +21,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuIsOpen: false,
       howYouKnowmenuIsOpen: false,
+      topMenuActive: false,
     };
   }
 
@@ -31,14 +31,21 @@ class Header extends Component {
     this.menuElement = document.querySelector('#navMenu');
   }
 
-  toggleMenu = e => {
-    // If we're closing the menu, enable body scroll again
-    if (this.state.menuIsOpen) enableBodyScroll(this.targetElement);
-    // If we're opening the menu, disable body scroll
-    if (!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
-
+  openFullSiteMenu = () => {
     this.setState({
-      menuIsOpen: !this.state.menuIsOpen,
+      topMenuActive: true,
+    });
+  };
+
+  closeFullSiteMenu = () => {
+    this.setState({
+      topMenuActive: false,
+    });
+  };
+
+  toggleFullSiteMenu = () => {
+    this.setState({
+      topMenuActive: !this.state.topMenuActive,
     });
   };
 
@@ -68,27 +75,27 @@ class Header extends Component {
         <div className="coa-Header__container">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
-              {/* <button
-                onClick={this.toggleMenu}
-                tabIndex="0"
-                className="coa-Header__menu-toggle"
-                ref="menu"
-              >
-                {this.state.menuIsOpen ? (
-                  <i class="material-icons coa-Header__menuIcon">close</i>
-                ) : (
-                  <i class="material-icons coa-Header__menuIcon">menu</i>
-                )}
-
-                {intl.formatMessage(i18n2.menu)}
-              </button> */}
               <div className="coa-Header__desktop-languages">
                 <LanguageSelectBar path={path} />
               </div>
             </div>
-            <div className="coa-Header__center-controls">
-              <a className="coa-Header__menuIcon">
-                <i class="material-icons">menu</i>
+            <div
+              className={
+                'coa-Header__center-controls ' +
+                (this.state.topMenuActive
+                  ? 'coa-Header__center-controls--active'
+                  : null)
+              }
+            >
+              <a
+                className="coa-Header__menuIcon"
+                onClick={this.toggleFullSiteMenu}
+              >
+                {this.state.topMenuActive ? (
+                  <i class="material-icons">close</i>
+                ) : (
+                  <i class="material-icons">menu</i>
+                )}
                 Menu
               </a>
               <I18nLink className="coa-Header__logo" to="#">
@@ -114,7 +121,11 @@ class Header extends Component {
           toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
         />
 
-        <FullSiteMenu />
+        <FullSiteMenu
+          handleFullSiteMenuOpen={this.openFullSiteMenu}
+          handleFullSiteMenuClose={this.closeFullSiteMenu}
+          isTopMenuActive={this.state.topMenuActive}
+        />
       </header>
     );
   }

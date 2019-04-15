@@ -18,6 +18,14 @@ const ThemesNav = props => {
           </li>
         ))}
       </ul>
+      {props.isTopMenuActive ? (
+        <a
+          className="coa-FullSiteMenu__close"
+          onClick={props.handleFullSiteMenuClose}
+        >
+          <i className="material-icons">close</i>
+        </a>
+      ) : null}
     </nav>
   );
 };

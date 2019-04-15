@@ -6,54 +6,30 @@ import staticNavData from 'stories/static_data/navigationData.js';
 import MenuInfo from './MenuInfo';
 import ThemesTopicsMenu from './ThemesTopicsMenu';
 
-class FullSiteMenu extends React.Component {
-  state = {
-    topMenuActive: false,
-  };
-
-  handleFullSiteMenuOpen = () => {
-    this.setState({
-      topMenuActive: true,
-    });
-  };
-
-  handleFullSiteMenuClose = () => {
-    this.setState({
-      topMenuActive: false,
-    });
-  };
-
-  render() {
-    return (
-      <div
-        className={
-          'coa-FullSiteMenu ' +
-          (this.state.topMenuActive ? 'coa-FullSiteMenu--active' : '')
-        }
-        onMouseLeave={this.handleFullSiteMenuClose}
-      >
-        <div class="wrapper container-fluid">
-          <ThemesNav
-            handleOnClick={this.handleFullSiteMenuOpen}
-            handleOnMouseEnter={this.handleFullSiteMenuOpen}
-            themes={staticNavData}
-          />
-        </div>
-        <section className="coa-FullSiteMenu__subNav">
-          <a
-            className="coa-FullSiteMenu__close"
-            onClick={this.handleFullSiteMenuClose}
-          >
-            <i className="material-icons">close</i>
-          </a>
-          <div class="wrapper container-fluid">
-            <ThemesTopicsMenu menu={staticNavData} />
-          </div>
-          <MenuInfo />
-        </section>
+const FullSiteMenu = props => (
+  <div
+    className={
+      'coa-FullSiteMenu ' +
+      (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
+    }
+    onMouseLeave={props.handleFullSiteMenuClose}
+  >
+    <div class="wrapper container-fluid">
+      <ThemesNav
+        handleOnClick={props.handleFullSiteMenuOpen}
+        handleOnMouseEnter={props.handleFullSiteMenuOpen}
+        themes={staticNavData}
+        isTopMenuActive={props.isTopMenuActive}
+        handleFullSiteMenuClose={props.handleFullSiteMenuClose}
+      />
+    </div>
+    <section className="coa-FullSiteMenu__subNav">
+      <div class="wrapper container-fluid">
+        <ThemesTopicsMenu menu={staticNavData} />
       </div>
-    );
-  }
-}
+      <MenuInfo />
+    </section>
+  </div>
+);
 
 export default injectIntl(FullSiteMenu);

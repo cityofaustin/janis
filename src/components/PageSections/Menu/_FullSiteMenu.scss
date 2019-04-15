@@ -6,15 +6,20 @@
   margin-right: auto;
 }
 
-// .coa-FullSiteMenu__mobile-menu {
-//   @include media($coa-medium-screen) {
-//     display: none;
-//   }
-// }
-
 .coa-ThemesNav {
+  display: flex;
+  align-items: center;
+
   @include media($coa-large-screen) {
     border-top: 1px solid rgba($coa-color-white, 0.5);
+  }
+}
+
+.coa-FullSiteMenu__close {
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: block;
   }
 }
 
@@ -23,7 +28,7 @@
 
   @include media($coa-large-screen) {
     display: flex;
-    // margin-left: $coa-spacing-medium;
+    flex: 1;
     list-style: none;
     flex-direction: row;
     align-items: center;
@@ -48,6 +53,11 @@
   background: $coa-color-white;
   position: absolute;
   width: 100%;
+  padding: $coa-spacing-medium 0;
+
+  @include media($coa-medium-screen) {
+    padding: 0;
+  }
 }
 
 //removing css hover .coa-FullSiteMenu:hover
@@ -65,12 +75,8 @@
 
   .coa-FullSiteMenu__subNav {
     display: block;
-    border-top: 1px solid $coa-color-primary;
+    border-top: 1px solid $coa-color-dark-grey;
   }
-}
-
-.coa-ThemesTopicsMenu {
-  // padding: 0 $coa-spacing-medium;
 }
 
 .coa-ThemesTopicsMenu__list {
@@ -78,12 +84,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  // margin-left: $coa-spacing-medium;
 }
 
 .coa-ThemesTopicsMenu__section {
-  // margin: 0 $coa-spacing-medium 0 $coa-spacing-medium;
-  // padding: $coa-spacing-large $coa-spacing-xsmall;
   margin-left: 0;
   width: 100%;
   position: relative;
@@ -149,6 +152,11 @@
 
 .coa-MenuInfo {
   background: $coa-color-dark-blue;
+  display: none;
+
+  @include media($coa-medium-screen) {
+    display: block;
+  }
 }
 
 .coa-MenuInfo__container {
