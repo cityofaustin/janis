@@ -6,6 +6,7 @@ const servicePageFragment = `
     topics {
       edges {
         node {
+          toplink
           topic {
             id
             slug

@@ -9,6 +9,7 @@ const informationPageFragment = `
     topics {
       edges {
         node {
+          toplink
           topic {
             id
             slug

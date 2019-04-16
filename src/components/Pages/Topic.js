@@ -11,7 +11,14 @@ import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
 const Topic = ({
-  topic: { theme, text: title, description, callToAction, tiles },
+  topic: {
+    theme,
+    text: title,
+    description,
+    callToAction,
+    topLinks,
+    otherLinks,
+  },
   intl,
 }) => (
   <div>
@@ -27,6 +34,14 @@ const Topic = ({
     </div>
 
     <div className="wrapper container-fluid">
+      <div>TOP</div>
+      {topLinks.map(l => (
+        <p>{l.text}</p>
+      ))}
+      <div>OTHER</div>
+      {otherLinks.map(l => (
+        <p>{l.text}</p>
+      ))}
       {/* <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} /> */}
     </div>
   </div>

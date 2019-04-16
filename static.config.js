@@ -69,6 +69,30 @@ const makeThemePages = async client => {
   );
   const services = cleanServices(allServices);
 
+  // Add all service page links to topic pages
+  for (var service of services) {
+    if (!service.topic) continue;
+
+    let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
+    if (service.toplink) {
+      topics[matchingTopicIndex].topLinks.push(service);
+    } else {
+      topics[matchingTopicIndex].otherLinks.push(service);
+    }
+  }
+
+  // Add all information page links to topic pages
+  for (var page of informationPages) {
+    if (!page.topic) continue;
+
+    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
+    if (page.toplink) {
+      topics[matchingTopicIndex].topLinks.push(page);
+    } else {
+      topics[matchingTopicIndex].otherLinks.push(page);
+    }
+  }
+
   const { allProcesses } = await client.request(allProcessesQuery);
   const processes = cleanProcesses(allProcesses);
 

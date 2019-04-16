@@ -65,6 +65,8 @@ export const cleanLinks = (links, pageType) => {
     return links.edges.map(({ node: link }) => {
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
+      link.topLinks = [];
+      link.otherLinks = [];
       return link;
     });
   }
@@ -83,6 +85,7 @@ export const cleanLinks = (links, pageType) => {
         link.url = `${pathPrefix || ''}/${link.slug}`;
         link.text = link.title;
         link.topic = topic;
+        link.toplink = edge.node.toplink;
 
         cleanedLinks.push(link);
       }
