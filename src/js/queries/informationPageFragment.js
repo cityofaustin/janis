@@ -22,7 +22,6 @@ const informationPageFragment = `
         }
       }
     }
-    toplink
     description
     options
     additionalContent
