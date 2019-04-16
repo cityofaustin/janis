@@ -25,24 +25,15 @@ const Topic = ({
     <Head>
       <title>{title}</title>
     </Head>
-    <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
-    <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader description={description}>{title}</PageHeader>
-    </div>
-    <div className="wrapper wrapper--sm wrapper--hasDashedBorder container-fluid">
-      <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
-    </div>
-
+    {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
+    <PageHeader contentType={'information'} description={description}>
+      {title}
+    </PageHeader>
     <div className="wrapper container-fluid">
-      <div>TOP</div>
-      {topLinks.map(l => (
-        <p>{l.text}</p>
-      ))}
-      <div>OTHER</div>
-      {otherLinks.map(l => (
-        <p>{l.text}</p>
-      ))}
-      {/* <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} /> */}
+      <TileGroup text={'Top Services'} tiles={topLinks} />
+    </div>
+    <div className="wrapper container-fluid">
+      <TileGroup text={'All Services'} tiles={otherLinks} />
     </div>
   </div>
 );
