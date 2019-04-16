@@ -31,8 +31,6 @@ const Topic = ({
     </PageHeader>
     <div className="wrapper container-fluid">
       <TileGroup text={'Top Services'} tiles={topLinks} />
-    </div>
-    <div className="wrapper container-fluid">
       <TileGroup text={'All Services'} tiles={otherLinks} />
     </div>
   </div>
