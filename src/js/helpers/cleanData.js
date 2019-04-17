@@ -69,6 +69,15 @@ export const cleanLinks = (links, pageType) => {
     });
   }
 
+  // Topic Collections
+  if (pageType === 'topiccollection') {
+    return links.edges.map(({ node: link }) => {
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+      return link;
+    });
+  }
+
   let cleanedLinks = [];
   for (const edge of links.edges) {
     const link = edge.node;
@@ -207,6 +216,18 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
+};
+
+export const cleanTopicCollections = allTopicCollections => {
+  if (!allTopicCollections || !allTopicCollections.edges) return null;
+
+  let cleanedTopicCollections = cleanLinks(
+    allTopicCollections,
+    'topiccollection',
+  );
+
+  // console.log(cleanedTopicCollections);
+  return cleanedTopicCollections;
 };
 
 export const cleanThemes = allThemes => {

@@ -13,6 +13,11 @@ const allTopicsQuery = `
                 topiccollection {
                   id
                   title
+                  slug
+                  theme {
+                    id
+                    slug
+                  }
                 }
               }
             }

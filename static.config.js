@@ -6,6 +6,7 @@ import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
+import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
@@ -15,6 +16,7 @@ import {
   cleanLinks,
   cleanDepartments,
   cleanTopics,
+  cleanTopicCollections,
   cleanThemes,
   cleanProcesses,
   cleanServices,
@@ -55,6 +57,11 @@ const makeAllPages = async langCode => {
 const makeThemePages = async client => {
   const { allThemes } = await client.request(allThemesQuery);
   const themes = cleanThemes(allThemes);
+
+  const { allTopicCollections } = await client.request(
+    allTopicCollectionsQuery,
+  );
+  const topicCollections = cleanTopicCollections(allTopicCollections);
 
   const { allTopics } = await client.request(allTopicsQuery);
   const topics = cleanTopics(allTopics);
