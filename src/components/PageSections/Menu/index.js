@@ -126,8 +126,6 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  // navigation: PropTypes.arrayOf(themePropTypes).isRequired,
-  // closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 };
 

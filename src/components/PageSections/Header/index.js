@@ -114,7 +114,6 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  // navigation: PropTypes.arrayOf(themePropTypes).isRequired,
   path: PropTypes.string.isRequired,
 };
 
