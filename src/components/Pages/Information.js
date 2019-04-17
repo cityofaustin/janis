@@ -61,10 +61,12 @@ const InformationPage = ({
       title={title}
     /> */}
     <div>
-      <PageHeader contentType={'information'} description={description}>{title}</PageHeader>
+      <PageHeader contentType={'information'} description={description}>
+        {title}
+      </PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-xs-12 col-md-8">
             {options.map((option, index) => (
               <HtmlFromAdmin title={''} content={option.value} />
             ))}

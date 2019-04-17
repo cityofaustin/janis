@@ -1,0 +1,18 @@
+.coa-404 {
+  padding: $coa-spacing-xlarge 0;
+  text-align: center;
+}
+
+.coa-404__title {
+  color: $coa-color-primary;
+  font-weight: $coa-font-bold;
+  font-size: $coa-font-size-xxlarge;
+  margin-bottom: $coa-spacing-large;
+}
+
+.coa-404__copy {
+  > * {
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
+  }
+}
