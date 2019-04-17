@@ -7,10 +7,15 @@ const allTopicsQuery = `
           slug,
           title,
           description,
-          theme {
-            text,
-            slug,
-            id
+          topiccollections {
+            edges {
+              node {
+                topiccollection {
+                  id
+                  title
+                }
+              }
+            }
           }
         }
       }

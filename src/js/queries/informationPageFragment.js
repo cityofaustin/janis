@@ -10,13 +10,24 @@ const informationPageFragment = `
       edges {
         node {
           topic {
-            id
-            slug
-            title
-            theme {
-              id
-              slug
-              text
+            id,
+            slug,
+            title,
+            description,
+            topiccollections {
+              edges {
+                node {
+                  topiccollection {
+                    id
+                    title
+                    slug
+                    theme {
+                      id
+                      slug
+                    }
+                  }
+                }
+              }
             }
           }
         }

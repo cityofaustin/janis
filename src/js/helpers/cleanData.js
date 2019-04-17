@@ -53,7 +53,7 @@ export const cleanLinks = (links, pageType) => {
   // Themes
   if (pageType === 'theme') {
     return links.edges.map(({ node: link }) => {
-      link.topics = link.topicPages.edges.map(e => e.node);
+      link.topics = link.topicCollectionPages.edges.map(e => e.node);
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
       return link;
@@ -77,14 +77,25 @@ export const cleanLinks = (links, pageType) => {
     if (link.topics && link.topics.edges.length) {
       for (const edge of link.topics.edges) {
         const { topic } = edge.node;
-        pathPrefix = `/${topic.theme.slug}/${topic.slug}`;
 
-        link.slug = link.slug || link.sortOrder;
-        link.url = `${pathPrefix || ''}/${link.slug}`;
-        link.text = link.title;
-        link.topic = topic;
+        if (topic.topiccollections && topic.topiccollections.edges.length) {
+          for (const edge of topic.topiccollections.edges) {
+            const { topiccollection } = edge.node;
 
-        cleanedLinks.push(link);
+            if (topiccollection.theme) {
+              pathPrefix = `/${topiccollection.theme.slug}/${
+                topiccollection.slug
+              }/${topic.slug}`;
+
+              link.slug = link.slug || link.sortOrder;
+              link.url = `${pathPrefix || ''}/${link.slug}`;
+              link.text = link.title;
+              link.topic = topic;
+
+              cleanedLinks.push(link);
+            }
+          }
+        }
       }
     }
 
