@@ -7,7 +7,6 @@ const allTopicsQuery = `
           slug,
           title,
           description,
-          callToAction,
           theme {
             text,
             slug,
