@@ -60,25 +60,38 @@ export const cleanLinks = (links, pageType) => {
     });
   }
 
-  // Topics
-  if (pageType === 'topic') {
-    return links.edges.map(({ node: link }) => {
-      link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
-      return link;
-    });
-  }
-
   // Topic Collections
   if (pageType === 'topiccollection') {
     return links.edges.map(({ node: link }) => {
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
+
       return link;
     });
   }
 
   let cleanedLinks = [];
+
+  // Topics
+  if (pageType === 'topic') {
+    for (const edge of links.edges) {
+      const link = edge.node;
+      if (link.topiccollections && link.topiccollections.edges.length) {
+        for (const edge of link.topiccollections.edges) {
+          const { topiccollection } = edge.node;
+
+          link.url = `${pathPrefix || ''}/${link.slug}`;
+          link.text = link.title;
+          link.topiccollection = topiccollection;
+
+          cleanedLinks.push(link);
+        }
+      }
+    }
+
+    return cleanedLinks;
+  }
+
   for (const edge of links.edges) {
     const link = edge.node;
 

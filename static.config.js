@@ -85,52 +85,64 @@ const makeThemePages = async client => {
     getData: async () => ({
       theme,
     }),
-    children: topics
-      .filter(top => top.theme != null && top.theme.id == theme.id)
-      .map(topic => ({
-        path: `/${topic.slug}`,
-        component: 'src/components/Pages/Topic',
+    children: topicCollections
+      .filter(tc => tc.theme != null && tc.theme.id == theme.id)
+      .map(tc => ({
+        path: `/${tc.slug}`,
+        component: 'src/components/Pages/TopicCollection',
         getData: async () => ({
-          topic,
+          tc,
         }),
-        children: informationPages
-          .filter(i => i.topic != null && i.topic.id == topic.id)
-          .map(informationPage => ({
-            path: `/${informationPage.slug}`,
-            component: 'src/components/Pages/Information',
-            getData: async () => ({
-              informationPage,
-            }),
-          }))
-          .concat(
-            services
-              .filter(s => s.topic != null && s.topic.id == topic.id)
-              .map(service => ({
-                path: `/${service.slug}`,
-                component: 'src/components/Pages/Service',
-                getData: async () => ({
-                  service,
-                }),
-              })),
+        children: topics
+          .filter(
+            top =>
+              top.topiccollection != null && top.topiccollection.id == tc.id,
           )
-          .concat(
-            processes
-              .filter(p => p.topic != null && p.topic.id == topic.id)
-              .map(process => ({
-                path: `/${process.slug}`,
-                component: 'src/components/Pages/Process',
+          .map(topic => ({
+            path: `/${topic.slug}`,
+            component: 'src/components/Pages/Topic',
+            getData: async () => ({
+              topic,
+            }),
+            children: informationPages
+              .filter(i => i.topic != null && i.topic.id == topic.id)
+              .map(informationPage => ({
+                path: `/${informationPage.slug}`,
+                component: 'src/components/Pages/Information',
                 getData: async () => ({
-                  process,
+                  informationPage,
                 }),
-                children: process.processSteps.map(processStep => ({
-                  path: `/${processStep.slug}`,
-                  component: 'src/components/Pages/ProcessStep',
-                  getData: async () => ({
-                    processStep,
-                  }),
-                })),
-              })),
-          ),
+              }))
+              .concat(
+                services
+                  .filter(s => s.topic != null && s.topic.id == topic.id)
+                  .map(service => ({
+                    path: `/${service.slug}`,
+                    component: 'src/components/Pages/Service',
+                    getData: async () => ({
+                      service,
+                    }),
+                  })),
+              )
+              .concat(
+                processes
+                  .filter(p => p.topic != null && p.topic.id == topic.id)
+                  .map(process => ({
+                    path: `/${process.slug}`,
+                    component: 'src/components/Pages/Process',
+                    getData: async () => ({
+                      process,
+                    }),
+                    children: process.processSteps.map(processStep => ({
+                      path: `/${processStep.slug}`,
+                      component: 'src/components/Pages/ProcessStep',
+                      getData: async () => ({
+                        processStep,
+                      }),
+                    })),
+                  })),
+              ),
+          })),
       })),
   }));
 

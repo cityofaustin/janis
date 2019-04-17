@@ -6,6 +6,9 @@ const allTopicCollectionsQuery = `
           id
           slug
           title
+          theme {
+            id
+          }
         }
       }
     }
