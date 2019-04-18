@@ -9,18 +9,21 @@ import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery'
 import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
 import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
+import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import {
   cleanProcesses,
   cleanServices,
   cleanInformationPages,
   cleanTopics,
   cleanDepartments,
+  cleanTopicCollections,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import Process from 'components/Pages/Process';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
+import TopicCollection from 'components/Pages/TopicCollection';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -68,6 +71,11 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'topiccollection':
+        req = client.request(getTopicCollectionPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
       let page;
@@ -87,6 +95,9 @@ class CMSPreview extends Component {
           break;
         case 'department':
           page = data.pageRevision.asDepartmentPage;
+          break;
+        case 'topiccollection':
+          page = data.pageRevision.asTopicCollectionPage;
           break;
       }
 
@@ -145,6 +156,12 @@ class CMSPreview extends Component {
           path="/department"
           render={props => (
             <Department department={cleanDepartments(data)[0]} />
+          )}
+        />
+        <Route
+          path="/topiccollection"
+          render={props => (
+            <TopicCollection topics={cleanTopicCollections(data)[0]} />
           )}
         />
       </Switch>
