@@ -7,7 +7,7 @@ const allThemesQuery = `
           slug
           text
           description
-          topicPages {
+          topicCollectionPages {
             edges {
               node {
                 title

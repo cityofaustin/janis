@@ -53,23 +53,45 @@ export const cleanLinks = (links, pageType) => {
   // Themes
   if (pageType === 'theme') {
     return links.edges.map(({ node: link }) => {
-      link.topics = link.topicPages.edges.map(e => e.node);
+      link.topics = link.topicCollectionPages.edges.map(e => e.node);
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
       return link;
     });
   }
 
-  // Topics
-  if (pageType === 'topic') {
+  // Topic Collections
+  if (pageType === 'topiccollection') {
     return links.edges.map(({ node: link }) => {
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
+
       return link;
     });
   }
 
   let cleanedLinks = [];
+
+  // Topics
+  if (pageType === 'topic') {
+    for (const edge of links.edges) {
+      const link = edge.node;
+      if (link.topiccollections && link.topiccollections.edges.length) {
+        for (const edge of link.topiccollections.edges) {
+          const { topiccollection } = edge.node;
+
+          link.url = `${pathPrefix || ''}/${link.slug}`;
+          link.text = link.title;
+          link.topiccollection = topiccollection;
+
+          cleanedLinks.push(link);
+        }
+      }
+    }
+
+    return cleanedLinks;
+  }
+
   for (const edge of links.edges) {
     const link = edge.node;
 
@@ -77,14 +99,28 @@ export const cleanLinks = (links, pageType) => {
     if (link.topics && link.topics.edges.length) {
       for (const edge of link.topics.edges) {
         const { topic } = edge.node;
-        pathPrefix = `/${topic.theme.slug}/${topic.slug}`;
 
-        link.slug = link.slug || link.sortOrder;
-        link.url = `${pathPrefix || ''}/${link.slug}`;
-        link.text = link.title;
-        link.topic = topic;
+        if (topic.topiccollections && topic.topiccollections.edges.length) {
+          for (const edge of topic.topiccollections.edges) {
+            const { topiccollection } = edge.node;
 
-        cleanedLinks.push(link);
+            if (topiccollection.theme) {
+              // We need to make copies here so we actually have multiple urls
+              let linkCopy = JSON.parse(JSON.stringify(link));
+
+              pathPrefix = `/${topiccollection.theme.slug}/${
+                topiccollection.slug
+              }/${topic.slug}`;
+
+              linkCopy.slug = link.slug || link.sortOrder;
+              linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+              linkCopy.text = link.title;
+              linkCopy.topic = topic;
+
+              cleanedLinks.push(linkCopy);
+            }
+          }
+        }
       }
     }
 
@@ -196,6 +232,18 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
+};
+
+export const cleanTopicCollections = allTopicCollections => {
+  if (!allTopicCollections || !allTopicCollections.edges) return null;
+
+  let cleanedTopicCollections = cleanLinks(
+    allTopicCollections,
+    'topiccollection',
+  );
+
+  // console.log(cleanedTopicCollections);
+  return cleanedTopicCollections;
 };
 
 export const cleanThemes = allThemes => {
