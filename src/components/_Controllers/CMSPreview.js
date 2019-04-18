@@ -7,14 +7,17 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
 import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery';
 import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
+import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import {
   cleanProcesses,
   cleanServices,
   cleanInformationPages,
+  cleanTopics,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import Process from 'components/Pages/Process';
 import InformationPage from 'components/Pages/Information';
+import Topic from 'components/Pages/Topic';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -52,6 +55,11 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'topic':
+        req = client.request(getTopicPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
       let page;
@@ -65,6 +73,9 @@ class CMSPreview extends Component {
           break;
         case 'information':
           page = data.pageRevision.asInformationPage;
+          break;
+        case 'topic':
+          page = data.pageRevision.asTopicPage;
           break;
       }
 
@@ -103,6 +114,10 @@ class CMSPreview extends Component {
           render={props => (
             <InformationPage informationPage={cleanInformationPages(data)[0]} />
           )}
+        />
+        <Route
+          path="/topic"
+          render={props => <Topic topic={cleanTopics(data)[0]} />}
         />
       </Switch>
     );
