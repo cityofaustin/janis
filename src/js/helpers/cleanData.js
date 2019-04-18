@@ -105,16 +105,19 @@ export const cleanLinks = (links, pageType) => {
             const { topiccollection } = edge.node;
 
             if (topiccollection.theme) {
+              // We need to make copies here so we actually have multiple urls
+              let linkCopy = JSON.parse(JSON.stringify(link));
+
               pathPrefix = `/${topiccollection.theme.slug}/${
                 topiccollection.slug
               }/${topic.slug}`;
 
-              link.slug = link.slug || link.sortOrder;
-              link.url = `${pathPrefix || ''}/${link.slug}`;
-              link.text = link.title;
-              link.topic = topic;
+              linkCopy.slug = link.slug || link.sortOrder;
+              linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+              linkCopy.text = link.title;
+              linkCopy.topic = topic;
 
-              cleanedLinks.push(link);
+              cleanedLinks.push(linkCopy);
             }
           }
         }
