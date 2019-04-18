@@ -8,16 +8,19 @@ import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery'
 import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery';
 import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
 import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
+import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import {
   cleanProcesses,
   cleanServices,
   cleanInformationPages,
   cleanTopics,
+  cleanDepartments,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import Process from 'components/Pages/Process';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
+import Department from 'components/Pages/Department';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -60,6 +63,11 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'department':
+        req = client.request(getDepartmentPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
       let page;
@@ -76,6 +84,9 @@ class CMSPreview extends Component {
           break;
         case 'topic':
           page = data.pageRevision.asTopicPage;
+          break;
+        case 'department':
+          page = data.pageRevision.asDepartmentPage;
           break;
       }
 
@@ -129,6 +140,12 @@ class CMSPreview extends Component {
 
             return <Topic topic={topic} />;
           }}
+        />
+        <Route
+          path="/department"
+          render={props => (
+            <Department department={cleanDepartments(data)[0]} />
+          )}
         />
       </Switch>
     );
