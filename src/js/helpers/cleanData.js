@@ -80,6 +80,8 @@ export const cleanLinks = (links, pageType) => {
         for (const edge of link.topiccollections.edges) {
           const { topiccollection } = edge.node;
 
+          link.topLinks = [];
+          link.otherLinks = [];
           link.url = `${pathPrefix || ''}/${link.slug}`;
           link.text = link.title;
           link.topiccollection = topiccollection;
@@ -98,7 +100,7 @@ export const cleanLinks = (links, pageType) => {
     // If it's under a topic make it in all the right places
     if (link.topics && link.topics.edges.length) {
       for (const edge of link.topics.edges) {
-        const { topic } = edge.node;
+        const { topic, toplink } = edge.node;
 
         if (topic.topiccollections && topic.topiccollections.edges.length) {
           for (const edge of topic.topiccollections.edges) {
@@ -116,6 +118,7 @@ export const cleanLinks = (links, pageType) => {
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
               linkCopy.topic = topic;
+              linkCopy.toplink = toplink;
 
               cleanedLinks.push(linkCopy);
             }

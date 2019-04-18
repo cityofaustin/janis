@@ -11,23 +11,27 @@ import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
 const Topic = ({
-  topic: { theme, text: title, description, callToAction, tiles },
+  topic: {
+    theme,
+    text: title,
+    description,
+    callToAction,
+    topLinks,
+    otherLinks,
+  },
   intl,
 }) => (
   <div>
     <Head>
       <title>{title}</title>
     </Head>
-    <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} />
-    <div className="wrapper wrapper--sm container-fluid">
-      <PageHeader description={description}>{title}</PageHeader>
-    </div>
-    <div className="wrapper wrapper--sm wrapper--hasDashedBorder container-fluid">
-      <SectionHeader hasHighlight={true}>{callToAction}</SectionHeader>
-    </div>
-
+    {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
+    <PageHeader contentType={'information'} description={description}>
+      {title}
+    </PageHeader>
     <div className="wrapper container-fluid">
-      {/* <TileGroup tiles={tiles} tag={intl.formatMessage(i18n.service)} /> */}
+      <TileGroup text={'Top Services'} tiles={topLinks} />
+      <TileGroup text={'All Services'} tiles={otherLinks} />
     </div>
   </div>
 );
