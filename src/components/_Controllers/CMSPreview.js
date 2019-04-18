@@ -117,7 +117,18 @@ class CMSPreview extends Component {
         />
         <Route
           path="/topic"
-          render={props => <Topic topic={cleanTopics(data)[0]} />}
+          render={props => {
+            let topic = cleanTopics(data)[0];
+            topic.topLinks = [{ text: 'Top link' }, { text: 'Other top link' }];
+            topic.otherLinks = [
+              { text: 'First link' },
+              { text: 'Second link' },
+              { text: 'Third link' },
+              { text: 'Fourth link' },
+            ];
+
+            return <Topic topic={topic} />;
+          }}
         />
       </Switch>
     );

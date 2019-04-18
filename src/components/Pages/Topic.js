@@ -11,14 +11,7 @@ import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
 const Topic = ({
-  topic: {
-    theme,
-    text: title,
-    description,
-    callToAction,
-    topLinks,
-    otherLinks,
-  },
+  topic: { theme, text: title, description, topLinks, otherLinks },
   intl,
 }) => (
   <div>
@@ -40,7 +33,6 @@ Topic.propTypes = {
   topic: PropTypes.shape({
     text: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    callToAction: PropTypes.string.isRequired,
     tiles: PropTypes.array.isRequired,
     theme: PropTypes.shape({
       text: PropTypes.string,
