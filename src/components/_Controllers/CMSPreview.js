@@ -6,9 +6,15 @@ import { request } from 'graphql-request';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
 import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery';
-import { cleanProcesses, cleanServices } from 'js/helpers/cleanData';
+import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
+import {
+  cleanProcesses,
+  cleanServices,
+  cleanInformationPages,
+} from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import Process from 'components/Pages/Process';
+import InformationPage from 'components/Pages/Information';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -41,32 +47,36 @@ class CMSPreview extends Component {
       case 'processes':
         req = client.request(getProcessPageRevisionQuery, { id: revision_id });
         break;
+      case 'information':
+        req = client.request(getInformationPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
+      let page;
+
       switch (page_type) {
         case 'services':
-          this.setState({
-            data: {
-              edges: [
-                {
-                  node: data.pageRevision.asServicePage,
-                },
-              ],
-            },
-          });
+          page = data.pageRevision.asServicePage;
           break;
         case 'processes':
-          this.setState({
-            data: {
-              edges: [
-                {
-                  node: data.pageRevision.asProcessPage,
-                },
-              ],
-            },
-          });
+          page = data.pageRevision.asProcessPage;
+          break;
+        case 'information':
+          page = data.pageRevision.asInformationPage;
           break;
       }
+
+      this.setState({
+        data: {
+          edges: [
+            {
+              node: page,
+            },
+          ],
+        },
+      });
     });
   }
 
@@ -87,6 +97,12 @@ class CMSPreview extends Component {
         <Route
           path="/services"
           render={props => <Service service={cleanServices(data)[0]} />}
+        />
+        <Route
+          path="/information"
+          render={props => (
+            <InformationPage informationPage={cleanInformationPages(data)[0]} />
+          )}
         />
       </Switch>
     );
