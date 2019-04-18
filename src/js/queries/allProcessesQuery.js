@@ -2,7 +2,7 @@ import processPageFragment from './processPageFragment';
 
 const allProcessesQuery = `
   query allProcesses {
-    allProcesses {
+    allProcesses(live:true) {
       edges {
         node {
           ...processPageInfo
