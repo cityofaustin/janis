@@ -26,15 +26,15 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav). 
+    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav).
     this.menuElement = document.querySelector('#navMenu');
   }
 
   toggleMenu = e => {
     // If we're closing the menu, enable body scroll again
-    if(this.state.menuIsOpen) enableBodyScroll(this.targetElement);
+    if (this.state.menuIsOpen) enableBodyScroll(this.targetElement);
     // If we're opening the menu, disable body scroll
-    if(!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
+    if (!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
 
     this.setState({
       menuIsOpen: !this.state.menuIsOpen,
@@ -57,7 +57,10 @@ class Header extends Component {
         })}
         role="banner"
       >
-        <GovSite toggleHowYouKnowMenu={this.toggleHowYouKnowMenu} menuIsOpen={this.state.howYouKnowmenuIsOpen}/>
+        <GovSite
+          toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
+          menuIsOpen={this.state.howYouKnowmenuIsOpen}
+        />
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
@@ -70,11 +73,12 @@ class Header extends Component {
                 className="coa-Header__menu-toggle"
                 ref="menu"
               >
-                { this.state.menuIsOpen ? 
-                  <i class="material-icons coa-Header__menuIcon">close</i> :
-                  <i class="material-icons coa-Header__menuIcon">menu</i> 
-                }
-                
+                {this.state.menuIsOpen ? (
+                  <i className="material-icons coa-Header__menuIcon">close</i>
+                ) : (
+                  <i className="material-icons coa-Header__menuIcon">menu</i>
+                )}
+
                 {intl.formatMessage(i18n2.menu)}
               </button>
               <div className="coa-Header__desktop-languages">
@@ -92,23 +96,24 @@ class Header extends Component {
                   {intl.formatMessage(i18n1.airport)}
                 </ExternalLink>
                 <span className="coa-text-spacer--vertical" />
-                <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
+                <ExternalLink to="http://311.austintexas.gov/">
+                  311
+                </ExternalLink>
               </div>
             </div>
           </div>
         </div>
-        <Menu
-          isMenuOpen={this.state.menuIsOpen}
-          navigation={navigation}
+        <Menu isMenuOpen={this.state.menuIsOpen} />
+        <HowYouKnowMenu
+          open={this.state.howYouKnowmenuIsOpen}
+          toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
         />
-        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}/>
       </header>
     );
   }
 }
 
 Header.propTypes = {
-  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
   path: PropTypes.string.isRequired,
 };
 
