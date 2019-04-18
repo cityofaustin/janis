@@ -33,11 +33,6 @@ const servicePageFragment = `
     steps
     dynamicContent
     additionalContent
-    image {
-      id
-      filename
-      title
-    }
     contacts {
       edges {
         node {
