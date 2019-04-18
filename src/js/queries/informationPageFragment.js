@@ -36,11 +36,6 @@ const informationPageFragment = `
     description
     options
     additionalContent
-    image {
-      id
-      filename
-      title
-    }
     contacts {
       edges {
         node {
