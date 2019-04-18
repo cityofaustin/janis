@@ -1,17 +1,16 @@
+import topicCollectionFragment from './topicCollectionFragment';
+
 const allTopicCollectionsQuery = `
   query allTopicsQuery {
-    allTopicCollections {
+    allTopicCollections(live:true) {
       edges {
         node {
-          id
-          slug
-          title
-          theme {
-            id
-          }
+          ...topicCollectionInfo
         }
       }
     }
-  }`;
+  }
+  ${topicCollectionFragment}
+`;
 
 export default allTopicCollectionsQuery;

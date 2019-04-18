@@ -1,12 +1,14 @@
-const servicePageFragment = `
-  fragment servicePageInfo on ServicePageNode {
-    id
+const processPageFragment = `
+  fragment processPageInfo on ProcessPageNode {
     title
+    description
     slug
+    department {
+      id
+    }
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
@@ -31,9 +33,10 @@ const servicePageFragment = `
         }
       }
     }
-    steps
-    dynamicContent
-    additionalContent
+    image {
+      filename
+      title
+    }
     contacts {
       edges {
         node {
@@ -41,7 +44,6 @@ const servicePageFragment = `
             name
             email
             phone
-            socialMedia
             hours {
               edges {
                 node {
@@ -63,7 +65,25 @@ const servicePageFragment = `
         }
       }
     }
+    processSteps {
+      edges {
+        node {
+          sortOrder
+          title
+          shortTitle
+          linkTitle
+          description
+          overviewSteps
+          detailedContent
+          quote
+          image {
+            filename
+            title
+          }
+        }
+      }
+    }
   }
 `;
 
-export default servicePageFragment;
+export default processPageFragment;
