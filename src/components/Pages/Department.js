@@ -18,6 +18,10 @@ import WorkInProgress from 'components/WorkInProgress';
 // TODO: this jsonFileData is temporary. Add it to Wagtail API
 import jsonFileData from '__tmpdata/pages';
 
+//rmv
+import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import TopServices from 'components/Tiles/TopServices';
+
 const TopServiceButtons = ({ topServices, locale }) => (
   <div className="coa-DepartmentPage__topServiceButtons">
     {topServices &&
@@ -75,24 +79,13 @@ const Department = ({
           headerText={title}
         />
       )}
-      <div className="coa-DepartmentPage__topservices--mobile">
-        <div className="coa-DepartmentPage__topservices-contentcontainer--mobile">
-          <h3 className="coa-DepartmentPage__topservices-header--mobile">
-            {intl.formatMessage(i18n.topServices)}
-          </h3>
-          <TopServiceButtons topServices={topServices} locale={intl.locale} />
-        </div>
-      </div>
-      <div className="wrapper container-fluid">
-        <div className="coa-DepartmentPage__topservices--desktop">
-          <div className="coa-DepartmentPage__topservices-contentcontainer--desktop">
-            <h3 className="coa-DepartmentPage__topservices-header--desktop">
-              {intl.formatMessage(i18n.topServices)}
-            </h3>
-            <TopServiceButtons topServices={topServices} locale={intl.locale} />
-          </div>
-        </div>
-      </div>
+
+      <TopServices
+        title={intl.formatMessage(i18n.topServices)}
+        tiles={topServices}
+        locale={intl.locale}
+      />
+
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
           <div className="wrapper wrapper--sm container-fluid">
