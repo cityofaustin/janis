@@ -7,28 +7,25 @@
   flex-grow: 1;
   font-family: $coa-font-sans;
   min-width: $coa-tile-min-width;
-  padding: $coa-spacing-medium $coa-spacing-small;
+  padding: $coa-spacing-medium;
   text-decoration: none;
   align-items: stretch;
 
   &:hover {
-    background-color: $coa-color-secondary;
-
-    .coa-Tile__text {
-      border-right: 1px solid $coa-color-white;
-    }
+    background-color: $coa-color-primary;
+    color: $coa-color-white;
 
     .coa-Tile__text,
     i {
-      color: $coa-color-primary;
+      color: $coa-color-white;
     }
   }
 
   &:active {
     background-color: $coa-color-darker-blue;
+    color: $coa-color-white;
 
-    .coa-Tile__text,
-    i {
+    .coa-Tile__text {
       color: $coa-color-white;
     }
   }
