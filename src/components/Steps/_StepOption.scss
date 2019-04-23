@@ -1,0 +1,64 @@
+.coa-StepOption {
+  display: flex;
+  flex: 1;
+}
+
+.coa-StepOption__title {
+  font-weight: $coa-font-bold;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  margin-bottom: $coa-spacing-large;
+}
+
+.coa-StepOption__item {
+  align-items: center;
+}
+
+.coa-StepOption__container {
+  flex: 1;
+}
+
+.coa-StepOption__name {
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  margin-bottom: 0;
+  flex: 1;
+  margin-right: $coa-spacing-xsmall;
+}
+
+.coa-Accordion {
+  flex: 1;
+}
+
+.coa-AccordionItem {
+  display: block;
+  width: 100%;
+  margin-bottom: $coa-spacing-medium;
+}
+
+.coa-AccordionItemHeading {
+  flex: 1;
+}
+
+.coa-AccordionButton {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  background: $coa-color-grey;
+  border-radius: $coa-button-border-radius;
+  padding: $coa-spacing-medium;
+
+  i {
+    color: $coa-color-primary;
+  }
+
+  &[aria-expanded='true'] {
+    border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
+  }
+}
+
+.coa-AccordionPanel {
+  border: 4px solid $coa-color-grey;
+  padding: $coa-spacing-medium;
+}

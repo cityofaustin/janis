@@ -3,20 +3,53 @@ import PropTypes from 'prop-types';
 import Parser from 'html-react-parser';
 import { optionPropTypes, stepWithOptionsPropTypes } from './proptypes';
 
-const Option = ({ option_name, option_description }) => (
-  <div>
-    <span>{option_name}</span>
-    <span>{Parser(option_description)}</span>
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+  AccordionItemState,
+} from 'react-accessible-accordion';
+
+const StepOption = ({ option_name, option_description }) => (
+  <div className="coa-StepOption">
+    <AccordionItem className={'coa-AccordionItem'}>
+      <AccordionItemHeading className={'coa-AccordionItemHeading'}>
+        <AccordionItemButton className={'coa-AccordionButton'}>
+          <h3 className="coa-StepOption__name">{option_name}</h3>
+
+          <AccordionItemState>
+            {({ expanded }) =>
+              expanded ? (
+                <i class="material-icons">remove</i>
+              ) : (
+                <i class="material-icons">add</i>
+              )
+            }
+          </AccordionItemState>
+        </AccordionItemButton>
+      </AccordionItemHeading>
+      <AccordionItemPanel className={'coa-AccordionPanel'}>
+        <span>{Parser(option_description)}</span>
+      </AccordionItemPanel>
+    </AccordionItem>
   </div>
 );
 
 Option.propTypes = optionPropTypes;
 
 const StepWithOptions = ({ description, options }) => (
-  <div className="coa-StepWithOptions">
-    <h1>{description}</h1>
-    {options.map(({ ...rest }, index) => <Option key={index} {...rest} />)}
-  </div>
+  <li className="coa-StepOption__item">
+    <div className="coa-StepOption__container">
+      <h1 className="coa-StepOption__title">{description}</h1>
+      <Accordion className={'coa-Accordion'} allowMultipleExpanded={false}>
+        {options.map(({ ...rest }, index) => (
+          <StepOption key={index} {...rest} />
+        ))}
+      </Accordion>
+    </div>
+  </li>
 );
 
 StepWithOptions.propTypes = stepWithOptionsPropTypes;
