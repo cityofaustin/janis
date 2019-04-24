@@ -37,7 +37,7 @@ const StepOption = ({ option_name, option_description }) => (
   </div>
 );
 
-Option.propTypes = optionPropTypes;
+StepOption.propTypes = optionPropTypes;
 
 const StepWithOptionsContent = props => (
   <div className="coa-StepOption__container">
