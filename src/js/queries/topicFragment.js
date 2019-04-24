@@ -13,6 +13,7 @@ const topicFragment = `
             slug
             theme {
               id
+              text
               slug
             }
           }

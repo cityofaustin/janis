@@ -21,8 +21,7 @@ const Service = ({
     text: title,
     slug,
     topic,
-    topic: { theme },
-    topics,
+    theme,
     steps,
     dynamicContent,
     additionalContent,
@@ -47,20 +46,21 @@ const Service = ({
       />
     )}
     <div>
-      <ContextualNav parent={topic} related={topics} />
+      <ContextualNav
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+      />
       <PageHeader contentType={'service'}>{title}</PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            {steps &&
-              !!steps.length && (
-                <Fragment>
-                  <SectionHeader>
-                    {intl.formatMessage(i18n2.steps)}
-                  </SectionHeader>
-                  <Steps steps={steps} />
-                </Fragment>
-              )}
+            {steps && !!steps.length && (
+              <Fragment>
+                <SectionHeader>{intl.formatMessage(i18n2.steps)}</SectionHeader>
+                <Steps steps={steps} />
+              </Fragment>
+            )}
 
             {!!dynamicContent &&
               dynamicContent.map(content => (
@@ -74,8 +74,9 @@ const Service = ({
               />
             )}
 
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>
