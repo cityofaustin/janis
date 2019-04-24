@@ -19,7 +19,7 @@ const Topic = ({
       <title>{title}</title>
     </Head>
     {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
-    <PageHeader contentType={'information'} description={description}>
+    <PageHeader contentType={'topic'} description={description}>
       {title}
     </PageHeader>
     <div className="wrapper container-fluid">
