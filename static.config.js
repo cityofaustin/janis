@@ -76,6 +76,20 @@ const makeThemePages = async client => {
   );
   const services = cleanServices(allServices);
 
+  // Add all topic links to topic collection pages
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
+    topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+
+    // Update the topicCollection on the topic
+    const topicCollectionCopy = JSON.parse(
+      JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
+    );
+    topic.topiccollection = topicCollectionCopy;
+  }
+
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
@@ -86,6 +100,10 @@ const makeThemePages = async client => {
     } else {
       topics[matchingTopicIndex].otherLinks.push(service);
     }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    service.topic = topicCopy;
   }
 
   // Add all information page links to topic pages
@@ -98,6 +116,10 @@ const makeThemePages = async client => {
     } else {
       topics[matchingTopicIndex].otherLinks.push(page);
     }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    page.topic = topicCopy;
   }
 
   const { allProcesses } = await client.request(allProcessesQuery);

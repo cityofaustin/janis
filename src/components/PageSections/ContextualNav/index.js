@@ -18,17 +18,9 @@ const ContextualNav = ({
   };
 
   // Set the related links
-  // TODO
-  const related = [
-    {
-      slug: `#`,
-      title: `Placeholder`,
-    },
-    {
-      slug: `#`,
-      title: `Placeholder`,
-    },
-  ];
+  const related = topiccollection
+    ? topiccollection.topics.filter(t => t.id !== topic.id)
+    : topics.edges.map(edge => edge.node);
 
   return (
     <div className="coa-ContextualNav">
@@ -40,15 +32,17 @@ const ContextualNav = ({
               <span>{parent.title}</span>
             </a>
           </div>
-          <div className="coa-ContextualNav__related">
-            <span className="coa-ContextualNav__label">Related to: </span>
-            {related.map((topic, index) => (
-              <a key={index} href={topic.slug}>
-                {topic.title}
-                {index !== related.length - 1 && ', '}
-              </a>
-            ))}
-          </div>
+          {!!related.length && (
+            <div className="coa-ContextualNav__related">
+              <span className="coa-ContextualNav__label">Related to: </span>
+              {related.map((topic, index) => (
+                <a key={index} href={topic.slug}>
+                  {topic.title}
+                  {index !== related.length - 1 && ', '}
+                </a>
+              ))}
+            </div>
+          )}
           <div className="coa-ContextualNav__dept">
             {department && (
               <Fragment>

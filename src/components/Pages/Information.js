@@ -22,7 +22,6 @@ const InformationPage = ({
     slug,
     topic,
     topics,
-    topiccollection,
     theme,
     department,
     toplink,
@@ -41,20 +40,10 @@ const InformationPage = ({
     <ContextualNav
       topic={topic}
       topics={topics}
-      topiccollection={topiccollection}
+      topiccollection={topic && topic.topiccollection}
       theme={theme}
       department={department}
     />
-    {/*<div className="coa_InformationPage__back-to-dept">
-        <div className="wrapper container-fluid">
-          <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
-            <i className="material-icons coa_InformationPage__arrow">
-              arrow_back
-            </i>
-            <span>{intl.formatMessage(i18n2.opoName)}</span>
-          </a>
-        </div>
-      </div>*/}
     {image && (
       <PageBanner
         imagesPath={`${process.env.CMS_MEDIA}/images`}
@@ -66,11 +55,6 @@ const InformationPage = ({
         imageTitle={image.title}
       />
     )}
-    {/* to likely replace with microsite breadcrumb <PageBreadcrumbs
-      grandparent={{ ...theme, subpath: 'themes' }}
-      parent={{ ...topic, subpath: 'topics' }}
-      title={title}
-    /> */}
     <div>
       <PageHeader contentType={'information'} description={description}>
         {title}

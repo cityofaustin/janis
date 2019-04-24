@@ -63,6 +63,7 @@ export const cleanLinks = (links, pageType) => {
   // Topic Collections
   if (pageType === 'topiccollection') {
     return links.edges.map(({ node: link }) => {
+      link.topics = [];
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
 
