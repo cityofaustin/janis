@@ -1,21 +1,16 @@
+import topicFragment from './topicFragment';
+
 const allTopicsQuery = `
   query allTopicsQuery {
-    allTopics{
+    allTopics(live:true) {
       edges {
         node {
-          id,
-          slug,
-          title,
-          description,
-          callToAction,
-          theme {
-            text,
-            slug,
-            id
-          }
+          ...topicInfo
         }
       }
     }
-  }`;
+  }
+  ${topicFragment}
+`;
 
 export default allTopicsQuery;

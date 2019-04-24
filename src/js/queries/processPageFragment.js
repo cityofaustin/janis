@@ -1,17 +1,14 @@
-const informationPageFragment = `
-  fragment informationPageInfo on InformationPageNode {
-    id
+const processPageFragment = `
+  fragment processPageInfo on ProcessPageNode {
     title
+    description
     slug
     department {
       id
-      slug
-      title
     }
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
@@ -36,9 +33,10 @@ const informationPageFragment = `
         }
       }
     }
-    description
-    options
-    additionalContent
+    image {
+      filename
+      title
+    }
     contacts {
       edges {
         node {
@@ -67,7 +65,25 @@ const informationPageFragment = `
         }
       }
     }
+    processSteps {
+      edges {
+        node {
+          sortOrder
+          title
+          shortTitle
+          linkTitle
+          description
+          overviewSteps
+          detailedContent
+          quote
+          image {
+            filename
+            title
+          }
+        }
+      }
+    }
   }
 `;
 
-export default informationPageFragment;
+export default processPageFragment;

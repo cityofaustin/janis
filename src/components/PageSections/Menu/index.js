@@ -3,7 +3,11 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { misc as i18n1, navigation as i18n2, departmentPage as i18n3 } from 'js/i18n/definitions';
+import {
+  misc as i18n1,
+  navigation as i18n2,
+  departmentPage as i18n3,
+} from 'js/i18n/definitions';
 
 import WorkInProgress from 'components/WorkInProgress';
 import ThreeOneOneRequest from 'components/PageSections/ThreeOneOne/ThreeOneOneRequest';
@@ -68,32 +72,53 @@ class Menu extends Component {
         >
           <div className="container-fluid wrapper">
             <div className="coa-Menu__header">
-              <h2><a href={intl.formatMessage(i18n1.opoDeptUrl)}>{intl.formatMessage(i18n1.opoName)}</a></h2>
+              <h2>
+                <a href={intl.formatMessage(i18n1.opoDeptUrl)}>
+                  {intl.formatMessage(i18n1.opoName)}
+                </a>
+              </h2>
             </div>
-            <div className="coa-Menu__subheading">{intl.formatMessage(i18n1.services)}</div>
+            <div className="coa-Menu__subheading">
+              {intl.formatMessage(i18n1.services)}
+            </div>
             <div className="coa-Menu__link coa-Menu__service-link">
-              <a href={intl.formatMessage(i18n3.complaintFormUrl)}>{intl.formatMessage(i18n3.complaintFormButtonText)}</a>
-            </div>
-            <div className="coa-Menu__link coa-Menu__service-link">
-              <a href={intl.formatMessage(i18n3.thankFormUrl)}>{intl.formatMessage(i18n3.thankFormButtonText)}</a>
-            </div>
-            <div className="coa-DepartmentPage__topServiceButtons coa-Menu__serviceButtons-desktop">
-              <a href={intl.formatMessage(i18n3.complaintFormUrl)} className="coa-DepartmentPage__topServiceButton">
+              <a href={intl.formatMessage(i18n3.complaintFormUrl)}>
                 {intl.formatMessage(i18n3.complaintFormButtonText)}
               </a>
-              <a href={intl.formatMessage(i18n3.thankFormUrl)} className="coa-DepartmentPage__topServiceButton">
+            </div>
+            <div className="coa-Menu__link coa-Menu__service-link">
+              <a href={intl.formatMessage(i18n3.thankFormUrl)}>
                 {intl.formatMessage(i18n3.thankFormButtonText)}
               </a>
             </div>
-            <div className="coa-Menu__subheading">{intl.formatMessage(i18n1.info)}</div>
-            <div className="coa-Menu__link">
-              <a href={intl.formatMessage(i18n3.yourDataUrl)}>{intl.formatMessage(i18n3.yourDataLinkText)}</a>
+            <div className="coa-DepartmentPage__topServiceButtons coa-Menu__serviceButtons-desktop">
+              <a
+                href={intl.formatMessage(i18n3.complaintFormUrl)}
+                className="coa-DepartmentPage__topServiceButton"
+              >
+                {intl.formatMessage(i18n3.complaintFormButtonText)}
+              </a>
+              <a
+                href={intl.formatMessage(i18n3.thankFormUrl)}
+                className="coa-DepartmentPage__topServiceButton"
+              >
+                {intl.formatMessage(i18n3.thankFormButtonText)}
+              </a>
+            </div>
+            <div className="coa-Menu__subheading">
+              {intl.formatMessage(i18n1.info)}
             </div>
             <div className="coa-Menu__link">
-              <a href={intl.formatMessage(i18n3.investigationProcessUrl)}>{intl.formatMessage(i18n3.investigationProcessLinkText)}</a>
+              <a href={intl.formatMessage(i18n3.yourDataUrl)}>
+                {intl.formatMessage(i18n3.yourDataLinkText)}
+              </a>
+            </div>
+            <div className="coa-Menu__link">
+              <a href={intl.formatMessage(i18n3.investigationProcessUrl)}>
+                {intl.formatMessage(i18n3.investigationProcessLinkText)}
+              </a>
             </div>
           </div>
-
         </nav>
       </div>
     );
@@ -101,8 +126,6 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
-  closeMenu: PropTypes.func.isRequired,
   isMenuOpen: PropTypes.bool,
 };
 

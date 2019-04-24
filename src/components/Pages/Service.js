@@ -6,7 +6,6 @@ import path from 'path';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
-// import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
@@ -14,6 +13,7 @@ import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import ContextualNav from '../PageSections/ContextualNav';
 
 const Service = ({
   service: {
@@ -21,7 +21,7 @@ const Service = ({
     text: title,
     slug,
     topic,
-    topic: { theme },
+    theme,
     steps,
     dynamicContent,
     additionalContent,
@@ -45,12 +45,12 @@ const Service = ({
         imageTitle={image.title}
       />
     )}
-    {/* <PageBreadcrumbs
-      grandparent={{ ...theme, subpath: 'themes' }}
-      parent={{ ...topic, subpath: 'topics' }}
-      title={title}
-    /> */}
     <div>
+      <ContextualNav
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+      />
       <PageHeader contentType={'service'}>{title}</PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
@@ -80,7 +80,6 @@ const Service = ({
           </div>
         </div>
       </div>
-
       {/*}
       <TileGroup
         text={intl.formatMessage(i18n3.checkOutRelatedServices)}
