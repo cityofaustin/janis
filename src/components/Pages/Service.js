@@ -47,20 +47,24 @@ const Service = ({
       />
     )}
     <div>
-      <ContextualNav parent={topic} related={topics} />
+      {/* <ContextualNav parent={topic} related={topics} /> */}
       <PageHeader contentType={'service'}>{title}</PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            {steps &&
-              !!steps.length && (
+            {steps && !!steps.length ? (
+              //just 1 step? don't display steps header or steps in list (ul)
+              steps.length === 1 ? (
+                <Steps steps={steps} />
+              ) : (
                 <Fragment>
                   <SectionHeader>
                     {intl.formatMessage(i18n2.steps)}
                   </SectionHeader>
                   <Steps steps={steps} />
                 </Fragment>
-              )}
+              )
+            ) : null}
 
             {!!dynamicContent &&
               dynamicContent.map(content => (

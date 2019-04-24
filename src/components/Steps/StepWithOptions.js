@@ -39,18 +39,25 @@ const StepOption = ({ option_name, option_description }) => (
 
 Option.propTypes = optionPropTypes;
 
-const StepWithOptions = ({ description, options }) => (
-  <li className="coa-StepOption__item">
-    <div className="coa-StepOption__container">
-      <h1 className="coa-StepOption__title">{description}</h1>
-      <Accordion className={'coa-Accordion'} allowMultipleExpanded={false}>
-        {options.map(({ ...rest }, index) => (
-          <StepOption key={index} {...rest} />
-        ))}
-      </Accordion>
-    </div>
-  </li>
+const StepWithOptionsContent = props => (
+  <div className="coa-StepOption__container">
+    <h1 className="coa-StepOption__title">{props.description}</h1>
+    <Accordion className={'coa-Accordion'} allowMultipleExpanded={false}>
+      {props.options.map(({ ...rest }, index) => (
+        <StepOption key={index} {...rest} />
+      ))}
+    </Accordion>
+  </div>
 );
+
+const StepWithOptions = ({ description, options, singleStep }) =>
+  singleStep ? (
+    <StepWithOptionsContent description={description} options={options} />
+  ) : (
+    <li className="coa-StepOption__item">
+      <StepWithOptionsContent description={description} options={options} />
+    </li>
+  );
 
 StepWithOptions.propTypes = stepWithOptionsPropTypes;
 
