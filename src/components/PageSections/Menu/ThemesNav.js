@@ -8,12 +8,24 @@ const ThemesNav = props => {
       <ul className="coa-ThemesNav__list">
         {props.themes[props.intl.locale].map((theme, index) => (
           <li className="coa-ThemesNav__theme" key={index}>
-            <a className="coa-ThemesNav__link" onClick={props.handleOnClick}>
+            <a
+              className="coa-ThemesNav__link"
+              onClick={props.handleOnClick}
+              onMouseEnter={props.handleOnMouseEnter}
+            >
               {theme.text}
             </a>
           </li>
         ))}
       </ul>
+      {props.isTopMenuActive ? (
+        <a
+          className="coa-FullSiteMenu__close"
+          onClick={props.handleFullSiteMenuClose}
+        >
+          <i className="material-icons">close</i>
+        </a>
+      ) : null}
     </nav>
   );
 };
