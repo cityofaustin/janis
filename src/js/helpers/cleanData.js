@@ -117,7 +117,11 @@ export const cleanLinks = (links, pageType) => {
               linkCopy.slug = link.slug || link.sortOrder;
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
+
+              // Give it all the parts to get back to theme
               linkCopy.topic = topic;
+              linkCopy.topiccollection = topiccollection;
+              linkCopy.theme = topiccollection.theme;
               linkCopy.toplink = toplink;
 
               cleanedLinks.push(linkCopy);

@@ -21,6 +21,7 @@ const servicePageFragment = `
                     slug
                     theme {
                       id
+                      text
                       slug
                     }
                   }
