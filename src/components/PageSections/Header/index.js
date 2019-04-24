@@ -98,7 +98,7 @@ class Header extends Component {
                 )}
                 Menu
               </a>
-              <I18nLink className="coa-Header__logo" to="#">
+              <I18nLink className="coa-Header__logo" to="/">
                 City of Austin
               </I18nLink>
             </div>
