@@ -21,7 +21,6 @@ const Service = ({
     text: title,
     slug,
     topic,
-    topiccollection,
     theme,
     steps,
     dynamicContent,
@@ -49,7 +48,7 @@ const Service = ({
     <div>
       <ContextualNav
         topic={topic}
-        topiccollection={topiccollection}
+        topiccollection={topic && topic.topiccollection}
         theme={theme}
       />
       <PageHeader contentType={'service'}>{title}</PageHeader>
