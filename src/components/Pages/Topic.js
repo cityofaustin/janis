@@ -13,21 +13,24 @@ import TileGroup from 'components/Tiles/TileGroup';
 const Topic = ({
   topic: { theme, text: title, description, topLinks, otherLinks },
   intl,
-}) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-    </Head>
-    {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
-    <PageHeader contentType={'information'} description={description}>
-      {title}
-    </PageHeader>
-    <div className="wrapper container-fluid">
-      <TileGroup text={'Top Services'} tiles={topLinks} />
-      <TileGroup text={'All Services'} tiles={otherLinks} />
+}) => {
+  debugger;
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
+      <PageHeader contentType={'information'} description={description}>
+        {title}
+      </PageHeader>
+      <div className="wrapper container-fluid">
+        <TileGroup text={'Top Services'} tiles={topLinks} />
+        <TileGroup text={'All Services'} tiles={otherLinks} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Topic.propTypes = {
   topic: PropTypes.shape({

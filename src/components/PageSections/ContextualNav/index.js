@@ -12,8 +12,8 @@ const ContextualNav = ({
   // if we don't, use the dept
   const parent = {
     slug: topic
-      ? `${theme.slug}/${topiccollection.slug}/${topic.slug}`
-      : `${department.slug}`,
+      ? `/${theme.slug}/${topiccollection.slug}/${topic.slug}`
+      : `/${department.slug}`,
     title: topic ? topic.title : department.title,
   };
 
