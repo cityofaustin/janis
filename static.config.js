@@ -48,6 +48,12 @@ const makeAllPages = async langCode => {
           index === topServices.findIndex(s => s.id === service.id),
       );
 
+      // Quick little hack to get homepage top services
+      // working with TopServices component
+      for (var service of topServices) {
+        service.type = 'en';
+      }
+
       return {
         topServices,
         image: {

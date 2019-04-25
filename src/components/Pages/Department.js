@@ -22,30 +22,6 @@ import jsonFileData from '__tmpdata/pages';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
 
-const TopServiceButtons = ({ topServices, locale }) => (
-  <div className="coa-DepartmentPage__topServiceButtons">
-    {topServices &&
-      topServices.map(service => {
-        // If our link type matches our locale, render it
-        if (service.type.substr(-2) === locale) {
-          return (
-            <a
-              href={service.value.url}
-              className="coa-DepartmentPage__topServiceButton"
-            >
-              <div className="coa-DepartmentPage__topServiceButtonText">
-                {service.value.title}
-              </div>
-              <div className="coa-DepartmentPage__topServiceButtonArrow">
-                <i className="material-icons">arrow_forward</i>
-              </div>
-            </a>
-          );
-        }
-      })}
-  </div>
-);
-
 const Department = ({
   department: {
     title,
