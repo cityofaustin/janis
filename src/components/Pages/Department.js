@@ -53,7 +53,7 @@ const Department = ({
         headerText={title}
       />
     )}
-    {topServices.length > 1 && (
+    {!!topServices.length && (
       <TopServices
         title={intl.formatMessage(i18n.topServices)}
         tiles={topServices}
@@ -64,8 +64,8 @@ const Department = ({
     {!!relatedLinks.length && (
       <div className="coa-DepartmentPage__related-container">
         <h2 className="coa-SectionHeader">Related content</h2>
-        {relatedLinks.map(l => (
-          <div>
+        {relatedLinks.map((l, index) => (
+          <div key={index}>
             <a href={l.url}>{l.text}</a>
           </div>
         ))}
