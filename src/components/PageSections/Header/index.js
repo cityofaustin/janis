@@ -115,7 +115,6 @@ class Header extends Component {
             </div>
           </div>
         </div>
-        <Menu isMenuOpen={this.state.menuIsOpen} navigation={navigation} />
         <HowYouKnowMenu
           open={this.state.howYouKnowmenuIsOpen}
           toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}

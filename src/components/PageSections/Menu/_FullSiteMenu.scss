@@ -17,6 +17,7 @@
 
 .coa-FullSiteMenu__close {
   display: none;
+  cursor: pointer;
 
   @include media($coa-large-screen) {
     display: block;
@@ -40,6 +41,10 @@
 }
 
 .coa-ThemesNav__link {
+  &:hover {
+    color: $coa-color-white;
+  }
+  cursor: pointer;
   text-decoration: none;
   font-size: $coa-font-size-xsmall;
   color: $coa-color-white;

@@ -12,19 +12,17 @@ const FullSiteMenu = props => (
       'coa-FullSiteMenu ' +
       (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
     }
-    onMouseLeave={props.handleFullSiteMenuClose}
   >
     <div class="wrapper container-fluid">
       <ThemesNav
         handleOnClick={props.handleFullSiteMenuOpen}
-        handleOnMouseEnter={props.handleFullSiteMenuOpen}
-        themes={staticNavData}
         isTopMenuActive={props.isTopMenuActive}
+        themes={staticNavData}
         handleFullSiteMenuClose={props.handleFullSiteMenuClose}
       />
     </div>
     <section className="coa-FullSiteMenu__subNav">
-      <div class="wrapper container-fluid">
+      <div className="wrapper container-fluid">
         <ThemesTopicsMenu menu={staticNavData} />
       </div>
       <MenuInfo />
