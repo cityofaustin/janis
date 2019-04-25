@@ -12,7 +12,7 @@ import SectionHeader from 'components/SectionHeader';
 import TopServices from 'components/Tiles/TopServices';
 
 const Home = ({ topServices, image, intl }) => (
-  <div className="coa-Home-background">
+  <div>
     <Head>
       <title>{'City of Austin'}</title>
     </Head>
