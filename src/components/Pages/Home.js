@@ -26,6 +26,7 @@ const Home = ({ topServices, image, intl }) => (
       title="Check out city of Austin services"
       tiles={topServices}
       locale={intl.locale}
+      extraClasses={'floating'}
     />
     <PageNotificationBanner>
       <WorkInProgress />

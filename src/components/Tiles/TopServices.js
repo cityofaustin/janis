@@ -5,8 +5,8 @@ import I18nLink from 'components/I18n/I18nLink';
 import ArrowRight from 'components/SVGs/ArrowRight';
 import Tile from './Tile';
 
-const TopServices = ({ tiles, title, url, locale }) => (
-  <div className="coa-TopServices">
+const TopServices = ({ tiles, title, url, locale, extraClasses }) => (
+  <div className={`coa-TopServices ${extraClasses}`}>
     <div className="wrapper container-fluid">
       {title && url && (
         <h4 className="coa-TopServices__title">

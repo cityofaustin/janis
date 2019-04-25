@@ -2,14 +2,17 @@
   img {
     position: absolute;
     z-index: -1;
+    top: 0px;
     height: $coa-herohome-height--default;
     width: 100%;
     object-fit: cover;
     @include media($coa-medium-screen) {
       height: $coa-herohome-height--medium;
+      top: auto;
     }
     @include media($coa-large-screen) {
       height: $coa-herohome-height--large;
+      top: auto;
     }
   }
 }
@@ -20,12 +23,12 @@
   height: $coa-herohome-height--default;
   color: $coa-color-white;
   text-align: center;
-  display: flex;
   align-items: center;
   justify-content: center;
   background: $coa-herohome-gradient;
   @include media($coa-medium-screen) {
     height: $coa-herohome-height--medium;
+    display: flex;
   }
   @include media($coa-large-screen) {
     height: $coa-herohome-height--large;
