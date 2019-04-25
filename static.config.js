@@ -51,7 +51,7 @@ const makeAllPages = async langCode => {
       // Quick little hack to get homepage top services
       // working with TopServices component
       for (var service of topServices) {
-        service.type = langCode;
+        service.type = !!langCode ? langCode : '';
       }
 
       return {
