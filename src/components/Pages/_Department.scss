@@ -164,3 +164,16 @@
     display: none;
   }
 }
+
+.coa-DepartmentPage__related-container {
+  max-width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  a {
+    @include media($coa-medium-screen) {
+      font-size: 2rem;
+    }
+  }
+}

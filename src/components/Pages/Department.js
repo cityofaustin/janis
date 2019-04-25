@@ -22,30 +22,6 @@ import jsonFileData from '__tmpdata/pages';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
 
-const TopServiceButtons = ({ topServices, locale }) => (
-  <div className="coa-DepartmentPage__topServiceButtons">
-    {topServices &&
-      topServices.map(service => {
-        // If our link type matches our locale, render it
-        if (service.type.substr(-2) === locale) {
-          return (
-            <a
-              href={service.value.url}
-              className="coa-DepartmentPage__topServiceButton"
-            >
-              <div className="coa-DepartmentPage__topServiceButtonText">
-                {service.value.title}
-              </div>
-              <div className="coa-DepartmentPage__topServiceButtonArrow">
-                <i className="material-icons">arrow_forward</i>
-              </div>
-            </a>
-          );
-        }
-      })}
-  </div>
-);
-
 const Department = ({
   department: {
     title,
@@ -57,95 +33,98 @@ const Department = ({
     socialMedia,
     jobListings,
     topServices,
+    relatedLinks,
   },
   intl,
-}) => {
-  const relatedLinks = get(jsonFileData, 'departmentpage.projectsRelated', []);
-
-  return (
-    <div>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      {image && (
-        <PageBanner
-          imagesPath={`${process.env.CMS_MEDIA}/images`}
-          imageFilename={path.basename(
-            image.filename,
-            path.extname(image.filename),
-          )}
-          imageExtension={path.extname(image.filename).substring(1)}
-          imageTitle={image.title}
-          headerText={title}
-        />
-      )}
-
-      <TopServices
-        title={intl.formatMessage(i18n.topServices)}
-        tiles={topServices}
-        locale={intl.locale}
+}) => (
+  <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
+    {image && (
+      <PageBanner
+        imagesPath={`${process.env.CMS_MEDIA}/images`}
+        imageFilename={path.basename(
+          image.filename,
+          path.extname(image.filename),
+        )}
+        imageExtension={path.extname(image.filename).substring(1)}
+        imageTitle={image.title}
+        headerText={title}
       />
-
-      <div className="coa-DepartmentPage__all-of-the-content">
-        <div className="coa-DepartmentPage__main-content">
-          <div className="wrapper wrapper--sm container-fluid">
-            <h2 className="coa-SectionHeader">
-              {intl.formatMessage(i18n.whatWeDo)}
-            </h2>
-            <p>{Parser(whatWeDo)}</p>
-            <h2 className="coa-SectionHeader">
-              {intl.formatMessage(i18n.mission)}
-            </h2>
-            <p>{mission}</p>
-            <div className="coa-DepartmentPage__contacts-mobile">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
-              )}
-            </div>
-            {directors.length > 0 && (
-              <h2 className="coa-SectionHeader">
-                {directors.length > 1
-                  ? intl.formatMessage(i18n.meetDirectors)
-                  : intl.formatMessage(i18n.meetDirector)}
-              </h2>
-            )}
-            {directors.map(director => (
-              <div>
-                <div className="coa-DepartmentPage__directorcard">
-                  {director.photo && (
-                    <DirectorHeadshot photo={director.photo} />
-                  )}
-
-                  <div className="coa-DepartmentPage__directorcard-info">
-                    <h3 className="coa-DepartmentPage__directorcard-name">
-                      {director.name}
-                    </h3>
-                    <div className="coa-DepartmentPage__directorcard-title">
-                      {director.title}
-                    </div>
-                    <div className="coa-DepartmentPage__directorcard-coamaybe">
-                      {intl.formatMessage(i18n.coa)}
-                    </div>
-                  </div>
-                </div>
-                <p className="coa-DepartmentPage__directorAbout">
-                  {director.about}
-                </p>
-              </div>
-            ))}
+    )}
+    <TopServices
+      title={intl.formatMessage(i18n.topServices)}
+      tiles={topServices}
+      locale={intl.locale}
+    />
+    {!!relatedLinks.length && (
+      <div className="coa-DepartmentPage__related-container">
+        <h2 className="coa-SectionHeader">Related content</h2>
+        {relatedLinks.map(l => (
+          <div>
+            <a href={l.url}>{l.text}</a>
           </div>
-        </div>
-        <div className="coa-DepartmentPage__side-content">
-          <div className="coa-DepartmentPage__contacts-desktop">
+        ))}
+      </div>
+    )}
+    <div className="coa-DepartmentPage__all-of-the-content">
+      <div className="coa-DepartmentPage__main-content">
+        <div className="wrapper wrapper--sm container-fluid">
+          <h2 className="coa-SectionHeader">
+            {intl.formatMessage(i18n.whatWeDo)}
+          </h2>
+          <p>{Parser(whatWeDo)}</p>
+          <h2 className="coa-SectionHeader">
+            {intl.formatMessage(i18n.mission)}
+          </h2>
+          <p>{mission}</p>
+          <div className="coa-DepartmentPage__contacts-mobile">
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />
             )}
           </div>
+          {directors.length > 0 && (
+            <h2 className="coa-SectionHeader">
+              {directors.length > 1
+                ? intl.formatMessage(i18n.meetDirectors)
+                : intl.formatMessage(i18n.meetDirector)}
+            </h2>
+          )}
+          {directors.map(director => (
+            <div>
+              <div className="coa-DepartmentPage__directorcard">
+                {director.photo && <DirectorHeadshot photo={director.photo} />}
+
+                <div className="coa-DepartmentPage__directorcard-info">
+                  <h3 className="coa-DepartmentPage__directorcard-name">
+                    {director.name}
+                  </h3>
+                  <div className="coa-DepartmentPage__directorcard-title">
+                    {director.title}
+                  </div>
+                  <div className="coa-DepartmentPage__directorcard-coamaybe">
+                    {intl.formatMessage(i18n.coa)}
+                  </div>
+                </div>
+              </div>
+              <p className="coa-DepartmentPage__directorAbout">
+                {director.about}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="coa-DepartmentPage__side-content">
+        <div className="coa-DepartmentPage__contacts-desktop">
+          {!!contacts && !!contacts.length && (
+            <ContactDetails contact={contacts[0]} />
+          )}
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default withRouteData(injectIntl(Department));
 
