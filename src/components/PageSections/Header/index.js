@@ -9,35 +9,42 @@ import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
-import Menu from 'components/PageSections/Menu';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import GovSite from 'components/PageSections/Header/GovSite';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import FullSiteMenu from '../Menu/FullSiteMenu';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuIsOpen: false,
       howYouKnowmenuIsOpen: false,
+      topMenuActive: false,
     };
   }
 
   componentDidMount() {
-    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav). 
+    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav).
     this.menuElement = document.querySelector('#navMenu');
   }
 
-  toggleMenu = e => {
-    // If we're closing the menu, enable body scroll again
-    if(this.state.menuIsOpen) enableBodyScroll(this.targetElement);
-    // If we're opening the menu, disable body scroll
-    if(!this.state.menuIsOpen) disableBodyScroll(this.targetElement);
-
+  openFullSiteMenu = () => {
     this.setState({
-      menuIsOpen: !this.state.menuIsOpen,
+      topMenuActive: true,
+    });
+  };
+
+  closeFullSiteMenu = () => {
+    this.setState({
+      topMenuActive: false,
+    });
+  };
+
+  toggleFullSiteMenu = () => {
+    this.setState({
+      topMenuActive: !this.state.topMenuActive,
     });
   };
 
@@ -57,32 +64,40 @@ class Header extends Component {
         })}
         role="banner"
       >
-        <GovSite toggleHowYouKnowMenu={this.toggleHowYouKnowMenu} menuIsOpen={this.state.howYouKnowmenuIsOpen}/>
+        <GovSite
+          toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
+          menuIsOpen={this.state.howYouKnowmenuIsOpen}
+        />
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
         </div>
-        <div className="container-fluid wrapper">
+        <div className="coa-Header__container">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
-              <button
-                onClick={this.toggleMenu}
-                tabIndex="0"
-                className="coa-Header__menu-toggle"
-                ref="menu"
-              >
-                { this.state.menuIsOpen ? 
-                  <i class="material-icons coa-Header__menuIcon">close</i> :
-                  <i class="material-icons coa-Header__menuIcon">menu</i> 
-                }
-                
-                {intl.formatMessage(i18n2.menu)}
-              </button>
               <div className="coa-Header__desktop-languages">
                 <LanguageSelectBar path={path} />
               </div>
             </div>
-            <div className="coa-Header__center-controls">
-              <I18nLink className="coa-Header__logo" to="#">
+            <div
+              className={
+                'coa-Header__center-controls ' +
+                (this.state.topMenuActive
+                  ? 'coa-Header__center-controls--active'
+                  : null)
+              }
+            >
+              <a
+                className="coa-Header__menuIcon"
+                onClick={this.toggleFullSiteMenu}
+              >
+                {this.state.topMenuActive ? (
+                  <i class="material-icons">close</i>
+                ) : (
+                  <i class="material-icons">menu</i>
+                )}
+                Menu
+              </a>
+              <I18nLink className="coa-Header__logo" to="/">
                 City of Austin
               </I18nLink>
             </div>
@@ -92,16 +107,24 @@ class Header extends Component {
                   {intl.formatMessage(i18n1.airport)}
                 </ExternalLink>
                 <span className="coa-text-spacer--vertical" />
-                <ExternalLink to="http://311.austintexas.gov/">311</ExternalLink>
+                <ExternalLink to="http://311.austintexas.gov/">
+                  311
+                </ExternalLink>
               </div>
             </div>
           </div>
         </div>
-        <Menu
-          isMenuOpen={this.state.menuIsOpen}
-          navigation={navigation}
+        <HowYouKnowMenu
+          open={this.state.howYouKnowmenuIsOpen}
+          toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
         />
-        <HowYouKnowMenu open={this.state.howYouKnowmenuIsOpen} toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}/>
+
+        <FullSiteMenu
+          navigation={navigation}
+          handleFullSiteMenuOpen={this.openFullSiteMenu}
+          handleFullSiteMenuClose={this.closeFullSiteMenu}
+          isTopMenuActive={this.state.topMenuActive}
+        />
       </header>
     );
   }

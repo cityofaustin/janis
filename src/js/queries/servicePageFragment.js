@@ -6,14 +6,27 @@ const servicePageFragment = `
     topics {
       edges {
         node {
+          toplink
           topic {
-            id
-            slug
-            title
-            theme {
-              id
-              slug
-              text
+            id,
+            slug,
+            title,
+            description,
+            topiccollections {
+              edges {
+                node {
+                  topiccollection {
+                    id
+                    title
+                    slug
+                    theme {
+                      id
+                      text
+                      slug
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -22,11 +35,6 @@ const servicePageFragment = `
     steps
     dynamicContent
     additionalContent
-    image {
-      id
-      filename
-      title
-    }
     contacts {
       edges {
         node {

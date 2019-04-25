@@ -22,7 +22,6 @@ const Process = ({
     url,
     image = {},
     topic,
-    topic: { theme },
     description,
     stepDetailGroup,
     contacts,
@@ -53,11 +52,7 @@ const Process = ({
           imageTitle={image.title}
         />
       )}
-      <PageBreadcrumbs
-        grandparent={{ ...theme, subpath: 'themes' }}
-        parent={{ ...topic, subpath: 'topics' }}
-        title={title}
-      />
+      <PageBreadcrumbs parent={{ ...topic, subpath: 'topics' }} title={title} />
       <div className="wrapper wrapper--sm container-fluid">
         <PageHeader>{title}</PageHeader>
       </div>
@@ -70,12 +65,11 @@ const Process = ({
         </SectionHeader>
       </div>
       <StepDetailGroup steps={stepDetailGroup} stepClassName="wrapper--sm" />
-      {!!contacts &&
-        !!contacts.length && (
-          <div className="wrapper wrapper--sm container-fluid">
-            <ContactDetails contact={contacts[0]} />
-          </div>
-        )}
+      {!!contacts && !!contacts.length && (
+        <div className="wrapper wrapper--sm container-fluid">
+          <ContactDetails contact={contacts[0]} />
+        </div>
+      )}
     </div>
   );
 };
