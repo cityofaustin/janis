@@ -91,9 +91,9 @@ class Header extends Component {
                 onClick={this.toggleFullSiteMenu}
               >
                 {this.state.topMenuActive ? (
-                  <i class="material-icons">close</i>
+                  <i className="material-icons">close</i>
                 ) : (
-                  <i class="material-icons">menu</i>
+                  <i className="material-icons">menu</i>
                 )}
                 Menu
               </a>
