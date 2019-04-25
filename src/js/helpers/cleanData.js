@@ -55,7 +55,6 @@ export const cleanLinks = (links, pageType) => {
     return links.edges.map(({ node: link }) => {
       link.topics = link.topicCollectionPages.edges.map(e => e.node);
       link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
       return link;
     });
   }
