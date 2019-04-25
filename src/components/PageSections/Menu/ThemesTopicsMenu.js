@@ -8,7 +8,9 @@ const TopicsLinks = props =>
       {props.topicCollections.map((tc, index) => (
         <li key={index} className="coa-ThemesTopicsMenu__topic">
           <a
-            href={`/${props.themeSlug}/${tc.node.slug}`}
+            href={
+              tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
+            }
             className="coa-ThemesTopicsMenu__link"
           >
             {tc.node.title}

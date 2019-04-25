@@ -172,12 +172,9 @@
   text-decoration: none;
   margin-left: auto;
   margin-right: auto;
-  cursor: default;
-  // Instead of making it not a link let's just pretend it's not one with style
 
   &:hover {
     color: $coa-color-white;
-    cursor: default;
   }
   &:visited {
     color: $coa-color-white;

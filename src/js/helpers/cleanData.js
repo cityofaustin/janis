@@ -272,6 +272,16 @@ export const cleanNavigation = navigation => {
   let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
+
+    // Add departments page link to menu
+    if (theme.slug === 'government-business') {
+      theme.topicCollectionPages.edges.push({
+        node: {
+          url: '/departments',
+          title: 'Departments',
+        },
+      });
+    }
   });
 
   return cleanedNavigation;
