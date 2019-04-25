@@ -2,11 +2,6 @@
   background-color: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
-  border-bottom: 1px solid #80A8EB;
-  @include media($coa-medium-screen) {
-    border-bottom: none;
-  }
-
 }
 
 .coa-LanguageSelectBar__list {
@@ -19,7 +14,7 @@
   justify-content: center;
   @include media($coa-medium-screen) {
     justify-content: flex-end;
-    border-left: 1px solid #407CE2;
+    // border-left: 1px solid #407CE2;
   }
 
   li {
@@ -41,12 +36,12 @@
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-md-small;
   margin: 0 0 0 $coa-spacing-xsmall;
-  padding: 0 $coa-spacing-small;
+  padding: 0 $coa-spacing-small 0 0;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   @include media($coa-medium-screen) {
-    margin: 0 0 0 $coa-space-level3;
+    margin: 0;
   }
   &:visited {
     color: $coa-color-white;

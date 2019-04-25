@@ -55,7 +55,6 @@ export const cleanLinks = (links, pageType) => {
     return links.edges.map(({ node: link }) => {
       link.topics = link.topicCollectionPages.edges.map(e => e.node);
       link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
       return link;
     });
   }
@@ -63,6 +62,7 @@ export const cleanLinks = (links, pageType) => {
   // Topic Collections
   if (pageType === 'topiccollection') {
     return links.edges.map(({ node: link }) => {
+      link.topics = [];
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
 
@@ -117,7 +117,11 @@ export const cleanLinks = (links, pageType) => {
               linkCopy.slug = link.slug || link.sortOrder;
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
+
+              // Give it all the parts to get back to theme
               linkCopy.topic = topic;
+              linkCopy.topiccollection = topiccollection;
+              linkCopy.theme = topiccollection.theme;
               linkCopy.toplink = toplink;
 
               cleanedLinks.push(linkCopy);
@@ -268,6 +272,16 @@ export const cleanNavigation = navigation => {
   let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
+
+    // Add departments page link to menu
+    if (theme.slug === 'government-business') {
+      theme.topicCollectionPages.edges.push({
+        node: {
+          url: '/departments',
+          title: 'Departments',
+        },
+      });
+    }
   });
 
   return cleanedNavigation;
