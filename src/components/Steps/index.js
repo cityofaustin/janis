@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import StepBasic from './StepBasic';
 import StepWithOptions from './StepWithOptions';
 import { stepsPropTypes } from './proptypes';
 
+const mapSteps = (steps, singleStep) =>
+  // singleStep boolean param to determine whether to render steps in a list (ul) or a single item for StepWithOptions and StepBasic
+  steps.map((step, index) => {
+    if (step.type === 'step_with_options_accordian')
+      return (
+        <StepWithOptions
+          key={index}
+          description={step.value.options_description}
+          options={step.value.options}
+          singleStep={singleStep}
+        />
+      );
+
+    if (step.type === 'basic_step')
+      return (
+        <StepBasic
+          key={index}
+          stepAsHtmlFromAdmin={step.value}
+          singleStep={singleStep}
+        />
+      );
+  });
+
 const Steps = ({ steps }) => (
   <div className="coa-Steps">
-    <div className="coa-Steps__list">
-      <ul>
-        {steps.map((step, index) => {
-          if (step.type === 'step_with_options_accordian')
-            return (
-              <StepWithOptions
-                key={index}
-                description={step.value.options_description}
-                options={step.value.options}
-              />
-            );
-
-          if (step.type === 'basic_step')
-            return <StepBasic key={index} stepAsHtmlFromAdmin={step.value} />;
-        })}
-      </ul>
-    </div>
+    {steps.length === 1 ? (
+      <Fragment>{mapSteps(steps, true)}</Fragment>
+    ) : (
+      <div className="coa-Steps__list">
+        <ul>{mapSteps(steps)}</ul>
+      </div>
+    )}
   </div>
 );
 

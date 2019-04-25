@@ -76,6 +76,20 @@ const makeThemePages = async client => {
   );
   const services = cleanServices(allServices);
 
+  // Add all topic links to topic collection pages
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
+    topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+
+    // Update the topicCollection on the topic
+    const topicCollectionCopy = JSON.parse(
+      JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
+    );
+    topic.topiccollection = topicCollectionCopy;
+  }
+
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
@@ -86,6 +100,10 @@ const makeThemePages = async client => {
     } else {
       topics[matchingTopicIndex].otherLinks.push(service);
     }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    service.topic = topicCopy;
   }
 
   // Add all information page links to topic pages
@@ -98,6 +116,10 @@ const makeThemePages = async client => {
     } else {
       topics[matchingTopicIndex].otherLinks.push(page);
     }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    page.topic = topicCopy;
   }
 
   const { allProcesses } = await client.request(allProcessesQuery);
@@ -190,49 +212,61 @@ const makeDepartmentPages = async client => {
   const { allProcesses } = await client.request(allProcessesQuery);
   const processes = cleanProcesses(allProcesses);
 
-  const data = departments.map(department => ({
-    path: `/${department.slug}`,
-    component: 'src/components/Pages/Department',
-    getData: async () => ({
-      department,
-    }),
-    children: informationPages
-      .filter(i => i.department != null && i.department.id == department.id)
-      .map(informationPage => ({
-        path: `/${informationPage.slug}`,
-        component: 'src/components/Pages/Information',
-        getData: async () => ({
-          informationPage,
-        }),
-      }))
-      // .concat(
-      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-      //     path: `/${service.slug}`,
-      //     component: 'src/components/Pages/Service',
-      //     getData: async () => ({
-      //       service,
-      //     }),
-      //   }))
-      // )
-      .concat(
-        processes
-          .filter(p => p.department != null && p.department.id == department.id)
-          .map(process => ({
-            path: `/${process.slug}`,
-            component: 'src/components/Pages/Process',
-            getData: async () => ({
-              process,
-            }),
-            children: process.processSteps.map(processStep => ({
-              path: `/${processStep.slug}`,
-              component: 'src/components/Pages/ProcessStep',
+  const data = departments
+    .map(department => ({
+      path: `/${department.slug}`,
+      component: 'src/components/Pages/Department',
+      getData: async () => ({
+        department,
+      }),
+      children: informationPages
+        .filter(i => i.department != null && i.department.id == department.id)
+        .map(informationPage => ({
+          path: `/${informationPage.slug}`,
+          component: 'src/components/Pages/Information',
+          getData: async () => ({
+            informationPage,
+          }),
+        }))
+        // .concat(
+        //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+        //     path: `/${service.slug}`,
+        //     component: 'src/components/Pages/Service',
+        //     getData: async () => ({
+        //       service,
+        //     }),
+        //   }))
+        // )
+        .concat(
+          processes
+            .filter(
+              p => p.department != null && p.department.id == department.id,
+            )
+            .map(process => ({
+              path: `/${process.slug}`,
+              component: 'src/components/Pages/Process',
               getData: async () => ({
-                processStep,
+                process,
               }),
+              children: process.processSteps.map(processStep => ({
+                path: `/${processStep.slug}`,
+                component: 'src/components/Pages/ProcessStep',
+                getData: async () => ({
+                  processStep,
+                }),
+              })),
             })),
-          })),
-      ),
-  }));
+        ),
+    }))
+    .concat([
+      {
+        path: '/departments',
+        component: 'src/components/Pages/Departments',
+        getData: async () => ({
+          departments,
+        }),
+      },
+    ]);
 
   return data;
 };
