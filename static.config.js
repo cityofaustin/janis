@@ -40,12 +40,19 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      const topServices = cleanLinks(allServicePages, 'service');
+      let topServices = cleanLinks(allServicePages, 'service');
+
+      // Make sure we don't have any dupes in top services
+      topServices = topServices.filter(
+        (service, index) =>
+          index === topServices.findIndex(s => s.id === service.id),
+      );
+
       return {
         topServices,
         image: {
-          file: 'lady-bird-lake',
-          title: 'Lady Bird Lake walking trail',
+          file: 'tomek-baginski-593896-unsplash',
+          title: 'Lady Bird Lake',
         },
       };
     },
