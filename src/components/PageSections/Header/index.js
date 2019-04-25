@@ -9,7 +9,6 @@ import I18nLink from 'components/I18n/I18nLink';
 import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
-import Menu from 'components/PageSections/Menu';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import GovSite from 'components/PageSections/Header/GovSite';
@@ -121,6 +120,7 @@ class Header extends Component {
         />
 
         <FullSiteMenu
+          navigation={navigation}
           handleFullSiteMenuOpen={this.openFullSiteMenu}
           handleFullSiteMenuClose={this.closeFullSiteMenu}
           isTopMenuActive={this.state.topMenuActive}
