@@ -217,6 +217,14 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
+  for (var page of informationPages) {
+    for (var department of departments) {
+      if (page.department !== null && page.department.id === department.id) {
+        department.relatedLinks.push(page);
+      }
+    }
+  }
+
   // const { allServicePages: allServices } = await client.request(
   //   allServicePagesQuery,
   // );
