@@ -5,6 +5,8 @@ const topicCollectionFragment = `
     title
     theme {
       id
+      text
+      slug
     }
   }
 `;

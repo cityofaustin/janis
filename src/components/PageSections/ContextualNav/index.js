@@ -12,14 +12,21 @@ const ContextualNav = ({
   // if we don't, use the dept
   const parent = {
     slug: topic
-      ? `/${theme.slug}/${topiccollection.slug}/${topic.slug}`
-      : `/${department.slug}`,
+      ? `${theme.slug}/${topiccollection.slug}/${topic.slug}`
+      : `${department.slug}`,
     title: topic ? topic.title : department.title,
   };
 
   // Set the related links
   const related = topiccollection
-    ? topiccollection.topics.filter(t => t.id !== topic.id)
+    ? topiccollection.topics
+        .filter(t => t.id !== topic.id)
+        .map(t => ({
+          slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
+            t.slug
+          }`,
+          title: t.title,
+        }))
     : topics.edges.map(edge => edge.node);
 
   return (
