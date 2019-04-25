@@ -23,17 +23,26 @@ const TopicCollection = ({ intl, tc: { title, description, topics } }) => (
     <div className="wrapper container-fluid">
       {/*<TileGroup tiles={topics} tag={intl.formatMessage(i18n.topic)} />*/}
     </div>
-
-    {console.log(topics)}
     {topics.map((topic, index) => {
+      const pages =
+        topic.topLinks && topic.topLinks.length
+          ? topic.toplinks
+          : topic.otherLinks && topic.otherLinks.length
+          ? topic.otherLinks.slice(0, 4)
+          : null;
+
       return (
         <div key={index}>
           <h2>{topic.title}</h2>
           {topic.description && <p>{topic.description}</p>}
-          {topic.otherLinks
-            ? topic.otherLinks.map((link, index) => (
+          {pages
+            ? pages.map((link, index) => (
                 <ul>
-                  <li key={index}>{link.title}</li>
+                  <li key={index}>
+                    <div>Title: {link.title}</div>
+                    <div>Type: {link.type}</div>
+                    <div>URL: {link.url}</div>
+                  </li>
                 </ul>
               ))
             : null}
