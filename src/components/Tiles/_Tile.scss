@@ -7,25 +7,28 @@
   flex-grow: 1;
   font-family: $coa-font-sans;
   min-width: $coa-tile-min-width;
-  padding: $coa-spacing-medium;
+  padding: $coa-spacing-medium $coa-spacing-small;
   text-decoration: none;
   align-items: stretch;
 
   &:hover {
-    background-color: $coa-color-primary;
-    color: $coa-color-white;
+    background-color: $coa-color-secondary;
+
+    .coa-Tile__text {
+      border-right: 1px solid $coa-color-white;
+    }
 
     .coa-Tile__text,
     i {
-      color: $coa-color-white;
+      color: $coa-color-primary;
     }
   }
 
   &:active {
     background-color: $coa-color-darker-blue;
-    color: $coa-color-white;
 
-    .coa-Tile__text {
+    .coa-Tile__text,
+    i {
       color: $coa-color-white;
     }
   }

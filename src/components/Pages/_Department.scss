@@ -1,44 +1,52 @@
-.coa-DepartmentPage__topservices--mobile {
-  background: $coa-color-primary;
-  @include media($coa-medium-screen) {
-    display: none;
-  }
-}
+// .coa-DepartmentPage__topservices {
+//   // background: $coa-color-primary;
 
-.coa-DepartmentPage__topservices--desktop {
-  background: $coa-color-primary;
-  display: none;
-  margin-bottom: 4rem;
-  @include media($coa-medium-screen) {
-    margin-top: -4rem;
-    display: inherit;
-  }
-}
+//   @include media($coa-medium-screen) {
+//     margin-top: -4rem;
+//   }
+// }
 
-.coa-DepartmentPage__topservices-contentcontainer--mobile {
-  padding: 2rem;
-}
+// .coa-DepartmentPage__topservices--mobile {
+//   background: $coa-color-primary;
+//   @include media($coa-medium-screen) {
+//     display: none;
+//   }
+// }
 
-.coa-DepartmentPage__topservices-contentcontainer--desktop {
-  padding-left: 4rem;
-  padding-right: 4rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
+// .coa-DepartmentPage__topservices--desktop {
+//   background: $coa-color-primary;
+//   display: none;
+//   margin-bottom: 4rem;
+//   @include media($coa-medium-screen) {
+//     margin-top: -4rem;
+//     display: inherit;
+//   }
+// }
 
-.coa-DepartmentPage__topservices-header--mobile {
-  color: $coa-color-white;
-  font-size: 1.5rem;
-  letter-spacing: 0.15rem;
-  font-weight: $coa-font-semibold;
-  margin-bottom: 0;
-}
+// .coa-DepartmentPage__topservices-contentcontainer--mobile {
+//   padding: 2rem;
+// }
 
-.coa-DepartmentPage__topservices-header--desktop {
-  color: $coa-color-white;
-  font-weight: $coa-font-semibold;
-  margin-bottom: $coa-spacing-small;
-}
+// .coa-DepartmentPage__topservices-contentcontainer--desktop {
+//   padding-left: 4rem;
+//   padding-right: 4rem;
+//   padding-top: 2rem;
+//   padding-bottom: 2rem;
+// }
+
+// .coa-DepartmentPage__topservices-header--mobile {
+//   color: $coa-color-white;
+//   font-size: 1.5rem;
+//   letter-spacing: 0.15rem;
+//   font-weight: $coa-font-semibold;
+//   margin-bottom: 0;
+// }
+
+// .coa-DepartmentPage__topservices-header--desktop {
+//   color: $coa-color-white;
+//   font-weight: $coa-font-semibold;
+//   margin-bottom: $coa-spacing-small;
+// }
 
 .coa-DepartmentPage__topServiceButtons {
   display: flex;
