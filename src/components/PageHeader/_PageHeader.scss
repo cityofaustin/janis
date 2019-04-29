@@ -63,3 +63,11 @@
     color: $coa-color-darker-grey;
   }
 }
+
+.coa-PageHeader--topic-collection {
+  margin-bottom: $coa-spacing-large;
+
+  @include media($coa-medium-screen) {
+    margin-bottom: $coa-spacing-xlarge;
+  }
+}
