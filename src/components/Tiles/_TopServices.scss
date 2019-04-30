@@ -1,13 +1,28 @@
 .coa-TopServices {
+  &.floating {
+    padding: 2rem 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 6px;
+    margin-top: -70rem;
+    @include media($coa-medium-screen) {
+      margin-top: -7rem;
+      border-radius: 0;
+    }
+    @include media($coa-large-screen) {
+      border-radius: 6px;
+    }
+  }
+
   background: $coa-color-primary;
   padding: $coa-spacing-large 0;
   border-radius: 0;
 
   @include media($coa-medium-screen) {
     max-width: 1080px;
-    margin-top: -$coa-spacing-large;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: -7rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
     border-radius: $coa-button-border-radius;
   }
 

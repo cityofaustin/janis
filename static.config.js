@@ -40,12 +40,25 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      const topServices = cleanLinks(allServicePages, 'service');
+      let topServices = cleanLinks(allServicePages, 'service');
+
+      // Make sure we don't have any dupes in top services
+      topServices = topServices.filter(
+        (service, index) =>
+          index === topServices.findIndex(s => s.id === service.id),
+      );
+
+      // Quick little hack to get homepage top services
+      // working with TopServices component
+      for (var service of topServices) {
+        service.type = !!langCode ? langCode : 'en';
+      }
+
       return {
         topServices,
         image: {
-          file: 'lady-bird-lake',
-          title: 'Lady Bird Lake walking trail',
+          file: 'tomek-baginski-593896-unsplash',
+          title: 'Lady Bird Lake',
         },
       };
     },
@@ -203,6 +216,14 @@ const makeDepartmentPages = async client => {
     allInformationPagesQuery,
   );
   const informationPages = cleanInformationPages(allInformationPages);
+
+  for (var page of informationPages) {
+    for (var department of departments) {
+      if (page.department !== null && page.department.id === department.id) {
+        department.relatedLinks.push(page);
+      }
+    }
+  }
 
   // const { allServicePages: allServices } = await client.request(
   //   allServicePagesQuery,

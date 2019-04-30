@@ -12,14 +12,10 @@ const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
       widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
       altText={imageTitle}
     />
-    <div
-      className="coa-HeroHome"
-      role="img"
-      aria-label={imageTitle}
-    >
+    <div className="coa-HeroHome" role="img" aria-label={imageTitle}>
       <div className="container-fluid wrapper">
         <span className="coa-HeroHome__preheader">{preheader}</span>
-        <h2 className="coa-HeroHome__header">Austin, TX</h2>
+        <h2 className="coa-HeroHome__header">Austin, Texas</h2>
       </div>
     </div>
   </div>

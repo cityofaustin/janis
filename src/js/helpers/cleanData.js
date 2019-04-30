@@ -230,6 +230,7 @@ export const cleanDepartments = allDepartments => {
     department.directors = cleanDepartmentDirectors(
       department.departmentDirectors,
     );
+    department.relatedLinks = [];
     return department;
   });
 };
