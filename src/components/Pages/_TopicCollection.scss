@@ -1,4 +1,4 @@
-.coa-TopicCollectionCard__container {
+.coa-TopicCollectionCards {
   display: flex;
   flex-direction: column;
   margin-bottom: $coa-spacing-xlarge;
@@ -16,11 +16,11 @@
   background: $coa-color-grey;
   border-radius: $coa-button-border-radius;
   padding: $coa-spacing-large;
-  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 3px;
 
   @include media($coa-large-screen) {
     width: calc(33.333% - #{$coa-spacing-medium});
     margin-right: $coa-spacing-medium;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 3px;
 
     &:nth-child(3n) {
       margin-right: 0;
@@ -32,26 +32,58 @@
   display: flex;
   align-items: center;
   font-weight: $coa-font-medium;
-  margin-bottom: $coa-spacing-medium;
+  margin-bottom: 0;
 
   a {
     color: $coa-color-almost-black;
     text-decoration: none;
   }
 
-  i {
-    margin-left: $coa-spacing-xsmall;
+  @include media($coa-large-screen) {
+    margin-bottom: $coa-spacing-medium;
+  }
+}
+
+.coa-TopicCollectionCard__arrow-icon {
+  margin-left: $coa-spacing-xsmall;
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: block;
+  }
+}
+
+.coa-TopicCollectionCard__add-icon {
+  color: $coa-color-primary;
+  display: block;
+  flex: 1;
+  text-align: right;
+
+  @include media($coa-large-screen) {
+    display: none;
   }
 }
 
 .coa-TopicCollectionCard__description {
   margin-top: 0;
   margin-bottom: $coa-spacing-medium;
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: block;
+  }
 }
 
 .coa-TopicCollectionCard__links {
   flex: 1;
+  margin-top: $coa-spacing-medium;
   margin-bottom: $coa-spacing-medium;
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: block;
+    margin-top: none;
+  }
 }
 
 .coa-TopicCollectionCard__item {
@@ -64,8 +96,25 @@
   text-decoration: none;
   font-weight: $coa-font-semibold;
   font-size: $coa-font-size-small;
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: block;
+  }
 }
 
 .coa-TopicCollectionCard__info-link {
   text-decoration: none;
+}
+
+.coa-TopicCollectionCard--active {
+  .coa-TopicCollectionCard__description,
+  .coa-TopicCollectionCard__links,
+  .coa-TopicCollectionCard__link {
+    display: block;
+  }
+
+  .coa-TopicCollectionCard__add-icon {
+    display: none;
+  }
 }
