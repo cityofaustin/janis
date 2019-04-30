@@ -9,25 +9,45 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import ContextualNav from '../PageSections/ContextualNav';
 
 const Topic = ({
-  topic: { theme, text: title, description, topLinks, otherLinks },
+  topic,
+  topic: {
+    theme,
+    text: title,
+    description,
+    topLinks,
+    otherLinks,
+    topiccollection,
+  },
   intl,
 }) => (
   <div>
     <Head>
       <title>{title}</title>
     </Head>
+
+    <ContextualNav
+      topic={topic}
+      topiccollection={topiccollection}
+      theme={topiccollection.theme}
+      contentType={'topic'}
+    />
     <PageHeader contentType={'topic'} description={description}>
       {title}
     </PageHeader>
     <div className="wrapper container-fluid">
-      {!!topLinks.length && (
-        <TileGroup text={'Top Services'} tiles={topLinks} />
-      )}
-      {!!otherLinks.length && (
-        <TileGroup text={'All Services'} tiles={otherLinks} />
-      )}
+      <div className="row">
+        <div className="col-xs-12">
+          {!!topLinks.length && (
+            <TileGroup text={'Top Services'} tiles={topLinks} />
+          )}
+          {!!otherLinks.length && (
+            <TileGroup text={'All Services'} tiles={otherLinks} />
+          )}
+        </div>
+      </div>
     </div>
   </div>
 );
