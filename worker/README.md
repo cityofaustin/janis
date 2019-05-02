@@ -1,3 +1,18 @@
+## Janis Deployments
+
+The general architecture for the deployment of janis builds in production is as follows:
+
+![Janis Production Architecture.png](https://images.zenhubusercontent.com/5b7edad7290aac725aec290c/70ffca0f-6bf5-44b9-9ca3-088074a69576)
+
+The main points are these:
+1. For every update on Janis code, a worker image containing the latest code is built and deployed to AWS.
+2. The worker image (container) can be run as many times as needed.
+3. The worker image builds janis, pulling data from joplin.
+4. Once built, janis is then deployed to a bucket subfolder using the above convention.
+5. Every build of janis is archived for backups or redundancy.
+
+The janis worker is in charge of deploying and rotating the origins in S3 and CloudFront.
+
 ### Janis Worker
 
 Required Environment Variables
