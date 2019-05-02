@@ -171,7 +171,7 @@
   margin-left: auto;
   padding: $coa-spacing-large 2rem;
 
-  @include media($coa-medium-screen) {
+  @include media($coa-large-screen) {
     padding-top: 17.5rem;
     padding-bottom: $coa-spacing-large;
   }
@@ -182,7 +182,7 @@
   position: relative;
 
   .coa-TopServices {
-    @include media($coa-medium-screen) {
+    @include media($coa-large-screen) {
       position: absolute;
       left: 0;
       right: 0;
@@ -200,7 +200,7 @@
 .coa-DepartmentPage__related-item {
   list-style: none;
   display: flex;
-  margin-left: 0;
+  margin-left: $coa-spacing-small;
 
   &:before {
     content: '•';
