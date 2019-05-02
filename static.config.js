@@ -95,6 +95,14 @@ const makeThemePages = async client => {
       tc => tc.id === topic.topiccollection.id,
     );
     topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+  }
+
+  // And now that we have all the topics on each topic collection,
+  // let's update the topic collections on the topics
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
 
     // Update the topicCollection on the topic
     const topicCollectionCopy = JSON.parse(
