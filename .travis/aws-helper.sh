@@ -59,7 +59,7 @@ if [ "${TRAVIS_BRANCH}" == "production" ]; then
   export CMS_API=$CMS_API_PRODUCTION
   export CMS_MEDIA=$CMS_MEDIA_PRODUCTION
   export BASE_PATH_PR="/"
-  export JANIS_IMAGE_VERSION="latest"
+  export JANIS_IMAGE_VERSION="production"
 elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export DEPLOYMENT_MODE="STAGING"
   # GOOGLE_ANALYTICS=$GOOGLE_ANALYTICS_STAGING
@@ -187,13 +187,14 @@ function janis_build_worker {
 
   echo "JANIS_WORKER_BUILD_TAG: ${JANIS_WORKER_BUILD_TAG}";
   echo "JANIS_WORKER_BUILD_URL: ${JANIS_WORKER_BUILD_URL}";
+  echo "JANIS_IMAGE_VERSION: ${JANIS_IMAGE_VERSION}";
 
   echo "Logging in to AWS ECR...";
   $(aws ecr get-login --no-include-email --region "us-east-1");
 
   echo "We now build the container...";
-  echo "docker build --no-cache -f worker/Dockerfile -t ${JANIS_WORKER_BUILD_TAG} .";
-  docker build --no-cache -f worker/Dockerfile -t $JANIS_WORKER_BUILD_TAG .
+  echo "docker build --no-cache -f worker/Dockerfile -t ${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION} .";
+  docker build --no-cache -f worker/Dockerfile -t $JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION .
 
   echo "Now we tag the build...";
   echo "docker tag ${JANIS_WORKER_BUILD_TAG} ${JANIS_WORKER_BUILD_URL}/${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION}";
