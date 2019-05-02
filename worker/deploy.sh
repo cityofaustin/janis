@@ -87,14 +87,12 @@ upload_logfile;
 # Send slack notification
 #
 
-#if [[ "$DEPLOYMENT_MODE" = "PRODUCTION" ]]; then
-#  JANIS_BUILD_ID=$(cat janis_build_id);
-#  BUILD_MESSAGE="The build '${JANIS_BUILD_ID}' has been deployed.";
-#else
-#  BUILD_MESSAGE="The build has been deployed.";
-#fi
-
-BUILD_MESSAGE="The build has been deployed.";
+if [[ "$DEPLOYMENT_MODE" = "PRODUCTION" ]]; then
+  JANIS_BUILD_ID=$(cat janis_build_id);
+  BUILD_MESSAGE="The build '${JANIS_BUILD_ID}' has been deployed.";
+else
+  BUILD_MESSAGE="The build has been deployed.";
+fi
 
 echo "Message: ${BUILD_MESSAGE}";
 echo "LOG_URL: ${LOG_URL}";
