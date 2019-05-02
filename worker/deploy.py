@@ -245,7 +245,7 @@ if(DEPLOYMENT_MODE=="PRODUCTION"):
     print_fancy_msg("AWS Sync Method")
     print("Sync to AWS Bucket: " + S3_BUCKET)
     print("New Build location: " + NEW_BUILD_ID)
-    run_command_live("aws s3 sync /app/janis/_dist s3://{0}/{1} --delete --no-progress".format(S3_BUCKET, NEW_BUILD_ID))
+  run_command_live("aws s3 sync /app/janis/_dist s3://{0}/{1} --no-progress".format(S3_BUCKET, NEW_BUILD_ID))
 
 
 
