@@ -6,7 +6,7 @@ import ArrowRight from 'components/SVGs/ArrowRight';
 import Tile from './Tile';
 
 const TopServices = ({ tiles, title, url, locale, extraClasses }) => (
-  <div className={'coa-TopServices ' + (extraClasses ? extraClasses : '')}>
+  <div className={`coa-TopServices ${extraClasses ? extraClasses : ''}`}>
     <div className="wrapper container-fluid">
       {title &&
         url && (
