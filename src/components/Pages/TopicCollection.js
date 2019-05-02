@@ -15,16 +15,16 @@ const TopicCollection = ({
   tc: { title, description, theme, topics, slug },
 }) => (
   <div>
-    {/*
+    {
+      // TopicCollection can belong to other TopicCollection or Theme.
+      // Add placeholder related to
+    }
 
-    TopicCollection can belong to other TopicCollection or Theme.
-    Add placeholder related to
-
-    <ContextualNav
-      topic={topic}
-      topiccollection={topic && topic.topiccollection}
-      theme={theme}
-    /> */}
+    {/* <ContextualNav
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+      /> */}
 
     <PageHeader description={description} contentType={'topic-collection'}>
       {title}
