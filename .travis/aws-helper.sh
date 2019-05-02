@@ -183,26 +183,32 @@ function janis_build {
 }
 
 function janis_build_worker {
+  IS_PR=$(is_pull_request);
+
   janis_print_header "Building Janis";
 
-  echo "JANIS_WORKER_BUILD_TAG: ${JANIS_WORKER_BUILD_TAG}";
-  echo "JANIS_WORKER_BUILD_URL: ${JANIS_WORKER_BUILD_URL}";
-  echo "JANIS_IMAGE_VERSION: ${JANIS_IMAGE_VERSION}";
+  if [[ "${IS_PR}" = "TRUE" ]]; then
+    echo "Cannot build container image for PRs, skipping build process."
+  else
+    echo "JANIS_WORKER_BUILD_TAG: ${JANIS_WORKER_BUILD_TAG}";
+    echo "JANIS_WORKER_BUILD_URL: ${JANIS_WORKER_BUILD_URL}";
+    echo "JANIS_IMAGE_VERSION: ${JANIS_IMAGE_VERSION}";
 
-  echo "Logging in to AWS ECR...";
-  $(aws ecr get-login --no-include-email --region "us-east-1");
+    echo "Logging in to AWS ECR...";
+    $(aws ecr get-login --no-include-email --region "us-east-1");
 
-  echo "We now build the container...";
-  echo "docker build --no-cache -f worker/Dockerfile -t ${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION} .";
-  docker build --no-cache -f worker/Dockerfile -t $JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION .
+    echo "We now build the container...";
+    echo "docker build --no-cache -f worker/Dockerfile -t ${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION} .";
+    docker build --no-cache -f worker/Dockerfile -t $JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION .
 
-  echo "Now we tag the build...";
-  echo "docker tag ${JANIS_WORKER_BUILD_TAG} ${JANIS_WORKER_BUILD_URL}/${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION}";
-  docker tag $JANIS_WORKER_BUILD_TAG $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION;
+    echo "Now we tag the build...";
+    echo "docker tag ${JANIS_WORKER_BUILD_TAG} ${JANIS_WORKER_BUILD_URL}/${JANIS_WORKER_BUILD_TAG}:${JANIS_IMAGE_VERSION}";
+    docker tag $JANIS_WORKER_BUILD_TAG $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION;
 
-  echo "Pushing the build to AWS ECR...";
-  echo "docker push $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION";
-  docker push $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION;
+    echo "Pushing the build to AWS ECR...";
+    echo "docker push $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION";
+    docker push $JANIS_WORKER_BUILD_URL/$JANIS_WORKER_BUILD_TAG:$JANIS_IMAGE_VERSION;
+  fi;
 }
 
 function janis_deploy {
