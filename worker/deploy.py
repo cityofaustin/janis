@@ -171,7 +171,7 @@ def run_command_live(command):
 # For master/staging, all we need to do is to sync the build to bucket.
 print_fancy_msg("AWS Sync Method")
 print("Sync to AWS Bucket: " + S3_BUCKET)
-run_command_live("aws s3 sync /app/janis/_dist s3://{0}/ --delete --no-progress".format(S3_BUCKET))
+run_command_live("aws s3 sync /app/janis/_dist s3://{0}/ --no-progress".format(S3_BUCKET))
 
 
 
