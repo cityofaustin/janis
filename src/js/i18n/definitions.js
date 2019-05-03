@@ -95,6 +95,10 @@ export const themes = defineMessages({
   theme: 'theme',
 });
 
+export const departments = defineMessages({
+  departments: 'Departments',
+});
+
 export const threeoneone = defineMessages({
   all311: 'All 311 Services',
   call311: 'Call 311',
