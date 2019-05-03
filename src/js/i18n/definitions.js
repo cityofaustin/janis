@@ -66,6 +66,7 @@ export const misc = defineMessages({
   services: 'Services',
   info: 'Information',
   projectsSiteLinkText: 'project site.',
+  comingSoon: 'Coming soon',
 });
 
 export const navigation = defineMessages({
@@ -119,9 +120,9 @@ export const departmentPage = defineMessages({
   thankFormButtonText: 'Thank an Austin Police Officer',
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
   yourDataLinkText: 'How we store and use your data',
-  yourDataUrl: "/police-oversight/how-we-store-and-use-your-data",
+  yourDataUrl: '/police-oversight/how-we-store-and-use-your-data',
   investigationProcessLinkText: 'Complaint Investigation Process',
-  investigationProcessUrl: "/police-oversight/complaint-investigation-process",
+  investigationProcessUrl: '/police-oversight/complaint-investigation-process',
   directorTitle: 'Director, Office of Police Oversight',
   coa: 'City of Austin',
   mission: 'Our mission',

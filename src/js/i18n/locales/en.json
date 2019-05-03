@@ -1,8 +1,7 @@
 {
   "callToAction.enterAddress": "Type your street address in the box below",
   "callToAction.submitOnlineRequest": "Submit an Online Request",
-  "callToAction.whatDoIDoWith":
-    "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "callToAction.whatDoIDoWith": "Check the \"What do I do with\" tool below to find out what items are accepted.",
   "contact.closed": "Closed",
   "contact.map": "Map",
   "contact.phoneTTD": "TDD/TTY",
@@ -19,8 +18,7 @@
   "emoji.neutral": "Neutral",
   "emoji.sad": "Sad",
   "emoji.slightlySmiling": "Slightly Smiling",
-  "form.error":
-    "Oh no, something went wrong! Please, try submitting your information again.",
+  "form.error": "Oh no, something went wrong! Please, try submitting your information again.",
   "form.loading": "Loading...",
   "formFeedback.giveMore": "Give more feedback",
   "formFeedback.howSatisfied": "How satisfied are you with this page?",
@@ -33,10 +31,8 @@
   "misc.steps": "Steps",
   "misc.welcomeTo": "Welcome to",
   "misc.whatElse": "What else do I need to know?",
-  "misc.workInProgress":
-    "{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
-  "misc.workInProgressClipped":
-    "{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}",
+  "misc.workInProgress": "{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.",
+  "misc.workInProgressClipped": "{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}",
   "misc.projectsSiteLinkText": "project site.",
   "misc.forFullVisit": "For the full City of Austin website, visit ",
   "misc.opoName": "Office of Police Oversight",
@@ -45,6 +41,7 @@
   "misc.officialHowYouKnow": "Here’s how you know.",
   "misc.services": "Services",
   "misc.info": "Information",
+  "misc.comingSoon": "Coming soon",
   "navigation.home": "Home",
   "navigation.menu": "Menu",
   "navigation.openInNewWindow": "Opens in new window",
@@ -58,15 +55,13 @@
   "threeoneone.call311": "Call 311",
   "threeoneone.contact311": "{call311Link} or {submit311Link}",
   "topics.topic": "topic",
-  "departmentPage.complaintFormButtonText":
-    "File a complaint against an Austin police officer",
+  "departmentPage.complaintFormButtonText": "File a complaint against an Austin police officer",
   "departmentPage.complaintFormUrl": "https://forms.austin.gov/police-complain",
   "departmentPage.thankFormButtonText": "Thank an Austin police officer",
   "departmentPage.thankFormUrl": "https://forms.austin.gov/police-thank",
   "departmentPage.yourDataLinkText": "How we store and use your data",
   "departmentPage.yourDataUrl": "/police-oversight/how-we-store-and-use-your-data",
-  "departmentPage.investigationProcessLinkText":
-    "Complaint investigation process",
+  "departmentPage.investigationProcessLinkText": "Complaint investigation process",
   "departmentPage.investigationProcessUrl": "/police-oversight/complaint-investigation-process",
   "departmentPage.directorTitle": "Director, Office of Police Oversight",
   "departmentPage.coa": "City of Austin",
@@ -76,9 +71,7 @@
   "departmentPage.meetDirectors": "Meet our directors",
   "departmentPage.topServices": "Top services",
   "howYouKnowMenu.dotGovHeader": "The .gov means it’s official.",
-  "howYouKnowMenu.dotGovText":
-    "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a government site.",
+  "howYouKnowMenu.dotGovText": "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a government site.",
   "howYouKnowMenu.httpsHeader": "The site is secure.",
-  "howYouKnowMenu.httpsText":
-    "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
+  "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
 }
