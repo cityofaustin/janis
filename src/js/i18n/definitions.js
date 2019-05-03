@@ -70,6 +70,7 @@ export const misc = defineMessages({
   projectsSiteLinkText: 'project site.',
   comingSoon: 'Coming soon',
   moreAboutProject: 'More about the alpha.austin.gov project.',
+  learnMore: 'Learn more',
 });
 
 export const navigation = defineMessages({
