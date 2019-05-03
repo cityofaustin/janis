@@ -265,10 +265,20 @@ export const cleanThemes = allThemes => {
   return cleanedThemes;
 };
 
-export const cleanNavigation = navigation => {
+export const cleanNavigation = (navigation, lang) => {
   const { allThemes } = navigation;
 
   if (!allThemes || !allThemes.edges) return null;
+
+  let title;
+  switch (lang) {
+    case 'en':
+      title = 'Departments';
+      break;
+    case 'es':
+      title = 'Departamentos';
+      break;
+  }
 
   let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
@@ -279,7 +289,7 @@ export const cleanNavigation = navigation => {
       theme.topicCollectionPages.edges.push({
         node: {
           url: '/departments',
-          title: 'Departments',
+          title: title,
         },
       });
     }
