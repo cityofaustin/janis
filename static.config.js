@@ -95,6 +95,14 @@ const makeThemePages = async client => {
       tc => tc.id === topic.topiccollection.id,
     );
     topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+  }
+
+  // And now that we have all the topics on each topic collection,
+  // let's update the topic collections on the topics
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
 
     // Update the topicCollection on the topic
     const topicCollectionCopy = JSON.parse(
@@ -106,6 +114,7 @@ const makeThemePages = async client => {
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
+    service.type = 'service';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
     if (service.toplink) {
@@ -122,6 +131,7 @@ const makeThemePages = async client => {
   // Add all information page links to topic pages
   for (var page of informationPages) {
     if (!page.topic) continue;
+    page.type = 'info';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
     if (page.toplink) {

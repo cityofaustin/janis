@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
@@ -9,24 +9,51 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import ContextualNav from '../PageSections/ContextualNav';
+import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Topic = ({
-  topic: { theme, text: title, description, topLinks, otherLinks },
+  topic,
+  topic: {
+    theme,
+    text: title,
+    description,
+    topLinks,
+    otherLinks,
+    topiccollection,
+  },
   intl,
 }) => (
-  <div>
+  <Fragment>
     <Head>
       <title>{title}</title>
     </Head>
-    {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
-    <PageHeader contentType={'information'} description={description}>
+
+    <ContextualNav
+      topic={topic}
+      topiccollection={topiccollection}
+      theme={topiccollection.theme}
+      contentType={'topic'}
+    />
+    <PageHeader contentType={'topic'} description={description}>
       {title}
     </PageHeader>
     <div className="wrapper container-fluid">
-      <TileGroup text={'Top Services'} tiles={topLinks} />
-      <TileGroup text={'All Services'} tiles={otherLinks} />
+      <div className="row">
+        <div className="col-xs-12">
+          {!!topLinks.length && (
+            <TileGroup text={'Top Services'} tiles={topLinks} />
+          )}
+          {!!otherLinks.length && (
+            <TileGroup text={'All Services'} tiles={otherLinks} />
+          )}
+        </div>
+      </div>
     </div>
-  </div>
+    {/* {console.log(topiccollection)} */}
+
+    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+  </Fragment>
 );
 
 Topic.propTypes = {
