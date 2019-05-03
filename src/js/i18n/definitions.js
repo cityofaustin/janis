@@ -55,6 +55,7 @@ export const misc = defineMessages({
     '{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}',
   workInProgressTiny: 'alpha.austin.gov is a work in progress.',
   forFullVisit: 'For the full City of Austin website, visit ',
+  currentSite: 'Visit austintexas.gov for the current city website.',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',

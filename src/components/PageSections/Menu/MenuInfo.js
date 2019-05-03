@@ -17,7 +17,7 @@ const MenuInfo = ({ intl }) => (
             <CoaSeal />
           </div>
           <a className="coa-MenuInfo__link">
-            Visit austintexas.gov for the current city website.
+            {intl.formatMessage(i18n2.currentSite)}
           </a>
         </div>
         <div className="coa-MenuInfo__resource">
