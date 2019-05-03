@@ -106,6 +106,7 @@ const makeThemePages = async client => {
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
+    service.type = 'service';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
     if (service.toplink) {
@@ -122,6 +123,7 @@ const makeThemePages = async client => {
   // Add all information page links to topic pages
   for (var page of informationPages) {
     if (!page.topic) continue;
+    page.type = 'info';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
     if (page.toplink) {

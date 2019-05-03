@@ -18,13 +18,16 @@ const Topic = ({
     <Head>
       <title>{title}</title>
     </Head>
-    {/* <PageBreadcrumbs parent={{ ...theme, subpath: 'themes' }} title={title} /> */}
-    <PageHeader contentType={'information'} description={description}>
+    <PageHeader contentType={'topic'} description={description}>
       {title}
     </PageHeader>
     <div className="wrapper container-fluid">
-      <TileGroup text={'Top Services'} tiles={topLinks} />
-      <TileGroup text={'All Services'} tiles={otherLinks} />
+      {!!topLinks.length && (
+        <TileGroup text={'Top Services'} tiles={topLinks} />
+      )}
+      {!!otherLinks.length && (
+        <TileGroup text={'All Services'} tiles={otherLinks} />
+      )}
     </div>
   </div>
 );
