@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 import Tile from 'components/Tiles/Tile';
+import { misc as i18n1 } from 'js/i18n/definitions';
 
-const TopicCollectionCards = ({ topics, theme, slug }) => (
+const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
   <div className="coa-TopicCollectionCards">
     {topics.map((topic, index) => {
       const pages =
         topic.topLinks && topic.topLinks.length
           ? topic.toplinks
           : topic.otherLinks && topic.otherLinks.length
-            ? topic.otherLinks.slice(0, 4)
-            : null;
+          ? topic.otherLinks.slice(0, 4)
+          : null;
 
       {
         /* const servicePages = pages.filter(page => page.type === 'service');
@@ -83,7 +84,7 @@ const TopicCollectionCards = ({ topics, theme, slug }) => (
               href={`/${theme.slug}/${slug}/${topic.slug}`}
               className="coa-TopicCollectionCard__link"
             >
-              Learn More
+              {intl.formatMessage(i18n1.learnMore)}
             </a>
           </div>
         </Fragment>

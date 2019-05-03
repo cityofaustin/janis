@@ -70,6 +70,7 @@ export const misc = defineMessages({
   projectsSiteLinkText: 'project site.',
   comingSoon: 'Coming soon',
   moreAboutProject: 'More about the alpha.austin.gov project.',
+  learnMore: 'Learn more',
 });
 
 export const navigation = defineMessages({
@@ -93,6 +94,10 @@ export const services = defineMessages({
 
 export const themes = defineMessages({
   theme: 'theme',
+});
+
+export const departments = defineMessages({
+  departments: 'Departments',
 });
 
 export const threeoneone = defineMessages({

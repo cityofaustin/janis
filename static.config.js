@@ -339,7 +339,10 @@ export default {
       const langIndex = (i - queryIndex) / queries.length;
       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
         typeof queries[queryIndex].middleware === 'function'
-          ? queries[queryIndex].middleware(response)
+          ? queries[queryIndex].middleware(
+              response,
+              SUPPORTED_LANG_CODES[langIndex],
+            )
           : response;
     });
 
