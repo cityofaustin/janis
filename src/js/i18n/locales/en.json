@@ -43,6 +43,8 @@
   "misc.info": "Information",
   "misc.comingSoon": "Coming soon",
   "misc.workInProgressTiny": "alpha.austin.gov is a work in progress.",
+  "misc.currentSite": "Visit austintexas.gov for the current city website.",
+  "misc.moreAboutProject": "More about the alpha.austin.gov project.",
   "navigation.home": "Home",
   "navigation.menu": "Menu",
   "navigation.openInNewWindow": "Opens in new window",

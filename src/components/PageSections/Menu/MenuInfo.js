@@ -25,7 +25,7 @@ const MenuInfo = ({ intl }) => (
             <LoveChicken />
           </div>
           <a className="coa-MenuInfo__link">
-            More about the alpha.austin.gov project.
+            {intl.formatMessage(i18n2.moreAboutProject)}
           </a>
         </div>
       </div>
