@@ -23,7 +23,7 @@ const Home = ({ topServices, image, intl }) => (
       preheader={intl.formatMessage(i18n2.welcomeTo)}
     />
     <TopServices
-      title="Check out city of Austin services"
+      title={intl.formatMessage(i18n3.checkOutServices)}
       tiles={topServices}
       locale={intl.locale}
       extraClasses={'floating'}

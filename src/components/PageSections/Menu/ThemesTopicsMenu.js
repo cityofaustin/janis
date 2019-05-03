@@ -1,6 +1,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { misc as i18n2 } from 'js/i18n/definitions';
 
 const TopicsLinks = props =>
   props.topicCollections.length > 0 ? (
@@ -19,7 +20,9 @@ const TopicsLinks = props =>
       ))}
     </ul>
   ) : (
-    <p className="coa-FullSiteMenu__coming-soon">Coming soon</p>
+    <p className="coa-FullSiteMenu__coming-soon">
+      {props.intl.formatMessage(i18n2.comingSoon)}
+    </p>
   );
 
 const ThemesTopicsMenu = props => {
@@ -32,6 +35,7 @@ const ThemesTopicsMenu = props => {
             <TopicsLinks
               topicCollections={theme.topicCollectionPages.edges}
               themeSlug={theme.slug}
+              intl={props.intl}
             />
           </li>
         ))}

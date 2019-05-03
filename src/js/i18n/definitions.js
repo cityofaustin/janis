@@ -53,7 +53,9 @@ export const misc = defineMessages({
     '{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
   workInProgressClipped:
     '{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}',
+  workInProgressTiny: 'alpha.austin.gov is a work in progress.',
   forFullVisit: 'For the full City of Austin website, visit ',
+  currentSite: 'Visit austintexas.gov for the current city website.',
   overview: 'Overview',
   privacy: 'Read About Privacy',
   steps: 'Steps',
@@ -66,6 +68,8 @@ export const misc = defineMessages({
   services: 'Services',
   info: 'Information',
   projectsSiteLinkText: 'project site.',
+  comingSoon: 'Coming soon',
+  moreAboutProject: 'More about the alpha.austin.gov project.',
 });
 
 export const navigation = defineMessages({
@@ -119,9 +123,9 @@ export const departmentPage = defineMessages({
   thankFormButtonText: 'Thank an Austin Police Officer',
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
   yourDataLinkText: 'How we store and use your data',
-  yourDataUrl: "/police-oversight/how-we-store-and-use-your-data",
+  yourDataUrl: '/police-oversight/how-we-store-and-use-your-data',
   investigationProcessLinkText: 'Complaint Investigation Process',
-  investigationProcessUrl: "/police-oversight/complaint-investigation-process",
+  investigationProcessUrl: '/police-oversight/complaint-investigation-process',
   directorTitle: 'Director, Office of Police Oversight',
   coa: 'City of Austin',
   mission: 'Our mission',
