@@ -10,8 +10,9 @@ import { tileGroupPropTypes } from './proptypes';
 
 const TileGroup = ({ tiles, text, url, description, intl }) => (
   <div className="coa-TileGroup">
-    <div className="wrapper container-fluid">
-      {text && url && (
+    {/* <div className="wrapper container-fluid"> */}
+    {text &&
+      url && (
         <h4 className="coa-TileGroup__title">
           <Link to={url}>
             {text}&nbsp;
@@ -20,19 +21,19 @@ const TileGroup = ({ tiles, text, url, description, intl }) => (
         </h4>
       )}
 
-      {text && !url && <h4 className="coa-TileGroup__title">{text}</h4>}
+    {text && !url && <h4 className="coa-TileGroup__title">{text}</h4>}
 
-      <div className="row">
-        {tiles.map(({ url, text }, index) => (
-          <div
-            key={index}
-            className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
-          >
-            <Tile url={url} text={text} />
-          </div>
-        ))}
-      </div>
+    <div className="row">
+      {tiles.map(({ url, text }, index) => (
+        <div
+          key={index}
+          className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
+        >
+          <Tile url={url} text={text} />
+        </div>
+      ))}
     </div>
+    {/* </div> */}
   </div>
 );
 

@@ -1,0 +1,34 @@
+.coa-RelatedToMobile {
+  background: $coa-color-secondary;
+  padding: $coa-spacing-large 0;
+
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-RelatedToMobile__title {
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  font-weight: $coa-font-bold;
+  margin-bottom: $coa-spacing-small;
+}
+
+.coa-RelatedToMobile__item {
+  display: flex;
+  list-style: none;
+  margin-left: $coa-spacing-xsmall;
+  margin-bottom: $coa-spacing-xsmall;
+
+  &:before {
+    content: '•';
+    color: $coa-color-almost-black;
+    margin-right: $coa-spacing-small;
+  }
+}
+
+.coa-RelatedToMobile__link {
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+  text-decoration: none;
+}

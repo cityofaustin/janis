@@ -7,26 +7,31 @@ const ContextualNav = ({
   topiccollection,
   theme,
   department,
+  contentType,
 }) => {
   // Set the parent, if we have a topic, it's because we nav'd from a topic
   // if we don't, use the dept
   const parent = {
     slug: topic
-      ? `/${theme.slug}/${topiccollection.slug}/${topic.slug}`
+      ? contentType === 'topic'
+        ? `/${theme.slug}/${topiccollection.slug}`
+        : `/${theme.slug}/${topiccollection.slug}/${topic.slug}`
       : `/${department.slug}`,
-    title: topic ? topic.title : department.title,
+    title: topic
+      ? contentType === 'topic'
+        ? topiccollection.title
+        : topic.title
+      : department.title,
   };
 
   // Set the related links
   const related = topiccollection
-    ? topiccollection.topics
-        .filter(t => t.id !== topic.id)
-        .map(t => ({
-          slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
-            t.slug
-          }`,
-          title: t.title,
-        }))
+    ? topiccollection.topics.filter(t => t.id !== topic.id).map(t => ({
+        slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
+          t.slug
+        }`,
+        title: t.title,
+      }))
     : topics.edges.map(edge => edge.node);
 
   return (
