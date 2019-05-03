@@ -95,7 +95,7 @@ class Header extends Component {
                 ) : (
                   <i className="material-icons">menu</i>
                 )}
-                Menu
+                {intl.formatMessage(i18n2.menu)}
               </a>
               <I18nLink className="coa-Header__logo" to="/">
                 City of Austin
