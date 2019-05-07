@@ -33,7 +33,14 @@ const TopServices = ({ tiles, title, url, locale, extraClasses }) => (
               key={index}
               className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
             >
-              <Tile url={`/${locale}${value.url}`} text={value.title} />
+              <Tile
+                url={
+                  value.url.substring(0, 4) === 'http'
+                    ? value.url
+                    : `/${locale}${value.url}`
+                }
+                text={value.title}
+              />
             </div>
           ) : null;
         })}
