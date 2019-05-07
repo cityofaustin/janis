@@ -23,38 +23,55 @@ const Topic = ({
     topiccollection,
   },
   intl,
-}) => (
-  <Fragment>
-    <Head>
-      <title>{title}</title>
-    </Head>
+}) => {
+  // Not my favorite way to handle this but I know that adding locales to our
+  // slugs and urls in our cleanData functions could break things in a lot more
+  // places than doing this here can.
+  for (var link of otherLinks) {
+    if (link.url.substring(1, 3) !== intl.locale) {
+      link.url = `/${intl.locale}${link.url}`;
+    }
+  }
 
-    <ContextualNav
-      topic={topic}
-      topiccollection={topiccollection}
-      theme={topiccollection.theme}
-      contentType={'topic'}
-    />
-    <PageHeader contentType={'topic'} description={description}>
-      {title}
-    </PageHeader>
-    <div className="wrapper container-fluid">
-      <div className="row">
-        <div className="col-xs-12">
-          {!!topLinks.length && (
-            <TileGroup text={'Top Services'} tiles={topLinks} />
-          )}
-          {!!otherLinks.length && (
-            <TileGroup text={'All Services'} tiles={otherLinks} />
-          )}
+  for (var link of otherLinks) {
+    if (link.url.substring(1, 3) !== intl.locale) {
+      link.url = `/${intl.locale}${link.url}`;
+    }
+  }
+
+  return (
+    <Fragment>
+      <Head>
+        <title>{title}</title>
+      </Head>
+
+      <ContextualNav
+        topic={topic}
+        topiccollection={topiccollection}
+        theme={topiccollection.theme}
+        contentType={'topic'}
+      />
+      <PageHeader contentType={'topic'} description={description}>
+        {title}
+      </PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-xs-12">
+            {!!topLinks.length && (
+              <TileGroup text={'Top Services'} tiles={topLinks} />
+            )}
+            {!!otherLinks.length && (
+              <TileGroup text={'All Services'} tiles={otherLinks} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
-    {/* {console.log(topiccollection)} */}
+      {/* {console.log(topiccollection)} */}
 
-    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
-  </Fragment>
-);
+      <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+    </Fragment>
+  );
+};
 
 Topic.propTypes = {
   topic: PropTypes.shape({
