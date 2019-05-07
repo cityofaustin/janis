@@ -8,15 +8,16 @@ const ContextualNav = ({
   theme,
   department,
   contentType,
+  intl,
 }) => {
   // Set the parent, if we have a topic, it's because we nav'd from a topic
   // if we don't, use the dept
   const parent = {
     slug: topic
       ? contentType === 'topic'
-        ? `/${theme.slug}/${topiccollection.slug}`
-        : `/${theme.slug}/${topiccollection.slug}/${topic.slug}`
-      : `/${department.slug}`,
+        ? `/${intl.locale}/${theme.slug}/${topiccollection.slug}`
+        : `/${intl.locale}/${theme.slug}/${topiccollection.slug}/${topic.slug}`
+      : `/${intl.locale}/${department.slug}`,
     title: topic
       ? contentType === 'topic'
         ? topiccollection.title
@@ -26,12 +27,14 @@ const ContextualNav = ({
 
   // Set the related links
   const related = topiccollection
-    ? topiccollection.topics.filter(t => t.id !== topic.id).map(t => ({
-        slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
-          t.slug
-        }`,
-        title: t.title,
-      }))
+    ? topiccollection.topics
+        .filter(t => t.id !== topic.id)
+        .map(t => ({
+          slug: `/${intl.locale}/${topiccollection.theme.slug}/${
+            topiccollection.slug
+          }/${t.slug}`,
+          title: t.title,
+        }))
     : topics.edges.map(edge => edge.node);
 
   return (
@@ -59,7 +62,9 @@ const ContextualNav = ({
             {department && (
               <Fragment>
                 <span className="coa-ContextualNav__label">Offered by: </span>
-                <a href={`/${department.slug}`}>{department.title}</a>
+                <a href={`/${intl.locale}/${department.slug}`}>
+                  {department.title}
+                </a>
               </Fragment>
             )}
           </div>

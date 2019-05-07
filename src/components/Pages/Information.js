@@ -13,7 +13,6 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
-import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from 'components/PageSections/ContextualNav';
 
 const InformationPage = ({

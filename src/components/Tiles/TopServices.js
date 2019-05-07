@@ -8,15 +8,14 @@ import Tile from './Tile';
 const TopServices = ({ tiles, title, url, locale, extraClasses }) => (
   <div className={`coa-TopServices ${extraClasses ? extraClasses : ''}`}>
     <div className="wrapper container-fluid">
-      {title &&
-        url && (
-          <h4 className="coa-TopServices__title">
-            <I18nLink to={url}>
-              {title}&nbsp;
-              <ArrowRight />
-            </I18nLink>
-          </h4>
-        )}
+      {title && url && (
+        <h4 className="coa-TopServices__title">
+          <I18nLink to={url}>
+            {title}&nbsp;
+            <ArrowRight />
+          </I18nLink>
+        </h4>
+      )}
 
       {title && !url && <h4 className="coa-TopServices__title">{title}</h4>}
 
@@ -34,7 +33,7 @@ const TopServices = ({ tiles, title, url, locale, extraClasses }) => (
               key={index}
               className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
             >
-              <Tile url={value.url} text={value.title} />
+              <Tile url={`/${locale}${value.url}`} text={value.title} />
             </div>
           ) : null;
         })}

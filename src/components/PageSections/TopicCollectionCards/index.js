@@ -52,7 +52,10 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
                 {pages &&
                   pages.map((link, index) => (
                     <li className="coa-TopicCollectionCard__item" key={index}>
-                      <Tile text={link.title} url={link.url} />
+                      <Tile
+                        text={link.title}
+                        url={`/${intl.locale}${link.url}`}
+                      />
                     </li>
                   ))}
                 {/* {servicePages &&
@@ -81,7 +84,7 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
               </ul>
             ) : null}
             <a
-              href={`/${theme.slug}/${slug}/${topic.slug}`}
+              href={`/${intl.locale}/${theme.slug}/${slug}/${topic.slug}`}
               className="coa-TopicCollectionCard__link"
             >
               {intl.formatMessage(i18n1.learnMore)}
