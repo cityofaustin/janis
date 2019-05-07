@@ -84,7 +84,7 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
               </ul>
             ) : null}
             <a
-              href={`/${theme.slug}/${slug}/${topic.slug}`}
+              href={`/${intl.locale}/${theme.slug}/${slug}/${topic.slug}`}
               className="coa-TopicCollectionCard__link"
             >
               {intl.formatMessage(i18n1.learnMore)}
