@@ -52,7 +52,10 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
                 {pages &&
                   pages.map((link, index) => (
                     <li className="coa-TopicCollectionCard__item" key={index}>
-                      <Tile text={link.title} url={link.url} />
+                      <Tile
+                        text={link.title}
+                        url={`/${intl.locale}${link.url}`}
+                      />
                     </li>
                   ))}
                 {/* {servicePages &&
