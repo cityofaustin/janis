@@ -12,7 +12,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 
 const Departments = ({ departments, intl }) => {
   const departmentLinks = departments.map(d => ({
-    url: `/${d.slug}`,
+    url: `/${intl.locale}/${d.slug}`,
     text: d.title,
   }));
 
