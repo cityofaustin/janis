@@ -50,14 +50,18 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
             {pages ? (
               <ul className="coa-TopicCollectionCard__links">
                 {pages &&
-                  pages.map((link, index) => (
-                    <li className="coa-TopicCollectionCard__item" key={index}>
-                      <Tile
-                        text={link.title}
-                        url={`/${intl.locale}${link.url}`}
-                      />
-                    </li>
-                  ))}
+                  pages.map((link, index) => {
+                    // This is ugly, once we move to react static 7 we should make this clean
+                    if (link.url.substring(1, 3) !== intl.locale) {
+                      link.url = `/${intl.locale}${link.url}`;
+                    }
+
+                    return (
+                      <li className="coa-TopicCollectionCard__item" key={index}>
+                        <Tile text={link.title} url={link.url} />
+                      </li>
+                    );
+                  })}
                 {/* {servicePages &&
                       servicePages.map((link, index) => (
                         <li
