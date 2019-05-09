@@ -55,6 +55,8 @@
   "services.checkOutRelatedServices": "Vea los servicios relacionados",
   "services.checkOutServices": "Vea los servicios de la Ciudad de Austin",
   "services.service": "servicio",
+  "services.topServices": "Servicios principales",
+  "services.allServices": "Todos los servicios",
   "themes.theme": "",
   "threeoneone.all311": "Todos los servicios del 311",
   "threeoneone.call311": "Llame al 311",

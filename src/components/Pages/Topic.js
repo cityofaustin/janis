@@ -58,10 +58,16 @@ const Topic = ({
         <div className="row">
           <div className="col-xs-12">
             {!!topLinks.length && (
-              <TileGroup text={'Top Services'} tiles={topLinks} />
+              <TileGroup
+                text={intl.formatMessage(i18n.topServices)}
+                tiles={topLinks}
+              />
             )}
             {!!otherLinks.length && (
-              <TileGroup text={'All Services'} tiles={otherLinks} />
+              <TileGroup
+                text={intl.formatMessage(i18n.allServices)}
+                tiles={otherLinks}
+              />
             )}
           </div>
         </div>

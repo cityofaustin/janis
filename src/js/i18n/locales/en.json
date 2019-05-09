@@ -55,6 +55,8 @@
   "services.checkOutRelatedServices": "Related services",
   "services.checkOutServices": "Check out City of Austin Services",
   "services.service": "Service",
+  "services.topServices": "Top services",
+  "services.allServices": "All services",
   "themes.theme": "theme",
   "threeoneone.all311": "All 311 Services",
   "threeoneone.call311": "Call 311",
