@@ -10,7 +10,7 @@ import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
-import 'css/coa.scss';
+import 'css/coa.css';
 
 // const AppView = withSiteData(
 //   injectIntl(({ path, navigation, threeoneone, intl }) => (

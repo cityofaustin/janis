@@ -29,3 +29,4 @@ yarn-error.log*
 
 # sass to css
 src/**/*.css
+janis/src/**/*.css
