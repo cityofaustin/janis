@@ -55,7 +55,7 @@ class Header extends Component {
   };
 
   render() {
-    const { intl, navigation, path } = this.props;
+    const { intl, navigation } = this.props;
 
     return (
       <header
@@ -69,13 +69,13 @@ class Header extends Component {
           menuIsOpen={this.state.howYouKnowmenuIsOpen}
         />
         <div className="coa-Header__mobile-languages">
-          <LanguageSelectBar path={path} />
+          <LanguageSelectBar />
         </div>
         <div className="coa-Header__container">
           <div className="coa-Header__controls">
             <div className="coa-Header__left-controls">
               <div className="coa-Header__desktop-languages">
-                <LanguageSelectBar path={path} />
+                <LanguageSelectBar />
               </div>
             </div>
             <div
@@ -129,10 +129,5 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  navigation: PropTypes.arrayOf(themePropTypes).isRequired,
-  path: PropTypes.string.isRequired,
-};
 
 export default injectIntl(Header);

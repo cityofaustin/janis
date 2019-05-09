@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Link } from 'react-static';
+import { Link } from '@reach/router';
 import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
@@ -34,7 +34,10 @@ const WorkInProgress = ({ isClipped, intl }) =>
       id="misc.workInProgress"
       values={{
         citySiteLink: (
-          <ExternalLink className="coa-Footer__link" to="http://austintexas.gov">
+          <ExternalLink
+            className="coa-Footer__link"
+            to="http://austintexas.gov"
+          >
             austintexas.gov
           </ExternalLink>
         ),

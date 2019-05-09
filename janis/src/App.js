@@ -31,16 +31,18 @@ import 'css/coa.css';
 //   )),
 // );
 
-const App = injectIntl(({ navigation, threeoneone, intl }) => (
+const App = () => (
   <Root>
     <div>
       <React.Suspense fallback={<em>Loading...</em>}>
+        <Header />
         <Router>
-          <Routes path="*" />
+          <Routes default />
         </Router>
       </React.Suspense>
+      <Footer />
     </div>
   </Root>
-));
+);
 
 export default App;

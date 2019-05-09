@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-static';
+import { Link } from '@reach/router';
 import { i18nalizeLinkTo } from 'js/i18n/constants';
 
 const I18nLink = ({ intl, to, ...rest }) => (
