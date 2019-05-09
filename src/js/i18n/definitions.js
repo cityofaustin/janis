@@ -72,6 +72,7 @@ export const misc = defineMessages({
   moreAboutProject: 'More about the alpha.austin.gov project.',
   learnMore: 'Learn more',
   relatedTo: 'Related to',
+  offeredBy: 'Offered by',
 });
 
 export const navigation = defineMessages({

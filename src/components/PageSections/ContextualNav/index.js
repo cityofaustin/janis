@@ -65,7 +65,9 @@ const ContextualNav = ({
           <div className="coa-ContextualNav__dept">
             {department && (
               <Fragment>
-                <span className="coa-ContextualNav__label">Offered by: </span>
+                <span className="coa-ContextualNav__label">{`${intl.formatMessage(
+                  i18n.offeredBy,
+                )}: `}</span>
                 <a href={`/${intl.locale}/${department.slug}`}>
                   {department.title}
                 </a>
