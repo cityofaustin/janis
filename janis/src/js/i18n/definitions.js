@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+debugger;
 
 export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',
@@ -76,7 +77,10 @@ export const misc = defineMessages({
 export const navigation = defineMessages({
   home: 'Home',
   menu: 'Menu',
-  openInNewWindow: 'Opens in new window',
+  openInNewWindow: {
+    id: 'openInNewWindow',
+    defaultMessage: 'Opens in new window',
+  },
   search: 'Search',
   skipToMain: 'Skip to main content',
 });

@@ -36,7 +36,7 @@ const makeAllPages = async langCode => {
 
   const data = {
     path: path,
-    component: 'src/components/Pages/Home',
+    template: 'src/components/Pages/Home',
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
