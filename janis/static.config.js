@@ -150,7 +150,7 @@ const makeThemePages = async client => {
 
   const data = themes.map(theme => ({
     path: `/${theme.slug}`,
-    component: 'src/components/Pages/Theme',
+    template: 'src/components/Pages/Theme',
     getData: async () => ({
       theme,
     }),
@@ -158,7 +158,7 @@ const makeThemePages = async client => {
       .filter(tc => tc.theme != null && tc.theme.id == theme.id)
       .map(tc => ({
         path: `/${tc.slug}`,
-        component: 'src/components/Pages/TopicCollection',
+        template: 'src/components/Pages/TopicCollection',
         getData: async () => ({
           tc,
         }),
@@ -169,7 +169,7 @@ const makeThemePages = async client => {
           )
           .map(topic => ({
             path: `/${topic.slug}`,
-            component: 'src/components/Pages/Topic',
+            template: 'src/components/Pages/Topic',
             getData: async () => ({
               topic,
             }),
@@ -177,7 +177,7 @@ const makeThemePages = async client => {
               .filter(i => i.topic != null && i.topic.id == topic.id)
               .map(informationPage => ({
                 path: `/${informationPage.slug}`,
-                component: 'src/components/Pages/Information',
+                template: 'src/components/Pages/Information',
                 getData: async () => ({
                   informationPage,
                 }),
@@ -187,7 +187,7 @@ const makeThemePages = async client => {
                   .filter(s => s.topic != null && s.topic.id == topic.id)
                   .map(service => ({
                     path: `/${service.slug}`,
-                    component: 'src/components/Pages/Service',
+                    template: 'src/components/Pages/Service',
                     getData: async () => ({
                       service,
                     }),
@@ -198,13 +198,13 @@ const makeThemePages = async client => {
                   .filter(p => p.topic != null && p.topic.id == topic.id)
                   .map(process => ({
                     path: `/${process.slug}`,
-                    component: 'src/components/Pages/Process',
+                    template: 'src/components/Pages/Process',
                     getData: async () => ({
                       process,
                     }),
                     children: process.processSteps.map(processStep => ({
                       path: `/${processStep.slug}`,
-                      component: 'src/components/Pages/ProcessStep',
+                      template: 'src/components/Pages/ProcessStep',
                       getData: async () => ({
                         processStep,
                       }),

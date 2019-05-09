@@ -4,6 +4,11 @@
 // Template Map
 export default {
   '../src/components/Pages/404': require('../src/components/Pages/404').default,
+'../src/components/Pages/Service': require('../src/components/Pages/Service').default,
+'../src/components/Pages/Topic': require('../src/components/Pages/Topic').default,
+'../src/components/Pages/TopicCollection': require('../src/components/Pages/TopicCollection').default,
+'../src/components/Pages/Theme': require('../src/components/Pages/Theme').default,
+'../src/components/Pages/Information': require('../src/components/Pages/Information').default,
 '../src/components/Pages/Home': require('../src/components/Pages/Home').default
 }
 

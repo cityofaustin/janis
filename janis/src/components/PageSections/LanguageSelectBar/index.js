@@ -7,7 +7,11 @@ import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 import { getPath } from 'js/helpers/path';
 
 const LanguageSelectBar = ({ intl }) => {
-  const path = getPath();
+  let path = getPath();
+  // Hacky thing here but let's see if it does the trick!
+  if (path.substring(1, 3) === intl.locale) {
+    path = path.substring(3);
+  }
 
   return (
     <div className="coa-LanguageSelectBar">
@@ -15,7 +19,7 @@ const LanguageSelectBar = ({ intl }) => {
         {SUPPORTED_LANGUAGES.map(({ title, abbr, code }, i) => (
           <li key={i}>
             <Link
-              to={`/${code}/${path}`}
+              to={`${code}${path}`}
               className={classNames('coa-LanguageSelectBar__item', {
                 'coa-LanguageSelectBar__item--active': intl.locale === code,
               })}
