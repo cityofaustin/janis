@@ -246,7 +246,7 @@ const makeDepartmentPages = async client => {
   const data = departments
     .map(department => ({
       path: `/${department.slug}`,
-      component: 'src/components/Pages/Department',
+      template: 'src/components/Pages/Department',
       getData: async () => ({
         department,
       }),
@@ -254,7 +254,7 @@ const makeDepartmentPages = async client => {
         .filter(i => i.department != null && i.department.id == department.id)
         .map(informationPage => ({
           path: `/${informationPage.slug}`,
-          component: 'src/components/Pages/Information',
+          template: 'src/components/Pages/Information',
           getData: async () => ({
             informationPage,
           }),
@@ -275,13 +275,13 @@ const makeDepartmentPages = async client => {
             )
             .map(process => ({
               path: `/${process.slug}`,
-              component: 'src/components/Pages/Process',
+              template: 'src/components/Pages/Process',
               getData: async () => ({
                 process,
               }),
               children: process.processSteps.map(processStep => ({
                 path: `/${processStep.slug}`,
-                component: 'src/components/Pages/ProcessStep',
+                template: 'src/components/Pages/ProcessStep',
                 getData: async () => ({
                   processStep,
                 }),
@@ -292,7 +292,7 @@ const makeDepartmentPages = async client => {
     .concat([
       {
         path: '/departments',
-        component: 'src/components/Pages/Departments',
+        template: 'src/components/Pages/Departments',
         getData: async () => ({
           departments,
         }),
@@ -352,7 +352,7 @@ export default {
     const routes = [
       {
         path: '/search',
-        component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+        template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
         path: '404',
