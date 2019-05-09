@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import { IntlProvider } from 'react-intl';
 
 // Your top level component
 import App from './App'
@@ -16,11 +17,17 @@ if (typeof document !== 'undefined') {
     ? ReactDOM.hydrate
     : ReactDOM.render
 
+  if (!global.Intl) {
+    global.Intl = require('intl');
+  }
+
   const render = Comp => {
     renderMethod(
-      <AppContainer>
-        <Comp />
-      </AppContainer>,
+      <IntlProvider locale="en">
+        <AppContainer>
+          <Comp />
+        </AppContainer>
+      </IntlProvider>,
       target
     )
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { IntlProvider } from 'react-intl';
 
 // Your top level component
 import App from './App';
@@ -13,9 +14,11 @@ if (typeof document !== 'undefined') {
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
   const render = Comp => {
     renderMethod(
-      <AppContainer>
-        <Comp />
-      </AppContainer>,
+      <IntlProvider locale="en">
+        <AppContainer>
+          <Comp />
+        </AppContainer>
+      </IntlProvider>,
       document.getElementById('root'),
     );
   };

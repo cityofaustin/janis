@@ -4,7 +4,7 @@
   "scripts": {
     "start": "NODE_PATH=./src CMS_API='https://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' react-static start",
     "stage": "react-static build --staging",
-    "build": "react-static build",
+    "build": "NODE_PATH=./src CMS_API='https://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' react-static build",
     "analyze": "react-static build --analyze",
     "serve": "serve dist -p 3000"
   },
@@ -17,6 +17,7 @@
     "downshift": "^3.2.10",
     "graphql-request": "^1.8.2",
     "html-react-parser": "^0.7.0",
+    "intl": "^1.2.5",
     "js-cookie": "^2.2.0",
     "moment-timezone": "^0.5.25",
     "react": "^16.8.2",
