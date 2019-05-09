@@ -1,0 +1,238 @@
+.coa-Header {
+  // border-bottom: 1px solid lighten($coa-color-white, 10%);
+  font-family: $coa-font-sans;
+  background-color: $coa-color-primary;
+  color: $coa-color-white;
+}
+
+// .coa-Header--menu-is-open ~ main,
+// .coa-Header--menu-is-open ~ footer {
+//   display: block;
+// }
+
+.coa-Header--menu-is-open {
+  position: fixed;
+  width: 100%;
+}
+
+.coa-Header__container {
+  max-width: 1325px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media($coa-large-screen) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.coa-Header__controls {
+  display: flex;
+  // height: $coa-header-toprow-height;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @include media($coa-large-screen) {
+    padding-top: $coa-spacing-small;
+    padding-bottom: $coa-spacing-small;
+    padding-right: $coa-spacing-small;
+  }
+}
+
+.coa-Header__left-controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 2rem;
+
+  .coa-text-spacer--vertical:after {
+    display: block;
+    height: $coa-header-toprow-height;
+  }
+
+  @include media($coa-large-screen) {
+    margin-left: 0;
+  }
+}
+
+.coa-Header__center-controls {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  order: 3;
+  width: 100%;
+  border-top: 1px solid rgba($coa-color-white, 0.5);
+  padding: $coa-spacing-small 0;
+
+  @include media($coa-large-screen) {
+    order: unset;
+    width: initial;
+    border-top: none;
+    padding: 0;
+  }
+}
+
+.coa-Header__center-controls--active {
+  background: $coa-color-white;
+
+  .coa-Header__logo {
+    color: $coa-color-primary;
+
+    &:visited {
+      color: $coa-color-primary;
+    }
+  }
+
+  .coa-Header__menuIcon {
+    color: $coa-color-primary;
+
+    &:visited,
+    &:active,
+    &:hover {
+      color: $coa-color-primary;
+    }
+  }
+
+  @include media($coa-large-screen) {
+    background: none;
+
+    .coa-Header__logo {
+      color: $coa-color-white;
+
+      &:visited {
+        color: $coa-color-white;
+      }
+    }
+  }
+}
+
+.coa-Header__right-controls-wrapper {
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 2rem;
+
+  @include media($coa-large-screen) {
+    margin-right: 0;
+  }
+
+  display: flex;
+  a {
+    font-size: $coa-font-size-xsmall;
+    text-transform: uppercase;
+  }
+  svg {
+    height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+    width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+    vertical-align: -0.2rem;
+  }
+}
+
+.coa-Header__right-controls {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: flex;
+  }
+
+  a {
+    color: $coa-color-white;
+    &:visited {
+      color: $coa-color-white;
+    }
+    svg {
+      margin-left: $coa-space-level1;
+      vertical-align: middle;
+      path {
+        fill: $coa-color-white;
+      }
+    }
+  }
+}
+
+.coa-Header__mobile-languages {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-Header__desktop-languages {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: flex;
+  }
+}
+
+.coa-Header__menu-toggle {
+  font-weight: $coa-font-semibold;
+  opacity: 0.75;
+}
+
+.coa-Header__logo {
+  color: $coa-color-white;
+  font-weight: $coa-font-semibold;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:hover {
+    color: $coa-color-white;
+  }
+  &:visited {
+    color: $coa-color-white;
+  }
+
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-md-small;
+    margin: initial;
+  }
+}
+
+.coa-Header__gov-site {
+  background: $coa-color-blue-darkest;
+  font-size: 1.2rem;
+  line-height: 3.1rem;
+  svg {
+    vertical-align: middle;
+    height: 1.6rem;
+    margin-top: -0.4rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+  }
+}
+
+.coa-Header__gov-site-toggle {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  i {
+    vertical-align: middle;
+    margin-top: -0.4rem;
+  }
+}
+
+.coa-Header__menuIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-xsmall;
+  margin-right: 0.4rem;
+  color: $coa-color-white;
+  position: absolute;
+  margin-left: 2rem;
+
+  i {
+    font-size: $coa-font-size-md-small;
+  }
+
+  &:visited,
+  &:active,
+  &:hover {
+    color: $coa-color-white;
+  }
+
+  @include media($coa-large-screen) {
+    display: none;
+    font-size: $coa-font-size-small;
+    margin-left: none;
+  }
+}

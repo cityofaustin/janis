@@ -1,0 +1,68 @@
+.coa-Trashy {
+  border-left: none;
+  border-right: none;
+  margin: auto;
+  padding: $coa-spacing-large $coa-spacing-medium;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.coa-Trashy__autosuggestion {
+  border: solid 1px gray;
+  padding: $coa-spacing-small;
+  background-color: white;
+}
+
+.coa-Trashy__autosuggestion--highlighted {
+  background-color: lightgray;
+}
+
+.coa-Trashy__autosuggestion-clear {
+  position: relative;
+  float: right;
+  bottom: $coa-spacing-large + $coa-spacing-xsmall;
+  right: $coa-spacing-small;
+  background: white;
+  height: $coa-font-size-medium;
+}
+
+// schedule styles
+.coa-Trashy__schedule-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: $coa-spacing-medium;
+}
+
+.coa-Trashy__schedule-header {
+  margin-bottom: $coa-spacing-large;
+}
+
+.coa-Trashy__schedule-list-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: $coa-spacing-md-small;
+
+  h4 {
+    margin-bottom: $coa-spacing-small;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}
+
+.coa-Trashy__schedule-list-pickup-item {
+  margin-bottom: $coa-spacing-medium;
+
+  li {
+    text-decoration: none;
+  }
+}
+
+.coa-Trashy__schedule-bulk-pickup {
+}

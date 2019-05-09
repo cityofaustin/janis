@@ -1,0 +1,33 @@
+.coa-ListLink {
+  @include box-verticalcenter(7.5rem);
+  border-bottom: 1px dashed $color-gray-dark;
+  font-family: $coa-font-sans;
+  font-size: $coa-font-size-xsmall;
+  justify-content: space-between;
+  padding: $coa-spacing-medium;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  span {
+    display: block;
+    flex-basis: calc(100% - #{$coa-font-size-xsmall - .1rem - $coa-spacing-small}); //based on svg width and margin
+    @include media($coa-small-screen) {
+      flex-basis: calc(100% - #{$coa-font-size-small - .1rem - $coa-spacing-small}); //based on svg width and margin
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+    height: $coa-font-size-xsmall - .1rem;
+    width: $coa-font-size-xsmall - .1rem;
+    margin-left: $coa-spacing-small;
+  }
+
+  @include media($coa-small-screen) {
+    font-size: $coa-font-size-small;
+    svg {
+      height: $coa-font-size-small - .1rem;
+      width: $coa-font-size-small - .1rem;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.coa-Badge {
+  font-family: $coa-font-sans;
+  font-weight: $coa-font-semibold;
+  height: $coa-badge-height + $coa-badge-step-radius;
+  margin: $coa-badge-margin-tb $coa-badge-margin-lr;
+  overflow: hidden;
+  position: relative;
+  width: $coa-badge-width;
+
+  @include media($coa-medium-screen) {
+    height: $coa-badgelarge-height + $coa-badgelarge-step-radius;
+    margin: $coa-badgelarge-margin-tb $coa-badgelarge-margin-lr;
+    width: $coa-badgelarge-width;
+  }
+}
+
+.coa-Badge__background {
+  bottom: 0;
+  height: $coa-badge-height;
+  position: absolute;
+  width: $coa-badge-width;
+  path {
+    fill: transparent;
+    stroke: $coa-color-gray-light;
+    stroke-width: $coa-badge-stroke;
+  }
+  polygon {
+    fill: $coa-color-green-light;
+  }
+
+  @include media($coa-medium-screen) {
+    height: $coa-badgelarge-height;
+    width: $coa-badgelarge-width;
+  }
+}
+
+.coa-Badge__title {
+  align-items: center;
+  color: $coa-color-purple-dark;
+  display: flex;
+  font-size: $coa-font-size-xsmall;
+  height: $coa-badge-height / 2;
+  line-height: $coa-line-height-xsmall - 0.4rem;
+  justify-content: center;
+  padding: 0 $coa-spacing-md-small;
+  position: absolute;
+  text-align: center;
+  top: $coa-badge-step-radius * 2;
+  width: $coa-badge-width;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-md-small;
+    height: $coa-badgelarge-height / 2;
+    line-height: $coa-line-height-md-small;
+    top: $coa-badgelarge-step-radius * 2;
+    width: $coa-badgelarge-width;
+  }
+}
+a.coa-Badge__title {
+  text-decoration: none;
+}
+a.coa-Badge__title:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+a.coa-Badge__title:visited {
+  color: inherit;
+}
+
+.coa-Badge__symbol {
+  align-items: center;
+  background: $coa-color-white;
+  border: ($coa-badge-stroke - 1) solid $coa-color-purple-dark;
+  border-radius: 50%;
+  display: flex;
+  font-size: $coa-font-size-md-small;
+  font-weight: $coa-font-bold;
+  height: $coa-badge-step-radius * 2;
+  justify-content: center;
+  left: $coa-badge-width / 2 - $coa-badge-step-radius;
+  position: absolute;
+  top: 0;
+  width: $coa-badge-step-radius * 2;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-medium;
+    height: $coa-badgelarge-step-radius * 2;
+    left: $coa-badgelarge-width / 2 - $coa-badgelarge-step-radius;
+    width: $coa-badgelarge-step-radius * 2;
+  }
+  svg {
+    height: $coa-font-size-md-small;
+    width: $coa-font-size-md-small;
+    @include media($coa-medium-screen) {
+      height: $coa-font-size-medium;
+      width: $coa-font-size-medium;
+    }
+  }
+}
+
+.coa-Badge--isActive {
+  .coa-Badge__background {
+    path {
+      stroke: $coa-color-purple-dark;
+      stroke-width: $coa-badgelarge-stroke;
+    }
+  }
+  .coa-Badge__title {
+    text-decoration-color: $coa-color-green-light; /* limited browser compat */
+    text-decoration: underline;
+  }
+}

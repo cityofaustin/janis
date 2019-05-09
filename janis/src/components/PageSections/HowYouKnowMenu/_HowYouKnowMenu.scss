@@ -1,0 +1,48 @@
+.coa-HowYouKnowMenu {
+  background: $coa-color-blue-darkest;
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.coa-HowYouKnowMenu--is-open {
+  display: inherit;
+  z-index: 1;
+}
+
+.coa-HowYouKnowMenu__info-block {
+  display: flex;
+  max-width: 35rem;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  margin-bottom: 1.5rem;
+  margin-right: 3rem;
+  svg {
+    // @include media($coa-medium-screen) {
+    //   width: 5rem;
+    // }
+    width: 60px;
+    height: 40px;
+    margin-top: 0.2rem;
+  }
+}
+
+.coa-HowYouKnowMenu__info-blocks {
+  display: flex;
+  margin-top: 1.5rem;
+  flex-direction: column;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
+}
+
+.coa-HowYouKnowMenu__info-block-header {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+}
+
+.coa-HowYouKnowMenu__info-block-text {
+  margin-left: 1.2rem;
+}

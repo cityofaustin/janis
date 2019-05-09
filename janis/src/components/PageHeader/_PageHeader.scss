@@ -1,0 +1,73 @@
+.coa-PageHeader {
+  padding-top: $coa-spacing-large;
+
+  h1 {
+    color: $coa-color-dark-blue;
+  }
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+  }
+}
+
+.coa-PageHeader__description {
+  margin-top: 3rem;
+  font-size: $coa-font-size-md-small;
+  line-height: $coa-line-height-md-small;
+}
+
+.coa-PageHeader--service {
+  padding-top: $coa-spacing-large;
+  padding-bottom: $coa-spacing-large;
+  margin-bottom: $coa-spacing-md-small;
+  background: $coa-color-secondary;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+    padding-bottom: $coa-spacing-xlarge;
+    margin-bottom: $coa-spacing-large;
+  }
+}
+
+.coa-PageHeader--information {
+  padding-top: $coa-spacing-large;
+
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+  }
+
+  h1 {
+    font-weight: $coa-font-semibold;
+
+    @include media($coa-medium-screen) {
+      font-weight: $coa-font-bold;
+    }
+  }
+
+  .coa-PageHeader__description {
+    margin-top: $coa-spacing-small;
+    margin-bottom: 0;
+  }
+
+  .coa-SectionHeader {
+    margin-bottom: 0;
+  }
+}
+
+.coa-PageHeader--topic {
+  h1 {
+    color: $coa-color-almost-black;
+  }
+
+  .coa-PageHeader__description {
+    color: $coa-color-darker-grey;
+  }
+}
+
+.coa-PageHeader--topic-collection {
+  margin-bottom: $coa-spacing-large;
+
+  @include media($coa-medium-screen) {
+    margin-bottom: $coa-spacing-xlarge;
+  }
+}

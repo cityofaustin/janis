@@ -1,0 +1,43 @@
+.coa-ThreeOneOne {
+  background-color: $coa-color-primary;
+  color: $coa-color-gray-lightest;
+  font-family: $coa-font-sans;
+  padding: $coa-spacing-large 0 $coa-spacing-xlarge; //1px to prevent margin stacking
+
+  .coa-SectionHeader a {
+    color: $coa-color-white;
+    text-decoration: underline;
+  }
+
+  .coa-ListLink {
+    color: $coa-color-gray-lightest;
+    border-color: $coa-color-white;
+
+    svg path {
+      fill: $coa-color-gray-lightest;
+    }
+  }
+
+  .coa-ThreeOneOne__link {
+    display: none;
+
+    /* 3 links or less */
+    &:nth-child(-n+3) {
+      display: block;
+    }
+
+    /* 5 links or less */
+    @include media($coa-medium-screen) {
+      &:nth-child(-n+5) {
+        display: block;
+      }
+    }
+
+    /* 8 links or less */
+    @include media($coa-large-screen) {
+      &:nth-child(-n+8) {
+        display: block;
+      }
+    }
+  }
+}

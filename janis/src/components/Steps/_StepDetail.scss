@@ -1,0 +1,60 @@
+.coa-StepDetail {
+  padding: $coa-spacing-xlarge 0;
+}
+.coa-StepDetail__title {
+  margin-bottom: $coa-spacing-medium;
+}
+.coa-StepDetail__content {
+  margin-bottom: $coa-spacing-large;
+
+  ul {
+    list-style-type: none;
+    padding-left: $coa-spacing-md-small;
+
+    li {
+      align-items: start;
+      display: flex;
+      margin-bottom: $coa-spacing-medium;
+
+      &:before {
+        border: 1px solid $coa-color-green-light;
+        border-radius: 50%;
+        content: '';
+        flex-shrink: 0;
+        flex-grow: 0;
+        height: 7px;
+        margin-top: $coa-font-size-small - 0.6rem;
+        margin-right: $coa-spacing-large;
+        width: 7px;
+      }
+
+      //TODO: adjust styles below when top level steps are not formatted within paragraphs
+      & > p {
+        display: inline;
+        font-size: $coa-font-size-xsmall;
+        line-height: $coa-line-height-xsmall;
+        margin: 0;
+
+        @include media($coa-medium-screen) {
+          font-size: $coa-font-size-small;
+          line-height: $coa-line-height-small;
+        }
+      }
+    }
+  }
+}
+
+.coa-rtl {
+  .coa-StepDetail__content {
+    ul {
+      padding-left: 0;
+      padding-right: $coa-spacing-md-small;
+      li {
+        &:before {
+          margin-left: $coa-spacing-large;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

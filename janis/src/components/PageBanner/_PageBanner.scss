@@ -1,0 +1,33 @@
+.coa-PageBannerImage {
+  object-fit: cover;
+  width: 100%;
+  height: 17rem;
+  margin-bottom: $coa-space-level4;
+  display: none;
+  @include media($coa-medium-screen) {
+    height: 32rem;
+    display: inherit;
+  }
+}
+
+.coa-PageBannerCover {
+  flex-direction: column;
+  padding: $coa-space-level7 0;
+  height: 12rem;
+  color: $coa-color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $coa-color-primary;
+  @include media($coa-medium-screen) {
+    height: $coa-herohome-height--medium;
+    background: rgba(0,0,0,.6);
+  }
+  @include media($coa-large-screen) {
+    height: $coa-herohome-height--large;
+  }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
+}

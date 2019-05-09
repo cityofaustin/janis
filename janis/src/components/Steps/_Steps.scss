@@ -1,0 +1,113 @@
+.coa-Steps {
+  margin-bottom: $coa-spacing-large;
+  padding-bottom: $coa-spacing-large;
+}
+
+.coa-rtl {
+  .coa-Steps__list > ul > li {
+    &:before {
+      margin-left: $coa-spacing-md-small;
+      margin-right: 0;
+    }
+  }
+  .coa-Steps__list > ul {
+    ol,
+    ul {
+      padding-left: 0;
+      padding-right: $coa-spacing-xlarge + 2;
+    }
+  }
+}
+
+.coa-Steps__list {
+  & > ul {
+    counter-reset: step-item;
+    margin-bottom: $coa-space-level4;
+    list-style-type: none;
+
+    & > li {
+      align-items: flex-start;
+      counter-increment: step-item;
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 0;
+      margin-bottom: $coa-spacing-large;
+      padding-bottom: $coa-spacing-large;
+      border-bottom: 1px solid $coa-color-grey;
+
+      &:before {
+        background-color: $coa-color-secondary-dark;
+        border-radius: 50%;
+        flex: 0 0 ($coa-line-height-medium + 0.2);
+        color: $coa-color-primary;
+        content: counter(step-item);
+        font-size: $coa-font-size-md-small;
+        font-weight: $coa-font-bold;
+        line-height: $coa-line-height-medium + 0.2;
+        text-align: center;
+        margin-right: 100%;
+        margin-bottom: $coa-spacing-md-small;
+
+        @include media($coa-medium-screen) {
+          margin-right: $coa-spacing-large;
+          margin-bottom: 0;
+        }
+
+        // @include media($coa-large-screen) {
+        //   font-size: $coa-font-size-md-small;
+        //   line-height: $coa-line-height-md-small;
+        //   flex: 0 0 ($coa-line-height-md-small + 0.2);
+        // }
+      }
+
+      //TODO: adjust styles below when top level steps are not formatted within paragraphs
+      & > p {
+        display: inline;
+        flex: 1 1;
+        font-size: $coa-font-size-small;
+        line-height: $coa-line-height-small;
+        margin: 0;
+
+        //p tag within p tag, wagtail issue?
+        & > p {
+          margin: 0;
+          font-size: inherit;
+        }
+
+        ul,
+        li {
+          font-size: inherit;
+          margin-bottom: 0;
+        }
+        // @include media($coa-medium-screen) {
+        //   font-size: $coa-font-size-medium;
+        //   line-height: $coa-line-height-medium;
+        // }
+
+        // @include media($coa-large-screen) {
+        //   font-size: $coa-font-size-small;
+        //   line-height: $coa-line-height-small;
+        // }
+      }
+    }
+
+    ol,
+    ul {
+      // padding-bottom: $coa-spacing-xlarge;
+      padding-left: $coa-spacing-xsmall;
+      padding-top: $coa-spacing-xsmall;
+      list-style-type: disc;
+      width: 100%;
+
+      //TODO: adjust styles below when nested lists are not formatted within paragraphs
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  //TODO: remove styles below when steps are properly formatted JSON
+  br {
+    display: none;
+  }
+}

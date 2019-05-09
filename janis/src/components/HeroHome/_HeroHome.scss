@@ -1,0 +1,67 @@
+.coa-HeroHome__container {
+  img {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    height: $coa-herohome-height--default;
+    width: 100%;
+    object-fit: cover;
+    @include media($coa-medium-screen) {
+      height: $coa-herohome-height--medium;
+      top: auto;
+    }
+    @include media($coa-large-screen) {
+      height: $coa-herohome-height--large;
+      top: auto;
+    }
+  }
+}
+
+.coa-HeroHome {
+  flex-direction: column;
+  padding: $coa-space-level7 0;
+  height: $coa-herohome-height--default;
+  color: $coa-color-white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: $coa-herohome-gradient;
+  @include media($coa-medium-screen) {
+    height: $coa-herohome-height--medium;
+    display: flex;
+  }
+  @include media($coa-large-screen) {
+    height: $coa-herohome-height--large;
+  }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
+}
+
+.coa-HeroHome__preheader {
+  font-size: $coa-font-size-md-small;
+  font-weight: $coa-font-semibold;
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-large;
+  }
+  @include media($coa-large-screen) {
+    font-size: $coa-font-size-xlarge;
+  }
+}
+
+.coa-HeroHome__header {
+  font-size: $coa-font-size-large;
+  font-weight: $coa-font-medium;
+  line-height: $coa-line-height-large;
+  margin-top: $coa-space-level1;
+  @include media($coa-medium-screen) {
+    margin-top: $coa-space-level3;
+    line-height: $coa-line-height-xlarge;
+    font-size: 7.2rem;
+  }
+  @include media($coa-large-screen) {
+    margin-top: $coa-space-level4;
+    line-height: $coa-line-height-xxlarge;
+    font-size: 8rem;
+  }
+}

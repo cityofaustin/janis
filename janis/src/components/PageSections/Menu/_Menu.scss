@@ -1,0 +1,141 @@
+.coa-Menu {
+  // background-color: $coa-color-primary;
+  background-color: $coa-color-white;
+  color: $coa-color-primary;
+  bottom: 0;
+  left: -100vw;
+  overflow-y: auto;
+  position: fixed;
+  // transition: left 0.5s;
+  top: 13.5rem;
+  @include media($coa-medium-screen) {
+    top: 8.5rem;
+  }
+  width: 100vw;
+  padding-bottom: 3rem;
+  // z-index: 2; This interacts badly with the gov site menu
+  // @include media($coa-large-screen) {
+  //   background: none;
+  //   bottom: auto;
+  //   left: auto;
+  //   margin: $coa-space-level5 auto 0;
+  //   overflow-y: visible;
+  //   position: relative;
+  //   top: auto;
+  //   width: 100%;
+  //   z-index: 2;
+  // }
+}
+
+.coa-Menu--open {
+  left: 0;
+  // @include media($coa-large-screen) {
+  //   left: auto;
+  // }
+}
+
+.coa-Menu__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  // @include media($coa-large-screen) {
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  // }
+  & > li {
+    margin: 0;
+    // @include media($coa-large-screen) {
+    //   position: relative;
+    // }
+  }
+}
+
+.coa-Menu__footer {
+  padding: $coa-spacing-large $coa-spacing-md-small;
+  p {
+    font-size: $coa-font-size-xsmall;
+    margin: 0 0 $coa-spacing-medium 0;
+    svg {
+      height: $coa-font-size-xsmall - 0.1rem;
+      width: $coa-font-size-xsmall - 0.1rem;
+    }
+  }
+}
+
+.coa-Menu__close-btn {
+  margin: $coa-spacing-xsmall;
+  height: $coa-menu-closebtn-height + (2 * $coa-spacing-small);
+  svg {
+    margin: $coa-spacing-small;
+    height: $coa-menu-closebtn-height;
+    width: $coa-menu-closebtn-height;
+  }
+}
+
+.coa-Menu__close-submenu-click-target {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  // @include media($coa-large-screen) {
+  //   display: block;
+  // }
+}
+
+.coa-Menu__header {
+  padding-top: $coa-spacing-large;
+
+  a {
+    color: $coa-color-primary !important;
+    text-decoration: none !important;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  text-align: center;
+  @include media($coa-medium-screen) {
+    text-align: left;
+    border-bottom: 4px solid $coa-color-primary;
+    h2 {
+      font-size: 3.6rem;
+    }
+  }
+}
+
+.coa-Menu__serviceButtons-desktop {
+  display: none !important;
+  @include media($coa-medium-screen) {
+    display: flex !important;
+  }
+}
+
+.coa-Menu__subheading {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  padding-top: 3rem;
+  color: $coa-color-gray-dark;
+  border-bottom: 2px solid $coa-color-half-primary;
+  @include media($coa-medium-screen) {
+    border-bottom: none;
+  }
+}
+
+.coa-Menu__service-link {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-Menu__link {
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  padding-top: 1.5rem;
+  @include media($coa-medium-screen) {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+}

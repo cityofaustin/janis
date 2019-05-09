@@ -1,0 +1,94 @@
+// These variables drive almost every aspect of the U.S. Web Design
+// system. Every variable is declared as !default so that it can be
+// overridden by a previous import.
+
+// Typography
+// Removing the !default from $em-base so we are not inheriting that
+// value from Bourbon.
+
+// @import "../../../node_modules/uswds/src/stylesheets/lib/addons/font-stacks";
+
+$em-base:             $coa-em-base;
+$base-font-size:      $coa-base-font-size !default;
+$base-line-height:    $coa-base-line-height !default;
+
+$font-sans:           $coa-font-sans !default;
+$font-serif:          $coa-font-serif !default;
+
+// TODO these should be called font-weight-${}
+$font-normal:         $coa-font-regular !default;
+$font-bold:           $coa-font-bold !default;
+
+$color-white:                $coa-color-white !default;
+$color-black:                $coa-color-black !default;
+
+$color-gray-dark:            $coa-color-gray-dark !default;
+$color-gray:                 $coa-color-gray !default;
+$color-gray-medium:          $coa-color-gray !default;
+$color-gray-light:           $coa-color-gray-light !default;
+$color-gray-lighter:         $coa-color-gray-lighter !default;
+$color-gray-lightest:        $coa-color-gray-lightest !default;
+
+$color-blue:                 $coa-color-blue !default;
+$color-blue-darker:          $coa-color-blue-dark !default;
+$color-blue-darkest:         $coa-color-blue-darker !default;
+
+// Functional colors
+$color-primary:              $coa-color-primary !default;
+$color-primary-darker:       $color-blue-darker !default;
+$color-primary-darkest:      $color-blue-darkest !default;
+
+// $color-primary-alt:          $color-aqua !default;
+// $color-primary-alt-dark:     $color-aqua-dark !default;
+// $color-primary-alt-darkest:  $color-aqua-darkest !default;
+// $color-primary-alt-light:    $color-aqua-light !default;
+// $color-primary-alt-lightest: $color-aqua-lightest !default;
+
+$color-secondary:            $coa-color-orange !default;
+$color-secondary-dark:       $coa-color-orange-dark !default;
+// $color-secondary-darkest:    $color-red-darkest !default;
+// $color-secondary-light:      $color-red-light !default;
+// $color-secondary-lightest:   $color-red-lightest !default;
+
+// $color-base:                 $color-black-light !default;
+// $color-focus:                $color-gray-light !default;
+// $color-visited:              $color-purple !default;
+
+// Magic Numbers
+// $text-max-width:                66ch !default; // 66 characters per line
+// $lead-max-width:                77rem !default;
+// $site-max-width:                1040px !default;
+// $site-margins:                  3rem !default;
+// $site-margins-mobile:           1.5rem !default;
+// $article-max-width:             600px !default;
+// $input-max-width:               46rem !default;
+// $label-border-radius:           2px !default;
+// $checkbox-border-radius:        2px !default;
+// $border-radius:                 3px !default;
+$button-border-radius:          $coa-button-border-radius !default;
+// $box-shadow:                    0 0 2px $color-shadow !default;
+// $focus-outline:                 2px dotted $color-gray-light !default;
+// $focus-spacing:                 3px !default;
+// $nav-width:                     951px !default;
+// $sidenav-current-border-width:  0.4rem !default; // must be in rem for math
+
+// Mobile First Breakpoints
+$small-screen:  $coa-small-screen !default;
+$medium-screen: $coa-medium-screen !default;
+$large-screen:  $coa-large-screen !default;
+
+// @media single-keyword helpers
+//TODO: file issue with USWDS --> new breakpoint will not be defined when this file is imported
+// $small: new-breakpoint(min-width $small-screen $grid-columns-small) !default;
+// $medium: new-breakpoint(min-width $medium-screen $grid-columns-medium) !default;
+// $large: new-breakpoint(min-width $large-screen $grid-columns-large) !default;
+
+// Relative font and image file paths
+$font-path:   '../../node_modules/uswds/src/fonts' !default;
+$image-path:  '../../node_modules/uswds/src/img' !default;
+
+$spacing-x-small: $coa-spacing-xsmall;
+$spacing-small: $coa-spacing-small;
+$spacing-md-small: $coa-spacing-md-small;
+$spacing-medium: $coa-spacing-medium;
+$spacing-large: $coa-spacing-large;

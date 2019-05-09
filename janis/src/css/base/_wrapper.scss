@@ -1,0 +1,11 @@
+.wrapper {
+  &.wrapper--sm {
+    max-width: $coa-wrapper-sm-maxwidth;
+  }
+  &.wrapper--hasBorder {
+    border-top: 1px solid $coa-color-purple-lighter;
+  }
+  &.wrapper--hasDashedBorder {
+    border-top: 1px dashed $coa-color-purple-lighter;
+  }
+}

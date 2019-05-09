@@ -1,0 +1,30 @@
+.coa-PageNotificationBanner {
+  // Commenting out because it's causing issues on the homepage
+  // that will be addressed in: https://github.com/cityofaustin/techstack/issues/1796
+  // background-color: $coa-color-gray-lightest;
+  background-color: $coa-color-white;
+  margin-top: 3rem;
+  @include media($coa-medium-screen) {
+    margin-top: 0;
+  }
+
+  padding: $coa-spacing-md-small 0;
+  p {
+    font-size: $coa-font-size-xsmall;
+    font-style: italic;
+    line-height: $coa-line-height-small;
+    text-align: center;
+    svg {
+      height: $coa-font-size-xsmall - 0.1rem;
+      width: $coa-font-size-xsmall - 0.1rem;
+    }
+    @include media($coa-medium-screen) {
+      font-size: $coa-font-size-md-small;
+      line-height: $coa-line-height-medium;
+      svg {
+        height: $coa-font-size-md-small - 0.1rem;
+        width: $coa-font-size-md-small - 0.1rem;
+      }
+    }
+  }
+}
