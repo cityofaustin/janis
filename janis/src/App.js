@@ -9,6 +9,7 @@ import I18nController from 'components/I18n/I18nController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
+import { getPath } from 'js/helpers/path';
 
 import 'css/coa.css';
 
@@ -31,18 +32,33 @@ import 'css/coa.css';
 //   )),
 // );
 
-const App = () => (
-  <Root>
-    <div>
-      <React.Suspense fallback={<em>Loading...</em>}>
-        <Header />
-        <Router>
-          <Routes default />
-        </Router>
-      </React.Suspense>
-      <Footer />
-    </div>
-  </Root>
-);
+const App = () => {
+  const path = getPath();
+
+  // SUPERHACK
+  let lang = 'en';
+  if (path.substring(1, 3) === 'es') {
+    lang = 'es';
+  }
+
+  console.log(path.substring(1, 3));
+  debugger;
+
+  return (
+    <Root>
+      <div>
+        <React.Suspense fallback={<em>Loading...</em>}>
+          <I18nController lang={lang}>
+            <Header />
+            <Router>
+              <Routes default />
+            </Router>
+            <Footer />
+          </I18nController>
+        </React.Suspense>
+      </div>
+    </Root>
+  );
+};
 
 export default App;
