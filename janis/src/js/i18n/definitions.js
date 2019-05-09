@@ -1,5 +1,4 @@
 import { defineMessages } from 'react-intl';
-debugger;
 
 export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',

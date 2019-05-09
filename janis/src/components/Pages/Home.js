@@ -2,8 +2,7 @@ import React from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
-import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
-debugger;
+import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions.js';
 
 import WorkInProgress from 'components/WorkInProgress';
 import PageNotificationBanner from 'components/PageNotificationBanner';
@@ -12,9 +11,7 @@ import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
 import TopServices from 'components/Tiles/TopServices';
 
-const Home = ({ topServices, image, intl }) => {
-  debugger;
-  return (
+const Home = ({ topServices, image, intl }) => (
   <div>
     <Head>
       <title>{'City of Austin'}</title>
@@ -35,7 +32,6 @@ const Home = ({ topServices, image, intl }) => {
       <WorkInProgress />
     </PageNotificationBanner>
   </div>
-)
-};
+);
 
 export default withRouteData(injectIntl(Home));
