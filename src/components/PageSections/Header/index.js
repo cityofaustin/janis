@@ -30,13 +30,26 @@ class Header extends Component {
     this.menuElement = document.querySelector('#navMenu');
   }
 
-  openFullSiteMenu = () => {
+  openFullSiteMenu = (e) => {
+    if (e.key !== "Enter") {
+      e.preventDefault();
+      console.log("We don't care for any other keys");
+    }
+
     this.setState({
       topMenuActive: true,
     });
   };
 
-  closeFullSiteMenu = () => {
+  closeFullSiteMenu = (e) => {
+    if (e.key !== "Tab") {
+      this.setState({
+        topMenuActive: false,
+      });
+    } else {
+      e.preventDefault();
+    }
+
     this.setState({
       topMenuActive: false,
     });
