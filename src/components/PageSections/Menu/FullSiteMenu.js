@@ -8,6 +8,7 @@ import ThemesTopicsMenu from './ThemesTopicsMenu';
 
 const FullSiteMenu = props => (
   <div
+    ref={props.refnode}
     className={
       'coa-FullSiteMenu ' +
       (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
