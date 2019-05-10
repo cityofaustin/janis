@@ -6,7 +6,7 @@ const ThemesNav = props => (
   <nav className="coa-ThemesNav">
     <ul className="coa-ThemesNav__list">
       {props.themes[props.intl.locale].map((theme, index) => (
-        <li className="coa-ThemesNav__theme" key={index} tabindex="0" onKeyPress={props.handleOnClick}>
+        <li className="coa-ThemesNav__theme" key={index} tabindex="0" onKeyDown={props.handleOnClick}>
           <a className="coa-ThemesNav__link" onClick={props.handleOnClick} >
             {theme.text}
           </a>
@@ -18,7 +18,7 @@ const ThemesNav = props => (
         className="coa-FullSiteMenu__close"
         tabindex="0"
         onClick={props.handleFullSiteMenuClose}
-        onKeyPress={props.handleFullSiteMenuClose}
+        onKeyDown={props.handleFullSiteMenuClose}
       >
         <i className="material-icons">close</i>
       </a>

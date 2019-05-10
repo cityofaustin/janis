@@ -31,23 +31,30 @@ class Header extends Component {
   }
 
   openFullSiteMenu = (e) => {
-    if (e.key !== "Enter") {
+    // Show the menu, if the user clicks on element or preses Space or Enter in keyboard
+    if (e.key === "Enter" || e.key === " " || e.type == "click") {
       e.preventDefault();
+      this.setState({
+        topMenuActive: true,
+      });
     }
 
-    this.setState({
-      topMenuActive: true,
-    });
+    // Hide menu if the user presses escape
+    if(e.key === "Escape") {
+      this.setState({
+        topMenuActive: false,
+      });
+    }
   };
 
   closeFullSiteMenu = (e) => {
-    if (e.key !== "Tab") {
+    // Hide menu on click, Enter, Space or Escape
+    if (e.key === "Enter" || e.key === " " || e.key === "Escape" || e.type == "click") {
       e.preventDefault();
+      this.setState({
+        topMenuActive: false,
+      });
     }
-
-    this.setState({
-      topMenuActive: false,
-    });
   };
 
   toggleFullSiteMenu = () => {
