@@ -69,6 +69,20 @@ class Header extends Component {
     }
   };
 
+  closeFullSiteMenuItem = (e) => {
+    // Hide menu on click, Enter, Space or Escape
+    if (e.key === "Escape") {
+      e.preventDefault();
+      this.setState({
+        topMenuActive: false,
+      });
+    }
+
+    if(e.key === " ") {
+      e.preventDefault();
+    }
+  }
+
   closeFullSiteMenu = (e) => {
     // Hide menu on click, Enter, Space or Escape
     if (e.key === "Enter" || e.key === " " || e.key === "Escape" || e.type == "click") {
@@ -160,6 +174,7 @@ class Header extends Component {
           // ref={node => this.node = node}
           refnode={this.setWrapperRef}
           navigation={navigation}
+          handleFullSiteMenuItem={this.closeFullSiteMenuItem}
           handleFullSiteMenuOpen={this.openFullSiteMenu}
           handleFullSiteMenuClose={this.closeFullSiteMenu}
           isTopMenuActive={this.state.topMenuActive}

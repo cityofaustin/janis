@@ -24,7 +24,10 @@ const FullSiteMenu = props => (
     </div>
     <section className="coa-FullSiteMenu__subNav">
       <div className="wrapper container-fluid">
-        <ThemesTopicsMenu menu={props.navigation} />
+        <ThemesTopicsMenu
+          menu={props.navigation}
+          handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+        />
       </div>
       <MenuInfo />
     </section>
