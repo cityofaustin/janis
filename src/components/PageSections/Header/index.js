@@ -44,17 +44,18 @@ class Header extends Component {
   // Hides the menu
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({
-        topMenuActive: false,
-      });
+      // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
+      if (event.target.className !== 'coa-Header__menuIcon') {
+        this.setState({
+          topMenuActive: false,
+        });
+      }
     }
   }
 
-
-
-  openFullSiteMenu = (e) => {
+  openFullSiteMenu = e => {
     // Show the menu, if the user clicks on element or preses Space or Enter in keyboard
-    if (e.key === "Enter" || e.key === " " || e.type == "click") {
+    if (e.key === 'Enter' || e.key === ' ' || e.type == 'click') {
       e.preventDefault();
       this.setState({
         topMenuActive: true,
@@ -62,30 +63,35 @@ class Header extends Component {
     }
 
     // Hide menu if the user presses escape
-    if(e.key === "Escape") {
+    if (e.key === 'Escape') {
       this.setState({
         topMenuActive: false,
       });
     }
   };
 
-  closeFullSiteMenuItem = (e) => {
+  closeFullSiteMenuItem = e => {
     // Hide menu on click, Enter, Space or Escape
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
       });
     }
 
-    if(e.key === " ") {
+    if (e.key === ' ') {
       e.preventDefault();
     }
-  }
+  };
 
-  closeFullSiteMenu = (e) => {
+  closeFullSiteMenu = e => {
     // Hide menu on click, Enter, Space or Escape
-    if (e.key === "Enter" || e.key === " " || e.key === "Escape" || e.type == "click") {
+    if (
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Escape' ||
+      e.type == 'click'
+    ) {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
