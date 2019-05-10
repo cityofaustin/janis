@@ -31,7 +31,7 @@ const ThemesTopicsMenu = props => {
       <ul className="coa-ThemesTopicsMenu__list">
         {props.menu.map((theme, index) => (
           <li className="coa-ThemesTopicsMenu__section" key={index}>
-            <h4 className="coa-ThemesTopicsMenu__theme">{theme.text}</h4>
+            <h4 className="coa-ThemesTopicsMenu__theme" tabindex="0">{theme.text}</h4>
             <TopicsLinks
               topicCollections={theme.topicCollectionPages.edges}
               themeSlug={theme.slug}
