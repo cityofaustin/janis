@@ -33,7 +33,6 @@ class Header extends Component {
   openFullSiteMenu = (e) => {
     if (e.key !== "Enter") {
       e.preventDefault();
-      console.log("We don't care for any other keys");
     }
 
     this.setState({
@@ -43,10 +42,6 @@ class Header extends Component {
 
   closeFullSiteMenu = (e) => {
     if (e.key !== "Tab") {
-      this.setState({
-        topMenuActive: false,
-      });
-    } else {
       e.preventDefault();
     }
 
