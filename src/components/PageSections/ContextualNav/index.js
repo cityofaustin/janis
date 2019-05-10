@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 
+import { misc as i18n } from 'js/i18n/definitions';
+
 const ContextualNav = ({
   topic,
   topics,
@@ -49,7 +51,9 @@ const ContextualNav = ({
           </div>
           {!!related.length && (
             <div className="coa-ContextualNav__related">
-              <span className="coa-ContextualNav__label">Related to: </span>
+              <span className="coa-ContextualNav__label">
+                {`${intl.formatMessage(i18n.relatedTo)}: `}
+              </span>
               {related.map((topic, index) => (
                 <a key={index} href={topic.slug}>
                   {topic.title}
@@ -61,7 +65,9 @@ const ContextualNav = ({
           <div className="coa-ContextualNav__dept">
             {department && (
               <Fragment>
-                <span className="coa-ContextualNav__label">Offered by: </span>
+                <span className="coa-ContextualNav__label">{`${intl.formatMessage(
+                  i18n.offeredBy,
+                )}: `}</span>
                 <a href={`/${intl.locale}/${department.slug}`}>
                   {department.title}
                 </a>
