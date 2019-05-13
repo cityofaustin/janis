@@ -23,23 +23,80 @@ class Header extends Component {
       howYouKnowmenuIsOpen: false,
       topMenuActive: false,
     };
-  }
 
+    // Bind wrappers and outside-click functions
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
   componentDidMount() {
-    // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav).
-    this.menuElement = document.querySelector('#navMenu');
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
-  openFullSiteMenu = () => {
-    this.setState({
-      topMenuActive: true,
-    });
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  // Sets up the wrapper reference
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  // Hides the menu
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
+      if (event.target.className !== 'coa-Header__menuIcon') {
+        this.setState({
+          topMenuActive: false,
+        });
+      }
+    }
+  }
+
+  openFullSiteMenu = e => {
+    // Show the menu, if the user clicks on element or preses Space or Enter in keyboard
+    if (e.key === 'Enter' || e.key === ' ' || e.type == 'click') {
+      e.preventDefault();
+      this.setState({
+        topMenuActive: true,
+      });
+    }
+
+    // Hide menu if the user presses escape
+    if (e.key === 'Escape') {
+      this.setState({
+        topMenuActive: false,
+      });
+    }
   };
 
-  closeFullSiteMenu = () => {
-    this.setState({
-      topMenuActive: false,
-    });
+  closeFullSiteMenuItem = e => {
+    // Hide menu on click, Enter, Space or Escape
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      this.setState({
+        topMenuActive: false,
+      });
+    }
+
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+  };
+
+  closeFullSiteMenu = e => {
+    // Hide menu on click, Enter, Space or Escape
+    if (
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Escape' ||
+      e.type == 'click'
+    ) {
+      e.preventDefault();
+      this.setState({
+        topMenuActive: false,
+      });
+    }
   };
 
   toggleFullSiteMenu = () => {
@@ -120,7 +177,10 @@ class Header extends Component {
         />
 
         <FullSiteMenu
+          // ref={node => this.node = node}
+          refnode={this.setWrapperRef}
           navigation={navigation}
+          handleFullSiteMenuItem={this.closeFullSiteMenuItem}
           handleFullSiteMenuOpen={this.openFullSiteMenu}
           handleFullSiteMenuClose={this.closeFullSiteMenu}
           isTopMenuActive={this.state.topMenuActive}

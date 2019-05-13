@@ -8,6 +8,7 @@ import ThemesTopicsMenu from './ThemesTopicsMenu';
 
 const FullSiteMenu = props => (
   <div
+    ref={props.refnode}
     className={
       'coa-FullSiteMenu ' +
       (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
@@ -23,7 +24,10 @@ const FullSiteMenu = props => (
     </div>
     <section className="coa-FullSiteMenu__subNav">
       <div className="wrapper container-fluid">
-        <ThemesTopicsMenu menu={props.navigation} />
+        <ThemesTopicsMenu
+          menu={props.navigation}
+          handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+        />
       </div>
       <MenuInfo />
     </section>
