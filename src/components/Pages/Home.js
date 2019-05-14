@@ -16,18 +16,19 @@ const Home = ({ topServices, image, intl }) => (
     <Head>
       <title>{'City of Austin'}</title>
     </Head>
-
     <HeroHome
       imageFilename={`${process.env.CMS_MEDIA}/images/${image.file}`}
       imageTitle={image.title}
       preheader={intl.formatMessage(i18n2.welcomeTo)}
     />
-    <TopServices
-      title={intl.formatMessage(i18n3.checkOutServices)}
-      tiles={topServices}
-      locale={intl.locale}
-      extraClasses={'floating'}
-    />
+    <div style={{ backgroundColor: `#f0f0f0` }}>
+      <TopServices
+        title={intl.formatMessage(i18n3.checkOutServices)}
+        tiles={topServices}
+        locale={intl.locale}
+        extraClasses={'floating'}
+      />
+    </div>
     <PageNotificationBanner>
       <WorkInProgress />
     </PageNotificationBanner>

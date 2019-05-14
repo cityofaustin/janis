@@ -1,4 +1,6 @@
 .coa-TopServices {
+  position: relative;
+  z-index: 2;
   &.floating {
     padding: 2rem 0;
     margin-left: 2rem;

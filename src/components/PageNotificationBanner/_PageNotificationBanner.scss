@@ -1,8 +1,8 @@
 .coa-PageNotificationBanner {
   // Commenting out because it's causing issues on the homepage
   // that will be addressed in: https://github.com/cityofaustin/techstack/issues/1796
-  // background-color: $coa-color-gray-lightest;
-  background-color: $coa-color-white;
+  background-color: $coa-color-gray-spec;
+  // background-color: $coa-color-white;
   margin-top: 3rem;
   @include media($coa-medium-screen) {
     margin-top: 0;
