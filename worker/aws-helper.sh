@@ -56,6 +56,7 @@ function janis_print_header {
     echo "  JANIS_REPO:                 ${JANIS_REPO}"
     echo "  AWS_BUCKET_NAME:            ${AWS_BUCKET_NAME}"
     echo "  AWS_CF_DISTRO:              ${AWS_CF_DISTRO}"
+    echo "  AWS_CF_DISTRO_PATH:         ${AWS_CF_DISTRO_PATH}"
     echo ""
 }
 
@@ -153,6 +154,8 @@ if [[ "${AWS_CF_DISTRO}" != "" ]]; then
   if [[ "${AWS_CF_DISTRO_PATH}" = "" ]]; then
     echo "janis_clearcache() No distribution path defined in 'AWS_CF_DISTRO_PATH' variable, assuming entire distribution.";
     AWS_CF_DISTRO_PATH="/*";
+  else
+    echo "janis_clearcache() AWS_CF_DISTRO_PATH = '${AWS_CF_DISTRO_PATH}'";
   fi;
 
   aws cloudfront create-invalidation --distribution-id $AWS_CF_DISTRO --paths "${AWS_CF_DISTRO_PATH}";
