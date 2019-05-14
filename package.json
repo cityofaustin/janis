@@ -65,7 +65,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-joplin-cloud":
-      "NODE_PATH=./src CMS_API='https://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' npm-run-all build-css build-js && cp -r dist/* _dist/",
+      "NODE_PATH=./src CMS_API='https://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' npm-run-all build-css build-js",
     "start-js": "react-static start",
     "build-js": "react-static build",
     "build-translations":
