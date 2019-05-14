@@ -14,7 +14,7 @@ const FullSiteMenu = props => (
       (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
     }
   >
-    <div class="wrapper container-fluid">
+    <div className="wrapper container-fluid">
       <ThemesNav
         handleOnClick={props.handleFullSiteMenuOpen}
         isTopMenuActive={props.isTopMenuActive}
