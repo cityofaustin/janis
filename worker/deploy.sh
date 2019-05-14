@@ -19,9 +19,19 @@ LOG_URL="https://s3.amazonaws.com/${AWS_BUCKET_NAME}/_reserved/logs/${FILE_UUID}
 # to build janis has been made
 #
 if [[ "$SLACK_URL" != "" ]]; then
-  curl -X POST -H 'Content-type: application/json' \
-  --data "{\"text\":\":coffee: We've received a request to build janis. Take a cup of coffee, you will be notified whenever it's done.\"}" \
-  $SLACK_URL;
+
+  #
+  # We need to allocate space for a custom message.
+  #
+  if [[ "${SLACK_MESSAGE}" != "" ]]; then
+      curl -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"${SLACK_MESSAGE}\"}" \
+            $SLACK_URL;
+  else
+    curl -X POST -H 'Content-type: application/json' \
+    --data "{\"text\":\":coffee: We've received a request to build janis. Take a cup of coffee, you will be notified whenever it's done.\"}" \
+    $SLACK_URL;
+  fi;
 fi;
 
 function upload_logfile {
@@ -97,23 +107,16 @@ echo "Message: ${BUILD_MESSAGE}";
 echo "LOG_URL: ${LOG_URL}";
 
 #
-# We are going to submit a notification to slack.
+# We are going to submit a notification to slack when complete.
 #
 if [[ "$SLACK_URL" != "" ]]; then
-
-  if [[ "${SLACK_MESSAGE}" != "" ]]; then
-    curl -X POST -H 'Content-type: application/json' \
-          --data "{\"text\":\"${SLACK_MESSAGE}\"}" \
-          $SLACK_URL;
-  fi;
-
   curl -X POST -H 'Content-type: application/json' \
         --data "{\"text\":\":white_check_mark: ${BUILD_MESSAGE} -- ${LOG_URL}\"}" \
         $SLACK_URL;
 fi;
 
 #
-# Now we need to clear the
+# Now we need to clear the cache.
 #
 if [[ "${CF_DISTRO}" != "" ]]; then
   echo "Clearing cache for distribution: ${CF_DISTRO}";
