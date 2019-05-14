@@ -59,6 +59,7 @@
   position: absolute;
   width: 100%;
   padding: $coa-spacing-medium 0;
+  border-radius: 0 0 $coa-button-border-radius $coa-button-border-radius;
 
   @include media($coa-medium-screen) {
     padding: 0;
@@ -81,6 +82,7 @@
   .coa-FullSiteMenu__subNav {
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
+    z-index: 3;
   }
 }
 
@@ -158,6 +160,7 @@
 .coa-MenuInfo {
   background: $coa-color-dark-blue;
   display: none;
+  border-radius: 0 0 $coa-button-border-radius $coa-button-border-radius;
 
   @include media($coa-medium-screen) {
     display: block;
