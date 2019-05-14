@@ -2,10 +2,13 @@
   img {
     position: absolute;
     z-index: 0;
-    top: 0px;
     height: $coa-herohome-height--default;
     width: 100%;
     object-fit: cover;
+    @include media($coa-small-screen) {
+      height: $coa-herohome-height--small;
+      top: auto;
+    }
     @include media($coa-medium-screen) {
       height: $coa-herohome-height--medium;
       top: auto;
