@@ -144,6 +144,22 @@ function janis_deploy {
 }
 
 
+function janis_clearcache {
+
+if [[ "${AWS_CF_DISTRO}" != "" ]]; then
+  echo "janis_clearcache() Clearing cache for distribution: ${AWS_CF_DISTRO}";
+
+  # Assume entire distribution if specific path not defined...
+  if [[ "${AWS_CF_DISTRO_PATH}" = "" ]]; then
+    echo "janis_clearcache() No distribution path defined in 'AWS_CF_DISTRO_PATH' variable, assuming entire distribution.";
+    AWS_CF_DISTRO_PATH="/*";
+  fi;
+
+  aws cloudfront create-invalidation --distribution-id $AWS_CF_DISTRO --paths "${AWS_CF_DISTRO_PATH}";
+  echo "janis_clearcache() Invalidation request submitted!";
+fi;
+
+}
 echo -e "\n----------------------------------------------------------------"
 echo "Janis Deploy Helper Script:  Initialization successful."
 echo -e "----------------------------------------------------------------\n"
