@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
-set -e
-
-
+set -e;
 
 
 #
@@ -99,9 +96,28 @@ BUILD_MESSAGE="The build has been deployed.";
 echo "Message: ${BUILD_MESSAGE}";
 echo "LOG_URL: ${LOG_URL}";
 
-
+#
+# We are going to submit a notification to slack.
+#
 if [[ "$SLACK_URL" != "" ]]; then
+
+  if [[ "${SLACK_MESSAGE}" != "" ]]; then
+    curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"${SLACK_MESSAGE}\"}" \
+          $SLACK_URL;
+  fi;
+
   curl -X POST -H 'Content-type: application/json' \
         --data "{\"text\":\":white_check_mark: ${BUILD_MESSAGE} -- ${LOG_URL}\"}" \
         $SLACK_URL;
 fi;
+
+#
+# Now we need to clear the
+#
+if [[ "${CF_DISTRO}" != "" ]]; then
+  echo "Clearing cache for distribution: ${CF_DISTRO}";
+  aws cloudfront create-invalidation --distribution-id $CF_DISTRO --paths "/*";
+  echo "Invalidation request submitted!";
+fi;
+
