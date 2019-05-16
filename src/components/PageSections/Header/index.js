@@ -44,7 +44,6 @@ class Header extends Component {
 
   // Sets up the how you know wrapper reference
   setHowYouKnowWrapperRef(node) {
-    debugger;
     this.howYouKnowwrapperRef = node;
   }
 
