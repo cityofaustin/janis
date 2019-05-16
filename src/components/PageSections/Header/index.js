@@ -29,11 +29,11 @@ class Header extends Component {
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
   componentDidMount() {
-    document.addEventListener('click', this.handleClickOutside);
+    document.addEventListener('touch', this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
+    document.removeEventListener('touch', this.handleClickOutside);
   }
 
   // Sets up the wrapper reference
