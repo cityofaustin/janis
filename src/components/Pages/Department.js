@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
-import Parser from 'html-react-parser';
+import HtmlFromAdmin from 'components/HtmlFromAdmin';
 
 import { departmentPage as i18n } from 'js/i18n/definitions';
 
@@ -98,14 +98,15 @@ const Department = ({
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>
-            <p>{Parser(whatWeDo)}</p>
+            <HtmlFromAdmin content={whatWeDo} />
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.mission)}
             </h2>
             <p>{mission}</p>
             <div className="coa-DepartmentPage__contacts-mobile">
-              {!!contacts &&
-                !!contacts.length && <ContactDetails contact={contacts[0]} />}
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+              )}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -142,8 +143,9 @@ const Department = ({
         </div>
         <div className="coa-DepartmentPage__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>

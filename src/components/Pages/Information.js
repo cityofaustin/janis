@@ -62,10 +62,10 @@ const InformationPage = ({
         <div className="row">
           <div className="col-xs-12 col-md-8">
             {options.map((option, index) => (
-              <HtmlFromAdmin title={''} content={option.value} />
+              <HtmlFromAdmin content={option.value} />
             ))}
             {additionalContent && (
-              <HtmlFromAdmin title={' '} content={additionalContent} />
+              <HtmlFromAdmin content={additionalContent} />
             )}
           </div>
         </div>

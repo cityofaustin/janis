@@ -75,10 +75,14 @@ const Service = ({
               ))}
 
             {additionalContent && (
-              <HtmlFromAdmin
-                title={intl.formatMessage(i18n2.whatElse)}
-                content={additionalContent}
-              />
+              <div className="coa-HtmlFromAdmin">
+                <div className="coa-HtmlFromAdmin__content">
+                  <HtmlFromAdmin
+                    title={intl.formatMessage(i18n2.whatElse)}
+                    content={additionalContent}
+                  />
+                </div>
+              </div>
             )}
 
             {!!contacts && !!contacts.length && (
