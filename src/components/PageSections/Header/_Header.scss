@@ -190,6 +190,7 @@
   background: $coa-color-blue-darkest;
   font-size: 1.2rem;
   line-height: 3.1rem;
+  cursor: pointer;
   svg {
     vertical-align: middle;
     height: 1.6rem;
@@ -201,7 +202,6 @@
 
 .coa-Header__gov-site-toggle {
   margin-left: 0.5rem;
-  cursor: pointer;
   i {
     vertical-align: middle;
     margin-top: -0.4rem;

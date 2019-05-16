@@ -26,6 +26,7 @@ class Header extends Component {
 
     // Bind wrappers and outside-click functions
     this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.setHowYouKnowWrapperRef = this.setHowYouKnowWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
   componentDidMount() {
@@ -41,8 +42,15 @@ class Header extends Component {
     this.wrapperRef = node;
   }
 
+  // Sets up the how you know wrapper reference
+  setHowYouKnowWrapperRef(node) {
+    debugger;
+    this.howYouKnowwrapperRef = node;
+  }
+
   // Hides the menu
   handleClickOutside(event) {
+    // Full site
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       if (event.target.className !== 'coa-Header__menuIcon') {
@@ -50,6 +58,14 @@ class Header extends Component {
           topMenuActive: false,
         });
       }
+    }
+
+    // How you know
+    if (this.howYouKnowwrapperRef && !this.howYouKnowwrapperRef.contains(event.target)) {
+      // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
+      this.setState({
+        howYouKnowmenuIsOpen: false,
+      });
     }
   }
 
@@ -172,6 +188,7 @@ class Header extends Component {
           </div>
         </div>
         <HowYouKnowMenu
+          refnode={this.setHowYouKnowWrapperRef}
           open={this.state.howYouKnowmenuIsOpen}
           toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
         />
