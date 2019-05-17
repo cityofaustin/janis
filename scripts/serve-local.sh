@@ -33,7 +33,7 @@ unset EXEC
 while getopts "PSe:" opt; do
   case $opt in
     P )
-      CMS_API="https://joplin.herokuapp.com/api/graphql"
+      CMS_API="https://joplin-staging-pr-234.herokuapp.com/api/graphql"
       CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
       ;;
     S)
