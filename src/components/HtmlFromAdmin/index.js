@@ -5,138 +5,48 @@ import PropTypes from 'prop-types';
 import cheerio from 'cheerio';
 
 const HtmlFromAdmin = ({ content }) => {
-  // if(content.indexOf("<code>")) {
-  //   // If we have code blocks in there, we've got some markdown to work with
-  //   // to handle this we will parse everything from HTML into markdown and then
-  //   //
-  // }
-  // debugger;
+  // If we have code blocks in there, we've got some markdown to work with
+  if (content.includes('<code>')) {
+    // #tbt - use cheerio to do some old school dom manip
+    const $ = cheerio.load(content);
 
-  // Really hacking it together here
-  // const domParser = new DOMParser();
-  // const doc = domParser.parseFromString(content, 'text/html');
-  // var kids = [...doc.body.children];
-  var useMarkdown = false;
-  // var markdown = '';
+    const markdown = $('h1, h2, h3, h4, p, ul, ol')
+      .map((index, element) => {
+        if (
+          element.children.length &&
+          !element.children.some(child => child.type !== 'text')
+        ) {
+          return $.html(element);
+        }
 
-  // #tbt
-  const $ = cheerio.load(content);
-  // const blarg = $('p');
-  // debugger;
-
-  const blarg = $('p')[0]; //.find('*');
-
-  $('p')
-    .find('br')
-    .replaceWith('\n');
-
-  const markdown = $('p')
-    .map((index, element) => {
-      return element.children
-        .map(child => {
-          if (child.type === 'text') {
-            return $(child).text();
-          }
-
-          if (child.type === 'tag') {
-            if (child.name === 'code') {
-              // debugger;
+        return element.children
+          .map(child => {
+            if (child.type === 'text') {
               return $(child).text();
             }
-          }
 
-          return $.html(child);
-        })
-        .join('');
-    })
-    .get()
-    .join('\n');
-  // debugger;
+            if (child.type === 'tag') {
+              if (child.name === 'code') {
+                $(element)
+                  .find('br')
+                  .replaceWith('\n');
 
-  // debugger;
+                return $(child).text();
+              }
+            }
 
-  // blarg.each((index, element) => {
-  //   debugger;
-  // });
+            return $.html(child);
+          })
+          .join('');
+      })
+      .get()
+      .join('\n');
 
-  // const markdown = $('code')
-  // .map((index, element) => {
-  //   $(element)
-  //     .find('br')
-  //     .replaceWith('\n');
-  //   debugger;
-  //   console.log($(element).text());
-  //   return $(element).text();
-  // })
-  // .get()
-  // .join('\n');
-
-  // const markdown = blarg.children
-  //   .map(child => {
-  //     if (child.type === 'text') {
-  //       return $(child).text();
-  //     }
-
-  //     if (child.type === 'tag') {
-  //       if (child.name === 'code') {
-  //         debugger;
-  //         return $(child).text();
-  //       }
-  //     }
-
-  //     return $.html(child);
-
-  //     // debugger;
-  //     // $(element)
-  //     //   .find('br')
-  //     //   .replaceWith('\n');
-  //     // // debugger;
-  //     // console.log($(element));
-  //     // console.log(element.name); //.text());
-  //     // return $(child).text();
-  //   })
-  //   .join('');
-
-  // debugger;
-
-  if (markdown) {
-    debugger;
-  }
-  // debugger;
-
-  // debugger;
-  // debugger;
-
-  // for (const kid of kids) {
-  //   if (kid.lastChild.localName === 'code') {
-  //     useMarkdown = true;
-  //     markdown = markdown.concat(kid.innerText, '\n');
-  //   } else {
-  //     markdown = markdown.concat(kid.outerHTML, '\n\n');
-  //   }
-  // }
-
-  if (markdown) {
     return <ReactMarkdown source={markdown} escapeHtml={false} />;
-  } else {
-    return Parser(content);
   }
 
-  return null;
-
-  // for (var index = 0; index < kids.length; index++) {
-  //   if (kids[index].lastChild.localName === 'code') {
-  //     indexesToReplace.push(index);
-  //     tableMarkdown = tableMarkdown.concat(kids[index].innerText, '\n');
-  //   }
-  // }
-
-  // console.log(indexesToReplace);
-  // console.log(tableMarkdown);
-
-  // const stringy = kids.map(k => k.outerHTML).join('');
-
-  // return Parser(stringy);
+  // No markdown, just use Parser
+  return Parser(content);
 };
 
 HtmlFromAdmin.propTypes = {
