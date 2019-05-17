@@ -1,6 +1,6 @@
 const topServicesQuery = `
   query topServices {
-    allServicePages(first: 4) {
+    allServicePages(live:true, first:4) {
       edges {
         node {
           id
