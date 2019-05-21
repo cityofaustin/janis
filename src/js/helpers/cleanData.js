@@ -26,7 +26,6 @@ export const cleanContacts = contacts => {
         cleaned.phone = JSON.parse(cleaned.phone);
       } catch (error) {
         cleaned.phone = JSON.stringify({ default: cleaned.phone });
-        console.log('fix phone error', cleaned.phone);
       }
     }
     if (cleaned.hours && cleaned.hours.edges) {
