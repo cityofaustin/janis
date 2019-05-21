@@ -19,9 +19,16 @@ export const cleanContacts = contacts => {
   return contacts.edges.map(({ node: contact }) => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
-
-    if (cleaned.phone) {
-      cleaned.phone = JSON.parse(cleaned.phone);
+    console.log(cleaned.phone);
+    console.log(typeof cleaned.phone);
+    try {
+      if (cleaned.phone) {
+        cleaned.phone = JSON.parse(cleaned.phone);
+      }
+    } catch (e) {
+      console.log('phone error!');
+      cleaned.phone = JSON.stringify({ default: cleaned.phone });
+      console.log('new phone', cleaned.phone);
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
