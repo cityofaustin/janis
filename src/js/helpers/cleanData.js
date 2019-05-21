@@ -21,12 +21,13 @@ export const cleanContacts = contacts => {
     let cleaned = Object.assign({}, contact.contact);
 
     // quick fix re: phone numbers are current inconsiently entered on the backend
-    try {
-      if (cleaned.phone) {
+    if (cleaned.phone) {
+      try {
         cleaned.phone = JSON.parse(cleaned.phone);
+      } catch (error) {
+        cleaned.phone = JSON.stringify({ default: cleaned.phone });
+        console.log('fix phone error', cleaned.phone);
       }
-    } catch (error) {
-      cleaned.phone = JSON.stringify({ default: cleaned.phone });
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
