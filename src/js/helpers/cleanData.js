@@ -19,16 +19,14 @@ export const cleanContacts = contacts => {
   return contacts.edges.map(({ node: contact }) => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
-    console.log(cleaned.phone);
-    console.log(typeof cleaned.phone);
+
+    // quick fix re: phone numbers are current inconsiently entered on the backend
     try {
       if (cleaned.phone) {
         cleaned.phone = JSON.parse(cleaned.phone);
       }
-    } catch (e) {
-      console.log('phone error!');
+    } catch (error) {
       cleaned.phone = JSON.stringify({ default: cleaned.phone });
-      console.log('new phone', cleaned.phone);
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
