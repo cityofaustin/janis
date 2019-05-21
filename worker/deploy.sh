@@ -32,13 +32,13 @@ if [[ "$SLACK_URL" != "" ]]; then
   #
   if [[ "${SLACK_MESSAGE}" != "" ]]; then
       curl -X POST -H 'Content-type: application/json' \
-            --data "{\"text\":\"$(date) ${BUILD_ID} -- ${SLACK_MESSAGE}\"}" \
+            --data "{\"text\":\"${DEPLOYMENT_MODE} -- $(date) ${BUILD_ID} -- ${SLACK_MESSAGE}\"}" \
             $SLACK_URL;
   fi;
 
   # Now we signal that the request to build janis has been received.
   curl -X POST -H 'Content-type: application/json' \
-    --data "{\"text\":\"$(date) ${BUILD_ID} -- :coffee: We've received a request to build janis. Take a cup of coffee, you will be notified whenever it's done.\"}" \
+    --data "{\"text\":\"${DEPLOYMENT_MODE} -- $(date) ${BUILD_ID} -- :coffee: We've received a request to build janis. Take a cup of coffee, you will be notified whenever it's done.\"}" \
     $SLACK_URL;
 fi;
 
@@ -52,7 +52,7 @@ function error_message_slack {
     upload_logfile;
 
     curl -X POST -H 'Content-type: application/json' \
-    --data "{\"text\":\"$(date) ${BUILD_ID} -- :x: There was a problem building janis. Check the logs for details. ${LOG_URL}\"}" \
+    --data "{\"text\":\"${DEPLOYMENT_MODE} -- $(date) ${BUILD_ID} -- :x: There was a problem building janis. Check the logs for details. ${LOG_URL}\"}" \
     $SLACK_URL;
   fi;
 }
@@ -128,7 +128,7 @@ if [[ "$SLACK_URL" != "" ]]; then
   duration=$SECONDS;
 
   curl -X POST -H 'Content-type: application/json' \
-        --data "{\"text\":\"$(date) ${BUILD_ID} -- :white_check_mark: ${BUILD_MESSAGE} -- Build Duration: $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed. -- ${LOG_URL}\"}" \
+        --data "{\"text\":\"${DEPLOYMENT_MODE} -- $(date) ${BUILD_ID} -- :white_check_mark: ${BUILD_MESSAGE} -- Build Duration: $(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed. -- ${LOG_URL}\"}" \
         $SLACK_URL;
 fi;
 
