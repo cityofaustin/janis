@@ -1,6 +1,6 @@
 import React from 'react';
 import ExternalLink from 'components/ExternalLink';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { misc as i18n } from 'js/i18n/definitions';
 
 // The secret to using non-static routes is here.
@@ -32,18 +32,12 @@ class FourOhFour extends React.Component {
           <h1 className="coa-404__title">404</h1>
           <div className="coa-404__copy">
             <p>{this.props.intl.formatMessage(i18n.sorry404)}</p>
-
-            <FormattedMessage
-              id="misc.browseOrContact404"
-              // values={{
-              //   name: 'Eric',
-              // }}
-            />
-
             <p>
-              You can browse from the <a href="/">home page</a>, or{' '}
+              {this.props.intl.formatMessage(i18n.homeIntro404)}
+              <a href="/">{this.props.intl.formatMessage(i18n.homeLink404)}</a>
+              {this.props.intl.formatMessage(i18n.or404)}
               <ExternalLink to={'https://projects.austintexas.io/contact/'}>
-                contact us
+                {this.props.intl.formatMessage(i18n.contactUs404)}
               </ExternalLink>
               .
             </p>

@@ -75,7 +75,10 @@ export const misc = defineMessages({
   offeredBy: 'Offered by',
   relatedInfo: 'Related information',
   sorry404: "Sorry, this isn't the page you were hoping to find.",
-  browseOrContact404: 'blarg',
+  homeIntro404: 'You can browse from the ',
+  homeLink404: 'home page',
+  or404: ', or ',
+  contactUs404: 'contact us',
 });
 
 export const navigation = defineMessages({
