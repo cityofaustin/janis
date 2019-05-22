@@ -117,15 +117,18 @@ const makeThemePages = async client => {
     service.type = 'service';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
-    if (service.toplink) {
-      topics[matchingTopicIndex].topLinks.push(service);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(service);
-    }
 
-    // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
-    service.topic = topicCopy;
+    if (topics[matchingTopicIndex]) {
+      if (service.toplink) {
+        topics[matchingTopicIndex].topLinks.push(service);
+      } else {
+        topics[matchingTopicIndex].otherLinks.push(service);
+      }
+
+      // Update the topic on the page
+      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      service.topic = topicCopy;
+    }
   }
 
   // Add all information page links to topic pages
