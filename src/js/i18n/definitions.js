@@ -73,6 +73,7 @@ export const misc = defineMessages({
   learnMore: 'Learn more',
   relatedTo: 'Related to',
   offeredBy: 'Offered by',
+  relatedInfo: 'Related information',
 });
 
 export const navigation = defineMessages({
