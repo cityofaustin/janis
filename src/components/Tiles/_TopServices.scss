@@ -6,7 +6,6 @@
     border-radius: 6px;
     margin-top: -70rem;
     @include media($coa-medium-screen) {
-      margin-top: -7rem;
       border-radius: 0;
     }
     @include media($coa-large-screen) {
@@ -15,15 +14,13 @@
   }
 
   background: $coa-color-primary;
-  padding: $coa-spacing-large 0;
+  padding: ($coa-spacing-large * 1.5) 0;
   border-radius: 0;
 
   @include media($coa-medium-screen) {
-    max-width: 1080px;
-    margin-top: -7rem;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    border-radius: $coa-button-border-radius;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .coa-TileGroup__tile {
@@ -50,4 +47,10 @@
     font-size: $coa-font-size-md-small;
     margin-bottom: $coa-spacing-large;
   }
+}
+
+.coa-TopServices__container {
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
 }

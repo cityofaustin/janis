@@ -8,7 +8,8 @@ import Tile from './Tile';
 const TopServices = ({ tiles, title, url, locale, extraClasses }) =>
   !!tiles.length && (
     <div className={`coa-TopServices ${extraClasses ? extraClasses : ''}`}>
-      <div className="wrapper container-fluid">
+      <div className="coa-TopServices__container">
+        <div className="wrapper container-fluid">
         {title && url && (
           <h4 className="coa-TopServices__title">
             <I18nLink to={url}>
@@ -46,6 +47,7 @@ const TopServices = ({ tiles, title, url, locale, extraClasses }) =>
             ) : null;
           })}
         </div>
+      </div>
       </div>
     </div>
   );

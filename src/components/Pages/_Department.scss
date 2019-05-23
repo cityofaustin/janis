@@ -172,7 +172,7 @@
   padding: $coa-spacing-large 2rem;
 
   @include media($coa-large-screen) {
-    padding-top: 17.5rem;
+    padding-top: $coa-spacing-large;
     padding-bottom: $coa-spacing-large;
   }
 }
@@ -183,7 +183,6 @@
 
   .coa-TopServices {
     @include media($coa-large-screen) {
-      position: absolute;
       left: 0;
       right: 0;
     }
