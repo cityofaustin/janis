@@ -11,6 +11,12 @@
 
 .coa-TopicCollectionCard {
   display: flex;
+
+  // IE is having flexbox issues, it still looks OK in block mode with this
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    display: block !important;
+  }
+
   flex-direction: column;
   margin-bottom: $coa-spacing-medium;
   background: $coa-color-grey;
