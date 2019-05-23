@@ -54,7 +54,10 @@ class Header extends Component {
     // Full site
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
-      if (event.target.className !== 'coa-Header__menuIcon') {
+      if (
+        event.target.className !== 'coa-Header__menuIcon' &&
+        event.target.parentElement.className !== 'coa-Header__menuIcon'
+      ) {
         this.setState({
           topMenuActive: false,
         });
@@ -62,7 +65,10 @@ class Header extends Component {
     }
 
     // How you know
-    if (this.howYouKnowwrapperRef && !this.howYouKnowwrapperRef.contains(event.target)) {
+    if (
+      this.howYouKnowwrapperRef &&
+      !this.howYouKnowwrapperRef.contains(event.target)
+    ) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       this.setState({
         howYouKnowmenuIsOpen: false,
