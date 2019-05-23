@@ -3,7 +3,8 @@
   display: none;
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
+  max-width: $coa-top-menu-max-width;
 }
 
 .coa-HowYouKnowMenu--is-open {

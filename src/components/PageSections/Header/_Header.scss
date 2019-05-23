@@ -5,6 +5,12 @@
   color: $coa-color-white;
 }
 
+.coa-Header--container {
+  max-width: $coa-top-menu-max-width;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 // .coa-Header--menu-is-open ~ main,
 // .coa-Header--menu-is-open ~ footer {
 //   display: block;
