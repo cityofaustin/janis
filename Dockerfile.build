@@ -1,7 +1,7 @@
 # ============================================
 # Build the files
 # ============================================
-FROM node AS builder
+FROM node:12 AS builder
 
 RUN mkdir -p /app/_dist
 WORKDIR /app
