@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
-const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, headerText }) => (
+const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, headerText, extraClasses }) => (
   <div className="coa-HeroHome__container">
     <ResponsiveImage
       className="coa-PageBannerImage"
@@ -15,7 +15,7 @@ const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, hea
       altText={imageTitle}
     />
     <div
-      className="coa-PageBannerCover"
+      className={`coa-PageBannerCover ${extraClasses ? extraClasses : ''}`}
       role="img"
       aria-label={imageTitle}
     >
