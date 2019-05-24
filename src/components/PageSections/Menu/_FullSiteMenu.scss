@@ -64,12 +64,27 @@
     padding: 0;
   }
 }
+$coa-menu-border-width: 1px;
+$coa-menu-bodercolor: #0049C7;
 
 //removing css hover .coa-FullSiteMenu:hover
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
   border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
 
+
+  &:before {
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+    border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+    border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    left: 0;
+    position: absolute;
+  }
   .coa-ThemesNav {
     border-top: none;
   }
@@ -79,6 +94,16 @@
   }
 
   .coa-FullSiteMenu__subNav {
+    &:before {
+      content: '';
+      height: 100%;
+      width: 100%;
+      border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+      border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+      border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
+      position: absolute;
+      left: 0;
+    }
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
@@ -101,13 +126,13 @@
     width: 25%;
     padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
 
-    &:nth-child(n + 5) {
+    &:nth-child(-n+4) {
       &:before {
         content: '';
-        width: 80%;
-        border-top: 1px solid $coa-color-dark-grey;
+        width: 95%;
+        border-bottom: 1px solid #dbdee1;
         position: absolute;
-        top: 0;
+        bottom: 0;
       }
     }
   }
@@ -157,8 +182,9 @@
 }
 
 .coa-MenuInfo {
-  background: $coa-color-dark-blue;
+  background: #F8F9FA;
   display: none;
+  border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
 
   @include media($coa-medium-screen) {
     display: block;
@@ -174,7 +200,7 @@
 
 .coa-MenuInfo__disclaimer {
   font-size: $coa-font-size-small;
-  color: $coa-color-white;
+  color: #2D2E2F;
   flex: 1 0 50%;
 }
 
@@ -199,10 +225,15 @@
     height: 4rem;
     padding: 0.5rem;
   }
+
+  i {
+    color: #0049C7;
+    font-size: 4.5rem;
+  }
 }
 
 .coa-MenuInfo__link {
-  color: $coa-color-white;
+  color: #0049C7;
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
