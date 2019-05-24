@@ -15,7 +15,9 @@ const ExternalLink = ({ to, noIcon, children, intl }) => (
     aria-label={intl.formatMessage(i18n.openInNewWindow)}
   >
     {children}
-    {!noIcon && <ExternalLinkSVG />}
+    {!noIcon && <i className="material-icons coa-ExternalLinkMaterial">
+      open_in_new
+    </i>}
   </a>
 );
 
