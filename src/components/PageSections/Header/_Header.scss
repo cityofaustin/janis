@@ -5,6 +5,12 @@
   color: $coa-color-white;
 }
 
+.coa-Header--container {
+  max-width: $coa-top-menu-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 // .coa-Header--menu-is-open ~ main,
 // .coa-Header--menu-is-open ~ footer {
 //   display: block;
@@ -107,6 +113,7 @@
 }
 
 .coa-Header__right-controls-wrapper {
+  order: 3;
   align-items: center;
   justify-content: flex-end;
   margin-right: 2rem;
@@ -190,6 +197,8 @@
   background: $coa-color-blue-darkest;
   font-size: 1.2rem;
   line-height: 3.1rem;
+  cursor: pointer;
+  border-radius: 0px 0px 4px 4px;
   svg {
     vertical-align: middle;
     height: 1.6rem;
@@ -201,7 +210,6 @@
 
 .coa-Header__gov-site-toggle {
   margin-left: 0.5rem;
-  cursor: pointer;
   i {
     vertical-align: middle;
     margin-top: -0.4rem;

@@ -6,10 +6,9 @@ import { injectIntl } from 'react-intl';
 
 const GovSite = ({ intl, toggleHowYouKnowMenu, menuIsOpen }) => (
   <div className="coa-Header__gov-site">
-    <div className="container-fluid wrapper">
-      <DomeSVG />
+    <div className="container-fluid wrapper center-xs" onClick={toggleHowYouKnowMenu}>
       {intl.formatMessage(i18n1.coaOfficialWeb)}
-      <span className="coa-Header__gov-site-toggle" onClick={toggleHowYouKnowMenu}>
+      <span className="coa-Header__gov-site-toggle">
         {menuIsOpen ? <i className="material-icons">remove</i> : <i className="material-icons">add</i>}
       </span>
     </div>

@@ -81,6 +81,7 @@
   .coa-FullSiteMenu__subNav {
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
+    z-index: 2;
   }
 }
 

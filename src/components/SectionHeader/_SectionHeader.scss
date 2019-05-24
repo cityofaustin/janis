@@ -1,9 +1,9 @@
 .coa-SectionHeader {
-  color: $coa-color-primary;
-  border-bottom: 4px solid $coa-color-half-primary;
+  color: $coa-color-decently-black;
   padding-top: $coa-spacing-large;
   font-size: 2.4rem;
   font-weight: bold;
+  margin-bottom: $coa-space-level4;
 
   @include media($coa-medium-screen) {
     padding-top: $coa-spacing-xlarge;
