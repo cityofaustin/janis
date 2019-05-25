@@ -93,13 +93,14 @@
     @include media($coa-medium-screen) {
       &:before {
         content: '';
-        height: 100%;
+        height: calc(100% + 1px);
         width: 100%;
         border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
         border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
         border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
         position: absolute;
         left: 0;
+        top: -1px;
         border-bottom-left-radius: $coa-menu-border-radius;
         border-bottom-right-radius: $coa-menu-border-radius;
       }
