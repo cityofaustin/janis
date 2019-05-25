@@ -98,12 +98,16 @@
         border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
         position: absolute;
         left: 0;
+        border-bottom-left-radius: $coa-menu-border-radius;
+        border-bottom-right-radius: $coa-menu-border-radius;
       }
     }
 
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
+    border-bottom-left-radius: $coa-menu-border-radius;
+    border-bottom-right-radius: $coa-menu-border-radius;
   }
 }
 
@@ -182,6 +186,8 @@
   background: #F8F9FA;
   display: none;
   border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-bottom-left-radius: $coa-menu-border-radius;
+  border-bottom-right-radius: $coa-menu-border-radius;
 
   @include media($coa-medium-screen) {
     display: block;
