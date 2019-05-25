@@ -9,6 +9,7 @@
 .coa-ThemesNav {
   display: flex;
   align-items: center;
+  padding: 0 2rem;
 
   @include media($coa-large-screen) {
     border-top: 1px solid rgba($coa-color-white, 0.5);
@@ -53,7 +54,8 @@
   padding: $coa-spacing-medium $coa-space-level7 $coa-spacing-medium 0;
 }
 
-.coa-FullSiteMenu__topNav {
+
+.coa-ThemesNav--open {
   border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
   border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
   border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
