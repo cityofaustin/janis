@@ -53,6 +53,14 @@
   padding: $coa-spacing-medium $coa-space-level7 $coa-spacing-medium 0;
 }
 
+.coa-FullSiteMenu__topNav {
+  border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 .coa-FullSiteMenu__subNav {
   display: none;
   background: $coa-color-white;
@@ -64,30 +72,12 @@
     padding: 0;
   }
 }
-$coa-menu-border-width: 1px;
-$coa-menu-bodercolor: #0049C7;
+
 
 //removing css hover .coa-FullSiteMenu:hover
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
   border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
-
-  @include media($coa-medium-screen) {
-    &:before {
-      content: ' ';
-      height: 100%;
-      width: 100%;
-      border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
-      border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-      border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      left: 0;
-      position: absolute;
-    }
-  }
-
-
 
   .coa-ThemesNav {
     border-top: none;
