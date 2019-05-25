@@ -72,19 +72,23 @@ $coa-menu-bodercolor: #0049C7;
   background: $coa-color-white;
   border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
 
-
-  &:before {
-    content: ' ';
-    height: 100%;
-    width: 100%;
-    border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
-    border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-    border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    left: 0;
-    position: absolute;
+  @include media($coa-medium-screen) {
+    &:before {
+      content: ' ';
+      height: 100%;
+      width: 100%;
+      border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+      border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+      border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      left: 0;
+      position: absolute;
+    }
   }
+
+
+
   .coa-ThemesNav {
     border-top: none;
   }
@@ -94,16 +98,19 @@ $coa-menu-bodercolor: #0049C7;
   }
 
   .coa-FullSiteMenu__subNav {
-    &:before {
-      content: '';
-      height: 100%;
-      width: 100%;
-      border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-      border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-      border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
-      position: absolute;
-      left: 0;
+    @include media($coa-medium-screen) {
+      &:before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+        border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+        border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
+        position: absolute;
+        left: 0;
+      }
     }
+
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
