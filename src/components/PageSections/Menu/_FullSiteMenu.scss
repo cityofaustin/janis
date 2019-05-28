@@ -54,7 +54,6 @@
   padding: $coa-spacing-medium $coa-space-level7 $coa-spacing-medium 0;
 }
 
-
 .coa-ThemesNav--open {
   border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
   border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
@@ -74,7 +73,6 @@
     padding: 0;
   }
 }
-
 
 //removing css hover .coa-FullSiteMenu:hover
 .coa-FullSiteMenu--active {
@@ -130,7 +128,7 @@
     width: 25%;
     padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
 
-    &:nth-child(-n+4) {
+    &:nth-child(-n + 4) {
       &:before {
         content: '';
         width: 95%;
@@ -186,7 +184,7 @@
 }
 
 .coa-MenuInfo {
-  background: #F8F9FA;
+  background: $coa-color-grey;
   display: none;
   border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
   border-bottom-left-radius: $coa-menu-border-radius;
@@ -206,7 +204,7 @@
 
 .coa-MenuInfo__disclaimer {
   font-size: $coa-font-size-small;
-  color: #2D2E2F;
+  color: $coa-color-decently-black;
   flex: 1 0 50%;
 }
 
@@ -233,13 +231,13 @@
   }
 
   i {
-    color: #0049C7;
+    color: $coa-color-primary;
     font-size: 4.5rem;
   }
 }
 
 .coa-MenuInfo__link {
-  color: #0049C7;
+  color: $coa-color-primary;
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
