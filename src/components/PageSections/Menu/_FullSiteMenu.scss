@@ -9,6 +9,7 @@
 .coa-ThemesNav {
   display: flex;
   align-items: center;
+  padding: 0 2rem;
 
   @include media($coa-large-screen) {
     border-top: 1px solid rgba($coa-color-white, 0.5);
@@ -53,6 +54,14 @@
   padding: $coa-spacing-medium $coa-space-level7 $coa-spacing-medium 0;
 }
 
+.coa-ThemesNav--open {
+  border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 .coa-FullSiteMenu__subNav {
   display: none;
   background: $coa-color-white;
@@ -79,9 +88,27 @@
   }
 
   .coa-FullSiteMenu__subNav {
+    @include media($coa-medium-screen) {
+      &:before {
+        content: '';
+        height: calc(100% + 1px);
+        width: 100%;
+        border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+        border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+        border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
+        position: absolute;
+        left: 0;
+        top: -1px;
+        border-bottom-left-radius: $coa-menu-border-radius;
+        border-bottom-right-radius: $coa-menu-border-radius;
+      }
+    }
+
     display: block;
     border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
+    border-bottom-left-radius: $coa-menu-border-radius;
+    border-bottom-right-radius: $coa-menu-border-radius;
   }
 }
 
@@ -101,13 +128,13 @@
     width: 25%;
     padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
 
-    &:nth-child(n + 5) {
+    &:nth-child(-n + 4) {
       &:before {
         content: '';
-        width: 80%;
-        border-top: 1px solid $coa-color-dark-grey;
+        width: 95%;
+        border-bottom: 1px solid #dbdee1;
         position: absolute;
-        top: 0;
+        bottom: 0;
       }
     }
   }
@@ -157,8 +184,11 @@
 }
 
 .coa-MenuInfo {
-  background: $coa-color-dark-blue;
+  background: $coa-color-grey;
   display: none;
+  border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+  border-bottom-left-radius: $coa-menu-border-radius;
+  border-bottom-right-radius: $coa-menu-border-radius;
 
   @include media($coa-medium-screen) {
     display: block;
@@ -174,7 +204,7 @@
 
 .coa-MenuInfo__disclaimer {
   font-size: $coa-font-size-small;
-  color: $coa-color-white;
+  color: $coa-color-decently-black;
   flex: 1 0 50%;
 }
 
@@ -199,10 +229,15 @@
     height: 4rem;
     padding: 0.5rem;
   }
+
+  i {
+    color: $coa-color-primary;
+    font-size: 4.5rem;
+  }
 }
 
 .coa-MenuInfo__link {
-  color: $coa-color-white;
+  color: $coa-color-primary;
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
