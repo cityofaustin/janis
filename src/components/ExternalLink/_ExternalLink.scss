@@ -1,8 +1,11 @@
 .coa-ExternalLink {
-  color: $coa-color-decently-black;
-  &:visited {
-    color: $coa-color-decently-black;
-  }
+  opacity: .75 !important;
+  text-transform: capitalize !important;
+  text-decoration: none;
+  &:hover {
+    opacity: 1.0 !important;
+  };
+
   svg {
     margin-left: $coa-space-level1;
     vertical-align: middle;
@@ -19,4 +22,11 @@
       margin-left: 0;
     }
   }
+}
+
+.coa-ExternalLinkMaterial {
+  padding: 0 3px;
+  font-size: 16px;
+  position: relative;
+  top: 3px;
 }

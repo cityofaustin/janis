@@ -59,6 +59,7 @@ const Department = ({
           title={intl.formatMessage(i18n.topServices)}
           tiles={topServices}
           locale={intl.locale}
+          extraClasses="coa-TopServicesDepartment"
         />
         <RelatedContent />
       </div>
@@ -79,6 +80,7 @@ const Department = ({
       </Head>
       {image && (
         <PageBanner
+          extraClasses="coa-PageBannerCoverDepartment"
           imagesPath={`${process.env.CMS_MEDIA}/images`}
           imageFilename={path.basename(
             image.filename,
