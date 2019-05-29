@@ -34,3 +34,25 @@
     margin-top: $coa-space-level6;
   }
 }
+
+.coa-PageBannerCoverDepartment {
+  flex-direction: column;
+  padding: $coa-space-level7 0;
+  height: 12rem;
+  color: $coa-color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $coa-color-primary;
+  @include media($coa-medium-screen) {
+    height: 30rem;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  @include media($coa-large-screen) {
+    height: 30rem;
+  }
+  .usa-search {
+    margin-top: $coa-space-level6;
+  }
+}

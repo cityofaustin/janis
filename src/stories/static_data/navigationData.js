@@ -463,7 +463,7 @@ const staticNavData = {
     },
     {
       url: '/themes/explore-visit',
-      text: 'Explore y visite',
+      text: 'Explorar y visitar',
       id: 'VGhlbWVOb2RlOjU=',
       description: '',
       topics: [
