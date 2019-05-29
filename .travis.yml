@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10"
+  - "12"
 dist: trusty
 
 # We only deploy for staging and production as well as a PR.
@@ -27,6 +27,7 @@ jobs:
   - stage: Build Janis & Deploy
     script:
     # First we build it (yarn, yarn build)
+    - janis_build_worker
     - janis_build
     # Once built we deploy to S3 bucket
     after_success:

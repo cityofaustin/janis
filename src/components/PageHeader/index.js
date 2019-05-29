@@ -10,12 +10,18 @@ const PageHeader = ({ description, children, contentType }) => (
     }
   >
     <div className="wrapper container-fluid">
-      <h1>{children}</h1>
-      {description && (
-        <p className="coa-PageHeader__description">{description}</p>
-      )}
+      <div className="row">
+        <div className="col-xs-12 col-md-8">
+          <h1>{children}</h1>
+          {description && (
+            <p className="coa-PageHeader__description">{description}</p>
+          )}
 
-      {contentType && contentType === 'information' ? <SectionHeader /> : null}
+          {contentType && contentType === 'information' ? (
+            <SectionHeader />
+          ) : null}
+        </div>
+      </div>
     </div>
   </div>
 );

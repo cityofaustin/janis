@@ -22,30 +22,6 @@ import jsonFileData from '__tmpdata/pages';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
 
-const TopServiceButtons = ({ topServices, locale }) => (
-  <div className="coa-DepartmentPage__topServiceButtons">
-    {topServices &&
-      topServices.map(service => {
-        // If our link type matches our locale, render it
-        if (service.type.substr(-2) === locale) {
-          return (
-            <a
-              href={service.value.url}
-              className="coa-DepartmentPage__topServiceButton"
-            >
-              <div className="coa-DepartmentPage__topServiceButtonText">
-                {service.value.title}
-              </div>
-              <div className="coa-DepartmentPage__topServiceButtonArrow">
-                <i className="material-icons">arrow_forward</i>
-              </div>
-            </a>
-          );
-        }
-      })}
-  </div>
-);
-
 const Department = ({
   department: {
     title,
@@ -57,10 +33,44 @@ const Department = ({
     socialMedia,
     jobListings,
     topServices,
+    relatedLinks,
   },
   intl,
 }) => {
-  const relatedLinks = get(jsonFileData, 'departmentpage.projectsRelated', []);
+  const RelatedContent = () => (
+    <div className="coa-DepartmentPage__related-container">
+      <h2 className="coa-DepartmentPage__related-title">{intl.formatMessage(i18n2.relatedInfo)}</h2>
+      <ul className="coa-DepartmentPage__related-list">
+        {relatedLinks.map((l, index) => (
+          <li key={index} className="coa-DepartmentPage__related-item">
+            <a href={l.url} className="coa-DepartmentPage__related-link">
+              {l.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+  const TopServicesRelatedContent = () =>
+    // if we render both TopServices and Related, wrap them in a div
+    topServices.length > 0 && !!relatedLinks.length ? (
+      <div className="coa-TopServicesRelatedContent">
+        <TopServices
+          title={intl.formatMessage(i18n.topServices)}
+          tiles={topServices}
+          locale={intl.locale}
+        />
+        <RelatedContent />
+      </div>
+    ) : topServices.length > 0 ? (
+      <TopServices
+        title={intl.formatMessage(i18n.topServices)}
+        tiles={topServices}
+        locale={intl.locale}
+      />
+    ) : !!relatedLinks.length ? (
+      <RelatedContent />
+    ) : null;
 
   return (
     <div>
@@ -80,11 +90,7 @@ const Department = ({
         />
       )}
 
-      <TopServices
-        title={intl.formatMessage(i18n.topServices)}
-        tiles={topServices}
-        locale={intl.locale}
-      />
+      <TopServicesRelatedContent />
 
       <div className="coa-DepartmentPage__all-of-the-content">
         <div className="coa-DepartmentPage__main-content">
@@ -98,9 +104,8 @@ const Department = ({
             </h2>
             <p>{mission}</p>
             <div className="coa-DepartmentPage__contacts-mobile">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
-              )}
+              {!!contacts &&
+                !!contacts.length && <ContactDetails contact={contacts[0]} />}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -137,9 +142,8 @@ const Department = ({
         </div>
         <div className="coa-DepartmentPage__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contact={contacts[0]} />
-            )}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contact={contacts[0]} />}
           </div>
         </div>
       </div>

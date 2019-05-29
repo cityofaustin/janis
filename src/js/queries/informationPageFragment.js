@@ -5,6 +5,8 @@ const informationPageFragment = `
     slug
     department {
       id
+      slug
+      title
     }
     topics {
       edges {

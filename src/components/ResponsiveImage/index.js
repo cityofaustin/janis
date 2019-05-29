@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import objectFitImages from 'object-fit-images';
 
-const ResponsiveImage = ({ filename, extension, widths, defaultWidth, altText, ...rest }) => {
-  const sources = widths.map(w => `${filename}.width-${w}.${extension} ${w}w`).toString();
+const ResponsiveImage = ({
+  filename,
+  extension,
+  widths,
+  defaultWidth,
+  altText,
+  ...rest
+}) => {
+  const sources = widths
+    .map(w => `${filename}.width-${w}.${extension} ${w}w`)
+    .toString();
   // fallbackSrc is for browsers that don't support srcSet
-  const fallbackSrc = `${filename}.${defaultWidth + extension}`
+  const fallbackSrc = `${filename}.${defaultWidth}.${extension}`;
 
-  return (
-    <img srcSet={sources}
-         src={fallbackSrc}
-         alt={altText}
-         {...rest} />
-  );
+  objectFitImages();
+
+  return <img srcSet={sources} src={fallbackSrc} alt={altText} {...rest} />;
 };
 
 ResponsiveImage.propTypes = {

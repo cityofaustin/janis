@@ -20,8 +20,13 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
+    // quick fix re: phone numbers are current inconsiently entered on the backend
     if (cleaned.phone) {
-      cleaned.phone = JSON.parse(cleaned.phone);
+      try {
+        cleaned.phone = JSON.parse(cleaned.phone);
+      } catch (error) {
+        cleaned.phone = JSON.stringify({ default: cleaned.phone });
+      }
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
@@ -55,7 +60,6 @@ export const cleanLinks = (links, pageType) => {
     return links.edges.map(({ node: link }) => {
       link.topics = link.topicCollectionPages.edges.map(e => e.node);
       link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
       return link;
     });
   }
@@ -63,6 +67,7 @@ export const cleanLinks = (links, pageType) => {
   // Topic Collections
   if (pageType === 'topiccollection') {
     return links.edges.map(({ node: link }) => {
+      link.topics = [];
       link.url = `${pathPrefix || ''}/${link.slug}`;
       link.text = link.title;
 
@@ -117,7 +122,11 @@ export const cleanLinks = (links, pageType) => {
               linkCopy.slug = link.slug || link.sortOrder;
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
+
+              // Give it all the parts to get back to theme
               linkCopy.topic = topic;
+              linkCopy.topiccollection = topiccollection;
+              linkCopy.theme = topiccollection.theme;
               linkCopy.toplink = toplink;
 
               cleanedLinks.push(linkCopy);
@@ -226,6 +235,7 @@ export const cleanDepartments = allDepartments => {
     department.directors = cleanDepartmentDirectors(
       department.departmentDirectors,
     );
+    department.relatedLinks = [];
     return department;
   });
 };
@@ -260,14 +270,34 @@ export const cleanThemes = allThemes => {
   return cleanedThemes;
 };
 
-export const cleanNavigation = navigation => {
+export const cleanNavigation = (navigation, lang) => {
   const { allThemes } = navigation;
 
   if (!allThemes || !allThemes.edges) return null;
 
+  let title;
+  switch (lang) {
+    case 'en':
+      title = 'Departments';
+      break;
+    case 'es':
+      title = 'Departamentos';
+      break;
+  }
+
   let cleanedNavigation = cleanLinks(allThemes, 'theme');
   cleanedNavigation.map(theme => {
     theme.topics = cleanTopics(theme.topics);
+
+    // Add departments page link to menu
+    if (theme.slug === 'government-business') {
+      theme.topicCollectionPages.edges.push({
+        node: {
+          url: '/departments',
+          title: title,
+        },
+      });
+    }
   });
 
   return cleanedNavigation;

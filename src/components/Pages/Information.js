@@ -13,14 +13,16 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
-import TileGroup from 'components/Tiles/TileGroup';
+import ContextualNav from 'components/PageSections/ContextualNav';
 
 const InformationPage = ({
   informationPage: {
     text: title,
     slug,
-    // topic,
-    // topic: { theme },
+    topic,
+    topics,
+    theme,
+    department,
     toplink,
     description,
     options,
@@ -34,16 +36,13 @@ const InformationPage = ({
     <Head>
       <title>{title}</title>
     </Head>
-    <div className="coa_InformationPage__back-to-dept">
-      <div className="wrapper container-fluid">
-        <a href={intl.formatMessage(i18n2.opoDeptUrl)}>
-          <i className="material-icons coa_InformationPage__arrow">
-            arrow_back
-          </i>
-          <span>{intl.formatMessage(i18n2.opoName)}</span>
-        </a>
-      </div>
-    </div>
+    <ContextualNav
+      topic={topic}
+      topics={topics}
+      topiccollection={topic && topic.topiccollection}
+      theme={theme}
+      department={department}
+    />
     {image && (
       <PageBanner
         imagesPath={`${process.env.CMS_MEDIA}/images`}
@@ -55,11 +54,6 @@ const InformationPage = ({
         imageTitle={image.title}
       />
     )}
-    {/* to likely replace with microsite breadcrumb <PageBreadcrumbs
-      grandparent={{ ...theme, subpath: 'themes' }}
-      parent={{ ...topic, subpath: 'topics' }}
-      title={title}
-    /> */}
     <div>
       <PageHeader contentType={'information'} description={description}>
         {title}

@@ -1,0 +1,55 @@
+.coa-ContextualNav {
+  background: $coa-color-secondary;
+  border-bottom: 1px solid $coa-color-grey;
+  padding: $coa-spacing-small 0;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.coa-ContextualNav__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.coa-ContextualNav__parent {
+  flex: 1;
+}
+
+.coa-ContextualNav__arrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  font-weight: $coa-font-semibold;
+}
+
+.coa-ContextualNav__related {
+  display: none;
+
+  @include media($coa-medium-screen) {
+    display: block;
+    flex: 1;
+    text-align: center;
+    font-size: $coa-font-size-xsmall;
+    line-height: $coa-line-height-xsmall;
+  }
+}
+
+.coa-ContextualNav__label {
+  font-weight: $coa-font-medium;
+}
+
+.coa-ContextualNav__dept {
+  display: none;
+
+  @include media($coa-medium-screen) {
+    display: block;
+    flex: 1;
+    text-align: right;
+    font-size: $coa-font-size-xsmall;
+  }
+}

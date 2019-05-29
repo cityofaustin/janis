@@ -40,12 +40,25 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      const topServices = cleanLinks(allServicePages, 'service');
+      let topServices = cleanLinks(allServicePages, 'service');
+
+      // Make sure we don't have any dupes in top services
+      topServices = topServices.filter(
+        (service, index) =>
+          index === topServices.findIndex(s => s.id === service.id),
+      );
+
+      // Quick little hack to get homepage top services
+      // working with TopServices component
+      for (var service of topServices) {
+        service.type = !!langCode ? langCode : 'en';
+      }
+
       return {
         topServices,
         image: {
-          file: 'lady-bird-lake',
-          title: 'Lady Bird Lake walking trail',
+          file: 'tomek-baginski-593896-unsplash',
+          title: 'Lady Bird Lake',
         },
       };
     },
@@ -76,21 +89,56 @@ const makeThemePages = async client => {
   );
   const services = cleanServices(allServices);
 
+  // Add all topic links to topic collection pages
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
+    if (matchingTopicCollectionIndex !== -1) {
+      topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+    }
+  }
+
+  // And now that we have all the topics on each topic collection,
+  // let's update the topic collections on the topics
+  for (var topic of topics) {
+    let matchingTopicCollectionIndex = topicCollections.findIndex(
+      tc => tc.id === topic.topiccollection.id,
+    );
+
+    if (matchingTopicCollectionIndex !== -1) {
+      // Update the topicCollection on the topic
+      const topicCollectionCopy = JSON.parse(
+        JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
+      );
+      topic.topiccollection = topicCollectionCopy;
+    }
+  }
+
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
+    service.type = 'service';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
-    if (service.toplink) {
-      topics[matchingTopicIndex].topLinks.push(service);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(service);
+
+    if (topics[matchingTopicIndex]) {
+      if (service.toplink) {
+        topics[matchingTopicIndex].topLinks.push(service);
+      } else {
+        topics[matchingTopicIndex].otherLinks.push(service);
+      }
+
+      // Update the topic on the page
+      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      service.topic = topicCopy;
     }
   }
 
   // Add all information page links to topic pages
   for (var page of informationPages) {
     if (!page.topic) continue;
+    page.type = 'info';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
     if (page.toplink) {
@@ -98,6 +146,10 @@ const makeThemePages = async client => {
     } else {
       topics[matchingTopicIndex].otherLinks.push(page);
     }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    page.topic = topicCopy;
   }
 
   const { allProcesses } = await client.request(allProcessesQuery);
@@ -182,6 +234,14 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
+  for (var page of informationPages) {
+    for (var department of departments) {
+      if (page.department !== null && page.department.id === department.id) {
+        department.relatedLinks.push(page);
+      }
+    }
+  }
+
   // const { allServicePages: allServices } = await client.request(
   //   allServicePagesQuery,
   // );
@@ -190,49 +250,61 @@ const makeDepartmentPages = async client => {
   const { allProcesses } = await client.request(allProcessesQuery);
   const processes = cleanProcesses(allProcesses);
 
-  const data = departments.map(department => ({
-    path: `/${department.slug}`,
-    component: 'src/components/Pages/Department',
-    getData: async () => ({
-      department,
-    }),
-    children: informationPages
-      .filter(i => i.department != null && i.department.id == department.id)
-      .map(informationPage => ({
-        path: `/${informationPage.slug}`,
-        component: 'src/components/Pages/Information',
-        getData: async () => ({
-          informationPage,
-        }),
-      }))
-      // .concat(
-      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-      //     path: `/${service.slug}`,
-      //     component: 'src/components/Pages/Service',
-      //     getData: async () => ({
-      //       service,
-      //     }),
-      //   }))
-      // )
-      .concat(
-        processes
-          .filter(p => p.department != null && p.department.id == department.id)
-          .map(process => ({
-            path: `/${process.slug}`,
-            component: 'src/components/Pages/Process',
-            getData: async () => ({
-              process,
-            }),
-            children: process.processSteps.map(processStep => ({
-              path: `/${processStep.slug}`,
-              component: 'src/components/Pages/ProcessStep',
+  const data = departments
+    .map(department => ({
+      path: `/${department.slug}`,
+      component: 'src/components/Pages/Department',
+      getData: async () => ({
+        department,
+      }),
+      children: informationPages
+        .filter(i => i.department != null && i.department.id == department.id)
+        .map(informationPage => ({
+          path: `/${informationPage.slug}`,
+          component: 'src/components/Pages/Information',
+          getData: async () => ({
+            informationPage,
+          }),
+        }))
+        // .concat(
+        //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+        //     path: `/${service.slug}`,
+        //     component: 'src/components/Pages/Service',
+        //     getData: async () => ({
+        //       service,
+        //     }),
+        //   }))
+        // )
+        .concat(
+          processes
+            .filter(
+              p => p.department != null && p.department.id == department.id,
+            )
+            .map(process => ({
+              path: `/${process.slug}`,
+              component: 'src/components/Pages/Process',
               getData: async () => ({
-                processStep,
+                process,
               }),
+              children: process.processSteps.map(processStep => ({
+                path: `/${processStep.slug}`,
+                component: 'src/components/Pages/ProcessStep',
+                getData: async () => ({
+                  processStep,
+                }),
+              })),
             })),
-          })),
-      ),
-  }));
+        ),
+    }))
+    .concat([
+      {
+        path: '/departments',
+        component: 'src/components/Pages/Departments',
+        getData: async () => ({
+          departments,
+        }),
+      },
+    ]);
 
   return data;
 };
@@ -274,7 +346,10 @@ export default {
       const langIndex = (i - queryIndex) / queries.length;
       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
         typeof queries[queryIndex].middleware === 'function'
-          ? queries[queryIndex].middleware(response)
+          ? queries[queryIndex].middleware(
+              response,
+              SUPPORTED_LANG_CODES[langIndex],
+            )
           : response;
     });
 

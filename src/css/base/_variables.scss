@@ -74,13 +74,16 @@ $coa-color-blue-darker: #065889;
 $coa-color-blue-darkest: #023654;
 
 //new COA brand color
-$coa-color-primary: #0050d8;
+$coa-color-primary: #0049c7;
 $coa-color-half-primary: rgba(0, 80, 216, 0.5);
 $coa-color-almost-black: rgba(23, 23, 23, 1);
 $coa-color-decently-black: #212121;
-$coa-color-secondary: #d9e8f6;
+$coa-color-secondary: #f3f7fc;
+$coa-color-secondary-dark: #d9e8f6;
 $coa-color-grey: #f0f0f0;
 $coa-color-dark-grey: #dbdee1;
+$coa-color-darker-grey: #585c62;
+$coa-color-darkest-grey: #757575;
 $coa-color-dark-blue: #162e51;
 $coa-color-darker-blue: #1a4480;
 
@@ -103,6 +106,7 @@ $coa-color-gray: #919191;
 $coa-color-gray-dark: #363636;
 
 //magic numbers
+$coa-top-menu-max-width: 1160px;
 $coa-header-toprow-height: 55px;
 $coa-languageselectbar-height: 50px;
 $coa-button-border-radius: 4px;
@@ -131,10 +135,10 @@ $coa-badgelarge-step-radius: 25px;
 $coa-badgelarge-margin-lr: 22px;
 $coa-badgelarge-margin-tb: 19px;
 $coa-menu-closebtn-height: 4rem;
-$coa-herohome-height--default: 26rem;
+$coa-herohome-height--default: 100rem;
 $coa-herohome-height--medium: 40rem;
 $coa-herohome-height--large: 44rem;
-$coa-herohome-gradient: linear-gradient(
-  rgba(36, 11, 51, 0.3),
-  rgba(36, 11, 51, 0.3)
-);
+$coa-herohome-gradient: rgba(28, 35, 28, 0.3);
+$coa-menu-border-width: 1px;
+$coa-menu-border-radius: 4px;
+$coa-menu-bodercolor: #0049c7;
