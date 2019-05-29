@@ -218,8 +218,10 @@ function janis_deploy {
   S3_DESTINATION="s3://${DEPLOYMENT_BUCKET}/${PR_SLUG}"
   echo "Syncing Janis into '${S3_DESTINATION}'"
   aws s3 sync ./dist $S3_DESTINATION --delete
-  
-  echo "janis_deploy() Clearing CloudFront cache..."
-  aws cloudfront create-invalidation --distribution-id $AWS_CF_DISTRO --paths "${AWS_CF_DISTRO_PATH}";
-  echo "janis_deploy() Invalidation request submitted!";
+
+  if [ "${DEPLOYMENT_MODE}" == "PRODUCTION" ]; then
+    echo "janis_deploy() Clearing CloudFront cache..."
+    aws cloudfront create-invalidation --distribution-id $AWS_CF_DISTRO --paths "${AWS_CF_DISTRO_PATH}";
+    echo "janis_deploy() Invalidation request submitted!";
+  fi;
 }
