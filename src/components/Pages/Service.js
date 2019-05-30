@@ -27,6 +27,7 @@ const Service = ({
     additionalContent,
     contacts,
     related,
+    shortDescription
   },
   intl,
 }) => (
@@ -55,6 +56,7 @@ const Service = ({
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
+            {shortDescription && !!shortDescription.length ? <div>{shortDescription}</div> : null}
             {steps && !!steps.length ? (
               //just 1 step? don't display steps header or steps in list (ul)
               steps.length === 1 ? (
