@@ -143,13 +143,17 @@ class CMSPreview extends Component {
           path="/topic"
           render={props => {
             let topic = cleanTopics(data)[0];
-            topic.topLinks = [{ text: 'Top link' }, { text: 'Other top link' }];
-            topic.otherLinks = [
-              { text: 'First link' },
-              { text: 'Second link' },
-              { text: 'Third link' },
-              { text: 'Fourth link' },
+            topic.topLinks = [
+              { text: 'Top link', url: '' },
+              { text: 'Other top link', url: '' },
             ];
+            topic.otherLinks = [
+              { text: 'First link', url: '' },
+              { text: 'Second link', url: '' },
+              { text: 'Third link', url: '' },
+              { text: 'Fourth link', url: '' },
+            ];
+            topic.topiccollection = { topics: [], theme: {} };
 
             return <Topic topic={topic} />;
           }}
