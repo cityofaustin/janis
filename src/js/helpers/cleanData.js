@@ -207,76 +207,21 @@ export const cleanServices = allServices => {
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
 export const cleanServicesForPreview = allServices => {
-  debugger;
   if (!allServices || !allServices.edges) return null;
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
 
-  const topic = JSON.parse(`{
-  "id": "nope",
-  "slug": "preview-topic",
-  "title": "Preview Topic",
-  "description": "",
-  "topiccollections": {
-    "edges": [
-      {
-        "node": {
-          "topiccollection": {
-            "id": "nope",
-            "title": "Preview Topic Collection",
-            "slug": "preview-topic-collection",
-            "theme": {
-              "id": "VGhlbWVOb2RlOjI=",
-              "text": "Preview Theme",
-              "slug": "preview-theme"
-            }
-          }
-        }
-      }
-    ]
-  },
-  "url": "/preview-topic",
-  "text": "Preview Topic",
-  "topiccollection": {
-    "id": "nope",
-    "slug": "preview-topic-colleciton",
-    "title": "Preview Topic Collection",
-    "slug": "preview-topic-collection",
-    "theme": {
-      "id": "VGhlbWVOb2RlOjI=",
-      "text": "Preview Theme",
-      "slug": "preview-theme"
+  service.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
     },
-    "topics": [],
-    "url": "/preview-topic-collection",
-    "text": "Preview Topic Collection"
-  }
-}
-`);
-
-  const theme = JSON.parse(
-    `{"id":"nope=","text":"Theme of the week!","slug":"theme-of-the-week"}`,
-  );
-
-  service.topic = topic;
-  service.theme = theme;
+  };
+  service.theme = {};
   service.text = service.title;
 
   return service;
-
-  let cleanedServices = cleanLinks(allServices, '/services');
-  cleanedServices.map(service => {
-    service.contacts = cleanContacts(service.contacts);
-    service.related = cleanRelatedServiceLinks(service.related);
-
-    //TODO: mapblock data should include contact data when sent via joplin
-    const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
-    if (tempkey)
-      service.dynamicContent[tempkey].value['contact'] = service.contacts.length
-        ? service.contacts[0]
-        : null;
-  });
-  return cleanedServices;
 };
 
 export const cleanInformationPages = allInformationPages => {
