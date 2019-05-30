@@ -155,15 +155,18 @@ class CMSPreview extends Component {
           }}
         />
         <Route
+          path="/topiccollection"
+          render={props => {
+            let tc = cleanTopicCollections(data)[0];
+            tc.topics = [{ title: 'Sample Text' }];
+
+            return <TopicCollection tc={tc} />;
+          }}
+        />
+        <Route
           path="/department"
           render={props => (
             <Department department={cleanDepartments(data)[0]} />
-          )}
-        />
-        <Route
-          path="/topiccollection"
-          render={props => (
-            <TopicCollection topics={cleanTopicCollections(data)[0]} />
           )}
         />
       </Switch>
