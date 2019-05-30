@@ -234,6 +234,26 @@ export const cleanInformationPages = allInformationPages => {
   return cleanedInformationPages;
 };
 
+// Let's just do this for now, we'll probably need to make some changes
+// when we move to rs7 anyways
+export const cleanInformationForPreview = allInformationPages => {
+  if (!allInformationPages || !allInformationPages.edges) return null;
+  const infos = allInformationPages.edges.map(e => e.node);
+  let info = infos[0];
+
+  info.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
+    },
+  };
+  info.theme = {};
+  info.text = info.title;
+
+  return info;
+};
+
 export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 

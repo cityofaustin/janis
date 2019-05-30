@@ -13,7 +13,7 @@ import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPa
 import {
   cleanProcesses,
   cleanServicesForPreview,
-  cleanInformationPages,
+  cleanInformationForPreview,
   cleanTopics,
   cleanDepartments,
   cleanTopicCollections,
@@ -134,7 +134,9 @@ class CMSPreview extends Component {
         <Route
           path="/information"
           render={props => (
-            <InformationPage informationPage={cleanInformationPages(data)[0]} />
+            <InformationPage
+              informationPage={cleanInformationForPreview(data)}
+            />
           )}
         />
         <Route
