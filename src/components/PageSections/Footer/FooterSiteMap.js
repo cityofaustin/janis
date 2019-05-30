@@ -1,15 +1,18 @@
 import React from 'react';
 import { withSiteData } from 'react-static';
-// import footerSiteMapData from 'stories/static_data/footerSiteMapData';
 import { injectIntl } from 'react-intl';
 import ThemesTopicsMenu from 'components/PageSections/Menu/ThemesTopicsMenu';
 
 const FooterSiteMap = ({ intl, navigation }) => {
   const menu = navigation[intl.locale];
-  debugger;
   return (
     <div className="coa-FooterSiteMap">
-      <ThemesTopicsMenu menu={menu} />
+      <div className="container-fluid wrapper">
+        <ThemesTopicsMenu
+          menu={menu}
+          extraClasses={'coa-ThemesTopicsMenu--FooterSiteMap'}
+        />
+      </div>
     </div>
   );
 

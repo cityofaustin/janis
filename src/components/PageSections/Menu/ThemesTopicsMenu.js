@@ -32,7 +32,11 @@ const TopicsLinks = props =>
 const ThemesTopicsMenu = props => {
   debugger;
   return (
-    <nav className="coa-ThemesTopicsMenu">
+    <nav
+      className={`coa-ThemesTopicsMenu ${
+        props.extraClasses ? props.extraClasses : ''
+      }`}
+    >
       <ul className="coa-ThemesTopicsMenu__list">
         {props.menu.map((theme, index) => (
           <li className="coa-ThemesTopicsMenu__section" key={index}>
