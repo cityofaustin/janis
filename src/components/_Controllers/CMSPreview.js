@@ -12,7 +12,7 @@ import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevision
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import {
   cleanProcesses,
-  cleanServices,
+  cleanServicesForPreview,
   cleanInformationPages,
   cleanTopics,
   cleanDepartments,
@@ -129,7 +129,7 @@ class CMSPreview extends Component {
         />
         <Route
           path="/services"
-          render={props => <Service service={cleanServices(data)[0]} />}
+          render={props => <Service service={cleanServicesForPreview(data)} />}
         />
         <Route
           path="/information"
