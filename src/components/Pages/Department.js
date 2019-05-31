@@ -68,6 +68,7 @@ const Department = ({
         title={intl.formatMessage(i18n.topServices)}
         tiles={topServices}
         locale={intl.locale}
+        extraClasses="coa-TopServicesDepartment"
       />
     ) : !!relatedLinks.length ? (
       <RelatedContent />
