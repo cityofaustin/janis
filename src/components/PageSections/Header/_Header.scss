@@ -25,7 +25,6 @@
   // reakit stuff looking nice
   button {
     width: 100%;
-    border: inherit;
     margin: inherit;
     padding: inherit;
     font: inherit;
@@ -84,6 +83,14 @@
 }
 
 .coa-Header__center-controls {
+  // This seems kinda hacky but I'm just trying to get
+  // reakit stuff looking nice
+  button {
+    padding: 0px;
+    width: auto;
+    background: none !important;
+  }
+
   align-items: center;
   display: flex;
   justify-content: flex-start;
@@ -245,7 +252,6 @@
   font-size: $coa-font-size-xsmall;
   margin-right: 0.4rem;
   color: $coa-color-white;
-  position: absolute;
   margin-left: 2rem;
 
   i {

@@ -48,14 +48,16 @@ const Header = ({ intl, navigation, path }) => {
                 (false ? 'coa-Header__center-controls--active' : null)
               }
             >
-              <a className="coa-Header__menuIcon">
-                {false ? (
-                  <i className="material-icons">close</i>
-                ) : (
-                  <i className="material-icons">menu</i>
-                )}
-                {intl.formatMessage(i18n2.menu)}
-              </a>
+              <PopoverDisclosure {...navMenuPopover}>
+                <div className="coa-Header__menuIcon">
+                  {false ? (
+                    <i className="material-icons">close</i>
+                  ) : (
+                    <i className="material-icons">menu</i>
+                  )}
+                  {intl.formatMessage(i18n2.menu)}
+                </div>
+              </PopoverDisclosure>
               <I18nLink className="coa-Header__logo" to="/">
                 City of Austin
               </I18nLink>
