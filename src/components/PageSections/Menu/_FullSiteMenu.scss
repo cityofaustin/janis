@@ -209,6 +209,10 @@
 }
 
 .coa-MenuInfo__resource {
+  // techdebt: we may be dealing with some weird div sizing here
+  // the links weren't clickable without this fix
+  z-index: 4;
+
   display: flex;
   align-items: center;
   margin-right: $coa-spacing-small;

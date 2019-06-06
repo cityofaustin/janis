@@ -4,7 +4,7 @@ import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 
 const PageBanner = ({ imagesPath, imageFilename, imageExtension, imageTitle, headerText, extraClasses }) => (
-  <div className="coa-HeroHome__container">
+  <div className="coa-PageBanner__container">
     <ResponsiveImage
       className="coa-PageBannerImage"
       filename={`${imagesPath}/${imageFilename}`}

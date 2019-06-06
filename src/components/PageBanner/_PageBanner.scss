@@ -56,3 +56,16 @@
     margin-top: $coa-space-level6;
   }
 }
+
+.coa-PageBanner__container {
+  img {
+    position: absolute;
+    z-index: -1;
+    top: auto;
+    height: 30rem;
+    width: 100%;
+    object-fit: cover;
+    // This is for https://www.npmjs.com/package/object-fit-images
+    font-family: 'object-fit: cover;';
+  }
+}
