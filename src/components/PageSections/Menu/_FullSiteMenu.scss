@@ -237,7 +237,7 @@
 }
 
 .coa-MenuInfo__link {
-  color: $coa-color-primary;
+  color: $coa-color-primary !important; //Using !important so it doesn't turn purple
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xsmall;
