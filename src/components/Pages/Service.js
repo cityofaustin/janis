@@ -27,7 +27,7 @@ const Service = ({
     additionalContent,
     contacts,
     related,
-    shortDescription
+    shortDescription,
   },
   intl,
 }) => (
@@ -52,20 +52,18 @@ const Service = ({
         topiccollection={topic && topic.topiccollection}
         theme={theme}
       />
-      <PageHeader contentType={'service'}>{title}</PageHeader>
+      <PageHeader contentType={'service'} description={shortDescription}>
+        {title}
+      </PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            {shortDescription && !!shortDescription.length ? <div>{shortDescription}</div> : null}
             {steps && !!steps.length ? (
-              //just 1 step? don't display steps header or steps in list (ul)
+              //just 1 step? don't display steps in list (ul)
               steps.length === 1 ? (
                 <Steps steps={steps} />
               ) : (
                 <Fragment>
-                  <SectionHeader>
-                    {intl.formatMessage(i18n2.steps)}
-                  </SectionHeader>
                   <Steps steps={steps} />
                 </Fragment>
               )
