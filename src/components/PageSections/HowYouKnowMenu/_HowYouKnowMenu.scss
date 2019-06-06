@@ -1,14 +1,11 @@
 .coa-HowYouKnowMenu {
   background: $coa-color-blue-darkest;
-  display: none;
   position: fixed;
   top: 0;
   width: 100%;
   max-width: $coa-top-menu-max-width;
   border-radius: 0px 0px 4px 4px;
-}
-
-.coa-HowYouKnowMenu--is-open {
+  top: 2.9rem;
   display: inherit;
   z-index: 1;
 }
