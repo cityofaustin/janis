@@ -19,6 +19,7 @@ import NavMenu from '../Menu/NavMenu';
 
 const Header = ({ intl, navigation, path }) => {
   const govSitePopover = usePopoverState();
+  const navMenuPopover = usePopoverState();
 
   return (
     <header
@@ -75,7 +76,7 @@ const Header = ({ intl, navigation, path }) => {
         <Popover {...govSitePopover} aria-label="How you know menu">
           <HowYouKnowMenu />
         </Popover>
-        <NavMenu navigation={navigation} />
+        <NavMenu navigation={navigation} navMenuPopover={navMenuPopover} />
       </div>
     </header>
   );

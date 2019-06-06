@@ -6,34 +6,32 @@ import staticNavData from 'stories/static_data/navigationData.js';
 import MenuInfo from './MenuInfo';
 import ThemesTopicsMenu from './ThemesTopicsMenu';
 
-import { usePopoverState, Popover, PopoverDisclosure } from 'reakit/Popover';
+import { Popover, PopoverDisclosure } from 'reakit/Popover';
 
-const NavMenu = props => {
-  const navMenuPopover = usePopoverState();
-
-  return (
-    <div
-      className={
-        'coa-FullSiteMenu ' +
-        (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
-      }
-    >
-      <PopoverDisclosure {...navMenuPopover}>
-        <div className="wrapper">
-          <ThemesNav themes={staticNavData} />
-        </div>
-      </PopoverDisclosure>
+const NavMenu = props => (
+  <div
+    className={
+      'coa-FullSiteMenu ' +
+      (props.navMenuPopover.visible ? 'coa-FullSiteMenu--active' : '')
+    }
+  >
+    <PopoverDisclosure {...props.navMenuPopover}>
+      <div className="wrapper">
+        <ThemesNav
+          themes={staticNavData}
+          isTopMenuActive={props.navMenuPopover.visible}
+        />
+      </div>
+    </PopoverDisclosure>
+    <Popover {...props.navMenuPopover} aria-label="Navigation menu">
       <section className="coa-FullSiteMenu__subNav">
         <div className="wrapper container-fluid">
-          <ThemesTopicsMenu
-            menu={props.navigation}
-            handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-          />
+          <ThemesTopicsMenu menu={props.navigation} />
         </div>
         <MenuInfo />
       </section>
-    </div>
-  );
-};
+    </Popover>
+  </div>
+);
 
 export default injectIntl(NavMenu);

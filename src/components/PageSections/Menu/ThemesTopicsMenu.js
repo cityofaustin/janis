@@ -7,11 +7,7 @@ const TopicsLinks = props =>
   props.topicCollections.length > 0 ? (
     <ul className="coa-ThemesTopicsMenu__topics">
       {props.topicCollections.map((tc, index) => (
-        <li
-          key={index}
-          className="coa-ThemesTopicsMenu__topic"
-          onKeyDown={props.handleFullSiteMenuItem}
-        >
+        <li key={index} className="coa-ThemesTopicsMenu__topic">
           <a
             href={`/${props.intl.locale}${
               tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
@@ -35,15 +31,10 @@ const ThemesTopicsMenu = props => {
       <ul className="coa-ThemesTopicsMenu__list">
         {props.menu.map((theme, index) => (
           <li className="coa-ThemesTopicsMenu__section" key={index}>
-            <h4
-              className="coa-ThemesTopicsMenu__theme"
-              tabIndex="0"
-              onKeyDown={props.handleFullSiteMenuItem}
-            >
+            <h4 className="coa-ThemesTopicsMenu__theme" tabIndex="0">
               {theme.text}
             </h4>
             <TopicsLinks
-              handleFullSiteMenuItem={props.handleFullSiteMenuItem}
               topicCollections={theme.topicCollectionPages.edges}
               themeSlug={theme.slug}
               intl={props.intl}
