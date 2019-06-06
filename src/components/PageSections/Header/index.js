@@ -24,7 +24,7 @@ const Header = ({ intl, navigation, path }) => {
   return (
     <header
       className={classNames('coa-Header', {
-        'coa-Header--menu-is-open': false,
+        'coa-Header--menu-is-open': navMenuPopover.visible,
       })}
       role="banner"
     >
@@ -45,12 +45,14 @@ const Header = ({ intl, navigation, path }) => {
             <div
               className={
                 'coa-Header__center-controls ' +
-                (false ? 'coa-Header__center-controls--active' : null)
+                (navMenuPopover.visible
+                  ? 'coa-Header__center-controls--active'
+                  : null)
               }
             >
               <PopoverDisclosure {...navMenuPopover}>
                 <div className="coa-Header__menuIcon">
-                  {false ? (
+                  {navMenuPopover.visible ? (
                     <i className="material-icons">close</i>
                   ) : (
                     <i className="material-icons">menu</i>
