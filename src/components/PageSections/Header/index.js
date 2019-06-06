@@ -15,7 +15,7 @@ import GovSite from 'components/PageSections/Header/GovSite';
 
 import { usePopoverState, Popover, PopoverDisclosure } from 'reakit/Popover';
 
-import FullSiteMenu from '../Menu/FullSiteMenu';
+import NavMenu from '../Menu/NavMenu';
 
 const Header = ({ intl, navigation, path }) => {
   const govSitePopover = usePopoverState();
@@ -75,18 +75,7 @@ const Header = ({ intl, navigation, path }) => {
         <Popover {...govSitePopover} aria-label="How you know menu">
           <HowYouKnowMenu />
         </Popover>
-
-        {/*
-        <FullSiteMenu
-          // ref={node => this.node = node}
-          refnode={this.setWrapperRef}
-          navigation={navigation}
-          handleFullSiteMenuItem={this.closeFullSiteMenuItem}
-          handleFullSiteMenuOpen={this.openFullSiteMenu}
-          handleFullSiteMenuClose={this.closeFullSiteMenu}
-          isTopMenuActive={this.state.topMenuActive}
-        />
-      */}
+        <NavMenu navigation={navigation} />
       </div>
     </header>
   );

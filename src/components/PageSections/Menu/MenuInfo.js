@@ -22,11 +22,12 @@ const MenuInfo = ({ intl }) => (
         </div>
         <div className="coa-MenuInfo__resource">
           <div className="coa-MenuInfo__svg">
-            <i className="material-icons">
-              info
-            </i>
+            <i className="material-icons">info</i>
           </div>
-          <a href="https://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/" className="coa-MenuInfo__link">
+          <a
+            href="https://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/"
+            className="coa-MenuInfo__link"
+          >
             {intl.formatMessage(i18n2.moreAboutProject)}
           </a>
         </div>
