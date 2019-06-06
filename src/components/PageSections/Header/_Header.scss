@@ -3,6 +3,14 @@
   font-family: $coa-font-sans;
   background-color: $coa-color-primary;
   color: $coa-color-white;
+
+  // This seems kinda hacky but I'm just trying to get
+  // reakit stuff looking nice
+  div[role='dialog'] {
+    transform: none !important;
+    will-change: auto !important;
+    position: inherit !important;
+  }
 }
 
 .coa-Header--container {
