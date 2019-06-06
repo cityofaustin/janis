@@ -9,6 +9,20 @@
   max-width: $coa-top-menu-max-width;
   margin-left: auto;
   margin-right: auto;
+
+  font-size: 1.2rem;
+  line-height: 3.1rem;
+
+  // This seems kinda hacky but I'm just trying to get
+  // reakit stuff looking nice
+  button {
+    width: 100%;
+    border: inherit;
+    margin: inherit;
+    padding: inherit;
+    font: inherit;
+    font-size: inherit;
+  }
 }
 
 // .coa-Header--menu-is-open ~ main,
@@ -195,8 +209,6 @@
 
 .coa-Header__gov-site {
   background: $coa-color-blue-darkest;
-  font-size: 1.2rem;
-  line-height: 3.1rem;
   cursor: pointer;
   border-radius: 0px 0px 4px 4px;
   svg {
