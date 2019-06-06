@@ -35,6 +35,7 @@
     "react-router-dom": "^4.2.2",
     "react-static": "^5.9.7",
     "react-universal-component": "^2.8.1",
+    "reakit": "^1.0.0-beta.2",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"

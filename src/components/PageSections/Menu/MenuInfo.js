@@ -16,7 +16,7 @@ const MenuInfo = ({ intl }) => (
           <div className="coa-MenuInfo__svg">
             <CoaSeal />
           </div>
-          <a href="/" className="coa-MenuInfo__link">
+          <a href="https://austintexas.gov/" className="coa-MenuInfo__link">
             {intl.formatMessage(i18n2.currentSite)}
           </a>
         </div>
