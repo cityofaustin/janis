@@ -89,6 +89,7 @@
     padding: 0px;
     width: auto;
     background: none !important;
+    position: absolute;
   }
 
   align-items: center;
@@ -97,7 +98,9 @@
   order: 3;
   width: 100%;
   border-top: 1px solid rgba($coa-color-white, 0.5);
-  padding: $coa-spacing-small 0;
+
+  // Updating the padding to account for some button oddities
+  padding: $coa-spacing-small - 0.2rem 0;
 
   @include media($coa-large-screen) {
     order: unset;
