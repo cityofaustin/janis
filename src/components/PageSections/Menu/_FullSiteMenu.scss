@@ -1,8 +1,5 @@
 .coa-FullSiteMenu {
-  display: none;
-
   @include media($coa-large-screen) {
-    display: inherit;
     background: $coa-color-primary;
     position: relative;
     max-width: 1400px;
@@ -15,6 +12,14 @@
         background: none;
       }
     }
+  }
+}
+
+.coa-NavMenu__themes_wrapper {
+  display: none;
+
+  @include media($coa-large-screen) {
+    display: inherit;
   }
 }
 

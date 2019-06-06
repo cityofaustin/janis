@@ -15,14 +15,16 @@ const NavMenu = props => (
       (props.navMenuPopover.visible ? 'coa-FullSiteMenu--active' : '')
     }
   >
-    <PopoverDisclosure {...props.navMenuPopover}>
-      <div className="wrapper">
-        <ThemesNav
-          themes={staticNavData}
-          isTopMenuActive={props.navMenuPopover.visible}
-        />
-      </div>
-    </PopoverDisclosure>
+    <div className="coa-NavMenu__themes_wrapper">
+      <PopoverDisclosure {...props.navMenuPopover}>
+        <div className="wrapper">
+          <ThemesNav
+            themes={staticNavData}
+            isTopMenuActive={props.navMenuPopover.visible}
+          />
+        </div>
+      </PopoverDisclosure>
+    </div>
     <Popover {...props.navMenuPopover} aria-label="Navigation menu">
       <section className="coa-FullSiteMenu__subNav">
         <div className="wrapper container-fluid">
