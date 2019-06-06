@@ -29,7 +29,7 @@ const Header = ({ intl, navigation, path }) => {
     >
       <div className="coa-Header--container">
         <PopoverDisclosure {...govSitePopover}>
-          <GovSite />
+          <GovSite menuIsOpen={govSitePopover.visible} />
         </PopoverDisclosure>
         <div className="coa-Header__mobile-languages">
           <LanguageSelectBar path={path} />
