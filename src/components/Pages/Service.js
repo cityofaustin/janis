@@ -14,6 +14,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
+import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Service = ({
   service: {
@@ -80,7 +81,6 @@ const Service = ({
                 content={additionalContent}
               />
             )}
-
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />
             )}
@@ -94,6 +94,11 @@ const Service = ({
         tag={intl.formatMessage(i18n3.service)}
       />
       */}
+      <RelatedToMobile
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+      />
     </div>
   </div>
 );
