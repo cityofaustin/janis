@@ -11,7 +11,7 @@
   align-items: center;
   padding: 0 2rem;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     border-top: 1px solid rgba($coa-color-white, 0.5);
   }
 }
@@ -20,7 +20,7 @@
   display: none;
   cursor: pointer;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     display: block;
   }
 }
@@ -28,7 +28,7 @@
 .coa-ThemesNav__list {
   display: none;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     display: flex;
     flex: 1;
     list-style: none;
