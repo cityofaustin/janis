@@ -6,9 +6,8 @@ WORKDIR /app
 ENV PORT ${PORT:-80}
 ENV NODE_PATH=src
 
-COPY yarn.lock /app/yarn.lock
-COPY package.json /app/package.json
-RUN yarn
+COPY package.json yarn.lock /app
+RUN yarn install
 
 COPY static.config.js /app/static.config.js
 COPY .babelrc /app/.babelrc
