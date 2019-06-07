@@ -29,10 +29,6 @@
   .coa-TileGroup__tile {
     margin-bottom: $coa-spacing-small;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
     @include media($coa-medium-screen) {
       margin-bottom: initial;
     }
@@ -52,7 +48,6 @@
   }
 }
 
-
 .coa-TopServicesDepartment {
   &.floating {
     padding: 2rem 0;
@@ -60,7 +55,6 @@
     margin-right: 2rem;
     margin-top: -70rem;
     @include media($coa-medium-screen) {
-
       border-radius: 0;
     }
     @include media($coa-large-screen) {
@@ -92,7 +86,6 @@
   }
 }
 
-
 .coa-TopServicesHome {
   &.floating {
     padding: 2rem 0;
@@ -100,7 +93,6 @@
     margin-right: 2rem;
     margin-top: -70rem;
     @include media($coa-medium-screen) {
-
       border-radius: 0;
     }
     @include media($coa-large-screen) {
@@ -116,7 +108,6 @@
   padding: ($coa-spacing-xlarge * 1.5) 0;
   border-radius: 0;
 
-
   @include media($coa-medium-screen) {
     max-width: 100%;
     margin-top: 0rem;
@@ -127,15 +118,8 @@
   .coa-TileGroup__tile {
     margin-bottom: $coa-spacing-small;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @include media($coa-medium-screen) {
+    @include media($coa-large-screen) {
       margin-bottom: initial;
     }
   }
 }
-
-
-

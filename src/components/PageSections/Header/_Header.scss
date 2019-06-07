@@ -26,7 +26,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     padding-left: 2rem;
     padding-right: 2rem;
   }
@@ -38,7 +38,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     padding-top: $coa-spacing-small;
     padding-bottom: $coa-spacing-small;
     padding-right: $coa-spacing-small;
@@ -56,7 +56,7 @@
     height: $coa-header-toprow-height;
   }
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     margin-left: 0;
   }
 }
@@ -70,7 +70,7 @@
   border-top: 1px solid rgba($coa-color-white, 0.5);
   padding: $coa-spacing-small 0;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     order: unset;
     width: initial;
     border-top: none;
@@ -99,7 +99,7 @@
     }
   }
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     background: none;
 
     .coa-Header__logo {
@@ -118,7 +118,7 @@
   justify-content: flex-end;
   margin-right: 2rem;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     margin-right: 0;
   }
 
@@ -187,7 +187,7 @@
     color: $coa-color-white;
   }
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     font-size: $coa-font-size-md-small;
     margin: initial;
   }
@@ -238,7 +238,7 @@
     color: $coa-color-white;
   }
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     display: none;
     font-size: $coa-font-size-small;
     margin-left: none;
