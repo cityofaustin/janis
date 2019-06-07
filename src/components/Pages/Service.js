@@ -81,13 +81,9 @@ const Service = ({
                 content={additionalContent}
               />
             )}
-            <RelatedToMobile
-              topic={topic}
-              topiccollection={topic && topic.topiccollection}
-              theme={theme}
-            />
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>
@@ -98,6 +94,11 @@ const Service = ({
         tag={intl.formatMessage(i18n3.service)}
       />
       */}
+      <RelatedToMobile
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+      />
     </div>
   </div>
 );

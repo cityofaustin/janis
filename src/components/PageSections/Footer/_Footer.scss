@@ -4,12 +4,15 @@
 }
 
 .coa-Footer {
-  margin-top: 2rem;
+  @include media($coa-medium-screen) {
+    margin-top: 2rem;
+    border-radius: $coa-button-border-radius;
+  }
+
   background: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
   padding-bottom: $coa-spacing-large;
-  border-radius: $coa-button-border-radius;
 
   a {
     &:hover {
