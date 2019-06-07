@@ -4,12 +4,14 @@ import { injectIntl } from 'react-intl';
 const RelatedToMobile = ({ topiccollection, topic }) => {
   // Set the related links, taken from ContextualNav
   const related = topiccollection
-    ? topiccollection.topics.filter(t => t.id !== topic.id).map(t => ({
-        slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
-          t.slug
-        }`,
-        title: t.title,
-      }))
+    ? topiccollection.topics
+        .filter(t => t.id !== topic.id)
+        .map(t => ({
+          slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
+            t.slug
+          }`,
+          title: t.title,
+        }))
     : topics.edges.map(edge => edge.node);
 
   return related.length > 0 ? (
@@ -22,7 +24,6 @@ const RelatedToMobile = ({ topiccollection, topic }) => {
               <li key={index} className="coa-RelatedToMobile__item">
                 <a href={topic.slug} className="coa-RelatedToMobile__link">
                   {topic.title}
-                  {index !== related.length - 1 && ', '}
                 </a>
               </li>
             ))}
