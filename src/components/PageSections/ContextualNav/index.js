@@ -45,7 +45,6 @@ const ContextualNav = ({
         <div className="coa-ContextualNav__container">
           <div className="coa-ContextualNav__parent">
             <a href={parent.slug} className="coa-ContextualNav__arrow">
-              <i className="material-icons">arrow_back</i>
               <span>{parent.title}</span>
             </a>
           </div>

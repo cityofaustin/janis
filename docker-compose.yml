@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  app:
+    image: $TAG
+    ports:
+      - "3000:80"
+    volumes:
+      - "./src:/app/src"
+      - "./public:/app/public"
+      - "./yarn.lock:/app/yarn.lock"
+      - "./package.json:/app/package.json"
+      - "./static.config.js:/app/static.config.js"
+      - "./.babelrc:/app/.babelrc"
+    environment:
+      CMS_API: $CMS_API
+      CMS_MEDIA: $CMS_MEDIA
+      GOOGLE_ANALYTICS: "UA-110716917-2"
+      FEEDBACK_API: "https://coa-test-form-api.herokuapp.com/process/"

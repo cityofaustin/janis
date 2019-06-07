@@ -7,10 +7,7 @@ import ResponsiveImage from 'components/ResponsiveImage';
 const DirectorHeadshot = ({ photo }) => {
   const filename = photo.filename;
   const photoExtension = path.extname(filename);
-  const photoBasename = path.basename(
-    filename,
-    photoExtension,
-  );
+  const photoBasename = path.basename(filename, photoExtension);
   const filepath = `${process.env.CMS_MEDIA}/images/${photoBasename}`;
 
   return (
@@ -20,12 +17,12 @@ const DirectorHeadshot = ({ photo }) => {
         filename={filepath}
         defaultWidth="width-640"
         widths={[]}
-        extension={photoExtension}
+        extension={photoExtension.slice(1)}
         aria-label={photo.title}
         altText={photo.title}
       />
     </div>
-  )
+  );
 };
 
 DirectorHeadshot.propTypes = {

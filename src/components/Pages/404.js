@@ -1,6 +1,7 @@
 import React from 'react';
 import ExternalLink from 'components/ExternalLink';
-//
+import { injectIntl } from 'react-intl';
+import { misc as i18n } from 'js/i18n/definitions';
 
 // The secret to using non-static routes is here.
 
@@ -10,7 +11,7 @@ import ExternalLink from 'components/ExternalLink';
 
 // If the route is in fact matched by a non-static route, it will render before
 // the 404 page mounts :)
-export default class extends React.Component {
+class FourOhFour extends React.Component {
   state = {
     ready: false,
   };
@@ -30,12 +31,15 @@ export default class extends React.Component {
         <div className="wrapper container-fluid">
           <h1 className="coa-404__title">404</h1>
           <div className="coa-404__copy">
-            <p>Sorry, this isn't the page you were hoping to find.</p>
+            <p>{this.props.intl.formatMessage(i18n.sorry404)}</p>
             <p>
-              You can browse from the <a href="/">home page</a>, or{' '}
+              {this.props.intl.formatMessage(i18n.homeIntro404)}
+              <a href="/">{this.props.intl.formatMessage(i18n.homeLink404)}</a>
+              {this.props.intl.formatMessage(i18n.or404)}
               <ExternalLink to={'https://projects.austintexas.io/contact/'}>
-                contact us
-              </ExternalLink>.
+                {this.props.intl.formatMessage(i18n.contactUs404)}
+              </ExternalLink>
+              .
             </p>
           </div>
         </div>
@@ -43,3 +47,5 @@ export default class extends React.Component {
     ) : null;
   }
 }
+
+export default injectIntl(FourOhFour);

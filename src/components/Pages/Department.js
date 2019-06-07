@@ -39,7 +39,7 @@ const Department = ({
 }) => {
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
-      <h2 className="coa-DepartmentPage__related-title">Related content</h2>
+      <h2 className="coa-DepartmentPage__related-title">{intl.formatMessage(i18n2.relatedInfo)}</h2>
       <ul className="coa-DepartmentPage__related-list">
         {relatedLinks.map((l, index) => (
           <li key={index} className="coa-DepartmentPage__related-item">
@@ -59,6 +59,7 @@ const Department = ({
           title={intl.formatMessage(i18n.topServices)}
           tiles={topServices}
           locale={intl.locale}
+          extraClasses="coa-TopServicesDepartment"
         />
         <RelatedContent />
       </div>
@@ -67,6 +68,7 @@ const Department = ({
         title={intl.formatMessage(i18n.topServices)}
         tiles={topServices}
         locale={intl.locale}
+        extraClasses="coa-TopServicesDepartment"
       />
     ) : !!relatedLinks.length ? (
       <RelatedContent />
@@ -79,6 +81,7 @@ const Department = ({
       </Head>
       {image && (
         <PageBanner
+          extraClasses="coa-PageBannerCoverDepartment"
           imagesPath={`${process.env.CMS_MEDIA}/images`}
           imageFilename={path.basename(
             image.filename,

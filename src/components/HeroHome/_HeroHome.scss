@@ -6,6 +6,9 @@
     height: $coa-herohome-height--default;
     width: 100%;
     object-fit: cover;
+    // This is for https://www.npmjs.com/package/object-fit-images
+    font-family: 'object-fit: cover;';
+
     @include media($coa-medium-screen) {
       height: $coa-herohome-height--medium;
       top: auto;

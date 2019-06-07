@@ -7,7 +7,7 @@ const allThemesQuery = `
           slug
           text
           description
-          topicCollectionPages {
+          topicCollectionPages(live:true) {
             edges {
               node {
                 title

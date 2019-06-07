@@ -16,15 +16,18 @@ const MenuInfo = ({ intl }) => (
           <div className="coa-MenuInfo__svg">
             <CoaSeal />
           </div>
-          <a className="coa-MenuInfo__link">
+          <a href="https://austintexas.gov/" className="coa-MenuInfo__link">
             {intl.formatMessage(i18n2.currentSite)}
           </a>
         </div>
         <div className="coa-MenuInfo__resource">
           <div className="coa-MenuInfo__svg">
-            <LoveChicken />
+            <i className="material-icons">info</i>
           </div>
-          <a className="coa-MenuInfo__link">
+          <a
+            href="https://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/"
+            className="coa-MenuInfo__link"
+          >
             {intl.formatMessage(i18n2.moreAboutProject)}
           </a>
         </div>

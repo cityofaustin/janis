@@ -12,8 +12,13 @@
 
 .coa-PageHeader__description {
   margin-top: 3rem;
-  font-size: $coa-font-size-md-small;
-  line-height: $coa-line-height-md-small;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+
+  @include media($coa-medium-screen) {
+    font-size: $coa-font-size-md-small;
+    line-height: $coa-line-height-md-small;
+  }
 }
 
 .coa-PageHeader--service {
