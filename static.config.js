@@ -365,6 +365,10 @@ export default {
         is404: true,
         component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
+      {
+        path: '/test-form',
+        component: 'src/components/Pages/Form',
+      },
     ];
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
