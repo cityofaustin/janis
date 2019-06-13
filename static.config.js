@@ -6,6 +6,7 @@ import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
+import allFormPagesQuery from 'js/queries/allFormPagesQuery';
 import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
@@ -356,6 +357,8 @@ export default {
     return data;
   },
   getRoutes: async () => {
+    const client = createGraphQLClientsByLang('en');
+    const { allFormPages } = await client.request(allFormPagesQuery);
     const routes = [
       {
         path: '/search',
@@ -368,6 +371,12 @@ export default {
       {
         path: '/test-form',
         component: 'src/components/Pages/Form',
+        getData: async () => ({
+          allFormPages,
+        }),
+        // getData: async () => ({
+        //   informationPage,
+        // }),
       },
     ];
 
