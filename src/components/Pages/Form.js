@@ -1,28 +1,14 @@
 import React, { Component } from 'react';
-
-// class Form extends Component {
-//   render() {
-//     debugger;
-//     return (
-//       <section className="wrapper wrapper--sm">
-//         <h1>Form Page </h1>️
-//         <p>just a placeholder</p>
-//       </section>
-//     );
-//   }
-// }
-//
-// export default Form;
+import { withRouteData } from 'react-static';
 
 const Form = props => {
-  debugger;
+  console.log(props.form);
 
   return (
     <section className="wrapper wrapper--sm">
-      <h1>Form Page </h1>️
-      <p>just a placeholder</p>
+      <h1>Form Page </h1>️<p>just a placeholder</p>
     </section>
   );
 };
 
-export default Form;
+export default withRouteData(Form);

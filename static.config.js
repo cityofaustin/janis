@@ -35,10 +35,26 @@ const makeAllPages = async langCode => {
   const themeChildren = await makeThemePages(client);
   const deptChildren = await makeDepartmentPages(client);
 
+  const { allFormPages } = await client.request(allFormPagesQuery);
+  // console.log(allFormPages.edges);
+
+  const formChildren = allFormPages.edges.map(form => {
+    console.log(form);
+
+    return {
+      path: `forms/${form.node.slug}`,
+      component: 'src/components/Pages/Form',
+      getData: async () => ({
+        form,
+      }),
+    };
+  });
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: themeChildren.concat(deptChildren),
+    // children: themeChildren.concat(deptChildren),
+    children: themeChildren.concat(deptChildren).concat(formChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let topServices = cleanLinks(allServicePages, 'service');
@@ -367,16 +383,6 @@ export default {
       {
         is404: true,
         component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
-      },
-      {
-        path: '/test-form',
-        component: 'src/components/Pages/Form',
-        getData: async () => ({
-          allFormPages,
-        }),
-        // getData: async () => ({
-        //   informationPage,
-        // }),
       },
     ];
 
