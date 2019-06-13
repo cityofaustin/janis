@@ -5,16 +5,19 @@ const Form = props => {
   console.log(props.form);
 
   const formFields = props.form.node.formFields.edges.map((item, key) => (
-    <form>
+    <li>
       <p key={item.id}>{item.node.fieldType}</p>
       <p key={item.id}>{item.node.choices}</p>
-    </form>
+    </li>
   ));
 
   return (
     <section className="wrapper wrapper--sm">
       <h1>{props.form.node.title} </h1>️
-      {formFields}
+      <form action="http://localhost:8000/test-form/" method="POST">
+        {formFields}
+        <input type="submit" />
+      </form>
     </section>
   );
 };
