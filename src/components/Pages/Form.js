@@ -17,7 +17,13 @@ function slugify(text) {
 const BasicExample = props => (
   <div>
     <Formik
-      initialValues={props.form.node.formFields.edges}
+      initialValues={`
+        ${props.form.node.formFields.edges[0].node.label}:${
+        props.form.node.formFields.edges[0].node.defaultValue
+      },
+        ${props.form.node.formFields.edges[1].node.label}:${
+        props.form.node.formFields.edges[1].node.defaultValue
+      }`}
       onSubmit={(values, actions) => {
         // use FormData api to make body for POST request:
         //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
@@ -47,10 +53,11 @@ const BasicExample = props => (
             type="text"
             onChange={props.handleChange}
             onBlur={props.handleBlur}
-            name={slugify(props.values[1].node.label)}
-            value={props.values[1].node.defaultValue}
+            name="text"
+            value="Text"
           />
-          <Field component="select" name={slugify(props.values[0].node.label)}>
+
+          <Field component="select" name="select">
             <option value="cool">cool</option>
             <option value="not-cool">not-cool</option>
           </Field>
@@ -64,6 +71,7 @@ const BasicExample = props => (
 
 const FormPage = props => {
   console.log(props.form);
+  debugger;
 
   // const formFields = props.form.node.formFields.edges.map((item, key) => (
   //   <li>
@@ -77,6 +85,7 @@ const FormPage = props => {
   return (
     <section className="wrapper wrapper--sm">
       <h1>{props.form.node.title} </h1>️
+      <div> {slugify(props.form.node.formFields.edges[1].node.label)}</div>
       <BasicExample {...props} />
     </section>
   );
