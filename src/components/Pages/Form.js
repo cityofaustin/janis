@@ -3,10 +3,21 @@ import { withRouteData } from 'react-static';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 
-const BasicExample = () => (
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, ''); // Trim - from end of text
+}
+
+const BasicExample = props => (
   <div>
     <Formik
-      initialValues={{ 'how-cool-is-this-form': 'cool', 'tell-us-why': '' }}
+      initialValues={props.form.node.formFields.edges}
       onSubmit={(values, actions) => {
         // use FormData api to make body for POST request:
         //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
@@ -36,10 +47,10 @@ const BasicExample = () => (
             type="text"
             onChange={props.handleChange}
             onBlur={props.handleBlur}
-            value={props.values['tell-us-why']}
-            name="tell-us-why"
+            name={slugify(props.values[1].node.label)}
+            value={props.values[1].node.defaultValue}
           />
-          <Field component="select" name="how-cool-is-this-form">
+          <Field component="select" name={slugify(props.values[0].node.label)}>
             <option value="cool">cool</option>
             <option value="not-cool">not-cool</option>
           </Field>
@@ -61,10 +72,12 @@ const FormPage = props => {
   //   </li>
   // ));
 
+  // parsedFormFields.map(field => ( console.log(field.label)))
+
   return (
     <section className="wrapper wrapper--sm">
       <h1>{props.form.node.title} </h1>️
-      <BasicExample />
+      <BasicExample {...props} />
     </section>
   );
 };
