@@ -1,55 +1,72 @@
 import React, { Component } from 'react';
 import { withRouteData } from 'react-static';
-import { Formik } from 'formik';
+import axios from 'axios';
+import { Formik, Form, Field } from 'formik';
 
 const BasicExample = () => (
   <div>
-    <h1>My Form</h1>
     <Formik
-      initialValues={{ name: 'jared' }}
+      initialValues={{ 'how-cool-is-this-form': 'cool', 'tell-us-why': '' }}
       onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
+        // use FormData api to make body for POST request:
+        //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+        let body = new FormData();
+        // Formik passes form values, add these to the body
+        for (const key in values) {
+          body.set(key, values[key]);
+        }
+        axios({
+          method: 'post',
+          url: 'https://joplin-pr-2308-wagtail-forms.herokuapp.com/test-form/',
+          data: body,
+          config: { headers: { 'Content-Type': 'multipart/form-data' } },
+        })
+          .then(function(response) {
+            //handle success
+            console.log(response);
+          })
+          .catch(function(response) {
+            //handle error
+            console.log(response);
+          });
       }}
       render={props => (
-        <form onSubmit={props.handleSubmit}>
-          <input
+        <Form>
+          <Field
             type="text"
             onChange={props.handleChange}
             onBlur={props.handleBlur}
-            value={props.values.name}
-            name="name"
+            value={props.values['tell-us-why']}
+            name="tell-us-why"
           />
+          <Field component="select" name="how-cool-is-this-form">
+            <option value="cool">cool</option>
+            <option value="not-cool">not-cool</option>
+          </Field>
           {props.errors.name && <div id="feedback">{props.errors.name}</div>}
           <button type="submit">Submit</button>
-        </form>
+        </Form>
       )}
     />
   </div>
 );
 
-const Form = props => {
+const FormPage = props => {
   console.log(props.form);
 
-  const formFields = props.form.node.formFields.edges.map((item, key) => (
-    <li>
-      <p key={item.id}>{item.node.fieldType}</p>
-      <p key={item.id}>{item.node.choices}</p>
-    </li>
-  ));
+  // const formFields = props.form.node.formFields.edges.map((item, key) => (
+  //   <li>
+  //     <p key={item.id}>{item.node.fieldType}</p>
+  //     <p key={item.id}>{item.node.choices}</p>
+  //   </li>
+  // ));
 
   return (
     <section className="wrapper wrapper--sm">
       <h1>{props.form.node.title} </h1>️
-      <form action="http://localhost:8000/test-form/" method="POST">
-        {formFields}
-        <input type="submit" />
-      </form>
       <BasicExample />
     </section>
   );
 };
 
-export default withRouteData(Form);
+export default withRouteData(FormPage);

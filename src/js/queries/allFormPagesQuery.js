@@ -7,21 +7,22 @@ const allFormPagesQuery = `
         title
         slug
         toAddress
-				fromAddress
+        fromAddress
         urlPath
         formFields {
           edges {
             node {
+              sortOrder
               id
               label
               fieldType
+              required
               choices
               defaultValue
               helpText
               page {
                 id
               }
-              sortOrder
             }
           }
         }
