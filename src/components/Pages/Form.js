@@ -29,7 +29,7 @@ const BasicExample = props => {
   return (
     <div>
       <Formik
-        initialValues={getInitialValues()}
+        initialValues={[getInitialValues(), props.form.node.formFields]}
         onSubmit={(values, actions) => {
           // use FormData api to make body for POST request:
           //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
@@ -60,11 +60,11 @@ const BasicExample = props => {
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
-              name="text"
-              value="Text"
+              name={Object.keys(props.values[0])[1]}
+              value={Object.values(props.values[0])[1]}
             />
-
-            <Field component="select" name="select">
+            {props.values[1].edges[0].node.choices}
+            <Field component="select" name={Object.keys(props.values[0])[0]}>
               <option value="cool">cool</option>
               <option value="not-cool">not-cool</option>
             </Field>
