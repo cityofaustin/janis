@@ -14,73 +14,71 @@ function slugify(text) {
     .replace(/-+$/, ''); // Trim - from end of text
 }
 
-const BasicExample = props => (
-  <div>
-    <Formik
-      initialValues={`
-        ${props.form.node.formFields.edges[0].node.label}:${
-        props.form.node.formFields.edges[0].node.defaultValue
-      },
-        ${props.form.node.formFields.edges[1].node.label}:${
-        props.form.node.formFields.edges[1].node.defaultValue
-      }`}
-      onSubmit={(values, actions) => {
-        // use FormData api to make body for POST request:
-        //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
-        let body = new FormData();
-        // Formik passes form values, add these to the body
-        for (const key in values) {
-          body.set(key, values[key]);
-        }
-        axios({
-          method: 'post',
-          url: 'https://joplin-pr-2308-wagtail-forms.herokuapp.com/test-form/',
-          data: body,
-          config: { headers: { 'Content-Type': 'multipart/form-data' } },
-        })
-          .then(function(response) {
-            //handle success
-            console.log(response);
+const BasicExample = props => {
+  const getInitialValues = () => {
+    const formFields = props.form.node.formFields.edges;
+    let initialValues = formFields.map(formField => {
+      return {
+        [slugify(formField.node.label)]: formField.node.defaultValue,
+      };
+    });
+    // merge these into a single object to pass to formik
+    initialValues = Object.assign({}, ...initialValues);
+    return initialValues;
+  };
+  return (
+    <div>
+      <Formik
+        initialValues={getInitialValues()}
+        onSubmit={(values, actions) => {
+          // use FormData api to make body for POST request:
+          //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
+          let body = new FormData();
+          // Formik passes form values, add these to the body
+          for (const key in values) {
+            body.set(key, values[key]);
+          }
+          axios({
+            method: 'post',
+            url:
+              'https://joplin-pr-2308-wagtail-forms.herokuapp.com/test-form/',
+            data: body,
+            config: { headers: { 'Content-Type': 'multipart/form-data' } },
           })
-          .catch(function(response) {
-            //handle error
-            console.log(response);
-          });
-      }}
-      render={props => (
-        <Form>
-          <Field
-            type="text"
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            name="text"
-            value="Text"
-          />
+            .then(function(response) {
+              //handle success
+              console.log(response);
+            })
+            .catch(function(response) {
+              //handle error
+              console.log(response);
+            });
+        }}
+        render={props => (
+          <Form>
+            <Field
+              type="text"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              name="text"
+              value="Text"
+            />
 
-          <Field component="select" name="select">
-            <option value="cool">cool</option>
-            <option value="not-cool">not-cool</option>
-          </Field>
-          {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-          <button type="submit">Submit</button>
-        </Form>
-      )}
-    />
-  </div>
-);
+            <Field component="select" name="select">
+              <option value="cool">cool</option>
+              <option value="not-cool">not-cool</option>
+            </Field>
+            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+            <button type="submit">Submit</button>
+          </Form>
+        )}
+      />
+    </div>
+  );
+};
 
 const FormPage = props => {
   console.log(props.form);
-  debugger;
-
-  // const formFields = props.form.node.formFields.edges.map((item, key) => (
-  //   <li>
-  //     <p key={item.id}>{item.node.fieldType}</p>
-  //     <p key={item.id}>{item.node.choices}</p>
-  //   </li>
-  // ));
-
-  // parsedFormFields.map(field => ( console.log(field.label)))
 
   return (
     <section className="wrapper wrapper--sm">
