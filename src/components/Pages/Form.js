@@ -14,9 +14,10 @@ function slugify(text) {
     .replace(/-+$/, ''); // Trim - from end of text
 }
 
-const BasicExample = props => {
+const FormikForm = ({ form }) => {
+  // parses initial values...this seems like a bad place for this?
   const getInitialValues = () => {
-    const formFields = props.form.node.formFields.edges;
+    const formFields = form.formFields.edges;
     let initialValues = formFields.map(formField => {
       return {
         [slugify(formField.node.label)]: formField.node.defaultValue,
@@ -29,7 +30,7 @@ const BasicExample = props => {
   return (
     <div>
       <Formik
-        initialValues={[getInitialValues(), props.form.node.formFields]}
+        initialValues={getInitialValues()}
         onSubmit={(values, actions) => {
           // use FormData api to make body for POST request:
           //https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
@@ -55,18 +56,19 @@ const BasicExample = props => {
             });
         }}
         render={props => (
+          // need to pass props or values dynamically here or refactor to make
+          // that possible
           <Form>
             <Field
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
-              name={Object.keys(props.values[0])[1]}
-              value={Object.values(props.values[0])[1]}
+              value={props.values['tell-us-why']}
+              name="tell-us-why"
             />
-            {props.values[1].edges[0].node.choices}
-            <Field component="select" name={Object.keys(props.values[0])[0]}>
+            <Field component="select" name="how-cool-is-this-form">
               <option value="cool">cool</option>
-              <option value="not-cool">not-cool</option>
+              <option value="not cool">not-cool</option>
             </Field>
             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
             <button type="submit">Submit</button>
@@ -77,14 +79,26 @@ const BasicExample = props => {
   );
 };
 
+const FormFields = ({ fields }) =>
+  // thought here would be to have a component that loops through formFields
+  // and maps backend values to frontend form components
+  fields.edges.map((item, key) => (
+    <div>
+      <input
+        key={item.id}
+        type={item.node.fieldType}
+        name={slugify(item.node.label)}
+        defaultValue={item.node.defaultValue}
+      />
+    </div>
+  ));
 const FormPage = props => {
   console.log(props.form);
 
   return (
     <section className="wrapper wrapper--sm">
       <h1>{props.form.node.title} </h1>️
-      <div> {slugify(props.form.node.formFields.edges[1].node.label)}</div>
-      <BasicExample {...props} />
+      <FormikForm form={props.form.node} />
     </section>
   );
 };
