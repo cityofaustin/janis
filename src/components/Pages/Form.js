@@ -14,6 +14,46 @@ function slugify(text) {
     .replace(/-+$/, ''); // Trim - from end of text
 }
 
+const FormikField = ({ fieldNode }) => {
+  // debugger;
+  switch (fieldNode.fieldType) {
+    case 'SINGLELINE':
+      return (
+        <Field
+          type="text"
+          name={slugify(fieldNode.label)}
+          id={`id_${slugify(fieldNode.label)}`}
+        />
+      );
+    case 'NUMBER':
+      return (
+        <Field
+          type="number"
+          name={slugify(fieldNode.label)}
+          id={`id_${slugify(fieldNode.label)}`}
+        />
+      );
+    case 'EMAIL':
+      return (
+        <Field
+          type="email"
+          name={slugify(fieldNode.label)}
+          id={`id_${slugify(fieldNode.label)}`}
+        />
+      );
+    case 'DATETIME':
+      return (
+        <Field
+          type="datetime"
+          name={slugify(fieldNode.label)}
+          id={`id_${slugify(fieldNode.label)}`}
+        />
+      );
+  }
+
+  return <div>Had a problem rendering this field</div>;
+};
+
 class FormikForm extends Component {
   renderFormFields = props => {
     const formFields = this.props.form.formFields.edges;
@@ -26,13 +66,14 @@ class FormikForm extends Component {
           return (
             <React.Fragment>
               <label
-                htmlFor={slugify(formField.node.label)}
+                htmlFor={`id_${slugify(formField.node.label)}`}
                 style={{ display: 'block' }}
               >
                 <h4>{formField.node.label}</h4>
                 <p>{formField.node.helpText}</p>
+                <p>{formField.node.fieldType}</p>
               </label>
-              <Field type="text" name={slugify(formField.node.label)} />
+              <FormikField fieldNode={formField.node} />
             </React.Fragment>
           );
         })}
