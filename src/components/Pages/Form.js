@@ -49,6 +49,14 @@ const FormikField = ({ fieldNode }) => {
           id={`id_${slugify(fieldNode.label)}`}
         />
       );
+    case 'MULTILINE':
+      return (
+        <Field
+          component="textarea"
+          name={slugify(fieldNode.label)}
+          id={`id_${slugify(fieldNode.label)}`}
+        />
+      );
   }
 
   return <div>Had a problem rendering this field</div>;
@@ -99,6 +107,7 @@ class FormikForm extends Component {
   };
 
   render() {
+    // debugger;
     return (
       <div>
         <Formik
@@ -114,8 +123,9 @@ class FormikForm extends Component {
             axios({
               method: 'post',
               // obvs should pull in from an env variable at some point
-              url:
-                'https://joplin-pr-2308-wagtail-forms.herokuapp.com/test-form/',
+              url: `https://joplin-pr-2308-wagtail-forms.herokuapp.com/${
+                this.props.form.slug
+              }/`,
               data: body,
               config: { headers: { 'Content-Type': 'multipart/form-data' } },
             })
