@@ -141,6 +141,7 @@ function resolve_pr_name {
 # Prints Environment Variables
 #
 function janis_envars {
+  export CMS_API=https://joplin-pr-2308-wagtail-forms.herokuapp.com/api/graphql
   janis_print_header "Janis Environment Variables";
 
   echo "GOOGLE_ANALYTICS: '${GOOGLE_ANALYTICS}'";
