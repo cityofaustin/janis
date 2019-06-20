@@ -17,21 +17,25 @@ function slugify(text) {
 class FormikForm extends Component {
   renderFormFields = props => {
     const formFields = this.props.form.formFields.edges;
-    debugger;
 
     return (
       <React.Fragment>
-        <Field
-          type="text"
-          onChange={props.handleChange}
-          onBlur={props.handleBlur}
-          value={props.values['tell-us-why']}
-          name="tell-us-why"
-        />
-        <Field component="select" name="how-cool-is-this-form">
-          <option value="cool">cool</option>
-          <option value="not cool">not-cool</option>
-        </Field>
+        {formFields.map(formField => {
+          console.log(formField);
+
+          return (
+            <React.Fragment>
+              <label
+                htmlFor={slugify(formField.node.label)}
+                style={{ display: 'block' }}
+              >
+                <h4>{formField.node.label}</h4>
+                <p>{formField.node.helpText}</p>
+              </label>
+              <Field type="text" name={slugify(formField.node.label)} />
+            </React.Fragment>
+          );
+        })}
       </React.Fragment>
     );
   };
