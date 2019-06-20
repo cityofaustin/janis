@@ -14,6 +14,45 @@ function slugify(text) {
     .replace(/-+$/, ''); // Trim - from end of text
 }
 
+export const DRINKS = [
+  {
+    label: 'Water',
+    value: 'water',
+  },
+  {
+    label: 'Pepsi',
+    value: 'pepsi',
+  },
+  {
+    label: 'Coca-Cola',
+    value: 'coca cola',
+  },
+];
+
+const FormikRadio = ({ fieldNode }) => {
+  const noop = () => {};
+  const isChecked = (radioValue: string, storedValue: string) =>
+    radioValue === storedValue;
+
+  return DRINKS.map((tier, index) => (
+    <label key={index} className="my-2 mt-8 cursor-pointer">
+      <Field name="ageTier">
+        {({ field }: FieldProps) => (
+          <input
+            {...field}
+            type="radio"
+            className="coa-input-radio"
+            name={field.name}
+            checked={isChecked(tier.value, field.value)}
+            onChange={() => field.onChange(field.name)(tier.value)}
+          />
+        )}
+      </Field>
+      <span className="pl-2">{tier.label}</span>
+    </label>
+  ));
+};
+
 const FormikField = ({ fieldNode }) => {
   // debugger;
   switch (fieldNode.fieldType) {
@@ -57,6 +96,9 @@ const FormikField = ({ fieldNode }) => {
           id={`id_${slugify(fieldNode.label)}`}
         />
       );
+    // following this example for radio: https://github.com/Andreyco/formik/blob/feature/examples/formik-examples/src/views/examples/RadioExamples/RadioExamples.tsx
+    case 'RADIO':
+      return <FormikRadio fieldNode={fieldNode} />;
   }
 
   return <div>Had a problem rendering this field</div>;
