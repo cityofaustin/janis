@@ -26,7 +26,10 @@ const FormikRadio = ({ fieldNode }) => {
 
   return choices.map((tier, index) => (
     <label key={index} className="coa-radio-button">
-      <Field name={slugify(fieldNode.label)}>
+      <Field
+        name={slugify(fieldNode.label)}
+        id={`id_${slugify(fieldNode.label)}`}
+      >
         {({ field }: FieldProps) => (
           <input
             {...field}
@@ -51,7 +54,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="text"
           name={slugify(fieldNode.label)}
-          // id={`id_${slugify(fieldNode.label)}`}
+          id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'NUMBER':
@@ -59,7 +62,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="number"
           name={slugify(fieldNode.label)}
-          // id={`id_${slugify(fieldNode.label)}`}
+          id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'EMAIL':
@@ -67,7 +70,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="email"
           name={slugify(fieldNode.label)}
-          // id={`id_${slugify(fieldNode.label)}`}
+          id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'DATETIME':
@@ -75,7 +78,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="datetime"
           name={slugify(fieldNode.label)}
-          // id={`id_${slugify(fieldNode.label)}`}
+          id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'MULTILINE':
@@ -83,7 +86,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           component="textarea"
           name={slugify(fieldNode.label)}
-          // id={`id_${slugify(fieldNode.label)}`}
+          id={`id_${slugify(fieldNode.label)}`}
         />
       );
     // following this example for radio: https://github.com/Andreyco/formik/blob/feature/examples/formik-examples/src/views/examples/RadioExamples/RadioExamples.tsx
