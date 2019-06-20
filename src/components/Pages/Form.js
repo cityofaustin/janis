@@ -35,7 +35,7 @@ const FormikRadio = ({ fieldNode }) => {
     radioValue === storedValue;
 
   return DRINKS.map((tier, index) => (
-    <label key={index} className="my-2 mt-8 cursor-pointer">
+    <label key={index} className="coa-radio-button">
       <Field name="ageTier">
         {({ field }: FieldProps) => (
           <input

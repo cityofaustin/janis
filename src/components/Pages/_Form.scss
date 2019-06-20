@@ -5,4 +5,9 @@
 .coa-input-radio {
   position: inherit !important;
   appearance: radio;
+  width: 3rem;
+}
+
+.coa-radio-button {
+  display: flex;
 }
