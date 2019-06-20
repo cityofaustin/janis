@@ -14,29 +14,19 @@ function slugify(text) {
     .replace(/-+$/, ''); // Trim - from end of text
 }
 
-export const DRINKS = [
-  {
-    label: 'Water',
-    value: 'water',
-  },
-  {
-    label: 'Pepsi',
-    value: 'pepsi',
-  },
-  {
-    label: 'Coca-Cola',
-    value: 'coca cola',
-  },
-];
-
 const FormikRadio = ({ fieldNode }) => {
   const noop = () => {};
   const isChecked = (radioValue: string, storedValue: string) =>
     radioValue === storedValue;
+  const choices = fieldNode.choices.split(',').map((c, index) => ({
+    label: c,
+    value: `id_${slugify(fieldNode.label)}_${index}`,
+  }));
+  // debugger;
 
-  return DRINKS.map((tier, index) => (
+  return choices.map((tier, index) => (
     <label key={index} className="coa-radio-button">
-      <Field name="ageTier">
+      <Field name={slugify(fieldNode.label)}>
         {({ field }: FieldProps) => (
           <input
             {...field}
@@ -61,7 +51,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="text"
           name={slugify(fieldNode.label)}
-          id={`id_${slugify(fieldNode.label)}`}
+          // id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'NUMBER':
@@ -69,7 +59,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="number"
           name={slugify(fieldNode.label)}
-          id={`id_${slugify(fieldNode.label)}`}
+          // id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'EMAIL':
@@ -77,7 +67,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="email"
           name={slugify(fieldNode.label)}
-          id={`id_${slugify(fieldNode.label)}`}
+          // id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'DATETIME':
@@ -85,7 +75,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           type="datetime"
           name={slugify(fieldNode.label)}
-          id={`id_${slugify(fieldNode.label)}`}
+          // id={`id_${slugify(fieldNode.label)}`}
         />
       );
     case 'MULTILINE':
@@ -93,7 +83,7 @@ const FormikField = ({ fieldNode }) => {
         <Field
           component="textarea"
           name={slugify(fieldNode.label)}
-          id={`id_${slugify(fieldNode.label)}`}
+          // id={`id_${slugify(fieldNode.label)}`}
         />
       );
     // following this example for radio: https://github.com/Andreyco/formik/blob/feature/examples/formik-examples/src/views/examples/RadioExamples/RadioExamples.tsx
@@ -116,12 +106,12 @@ class FormikForm extends Component {
           return (
             <React.Fragment>
               <label
-                htmlFor={`id_${slugify(formField.node.label)}`}
+                htmlFor={slugify(formField.node.label)}
                 style={{ display: 'block' }}
               >
                 <h4>{formField.node.label}</h4>
                 <p>{formField.node.helpText}</p>
-                <p>{formField.node.fieldType}</p>
+                {/* <p>{formField.node.fieldType}</p> */}
               </label>
               <FormikField fieldNode={formField.node} />
             </React.Fragment>
