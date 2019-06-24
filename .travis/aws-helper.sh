@@ -72,6 +72,9 @@ else
   helper_halt_deployment "TRAVIS_BRANCH: '${TRAVIS_BRANCH}' cannot be deployed to staging or production."
 fi;
 
+if [ "${TRAVIS_PULL_REQUEST_BRANCH}" == "interns" ]; then
+  export CMS_API="https://joplin-pr-2399-interns.herokuapp.com/api/graphql"
+fi
 
 #
 # Simply builds a noticeable header when parsing logs.
@@ -156,7 +159,7 @@ function janis_envars {
 #
 function janis_build {
   janis_envars;
-  
+
   janis_print_header "Building Janis";
   mkdir _dist;
 
