@@ -2,7 +2,7 @@ import { defineMessages } from 'react-intl';
 
 export const callToAction = defineMessages({
   enterAddress: 'Type your street address in the box below',
-  submitOnlineRequest: 'Submit an Online Request',
+  submitOnlineRequest: 'Submit an online request',
   whatDoIDoWith:
     'Check the "What do I do with" tool below to find out what items are accepted.',
 });
@@ -29,7 +29,7 @@ export const emoji = defineMessages({
   grinning: 'Grinning',
   neutral: 'Neutral',
   sad: 'Sad',
-  slightlySmiling: 'Slightly Smiling',
+  slightlySmiling: 'Slightly smiling',
 });
 
 export const form = defineMessages({
@@ -57,7 +57,7 @@ export const misc = defineMessages({
   forFullVisit: 'For the full City of Austin website, visit ',
   currentSite: 'Visit austintexas.gov for the current city website.',
   overview: 'Overview',
-  privacy: 'Read About Privacy',
+  privacy: 'Read about privacy',
   steps: 'Steps',
   welcomeTo: 'Welcome to',
   whatElse: 'What else do I need to know?',
@@ -120,13 +120,13 @@ export const topics = defineMessages({
 });
 
 export const curbsideServices = defineMessages({
-  textiles: 'Clothing & Housewares Recycling',
+  textiles: 'Clothing and housewares recycling',
   recycling: 'Recycling',
-  yardtrimmings: 'Yard Trimmings',
+  yardtrimmings: 'Yard trimmings',
   trash: 'Trash',
   compost: 'Compost',
-  brushcollection: 'Large Brush Collection',
-  bulkitemcollection: 'Bulk Item Collection',
+  brushcollection: 'Large brush collection',
+  bulkitemcollection: 'Bulk item collection',
   pickupschedule: "Here's the pickup schedule for {address}",
 });
 
@@ -139,7 +139,7 @@ export const departmentPage = defineMessages({
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
   yourDataLinkText: 'How we store and use your data',
   yourDataUrl: '/police-oversight/how-we-store-and-use-your-data',
-  investigationProcessLinkText: 'Complaint Investigation Process',
+  investigationProcessLinkText: 'Complaint investigation process',
   investigationProcessUrl: '/police-oversight/complaint-investigation-process',
   directorTitle: 'Director, Office of Police Oversight',
   coa: 'City of Austin',
@@ -162,7 +162,7 @@ export const howYouKnowMenu = defineMessages({
 export const footerSiteMapMenu = defineMessages([
   {
     url: '/themes/permits-tickets',
-    text: 'Permits & Tickets',
+    text: 'Permits and tickets',
     id: 'VGhlbWVOb2RlOjE=',
     description: '',
     topics: [
@@ -174,7 +174,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/business-permits-licenses',
-        text: 'Business permits & licenses',
+        text: 'Business permits and licenses',
         description: '',
         services: [],
       },
@@ -194,7 +194,7 @@ export const footerSiteMapMenu = defineMessages([
   },
   {
     url: '/themes/housing-utilities',
-    text: 'Housing & Utilities',
+    text: 'Housing and utilities',
     id: 'VGhlbWVOb2RlOjI=',
     description:
       'Find the resources to keep your home, apartment, or condo running smoothly.',
@@ -207,7 +207,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/water-electric-service',
-        text: 'Water & electric service',
+        text: 'Water and electric service',
         description: '',
         services: [],
       },
@@ -273,7 +273,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/lost-found-pets',
-        text: 'Lots & found pets',
+        text: 'Lost and found pets',
         description: '',
         services: [],
       },
@@ -281,7 +281,7 @@ export const footerSiteMapMenu = defineMessages([
   },
   {
     url: '/themes/health-safety',
-    text: 'Health & Safety',
+    text: 'Health and safety',
     id: 'VGhlbWVOb2RlOjQ=',
     description: '',
     topics: [
@@ -293,7 +293,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/healthcare-prevention',
-        text: 'Healthcare & prevention',
+        text: 'Healthcare and prevention',
         description: '',
         services: [],
       },
@@ -305,19 +305,19 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/child-senior-safety',
-        text: 'Child & senior safety',
+        text: 'Child and senior safety',
         description: '',
         services: [],
       },
       {
         url: '/topics/disaster-safety-relief',
-        text: 'Disaster safety & relief',
+        text: 'Disaster safety and relief',
         description: '',
         services: [],
       },
       {
         url: '/topics/police-reports-records',
-        text: 'Police reports & records',
+        text: 'Police reports and records',
         description: '',
         services: [],
       },
@@ -325,25 +325,25 @@ export const footerSiteMapMenu = defineMessages([
   },
   {
     url: '/themes/explore-visit',
-    text: 'Explore & Visit',
+    text: 'Explore and visit',
     id: 'VGhlbWVOb2RlOjU=',
     description: '',
     topics: [
       {
         url: '/topics/events-classes',
-        text: 'Events & classes',
+        text: 'Events and classes',
         description: '',
         services: [],
       },
       {
         url: '/topics/hike-bike-swim-play',
-        text: 'Hike, bike, swim, & play',
+        text: 'Hike, bike, swim, and play',
         description: '',
         services: [],
       },
       {
         url: '/topics/arts-culture',
-        text: 'Arts & culture',
+        text: 'Arts and culture',
         description: '',
         services: [],
       },
@@ -355,7 +355,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/transportation-parking',
-        text: 'Transportation & parking',
+        text: 'Transportation and parking',
         description: '',
         services: [],
       },
@@ -369,7 +369,7 @@ export const footerSiteMapMenu = defineMessages([
   },
   {
     url: '/themes/government-business',
-    text: 'Government & Business',
+    text: 'Government and business',
     id: 'VGhlbWVOb2RlOjY=',
     description: '',
     topics: [
@@ -381,7 +381,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/court-dates',
-        text: 'Court dates & times',
+        text: 'Court dates and times',
         description: '',
         services: [],
       },
@@ -393,19 +393,19 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/city-code',
-        text: 'City code & ordinance',
+        text: 'City code and ordinance',
         description: '',
         services: [],
       },
       {
         url: '/topics/budget-performance-open-records',
-        text: 'Budget, performance, & open records',
+        text: 'Budget, performance, and open records',
         description: '',
         services: [],
       },
       {
         url: '/topics/funding-grants-rebates',
-        text: 'Fudning, grants, & rebates',
+        text: 'Fudning, grants, and rebates',
         description: '',
         services: [],
       },
@@ -417,7 +417,7 @@ export const footerSiteMapMenu = defineMessages([
       },
       {
         url: '/topics/mayor-council',
-        text: 'Mayor & Council',
+        text: 'Mayor and Council',
         description: '',
         services: [],
       },
@@ -431,7 +431,7 @@ export const footerSiteMapMenu = defineMessages([
     topics: [
       {
         url: '/topics/job-titles-pay',
-        text: 'City job titles & pay',
+        text: 'City job titles and pay',
         description: '',
         services: [],
       },
