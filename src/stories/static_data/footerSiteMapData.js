@@ -2,7 +2,7 @@ const footerSiteMapData = {
   en: [
     {
       url: '/themes/permits-tickets',
-      text: 'Permits & Tickets',
+      text: 'Permits and tickets',
       id: 'VGhlbWVOb2RlOjE=',
       description: '',
       topics: [
@@ -14,7 +14,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/business-permits-licenses',
-          text: 'Business permits & licenses',
+          text: 'Business permits and licenses',
           description: '',
           services: [],
         },
@@ -34,7 +34,7 @@ const footerSiteMapData = {
     },
     {
       url: '/themes/housing-utilities',
-      text: 'Housing & Utilities',
+      text: 'Housing and utilities',
       id: 'VGhlbWVOb2RlOjI=',
       description:
         'Find the resources to keep your home, apartment, or condo running smoothly.',
@@ -47,7 +47,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/water-electric-service',
-          text: 'Water & electric service',
+          text: 'Water and electric service',
           description: '',
           services: [],
         },
@@ -113,7 +113,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/lost-found-pets',
-          text: 'Lots & found pets',
+          text: 'Lost and found pets',
           description: '',
           services: [],
         },
@@ -121,7 +121,7 @@ const footerSiteMapData = {
     },
     {
       url: '/themes/health-safety',
-      text: 'Health & Safety',
+      text: 'Health and safety',
       id: 'VGhlbWVOb2RlOjQ=',
       description: '',
       topics: [
@@ -133,7 +133,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/healthcare-prevention',
-          text: 'Healthcare & prevention',
+          text: 'Healthcare and prevention',
           description: '',
           services: [],
         },
@@ -145,19 +145,19 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/child-senior-safety',
-          text: 'Child & senior safety',
+          text: 'Child and senior safety',
           description: '',
           services: [],
         },
         {
           url: '/topics/disaster-safety-relief',
-          text: 'Disaster safety & relief',
+          text: 'Disaster safety and relief',
           description: '',
           services: [],
         },
         {
           url: '/topics/police-reports-records',
-          text: 'Police reports & records',
+          text: 'Police reports and records',
           description: '',
           services: [],
         },
@@ -165,25 +165,25 @@ const footerSiteMapData = {
     },
     {
       url: '/themes/explore-visit',
-      text: 'Explore & Visit',
+      text: 'Explore and visit',
       id: 'VGhlbWVOb2RlOjU=',
       description: '',
       topics: [
         {
           url: '/topics/events-classes',
-          text: 'Events & classes',
+          text: 'Events and classes',
           description: '',
           services: [],
         },
         {
           url: '/topics/hike-bike-swim-play',
-          text: 'Hike, bike, swim, & play',
+          text: 'Hike, bike, swim, and play',
           description: '',
           services: [],
         },
         {
           url: '/topics/arts-culture',
-          text: 'Arts & culture',
+          text: 'Arts and culture',
           description: '',
           services: [],
         },
@@ -195,7 +195,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/transportation-parking',
-          text: 'Transportation & parking',
+          text: 'Transportation and parking',
           description: '',
           services: [],
         },
@@ -209,7 +209,7 @@ const footerSiteMapData = {
     },
     {
       url: '/themes/government-business',
-      text: 'Government & Business',
+      text: 'Government and business',
       id: 'VGhlbWVOb2RlOjY=',
       description: '',
       topics: [
@@ -221,7 +221,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/court-dates',
-          text: 'Court dates & times',
+          text: 'Court dates and times',
           description: '',
           services: [],
         },
@@ -233,19 +233,19 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/city-code',
-          text: 'City code & ordinance',
+          text: 'City code and ordinance',
           description: '',
           services: [],
         },
         {
           url: '/topics/budget-performance-open-records',
-          text: 'Budget, performance, & open records',
+          text: 'Budget, performance, and open records',
           description: '',
           services: [],
         },
         {
           url: '/topics/funding-grants-rebates',
-          text: 'Fudning, grants, & rebates',
+          text: 'Fudning, grants, and rebates',
           description: '',
           services: [],
         },
@@ -257,7 +257,7 @@ const footerSiteMapData = {
         },
         {
           url: '/topics/mayor-council',
-          text: 'Mayor & Council',
+          text: 'Mayor and Council',
           description: '',
           services: [],
         },
@@ -271,7 +271,7 @@ const footerSiteMapData = {
       topics: [
         {
           url: '/topics/job-titles-pay',
-          text: 'City job titles & pay',
+          text: 'City job titles and pay',
           description: '',
           services: [],
         },
