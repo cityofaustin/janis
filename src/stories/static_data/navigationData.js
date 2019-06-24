@@ -209,7 +209,7 @@ const staticNavData = {
     },
     {
       url: '/themes/government-business',
-      text: 'Government and Business',
+      text: 'Government and business',
       id: 'VGhlbWVOb2RlOjY=',
       description: '',
       topics: [
