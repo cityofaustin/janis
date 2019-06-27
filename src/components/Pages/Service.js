@@ -100,6 +100,7 @@ const Service = ({
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
+        department={department}
       />
     </div>
   </div>
