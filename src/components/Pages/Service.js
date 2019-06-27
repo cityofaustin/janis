@@ -22,6 +22,7 @@ const Service = ({
     text: title,
     slug,
     topic,
+    department,
     theme,
     steps,
     dynamicContent,
@@ -52,6 +53,7 @@ const Service = ({
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
+        department={department}
       />
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
@@ -98,6 +100,7 @@ const Service = ({
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
+        department={department}
       />
     </div>
   </div>
