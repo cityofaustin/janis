@@ -220,6 +220,7 @@ export const cleanServicesForPreview = allServices => {
   };
   service.theme = {};
   service.text = service.title;
+  service.contacts = cleanContacts(service.contacts);
 
   return service;
 };
