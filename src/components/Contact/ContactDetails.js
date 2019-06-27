@@ -23,22 +23,22 @@ import {
 
 const ContactSocialMediaLink = ({ url }) => {
   const facebookRegex = /http(s)?:\/\/(www\.)?(facebook|fb)\.com\/[A-z0-9_\-\.]+\/?/g;
-  if(facebookRegex.test(url)) {
-    return <Facebook url={url} />
+  if (facebookRegex.test(url)) {
+    return <Facebook url={url} />;
   }
 
   const twitterRegex = /http(s)?:\/\/(.*\.)?twitter\.com\/[A-z0-9_]+\/?/g;
-  if(twitterRegex.test(url)) {
-    return <Twitter url={url} />
+  if (twitterRegex.test(url)) {
+    return <Twitter url={url} />;
   }
 
-  return(
+  return (
     <div className="coa-ContactItem">
       <i className="material-icons">public</i>
       <div className="coa-ContactItem_content">
         <ExternalLink to={url}>{url}</ExternalLink>
       </div>
-  </div>
+    </div>
   );
 };
 
@@ -57,10 +57,10 @@ const ContactDetails = ({
 
     {phone && <Phone phone={phone} />}
 
-    {hours && <Hours hours={hours} />}
+    {hours && !!hours.length && <Hours hours={hours} />}
 
-    {socialMedia && socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
-
+    {socialMedia &&
+      socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
   </div>
 );
 
