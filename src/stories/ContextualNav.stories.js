@@ -8,9 +8,9 @@ const tempTopicData = {
   theme: {
     id: 'VGhlbWVOb2RlOjQ=',
     slug: 'health-safety',
-    text: 'Health & Safety',
+    text: 'Health and safety',
   },
-  title: 'Healthcare & prevention',
+  title: 'Healthcare and prevention',
 };
 
 const tempTopicsData = {
@@ -23,9 +23,9 @@ const tempTopicsData = {
           theme: {
             id: 'VGhlbWVOb2RlOjQ=',
             slug: 'health-safety',
-            text: 'Health & Safety',
+            text: 'Health and safety',
           },
-          title: 'Healthcare & prevention',
+          title: 'Healthcare and prevention',
         },
       },
     },
