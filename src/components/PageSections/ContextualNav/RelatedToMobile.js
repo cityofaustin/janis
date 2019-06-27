@@ -4,7 +4,6 @@ import { injectIntl } from 'react-intl';
 const RelatedToMobile = ({ topiccollection, topic, department }) => {
   // Making it easier on us for when we add support for multiple departments
   const departments = !!department ? [department] : null;
-  //blarg
 
   // Set the related links, taken from ContextualNav
   const related =
