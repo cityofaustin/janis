@@ -12,3 +12,9 @@
   padding-left: 2rem;
   padding-right: 2rem;
 }
+
+.coa-Page__contacts-mobile {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}

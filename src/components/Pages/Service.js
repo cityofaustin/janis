@@ -85,9 +85,11 @@ const Service = ({
                     content={additionalContent}
                   />
                 )}
-                {!!contacts && !!contacts.length && (
-                  <ContactDetails contact={contacts[0]} />
-                )}
+                <div className="coa-Page__contacts-mobile">
+                  {!!contacts && !!contacts.length && (
+                    <ContactDetails contact={contacts[0]} />
+                  )}
+                </div>
               </div>
             </div>
           </div>

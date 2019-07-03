@@ -108,7 +108,7 @@ const Department = ({
               {intl.formatMessage(i18n.mission)}
             </h2>
             <p>{mission}</p>
-            <div className="coa-DepartmentPage__contacts-mobile">
+            <div className="coa-Page__contacts-mobile">
               {!!contacts && !!contacts.length && (
                 <ContactDetails contact={contacts[0]} />
               )}

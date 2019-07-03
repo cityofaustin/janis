@@ -94,12 +94,6 @@
   white-space: pre-line;
 }
 
-.coa-DepartmentPage__contacts-mobile {
-  @include media($coa-medium-screen) {
-    display: none;
-  }
-}
-
 .coa-DepartmentPage__related-container {
   max-width: $coa-wrapper-maxwidth;
   margin-right: auto;
