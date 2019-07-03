@@ -58,31 +58,42 @@ const Service = ({
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 col-md-8">
-            {steps && !!steps.length ? (
-              //just 1 step? don't display steps in list (ul)
-              steps.length === 1 ? (
-                <Steps steps={steps} />
-              ) : (
-                <Fragment>
-                  <Steps steps={steps} />
-                </Fragment>
-              )
-            ) : null}
+      <div className="coa-DepartmentPage__all-of-the-content">
+        <div className="coa-DepartmentPage__main-content">
+          <div className="wrapper container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-10">
+                {steps && !!steps.length ? (
+                  //just 1 step? don't display steps in list (ul)
+                  steps.length === 1 ? (
+                    <Steps steps={steps} />
+                  ) : (
+                    <Fragment>
+                      <Steps steps={steps} />
+                    </Fragment>
+                  )
+                ) : null}
 
-            {!!dynamicContent &&
-              dynamicContent.map(content => (
-                <ApplicationBlock key={content.id} content={content} />
-              ))}
+                {!!dynamicContent &&
+                  dynamicContent.map(content => (
+                    <ApplicationBlock key={content.id} content={content} />
+                  ))}
 
-            {additionalContent && (
-              <HtmlFromAdmin
-                title={intl.formatMessage(i18n2.whatElse)}
-                content={additionalContent}
-              />
-            )}
+                {additionalContent && (
+                  <HtmlFromAdmin
+                    title={intl.formatMessage(i18n2.whatElse)}
+                    content={additionalContent}
+                  />
+                )}
+                {!!contacts && !!contacts.length && (
+                  <ContactDetails contact={contacts[0]} />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="coa-DepartmentPage__side-content">
+          <div className="coa-ServicePage__contacts-desktop">
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />
             )}
