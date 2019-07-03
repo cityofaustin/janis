@@ -94,21 +94,6 @@
   white-space: pre-line;
 }
 
-.coa-DepartmentPage__all-of-the-content {
-  display: flex;
-  max-width: $coa-wrapper-maxwidth;
-  margin: auto;
-}
-
-.coa-DepartmentPage__side-content {
-  display: none;
-  @include media($coa-medium-screen) {
-    display: inherit;
-  }
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 .coa-DepartmentPage__contacts-mobile {
   @include media($coa-medium-screen) {
     display: none;

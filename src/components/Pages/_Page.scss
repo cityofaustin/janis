@@ -1,0 +1,14 @@
+.coa-Page__all-of-the-content {
+  display: flex;
+  max-width: $coa-wrapper-maxwidth;
+  margin: auto;
+}
+
+.coa-Page__side-content {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: inherit;
+  }
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

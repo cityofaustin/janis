@@ -58,8 +58,8 @@ const Service = ({
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>
-      <div className="coa-DepartmentPage__all-of-the-content">
-        <div className="coa-DepartmentPage__main-content">
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
           <div className="wrapper container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-10">
@@ -92,7 +92,7 @@ const Service = ({
             </div>
           </div>
         </div>
-        <div className="coa-DepartmentPage__side-content">
+        <div className="coa-Page__side-content">
           <div className="coa-ServicePage__contacts-desktop">
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />

@@ -39,7 +39,9 @@ const Department = ({
 }) => {
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
-      <h2 className="coa-DepartmentPage__related-title">{intl.formatMessage(i18n2.relatedInfo)}</h2>
+      <h2 className="coa-DepartmentPage__related-title">
+        {intl.formatMessage(i18n2.relatedInfo)}
+      </h2>
       <ul className="coa-DepartmentPage__related-list">
         {relatedLinks.map((l, index) => (
           <li key={index} className="coa-DepartmentPage__related-item">
@@ -95,8 +97,8 @@ const Department = ({
 
       <TopServicesRelatedContent />
 
-      <div className="coa-DepartmentPage__all-of-the-content">
-        <div className="coa-DepartmentPage__main-content">
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
@@ -107,8 +109,9 @@ const Department = ({
             </h2>
             <p>{mission}</p>
             <div className="coa-DepartmentPage__contacts-mobile">
-              {!!contacts &&
-                !!contacts.length && <ContactDetails contact={contacts[0]} />}
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+              )}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -143,10 +146,11 @@ const Department = ({
             ))}
           </div>
         </div>
-        <div className="coa-DepartmentPage__side-content">
+        <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contact={contacts[0]} />}
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
+            )}
           </div>
         </div>
       </div>
