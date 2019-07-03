@@ -39,7 +39,7 @@ const ApplicationBlock = ({ content: { id, type, value }, intl }) => {
 
       app = (
         <div>
-          <ContactMap contact={contact} />
+          <ContactMap location={contact.location} />
         </div>
       );
       title = value.description;

@@ -18,7 +18,7 @@ storiesOf('Contact', module)
   ))
   .add('Contact Map', () => (
     <div className="wrapper container-fluid">
-      <ContactMap contact={contactData} />
+      <ContactMap location={contactData.location} />
     </div>
   ))
   .add('Phone', () => (
