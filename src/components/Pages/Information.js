@@ -59,14 +59,30 @@ const InformationPage = ({
       <PageHeader contentType={'information'} description={description}>
         {title}
       </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 col-md-8">
-            {options.map((option, index) => (
-              <HtmlFromAdmin title={''} content={option.value} />
-            ))}
-            {additionalContent && (
-              <HtmlFromAdmin title={' '} content={additionalContent} />
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
+          <div className="wrapper container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-8">
+                {options.map((option, index) => (
+                  <HtmlFromAdmin title={''} content={option.value} />
+                ))}
+                {additionalContent && (
+                  <HtmlFromAdmin title={' '} content={additionalContent} />
+                )}
+                <div className="coa-Page__contacts-mobile">
+                  {!!contacts && !!contacts.length && (
+                    <ContactDetails contact={contacts[0]} />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="coa-Page__side-content">
+          <div className="coa-ServicePage__contacts-desktop">
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contact={contacts[0]} />
             )}
           </div>
         </div>
