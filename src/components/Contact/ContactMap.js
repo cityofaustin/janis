@@ -5,26 +5,17 @@ import Address from 'components/Contact/Address';
 import Phone from 'components/Contact/Phone';
 import Hours from 'components/Contact/Hours';
 
-import { addressPropTypes, hoursPropTypes, phonePropTypes } from './proptypes';
+import { addressPropTypes } from './proptypes';
 
-const ContactMap = ({ contact: { phone, hours, location } }) => (
+const ContactMap = ({ location }) => (
   <div className="coa-ContactMap">
     <StaticMap location={location} />
-
     <Address location={location} />
-
-    {phone && <Phone phone={phone} />}
-
-    {hours && <Hours hours={hours} />}
   </div>
 );
 
 ContactMap.propTypes = {
-  contact: PropTypes.shape({
-    location: addressPropTypes,
-    hours: hoursPropTypes,
-    phone: phonePropTypes,
-  }).isRequired,
+  location: addressPropTypes,
 };
 
 export default ContactMap;

@@ -32,6 +32,11 @@ const servicePageFragment = `
         }
       }
     }
+    department {
+      id
+      slug
+      title
+    }
     steps
     dynamicContent
     additionalContent
