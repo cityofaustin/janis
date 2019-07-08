@@ -30,7 +30,6 @@ const TopicsLinks = props =>
   );
 
 const ThemesTopicsMenu = props => {
-  debugger;
   return (
     <nav
       className={`coa-ThemesTopicsMenu ${

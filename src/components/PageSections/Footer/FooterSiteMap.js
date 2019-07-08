@@ -6,14 +6,17 @@ import ThemesTopicsMenu from 'components/PageSections/Menu/ThemesTopicsMenu';
 const FooterSiteMap = ({ intl, navigation }) => {
   const menu = navigation[intl.locale];
   return (
-    <div className="coa-FooterSiteMap">
-      <div className="container-fluid wrapper">
-        <ThemesTopicsMenu
-          menu={menu}
-          extraClasses={'coa-ThemesTopicsMenu--FooterSiteMap'}
-        />
+    <React.Fragment>
+      <div className="coa-FooterSiteMap">
+        <div className="container-fluid wrapper">
+          <ThemesTopicsMenu
+            menu={menu}
+            extraClasses={'coa-ThemesTopicsMenu--FooterSiteMap'}
+          />
+        </div>
       </div>
-    </div>
+      <div className="coa-FooterMobileSiteMap">I'm for mobile!</div>
+    </React.Fragment>
   );
 
   // debugger;
