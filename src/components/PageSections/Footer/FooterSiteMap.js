@@ -2,6 +2,7 @@ import React from 'react';
 import { withSiteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import ThemesTopicsMenu from 'components/PageSections/Menu/ThemesTopicsMenu';
+import ThemesTopicsMobileMenu from 'components/PageSections/Menu/ThemesTopicsMobileMenu';
 
 const FooterSiteMap = ({ intl, navigation }) => {
   const menu = navigation[intl.locale];
@@ -15,7 +16,9 @@ const FooterSiteMap = ({ intl, navigation }) => {
           />
         </div>
       </div>
-      <div className="coa-FooterMobileSiteMap">I'm for mobile!</div>
+      <div className="coa-FooterMobileSiteMap">
+        <ThemesTopicsMobileMenu menu={menu} />
+      </div>
     </React.Fragment>
   );
 
