@@ -14,6 +14,7 @@ import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
+import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const InformationPage = ({
   informationPage: {
@@ -70,6 +71,12 @@ const InformationPage = ({
           </div>
         </div>
       </div>
+      <RelatedToMobile
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+        department={department}
+      />
     </div>
   </div>
 );

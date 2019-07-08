@@ -14,6 +14,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
+import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Service = ({
   service: {
@@ -21,12 +22,14 @@ const Service = ({
     text: title,
     slug,
     topic,
+    department,
     theme,
     steps,
     dynamicContent,
     additionalContent,
     contacts,
     related,
+    shortDescription,
   },
   intl,
 }) => (
@@ -50,20 +53,20 @@ const Service = ({
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
+        department={department}
       />
-      <PageHeader contentType={'service'}>{title}</PageHeader>
+      <PageHeader contentType={'service'} description={shortDescription}>
+        {title}
+      </PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
           <div className="col-xs-12 col-md-8">
             {steps && !!steps.length ? (
-              //just 1 step? don't display steps header or steps in list (ul)
+              //just 1 step? don't display steps in list (ul)
               steps.length === 1 ? (
                 <Steps steps={steps} />
               ) : (
                 <Fragment>
-                  <SectionHeader>
-                    {intl.formatMessage(i18n2.steps)}
-                  </SectionHeader>
                   <Steps steps={steps} />
                 </Fragment>
               )
@@ -80,7 +83,6 @@ const Service = ({
                 content={additionalContent}
               />
             )}
-
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />
             )}
@@ -94,6 +96,12 @@ const Service = ({
         tag={intl.formatMessage(i18n3.service)}
       />
       */}
+      <RelatedToMobile
+        topic={topic}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+        department={department}
+      />
     </div>
   </div>
 );

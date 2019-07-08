@@ -94,7 +94,9 @@ const makeThemePages = async client => {
     let matchingTopicCollectionIndex = topicCollections.findIndex(
       tc => tc.id === topic.topiccollection.id,
     );
-    topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+    if (matchingTopicCollectionIndex !== -1) {
+      topicCollections[matchingTopicCollectionIndex].topics.push(topic);
+    }
   }
 
   // And now that we have all the topics on each topic collection,
@@ -104,11 +106,13 @@ const makeThemePages = async client => {
       tc => tc.id === topic.topiccollection.id,
     );
 
-    // Update the topicCollection on the topic
-    const topicCollectionCopy = JSON.parse(
-      JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
-    );
-    topic.topiccollection = topicCollectionCopy;
+    if (matchingTopicCollectionIndex !== -1) {
+      // Update the topicCollection on the topic
+      const topicCollectionCopy = JSON.parse(
+        JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
+      );
+      topic.topiccollection = topicCollectionCopy;
+    }
   }
 
   // Add all service page links to topic pages
@@ -117,15 +121,18 @@ const makeThemePages = async client => {
     service.type = 'service';
 
     let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
-    if (service.toplink) {
-      topics[matchingTopicIndex].topLinks.push(service);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(service);
-    }
 
-    // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
-    service.topic = topicCopy;
+    if (topics[matchingTopicIndex]) {
+      if (service.toplink) {
+        topics[matchingTopicIndex].topLinks.push(service);
+      } else {
+        topics[matchingTopicIndex].otherLinks.push(service);
+      }
+
+      // Update the topic on the page
+      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      service.topic = topicCopy;
+    }
   }
 
   // Add all information page links to topic pages

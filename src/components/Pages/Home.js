@@ -26,11 +26,12 @@ const Home = ({ topServices, image, intl }) => (
       title={intl.formatMessage(i18n3.checkOutServices)}
       tiles={topServices}
       locale={intl.locale}
-      extraClasses={'floating'}
+      extraClasses={'coa-TopServicesHome'}
     />
-    <PageNotificationBanner>
-      <WorkInProgress />
-    </PageNotificationBanner>
+    {/* We are leaving it here because we might need it again.*/}
+    {/*<PageNotificationBanner>*/}
+    {/*  <WorkInProgress />*/}
+    {/*</PageNotificationBanner>*/}
   </div>
 );
 

@@ -42,7 +42,7 @@ const ThemesTopicsMenu = props => {
           <li className="coa-ThemesTopicsMenu__section" key={index}>
             <h4
               className="coa-ThemesTopicsMenu__theme"
-              tabindex="0"
+              tabIndex="0"
               onKeyDown={props.handleFullSiteMenuItem}
             >
               {theme.text}
