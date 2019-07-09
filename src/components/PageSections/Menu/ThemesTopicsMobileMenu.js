@@ -40,8 +40,8 @@ const ThemeAccordianItem = ({ theme, locale }) => {
 
   return (
     <AccordionItem className={'coa-ThemeAccordianItem'}>
-      <AccordionItemHeading className={'coa-AccordionItemHeading'}>
-        <AccordionItemButton className={'coa-AccordionButton'}>
+      <AccordionItemHeading className={'coa-ThemeAccordionItemHeading'}>
+        <AccordionItemButton className={'coa-ThemeAccordionButton'}>
           <p className="coa-ThemeAccordianItem__name">{theme.text}</p>
 
           <AccordionItemState>
@@ -66,7 +66,11 @@ const ThemesTopicsMobileMenu = props => {
   // debugger;
 
   return (
-    <Accordion className={'coa-Accordion'} allowMultipleExpanded={true}>
+    <Accordion
+      className={'coa-Accordion'}
+      allowMultipleExpanded={true}
+      allowZeroExpanded={true}
+    >
       {props.menu.map((theme, index) => (
         <div className="coa-ThemesTopicsMobileMenu__theme-container">
           <ThemeAccordianItem theme={theme} locale={props.intl.locale} />

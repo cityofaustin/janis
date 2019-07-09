@@ -179,14 +179,22 @@
 }
 
 .coa-ThemesTopicsMobileMenu__theme-container {
-  background: red;
+  background: $coa-color-grey;
 }
 
 .coa-ThemeAccordianItem__name {
-  color: $coa-color-primary;
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   flex: auto;
+}
+
+.coa-ThemeAccordionButton {
+  display: flex;
+  align-items: center;
+  color: $coa-color-primary;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-top: 1px solid $coa-color-dark-grey;
 }
 
 // .coa-FooterSiteMap__title {
