@@ -32,7 +32,8 @@ class Hours extends Component {
     } else {
       style = "ha";
     }
-    return moment(time).tz('America/Chicago').format(style);
+    
+    return moment.utc(time).format(style);
   }
 
   render() {

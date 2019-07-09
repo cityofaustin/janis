@@ -62,14 +62,10 @@ if [ "${TRAVIS_BRANCH}" == "production" ]; then
   export JANIS_IMAGE_VERSION="production"
 elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export DEPLOYMENT_MODE="STAGING"
-  # GOOGLE_ANALYTICS=$GOOGLE_ANALYTICS_STAGING
-  # FEEDBACK_API=$FEEDBACK_API_STAGING
-  # CMS_API=$CMS_API_STAGING
-  # CMS_MEDIA=$CMS_MEDIA_STAGING
+  export FEEDBACK_API=$FEEDBACK_API_STAGING
+  export CMS_API=$CMS_API_STAGING
+  export CMS_MEDIA=$CMS_MEDIA_STAGING
   export GOOGLE_ANALYTICS=$GOOGLE_ANALYTICS_STAGING
-  export FEEDBACK_API=$FEEDBACK_API_PRODUCTION
-  export CMS_API=$CMS_API_PRODUCTION
-  export CMS_MEDIA=$CMS_MEDIA_PRODUCTION
   export BASE_PATH_PR="/"
   export JANIS_IMAGE_VERSION="master"
 else
@@ -218,4 +214,10 @@ function janis_deploy {
   S3_DESTINATION="s3://${DEPLOYMENT_BUCKET}/${PR_SLUG}"
   echo "Syncing Janis into '${S3_DESTINATION}'"
   aws s3 sync ./dist $S3_DESTINATION --delete
+
+  if [ "${DEPLOYMENT_MODE}" == "PRODUCTION" ]; then
+    echo "janis_deploy() Clearing CloudFront cache..."
+    aws cloudfront create-invalidation --distribution-id $AWS_CF_DISTRO --paths "${AWS_CF_DISTRO_PATH}";
+    echo "janis_deploy() Invalidation request submitted!";
+  fi;
 }

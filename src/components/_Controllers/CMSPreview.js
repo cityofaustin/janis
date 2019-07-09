@@ -12,8 +12,8 @@ import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevision
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import {
   cleanProcesses,
-  cleanServices,
-  cleanInformationPages,
+  cleanServicesForPreview,
+  cleanInformationForPreview,
   cleanTopics,
   cleanDepartments,
   cleanTopicCollections,
@@ -129,39 +129,48 @@ class CMSPreview extends Component {
         />
         <Route
           path="/services"
-          render={props => <Service service={cleanServices(data)[0]} />}
+          render={props => <Service service={cleanServicesForPreview(data)} />}
         />
         <Route
           path="/information"
           render={props => (
-            <InformationPage informationPage={cleanInformationPages(data)[0]} />
+            <InformationPage
+              informationPage={cleanInformationForPreview(data)}
+            />
           )}
         />
         <Route
           path="/topic"
           render={props => {
             let topic = cleanTopics(data)[0];
-            topic.topLinks = [{ text: 'Top link' }, { text: 'Other top link' }];
-            topic.otherLinks = [
-              { text: 'First link' },
-              { text: 'Second link' },
-              { text: 'Third link' },
-              { text: 'Fourth link' },
+            topic.topLinks = [
+              { text: 'Top link', url: '' },
+              { text: 'Other top link', url: '' },
             ];
+            topic.otherLinks = [
+              { text: 'First link', url: '' },
+              { text: 'Second link', url: '' },
+              { text: 'Third link', url: '' },
+              { text: 'Fourth link', url: '' },
+            ];
+            topic.topiccollection = { topics: [], theme: {} };
 
             return <Topic topic={topic} />;
+          }}
+        />
+        <Route
+          path="/topiccollection"
+          render={props => {
+            let tc = cleanTopicCollections(data)[0];
+            tc.topics = [{ title: 'Sample Text' }];
+
+            return <TopicCollection tc={tc} />;
           }}
         />
         <Route
           path="/department"
           render={props => (
             <Department department={cleanDepartments(data)[0]} />
-          )}
-        />
-        <Route
-          path="/topiccollection"
-          render={props => (
-            <TopicCollection topics={cleanTopicCollections(data)[0]} />
           )}
         />
       </Switch>

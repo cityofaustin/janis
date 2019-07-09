@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import Parser from 'html-react-parser';
 
 import { departmentPage as i18n } from 'js/i18n/definitions';
 
@@ -39,7 +39,9 @@ const Department = ({
 }) => {
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
-      <h2 className="coa-DepartmentPage__related-title">Related content</h2>
+      <h2 className="coa-DepartmentPage__related-title">
+        {intl.formatMessage(i18n2.relatedInfo)}
+      </h2>
       <ul className="coa-DepartmentPage__related-list">
         {relatedLinks.map((l, index) => (
           <li key={index} className="coa-DepartmentPage__related-item">
@@ -59,6 +61,7 @@ const Department = ({
           title={intl.formatMessage(i18n.topServices)}
           tiles={topServices}
           locale={intl.locale}
+          extraClasses="coa-TopServicesDepartment"
         />
         <RelatedContent />
       </div>
@@ -67,6 +70,7 @@ const Department = ({
         title={intl.formatMessage(i18n.topServices)}
         tiles={topServices}
         locale={intl.locale}
+        extraClasses="coa-TopServicesDepartment"
       />
     ) : !!relatedLinks.length ? (
       <RelatedContent />
@@ -79,6 +83,7 @@ const Department = ({
       </Head>
       {image && (
         <PageBanner
+          extraClasses="coa-PageBannerCoverDepartment"
           imagesPath={`${process.env.CMS_MEDIA}/images`}
           imageFilename={path.basename(
             image.filename,
@@ -92,18 +97,18 @@ const Department = ({
 
       <TopServicesRelatedContent />
 
-      <div className="coa-DepartmentPage__all-of-the-content">
-        <div className="coa-DepartmentPage__main-content">
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>
-            <HtmlFromAdmin content={whatWeDo} />
+            <p>{Parser(whatWeDo)}</p>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.mission)}
             </h2>
             <p>{mission}</p>
-            <div className="coa-DepartmentPage__contacts-mobile">
+            <div className="coa-Page__contacts-mobile">
               {!!contacts && !!contacts.length && (
                 <ContactDetails contact={contacts[0]} />
               )}
@@ -141,7 +146,7 @@ const Department = ({
             ))}
           </div>
         </div>
-        <div className="coa-DepartmentPage__side-content">
+        <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />

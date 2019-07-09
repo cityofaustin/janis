@@ -20,8 +20,13 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
+    // quick fix re: phone numbers are current inconsiently entered on the backend
     if (cleaned.phone) {
-      cleaned.phone = JSON.parse(cleaned.phone);
+      try {
+        cleaned.phone = JSON.parse(cleaned.phone);
+      } catch (error) {
+        cleaned.phone = JSON.stringify({ default: cleaned.phone });
+      }
     }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
@@ -199,6 +204,27 @@ export const cleanServices = allServices => {
   return cleanedServices;
 };
 
+// Let's just do this for now, we'll probably need to make some changes
+// when we move to rs7 anyways
+export const cleanServicesForPreview = allServices => {
+  if (!allServices || !allServices.edges) return null;
+  const services = allServices.edges.map(e => e.node);
+  let service = services[0];
+
+  service.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
+    },
+  };
+  service.theme = {};
+  service.text = service.title;
+  service.contacts = cleanContacts(service.contacts);
+
+  return service;
+};
+
 export const cleanInformationPages = allInformationPages => {
   if (!allInformationPages || !allInformationPages.edges) return null;
 
@@ -207,6 +233,27 @@ export const cleanInformationPages = allInformationPages => {
     informationPage.contacts = cleanContacts(informationPage.contacts);
   });
   return cleanedInformationPages;
+};
+
+// Let's just do this for now, we'll probably need to make some changes
+// when we move to rs7 anyways
+export const cleanInformationForPreview = allInformationPages => {
+  if (!allInformationPages || !allInformationPages.edges) return null;
+  const infos = allInformationPages.edges.map(e => e.node);
+  let info = infos[0];
+
+  info.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
+    },
+  };
+  info.theme = {};
+  info.text = info.title;
+  info.contacts = cleanContacts(info.contacts);
+
+  return info;
 };
 
 export const cleanDepartmentDirectors = directors => {
