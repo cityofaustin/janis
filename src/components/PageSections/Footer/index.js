@@ -21,20 +21,7 @@ import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
 const Footer = ({ threeoneone, intl }) => (
   <footer>
-    {' '}
-    {/* className="coa-FooterContainer" */}
-    {/* <div className="container-fluid wrapper"> */}
-    {/*
-        Commenting out until we finalize IA and FooterSiteMap menu data + sections
-      
-      */}
     <div className="coa-Footer">
-      {/* Commenting this out because it's causing issues with oversized footer stuff
-
-        <div className="row">
-          <div className="col-xs-12">
-
-        */}
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">
         <CitySealSVG />
@@ -52,8 +39,6 @@ const Footer = ({ threeoneone, intl }) => (
         </div>
       </div>
     </div>
-    {/*         </div>
-      </div></div> */}
   </footer>
 );
 

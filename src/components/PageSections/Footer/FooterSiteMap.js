@@ -21,26 +21,6 @@ const FooterSiteMap = ({ intl, navigation }) => {
       </div>
     </React.Fragment>
   );
-
-  // debugger;
-  // return (
-  //   <div className="row">
-  //     {sections.map(section => (
-  //       <div className="col-xs-12 col-md-3">
-  //         <h4 className="coa-FooterSiteMap__title">{section.text}</h4>
-  //         <ul className="coa-FooterSiteMap__list">
-  //           {section.topicCollectionPages.edges.map(edge => (
-  //             <li className="coa-FooterSiteMap__item">
-  //               <a href={edge.node.url} className="coa-FooterSiteMap__link">
-  //                 {edge.node.title}
-  //               </a>
-  //             </li>
-  //           ))}
-  //         </ul>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
 };
 
 export default withSiteData(injectIntl(FooterSiteMap));
