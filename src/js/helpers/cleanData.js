@@ -220,6 +220,7 @@ export const cleanServicesForPreview = allServices => {
   };
   service.theme = {};
   service.text = service.title;
+  service.contacts = cleanContacts(service.contacts);
 
   return service;
 };
@@ -250,6 +251,7 @@ export const cleanInformationForPreview = allInformationPages => {
   };
   info.theme = {};
   info.text = info.title;
+  info.contacts = cleanContacts(info.contacts);
 
   return info;
 };
