@@ -21,7 +21,7 @@ const Departments = ({ departments, intl }) => {
       <Head>
         <title>Departments</title>
       </Head>
-      <PageHeader contentType={'information'}>
+      <PageHeader>
         {intl.formatMessage(i18n2.departments)}
       </PageHeader>
       <div className="wrapper container-fluid">
