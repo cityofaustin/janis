@@ -251,6 +251,7 @@ export const cleanInformationForPreview = allInformationPages => {
   };
   info.theme = {};
   info.text = info.title;
+  info.contacts = cleanContacts(info.contacts);
 
   return info;
 };
