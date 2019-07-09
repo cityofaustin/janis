@@ -11,9 +11,8 @@ import {
   AccordionItemState,
 } from 'react-accessible-accordion';
 
-const TopicsLinks = ({ theme, locale }) => {
+const TopicsLinks = ({ theme, locale, intl }) => {
   const topicCollections = theme.topicCollectionPages.edges;
-  // debugger;
 
   return !!topicCollections && topicCollections.length > 0 ? (
     <ul className="coa-ThemesTopicsMenu__topics">
@@ -31,54 +30,52 @@ const TopicsLinks = ({ theme, locale }) => {
       ))}
     </ul>
   ) : (
-    <p className="coa-FullSiteMenu__coming-soon">SOON</p>
+    <p className="coa-FullSiteMenu__coming-soon">
+      {intl.formatMessage(i18n2.comingSoon)}
+    </p>
   );
 };
 
-const ThemeAccordianItem = ({ theme, locale }) => {
-  // debugger;
+const ThemeAccordianItem = ({ theme, locale, intl }) => (
+  <AccordionItem className={'coa-ThemeAccordianItem'}>
+    <AccordionItemHeading className={'coa-ThemeAccordionItemHeading'}>
+      <AccordionItemButton className={'coa-ThemeAccordionButton'}>
+        <p className="coa-ThemeAccordianItem__name">{theme.text}</p>
 
-  return (
-    <AccordionItem className={'coa-ThemeAccordianItem'}>
-      <AccordionItemHeading className={'coa-ThemeAccordionItemHeading'}>
-        <AccordionItemButton className={'coa-ThemeAccordionButton'}>
-          <p className="coa-ThemeAccordianItem__name">{theme.text}</p>
+        <AccordionItemState>
+          {({ expanded }) =>
+            expanded ? (
+              <i className="material-icons">expand_less</i>
+            ) : (
+              <i className="material-icons">expand_more</i>
+            )
+          }
+        </AccordionItemState>
+      </AccordionItemButton>
+    </AccordionItemHeading>
+    <AccordionItemPanel className={'coa-AccordionPanel'}>
+      <TopicsLinks theme={theme} locale={locale} intl={intl} />
+    </AccordionItemPanel>
+  </AccordionItem>
+);
 
-          <AccordionItemState>
-            {({ expanded }) =>
-              expanded ? (
-                <i className="material-icons">expand_less</i>
-              ) : (
-                <i className="material-icons">expand_more</i>
-              )
-            }
-          </AccordionItemState>
-        </AccordionItemButton>
-      </AccordionItemHeading>
-      <AccordionItemPanel className={'coa-AccordionPanel'}>
-        <TopicsLinks theme={theme} locale={locale} />
-      </AccordionItemPanel>
-    </AccordionItem>
-  );
-};
-
-const ThemesTopicsMobileMenu = props => {
-  // debugger;
-
-  return (
-    <Accordion
-      className={'coa-Accordion'}
-      allowMultipleExpanded={true}
-      allowZeroExpanded={true}
-    >
-      {props.menu.map((theme, index) => (
-        <div className="coa-ThemesTopicsMobileMenu__theme-container">
-          <ThemeAccordianItem theme={theme} locale={props.intl.locale} />
-        </div>
-      ))}
-    </Accordion>
-  );
-};
+const ThemesTopicsMobileMenu = props => (
+  <Accordion
+    className={'coa-Accordion'}
+    allowMultipleExpanded={true}
+    allowZeroExpanded={true}
+  >
+    {props.menu.map((theme, index) => (
+      <div className="coa-ThemesTopicsMobileMenu__theme-container">
+        <ThemeAccordianItem
+          theme={theme}
+          locale={props.intl.locale}
+          intl={props.intl}
+        />
+      </div>
+    ))}
+  </Accordion>
+);
 
 ThemesTopicsMobileMenu.propTypes = {
   menu: PropTypes.object.isRequired,
