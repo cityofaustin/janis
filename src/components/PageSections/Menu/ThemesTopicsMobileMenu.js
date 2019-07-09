@@ -47,9 +47,9 @@ const ThemeAccordianItem = ({ theme, locale }) => {
           <AccordionItemState>
             {({ expanded }) =>
               expanded ? (
-                <i class="material-icons">remove</i>
+                <i className="material-icons">expand_less</i>
               ) : (
-                <i class="material-icons">add</i>
+                <i className="material-icons">expand_more</i>
               )
             }
           </AccordionItemState>
