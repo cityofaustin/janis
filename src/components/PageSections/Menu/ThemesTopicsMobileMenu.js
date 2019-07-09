@@ -13,7 +13,7 @@ import {
 
 const TopicsLinks = ({ theme, locale }) => {
   const topicCollections = theme.topicCollectionPages.edges;
-  debugger;
+  // debugger;
 
   return !!topicCollections && topicCollections.length > 0 ? (
     <ul className="coa-ThemesTopicsMenu__topics">
@@ -42,7 +42,7 @@ const ThemeAccordianItem = ({ theme, locale }) => {
     <AccordionItem className={'coa-ThemeAccordianItem'}>
       <AccordionItemHeading className={'coa-AccordionItemHeading'}>
         <AccordionItemButton className={'coa-AccordionButton'}>
-          <h3 className="coa-StepOption__name">{theme.text}</h3>
+          <p className="coa-ThemeAccordianItem__name">{theme.text}</p>
 
           <AccordionItemState>
             {({ expanded }) =>
