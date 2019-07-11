@@ -27,17 +27,20 @@ const ContextualNav = ({
       : department.title,
   };
 
-  // Set the related links
-  const related = topiccollection
-    ? topiccollection.topics
-        .filter(t => t.id !== topic.id)
-        .map(t => ({
-          slug: `/${intl.locale}/${topiccollection.theme.slug}/${
-            topiccollection.slug
-          }/${t.slug}`,
-          title: t.title,
-        }))
-    : topics.edges.map(edge => edge.node);
+  // Set the related links if we have a topic collection
+  let related = [];
+  if (topiccollection) {
+    related = topiccollection
+      ? topiccollection.topics
+          .filter(t => t.id !== topic.id)
+          .map(t => ({
+            slug: `/${intl.locale}/${topiccollection.theme.slug}/${
+              topiccollection.slug
+            }/${t.slug}`,
+            title: t.title,
+          }))
+      : topics.edges.map(edge => edge.node);
+  }
 
   return (
     <div className="coa-ContextualNav">

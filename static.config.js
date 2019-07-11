@@ -234,18 +234,44 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
-  for (var page of informationPages) {
-    for (var department of departments) {
-      if (page.department !== null && page.department.id === department.id) {
-        department.relatedLinks.push(page);
-      }
+  // Commenting ths out because info pages are using a different struture
+  // and I broke that in cleanData to get the mutli-dept pages working
+  // TODO: clean this up when we get everything to multi-dept
+  //
+
+  // for (var page of informationPages) {
+  //   for (var department of departments) {
+  //     if (page.department !== null && page.department.id === department.id) {
+  //       department.relatedLinks.push(page);
+  //     }
+  //   }
+  // }
+
+  const { allServicePages: allServices } = await client.request(
+    allServicePagesQuery,
+  );
+  const services = cleanServices(allServices);
+
+  // Add all service page links to department pages
+  // copying the pattern from topics, may not need to do all this copying
+  for (var service of services) {
+    if (!service.department) continue;
+    service.type = 'service';
+
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === service.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      departments[matchingDepartmentIndex].relatedLinks.push(service);
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      service.department = departmentCopy;
     }
   }
-
-  // const { allServicePages: allServices } = await client.request(
-  //   allServicePagesQuery,
-  // );
-  // const services = cleanServices(allServices);
 
   const { allProcesses } = await client.request(allProcessesQuery);
   const processes = cleanProcesses(allProcesses);
@@ -266,33 +292,17 @@ const makeDepartmentPages = async client => {
             informationPage,
           }),
         }))
-        // .concat(
-        //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-        //     path: `/${service.slug}`,
-        //     component: 'src/components/Pages/Service',
-        //     getData: async () => ({
-        //       service,
-        //     }),
-        //   }))
-        // )
         .concat(
-          processes
+          services
             .filter(
-              p => p.department != null && p.department.id == department.id,
+              s => s.department != null && s.department.id == department.id,
             )
-            .map(process => ({
-              path: `/${process.slug}`,
-              component: 'src/components/Pages/Process',
+            .map(service => ({
+              path: `/${service.slug}`,
+              component: 'src/components/Pages/Service',
               getData: async () => ({
-                process,
+                service,
               }),
-              children: process.processSteps.map(processStep => ({
-                path: `/${processStep.slug}`,
-                component: 'src/components/Pages/ProcessStep',
-                getData: async () => ({
-                  processStep,
-                }),
-              })),
             })),
         ),
     }))

@@ -37,6 +37,17 @@ const servicePageFragment = `
       slug
       title
     }
+    relatedDepartments {
+      edges {
+        node {
+          relatedDepartment {
+            id
+            title
+            slug
+          }
+        }
+      }
+    }
     steps
     dynamicContent
     additionalContent
