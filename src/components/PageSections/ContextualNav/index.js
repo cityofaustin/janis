@@ -9,6 +9,7 @@ const ContextualNav = ({
   topiccollection,
   theme,
   department,
+  relatedDepartments,
   contentType,
   intl,
 }) => {
@@ -42,6 +43,13 @@ const ContextualNav = ({
       : topics.edges.map(edge => edge.node);
   }
 
+  // Set the 'offered by' departments if we have them
+  let offeredBy = [];
+  if (relatedDepartments) {
+    offeredBy = relatedDepartments.edges.map(e => e.node.relatedDepartment);
+    debugger;
+  }
+
   return (
     <div className="coa-ContextualNav">
       <div className="wrapper container-fluid">
@@ -65,14 +73,16 @@ const ContextualNav = ({
             </div>
           )}
           <div className="coa-ContextualNav__dept">
-            {department && (
+            {offeredBy.length && (
               <Fragment>
                 <span className="coa-ContextualNav__label">{`${intl.formatMessage(
                   i18n.offeredBy,
                 )}: `}</span>
-                <a href={`/${intl.locale}/${department.slug}`}>
-                  {department.title}
-                </a>
+                {offeredBy.map(department => (
+                  <a href={`/${intl.locale}/${department.slug}`}>
+                    {department.title}
+                  </a>
+                ))}
               </Fragment>
             )}
           </div>
