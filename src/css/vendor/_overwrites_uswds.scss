@@ -68,6 +68,33 @@ button {
   width: auto;
 }
 
+// TODO: clean this up by doing a better job of importing the uswds styles
+table {
+  border-spacing: 0;
+  margin: units(2.5) 0;
+
+  thead {
+    th {
+      font-weight: $coa-font-bold;
+      background-color: transparent;
+      border-top: 0;
+    }
+  }
+
+  th,
+  td {
+    border-left: 0;
+    border-right: 0;
+    padding-left: 0;
+  }
+
+  th {
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
 .usa-table-borderless {
   margin: 0;
   padding: 0;
