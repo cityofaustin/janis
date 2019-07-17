@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Parser from 'html-react-parser';
+import Parser, { domToReact } from 'html-react-parser';
 import { optionPropTypes, stepWithOptionsPropTypes } from './proptypes';
 
 import {
@@ -31,7 +31,15 @@ const StepOption = ({ option_name, option_description }) => (
         </AccordionItemButton>
       </AccordionItemHeading>
       <AccordionItemPanel className={'coa-AccordionPanel'}>
-        <span>{Parser(option_description)}</span>
+        <span>
+          {Parser(option_description, {
+            replace: domNode => {
+              if (domNode.data === 'Start') {
+                return <span class="usa-button-primary">Start</span>;
+              }
+            },
+          })}
+        </span>
       </AccordionItemPanel>
     </AccordionItem>
   </div>
