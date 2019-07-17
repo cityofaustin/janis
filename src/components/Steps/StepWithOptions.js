@@ -35,7 +35,8 @@ const StepOption = ({ option_name, option_description }) => (
           {Parser(option_description, {
             replace: domNode => {
               if (domNode.data === 'Start') {
-                return <span class="usa-button-primary">Start</span>;
+                return <nav class="usa-button-primary">Start</nav>;
+                console.dir(domNode);
               }
             },
           })}
