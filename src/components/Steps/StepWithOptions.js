@@ -44,7 +44,7 @@ const StepOption = ({ option_name, option_description }) => (
                 if (
                   domNode.attribs.hasOwnProperty('href') &&
 
-                  domNode.parent.name === 'li'
+                  domNode.parent.name !== 'li'
                 ) {
                   console.dir(domNode);
                   // replace the node with a button
