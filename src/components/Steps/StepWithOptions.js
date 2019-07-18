@@ -34,10 +34,15 @@ const StepOption = ({ option_name, option_description }) => (
         <span>
           {Parser(option_description, {
             replace: domNode => {
-              if (domNode.data === 'Start') {
-                return <nav class="usa-button-primary">Start</nav>;
-                console.dir(domNode);
+              if (domNode.attribs){
+                if (domNode.attribs.hasOwnProperty('href' ) && domNode.parent.name === "li" ) {
+                // console.dir(domNode);
+                return <nav class="usa-button-primary">{domNode.children[0].data}</nav>;
+
+
+                }
               }
+
             },
           })}
         </span>
