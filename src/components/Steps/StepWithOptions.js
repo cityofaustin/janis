@@ -35,23 +35,26 @@ const StepOption = ({ option_name, option_description }) => (
           {Parser(option_description, {
             replace: domNode => {
               // this initial if is needed to prevent undefined error
+              {/*
+              making a sorta safe assumption that buttons in the steps
+              will always be part of a list (to prevent links elsewhere
+              from being overwritten), but perhaps there is a better
+              way to distinguish them */}
               if (domNode.attribs) {
                 if (
                   domNode.attribs.hasOwnProperty('href') &&
-                  // making a sorta safe assumption that buttons in the steps
-                  // will always be part of a list (to prevent links elsewhere
-                  // from being overwritten), but perhaps there is a better
-                  // way to distinguish them
+
                   domNode.parent.name === 'li'
                 ) {
-                  // console.dir(domNode);
+                  console.dir(domNode);
                   // replace the node with a button
                   return (
-                    <nav class="usa-button-primary">
-                      // this is kinda goofy, but the 'data' is the text of the link
-                      // and html-parser reads that as a child of 'a'
+                    <a class="usa-button-primary" href={domNode.attribs.href}>
+                      {/* this is kinda goofy, but the 'data' is the text of the link
+                       and html-parser reads that as a child of 'a' */}
+
                       {domNode.children[0].data}
-                    </nav>
+                    </a>
                   );
                 }
               }
