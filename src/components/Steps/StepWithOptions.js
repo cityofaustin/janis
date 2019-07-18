@@ -49,7 +49,7 @@ const StepOption = ({ option_name, option_description }) => (
                   return (
                     <nav class="usa-button-primary">
                       // this is kinda goofy, but the 'data' is the text of the link
-                      // and html-parser reads that as a child of <a>
+                      // and html-parser reads that as a child of 'a'
                       {domNode.children[0].data}
                     </nav>
                   );
