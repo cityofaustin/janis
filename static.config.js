@@ -4,7 +4,6 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 // QUERIES
 import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
-import allProcessesQuery from 'js/queries/allProcessesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
@@ -18,7 +17,6 @@ import {
   cleanTopics,
   cleanTopicCollections,
   cleanThemes,
-  cleanProcesses,
   cleanServices,
   cleanInformationPages,
   clean311,
@@ -152,9 +150,6 @@ const makeThemePages = async client => {
     page.topic = topicCopy;
   }
 
-  const { allProcesses } = await client.request(allProcessesQuery);
-  const processes = cleanProcesses(allProcesses);
-
   const data = themes.map(theme => ({
     path: `/${theme.slug}`,
     component: 'src/components/Pages/Theme',
@@ -199,24 +194,6 @@ const makeThemePages = async client => {
                       service,
                     }),
                   })),
-              )
-              .concat(
-                processes
-                  .filter(p => p.topic != null && p.topic.id == topic.id)
-                  .map(process => ({
-                    path: `/${process.slug}`,
-                    component: 'src/components/Pages/Process',
-                    getData: async () => ({
-                      process,
-                    }),
-                    children: process.processSteps.map(processStep => ({
-                      path: `/${processStep.slug}`,
-                      component: 'src/components/Pages/ProcessStep',
-                      getData: async () => ({
-                        processStep,
-                      }),
-                    })),
-                  })),
               ),
           })),
       })),
@@ -247,9 +224,6 @@ const makeDepartmentPages = async client => {
   // );
   // const services = cleanServices(allServices);
 
-  const { allProcesses } = await client.request(allProcessesQuery);
-  const processes = cleanProcesses(allProcesses);
-
   const data = departments
     .map(department => ({
       path: `/${department.slug}`,
@@ -265,36 +239,16 @@ const makeDepartmentPages = async client => {
           getData: async () => ({
             informationPage,
           }),
-        }))
-        // .concat(
-        //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-        //     path: `/${service.slug}`,
-        //     component: 'src/components/Pages/Service',
-        //     getData: async () => ({
-        //       service,
-        //     }),
-        //   }))
-        // )
-        .concat(
-          processes
-            .filter(
-              p => p.department != null && p.department.id == department.id,
-            )
-            .map(process => ({
-              path: `/${process.slug}`,
-              component: 'src/components/Pages/Process',
-              getData: async () => ({
-                process,
-              }),
-              children: process.processSteps.map(processStep => ({
-                path: `/${processStep.slug}`,
-                component: 'src/components/Pages/ProcessStep',
-                getData: async () => ({
-                  processStep,
-                }),
-              })),
-            })),
-        ),
+        })),
+      // .concat(
+      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
+      //     path: `/${service.slug}`,
+      //     component: 'src/components/Pages/Service',
+      //     getData: async () => ({
+      //       service,
+      //     }),
+      //   }))
+      // )
     }))
     .concat([
       {
