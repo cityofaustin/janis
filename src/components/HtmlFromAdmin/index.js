@@ -2,51 +2,46 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
-import cheerio from 'cheerio';
 
 const HtmlFromAdmin = ({ content }) => {
-  // If we have code blocks in there, we've got some markdown to work with
-  if (content.includes('<code>')) {
-    // #tbt - use cheerio to do some old school dom manip
-    const $ = cheerio.load(content);
+  return Parser(content, {
+    replace: domNode => {
+      // this initial if is needed to prevent undefined error
+      // making a sorta safe assumption that buttons in the steps
+      // will always be part of a list (to prevent links elsewhere
+      // from being overwritten), but perhaps there is a better
+      // way to distinguish them
+      if (domNode.attribs) {
+        // Turn parse markdown from code
+        if (domNode.name === 'code') {
+          console.dir(domNode);
 
-    const markdown = $('h1, h2, h3, h4, p, ul, ol')
-      .map((index, element) => {
-        if (
-          element.children.length &&
-          !element.children.some(child => child.type !== 'text')
-        ) {
-          return $.html(element);
+          const markdown = domNode.children
+            .filter(child => child.type === 'text')
+            .map(textChild => textChild.data)
+            .join('\n');
+
+          return <ReactMarkdown source={markdown} escapeHtml={false} />;
         }
 
-        return element.children
-          .map(child => {
-            if (child.type === 'text') {
-              return $(child).text();
-            }
+        // Turn links into buttons
+        if (
+          domNode.attribs.hasOwnProperty('href') &&
+          domNode.parent.name !== 'li'
+        ) {
+          // replace the node with a button
+          return (
+            <a class="usa-button-primary" href={domNode.attribs.href}>
+              {/* this is kinda goofy, but the 'data' is the text of the link
+                       and html-parser reads that as a child of 'a' */}
 
-            if (child.type === 'tag') {
-              if (child.name === 'code') {
-                $(element)
-                  .find('br')
-                  .replaceWith('\n');
-
-                return $(child).text();
-              }
-            }
-
-            return $.html(child);
-          })
-          .join('');
-      })
-      .get()
-      .join('\n');
-
-    return <ReactMarkdown source={markdown} escapeHtml={false} />;
-  }
-
-  // No markdown, just use Parser
-  return Parser(content);
+              {domNode.children[0].data}
+            </a>
+          );
+        }
+      }
+    },
+  });
 };
 
 HtmlFromAdmin.propTypes = {
