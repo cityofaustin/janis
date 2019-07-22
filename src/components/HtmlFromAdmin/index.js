@@ -25,20 +25,21 @@ const HtmlFromAdmin = ({ content }) => {
         }
 
         // Turn links into buttons
-        if (
-          domNode.attribs.hasOwnProperty('href') &&
-          domNode.parent.name !== 'li'
-        ) {
-          // replace the node with a button
-          return (
-            <a class="usa-button-primary" href={domNode.attribs.href}>
-              {/* this is kinda goofy, but the 'data' is the text of the link
-                       and html-parser reads that as a child of 'a' */}
+        // waiting on
+        // if (
+        //   domNode.attribs.hasOwnProperty('href') &&
+        //   domNode.parent.name !== 'li'
+        // ) {
+        //   // replace the node with a button
+        //   return (
+        //     <a class="usa-button-primary" href={domNode.attribs.href}>
+        //       {/* this is kinda goofy, but the 'data' is the text of the link
+        //                and html-parser reads that as a child of 'a' */}
 
-              {domNode.children[0].data}
-            </a>
-          );
-        }
+        //       {domNode.children[0].data}
+        //     </a>
+        //   );
+        // }
       }
     },
   });
