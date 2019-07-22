@@ -5,13 +5,11 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
-import getProcessPageRevisionQuery from 'js/queries/getProcessPageRevisionQuery';
 import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
 import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import {
-  cleanProcesses,
   cleanServicesForPreview,
   cleanInformationForPreview,
   cleanTopics,
@@ -19,7 +17,6 @@ import {
   cleanTopicCollections,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
-import Process from 'components/Pages/Process';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
@@ -53,9 +50,6 @@ class CMSPreview extends Component {
       case 'services':
         req = client.request(getServicePageRevisionQuery, { id: revision_id });
         break;
-      case 'processes':
-        req = client.request(getProcessPageRevisionQuery, { id: revision_id });
-        break;
       case 'information':
         req = client.request(getInformationPageRevisionQuery, {
           id: revision_id,
@@ -83,9 +77,6 @@ class CMSPreview extends Component {
       switch (page_type) {
         case 'services':
           page = data.pageRevision.asServicePage;
-          break;
-        case 'processes':
-          page = data.pageRevision.asProcessPage;
           break;
         case 'information':
           page = data.pageRevision.asInformationPage;
@@ -123,10 +114,6 @@ class CMSPreview extends Component {
     if (!this.state.data) return <h1>⏱️LoAdInG⏱️...</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
-        <Route
-          path="/processes"
-          render={props => <Process process={cleanProcesses(data)[0]} />}
-        />
         <Route
           path="/services"
           render={props => <Service service={cleanServicesForPreview(data)} />}
