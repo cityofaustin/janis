@@ -234,18 +234,26 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
-  // Commenting ths out because info pages are using a different struture
-  // and I broke that in cleanData to get the mutli-dept pages working
-  // TODO: clean this up when we get everything to multi-dept
-  //
+  // Add all information page links to department pages
+  // copying the pattern from topics, may not need to do all this copying
+  for (var infoPage of informationPages) {
+    if (!infoPage.department) continue;
+    infoPage.type = 'info';
 
-  // for (var page of informationPages) {
-  //   for (var department of departments) {
-  //     if (page.department !== null && page.department.id === department.id) {
-  //       department.relatedLinks.push(page);
-  //     }
-  //   }
-  // }
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === infoPage.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      infoPage.department = departmentCopy;
+    }
+  }
 
   const { allServicePages: allServices } = await client.request(
     allServicePagesQuery,

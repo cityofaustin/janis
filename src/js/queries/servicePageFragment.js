@@ -32,11 +32,6 @@ const servicePageFragment = `
         }
       }
     }
-    department {
-      id
-      slug
-      title
-    }
     relatedDepartments {
       edges {
         node {

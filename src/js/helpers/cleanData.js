@@ -149,26 +149,11 @@ export const cleanLinks = (links, pageType) => {
         linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
         linkCopy.text = link.title;
 
-        console.log(linkCopy.url);
-
         linkCopy.department = relatedDepartment;
 
         cleanedLinks.push(linkCopy);
       }
     }
-
-    // Commenting this out because things could get wonky if we're trying
-    // to handle both single and multi-dept page models
-
-    // TODO: remove this after switching everything to multi-dept
-    // if (link.department) {
-    //   pathPrefix = `/${link.department.slug}`;
-
-    //   link.slug = link.slug || link.sortOrder;
-    //   link.url = `${pathPrefix || ''}/${link.slug}`;
-    //   link.text = link.title;
-    //   cleanedLinks.push(link);
-    // }
   }
 
   return cleanedLinks;
