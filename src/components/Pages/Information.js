@@ -24,6 +24,7 @@ const InformationPage = ({
     topics,
     theme,
     department,
+    relatedDepartments,
     toplink,
     description,
     options,
@@ -43,6 +44,7 @@ const InformationPage = ({
       topiccollection={topic && topic.topiccollection}
       theme={theme}
       department={department}
+      relatedDepartments={relatedDepartments}
     />
     {image && (
       <PageBanner
