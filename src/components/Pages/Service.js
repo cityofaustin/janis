@@ -30,6 +30,7 @@ const Service = ({
     contacts,
     related,
     shortDescription,
+    relatedDepartments,
   },
   intl,
 }) => (
@@ -54,35 +55,49 @@ const Service = ({
         topiccollection={topic && topic.topiccollection}
         theme={theme}
         department={department}
+        relatedDepartments={relatedDepartments}
       />
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 col-md-8">
-            {steps && !!steps.length ? (
-              //just 1 step? don't display steps in list (ul)
-              steps.length === 1 ? (
-                <Steps steps={steps} />
-              ) : (
-                <Fragment>
-                  <Steps steps={steps} />
-                </Fragment>
-              )
-            ) : null}
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
+          <div className="wrapper container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-10">
+                {steps && !!steps.length ? (
+                  //just 1 step? don't display steps in list (ul)
+                  steps.length === 1 ? (
+                    <Steps steps={steps} />
+                  ) : (
+                    <Fragment>
+                      <Steps steps={steps} />
+                    </Fragment>
+                  )
+                ) : null}
 
-            {!!dynamicContent &&
-              dynamicContent.map(content => (
-                <ApplicationBlock key={content.id} content={content} />
-              ))}
+                {!!dynamicContent &&
+                  dynamicContent.map(content => (
+                    <ApplicationBlock key={content.id} content={content} />
+                  ))}
 
-            {additionalContent && (
-              <HtmlFromAdmin
-                title={intl.formatMessage(i18n2.whatElse)}
-                content={additionalContent}
-              />
-            )}
+                {additionalContent && (
+                  <HtmlFromAdmin
+                    title={intl.formatMessage(i18n2.whatElse)}
+                    content={additionalContent}
+                  />
+                )}
+                <div className="coa-Page__contacts-mobile">
+                  {!!contacts && !!contacts.length && (
+                    <ContactDetails contact={contacts[0]} />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="coa-Page__side-content">
+          <div className="coa-ServicePage__contacts-desktop">
             {!!contacts && !!contacts.length && (
               <ContactDetails contact={contacts[0]} />
             )}

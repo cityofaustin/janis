@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Parser from 'html-react-parser';
+import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import { optionPropTypes, stepWithOptionsPropTypes } from './proptypes';
 
 import {
@@ -31,7 +31,9 @@ const StepOption = ({ option_name, option_description }) => (
         </AccordionItemButton>
       </AccordionItemHeading>
       <AccordionItemPanel className={'coa-AccordionPanel'}>
-        <span>{Parser(option_description)}</span>
+        <span>
+          <HtmlFromAdmin content={option_description} />
+        </span>
       </AccordionItemPanel>
     </AccordionItem>
   </div>

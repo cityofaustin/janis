@@ -119,7 +119,7 @@ export const cleanLinks = (links, pageType) => {
                 topiccollection.slug
               }/${topic.slug}`;
 
-              linkCopy.slug = link.slug || link.sortOrder;
+              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
 
@@ -136,14 +136,23 @@ export const cleanLinks = (links, pageType) => {
       }
     }
 
-    // If it's under a department make sure it's there
-    if (link.department) {
-      pathPrefix = `/${link.department.slug}`;
+    // If it's under any departments make sure it's there
+    if (link.relatedDepartments && link.relatedDepartments.edges.length) {
+      for (const edge of link.relatedDepartments.edges) {
+        const { relatedDepartment } = edge.node;
 
-      link.slug = link.slug || link.sortOrder;
-      link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
-      cleanedLinks.push(link);
+        // We need to make copies here so we actually have multiple urls
+        let linkCopy = JSON.parse(JSON.stringify(link));
+
+        pathPrefix = `/${relatedDepartment.slug}`;
+        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.text = link.title;
+
+        linkCopy.department = relatedDepartment;
+
+        cleanedLinks.push(linkCopy);
+      }
     }
   }
 
@@ -220,6 +229,7 @@ export const cleanServicesForPreview = allServices => {
   };
   service.theme = {};
   service.text = service.title;
+  service.contacts = cleanContacts(service.contacts);
 
   return service;
 };
@@ -250,6 +260,7 @@ export const cleanInformationForPreview = allInformationPages => {
   };
   info.theme = {};
   info.text = info.title;
+  info.contacts = cleanContacts(info.contacts);
 
   return info;
 };

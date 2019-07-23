@@ -9,6 +9,7 @@ const ContextualNav = ({
   topiccollection,
   theme,
   department,
+  relatedDepartments,
   contentType,
   intl,
 }) => {
@@ -27,17 +28,27 @@ const ContextualNav = ({
       : department.title,
   };
 
-  // Set the related links
-  const related = topiccollection
-    ? topiccollection.topics
-        .filter(t => t.id !== topic.id)
-        .map(t => ({
-          slug: `/${intl.locale}/${topiccollection.theme.slug}/${
-            topiccollection.slug
-          }/${t.slug}`,
-          title: t.title,
-        }))
-    : topics.edges.map(edge => edge.node);
+  // Set the related links if we have a topic collection
+  let related = [];
+  if (topiccollection) {
+    related = topiccollection
+      ? topiccollection.topics
+          .filter(t => t.id !== topic.id)
+          .map(t => ({
+            slug: `/${intl.locale}/${topiccollection.theme.slug}/${
+              topiccollection.slug
+            }/${t.slug}`,
+            title: t.title,
+          }))
+      : topics.edges.map(edge => edge.node);
+  }
+
+  // Set the 'offered by' departments if we have them
+  let offeredBy = [];
+  if (relatedDepartments) {
+    offeredBy = relatedDepartments.edges.map(e => e.node.relatedDepartment);
+    debugger;
+  }
 
   return (
     <div className="coa-ContextualNav">
@@ -62,14 +73,17 @@ const ContextualNav = ({
             </div>
           )}
           <div className="coa-ContextualNav__dept">
-            {department && (
+            {!!offeredBy.length && (
               <Fragment>
                 <span className="coa-ContextualNav__label">{`${intl.formatMessage(
                   i18n.offeredBy,
                 )}: `}</span>
-                <a href={`/${intl.locale}/${department.slug}`}>
-                  {department.title}
-                </a>
+                {offeredBy.map((department, index) => (
+                  <a href={`/${intl.locale}/${department.slug}`}>
+                    {department.title}
+                    {index !== offeredBy.length - 1 && ', '}
+                  </a>
+                ))}
               </Fragment>
             )}
           </div>
