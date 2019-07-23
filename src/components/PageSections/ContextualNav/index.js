@@ -78,9 +78,10 @@ const ContextualNav = ({
                 <span className="coa-ContextualNav__label">{`${intl.formatMessage(
                   i18n.offeredBy,
                 )}: `}</span>
-                {offeredBy.map(department => (
+                {offeredBy.map((department, index) => (
                   <a href={`/${intl.locale}/${department.slug}`}>
                     {department.title}
+                    {index !== offeredBy.length - 1 && ', '}
                   </a>
                 ))}
               </Fragment>
