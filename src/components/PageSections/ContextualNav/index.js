@@ -73,7 +73,7 @@ const ContextualNav = ({
             </div>
           )}
           <div className="coa-ContextualNav__dept">
-            {offeredBy.length && (
+            {!!offeredBy.length && (
               <Fragment>
                 <span className="coa-ContextualNav__label">{`${intl.formatMessage(
                   i18n.offeredBy,
