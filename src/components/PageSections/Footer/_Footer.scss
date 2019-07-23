@@ -151,21 +151,15 @@
         margin-bottom: $coa-spacing-small;
       }
 
-      .coa-ThemesTopicsMenu__topic {
-        margin-bottom: $coa-spacing-xsmall;
-
-        &:before {
-          content: none;
-        }
-      }
-
       .coa-ThemesTopicsMenu__link {
         text-decoration: none;
         color: $coa-color-decently-black;
         font-size: $coa-font-size-xsmall;
-        &:hover,
         &:visited {
           color: $coa-color-decently-black;
+        }
+        &:hover {
+          color: $coa-color-darker-blue;
         }
       }
     }
@@ -186,6 +180,7 @@
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   flex: auto;
+  color: $coa-color-dark-blue;
 }
 
 .coa-ThemeAccordionButton {
