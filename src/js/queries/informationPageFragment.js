@@ -3,10 +3,16 @@ const informationPageFragment = `
     id
     title
     slug
-    department {
-      id
-      slug
-      title
+    relatedDepartments {
+      edges {
+        node {
+          relatedDepartment {
+            id
+            title
+            slug
+          }
+        }
+      }
     }
     topics {
       edges {

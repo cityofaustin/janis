@@ -211,18 +211,52 @@ const makeDepartmentPages = async client => {
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
-  for (var page of informationPages) {
-    for (var department of departments) {
-      if (page.department !== null && page.department.id === department.id) {
-        department.relatedLinks.push(page);
-      }
+  // Add all information page links to department pages
+  // copying the pattern from topics, may not need to do all this copying
+  for (var infoPage of informationPages) {
+    if (!infoPage.department) continue;
+    infoPage.type = 'info';
+
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === infoPage.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      infoPage.department = departmentCopy;
     }
   }
 
-  // const { allServicePages: allServices } = await client.request(
-  //   allServicePagesQuery,
-  // );
-  // const services = cleanServices(allServices);
+  const { allServicePages: allServices } = await client.request(
+    allServicePagesQuery,
+  );
+  const services = cleanServices(allServices);
+
+  // Add all service page links to department pages
+  // copying the pattern from topics, may not need to do all this copying
+  for (var service of services) {
+    if (!service.department) continue;
+    service.type = 'service';
+
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === service.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      departments[matchingDepartmentIndex].relatedLinks.push(service);
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      service.department = departmentCopy;
+    }
+  }
 
   const data = departments
     .map(department => ({
@@ -239,16 +273,20 @@ const makeDepartmentPages = async client => {
           getData: async () => ({
             informationPage,
           }),
-        })),
-      // .concat(
-      //   services.filter(s => s.department != null && s.department.id == department.id).map(service => ({
-      //     path: `/${service.slug}`,
-      //     component: 'src/components/Pages/Service',
-      //     getData: async () => ({
-      //       service,
-      //     }),
-      //   }))
-      // )
+        }))
+        .concat(
+          services
+            .filter(
+              s => s.department != null && s.department.id == department.id,
+            )
+            .map(service => ({
+              path: `/${service.slug}`,
+              component: 'src/components/Pages/Service',
+              getData: async () => ({
+                service,
+              }),
+            })),
+        ),
     }))
     .concat([
       {

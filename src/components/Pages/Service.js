@@ -30,6 +30,7 @@ const Service = ({
     contacts,
     related,
     shortDescription,
+    relatedDepartments,
   },
   intl,
 }) => (
@@ -54,6 +55,7 @@ const Service = ({
         topiccollection={topic && topic.topiccollection}
         theme={theme}
         department={department}
+        relatedDepartments={relatedDepartments}
       />
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
