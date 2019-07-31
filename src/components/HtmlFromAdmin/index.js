@@ -2,6 +2,7 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
+import Trashy from 'components/Trashy';
 
 const HtmlFromAdmin = ({ content }) => {
   return Parser(content, {
@@ -14,14 +15,20 @@ const HtmlFromAdmin = ({ content }) => {
       if (domNode.attribs) {
         // Turn parse markdown from code
         if (domNode.name === 'code') {
-          console.dir(domNode);
-
-          const markdown = domNode.children
+          const content = domNode.children
             .filter(child => child.type === 'text')
             .map(textChild => textChild.data)
             .join('\n');
 
-          return <ReactMarkdown source={markdown} escapeHtml={false} />;
+          // Check if we have an app block
+          if (content.indexOf('APPBLOCK') === 0) {
+            const blockName = content.slice(10);
+            if (blockName === 'Collection Schedule') {
+              return <Trashy />;
+            }
+          }
+
+          return <ReactMarkdown source={content} escapeHtml={false} />;
         }
 
         // Turn links into buttons
