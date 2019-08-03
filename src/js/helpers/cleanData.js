@@ -367,3 +367,12 @@ export const clean311 = threeoneone => {
     };
   });
 };
+
+export const cleanOfficialDocumentPages = allOfficialDocumentPages => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  let cleanedOfficialDocumentPages = allOfficialDocumentPages;
+  // let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+
+  return cleanedOfficialDocumentPages;
+}

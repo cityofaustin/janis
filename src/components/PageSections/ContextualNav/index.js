@@ -47,7 +47,6 @@ const ContextualNav = ({
   let offeredBy = [];
   if (relatedDepartments) {
     offeredBy = relatedDepartments.edges.map(e => e.node.relatedDepartment);
-    debugger;
   }
 
   return (

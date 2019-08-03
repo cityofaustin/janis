@@ -62,6 +62,7 @@
     "start-staging": "./scripts/serve-local.sh -S",
     "start-prod": "./scripts/serve-local.sh -P",
     "start": "npm-run-all -p watch-css start-js",
+    "new-build": "./scripts/undockered.sh",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-joplin-cloud": "NODE_PATH=./src CMS_API='https://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' npm-run-all build-css build-js",
     "start-js": "react-static start",
