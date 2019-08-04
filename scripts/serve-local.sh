@@ -42,6 +42,10 @@ elif [ $FROM_STAGING="on" ]; then
   CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
 fi
 
+if [ $PROD_CMS="on" ]; then
+  CMS_API="https://joplin.herokuapp.com/api/graphql"
+fi  
+
 # Process Parameters
 # if -P prod flag is used, then point to prod graphql and CMS
 while getopts "PSe:" opt; do
