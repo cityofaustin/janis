@@ -371,8 +371,22 @@ export const clean311 = threeoneone => {
 export const cleanOfficialDocumentPages = allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
-  let cleanedOfficialDocumentPages = allOfficialDocumentPages;
-  // let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+  return allOfficialDocumentPages;
+}
 
-  return cleanedOfficialDocumentPages;
+export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  return allOfficialDocumentPages.edges.map(({node: officialDocumentPage }) => {
+    officialDocumentPage.url = `/official_document/${officialDocumentPage.slug}`;
+    officialDocumentPage.topic = {
+      slug: 'sample-topic',
+      title: 'Sample Topic',
+      topiccollection: {
+        topics: [],
+      },
+    };
+    officialDocumentPage.theme = {};
+    return officialDocumentPage;
+  })
 }

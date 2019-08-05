@@ -16,7 +16,7 @@ import {
   cleanTopics,
   cleanDepartments,
   cleanTopicCollections,
-  cleanOfficialDocumentPages,
+  cleanOfficialDocumentPagesForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -173,7 +173,7 @@ class CMSPreview extends Component {
         <Route
           path="/official_document"
           render={props => (
-            <OfficialDocumentList officialDocumentPage={cleanOfficialDocumentPages(data)[0]} />
+              <OfficialDocumentList officialDocumentPage={cleanOfficialDocumentPagesForPreview(data)[0]} />
           )}
         />
       </Switch>

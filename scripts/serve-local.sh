@@ -34,17 +34,17 @@ COMPOSE_PROJECT_NAME="janis"
 unset EXEC
 
 # If you want to pass environment variables to start of script (like Joplin) instead of using flags
-if [ $FROM_PROD="on" ]; then
+if [ "$FROM_PROD" == "on" ]; then
   CMS_API="https://joplin.herokuapp.com/api/graphql"
   CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
-elif [ $FROM_STAGING="on" ]; then
+elif [ "$FROM_STAGING" == "on" ]; then
   CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
   CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
 fi
 
-if [ $PROD_CMS="on" ]; then
-  CMS_API="https://joplin.herokuapp.com/api/graphql"
-fi  
+if [ $PROD_MEDIA="on" ]; then
+  CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+fi
 
 # Process Parameters
 # if -P prod flag is used, then point to prod graphql and CMS
