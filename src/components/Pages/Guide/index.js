@@ -5,6 +5,8 @@ import { injectIntl } from 'react-intl';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
 
+import GuideSection from 'components/Pages/Guide/GuideSection';
+
 const Guide = ({
   guidePage: {
     id,
@@ -41,8 +43,8 @@ const Guide = ({
           <div className="wrapper container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-8">
-                {sections.edges.map((section, index) => (
-                  <div>{JSON.stringify(section)}</div>
+                {sections.map((section, index) => (
+                  <GuideSection section={section} />
                 ))}
               </div>
             </div>

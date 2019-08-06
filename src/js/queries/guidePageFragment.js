@@ -3,6 +3,7 @@ const guidePageFragment = `
     id
     title
     description
+    slug
     relatedDepartments {
       edges {
         node {
