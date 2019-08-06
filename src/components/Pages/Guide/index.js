@@ -36,7 +36,6 @@ const Guide = ({
     phone = JSON.parse(contact.phone);
   }
 
-  debugger;
   return (
     <div>
       <Head>

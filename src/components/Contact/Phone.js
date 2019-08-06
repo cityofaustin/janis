@@ -7,8 +7,6 @@ import { contact as i18n } from 'js/i18n/definitions';
 import { phonePropTypes } from './proptypes';
 
 const Phone = ({ phone, intl }) => {
-  debugger;
-
   // If we don't have a phone object then don't render
   if (!phone) return null;
 

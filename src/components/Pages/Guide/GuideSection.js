@@ -1,34 +1,59 @@
 import React from 'react';
 
-const GuideSectionPage = ({ page }) => {
+import HtmlFromAdmin from 'components/HtmlFromAdmin';
+
+const GuideSectionPage = ({
+  page,
+  pageNumber,
+  numberOfPages,
+  sectionHeading,
+}) => {
   if (page.informationPage) {
     return (
-      <div>
-        <div>INFO PAGE</div>
-        <div>{JSON.stringify(page.informationPage)}</div>
+      <div className="coa-GuideSectionPage">
+        <div className="coa-GuideSectionPage__section-info">
+          {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
+        </div>
+        <h2>{page.informationPage.title}</h2>
+        <p>{page.informationPage.description}</p>
+        <HtmlFromAdmin
+          title={' '}
+          content={page.informationPage.additionalContent}
+        />
       </div>
     );
   }
 
+  // TODO: handle steps
   if (page.servicePage) {
     return (
       <div>
-        <div>SERVICE PAGE</div>
-        <div>{JSON.stringify(page.servicePage)}</div>
+        <div className="coa-GuideSectionPage__section-info">
+          {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
+        </div>
+        <h2>{page.servicePage.title}</h2>
+        <p>{page.servicePage.shortDescription}</p>
+        <HtmlFromAdmin
+          title={' '}
+          content={page.servicePage.additionalContent}
+        />
       </div>
     );
   }
 };
 
-const GuideSection = ({ section }) => {
-  return (
-    <React.Fragment>
-      <h1>{section.heading}</h1>
-      {section.pages.map((page, index) => (
-        <GuideSectionPage page={page} />
-      ))}
-    </React.Fragment>
-  );
-};
+const GuideSection = ({ section }) => (
+  <React.Fragment>
+    <h1>{section.heading}</h1>
+    {section.pages.map((page, index) => (
+      <GuideSectionPage
+        page={page}
+        pageNumber={index + 1}
+        numberOfPages={section.pages.length}
+        sectionHeading={section.heading}
+      />
+    ))}
+  </React.Fragment>
+);
 
 export default GuideSection;
