@@ -46,7 +46,6 @@ const OfficialDocumentList = ({
                   <OfficialDocument
                     document={document.node}
                     key={index}
-                    bottomBorder={index !== officialDocuments.edges.length-1}
                   />
                 ))}
               </div>
