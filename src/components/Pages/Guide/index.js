@@ -7,6 +7,7 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSection from 'components/Pages/Guide/GuideSection';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
 import Phone from 'components/Contact/Phone';
+import Email from 'components/Contact/Email';
 
 const Guide = ({
   guidePage: {
@@ -67,11 +68,15 @@ const Guide = ({
                 <h1>Contact Information</h1>
                 <div className="coa-GuidePage__contact-block row">
                   <div className="coa-GuidePage__contact-block-name col-md-6">
-                    blarg
+                    <h2>{contact.name}</h2>
                   </div>
                   <div className="coa-GuidePage__contact-block-info col-md-6">
-                    <Phone phone={phone} />
-                    blarg
+                    <div className="coa-GuidePage__contact-block-phone">
+                      <Phone phone={phone} />
+                    </div>
+                    <div className="coa-GuidePage__contact-block-email">
+                      <Email email={contact.email} />
+                    </div>
                   </div>
                 </div>
                 {sections.map((section, index) => (

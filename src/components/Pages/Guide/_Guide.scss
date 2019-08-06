@@ -44,3 +44,25 @@
 .coa-GuidePage__contact-block-info {
   border-left: 2px solid #dddfe1;
 }
+
+.coa-GuidePage__contact-block-email {
+  border-top: 2px solid #dddfe1;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+}
+
+.coa-GuidePage__contact-block-phone {
+  padding-left: 1rem;
+  padding-bottom: 2rem;
+}
+
+.coa-GuidePage__contact-block-name {
+  padding-top: 2rem;
+  padding-right: 3rem;
+  h2 {
+    font-size: 2.4rem;
+    line-height: 3rem;
+  }
+}
