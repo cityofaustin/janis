@@ -8,4 +8,8 @@ if [ "$HEAD" == '2572-official-doc' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
+if [ "$HEAD" == '2599-guide-pages' ]; then
+  export CMS_API='https://joplin-pr-2600-guides.herokuapp.com/api/graphql'
+fi
+
 yarn npm-run-all build-css build-js
