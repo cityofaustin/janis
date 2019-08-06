@@ -397,6 +397,7 @@ export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => 
 
 export const cleanGuidePages = allGuidePages => {
   if (!allGuidePages || !allGuidePages.edges) return null;
+  let cleanedGuidePages = cleanLinks(allGuidePages, 'guide');
 
-  return allGuidePages.edges.map(edge => edge.node);
+  return cleanedGuidePages;
 };
