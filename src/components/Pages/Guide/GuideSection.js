@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import Steps from 'components/Steps';
 
 const GuideSectionPage = ({
   page,
@@ -33,6 +34,7 @@ const GuideSectionPage = ({
         </div>
         <h2>{page.servicePage.title}</h2>
         <p>{page.servicePage.shortDescription}</p>
+        <Steps steps={page.servicePage.steps} />
         <HtmlFromAdmin
           title={' '}
           content={page.servicePage.additionalContent}
