@@ -27,7 +27,7 @@ const GuideSectionPage = ({
   // TODO: handle steps
   if (page.servicePage) {
     return (
-      <div>
+      <div className="coa-GuideSectionPage">
         <div className="coa-GuideSectionPage__section-info">
           {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
         </div>
