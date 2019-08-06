@@ -21,6 +21,12 @@ const GuideSectionPage = ({
           title={' '}
           content={page.informationPage.additionalContent}
         />
+        <div className="coa-GuideSectionPage__link">
+          <a href={'blarg'}>
+            View this page on alpha.austin.gov
+            <i className="material-icons">open_in_new</i>
+          </a>
+        </div>
       </div>
     );
   }
@@ -39,6 +45,12 @@ const GuideSectionPage = ({
           title={' '}
           content={page.servicePage.additionalContent}
         />
+        <div className="coa-GuideSectionPage__link">
+          <a href={'blarg'}>
+            View this page on alpha.austin.gov
+            <i className="material-icons">open_in_new</i>
+          </a>
+        </div>
       </div>
     );
   }

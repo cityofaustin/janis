@@ -82,3 +82,25 @@
   font-size: 1.6rem;
   margin-bottom: 2rem;
 }
+
+.coa-GuideSectionPage__link {
+  font-size: 1.8rem;
+  border-top: 2px solid #dddfe1;
+  text-align: center;
+  margin-right: -4rem;
+  margin-left: -4rem;
+  margin-bottom: -1.6rem;
+  padding-top: 1.6rem;
+
+  a {
+    color: #0049c7;
+    text-decoration: none;
+  }
+
+  i {
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    position: relative;
+    top: 3px;
+  }
+}
