@@ -4,8 +4,10 @@ import { injectIntl } from 'react-intl';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
+import PageBanner from 'components/PageBanner';
 
 import GuideSection from 'components/Pages/Guide/GuideSection';
+import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
 
 const Guide = ({
   guidePage: {
@@ -19,6 +21,7 @@ const Guide = ({
     department,
     relatedDepartments,
     sections,
+    image,
   },
   intl,
 }) => {
@@ -36,6 +39,9 @@ const Guide = ({
         relatedDepartments={relatedDepartments}
       />
       <div>
+        <div className="wrapper container-fluid">
+          <GuideBannerImage image={image} />
+        </div>
         <PageHeader contentType={'guide'} description={description}>
           {title}
         </PageHeader>

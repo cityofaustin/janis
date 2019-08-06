@@ -4,6 +4,11 @@ const guidePageFragment = `
     title
     description
     slug
+    image {
+      id
+      filename
+      title
+    }
     relatedDepartments {
       edges {
         node {
