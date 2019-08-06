@@ -6,6 +6,7 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 
 import GuideSection from 'components/Pages/Guide/GuideSection';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
+import Phone from 'components/Contact/Phone';
 
 const Guide = ({
   guidePage: {
@@ -20,9 +21,21 @@ const Guide = ({
     relatedDepartments,
     sections,
     image,
+    contacts,
   },
   intl,
 }) => {
+  let contact = null;
+  if (contacts && contacts.edges && contacts.edges.length) {
+    contact = contacts.edges[0].node.contact;
+  }
+
+  let phone = null;
+  if (contact && contact.phone) {
+    phone = JSON.parse(contact.phone);
+  }
+
+  debugger;
   return (
     <div>
       <Head>
@@ -47,10 +60,20 @@ const Guide = ({
         <div className="coa-Page__all-of-the-content">
           <div className="wrapper container-fluid">
             <div className="row">
-              <div className="coa-GuidePage__navSidebar col-md-4">
+              <div className="coa-GuidePage__nav-sidebar col-md-4">
                 Coming Soon
               </div>
-              <div className="col-xs-12 col-md-8">
+              <div className="coa-GuidePage__main-content col-xs-12 col-md-8">
+                <h1>Contact Information</h1>
+                <div className="coa-GuidePage__contact-block row">
+                  <div className="coa-GuidePage__contact-block-name col-md-6">
+                    blarg
+                  </div>
+                  <div className="coa-GuidePage__contact-block-info col-md-6">
+                    <Phone phone={phone} />
+                    blarg
+                  </div>
+                </div>
                 {sections.map((section, index) => (
                   <GuideSection section={section} />
                 ))}

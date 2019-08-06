@@ -4,6 +4,35 @@ const guidePageFragment = `
     title
     description
     slug
+    contacts {
+      edges {
+        node {
+          contact {
+            name
+            email
+            phone
+            socialMedia
+            hours {
+              edges {
+                node {
+                  dayOfWeek
+                  startTime
+                  endTime
+                }
+              }
+            }
+            location {
+              name
+              street
+              city
+              state
+              zip
+              country
+            }
+          }
+        }
+      }
+    }
     image {
       id
       filename

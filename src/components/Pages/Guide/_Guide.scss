@@ -20,6 +20,27 @@
   }
 }
 
-.coa-GuidePage__navSidebar {
+.coa-GuidePage__nav-sidebar {
   background: #e1c5ff;
+}
+
+.coa-GuidePage__main-content {
+  h1 {
+    background: #ecf1f7;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.coa-GuidePage__contact-block {
+  margin-top: 3rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
+  margin-bottom: 4rem;
+  border: 2px solid #dddfe1;
+}
+
+.coa-GuidePage__contact-block-info {
+  border-left: 2px solid #dddfe1;
 }
