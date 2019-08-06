@@ -372,21 +372,31 @@ export const cleanOfficialDocumentPages = allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
   return allOfficialDocumentPages;
-}
+};
 
 export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
-  return allOfficialDocumentPages.edges.map(({node: officialDocumentPage }) => {
-    officialDocumentPage.url = `/official_document/${officialDocumentPage.slug}`;
-    officialDocumentPage.topic = {
-      slug: 'sample-topic',
-      title: 'Sample Topic',
-      topiccollection: {
-        topics: [],
-      },
-    };
-    officialDocumentPage.theme = {};
-    return officialDocumentPage;
-  })
-}
+  return allOfficialDocumentPages.edges.map(
+    ({ node: officialDocumentPage }) => {
+      officialDocumentPage.url = `/official_document/${
+        officialDocumentPage.slug
+      }`;
+      officialDocumentPage.topic = {
+        slug: 'sample-topic',
+        title: 'Sample Topic',
+        topiccollection: {
+          topics: [],
+        },
+      };
+      officialDocumentPage.theme = {};
+      return officialDocumentPage;
+    },
+  );
+};
+
+export const cleanGuidePages = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+
+  return allGuidePages.edges.map(edge => edge.node);
+};
