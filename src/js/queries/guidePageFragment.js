@@ -54,10 +54,10 @@ const guidePageFragment = `
         node {
           toplink
           topic {
-            id,
-            slug,
-            title,
-            description,
+            id
+            slug
+            title
+            description
             topiccollections {
               edges {
                 node {
@@ -85,11 +85,93 @@ const guidePageFragment = `
           shortDescription
           additionalContent
           steps
+          slug
+          topics {
+            edges {
+              node {
+                toplink
+                topic {
+                  id
+                  slug
+                  title
+                  description
+                  topiccollections {
+                    edges {
+                      node {
+                        topiccollection {
+                          id
+                          title
+                          slug
+                          theme {
+                            id
+                            text
+                            slug
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          relatedDepartments {
+            edges {
+              node {
+                relatedDepartment {
+                  id
+                  title
+                  slug
+                }
+              }
+            }
+          }
         }
         informationPage {
           title
           description
           additionalContent
+          slug
+          topics {
+            edges {
+              node {
+                toplink
+                topic {
+                  id
+                  slug
+                  title
+                  description
+                  topiccollections {
+                    edges {
+                      node {
+                        topiccollection {
+                          id
+                          title
+                          slug
+                          theme {
+                            id
+                            text
+                            slug
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          relatedDepartments {
+            edges {
+              node {
+                relatedDepartment {
+                  id
+                  title
+                  slug
+                }
+              }
+            }
+          }
         }
       }
     }

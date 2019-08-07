@@ -3,6 +3,30 @@ import React from 'react';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import Steps from 'components/Steps';
 
+const GetUrlFromTopicsOrDepartments = ({ topics, departments, slug }) => {
+  // Just use the first topic if we've got one
+  if (topics.length) {
+    const topic = topics[0].node.topic;
+    const topicCollection =
+      topic.topiccollections.edges[0].node.topiccollection;
+
+    return `/${topicCollection.theme.slug}/${topicCollection.slug}/${
+      topic.slug
+    }/${slug}/`;
+  }
+
+  // Fine, then I guess just use the first department if we've got one
+  if (departments.length) {
+    const department = departments[0].node.relatedDepartment;
+
+    return `/${department.slug}/${slug}/`;
+  }
+
+  // This should make it so broken links don't break the build,
+  // and instead just keep us on the guide page
+  return '';
+};
+
 const GuideSectionPage = ({
   page,
   pageNumber,
@@ -22,7 +46,13 @@ const GuideSectionPage = ({
           content={page.informationPage.additionalContent}
         />
         <div className="coa-GuideSectionPage__link">
-          <a href={'blarg'}>
+          <a
+            href={GetUrlFromTopicsOrDepartments({
+              topics: page.informationPage.topics.edges,
+              departments: page.informationPage.relatedDepartments.edges,
+              slug: page.informationPage.slug,
+            })}
+          >
             View this page on alpha.austin.gov
             <i className="material-icons">open_in_new</i>
           </a>
@@ -46,7 +76,13 @@ const GuideSectionPage = ({
           content={page.servicePage.additionalContent}
         />
         <div className="coa-GuideSectionPage__link">
-          <a href={'blarg'}>
+          <a
+            href={GetUrlFromTopicsOrDepartments({
+              topics: page.servicePage.topics.edges,
+              departments: page.servicePage.relatedDepartments.edges,
+              slug: page.servicePage.slug,
+            })}
+          >
             View this page on alpha.austin.gov
             <i className="material-icons">open_in_new</i>
           </a>
