@@ -61,7 +61,6 @@ const GuideSectionPage = ({
     );
   }
 
-  // TODO: handle steps
   if (page.servicePage) {
     return (
       <div className="coa-GuideSectionPage">
