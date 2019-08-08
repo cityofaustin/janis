@@ -123,3 +123,8 @@ table {
     }
   }
 }
+
+.rich-text-button-link > a {
+  color: inherit;
+  text-decoration: none;
+}
