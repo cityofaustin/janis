@@ -51,6 +51,9 @@ export const cleanRelatedServiceLinks = links => {
   });
 };
 
+/**
+  Makes copies of pages for each topic and each department.
+**/
 export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
   let pathPrefix = '';
@@ -371,7 +374,8 @@ export const clean311 = threeoneone => {
 export const cleanOfficialDocumentPages = allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
-  return allOfficialDocumentPages;
+  let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+  return cleanedOfficialDocumentPages;
 };
 
 export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {

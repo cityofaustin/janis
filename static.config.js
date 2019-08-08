@@ -341,20 +341,25 @@ const makeDepartmentPages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = cleanServices(allOfficialDocumentPages);
+  const officialDocumentPages = cleanOfficialDocumentPages(allOfficialDocumentPages);
 
   // Add all official document page links to department pages
   for (let page of officialDocumentPages) {
-    if (!page.relatedDepartments.edges) continue;
+    if (!page.department) continue;
     page.type = 'official-document';
 
-    for (let releatedDepartment of page.relatedDepartments.edges) {
-      let matchingDepartmentIndex = departments.findIndex(
-        d => d.id === releatedDepartment.id,
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === page.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      departments[matchingDepartmentIndex].relatedLinks.push(page);
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
       );
-      if (departments[matchingDepartmentIndex]) {
-        departments[matchingDepartmentIndex].relatedLinks.push(page);
-      }
+      page.department = departmentCopy;
     }
   }
 
@@ -409,7 +414,7 @@ const makeDepartmentPages = async client => {
         )
         .concat(
           officialDocumentPages
-            .filter(d => isRelatedDepartment(d, department.id))
+            .filter(d => d.department != null && d.department.id == department.id)
             .map(officialDocumentPage => ({
               path: `/${officialDocumentPage.slug}`,
               component: 'src/components/Pages/OfficialDocumentList',
