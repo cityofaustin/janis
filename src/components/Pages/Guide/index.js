@@ -9,6 +9,8 @@ import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
 import Phone from 'components/Contact/Phone';
 import Email from 'components/Contact/Email';
 
+// TODO: make this not break with broken data
+
 const Guide = ({
   guidePage: {
     id,
