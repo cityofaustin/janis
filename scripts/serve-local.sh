@@ -42,7 +42,7 @@ elif [ "$FROM_STAGING" == "on" ]; then
   CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
 fi
 
-if [ $PROD_MEDIA="on" ]; then
+if [ "$PROD_MEDIA" == "on" ]; then
   CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
 fi
 

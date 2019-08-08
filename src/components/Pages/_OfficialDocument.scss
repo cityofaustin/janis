@@ -2,6 +2,11 @@
   font-size: $coa-font-size-small;
   margin-bottom: 3rem;
   margin-top: 3rem;
+
+  &:not(:last-child) {
+    border-bottom: 1.5px solid $coa-color-gray-lighter;
+    padding-bottom: 3rem;
+  }
 }
 
 .coa-OfficialDocumentPage__date {
@@ -21,7 +26,6 @@
   font-weight: bold;
 }
 
-.coa-OfficialDocumentPage__bottom-border {
-  border-bottom: 1.5px solid $coa-color-gray-lighter;
-  padding-bottom: 3rem;
+.coa-OfficialDocumentPage__pdf {
+  color: $coa-color-gray;
 }
