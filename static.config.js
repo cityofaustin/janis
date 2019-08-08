@@ -341,7 +341,7 @@ const makeDepartmentPages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = cleanOfficialDocumentPages(allOfficialDocumentPages);
+  const officialDocumentPages = await cleanOfficialDocumentPages(allOfficialDocumentPages);
 
   // Add all official document page links to department pages
   for (let page of officialDocumentPages) {

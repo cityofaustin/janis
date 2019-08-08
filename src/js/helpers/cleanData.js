@@ -1,4 +1,7 @@
 import { findKey } from 'lodash';
+import axios from 'axios';
+import prettyBytes from 'pretty-bytes';
+
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
@@ -371,10 +374,35 @@ export const clean311 = threeoneone => {
   });
 };
 
-export const cleanOfficialDocumentPages = allOfficialDocumentPages => {
+const getDocumentPdfSize = async (document) => {
+  return await axios({
+    method: 'HEAD',
+    url: document.link
+  })
+  .then(res => {
+    if (res.headers["content-type"] === "application/pdf") {
+      document.pdfSize = prettyBytes(+res.headers["content-length"]).replace(" ", "");
+      return;
+    }
+  })
+  .catch(error => null);
+}
+
+export const cleanOfficialDocumentPages = async (allOfficialDocumentPages) => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
   let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+
+  const pdfSizePromises = []
+  for (let page of cleanedOfficialDocumentPages) {
+    if (!page.officialDocuments.edges) continue; 
+    for (let doc of page.officialDocuments.edges) {
+      pdfSizePromises.push(getDocumentPdfSize(doc.node))
+    }
+  }
+
+  await Promise.all(pdfSizePromises);
+
   return cleanedOfficialDocumentPages;
 };
 
