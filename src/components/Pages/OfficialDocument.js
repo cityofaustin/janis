@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
 
-const OfficialDocument = ({ document: { id, date, title, authoringOffice, summary, name, link }, intl }) => {
-  let pdfComponent = null;
-  if (!!link.match(/\.pdf$/)) {
-    pdfComponent = <span className="coa-OfficialDocumentPage__pdf">(PDF)</span>
-  }
+const OfficialDocument = ({ document: { id, date, title, authoringOffice, summary, name, link, pdfSize }, intl }) => {
+  // If the link is a PDF with a pdfSize, then include it.
+  const pdfComponent = (!!pdfSize) ?
+    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
+    null
 
   return (
     <div className="coa-OfficialDocumentPage__container">
@@ -35,6 +35,7 @@ OfficialDocument.propTypes = {
     summary: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
+    pdfSize: PropTypes.string,
   }),
 }
 

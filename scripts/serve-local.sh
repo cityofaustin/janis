@@ -33,22 +33,9 @@ CMS_MEDIA="http://$HOST_IP:8000/media"
 COMPOSE_PROJECT_NAME="janis"
 unset EXEC
 
-# If you want to pass environment variables to start of script (like Joplin) instead of using flags
-if [ "$FROM_PROD" == "on" ]; then
-  CMS_API="https://joplin.herokuapp.com/api/graphql"
-  CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
-elif [ "$FROM_STAGING" == "on" ]; then
-  CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
-  CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
-fi
-
-if [ "$PROD_MEDIA" == "on" ]; then
-  CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
-fi
-
 # Process Parameters
 # if -P prod flag is used, then point to prod graphql and CMS
-while getopts "PSe:" opt; do
+while getopts "PSe:M:A:" opt; do
   case $opt in
     P )
       CMS_API="https://joplin.herokuapp.com/api/graphql"
@@ -60,6 +47,24 @@ while getopts "PSe:" opt; do
       ;;
     e )
       EXEC=$OPTARG
+      ;;
+    M )
+      if [ "$OPTARG" == "prod" ]; then
+        CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+      elif [ "$OPTARG" == "staging" ]; then
+        CMS_MEDIA="https://joplin-staging.s3.amazonaws.com/media"
+      else
+        CMS_MEDIA=$OPTARG
+      fi
+      ;;
+    A )
+      if [ "$OPTARG" == "prod" ]; then
+        CMS_API="https://joplin.herokuapp.com/api/graphql"
+      elif [ "$OPTARG" == "staging" ]; then
+        CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
+      else
+        CMS_MEDIA=$OPTARG
+      fi
       ;;
     \? )
       echo "Invalid option: -$OPTARG" >&2
