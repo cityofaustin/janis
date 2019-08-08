@@ -104,7 +104,7 @@ const makeThemePages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = cleanServices(allOfficialDocumentPages);
+  const officialDocumentPages = await cleanOfficialDocumentPages(allOfficialDocumentPages);
 
   const { allGuidePages: allGuidePages } = await client.request(
     allGuidePagesQuery,
