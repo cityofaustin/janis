@@ -1,12 +1,12 @@
-const servicePageFragment = `
-  fragment servicePageInfo on ServicePageNode {
+const officialDocumentPageFragment = `
+  fragment officialDocumentPageInfo on OfficialDocumentPageNode {
     id
     title
     slug
+    description
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
@@ -21,7 +21,6 @@ const servicePageFragment = `
                     slug
                     theme {
                       id
-                      text
                       slug
                     }
                   }
@@ -43,40 +42,20 @@ const servicePageFragment = `
         }
       }
     }
-    steps
-    dynamicContent
-    additionalContent
-    shortDescription
-    contacts {
+    officialDocuments(orderBy: "-date") {
       edges {
         node {
-          contact {
-            name
-            email
-            phone
-            socialMedia
-            hours {
-              edges {
-                node {
-                  dayOfWeek
-                  startTime
-                  endTime
-                }
-              }
-            }
-            location {
-              name
-              street
-              city
-              state
-              zip
-              country
-            }
-          }
+          id
+          date
+          title
+          authoringOffice
+          summary
+          name
+          link
         }
       }
     }
   }
 `;
 
-export default servicePageFragment;
+export default officialDocumentPageFragment;

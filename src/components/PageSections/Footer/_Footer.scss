@@ -6,7 +6,7 @@
 .coa-Footer {
   @include media($coa-medium-screen) {
     margin-top: 2rem;
-    border-radius: $coa-button-border-radius;
+    border-radius: 0;
   }
 
   background: $coa-color-primary;

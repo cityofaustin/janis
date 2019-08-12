@@ -1,4 +1,7 @@
 import { findKey } from 'lodash';
+import axios from 'axios';
+import prettyBytes from 'pretty-bytes';
+
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
@@ -51,6 +54,9 @@ export const cleanRelatedServiceLinks = links => {
   });
 };
 
+/**
+  Makes copies of pages for each topic and each department.
+**/
 export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
   let pathPrefix = '';
@@ -119,7 +125,7 @@ export const cleanLinks = (links, pageType) => {
                 topiccollection.slug
               }/${topic.slug}`;
 
-              linkCopy.slug = link.slug || link.sortOrder;
+              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
 
@@ -136,14 +142,23 @@ export const cleanLinks = (links, pageType) => {
       }
     }
 
-    // If it's under a department make sure it's there
-    if (link.department) {
-      pathPrefix = `/${link.department.slug}`;
+    // If it's under any departments make sure it's there
+    if (link.relatedDepartments && link.relatedDepartments.edges.length) {
+      for (const edge of link.relatedDepartments.edges) {
+        const { relatedDepartment } = edge.node;
 
-      link.slug = link.slug || link.sortOrder;
-      link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
-      cleanedLinks.push(link);
+        // We need to make copies here so we actually have multiple urls
+        let linkCopy = JSON.parse(JSON.stringify(link));
+
+        pathPrefix = `/${relatedDepartment.slug}`;
+        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.text = link.title;
+
+        linkCopy.department = relatedDepartment;
+
+        cleanedLinks.push(linkCopy);
+      }
     }
   }
 
@@ -357,4 +372,64 @@ export const clean311 = threeoneone => {
       text: title,
     };
   });
+};
+
+const getDocumentPdfSize = async (document) => {
+  return await axios({
+    method: 'HEAD',
+    url: document.link
+  })
+  .then(res => {
+    if (res.headers["content-type"] === "application/pdf") {
+      document.pdfSize = prettyBytes(+res.headers["content-length"]).replace(" ", "");
+      return;
+    }
+  })
+  .catch(error => null);
+}
+
+export const cleanOfficialDocumentPages = async (allOfficialDocumentPages) => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+
+  const pdfSizePromises = []
+  for (let page of cleanedOfficialDocumentPages) {
+    if (!page.officialDocuments.edges) continue; 
+    for (let doc of page.officialDocuments.edges) {
+      pdfSizePromises.push(getDocumentPdfSize(doc.node))
+    }
+  }
+
+  await Promise.all(pdfSizePromises);
+
+  return cleanedOfficialDocumentPages;
+};
+
+export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  return allOfficialDocumentPages.edges.map(
+    ({ node: officialDocumentPage }) => {
+      officialDocumentPage.url = `/official_document/${
+        officialDocumentPage.slug
+      }`;
+      officialDocumentPage.topic = {
+        slug: 'sample-topic',
+        title: 'Sample Topic',
+        topiccollection: {
+          topics: [],
+        },
+      };
+      officialDocumentPage.theme = {};
+      return officialDocumentPage;
+    },
+  );
+};
+
+export const cleanGuidePages = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+  let cleanedGuidePages = cleanLinks(allGuidePages, 'guide');
+
+  return cleanedGuidePages;
 };
