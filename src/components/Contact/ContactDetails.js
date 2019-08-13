@@ -43,7 +43,7 @@ const ContactSocialMediaLink = ({ url }) => {
 };
 
 const ContactDetails = ({
-  contact: { phone, email, location, hours, socialMedia },
+  contact: { phone, phoneNumber, email, location, hours, socialMedia },
   intl,
 }) => (
   <div className="coa-ContactDetails">
@@ -56,6 +56,8 @@ const ContactDetails = ({
     {location && <Address location={location} />}
 
     {phone && <Phone phone={phone} />}
+
+    {phoneNumber && <div> {JSON.stringify(phoneNumber.edges[0].node.phoneDescription)}{JSON.stringify(phoneNumber.edges[0].node.phoneNumber)}</div>}
 
     {hours && !!hours.length && <Hours hours={hours} />}
 
