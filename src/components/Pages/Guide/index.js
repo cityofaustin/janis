@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
@@ -59,13 +59,13 @@ const Guide = ({
           <h1>{title}</h1>
           <p>{description}</p>
         </div>
-        <div className="coa-Page__all-of-the-content">
+        <div className="coa-GuidePage__content-container">
           <div className="wrapper container-fluid">
             <div className="row">
-              <div className="coa-GuidePage__nav-sidebar col-md-4">
+              <div className="coa-GuidePage__nav-sidebar sticky">
                 Coming Soon
               </div>
-              <div className="coa-GuidePage__main-content col-xs-12 col-md-8">
+              <div className="coa-GuidePage__main-content">
                 <h1>Contact Information</h1>
                 <div className="coa-GuidePage__contact-block row">
                   <div className="coa-GuidePage__contact-block-name col-md-6">

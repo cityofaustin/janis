@@ -8,6 +8,7 @@
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "body-scroll-lock": "^2.6.1",
+    "bootstrap": "^4.3.1",
     "browser-locale": "^1.0.3",
     "classnames": "^2.2.5",
     "downshift": "^1.31.15",
@@ -37,6 +38,7 @@
     "react-router-dom": "^4.2.2",
     "react-static": "^5.9.7",
     "react-universal-component": "^2.8.1",
+    "stickyfilljs": "^2.1.0",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"
@@ -53,8 +55,11 @@
     "eslint-config-react-tools": "1.x.x",
     "extract-react-intl-messages": "^0.8.2",
     "prettier": "1.12.1",
+    "sass-loader": "^7.2.0",
     "serve": "^7.0.0",
-    "storybook-addon-intl": "^2.3.0"
+    "storybook-addon-intl": "^2.3.0",
+    "svg-url-loader": "^3.0.0",
+    "url-loader": "^2.1.0"
   },
   "scripts": {
     "start-local": "./scripts/serve-local.sh",
