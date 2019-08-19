@@ -39,20 +39,20 @@ while getopts "PSe:M:A:" opt; do
   case $opt in
     P )
       CMS_API="https://joplin.herokuapp.com/api/graphql"
-      CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+      CMS_MEDIA="https://joplin-austin-gov-static.s3.amazonaws.com/production/media"
       ;;
     S)
       CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
-      CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+      CMS_MEDIA="https://joplin-austin-gov-static.s3.amazonaws.com/staging/media"
       ;;
     e )
       EXEC=$OPTARG
       ;;
     M )
       if [ "$OPTARG" == "prod" ]; then
-        CMS_MEDIA="https://joplin-austin-gov.s3.amazonaws.com/media"
+        CMS_MEDIA="https://joplin-austin-gov-static.s3.amazonaws.com/production/media"
       elif [ "$OPTARG" == "staging" ]; then
-        CMS_MEDIA="https://joplin-staging.s3.amazonaws.com/media"
+        CMS_MEDIA="https://joplin-austin-gov-static.s3.amazonaws.com/staging/media"
       else
         CMS_MEDIA=$OPTARG
       fi
