@@ -7,6 +7,7 @@ import Stickyfill from 'stickyfilljs';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSection from 'components/Pages/Guide/GuideSection';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
+import GuideSidebar from 'components/Pages/Guide/GuideSidebar';
 import Phone from 'components/Contact/Phone';
 import Email from 'components/Contact/Email';
 
@@ -72,9 +73,7 @@ class Guide extends Component {
           <div className="coa-GuidePage__content-container">
             <div className="wrapper container-fluid">
               <div className="row">
-                <div className="coa-GuidePage__nav-sidebar sticky">
-                  Coming Soon
-                </div>
+                <GuideSidebar sections={sections}/>
                 <div className="coa-GuidePage__main-content">
                   <h1>Contact Information</h1>
                   <div className="coa-GuidePage__contact-block row">

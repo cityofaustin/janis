@@ -34,13 +34,11 @@ $sticky-guide-top: 25px;
   @extend .coa-Page__all-of-the-content;
 }
 
-.coa-GuidePage__nav-sidebar {
+.coa-GuidePage__sidebar {
   @extend .col-xs-12;
   @extend .order-sm-last; // Stack on bottom for mobile screens
   @extend .col-md-4;
   @extend .order-md-first; // Keep on the left for larger screens
-
-  background-color: #e1c5ff;
 
   // Help with sticky positioning
   height: 100%;
@@ -134,4 +132,34 @@ $sticky-guide-top: 25px;
     position: relative;
     top: 3px;
   }
+}
+
+.coa-GuideSidebar__section {
+  border-top: 1.5px solid $coa-color-gray-lighter;
+}
+
+.coa-GuideSidebar__link {
+  color: #212529;
+  text-decoration: none;
+
+  &:visited {
+    color: #212529;
+    text-decoration: none;
+  }
+  &:hover {
+    color: #212529;
+    text-decoration: none;
+  }
+}
+
+.coa-GuideSidebar__section-heading {
+  @extend .coa-GuideSidebar__link;
+  font-size: 1.7rem;
+  font-weight: bolder;
+}
+
+.coa-GuideSidebar__section-subheading {
+  @extend .coa-GuideSidebar__link;
+  font-size: 1.7rem;
+  line-height: 1;
 }

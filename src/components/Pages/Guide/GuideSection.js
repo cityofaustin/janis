@@ -33,67 +33,45 @@ const GuideSectionPage = ({
   numberOfPages,
   sectionHeading,
 }) => {
-  if (page.informationPage) {
-    return (
-      <div className="coa-GuideSectionPage">
-        <div className="coa-GuideSectionPage__section-info">
-          {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
-        </div>
-        <h2>{page.informationPage.title}</h2>
-        <p>{page.informationPage.description}</p>
-        <HtmlFromAdmin
-          title={' '}
-          content={page.informationPage.additionalContent}
-        />
-        <div className="coa-GuideSectionPage__link">
-          <a
-            href={GetUrlFromTopicsOrDepartments({
-              topics: page.informationPage.topics.edges,
-              departments: page.informationPage.relatedDepartments.edges,
-              slug: page.informationPage.slug,
-            })}
-          >
-            View this page on alpha.austin.gov
-            <i className="material-icons">open_in_new</i>
-          </a>
-        </div>
-      </div>
-    );
-  }
+  const pageData = page.informationPage || page.servicePage;
+  const title = pageData.title;
+  const description = (page.informationPage) ? pageData.description : pageData.shortDescription;
+  const additionalContent = pageData.additionalContent;
+  const topics = pageData.topics.edges;
+  const departments = pageData.relatedDepartments.edges;
+  const slug = pageData.slug;
 
-  if (page.servicePage) {
-    return (
-      <div className="coa-GuideSectionPage">
-        <div className="coa-GuideSectionPage__section-info">
-          {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
-        </div>
-        <h2>{page.servicePage.title}</h2>
-        <p>{page.servicePage.shortDescription}</p>
-        <Steps steps={page.servicePage.steps} />
-        <HtmlFromAdmin
-          title={' '}
-          content={page.servicePage.additionalContent}
-        />
-        <div className="coa-GuideSectionPage__link">
-          <a
-            href={GetUrlFromTopicsOrDepartments({
-              topics: page.servicePage.topics.edges,
-              departments: page.servicePage.relatedDepartments.edges,
-              slug: page.servicePage.slug,
-            })}
-          >
-            View this page on alpha.austin.gov
-            <i className="material-icons">open_in_new</i>
-          </a>
-        </div>
+  return (
+    <div id={`${sectionHeading}-${pageNumber}`} className="coa-GuideSectionPage">
+      <div className="coa-GuideSectionPage__section-info">
+        {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
       </div>
-    );
-  }
+      <h2>{title}</h2>
+      <p>{description}</p>
+      {page.servicePage && <Steps steps={pageData.steps} />}
+      <HtmlFromAdmin
+        title={' '}
+        content={additionalContent}
+      />
+      <div className="coa-GuideSectionPage__link">
+        <a
+          href={GetUrlFromTopicsOrDepartments({
+            topics,
+            departments,
+            slug,
+          })}
+        >
+          View this page on alpha.austin.gov
+          <i className="material-icons">open_in_new</i>
+        </a>
+      </div>
+    </div>
+  );
 };
 
 const GuideSection = ({ section }) => (
   <React.Fragment>
-    <h1>{section.heading}</h1>
+    <h1 id={section.heading}>{section.heading}</h1>
     {section.pages.map((page, index) => (
       <GuideSectionPage
         page={page}
