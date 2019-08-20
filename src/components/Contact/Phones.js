@@ -20,21 +20,20 @@ const Phone = ({ phone, intl }) => {
       </div>
     );
   }
-
   // Render the phone numbers with the descriptive text
-  return (
-    <div className="coa-ContactItem coa-ContactPhone">
-      <i className="material-icons">contact_phone</i>
-      <div>
-        {Object.entries(phone).map(([key, value]) => (
-          <div>
-            {key}: <a href={`tel:${value}`}>{value}</a>
-            <br />
-          </div>
-        ))}
+  if (phone.phoneDescription && phone.phoneNumber) {
+    return (
+      <div className="coa-ContactItem coa-ContactPhone">
+        <i className="material-icons">contact_phone</i>
+        <div>
+          <div>{phone.phoneDescription}:</div>
+          <a href={`tel:${phone.phoneNumber}`}>{phone.phoneNumber}</a>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+
 };
 
 Phone.propTypes = {
