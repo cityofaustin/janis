@@ -5,7 +5,6 @@ import { injectIntl } from 'react-intl';
 import { contact as i18n } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
-import Phone from './Phone';
 import Phones from './Phones';
 import Email from './Email';
 import Address from './Address';
@@ -44,7 +43,7 @@ const ContactSocialMediaLink = ({ url }) => {
 };
 
 const ContactDetails = ({
-  contact: { phone, phoneNumber, email, location, hours, socialMedia },
+  contact: { phoneNumber, email, location, hours, socialMedia },
   intl,
 }) => (
   <div className="coa-ContactDetails">
@@ -53,7 +52,6 @@ const ContactDetails = ({
     </SectionHeader>
     {email && <Email email={email} />}
     {location && <Address location={location} />}
-    {phone && <Phones phone={phone} />}
     {phoneNumber &&
       !!phoneNumber.edges.length && (
           phoneNumber.edges.map(phone =>
