@@ -12,16 +12,6 @@ const Phone = ({ phone, intl }) => {
   // If we don't have a phone object then don't render
   if (!phone) return null;
 
-  // If we have a default phone number just put it there without
-  // any descriptive text
-  if (phone.default) {
-    return (
-      <div className="coa-ContactItem coa-ContactPhone">
-        <i className="material-icons">contact_phone</i>
-        <a href={`tel:${phone.default}`}>{phone.default}</a>
-      </div>
-    );
-  }
   // Render the phone numbers with the descriptive text
   else if (phone.phoneDescription && phone.phoneNumber) {
     let phoneNumber = parsePhoneNumberFromString(phone.phoneNumber)
@@ -33,20 +23,6 @@ const Phone = ({ phone, intl }) => {
             {`${phone.phoneDescription}: `}
             <a href={`tel:${phoneNumber.formatNational()}`}>{phoneNumber.formatNational()}</a>
           </div>
-        </div>
-      </div>
-    );
-  } else if (phone) {
-    return (
-      <div className="coa-ContactItem coa-ContactPhone">
-        <i className="material-icons">contact_phone</i>
-        <div>
-          {Object.entries(phone).map(([key, value]) => (
-            <div>
-              {key}: <a href={`tel:${value}`}>{value}</a>
-              <br />
-            </div>
-          ))}
         </div>
       </div>
     );
