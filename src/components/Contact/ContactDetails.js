@@ -53,10 +53,9 @@ const ContactDetails = ({
     </SectionHeader>
     {email && <Email email={email} />}
     {location && <Address location={location} />}
-    {phone && <Phone phone={phone} />}
+    {phone && <Phones phone={phone} />}
     {phoneNumber &&
       !!phoneNumber.edges.length && (
-
           phoneNumber.edges.map(phone =>
           <Phones phone={phone.node} />)
       )}
