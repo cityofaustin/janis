@@ -23,6 +23,7 @@ class GuideSidebarLink extends Component {
         })}
         onClick={this.goToSection}
       >
+        <i className="material-icons coa-GuideSidebar__arrow"></i>
         {title}
       </div>
     )

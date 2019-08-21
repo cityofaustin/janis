@@ -140,13 +140,22 @@ $sticky-guide-top: 25px;
     border-bottom: 1.5px solid $coa-color-gray-lighter;
   }
   padding-bottom: $coa-spacing-small;
-  padding-left: $coa-spacing-medium;
   padding-top: $coa-spacing-small;
 }
 
 .coa-GuideSidebar__link {
   color: #212529;
+  font-size: 1.7rem;
+  line-height: 1.7em;
   text-decoration: none;
+
+  padding-left: $coa-spacing-large;
+  padding-bottom: $coa-spacing-xsmall;
+  padding-top: $coa-spacing-xsmall;
+
+  // ::before {
+  //   content: 'arrow_forward';
+  // }
 
   &:visited {
     color: #212529;
@@ -156,18 +165,23 @@ $sticky-guide-top: 25px;
     color: #212529;
     cursor: pointer;
     background-color: #D9E8F6;
+    ::before {
+      content: 'arrow_forward';
+    }
   }
+}
+
+.coa-GuideSidebar__arrow {
+  position: absolute;
+  left: 20px;
 }
 
 .coa-GuideSidebar__heading {
   @extend .coa-GuideSidebar__link;
-  font-size: 1.7rem;
-  line-height: 1;
   font-weight: bolder;
 }
 
 .coa-GuideSidebar__subheading {
   @extend .coa-GuideSidebar__link;
-  font-size: 1.7rem;
-  line-height: 1;
+  line-height: 1em;
 }
