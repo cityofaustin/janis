@@ -136,6 +136,12 @@ $sticky-guide-top: 25px;
 
 .coa-GuideSidebar__section {
   border-top: 1.5px solid $coa-color-gray-lighter;
+  &:last-child {
+    border-bottom: 1.5px solid $coa-color-gray-lighter;
+  }
+  padding-bottom: $coa-spacing-small;
+  padding-left: $coa-spacing-medium;
+  padding-top: $coa-spacing-small;
 }
 
 .coa-GuideSidebar__link {
@@ -148,17 +154,19 @@ $sticky-guide-top: 25px;
   }
   &:hover {
     color: #212529;
-    text-decoration: none;
+    cursor: pointer;
+    background-color: #D9E8F6;
   }
 }
 
-.coa-GuideSidebar__section-heading {
+.coa-GuideSidebar__heading {
   @extend .coa-GuideSidebar__link;
   font-size: 1.7rem;
+  line-height: 1;
   font-weight: bolder;
 }
 
-.coa-GuideSidebar__section-subheading {
+.coa-GuideSidebar__subheading {
   @extend .coa-GuideSidebar__link;
   font-size: 1.7rem;
   line-height: 1;

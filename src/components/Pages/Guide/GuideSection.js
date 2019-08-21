@@ -2,6 +2,7 @@ import React from 'react';
 
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import Steps from 'components/Steps';
+import {hyphenate} from "./helpers";
 
 const GetUrlFromTopicsOrDepartments = ({ topics, departments, slug }) => {
   // Just use the first topic if we've got one
@@ -42,7 +43,7 @@ const GuideSectionPage = ({
   const slug = pageData.slug;
 
   return (
-    <div id={`${sectionHeading}-${pageNumber}`} className="coa-GuideSectionPage">
+    <div id={`${hyphenate(sectionHeading)}-${pageNumber}`} className="coa-GuideSectionPage">
       <div className="coa-GuideSectionPage__section-info">
         {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
       </div>
@@ -71,7 +72,7 @@ const GuideSectionPage = ({
 
 const GuideSection = ({ section }) => (
   <React.Fragment>
-    <h1 id={section.heading}>{section.heading}</h1>
+    <h1 id={hyphenate(section.heading)}>{section.heading}</h1>
     {section.pages.map((page, index) => (
       <GuideSectionPage
         page={page}
