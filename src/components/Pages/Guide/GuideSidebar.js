@@ -17,13 +17,12 @@ class GuideSidebarLink extends Component {
     const {title, isHeading} = this.props;
     return (
       <div
-        className={classNames({
+        className={classNames("coa-GuideSidebar__link", {
           'coa-GuideSidebar__heading': isHeading,
           'coa-GuideSidebar__subheading': !isHeading,
         })}
         onClick={this.goToSection}
       >
-        <i className="material-icons coa-GuideSidebar__arrow"></i>
         {title}
       </div>
     )

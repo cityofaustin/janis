@@ -153,35 +153,36 @@ $sticky-guide-top: 25px;
   padding-bottom: $coa-spacing-xsmall;
   padding-top: $coa-spacing-xsmall;
 
-  // ::before {
-  //   content: 'arrow_forward';
-  // }
-
   &:visited {
     color: #212529;
     text-decoration: none;
   }
+
   &:hover {
     color: #212529;
     cursor: pointer;
     background-color: #D9E8F6;
-    ::before {
-      content: 'arrow_forward';
+
+    // Add arrow icon on hover
+    &:before {
+      @extend .coa-GuideSidebar__arrow;
     }
   }
 }
 
 .coa-GuideSidebar__arrow {
-  position: absolute;
+  font-family: "Material Icons";
+  font-weight: normal;
+  content: 'arrow_forward';
+  color: $coa-color-primary;
   left: 20px;
+  position: absolute;
 }
 
 .coa-GuideSidebar__heading {
-  @extend .coa-GuideSidebar__link;
   font-weight: bolder;
 }
 
 .coa-GuideSidebar__subheading {
-  @extend .coa-GuideSidebar__link;
   line-height: 1em;
 }
