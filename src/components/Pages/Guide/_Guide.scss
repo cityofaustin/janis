@@ -144,7 +144,7 @@ $sticky-guide-top: 25px;
 .coa-GuideSidebar__link {
   color: #212529;
   font-size: 1.7rem;
-  line-height: 1.7em;
+  line-height: 1em;
   text-decoration: none;
   padding-left: $coa-spacing-large;
 
@@ -161,15 +161,17 @@ $sticky-guide-top: 25px;
 }
 
 .coa-GuideSidebar__heading {
-  padding-bottom: $coa-spacing-small;
-  padding-top: $coa-spacing-small;
+  padding-bottom: $coa-spacing-md-small;
+  padding-top: $coa-spacing-md-small;
   font-weight: bolder;
 }
 
 .coa-GuideSidebar__subheading {
   padding-bottom: $coa-spacing-xsmall;
   padding-top: $coa-spacing-xsmall;
-  line-height: 1em;
+  &:last-child {
+    padding-bottom: $coa-spacing-md-small;
+  }
 }
 
 .coa-GuideSidebar__current-section {
@@ -182,5 +184,6 @@ $sticky-guide-top: 25px;
     color: $coa-color-primary;
     left: 20px;
     position: absolute;
+    font-size: larger;
   }
 }
