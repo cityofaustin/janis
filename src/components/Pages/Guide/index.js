@@ -23,12 +23,13 @@ class Guide extends Component {
       currentSection: null
     };
     this.handleScroll = this.handleScroll.bind(this);
-    this.registerSection = this.registerSection.bind(this);
-    this.updateSection = this.updateSection.bind(this);
+    this.registerSectionLocation = this.registerSectionLocation.bind(this);
+    this.updateSectionLocation = this.updateSectionLocation.bind(this);
     this.sectionLocations = [];
   }
 
-  registerSection(offsetTop, anchorTag) {
+  // Keep track of the offsetTop of each GuideSection
+  registerSectionLocation(offsetTop, anchorTag) {
     this.sectionLocations.push({
       offsetTop,
       anchorTag
@@ -36,11 +37,11 @@ class Guide extends Component {
     this.sectionLocations = sortBy(this.sectionLocations, 'fullOffsetTop')
   }
 
-  // Used in case window resizes
-  updateSection(offsetTop, anchorTag) {
+  // Update offsetTop of each GuideSection if the window resizes
+  updateSectionLocation(offsetTop, anchorTag) {
     const section = find(this.sectionLocations, {anchorTag})
     if (!section) {
-      this.registerSection(offsetTop, anchorTag)
+      this.registerSectionLocation(offsetTop, anchorTag)
     } else {
       section.offsetTop = offsetTop;
     }
@@ -144,16 +145,16 @@ class Guide extends Component {
                 <div className="coa-GuidePage__main-content" ref={this.mainContent}>
                   <GuideSectionWrapper
                     anchorTag="Contact-information"
-                    registerSection={this.registerSection}
-                    updateSection={this.updateSection}
+                    registerSectionLocation={this.registerSectionLocation}
+                    updateSectionLocation={this.updateSectionLocation}
                   >
                     <GuideContactInformation contact={contact}/>
                   </GuideSectionWrapper>
                   {sections.map((section, index) => (
                     <GuideSectionList
                       section={section}
-                      registerSection={this.registerSection}
-                      updateSection={this.updateSection}
+                      registerSectionLocation={this.registerSectionLocation}
+                      updateSectionLocation={this.updateSectionLocation}
                     />
                   ))}
                 </div>

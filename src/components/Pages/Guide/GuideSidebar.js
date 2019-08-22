@@ -8,6 +8,7 @@ class GuideSidebarLink extends Component {
     this.goToSection = this.goToSection.bind(this);
   }
 
+  // Each GuideSectionWrapper has an id={this.props.anchorTag}
   goToSection(e) {
     e.preventDefault();
     window.location.href = `#${this.props.anchorTag}`;
