@@ -14,8 +14,6 @@ const HtmlFromAdmin = ({ content }) => {
       if (domNode.attribs) {
         // Turn parse markdown from code
         if (domNode.name === 'code') {
-          console.dir(domNode);
-
           const markdown = domNode.children
             .filter(child => child.type === 'text')
             .map(textChild => textChild.data)

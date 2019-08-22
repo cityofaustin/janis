@@ -1,0 +1,107 @@
+.coa-GuidePageBannerImage {
+  object-fit: cover;
+  // This is for https://www.npmjs.com/package/object-fit-images
+  font-family: 'object-fit: cover;';
+
+  height: 32rem;
+  width: 100%;
+}
+
+.coa-GuidePage-header--container {
+  width: 57rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rem;
+
+  h1 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+.coa-GuidePage__nav-sidebar {
+  background: #e1c5ff;
+}
+
+.coa-GuidePage__main-content {
+  h1:not(:first-child) {
+    margin-top: 4rem;
+  }
+
+  h1 {
+    background: #ecf1f7;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.coa-GuidePage__contact-block {
+  margin-top: 3rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
+  margin-bottom: 4rem;
+  border: 2px solid #dddfe1;
+}
+
+.coa-GuidePage__contact-block-info {
+  border-left: 2px solid #dddfe1;
+}
+
+.coa-GuidePage__contact-block-email {
+  border-top: 2px solid #dddfe1;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+}
+
+.coa-GuidePage__contact-block-phone {
+  padding-left: 1rem;
+  padding-bottom: 2rem;
+}
+
+.coa-GuidePage__contact-block-name {
+  padding-top: 2rem;
+  padding-right: 3rem;
+  h2 {
+    font-size: 2.4rem;
+    line-height: 3rem;
+  }
+}
+
+.coa-GuideSectionPage {
+  border: 2px solid #dddfe1;
+  margin-top: 2rem;
+  padding: 4rem;
+}
+
+.coa-GuideSectionPage__section-info {
+  color: #868686;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.coa-GuideSectionPage__link {
+  font-size: 1.8rem;
+  border-top: 2px solid #dddfe1;
+  text-align: center;
+  margin-right: -4rem;
+  margin-left: -4rem;
+  margin-bottom: -2.8rem;
+  padding-top: 1rem;
+
+  a {
+    color: #0049c7;
+    text-decoration: none;
+  }
+
+  i {
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    position: relative;
+    top: 3px;
+  }
+}

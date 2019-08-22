@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
 import { topics as i18n } from 'js/i18n/definitions';
@@ -13,6 +13,9 @@ const TopicCollection = ({
   tc: { title, description, theme, topics, slug },
 }) => (
   <div>
+    <Head>
+      <title>{title}</title>
+    </Head>
     {
       // TopicCollection can belong to other TopicCollection or Theme.
       // Add placeholder related to
