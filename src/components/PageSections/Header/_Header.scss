@@ -125,7 +125,6 @@
   display: flex;
   a {
     font-size: $coa-font-size-xsmall;
-    text-transform: uppercase;
   }
   svg {
     height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
