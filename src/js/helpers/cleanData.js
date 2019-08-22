@@ -1,6 +1,6 @@
 import { findKey } from 'lodash';
 import axios from 'axios';
-import prettyBytes from 'pretty-bytes';
+import { prettyBytes } from 'js/helpers/prettyBytes';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -395,7 +395,7 @@ export const cleanOfficialDocumentPages = async (allOfficialDocumentPages) => {
 
   const pdfSizePromises = []
   for (let page of cleanedOfficialDocumentPages) {
-    if (!page.officialDocuments.edges) continue; 
+    if (!page.officialDocuments.edges) continue;
     for (let doc of page.officialDocuments.edges) {
       pdfSizePromises.push(getDocumentPdfSize(doc.node))
     }
