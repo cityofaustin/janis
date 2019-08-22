@@ -1,5 +1,3 @@
-import phoneFragment from './phoneFragment';
-
 const servicePageFragment = `
   fragment servicePageInfo on ServicePageNode {
     id
@@ -56,7 +54,6 @@ const servicePageFragment = `
             name
             email
             phone
-            ${phoneFragment}
             socialMedia
             hours {
               edges {

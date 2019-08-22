@@ -1,5 +1,3 @@
-import phoneFragment from './phoneFragment';
-
 const departmentPageFragment = `
   fragment departmentPageInfo on DepartmentPageNode {
     id
@@ -33,7 +31,6 @@ const departmentPageFragment = `
           contact {
             name
             phone
-            ${phoneFragment}
             email
             socialMedia
             location {
