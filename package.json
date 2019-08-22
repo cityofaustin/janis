@@ -52,6 +52,7 @@
     "babel-plugin-react-intl-auto": "^1.1.0",
     "eslint-config-react-tools": "1.x.x",
     "extract-react-intl-messages": "^0.8.2",
+    "libphonenumber-js": "^1.7.22",
     "prettier": "1.12.1",
     "serve": "^7.0.0",
     "storybook-addon-intl": "^2.3.0"
