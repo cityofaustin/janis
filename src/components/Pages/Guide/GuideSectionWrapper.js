@@ -10,10 +10,16 @@ export default class GuideSectionWrapper extends Component {
   constructor(props) {
     super(props);
     this.node = React.createRef();
+    this.handleResize = this.handleResize.bind(this);
+  }
+
+  handleResize() {
+    this.props.updateSection(this.node.current.offsetTop, this.props.anchorTag)
   }
 
   componentDidMount() {
     this.props.registerSection(this.node.current.offsetTop, this.props.anchorTag);
+    window.addEventListener("resize", this.handleResize);
   }
 
   render() {

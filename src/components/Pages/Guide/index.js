@@ -3,7 +3,7 @@ import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import Stickyfill from 'stickyfilljs';
-import { sortBy } from 'lodash';
+import { find, sortBy } from 'lodash';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
@@ -24,20 +24,26 @@ class Guide extends Component {
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.registerSection = this.registerSection.bind(this);
+    this.updateSection = this.updateSection.bind(this);
     this.sectionLocations = [];
   }
 
   registerSection(offsetTop, anchorTag) {
-    /**
-      Need to subtract 1 from fullOffsetTop.
-      This makes sidebar highlighting work when you navigate to a section by clicking on it from the sidebar.
-    **/
     this.sectionLocations.push({
       offsetTop,
       anchorTag
     })
     this.sectionLocations = sortBy(this.sectionLocations, 'fullOffsetTop')
-    console.log("secitonLocations::", this.sectionLocations)
+  }
+
+  // Used in case window resizes
+  updateSection(offsetTop, anchorTag) {
+    const section = find(this.sectionLocations, {anchorTag})
+    if (!section) {
+      this.registerSection(offsetTop, anchorTag)
+    } else {
+      section.offsetTop = offsetTop;
+    }
   }
 
   handleScroll(e) {
@@ -139,6 +145,7 @@ class Guide extends Component {
                   <GuideSectionWrapper
                     anchorTag="Contact-information"
                     registerSection={this.registerSection}
+                    updateSection={this.updateSection}
                   >
                     <GuideContactInformation contact={contact}/>
                   </GuideSectionWrapper>
@@ -146,6 +153,7 @@ class Guide extends Component {
                     <GuideSectionList
                       section={section}
                       registerSection={this.registerSection}
+                      updateSection={this.updateSection}
                     />
                   ))}
                 </div>

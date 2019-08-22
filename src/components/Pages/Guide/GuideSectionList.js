@@ -73,13 +73,14 @@ const GuideSection = ({
 
 class GuideSectionList extends Component {
   render() {
-    let { section, registerSection } = this.props;
+    let { section, registerSection, updateSection } = this.props;
 
     return (
       <React.Fragment>
         <GuideSectionWrapper
           anchorTag={hyphenate(section.heading)}
           registerSection={registerSection}
+          updateSection={updateSection}
         >
           <h1>{section.heading}</h1>
         </GuideSectionWrapper>
@@ -87,6 +88,7 @@ class GuideSectionList extends Component {
           <GuideSectionWrapper
             anchorTag={`${hyphenate(section.heading)}-${index+1}`}
             registerSection={registerSection}
+            updateSection={updateSection}
           >
             <GuideSection
               page={page}
