@@ -86,5 +86,7 @@
   "departmentPage.meetDirector": "Conozca a nuestra directora",
   "departmentPage.topServices": "Servicios principales",
   "departmentPage.yourDataLinkText": "Cómo almacenamos y usamos su información",
-  "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas"
+  "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas",
+  "officialdocuments.author": "Autor",
+  "officialdocuments.document": "Documento"
 }
