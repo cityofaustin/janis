@@ -88,5 +88,7 @@
   "howYouKnowMenu.dotGovHeader": "The .gov means it’s official.",
   "howYouKnowMenu.dotGovText": "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a government site.",
   "howYouKnowMenu.httpsHeader": "The site is secure.",
-  "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely."
+  "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
+  "officialdocuments.author": "Author",
+  "officialdocuments.document": "Document"
 }
