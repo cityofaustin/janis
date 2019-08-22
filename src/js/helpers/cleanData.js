@@ -1,6 +1,7 @@
 import { findKey } from 'lodash';
 import axios from 'axios';
-import prettyBytes from 'pretty-bytes';
+// import prettyBytes from 'pretty-bytes';
+import filesize from 'filesize';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -374,30 +375,36 @@ export const clean311 = threeoneone => {
   });
 };
 
-const getDocumentPdfSize = async (document) => {
+const getDocumentPdfSize = async document => {
   return await axios({
     method: 'HEAD',
-    url: document.link
+    url: document.link,
   })
-  .then(res => {
-    if (res.headers["content-type"] === "application/pdf") {
-      document.pdfSize = prettyBytes(+res.headers["content-length"]).replace(" ", "");
-      return;
-    }
-  })
-  .catch(error => null);
-}
+    .then(res => {
+      if (res.headers['content-type'] === 'application/pdf') {
+        document.pdfSize = filesize(+res.headers['content-length']).replace(
+          ' ',
+          '',
+        );
+        return;
+      }
+    })
+    .catch(error => null);
+};
 
-export const cleanOfficialDocumentPages = async (allOfficialDocumentPages) => {
+export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
-  let cleanedOfficialDocumentPages = cleanLinks(allOfficialDocumentPages, 'official_document');
+  let cleanedOfficialDocumentPages = cleanLinks(
+    allOfficialDocumentPages,
+    'official_document',
+  );
 
-  const pdfSizePromises = []
+  const pdfSizePromises = [];
   for (let page of cleanedOfficialDocumentPages) {
     if (!page.officialDocuments.edges) continue;
     for (let doc of page.officialDocuments.edges) {
-      pdfSizePromises.push(getDocumentPdfSize(doc.node))
+      pdfSizePromises.push(getDocumentPdfSize(doc.node));
     }
   }
 

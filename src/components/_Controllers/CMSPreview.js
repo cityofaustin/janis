@@ -121,7 +121,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { data } = this.state;
-    if (!this.state.data) return <h1>⏱️LoAdInG⏱️...</h1>;
+    if (!this.state.data) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
