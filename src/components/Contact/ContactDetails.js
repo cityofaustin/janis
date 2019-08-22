@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { contact as i18n } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
-import Phones from './Phones';
+import Phone from './Phone';
 import Email from './Email';
 import Address from './Address';
 import Hours from './Hours';
@@ -43,21 +43,22 @@ const ContactSocialMediaLink = ({ url }) => {
 };
 
 const ContactDetails = ({
-  contact: { phoneNumber, email, location, hours, socialMedia },
+  contact: { phone, email, location, hours, socialMedia },
   intl,
 }) => (
   <div className="coa-ContactDetails">
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
+
     {email && <Email email={email} />}
+
     {location && <Address location={location} />}
-    {phoneNumber &&
-      !!phoneNumber.edges.length && (
-          phoneNumber.edges.map(phone =>
-          <Phones phone={phone.node} />)
-      )}
+
+    {phone && <Phone phone={phone} />}
+
     {hours && !!hours.length && <Hours hours={hours} />}
+
     {socialMedia &&
       socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
   </div>
