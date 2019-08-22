@@ -139,8 +139,6 @@ $sticky-guide-top: 25px;
   &:last-child {
     border-bottom: 1.5px solid $coa-color-gray-lighter;
   }
-  padding-bottom: $coa-spacing-small;
-  padding-top: $coa-spacing-small;
 }
 
 .coa-GuideSidebar__link {
@@ -148,10 +146,7 @@ $sticky-guide-top: 25px;
   font-size: 1.7rem;
   line-height: 1.7em;
   text-decoration: none;
-
   padding-left: $coa-spacing-large;
-  padding-bottom: $coa-spacing-xsmall;
-  padding-top: $coa-spacing-xsmall;
 
   &:visited {
     color: #212529;
@@ -161,28 +156,31 @@ $sticky-guide-top: 25px;
   &:hover {
     color: #212529;
     cursor: pointer;
-    background-color: #D9E8F6;
-
-    // Add arrow icon on hover
-    &:before {
-      @extend .coa-GuideSidebar__arrow;
-    }
+    @extend .coa-GuideSidebar__current-section;
   }
 }
 
-.coa-GuideSidebar__arrow {
-  font-family: "Material Icons";
-  font-weight: normal;
-  content: 'arrow_forward';
-  color: $coa-color-primary;
-  left: 20px;
-  position: absolute;
-}
-
 .coa-GuideSidebar__heading {
+  padding-bottom: $coa-spacing-small;
+  padding-top: $coa-spacing-small;
   font-weight: bolder;
 }
 
 .coa-GuideSidebar__subheading {
+  padding-bottom: $coa-spacing-xsmall;
+  padding-top: $coa-spacing-xsmall;
   line-height: 1em;
+}
+
+.coa-GuideSidebar__current-section {
+  background-color: #D9E8F6;
+
+  &:before {
+    font-family: "Material Icons";
+    font-weight: normal;
+    content: 'arrow_forward';
+    color: $coa-color-primary;
+    left: 20px;
+    position: absolute;
+  }
 }

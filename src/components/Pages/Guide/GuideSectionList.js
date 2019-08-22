@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
+import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import Steps from 'components/Steps';
 import {hyphenate} from "./helpers";
@@ -28,7 +29,7 @@ const GetUrlFromTopicsOrDepartments = ({ topics, departments, slug }) => {
   return '';
 };
 
-const GuideSectionPage = ({
+const GuideSection = ({
   page,
   pageNumber,
   numberOfPages,
@@ -43,7 +44,7 @@ const GuideSectionPage = ({
   const slug = pageData.slug;
 
   return (
-    <div id={`${hyphenate(sectionHeading)}-${pageNumber}`} className="coa-GuideSectionPage">
+    <div className="coa-GuideSectionPage">
       <div className="coa-GuideSectionPage__section-info">
         {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
       </div>
@@ -70,18 +71,34 @@ const GuideSectionPage = ({
   );
 };
 
-const GuideSection = ({ section }) => (
-  <React.Fragment>
-    <h1 id={hyphenate(section.heading)}>{section.heading}</h1>
-    {section.pages.map((page, index) => (
-      <GuideSectionPage
-        page={page}
-        pageNumber={index + 1}
-        numberOfPages={section.pages.length}
-        sectionHeading={section.heading}
-      />
-    ))}
-  </React.Fragment>
-);
+class GuideSectionList extends Component {
+  render() {
+    let { section, registerSection } = this.props;
 
-export default GuideSection;
+    return (
+      <React.Fragment>
+        <GuideSectionWrapper
+          anchorTag={hyphenate(section.heading)}
+          registerSection={registerSection}
+        >
+          <h1>{section.heading}</h1>
+        </GuideSectionWrapper>
+        {section.pages.map((page, index) => (
+          <GuideSectionWrapper
+            anchorTag={`${hyphenate(section.heading)}-${index+1}`}
+            registerSection={registerSection}
+          >
+            <GuideSection
+              page={page}
+              pageNumber={index + 1}
+              numberOfPages={section.pages.length}
+              sectionHeading={section.heading}
+            />
+          </GuideSectionWrapper>
+        ))}
+      </React.Fragment>
+    )
+  }
+};
+
+export default GuideSectionList;
