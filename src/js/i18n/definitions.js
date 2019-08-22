@@ -462,3 +462,8 @@ export const footerSiteMapMenu = defineMessages([
     ],
   },
 ]);
+
+export const officialdocuments = defineMessages({
+  author: 'Author',
+  document: 'Document',
+});
