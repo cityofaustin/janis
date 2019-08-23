@@ -8,32 +8,32 @@ import { phonePropTypes } from './proptypes';
 
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
-const Phone = ({ phone, intl }) => {
+const Phones = ({ phone, intl }) => {
   // If we don't have a phone object then don't render
   if (!phone) return null;
 
   // Render the phone numbers with the descriptive text
-  else if (phone.phoneDescription && phone.phoneNumber) {
+  if (phone.phoneDescription || phone.phoneNumber) {
     let phoneNumber = parsePhoneNumberFromString(phone.phoneNumber)
     return (
       <div className="coa-ContactItem coa-ContactPhone">
         <i className="material-icons">contact_phone</i>
         <div>
           <div>
-            {`${phone.phoneDescription}: `}
+            {phone.phoneDescription && `${phone.phoneDescription}: `}
             <a href={`tel:${phoneNumber.formatNational()}`}>{phoneNumber.formatNational()}</a>
           </div>
         </div>
       </div>
     );
   }
-};
+}
 
-Phone.propTypes = {
+Phones.propTypes = {
   phone: phonePropTypes,
 };
 
-export default injectIntl(Phone);
+export default injectIntl(Phones);
 
 /*
 
