@@ -12,4 +12,8 @@ if [ "$HEAD" == '2599-guide-pages' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
+if [ "$HEAD" == 'add-phones-back' ]; then
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+fi
+
 yarn npm-run-all build-css build-js
