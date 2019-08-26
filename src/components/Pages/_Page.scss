@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.coa-Page__main-content {
+  width: 100%; // Required for IE11
+}
+
 .coa-Page__side-content {
   display: none;
   @include media($coa-medium-screen) {
