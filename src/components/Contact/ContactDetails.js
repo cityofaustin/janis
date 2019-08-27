@@ -42,6 +42,15 @@ const ContactSocialMediaLink = ({ url }) => {
   );
 };
 
+const PhonesList = ({ phoneNumbers }) => {
+  return (
+    <div className="coa-ContactItem coa-ContactPhoneList">
+      <i className="material-icons">contact_phone</i>
+      <div><Phones phones={phoneNumbers} /></div>
+    </div>
+  );
+};
+
 const ContactDetails = ({
   contact: { phoneNumber, email, location, hours, socialMedia },
   intl,
@@ -54,10 +63,7 @@ const ContactDetails = ({
     {location && <Address location={location} />}
 
     {/*phone list should probably be a list for semantics but it affects styling atm */}
-    <div className="coa-ContactItem coa-ContactPhoneList">
-      <i className="material-icons">contact_phone</i>
-      <div>{phoneNumber && <Phones phones={phoneNumber} />}</div>
-    </div>
+    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
     {hours && !!hours.length && <Hours hours={hours} />}
     {socialMedia &&
       socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
