@@ -63,7 +63,7 @@ while getopts "PSe:M:A:" opt; do
       elif [ "$OPTARG" == "staging" ]; then
         CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
       else
-        CMS_MEDIA=$OPTARG
+        CMS_API=$OPTARG
       fi
       ;;
     \? )
