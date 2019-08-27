@@ -36,9 +36,18 @@ $sticky-guide-top: 25px;
 
 .coa-GuidePage__sidebar {
   @extend .col-xs-12;
-  @extend .order-sm-last; // Stack on bottom for mobile screens
-  @extend .col-md-4;
-  @extend .order-md-first; // Keep on the left for larger screens
+  @extend .col-lg-4;
+
+  @include mobile-and-tablet {
+    background-color: $coa-color-green-light;
+    order: 2;
+    -webkit-order: 2;
+  }
+
+  @include desktop {
+    order: 1;
+    -webkit-order: 1;
+  }
 
   // Help with sticky positioning
   height: 100%;
@@ -50,7 +59,17 @@ $sticky-guide-top: 25px;
 
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
-  @extend .col-md-8;
+  @extend .col-lg-8;
+
+  @include mobile-and-tablet {
+    order: 1;
+    -webkit-order: 1;
+  }
+
+  @include desktop {
+    order: 2;
+    -webkit-order: 2;
+  }
 
   margin-top: $sticky-guide-top;
 

@@ -140,3 +140,34 @@
   display: flex;
   height: $height;
 }
+
+/**
+  Add responsive styling to be used only for specific device sizes
+  ex:
+  @include mobile {
+    background-color: $coa-color-green-light;
+  }
+**/
+@mixin mobile {
+  @media (max-width: #{$coa-medium-screen - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$coa-medium-screen}) and (max-width: #{$coa-large-screen - 1px}) {
+    @content;
+  }
+}
+
+@mixin mobile-and-tablet {
+  @media (max-width: #{$coa-large-screen - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$coa-large-screen}) {
+    @content;
+  }
+}
