@@ -6,7 +6,7 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 
 import GuideSection from 'components/Pages/Guide/GuideSection';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
-import Phone from 'components/Contact/Phone';
+import PhonesList from 'components/Contact/Phones';
 import Email from 'components/Contact/Email';
 
 // TODO: make this not break with broken data
@@ -33,10 +33,7 @@ const Guide = ({
     contact = contacts.edges[0].node.contact;
   }
 
-  let phone = null;
-  if (contact && contact.phone) {
-    phone = JSON.parse(contact.phone);
-  }
+  debugger;
 
   return (
     <div>
@@ -73,7 +70,7 @@ const Guide = ({
                   </div>
                   <div className="coa-GuidePage__contact-block-info col-md-6">
                     <div className="coa-GuidePage__contact-block-phone">
-                      <Phone phone={phone} />
+                      <PhonesList phoneNumbers={contact.phoneNumber} />
                     </div>
                     <div className="coa-GuidePage__contact-block-email">
                       <Email email={contact.email} />
