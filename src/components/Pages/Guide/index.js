@@ -12,8 +12,6 @@ import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
 import GuideSidebar from 'components/Pages/Guide/GuideSidebar';
 
-// TODO: make this not break with broken data
-
 class Guide extends Component {
   constructor(props) {
     super(props);
@@ -128,7 +126,7 @@ class Guide extends Component {
         />
         <div>
           <div className="wrapper container-fluid">
-            <GuideBannerImage image={image} />
+            {image && <GuideBannerImage image={image} />}
           </div>
           <div className="coa-GuidePage-header--container">
             <h1>{title}</h1>
@@ -138,6 +136,7 @@ class Guide extends Component {
             <div className="wrapper container-fluid">
               <div className="row">
                 <GuideSidebar
+                  contact={contact}
                   sections={sections}
                   currentSection={currentSection}
                 />
@@ -147,7 +146,7 @@ class Guide extends Component {
                     registerSectionLocation={this.registerSectionLocation}
                     updateSectionLocation={this.updateSectionLocation}
                   >
-                    <GuideContactInformation contact={contact}/>
+                    {contact && <GuideContactInformation contact={contact}/>}
                   </GuideSectionWrapper>
                   {sections.map((section, index) => (
                     <GuideSectionList

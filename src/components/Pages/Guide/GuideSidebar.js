@@ -72,17 +72,19 @@ class GuideSidebarSection extends Component {
 
 class GuideSidebar extends Component {
   render() {
-    let { sections, currentSection } = this.props;
+    let { contact, sections, currentSection } = this.props;
 
     return (
       <div className="coa-GuidePage__sidebar sticky">
         <div className="coa-GuideSidebar__section">
-          <GuideSidebarLink
-            title="Contact information"
-            anchorTag="Contact-information"
-            isHeading={true}
-            isCurrentSection={currentSection === "Contact-information"}
-          />
+          {contact && (
+            <GuideSidebarLink
+              title="Contact information"
+              anchorTag="Contact-information"
+              isHeading={true}
+              isCurrentSection={currentSection === "Contact-information"}
+            />
+          )}
         </div>
         {sections.map((section, index) => (
           <GuideSidebarSection
