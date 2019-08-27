@@ -138,3 +138,9 @@ This will enable proper line wrapping for the :last-child.
   word-wrap: break-word;
   word-break: break-word;
 }
+
+// we might need to refactor this pattern later in case we add multiples of other
+// contact types, like email or location
+.coa-ContactPhone:not(:first-of-type) i  {
+  display:none;
+}

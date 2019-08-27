@@ -52,11 +52,12 @@ const ContactDetails = ({
     </SectionHeader>
     {email && <Email email={email} />}
     {location && <Address location={location} />}
-    {phoneNumber &&
-      !!phoneNumber.edges.length && (
-          phoneNumber.edges.map(phone =>
-          <Phones phone={phone.node} />)
-      )}
+    {/*phone list should probably be a list for semantics but it affects styling atm */}
+    <div className="coa-ContactPhoneList">
+      {phoneNumber &&
+        !!phoneNumber.edges.length &&
+        phoneNumber.edges.map(phone => <Phones phone={phone.node} />)}
+    </div>
     {hours && !!hours.length && <Hours hours={hours} />}
     {socialMedia &&
       socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
