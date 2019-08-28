@@ -15,8 +15,6 @@ import GuideSidebar from 'components/Pages/Guide/GuideSidebar';
 class Guide extends Component {
   constructor(props) {
     super(props);
-    this.mainContent = React.createRef();
-    this.mainContentOffsetTop = null;
     this.state = {
       currentSection: null
     };
@@ -32,7 +30,7 @@ class Guide extends Component {
       offsetTop,
       anchorTag
     })
-    this.sectionLocations = sortBy(this.sectionLocations, 'fullOffsetTop')
+    this.sectionLocations = sortBy(this.sectionLocations, 'fullOffsetTop');
   }
 
   // Update offsetTop of each GuideSection if the window resizes
@@ -46,14 +44,8 @@ class Guide extends Component {
   }
 
   /**
-    If the window's vertical distance from the top of the page
-      (window.scrollY)
-    is less than a GuideSection's vertical distance from the top of page
-      (
-        the sum of the mainContent container's distance from the top (mainContentOffsetTop)
-        plus the GuideSection's distance from the top of its mainContent parent container (offsetTop)
-        minus 1 (without it, the sidebar highlighting won't work when you navigate to a GuideSection by clicking on it from the sidebar)
-      ),
+    If the window's vertical distance from the top of the page (window.scrollY)
+    is less than a GuideSection's vertical distance from the top of page (offsetTop)
     then we know that the window is positioned at the section right before that GuideSection.
     That's why we i-- at the end.
     We want the GuideSection right before the first GuideSection that is past the window's position.
@@ -61,7 +53,7 @@ class Guide extends Component {
   handleScroll(e) {
     let i = 0;
     while (i < this.sectionLocations.length) {
-      if (window.scrollY < (this.mainContentOffsetTop + this.sectionLocations[i].offsetTop - 1)) {
+      if (window.scrollY < (this.sectionLocations[i].offsetTop - 1)) {
         break;
       } else {
         i++
@@ -79,7 +71,6 @@ class Guide extends Component {
 
   componentDidMount(){
     // add listener for scroll events
-    this.mainContentOffsetTop = this.mainContent.current.offsetTop;
     window.addEventListener('scroll', this.handleScroll);
 
     // Implement sticky polyfill for browsers that don't natively allow {position: sticky}
@@ -140,7 +131,7 @@ class Guide extends Component {
                   sections={sections}
                   currentSection={currentSection}
                 />
-                <div className="coa-GuidePage__main-content" ref={this.mainContent}>
+                <div className="coa-GuidePage__main-content">
                   <GuideSectionWrapper
                     anchorTag="Contact-information"
                     registerSectionLocation={this.registerSectionLocation}
