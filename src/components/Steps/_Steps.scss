@@ -70,14 +70,16 @@
 
         //p tag within p tag, wagtail issue?
         & > p {
-          // margin: 0;
+          &:first-child {
+            margin-top: 0;
+          }
           font-size: inherit;
         }
 
         ul,
         li {
           font-size: inherit;
-          margin-bottom: 0;
+          // margin-bottom: 0;
         }
         // @include media($coa-medium-screen) {
         //   font-size: $coa-font-size-medium;
