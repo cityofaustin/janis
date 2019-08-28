@@ -34,6 +34,15 @@ const departmentPageFragment = `
           servicePage {
             title
             slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
             topics {
               edges {
                 node {
@@ -59,6 +68,15 @@ const departmentPageFragment = `
           informationPage {
             title
             slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
             topics {
               edges {
                 node {
@@ -84,6 +102,15 @@ const departmentPageFragment = `
           guidePage {
             title
             slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
             topics {
               edges {
                 node {

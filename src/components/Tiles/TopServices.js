@@ -23,7 +23,6 @@ const TopServices = ({ tiles, title, url, locale, extraClasses }) =>
 
           <div className="row">
             {tiles.map(({ type, value }, index) => {
-              debugger;
               // If we don't have a value just use the whole tile
               // this fixes the homepage top services
               if (!value) {

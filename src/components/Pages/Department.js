@@ -25,24 +25,36 @@ const cleanDepartmentTopServiceLink = topService => {
     topService.guidePage ||
     topService.informationPage;
 
-  if (page && page.topics && page.topics.edges.length) {
-    const topic = page.topics.edges[0].node.topic;
+  if (page) {
+    // If we have a topic let's make our URL from it
+    if (page.topics && page.topics.edges.length) {
+      const topic = page.topics.edges[0].node.topic;
 
-    if (
-      topic &&
-      topic.topiccollections &&
-      topic.topiccollections.edges.length
-    ) {
-      const tc = topic.topiccollections.edges[0].node.topiccollection;
-      debugger;
+      if (
+        topic &&
+        topic.topiccollections &&
+        topic.topiccollections.edges.length
+      ) {
+        const tc = topic.topiccollections.edges[0].node.topiccollection;
+
+        return {
+          title: page.title,
+          url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
+          type: 'en',
+        };
+      }
+    }
+
+    // If we have a department let's make our URL from it
+    if (page.relatedDepartments && page.relatedDepartments.edges.length) {
+      const dept = page.relatedDepartments.edges[0].node.relatedDepartment;
 
       return {
         title: page.title,
-        url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
+        url: `/${dept.slug}/${page.slug}`,
         type: 'en',
       };
     }
-    debugger;
   }
 };
 
