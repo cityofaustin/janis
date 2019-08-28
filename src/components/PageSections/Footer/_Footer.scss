@@ -128,29 +128,66 @@
   }
 }
 
-.coa-FooterSiteMap__title {
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
-  font-weight: $coa-font-medium;
-  margin-bottom: $coa-spacing-small;
-}
+.coa-FooterSiteMap {
+  display: none;
 
-.coa-FooterSiteMap__list {
-  margin-left: 0;
-}
+  @include media($coa-medium-screen) {
+    display: inherit;
+    background: $coa-color-grey;
+    padding: $coa-spacing-xlarge 0;
 
-.coa-FooterSiteMap__item {
-  list-style: none;
-  margin-left: 0;
-  margin-bottom: $coa-spacing-xsmall;
-}
+    .coa-ThemesTopicsMenu--FooterSiteMap {
+      max-width: $coa-large-screen;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 $coa-spacing-xlarge;
 
-.coa-FooterSiteMap__link {
-  text-decoration: none;
-  color: $coa-color-decently-black;
-  font-size: $coa-font-size-xsmall;
-  &:hover,
-  &:visited {
-    color: $coa-color-decently-black;
+      .coa-ThemesTopicsMenu__section:nth-child(n + 5):before {
+        border: none;
+      }
+
+      .coa-ThemesTopicsMenu__theme {
+        color: $coa-color-almost-black;
+        margin-bottom: $coa-spacing-small;
+      }
+
+      .coa-ThemesTopicsMenu__link {
+        text-decoration: none;
+        color: $coa-color-decently-black;
+        font-size: $coa-font-size-xsmall;
+        &:visited {
+          color: $coa-color-decently-black;
+        }
+        &:hover {
+          color: $coa-color-darker-blue;
+        }
+      }
+    }
   }
+}
+
+.coa-FooterMobileSiteMap {
+  @include media($coa-medium-screen) {
+    display: none;
+  }
+}
+
+.coa-ThemesTopicsMobileMenu__theme-container {
+  background: $coa-color-grey;
+}
+
+.coa-ThemeAccordianItem__name {
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-xsmall;
+  flex: auto;
+  color: $coa-color-dark-blue;
+}
+
+.coa-ThemeAccordionButton {
+  display: flex;
+  align-items: center;
+  color: $coa-color-primary;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-top: 1px solid $coa-color-dark-grey;
 }
