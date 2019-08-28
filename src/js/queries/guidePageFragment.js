@@ -10,7 +10,15 @@ const guidePageFragment = `
           contact {
             name
             email
-            phone
+            phoneNumber {
+              edges {
+                node {
+                  id
+                  phoneDescription
+                  phoneNumber
+                }
+              }
+            }
             socialMedia
             hours {
               edges {

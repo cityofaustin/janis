@@ -5,12 +5,11 @@ import { injectIntl } from 'react-intl';
 import { contact as i18n } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
-import Phone from './Phone';
+import PhonesList from './Phones';
 import Email from './Email';
 import Address from './Address';
 import Hours from './Hours';
-import Facebook from './Facebook';
-import Twitter from './Twitter';
+import SocialMediaLink from './SocialMediaLink';
 import ExternalLink from 'components/ExternalLink';
 import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
@@ -21,46 +20,24 @@ import {
   phonePropTypes,
 } from './proptypes';
 
-const ContactSocialMediaLink = ({ url }) => {
-  const facebookRegex = /http(s)?:\/\/(www\.)?(facebook|fb)\.com\/[A-z0-9_\-\.]+\/?/g;
-  if (facebookRegex.test(url)) {
-    return <Facebook url={url} />;
-  }
-
-  const twitterRegex = /http(s)?:\/\/(.*\.)?twitter\.com\/[A-z0-9_]+\/?/g;
-  if (twitterRegex.test(url)) {
-    return <Twitter url={url} />;
-  }
-
-  return (
-    <div className="coa-ContactItem">
-      <i className="material-icons">public</i>
-      <div className="coa-ContactItem_content">
-        <ExternalLink to={url}>{url}</ExternalLink>
-      </div>
-    </div>
-  );
-};
-
 const ContactDetails = ({
-  contact: { phone, email, location, hours, socialMedia },
+  contact: { phoneNumber, email, location, hours, socialMedia },
   intl,
 }) => (
   <div className="coa-ContactDetails">
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
-
+    {/* We want to keep this component easy to read and streamlined, so we are
+      avoiding complicated functions in this return.
+      Consider breaking into another component and calling that here*/}
     {email && <Email email={email} />}
-
     {location && <Address location={location} />}
-
-    {phone && <Phone phone={phone} />}
-
+    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
     {hours && !!hours.length && <Hours hours={hours} />}
-
-    {socialMedia &&
-      socialMedia.map(url => <ContactSocialMediaLink url={url.value} />)}
+    {/*Each social media link is it's own contact item with it's own icon,
+    so it makes sense to have the map here*/}
+    {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
   </div>
 );
 
