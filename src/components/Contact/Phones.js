@@ -25,8 +25,11 @@ const Phone = ({ phone }) => {
 
 const PhonesList = ({ phoneNumbers, intl }) => {
   if (!phoneNumbers) return null;
+  {/*phone list should probably be a list
+    for semantics but it affects styling atm */}
 
   return (
+
     <div className="coa-ContactItem coa-ContactPhoneList">
       <i className="material-icons">contact_phone</i>
       <div className="coa-ContactItem_content">
