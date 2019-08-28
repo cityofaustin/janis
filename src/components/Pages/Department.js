@@ -34,6 +34,23 @@ const Department = ({
   },
   intl,
 }) => {
+  const RelatedContent = () => (
+    <div className="coa-DepartmentPage__related-container">
+      <h2 className="coa-DepartmentPage__related-title">
+        {intl.formatMessage(i18n2.relatedInfo)}
+      </h2>
+      <ul className="coa-DepartmentPage__related-list">
+        {relatedLinks.map((l, index) => (
+          <li key={index} className="coa-DepartmentPage__related-item">
+            <a href={l.url} className="coa-DepartmentPage__related-link">
+              {l.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+
   const TopServicesRelatedContent = () =>
     // if we render both TopServices and Related, wrap them in a div
     topServices.length > 0 && !!relatedLinks.length ? (
@@ -56,23 +73,6 @@ const Department = ({
     ) : !!relatedLinks.length ? (
       <RelatedContent />
     ) : null;
-
-  const RelatedContent = () => (
-    <div className="coa-DepartmentPage__related-container">
-      <h2 className="coa-DepartmentPage__related-title">
-        {intl.formatMessage(i18n2.relatedInfo)}
-      </h2>
-      <ul className="coa-DepartmentPage__related-list">
-        {relatedLinks.map((l, index) => (
-          <li key={index} className="coa-DepartmentPage__related-item">
-            <a href={l.url} className="coa-DepartmentPage__related-link">
-              {l.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 
   return (
     <div>
