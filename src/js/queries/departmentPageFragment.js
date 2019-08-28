@@ -26,7 +26,89 @@ const departmentPageFragment = `
       }
     }
     jobListings
-    topServices
+    topServicePages {
+      edges {
+        node {
+          id
+          sortOrder
+          servicePage {
+            title
+            slug
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          informationPage {
+            title
+            slug
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          guidePage {
+            title
+            slug
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     contacts {
       edges {
         node {

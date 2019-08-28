@@ -15,12 +15,48 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import WorkInProgress from 'components/WorkInProgress';
 
-// TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/pages';
-
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
+
+const cleanDepartmentTopServiceLink = topService => {
+  const page =
+    topService.servicePage ||
+    topService.guidePage ||
+    topService.informationPage;
+
+  if (page && page.topics && page.topics.edges.length) {
+    const topic = page.topics.edges[0].node.topic;
+
+    if (
+      topic &&
+      topic.topiccollections &&
+      topic.topiccollections.edges.length
+    ) {
+      const tc = topic.topiccollections.edges[0].node.topiccollection;
+      debugger;
+
+      return {
+        title: page.title,
+        url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
+        type: 'en',
+      };
+    }
+    debugger;
+  }
+};
+
+const cleanDepartmentTopServices = topServicePages => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges
+    .map(({ node: topService }) => {
+      let cleaned = cleanDepartmentTopServiceLink(topService);
+
+      return cleaned;
+    })
+    .filter(x => typeof x !== 'undefined');
+};
 
 const Department = ({
   department: {
@@ -37,6 +73,31 @@ const Department = ({
   },
   intl,
 }) => {
+  const topBlargs = cleanDepartmentTopServices(topServices);
+
+  const TopServicesRelatedContent = () =>
+    // if we render both TopServices and Related, wrap them in a div
+    topBlargs.length > 0 && !!relatedLinks.length ? (
+      <div className="coa-TopServicesRelatedContent">
+        <TopServices
+          title={intl.formatMessage(i18n.topServices)}
+          tiles={topBlargs}
+          locale={intl.locale}
+          extraClasses="coa-TopServicesDepartment"
+        />
+        <RelatedContent />
+      </div>
+    ) : topBlargs.length > 0 ? (
+      <TopServices
+        title={intl.formatMessage(i18n.topServices)}
+        tiles={topBlargs}
+        locale={intl.locale}
+        extraClasses="coa-TopServicesDepartment"
+      />
+    ) : !!relatedLinks.length ? (
+      <RelatedContent />
+    ) : null;
+
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
       <h2 className="coa-DepartmentPage__related-title">
@@ -53,28 +114,6 @@ const Department = ({
       </ul>
     </div>
   );
-  const TopServicesRelatedContent = () =>
-    // if we render both TopServices and Related, wrap them in a div
-    topServices.length > 0 && !!relatedLinks.length ? (
-      <div className="coa-TopServicesRelatedContent">
-        <TopServices
-          title={intl.formatMessage(i18n.topServices)}
-          tiles={topServices}
-          locale={intl.locale}
-          extraClasses="coa-TopServicesDepartment"
-        />
-        <RelatedContent />
-      </div>
-    ) : topServices.length > 0 ? (
-      <TopServices
-        title={intl.formatMessage(i18n.topServices)}
-        tiles={topServices}
-        locale={intl.locale}
-        extraClasses="coa-TopServicesDepartment"
-      />
-    ) : !!relatedLinks.length ? (
-      <RelatedContent />
-    ) : null;
 
   return (
     <div>
@@ -159,15 +198,3 @@ const Department = ({
 };
 
 export default withRouteData(injectIntl(Department));
-
-/*
-Taking these out instead of doing actual conditional stuff because we don't need them for OPO
-
-        <h3>Social Media URLs</h3>
-        {socialMedia.map(smlink => (
-          <div className="wrapper wrapper--sm container-fluid">
-            <p>URL: {smlink.value}</p>
-          </div>
-        ))}
-        <p>Job Listing link: {jobListings}</p>
-*/

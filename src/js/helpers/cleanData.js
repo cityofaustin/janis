@@ -283,6 +283,21 @@ export const cleanDepartmentDirectors = directors => {
   });
 };
 
+// export const cleanDepartmentTopServiceLink = topService => {
+//   let topServiceLink;
+//   if()
+// }
+
+export const cleanDepartmentTopServices = topServicePages => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges.map(({ node: topService }) => {
+    let cleaned = Object.assign({}, topService);
+
+    return cleaned;
+  });
+};
+
 export const cleanDepartments = allDepartments => {
   if (!allDepartments || !allDepartments.edges) return null;
 
@@ -294,6 +309,11 @@ export const cleanDepartments = allDepartments => {
       department.departmentDirectors,
     );
     department.relatedLinks = [];
+    department.topServices = department.topServicePages;
+    // department.topServices = cleanDepartmentTopServices(
+    //   department.topServicePages,
+    // );
+
     return department;
   });
 };
