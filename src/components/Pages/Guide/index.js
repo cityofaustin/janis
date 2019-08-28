@@ -33,8 +33,6 @@ const Guide = ({
     contact = contacts.edges[0].node.contact;
   }
 
-  debugger;
-
   return (
     <div>
       <Head>
