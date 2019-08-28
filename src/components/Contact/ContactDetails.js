@@ -28,15 +28,15 @@ const ContactDetails = ({
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
+    {/* We want to keep this component easy to read and streamlined, so we are
+      avoiding complicated functions in this return.
+      Consider breaking into another component and calling that here*/}
     {email && <Email email={email} />}
     {location && <Address location={location} />}
-    {/*phone list should probably be a list for semantics but it affects styling atm */}
     {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
-    {/* We want to keep this component easy to read and streamlined, so we are
-      avoiding complicate functions in this return.
-      However, each social media link is it's own contact item with it's own icon,
-      so it makes sense to have the map here*/}
     {hours && !!hours.length && <Hours hours={hours} />}
+    {/*Each social media link is it's own contact item with it's own icon,
+    so it makes sense to have the map here*/}
     {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
   </div>
 );
