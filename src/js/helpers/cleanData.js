@@ -334,6 +334,21 @@ export const cleanDepartmentTopServices = (topServicePages, langCode) => {
     .filter(x => typeof x !== 'undefined');
 };
 
+export const cleanDepartmentTopServiceIds = topServicePages => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges
+    .map(({ node: topService }) => {
+      const page =
+        topService.servicePage ||
+        topService.guidePage ||
+        topService.informationPage;
+
+      if (page) return page.id;
+    })
+    .filter(x => typeof x !== 'undefined');
+};
+
 export const cleanDepartments = (allDepartments, langCode) => {
   if (!allDepartments || !allDepartments.edges) return null;
 
@@ -349,6 +364,9 @@ export const cleanDepartments = (allDepartments, langCode) => {
     department.topServices = cleanDepartmentTopServices(
       department.topServicePages,
       langCode,
+    );
+    department.topServiceIds = cleanDepartmentTopServiceIds(
+      department.topServicePages,
     );
 
     return department;

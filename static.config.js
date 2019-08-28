@@ -297,6 +297,7 @@ const makeDepartmentPages = async (client, langCode) => {
   // copying the pattern from topics, may not need to do all this copying
   for (var infoPage of informationPages) {
     if (!infoPage.department) continue;
+
     infoPage.type = 'info';
 
     let matchingDepartmentIndex = departments.findIndex(
@@ -304,7 +305,14 @@ const makeDepartmentPages = async (client, langCode) => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-      departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(
+          infoPage.id,
+        )
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
@@ -330,7 +338,12 @@ const makeDepartmentPages = async (client, langCode) => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-      departments[matchingDepartmentIndex].relatedLinks.push(service);
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(service.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(service);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
@@ -382,7 +395,11 @@ const makeDepartmentPages = async (client, langCode) => {
         d => d.id === releatedDepartment.id,
       );
       if (departments[matchingDepartmentIndex]) {
-        departments[matchingDepartmentIndex].relatedLinks.push(page);
+        if (
+          !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
+        ) {
+          departments[matchingDepartmentIndex].relatedLinks.push(page);
+        }
       }
     }
   }

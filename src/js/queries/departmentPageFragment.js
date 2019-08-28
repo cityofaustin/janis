@@ -32,6 +32,7 @@ const departmentPageFragment = `
           id
           sortOrder
           servicePage {
+            id
             title
             slug
             relatedDepartments {
@@ -66,6 +67,7 @@ const departmentPageFragment = `
             }
           }
           informationPage {
+            id
             title
             slug
             relatedDepartments {
@@ -100,6 +102,7 @@ const departmentPageFragment = `
             }
           }
           guidePage {
+            id
             title
             slug
             relatedDepartments {
