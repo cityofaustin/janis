@@ -44,7 +44,7 @@ const makeAllPages = async langCode => {
   const client = createGraphQLClientsByLang(langCode);
 
   const themeChildren = await makeThemePages(client);
-  const deptChildren = await makeDepartmentPages(client);
+  const deptChildren = await makeDepartmentPages(client, langCode);
 
   const data = {
     path: path,
@@ -104,7 +104,9 @@ const makeThemePages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = await cleanOfficialDocumentPages(allOfficialDocumentPages);
+  const officialDocumentPages = await cleanOfficialDocumentPages(
+    allOfficialDocumentPages,
+  );
 
   const { allGuidePages: allGuidePages } = await client.request(
     allGuidePagesQuery,
@@ -282,9 +284,9 @@ const makeThemePages = async client => {
   return data;
 };
 
-const makeDepartmentPages = async client => {
+const makeDepartmentPages = async (client, langCode) => {
   const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
-  const departments = cleanDepartments(allDepartmentPages);
+  const departments = cleanDepartments(allDepartmentPages, langCode);
 
   const { allInformationPages: allInformationPages } = await client.request(
     allInformationPagesQuery,
@@ -341,7 +343,9 @@ const makeDepartmentPages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = await cleanOfficialDocumentPages(allOfficialDocumentPages);
+  const officialDocumentPages = await cleanOfficialDocumentPages(
+    allOfficialDocumentPages,
+  );
 
   // Add all official document page links to department pages
   for (let page of officialDocumentPages) {
@@ -414,7 +418,9 @@ const makeDepartmentPages = async client => {
         )
         .concat(
           officialDocumentPages
-            .filter(d => d.department != null && d.department.id == department.id)
+            .filter(
+              d => d.department != null && d.department.id == department.id,
+            )
             .map(officialDocumentPage => ({
               path: `/${officialDocumentPage.slug}`,
               component: 'src/components/Pages/OfficialDocumentList',

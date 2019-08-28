@@ -19,57 +19,6 @@ import WorkInProgress from 'components/WorkInProgress';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
 
-const cleanDepartmentTopServiceLink = topService => {
-  const page =
-    topService.servicePage ||
-    topService.guidePage ||
-    topService.informationPage;
-
-  if (page) {
-    // If we have a topic let's make our URL from it
-    if (page.topics && page.topics.edges.length) {
-      const topic = page.topics.edges[0].node.topic;
-
-      if (
-        topic &&
-        topic.topiccollections &&
-        topic.topiccollections.edges.length
-      ) {
-        const tc = topic.topiccollections.edges[0].node.topiccollection;
-
-        return {
-          title: page.title,
-          url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
-          type: 'en',
-        };
-      }
-    }
-
-    // If we have a department let's make our URL from it
-    if (page.relatedDepartments && page.relatedDepartments.edges.length) {
-      const dept = page.relatedDepartments.edges[0].node.relatedDepartment;
-
-      return {
-        title: page.title,
-        url: `/${dept.slug}/${page.slug}`,
-        type: 'en',
-      };
-    }
-  }
-};
-
-const cleanDepartmentTopServices = topServicePages => {
-  if (!topServicePages || !topServicePages.edges) return null;
-
-  return topServicePages.edges
-    .map(({ node: topService }) => {
-      let cleaned = cleanDepartmentTopServiceLink(topService);
-
-      return cleaned;
-    })
-    .filter(x => typeof x !== 'undefined');
-};
-
 const Department = ({
   department: {
     title,
@@ -85,24 +34,22 @@ const Department = ({
   },
   intl,
 }) => {
-  const topBlargs = cleanDepartmentTopServices(topServices);
-
   const TopServicesRelatedContent = () =>
     // if we render both TopServices and Related, wrap them in a div
-    topBlargs.length > 0 && !!relatedLinks.length ? (
+    topServices.length > 0 && !!relatedLinks.length ? (
       <div className="coa-TopServicesRelatedContent">
         <TopServices
           title={intl.formatMessage(i18n.topServices)}
-          tiles={topBlargs}
+          tiles={topServices}
           locale={intl.locale}
           extraClasses="coa-TopServicesDepartment"
         />
         <RelatedContent />
       </div>
-    ) : topBlargs.length > 0 ? (
+    ) : topServices.length > 0 ? (
       <TopServices
         title={intl.formatMessage(i18n.topServices)}
-        tiles={topBlargs}
+        tiles={topServices}
         locale={intl.locale}
         extraClasses="coa-TopServicesDepartment"
       />

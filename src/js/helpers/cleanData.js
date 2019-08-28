@@ -283,22 +283,58 @@ export const cleanDepartmentDirectors = directors => {
   });
 };
 
-// export const cleanDepartmentTopServiceLink = topService => {
-//   let topServiceLink;
-//   if()
-// }
+export const cleanDepartmentTopServiceLink = (topService, langCode) => {
+  const page =
+    topService.servicePage ||
+    topService.guidePage ||
+    topService.informationPage;
 
-export const cleanDepartmentTopServices = topServicePages => {
-  if (!topServicePages || !topServicePages.edges) return null;
+  if (page) {
+    // If we have a topic let's make our URL from it
+    if (page.topics && page.topics.edges.length) {
+      const topic = page.topics.edges[0].node.topic;
 
-  return topServicePages.edges.map(({ node: topService }) => {
-    let cleaned = Object.assign({}, topService);
+      if (
+        topic &&
+        topic.topiccollections &&
+        topic.topiccollections.edges.length
+      ) {
+        const tc = topic.topiccollections.edges[0].node.topiccollection;
 
-    return cleaned;
-  });
+        return {
+          title: page.title,
+          url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
+          type: langCode,
+        };
+      }
+    }
+
+    // If we have a department let's make our URL from it
+    if (page.relatedDepartments && page.relatedDepartments.edges.length) {
+      const dept = page.relatedDepartments.edges[0].node.relatedDepartment;
+
+      return {
+        title: page.title,
+        url: `/${dept.slug}/${page.slug}`,
+        type: langCode,
+      };
+    }
+  }
 };
 
-export const cleanDepartments = allDepartments => {
+export const cleanDepartmentTopServices = (topServicePages, langCode) => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges
+    .map(({ node: topService }) => {
+      let cleaned = cleanDepartmentTopServiceLink(topService, langCode);
+
+      return cleaned;
+    })
+    .filter(x => typeof x !== 'undefined');
+};
+
+export const cleanDepartments = (allDepartments, langCode) => {
   if (!allDepartments || !allDepartments.edges) return null;
 
   return allDepartments.edges.map(({ node: department }) => {
@@ -310,9 +346,10 @@ export const cleanDepartments = allDepartments => {
     );
     department.relatedLinks = [];
     department.topServices = department.topServicePages;
-    // department.topServices = cleanDepartmentTopServices(
-    //   department.topServicePages,
-    // );
+    department.topServices = cleanDepartmentTopServices(
+      department.topServicePages,
+      langCode,
+    );
 
     return department;
   });
