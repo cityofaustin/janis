@@ -75,7 +75,7 @@ class GuideSidebar extends Component {
     let { contact, sections, currentSection } = this.props;
 
     return (
-      <div className="coa-GuidePage__sidebar sticky">
+      <div className="coa-GuideSidebar__container sticky">
         <div className="coa-GuideSidebar__section">
           {contact && (
             <GuideSidebarLink

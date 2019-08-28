@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.3.3",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "body-scroll-lock": "^2.6.1",

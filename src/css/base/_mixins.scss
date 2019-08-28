@@ -147,6 +147,8 @@
   @include mobile {
     background-color: $coa-color-green-light;
   }
+
+  Synchronize changes with src/js/helpers/reactMediaQueries.js
 **/
 @mixin mobile {
   @media (max-width: #{$coa-medium-screen - 1px}) {
