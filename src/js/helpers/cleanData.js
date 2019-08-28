@@ -304,7 +304,7 @@ export const cleanDepartmentTopServiceLink = (topService, langCode) => {
         return {
           title: page.title,
           url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
-          type: langCode,
+          type: !!langCode ? langCode : 'en',
         };
       }
     }
@@ -316,7 +316,7 @@ export const cleanDepartmentTopServiceLink = (topService, langCode) => {
       return {
         title: page.title,
         url: `/${dept.slug}/${page.slug}`,
-        type: langCode,
+        type: !!langCode ? langCode : 'en',
       };
     }
   }
