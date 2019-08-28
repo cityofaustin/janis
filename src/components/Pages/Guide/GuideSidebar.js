@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+
+import GuideSidebarMobile from 'components/Pages/Guide/GuideSidebarMobile';
 import classNames from 'classnames';
 import {hyphenate} from "./helpers";
+import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 
 class GuideSidebarLink extends Component {
   constructor(props) {
@@ -69,31 +72,46 @@ class GuideSidebarSection extends Component {
   }
 }
 
-
-class GuideSidebar extends Component {
-  render() {
-    let { contact, sections, currentSection } = this.props;
-
-    return (
-      <div className="coa-GuideSidebar__container sticky">
-        <div className="coa-GuideSidebar__section">
-          {contact && (
-            <GuideSidebarLink
-              title="Contact information"
-              anchorTag="Contact-information"
-              isHeading={true}
-              isCurrentSection={currentSection === "Contact-information"}
-            />
-          )}
-        </div>
-        {sections.map((section, index) => (
-          <GuideSidebarSection
-            section={section}
-            currentSection={currentSection}
-            key={index}
+function GuideSidebarDesktop({ contact, sections, currentSection }) {
+  return (
+    <div className="coa-GuideSidebar__container sticky">
+      <div className="coa-GuideSidebar__section">
+        {contact && (
+          <GuideSidebarLink
+            title="Contact information"
+            anchorTag="Contact-information"
+            isHeading={true}
+            isCurrentSection={currentSection === "Contact-information"}
           />
-        ))}
+        )}
       </div>
+      {sections.map((section, index) => (
+        <GuideSidebarSection
+          section={section}
+          currentSection={currentSection}
+          key={index}
+        />
+      ))}
+    </div>
+  )
+}
+
+function GuideSidebar({ contact, sections, currentSection }){
+  if (isMobileOrTablet()) {
+    return (
+      <GuideSidebarMobile
+        contact={contact}
+        sections={sections}
+        currentSection={currentSection}
+      />
+    )
+  } else {
+    return (
+      <GuideSidebarDesktop
+        contact={contact}
+        sections={sections}
+        currentSection={currentSection}
+      />
     )
   }
 }

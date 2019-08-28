@@ -4,7 +4,6 @@ import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import Stickyfill from 'stickyfilljs';
 import { find, sortBy } from 'lodash';
-import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
@@ -12,7 +11,7 @@ import GuideContactInformation from 'components/Pages/Guide/GuideContactInformat
 import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
 import GuideSidebar from 'components/Pages/Guide/GuideSidebar';
-import PsychoSidebar from 'components/Pages/Guide/PsychoSidebar';
+import GuideSidebarMobile from 'components/Pages/Guide/GuideSidebarMobile';
 
 class Guide extends Component {
   constructor(props) {
@@ -75,16 +74,10 @@ class Guide extends Component {
     // add listener for scroll events
     window.addEventListener('scroll', this.handleScroll);
 
-    window.addEventListener("resize", this.handleResize);
-
     // Implement sticky polyfill for browsers that don't natively allow {position: sticky}
     const node = ReactDOM.findDOMNode(this); // Prefer React.createRef() in v16.3.0+
     const stickyElements = node.querySelectorAll('.sticky');
     Stickyfill.add(stickyElements);
-  }
-
-  handleResize() {
-    console.log(`ist mobile o tablet? ${isMobileOrTablet()}`)
   }
 
   render() {
@@ -134,7 +127,6 @@ class Guide extends Component {
           <div className="coa-GuidePage__content-container">
             <div className="wrapper container-fluid">
               <div className="row">
-                <PsychoSidebar />
                 <GuideSidebar
                   contact={contact}
                   sections={sections}
