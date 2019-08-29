@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
+
 import {hyphenate} from "./helpers";
+import dickens from "./dickens";
 
 function GuideSidebarMobile({ contact, sections, currentSection }) {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -27,6 +29,10 @@ function GuideSidebarMobile({ contact, sections, currentSection }) {
       <div className={classNames("coa-GuideSidebar__mobile-menu-popup", {
         "coa-GuideSidebar__mobile-menu-popup-open": menuOpened
       })}>
+        <div className="coa-GuideSidebar__mobile-menu-background"/>
+        <div className="coa-GuideSidebar__mobile-menu-content">
+          {dickens}
+        </div>
       </div>
       <div className="coa-GuideSidebar__mobile-menu-button">
         <i className="material-icons">list</i>

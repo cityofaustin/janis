@@ -139,7 +139,7 @@ $sticky-guide-top: 25px;
   padding-top: 1rem;
 
   a {
-    color: #0049c7;
+    color: $coa-color-primary;
     text-decoration: none;
   }
 
@@ -287,11 +287,9 @@ $sticky-guide-top: 25px;
 .coa-GuideSidebar__mobile-menu-popup {
   width: 100vw;
   height: 100vh;
-  opacity: 0.5;
-  background-color: $coa-color-black;
-
   position: fixed;
   top: 100vh; // Initialize below the screen, only open up onClick
+  overflow-y: scroll;
 
   -webkit-transition: top .3s ease-in;
   -moz-transition: top .3s ease-in;
@@ -304,6 +302,18 @@ $sticky-guide-top: 25px;
   top: 0px;
 }
 
+.coa-GuideSidebar__mobile-menu-background {
+  opacity: 0.5;
+  background-color: $coa-color-black;
+  height: 33vh;
+}
+
+// When mobile-menu is open
 .frozen-body {
   overflow-y: hidden;
+}
+
+.coa-GuideSidebar__mobile-menu-content {
+  border-top: 5px solid $coa-color-primary;
+  background-color: $coa-color-white;
 }
