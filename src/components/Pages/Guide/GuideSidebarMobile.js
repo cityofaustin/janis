@@ -23,12 +23,12 @@ function GuideSidebarMobile({ contact, sections, currentSection }) {
   const arrowIcon = (menuOpened) ? "expand_more" : "expand_less";
 
   return (
-    <div className="coa-GuideSidebar__mobile-table-of-contents-container" onClick={toggleMenuOpened}>
-      {menuOpened && (
-        <div className="popup">
-        </div>
-      )}
-      <div className="coa-GuideSidebar__mobile-table-of-contents-button">
+    <div className="coa-GuideSidebar__mobile-menu-container" onClick={toggleMenuOpened}>
+      <div className={classNames("coa-GuideSidebar__mobile-menu-popup", {
+        "coa-GuideSidebar__mobile-menu-popup-open": menuOpened
+      })}>
+      </div>
+      <div className="coa-GuideSidebar__mobile-menu-button">
         <i className="material-icons">list</i>
         <span>Table of Contents</span>
         <i className="material-icons">{arrowIcon}</i>

@@ -253,7 +253,7 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSidebar__mobile-table-of-contents-container {
+.coa-GuideSidebar__mobile-menu-container {
   position: fixed;
   z-index: 1; // Allow GuideSidebarMobile to be stacked above footer
   bottom: 0;
@@ -261,8 +261,7 @@ $sticky-guide-top: 25px;
   width: 100%;
 }
 
-.coa-GuideSidebar__mobile-table-of-contents-button {
-  z-index: 999;
+.coa-GuideSidebar__mobile-menu-button {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -285,18 +284,26 @@ $sticky-guide-top: 25px;
   }
 }
 
-.popup {
+.coa-GuideSidebar__mobile-menu-popup {
   width: 100vw;
   height: 100vh;
-  opacity: 0.8;
-  background-color: $coa-color-grey;
+  opacity: 0.5;
+  background-color: $coa-color-black;
 
   position: fixed;
-  top: 0px;
-  z-index: 998;
+  top: 100vh; // Initialize below the screen, only open up onClick
+
+  -webkit-transition: top .3s ease-in;
+  -moz-transition: top .3s ease-in;
+  -o-transition: top .3s ease-in;
+  -ms-transition: top .3s ease-in;
+  transition: top .3s ease-in;
 }
 
-// But I need this on body element period
+.coa-GuideSidebar__mobile-menu-popup-open {
+  top: 0px;
+}
+
 .frozen-body {
   overflow-y: hidden;
 }
