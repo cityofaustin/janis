@@ -96,10 +96,11 @@ function GuideSidebarDesktop({ contact, sections, currentSection }) {
   )
 }
 
-function GuideSidebar({ contact, sections, currentSection }){
+function GuideSidebar({ title, contact, sections, currentSection }){
   if (isMobileOrTablet()) {
     return (
       <GuideSidebarMobile
+        title={title}
         contact={contact}
         sections={sections}
         currentSection={currentSection}

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import {hyphenate} from "./helpers";
 import dickens from "./dickens";
 
-function GuideSidebarMobile({ contact, sections, currentSection }) {
+function GuideSidebarMobile({ title, contact, sections, currentSection }) {
   const [menuOpened, setMenuOpened] = useState(false);
 
   // Freeze the body of the page when mobile menu is opened.
@@ -30,13 +30,19 @@ function GuideSidebarMobile({ contact, sections, currentSection }) {
         "coa-GuideSidebar__mobile-menu-popup-open": menuOpened
       })}>
         <div className="coa-GuideSidebar__mobile-menu-background"/>
-        <div className="coa-GuideSidebar__mobile-menu-content">
-          {dickens}
+        <div className="coa-GuideSidebar__mobile-menu-content-container">
+          <div className="coa-GuideSidebar__mobile-menu-content-title">
+            <h2>Table of contents</h2>
+            <h3>{title}</h3>
+          </div>
+          <div>
+            {dickens}
+          </div>
         </div>
       </div>
       <div className="coa-GuideSidebar__mobile-menu-button">
         <i className="material-icons">list</i>
-        <span>Table of Contents</span>
+        <span>Table of contents</span>
         <i className="material-icons">{arrowIcon}</i>
       </div>
     </div>

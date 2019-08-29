@@ -159,19 +159,19 @@ $sticky-guide-top: 25px;
 }
 
 .coa-GuideSidebar__link {
-  color: #212529;
+  color: $coa-color-cod-gray;
   font-size: 1.7rem;
   line-height: 1em;
   text-decoration: none;
   padding-left: $coa-spacing-large;
 
   &:visited {
-    color: #212529;
+    color: $coa-color-cod-gray;
     text-decoration: none;
   }
 
   &:hover {
-    color: #212529;
+    color: $coa-color-cod-gray;
     cursor: pointer;
     @extend .coa-GuideSidebar__current-section;
   }
@@ -286,7 +286,7 @@ $sticky-guide-top: 25px;
 
 .coa-GuideSidebar__mobile-menu-popup {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 100vh; // Initialize below the screen, only open up onClick
   overflow-y: scroll;
@@ -313,7 +313,25 @@ $sticky-guide-top: 25px;
   overflow-y: hidden;
 }
 
-.coa-GuideSidebar__mobile-menu-content {
+.coa-GuideSidebar__mobile-menu-content-container {
   border-top: 5px solid $coa-color-primary;
   background-color: $coa-color-white;
+  min-height: 67vh;
+  padding-bottom: 10rem;
+}
+
+.coa-GuideSidebar__mobile-menu-content-title {
+  text-align: center;
+  color: $coa-color-cod-gray;
+
+  h2 {
+    padding-bottom: $coa-spacing-md-small;
+    padding-top: $coa-spacing-md-small;
+    margin-bottom: 0px;
+  }
+  h3 {
+    font-size: 1.7rem;
+    font-weight: normal;
+    line-height: 1em;
+  }
 }

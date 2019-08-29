@@ -128,6 +128,7 @@ class Guide extends Component {
             <div className="wrapper container-fluid">
               <div className="row">
                 <GuideSidebar
+                  title={title}
                   contact={contact}
                   sections={sections}
                   currentSection={currentSection}
