@@ -25,3 +25,13 @@ svg {
     width: $coa-font-size-md-small - 0.1rem;
   }
 }
+
+// Allow elements rendered in main to stack above footer, if necessary.
+// For example, the mobile menu on the GuidePage
+main {
+  z-index: 1;
+}
+
+footer {
+  z-index: 0;
+}

@@ -146,7 +146,7 @@ $sticky-guide-top: 25px;
   i {
     padding-left: 1rem;
     font-size: 1.5rem;
-    // position: relative; // Was overlapped on top of mobile menu popup?
+    position: relative;
     top: 3px;
   }
 }
@@ -255,6 +255,7 @@ $sticky-guide-top: 25px;
 
 .coa-GuideSidebar__mobile-table-of-contents-container {
   position: fixed;
+  z-index: 1; // Allow GuideSidebarMobile to be stacked above footer
   bottom: 0;
   left: 0;
   width: 100%;
@@ -271,6 +272,7 @@ $sticky-guide-top: 25px;
   margin-right: $coa-spacing-medium; // margin-right must be set in child of position: fixed element
   margin-left: $coa-spacing-medium;
   border-radius: $coa-button-border-radius;
+  border: 2px solid #dddfe1;
 
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-small;
