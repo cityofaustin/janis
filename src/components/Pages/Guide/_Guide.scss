@@ -146,7 +146,7 @@ $sticky-guide-top: 25px;
   i {
     padding-left: 1rem;
     font-size: 1.5rem;
-    position: relative;
+    // position: relative; // Was overlapped on top of mobile menu popup?
     top: 3px;
   }
 }
@@ -251,4 +251,50 @@ $sticky-guide-top: 25px;
   &[aria-expanded='true'] {
     border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
   }
+}
+
+.coa-GuideSidebar__mobile-table-of-contents-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.coa-GuideSidebar__mobile-table-of-contents-button {
+  z-index: 999;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  padding: $coa-spacing-md-small;
+  margin-bottom: $coa-spacing-medium;
+  margin-right: $coa-spacing-medium; // margin-right must be set in child of position: fixed element
+  margin-left: $coa-spacing-medium;
+  border-radius: $coa-button-border-radius;
+
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  color: $coa-color-white;
+  background: $coa-color-primary;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.popup {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.8;
+  background-color: $coa-color-grey;
+
+  position: fixed;
+  top: 0px;
+  z-index: 998;
+}
+
+// But I need this on body element period
+.frozen-body {
+  overflow-y: hidden;
 }

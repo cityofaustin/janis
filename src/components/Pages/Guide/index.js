@@ -17,7 +17,7 @@ class Guide extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSection: null
+      currentSection: null,
     };
     this.handleScroll = this.handleScroll.bind(this);
     this.registerSectionLocation = this.registerSectionLocation.bind(this);
