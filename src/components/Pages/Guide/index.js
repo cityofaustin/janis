@@ -10,8 +10,7 @@ import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
 import GuideContactInformation from 'components/Pages/Guide/GuideContactInformation';
 import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
-import GuideSidebar from 'components/Pages/Guide/GuideSidebar';
-import GuideSidebarMobile from 'components/Pages/Guide/GuideSidebarMobile';
+import GuideMenuSwitch from 'components/Pages/Guide/GuideMenuSwitch';
 
 class Guide extends Component {
   constructor(props) {
@@ -75,6 +74,7 @@ class Guide extends Component {
     window.addEventListener('scroll', this.handleScroll);
 
     // Implement sticky polyfill for browsers that don't natively allow {position: sticky}
+    // {position: sticky} will be used by GuideMenuSwitch child.
     const node = ReactDOM.findDOMNode(this); // Prefer React.createRef() in v16.3.0+
     const stickyElements = node.querySelectorAll('.sticky');
     Stickyfill.add(stickyElements);
@@ -127,7 +127,7 @@ class Guide extends Component {
           <div className="coa-GuidePage__content-container">
             <div className="wrapper container-fluid">
               <div className="row">
-                <GuideSidebar
+                <GuideMenuSwitch
                   title={title}
                   contact={contact}
                   sections={sections}

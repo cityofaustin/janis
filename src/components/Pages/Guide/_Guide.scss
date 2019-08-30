@@ -34,19 +34,8 @@ $sticky-guide-top: 25px;
   @extend .coa-Page__all-of-the-content;
 }
 
-.coa-GuideSidebar__container {
-  @extend .col-xs-12;
+.coa-GuideMenu__desktop-container {
   @extend .col-lg-4;
-
-  @include mobile-and-tablet {
-    background-color: $coa-color-green-light;
-    order: 2;
-    -webkit-order: 2;
-  }
-  @include desktop {
-    order: 1;
-    -webkit-order: 1;
-  }
 
   // Help with sticky positioning
   height: 100%;
@@ -59,15 +48,6 @@ $sticky-guide-top: 25px;
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
   @extend .col-lg-8;
-
-  @include mobile-and-tablet {
-    order: 1;
-    -webkit-order: 1;
-  }
-  @include desktop {
-    order: 2;
-    -webkit-order: 2;
-  }
 
   margin-top: $sticky-guide-top;
 
@@ -151,14 +131,14 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSidebar__section {
+.coa-GuideMenu__section {
   border-top: 1.5px solid $coa-color-gray-lighter;
   &:last-child {
     border-bottom: 1.5px solid $coa-color-gray-lighter;
   }
 }
 
-.coa-GuideSidebar__link {
+.coa-GuideMenu__link {
   color: $coa-color-cod-gray;
   font-size: 1.7rem;
   line-height: 1em;
@@ -173,17 +153,17 @@ $sticky-guide-top: 25px;
   &:hover {
     color: $coa-color-cod-gray;
     cursor: pointer;
-    @extend .coa-GuideSidebar__current-section;
+    @extend .coa-GuideMenu__current-section;
   }
 }
 
-.coa-GuideSidebar__heading {
+.coa-GuideMenu__heading {
   padding-bottom: $coa-spacing-md-small;
   padding-top: $coa-spacing-md-small;
   font-weight: bolder;
 }
 
-.coa-GuideSidebar__subheading {
+.coa-GuideMenu__subheading {
   padding-bottom: $coa-spacing-xsmall;
   padding-top: $coa-spacing-xsmall;
   &:last-child {
@@ -191,77 +171,33 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSidebar__current-section {
+.coa-GuideMenu__current-section {
   background-color: #D9E8F6;
 
   &:before {
+    // Material icon should be in margin on desktop
+    // But inline with left on mobile
+    @include desktop {
+      position: absolute;
+    }
     font-family: "Material Icons";
     font-weight: normal;
     content: 'arrow_forward';
     color: $coa-color-primary;
     left: 20px;
-    position: absolute;
     font-size: larger;
   }
 }
 
-.coa-GuideSidebar__mobile-accordian-container {
-  @extend .coa-Page__all-of-the-content;
-
+.coa-GuideMenu__mobile-container {
   position: fixed;
+  z-index: 1; // Allow GuideMenuMobile to be stacked above footer
   bottom: 0;
   left: 0;
   width: 100%;
 }
 
-.coa-GuideSidebar__mobile-accordian-item {
-  width: 100%;
-  margin-bottom: $coa-spacing-medium;
-  margin-right: $coa-spacing-medium; // margin-right must be set in child of position: fixed element
-  margin-left: $coa-spacing-medium;
-}
-
-.coa-GuideSidebar__mobile-accordian-panel {
-  border: 4px solid $coa-color-grey;
-  padding: $coa-spacing-medium;
-  background-color: $coa-color-white;
-}
-
-.coa-GuideSidebar__mobile-accordian-heading {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.coa-GuideSidebar__mobile-accordian-button {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-
-  border-radius: $coa-button-border-radius;
-  padding: $coa-spacing-medium;
-
-  font-weight: $coa-font-medium;
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
-  color: $coa-color-white;
-  background: $coa-color-primary;
-
-  &[aria-expanded='true'] {
-    border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
-  }
-}
-
-.coa-GuideSidebar__mobile-menu-container {
-  position: fixed;
-  z-index: 1; // Allow GuideSidebarMobile to be stacked above footer
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-.coa-GuideSidebar__mobile-menu-button {
+.coa-GuideMenu__mobile-button {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -284,7 +220,7 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSidebar__mobile-menu-popup {
+.coa-GuideMenu__mobile-popup {
   width: 100vw;
   height: 100%;
   position: fixed;
@@ -298,29 +234,29 @@ $sticky-guide-top: 25px;
   transition: top .3s ease-in;
 }
 
-.coa-GuideSidebar__mobile-menu-popup-open {
+.coa-GuideMenu__mobile-popup-open {
   top: 0px;
 }
 
-.coa-GuideSidebar__mobile-menu-background {
+.coa-GuideMenu__mobile-background {
   opacity: 0.5;
   background-color: $coa-color-black;
   height: 33vh;
 }
 
-// When mobile-menu is open
+// When mobile is open
 .frozen-body {
   overflow-y: hidden;
 }
 
-.coa-GuideSidebar__mobile-menu-content-container {
+.coa-GuideMenu__mobile-content-container {
   border-top: 5px solid $coa-color-primary;
   background-color: $coa-color-white;
   min-height: 67vh;
   padding-bottom: 10rem;
 }
 
-.coa-GuideSidebar__mobile-menu-content-title {
+.coa-GuideMenu__mobile-content-title {
   text-align: center;
   color: $coa-color-cod-gray;
 
@@ -333,5 +269,15 @@ $sticky-guide-top: 25px;
     font-size: 1.7rem;
     font-weight: normal;
     line-height: 1em;
+  }
+}
+
+.coa-GuideMenu__mobile-content {
+  margin-right: 2rem;
+  margin-left: 2rem;
+
+  @include tablet {
+    max-width: 550px;
+    margin: auto;
   }
 }
