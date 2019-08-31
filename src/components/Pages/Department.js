@@ -83,20 +83,12 @@ const Department = ({
       </Head>
       {image && (
         <PageBanner
-          extraClasses="coa-PageBannerCoverDepartment"
-          imagesPath={`${process.env.CMS_MEDIA}/images`}
-          imageFilename={path.basename(
-            image.filename,
-            path.extname(image.filename),
-          )}
-          imageExtension={path.extname(image.filename).substring(1)}
-          imageTitle={image.title}
+          image={image}
           headerText={title}
+          mobileOptimized={true}
         />
       )}
-
       <TopServicesRelatedContent />
-
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">

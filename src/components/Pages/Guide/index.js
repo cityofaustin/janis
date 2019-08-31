@@ -3,12 +3,13 @@ import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import Stickyfill from 'stickyfilljs';
 import { findIndex, sortBy } from 'lodash';
+import path from 'path';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
 import GuideContactInformation from 'components/Pages/Guide/GuideContactInformation';
 import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
-import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
+import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
@@ -128,52 +129,48 @@ function Guide(props) {
         department={department}
         relatedDepartments={relatedDepartments}
       />
-      <div>
+      {image && <PageBanner image={image}/>}
+      <div className="coa-GuidePage-header--container">
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
+      <div className="coa-GuidePage__content-container">
         <div className="wrapper container-fluid">
-          {image && <GuideBannerImage image={image} />}
-        </div>
-        <div className="coa-GuidePage-header--container">
-          <h1>{title}</h1>
-          <p>{description}</p>
-        </div>
-        <div className="coa-GuidePage__content-container">
-          <div className="wrapper container-fluid">
-            <div className="row">
-              {isMobileOrTablet ? (
-                <GuideMenuMobile
-                  title={title}
+          <div className="row">
+            {isMobileOrTablet ? (
+              <GuideMenuMobile
+                title={title}
+                contact={contact}
+                sections={sections}
+                currentSection={currentSection}
+              />
+            ) : (
+              <div className="coa-GuideMenu__desktop-container sticky">
+                <GuideMenu
                   contact={contact}
                   sections={sections}
                   currentSection={currentSection}
                 />
-              ) : (
-                <div className="coa-GuideMenu__desktop-container sticky">
-                  <GuideMenu
-                    contact={contact}
-                    sections={sections}
-                    currentSection={currentSection}
-                  />
-                </div>
-              )}
-              <div className="coa-GuidePage__main-content">
-                <GuideSectionWrapper
-                  anchorTag="Contact-information"
+              </div>
+            )}
+            <div className="coa-GuidePage__main-content">
+              <GuideSectionWrapper
+                anchorTag="Contact-information"
+                updateSectionLocation={updateSectionLocation}
+                isMobileOrTablet={isMobileOrTablet}
+                resizeCount={resizeCount}
+              >
+                {contact && <GuideContactInformation contact={contact}/>}
+              </GuideSectionWrapper>
+              {sections.map((section, index) => (
+                <GuideSectionList
+                  key={index}
+                  section={section}
                   updateSectionLocation={updateSectionLocation}
                   isMobileOrTablet={isMobileOrTablet}
                   resizeCount={resizeCount}
-                >
-                  {contact && <GuideContactInformation contact={contact}/>}
-                </GuideSectionWrapper>
-                {sections.map((section, index) => (
-                  <GuideSectionList
-                    key={index}
-                    section={section}
-                    updateSectionLocation={updateSectionLocation}
-                    isMobileOrTablet={isMobileOrTablet}
-                    resizeCount={resizeCount}
-                  />
-                ))}
-              </div>
+                />
+              ))}
             </div>
           </div>
         </div>
