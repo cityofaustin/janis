@@ -23,13 +23,6 @@ $sticky-guide-top: 25px;
   }
 }
 
-// Keep in its own class for polyfill's "querySelectorAll('.sticky')" to work
-// Must be called after .coa-GuidePage__nav-sidebar in order overwrite .col-x-x position properties
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
 .coa-GuidePage__content-container {
   @extend .coa-Page__all-of-the-content;
 }
