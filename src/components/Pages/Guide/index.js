@@ -1,46 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useReducer, useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import ReactDOM from 'react-dom';
 import Stickyfill from 'stickyfilljs';
-import { find, sortBy } from 'lodash';
+import { findIndex, sortBy } from 'lodash';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
 import GuideContactInformation from 'components/Pages/Guide/GuideContactInformation';
 import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
 import GuideBannerImage from 'components/Pages/Guide/GuideBannerImage';
-import GuideMenuSwitch from 'components/Pages/Guide/GuideMenuSwitch';
+import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
+import GuideMenu from 'components/Pages/Guide/GuideMenu';
+import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
+import { printSections } from './helpers';
 
-class Guide extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentSection: null,
-    };
-    this.handleScroll = this.handleScroll.bind(this);
-    this.registerSectionLocation = this.registerSectionLocation.bind(this);
-    this.updateSectionLocation = this.updateSectionLocation.bind(this);
-    this.sectionLocations = [];
-  }
-
-  // Keep track of the offsetTop of each GuideSection
-  registerSectionLocation(offsetTop, anchorTag) {
-    this.sectionLocations.push({
-      offsetTop,
-      anchorTag
-    })
-    this.sectionLocations = sortBy(this.sectionLocations, 'fullOffsetTop');
-  }
+function Guide(props) {
+  const [currentSection, setCurrentSection] = useState(null);
+  const [resizeCount, setResizeCount] = useState(0);
+  const [sectionLocations, dispatchSectionLocations] = useReducer((sectionLocations, {action, payload})=>{
+    switch (action) {
+      case "update":
+        const sectionIndex = findIndex(sectionLocations, {anchorTag: payload.anchorTag});
+        if (sectionIndex === -1) {
+          // Add a new value, then re-sort array by "offsetTop"
+          return sortBy([...sectionLocations, payload], "offsetTop");
+        } else {
+          // update "offsetTop" for an existing sectionLocation
+          return sectionLocations.map((sectionLocation, i)=>{
+            return (i === sectionIndex) ? payload : sectionLocation;
+          });
+        }
+      default:
+        return sectionLocations
+    }
+  },[]);
+  const isMobileOrTablet = isMobileOrTabletQuery();
+  const node = useRef();
 
   // Update offsetTop of each GuideSection if the window resizes
-  updateSectionLocation(offsetTop, anchorTag) {
-    const section = find(this.sectionLocations, {anchorTag})
-    if (!section) {
-      this.registerSectionLocation(offsetTop, anchorTag)
-    } else {
-      section.offsetTop = offsetTop;
-    }
+  function updateSectionLocation(offsetTop, anchorTag) {
+    return dispatchSectionLocations({
+      action: "update",
+      payload: { offsetTop, anchorTag }
+    })
   }
 
   /**
@@ -50,10 +52,11 @@ class Guide extends Component {
     That's why we i-- at the end.
     We want the GuideSection right before the first GuideSection that is past the window's position.
   **/
-  handleScroll(e) {
+  function handleScroll(){
+    const thing = sectionLocations[0].offsetTop
     let i = 0;
-    while (i < this.sectionLocations.length) {
-      if (window.scrollY < (this.sectionLocations[i].offsetTop - 1)) {
+    while (i < sectionLocations.length) {
+      if (window.scrollY < (sectionLocations[i].offsetTop - 1)) {
         break;
       } else {
         i++
@@ -61,101 +64,122 @@ class Guide extends Component {
     }
     i--;
 
-    const currentSection = this.sectionLocations[i];
-    if (currentSection) {
-      this.setState({currentSection: currentSection.anchorTag})
+    const nextCurrentSection = sectionLocations[i];
+    if (nextCurrentSection) {
+      setCurrentSection(nextCurrentSection.anchorTag)
     } else {
-      this.setState({currentSection: null})
+      setCurrentSection(null)
     }
   }
+  useEffect(()=>{
+    // update "scroll" listener when sectionLocations change
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [sectionLocations])
 
-  componentDidMount(){
-    // add listener for scroll events
-    window.addEventListener('scroll', this.handleScroll);
-
-    // Implement sticky polyfill for browsers that don't natively allow {position: sticky}
-    // {position: sticky} will be used by GuideMenuSwitch child.
-    const node = ReactDOM.findDOMNode(this); // Prefer React.createRef() in v16.3.0+
-    const stickyElements = node.querySelectorAll('.sticky');
+  // Implement sticky polyfill for browsers that don't natively allow "position: sticky"
+  // "position: sticky" will be used by GuideMenuSwitch child.
+  useEffect(()=>{
+    const stickyElements = node.current.querySelectorAll('.sticky');
     Stickyfill.add(stickyElements);
+  },[])
+
+  // Alert state when the window resizes.
+  // This will tell the GuideSectionWrapper to update its sectionLocation
+  // resizeCount is an arbitrary number. It just needs to change so that children know when to re-initiate a useEffect()
+  useEffect(()=>{
+    window.addEventListener("resize", ()=>setResizeCount(resizeCount + 1));
+  },[])
+
+  // Organize variables that will be used in rendering
+  let {
+    id,
+    title,
+    description,
+    slug,
+    topic,
+    topics,
+    theme,
+    department,
+    relatedDepartments,
+    sections,
+    image,
+    contacts,
+  } = props.guidePage;
+  let {intl} = props;
+
+  let contact = null;
+  if (contacts && contacts.edges && contacts.edges.length) {
+    contact = contacts.edges[0].node.contact;
   }
 
-  render() {
-    let {
-      id,
-      title,
-      description,
-      slug,
-      topic,
-      topics,
-      theme,
-      department,
-      relatedDepartments,
-      sections,
-      image,
-      contacts,
-    } = this.props.guidePage;
-    let {intl} = this.props;
-    let { currentSection } = this.state;
-
-    let contact = null;
-    if (contacts && contacts.edges && contacts.edges.length) {
-      contact = contacts.edges[0].node.contact;
-    }
-
-    return (
+  return (
+    <div ref={node}>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <ContextualNav
+        topic={topic}
+        topics={topics}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+        department={department}
+        relatedDepartments={relatedDepartments}
+      />
       <div>
-        <Head>
-          <title>{title}</title>
-        </Head>
-        <ContextualNav
-          topic={topic}
-          topics={topics}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
-        />
-        <div>
+        <div className="wrapper container-fluid">
+          {image && <GuideBannerImage image={image} />}
+        </div>
+        <div className="coa-GuidePage-header--container">
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </div>
+        <div className="coa-GuidePage__content-container">
           <div className="wrapper container-fluid">
-            {image && <GuideBannerImage image={image} />}
-          </div>
-          <div className="coa-GuidePage-header--container">
-            <h1>{title}</h1>
-            <p>{description}</p>
-          </div>
-          <div className="coa-GuidePage__content-container">
-            <div className="wrapper container-fluid">
-              <div className="row">
-                <GuideMenuSwitch
+            <div className="row">
+              {isMobileOrTablet ? (
+                <GuideMenuMobile
                   title={title}
                   contact={contact}
                   sections={sections}
                   currentSection={currentSection}
                 />
-                <div className="coa-GuidePage__main-content">
-                  <GuideSectionWrapper
-                    anchorTag="Contact-information"
-                    registerSectionLocation={this.registerSectionLocation}
-                    updateSectionLocation={this.updateSectionLocation}
-                  >
-                    {contact && <GuideContactInformation contact={contact}/>}
-                  </GuideSectionWrapper>
-                  {sections.map((section, index) => (
-                    <GuideSectionList
-                      section={section}
-                      registerSectionLocation={this.registerSectionLocation}
-                      updateSectionLocation={this.updateSectionLocation}
-                    />
-                  ))}
+              ) : (
+                <div className="coa-GuideMenu__desktop-container sticky">
+                  <GuideMenu
+                    contact={contact}
+                    sections={sections}
+                    currentSection={currentSection}
+                  />
                 </div>
+              )}
+              <div className="coa-GuidePage__main-content">
+                <GuideSectionWrapper
+                  anchorTag="Contact-information"
+                  updateSectionLocation={updateSectionLocation}
+                  isMobileOrTablet={isMobileOrTablet}
+                  resizeCount={resizeCount}
+                >
+                  {contact && <GuideContactInformation contact={contact}/>}
+                </GuideSectionWrapper>
+                {sections.map((section, index) => (
+                  <GuideSectionList
+                    key={index}
+                    section={section}
+                    updateSectionLocation={updateSectionLocation}
+                    isMobileOrTablet={isMobileOrTablet}
+                    resizeCount={resizeCount}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default withRouteData(injectIntl(Guide));

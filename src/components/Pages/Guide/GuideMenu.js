@@ -49,6 +49,7 @@ function GuideMenuSection({ section, currentSection }) {
       />
       {subHeadings.map((subHeading, index) => (
         <GuideMenuLink
+          key={index}
           title={subHeading.title}
           anchorTag={subHeading.anchorTag}
           isHeading={false}
@@ -74,9 +75,9 @@ function GuideMenu({ contact, sections, currentSection }) {
       </div>
       {sections.map((section, index) => (
         <GuideMenuSection
+          key={index}
           section={section}
           currentSection={currentSection}
-          key={index}
         />
       ))}
     </div>

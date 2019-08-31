@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
@@ -9,21 +9,20 @@ function GuideMenuMobile({ title, contact, sections, currentSection }) {
 
   // Freeze the body of the page when mobile menu is opened.
   // Unfreeze the body of the page when mobile menu is closed.
-  const updateBodyStyling = () => {
+  useEffect(()=>{
     if (menuOpened) {
       window.document.body.classList.add("frozen-body");
     } else {
       window.document.body.classList.remove("frozen-body");
     }
-  }
-  useMemo(updateBodyStyling, [menuOpened])
+  },[menuOpened])
 
   // Close menu when user pressed "back" button on browser
   useEffect(()=>{
     window.onpopstate = function(event) {
       if (menuOpened) setMenuOpened(false)
     };
-  })
+  },[menuOpened])
 
   function toggleMenuOpened() {
     setMenuOpened(!menuOpened)

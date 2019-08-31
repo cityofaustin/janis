@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 /**
   Wrapper to create an id for the GuideSidebar's anchorTag to link to.
@@ -6,30 +6,30 @@ import React, { Component } from 'react';
   This ref contains information about the rendered component's position.
   We pass the ref's offsetTop to the parent so that the sidebar can know which section is being looked at (based on scrolling behavior).
 **/
-export default class GuideSectionWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.node = React.createRef();
-    this.handleResize = this.handleResize.bind(this);
-  }
+function GuideSectionWrapper(props) {
+  const node = useRef();
 
-  handleResize() {
-    this.props.updateSectionLocation(this.node.current.offsetTop, this.props.anchorTag)
-  }
+  const {
+    anchorTag,
+    updateSectionLocation,
+    isMobileOrTablet,
+    resizeCount,
+    children
+  } = props;
 
-  componentDidMount() {
-    this.props.registerSectionLocation(this.node.current.offsetTop, this.props.anchorTag);
-    window.addEventListener("resize", this.handleResize);
-  }
+  // updateSectionLocation if the window resized or Mobile status changed
+  useEffect(()=>{
+    updateSectionLocation(node.current.offsetTop, anchorTag);
+  }, [isMobileOrTablet, resizeCount])
 
-  render() {
-    return (
-      <div
-        id={this.props.anchorTag}
-        ref={this.node}
-      >
-        {this.props.children}
-      </div>
-    )
-  }
+  return (
+    <div
+      id={anchorTag}
+      ref={node}
+    >
+      {children}
+    </div>
+  )
 }
+
+export default GuideSectionWrapper;

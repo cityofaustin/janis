@@ -2,10 +2,12 @@ import React from 'react';
 
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
-import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
+import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
 
 function GuideMenuSwitch({ title, contact, sections, currentSection }){
-  if (isMobileOrTablet()) {
+  const isMobileOrTablet = isMobileOrTabletQuery();
+
+  if (isMobileOrTablet) {
     return (
       <GuideMenuMobile
         title={title}

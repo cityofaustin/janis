@@ -5,7 +5,7 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import Steps from 'components/Steps';
 import {hyphenate} from "./helpers";
 
-const GetUrlFromTopicsOrDepartments = ({ topics, departments, slug }) => {
+function GetUrlFromTopicsOrDepartments({ topics, departments, slug }){
   // Just use the first topic if we've got one
   if (topics.length) {
     const topic = topics[0].node.topic;
@@ -29,12 +29,12 @@ const GetUrlFromTopicsOrDepartments = ({ topics, departments, slug }) => {
   return '';
 };
 
-const GuideSection = ({
+function GuideSection({
   page,
   pageNumber,
   numberOfPages,
   sectionHeading,
-}) => {
+}) {
   const pageData = page.informationPage || page.servicePage;
   const title = pageData.title;
   const description = (page.informationPage) ? pageData.description : pageData.shortDescription;
@@ -71,36 +71,40 @@ const GuideSection = ({
   );
 };
 
-class GuideSectionList extends Component {
-  render() {
-    let { section, registerSectionLocation, updateSectionLocation } = this.props;
-
-    return (
-      <React.Fragment>
+function GuideSectionList({
+  section,
+  updateSectionLocation,
+  isMobileOrTablet,
+  resizeCount,
+}) {
+  return (
+    <React.Fragment>
+      <GuideSectionWrapper
+        anchorTag={hyphenate(section.heading)}
+        updateSectionLocation={updateSectionLocation}
+        isMobileOrTablet={isMobileOrTablet}
+        resizeCount={resizeCount}
+      >
+        <h1>{section.heading}</h1>
+      </GuideSectionWrapper>
+      {section.pages.map((page, index) => (
         <GuideSectionWrapper
-          anchorTag={hyphenate(section.heading)}
-          registerSectionLocation={registerSectionLocation}
+          key={index}
+          anchorTag={`${hyphenate(section.heading)}-${index+1}`}
           updateSectionLocation={updateSectionLocation}
+          isMobileOrTablet={isMobileOrTablet}
+          resizeCount={resizeCount}
         >
-          <h1>{section.heading}</h1>
+          <GuideSection
+            page={page}
+            pageNumber={index + 1}
+            numberOfPages={section.pages.length}
+            sectionHeading={section.heading}
+          />
         </GuideSectionWrapper>
-        {section.pages.map((page, index) => (
-          <GuideSectionWrapper
-            anchorTag={`${hyphenate(section.heading)}-${index+1}`}
-            registerSectionLocation={registerSectionLocation}
-            updateSectionLocation={updateSectionLocation}
-          >
-            <GuideSection
-              page={page}
-              pageNumber={index + 1}
-              numberOfPages={section.pages.length}
-              sectionHeading={section.heading}
-            />
-          </GuideSectionWrapper>
-        ))}
-      </React.Fragment>
-    )
-  }
+      ))}
+    </React.Fragment>
+  )
 };
 
 export default GuideSectionList;
