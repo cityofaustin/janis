@@ -130,9 +130,9 @@ function Guide(props) {
         relatedDepartments={relatedDepartments}
       />
       {image && <PageBanner image={image}/>}
-      <div className="coa-GuidePage-header--container">
+      <div className="coa-GuidePage-header">
         <h1>{title}</h1>
-        <p>{description}</p>
+        {description && <p>{description}</p>}
       </div>
       <div className="coa-GuidePage__content-container">
         <div className="wrapper container-fluid">

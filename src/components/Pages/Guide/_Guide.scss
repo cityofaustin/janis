@@ -1,17 +1,13 @@
 $sticky-guide-top: 25px;
 
-.coa-GuidePage-header--container {
-  width: 57rem;
+.coa-GuidePage-header {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5rem;
-
-  h1 {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    text-align: center;
-    font-size: 40px;
-  }
+  text-align: center;
+  font-size: 40px;
 }
 
 .coa-GuidePage__content-container {
@@ -47,7 +43,7 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuidePage__contact-block {
+.coa-GuidePage__contact-container {
   margin-top: 3rem;
   margin-left: 0rem;
   margin-right: 0rem;
@@ -55,26 +51,56 @@ $sticky-guide-top: 25px;
   border: 2px solid #dddfe1;
 }
 
-.coa-GuidePage__contact-block-info {
-  border-left: 2px solid #dddfe1;
+/**
+  TODO: resolve issues with inherited styles
+  @extend col-xs-12 is not found by this stylesheet.
+  But it can be used inline within js.
+  This means that col-xs-12 is coming from some design system that isn't imported with our stylesheets.
+  This same design system also modifies col-x-x classes in unhelpful ways.
+  For example, col-md-6 has hardcoded left and right padding that was added by this design system.
+  We should get rid of uswds or whatever is causing these issues.
+**/
+.coa-GuidePage__contact-block {
+  padding-left: 0px; // overwrite col-x-x padding style from inherited design system
+  padding-right: 0px;
+  flex-grow: 1;
+
+  @include mobile {
+    &:not(:last-child) {
+      border-bottom: 2px solid #dddfe1;
+    }
+  }
+  @include tablet-and-desktop {
+    &:not(:last-child) {
+      border-right: 2px solid #dddfe1;
+    }
+  }
 }
 
-.coa-GuidePage__contact-block-email {
-  border-top: 2px solid #dddfe1;
-  margin-left: -1rem;
-  margin-right: -1rem;
+.coa-GuidePage__contact-info {
+  display: flex;
+  flex-direction: column;
+
+  .coa-ContactItem {
+    padding-top: 0px; //Undo styling to help spacing on guide page
+  }
+}
+
+.coa-GuidePage__contact-item {
   padding-left: 2rem;
-  padding-bottom: 2rem;
-}
-
-.coa-GuidePage__contact-block-phone {
-  padding-left: 1rem;
-  padding-bottom: 2rem;
-}
-
-.coa-GuidePage__contact-block-name {
   padding-top: 2rem;
-  padding-right: 3rem;
+  padding-bottom: 2rem;
+  flex-grow: 1;
+
+  &:not(:last-child) {
+    border-bottom: 2px solid #dddfe1;
+  }
+}
+
+.coa-GuidePage__contact-name {
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
   h2 {
     font-size: 2.4rem;
     line-height: 3rem;

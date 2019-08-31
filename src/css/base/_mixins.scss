@@ -168,6 +168,12 @@
   }
 }
 
+@mixin tablet-and-desktop {
+  @media (min-width: #{$coa-medium-screen}) {
+    @content;
+  }
+}
+
 @mixin desktop {
   @media (min-width: #{$coa-large-screen}) {
     @content;

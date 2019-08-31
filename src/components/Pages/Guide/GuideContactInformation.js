@@ -17,20 +17,20 @@ const GuideContactInformation = ({
   return (
     <div>
       <h1>Contact information</h1>
-      <div className="coa-GuidePage__contact-block row">
+      <div className="coa-GuidePage__contact-container row">
         {name && (
-          <div className="coa-GuidePage__contact-block-name col-md-6">
+          <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-name">
             <h2>{name}</h2>
           </div>
         )}
-        <div className="coa-GuidePage__contact-block-info col-md-6">
+        <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-info">
           {phone && (
-            <div className="coa-GuidePage__contact-block-phone">
+            <div className="coa-GuidePage__contact-item">
               <Phone phone={phone} />
             </div>
           )}
           {email && (
-            <div className="coa-GuidePage__contact-block-email">
+            <div className="coa-GuidePage__contact-item">
               <Email email={email} />
             </div>
           )}
