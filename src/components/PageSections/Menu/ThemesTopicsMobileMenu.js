@@ -66,7 +66,7 @@ const ThemesTopicsMobileMenu = props => (
     allowZeroExpanded={true}
   >
     {props.menu.map((theme, index) => (
-      <div className="coa-ThemesTopicsMobileMenu__theme-container">
+      <div key={index} className="coa-ThemesTopicsMobileMenu__theme-container">
         <ThemeAccordianItem
           theme={theme}
           locale={props.intl.locale}
@@ -78,7 +78,7 @@ const ThemesTopicsMobileMenu = props => (
 );
 
 ThemesTopicsMobileMenu.propTypes = {
-  menu: PropTypes.object.isRequired,
+  menu: PropTypes.array.isRequired,
 };
 
 export default injectIntl(ThemesTopicsMobileMenu);

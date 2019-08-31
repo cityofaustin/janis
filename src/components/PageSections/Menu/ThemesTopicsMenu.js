@@ -64,7 +64,7 @@ TopicsLinks.propTypes = {
 };
 
 ThemesTopicsMenu.propTypes = {
-  menu: PropTypes.object.isRequired,
+  menu: PropTypes.array.isRequired,
 };
 
 export default injectIntl(ThemesTopicsMenu);
