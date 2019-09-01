@@ -44,34 +44,30 @@ function GuideSection({
   const slug = pageData.slug;
 
   return (
-    <div className="coa-GuideSection">
-      <div className="coa-GuideSection__block">
-        <div className="coa-GuideSection__content">
-          <div className="coa-GuideSection__page-number">
-            {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
-          </div>
-          <h2>{title}</h2>
-          <p>{description}</p>
-          {page.servicePage && <Steps steps={pageData.steps} />}
-          <HtmlFromAdmin
-            title={' '}
-            content={additionalContent}
-          />
+    <div className="coa-GuideSection__container">
+      <div className="coa-GuideSection__content">
+        <div className="coa-GuideSection__page-number">
+          {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
         </div>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        {page.servicePage && <Steps steps={pageData.steps} />}
+        <HtmlFromAdmin
+          title={' '}
+          content={additionalContent}
+        />
       </div>
-      <div className="coa-GuideSection__block">
-        <div className="coa-GuideSection__link">
-          <a
-            href={GetUrlFromTopicsOrDepartments({
-              topics,
-              departments,
-              slug,
-            })}
-          >
-            View this page on alpha.austin.gov
-            <i className="material-icons">open_in_new</i>
-          </a>
-        </div>
+      <div className="coa-GuideSection__link">
+        <a
+          href={GetUrlFromTopicsOrDepartments({
+            topics,
+            departments,
+            slug,
+          })}
+        >
+          View this page on alpha.austin.gov
+          <i className="material-icons">open_in_new</i>
+        </a>
       </div>
     </div>
   );

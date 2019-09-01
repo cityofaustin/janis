@@ -141,7 +141,7 @@ function Guide(props) {
         {description && <p>{description}</p>}
       </div>
       <div className="coa-GuidePage__content-container">
-        <div className="wrapper container-fluid">
+        <div className="wrapper">
           <div className="row">
             {isMobileOrTablet ? (
               <GuideMenuMobile

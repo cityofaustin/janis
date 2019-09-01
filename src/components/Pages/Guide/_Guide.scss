@@ -1,4 +1,6 @@
 $sticky-guide-top: 25px;
+//TODO: what max-width does Chase want on tablet?
+$max-guide-tablet-width: $coa-medium-screen;
 
 .coa-GuidePage-header {
   margin-top: 4rem;
@@ -12,6 +14,9 @@ $sticky-guide-top: 25px;
 
 .coa-GuidePage__content-container {
   @extend .coa-Page__all-of-the-content;
+  @include tablet {
+    max-width: $max-guide-tablet-width
+  }
 }
 
 .coa-GuideMenu__desktop-container {
@@ -33,10 +38,8 @@ $sticky-guide-top: 25px;
 }
 
 .coa-GuidePage__contact-container {
-  margin-top: 3rem;
   margin-left: 0rem;
   margin-right: 0rem;
-  margin-bottom: 4rem;
   border: 2px solid #dddfe1;
 }
 
@@ -96,12 +99,22 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSection {
+.coa-GuideSection__container {
   margin-top: 4rem;
+  border: 2px solid #dddfe1;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  @include media($coa-medium-screen) {
+    margin-left: 0px; //TODO: again, uswds's default .row class has built in -1rem margins!!
+    margin-right: 0px;
+  }
 }
 
 .coa-GuideSection__collection {
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
+  @include media($coa-medium-screen) {
+    margin-bottom: 8rem;
+  }
 }
 
 .coa-GuideSection__header {
@@ -112,14 +125,6 @@ $sticky-guide-top: 25px;
 
   &:not(:first-child) {
     margin-top: 4rem;
-  }
-}
-
-.coa-GuideSection__block {
-  border: 2px solid #dddfe1;
-
-  &:last-child {
-    border-top: none;
   }
 }
 
@@ -138,6 +143,7 @@ $sticky-guide-top: 25px;
 }
 
 .coa-GuideSection__link {
+  border-top: 2px solid #dddfe1;;
   font-size: 1.8rem;
   text-align: center;
   padding-top: 1rem;
@@ -228,11 +234,16 @@ $sticky-guide-top: 25px;
   justify-content: space-between;
 
   padding: $coa-spacing-md-small;
-  margin-bottom: $coa-spacing-medium;
-  margin-right: $coa-spacing-medium; // margin-right must be set in child of position: fixed element
-  margin-left: $coa-spacing-medium;
+  margin-bottom: $coa-spacing-small;
+  margin-right: $coa-spacing-small; // margin-right must be set in child of position: fixed element
+  margin-left: $coa-spacing-small;
   border-radius: $coa-button-border-radius;
   border: 2px solid #dddfe1;
+  @include tablet {
+    max-width: $max-guide-tablet-width;
+    margin-right: auto;
+    margin-left: auto;
+  }
 
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-small;
