@@ -15,8 +15,8 @@ const GuideContactInformation = ({
   }
 
   return (
-    <div>
-      <h1>Contact information</h1>
+    <div className="coa-GuideSection__collection">
+      <h1 className="coa-GuideSection__header">Contact information</h1>
       <div className="coa-GuidePage__contact-container row">
         {name && (
           <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-name">

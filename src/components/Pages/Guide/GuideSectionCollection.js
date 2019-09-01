@@ -44,48 +44,54 @@ function GuideSection({
   const slug = pageData.slug;
 
   return (
-    <div className="coa-GuideSectionPage">
-      <div className="coa-GuideSectionPage__section-info">
-        {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
+    <div className="coa-GuideSection">
+      <div className="coa-GuideSection__block">
+        <div className="coa-GuideSection__content">
+          <div className="coa-GuideSection__page-number">
+            {`${sectionHeading} ${pageNumber} of ${numberOfPages}`}
+          </div>
+          <h2>{title}</h2>
+          <p>{description}</p>
+          {page.servicePage && <Steps steps={pageData.steps} />}
+          <HtmlFromAdmin
+            title={' '}
+            content={additionalContent}
+          />
+        </div>
       </div>
-      <h2>{title}</h2>
-      <p>{description}</p>
-      {page.servicePage && <Steps steps={pageData.steps} />}
-      <HtmlFromAdmin
-        title={' '}
-        content={additionalContent}
-      />
-      <div className="coa-GuideSectionPage__link">
-        <a
-          href={GetUrlFromTopicsOrDepartments({
-            topics,
-            departments,
-            slug,
-          })}
-        >
-          View this page on alpha.austin.gov
-          <i className="material-icons">open_in_new</i>
-        </a>
+      <div className="coa-GuideSection__block">
+        <div className="coa-GuideSection__link">
+          <a
+            href={GetUrlFromTopicsOrDepartments({
+              topics,
+              departments,
+              slug,
+            })}
+          >
+            View this page on alpha.austin.gov
+            <i className="material-icons">open_in_new</i>
+          </a>
+        </div>
       </div>
     </div>
   );
 };
 
-function GuideSectionList({
+function GuideSectionCollection({
   section,
   updateSectionLocation,
   isMobileOrTablet,
   resizeCount,
 }) {
   return (
-    <React.Fragment>
+    <div className="coa-GuideSection__collection">
       <GuideSectionWrapper
         anchorTag={hyphenate(section.heading)}
         updateSectionLocation={updateSectionLocation}
         isMobileOrTablet={isMobileOrTablet}
         resizeCount={resizeCount}
       >
-        <h1>{section.heading}</h1>
+        <h1 className="coa-GuideSection__header">{section.heading}</h1>
       </GuideSectionWrapper>
       {section.pages.map((page, index) => (
         <GuideSectionWrapper
@@ -103,8 +109,8 @@ function GuideSectionList({
           />
         </GuideSectionWrapper>
       ))}
-    </React.Fragment>
+    </div>
   )
 };
 
-export default GuideSectionList;
+export default GuideSectionCollection;

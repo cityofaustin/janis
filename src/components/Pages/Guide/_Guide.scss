@@ -17,7 +17,7 @@ $sticky-guide-top: 25px;
 .coa-GuideMenu__desktop-container {
   @extend .col-lg-4;
 
-  // Help with sticky positioning
+  // Helps with sticky positioning
   height: 100%;
   max-height: 100vh;
   overflow-y: scroll;
@@ -30,17 +30,6 @@ $sticky-guide-top: 25px;
   @extend .col-lg-8;
 
   margin-top: $sticky-guide-top;
-
-  h1:not(:first-child) {
-    margin-top: 4rem;
-  }
-
-  h1 {
-    background: #ecf1f7;
-    text-align: center;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
 }
 
 .coa-GuidePage__contact-container {
@@ -107,26 +96,52 @@ $sticky-guide-top: 25px;
   }
 }
 
-.coa-GuideSectionPage {
-  border: 2px solid #dddfe1;
-  margin-top: 2rem;
-  padding: 4rem;
+.coa-GuideSection {
+  margin-top: 4rem;
 }
 
-.coa-GuideSectionPage__section-info {
+.coa-GuideSection__collection {
+  margin-bottom: 8rem;
+}
+
+.coa-GuideSection__header {
+  background: #ecf1f7;
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
+}
+
+.coa-GuideSection__block {
+  border: 2px solid #dddfe1;
+
+  &:last-child {
+    border-top: none;
+  }
+}
+
+.coa-GuideSection__content {
+  padding: 4rem;
+
+  >p:last-child {
+    // Let parent handle padding-bottom for the last nested paragraph
+    margin-bottom: 0px;
+  }
+}
+
+.coa-GuideSection__page-number {
   color: #868686;
   font-size: 1.6rem;
-  margin-bottom: 2rem;
 }
 
-.coa-GuideSectionPage__link {
+.coa-GuideSection__link {
   font-size: 1.8rem;
-  border-top: 2px solid #dddfe1;
   text-align: center;
-  margin-right: -4rem;
-  margin-left: -4rem;
-  margin-bottom: -2.8rem;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 
   a {
     color: $coa-color-primary;

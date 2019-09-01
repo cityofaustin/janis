@@ -8,7 +8,7 @@ import path from 'path';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
 import GuideContactInformation from 'components/Pages/Guide/GuideContactInformation';
-import GuideSectionList from 'components/Pages/Guide/GuideSectionList';
+import GuideSectionCollection from 'components/Pages/Guide/GuideSectionCollection';
 import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
@@ -169,7 +169,7 @@ function Guide(props) {
                 {contact && <GuideContactInformation contact={contact}/>}
               </GuideSectionWrapper>
               {sections.map((section, index) => (
-                <GuideSectionList
+                <GuideSectionCollection
                   key={index}
                   section={section}
                   updateSectionLocation={updateSectionLocation}
