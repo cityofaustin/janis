@@ -90,9 +90,15 @@ function Guide(props) {
   // Alert state when the window resizes.
   // This will tell the GuideSectionWrapper to update its sectionLocation
   // resizeCount is an arbitrary number. It just needs to change so that children know when to re-initiate a useEffect()
+  function handleResize(){
+    return setResizeCount(resizeCount + 1);
+  }
   useEffect(()=>{
-    window.addEventListener("resize", ()=>setResizeCount(resizeCount + 1));
-  },[])
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  },[resizeCount])
 
   // Organize variables that will be used in rendering
   let {
