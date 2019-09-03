@@ -148,8 +148,13 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuideSection__header {
   background: #ecf1f7;
   text-align: center;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  @include tablet-and-desktop {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 
   &:not(:first-child) {
     margin-top: 4rem;
