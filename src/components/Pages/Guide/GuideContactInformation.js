@@ -1,19 +1,15 @@
 import React from 'react';
 
-import Phone from 'components/Contact/Phone';
+import Phones from 'components/Contact/Phones';
 import Email from 'components/Contact/Email';
 
 const GuideContactInformation = ({
   contact: {
     name,
-    phone,
+    phoneNumber,
     email
   },
 }) => {
-  if (phone) {
-    phone = JSON.parse(phone);
-  }
-
   return (
     <div className="coa-GuideSection__collection">
       <h1 className="coa-GuideSection__header">Contact information</h1>
@@ -24,9 +20,9 @@ const GuideContactInformation = ({
           </div>
         )}
         <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-info">
-          {phone && (
+          {phoneNumber && (
             <div className="coa-GuidePage__contact-item">
-              <Phone phone={phone} />
+              <Phones phoneNumbers={phoneNumber} />
             </div>
           )}
           {email && (
