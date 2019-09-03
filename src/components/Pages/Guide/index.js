@@ -13,7 +13,6 @@ import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
-import { printSections } from './helpers';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
@@ -81,7 +80,7 @@ function Guide(props) {
   }, [sectionLocations])
 
   // Implement sticky polyfill for browsers that don't natively allow "position: sticky"
-  // "position: sticky" will be used by GuideMenuSwitch child.
+  // "position: sticky" will be used by desktop GuideMenu.
   useEffect(()=>{
     const stickyElements = node.current.querySelectorAll('.sticky');
     Stickyfill.add(stickyElements);
