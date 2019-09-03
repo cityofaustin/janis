@@ -136,9 +136,13 @@ function Guide(props) {
         relatedDepartments={relatedDepartments}
       />
       {image && <PageBanner image={image}/>}
-      <div className="coa-GuidePage-header">
-        <h1>{title}</h1>
-        {description && <p>{description}</p>}
+      <div className="coa-GuidePage__header">
+        <h1 className="coa-GuidePage__header-title">{title}</h1>
+        {description && (
+          <div className="coa-GuidePage__header-description-container">
+            <p className="coa-GuidePage__header-description">{description}</p>
+          </div>
+        )}
       </div>
       <div className="coa-GuidePage__content-container">
         <div className="wrapper">

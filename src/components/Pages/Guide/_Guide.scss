@@ -2,14 +2,42 @@ $sticky-guide-top: 25px;
 //TODO: what max-width does Chase want on tablet?
 $max-guide-tablet-width: $coa-medium-screen;
 
-.coa-GuidePage-header {
+.coa-GuidePage__header {
+}
+
+.coa-GuidePage__header-title {
   margin-top: 4rem;
   margin-bottom: 4rem;
   max-width: 400px;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   font-size: 40px;
+}
+
+.coa-GuidePage__header-description-container {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include tablet {
+    max-width: $max-guide-tablet-width
+  }
+  @include desktop {
+    max-width: 1160px;
+  }
+}
+
+.coa-GuidePage__header-description {
+  text-align: left;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 0px;
+
+  @include tablet-and-desktop {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #dddfe1;
+    margin-bottom: 4rem;
+  }
 }
 
 .coa-GuidePage__content-container {
