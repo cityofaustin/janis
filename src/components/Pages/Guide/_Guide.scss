@@ -1,100 +1,186 @@
-.coa-GuidePageBannerImage {
-  object-fit: cover;
-  // This is for https://www.npmjs.com/package/object-fit-images
-  font-family: 'object-fit: cover;';
+$sticky-guide-top: 25px;
+//TODO: what max-width does Chase want on tablet?
+$max-guide-tablet-width: $coa-medium-screen;
 
-  height: 32rem;
-  width: 100%;
+.coa-GuidePage__header {
 }
 
-.coa-GuidePage-header--container {
-  width: 57rem;
+.coa-GuidePage__header-title {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  max-width: 400px;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5rem;
+  font-size: 40px;
+}
 
-  h1 {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    text-align: center;
-    font-size: 40px;
+.coa-GuidePage__header-description-container {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include tablet-and-desktop {
+    max-width: $max-guide-tablet-width
   }
 }
 
-.coa-GuidePage__nav-sidebar {
-  background: #e1c5ff;
+.coa-GuidePage__header-description {
+  text-align: left;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 0px;
+
+  @include tablet-and-desktop {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #dddfe1;
+    margin-bottom: 4rem;
+  }
+}
+
+.coa-GuidePage__content-container {
+  @extend .coa-Page__all-of-the-content;
+  @include tablet {
+    max-width: $max-guide-tablet-width
+  }
+}
+
+.coa-GuideMenu__desktop-container {
+  @extend .col-lg-4;
+
+  // Helps with sticky positioning
+  height: 100%;
+  max-height: 100vh;
+  overflow-y: scroll;
+  margin-top: $sticky-guide-top;
+  top: $sticky-guide-top;
 }
 
 .coa-GuidePage__main-content {
-  h1:not(:first-child) {
-    margin-top: 4rem;
-  }
+  @extend .col-xs-12;
+  @extend .col-lg-8;
 
-  h1 {
-    background: #ecf1f7;
-    text-align: center;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
+  margin-top: $sticky-guide-top;
 }
 
-.coa-GuidePage__contact-block {
-  margin-top: 3rem;
+.coa-GuidePage__contact-container {
   margin-left: 0rem;
   margin-right: 0rem;
-  margin-bottom: 4rem;
   border: 2px solid #dddfe1;
 }
 
-.coa-GuidePage__contact-block-info {
-  border-left: 2px solid #dddfe1;
+/**
+  TODO: resolve issues with inherited styles
+  @extend col-xs-12 is not found by this stylesheet.
+  But it can be used inline within js.
+  This means that col-xs-12 is coming from some design system that isn't imported with our stylesheets.
+  This same design system also modifies col-x-x classes in unhelpful ways.
+  For example, col-md-6 has hardcoded left and right padding that was added by this design system.
+  We should get rid of uswds or whatever is causing these issues.
+**/
+.coa-GuidePage__contact-block {
+  padding-left: 0px; // overwrite col-x-x padding style from inherited design system
+  padding-right: 0px;
+  flex-grow: 1;
+
+  @include mobile {
+    &:not(:last-child) {
+      border-bottom: 2px solid #dddfe1;
+    }
+  }
+  @include tablet-and-desktop {
+    &:not(:last-child) {
+      border-right: 2px solid #dddfe1;
+    }
+  }
 }
 
-.coa-GuidePage__contact-block-email {
-  border-top: 2px solid #dddfe1;
-  margin-left: -1rem;
-  margin-right: -1rem;
+.coa-GuidePage__contact-info {
+  display: flex;
+  flex-direction: column;
+
+  .coa-ContactItem {
+    padding-top: 0px; //Undo styling to help spacing on guide page
+  }
+}
+
+.coa-GuidePage__contact-item {
   padding-left: 2rem;
-  padding-bottom: 2rem;
-}
-
-.coa-GuidePage__contact-block-phone {
-  padding-left: 1rem;
-  padding-bottom: 2rem;
-}
-
-.coa-GuidePage__contact-block-name {
   padding-top: 2rem;
-  padding-right: 3rem;
+  padding-bottom: 2rem;
+  flex-grow: 1;
+
+  &:not(:last-child) {
+    border-bottom: 2px solid #dddfe1;
+  }
+}
+
+.coa-GuidePage__contact-name {
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
   h2 {
     font-size: 2.4rem;
     line-height: 3rem;
   }
 }
 
-.coa-GuideSectionPage {
+.coa-GuideSection__container {
+  margin-top: 4rem;
   border: 2px solid #dddfe1;
-  margin-top: 2rem;
-  padding: 4rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  @include media($coa-medium-screen) {
+    margin-left: 0px; //TODO: again, uswds's default .row class has built in -1rem margins!!
+    margin-right: 0px;
+  }
 }
 
-.coa-GuideSectionPage__section-info {
+.coa-GuideSection__collection {
+  margin-bottom: 4rem;
+  @include media($coa-medium-screen) {
+    margin-bottom: 8rem;
+  }
+}
+
+.coa-GuideSection__header {
+  background: #ecf1f7;
+  text-align: center;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  @include tablet-and-desktop {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
+}
+
+.coa-GuideSection__content {
+  padding: 4rem;
+
+  >p:last-child {
+    // Let parent handle padding-bottom for the last nested paragraph
+    margin-bottom: 0px;
+  }
+}
+
+.coa-GuideSection__page-number {
   color: #868686;
   font-size: 1.6rem;
-  margin-bottom: 2rem;
 }
 
-.coa-GuideSectionPage__link {
+.coa-GuideSection__link {
+  border-top: 2px solid #dddfe1;;
   font-size: 1.8rem;
-  border-top: 2px solid #dddfe1;
   text-align: center;
-  margin-right: -4rem;
-  margin-left: -4rem;
-  margin-bottom: -2.8rem;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 
   a {
-    color: #0049c7;
+    color: $coa-color-primary;
     text-decoration: none;
   }
 
@@ -103,5 +189,161 @@
     font-size: 1.5rem;
     position: relative;
     top: 3px;
+  }
+}
+
+.coa-GuideMenu__section {
+  border-top: 1.5px solid $coa-color-gray-lighter;
+  &:last-child {
+    border-bottom: 1.5px solid $coa-color-gray-lighter;
+  }
+}
+
+.coa-GuideMenu__link {
+  color: $coa-color-cod-gray;
+  font-size: 1.7rem;
+  line-height: 1em;
+  text-decoration: none;
+  padding-left: $coa-spacing-large;
+
+  &:visited {
+    color: $coa-color-cod-gray;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $coa-color-cod-gray;
+    cursor: pointer;
+    @extend .coa-GuideMenu__current-section;
+  }
+}
+
+.coa-GuideMenu__heading {
+  padding-bottom: $coa-spacing-md-small;
+  padding-top: $coa-spacing-md-small;
+  font-weight: bolder;
+}
+
+.coa-GuideMenu__subheading {
+  padding-bottom: $coa-spacing-xsmall;
+  padding-top: $coa-spacing-xsmall;
+  &:last-child {
+    padding-bottom: $coa-spacing-md-small;
+  }
+}
+
+.coa-GuideMenu__current-section {
+  background-color: #D9E8F6;
+
+  &:before {
+    // Material icon should be in margin on desktop
+    // But inline with left on mobile
+    @include desktop {
+      position: absolute;
+    }
+    font-family: "Material Icons";
+    font-weight: normal;
+    content: 'arrow_forward';
+    color: $coa-color-primary;
+    left: 20px;
+    font-size: larger;
+  }
+}
+
+.coa-GuideMenu__mobile-container {
+  position: fixed;
+  z-index: 1; // Allow GuideMenuMobile to be stacked above footer
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.coa-GuideMenu__mobile-button {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  padding: $coa-spacing-md-small;
+  margin-bottom: $coa-spacing-small;
+  margin-right: $coa-spacing-small; // margin-right must be set in child of position: fixed element
+  margin-left: $coa-spacing-small;
+  border-radius: $coa-button-border-radius;
+  border: 2px solid #dddfe1;
+  @include tablet {
+    max-width: $max-guide-tablet-width;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-small;
+  color: $coa-color-white;
+  background: $coa-color-primary;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.coa-GuideMenu__mobile-popup {
+  width: 100vw;
+  height: 100%;
+  position: fixed;
+  top: 100vh; // Initialize below the screen, only open up onClick
+  overflow-y: scroll;
+
+  -webkit-transition: top .3s ease-in;
+  -moz-transition: top .3s ease-in;
+  -o-transition: top .3s ease-in;
+  -ms-transition: top .3s ease-in;
+  transition: top .3s ease-in;
+}
+
+.coa-GuideMenu__mobile-popup-open {
+  top: 0px;
+}
+
+.coa-GuideMenu__mobile-background {
+  opacity: 0.5;
+  background-color: $coa-color-black;
+  height: 33vh;
+}
+
+// When mobile is open
+.frozen-body {
+  overflow-y: hidden;
+}
+
+.coa-GuideMenu__mobile-content-container {
+  border-top: 5px solid $coa-color-primary;
+  background-color: $coa-color-white;
+  min-height: 67vh;
+  padding-bottom: 10rem;
+}
+
+.coa-GuideMenu__mobile-content-title {
+  text-align: center;
+  color: $coa-color-cod-gray;
+
+  h2 {
+    padding-bottom: $coa-spacing-md-small;
+    padding-top: $coa-spacing-md-small;
+    margin-bottom: 0px;
+  }
+  h3 {
+    font-size: 1.7rem;
+    font-weight: normal;
+    line-height: 1em;
+  }
+}
+
+.coa-GuideMenu__mobile-content {
+  margin-right: 2rem;
+  margin-left: 2rem;
+
+  @include tablet {
+    max-width: 550px;
+    margin: auto;
   }
 }

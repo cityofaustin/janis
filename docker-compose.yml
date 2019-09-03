@@ -4,6 +4,7 @@ services:
     image: $TAG
     ports:
       - "3000:80"
+      - "4000:4000"
     volumes:
       - "./src:/app/src"
       - "./public:/app/public"

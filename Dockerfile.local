@@ -16,4 +16,6 @@ COPY public /app/public
 COPY src /app/src
 
 EXPOSE $PORT
+# Expose port 4000 for react-static's socket.io polling
+EXPOSE 4000
 CMD [ "yarn", "start" ]

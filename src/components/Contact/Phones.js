@@ -33,8 +33,8 @@ const PhonesList = ({ phoneNumbers, intl }) => {
     <div className="coa-ContactItem coa-ContactPhoneList">
       <i className="material-icons">contact_phone</i>
       <div className="coa-ContactItem_content">
-        {phoneNumbers.edges.map(phone => (
-          <Phone phone={phone.node} />
+        {phoneNumbers.edges.map((phone, index) => (
+          <Phone key={index} phone={phone.node} />
         ))}
       </div>
     </div>
