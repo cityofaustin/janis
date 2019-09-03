@@ -19,11 +19,8 @@ $max-guide-tablet-width: $coa-medium-screen;
   margin-left: auto;
   margin-right: auto;
 
-  @include tablet {
+  @include tablet-and-desktop {
     max-width: $max-guide-tablet-width
-  }
-  @include desktop {
-    max-width: 1160px;
   }
 }
 
