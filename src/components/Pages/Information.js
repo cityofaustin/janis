@@ -46,17 +46,7 @@ const InformationPage = ({
       department={department}
       relatedDepartments={relatedDepartments}
     />
-    {image && (
-      <PageBanner
-        imagesPath={`${process.env.CMS_MEDIA}/images`}
-        imageFilename={path.basename(
-          image.filename,
-          path.extname(image.filename),
-        )}
-        imageExtension={path.extname(image.filename).substring(1)}
-        imageTitle={image.title}
-      />
-    )}
+    {image && <PageBanner image={image}/>}
     <div>
       <PageHeader contentType={'information'} description={description}>
         {title}

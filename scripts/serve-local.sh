@@ -22,7 +22,7 @@ TAG='janis:local'
 
 # Install dependencies on host machine, copy them over into dockerfile
 echo "building docker image..."
-DOCKER_BUILDKIT=1 docker build --tag "$TAG" .
+DOCKER_BUILDKIT=1 docker build -f Dockerfile.local --tag "$TAG" .
 echo "running docker image..."
 
 # Get IP Address of local machine
@@ -63,7 +63,7 @@ while getopts "PSe:M:A:" opt; do
       elif [ "$OPTARG" == "staging" ]; then
         CMS_API="https://joplin-staging.herokuapp.com/api/graphql"
       else
-        CMS_MEDIA=$OPTARG
+        CMS_API=$OPTARG
       fi
       ;;
     \? )
@@ -81,20 +81,3 @@ echo "CMS_API is: $CMS_API"
 echo "CMS_MEDIA is: $CMS_MEDIA"
 
 docker-compose up
-
-# docker run \
-#     --rm \
-#     --name janis \
-#     --tty --interactive \
-#     --publish 3000:80 \
-#     --volume "$PWD/src:/app/src" \
-#     --volume "$PWD/public:/app/public" \
-#     --volume "$PWD/yarn.lock:/app/yarn.lock" \
-#     --volume "$PWD/package.json:/app/package.json" \
-#     --volume "$PWD/static.config.js:/app/static.config.js" \
-#     --volume "$PWD/.babelrc:/app/.babelrc" \
-#     --env "GOOGLE_ANALYTICS=UA-110716917-2" \
-#     --env "FEEDBACK_API=https://coa-test-form-api.herokuapp.com/process/" \
-#     --env "CMS_API=$CMS_API" \
-#     --env "CMS_MEDIA=$CMS_MEDIA" \
-#     "$TAG" $EXEC

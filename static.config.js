@@ -383,24 +383,29 @@ const makeDepartmentPages = async (client, langCode) => {
   const { allGuidePages: allGuidePages } = await client.request(
     allGuidePagesQuery,
   );
-  const guidePages = cleanServices(allGuidePages);
+  const guidePages = cleanGuidePages(allGuidePages);
 
   // Add all guide page links to department pages
   for (let page of guidePages) {
-    if (!page.relatedDepartments.edges) continue;
+    if (!page.department) continue;
     page.type = 'guide';
 
-    for (let releatedDepartment of page.relatedDepartments.edges) {
-      let matchingDepartmentIndex = departments.findIndex(
-        d => d.id === releatedDepartment.id,
-      );
-      if (departments[matchingDepartmentIndex]) {
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === page.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
         if (
           !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
         ) {
           departments[matchingDepartmentIndex].relatedLinks.push(page);
         }
-      }
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      page.department = departmentCopy;
     }
   }
 
@@ -435,9 +440,7 @@ const makeDepartmentPages = async (client, langCode) => {
         )
         .concat(
           officialDocumentPages
-            .filter(
-              d => d.department != null && d.department.id == department.id,
-            )
+            .filter(d => d.department != null && d.department.id == department.id)
             .map(officialDocumentPage => ({
               path: `/${officialDocumentPage.slug}`,
               component: 'src/components/Pages/OfficialDocumentList',
@@ -448,7 +451,7 @@ const makeDepartmentPages = async (client, langCode) => {
         )
         .concat(
           guidePages
-            .filter(d => isRelatedDepartment(d, department.id))
+            .filter(p => p.department != null && p.department.id == department.id)
             .map(guidePage => ({
               path: `/${guidePage.slug}`,
               component: 'src/components/Pages/Guide',

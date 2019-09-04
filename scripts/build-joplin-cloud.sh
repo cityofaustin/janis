@@ -10,6 +10,8 @@ fi
 
 if [ "$HEAD" == '2599-guide-pages' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
+  export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
 if [ "$HEAD" == 'department-top-services' ]; then

@@ -6,40 +6,39 @@ import { contact as i18n } from 'js/i18n/definitions';
 
 import { phonePropTypes } from './proptypes';
 
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
-const Phones = ({ phone, intl }) => {
-  // If we don't have a phone object then don't render
-  if (!phone) return null;
+const Phone = ({ phone }) => {
+  if (phone.phoneNumber) {
+    const phoneNumber = parsePhoneNumberFromString(phone.phoneNumber);
 
-  // Render the phone numbers with the descriptive text
-  if (phone.phoneDescription || phone.phoneNumber) {
-    let phoneNumber = parsePhoneNumberFromString(phone.phoneNumber)
     return (
-      <div className="coa-ContactItem coa-ContactPhone">
-        <i className="material-icons">contact_phone</i>
-        <div>
-          <div>
-            {phone.phoneDescription && `${phone.phoneDescription}: `}
-            <a href={`tel:${phoneNumber.formatNational()}`}>{phoneNumber.formatNational()}</a>
-          </div>
-        </div>
+      <div className="coa-ContactPhone">
+        {!!phone.phoneDescription && `${phone.phoneDescription}: `}
+        <a href={`tel:${phoneNumber.formatNational()}`}>
+          {phoneNumber.formatNational()}
+        </a>
       </div>
     );
   }
-}
-
-Phones.propTypes = {
-  phone: phonePropTypes,
 };
 
-export default injectIntl(Phones);
+const PhonesList = ({ phoneNumbers, intl }) => {
+  if (!phoneNumbers) return null;
+  {/*phone list should probably be a list
+    for semantics but it affects styling atm */}
 
-/*
+  return (
 
-      <span>
-        {intl.formatMessage(i18n.phoneTTD)}:{' '}
-        <a href={`tel:${phone.tty}`}>{phone.tty}</a>
-      </span>
+    <div className="coa-ContactItem coa-ContactPhoneList">
+      <i className="material-icons">contact_phone</i>
+      <div className="coa-ContactItem_content">
+        {phoneNumbers.edges.map((phone, index) => (
+          <Phone key={index} phone={phone.node} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-*/
+export default injectIntl(PhonesList);
