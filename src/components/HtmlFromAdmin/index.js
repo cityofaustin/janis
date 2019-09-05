@@ -3,6 +3,7 @@ import Parser from 'html-react-parser';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import Trashy from 'components/Trashy';
+import Recollect from 'components/Recollect';
 
 const HtmlFromAdmin = ({ content }) => {
   return Parser(content, {
@@ -25,6 +26,10 @@ const HtmlFromAdmin = ({ content }) => {
             const blockName = content.slice(10);
             if (blockName === 'Collection Schedule') {
               return <Trashy />;
+            }
+
+            if (blockName === 'What do I do with') {
+              return <Recollect options={{ name: 'wizard' }} />;
             }
           }
 
