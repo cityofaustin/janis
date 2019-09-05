@@ -8,19 +8,6 @@
   text-decoration: none;
   align-items: stretch;
 
-  &:hover {
-    background-color: $coa-color-secondary;
-
-    .coa-Tile__text {
-      border-right: 1px solid $coa-color-white;
-    }
-
-    .coa-Tile__text,
-    i {
-      color: $coa-color-primary;
-    }
-  }
-
   &:active {
     background-color: $coa-color-darker-blue;
 
@@ -36,16 +23,35 @@
   border: 1px solid $coa-color-primary;
   border-radius: $coa-button-border-radius;
   padding: $coa-spacing-medium $coa-spacing-small;
+
+  &:hover {
+    background-color: $coa-color-secondary;
+
+    .coa-Tile__text {
+      border-right: 1px solid $coa-color-white;
+    }
+
+    .coa-Tile__text,
+    i {
+      color: $coa-color-primary;
+    }
+  }
 }
 
 @mixin compact-tile {
   @include shared-tile;
+  box-sizing: border-box;
 
-  border-top: 1px solid $coa-color-primary;
-  border-left: 1px solid $coa-color-primary;
-  border-right: 1px solid $coa-color-primary;
+  border-top: 1px solid $coa-color-gray-light;
+  border-left: 1px solid $coa-color-gray-light;
+  border-right: 1px solid $coa-color-gray-light;
 
   padding: $coa-spacing-small $coa-spacing-small;
+
+  &:hover {
+    background-color: $coa-color-gray-lightest;
+    box-shadow: inset 0 0 0 1px $coa-color-primary;
+  }
 }
 
 @mixin compact-tile-container {
@@ -55,11 +61,13 @@
   // do our first/last-child logic here
   &:first-child {
     .coa-Tile {
+      border-top: 1px solid $coa-color-gray-light;
       border-top-right-radius: $coa-button-border-radius;
       border-top-left-radius: $coa-button-border-radius;
     }
 
     .coa-Tile--compact {
+      border-top: 1px solid $coa-color-gray-light;
       border-top-right-radius: $coa-button-border-radius;
       border-top-left-radius: $coa-button-border-radius;
     }
@@ -67,13 +75,13 @@
 
   &:last-child {
     .coa-Tile {
-      border-bottom: 1px solid $coa-color-primary;
+      border-bottom: 1px solid $coa-color-gray-light;
       border-bottom-right-radius: $coa-button-border-radius;
       border-bottom-left-radius: $coa-button-border-radius;
     }
 
     .coa-Tile--compact {
-      border-bottom: 1px solid $coa-color-primary;
+      border-bottom: 1px solid $coa-color-gray-light;
       border-bottom-right-radius: $coa-button-border-radius;
       border-bottom-left-radius: $coa-button-border-radius;
     }
