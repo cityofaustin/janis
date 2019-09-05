@@ -15,7 +15,7 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
 fi
 
 if [ "$HEAD" == '2855-official-doc-top-links' ]; then
-  export CMS_API='http://joplin-pr-2855-official-doc-to.herokuapp.com/api/graphql'
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
 yarn npm-run-all build-css build-js
