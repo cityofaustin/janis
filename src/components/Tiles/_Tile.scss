@@ -48,6 +48,38 @@
   padding: $coa-spacing-small $coa-spacing-small;
 }
 
+@mixin compact-tile-container {
+  margin-bottom: 0;
+
+  // Since we wrap our tiles in tilegroup, we need to
+  // do our first/last-child logic here
+  &:first-child {
+    .coa-Tile {
+      border-top-right-radius: $coa-button-border-radius;
+      border-top-left-radius: $coa-button-border-radius;
+    }
+
+    .coa-Tile--compact {
+      border-top-right-radius: $coa-button-border-radius;
+      border-top-left-radius: $coa-button-border-radius;
+    }
+  }
+
+  &:last-child {
+    .coa-Tile {
+      border-bottom: 1px solid $coa-color-primary;
+      border-bottom-right-radius: $coa-button-border-radius;
+      border-bottom-left-radius: $coa-button-border-radius;
+    }
+
+    .coa-Tile--compact {
+      border-bottom: 1px solid $coa-color-primary;
+      border-bottom-right-radius: $coa-button-border-radius;
+      border-bottom-left-radius: $coa-button-border-radius;
+    }
+  }
+}
+
 .coa-Tile {
   @include tablet-and-desktop {
     @include regular-tile;
@@ -58,29 +90,16 @@
   }
 }
 
+.coa-Tile--compact {
+  @include compact-tile;
+}
+
 .coa-TileGroup__tile {
   display: flex;
   margin-bottom: $coa-spacing-small;
 
   @include mobile {
-    margin-bottom: 0;
-
-    // Since we wrap our tiles in tilegroup, we need to
-    // do our first/last-child logic here
-    &:first-child {
-      .coa-Tile {
-        border-top-right-radius: $coa-button-border-radius;
-        border-top-left-radius: $coa-button-border-radius;
-      }
-    }
-
-    &:last-child {
-      .coa-Tile {
-        border-bottom: 1px solid $coa-color-primary;
-        border-bottom-right-radius: $coa-button-border-radius;
-        border-bottom-left-radius: $coa-button-border-radius;
-      }
-    }
+    @include compact-tile-container;
   }
 }
 

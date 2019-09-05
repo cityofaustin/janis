@@ -96,6 +96,8 @@
   list-style: none;
   margin-left: 0;
   margin-bottom: $coa-spacing-md-small;
+
+  @include compact-tile-container;
 }
 
 .coa-TopicCollectionCard__link {

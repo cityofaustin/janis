@@ -58,7 +58,7 @@ const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
 
                     return (
                       <li className="coa-TopicCollectionCard__item" key={index}>
-                        <Tile text={link.title} url={link.url} />
+                        <Tile text={link.title} url={link.url} compact={true} />
                       </li>
                     );
                   })}
