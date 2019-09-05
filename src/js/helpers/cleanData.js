@@ -287,7 +287,8 @@ export const cleanDepartmentTopServiceLink = (topService, langCode) => {
   const page =
     topService.servicePage ||
     topService.guidePage ||
-    topService.informationPage;
+    topService.informationPage ||
+    topService.officialDocumentPage;
 
   if (page) {
     // If we have a topic let's make our URL from it
@@ -342,7 +343,8 @@ export const cleanDepartmentTopServiceIds = topServicePages => {
       const page =
         topService.servicePage ||
         topService.guidePage ||
-        topService.informationPage;
+        topService.informationPage ||
+        topService.officialDocumentPage;
 
       if (page) return page.id;
     })

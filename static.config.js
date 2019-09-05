@@ -370,7 +370,12 @@ const makeDepartmentPages = async (client, langCode) => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-      departments[matchingDepartmentIndex].relatedLinks.push(page);
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(page);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
@@ -395,11 +400,11 @@ const makeDepartmentPages = async (client, langCode) => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-        if (
-          !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
-        ) {
-          departments[matchingDepartmentIndex].relatedLinks.push(page);
-        }
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(page);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
@@ -440,7 +445,9 @@ const makeDepartmentPages = async (client, langCode) => {
         )
         .concat(
           officialDocumentPages
-            .filter(d => d.department != null && d.department.id == department.id)
+            .filter(
+              d => d.department != null && d.department.id == department.id,
+            )
             .map(officialDocumentPage => ({
               path: `/${officialDocumentPage.slug}`,
               component: 'src/components/Pages/OfficialDocumentList',
@@ -451,7 +458,9 @@ const makeDepartmentPages = async (client, langCode) => {
         )
         .concat(
           guidePages
-            .filter(p => p.department != null && p.department.id == department.id)
+            .filter(
+              p => p.department != null && p.department.id == department.id,
+            )
             .map(guidePage => ({
               path: `/${guidePage.slug}`,
               component: 'src/components/Pages/Guide',
