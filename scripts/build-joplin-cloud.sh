@@ -14,7 +14,11 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
   export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
-if [ "$HEAD" == '2666-hacky-janis-step-apps' ]; then
+if [ "$HEAD" == '2356-tile-groups-figure-out-hover-borders' ]; then
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+fi
+
+if [ "$HEAD" == '2356-tile-groups' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
