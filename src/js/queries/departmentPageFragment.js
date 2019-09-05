@@ -136,6 +136,41 @@ const departmentPageFragment = `
               }
             }
           }
+          officialDocumentPage {
+            id
+            title
+            slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

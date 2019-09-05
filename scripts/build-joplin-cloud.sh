@@ -14,7 +14,7 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
   export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
-if [ "$HEAD" == 'department-top-services' ]; then
+if [ "$HEAD" == '2855-official-doc-top-links' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
