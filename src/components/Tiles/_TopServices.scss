@@ -64,18 +64,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-
-  .coa-TileGroup__tile {
-    margin-bottom: $coa-spacing-small;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @include media($coa-medium-screen) {
-      margin-bottom: initial;
-    }
-  }
 }
 
 .coa-TopServicesHome {
