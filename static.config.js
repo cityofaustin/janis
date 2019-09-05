@@ -10,6 +10,8 @@ import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
+import allOfficialDocumentPagesQuery from 'js/queries/allOfficialDocumentPagesQuery';
+import allGuidePagesQuery from 'js/queries/allGuidePagesQuery';
 
 import {
   cleanLinks,
@@ -21,7 +23,19 @@ import {
   cleanInformationPages,
   clean311,
   cleanNavigation,
+  cleanOfficialDocumentPages,
+  cleanGuidePages,
 } from 'js/helpers/cleanData';
+
+const isRelatedDepartment = (page, departmentId) => {
+  const relatedDepartments = page.relatedDepartments.edges;
+  for (let department in relatedDepartments) {
+    if (department.id == departmentId) {
+      return true;
+    }
+  }
+  return false;
+};
 
 const makeAllPages = async langCode => {
   const path = `/${!!langCode ? langCode : ''}`;
@@ -30,7 +44,7 @@ const makeAllPages = async langCode => {
   const client = createGraphQLClientsByLang(langCode);
 
   const themeChildren = await makeThemePages(client);
-  const deptChildren = await makeDepartmentPages(client);
+  const deptChildren = await makeDepartmentPages(client, langCode);
 
   const data = {
     path: path,
@@ -86,6 +100,18 @@ const makeThemePages = async client => {
     allServicePagesQuery,
   );
   const services = cleanServices(allServices);
+
+  const {
+    allOfficialDocumentPages: allOfficialDocumentPages,
+  } = await client.request(allOfficialDocumentPagesQuery);
+  const officialDocumentPages = await cleanOfficialDocumentPages(
+    allOfficialDocumentPages,
+  );
+
+  const { allGuidePages: allGuidePages } = await client.request(
+    allGuidePagesQuery,
+  );
+  const guidePages = cleanGuidePages(allGuidePages);
 
   // Add all topic links to topic collection pages
   for (var topic of topics) {
@@ -150,6 +176,40 @@ const makeThemePages = async client => {
     page.topic = topicCopy;
   }
 
+  // Add all official document page links to topic pages
+  for (let page of officialDocumentPages) {
+    if (!page.topic) continue;
+    page.type = 'official-document';
+
+    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
+    if (page.toplink) {
+      topics[matchingTopicIndex].topLinks.push(page);
+    } else {
+      topics[matchingTopicIndex].otherLinks.push(page);
+    }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    page.topic = topicCopy;
+  }
+
+  // Add all guide page links to topic pages
+  for (let page of guidePages) {
+    if (!page.topic) continue;
+    page.type = 'guide';
+
+    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
+    if (page.toplink) {
+      topics[matchingTopicIndex].topLinks.push(page);
+    } else {
+      topics[matchingTopicIndex].otherLinks.push(page);
+    }
+
+    // Update the topic on the page
+    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    page.topic = topicCopy;
+  }
+
   const data = themes.map(theme => ({
     path: `/${theme.slug}`,
     component: 'src/components/Pages/Theme',
@@ -194,6 +254,28 @@ const makeThemePages = async client => {
                       service,
                     }),
                   })),
+              )
+              .concat(
+                officialDocumentPages
+                  .filter(d => d.topic != null && d.topic.id == topic.id)
+                  .map(officialDocumentPage => ({
+                    path: `/${officialDocumentPage.slug}`,
+                    component: 'src/components/Pages/OfficialDocumentList',
+                    getData: async () => ({
+                      officialDocumentPage,
+                    }),
+                  })),
+              )
+              .concat(
+                guidePages
+                  .filter(d => d.topic != null && d.topic.id == topic.id)
+                  .map(guidePage => ({
+                    path: `/${guidePage.slug}`,
+                    component: 'src/components/Pages/Guide',
+                    getData: async () => ({
+                      guidePage,
+                    }),
+                  })),
               ),
           })),
       })),
@@ -202,9 +284,9 @@ const makeThemePages = async client => {
   return data;
 };
 
-const makeDepartmentPages = async client => {
+const makeDepartmentPages = async (client, langCode) => {
   const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
-  const departments = cleanDepartments(allDepartmentPages);
+  const departments = cleanDepartments(allDepartmentPages, langCode);
 
   const { allInformationPages: allInformationPages } = await client.request(
     allInformationPagesQuery,
@@ -215,6 +297,7 @@ const makeDepartmentPages = async client => {
   // copying the pattern from topics, may not need to do all this copying
   for (var infoPage of informationPages) {
     if (!infoPage.department) continue;
+
     infoPage.type = 'info';
 
     let matchingDepartmentIndex = departments.findIndex(
@@ -222,7 +305,14 @@ const makeDepartmentPages = async client => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-      departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(
+          infoPage.id,
+        )
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
@@ -248,13 +338,79 @@ const makeDepartmentPages = async client => {
     );
 
     if (departments[matchingDepartmentIndex]) {
-      departments[matchingDepartmentIndex].relatedLinks.push(service);
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(service.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(service);
+      }
 
       // Update the department on the page
       const departmentCopy = JSON.parse(
         JSON.stringify(departments[matchingDepartmentIndex]),
       );
       service.department = departmentCopy;
+    }
+  }
+
+  const {
+    allOfficialDocumentPages: allOfficialDocumentPages,
+  } = await client.request(allOfficialDocumentPagesQuery);
+  const officialDocumentPages = await cleanOfficialDocumentPages(
+    allOfficialDocumentPages,
+  );
+
+  // Add all official document page links to department pages
+  for (let page of officialDocumentPages) {
+    if (!page.department) continue;
+    page.type = 'official-document';
+
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === page.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      // Only add the related link if it's not a top service
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(page);
+      }
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      page.department = departmentCopy;
+    }
+  }
+
+  const { allGuidePages: allGuidePages } = await client.request(
+    allGuidePagesQuery,
+  );
+  const guidePages = cleanGuidePages(allGuidePages);
+
+  // Add all guide page links to department pages
+  for (let page of guidePages) {
+    if (!page.department) continue;
+    page.type = 'guide';
+
+    let matchingDepartmentIndex = departments.findIndex(
+      d => d.id === page.department.id,
+    );
+
+    if (departments[matchingDepartmentIndex]) {
+      if (
+        !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
+      ) {
+        departments[matchingDepartmentIndex].relatedLinks.push(page);
+      }
+
+      // Update the department on the page
+      const departmentCopy = JSON.parse(
+        JSON.stringify(departments[matchingDepartmentIndex]),
+      );
+      page.department = departmentCopy;
     }
   }
 
@@ -284,6 +440,32 @@ const makeDepartmentPages = async client => {
               component: 'src/components/Pages/Service',
               getData: async () => ({
                 service,
+              }),
+            })),
+        )
+        .concat(
+          officialDocumentPages
+            .filter(
+              d => d.department != null && d.department.id == department.id,
+            )
+            .map(officialDocumentPage => ({
+              path: `/${officialDocumentPage.slug}`,
+              component: 'src/components/Pages/OfficialDocumentList',
+              getData: async () => ({
+                officialDocumentPage,
+              }),
+            })),
+        )
+        .concat(
+          guidePages
+            .filter(
+              p => p.department != null && p.department.id == department.id,
+            )
+            .map(guidePage => ({
+              path: `/${guidePage.slug}`,
+              component: 'src/components/Pages/Guide',
+              getData: async () => ({
+                guidePage,
               }),
             })),
         ),

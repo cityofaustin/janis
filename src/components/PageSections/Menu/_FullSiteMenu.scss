@@ -162,10 +162,10 @@
   display: flex;
 
   &:before {
-    content: '•';
     color: $coa-color-darkest-grey;
     font-size: $coa-font-size-xsmall;
     margin-right: $coa-spacing-small;
+    margin-bottom: $coa-spacing-xsmall;
   }
 }
 

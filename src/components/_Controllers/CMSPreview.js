@@ -9,18 +9,21 @@ import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisi
 import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
+import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
 import {
   cleanServicesForPreview,
   cleanInformationForPreview,
   cleanTopics,
   cleanDepartments,
   cleanTopicCollections,
+  cleanOfficialDocumentPagesForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
+import OfficialDocumentList from 'components/Pages/OfficialDocumentList';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -70,6 +73,11 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'official_document':
+        req = client.request(getOfficialDocumentPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
       let page;
@@ -90,6 +98,8 @@ class CMSPreview extends Component {
         case 'topiccollection':
           page = data.pageRevision.asTopicCollectionPage;
           break;
+        case 'official_document':
+          page = data.pageRevision.asOfficialDocumentPage;
       }
 
       this.setState({
@@ -111,7 +121,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { data } = this.state;
-    if (!this.state.data) return <h1>⏱️LoAdInG⏱️...</h1>;
+    if (!this.state.data) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route
@@ -158,6 +168,12 @@ class CMSPreview extends Component {
           path="/department"
           render={props => (
             <Department department={cleanDepartments(data)[0]} />
+          )}
+        />
+        <Route
+          path="/official_document"
+          render={props => (
+              <OfficialDocumentList officialDocumentPage={cleanOfficialDocumentPagesForPreview(data)[0]} />
           )}
         />
       </Switch>

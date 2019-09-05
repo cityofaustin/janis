@@ -1,0 +1,31 @@
+.coa-OfficialDocumentPage__container {
+  font-size: $coa-font-size-small;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+
+  &:not(:last-child) {
+    border-bottom: 1.5px solid $coa-color-gray-lighter;
+    padding-bottom: 3rem;
+  }
+}
+
+.coa-OfficialDocumentPage__date {
+  color: $coa-color-gray-dark;
+  font-size: $coa-font-size-xsmall;
+}
+
+.coa-OfficialDocumentPage__title {
+  margin-bottom: 0rem;
+}
+
+.coa-OfficialDocumentPage__small-heading-container {
+  line-height: normal;
+}
+
+.coa-OfficialDocumentPage__small-heading {
+  font-weight: bold;
+}
+
+.coa-OfficialDocumentPage__pdf-size {
+  color: $coa-color-gray;
+}

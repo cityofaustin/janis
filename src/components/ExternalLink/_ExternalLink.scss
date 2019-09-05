@@ -1,10 +1,9 @@
 .coa-ExternalLink {
-  opacity: .75 !important;
-  text-transform: capitalize !important;
+  opacity: 0.75;
   text-decoration: none;
   &:hover {
-    opacity: 1.0 !important;
-  };
+    opacity: 1;
+  }
 
   svg {
     margin-left: $coa-space-level1;
@@ -12,7 +11,7 @@
     path {
       fill: $coa-color-decently-black;
     }
-  };
+  }
 }
 
 .coa-rtl {

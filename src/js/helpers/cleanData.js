@@ -1,4 +1,8 @@
 import { findKey } from 'lodash';
+import axios from 'axios';
+// import prettyBytes from 'pretty-bytes';
+import filesize from 'filesize';
+
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const cleanContacts = contacts => {
@@ -51,6 +55,9 @@ export const cleanRelatedServiceLinks = links => {
   });
 };
 
+/**
+  Makes copies of pages for each topic and each department.
+**/
 export const cleanLinks = (links, pageType) => {
   if (!links || !links.edges) return null;
   let pathPrefix = '';
@@ -276,7 +283,75 @@ export const cleanDepartmentDirectors = directors => {
   });
 };
 
-export const cleanDepartments = allDepartments => {
+export const cleanDepartmentTopServiceLink = (topService, langCode) => {
+  const page =
+    topService.servicePage ||
+    topService.guidePage ||
+    topService.informationPage ||
+    topService.officialDocumentPage;
+
+  if (page) {
+    // If we have a topic let's make our URL from it
+    if (page.topics && page.topics.edges.length) {
+      const topic = page.topics.edges[0].node.topic;
+
+      if (
+        topic &&
+        topic.topiccollections &&
+        topic.topiccollections.edges.length
+      ) {
+        const tc = topic.topiccollections.edges[0].node.topiccollection;
+
+        return {
+          title: page.title,
+          url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
+          type: !!langCode ? langCode : 'en',
+        };
+      }
+    }
+
+    // If we have a department let's make our URL from it
+    if (page.relatedDepartments && page.relatedDepartments.edges.length) {
+      const dept = page.relatedDepartments.edges[0].node.relatedDepartment;
+
+      return {
+        title: page.title,
+        url: `/${dept.slug}/${page.slug}`,
+        type: !!langCode ? langCode : 'en',
+      };
+    }
+  }
+};
+
+export const cleanDepartmentTopServices = (topServicePages, langCode) => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges
+    .map(({ node: topService }) => {
+      let cleaned = cleanDepartmentTopServiceLink(topService, langCode);
+
+      return cleaned;
+    })
+    .filter(x => typeof x !== 'undefined');
+};
+
+export const cleanDepartmentTopServiceIds = topServicePages => {
+  if (!topServicePages || !topServicePages.edges) return null;
+
+  return topServicePages.edges
+    .map(({ node: topService }) => {
+      const page =
+        topService.servicePage ||
+        topService.guidePage ||
+        topService.informationPage ||
+        topService.officialDocumentPage;
+
+      if (page) return page.id;
+    })
+    .filter(x => typeof x !== 'undefined');
+};
+
+export const cleanDepartments = (allDepartments, langCode) => {
   if (!allDepartments || !allDepartments.edges) return null;
 
   return allDepartments.edges.map(({ node: department }) => {
@@ -287,6 +362,15 @@ export const cleanDepartments = allDepartments => {
       department.departmentDirectors,
     );
     department.relatedLinks = [];
+    department.topServices = department.topServicePages;
+    department.topServices = cleanDepartmentTopServices(
+      department.topServicePages,
+      langCode,
+    );
+    department.topServiceIds = cleanDepartmentTopServiceIds(
+      department.topServicePages,
+    );
+
     return department;
   });
 };
@@ -366,4 +450,70 @@ export const clean311 = threeoneone => {
       text: title,
     };
   });
+};
+
+const getDocumentPdfSize = async document => {
+  return await axios({
+    method: 'HEAD',
+    url: document.link,
+  })
+    .then(res => {
+      if (res.headers['content-type'] === 'application/pdf') {
+        document.pdfSize = filesize(+res.headers['content-length']).replace(
+          ' ',
+          '',
+        );
+        return;
+      }
+    })
+    .catch(error => null);
+};
+
+export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  let cleanedOfficialDocumentPages = cleanLinks(
+    allOfficialDocumentPages,
+    'official_document',
+  );
+
+  const pdfSizePromises = [];
+  for (let page of cleanedOfficialDocumentPages) {
+    if (!page.officialDocuments.edges) continue;
+    for (let doc of page.officialDocuments.edges) {
+      pdfSizePromises.push(getDocumentPdfSize(doc.node));
+    }
+  }
+
+  await Promise.all(pdfSizePromises);
+
+  return cleanedOfficialDocumentPages;
+};
+
+export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
+  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+
+  return allOfficialDocumentPages.edges.map(
+    ({ node: officialDocumentPage }) => {
+      officialDocumentPage.url = `/official_document/${
+        officialDocumentPage.slug
+      }`;
+      officialDocumentPage.topic = {
+        slug: 'sample-topic',
+        title: 'Sample Topic',
+        topiccollection: {
+          topics: [],
+        },
+      };
+      officialDocumentPage.theme = {};
+      return officialDocumentPage;
+    },
+  );
+};
+
+export const cleanGuidePages = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+  let cleanedGuidePages = cleanLinks(allGuidePages, 'guide');
+
+  return cleanedGuidePages;
 };
