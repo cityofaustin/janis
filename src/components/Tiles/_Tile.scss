@@ -45,12 +45,13 @@
   border-top: 1px solid $coa-color-gray-light;
   border-left: 1px solid $coa-color-gray-light;
   border-right: 1px solid $coa-color-gray-light;
+  border-bottom: 1px solid transparent;
 
   padding: $coa-spacing-small $coa-spacing-small;
 
   &:hover {
     background-color: $coa-color-gray-lightest;
-    box-shadow: inset 0 0 0 1px $coa-color-primary;
+    border-color: $coa-color-primary !important;
   }
 }
 
