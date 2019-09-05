@@ -26,7 +26,119 @@ const departmentPageFragment = `
       }
     }
     jobListings
-    topServices
+    topServicePages {
+      edges {
+        node {
+          id
+          sortOrder
+          servicePage {
+            id
+            title
+            slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          informationPage {
+            id
+            title
+            slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          guidePage {
+            id
+            title
+            slug
+            relatedDepartments {
+              edges {
+                node {
+                  relatedDepartment {
+                    slug
+                  }
+                }
+              }
+            }
+            topics {
+              edges {
+                node {
+                  topic {
+                    slug
+                    topiccollections {
+                      edges {
+                        node {
+                          topiccollection {
+                            slug
+                            theme {
+                              slug
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     contacts {
       edges {
         node {
