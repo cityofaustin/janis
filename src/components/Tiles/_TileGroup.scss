@@ -6,10 +6,6 @@
 
   padding: $coa-spacing-large $coa-spacing-medium;
 
-  @include tablet {
-    max-width: $coa-wrapper-sm-maxwidth;
-  }
-
   @include mobile {
     background: $coa-color-primary;
   }

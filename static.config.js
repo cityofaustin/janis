@@ -62,10 +62,8 @@ const makeAllPages = async langCode => {
 
       const topServices = services.map(s => ({
         type: !!langCode ? langCode : 'en',
-        value: {
-          url: s.url,
-          title: s.title,
-        },
+        url: s.url,
+        title: s.title,
       }));
 
       return {

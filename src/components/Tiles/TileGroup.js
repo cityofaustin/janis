@@ -14,16 +14,12 @@ const TileGroup = ({ title, description, locale, tiles }) => {
           <p className="coa-TileGroup__description">{description}</p>
         )}
         <div className="coa-TileGroup__tiles-container">
-          {tiles.map(({ type, value }, index) => {
+          {tiles.map(({ type, url, title }, index) => {
             // If our link type matches our locale, render it
             return type.substring(type.length - 2) === locale ? (
               <Tile
-                url={
-                  value.url.substring(0, 4) === 'http'
-                    ? value.url
-                    : `/${locale}${value.url}`
-                }
-                text={value.title}
+                url={url.substring(0, 4) === 'http' ? url : `/${locale}${url}`}
+                text={title}
               />
             ) : null;
           })}
