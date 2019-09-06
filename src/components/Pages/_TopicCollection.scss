@@ -100,6 +100,10 @@
   @include compact-tile-container;
 }
 
+.coa-TopicCollectionCard__item + .coa-TopicCollectionCard__item {
+  display: none;
+}
+
 .coa-TopicCollectionCard__link {
   text-decoration: none;
   font-weight: $coa-font-semibold;

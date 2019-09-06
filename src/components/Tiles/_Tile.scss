@@ -45,17 +45,25 @@
   border-top: 1px solid $coa-color-gray-light;
   border-left: 1px solid $coa-color-gray-light;
   border-right: 1px solid $coa-color-gray-light;
-  border-bottom: 1px solid transparent;
+  // border-bottom: 1px solid transparent;
 
   padding: $coa-spacing-small $coa-spacing-small;
 
   &:hover {
     background-color: $coa-color-gray-lightest;
-    border-color: $coa-color-primary !important;
+    border: 1px solid $coa-color-primary;
+  }
+
+  + .coa-Tile {
+    background: red;
   }
 }
 
 @mixin compact-tile-container {
+  &: + .coa-Tile {
+    background: red;
+  }
+
   margin-bottom: 0;
 
   // Since we wrap our tiles in tilegroup, we need to
