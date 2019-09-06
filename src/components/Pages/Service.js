@@ -38,17 +38,7 @@ const Service = ({
     <Head>
       <title>{title}</title>
     </Head>
-    {image && (
-      <PageBanner
-        imagesPath={`${process.env.CMS_MEDIA}/images`}
-        imageFilename={path.basename(
-          image.filename,
-          path.extname(image.filename),
-        )}
-        imageExtension={path.extname(image.filename).substring(1)}
-        imageTitle={image.title}
-      />
-    )}
+    {image && <PageBanner image={image}/>}
     <div>
       <ContextualNav
         topic={topic}

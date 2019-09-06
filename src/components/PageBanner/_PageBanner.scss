@@ -1,71 +1,34 @@
-.coa-PageBannerImage {
-  object-fit: cover;
-  // This is for https://www.npmjs.com/package/object-fit-images
-  font-family: 'object-fit: cover;';
-
-  width: 100%;
-  height: 17rem;
-  margin-bottom: $coa-space-level4;
-  display: none;
-  @include media($coa-medium-screen) {
-    height: 32rem;
-    display: inherit;
-  }
-}
-
-.coa-PageBannerCover {
-  flex-direction: column;
-  padding: $coa-space-level7 0;
-  height: 12rem;
-  color: $coa-color-white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $coa-color-primary;
-  @include media($coa-medium-screen) {
-    height: $coa-herohome-height--medium;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  @include media($coa-large-screen) {
-    height: $coa-herohome-height--large;
-  }
-  .usa-search {
-    margin-top: $coa-space-level6;
-  }
-}
-
-.coa-PageBannerCoverDepartment {
-  flex-direction: column;
-  padding: $coa-space-level7 0;
-  height: 12rem;
-  color: $coa-color-white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $coa-color-primary;
-  @include media($coa-medium-screen) {
-    height: 30rem;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  @include media($coa-large-screen) {
-    height: 30rem;
-  }
-  .usa-search {
-    margin-top: $coa-space-level6;
-  }
-}
-
 .coa-PageBanner__container {
-  img {
-    position: absolute;
-    z-index: -1;
-    top: auto;
+  display: flex;
+  position: relative;
+  height: 17rem;
+  @include media($coa-medium-screen) {
     height: 30rem;
-    width: 100%;
-    object-fit: cover;
-    // This is for https://www.npmjs.com/package/object-fit-images
-    font-family: 'object-fit: cover;';
   }
+}
+
+.coa-PageBanner__container-mobile-optimized {
+  height: 12rem;
+  .coa-PageBanner__header {
+    background: $coa-color-primary;
+  }
+}
+
+.coa-PageBanner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  font-family: 'object-fit: cover;'; // This is for https://www.npmjs.com/package/object-fit-images
+}
+
+.coa-PageBanner__header {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: $coa-color-white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -7,3 +7,10 @@
   position: absolute;
   left: -999em;
 }
+
+// Keep in its own class for polyfill's "querySelectorAll('.sticky')" to work
+// Must be listed after other classes in order overwrite .col-x-x position properties
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}

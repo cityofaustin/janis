@@ -6,6 +6,7 @@ html {
   line-height: $coa-base-line-height;
   -webkit-font-smoothing: antialiased;
 }
+
 body {
   font-size: $coa-font-size-small;
   line-height: $coa-line-height-small;
@@ -23,4 +24,14 @@ svg {
     height: $coa-font-size-md-small - 0.1rem;
     width: $coa-font-size-md-small - 0.1rem;
   }
+}
+
+// Allow elements rendered in main to stack above footer, if necessary.
+// For example, the mobile menu on the GuidePage
+main {
+  z-index: 1;
+}
+
+footer {
+  z-index: 0;
 }

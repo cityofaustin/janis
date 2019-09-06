@@ -15,9 +15,6 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import WorkInProgress from 'components/WorkInProgress';
 
-// TODO: this jsonFileData is temporary. Add it to Wagtail API
-import jsonFileData from '__tmpdata/pages';
-
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import TopServices from 'components/Tiles/TopServices';
@@ -53,6 +50,7 @@ const Department = ({
       </ul>
     </div>
   );
+
   const TopServicesRelatedContent = () =>
     // if we render both TopServices and Related, wrap them in a div
     topServices.length > 0 && !!relatedLinks.length ? (
@@ -83,20 +81,12 @@ const Department = ({
       </Head>
       {image && (
         <PageBanner
-          extraClasses="coa-PageBannerCoverDepartment"
-          imagesPath={`${process.env.CMS_MEDIA}/images`}
-          imageFilename={path.basename(
-            image.filename,
-            path.extname(image.filename),
-          )}
-          imageExtension={path.extname(image.filename).substring(1)}
-          imageTitle={image.title}
+          image={image}
           headerText={title}
+          mobileOptimized={true}
         />
       )}
-
       <TopServicesRelatedContent />
-
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">
@@ -159,15 +149,3 @@ const Department = ({
 };
 
 export default withRouteData(injectIntl(Department));
-
-/*
-Taking these out instead of doing actual conditional stuff because we don't need them for OPO
-
-        <h3>Social Media URLs</h3>
-        {socialMedia.map(smlink => (
-          <div className="wrapper wrapper--sm container-fluid">
-            <p>URL: {smlink.value}</p>
-          </div>
-        ))}
-        <p>Job Listing link: {jobListings}</p>
-*/
