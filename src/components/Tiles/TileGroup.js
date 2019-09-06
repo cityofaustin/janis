@@ -1,42 +1,36 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { services as i18n3 } from 'js/i18n/definitions';
-import { Link } from 'react-static';
-import ArrowRight from 'components/SVGs/ArrowRight';
 
 import Tile from './Tile';
-import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ tiles, text, url, description, intl }) => (
-  <div className="coa-TileGroup">
-    {/* <div className="wrapper container-fluid"> */}
-    {text &&
-      url && (
-        <h4 className="coa-TileGroup__title">
-          <Link to={url}>
-            {text}&nbsp;
-            <ArrowRight />
-          </Link>
-        </h4>
-      )}
+const TileGroup = ({ title, description, locale, tiles }) => {
+  debugger;
 
-    {text && !url && <h4 className="coa-TileGroup__title">{text}</h4>}
-
-    <div className="row">
-      {tiles.map(({ url, text }, index) => (
-        <div
-          key={index}
-          className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
-        >
-          <Tile url={url} text={text} />
+  return (
+    !!tiles.length && (
+      <div className="coa-TileGroup">
+        <h4 className="coa-TileGroup__title">{title}</h4>
+        {!!description && (
+          <p className="coa-TileGroup__description">{description}</p>
+        )}
+        <div className="coa-TileGroup__tiles-container">
+          {tiles.map(({ type, value }, index) => {
+            // If our link type matches our locale, render it
+            return type.substring(type.length - 2) === locale ? (
+              <Tile
+                url={
+                  value.url.substring(0, 4) === 'http'
+                    ? value.url
+                    : `/${locale}${value.url}`
+                }
+                text={value.title}
+              />
+            ) : null;
+          })}
         </div>
-      ))}
-    </div>
-    {/* </div> */}
-  </div>
-);
-
-TileGroup.propTypes = tileGroupPropTypes;
+      </div>
+    )
+  );
+};
 
 export default injectIntl(TileGroup);

@@ -1,18 +1,28 @@
 .coa-TileGroup {
-  padding: $coa-spacing-xlarge 0;
+  // margin-left: $coa-container-margin;
+  // margin-right: $coa-container-margin;
+  max-width: $coa-wrapper-maxwidth;
+  margin: auto;
 
-  .coa-TileGroup__description {
-    text-align: center;
+  padding: $coa-spacing-large $coa-spacing-medium;
+
+  @include tablet {
+    max-width: $coa-wrapper-sm-maxwidth;
   }
-}
-
-.coa-TileGroup--service {
-  background: $coa-color-secondary;
-  padding: $coa-spacing-xlarge 0;
 }
 
 .coa-TileGroup__title {
   font-weight: $coa-font-semibold;
   font-size: $coa-font-size-medium;
   color: $coa-color-almost-black;
+}
+
+.coa-TileGroup__tiles-container {
+  @include tablet-and-desktop {
+    display: flex;
+  }
+
+  @include tablet {
+    flex-wrap: wrap;
+  }
 }
