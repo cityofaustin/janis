@@ -1,6 +1,6 @@
 # 🌻 Janis ☮️
 
-Janis is the codename for the software that renders [https://alpha.austin.gov](alpha.austin.gov) for web browsers. It is a working prototype of static site generation front-end and decoupled CMS architecture.
+Janis is the codename for the software that renders [alpha.austin.gov](https://alpha.austin.gov) for web browsers. It is a working prototype of static site generation front-end and decoupled CMS architecture.
 
 Janis uses data provided by the CMS API service, [Joplin](https://github.com/cityofaustin/joplin), along with the React components to generate a static-progressive website.
 
