@@ -9,12 +9,21 @@
   @include tablet {
     max-width: $coa-wrapper-sm-maxwidth;
   }
+
+  @include mobile {
+    background: $coa-color-primary;
+  }
 }
 
 .coa-TileGroup__title {
   font-weight: $coa-font-semibold;
   font-size: $coa-font-size-medium;
   color: $coa-color-almost-black;
+
+  @include mobile {
+    color: $coa-color-white;
+    font-size: $coa-font-size-md-small;
+  }
 }
 
 .coa-TileGroup__tiles-container {

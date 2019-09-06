@@ -97,7 +97,7 @@
   margin-left: 0;
   margin-bottom: $coa-spacing-md-small;
 
-  @include compact-tile-container;
+  // @include compact-tile-container;
 }
 
 .coa-TopicCollectionCard__item + .coa-TopicCollectionCard__item {
