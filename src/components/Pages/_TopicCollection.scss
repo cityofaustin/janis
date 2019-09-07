@@ -26,8 +26,18 @@
   background: $coa-color-grey;
   border-radius: $coa-button-border-radius;
 
-  @include media($coa-large-screen) {
+  @include desktop {
     width: calc(33.333% - #{$coa-spacing-medium});
+    margin-right: $coa-spacing-medium;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 3px;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+
+  @include tablet {
+    width: calc(50% - #{$coa-spacing-medium});
     margin-right: $coa-spacing-medium;
     box-shadow: rgba(0, 0, 0, 0.16) 0 1px 3px;
 
