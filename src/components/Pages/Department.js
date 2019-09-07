@@ -55,21 +55,23 @@ const Department = ({
     // if we render both TopServices and Related, wrap them in a div
     topServices.length > 0 && !!relatedLinks.length ? (
       <div className="coa-TopServicesRelatedContent">
+        <div className="coa-DepartmentPageTopServices">
+          <TopServices
+            title={intl.formatMessage(i18n.topServices)}
+            tiles={topServices}
+            locale={intl.locale}
+          />
+        </div>
+        <RelatedContent />
+      </div>
+    ) : topServices.length > 0 ? (
+      <div className="coa-DepartmentPageTopServices">
         <TopServices
           title={intl.formatMessage(i18n.topServices)}
           tiles={topServices}
           locale={intl.locale}
-          extraClasses="coa-TopServicesDepartment"
         />
-        <RelatedContent />
       </div>
-    ) : topServices.length > 0 ? (
-      <TopServices
-        title={intl.formatMessage(i18n.topServices)}
-        tiles={topServices}
-        locale={intl.locale}
-        extraClasses="coa-TopServicesDepartment"
-      />
     ) : !!relatedLinks.length ? (
       <RelatedContent />
     ) : null;
@@ -80,11 +82,7 @@ const Department = ({
         <title>{title}</title>
       </Head>
       {image && (
-        <PageBanner
-          image={image}
-          headerText={title}
-          mobileOptimized={true}
-        />
+        <PageBanner image={image} headerText={title} mobileOptimized={true} />
       )}
       <TopServicesRelatedContent />
       <div className="coa-Page__all-of-the-content">

@@ -7,6 +7,10 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  .coa-TileGroup__title {
+    font-size: $coa-font-size-md-small;
+  }
 }
 
 .coa-TopicCollectionCard {
@@ -21,7 +25,6 @@
   margin-bottom: $coa-spacing-medium;
   background: $coa-color-grey;
   border-radius: $coa-button-border-radius;
-  padding: $coa-spacing-large;
 
   @include media($coa-large-screen) {
     width: calc(33.333% - #{$coa-spacing-medium});

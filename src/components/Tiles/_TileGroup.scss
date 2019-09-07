@@ -2,13 +2,18 @@
   // margin-left: $coa-container-margin;
   // margin-right: $coa-container-margin;
   max-width: $coa-wrapper-maxwidth;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
 
   padding: $coa-spacing-large $coa-spacing-medium;
 
   @include mobile {
     background: $coa-color-primary;
   }
+}
+
+.coa-TileGroup--blue-background {
+  background: $coa-color-primary;
 }
 
 .coa-TileGroup__title {
@@ -30,4 +35,7 @@
   @include tablet {
     flex-wrap: wrap;
   }
+}
+
+.coa-TileGroup__tiles-container--compact {
 }

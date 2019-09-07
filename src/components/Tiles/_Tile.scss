@@ -65,14 +65,26 @@
     border-top: none;
   }
 
+  &:hover + .coa-Tile--compact {
+    border-top: none;
+  }
+
   &:first-child {
     border-top: 1px solid $coa-color-gray-light;
+    &:hover {
+      border-color: $coa-color-primary;
+    }
+
     border-top-right-radius: $coa-button-border-radius;
     border-top-left-radius: $coa-button-border-radius;
   }
 
   &:last-child {
     border-bottom: 1px solid $coa-color-gray-light;
+    &:hover {
+      border: 1px solid $coa-color-primary;
+    }
+
     border-bottom-right-radius: $coa-button-border-radius;
     border-bottom-left-radius: $coa-button-border-radius;
   }

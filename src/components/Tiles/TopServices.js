@@ -7,6 +7,7 @@ import TileGroup from './TileGroup';
 const TopServices = ({ tiles, title, url, locale, extraClasses }) => {
   return <TileGroup title={title} locale={locale} tiles={tiles} />;
 };
+
 TopServices.propTypes = {
   title: PropTypes.string.isRequired,
   tiles: PropTypes.array.isRequired,
