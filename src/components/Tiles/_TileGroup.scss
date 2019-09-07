@@ -21,6 +21,11 @@
   font-size: $coa-font-size-medium;
   color: $coa-color-almost-black;
 
+  a {
+    color: $coa-color-almost-black;
+    text-decoration: none;
+  }
+
   @include mobile {
     color: $coa-color-white;
     font-size: $coa-font-size-md-small;

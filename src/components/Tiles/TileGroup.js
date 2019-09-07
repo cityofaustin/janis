@@ -1,10 +1,11 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
+import { Link } from 'react-static';
 
 import Tile from './Tile';
 
-const TileGroup = ({ title, description, tiles, compact, intl }) => {
+const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
   return (
     !!tiles.length && (
       <div
@@ -12,7 +13,9 @@ const TileGroup = ({ title, description, tiles, compact, intl }) => {
           'coa-TileGroup--compact': compact,
         })}
       >
-        <h4 className="coa-TileGroup__title">{title}</h4>
+        <h4 className="coa-TileGroup__title">
+          {titleUrl ? <Link to={titleUrl}>{title}</Link> : title}
+        </h4>
         {!!description && (
           <p className="coa-TileGroup__description">{description}</p>
         )}
