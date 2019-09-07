@@ -3,7 +3,7 @@
   flex-direction: column;
   margin-bottom: $coa-spacing-xlarge;
 
-  @include media($coa-large-screen) {
+  @include media($coa-medium-screen) {
     flex-direction: row;
     flex-wrap: wrap;
   }

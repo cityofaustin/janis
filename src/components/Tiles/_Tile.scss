@@ -30,6 +30,7 @@
   border: 1px solid $coa-color-primary;
   border-radius: $coa-button-border-radius;
   padding: $coa-spacing-medium $coa-spacing-small;
+  max-width: $coa-tile-max-width;
 
   &:hover {
     background-color: $coa-color-secondary;

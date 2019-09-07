@@ -56,7 +56,7 @@ const Topic = ({
       </PageHeader>
       <div className="wrapper container-fluid">
         <div className="row">
-          <div className="col-xs-12">
+          <div className="col-xs-12 coa-TopicPage__tile-group">
             {!!topLinks.length && (
               <TileGroup
                 text={intl.formatMessage(i18n.topServices)}

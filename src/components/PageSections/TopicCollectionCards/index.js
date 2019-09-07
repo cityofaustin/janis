@@ -13,8 +13,6 @@ const TopicCard = ({ topic, index }) => {
 
   const tiles = pages.map(p => ({ url: p.url, title: p.title }));
 
-  debugger;
-
   return (
     <div key={index} className="coa-TopicCollectionCard">
       <TileGroup

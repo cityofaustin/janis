@@ -12,8 +12,14 @@
   }
 }
 
-.coa-TileGroup--blue-background {
-  background: $coa-color-primary;
+.coa-TopicPage__tile-group {
+  .coa-TileGroup {
+    background: none;
+  }
+
+  .coa-TileGroup__title {
+    color: $coa-color-almost-black;
+  }
 }
 
 .coa-TileGroup__title {
@@ -42,5 +48,6 @@
   }
 }
 
-.coa-TileGroup__tiles-container--compact {
+.coa-TileGroup--compact {
+  background: none;
 }

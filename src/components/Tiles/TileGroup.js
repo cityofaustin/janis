@@ -22,8 +22,8 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
         <div
           className={
             compact
-              ? 'TileGroup__tiles-container--compact'
-              : 'TileGroup__tiles-container'
+              ? 'coa-TileGroup__tiles-container--compact'
+              : 'coa-TileGroup__tiles-container'
           }
         >
           {tiles.map(({ type, url, title }, index) => {
