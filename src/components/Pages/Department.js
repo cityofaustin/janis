@@ -15,9 +15,10 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import WorkInProgress from 'components/WorkInProgress';
 
+import TileGroup from 'components/Tiles/TileGroup';
+
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
-import TopServices from 'components/Tiles/TopServices';
 
 const Department = ({
   department: {
@@ -56,20 +57,18 @@ const Department = ({
     topServices.length > 0 && !!relatedLinks.length ? (
       <div className="coa-TopServicesRelatedContent">
         <div className="coa-DepartmentPageTopServices">
-          <TopServices
+          <TileGroup
             title={intl.formatMessage(i18n.topServices)}
             tiles={topServices}
-            locale={intl.locale}
           />
         </div>
         <RelatedContent />
       </div>
     ) : topServices.length > 0 ? (
       <div className="coa-DepartmentPageTopServices">
-        <TopServices
+        <TileGroup
           title={intl.formatMessage(i18n.topServices)}
           tiles={topServices}
-          locale={intl.locale}
         />
       </div>
     ) : !!relatedLinks.length ? (
