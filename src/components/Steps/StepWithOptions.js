@@ -43,8 +43,8 @@ StepOption.propTypes = optionPropTypes;
 
 const StepWithOptionsContent = props => (
   <div className="coa-StepOption__container">
-    <h1 className="coa-StepOption__title">{props.description}</h1>
-    <Accordion className={'coa-Accordion'} allowMultipleExpanded={false}>
+    <HtmlFromAdmin content={props.description} />
+    <Accordion className={'coa-Accordion testy'} allowMultipleExpanded={false}>
       {props.options.map(({ ...rest }, index) => (
         <StepOption key={index} {...rest} />
       ))}
