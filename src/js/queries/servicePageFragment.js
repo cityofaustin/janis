@@ -55,7 +55,6 @@ const servicePageFragment = `
           contact {
             name
             email
-            phone
             ${phoneFragment}
             socialMedia
             hours {
