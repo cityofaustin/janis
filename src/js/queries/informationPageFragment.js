@@ -51,7 +51,6 @@ const informationPageFragment = `
           contact {
             name
             email
-            phone
             hours {
               edges {
                 node {
