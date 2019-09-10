@@ -18,7 +18,6 @@ const StepOption = ({ option_name, option_description }) => (
       <AccordionItemHeading className={'coa-AccordionItemHeading'}>
         <AccordionItemButton className={'coa-AccordionButton'}>
           <h3 className="coa-StepOption__name">{option_name}</h3>
-
           <AccordionItemState>
             {({ expanded }) =>
               expanded ? (
