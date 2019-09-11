@@ -9,7 +9,8 @@ import PageNotificationBanner from 'components/PageNotificationBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
-import TopServices from 'components/Tiles/TopServices';
+
+import TileGroup from 'components/Tiles/TileGroup';
 
 const Home = ({ topServices, image, intl }) => (
   <div>
@@ -22,11 +23,10 @@ const Home = ({ topServices, image, intl }) => (
       imageTitle={image.title}
       preheader={intl.formatMessage(i18n2.welcomeTo)}
     />
-    <TopServices
+
+    <TileGroup
       title={intl.formatMessage(i18n3.checkOutServices)}
       tiles={topServices}
-      locale={intl.locale}
-      extraClasses={'coa-TopServicesHome'}
     />
     {/* We are leaving it here because we might need it again.*/}
     {/*<PageNotificationBanner>*/}

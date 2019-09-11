@@ -11,7 +11,6 @@ const allDepartmentsQuery = `
               node {
                 contact {
                   name,
-
                   location {
                     id,
                     name,

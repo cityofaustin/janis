@@ -1,3 +1,14 @@
+.coa-DepartmentPageTopServices {
+  background: $coa-color-primary;
+
+  .coa-TileGroup__title {
+    color: $coa-color-white;
+    @include tablet-and-desktop {
+      font-size: $coa-font-size-md-small;
+    }
+  }
+}
+
 .coa-DepartmentPage__topServiceButtons {
   display: flex;
   flex-direction: column;

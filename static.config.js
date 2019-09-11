@@ -52,19 +52,19 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      let topServices = cleanLinks(allServicePages, 'service');
+      let services = cleanLinks(allServicePages, 'service');
 
       // Make sure we don't have any dupes in top services
-      topServices = topServices.filter(
+      services = services.filter(
         (service, index) =>
-          index === topServices.findIndex(s => s.id === service.id),
+          index === services.findIndex(s => s.id === service.id),
       );
 
-      // Quick little hack to get homepage top services
-      // working with TopServices component
-      for (var service of topServices) {
-        service.type = !!langCode ? langCode : 'en';
-      }
+      const topServices = services.map(s => ({
+        type: !!langCode ? langCode : 'en',
+        url: s.url,
+        title: s.title,
+      }));
 
       return {
         topServices,

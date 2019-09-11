@@ -1,22 +1,18 @@
-.coa-Tile {
+@mixin shared-tile {
   background-color: $coa-color-white;
-  border: 1px solid $coa-color-primary;
-  border-radius: $coa-button-border-radius;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   font-family: $coa-font-sans;
   min-width: $coa-tile-min-width;
-  padding: $coa-spacing-medium $coa-spacing-small;
   text-decoration: none;
   align-items: stretch;
+  i {
+    color: $coa-color-primary;
+  }
 
-  &:hover {
+  &:active {
     background-color: $coa-color-secondary;
-
-    .coa-Tile__text {
-      border-right: 1px solid $coa-color-white;
-    }
 
     .coa-Tile__text,
     i {
@@ -24,21 +20,96 @@
     }
   }
 
-  &:active {
-    background-color: $coa-color-darker-blue;
+  &:hover {
+    background-color: $coa-color-secondary;
 
     .coa-Tile__text,
     i {
-      color: $coa-color-white;
+      color: $coa-color-primary;
     }
   }
 }
 
-.coa-Tile__tag {
-  color: $coa-color-blue;
-  font-size: $coa-font-size-small;
-  font-weight: $coa-font-bold;
-  text-transform: uppercase;
+@mixin regular-tile {
+  @include shared-tile;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  margin: 1rem;
+  border: 1px solid $coa-color-primary;
+  border-radius: $coa-button-border-radius;
+  padding: $coa-spacing-medium $coa-spacing-small;
+  max-width: $coa-tile-max-width;
+
+  &:hover {
+    .coa-Tile__text {
+      border-right: 1px solid $coa-color-white;
+    }
+  }
+}
+
+@mixin compact-tile {
+  @include shared-tile;
+  box-sizing: border-box;
+
+  border-top: 1px solid $coa-color-gray-light;
+  border-left: 1px solid $coa-color-gray-light;
+  border-right: 1px solid $coa-color-gray-light;
+
+  padding: $coa-spacing-small $coa-spacing-small;
+
+  &:hover {
+    border: 1px solid $coa-color-primary;
+  }
+
+  &:hover + .coa-Tile {
+    border-top: none;
+  }
+
+  &:hover + .coa-Tile--compact {
+    border-top: none;
+  }
+
+  &:first-child {
+    border-top: 1px solid $coa-color-gray-light;
+    &:hover {
+      border-color: $coa-color-primary;
+    }
+
+    border-top-right-radius: $coa-button-border-radius;
+    border-top-left-radius: $coa-button-border-radius;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $coa-color-gray-light;
+    &:hover {
+      border: 1px solid $coa-color-primary;
+    }
+
+    border-bottom-right-radius: $coa-button-border-radius;
+    border-bottom-left-radius: $coa-button-border-radius;
+  }
+}
+
+.coa-Tile {
+  @include tablet-and-desktop {
+    @include regular-tile;
+  }
+
+  @include mobile {
+    @include compact-tile;
+  }
+
+  @include tablet {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    max-width: 47%;
+  }
+}
+
+.coa-Tile--compact {
+  @include compact-tile;
 }
 
 .coa-Tile__content {
@@ -57,9 +128,4 @@
   padding-right: $coa-spacing-md-small;
   margin-right: $coa-spacing-md-small;
   border-right: 1px solid $coa-color-dark-grey;
-}
-
-.coa-Tile__icon {
-  height: $coa-font-size-md-small; //based on coa-Tile__text font size
-  width: $coa-font-size-md-small; //based on coa-Tile__text font size
 }
