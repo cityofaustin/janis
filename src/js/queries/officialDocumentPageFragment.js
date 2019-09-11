@@ -52,6 +52,10 @@ const officialDocumentPageFragment = `
           summary
           name
           link
+          document {
+            fileSize
+            filename
+          }
         }
       }
     }

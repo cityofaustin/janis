@@ -481,7 +481,24 @@ export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
   for (let page of cleanedOfficialDocumentPages) {
     if (!page.officialDocuments.edges) continue;
     for (let doc of page.officialDocuments.edges) {
-      pdfSizePromises.push(getDocumentPdfSize(doc.node));
+      // If we have a document in wagtail
+      // use that info to update the information syncronously
+      if (doc.node.document) {
+        doc.node.link = `${process.env.CMS_DOCS}/${doc.node.document.filename}`;
+        // Maybe there's a better way to handle this but meh for now
+        // If it's a pdf, add the size
+        if (doc.node.document.filename.slice(-3) === 'pdf') {
+          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+            ' ',
+            '',
+          );
+        }
+      }
+
+      // If we have a external link, do some async axios filesize magic
+      else if (doc.node.link) {
+        pdfSizePromises.push(getDocumentPdfSize(doc.node));
+      }
     }
   }
 
