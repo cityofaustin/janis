@@ -56,8 +56,6 @@ const Topic = ({
         </div>
       </div>
     </div>
-    {/* {console.log(topiccollection)} */}
-
     <RelatedToMobile topiccollection={topiccollection} topic={topic} />
   </Fragment>
 );
