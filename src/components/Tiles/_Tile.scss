@@ -12,11 +12,20 @@
   }
 
   &:active {
-    background-color: $coa-color-darker-blue;
+    background-color: $coa-color-secondary;
 
     .coa-Tile__text,
     i {
-      color: $coa-color-white;
+      color: $coa-color-primary;
+    }
+  }
+
+  &:hover {
+    background-color: $coa-color-secondary;
+
+    .coa-Tile__text,
+    i {
+      color: $coa-color-primary;
     }
   }
 }
@@ -33,15 +42,8 @@
   max-width: $coa-tile-max-width;
 
   &:hover {
-    background-color: $coa-color-secondary;
-
     .coa-Tile__text {
       border-right: 1px solid $coa-color-white;
-    }
-
-    .coa-Tile__text,
-    i {
-      color: $coa-color-primary;
     }
   }
 }
@@ -53,12 +55,10 @@
   border-top: 1px solid $coa-color-gray-light;
   border-left: 1px solid $coa-color-gray-light;
   border-right: 1px solid $coa-color-gray-light;
-  // border-bottom: 1px solid transparent;
 
   padding: $coa-spacing-small $coa-spacing-small;
 
   &:hover {
-    background-color: $coa-color-gray-lightest;
     border: 1px solid $coa-color-primary;
   }
 
@@ -91,40 +91,6 @@
   }
 }
 
-// @mixin compact-tile-container {
-//   margin-bottom: 0;
-
-//   // Since we wrap our tiles in tilegroup, we need to
-//   // do our first/last-child logic here
-//   &:first-child {
-//     .coa-Tile {
-//       border-top: 1px solid $coa-color-gray-light;
-//       border-top-right-radius: $coa-button-border-radius;
-//       border-top-left-radius: $coa-button-border-radius;
-//     }
-
-//     .coa-Tile--compact {
-//       border-top: 1px solid $coa-color-gray-light;
-//       border-top-right-radius: $coa-button-border-radius;
-//       border-top-left-radius: $coa-button-border-radius;
-//     }
-//   }
-
-//   &:last-child {
-//     .coa-Tile {
-//       border-bottom: 1px solid $coa-color-gray-light;
-//       border-bottom-right-radius: $coa-button-border-radius;
-//       border-bottom-left-radius: $coa-button-border-radius;
-//     }
-
-//     .coa-Tile--compact {
-//       border-bottom: 1px solid $coa-color-gray-light;
-//       border-bottom-right-radius: $coa-button-border-radius;
-//       border-bottom-left-radius: $coa-button-border-radius;
-//     }
-//   }
-// }
-
 .coa-Tile {
   @include tablet-and-desktop {
     @include regular-tile;
@@ -145,15 +111,6 @@
 .coa-Tile--compact {
   @include compact-tile;
 }
-
-// .coa-TileGroup__tile {
-//   display: flex;
-//   margin-bottom: $coa-spacing-small;
-
-//   // @include mobile {
-//   //   @include compact-tile-container;
-//   // }
-// }
 
 .coa-Tile__content {
   display: flex;
