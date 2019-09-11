@@ -65,11 +65,6 @@
 
 .coa-TopicCollectionCard__arrow-icon {
   margin-left: $coa-spacing-xsmall;
-  // display: none;
-
-  // @include media($coa-large-screen) {
-  //   display: block;
-  // }
 }
 
 .coa-TopicCollectionCard__add-icon {
@@ -77,40 +72,23 @@
   display: block;
   flex: 1;
   text-align: right;
-
-  // @include media($coa-large-screen) {
-  //   display: none;
-  // }
 }
 
 .coa-TopicCollectionCard__description {
   margin-top: 0;
   margin-bottom: $coa-spacing-medium;
-  // display: none;
-
-  // @include media($coa-large-screen) {
-  //   display: block;
-  // }
 }
 
 .coa-TopicCollectionCard__links {
   flex: 1;
   margin-top: $coa-spacing-medium;
   margin-bottom: $coa-spacing-medium;
-  // display: none;
-
-  // @include media($coa-large-screen) {
-  //   display: block;
-  //   margin-top: none;
-  // }
 }
 
 .coa-TopicCollectionCard__item {
   list-style: none;
   margin-left: 0;
   margin-bottom: $coa-spacing-md-small;
-
-  // @include compact-tile-container;
 }
 
 .coa-TopicCollectionCard__item + .coa-TopicCollectionCard__item {
@@ -121,26 +99,8 @@
   text-decoration: none;
   font-weight: $coa-font-semibold;
   font-size: $coa-font-size-small;
-
-  // display: none;
-
-  // @include media($coa-large-screen) {
-  //   display: block;
-  // }
 }
 
 .coa-TopicCollectionCard__info-link {
   text-decoration: none;
 }
-
-// .coa-TopicCollectionCard--active {
-//   .coa-TopicCollectionCard__description,
-//   .coa-TopicCollectionCard__links,
-//   .coa-TopicCollectionCard__link {
-//     display: block;
-//   }
-
-//   .coa-TopicCollectionCard__add-icon {
-//     display: none;
-//   }
-// }
