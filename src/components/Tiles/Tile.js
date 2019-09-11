@@ -4,8 +4,8 @@ import { Link } from 'react-static';
 
 import { tilePropTypes } from './proptypes';
 
-const Tile = ({ url, text }) => (
-  <Link className="coa-Tile" to={url}>
+const Tile = ({ url, text, compact }) => (
+  <Link className={compact ? 'coa-Tile--compact' : 'coa-Tile'} to={url}>
     <div className="coa-Tile__content">
       <p className="coa-Tile__text">{text}</p>
       <i className="material-icons">arrow_forward</i>

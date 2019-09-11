@@ -1,42 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { services as i18n3 } from 'js/i18n/definitions';
+import classNames from 'classnames';
 import { Link } from 'react-static';
-import ArrowRight from 'components/SVGs/ArrowRight';
 
 import Tile from './Tile';
-import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ tiles, text, url, description, intl }) => (
-  <div className="coa-TileGroup">
-    {/* <div className="wrapper container-fluid"> */}
-    {text &&
-      url && (
+const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
+  return (
+    !!tiles.length && (
+      <div
+        className={classNames('coa-TileGroup', {
+          'coa-TileGroup--compact': compact,
+        })}
+      >
         <h4 className="coa-TileGroup__title">
-          <Link to={url}>
-            {text}&nbsp;
-            <ArrowRight />
-          </Link>
+          {titleUrl ? <Link to={titleUrl}>{title}</Link> : title}
         </h4>
-      )}
-
-    {text && !url && <h4 className="coa-TileGroup__title">{text}</h4>}
-
-    <div className="row">
-      {tiles.map(({ url, text }, index) => (
+        {!!description && (
+          <p className="coa-TileGroup__description">{description}</p>
+        )}
         <div
-          key={index}
-          className="coa-TileGroup__tile col-xs-12 col-md-6 col-lg-3"
+          className={
+            compact
+              ? 'coa-TileGroup__tiles-container--compact'
+              : 'coa-TileGroup__tiles-container'
+          }
         >
-          <Tile url={url} text={text} />
+          {tiles.map(({ type, url, title }, index) => {
+            return (
+              <Tile
+                url={
+                  url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
+                }
+                text={title}
+                compact={compact}
+              />
+            );
+          })}
         </div>
-      ))}
-    </div>
-    {/* </div> */}
-  </div>
-);
-
-TileGroup.propTypes = tileGroupPropTypes;
+      </div>
+    )
+  );
+};
 
 export default injectIntl(TileGroup);

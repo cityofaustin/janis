@@ -12,8 +12,8 @@ import TileGroup from 'components/Tiles/TileGroup';
 
 const Departments = ({ departments, intl }) => {
   const departmentLinks = departments.map(d => ({
-    url: `/${intl.locale}/${d.slug}`,
-    text: d.title,
+    url: `/${d.slug}`,
+    title: d.title,
   }));
 
   return (
@@ -21,9 +21,7 @@ const Departments = ({ departments, intl }) => {
       <Head>
         <title>Departments</title>
       </Head>
-      <PageHeader>
-        {intl.formatMessage(i18n2.departments)}
-      </PageHeader>
+      <PageHeader>{intl.formatMessage(i18n2.departments)}</PageHeader>
       <div className="wrapper container-fluid">
         <TileGroup tiles={departmentLinks} />
       </div>
