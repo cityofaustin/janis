@@ -179,7 +179,6 @@ const departmentPageFragment = `
         node {
           contact {
             name
-            phone
             ${phoneFragment}
             email
             socialMedia
