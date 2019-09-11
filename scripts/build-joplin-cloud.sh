@@ -14,4 +14,9 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
   export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
+if [ "$HEAD" == '2811-hosted-documents' ]; then
+  export CMS_API='http://joplin-pr-2811-play-with-docum.herokuapp.com/api/graphql'
+  export CMS_DOCS='https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents'
+fi
+
 yarn npm-run-all build-css build-js
