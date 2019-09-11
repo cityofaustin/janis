@@ -23,61 +23,44 @@ const Topic = ({
     topiccollection,
   },
   intl,
-}) => {
-  // Not my favorite way to handle this but I know that adding locales to our
-  // slugs and urls in our cleanData functions could break things in a lot more
-  // places than doing this here can.
-  for (var link of otherLinks) {
-    if (link.url.substring(1, 3) !== intl.locale) {
-      link.url = `/${intl.locale}${link.url}`;
-    }
-  }
+}) => (
+  <Fragment>
+    <Head>
+      <title>{title}</title>
+    </Head>
 
-  for (var link of otherLinks) {
-    if (link.url.substring(1, 3) !== intl.locale) {
-      link.url = `/${intl.locale}${link.url}`;
-    }
-  }
-
-  return (
-    <Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
-
-      <ContextualNav
-        topic={topic}
-        topiccollection={topiccollection}
-        theme={topiccollection.theme}
-        contentType={'topic'}
-      />
-      <PageHeader contentType={'topic'} description={description}>
-        {title}
-      </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 coa-TopicPage__tile-group">
-            {!!topLinks.length && (
-              <TileGroup
-                text={intl.formatMessage(i18n.topServices)}
-                tiles={topLinks}
-              />
-            )}
-            {!!otherLinks.length && (
-              <TileGroup
-                text={intl.formatMessage(i18n.allServices)}
-                tiles={otherLinks}
-              />
-            )}
-          </div>
+    <ContextualNav
+      topic={topic}
+      topiccollection={topiccollection}
+      theme={topiccollection.theme}
+      contentType={'topic'}
+    />
+    <PageHeader contentType={'topic'} description={description}>
+      {title}
+    </PageHeader>
+    <div className="wrapper container-fluid">
+      <div className="row">
+        <div className="col-xs-12 coa-TopicPage__tile-group">
+          {!!topLinks.length && (
+            <TileGroup
+              text={intl.formatMessage(i18n.topServices)}
+              tiles={topLinks}
+            />
+          )}
+          {!!otherLinks.length && (
+            <TileGroup
+              text={intl.formatMessage(i18n.allServices)}
+              tiles={otherLinks}
+            />
+          )}
         </div>
       </div>
-      {/* {console.log(topiccollection)} */}
+    </div>
+    {/* {console.log(topiccollection)} */}
 
-      <RelatedToMobile topiccollection={topiccollection} topic={topic} />
-    </Fragment>
-  );
-};
+    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+  </Fragment>
+);
 
 Topic.propTypes = {
   topic: PropTypes.shape({
