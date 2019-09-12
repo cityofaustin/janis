@@ -7,9 +7,17 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+// Hides the main scrollbar in chrome on windows 10
+::-webkit-scrollbar {
+  width: 0 !important;
+}
+
 body {
   font-size: $coa-font-size-small;
   line-height: $coa-line-height-small;
+
+  // This hides scrollbars in edge on windows 10
+  -ms-overflow-style: none;
 
   @include media($coa-medium-screen) {
     font-size: $coa-font-size-md-small;
@@ -35,3 +43,5 @@ main {
 footer {
   z-index: 0;
 }
+
+
