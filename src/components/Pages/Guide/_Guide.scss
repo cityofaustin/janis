@@ -20,7 +20,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   margin-right: auto;
 
   @include tablet-and-desktop {
-    max-width: $max-guide-tablet-width
+    max-width: $max-guide-tablet-width;
   }
 }
 
@@ -40,7 +40,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuidePage__content-container {
   @extend .coa-Page__all-of-the-content;
   @include tablet {
-    max-width: $max-guide-tablet-width
+    max-width: $max-guide-tablet-width;
   }
 }
 
@@ -161,7 +161,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuideSection__content {
   padding: 4rem;
 
-  >p:last-child {
+  > p:last-child {
     // Let parent handle padding-bottom for the last nested paragraph
     margin-bottom: 0px;
   }
@@ -173,7 +173,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideSection__link {
-  border-top: 2px solid #dddfe1;;
+  border-top: 2px solid #dddfe1;
   font-size: 1.8rem;
   text-align: center;
   padding-top: 1rem;
@@ -233,7 +233,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__current-section {
-  background-color: #D9E8F6;
+  background-color: #d9e8f6;
 
   &:before {
     // Material icon should be in margin on desktop
@@ -241,12 +241,13 @@ $max-guide-tablet-width: $coa-medium-screen;
     @include desktop {
       position: absolute;
     }
-    font-family: "Material Icons";
+    font-family: 'Material Icons';
     font-weight: normal;
     content: 'arrow_forward';
     color: $coa-color-primary;
     left: 20px;
     font-size: larger;
+    font-feature-settings: 'liga';
   }
 }
 
@@ -293,11 +294,11 @@ $max-guide-tablet-width: $coa-medium-screen;
   top: 100vh; // Initialize below the screen, only open up onClick
   overflow-y: scroll;
 
-  -webkit-transition: top .3s ease-in;
-  -moz-transition: top .3s ease-in;
-  -o-transition: top .3s ease-in;
-  -ms-transition: top .3s ease-in;
-  transition: top .3s ease-in;
+  -webkit-transition: top 0.3s ease-in;
+  -moz-transition: top 0.3s ease-in;
+  -o-transition: top 0.3s ease-in;
+  -ms-transition: top 0.3s ease-in;
+  transition: top 0.3s ease-in;
 }
 
 .coa-GuideMenu__mobile-popup-open {
