@@ -14,4 +14,9 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
   export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
+if [ "$HEAD" == '2941-guide-section-headings-localized' ]; then
+  export CMS_API='http://joplin-pr-2941-guide-section-h.herokuapp.com/api/graphql'
+fi
+
+
 yarn npm-run-all build-css build-js
