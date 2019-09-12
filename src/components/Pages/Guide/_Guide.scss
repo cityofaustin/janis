@@ -247,6 +247,7 @@ $max-guide-tablet-width: $coa-medium-screen;
     color: $coa-color-primary;
     left: 20px;
     font-size: larger;
+    font-feature-settings: 'liga';
   }
 }
 
