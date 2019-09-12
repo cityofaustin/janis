@@ -467,3 +467,7 @@ export const officialdocuments = defineMessages({
   author: 'Author',
   document: 'Document',
 });
+
+export const guides = defineMessages({
+  pageLink: 'View this page on alpha.austin.gov',
+});

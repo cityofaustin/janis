@@ -90,5 +90,6 @@
   "howYouKnowMenu.httpsHeader": "The site is secure.",
   "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
   "officialdocuments.author": "Author",
-  "officialdocuments.document": "Document"
+  "officialdocuments.document": "Document",
+  "guides.pageLink": "View this page on alpha.austin.gov"
 }
