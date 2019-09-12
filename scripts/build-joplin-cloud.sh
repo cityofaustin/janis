@@ -18,5 +18,4 @@ if [ "$HEAD" == '2939-arrows' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
-
 yarn npm-run-all build-css build-js

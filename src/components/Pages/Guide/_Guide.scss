@@ -306,8 +306,19 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__mobile-background {
-  opacity: 0.5;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
   background-color: $coa-color-black;
+  height: 0;
+}
+
+.coa-GuideMenu__mobile-background--visible {
+  height: 100vh;
+  display: block;
+  opacity: 0.5;
+}
+
+.coa-GuideMenu__mobile-padding {
   height: 33vh;
 }
 
