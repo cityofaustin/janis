@@ -200,11 +200,12 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__link {
+  display: flex;
   color: $coa-color-cod-gray;
   font-size: 1.7rem;
   line-height: 1em;
   text-decoration: none;
-  padding-left: $coa-spacing-large;
+  padding-left: $coa-spacing-medium;
 
   &:visited {
     color: $coa-color-cod-gray;
@@ -214,7 +215,21 @@ $max-guide-tablet-width: $coa-medium-screen;
   &:hover {
     color: $coa-color-cod-gray;
     cursor: pointer;
+    &:before {
+      visibility: visible;
+    }
     @extend .coa-GuideMenu__current-section;
+  }
+
+  &:before {
+    content: 'arrow_forward';
+    visibility: hidden;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    color: $coa-color-primary;
+    font-size: larger;
+    font-feature-settings: 'liga';
+    padding-right: $coa-spacing-md-small;
   }
 }
 
@@ -236,18 +251,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   background-color: #d9e8f6;
 
   &:before {
-    // Material icon should be in margin on desktop
-    // But inline with left on mobile
-    @include desktop {
-      position: absolute;
-    }
-    font-family: 'Material Icons';
-    font-weight: normal;
-    content: 'arrow_forward';
-    color: $coa-color-primary;
-    left: 20px;
-    font-size: larger;
-    font-feature-settings: 'liga';
+    visibility: visible;
   }
 }
 
