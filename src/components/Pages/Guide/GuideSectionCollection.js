@@ -5,6 +5,8 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import Steps from 'components/Steps';
 import { hyphenate } from './helpers';
 
+import { guides as i18n } from 'js/i18n/definitions';
+
 function GetUrlFromTopicsOrDepartments({ topics, departments, slug }) {
   // Just use the first topic if we've got one
   if (topics.length) {
@@ -29,7 +31,13 @@ function GetUrlFromTopicsOrDepartments({ topics, departments, slug }) {
   return '';
 }
 
-function GuideSection({ page, pageNumber, numberOfPages, sectionHeading }) {
+function GuideSection({
+  page,
+  pageNumber,
+  numberOfPages,
+  sectionHeading,
+  intl,
+}) {
   const pageData = page.informationPage || page.servicePage;
   const title = pageData.title;
   const description = page.informationPage
@@ -60,7 +68,7 @@ function GuideSection({ page, pageNumber, numberOfPages, sectionHeading }) {
           })}
           target="_blank"
         >
-          View this page on alpha.austin.gov
+          {intl.formatMessage(i18n.pageLink)}
           <i className="material-icons">open_in_new</i>
         </a>
       </div>
@@ -73,6 +81,7 @@ function GuideSectionCollection({
   updateSectionLocation,
   isMobileOrTablet,
   resizeCount,
+  intl,
 }) {
   return (
     <div className="coa-GuideSection__collection">
@@ -97,6 +106,7 @@ function GuideSectionCollection({
             pageNumber={index + 1}
             numberOfPages={section.pages.length}
             sectionHeading={section.heading}
+            intl={intl}
           />
         </GuideSectionWrapper>
       ))}
