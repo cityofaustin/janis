@@ -58,7 +58,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
   @extend .col-lg-8;
-
+  padding-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
   margin-top: $sticky-guide-top;
 }
 
@@ -260,7 +260,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuidePage__content-container > .wrapper > .row {
-  margin-right: 0 !important;
+  margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
 }
 
 .coa-GuideMenu__mobile-button {
