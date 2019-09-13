@@ -259,6 +259,10 @@ $max-guide-tablet-width: $coa-medium-screen;
   width: 100%;
 }
 
+.coa-GuidePage__content-container > .wrapper > .row {
+  margin-right: 0 !important;
+}
+
 .coa-GuideMenu__mobile-button {
   position: relative;
   display: flex;
