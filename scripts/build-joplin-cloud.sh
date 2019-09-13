@@ -18,7 +18,7 @@ if [ "$HEAD" == '2937-windows-scrollbars' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
-if [ "$HEAD" == '2939-arrows' ]; then
+if [ "$HEAD" == '2904-andriod-ToC' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
