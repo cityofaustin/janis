@@ -39,15 +39,16 @@ const InformationPage = ({
     <Head>
       <title>{title}</title>
     </Head>
-    <ContextualNav
-      topic={topic}
-      topics={topics}
-      topiccollection={topic && topic.topiccollection}
-      theme={theme}
-      department={department}
-      relatedDepartments={relatedDepartments}
-      coaGlobal={coaGlobal}
-    />
+    {!coaGlobal && (
+      <ContextualNav
+        topic={topic}
+        topics={topics}
+        topiccollection={topic && topic.topiccollection}
+        theme={theme}
+        department={department}
+        relatedDepartments={relatedDepartments}
+      />
+    )}
     {image && <PageBanner image={image} />}
     <div>
       <PageHeader contentType={'information'} description={description}>
@@ -81,12 +82,14 @@ const InformationPage = ({
           </div>
         </div>
       </div>
-      <RelatedToMobile
-        topic={topic}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
-      />
+      {!coaGlobal && (
+        <RelatedToMobile
+          topic={topic}
+          topiccollection={topic && topic.topiccollection}
+          theme={theme}
+          department={department}
+        />
+      )}
     </div>
   </div>
 );

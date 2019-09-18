@@ -12,15 +12,7 @@ const ContextualNav = ({
   relatedDepartments,
   contentType,
   intl,
-  coaGlobal,
 }) => {
-  debugger;
-
-  // TODO: figure out header
-  if (coaGlobal) {
-    return <div className="coa-ContextualNav">CITY</div>;
-  }
-
   // Set the parent, if we have a topic, it's because we nav'd from a topic
   // if we don't, use the dept
   const parent = {
