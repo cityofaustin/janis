@@ -114,6 +114,15 @@ export const cleanLinks = (links, pageType) => {
       for (const edge of link.topics.edges) {
         const { topic, toplink } = edge.node;
 
+        // Check for global topic and make those global
+        if (topic.slug === 'global-2') {
+          link.coaGlobal = true;
+          link.text = link.title;
+
+          // There's only one URL for these so we can push the link without copying it
+          cleanedLinks.push(link);
+        }
+
         if (topic.topiccollections && topic.topiccollections.edges.length) {
           for (const edge of topic.topiccollections.edges) {
             const { topiccollection } = edge.node;

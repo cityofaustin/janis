@@ -31,6 +31,7 @@ const InformationPage = ({
     additionalContent,
     image,
     contacts,
+    coaGlobal,
   },
   intl,
 }) => (
@@ -45,8 +46,9 @@ const InformationPage = ({
       theme={theme}
       department={department}
       relatedDepartments={relatedDepartments}
+      coaGlobal={coaGlobal}
     />
-    {image && <PageBanner image={image}/>}
+    {image && <PageBanner image={image} />}
     <div>
       <PageHeader contentType={'information'} description={description}>
         {title}

@@ -45,11 +45,12 @@ const makeAllPages = async langCode => {
 
   const themeChildren = await makeThemePages(client);
   const deptChildren = await makeDepartmentPages(client, langCode);
+  const globalChildren = await makeGlobalPages(client);
 
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: themeChildren.concat(deptChildren),
+    children: themeChildren.concat(deptChildren).concat(globalChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
@@ -75,6 +76,26 @@ const makeAllPages = async langCode => {
       };
     },
   };
+
+  return data;
+};
+
+const makeGlobalPages = async client => {
+  // TODO: other page types
+  const { allInformationPages: allInformationPages } = await client.request(
+    allInformationPagesQuery,
+  );
+  const informationPages = cleanInformationPages(allInformationPages);
+
+  const data = informationPages
+    .filter(i => i.coaGlobal)
+    .map(informationPage => ({
+      path: `/${informationPage.slug}`,
+      component: 'src/components/Pages/Information',
+      getData: async () => ({
+        informationPage,
+      }),
+    }));
 
   return data;
 };
