@@ -12,6 +12,7 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
 import allOfficialDocumentPagesQuery from 'js/queries/allOfficialDocumentPagesQuery';
 import allGuidePagesQuery from 'js/queries/allGuidePagesQuery';
+import globalInformationPagesQuery from 'js/queries/globalInformationPagesQuery';
 
 import {
   cleanLinks,
@@ -83,7 +84,7 @@ const makeAllPages = async langCode => {
 const makeGlobalPages = async client => {
   // TODO: other page types
   const { allInformationPages: allInformationPages } = await client.request(
-    allInformationPagesQuery,
+    globalInformationPagesQuery,
   );
   const informationPages = cleanInformationPages(allInformationPages);
 

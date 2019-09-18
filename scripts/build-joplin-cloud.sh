@@ -22,8 +22,8 @@ if [ "$HEAD" == '2960-guide-page-link-localization' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
-if [ "$HEAD" == '2862-global-pages' ]; then
-  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+if [ "$HEAD" == '2862-better-global-pages' ]; then
+  export CMS_API='https://http://joplin-pr-2862-global-pages.herokuapp.com/api/graphql'
 fi
 
 
