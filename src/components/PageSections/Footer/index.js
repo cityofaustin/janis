@@ -19,6 +19,8 @@ import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/propty
 
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
+import { Link } from 'react-static';
+
 const Footer = ({ threeoneone, intl }) => (
   <footer>
     <div className="coa-Footer">
@@ -37,6 +39,9 @@ const Footer = ({ threeoneone, intl }) => (
             austintexas.gov.
           </ExternalLink>
         </div>
+      </div>
+      <div className="coa-Footer__links">
+        <Link to={'/privacy-policy/'}>BLARG</Link>
       </div>
     </div>
   </footer>
