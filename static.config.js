@@ -13,6 +13,9 @@ import all311Query from 'js/queries/all311Query';
 import allOfficialDocumentPagesQuery from 'js/queries/allOfficialDocumentPagesQuery';
 import allGuidePagesQuery from 'js/queries/allGuidePagesQuery';
 import globalInformationPagesQuery from 'js/queries/globalInformationPagesQuery';
+import globalGuidePagesQuery from 'js/queries/globalGuidePagesQuery';
+import globalOfficialDocumentPagesQuery from 'js/queries/globalOfficialDocumentPagesQuery';
+import globalServicePagesQuery from 'js/queries/globalServicePagesQuery';
 
 import {
   cleanLinks,
@@ -82,21 +85,64 @@ const makeAllPages = async langCode => {
 };
 
 const makeGlobalPages = async client => {
-  // TODO: other page types
   const { allInformationPages: allInformationPages } = await client.request(
     globalInformationPagesQuery,
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
+  const { allGuidePages: allGuidePages } = await client.request(
+    globalGuidePagesQuery,
+  );
+  const guidePages = cleanGuidePages(allGuidePages);
+
+  const {
+    allOfficialDocumentPages: allOfficialDocumentPages,
+  } = await client.request(globalOfficialDocumentPagesQuery);
+  const officialDocumentPages = await cleanOfficialDocumentPages(
+    allOfficialDocumentPages,
+  );
+
+  const { allServicePages: allServicePages } = await client.request(
+    globalServicePagesQuery,
+  );
+  const servicePages = cleanServices(allServicePages);
+  console.log(servicePages);
+
   const data = informationPages
-    .filter(i => i.coaGlobal)
     .map(informationPage => ({
       path: `/${informationPage.slug}`,
       component: 'src/components/Pages/Information',
       getData: async () => ({
         informationPage,
       }),
-    }));
+    }))
+    .concat(
+      servicePages.map(service => ({
+        path: `/${service.slug}`,
+        component: 'src/components/Pages/Service',
+        getData: async () => ({
+          service,
+        }),
+      })),
+    )
+    .concat(
+      officialDocumentPages.map(officialDocumentPage => ({
+        path: `/${officialDocumentPage.slug}`,
+        component: 'src/components/Pages/OfficialDocumentList',
+        getData: async () => ({
+          officialDocumentPage,
+        }),
+      })),
+    )
+    .concat(
+      guidePages.map(guidePage => ({
+        path: `/${guidePage.slug}`,
+        component: 'src/components/Pages/Guide',
+        getData: async () => ({
+          guidePage,
+        }),
+      })),
+    );
 
   return data;
 };

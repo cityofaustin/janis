@@ -18,6 +18,7 @@ const OfficialDocumentList = ({
     department,
     relatedDepartments,
     officialDocuments,
+    coaGlobal,
   },
   intl,
 }) => {
@@ -26,14 +27,16 @@ const OfficialDocumentList = ({
       <Head>
         <title>{title}</title>
       </Head>
-      <ContextualNav
-        topic={topic}
-        topics={topics}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
-        relatedDepartments={relatedDepartments}
-      />
+      {!coaGlobal && (
+        <ContextualNav
+          topic={topic}
+          topics={topics}
+          topiccollection={topic && topic.topiccollection}
+          theme={theme}
+          department={department}
+          relatedDepartments={relatedDepartments}
+        />
+      )}
       <div>
         <PageHeader contentType={'official-document'} description={description}>
           {title}
@@ -43,10 +46,7 @@ const OfficialDocumentList = ({
             <div className="row">
               <div className="col-xs-12 col-md-8">
                 {officialDocuments.edges.map((document, index) => (
-                  <OfficialDocument
-                    document={document.node}
-                    key={index}
-                  />
+                  <OfficialDocument document={document.node} key={index} />
                 ))}
               </div>
             </div>
@@ -54,7 +54,7 @@ const OfficialDocumentList = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(injectIntl(OfficialDocumentList));
