@@ -118,6 +118,7 @@ function Guide(props) {
     sections,
     image,
     contacts,
+    coaGlobal,
   } = props.guidePage;
   let { intl } = props;
 
@@ -131,14 +132,16 @@ function Guide(props) {
       <Head>
         <title>{title}</title>
       </Head>
-      <ContextualNav
-        topic={topic}
-        topics={topics}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
-        relatedDepartments={relatedDepartments}
-      />
+      {!coaGlobal && (
+        <ContextualNav
+          topic={topic}
+          topics={topics}
+          topiccollection={topic && topic.topiccollection}
+          theme={theme}
+          department={department}
+          relatedDepartments={relatedDepartments}
+        />
+      )}
       {image && <PageBanner image={image} />}
       <div className="coa-GuidePage__header">
         <h1 className="coa-GuidePage__header-title">{title}</h1>

@@ -31,6 +31,7 @@ const Service = ({
     related,
     shortDescription,
     relatedDepartments,
+    coaGlobal,
   },
   intl,
 }) => (
@@ -38,15 +39,18 @@ const Service = ({
     <Head>
       <title>{title}</title>
     </Head>
-    {image && <PageBanner image={image}/>}
+    {image && <PageBanner image={image} />}
     <div>
-      <ContextualNav
-        topic={topic}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
-        relatedDepartments={relatedDepartments}
-      />
+      {!coaGlobal && (
+        <ContextualNav
+          topic={topic}
+          topiccollection={topic && topic.topiccollection}
+          theme={theme}
+          department={department}
+          relatedDepartments={relatedDepartments}
+          coaGlobal={coaGlobal}
+        />
+      )}
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>

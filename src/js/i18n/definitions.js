@@ -79,6 +79,7 @@ export const misc = defineMessages({
   homeLink404: 'home page',
   or404: ', or ',
   contactUs404: 'contact us',
+  privacyPolicy: 'Privacy policy',
 });
 
 export const navigation = defineMessages({
