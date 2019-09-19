@@ -14,7 +14,7 @@ elif [ "$HEAD" == '2783-mobile-guide-nav' ]; then
   export CMS_API='https://joplin-pr-2783-mobile-guide-na.herokuapp.com/api/graphql'
 fi
 
-if [ "$HEAD" == '2937-windows-scrollbars' ]; then
+if [ "$HEAD" == '2906-toc-horizontal-rules' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
