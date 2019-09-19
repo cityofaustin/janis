@@ -58,7 +58,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
   @extend .col-lg-8;
-  padding-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
+
   margin-top: $sticky-guide-top;
 }
 
@@ -200,12 +200,12 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__link {
+  display: flex;
   color: $coa-color-cod-gray;
   font-size: 1.7rem;
   line-height: 2.4rem;
   text-decoration: none;
-  padding-left: $coa-spacing-large;
-  padding-right: 2rem;
+  padding-left: $coa-spacing-medium;
 
   &:visited {
     color: $coa-color-cod-gray;
@@ -215,7 +215,21 @@ $max-guide-tablet-width: $coa-medium-screen;
   &:hover {
     color: $coa-color-cod-gray;
     cursor: pointer;
+    &:before {
+      visibility: visible;
+    }
     @extend .coa-GuideMenu__current-section;
+  }
+
+  &:before {
+    content: 'arrow_forward';
+    visibility: hidden;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    color: $coa-color-primary;
+    font-size: larger;
+    font-feature-settings: 'liga';
+    padding-right: $coa-spacing-md-small;
   }
 }
 
@@ -243,18 +257,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   background-color: #d9e8f6;
 
   &:before {
-    // Material icon should be in margin on desktop
-    // But inline with left on mobile
-    @include desktop {
-      position: absolute;
-    }
-    font-family: 'Material Icons';
-    font-weight: normal;
-    content: 'arrow_forward';
-    color: $coa-color-primary;
-    left: 20px;
-    font-size: larger;
-    font-feature-settings: 'liga';
+    visibility: visible;
   }
 }
 
@@ -264,10 +267,6 @@ $max-guide-tablet-width: $coa-medium-screen;
   bottom: 0;
   left: 0;
   width: 100%;
-}
-
-.coa-GuidePage__content-container > .wrapper > .row {
-  margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
 }
 
 .coa-GuideMenu__mobile-button {
@@ -362,6 +361,9 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__mobile-content {
+  margin-right: 2rem;
+  margin-left: 2rem;
+
   @include tablet {
     max-width: 550px;
     margin: auto;
