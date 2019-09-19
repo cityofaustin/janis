@@ -41,7 +41,9 @@ const Footer = ({ threeoneone, intl }) => (
         </div>
       </div>
       <div className="coa-Footer__links">
-        <Link to={'/privacy-policy/'}>BLARG</Link>
+        <Link to={'/privacy-policy/'}>
+          {intl.formatMessage(i18n.privacyPolicy)}
+        </Link>
       </div>
     </div>
   </footer>
