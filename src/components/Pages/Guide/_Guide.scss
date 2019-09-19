@@ -52,7 +52,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   max-height: 100vh;
   overflow-y: scroll;
   margin-top: $sticky-guide-top;
-  top: $sticky-guide-top;
+  top: 0px;
 }
 
 .coa-GuidePage__main-content {
