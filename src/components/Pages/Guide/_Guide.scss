@@ -205,6 +205,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   line-height: 1em;
   text-decoration: none;
   padding-left: $coa-spacing-large;
+  padding-right: 2rem;
 
   &:visited {
     color: $coa-color-cod-gray;
@@ -355,9 +356,6 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__mobile-content {
-  margin-right: 2rem;
-  margin-left: 2rem;
-
   @include tablet {
     max-width: 550px;
     margin: auto;
