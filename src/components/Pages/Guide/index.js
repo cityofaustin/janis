@@ -44,6 +44,7 @@ function Guide(props) {
 
   // Update offsetTop of each GuideSection if the window resizes
   function updateSectionLocation(offsetTop, anchorTag) {
+    console.log("offsetTop, anchorTag :", offsetTop, anchorTag)
     return dispatchSectionLocations({
       action: 'update',
       payload: { offsetTop, anchorTag },
@@ -62,6 +63,7 @@ function Guide(props) {
     let i = 0;
     while (i < sectionLocations.length) {
       if (window.scrollY < sectionLocations[i].offsetTop - 1) {
+        console.log('Its this section!!!',sectionLocations[i])
         break;
       } else {
         i++;

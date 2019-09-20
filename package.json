@@ -71,6 +71,7 @@
     "start-prod": "./scripts/serve-local.sh -P",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
+    "build-local": "bash ./scripts/build-local.sh",
     "build-joplin-cloud": "bash ./scripts/build-joplin-cloud.sh",
     "start-js": "react-static start",
     "build-js": "react-static build",

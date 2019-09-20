@@ -363,3 +363,22 @@ $max-guide-tablet-width: $coa-medium-screen;
     margin: auto;
   }
 }
+
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+   /*
+     - IE10+ specific styles go here
+     - https://paper-leaf.com/blog/2014/09/targeting-ie-10-11-browsers-css/
+   */
+
+   .coa-GuidePage__content-container {
+     display: block;
+   }
+
+   .coa-GuidePage__content-container > .wrapper > .row {
+     //display: block;
+     // flex: 1;
+   }
+   // .coa-GuidePage__main-content {
+   //   margin-left: 33.33%;
+   // }
+}
