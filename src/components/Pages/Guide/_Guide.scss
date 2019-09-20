@@ -365,20 +365,11 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-   /*
-     - IE10+ specific styles go here
-     - https://paper-leaf.com/blog/2014/09/targeting-ie-10-11-browsers-css/
-   */
-
+  /*
+    This CSS section is for conditional styling for IE 11 only.
+  */
    .coa-GuidePage__content-container {
+     // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
      display: block;
    }
-
-   .coa-GuidePage__content-container > .wrapper > .row {
-     //display: block;
-     // flex: 1;
-   }
-   // .coa-GuidePage__main-content {
-   //   margin-left: 33.33%;
-   // }
 }

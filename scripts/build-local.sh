@@ -8,3 +8,5 @@ yarn npm-run-all build-css build-js
 echo " 🏗 END of the Build 🏗 "
 
 http-server dist
+
+say "Hello O.D.D. Developer, I'm done building the application."
