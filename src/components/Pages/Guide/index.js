@@ -59,6 +59,7 @@ function Guide(props) {
     We want the GuideSection right before the first GuideSection that is past the window's position.
   **/
   function handleScroll() {
+    // printSections(sectionLocations, window.pageYOffset)
     let i = 0;
     while (i < sectionLocations.length) {
       if (window.pageYOffset < sectionLocations[i].offsetTop - 1) {
