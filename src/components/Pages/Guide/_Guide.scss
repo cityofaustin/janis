@@ -363,3 +363,13 @@ $max-guide-tablet-width: $coa-medium-screen;
     margin: auto;
   }
 }
+
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+  /*
+    This CSS section is for conditional styling for IE 11 only.
+  */
+   .coa-GuidePage__content-container {
+     // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
+     display: block;
+   }
+}

@@ -32,3 +32,6 @@ yarn-error.log*
 
 # sass to css
 src/**/*.css
+
+# react-static
+artifacts/
