@@ -58,7 +58,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
   @extend .col-lg-8;
-
+  padding-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
   margin-top: $sticky-guide-top;
 }
 
@@ -259,6 +259,10 @@ $max-guide-tablet-width: $coa-medium-screen;
   width: 100%;
 }
 
+.coa-GuidePage__content-container > .wrapper > .row {
+  margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
+}
+
 .coa-GuideMenu__mobile-button {
   position: relative;
   display: flex;
@@ -358,4 +362,14 @@ $max-guide-tablet-width: $coa-medium-screen;
     max-width: 550px;
     margin: auto;
   }
+}
+
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+  /*
+    This CSS section is for conditional styling for IE 11 only.
+  */
+   .coa-GuidePage__content-container {
+     // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
+     display: block;
+   }
 }

@@ -18,7 +18,6 @@ const StepOption = ({ option_name, option_description }) => (
       <AccordionItemHeading className={'coa-AccordionItemHeading'}>
         <AccordionItemButton className={'coa-AccordionButton'}>
           <h3 className="coa-StepOption__name">{option_name}</h3>
-
           <AccordionItemState>
             {({ expanded }) =>
               expanded ? (
@@ -43,7 +42,7 @@ StepOption.propTypes = optionPropTypes;
 
 const StepWithOptionsContent = props => (
   <div className="coa-StepOption__container">
-    <h1 className="coa-StepOption__title">{props.description}</h1>
+    <HtmlFromAdmin content={props.description} />
     <Accordion className={'coa-Accordion'} allowMultipleExpanded={false}>
       {props.options.map(({ ...rest }, index) => (
         <StepOption key={index} {...rest} />
