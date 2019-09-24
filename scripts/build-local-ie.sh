@@ -1,8 +1,7 @@
 # IE11 can't be served from webpack-dev-server
 # So we can use this script to build a static site and write it to the dist folder.
 # This allows us to develop and test IE11 on Browserstack locally.
-CD=`dirname $BASH_SOURCE`
-export NODE_PATH="$CD/../src"
+export NODE_PATH='./src'
 
 export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 export CMS_MEDIA='https://joplin-austin-gov-static.s3.amazonaws.com/production/media'
