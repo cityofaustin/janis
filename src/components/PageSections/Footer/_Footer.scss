@@ -12,12 +12,31 @@
   background: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
-  padding-bottom: $coa-spacing-large;
 
   a {
     &:hover {
       color: #d9e8f6;
     }
+  }
+}
+
+.coa-Footer__links {
+  background: $coa-color-white;
+  height: 5rem;
+  line-height: 5rem;
+  a {
+    font-size: $coa-font-size-xsmall;
+    text-decoration: none;
+    &:visited {
+      color: $coa-color-primary;
+    }
+  }
+  @include tablet-and-desktop {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+  @include mobile {
+    text-align: center;
   }
 }
 
