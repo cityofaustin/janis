@@ -13,6 +13,7 @@ import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
+import { printSections } from 'components/Pages/Guide/helpers.js'
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
@@ -58,17 +59,16 @@ function Guide(props) {
     We want the GuideSection right before the first GuideSection that is past the window's position.
   **/
   function handleScroll() {
-    const thing = sectionLocations[0].offsetTop;
+    // printSections(sectionLocations, window.pageYOffset)
     let i = 0;
     while (i < sectionLocations.length) {
-      if (window.scrollY < sectionLocations[i].offsetTop - 1) {
+      if (window.pageYOffset < sectionLocations[i].offsetTop - 1) {
         break;
       } else {
         i++;
       }
     }
     i--;
-
     const nextCurrentSection = sectionLocations[i];
     if (nextCurrentSection) {
       setCurrentSection(nextCurrentSection.anchorTag);
