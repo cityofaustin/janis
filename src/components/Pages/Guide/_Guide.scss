@@ -19,7 +19,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   // background: red;
   &:hover {
     background: #d9e8f6;
-    border-bottom: 1.5px solid $coa-color-gray-lighter;
+    // border-bottom: 1.5px solid $coa-color-gray-lighter;
     // border-top: 1.5px solid $coa-color-gray-lighter;
     & + .coa-GuideMenu__link-wrapper {
       // background: red;
@@ -32,10 +32,11 @@ $max-guide-tablet-width: $coa-medium-screen;
       }
     }
     & > .coa-GuideMenu__link {
-      border: none;
+      // border: none;
       // background: red;
       // border-bottom: none;
     }
+    @extend .coa-GuideMenu__current-section;
   }
 
   &:not(:last-child) {
@@ -248,11 +249,6 @@ $max-guide-tablet-width: $coa-medium-screen;
   }
 
   &:hover {
-    color: $coa-color-cod-gray;
-    cursor: pointer;
-    &:before {
-      visibility: visible;
-    }
     @extend .coa-GuideMenu__current-section;
   }
 
@@ -290,6 +286,12 @@ $max-guide-tablet-width: $coa-medium-screen;
 
 .coa-GuideMenu__current-section {
   background-color: #d9e8f6;
+
+  color: $coa-color-cod-gray;
+  cursor: pointer;
+  &:before {
+    visibility: visible;
+  }
 
   &:before {
     visibility: visible;
@@ -405,12 +407,13 @@ $max-guide-tablet-width: $coa-medium-screen;
   }
 }
 
-@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+@media screen and (-ms-high-contrast: active),
+  screen and (-ms-high-contrast: none) {
   /*
     This CSS section is for conditional styling for IE 11 only.
   */
-   .coa-GuidePage__content-container {
-     // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
-     display: block;
-   }
+  .coa-GuidePage__content-container {
+    // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
+    display: block;
+  }
 }

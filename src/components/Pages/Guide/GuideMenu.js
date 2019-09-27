@@ -12,7 +12,11 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
   }
 
   return (
-    <div className="coa-GuideMenu__link-wrapper">
+    <div
+      className={classNames('coa-GuideMenu__link-wrapper', {
+        'coa-GuideMenu__current-section': isCurrentSection,
+      })}
+    >
       <div
         className={classNames('coa-GuideMenu__link', {
           'coa-GuideMenu__heading': isHeading,
