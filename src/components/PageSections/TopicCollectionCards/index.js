@@ -5,7 +5,6 @@ import { misc as i18n1 } from 'js/i18n/definitions';
 import { Link } from 'react-static';
 
 const TopicCard = ({ topic, index, intl }) => {
-  // debugger;
   const pages =
     topic.topLinks && topic.topLinks.length
       ? topic.toplinks
