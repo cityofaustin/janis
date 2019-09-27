@@ -16,25 +16,13 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__link-wrapper {
-  // background: red;
   &:hover {
     background: #d9e8f6;
-    // border-bottom: 1.5px solid $coa-color-gray-lighter;
-    // border-top: 1.5px solid $coa-color-gray-lighter;
     & + .coa-GuideMenu__link-wrapper {
-      // background: red;
       border-top: none;
       & > div {
-        // background: yellow;
         border-top: none;
-
-        // border-bottom: none;
       }
-    }
-    & > .coa-GuideMenu__link {
-      // border: none;
-      // background: red;
-      // border-bottom: none;
     }
     @extend .coa-GuideMenu__current-section;
   }
