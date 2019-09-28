@@ -12,13 +12,13 @@ const TopicCard = ({ topic, index, intl }) => {
       ? topic.otherLinks.slice(0, 4)
       : null;
 
-  const tiles = pages.map(p => ({ url: p.url, title: p.title }));
+  const tiles = pages && pages.map(p => ({ url: p.url, title: p.title }));
 
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
     topic.topiccollection.slug
   }/${topic.slug}`;
 
-  return (
+  return !!tiles && (
     <div key={index} className="coa-TopicCollectionCard">
       <TileGroup
         title={`${topic.title} →`}

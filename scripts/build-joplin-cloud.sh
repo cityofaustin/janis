@@ -26,6 +26,8 @@ if [ "$HEAD" == '2996-privacy-policy-link' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
-
+if [ "$HEAD" == '3071-fix-pageless-topic-build-breaks' ]; then
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+fi
 
 yarn npm-run-all build-css build-js
