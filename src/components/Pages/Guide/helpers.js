@@ -2,15 +2,15 @@
 export const hyphenate = (title) => title.replace(/\s/g, "-")
 
 // useful for debugging the sidebar
-export const printSections = (sectionLocations, scrollY) => {
+export const printSections = (sectionLocations, pageYOffset) => {
   console.log("-----------------------------------------")
   let gotY = false;
   for (let i in sectionLocations) {
     let section = sectionLocations[i];
-    if (!gotY && (scrollY < (section.offsetTop - 1))) {
+    if (!gotY && (pageYOffset < (section.offsetTop - 1))) {
       gotY = true;
       console.log("|")
-      console.log(`x <---- we are here at ${scrollY}`);
+      console.log(`x <---- we are here at ${pageYOffset}`);
       console.log ("|")
     } else {
       console.log ("|")
@@ -19,7 +19,7 @@ export const printSections = (sectionLocations, scrollY) => {
   }
   if (!gotY) {
     console.log ("|")
-    console.log(`x <---- we are here at ${scrollY}`);
+    console.log(`x <---- we are here at ${pageYOffset}`);
     console.log ("|")
   } else {
     console.log ("|")
