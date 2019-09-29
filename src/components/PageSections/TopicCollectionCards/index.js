@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 import TileGroup from 'components/Tiles/TileGroup';
 import { misc as i18n1 } from 'js/i18n/definitions';
+import { Link } from 'react-static';
 
-const TopicCard = ({ topic, index }) => {
+const TopicCard = ({ topic, index, intl }) => {
   const pages =
     topic.topLinks && topic.topLinks.length
       ? topic.toplinks
@@ -11,19 +12,25 @@ const TopicCard = ({ topic, index }) => {
       ? topic.otherLinks.slice(0, 4)
       : null;
 
-  const tiles = pages.map(p => ({ url: p.url, title: p.title }));
+  const tiles = pages && pages.map(p => ({ url: p.url, title: p.title }));
 
-  return (
+  const titleUrl = `/${topic.topiccollection.theme.slug}/${
+    topic.topiccollection.slug
+  }/${topic.slug}`;
+
+  return !!tiles && (
     <div key={index} className="coa-TopicCollectionCard">
       <TileGroup
         title={`${topic.title} →`}
-        titleUrl={`/${topic.topiccollection.theme.slug}/${
-          topic.topiccollection.slug
-        }/${topic.slug}`}
+        titleUrl={titleUrl}
         description={topic.description}
         tiles={tiles}
         compact
       />
+      <Link to={titleUrl} className="coa-TopicCollectionCard__learn-more-link">
+        <p>{intl.formatMessage(i18n1.learnMore)}</p>
+        <i className="material-icons">arrow_forward</i>
+      </Link>
     </div>
   );
 };
@@ -31,7 +38,7 @@ const TopicCard = ({ topic, index }) => {
 const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
   <div className="coa-TopicCollectionCards">
     {topics.map((topic, index) => (
-      <TopicCard topic={topic} index={index} />
+      <TopicCard topic={topic} index={index} intl={intl} />
     ))}
   </div>
 );

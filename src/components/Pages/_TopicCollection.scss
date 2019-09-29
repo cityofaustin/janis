@@ -104,3 +104,24 @@
 .coa-TopicCollectionCard__info-link {
   text-decoration: none;
 }
+
+.coa-TopicCollectionCard__learn-more-link {
+  text-decoration: none;
+  padding-left: $coa-spacing-medium;
+  padding-right: $coa-spacing-medium;
+  padding-top: $coa-spacing-small;
+  border-top: 1px solid $coa-color-gray-light;
+  margin-top: auto;
+  display: flex;
+
+  color: $coa-color-primary;
+  &:visited {
+    color: $coa-color-primary;
+  }
+
+  p {
+    flex-basis: 95%;
+    margin-top: 0;
+    font-size: $coa-font-size-small;
+  }
+}

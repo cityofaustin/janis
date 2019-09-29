@@ -54,6 +54,7 @@
   "misc.homeLink404": "home page",
   "misc.or404": ", or ",
   "misc.contactUs404": "contact us",
+  "misc.privacyPolicy": "Privacy policy",
   "departments.departments": "Departments",
   "navigation.home": "Home",
   "navigation.menu": "Menu",
@@ -90,5 +91,6 @@
   "howYouKnowMenu.httpsHeader": "The site is secure.",
   "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
   "officialdocuments.author": "Author",
-  "officialdocuments.document": "Document"
+  "officialdocuments.document": "Document",
+  "guides.pageLink": "View this page on alpha.austin.gov"
 }

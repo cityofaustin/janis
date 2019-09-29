@@ -79,6 +79,7 @@ export const misc = defineMessages({
   homeLink404: 'home page',
   or404: ', or ',
   contactUs404: 'contact us',
+  privacyPolicy: 'Privacy policy',
 });
 
 export const navigation = defineMessages({
@@ -466,4 +467,8 @@ export const footerSiteMapMenu = defineMessages([
 export const officialdocuments = defineMessages({
   author: 'Author',
   document: 'Document',
+});
+
+export const guides = defineMessages({
+  pageLink: 'View this page on alpha.austin.gov',
 });
