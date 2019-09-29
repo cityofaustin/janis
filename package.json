@@ -65,8 +65,8 @@
   "scripts": {
     "start-local": "./scripts/serve-local.sh",
     "start-joplin-prod": "NODE_PATH=./src CMS_API='http://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' npm-run-all -p watch-css start-js",
-    "start-joplin-staging": "NODE_PATH=./src CMS_API='http://joplin-staging.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' CMS_DOCS='https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents' npm-run-all -p watch-css start-js",
-    "start-joplin-pr": "NODE_PATH=./src CMS_API='http://joplin-pr-2972-change-datadump.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' CMS_DOCS='https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents' npm-run-all -p watch-css start-js",
+    "start-joplin-staging": "NODE_PATH=./src CMS_API='http://joplin-staging.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
+    "start-joplin-pr": "NODE_PATH=./src CMS_API='http://joplin-pr-2972-change-datadump.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
     "start-joplin-local": "NODE_PATH=./src CMS_API='http://localhost:8000/api/graphql' CMS_MEDIA='http://localhost:8000/media' npm-run-all -p watch-css start-js",
     "start-staging": "./scripts/serve-local.sh -S",
     "start-prod": "./scripts/serve-local.sh -P",

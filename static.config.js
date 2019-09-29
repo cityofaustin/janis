@@ -172,7 +172,7 @@ const makeThemePages = async client => {
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
   } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = cleanOfficialDocumentPages(
+  const officialDocumentPages = await cleanOfficialDocumentPages(
     allOfficialDocumentPages,
   );
 
