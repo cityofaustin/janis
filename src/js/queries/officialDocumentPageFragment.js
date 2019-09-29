@@ -51,7 +51,6 @@ const officialDocumentPageFragment = `
           authoringOffice
           summary
           name
-          link
           document {
             fileSize
             filename
