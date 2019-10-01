@@ -45,13 +45,15 @@
   margin-top: 4rem;
   margin-bottom: 2rem;
   img {
-    width: 100px;
-    height: 100px;
+    width: $coa-footer-seal-size;
+    height: $coa-footer-seal-size;
   }
 
   @include desktop {
     img {
-      margin-bottom: -55px;
+      // not sure how well this calc holds up if we change the seal size,
+      // but it looks good for now
+      margin-bottom: calc(#{$coa-footer-seal-size} / -1.8);
     }
 
     border-bottom: 1px solid $coa-color-footer-lightest;
