@@ -31,11 +31,11 @@
       color: $coa-color-primary;
     }
   }
-  @include tablet-and-desktop {
+  @include desktop {
     padding-left: 10rem;
     padding-right: 10rem;
   }
-  @include mobile {
+  @include mobile-and-tablet {
     text-align: center;
   }
 }
@@ -150,7 +150,7 @@
 .coa-FooterSiteMap {
   display: none;
 
-  @include media($coa-medium-screen) {
+  @include desktop {
     display: inherit;
     // background: $coa-color-grey;
     padding: $coa-spacing-xlarge 0;
@@ -172,11 +172,9 @@
 
       .coa-ThemesTopicsMenu__link {
         text-decoration: none;
-        color: #81aefc; //TODO: use a var
+
         font-size: $coa-font-size-xsmall;
-        &:visited {
-          color: #81aefc; //TODO: use a var
-        }
+
         &:hover {
           color: $coa-color-darker-blue;
         }
@@ -185,28 +183,63 @@
   }
 }
 
+.coa-ThemesTopicsMenu__link {
+  color: #81aefc; //TODO: use a var
+  &:visited {
+    color: #81aefc; //TODO: use a var
+  }
+}
+
 .coa-FooterMobileSiteMap {
-  @include media($coa-medium-screen) {
+  @include desktop {
     display: none;
+  }
+
+  @include tablet {
+    max-width: 600px;
+    margin: auto;
+  }
+
+  & > div.coa-Accordion {
+    margin-top: 0px;
   }
 }
 
 .coa-ThemesTopicsMobileMenu__theme-container {
-  background: $coa-color-grey;
+  // background: $coa-color-grey;
+  background: #252f3e; //TODO: use a var;
+
+  &:last-child {
+    & > div.coa-ThemeAccordianItem {
+      & > div.coa-AccordionPanel {
+        border-bottom: 1px solid #25303e;
+      }
+    }
+  }
+}
+
+.coa-ThemeAccordianItem {
+  & > div.coa-AccordionPanel {
+    background: #13171f; //TODO: use a var;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid #25303e;
+    border-right: 1px solid #25303e;
+  }
 }
 
 .coa-ThemeAccordianItem__name {
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   flex: auto;
-  color: $coa-color-dark-blue;
+  color: #ffffff; //TODO: use a var
 }
 
 .coa-ThemeAccordionButton {
   display: flex;
   align-items: center;
   color: $coa-color-primary;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  border-top: 1px solid $coa-color-dark-grey;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-top: 1px solid #13171f; //TODO: use a var
 }
