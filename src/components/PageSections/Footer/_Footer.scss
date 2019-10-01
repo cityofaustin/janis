@@ -15,7 +15,7 @@
 
   a {
     &:hover {
-      color: #d9e8f6;
+      color: $coa-color-blue-light;
     }
   }
 }
@@ -97,7 +97,7 @@
       color: $coa-color-white;
     }
     &:hover {
-      color: #d9e8f6; //todo: use vars
+      color: $coa-color-blue-light;
     }
     padding-left: $coa-space-level4;
     padding-right: $coa-space-level4;
