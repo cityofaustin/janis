@@ -27,9 +27,11 @@ $max-guide-tablet-width: $coa-medium-screen;
     @extend .coa-GuideMenu__current-section;
   }
 
-  &:not(:last-child) {
-    & > div {
-      // border-bottom: 1.5px solid $coa-color-gray-lighter;
+  &:last-child {
+    > div.coa-GuideMenu__subheading {
+      > span.coa-GuideMenu__title-text {
+        border-bottom: none;
+      }
     }
   }
 }
@@ -253,23 +255,30 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__heading {
-  padding-bottom: $coa-spacing-md-small;
+  // padding-bottom: $coa-spacing-md-small;
   padding-top: $coa-spacing-md-small;
   font-weight: bolder;
 }
 
 .coa-GuideMenu__subheading {
-  &:not(:last-child) {
+  // &:not(:last-child) {
+  > span.coa-GuideMenu__title-text {
     border-bottom: 1.5px solid $coa-color-gray-lighter;
+    // border-bottom: 1px solid red;
   }
+  // }
   margin-left: 2rem;
   padding-left: 0rem;
 
-  padding-bottom: $coa-spacing-small;
+  // padding-bottom: $coa-spacing-small;
   padding-top: $coa-spacing-small;
   &:last-child {
-    padding-bottom: $coa-spacing-md-small;
+    // padding-bottom: $coa-spacing-md-small;
   }
+}
+
+.coa-GuideMenu__title-text {
+  padding-bottom: 1.5rem;
 }
 
 .coa-GuideMenu__current-section {

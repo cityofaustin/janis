@@ -25,7 +25,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
         })}
         onClick={goToSection}
       >
-        {title}
+        <span className="coa-GuideMenu__title-text">{title}</span>
       </div>
     </div>
   );
