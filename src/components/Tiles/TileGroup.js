@@ -14,7 +14,19 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
         })}
       >
         <h4 className="coa-TileGroup__title">
-          {titleUrl ? <Link to={titleUrl}>{title}</Link> : title}
+          {titleUrl ? (
+            <Link
+              to={
+                titleUrl.substring(0, 4) === 'http'
+                  ? titleUrl
+                  : `/${intl.locale}${titleUrl}`
+              }
+            >
+              {title}
+            </Link>
+          ) : (
+            title
+          )}
         </h4>
         {!!description && (
           <p className="coa-TileGroup__description">{description}</p>
