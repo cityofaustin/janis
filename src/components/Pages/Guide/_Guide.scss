@@ -29,7 +29,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 
   &:not(:last-child) {
     & > div {
-      border-bottom: 1.5px solid $coa-color-gray-lighter;
+      // border-bottom: 1.5px solid $coa-color-gray-lighter;
     }
   }
 }
@@ -262,7 +262,7 @@ $max-guide-tablet-width: $coa-medium-screen;
   &:not(:last-child) {
     border-bottom: 1.5px solid $coa-color-gray-lighter;
   }
-  margin-left: 4rem;
+  margin-left: 2rem;
   padding-left: 0rem;
 
   padding-bottom: $coa-spacing-small;
