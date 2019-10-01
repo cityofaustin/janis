@@ -5,6 +5,7 @@ html {
   font-weight: $coa-font-regular;
   line-height: $coa-base-line-height;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 // Hides the main scrollbar in chrome on windows 10
