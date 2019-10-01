@@ -27,14 +27,17 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </ExternalLink>
         ),
       }}
-      defaultMessage="{alphaSiteLink} is a work in progress. Learn more on our {projectsSiteLink}"
+      defaultMessage="Alpha.austin.gov is a work in progress.\n{projectsSiteLink}"
     />
   ) : (
     <FormattedMessage
       id="misc.workInProgress"
       values={{
         citySiteLink: (
-          <ExternalLink className="coa-Footer__link" to="http://austintexas.gov">
+          <ExternalLink
+            className="coa-Footer__link"
+            to="http://austintexas.gov"
+          >
             austintexas.gov
           </ExternalLink>
         ),
@@ -44,7 +47,7 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </ExternalLink>
         ),
       }}
-      defaultMessage="Alpha.austin.gov is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}."
+      defaultMessage="Alpha.austin.gov is a work in progress.\n{projectsSiteLink}"
     />
   );
 

@@ -41,6 +41,15 @@
 }
 
 .coa-Footer__city-seal-wrapper {
+  @include desktop {
+    & > img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: -55px;
+    }
+
+    border-bottom: 1px solid #adadad; //TODO: use vars;
+  }
   text-align: center;
   // padding: $coa-space-level5 0 $coa-space-level3;
   // @include media($coa-medium-screen) {

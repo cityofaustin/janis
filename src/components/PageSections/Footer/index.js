@@ -11,8 +11,8 @@ import WorkInProgress from 'components/WorkInProgress';
 import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
-import CitySealSVG from 'components/SVGs/CitySeal';
-import citySealImg from 'images/coa_seal_white.png';
+// import CitySealSVG from 'components/SVGs/CitySeal';
+import citySealImg from 'images/coa_seal_color.png';
 
 import ThreeOneOne from 'components/PageSections/ThreeOneOne';
 import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
@@ -26,7 +26,7 @@ const Footer = ({ threeoneone, intl }) => (
     <div className="coa-Footer">
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">
-        <CitySealSVG />
+        <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
       </div>
 
       <div className="coa-Footer__work-in-progress">
