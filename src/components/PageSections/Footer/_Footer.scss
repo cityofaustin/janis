@@ -123,6 +123,9 @@
     &:visited {
       color: #ffffff; //todo: use vars
     }
+    &:hover {
+      color: #d9e8f6; //todo: use vars
+    }
     padding-left: 2rem;
     padding-right: 2rem;
 
@@ -136,6 +139,13 @@
   text-align: center;
   margin-top: 2rem;
   border-top: 1px solid #41444c; //todo: use vars
+
+  @include desktop {
+    border-top: none;
+    text-align: right;
+    margin-top: -8rem;
+    margin-right: 10rem;
+  }
 }
 
 .coa-Footer__icons {
