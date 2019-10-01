@@ -9,7 +9,7 @@
     border-radius: 0;
   }
 
-  background: #13171f; //TODO: check/make var for it;
+  background: $coa-color-footer-darkest;
   color: $coa-color-white;
   font-family: $coa-font-sans;
 
@@ -86,35 +86,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-
-  // text-align: center;
-  // // font-size: $coa-font-size-small;
-  // // line-height: $coa-line-height-small;
-  // // font-weight: $coa-font-bold;
-  // white-space: pre-line;
-
-  // @include media($coa-medium-screen) {
-  //   font-size: $coa-font-size-medium;
-  //   line-height: $coa-line-height-medium;
-  //   font-weight: $coa-font-regular;
-  // }
-
-  // max-width: 660px;
-  // margin: auto;
-
-  // a {
-  //   color: $coa-color-white;
-  //   &:visited {
-  //     color: $coa-color-white;
-  //   }
-  //   svg {
-  //     margin-left: $coa-space-level1;
-  //     vertical-align: middle;
-  //     path {
-  //       fill: $coa-color-white;
-  //     }
-  //   }
-  // }
 }
 
 .coa-Footer__social-links {
@@ -285,7 +256,7 @@
 
 .coa-ThemeAccordianItem {
   & > div.coa-AccordionPanel {
-    background: #13171f; //TODO: use a var;
+    background: $coa-color-footer-darkest;
     border-top: none;
     border-bottom: none;
     border-left: 1px solid #25303e;
@@ -306,5 +277,5 @@
   color: $coa-color-primary;
   padding-left: 2rem;
   padding-right: 2rem;
-  border-top: 1px solid #13171f; //TODO: use a var
+  border-top: 1px solid $coa-color-footer-darkest;
 }
