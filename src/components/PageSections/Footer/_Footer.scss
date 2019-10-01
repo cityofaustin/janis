@@ -111,7 +111,7 @@
   padding-bottom: $coa-space-level4;
   text-align: center;
   margin-top: $coa-space-level4;
-  border-top: 1px solid #41444c; //todo: use vars
+  border-top: 1px solid $coa-footer-other-gray;
 
   @include desktop {
     border-top: none;
