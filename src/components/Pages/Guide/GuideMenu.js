@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import classNames from 'classnames';
-import {hyphenate} from "./helpers";
+import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 
 function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
@@ -13,30 +13,35 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
 
   return (
     <div
-      className={classNames("coa-GuideMenu__link", {
-        'coa-GuideMenu__heading': isHeading,
-        'coa-GuideMenu__subheading': !isHeading,
+      className={classNames('coa-GuideMenu__link-wrapper', {
         'coa-GuideMenu__current-section': isCurrentSection,
       })}
-      onClick={goToSection}
     >
-      {title}
+      <div
+        className={classNames('coa-GuideMenu__link', {
+          'coa-GuideMenu__heading': isHeading,
+          'coa-GuideMenu__subheading': !isHeading,
+          'coa-GuideMenu__current-section': isCurrentSection,
+        })}
+        onClick={goToSection}
+      >
+        <span className="coa-GuideMenu__title-text">{title}</span>
+      </div>
     </div>
-  )
+  );
 }
 
 function GuideMenuSection({ section, currentSection }) {
   const headingAnchorTag = hyphenate(section.heading);
   const subHeadings = section.pages.map((page, index) => {
-    const title = (
+    const title =
       (page.servicePage && page.servicePage.title) ||
-      (page.informationPage && page.informationPage.title)
-    );
-    const anchorTag = `${headingAnchorTag}-${index+1}`;
+      (page.informationPage && page.informationPage.title);
+    const anchorTag = `${headingAnchorTag}-${index + 1}`;
     return {
       title,
-      anchorTag
-    }
+      anchorTag,
+    };
   });
 
   return (
@@ -57,7 +62,7 @@ function GuideMenuSection({ section, currentSection }) {
         />
       ))}
     </div>
-  )
+  );
 }
 
 function GuideMenu({ contact, sections, currentSection }) {
@@ -69,7 +74,7 @@ function GuideMenu({ contact, sections, currentSection }) {
             title="Contact information"
             anchorTag="Contact-information"
             isHeading={true}
-            isCurrentSection={currentSection === "Contact-information"}
+            isCurrentSection={currentSection === 'Contact-information'}
           />
         )}
       </div>
@@ -81,7 +86,7 @@ function GuideMenu({ contact, sections, currentSection }) {
         />
       ))}
     </div>
-  )
+  );
 }
 
 export default GuideMenu;
