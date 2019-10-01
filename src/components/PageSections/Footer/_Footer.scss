@@ -41,32 +41,50 @@
 }
 
 .coa-Footer__city-seal-wrapper {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
   @include desktop {
-    & > img {
-      width: 100px;
-      height: 100px;
+    img {
       margin-bottom: -55px;
     }
 
-    text-align: center;
     border-bottom: 1px solid #adadad; //TODO: use vars;
   }
 }
 
 .coa-Footer__work-in-progress {
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-xsmall;
+  margin-bottom: 2rem;
+
+  a {
+    text-decoration: underline;
+    color: #81aefc; //todo: var
+    &:visited {
+      color: #81aefc; //todo: var
+    }
+  }
+
   @include desktop {
-    font-size: $coa-font-size-small;
-    max-width: 300px;
-    line-height: $coa-line-height-xsmall;
     margin-left: 10rem;
     margin-top: 2rem;
-    a {
-      text-decoration: underline;
-      color: #81aefc; //todo: var
-      &:visited {
-        color: #81aefc; //todo: var
-      }
-    }
+    max-width: 300px;
+  }
+
+  @include mobile {
+    max-width: 300px;
+  }
+
+  @include mobile-and-tablet {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   // text-align: center;
