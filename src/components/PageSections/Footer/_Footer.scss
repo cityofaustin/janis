@@ -9,7 +9,7 @@
     border-radius: 0;
   }
 
-  background: $coa-color-primary;
+  background: #13171f; //TODO: check/make var for it;
   color: $coa-color-white;
   font-family: $coa-font-sans;
 
@@ -152,7 +152,7 @@
 
   @include media($coa-medium-screen) {
     display: inherit;
-    background: $coa-color-grey;
+    // background: $coa-color-grey;
     padding: $coa-spacing-xlarge 0;
 
     .coa-ThemesTopicsMenu--FooterSiteMap {
@@ -166,16 +166,16 @@
       }
 
       .coa-ThemesTopicsMenu__theme {
-        color: $coa-color-almost-black;
+        color: #ffffff; //TODO: use a var
         margin-bottom: $coa-spacing-small;
       }
 
       .coa-ThemesTopicsMenu__link {
         text-decoration: none;
-        color: $coa-color-decently-black;
+        color: #81aefc; //TODO: use a var
         font-size: $coa-font-size-xsmall;
         &:visited {
-          color: $coa-color-decently-black;
+          color: #81aefc; //TODO: use a var
         }
         &:hover {
           color: $coa-color-darker-blue;
