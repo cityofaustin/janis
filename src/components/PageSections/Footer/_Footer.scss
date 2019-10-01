@@ -117,6 +117,27 @@
   // }
 }
 
+.coa-Footer__social-links {
+  a {
+    color: #ffffff; //todo: use vars
+    &:visited {
+      color: #ffffff; //todo: use vars
+    }
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    @include tablet {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #41444c; //todo: use vars
+}
+
 .coa-Footer__icons {
   a {
     margin-right: $coa-space-level4;
