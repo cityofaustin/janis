@@ -48,48 +48,55 @@
       margin-bottom: -55px;
     }
 
+    text-align: center;
     border-bottom: 1px solid #adadad; //TODO: use vars;
-  }
-  text-align: center;
-  // padding: $coa-space-level5 0 $coa-space-level3;
-  // @include media($coa-medium-screen) {
-  //   padding: $coa-space-level6 0 $coa-space-level3;
-  // }
-  svg {
-    height: 180px !important;
-    width: 180px !important;
   }
 }
 
 .coa-Footer__work-in-progress {
-  text-align: center;
-  font-size: $coa-font-size-small;
-  line-height: $coa-line-height-small;
-  font-weight: $coa-font-bold;
-  white-space: pre-line;
-
-  @include media($coa-medium-screen) {
-    font-size: $coa-font-size-medium;
-    line-height: $coa-line-height-medium;
-    font-weight: $coa-font-regular;
-  }
-
-  max-width: 660px;
-  margin: auto;
-
-  a {
-    color: $coa-color-white;
-    &:visited {
-      color: $coa-color-white;
-    }
-    svg {
-      margin-left: $coa-space-level1;
-      vertical-align: middle;
-      path {
-        fill: $coa-color-white;
+  @include desktop {
+    font-size: $coa-font-size-small;
+    max-width: 300px;
+    line-height: $coa-line-height-xsmall;
+    margin-left: 10rem;
+    margin-top: 2rem;
+    a {
+      text-decoration: underline;
+      color: #81aefc; //todo: var
+      &:visited {
+        color: #81aefc; //todo: var
       }
     }
   }
+
+  // text-align: center;
+  // // font-size: $coa-font-size-small;
+  // // line-height: $coa-line-height-small;
+  // // font-weight: $coa-font-bold;
+  // white-space: pre-line;
+
+  // @include media($coa-medium-screen) {
+  //   font-size: $coa-font-size-medium;
+  //   line-height: $coa-line-height-medium;
+  //   font-weight: $coa-font-regular;
+  // }
+
+  // max-width: 660px;
+  // margin: auto;
+
+  // a {
+  //   color: $coa-color-white;
+  //   &:visited {
+  //     color: $coa-color-white;
+  //   }
+  //   svg {
+  //     margin-left: $coa-space-level1;
+  //     vertical-align: middle;
+  //     path {
+  //       fill: $coa-color-white;
+  //     }
+  //   }
+  // }
 }
 
 .coa-Footer__icons {

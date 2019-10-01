@@ -32,14 +32,6 @@ const Footer = ({ threeoneone, intl }) => (
       <div className="coa-Footer__work-in-progress">
         <WorkInProgress isClipped={true} />
       </div>
-      <div className="coa-Footer__more_text_boxes">
-        <div className="coa-Footer__more_text_box">
-          {intl.formatMessage(i18n.forFullVisit)}{' '}
-          <ExternalLink to={'https://www.austintexas.gov/'}>
-            austintexas.gov.
-          </ExternalLink>
-        </div>
-      </div>
       <div className="coa-Footer__links">
         <Link to={'/privacy-policy/'}>
           {intl.formatMessage(i18n.privacyPolicy)}
