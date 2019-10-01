@@ -90,9 +90,9 @@
 
 .coa-Footer__social-links {
   a {
-    color: #ffffff; //todo: use vars
+    color: $coa-color-white;
     &:visited {
-      color: #ffffff; //todo: use vars
+      color: $coa-color-white;
     }
     &:hover {
       color: #d9e8f6; //todo: use vars
@@ -202,7 +202,7 @@
       }
 
       .coa-ThemesTopicsMenu__theme {
-        color: #ffffff; //TODO: use a var
+        color: $coa-color-white;
         margin-bottom: $coa-spacing-small;
       }
 
@@ -248,7 +248,7 @@
   &:last-child {
     & > div.coa-ThemeAccordianItem {
       & > div.coa-AccordionPanel {
-        border-bottom: 1px solid #25303e;
+        border-bottom: 1px solid $coa-color-footer-medium;
       }
     }
   }
@@ -259,8 +259,8 @@
     background: $coa-color-footer-darkest;
     border-top: none;
     border-bottom: none;
-    border-left: 1px solid #25303e;
-    border-right: 1px solid #25303e;
+    border-left: 1px solid $coa-color-footer-medium;
+    border-right: 1px solid $coa-color-footer-medium;
   }
 }
 
@@ -268,7 +268,7 @@
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   flex: auto;
-  color: #ffffff; //TODO: use a var
+  color: $coa-color-white;
 }
 
 .coa-ThemeAccordionButton {
