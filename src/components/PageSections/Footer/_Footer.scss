@@ -54,7 +54,7 @@
       margin-bottom: -55px;
     }
 
-    border-bottom: 1px solid #adadad; //TODO: use vars;
+    border-bottom: 1px solid $coa-color-footer-lightest;
   }
 }
 
@@ -65,9 +65,9 @@
 
   a {
     text-decoration: underline;
-    color: #81aefc; //todo: var
+    color: $coa-color-footer-babyblue;
     &:visited {
-      color: #81aefc; //todo: var
+      color: $coa-color-footer-babyblue;
     }
   }
 
