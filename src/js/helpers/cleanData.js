@@ -382,6 +382,17 @@ export const cleanDepartments = (allDepartments, langCode) => {
   });
 };
 
+export const cleanTopicsForPreview = allTopics => {
+  if (!allTopics || !allTopics.edges) return null;
+
+  const cleanedTopics = allTopics.edges.map(edge => ({
+    text: edge.node.title,
+    ...edge.node,
+  }));
+
+  return cleanedTopics;
+};
+
 export const cleanTopics = allTopics => {
   if (!allTopics || !allTopics.edges) return null;
 
