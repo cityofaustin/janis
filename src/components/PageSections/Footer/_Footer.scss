@@ -190,7 +190,6 @@
 
   @include desktop {
     display: inherit;
-    // background: $coa-color-grey;
     padding: $coa-spacing-xlarge 0;
 
     .coa-ThemesTopicsMenu--FooterSiteMap {
@@ -222,9 +221,9 @@
 }
 
 .coa-ThemesTopicsMenu__link {
-  color: #81aefc; //TODO: use a var
+  color: $coa-color-footer-babyblue;
   &:visited {
-    color: #81aefc; //TODO: use a var
+    color: $coa-color-footer-babyblue;
   }
 }
 
