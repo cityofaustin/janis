@@ -40,19 +40,28 @@ const Footer = ({ threeoneone, intl }) => (
         <WorkInProgress isClipped={true} />
       </div>
       <div className="coa-Footer__social-links">
-        <a href="https://www.facebook.com/austintexasgov">
+        <a href="https://www.facebook.com/austintexasgov" aria-label="facebook">
           <FontAwesomeIcon icon={faFacebook} size="lg" />
         </a>
-        <a href="https://www.instagram.com/austintexasgov/">
+        <a
+          href="https://www.instagram.com/austintexasgov/"
+          aria-label="instagram"
+        >
           <FontAwesomeIcon icon={faInstagram} size="lg" />
         </a>
-        <a href="https://www.linkedin.com/company/city-of-austin/">
+        <a
+          href="https://www.linkedin.com/company/city-of-austin/"
+          aria-label="linked in"
+        >
           <FontAwesomeIcon icon={faLinkedin} size="lg" />
         </a>
-        <a href="https://twitter.com/austintexasgov">
+        <a href="https://twitter.com/austintexasgov" aria-label="twitter">
           <FontAwesomeIcon icon={faTwitter} size="lg" />
         </a>
-        <a href="https://www.youtube.com/user/austintexasgov">
+        <a
+          href="https://www.youtube.com/user/austintexasgov"
+          aria-label="youtube"
+        >
           <FontAwesomeIcon icon={faYoutube} size="lg" />
         </a>
       </div>
