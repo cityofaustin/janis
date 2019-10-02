@@ -52,6 +52,12 @@
   font-weight: $coa-font-medium;
   display: block;
   padding: $coa-spacing-medium $coa-space-level6 $coa-spacing-medium 0;
+
+  @include tablet {
+    line-height: $coa-line-height-xxsmall;
+    font-size: $coa-font-size-xxsmall;
+    height: 8rem;
+  }
 }
 
 .coa-ThemesNav--open {
