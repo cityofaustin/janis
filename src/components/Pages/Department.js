@@ -35,26 +35,26 @@ const Department = ({
   },
   intl,
 }) => {
-  console.log("🔥 Department.js", relatedLinks)
-  const RelatedContent = () => (
-    <div className="coa-DepartmentPage__related-container">
-      <h2 className="coa-DepartmentPage__related-title">
-        {intl.formatMessage(i18n2.relatedInfo)}
-      </h2>
-      <ul className="coa-DepartmentPage__related-list">
-        {relatedLinks.map((l, index) => (
-          <li key={index} className="coa-DepartmentPage__related-item">
-            <a href={l.url} className="coa-DepartmentPage__related-link">
-              {l.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  const RelatedContent = () => {
+    return (
+      <div className="coa-DepartmentPage__related-container">
+        <h2 className="coa-DepartmentPage__related-title">
+          {intl.formatMessage(i18n2.relatedInfo)}
+        </h2>
+        <ul className="coa-DepartmentPage__related-list">
+          {relatedLinks.map((l, index) => (
+            <li key={index} className="coa-DepartmentPage__related-item">
+              <a href={l.url} className="coa-DepartmentPage__related-link">
+                {l.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
 
   const TopServicesRelatedContent = () => {
-    // debugger;
     // if we render both TopServices and Related, wrap them in a div
     return topServices.length > 0 && !!relatedLinks.length ? (
       <div className="coa-TopServicesRelatedContent">

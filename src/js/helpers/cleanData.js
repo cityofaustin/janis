@@ -394,7 +394,6 @@ export const cleanTopicCollections = allTopicCollections => {
     'topiccollection',
   );
 
-  // console.log(cleanedTopicCollections);
   return cleanedTopicCollections;
 };
 

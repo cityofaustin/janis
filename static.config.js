@@ -298,27 +298,6 @@ const makeDepartmentPages = async (client, langCode) => {
     if (!infoPage.department) continue;
 
     infoPage.type = 'info';
-
-    // let matchingDepartmentIndex = departments.findIndex(
-    //   d => d.id === infoPage.department.id,
-    // );
-    //
-    // if (departments[matchingDepartmentIndex]) {
-    //   // Only add the related link if it's not a top service
-    //   if (
-    //     !departments[matchingDepartmentIndex].topServiceIds.includes(
-    //       infoPage.id,
-    //     )
-    //   ) {
-    //     departments[matchingDepartmentIndex].relatedLinks.push(infoPage);
-    //   }
-    //
-    //   // Update the department on the page
-    //   const departmentCopy = JSON.parse(
-    //     JSON.stringify(departments[matchingDepartmentIndex]),
-    //   );
-    //   infoPage.department = departmentCopy;
-    // }
   }
 
   const { allServicePages: allServices } = await client.request(
@@ -331,25 +310,6 @@ const makeDepartmentPages = async (client, langCode) => {
   for (var service of services) {
     if (!service.department) continue;
     service.type = 'service';
-
-    // let matchingDepartmentIndex = departments.findIndex(
-    //   d => d.id === service.department.id,
-    // );
-    //
-    // if (departments[matchingDepartmentIndex]) {
-    //   // Only add the related link if it's not a top service
-    //   if (
-    //     !departments[matchingDepartmentIndex].topServiceIds.includes(service.id)
-    //   ) {
-    //     departments[matchingDepartmentIndex].relatedLinks.push(service);
-    //   }
-    //
-    //   // Update the department on the page
-    //   const departmentCopy = JSON.parse(
-    //     JSON.stringify(departments[matchingDepartmentIndex]),
-    //   );
-    //   service.department = departmentCopy;
-    // }
   }
 
   const {
@@ -363,25 +323,6 @@ const makeDepartmentPages = async (client, langCode) => {
   for (let page of officialDocumentPages) {
     if (!page.department) continue;
     page.type = 'official-document';
-    //
-    // let matchingDepartmentIndex = departments.findIndex(
-    //   d => d.id === page.department.id,
-    // );
-    //
-    // if (departments[matchingDepartmentIndex]) {
-    //   // Only add the related link if it's not a top service
-    //   if (
-    //     !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
-    //   ) {
-    //     departments[matchingDepartmentIndex].relatedLinks.push(page);
-    //   }
-    //
-    //   // Update the department on the page
-    //   const departmentCopy = JSON.parse(
-    //     JSON.stringify(departments[matchingDepartmentIndex]),
-    //   );
-    //   page.department = departmentCopy;
-    // }
   }
 
   const { allGuidePages: allGuidePages } = await client.request(
@@ -393,24 +334,6 @@ const makeDepartmentPages = async (client, langCode) => {
   for (let page of guidePages) {
     if (!page.department) continue;
     page.type = 'guide';
-
-    // let matchingDepartmentIndex = departments.findIndex(
-    //   d => d.id === page.department.id,
-    // );
-    //
-    // if (departments[matchingDepartmentIndex]) {
-    //   if (
-    //     !departments[matchingDepartmentIndex].topServiceIds.includes(page.id)
-    //   ) {
-    //     departments[matchingDepartmentIndex].relatedLinks.push(page);
-    //   }
-    //
-    //   // Update the department on the page
-    //   const departmentCopy = JSON.parse(
-    //     JSON.stringify(departments[matchingDepartmentIndex]),
-    //   );
-    //   page.department = departmentCopy;
-    // }
   }
 
   const data = departments
