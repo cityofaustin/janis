@@ -13,6 +13,7 @@ $coa-font-bold: 700;
 $coa-font-extrabold: 800; //not available with IBM Plex Sans, use coa-font-bold
 $coa-em-base: 10px;
 
+$coa-font-size-xxsmall: 1.4rem;
 $coa-font-size-xsmall: 1.5rem;
 $coa-font-size-small: 1.7rem;
 $coa-font-size-smedium: 2rem;
@@ -22,6 +23,7 @@ $coa-font-size-large: 3.6rem;
 $coa-font-size-xlarge: 4rem;
 $coa-font-size-xxlarge: 6.4rem;
 
+$coa-line-height-xxsmall: 2rem;
 $coa-line-height-xsmall: 2.4rem;
 $coa-line-height-small: 2.8rem;
 $coa-line-height-smedium: 3rem;
@@ -145,3 +147,12 @@ $coa-herohome-gradient: rgba(28, 35, 28, 0.3);
 $coa-menu-border-width: 1px;
 $coa-menu-border-radius: 4px;
 $coa-menu-bodercolor: #0049c7;
+
+// coa footer things, not sure where we're using others
+$coa-color-footer-lightest: #adadad;
+$coa-color-footer-darkest: #13171f;
+$coa-color-footer-babyblue: #81aefc;
+$coa-color-footer-medium: #25303e;
+$coa-footer-seal-size: 100px;
+$coa-footer-wip-max-width: 300px;
+$coa-footer-other-gray: #41444c;

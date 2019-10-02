@@ -1,7 +1,6 @@
 import { findKey } from 'lodash';
-import axios from 'axios';
-// import prettyBytes from 'pretty-bytes';
 import filesize from 'filesize';
+import axios from 'axios';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -108,6 +107,14 @@ export const cleanLinks = (links, pageType) => {
 
   for (const edge of links.edges) {
     const link = edge.node;
+
+    // Check for global
+    if (link.coaGlobal) {
+      link.text = link.title;
+
+      // There's only one URL for these so we can push the link without copying it
+      cleanedLinks.push(link);
+    }
 
     // If it's under a topic make it in all the right places
     if (link.topics && link.topics.edges.length) {
@@ -379,6 +386,17 @@ export const cleanDepartments = (allDepartments, langCode) => {
   });
 };
 
+export const cleanTopicsForPreview = allTopics => {
+  if (!allTopics || !allTopics.edges) return null;
+
+  const cleanedTopics = allTopics.edges.map(edge => ({
+    text: edge.node.title,
+    ...edge.node,
+  }));
+
+  return cleanedTopics;
+};
+
 export const cleanTopics = allTopics => {
   if (!allTopics || !allTopics.edges) return null;
 
@@ -455,21 +473,39 @@ export const clean311 = threeoneone => {
   });
 };
 
-const getDocumentPdfSize = async document => {
+const checkUrl = async url => {
   return await axios({
     method: 'HEAD',
-    url: document.link,
+    url: url,
   })
-    .then(res => {
-      if (res.headers['content-type'] === 'application/pdf') {
-        document.pdfSize = filesize(+res.headers['content-length']).replace(
-          ' ',
-          '',
-        );
-        return;
-      }
-    })
+    .then(res => url)
     .catch(error => null);
+};
+
+const getWorkingDocumentLink = async filename => {
+  // Single source mode, example use case:
+  // If we're on PROD, we should only get prod documents
+  if (process.env.CMS_DOCS !== 'multiple') {
+    return `${process.env.CMS_DOCS}/${filename}`;
+  }
+
+  // Multi source mode, let's do some url checking and get something
+  // that works. example use case:
+  // If we're on STAGING, we want docs imported from PROD to work,
+  // as well as any new docs we added when testing on staging
+  if (process.env.CMS_DOCS === 'multiple') {
+    const docUrls = [
+      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
+      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
+    ];
+
+    for (const url of docUrls) {
+      const validUrl = await checkUrl(`${url}/${filename}`);
+      if (validUrl !== null) {
+        return validUrl;
+      }
+    }
+  }
 };
 
 export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
@@ -480,15 +516,27 @@ export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
     'official_document',
   );
 
-  const pdfSizePromises = [];
   for (let page of cleanedOfficialDocumentPages) {
     if (!page.officialDocuments.edges) continue;
     for (let doc of page.officialDocuments.edges) {
-      pdfSizePromises.push(getDocumentPdfSize(doc.node));
+      // If we have a document in wagtail
+      // use that info to update the information syncronously
+      if (doc.node.document) {
+        doc.node.link = await getWorkingDocumentLink(
+          doc.node.document.filename,
+        );
+
+        // Maybe there's a better way to handle this but meh for now
+        // If it's a pdf, add the size
+        if (doc.node.document.filename.slice(-3) === 'pdf') {
+          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+            ' ',
+            '',
+          );
+        }
+      }
     }
   }
-
-  await Promise.all(pdfSizePromises);
 
   return cleanedOfficialDocumentPages;
 };

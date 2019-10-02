@@ -49,10 +49,9 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
-  workInProgress:
-    '{alphaSiteLink} is a new website and a work in progress. For the full City of Austin website, visit {citySiteLink}. Learn more about the new website at {projectsSiteLink}.',
+  workInProgress: 'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
   workInProgressClipped:
-    '{alphaSiteLink} is a work in progress.\nLearn more on our {projectsSiteLink}',
+    'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
   workInProgressTiny: 'alpha.austin.gov is a work in progress.',
   forFullVisit: 'For the full City of Austin website, visit ',
   currentSite: 'Visit austintexas.gov for the current city website.',
@@ -67,7 +66,7 @@ export const misc = defineMessages({
   officialHowYouKnow: 'Here’s how you know.',
   services: 'Services',
   info: 'Information',
-  projectsSiteLinkText: 'project site.',
+  projectsSiteLinkText: 'Learn more about the project',
   comingSoon: 'Coming soon',
   moreAboutProject: 'More about the alpha.austin.gov project.',
   learnMore: 'Learn more',
@@ -79,6 +78,7 @@ export const misc = defineMessages({
   homeLink404: 'home page',
   or404: ', or ',
   contactUs404: 'contact us',
+  privacyPolicy: 'Privacy policy',
 });
 
 export const navigation = defineMessages({

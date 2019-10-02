@@ -12,26 +12,37 @@ const TopicCard = ({ topic, index, intl }) => {
       ? topic.otherLinks.slice(0, 4)
       : null;
 
-  const tiles = pages.map(p => ({ url: p.url, title: p.title }));
+  const tiles = pages && pages.map(p => ({ url: p.url, title: p.title }));
 
+  // This and TileGroup have a fragile relationship so
+  // I copypasta'd logic into the learn more link instead of modifying it
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
     topic.topiccollection.slug
   }/${topic.slug}`;
 
   return (
-    <div key={index} className="coa-TopicCollectionCard">
-      <TileGroup
-        title={`${topic.title} →`}
-        titleUrl={titleUrl}
-        description={topic.description}
-        tiles={tiles}
-        compact
-      />
-      <Link to={titleUrl} className="coa-TopicCollectionCard__learn-more-link">
-        <p>{intl.formatMessage(i18n1.learnMore)}</p>
-        <i className="material-icons">arrow_forward</i>
-      </Link>
-    </div>
+    !!tiles && (
+      <div key={index} className="coa-TopicCollectionCard">
+        <TileGroup
+          title={`${topic.title} →`}
+          titleUrl={titleUrl}
+          description={topic.description}
+          tiles={tiles}
+          compact
+        />
+        <Link
+          to={
+            titleUrl.substring(0, 4) === 'http'
+              ? titleUrl
+              : `/${intl.locale}${titleUrl}`
+          }
+          className="coa-TopicCollectionCard__learn-more-link"
+        >
+          <p>{intl.formatMessage(i18n1.learnMore)}</p>
+          <i className="material-icons">arrow_forward</i>
+        </Link>
+      </div>
+    )
   );
 };
 

@@ -8,11 +8,32 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuidePage__header-title {
   margin-top: 4rem;
   margin-bottom: 4rem;
-  max-width: 400px;
+  max-width: 572px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   font-size: 40px;
+}
+
+.coa-GuideMenu__link-wrapper {
+  &:hover {
+    background: #d9e8f6;
+    & + .coa-GuideMenu__link-wrapper {
+      border-top: none;
+      & > div {
+        border-top: none;
+      }
+    }
+    @extend .coa-GuideMenu__current-section;
+  }
+
+  &:last-child {
+    > div.coa-GuideMenu__subheading {
+      > span.coa-GuideMenu__title-text {
+        border-bottom: none;
+      }
+    }
+  }
 }
 
 .coa-GuidePage__header-description-container {
@@ -52,14 +73,19 @@ $max-guide-tablet-width: $coa-medium-screen;
   max-height: 100vh;
   overflow-y: scroll;
   margin-top: $sticky-guide-top;
-  top: $sticky-guide-top;
+  top: 0px;
 }
 
 .coa-GuidePage__main-content {
   @extend .col-xs-12;
   @extend .col-lg-8;
+
   padding-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
   margin-top: $sticky-guide-top;
+}
+
+.coa-GuidePage__content-container > .wrapper > .row {
+  margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
 }
 
 .coa-GuidePage__contact-container {
@@ -200,11 +226,12 @@ $max-guide-tablet-width: $coa-medium-screen;
 }
 
 .coa-GuideMenu__link {
+  display: flex;
   color: $coa-color-cod-gray;
   font-size: 1.7rem;
-  line-height: 1em;
+  line-height: 2.4rem;
   text-decoration: none;
-  padding-left: $coa-spacing-large;
+  padding-left: $coa-spacing-medium;
 
   &:visited {
     color: $coa-color-cod-gray;
@@ -212,42 +239,53 @@ $max-guide-tablet-width: $coa-medium-screen;
   }
 
   &:hover {
-    color: $coa-color-cod-gray;
-    cursor: pointer;
     @extend .coa-GuideMenu__current-section;
+  }
+
+  &:before {
+    content: 'arrow_forward';
+    visibility: hidden;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    color: $coa-color-primary;
+    font-size: larger;
+    font-feature-settings: 'liga';
+    padding-right: $coa-spacing-md-small;
   }
 }
 
 .coa-GuideMenu__heading {
-  padding-bottom: $coa-spacing-md-small;
   padding-top: $coa-spacing-md-small;
   font-weight: bolder;
 }
 
 .coa-GuideMenu__subheading {
-  padding-bottom: $coa-spacing-xsmall;
-  padding-top: $coa-spacing-xsmall;
-  &:last-child {
-    padding-bottom: $coa-spacing-md-small;
+  > span.coa-GuideMenu__title-text {
+    border-bottom: 1.5px solid $coa-color-gray-lighter;
   }
+
+  margin-left: 2rem;
+  padding-left: 0rem;
+
+  padding-top: $coa-spacing-small;
+}
+
+.coa-GuideMenu__title-text {
+  padding-bottom: 1.5rem;
+  width: 100%;
 }
 
 .coa-GuideMenu__current-section {
   background-color: #d9e8f6;
 
+  color: $coa-color-cod-gray;
+  cursor: pointer;
   &:before {
-    // Material icon should be in margin on desktop
-    // But inline with left on mobile
-    @include desktop {
-      position: absolute;
-    }
-    font-family: 'Material Icons';
-    font-weight: normal;
-    content: 'arrow_forward';
-    color: $coa-color-primary;
-    left: 20px;
-    font-size: larger;
-    font-feature-settings: 'liga';
+    visibility: visible;
+  }
+
+  &:before {
+    visibility: visible;
   }
 }
 
@@ -257,10 +295,6 @@ $max-guide-tablet-width: $coa-medium-screen;
   bottom: 0;
   left: 0;
   width: 100%;
-}
-
-.coa-GuidePage__content-container > .wrapper > .row {
-  margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
 }
 
 .coa-GuideMenu__mobile-button {
@@ -364,12 +398,13 @@ $max-guide-tablet-width: $coa-medium-screen;
   }
 }
 
-@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+@media screen and (-ms-high-contrast: active),
+  screen and (-ms-high-contrast: none) {
   /*
     This CSS section is for conditional styling for IE 11 only.
   */
-   .coa-GuidePage__content-container {
-     // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
-     display: block;
-   }
+  .coa-GuidePage__content-container {
+    // IE 11 dosn't play nice with flex-box. Here we can override "display: flex" and preserve flex for all other browsers.
+    display: block;
+  }
 }
