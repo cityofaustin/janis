@@ -52,6 +52,12 @@
   font-weight: $coa-font-medium;
   display: block;
   padding: $coa-spacing-medium $coa-space-level6 $coa-spacing-medium 0;
+
+  @include tablet {
+    line-height: $coa-line-height-xxsmall;
+    font-size: $coa-font-size-xxsmall;
+    height: 8rem;
+  }
 }
 
 .coa-ThemesNav--open {
@@ -127,16 +133,6 @@
   @include media($coa-medium-screen) {
     width: 25%;
     padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
-
-    &:nth-child(-n + 4) {
-      &:before {
-        content: '';
-        width: 95%;
-        border-bottom: 1px solid #dbdee1;
-        position: absolute;
-        bottom: 0;
-      }
-    }
   }
 }
 
