@@ -361,10 +361,14 @@ export const cleanDepartments = (allDepartments, langCode) => {
     department.directors = cleanDepartmentDirectors(
       department.departmentDirectors,
     );
-    department.relatedLinks = [];
-    department.topServices = department.topServicePages;
+    department.topServices = department.topPages;
     department.topServices = cleanDepartmentTopServices(
-      department.topServicePages,
+      department.topPages,
+      langCode,
+    );
+    department.relatedLinks = department.relatedPages;
+    department.relatedLinks = cleanDepartmentTopServices(
+      department.relatedPages,
       langCode,
     );
     department.topServiceIds = cleanDepartmentTopServiceIds(

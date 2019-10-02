@@ -35,6 +35,7 @@ const Department = ({
   },
   intl,
 }) => {
+  console.log("🔥 Department.js", relatedLinks)
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
       <h2 className="coa-DepartmentPage__related-title">
@@ -52,9 +53,10 @@ const Department = ({
     </div>
   );
 
-  const TopServicesRelatedContent = () =>
+  const TopServicesRelatedContent = () => {
+    // debugger;
     // if we render both TopServices and Related, wrap them in a div
-    topServices.length > 0 && !!relatedLinks.length ? (
+    return topServices.length > 0 && !!relatedLinks.length ? (
       <div className="coa-TopServicesRelatedContent">
         <div className="coa-DepartmentPageTopServices">
           <TileGroup
@@ -74,7 +76,7 @@ const Department = ({
     ) : !!relatedLinks.length ? (
       <RelatedContent />
     ) : null;
-
+}
   return (
     <div>
       <Head>
