@@ -13,7 +13,7 @@ import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocument
 import {
   cleanServicesForPreview,
   cleanInformationForPreview,
-  cleanTopics,
+  cleanTopicsForPreview,
   cleanDepartments,
   cleanTopicCollections,
   cleanOfficialDocumentPagesForPreview,
@@ -139,16 +139,16 @@ class CMSPreview extends Component {
         <Route
           path="/topic"
           render={props => {
-            let topic = cleanTopics(data)[0];
+            let topic = cleanTopicsForPreview(data)[0];
             topic.topLinks = [
-              { text: 'Top link', url: '' },
-              { text: 'Other top link', url: '' },
+              { title: 'Top link', url: '' },
+              { title: 'Other top link', url: '' },
             ];
             topic.otherLinks = [
-              { text: 'First link', url: '' },
-              { text: 'Second link', url: '' },
-              { text: 'Third link', url: '' },
-              { text: 'Fourth link', url: '' },
+              { title: 'First link', url: '' },
+              { title: 'Second link', url: '' },
+              { title: 'Third link', url: '' },
+              { title: 'Fourth link', url: '' },
             ];
             topic.topiccollection = { topics: [], theme: {} };
 
@@ -173,7 +173,11 @@ class CMSPreview extends Component {
         <Route
           path="/official_document"
           render={props => (
-              <OfficialDocumentList officialDocumentPage={cleanOfficialDocumentPagesForPreview(data)[0]} />
+            <OfficialDocumentList
+              officialDocumentPage={
+                cleanOfficialDocumentPagesForPreview(data)[0]
+              }
+            />
           )}
         />
       </Switch>
