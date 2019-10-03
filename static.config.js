@@ -57,7 +57,6 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren).concat(globalChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
-      // console.log(JSON.stringify(allServicePages));
       let services = cleanLinks(allServicePages, 'service');
 
       // Make sure we don't have any dupes in top services
@@ -223,7 +222,6 @@ const makeThemePages = async client => {
       }
 
       // Update the topic on the page
-      // const topicCopy = rfdc(topics[matchingTopicIndex]);
       const topicCopy = {
         id: topics[matchingTopicIndex].id,
         title: topics[matchingTopicIndex].title,
