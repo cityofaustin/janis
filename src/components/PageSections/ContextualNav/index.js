@@ -49,6 +49,7 @@ const ContextualNav = ({
     offeredBy = relatedDepartments.edges.map(e => e.node.relatedDepartment);
   }
 
+  // todo: lonks
   return (
     <div className="coa-ContextualNav">
       <div className="wrapper container-fluid">

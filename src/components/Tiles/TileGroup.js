@@ -5,6 +5,7 @@ import { Link } from 'react-static';
 
 import Tile from './Tile';
 
+// TODO: lonks
 const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
   return (
     !!tiles.length && (

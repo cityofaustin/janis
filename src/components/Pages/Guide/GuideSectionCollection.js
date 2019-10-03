@@ -31,6 +31,7 @@ function GetUrlFromTopicsOrDepartments({ topics, departments, slug }) {
   return '';
 }
 
+// TODO: lonk
 function GuideSection({
   page,
   pageNumber,

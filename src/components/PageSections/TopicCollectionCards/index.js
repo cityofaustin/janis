@@ -16,6 +16,7 @@ const TopicCard = ({ topic, index, intl }) => {
 
   // This and TileGroup have a fragile relationship so
   // I copypasta'd logic into the learn more link instead of modifying it
+  // TODO: lonk
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
     topic.topiccollection.slug
   }/${topic.slug}`;

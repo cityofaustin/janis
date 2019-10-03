@@ -3,6 +3,7 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { misc as i18n2 } from 'js/i18n/definitions';
 
+// TODO: clean up links here
 const TopicsLinks = props =>
   props.topicCollections.length > 0 ? (
     <ul className="coa-ThemesTopicsMenu__topics">

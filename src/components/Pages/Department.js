@@ -35,6 +35,7 @@ const Department = ({
   },
   intl,
 }) => {
+  // todo: lonk
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
       <h2 className="coa-DepartmentPage__related-title">

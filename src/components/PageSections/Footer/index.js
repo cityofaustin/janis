@@ -29,6 +29,7 @@ import {
 
 import { Link } from 'react-static';
 
+// TODO: see if we like the link we have here
 const Footer = ({ threeoneone, intl }) => (
   <footer>
     <div className="coa-Footer">
