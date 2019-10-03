@@ -106,7 +106,6 @@ const makeGlobalPages = async client => {
     globalServicePagesQuery,
   );
   const servicePages = cleanServices(allServicePages);
-  console.log(servicePages);
 
   const data = informationPages
     .map(informationPage => ({
@@ -222,7 +221,12 @@ const makeThemePages = async client => {
       }
 
       // Update the topic on the page
-      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      const topicCopy = {
+        id: topics[matchingTopicIndex].id,
+        title: topics[matchingTopicIndex].title,
+        slug: topics[matchingTopicIndex].slug,
+        topiccollection: topics[matchingTopicIndex].topiccollection,
+      };
       service.topic = topicCopy;
     }
   }
@@ -240,7 +244,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -257,7 +266,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -274,7 +288,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
