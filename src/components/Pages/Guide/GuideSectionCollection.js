@@ -38,7 +38,6 @@ function GuideSection({
   sectionHeading,
   intl,
 }) {
-  debugger;
   const pageData = page.informationPage || page.servicePage;
   const title = pageData.title;
   const description = page.informationPage

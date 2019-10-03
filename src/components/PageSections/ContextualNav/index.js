@@ -13,8 +13,6 @@ const ContextualNav = ({
   contentType,
   intl,
 }) => {
-  debugger;
-
   // Set the parent, if we have a topic, it's because we nav'd from a topic
   // if we don't, use the dept
   const parent = {
