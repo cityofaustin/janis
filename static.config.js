@@ -31,6 +31,9 @@ import {
   cleanGuidePages,
 } from 'js/helpers/cleanData';
 
+// Try deep clone instead of JSON stringify/parse
+const rfdc = require('rfdc')();
+
 const isRelatedDepartment = (page, departmentId) => {
   const relatedDepartments = page.relatedDepartments.edges;
   for (let department in relatedDepartments) {
@@ -47,8 +50,16 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
+  console.log(`❤️ made it to 1`);
+
   const themeChildren = await makeThemePages(client);
+
+  console.log(`❤️ made it to 2`);
+
   const deptChildren = await makeDepartmentPages(client, langCode);
+
+  console.log('❤️ made it to 3');
+
   const globalChildren = await makeGlobalPages(client);
 
   const data = {
@@ -57,6 +68,7 @@ const makeAllPages = async langCode => {
     children: themeChildren.concat(deptChildren).concat(globalChildren),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
+      // console.log(JSON.stringify(allServicePages));
       let services = cleanLinks(allServicePages, 'service');
 
       // Make sure we don't have any dupes in top services
@@ -148,26 +160,38 @@ const makeGlobalPages = async client => {
 };
 
 const makeThemePages = async client => {
+  console.log('❤️ made it to Theme 1');
+
   const { allThemes } = await client.request(allThemesQuery);
   const themes = cleanThemes(allThemes);
+
+  console.log('❤️ made it to Theme 2');
 
   const { allTopicCollections } = await client.request(
     allTopicCollectionsQuery,
   );
   const topicCollections = cleanTopicCollections(allTopicCollections);
 
+  console.log('❤️ made it to Theme 3');
+
   const { allTopics } = await client.request(allTopicsQuery);
   const topics = cleanTopics(allTopics);
+
+  console.log('❤️ made it to Theme 4');
 
   const { allInformationPages: allInformationPages } = await client.request(
     allInformationPagesQuery,
   );
   const informationPages = cleanInformationPages(allInformationPages);
 
+  console.log('❤️ made it to Theme 5');
+
   const { allServicePages: allServices } = await client.request(
     allServicePagesQuery,
   );
   const services = cleanServices(allServices);
+
+  console.log('❤️ made it to Theme 6');
 
   const {
     allOfficialDocumentPages: allOfficialDocumentPages,
@@ -176,10 +200,14 @@ const makeThemePages = async client => {
     allOfficialDocumentPages,
   );
 
+  console.log('❤️ made it to Theme 7');
+
   const { allGuidePages: allGuidePages } = await client.request(
     allGuidePagesQuery,
   );
   const guidePages = cleanGuidePages(allGuidePages);
+
+  console.log('❤️ made it to Theme 8');
 
   // Add all topic links to topic collection pages
   for (var topic of topics) {
@@ -190,6 +218,8 @@ const makeThemePages = async client => {
       topicCollections[matchingTopicCollectionIndex].topics.push(topic);
     }
   }
+
+  console.log('❤️ made it to Theme 9');
 
   // And now that we have all the topics on each topic collection,
   // let's update the topic collections on the topics
@@ -207,6 +237,8 @@ const makeThemePages = async client => {
     }
   }
 
+  console.log('❤️ made it to Theme 10');
+
   // Add all service page links to topic pages
   for (var service of services) {
     if (!service.topic) continue;
@@ -222,10 +254,13 @@ const makeThemePages = async client => {
       }
 
       // Update the topic on the page
-      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      const topicCopy = rfdc(topics[matchingTopicIndex]);
+      // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
       service.topic = topicCopy;
     }
   }
+
+  console.log('❤️ made it to Theme 11');
 
   // Add all information page links to topic pages
   for (var page of informationPages) {
@@ -240,9 +275,15 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    console.log('🌈 started JSONing');
+    console.log(topics[matchingTopicIndex].title);
+    // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = rfdc(topics[matchingTopicIndex]);
+    console.log('🌈 finished JSONing');
     page.topic = topicCopy;
   }
+
+  console.log('❤️ made it to Theme 12');
 
   // Add all official document page links to topic pages
   for (let page of officialDocumentPages) {
@@ -257,9 +298,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = rfdc(topics[matchingTopicIndex]);
     page.topic = topicCopy;
   }
+
+  console.log('❤️ made it to Theme 13');
 
   // Add all guide page links to topic pages
   for (let page of guidePages) {
@@ -274,9 +318,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = rfdc(topics[matchingTopicIndex]);
     page.topic = topicCopy;
   }
+
+  console.log('❤️ made it to Theme 14');
 
   const data = themes.map(theme => ({
     path: `/${theme.slug}`,
@@ -383,9 +430,10 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      // const departmentCopy = JSON.parse(
+      //   JSON.stringify(departments[matchingDepartmentIndex]),
+      // );
+      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
       infoPage.department = departmentCopy;
     }
   }
@@ -414,9 +462,7 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
       service.department = departmentCopy;
     }
   }
@@ -446,9 +492,7 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
       page.department = departmentCopy;
     }
   }
@@ -475,9 +519,7 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
       page.department = departmentCopy;
     }
   }
