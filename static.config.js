@@ -106,7 +106,6 @@ const makeGlobalPages = async client => {
     globalServicePagesQuery,
   );
   const servicePages = cleanServices(allServicePages);
-  console.log(servicePages);
 
   const data = informationPages
     .map(informationPage => ({
