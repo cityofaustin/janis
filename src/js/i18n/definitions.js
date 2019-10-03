@@ -145,8 +145,7 @@ export const departmentPage = defineMessages({
   coa: 'City of Austin',
   mission: 'Our mission',
   whatWeDo: 'What we do',
-  meetDirector: 'Meet our director',
-  meetDirectors: 'Meet our directors',
+  meetDirector: 'Leadership',
   topServices: 'Top services',
 });
 
