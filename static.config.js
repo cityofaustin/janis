@@ -433,7 +433,11 @@ const makeDepartmentPages = async (client, langCode) => {
       // const departmentCopy = JSON.parse(
       //   JSON.stringify(departments[matchingDepartmentIndex]),
       // );
-      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       infoPage.department = departmentCopy;
     }
   }
@@ -462,7 +466,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       service.department = departmentCopy;
     }
   }
@@ -492,7 +500,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       page.department = departmentCopy;
     }
   }
@@ -519,7 +531,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = rfdc(departments[matchingDepartmentIndex]);
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       page.department = departmentCopy;
     }
   }
