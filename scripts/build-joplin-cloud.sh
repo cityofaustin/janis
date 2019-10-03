@@ -9,4 +9,13 @@ if [ "$HEAD" == '2906-toc-horizontal-rules' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
+# SAVE 👇 Example: "Let's your branchname is 2662-service-step-styling": Note trucation of name in CMS_API link.
+# if [ "$HEAD" == '2662-service-step-styling' ]; then
+#   export CMS_API='https://joplin-pr-2662-service-step-st.herokuapp.com/api/graphql'
+# fi
+
+if [ "$HEAD" == '2997-dept-links' ]; then
+  export CMS_API='https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql'
+fi
+
 yarn npm-run-all build-css build-js
