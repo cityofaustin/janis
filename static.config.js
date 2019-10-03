@@ -106,7 +106,6 @@ const makeGlobalPages = async client => {
     globalServicePagesQuery,
   );
   const servicePages = cleanServices(allServicePages);
-  console.log(servicePages);
 
   const data = informationPages
     .map(informationPage => ({
@@ -222,7 +221,12 @@ const makeThemePages = async client => {
       }
 
       // Update the topic on the page
-      const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+      const topicCopy = {
+        id: topics[matchingTopicIndex].id,
+        title: topics[matchingTopicIndex].title,
+        slug: topics[matchingTopicIndex].slug,
+        topiccollection: topics[matchingTopicIndex].topiccollection,
+      };
       service.topic = topicCopy;
     }
   }
@@ -240,7 +244,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -257,7 +266,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -274,7 +288,12 @@ const makeThemePages = async client => {
     }
 
     // Update the topic on the page
-    const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -383,9 +402,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       infoPage.department = departmentCopy;
     }
   }
@@ -414,9 +435,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       service.department = departmentCopy;
     }
   }
@@ -446,9 +469,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       page.department = departmentCopy;
     }
   }
@@ -475,9 +500,11 @@ const makeDepartmentPages = async (client, langCode) => {
       }
 
       // Update the department on the page
-      const departmentCopy = JSON.parse(
-        JSON.stringify(departments[matchingDepartmentIndex]),
-      );
+      const departmentCopy = {
+        title: departments[matchingDepartmentIndex].title,
+        slug: departments[matchingDepartmentIndex].slug,
+        id: departments[matchingDepartmentIndex].id,
+      };
       page.department = departmentCopy;
     }
   }
