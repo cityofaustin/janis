@@ -254,7 +254,13 @@ const makeThemePages = async client => {
       }
 
       // Update the topic on the page
-      const topicCopy = rfdc(topics[matchingTopicIndex]);
+      // const topicCopy = rfdc(topics[matchingTopicIndex]);
+      const topicCopy = {
+        id: topics[matchingTopicIndex].id,
+        title: topics[matchingTopicIndex].title,
+        slug: topics[matchingTopicIndex].slug,
+        topiccollection: topics[matchingTopicIndex].topiccollection,
+      };
       // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
       service.topic = topicCopy;
     }
@@ -278,7 +284,12 @@ const makeThemePages = async client => {
     console.log('🌈 started JSONing');
     console.log(topics[matchingTopicIndex].title);
     // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
-    const topicCopy = rfdc(topics[matchingTopicIndex]);
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     console.log('🌈 finished JSONing');
     page.topic = topicCopy;
   }
@@ -299,7 +310,12 @@ const makeThemePages = async client => {
 
     // Update the topic on the page
     // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
-    const topicCopy = rfdc(topics[matchingTopicIndex]);
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
@@ -319,7 +335,12 @@ const makeThemePages = async client => {
 
     // Update the topic on the page
     // const topicCopy = JSON.parse(JSON.stringify(topics[matchingTopicIndex]));
-    const topicCopy = rfdc(topics[matchingTopicIndex]);
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
     page.topic = topicCopy;
   }
 
