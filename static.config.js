@@ -355,6 +355,7 @@ const makeThemePages = async client => {
 const makeDepartmentPages = async (client, langCode) => {
   const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
   const departments = cleanDepartments(allDepartmentPages, langCode);
+  
   const { allInformationPages: allInformationPages } = await client.request(
     allInformationPagesQuery,
   );
