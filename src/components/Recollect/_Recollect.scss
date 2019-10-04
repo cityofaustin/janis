@@ -5,12 +5,12 @@
     border-color: $coa-color-gray;
   }
   .widget-header {
-    background: $coa-color-purple-darkest;
+    background: $coa-color-dark-blue;
     #rCw-title {
       font-size: $coa-font-size-xsmall !important;
       font-weight: $coa-font-bold;
       line-height: $coa-line-height-large;
-      text-transform: uppercase;
+      text-transform: none;
     }
     #recollect-social {
       display: none !important;
@@ -46,6 +46,7 @@
           background: none;
           border: none;
           border-radius: 0;
+          color: $coa-color-primary;
           display: flex;
           height: 100%;
           justify-content: center;
@@ -107,9 +108,10 @@
             }
             #rCbtn-search {
               align-items: center;
-              background-color: $coa-color-blue;
+              background-color: $coa-color-primary;
               border: none;
               border-radius: $coa-button-border-radius;
+              color: $coa-color-white;
               display: flex;
               flex-basis: 100%;
               font-size: $coa-font-size-small;
@@ -143,5 +145,10 @@
   .rC-footer .rC-powered {
     line-height: $coa-line-height-xsmall;
     padding: 0;
+  }
+  .rC-left-link {
+    a {
+      color: $coa-color-primary;
+    }
   }
 }
