@@ -15,6 +15,7 @@ fi
 # fi
 
 if [ "$HEAD" == '2997-dept-links' ]; then
+  echo "$HEAD"+"🔥"
   export CMS_API='https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql'
 fi
 
