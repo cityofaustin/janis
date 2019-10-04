@@ -82,7 +82,7 @@
           font-size: $coa-font-size-small;
           font-weight: $coa-font-bold;
           padding: 0 0 $coa-spacing-small;
-          text-transform: uppercase;
+          text-transform: none;
         }
         & > .rCsearch[data-type='Address'],
         & > .rCsearch[data-type='Material'] {
