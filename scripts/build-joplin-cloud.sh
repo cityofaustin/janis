@@ -5,7 +5,7 @@ export CMS_API='https://joplin.herokuapp.com/api/graphql'
 export CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media'
 export CMS_DOCS='multiple'
 
-if [ "$HEAD" == 'figure-out-build-issues' ]; then
+if [ "$HEAD" == '2906-toc-horizontal-rules' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
@@ -13,5 +13,9 @@ fi
 # if [ "$HEAD" == '2662-service-step-styling' ]; then
 #   export CMS_API='https://joplin-pr-2662-service-step-st.herokuapp.com/api/graphql'
 # fi
+
+if [ "$HEAD" == '2997-dept-links' ]; then
+  export CMS_API='https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql'
+fi
 
 yarn npm-run-all build-css build-js
