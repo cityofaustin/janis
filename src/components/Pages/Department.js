@@ -44,13 +44,13 @@ const Department = ({
         {relatedLinks.map((l, index) => (
           <li key={index} className="coa-DepartmentPage__related-item">
             <a href={l.url} className="coa-DepartmentPage__related-link">
-              {l.text}
+              {l.title}
             </a>
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 
   const TopServicesRelatedContent = () =>
     // if we render both TopServices and Related, wrap them in a div
