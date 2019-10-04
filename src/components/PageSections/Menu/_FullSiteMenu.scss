@@ -179,6 +179,12 @@
   font-style: italic;
 }
 
+.coa-ThemesTopicsMenu--FooterSiteMap {
+  .coa-FullSiteMenu__coming-soon {
+    color: $coa-footer-light-gray;
+  }
+}
+
 .coa-MenuInfo {
   background: $coa-color-grey;
   display: none;

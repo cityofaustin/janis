@@ -190,6 +190,9 @@
   &:visited {
     color: $coa-color-footer-babyblue;
   }
+  &:hover {
+    color: $coa-footer-link-hover;
+  }
 }
 
 .coa-FooterSiteMap {
@@ -222,10 +225,6 @@
         text-decoration: none;
 
         font-size: $coa-font-size-xsmall;
-
-        &:hover {
-          color: $coa-color-darker-blue;
-        }
       }
     }
   }
