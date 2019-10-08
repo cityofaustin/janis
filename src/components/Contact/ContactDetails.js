@@ -20,7 +20,18 @@ import {
   phonePropTypes,
 } from './proptypes';
 
-const SingularContactDetails = ({
+const ContactDetails = ({ contacts, intl }) => (
+  <div className="coa-ContactDetails">
+    <SectionHeader isSerif={true}>
+      {intl.formatMessage(i18n.questionsTitle)}
+    </SectionHeader>
+    {contacts.map(c => (
+      <ContactDetailsEntry contact={c} />
+    ))}
+  </div>
+);
+
+const ContactDetailsEntry = ({
   contact: { name, phoneNumber, email, location, hours, socialMedia },
 }) => (
   <React.Fragment>
@@ -38,21 +49,7 @@ const SingularContactDetails = ({
   </React.Fragment>
 );
 
-const ContactDetails = ({ contacts, intl }) => {
-  debugger;
-  return (
-    <div className="coa-ContactDetails">
-      <SectionHeader isSerif={true}>
-        {intl.formatMessage(i18n.questionsTitle)}
-      </SectionHeader>
-      {contacts.map(contact => (
-        <SingularContactDetails contact={contact} />
-      ))}
-    </div>
-  );
-};
-
-SingularContactDetails.propTypes = {
+ContactDetailsEntry.propTypes = {
   contact: PropTypes.shape({
     location: addressPropTypes,
     email: emailPropTypes,
