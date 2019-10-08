@@ -16,6 +16,16 @@
   padding-bottom: $coa-spacing-large;
 }
 
+.coa-ContactDetails__name {
+  font-size: $coa-font-size-small;
+  margin-bottom: 0;
+  &:not(:first-of-type) {
+    margin-top: $coa-space-level6;
+    padding-top: $coa-space-level6;
+    border-top: 2px solid $coa-color-dark-grey;
+  }
+}
+
 /*
 Assumes that there are 2 children for each .coa-ContactItem.
 This will enable proper line wrapping for the :last-child.
