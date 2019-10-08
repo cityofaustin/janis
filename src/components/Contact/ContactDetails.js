@@ -52,13 +52,13 @@ const ContactDetails = ({ contacts, intl }) => {
   );
 };
 
-// ContactDetails.propTypes = {
-//   contact: PropTypes.shape({
-//     location: addressPropTypes,
-//     email: emailPropTypes,
-//     hours: hoursPropTypes,
-//     phone: phonePropTypes,
-//   }).isRequired,
-// };
+SingularContactDetails.propTypes = {
+  contact: PropTypes.shape({
+    location: addressPropTypes,
+    email: emailPropTypes,
+    hours: hoursPropTypes,
+    phoneNumber: phonePropTypes,
+  }).isRequired,
+};
 
 export default injectIntl(ContactDetails);
