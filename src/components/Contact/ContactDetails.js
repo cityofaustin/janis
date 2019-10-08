@@ -20,34 +20,45 @@ import {
   phonePropTypes,
 } from './proptypes';
 
-const ContactDetails = ({
-  contact: { phoneNumber, email, location, hours, socialMedia },
-  intl,
+const SingularContactDetails = ({
+  contact: { name, phoneNumber, email, location, hours, socialMedia },
 }) => (
-  <div className="coa-ContactDetails">
-    <SectionHeader isSerif={true}>
-      {intl.formatMessage(i18n.questionsTitle)}
-    </SectionHeader>
+  <React.Fragment>
     {/* We want to keep this component easy to read and streamlined, so we are
       avoiding complicated functions in this return.
       Consider breaking into another component and calling that here*/}
-    {email && <Email email={email} />}
+    <h3 className="coa-ContactDetails__name">{name}</h3>
     {location && <Address location={location} />}
-    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
     {hours && !!hours.length && <Hours hours={hours} />}
+    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
+    {email && <Email email={email} />}
     {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
     {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
-  </div>
+  </React.Fragment>
 );
 
-ContactDetails.propTypes = {
-  contact: PropTypes.shape({
-    location: addressPropTypes,
-    email: emailPropTypes,
-    hours: hoursPropTypes,
-    phone: phonePropTypes,
-  }).isRequired,
+const ContactDetails = ({ contacts, intl }) => {
+  debugger;
+  return (
+    <div className="coa-ContactDetails">
+      <SectionHeader isSerif={true}>
+        {intl.formatMessage(i18n.questionsTitle)}
+      </SectionHeader>
+      {contacts.map(contact => (
+        <SingularContactDetails contact={contact} />
+      ))}
+    </div>
+  );
 };
+
+// ContactDetails.propTypes = {
+//   contact: PropTypes.shape({
+//     location: addressPropTypes,
+//     email: emailPropTypes,
+//     hours: hoursPropTypes,
+//     phone: phonePropTypes,
+//   }).isRequired,
+// };
 
 export default injectIntl(ContactDetails);

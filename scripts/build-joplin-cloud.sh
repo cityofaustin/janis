@@ -14,8 +14,8 @@ fi
 #   export CMS_API='https://joplin-pr-2662-service-step-st.herokuapp.com/api/graphql'
 # fi
 
-if [ "$HEAD" == '2997-dept-links' ]; then
-  export CMS_API='https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql'
+if [ "$HEAD" == '3127-multiple-locations' ]; then
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
 yarn npm-run-all build-css build-js
