@@ -1,3 +1,5 @@
+import phoneFragment from './phoneFragment';
+
 const informationPageFragment = `
   fragment informationPageInfo on InformationPageNode {
     id
@@ -51,6 +53,7 @@ const informationPageFragment = `
           contact {
             name
             email
+            ${phoneFragment}
             hours {
               edges {
                 node {

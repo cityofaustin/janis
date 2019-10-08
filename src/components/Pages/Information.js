@@ -67,7 +67,7 @@ const InformationPage = ({
                 )}
                 <div className="coa-Page__contacts-mobile">
                   {!!contacts && !!contacts.length && (
-                    <ContactDetails contact={contacts[0]} />
+                    <ContactDetails contacts={contacts} />
                   )}
                 </div>
               </div>
@@ -77,7 +77,7 @@ const InformationPage = ({
         <div className="coa-Page__side-content">
           <div className="coa-ServicePage__contacts-desktop">
             {!!contacts && !!contacts.length && (
-              <ContactDetails contact={contacts[0]} />
+              <ContactDetails contacts={contacts} />
             )}
           </div>
         </div>
