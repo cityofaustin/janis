@@ -246,7 +246,7 @@ export const cleanGuideForPreview = allGuidePages => {
 const getTopicForContextualNavPreview = page => {
   // If we don't have a topic, return a fake
   // topic describing that
-  if (!page.topics || !page.topics.edges) {
+  if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
     return {
       slug: 'no-topics',
       title: 'No topics selected',
