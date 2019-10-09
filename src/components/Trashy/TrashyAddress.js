@@ -34,10 +34,12 @@ const TrashyAddress = ({ suggestions, setAddress, getSuggestions, intl }) => (
           })}
         />
         {selectedItem && (
-          <CloseSVG
+          <div
             className="coa-Trashy__autosuggestion-clear"
             onClick={clearSelection}
-          />
+          >
+            <i className="material-icons">close</i>
+          </div>
         )}
         {isOpen ? (
           <div>
