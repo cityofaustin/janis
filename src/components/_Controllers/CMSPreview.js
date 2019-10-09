@@ -107,6 +107,7 @@ class CMSPreview extends Component {
           break;
         case 'official_document':
           page = data.pageRevision.asOfficialDocumentPage;
+          break;
         case 'guide':
           page = data.pageRevision.asGuidePage;
       }
