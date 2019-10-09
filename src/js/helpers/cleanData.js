@@ -198,7 +198,7 @@ export const cleanServicesForPreview = allServices => {
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
 
-  serivice.topic = getTopicForContextualNavPreview(service);
+  service.topic = getTopicForContextualNavPreview(service);
   service.theme = {};
   service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
