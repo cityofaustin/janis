@@ -124,8 +124,6 @@ class CMSPreview extends Component {
   }
 
   render() {
-    debugger;
-
     const {
       match: {
         params: { revision_id, page_type },

@@ -104,8 +104,6 @@ function Guide(props) {
     };
   }, [resizeCount]);
 
-  debugger;
-
   // Organize variables that will be used in rendering
   let {
     id,
