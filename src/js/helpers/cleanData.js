@@ -173,42 +173,6 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-export const cleanProcesses = allProcesses => {
-  if (!allProcesses || !allProcesses.edges) return null;
-
-  let cleanedProcesses = cleanLinks(allProcesses, '/processes');
-  cleanedProcesses.map(process => {
-    process.contacts = cleanContacts(process.contacts);
-    process.processSteps = cleanLinks(process.processSteps, process.url);
-
-    //build step details for overview page
-    process.stepDetailGroup = process.processSteps.map(
-      ({ title, sortOrder, linkTitle, url, overviewSteps }) => ({
-        title: `${sortOrder}. ${title}`,
-        link: { text: linkTitle, url: url },
-        content: overviewSteps,
-      }),
-    );
-
-    //build badges for process and processStep pages
-    process.badges = process.processSteps.map(
-      ({ shortTitle, url, sortOrder }) => ({
-        text: shortTitle,
-        url: url,
-        symbol: sortOrder,
-      }),
-    );
-    process.processSteps.map(processStep => {
-      processStep.processTitle = process.title;
-      processStep.processUrl = process.url;
-      processStep.badges = process.badges;
-      processStep.topic = process.topic;
-      processStep.contact = process.contact;
-    });
-  });
-  return cleanedProcesses;
-};
-
 export const cleanServices = allServices => {
   if (!allServices || !allServices.edges) return null;
 
@@ -234,13 +198,7 @@ export const cleanServicesForPreview = allServices => {
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
 
-  service.topic = {
-    slug: 'sample-text',
-    title: 'Sample Text',
-    topiccollection: {
-      topics: [],
-    },
-  };
+  serivice.topic = getTopicForContextualNavPreview(service);
   service.theme = {};
   service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
@@ -265,18 +223,48 @@ export const cleanInformationForPreview = allInformationPages => {
   const infos = allInformationPages.edges.map(e => e.node);
   let info = infos[0];
 
-  info.topic = {
-    slug: 'sample-text',
-    title: 'Sample Text',
-    topiccollection: {
-      topics: [],
-    },
-  };
+  info.topic = getTopicForContextualNavPreview(info);
   info.theme = {};
+
   info.text = info.title;
   info.contacts = cleanContacts(info.contacts);
 
   return info;
+};
+
+export const cleanGuideForPreview = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+  const guides = allGuidePages.edges.map(e => e.node);
+  let guide = guides[0];
+
+  guide.topic = getTopicForContextualNavPreview(guide);
+  guide.theme = {};
+
+  return guide;
+};
+
+const getTopicForContextualNavPreview = page => {
+  // If we don't have a topic, return a fake
+  // topic describing that
+  if (!page.topics || !page.topics.edges) {
+    return {
+      slug: 'no-topics',
+      title: 'No topics selected',
+      topiccollection: {
+        topics: [],
+      },
+    };
+  }
+
+  // If we have topics,
+  // get info from the first one
+  return {
+    slug: page.topics.edges[0].node.topic.slug,
+    title: page.topics.edges[0].node.topic.title,
+    topiccollection: {
+      topics: [],
+    },
+  };
 };
 
 export const cleanDepartmentDirectors = directors => {
