@@ -13,7 +13,7 @@ import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
-import { printSections } from 'components/Pages/Guide/helpers.js'
+import { printSections } from 'components/Pages/Guide/helpers.js';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
@@ -103,6 +103,8 @@ function Guide(props) {
       window.removeEventListener('resize', handleResize);
     };
   }, [resizeCount]);
+
+  debugger;
 
   // Organize variables that will be used in rendering
   let {

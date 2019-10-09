@@ -279,6 +279,23 @@ export const cleanInformationForPreview = allInformationPages => {
   return info;
 };
 
+export const cleanGuideForPreview = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+  const guides = allGuidePages.edges.map(e => e.node);
+  let guide = guides[0];
+
+  guide.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
+    },
+  };
+  guide.theme = {};
+
+  return guide;
+};
+
 export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 

@@ -14,4 +14,8 @@ fi
 #   export CMS_API='https://joplin-pr-2662-service-step-st.herokuapp.com/api/graphql'
 # fi
 
+if [ "$HEAD" == '3082-guide-page-previews' ]; then
+  export CMS_API='http://joplin-pr-3082-guide-page-prev.herokuapp.com/api/graphql'
+fi
+
 yarn npm-run-all build-css build-js

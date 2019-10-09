@@ -10,6 +10,7 @@ import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
+import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
 import {
   cleanServicesForPreview,
   cleanInformationForPreview,
@@ -17,6 +18,7 @@ import {
   cleanDepartments,
   cleanTopicCollections,
   cleanOfficialDocumentPagesForPreview,
+  cleanGuideForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -24,6 +26,7 @@ import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
 import OfficialDocumentList from 'components/Pages/OfficialDocumentList';
+import Guide from 'components/Pages/Guide';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -78,6 +81,10 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'guide':
+        req = client.request(getGuidePageRevisionQuery, {
+          id: revision_id,
+        });
     }
     req.then(data => {
       let page;
@@ -100,6 +107,8 @@ class CMSPreview extends Component {
           break;
         case 'official_document':
           page = data.pageRevision.asOfficialDocumentPage;
+        case 'guide':
+          page = data.pageRevision.asGuidePage;
       }
 
       this.setState({
@@ -115,6 +124,8 @@ class CMSPreview extends Component {
   }
 
   render() {
+    debugger;
+
     const {
       match: {
         params: { revision_id, page_type },
@@ -179,6 +190,10 @@ class CMSPreview extends Component {
               }
             />
           )}
+        />
+        <Route
+          path="/guide"
+          render={props => <Guide guidePage={cleanGuideForPreview(data)} />}
         />
       </Switch>
     );
