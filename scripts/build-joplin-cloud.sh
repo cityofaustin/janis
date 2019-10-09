@@ -15,7 +15,7 @@ fi
 # fi
 
 if [ "$HEAD" == '2473-preview-topics' ]; then
-  export CMS_API='http://joplin-pr-3082-guide-page-prev.herokuapp.com/api/graphql'
+  export CMS_API='https://joplin-pr-3082-guide-page-prev.herokuapp.com/api/graphql'
 fi
 
 yarn npm-run-all build-css build-js
