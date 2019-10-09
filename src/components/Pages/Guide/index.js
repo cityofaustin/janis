@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import Stickyfill from 'stickyfilljs';
 import { findIndex, sortBy } from 'lodash';
 import path from 'path';
 
@@ -88,7 +87,17 @@ function Guide(props) {
   // "position: sticky" will be used by desktop GuideMenu.
   useEffect(() => {
     const stickyElements = node.current.querySelectorAll('.sticky');
-    Stickyfill.add(stickyElements);
+
+    // stickyfill breaks the build with a 'window is not defined' error
+    // see https://github.com/react-static/react-static/issues/16
+    // see https://github.com/wilddeer/stickyfill/issues/99
+    if (typeof window !== 'undefined' && typeof Stickyfill == 'undefined') {
+      var Stickyfill = require('stickyfilljs');
+    }
+
+    if (typeof Stickyfill !== 'undefined') {
+      Stickyfill.add(stickyElements);
+    }
   }, []);
 
   // Alert state when the window resizes.
