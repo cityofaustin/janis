@@ -12,6 +12,7 @@ import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery'
 import getTopicPageQuery from 'js/queries/getTopicPageQuery';
 import getInformationPageQuery from 'js/queries/getInformationPageQuery';
 import getServicePageQuery from 'js/queries/getServicePageQuery';
+import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
 
 import {
   cleanLinks,
@@ -174,11 +175,35 @@ const makeAllPages = async langCode => {
     };
   });
 
+  const departmentPages = parsedStructure.filter(p => p.type === 'department');
+  const departmentPageData = departmentPages.map(departmentPage => {
+    return {
+      path: departmentPage.url,
+      component: 'src/components/Pages/Department',
+      getData: async () => {
+        console.log(`📡 Requesting page data for ${departmentPage.url}`);
+
+        const { allDepartmentPages } = await client.request(
+          getDepartmentPageQuery,
+          {
+            id: departmentPage.id,
+          },
+        );
+
+        let cleanedDepartmentPages = cleanDepartments(allDepartmentPages);
+
+        console.log(`🎉 Completed building page at ${departmentPage.url}`);
+        return { department: cleanedDepartmentPages[0] };
+      },
+    };
+  });
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
     children: topicCollectionData
       .concat(topicData)
+      .concat(departmentPageData)
       .concat(informationPageData)
       .concat(servicePageData),
     getData: async () => {
