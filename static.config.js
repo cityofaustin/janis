@@ -8,6 +8,7 @@ import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
 import getInformationPageQuery from 'js/queries/getInformationPageQuery';
+import getServicePageQuery from 'js/queries/getServicePageQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
@@ -59,13 +60,6 @@ const makeAllPages = async langCode => {
   const siteStructure = await client.request(siteStructureQuery);
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
   console.log(`🎉 Site structure acquired`);
-
-  // for (const page of parsedStructure) {
-  //   console.log(`🧩🧩🧩`);
-  //   for (const prop in page) {
-  //     console.log(`${prop}: ${page[prop]}`);
-  //   }
-  // }
 
   const topicCollectionPages = parsedStructure.filter(
     p => p.type === 'topic collection',
@@ -132,10 +126,41 @@ const makeAllPages = async langCode => {
     };
   });
 
+  const servicePages = parsedStructure.filter(p => p.type === 'service page');
+  const servicePageData = servicePages.map(servicePage => {
+    return {
+      path: servicePage.url,
+      component: 'src/components/Pages/Service',
+      getData: async () => {
+        const { allServicePages } = await client.request(getServicePageQuery, {
+          id: servicePage.id,
+        });
+
+        let cleanedServicePages = cleanServices(allServicePages);
+
+        cleanedServicePages[0].topic.topiccollection = {
+          theme: {
+            slug: 'blarg',
+          },
+          topics: [
+            {
+              id: 'blarg',
+            },
+          ],
+          slug: 'blarg',
+        };
+
+        return { service: cleanedServicePages[0] };
+      },
+    };
+  });
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: topicCollectionData.concat(informationPageData),
+    children: topicCollectionData
+      .concat(informationPageData)
+      .concat(servicePageData),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
