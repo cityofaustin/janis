@@ -67,66 +67,75 @@ const makeAllPages = async langCode => {
   //   }
   // }
 
-  // Topic collections are going to be hard, probably want to build out the Joplin side a bit
-  // before doing this
+  const topicCollectionPages = parsedStructure.filter(
+    p => p.type === 'topic collection',
+  );
+  const topicCollectionData = topicCollectionPages.map(topicCollectionPage => ({
+    path: topicCollectionPage.url,
+    component: 'src/components/Pages/TopicCollection',
+    getData: async () => {
+      console.log(`📡 Requesting page data for ${topicCollectionPage.url}`);
+      const { allTopicCollections } = await client.request(
+        getTopicCollectionPageQuery,
+        { id: topicCollectionPage.id },
+      );
 
-  // const topicCollectionPages = parsedStructure.filter(
-  //   p => p.type === 'topic collection',
-  // );
-  // const topicCollectionData = topicCollectionPages.map(topicCollectionPage => ({
-  //   path: topicCollectionPage.url,
-  //   component: 'src/components/Pages/TopicCollection',
-  //   getData: async () => {
-  //     const { allTopicCollections } = await client.request(
-  //       getTopicCollectionPageQuery,
-  //       { id: topicCollectionPage.id },
-  //     );
+      let cleanedTopicCollections = cleanTopicCollections(allTopicCollections);
 
-  //     let cleanedTopicCollections = cleanTopicCollections(allTopicCollections);
-  //     console.log('BLAAAAA');
+      cleanedTopicCollections[0].topics.push({
+        slug: 'no-topics',
+        title: 'No topics selected',
+        topiccollection: {
+          theme: {
+            slug: 'blarg',
+          },
+          slug: 'blarg',
+        },
+      });
 
-  //     cleanedTopicCollections[0].topics.push({
-  //       slug: 'no-topics',
-  //       title: 'No topics selected',
-  //     });
-
-  //     console.log(cleanedTopicCollections[0].topics);
-
-  //     return cleanedTopicCollections[0];
-  //   },
-  // }));
+      console.log(`🎉 Completed building page at ${topicCollectionPage.url}`);
+      return { tc: cleanedTopicCollections[0] };
+    },
+  }));
 
   const informationPages = parsedStructure.filter(
     p => p.type === 'information page',
   );
-  console.log(informationPages);
-  const informationPageData = informationPages.map(informationPage => ({
-    path: informationPage.url,
-    component: 'src/components/Pages/Information',
-    getData: async () => {
-      const { allInformationPages } = await client.request(
-        getInformationPageQuery,
-        { id: informationPage.id },
-      );
+  const informationPageData = informationPages.map(informationPage => {
+    return {
+      path: informationPage.url,
+      component: 'src/components/Pages/Information',
+      getData: async () => {
+        const { allInformationPages } = await client.request(
+          getInformationPageQuery,
+          { id: informationPage.id },
+        );
 
-      let cleanedInformationPages = cleanInformationPages(allInformationPages);
-      console.log('BLAAAAA');
+        let cleanedInformationPages = cleanInformationPages(
+          allInformationPages,
+        );
 
-      cleanedInformationPages[0].topics.edges.push({
-        slug: 'no-topics',
-        title: 'No topics selected',
-      });
+        cleanedInformationPages[0].topic.topiccollection = {
+          theme: {
+            slug: 'blarg',
+          },
+          topics: [
+            {
+              id: 'blarg',
+            },
+          ],
+          slug: 'blarg',
+        };
 
-      console.log(cleanedInformationPages[0]);
-
-      return cleanedInformationPages[0];
-    },
-  }));
+        return { informationPage: cleanedInformationPages[0] };
+      },
+    };
+  });
 
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: informationPageData,
+    children: topicCollectionData.concat(informationPageData),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
