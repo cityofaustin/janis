@@ -52,10 +52,6 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-  const themeChildren = await makeThemePages(client);
-  const deptChildren = await makeDepartmentPages(client, langCode);
-  const globalChildren = await makeGlobalPages(client);
-
   console.log(`📡 Requesting site structure`);
   const siteStructure = await client.request(siteStructureQuery);
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
@@ -100,6 +96,7 @@ const makeAllPages = async langCode => {
       path: informationPage.url,
       component: 'src/components/Pages/Information',
       getData: async () => {
+        console.log(`📡 Requesting page data for ${informationPage.url}`);
         const { allInformationPages } = await client.request(
           getInformationPageQuery,
           { id: informationPage.id },
@@ -109,18 +106,25 @@ const makeAllPages = async langCode => {
           allInformationPages,
         );
 
-        cleanedInformationPages[0].topic.topiccollection = {
-          theme: {
-            slug: 'blarg',
-          },
-          topics: [
-            {
-              id: 'blarg',
+        if (
+          cleanedInformationPages &&
+          cleanedInformationPages[0] &&
+          cleanedInformationPages[0].topic
+        ) {
+          cleanedInformationPages[0].topic.topiccollection = {
+            theme: {
+              slug: 'blarg',
             },
-          ],
-          slug: 'blarg',
-        };
+            topics: [
+              {
+                id: 'blarg',
+              },
+            ],
+            slug: 'blarg',
+          };
+        }
 
+        console.log(`🎉 Completed building page at ${informationPage.url}`);
         return { informationPage: cleanedInformationPages[0] };
       },
     };
@@ -132,24 +136,29 @@ const makeAllPages = async langCode => {
       path: servicePage.url,
       component: 'src/components/Pages/Service',
       getData: async () => {
+        console.log(`📡 Requesting page data for ${servicePage.url}`);
+
         const { allServicePages } = await client.request(getServicePageQuery, {
           id: servicePage.id,
         });
 
         let cleanedServicePages = cleanServices(allServicePages);
 
-        cleanedServicePages[0].topic.topiccollection = {
-          theme: {
-            slug: 'blarg',
-          },
-          topics: [
-            {
-              id: 'blarg',
+        if (cleanedServicePages[0].topic) {
+          cleanedServicePages[0].topic.topiccollection = {
+            theme: {
+              slug: 'blarg',
             },
-          ],
-          slug: 'blarg',
-        };
+            topics: [
+              {
+                id: 'blarg',
+              },
+            ],
+            slug: 'blarg',
+          };
+        }
 
+        console.log(`🎉 Completed building page at ${servicePage.url}`);
         return { service: cleanedServicePages[0] };
       },
     };
