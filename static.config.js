@@ -13,6 +13,7 @@ import getTopicPageQuery from 'js/queries/getTopicPageQuery';
 import getInformationPageQuery from 'js/queries/getInformationPageQuery';
 import getServicePageQuery from 'js/queries/getServicePageQuery';
 import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
+import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuery';
 
 import {
   cleanLinks,
@@ -99,6 +100,29 @@ const makeAllPages = async langCode => {
     },
   }));
 
+  const departmentPages = parsedStructure.filter(p => p.type === 'department');
+  const departmentPageData = departmentPages.map(departmentPage => {
+    return {
+      path: departmentPage.url,
+      component: 'src/components/Pages/Department',
+      getData: async () => {
+        console.log(`📡 Requesting page data for ${departmentPage.url}`);
+
+        const { allDepartmentPages } = await client.request(
+          getDepartmentPageQuery,
+          {
+            id: departmentPage.id,
+          },
+        );
+
+        let cleanedDepartmentPages = cleanDepartments(allDepartmentPages);
+
+        console.log(`🎉 Completed building page at ${departmentPage.url}`);
+        return { department: cleanedDepartmentPages[0] };
+      },
+    };
+  });
+
   const informationPages = parsedStructure.filter(
     p => p.type === 'information page',
   );
@@ -175,28 +199,52 @@ const makeAllPages = async langCode => {
     };
   });
 
-  const departmentPages = parsedStructure.filter(p => p.type === 'department');
-  const departmentPageData = departmentPages.map(departmentPage => {
-    return {
-      path: departmentPage.url,
-      component: 'src/components/Pages/Department',
-      getData: async () => {
-        console.log(`📡 Requesting page data for ${departmentPage.url}`);
+  const officialDocumentPages = parsedStructure.filter(
+    p => p.type === 'official document page',
+  );
+  const officialDocumentPageData = officialDocumentPages.map(
+    officialDocumentPage => {
+      return {
+        path: officialDocumentPage.url,
+        component: 'src/components/Pages/OfficialDocumentList',
+        getData: async () => {
+          console.log(
+            `📡 Requesting page data for ${officialDocumentPage.url}`,
+          );
 
-        const { allDepartmentPages } = await client.request(
-          getDepartmentPageQuery,
-          {
-            id: departmentPage.id,
-          },
-        );
+          const { allOfficialDocumentPages } = await client.request(
+            getOfficialDocumentPageQuery,
+            {
+              id: officialDocumentPage.id,
+            },
+          );
 
-        let cleanedDepartmentPages = cleanDepartments(allDepartmentPages);
+          let cleanedOfficialDocumentPages = cleanServices(
+            allOfficialDocumentPages,
+          );
 
-        console.log(`🎉 Completed building page at ${departmentPage.url}`);
-        return { department: cleanedDepartmentPages[0] };
-      },
-    };
-  });
+          if (cleanedOfficialDocumentPages[0].topic) {
+            cleanedOfficialDocumentPages[0].topic.topiccollection = {
+              theme: {
+                slug: 'blarg',
+              },
+              topics: [
+                {
+                  id: 'blarg',
+                },
+              ],
+              slug: 'blarg',
+            };
+          }
+
+          console.log(
+            `🎉 Completed building page at ${officialDocumentPage.url}`,
+          );
+          return { officialDocumentPage: cleanedOfficialDocumentPages[0] };
+        },
+      };
+    },
+  );
 
   const data = {
     path: path,
@@ -205,7 +253,8 @@ const makeAllPages = async langCode => {
       .concat(topicData)
       .concat(departmentPageData)
       .concat(informationPageData)
-      .concat(servicePageData),
+      .concat(servicePageData)
+      .concat(officialDocumentPageData),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
