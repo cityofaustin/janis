@@ -14,6 +14,7 @@ import getInformationPageQuery from 'js/queries/getInformationPageQuery';
 import getServicePageQuery from 'js/queries/getServicePageQuery';
 import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
 import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuery';
+import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 
 import {
   cleanLinks,
@@ -246,6 +247,40 @@ const makeAllPages = async langCode => {
     },
   );
 
+  const guidePages = parsedStructure.filter(p => p.type === 'guide page');
+  const guidePageData = guidePages.map(guidePage => {
+    return {
+      path: guidePage.url,
+      component: 'src/components/Pages/Guide',
+      getData: async () => {
+        console.log(`📡 Requesting page data for ${guidePage.url}`);
+
+        const { allGuidePages } = await client.request(getGuidePageQuery, {
+          id: guidePage.id,
+        });
+
+        let cleanedGuidePages = cleanGuidePages(allGuidePages);
+
+        if (cleanedGuidePages[0].topic) {
+          cleanedGuidePages[0].topic.topiccollection = {
+            theme: {
+              slug: 'blarg',
+            },
+            topics: [
+              {
+                id: 'blarg',
+              },
+            ],
+            slug: 'blarg',
+          };
+        }
+
+        console.log(`🎉 Completed building page at ${guidePage.url}`);
+        return { guidePage: cleanedGuidePages[0] };
+      },
+    };
+  });
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
@@ -254,7 +289,8 @@ const makeAllPages = async langCode => {
       .concat(departmentPageData)
       .concat(informationPageData)
       .concat(servicePageData)
-      .concat(officialDocumentPageData),
+      .concat(officialDocumentPageData)
+      .concat(guidePageData),
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
