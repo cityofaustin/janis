@@ -1,26 +1,17 @@
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
-// QUERIES
-import allServicePagesQuery from 'js/queries/allServicePagesQuery';
-import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
-import allTopicsQuery from 'js/queries/allTopicsQuery';
-import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
-import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
-import getInformationPageQuery from 'js/queries/getInformationPageQuery';
-import getServicePageQuery from 'js/queries/getServicePageQuery';
+// TODO: clean these up/remove them
 import allThemesQuery from 'js/queries/allThemesQuery';
-import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import all311Query from 'js/queries/all311Query';
-import allOfficialDocumentPagesQuery from 'js/queries/allOfficialDocumentPagesQuery';
-import allGuidePagesQuery from 'js/queries/allGuidePagesQuery';
-import globalInformationPagesQuery from 'js/queries/globalInformationPagesQuery';
-import globalGuidePagesQuery from 'js/queries/globalGuidePagesQuery';
-import globalOfficialDocumentPagesQuery from 'js/queries/globalOfficialDocumentPagesQuery';
-import globalServicePagesQuery from 'js/queries/globalServicePagesQuery';
 
+// Shiny ✨ new queries!
 import siteStructureQuery from 'js/queries/siteStructureQuery';
+import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
+import getTopicPageQuery from 'js/queries/getTopicPageQuery';
+import getInformationPageQuery from 'js/queries/getInformationPageQuery';
+import getServicePageQuery from 'js/queries/getServicePageQuery';
 
 import {
   cleanLinks,
@@ -35,16 +26,6 @@ import {
   cleanOfficialDocumentPages,
   cleanGuidePages,
 } from 'js/helpers/cleanData';
-
-const isRelatedDepartment = (page, departmentId) => {
-  const relatedDepartments = page.relatedDepartments.edges;
-  for (let department in relatedDepartments) {
-    if (department.id == departmentId) {
-      return true;
-    }
-  }
-  return false;
-};
 
 const makeAllPages = async langCode => {
   const path = `/${!!langCode ? langCode : ''}`;
@@ -85,6 +66,35 @@ const makeAllPages = async langCode => {
 
       console.log(`🎉 Completed building page at ${topicCollectionPage.url}`);
       return { tc: cleanedTopicCollections[0] };
+    },
+  }));
+
+  const topicPages = parsedStructure.filter(p => p.type === 'topic');
+  const topicData = topicPages.map(topicPage => ({
+    path: topicPage.url,
+    component: 'src/components/Pages/Topic',
+    getData: async () => {
+      console.log(`📡 Requesting page data for ${topicPage.url}`);
+      const { allTopics } = await client.request(getTopicPageQuery, {
+        id: topicPage.id,
+      });
+
+      let cleanedTopics = cleanTopics(allTopics);
+
+      cleanedTopics[0].topiccollection = {
+        theme: {
+          slug: 'blarg',
+        },
+        topics: [
+          {
+            id: 'blarg',
+          },
+        ],
+        slug: 'blarg',
+      };
+
+      console.log(`🎉 Completed building page at ${topicPage.url}`);
+      return { topic: cleanedTopics[0] };
     },
   }));
 
@@ -168,6 +178,7 @@ const makeAllPages = async langCode => {
     path: path,
     component: 'src/components/Pages/Home',
     children: topicCollectionData
+      .concat(topicData)
       .concat(informationPageData)
       .concat(servicePageData),
     getData: async () => {
@@ -195,415 +206,6 @@ const makeAllPages = async langCode => {
       };
     },
   };
-
-  return data;
-};
-
-const makeGlobalPages = async client => {
-  const { allInformationPages: allInformationPages } = await client.request(
-    globalInformationPagesQuery,
-  );
-  const informationPages = cleanInformationPages(allInformationPages);
-
-  const { allGuidePages: allGuidePages } = await client.request(
-    globalGuidePagesQuery,
-  );
-  const guidePages = cleanGuidePages(allGuidePages);
-
-  const {
-    allOfficialDocumentPages: allOfficialDocumentPages,
-  } = await client.request(globalOfficialDocumentPagesQuery);
-  const officialDocumentPages = await cleanOfficialDocumentPages(
-    allOfficialDocumentPages,
-  );
-
-  const { allServicePages: allServicePages } = await client.request(
-    globalServicePagesQuery,
-  );
-  const servicePages = cleanServices(allServicePages);
-
-  const data = informationPages
-    .map(informationPage => ({
-      path: `/${informationPage.slug}`,
-      component: 'src/components/Pages/Information',
-      getData: async () => ({
-        informationPage,
-      }),
-    }))
-    .concat(
-      servicePages.map(service => ({
-        path: `/${service.slug}`,
-        component: 'src/components/Pages/Service',
-        getData: async () => ({
-          service,
-        }),
-      })),
-    )
-    .concat(
-      officialDocumentPages.map(officialDocumentPage => ({
-        path: `/${officialDocumentPage.slug}`,
-        component: 'src/components/Pages/OfficialDocumentList',
-        getData: async () => ({
-          officialDocumentPage,
-        }),
-      })),
-    )
-    .concat(
-      guidePages.map(guidePage => ({
-        path: `/${guidePage.slug}`,
-        component: 'src/components/Pages/Guide',
-        getData: async () => ({
-          guidePage,
-        }),
-      })),
-    );
-
-  return data;
-};
-
-const makeThemePages = async client => {
-  const { allThemes } = await client.request(allThemesQuery);
-  const themes = cleanThemes(allThemes);
-
-  const { allTopicCollections } = await client.request(
-    allTopicCollectionsQuery,
-  );
-  const topicCollections = cleanTopicCollections(allTopicCollections);
-
-  const { allTopics } = await client.request(allTopicsQuery);
-  const topics = cleanTopics(allTopics);
-
-  const { allInformationPages: allInformationPages } = await client.request(
-    allInformationPagesQuery,
-  );
-  const informationPages = cleanInformationPages(allInformationPages);
-
-  const { allServicePages: allServices } = await client.request(
-    allServicePagesQuery,
-  );
-  const services = cleanServices(allServices);
-
-  const {
-    allOfficialDocumentPages: allOfficialDocumentPages,
-  } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = await cleanOfficialDocumentPages(
-    allOfficialDocumentPages,
-  );
-
-  const { allGuidePages: allGuidePages } = await client.request(
-    allGuidePagesQuery,
-  );
-  const guidePages = cleanGuidePages(allGuidePages);
-
-  // Add all topic links to topic collection pages
-  for (var topic of topics) {
-    let matchingTopicCollectionIndex = topicCollections.findIndex(
-      tc => tc.id === topic.topiccollection.id,
-    );
-    if (matchingTopicCollectionIndex !== -1) {
-      topicCollections[matchingTopicCollectionIndex].topics.push(topic);
-    }
-  }
-
-  // And now that we have all the topics on each topic collection,
-  // let's update the topic collections on the topics
-  for (var topic of topics) {
-    let matchingTopicCollectionIndex = topicCollections.findIndex(
-      tc => tc.id === topic.topiccollection.id,
-    );
-
-    if (matchingTopicCollectionIndex !== -1) {
-      // Update the topicCollection on the topic
-      const topicCollectionCopy = JSON.parse(
-        JSON.stringify(topicCollections[matchingTopicCollectionIndex]),
-      );
-      topic.topiccollection = topicCollectionCopy;
-    }
-  }
-
-  // Add all service page links to topic pages
-  for (var service of services) {
-    if (!service.topic) continue;
-    service.type = 'service';
-
-    let matchingTopicIndex = topics.findIndex(t => t.id === service.topic.id);
-
-    if (topics[matchingTopicIndex]) {
-      if (service.toplink) {
-        topics[matchingTopicIndex].topLinks.push(service);
-      } else {
-        topics[matchingTopicIndex].otherLinks.push(service);
-      }
-
-      // Update the topic on the page
-      const topicCopy = {
-        id: topics[matchingTopicIndex].id,
-        title: topics[matchingTopicIndex].title,
-        slug: topics[matchingTopicIndex].slug,
-        topiccollection: topics[matchingTopicIndex].topiccollection,
-      };
-      service.topic = topicCopy;
-    }
-  }
-
-  // Add all information page links to topic pages
-  for (var page of informationPages) {
-    if (!page.topic) continue;
-    page.type = 'info';
-
-    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
-    if (page.toplink) {
-      topics[matchingTopicIndex].topLinks.push(page);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(page);
-    }
-
-    // Update the topic on the page
-    const topicCopy = {
-      id: topics[matchingTopicIndex].id,
-      title: topics[matchingTopicIndex].title,
-      slug: topics[matchingTopicIndex].slug,
-      topiccollection: topics[matchingTopicIndex].topiccollection,
-    };
-    page.topic = topicCopy;
-  }
-
-  // Add all official document page links to topic pages
-  for (let page of officialDocumentPages) {
-    if (!page.topic) continue;
-    page.type = 'official-document';
-
-    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
-    if (page.toplink) {
-      topics[matchingTopicIndex].topLinks.push(page);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(page);
-    }
-
-    // Update the topic on the page
-    const topicCopy = {
-      id: topics[matchingTopicIndex].id,
-      title: topics[matchingTopicIndex].title,
-      slug: topics[matchingTopicIndex].slug,
-      topiccollection: topics[matchingTopicIndex].topiccollection,
-    };
-    page.topic = topicCopy;
-  }
-
-  // Add all guide page links to topic pages
-  for (let page of guidePages) {
-    if (!page.topic) continue;
-    page.type = 'guide';
-
-    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
-    if (page.toplink) {
-      topics[matchingTopicIndex].topLinks.push(page);
-    } else {
-      topics[matchingTopicIndex].otherLinks.push(page);
-    }
-
-    // Update the topic on the page
-    const topicCopy = {
-      id: topics[matchingTopicIndex].id,
-      title: topics[matchingTopicIndex].title,
-      slug: topics[matchingTopicIndex].slug,
-      topiccollection: topics[matchingTopicIndex].topiccollection,
-    };
-    page.topic = topicCopy;
-  }
-
-  const data = themes.map(theme => ({
-    path: `/${theme.slug}`,
-    component: 'src/components/Pages/Theme',
-    getData: async () => ({
-      theme,
-    }),
-    children: topicCollections
-      .filter(tc => tc.theme != null && tc.theme.id == theme.id)
-      .map(tc => ({
-        path: `/${tc.slug}`,
-        component: 'src/components/Pages/TopicCollection',
-        getData: async () => ({
-          tc,
-        }),
-        children: topics
-          .filter(
-            top =>
-              top.topiccollection != null && top.topiccollection.id == tc.id,
-          )
-          .map(topic => ({
-            path: `/${topic.slug}`,
-            component: 'src/components/Pages/Topic',
-            getData: async () => ({
-              topic,
-            }),
-            children: informationPages
-              .filter(i => i.topic != null && i.topic.id == topic.id)
-              .map(informationPage => ({
-                path: `/${informationPage.slug}`,
-                component: 'src/components/Pages/Information',
-                getData: async () => ({
-                  informationPage,
-                }),
-              }))
-              .concat(
-                services
-                  .filter(s => s.topic != null && s.topic.id == topic.id)
-                  .map(service => ({
-                    path: `/${service.slug}`,
-                    component: 'src/components/Pages/Service',
-                    getData: async () => ({
-                      service,
-                    }),
-                  })),
-              )
-              .concat(
-                officialDocumentPages
-                  .filter(d => d.topic != null && d.topic.id == topic.id)
-                  .map(officialDocumentPage => ({
-                    path: `/${officialDocumentPage.slug}`,
-                    component: 'src/components/Pages/OfficialDocumentList',
-                    getData: async () => ({
-                      officialDocumentPage,
-                    }),
-                  })),
-              )
-              .concat(
-                guidePages
-                  .filter(d => d.topic != null && d.topic.id == topic.id)
-                  .map(guidePage => ({
-                    path: `/${guidePage.slug}`,
-                    component: 'src/components/Pages/Guide',
-                    getData: async () => ({
-                      guidePage,
-                    }),
-                  })),
-              ),
-          })),
-      })),
-  }));
-
-  return data;
-};
-
-const makeDepartmentPages = async (client, langCode) => {
-  const { allDepartmentPages } = await client.request(allDepartmentPagesQuery);
-  const departments = cleanDepartments(allDepartmentPages, langCode);
-
-  const { allInformationPages: allInformationPages } = await client.request(
-    allInformationPagesQuery,
-  );
-  const informationPages = cleanInformationPages(allInformationPages);
-
-  // Add all information page links to department pages
-  // copying the pattern from topics, may not need to do all this copying
-  for (var infoPage of informationPages) {
-    if (!infoPage.department) continue;
-
-    infoPage.type = 'info';
-  }
-
-  const { allServicePages: allServices } = await client.request(
-    allServicePagesQuery,
-  );
-  const services = cleanServices(allServices);
-
-  // Add all service page links to department pages
-  // copying the pattern from topics, may not need to do all this copying
-  for (var service of services) {
-    if (!service.department) continue;
-    service.type = 'service';
-  }
-
-  const {
-    allOfficialDocumentPages: allOfficialDocumentPages,
-  } = await client.request(allOfficialDocumentPagesQuery);
-  const officialDocumentPages = await cleanOfficialDocumentPages(
-    allOfficialDocumentPages,
-  );
-
-  // Add all official document page links to department pages
-  for (let page of officialDocumentPages) {
-    if (!page.department) continue;
-    page.type = 'official-document';
-  }
-
-  const { allGuidePages: allGuidePages } = await client.request(
-    allGuidePagesQuery,
-  );
-  const guidePages = cleanGuidePages(allGuidePages);
-
-  // Add all guide page links to department pages
-  for (let page of guidePages) {
-    if (!page.department) continue;
-    page.type = 'guide';
-  }
-
-  const data = departments
-    .map(department => ({
-      path: `/${department.slug}`,
-      component: 'src/components/Pages/Department',
-      getData: async () => ({
-        department,
-      }),
-      children: informationPages
-        .filter(i => i.department != null && i.department.id == department.id)
-        .map(informationPage => ({
-          path: `/${informationPage.slug}`,
-          component: 'src/components/Pages/Information',
-          getData: async () => ({
-            informationPage,
-          }),
-        }))
-        .concat(
-          services
-            .filter(
-              s => s.department != null && s.department.id == department.id,
-            )
-            .map(service => ({
-              path: `/${service.slug}`,
-              component: 'src/components/Pages/Service',
-              getData: async () => ({
-                service,
-              }),
-            })),
-        )
-        .concat(
-          officialDocumentPages
-            .filter(
-              d => d.department != null && d.department.id == department.id,
-            )
-            .map(officialDocumentPage => ({
-              path: `/${officialDocumentPage.slug}`,
-              component: 'src/components/Pages/OfficialDocumentList',
-              getData: async () => ({
-                officialDocumentPage,
-              }),
-            })),
-        )
-        .concat(
-          guidePages
-            .filter(
-              p => p.department != null && p.department.id == department.id,
-            )
-            .map(guidePage => ({
-              path: `/${guidePage.slug}`,
-              component: 'src/components/Pages/Guide',
-              getData: async () => ({
-                guidePage,
-              }),
-            })),
-        ),
-    }))
-    .concat([
-      {
-        path: '/departments',
-        component: 'src/components/Pages/Departments',
-        getData: async () => ({
-          departments,
-        }),
-      },
-    ]);
 
   return data;
 };
