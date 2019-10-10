@@ -46,6 +46,10 @@ export const formFeedback = defineMessages({
   thankYouForSharing: 'Thank you for sharing feedback!',
 });
 
+export const userFeedback = defineMessages({
+  didYouFind: 'Did you find what you were looking for on this page?',
+});
+
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
