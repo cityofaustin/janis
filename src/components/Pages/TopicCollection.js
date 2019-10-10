@@ -11,34 +11,37 @@ import TopicCollectionCards from '../PageSections/TopicCollectionCards';
 const TopicCollection = ({
   intl,
   tc: { title, description, theme, topics, slug },
-}) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-    </Head>
-    {
-      // TopicCollection can belong to other TopicCollection or Theme.
-      // Add placeholder related to
-    }
+}) => {
+  debugger;
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      {
+        // TopicCollection can belong to other TopicCollection or Theme.
+        // Add placeholder related to
+      }
 
-    {/* <ContextualNav
+      {/* <ContextualNav
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
       /> */}
 
-    <PageHeader description={description} contentType={'topic-collection'}>
-      {title}
-    </PageHeader>
+      <PageHeader description={description} contentType={'topic-collection'}>
+        {title}
+      </PageHeader>
 
-    <div className="wrapper container-fluid">
-      <div className="row">
-        <div className="col-xs-12">
-          <TopicCollectionCards topics={topics} theme={theme} slug={slug} />
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-xs-12">
+            <TopicCollectionCards topics={topics} theme={theme} slug={slug} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default withRouteData(injectIntl(TopicCollection));

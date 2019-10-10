@@ -6,6 +6,8 @@ import allServicePagesQuery from 'js/queries/allServicePagesQuery';
 import allInformationPagesQuery from 'js/queries/allInformationPagesQuery';
 import allTopicsQuery from 'js/queries/allTopicsQuery';
 import allTopicCollectionsQuery from 'js/queries/allTopicCollectionsQuery';
+import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
+import getInformationPageQuery from 'js/queries/getInformationPageQuery';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import allDepartmentPagesQuery from 'js/queries/allDepartmentPagesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
@@ -16,6 +18,8 @@ import globalInformationPagesQuery from 'js/queries/globalInformationPagesQuery'
 import globalGuidePagesQuery from 'js/queries/globalGuidePagesQuery';
 import globalOfficialDocumentPagesQuery from 'js/queries/globalOfficialDocumentPagesQuery';
 import globalServicePagesQuery from 'js/queries/globalServicePagesQuery';
+
+import siteStructureQuery from 'js/queries/siteStructureQuery';
 
 import {
   cleanLinks,
@@ -51,10 +55,78 @@ const makeAllPages = async langCode => {
   const deptChildren = await makeDepartmentPages(client, langCode);
   const globalChildren = await makeGlobalPages(client);
 
+  console.log(`📡 Requesting site structure`);
+  const siteStructure = await client.request(siteStructureQuery);
+  const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
+  console.log(`🎉 Site structure acquired`);
+
+  // for (const page of parsedStructure) {
+  //   console.log(`🧩🧩🧩`);
+  //   for (const prop in page) {
+  //     console.log(`${prop}: ${page[prop]}`);
+  //   }
+  // }
+
+  // Topic collections are going to be hard, probably want to build out the Joplin side a bit
+  // before doing this
+
+  // const topicCollectionPages = parsedStructure.filter(
+  //   p => p.type === 'topic collection',
+  // );
+  // const topicCollectionData = topicCollectionPages.map(topicCollectionPage => ({
+  //   path: topicCollectionPage.url,
+  //   component: 'src/components/Pages/TopicCollection',
+  //   getData: async () => {
+  //     const { allTopicCollections } = await client.request(
+  //       getTopicCollectionPageQuery,
+  //       { id: topicCollectionPage.id },
+  //     );
+
+  //     let cleanedTopicCollections = cleanTopicCollections(allTopicCollections);
+  //     console.log('BLAAAAA');
+
+  //     cleanedTopicCollections[0].topics.push({
+  //       slug: 'no-topics',
+  //       title: 'No topics selected',
+  //     });
+
+  //     console.log(cleanedTopicCollections[0].topics);
+
+  //     return cleanedTopicCollections[0];
+  //   },
+  // }));
+
+  const informationPages = parsedStructure.filter(
+    p => p.type === 'information page',
+  );
+  console.log(informationPages);
+  const informationPageData = informationPages.map(informationPage => ({
+    path: informationPage.url,
+    component: 'src/components/Pages/Information',
+    getData: async () => {
+      const { allInformationPages } = await client.request(
+        getInformationPageQuery,
+        { id: informationPage.id },
+      );
+
+      let cleanedInformationPages = cleanInformationPages(allInformationPages);
+      console.log('BLAAAAA');
+
+      cleanedInformationPages[0].topics.edges.push({
+        slug: 'no-topics',
+        title: 'No topics selected',
+      });
+
+      console.log(cleanedInformationPages[0]);
+
+      return cleanedInformationPages[0];
+    },
+  }));
+
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: themeChildren.concat(deptChildren).concat(globalChildren),
+    children: informationPageData,
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');

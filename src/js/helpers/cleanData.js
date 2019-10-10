@@ -395,6 +395,8 @@ export const cleanTopics = allTopics => {
 export const cleanTopicCollections = allTopicCollections => {
   if (!allTopicCollections || !allTopicCollections.edges) return null;
 
+  console.log('in the cleaner');
+
   let cleanedTopicCollections = cleanLinks(
     allTopicCollections,
     'topiccollection',
