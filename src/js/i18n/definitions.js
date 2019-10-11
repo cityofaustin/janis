@@ -48,6 +48,12 @@ export const formFeedback = defineMessages({
 
 export const userFeedback = defineMessages({
   didYouFind: 'Did you find what you were looking for on this page?',
+  yes: 'Yes',
+  no: 'No',
+  tellUsMore: 'Please tell us more about your feedback. \n We\'ll use this information to improve the site.',
+  submit: 'Submit',
+  received: 'Feedback Received!',
+  thankYou: 'Thank you for helping improve this website!',
 });
 
 export const misc = defineMessages({

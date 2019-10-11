@@ -4,8 +4,45 @@
   padding: $coa-spacing-large $coa-spacing-medium;
 }
 
+.coa-UserFeedback__form {
+  background: $coa-color-grey;
+  text-align: center;
+  padding: $coa-spacing-medium;
+}
+
 .coa-UserFeedback__button {
-  margin-left: $coa-spacing-small;
+  display: inline-block;
+  height: 4.2rem;
+  max-height: 4.2rem;
+  width: 8rem;
+  padding: 0 !important;
+  margin: 0 0 0 1rem;
+  font-size: 1.2rem;
+  position: relative;
+  top: -2px;
+  background-color: #fff;
+  color: #0049c7;
+  box-shadow: 0px 3px 6px #00000014;
+  border: #C6CACE;
+  &:hover {
+    color: #fff;
+    background-color: #D9E8F6;
+  }
+}
+
+.coa-UserFeedback__button-selected {
+  color: #fff;
+  background-color: #2F4668;
+  box-shadow: 0px;
+}
+
+.coa-UserFeedback__textarea-container {
+  border-top: 1px solid $coa-color-orange;
+}
+
+.coa-UserFeedback__textarea {
+  width: 40%;
+  margin: 0 auto;
 }
 
 .coa-FormFeedback {

@@ -74,52 +74,53 @@ class UserFeedback extends Component {
     // });
 
     // are we allowed to submit empty feedback, as long as they selected yes or no?
-    if (!this.state.feedback) {
-      this.setState({
-        step: 3,
-        emoji: null,
-        feedback: null,
-        error: null,
-      });
-      return;
-    }
+    // if (!this.state.feedback) {
+    //   this.setState({
+    //     step: 3,
+    //     emoji: null,
+    //     feedback: null,
+    //     error: null,
+    //   });
+    //   return;
+    // }
 
     this.setState({
       loading: true,
+      feedbackSubmitted: true,
     });
 
-    postFeedback({
-      title: 'Alpha Site Feedback',
-      description: `Did they find what they were looking for:**\n${buttonValue}\n
-        \n**Text feedback:**\n${this.state.feedback}\n
-        \n**Url:**\n${window.location.href}\n
-        \n**Device Information:** \n\`\`\`\n${JSON.stringify(
-          parser(),
-          null,
-          2,
-        )}\n\`\`\`\n\n`,
-    })
-      .then(({ data }) => {
-        console.log(data);
-        this.setState({
-          step: 3,
-          loading: false,
-          emoji: null,
-          feedback: null,
-          error: null,
-        });
-      })
-      .catch(e => {
-        console.log(JSON.stringify(e))
-        //TODO: better handle error messaging
-        this.logEvent('post-error', e.response);
-        console.log('ERROR:', e);
+    // postFeedback({
+    //   title: 'Alpha Site Feedback',
+    //   description: `Did they find what they were looking for:**\n${buttonValue}\n
+    //     \n**Text feedback:**\n${this.state.feedback}\n
+    //     \n**Url:**\n${window.location.href}\n
+    //     \n**Device Information:** \n\`\`\`\n${JSON.stringify(
+    //       parser(),
+    //       null,
+    //       2,
+    //     )}\n\`\`\`\n\n`,
+    // })
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.setState({
+    //       step: 3,
+    //       loading: false,
+    //       emoji: null,
+    //       feedback: null,
+    //       error: null,
+    //     });
+    //   })
+    //   .catch(e => {
+    //     console.log(JSON.stringify(e))
+    //     //TODO: better handle error messaging
+    //     this.logEvent('post-error', e.response);
+    //     console.log('ERROR:', e);
 
-        this.setState({
-          loading: false,
-          error: true,
-        });
-      });
+    //     this.setState({
+    //       loading: false,
+    //       error: true,
+    //     });
+    //   });
   };
 
   handleReset = e => {
@@ -137,47 +138,45 @@ class UserFeedback extends Component {
     const { intl } = this.props;
 
     return (
-      <div>
-      <form className="coa-UserFeedback">
-        <SectionHeader isSerif={true}> {/*todo: shoudlnt be section header */}
+      <div className="coa-UserFeedback">
+      <form className="coa-UserFeedback__form">
+        [?]
+        <p>
           {intl.formatMessage(i18n2.didYouFind)}
-        
-        </SectionHeader>
+        </p>
         <input
           type="button"
           className="coa-UserFeedback__button"
           onClick={()=> this.setState({buttonSelected: true, buttonValue: 'yes'})} // language?
-          value="YES" // todo turn these into formated messages
+          value={intl.formatMessage(i18n2.yes)}
         />
         <input
           type="button"
           onClick={()=> this.setState({buttonSelected: true, buttonValue: 'no'})}
-          value="NO"
-          className="coa-UserFeedback__button"
+          value={intl.formatMessage(i18n2.no)}
+          className="coa-UserFeedback__button coa-UserFeedback__button-selected"
         />
         {this.state.buttonSelected
           && <div>
           {!this.state.feedbackSubmitted
           ?
-            <div>
-            Please tell us more about your feedback.
-            We'll use this information to improve the site.
-            <textarea
-              id="userfeedback-textarea"
-              name="userfeedback-textarea"
-              onChange={this.handleTextAreaChange}
-            />
+            <div className="coa-UserFeedback__textarea-container">
+              {intl.formatMessage(i18n2.tellUsMore)}
+              <textarea
+                id="userfeedback-textarea"
+                name="userfeedback-textarea"
+                onChange={this.handleTextAreaChange}
+                className="coa-UserFeedback__textarea"
+              />
               <input
-              type="button"
-              value="Submit"
-              onClick={this.handleSubmit}
-            />
+                type="button"
+                value={intl.formatMessage(i18n2.submit)}
+                onClick={this.handleSubmit}
+              /> {/*replace with render button*/}
             </div>
-            : 
-            <div>
-            Feedback Received!
-            Thank you for helping improve this website!
-            </div>
+            : <div>
+                <p> {intl.formatMessage(i18n2.thankYou)}</p>
+              </div>
           }
           </div>
         }
