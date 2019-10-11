@@ -17,7 +17,14 @@ class Recollect extends Component {
       options,
     );
     let loader = new window.Recollect.Widget.Loader(widgetOptions);
-    loader.load();
+
+    // window.requestAnimationFrame(function(){
+      console.log('\n\nONLOAD: go to', window.location.hash.split('#')[1])
+      const scrollToId = window.location.hash.split('#')[1]
+      document.getElementById(scrollToId).scrollIntoView(true);
+
+    // })
+    loader.load(); // 🔥move inside requestAnimationFrame
   }
 
   shouldComponentUpdate() {
