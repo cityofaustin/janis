@@ -17,15 +17,15 @@ class UserFeedback extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'site-feedback',
       step: 1,
       loading: false,
       feedback: null,
       error: null,
-      buttonSelected: false,
       feedbackSubmitted: false,
       buttonValue: null,
     };
+    this.toggleYesButton = this.toggleYesButton.bind(this);
+    this.toggleNoButton = this.toggleNoButton.bind(this);
   }
 
   logEvent(action, optionalData) {
@@ -37,22 +37,22 @@ class UserFeedback extends Component {
     });
   }
 
-  handleEmojiClick = e => {
-    const emojiText = this.props.intl.formatMessage(
-      i18n3[e.currentTarget.value],
-    );
-    const emojiValue = emojis[e.currentTarget.value].value;
+  toggleYesButton() {
+    if (this.state.buttonValue === 'yes') {
+      this.setState({buttonValue: null})
+    } else {
+      this.setState({buttonValue:'yes'})
+    }
+    console.log(this.state)
+  }
 
-    this.logEvent(`emoji-click-${emojiValue}`, {
-      emojiValue: emojiValue,
-      emojiText: emojiText,
-    });
-
-    this.setState({
-      step: 2,
-      emoji: e.currentTarget.value,
-    });
-  };
+  toggleNoButton() {
+    if (this.state.buttonValue === 'no') {
+      this.setState({buttonValue: null})
+    } else {
+      this.setState({buttonValue: 'no'})
+    }
+  }
 
   handleTextAreaChange = e => {
     this.setState({
@@ -123,19 +123,12 @@ class UserFeedback extends Component {
     //   });
   };
 
-  handleReset = e => {
-    this.logEvent('reset');
-    this.setState({
-      step: 1,
-      loading: false,
-      emoji: null,
-      feedback: null,
-      error: null,
-    });
-  };
-
   render() {
     const { intl } = this.props;
+    const yesButtonStyle = this.state.buttonValue === 'yes' ? "coa-UserFeedback__button-selected"
+      : "coa-UserFeedback__button-dimmed" ;
+    const noButtonStyle = this.state.buttonValue === 'no' ? "coa-UserFeedback__button-selected"
+      : "coa-UserFeedback__button-dimmed" ;
 
     return (
       <div className="coa-UserFeedback">
@@ -153,18 +146,18 @@ class UserFeedback extends Component {
                 </p>
                 <input
                   type="button"
-                  className="coa-UserFeedback__button"
-                  onClick={()=> this.setState({buttonSelected: true, buttonValue: 'yes'})} // language?
+                  className={Boolean(this.state.buttonValue) ? yesButtonStyle : "coa-UserFeedback__button"}
+                  onClick={this.toggleYesButton}
                   value={intl.formatMessage(i18n2.yes)}
                 />
                 <input
                   type="button"
-                  onClick={()=> this.setState({buttonSelected: true, buttonValue: 'no'})}
+                  onClick={this.toggleNoButton}
                   value={intl.formatMessage(i18n2.no)}
-                  className="coa-UserFeedback__button coa-UserFeedback__button-selected"
+                  className={Boolean(this.state.buttonValue) ? noButtonStyle : "coa-UserFeedback__button"}
                 />
               </div>
-              {this.state.buttonSelected
+              {Boolean(this.state.buttonValue)
                 &&
                   <div className="coa-UserFeedback__textarea-container">
                     <p>
