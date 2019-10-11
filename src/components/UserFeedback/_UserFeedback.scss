@@ -1,7 +1,9 @@
 .coa-UserFeedback {
   border: 2px solid $coa-color-orange;
-  margin: $coa-spacing-xlarge auto;
   padding: $coa-spacing-large $coa-spacing-medium;
+  max-width: $coa-wrapper-maxwidth;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .coa-UserFeedback__form {
@@ -10,7 +12,12 @@
   padding: $coa-spacing-medium;
 }
 
-.coa-UserFeedback__button {
+.coa-UserFeedback__prompt {
+  padding-bottom: $coa-spacing-medium;
+}
+
+input[type="button"] {
+  &.coa-UserFeedback__button {
   display: inline-block;
   height: 4.2rem;
   max-height: 4.2rem;
@@ -24,9 +31,10 @@
   color: #0049c7;
   box-shadow: 0px 3px 6px #00000014;
   border: #C6CACE;
-  &:hover {
-    color: #fff;
-    background-color: #D9E8F6;
+    &:hover {
+      /* color: #fff; */
+      background-color: #D9E8F6;
+    }
   }
 }
 
@@ -43,6 +51,12 @@
 .coa-UserFeedback__textarea {
   width: 40%;
   margin: 0 auto;
+}
+
+.coa-UserFeedback__thankYou {
+  background: $coa-color-grey;
+  text-align: center;
+  padding: $coa-spacing-medium;
 }
 
 .coa-FormFeedback {

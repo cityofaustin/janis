@@ -139,48 +139,52 @@ class UserFeedback extends Component {
 
     return (
       <div className="coa-UserFeedback">
-      <form className="coa-UserFeedback__form">
-        [?]
-        <p>
-          {intl.formatMessage(i18n2.didYouFind)}
-        </p>
-        <input
-          type="button"
-          className="coa-UserFeedback__button"
-          onClick={()=> this.setState({buttonSelected: true, buttonValue: 'yes'})} // language?
-          value={intl.formatMessage(i18n2.yes)}
-        />
-        <input
-          type="button"
-          onClick={()=> this.setState({buttonSelected: true, buttonValue: 'no'})}
-          value={intl.formatMessage(i18n2.no)}
-          className="coa-UserFeedback__button coa-UserFeedback__button-selected"
-        />
-        {this.state.buttonSelected
-          && <div>
-          {!this.state.feedbackSubmitted
-          ?
-            <div className="coa-UserFeedback__textarea-container">
-              {intl.formatMessage(i18n2.tellUsMore)}
-              <textarea
-                id="userfeedback-textarea"
-                name="userfeedback-textarea"
-                onChange={this.handleTextAreaChange}
-                className="coa-UserFeedback__textarea"
-              />
-              <input
-                type="button"
-                value={intl.formatMessage(i18n2.submit)}
-                onClick={this.handleSubmit}
-              /> {/*replace with render button*/}
-            </div>
-            : <div>
+        {this.state.feedbackSubmitted
+          ? <div className="coa-UserFeedback__thankYou">
+                <h3> {intl.formatMessage(i18n2.received)}</h3>
                 <p> {intl.formatMessage(i18n2.thankYou)}</p>
               </div>
+          :
+            <form className="coa-UserFeedback__form">
+              <div className="coa-UserFeedback__prompt">
+                [?]
+                <p>
+                  {intl.formatMessage(i18n2.didYouFind)}
+                </p>
+                <input
+                  type="button"
+                  className="coa-UserFeedback__button"
+                  onClick={()=> this.setState({buttonSelected: true, buttonValue: 'yes'})} // language?
+                  value={intl.formatMessage(i18n2.yes)}
+                />
+                <input
+                  type="button"
+                  onClick={()=> this.setState({buttonSelected: true, buttonValue: 'no'})}
+                  value={intl.formatMessage(i18n2.no)}
+                  className="coa-UserFeedback__button coa-UserFeedback__button-selected"
+                />
+              </div>
+              {this.state.buttonSelected
+                &&
+                  <div className="coa-UserFeedback__textarea-container">
+                    <p>
+                      {intl.formatMessage(i18n2.tellUsMore)}
+                    </p>
+                    <textarea
+                      id="userfeedback-textarea"
+                      name="userfeedback-textarea"
+                      onChange={this.handleTextAreaChange}
+                      className="coa-UserFeedback__textarea"
+                    />
+                    <input
+                      type="button"
+                      value={intl.formatMessage(i18n2.submit)}
+                      onClick={this.handleSubmit}
+                    /> {/*replace with render button*/}
+                  </div>
+              }
+            </form>
           }
-          </div>
-        }
-      </form>
       </div>
 
     );
