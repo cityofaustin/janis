@@ -54,6 +54,38 @@ class UserFeedback extends Component {
     }
   }
 
+  renderButton() {
+    const { intl } = this.props;
+    if (this.state.loading) {
+      return (
+        <button className="coa-UserFeedback__button-sending">
+          Sending <div className="coa-UserFeedback__button-loading"></div>
+        </button>
+        /*<input
+          type="button"
+          value="Sending..."
+          onClick={null}
+          className="coa-UserFeedback__button-loading"
+        /> */
+      )
+    } 
+    if (this.state.success) {
+      return (
+        <input
+          type="button"
+          value="✓" // where do i get this
+          onClick={this.handleSubmit}
+        />
+      )
+    }
+    return (
+      <input
+        type="button"
+        value={intl.formatMessage(i18n2.submit)}
+        onClick={this.handleSubmit}
+      /> )
+  }
+
   handleTextAreaChange = e => {
     this.setState({
       feedback: e.currentTarget.value,
@@ -86,7 +118,7 @@ class UserFeedback extends Component {
 
     this.setState({
       loading: true,
-      feedbackSubmitted: true,
+      // feedbackSubmitted: true,
     });
 
     // postFeedback({
@@ -136,6 +168,7 @@ class UserFeedback extends Component {
           ? <div className="coa-UserFeedback__thankYou">
                 <h3> {intl.formatMessage(i18n2.received)}</h3>
                 <p> {intl.formatMessage(i18n2.thankYou)}</p>
+                ✓
               </div>
           :
             <form className="coa-UserFeedback__form">
@@ -169,11 +202,7 @@ class UserFeedback extends Component {
                       onChange={this.handleTextAreaChange}
                       className="coa-UserFeedback__textarea"
                     />
-                    <input
-                      type="button"
-                      value={intl.formatMessage(i18n2.submit)}
-                      onClick={this.handleSubmit}
-                    /> {/*replace with render button*/}
+                    {this.renderButton()}
                   </div>
               }
             </form>
