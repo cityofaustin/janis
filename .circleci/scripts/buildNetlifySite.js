@@ -9,7 +9,7 @@ const payload = Object.assign(
   defaultValues,
   branchOverrides[branch]);
 
-return axios.post(process.env.CI_COA_PUBLISHER_URL, payload)
+return axios.post(`${process.env.CI_COA_PUBLISHER_URL}/build`, payload)
 .then((res) => {
   console.log("Success")
   console.log("New build instructions sent to coa-publisher")
