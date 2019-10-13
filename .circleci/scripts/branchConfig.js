@@ -15,7 +15,15 @@
   That CMS_API value will only be used by the branch "2997-dept-links".
 **/
 
-module.exports = {
+// Don't overwrite defaultValues.
+export const defaultValues = {
+  CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
+  CMS_MEDIA: 'https://joplin-austin-gov.s3.amazonaws.com/joplin-austin-gov-static/staging/media',
+  CMS_DOCS: 'multiple',
+}
+
+// Add branch-specifc values here
+export const branchOverrides = {
   "2997-dept-links": {
     CMS_API: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
   },
