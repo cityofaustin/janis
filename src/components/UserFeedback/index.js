@@ -17,7 +17,6 @@ class UserFeedback extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 1,
       loading: false,
       feedback: null,
       error: null,
@@ -31,8 +30,7 @@ class UserFeedback extends Component {
 
   logEvent(action, optionalData) {
     logFormEvent({
-      formName: this.state.name,
-      formStep: this.state.step,
+      formName: "user feedback form",
       formAction: action,
       optionalData: optionalData,
     });
@@ -72,11 +70,10 @@ class UserFeedback extends Component {
       return (
         <button
           type="button"
-          // value="✓" // where do i get this
           onClick={null}
           className="coa-UserFeedback__button-check"
         >
-        ✓ 
+          <i className="material-icons">check</i>
         </button>
       )
     }
@@ -99,7 +96,6 @@ class UserFeedback extends Component {
   };
 
   handleSubmit = e => {
-    console.log('submit')
     e.preventDefault();
 
     const { buttonValue } = this.state;
@@ -107,59 +103,49 @@ class UserFeedback extends Component {
     // todo: bring this back
     // this.logEvent('send-feedback-click', {
     //   feedback: this.state.feedback,
-    //   emojiValue: emojiValue,
-    //   emojiText: emojiText,
+    //   buttonValue: this.state.buttonValue,
     // });
-
-    // are we allowed to submit empty feedback, as long as they selected yes or no?
-    // if (!this.state.feedback) {
-    //   this.setState({
-    //     step: 3,
-    //     emoji: null,
-    //     feedback: null,
-    //     error: null,
-    //   });
-    //   return;
-    // }
 
     this.setState({
       loading: true,
       // success: true,
-      // feedbackSubmitted: true,
+      feedbackSubmitted: true, //todo: dont forget to remove this from here
     });
 
-    // postFeedback({
-    //   title: 'Alpha Site Feedback',
-    //   description: `Did they find what they were looking for:**\n${buttonValue}\n
-    //     \n**Text feedback:**\n${this.state.feedback}\n
-    //     \n**Url:**\n${window.location.href}\n
-    //     \n**Device Information:** \n\`\`\`\n${JSON.stringify(
-    //       parser(),
-    //       null,
-    //       2,
-    //     )}\n\`\`\`\n\n`,
-    // })
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //     this.setState({
-    //       step: 3,
-    //       loading: false,
-    //       emoji: null,
-    //       feedback: null,
-    //       error: null,
-    //     });
-    //   })
-    //   .catch(e => {
-    //     console.log(JSON.stringify(e))
-    //     //TODO: better handle error messaging
-    //     this.logEvent('post-error', e.response);
-    //     console.log('ERROR:', e);
+    postFeedback({
+      title: 'Alpha Site Feedback',
+      description: `Did they find what they were looking for:**\n${buttonValue}\n
+        \n**Text feedback:**\n${this.state.feedback}\n
+        \n**Url:**\n${window.location.href}\n
+        \n**Device Information:** \n\`\`\`\n${JSON.stringify(
+          parser(),
+          null,
+          2,
+        )}\n\`\`\`\n\n`,
+    })
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({
+          feedbackSubmitted: true,
+          success: true,
+          // reset state
+          loading: false,
+          buttonValue: null,
+          feedback: null,
+          error: null,
+        });
+      })
+      .catch(e => {
+        console.log(JSON.stringify(e))
+        //TODO: better handle error messaging
+        this.logEvent('post-error', e.response);
+        console.log('ERROR:', e);
+        this.setState({
+          loading: false,
+          error: true,
 
-    //     this.setState({
-    //       loading: false,
-    //       error: true,
-    //     });
-    //   });
+        });
+      });
   };
 
   render() {
@@ -175,7 +161,9 @@ class UserFeedback extends Component {
           ? <div className="coa-UserFeedback__thankYou">
                 <h3> {intl.formatMessage(i18n2.received)}</h3>
                 <p> {intl.formatMessage(i18n2.thankYou)}</p>
-                ✓
+                <div className="coa-UserFeedback__check">
+                  <i className="material-icons">check</i>
+                </div>
               </div>
           :
             <form className="coa-UserFeedback__form">
