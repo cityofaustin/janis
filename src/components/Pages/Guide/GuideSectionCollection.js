@@ -38,18 +38,13 @@ function GuideSection({
   sectionHeading,
   intl,
 }) {
-  console.log("page :", page)
-  const pageData = page.informationPage || page.servicePage || {};
-  console.log("pageData :", pageData)
+  const pageData = page.informationPage || page.servicePage;
   const title = pageData.title;
   const description = page.informationPage
     ? pageData.description
     : pageData.shortDescription;
   const additionalContent = pageData.additionalContent;
-  // const topics = pageData.topics.edges;
   const topics = pageData.topics.edges;
-  console.log("topics :", topics)
-
   const departments = pageData.relatedDepartments.edges;
   const slug = pageData.slug;
 
@@ -88,7 +83,6 @@ function GuideSectionCollection({
   resizeCount,
   intl,
 }) {
-  console.log("section :", section)
   return (
     <div className="coa-GuideSection__collection">
       <GuideSectionWrapper
@@ -107,13 +101,18 @@ function GuideSectionCollection({
           isMobileOrTablet={isMobileOrTablet}
           resizeCount={resizeCount}
         >
-          <GuideSection
-            page={page}
-            pageNumber={index + 1}
-            numberOfPages={section.pages.length}
-            sectionHeading={section.heading}
-            intl={intl}
-          />
+        { (page.servicePage || page.informationPage) &&
+          (
+            <GuideSection
+              page={page}
+              pageNumber={index + 1}
+              numberOfPages={section.pages.length}
+              sectionHeading={section.heading}
+              intl={intl}
+            />
+          )
+        }
+
         </GuideSectionWrapper>
       ))}
     </div>
