@@ -23,6 +23,7 @@ class UserFeedback extends Component {
       error: null,
       feedbackSubmitted: false,
       buttonValue: null,
+      char: 0,
     };
     this.toggleYesButton = this.toggleYesButton.bind(this);
     this.toggleNoButton = this.toggleNoButton.bind(this);
@@ -65,21 +66,18 @@ class UserFeedback extends Component {
         >
          Sending <div className="coa-UserFeedback__button-loading"></div>
         </button>
-        /*<input
-          type="button"
-          value="Sending..."
-          onClick={null}
-          className="coa-UserFeedback__button-loading"
-        /> */
       )
     } 
     if (this.state.success) {
       return (
-        <input
+        <button
           type="button"
-          value="✓" // where do i get this
-          onClick={this.handleSubmit}
-        />
+          // value="✓" // where do i get this
+          onClick={null}
+          className="coa-UserFeedback__button-check"
+        >
+        ✓ 
+        </button>
       )
     }
     return (
@@ -96,6 +94,7 @@ class UserFeedback extends Component {
   handleTextAreaChange = e => {
     this.setState({
       feedback: e.currentTarget.value,
+      char: e.currentTarget.value.length,
     });
   };
 
@@ -125,6 +124,7 @@ class UserFeedback extends Component {
 
     this.setState({
       loading: true,
+      // success: true,
       // feedbackSubmitted: true,
     });
 
@@ -180,7 +180,7 @@ class UserFeedback extends Component {
           :
             <form className="coa-UserFeedback__form">
               <div className="coa-UserFeedback__prompt">
-                [?]
+                <i className="material-icons">feedback</i>
                 <p>
                   {intl.formatMessage(i18n2.didYouFind)}
                 </p>
@@ -199,16 +199,21 @@ class UserFeedback extends Component {
               </div>
               {Boolean(this.state.buttonValue)
                 &&
-                  <div className="coa-UserFeedback__textarea-container">
+                  <div className="coa-UserFeedback__elaborate">
                     <p>
                       {intl.formatMessage(i18n2.tellUsMore)}
                     </p>
-                    <textarea
-                      id="userfeedback-textarea"
-                      name="userfeedback-textarea"
-                      onChange={this.handleTextAreaChange}
-                      className="coa-UserFeedback__textarea"
-                    />
+                    <div className="coa-UserFeedback__textarea-wrapper">
+                      <textarea
+                        id="userfeedback-textarea"
+                        name="userfeedback-textarea"
+                        onChange={this.handleTextAreaChange}
+                        className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
+                      />
+                      <div className="coa-UserFeedback__charlimit">
+                        {`Character limit: ${this.state.char} of 5000`}
+                      </div>
+                    </div>
                     {this.renderButton()}
                   </div>
               }

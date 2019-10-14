@@ -17,6 +17,9 @@ $loader-dotsize: 6px;     // Specifies the size WxH of each dot
 
 .coa-UserFeedback__prompt {
   padding-bottom: $coa-spacing-medium;
+  .material-icons {
+    color: $coa-color-primary;
+  }
 }
 
 input[type="button"] {
@@ -107,6 +110,17 @@ button {
   }
 }
 
+button {
+  &.coa-UserFeedback__button-check {
+    background-color: #0CA900; /* is this the right green? */
+    display: inline-block;
+    height: 4.2rem;
+    max-height: 4.2rem;
+    width: 10rem;
+    padding: 0 !important;
+  }
+}
+
 /* sending button 3 dot animation*/
 .coa-UserFeedback__button-loading {
   position: relative;
@@ -153,13 +167,43 @@ button {
   }
 }
 
-.coa-UserFeedback__textarea-container {
+.coa-UserFeedback__elaborate {
   border-top: 1px solid $coa-color-orange;
 }
 
-.coa-UserFeedback__textarea {
+.coa-UserFeedback__textarea-wrapper {
   width: 40%;
   margin: 0 auto;
+}
+
+.coa-UserFeedback__textarea {
+  margin: 0 auto;
+}
+
+textarea#userfeedback-textarea {
+  border-width: 0.1rem 0.1rem 0 0.1rem;
+  border-color: #919191;
+  border-style: solid;
+  resize: none;
+}
+
+.coa-UserFeedback__charlimit {
+  background-color: #fff;
+  border-top: 0.1rem solid #ADADAD;
+  border-left: 0.1rem solid #919191;
+  border-right: 0.1rem solid #919191;
+  border-bottom: 0.1rem solid #919191;
+  color: #ADADAD;
+  font-size: 1.2rem;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.coa-UserFeedback__textarea-dimmed {
+  color: #ADADAD;
+  border-width: 0.1rem 0.1rem 0 0.1rem;
+  border-color: #919191;
+  border-style: solid;
 }
 
 .coa-UserFeedback__thankYou {
