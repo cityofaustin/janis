@@ -38,13 +38,18 @@ function GuideSection({
   sectionHeading,
   intl,
 }) {
-  const pageData = page.informationPage || page.servicePage;
+  console.log("page :", page)
+  const pageData = page.informationPage || page.servicePage || {};
+  console.log("pageData :", pageData)
   const title = pageData.title;
   const description = page.informationPage
     ? pageData.description
     : pageData.shortDescription;
   const additionalContent = pageData.additionalContent;
+  // const topics = pageData.topics.edges;
   const topics = pageData.topics.edges;
+  console.log("topics :", topics)
+
   const departments = pageData.relatedDepartments.edges;
   const slug = pageData.slug;
 
@@ -83,6 +88,7 @@ function GuideSectionCollection({
   resizeCount,
   intl,
 }) {
+  console.log("section :", section)
   return (
     <div className="coa-GuideSection__collection">
       <GuideSectionWrapper
