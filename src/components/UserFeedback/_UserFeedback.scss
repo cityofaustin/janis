@@ -1,3 +1,6 @@
+
+$loader-dotsize: 6px;     // Specifies the size WxH of each dot
+
 .coa-UserFeedback {
   border: 2px solid $coa-color-orange;
   padding: $coa-spacing-large $coa-spacing-medium;
@@ -74,13 +77,28 @@ input[type="button"] {
 }
 
 button {
+  &.coa-UserFeedback__button-submit {
+    display: inline-block;
+    height: 4.2rem;
+    max-height: 4.2rem;
+    width: 10rem;
+    padding: 0 !important;
+    /*margin: 0.5rem 0 0 1rem;*/
+    font-size: 1.2rem;
+    position: relative;
+    color: #fff;
+    text-align: center;
+  }
+}
+
+button {
   &.coa-UserFeedback__button-sending {
     display: inline-block;
     height: 4.2rem;
     max-height: 4.2rem;
-    width: 8rem;
+    width: 10rem;
     padding: 0 !important;
-    margin: 0 0 0 1rem;
+    /*margin: 0.5rem 0 0 1rem;*/
     font-size: 1.2rem;
     position: relative;
     background-color: #2F4668;
@@ -93,9 +111,10 @@ button {
 .coa-UserFeedback__button-loading {
   position: relative;
   display: inline-block;
-  width: 6px;
+  width: $loader-dotsize;
+  height: $loader-dotsize;
   border-radius: 50%;
-  margin: -12px 12px 12px;
+  margin: -($loader-dotsize*2) ($loader-dotsize*2) ($loader-dotsize*2);
   animation-fill-mode: both;
   animation: coa-UserFeedback__button-loading--animation 1s infinite ease-in-out;
   animation-delay: -0.16s;
@@ -106,18 +125,18 @@ button {
 .coa-UserFeedback__button-loading:after {
   content: '';
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: $loader-dotsize;
+  height: $loader-dotsize;
   top: 0;
   animation: coa-UserFeedback__button-loading--animation 1s infinite ease-in-out;
   border-radius: 50%;
 }
 .coa-UserFeedback__button-loading:before {
-  left: -12px;
+  left: -($loader-dotsize*2);
   animation-delay: -0.32s;
 }
 .coa-UserFeedback__button-loading:after {
-  left: 12px;
+  left: ($loader-dotsize*2);
 }
 
 /*

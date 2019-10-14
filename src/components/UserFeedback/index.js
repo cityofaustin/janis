@@ -83,11 +83,14 @@ class UserFeedback extends Component {
       )
     }
     return (
-      <input
+      <button
         type="button"
-        value={intl.formatMessage(i18n2.submit)}
         onClick={this.handleSubmit}
-      /> )
+        className="coa-UserFeedback__button-submit"
+      > 
+        {intl.formatMessage(i18n2.submit)}
+      </button>
+      )
   }
 
   handleTextAreaChange = e => {
