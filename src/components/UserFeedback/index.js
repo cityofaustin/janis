@@ -58,8 +58,12 @@ class UserFeedback extends Component {
     const { intl } = this.props;
     if (this.state.loading) {
       return (
-        <button className="coa-UserFeedback__button-sending">
-          Sending <div className="coa-UserFeedback__button-loading"></div>
+        <button 
+          type="button"
+          className="coa-UserFeedback__button-sending"
+          onClick={null}
+        >
+         Sending <div className="coa-UserFeedback__button-loading"></div>
         </button>
         /*<input
           type="button"

@@ -89,6 +89,7 @@ button {
   }
 }
 
+/* sending button 3 dot animation*/
 .coa-UserFeedback__button-loading {
   position: relative;
   display: inline-block;
@@ -99,6 +100,38 @@ button {
   animation: coa-UserFeedback__button-loading--animation 1s infinite ease-in-out;
   animation-delay: -0.16s;
   color: #fff;
+}
+
+.coa-UserFeedback__button-loading:before,
+.coa-UserFeedback__button-loading:after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 0;
+  animation: coa-UserFeedback__button-loading--animation 1s infinite ease-in-out;
+  border-radius: 50%;
+}
+.coa-UserFeedback__button-loading:before {
+  left: -12px;
+  animation-delay: -0.32s;
+}
+.coa-UserFeedback__button-loading:after {
+  left: 12px;
+}
+
+/*
+  Confirmation page submit button, loading three dots animation
+*/
+@keyframes coa-UserFeedback__button-loading--animation {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 10px 0 -6px;
+  }
+  40% {
+    box-shadow: 0 10px 0 0;
+  }
 }
 
 .coa-UserFeedback__textarea-container {
@@ -116,66 +149,105 @@ button {
   padding: $coa-spacing-medium;
 }
 
-.coa-FormFeedback {
-  border: 2px solid $coa-color-orange;
-  border-left: none;
-  border-right: none;
-  margin: $coa-spacing-xlarge auto;
-  padding: $coa-spacing-large $coa-spacing-medium;
-  .coa-SectionHeader--isSerif {
-    margin-top: 0;
-  }
-}
-
-.coa-FormFeedback__content {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 12.4rem;
-
-  input {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-}
-
-.coa-FormFeedback__emoji {
-  margin: 0 $coa-spacing-small;
-  width: 35px;
-
-  @include media($coa-small-screen) {
-    margin: 0 $coa-spacing-md-small;
-    width: 55px;
-  }
-  @include media($coa-medium-screen) {
-    margin: 0 $coa-spacing-medium;
-    width: 65px;
-  }
-
-  label {
-    &:before {
-      display: none;
-    }
-  }
+/*
+// Block's button, loading state
+.confirmation__button--loading-btn {
+  position: relative;
+  display: inline-block;
+  width: $loader-dotsize;
+  height: $loader-dotsize;
+  border-radius: 50%;
+  margin: -($loader-dotsize*2) ($loader-dotsize*2) ($loader-dotsize*2);
+  animation-fill-mode: both;
+  animation: confirmation__button-loading-btn--animation 1s infinite ease-in-out;
+  animation-delay: -0.16s;
+  color: $loader-color;
 }
 
 
-.coa-FormFeedback__step2 {
-  .coa-FormFeedback__content {
-    flex-direction: column;
+.confirmation__button--loading-btn:before,
+.confirmation__button--loading-btn:after {
+  content: '';
+  position: absolute;
+  width: $loader-dotsize;
+  height: $loader-dotsize;
+  top: 0;
+  animation: confirmation__button-loading-btn--animation 1s infinite ease-in-out;
+  border-radius: 50%;
+}
+.confirmation__button--loading-btn:before {
+  left: -($loader-dotsize*2);
+  animation-delay: -0.32s;
+}
+.confirmation__button--loading-btn:after {
+  left: ($loader-dotsize*2);
+}
+
+
+
+// Confirmation button, checkmark state
+.confirmation__button-checkmark-container {
+  left: -$checkmark-width;
+  top: .8rem;
+  position: relative;
+  padding: 0 !important;
+}
+.confirmation__button-checkmark {}
+.confirmation__button-checkmark.draw:after {
+  animation-duration: 800ms;
+  animation-timing-function: ease;
+  animation-name: confirmation__button-checkmark--animation;
+  transform: scaleX(-1) rotate(135deg);
+}
+.confirmation__button-checkmark:after {
+  opacity: 1;
+  height: $checkmark-height;
+  width: $checkmark-width;
+  transform-origin: left top;
+  border-right: 3px solid $checkmark-color;
+  border-top: 3px solid $checkmark-color;
+  content: '';
+  position: absolute;
+}
+
+
+/*
+  Confirmation page submit button, loading three dots animation
+
+@keyframes confirmation__button-loading-btn--animation {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 10px 0 -6px;
   }
-  textarea {
-    font-size: $coa-font-size-small;
-    margin-bottom: $coa-spacing-medium;
+  40% {
+    box-shadow: 0 10px 0 0;
   }
 }
 
-.coa-FormFeedback__step3 {
-  .coa-FormFeedback__content {
-    flex-direction: column;
+/*
+  Confirmation page submit button, success checkmark animation
+
+@keyframes confirmation__button-checkmark--animation {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: $checkmark-width;
+    opacity: 1;
+  }
+  40% {
+    height: $checkmark-height;
+    width: $checkmark-width;
+    opacity: 1;
+  }
+  100% {
+    height: $checkmark-height;
+    width: $checkmark-width;
+    opacity: 1;
   }
 }
-
-.coa-FormFeedback__error {
-  color: $coa-color-orange;
-}
+*/
