@@ -18,7 +18,7 @@
 // Don't overwrite defaultValues.
 const defaultValues = {
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
-  CMS_MEDIA: 'https://joplin-austin-gov.s3.amazonaws.com/joplin-austin-gov-static/staging/media',
+  CMS_MEDIA: 'https://joplin-austin-gov.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
 }
 
