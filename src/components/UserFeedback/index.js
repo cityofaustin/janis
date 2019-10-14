@@ -3,15 +3,9 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
 
-import {
-  form as i18n1,
-  userFeedback as i18n2,
-  emoji as i18n3,
-} from 'js/i18n/definitions';
+import { userFeedback as i18n2 } from 'js/i18n/definitions';
 import { postFeedback } from 'js/helpers/fetchData';
 import { logFormEvent } from 'js/helpers/googleAnalytics';
-import { emojis } from 'js/helpers/emojis';
-import SectionHeader from 'components/SectionHeader';
 
 class UserFeedback extends Component {
   constructor(props) {
@@ -42,7 +36,6 @@ class UserFeedback extends Component {
     } else {
       this.setState({buttonValue:'yes'})
     }
-    console.log(this.state)
   }
 
   toggleNoButton() {
@@ -100,16 +93,15 @@ class UserFeedback extends Component {
 
     const { buttonValue } = this.state;
 
-    // todo: bring this back
-    // this.logEvent('send-feedback-click', {
-    //   feedback: this.state.feedback,
-    //   buttonValue: this.state.buttonValue,
-    // });
+    this.logEvent('send-feedback-click', {
+      feedback: this.state.feedback,
+      buttonValue: this.state.buttonValue,
+    });
 
     this.setState({
       loading: true,
-      // success: true,
-      feedbackSubmitted: true, //todo: dont forget to remove this from here
+      success: true,
+      // feedbackSubmitted: true, //todo: dont forget to remove this from here
     });
 
     postFeedback({
@@ -137,13 +129,12 @@ class UserFeedback extends Component {
       })
       .catch(e => {
         console.log(JSON.stringify(e))
-        //TODO: better handle error messaging
+        //TODO: what should the error messaging be?
         this.logEvent('post-error', e.response);
         console.log('ERROR:', e);
         this.setState({
           loading: false,
           error: true,
-
         });
       });
   };
@@ -195,6 +186,7 @@ class UserFeedback extends Component {
                       <textarea
                         id="userfeedback-textarea"
                         name="userfeedback-textarea"
+                        maxlength={5000}
                         onChange={this.handleTextAreaChange}
                         className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
                       />
