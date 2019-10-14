@@ -14,6 +14,8 @@ import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
 import { printSections } from 'components/Pages/Guide/helpers.js';
 
+import guidePagePlacholder from 'images/guide_page_placeholder.png';
+
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
   const [resizeCount, setResizeCount] = useState(0);
@@ -131,6 +133,10 @@ function Guide(props) {
   } = props.guidePage;
   let { intl } = props;
 
+  // console.log("🔥\n\n image :", image)
+  // console.log("🔥\n\n default :", guidePagePlacholder)
+  // image = guidePagePlacholder
+
   let contact = null;
   if (contacts && contacts.edges && contacts.edges.length) {
     contact = contacts.edges[0].node.contact;
@@ -151,6 +157,8 @@ function Guide(props) {
           relatedDepartments={relatedDepartments}
         />
       )}
+      🙌The image show go right here...
+
       {image && <PageBanner image={image} />}
       <div className="coa-GuidePage__header">
         <h1 className="coa-GuidePage__header-title">{title}</h1>
