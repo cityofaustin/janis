@@ -101,7 +101,7 @@ function GuideSectionCollection({
           isMobileOrTablet={isMobileOrTablet}
           resizeCount={resizeCount}
         >
-        { (page.servicePage || page.informationPage) &&
+        { ( page.servicePage || page.informationPage ) &&
           (
             <GuideSection
               page={page}
