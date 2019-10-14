@@ -7,8 +7,8 @@ import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
   function goToSection(e) {
-    e.preventDefault();
-    window.location.href = `#${anchorTag}`;
+    history.pushState(null, null, `#${anchorTag}`);
+    document.getElementById(anchorTag).scrollIntoView(true);
   }
 
   return (
