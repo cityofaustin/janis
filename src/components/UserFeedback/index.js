@@ -100,8 +100,6 @@ class UserFeedback extends Component {
 
     this.setState({
       loading: true,
-      success: true,
-      // feedbackSubmitted: true, //todo: dont forget to remove this from here
     });
 
     postFeedback({
