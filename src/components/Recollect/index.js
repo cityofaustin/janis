@@ -18,7 +18,9 @@ class Recollect extends Component {
     );
     let loader = new window.Recollect.Widget.Loader(widgetOptions);
     const scrollToId = window.location.hash.split('#')[1];
-    document.getElementById(scrollToId).scrollIntoView(true);
+    if (scrollToId) {
+      document.getElementById(scrollToId).scrollIntoView(true);
+    }
     loader.load();
   }
 
