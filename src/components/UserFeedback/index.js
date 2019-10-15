@@ -123,6 +123,7 @@ class UserFeedback extends Component {
           buttonValue: null,
           feedback: null,
           error: null,
+          char: 0,
         });
       })
       .catch(e => {
@@ -133,6 +134,7 @@ class UserFeedback extends Component {
         this.setState({
           loading: false,
           error: true,
+          char: 0,
         });
       });
   };
