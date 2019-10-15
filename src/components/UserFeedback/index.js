@@ -106,7 +106,7 @@ class UserFeedback extends Component {
 
     postFeedback({
       title: 'Alpha Site Feedback',
-      description: `Did they find what they were looking for:**\n${buttonValue}\n
+      description: `**Did they find what they were looking for:**\n${buttonValue}\n
         \n**Text feedback:**\n${this.state.feedback}\n
         \n**Url:**\n${window.location.href}\n
         \n**Device Information:** \n\`\`\`\n${JSON.stringify(
