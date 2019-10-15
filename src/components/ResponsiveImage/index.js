@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import objectFitImages from 'object-fit-images';
 
-import guidePagePlacholder from 'images/guide_page_placeholder.png';
-
-
 const ResponsiveImage = ({
   filename,
   extension,
@@ -21,17 +18,7 @@ const ResponsiveImage = ({
 
   objectFitImages();
 
-  console.log("\n\n")
-  console.log("sources :", sources)
-  console.log("fallbackSrc :", fallbackSrc)
-
-  // return <img srcSet={sources} src={fallbackSrc} alt={altText} {...rest} />;
-  // return <img src={guidePagePlacholder} alt={intl.formatMessage(i18n.citySeal)} />
-
-  return <img src={guidePagePlacholder} alt="Guide Page Placeholder Image"
-    style={{ maxWidth: 1160, margin: "auto"}}
-  />
-
+  return <img srcSet={sources} src={fallbackSrc} alt={altText} {...rest} />;
 };
 
 ResponsiveImage.propTypes = {
