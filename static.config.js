@@ -30,6 +30,51 @@ import {
   cleanGuidePages,
 } from 'js/helpers/cleanData';
 
+const buildPageAtUrl = async pageAtUrlInfo => {
+  const {
+    url,
+    type,
+    id,
+    parent_department,
+    parent_topic,
+    parent_topic_collection,
+    grandparent_topic_collection,
+  } = pageAtUrlInfo;
+
+  // If we are a topic collection page, we need to use a query to get information about
+  // our child topics and their top pages
+  // (this might be able to move to the end with the "just run a query without extra vars" part)
+  if (type === 'topic collection') {
+    console.log(url);
+    return;
+  }
+
+  // If our parent is a TC, it means we're a topic, and we need to get info for the
+  // contextual nav, we also need to get information about the top links and others
+  // for the topic (managed in pages themselves)
+  if (parent_topic_collection) {
+    console.log(parent_topic_collection);
+    return;
+  }
+
+  // If we have a parent department, we need to use the query the gets
+  // us that information for contextual nav
+  if (parent_department) {
+    console.log(parent_department);
+  }
+
+  // If we have a parent topic and a grandparent topic collection, then
+  // we need to use the query that gets us that information for contextual nav
+  if (parent_topic && grandparent_topic_collection) {
+    console.log(parent_topic);
+  }
+
+  // If we made it here, it means we should be a top-level page (this includes departments)
+  // without contextualNav.
+
+  console.log(type);
+};
+
 const makeAllPages = async langCode => {
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
@@ -40,6 +85,10 @@ const makeAllPages = async langCode => {
   const siteStructure = await client.request(siteStructureQuery);
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
   console.log(`🎉 Site structure acquired`);
+
+  for (const pageAtUrLInfo of parsedStructure) {
+    buildPageAtUrl(pageAtUrLInfo);
+  }
 
   const topicCollectionPages = parsedStructure.filter(
     p => p.type === 'topic collection',
