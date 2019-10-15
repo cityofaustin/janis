@@ -5,7 +5,7 @@ export CMS_API='https://joplin.herokuapp.com/api/graphql'
 export CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media'
 export CMS_DOCS='multiple'
 
-if [ "$HEAD" == '3065-scroll-fix' ]; then
+if [ "$HEAD" == '3148-guide-image' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
