@@ -1,17 +1,33 @@
-import topicCollectionFragment from './topicCollectionFragment';
-
 const getTopicCollectionPageQuery = `
   query getTopicCollectionPage($id: ID) {
     allTopicCollections(id: $id) {
       edges {
         node {
           id
-          ...topicCollectionInfo
+          slug
+          title
+          description
+          theme {
+            id
+            text
+            slug
+          }
+        }
+      }
+    }
+    allTopicPageTopicCollections(topiccollection: $id) {
+      edges {
+        node {
+          page {
+            id
+            slug
+            title
+            description
+          }
         }
       }
     }
   }
-  ${topicCollectionFragment}
 `;
 
 export default getTopicCollectionPageQuery;

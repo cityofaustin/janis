@@ -17,10 +17,8 @@ import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuer
 import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 
 import {
-  cleanLinks,
   cleanDepartments,
   cleanTopics,
-  cleanTopicCollections,
   cleanThemes,
   cleanServices,
   cleanInformationPages,
@@ -30,7 +28,134 @@ import {
   cleanGuidePages,
 } from 'js/helpers/cleanData';
 
-const buildPageAtUrl = async pageAtUrlInfo => {
+export const cleanLinks = (links, pageType) => {
+  if (!links || !links.edges) return null;
+  let pathPrefix = '';
+
+  // Themes
+  if (pageType === 'theme') {
+    return links.edges.map(({ node: link }) => {
+      link.topics = link.topicCollectionPages.edges.map(e => e.node);
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      return link;
+    });
+  }
+
+  // Topic Collections
+  if (pageType === 'topiccollection') {
+    return links.edges.map(({ node: link }) => {
+      link.topics = [];
+      link.url = `${pathPrefix || ''}/${link.slug}`;
+      link.text = link.title;
+
+      return link;
+    });
+  }
+
+  let cleanedLinks = [];
+
+  // Topics
+  if (pageType === 'topic') {
+    for (const edge of links.edges) {
+      const link = edge.node;
+      if (link.topiccollections && link.topiccollections.edges.length) {
+        for (const edge of link.topiccollections.edges) {
+          const { topiccollection } = edge.node;
+
+          link.topLinks = [];
+          link.otherLinks = [];
+          link.url = `${pathPrefix || ''}/${link.slug}`;
+          link.text = link.title;
+          link.topiccollection = topiccollection;
+
+          cleanedLinks.push(link);
+        }
+      }
+    }
+
+    return cleanedLinks;
+  }
+
+  for (const edge of links.edges) {
+    const link = edge.node;
+
+    // Check for global
+    if (link.coaGlobal) {
+      link.text = link.title;
+
+      // There's only one URL for these so we can push the link without copying it
+      cleanedLinks.push(link);
+    }
+
+    // If it's under a topic make it in all the right places
+    if (link.topics && link.topics.edges.length) {
+      for (const edge of link.topics.edges) {
+        const { topic, toplink } = edge.node;
+
+        if (topic.topiccollections && topic.topiccollections.edges.length) {
+          for (const edge of topic.topiccollections.edges) {
+            const { topiccollection } = edge.node;
+
+            if (topiccollection.theme) {
+              // We need to make copies here so we actually have multiple urls
+              let linkCopy = JSON.parse(JSON.stringify(link));
+
+              pathPrefix = `/${topiccollection.theme.slug}/${
+                topiccollection.slug
+              }/${topic.slug}`;
+
+              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+              linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+              linkCopy.text = link.title;
+
+              // Give it all the parts to get back to theme
+              linkCopy.topic = topic;
+              linkCopy.topiccollection = topiccollection;
+              linkCopy.theme = topiccollection.theme;
+              linkCopy.toplink = toplink;
+
+              cleanedLinks.push(linkCopy);
+            }
+          }
+        }
+      }
+    }
+
+    // If it's under any departments make sure it's there
+    if (link.relatedDepartments && link.relatedDepartments.edges.length) {
+      for (const edge of link.relatedDepartments.edges) {
+        const { relatedDepartment } = edge.node;
+
+        // We need to make copies here so we actually have multiple urls
+        let linkCopy = JSON.parse(JSON.stringify(link));
+
+        pathPrefix = `/${relatedDepartment.slug}`;
+        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.text = link.title;
+
+        linkCopy.department = relatedDepartment;
+
+        cleanedLinks.push(linkCopy);
+      }
+    }
+  }
+
+  return cleanedLinks;
+};
+
+const cleanTopicCollections = allTopicCollections => {
+  if (!allTopicCollections || !allTopicCollections.edges) return null;
+
+  let cleanedTopicCollections = cleanLinks(
+    allTopicCollections,
+    'topiccollection',
+  );
+
+  return cleanedTopicCollections;
+};
+
+const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
     url,
     type,
@@ -49,27 +174,43 @@ const buildPageAtUrl = async pageAtUrlInfo => {
       path: url,
       component: 'src/components/Pages/TopicCollection',
       getData: async () => {
-        const { allTopicCollections } = await client.request(
-          getTopicCollectionPageQuery,
-          { id: id },
-        );
-
-        let cleanedTopicCollections = cleanTopicCollections(
+        const {
           allTopicCollections,
+          allTopicPageTopicCollections,
+        } = await client.request(getTopicCollectionPageQuery, { id: id });
+
+        const topicCollection = allTopicCollections.edges[0].node;
+        topicCollection.topics = allTopicPageTopicCollections.edges.map(
+          edge => ({
+            topiccollection: {
+              slug: topicCollection.slug,
+              theme: {
+                slug: topicCollection.theme.slug,
+              },
+            },
+            ...edge.node.page,
+          }),
         );
 
-        cleanedTopicCollections[0].topics.push({
-          slug: 'no-topics',
-          title: 'No topics selected',
-          topiccollection: {
-            theme: {
-              slug: 'blarg',
-            },
-            slug: 'blarg',
-          },
-        });
+        try {
+        } catch (e) {
+          console.err(e);
+          return;
+        }
 
-        return { tc: cleanedTopicCollections[0] };
+        console.log(topicCollection);
+        // cleanedTopicCollections[0].topics.push({
+        //   slug: 'no-topics',
+        //   title: 'No topics selected',
+        //   topiccollection: {
+        //     theme: {
+        //       slug: 'blarg',
+        //     },
+        //     slug: 'blarg',
+        //   },
+        // });
+
+        return { tc: topicCollection };
       },
     };
   }
@@ -78,28 +219,28 @@ const buildPageAtUrl = async pageAtUrlInfo => {
   // contextual nav, we also need to get information about the top links and others
   // for the topic (managed in pages themselves)
   if (parent_topic_collection) {
-    console.log(parent_topic_collection);
+    // console.log(parent_topic_collection);
     return;
   }
 
   // If we have a parent department, we need to use the query the gets
   // us that information for contextual nav
   if (parent_department) {
-    console.log(parent_department);
+    // console.log(parent_department);
     return;
   }
 
   // If we have a parent topic and a grandparent topic collection, then
   // we need to use the query that gets us that information for contextual nav
   if (parent_topic && grandparent_topic_collection) {
-    console.log(parent_topic);
+    // console.log(parent_topic);
     return;
   }
 
   // If we made it here, it means we should be a top-level page (this includes departments)
   // without contextualNav.
 
-  console.log(type);
+  // console.log(type);
 };
 
 const makeAllPages = async langCode => {
@@ -113,45 +254,46 @@ const makeAllPages = async langCode => {
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
   console.log(`🎉 Site structure acquired`);
 
-  const mappedStructure = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo)),
-  );
-  console.log(mappedStructure);
-
-  for (const pageAtUrLInfo of parsedStructure) {
-    buildPageAtUrl(pageAtUrLInfo);
-  }
-
   const topicCollectionPages = parsedStructure.filter(
     p => p.type === 'topic collection',
   );
-  const topicCollectionData = topicCollectionPages.map(topicCollectionPage => ({
-    path: topicCollectionPage.url,
-    component: 'src/components/Pages/TopicCollection',
-    getData: async () => {
-      console.log(`📡 Requesting page data for ${topicCollectionPage.url}`);
-      const { allTopicCollections } = await client.request(
-        getTopicCollectionPageQuery,
-        { id: topicCollectionPage.id },
-      );
+  const mappedStructure = await Promise.all(
+    topicCollectionPages.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo, client),
+    ),
+  );
+  const topicCollectionData = mappedStructure;
 
-      let cleanedTopicCollections = cleanTopicCollections(allTopicCollections);
+  // const topicCollectionPages = parsedStructure.filter(
+  //   p => p.type === 'topic collection',
+  // );
+  // const topicCollectionData = topicCollectionPages.map(topicCollectionPage => ({
+  //   path: topicCollectionPage.url,
+  //   component: 'src/components/Pages/TopicCollection',
+  //   getData: async () => {
+  //     console.log(`📡 Requesting page data for ${topicCollectionPage.url}`);
+  //     const { allTopicCollections } = await client.request(
+  //       getTopicCollectionPageQuery,
+  //       { id: topicCollectionPage.id },
+  //     );
 
-      cleanedTopicCollections[0].topics.push({
-        slug: 'no-topics',
-        title: 'No topics selected',
-        topiccollection: {
-          theme: {
-            slug: 'blarg',
-          },
-          slug: 'blarg',
-        },
-      });
+  //     let cleanedTopicCollections = cleanTopicCollections(allTopicCollections);
 
-      console.log(`🎉 Completed building page at ${topicCollectionPage.url}`);
-      return { tc: cleanedTopicCollections[0] };
-    },
-  }));
+  //     cleanedTopicCollections[0].topics.push({
+  //       slug: 'no-topics',
+  //       title: 'No topics selected',
+  //       topiccollection: {
+  //         theme: {
+  //           slug: 'blarg',
+  //         },
+  //         slug: 'blarg',
+  //       },
+  //     });
+
+  //     console.log(`🎉 Completed building page at ${topicCollectionPage.url}`);
+  //     return { tc: cleanedTopicCollections[0] };
+  //   },
+  // }));
 
   const topicPages = parsedStructure.filter(p => p.type === 'topic');
   const topicData = topicPages.map(topicPage => ({
