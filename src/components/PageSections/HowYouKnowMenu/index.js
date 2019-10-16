@@ -14,7 +14,6 @@ const HowYouKnowMenu = ({ open, toggleHowYouKnowMenu, refnode, intl }) => (
       'coa-HowYouKnowMenu--is-open': open,
     })}
   >
-    <GovSite menuIsOpen={open} toggleHowYouKnowMenu={toggleHowYouKnowMenu} />
     <div className="container-fluid wrapper">
       <div className="coa-HowYouKnowMenu__info-blocks">
         <div className="coa-HowYouKnowMenu__info-block">

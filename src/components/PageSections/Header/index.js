@@ -150,6 +150,12 @@ class Header extends Component {
             toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
             menuIsOpen={this.state.howYouKnowmenuIsOpen}
           />
+          {// <HowYouKnowMenu
+          //   refnode={this.setHowYouKnowWrapperRef}
+          //   open={this.state.howYouKnowmenuIsOpen}
+          //   toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
+          // />
+        }
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar path={path} />
           </div>
@@ -196,11 +202,6 @@ class Header extends Component {
               </div>
             </div>
           </div>
-          <HowYouKnowMenu
-            refnode={this.setHowYouKnowWrapperRef}
-            open={this.state.howYouKnowmenuIsOpen}
-            toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-          />
 
           <FullSiteMenu
             // ref={node => this.node = node}
