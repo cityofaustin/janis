@@ -6,9 +6,10 @@ import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 
 const GovSite = ({ intl, toggleHowYouKnowMenu, keyboardHowYouKnowMenu, menuIsOpen, refnode }) => (
   <div
-  	className={/*menuIsOpen ? "coa-Header__gov-site-open" : */"coa-Header__gov-site"}
+  	className={menuIsOpen ? "coa-Header__gov-site-open" : "coa-Header__gov-site"}
   	tabindex="0"
   	onKeyDown={keyboardHowYouKnowMenu}
+  	ref={refnode}
   >
     <div
     	className="container-fluid wrapper center-xs"
@@ -19,7 +20,8 @@ const GovSite = ({ intl, toggleHowYouKnowMenu, keyboardHowYouKnowMenu, menuIsOpe
         {menuIsOpen ? <i className="material-icons">remove</i> : <i className="material-icons">add</i>}
       </span>
     </div>
-     <HowYouKnowMenu open={menuIsOpen} refnode={refnode}/>
+     <HowYouKnowMenu open={menuIsOpen}
+     />
   </div>
 );
 
