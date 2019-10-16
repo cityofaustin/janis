@@ -156,6 +156,7 @@ class Header extends Component {
       <header
         className={classNames('coa-Header', {
           'coa-Header--menu-is-open': this.state.menuIsOpen,
+          'coa-Header--gov-is-open': this.state.howYouKnowMenuIsOpen,
         })}
         role="banner"
       >

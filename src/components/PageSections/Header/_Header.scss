@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+.coa-Header--gov-is-open{
+  padding-top: 30px; // should be dynamic?
+}
+
 .coa-Header__container {
   max-width: 1325px;
   margin-left: auto;
@@ -209,6 +213,9 @@
 
 .coa-Header__gov-site-open {
   background: #ff1493;
+  position: fixed;
+  top:0;
+  z-Index: 1;
   font-size: 1.2rem;
   line-height: 3.1rem;
   cursor: pointer;
