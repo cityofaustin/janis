@@ -4,6 +4,7 @@ import CitySeal from 'components/SVGs/CitySeal.js';
 import LoveChicken from 'components/SVGs/LoveChicken';
 import CoaSeal from '../../SVGs/CoaSeal';
 import { misc as i18n2 } from 'js/i18n/definitions';
+import { Link } from 'react-static';
 
 const MenuInfo = ({ intl }) => (
   <div className="coa-MenuInfo">
@@ -24,12 +25,12 @@ const MenuInfo = ({ intl }) => (
           <div className="coa-MenuInfo__svg">
             <i className="material-icons">info</i>
           </div>
-          <a
-            href="https://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/"
-            className="coa-MenuInfo__link"
-          >
-            {intl.formatMessage(i18n2.moreAboutProject)}
+          <a href="/feedback/" className="coa-MenuInfo__link">
+            {intl.formatMessage(i18n2.giveUserFeedback)}
           </a>
+          <Link to={'/feedback/'} className="coa-MenuInfo__link">
+            {intl.formatMessage(i18n2.giveUserFeedback)}
+          </Link>
         </div>
       </div>
     </div>
