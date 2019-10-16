@@ -207,6 +207,21 @@
   }
 }
 
+.coa-Header__gov-site-open {
+  background: #ff1493;
+  font-size: 1.2rem;
+  line-height: 3.1rem;
+  cursor: pointer;
+  border-radius: 0px 0px;
+  svg {
+    vertical-align: middle;
+    height: 1.6rem;
+    margin-top: -0.4rem;
+    margin-right: 0.4rem;
+    margin-left: 0.4rem;
+  }
+}
+
 .coa-Header__gov-site-toggle {
   margin-left: 0.5rem;
   i {
