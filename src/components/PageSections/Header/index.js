@@ -134,6 +134,17 @@ class Header extends Component {
     });
   };
 
+  keyboardHowYouKnowMenu = e => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      this.setState({howYouKnowmenuIsOpen: !this.state.howYouKnowmenuIsOpen}); // this should toggle?
+    }
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      this.setState({howYouKnowmenuIsOpen: false});
+    }
+  }
+
   render() {
     const { intl, navigation, path } = this.props;
 
@@ -148,6 +159,7 @@ class Header extends Component {
 
           <GovSite
             toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
+            keyboardHowYouKnowMenu={this.keyboardHowYouKnowMenu}
             menuIsOpen={this.state.howYouKnowmenuIsOpen}
             refnode={this.setHowYouKnowWrapperRef}
           />
