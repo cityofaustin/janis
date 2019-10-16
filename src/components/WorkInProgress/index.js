@@ -22,9 +22,9 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </Link>
         ),
         projectsSiteLink: (
-          <ExternalLink to="https://projects.austintexas.io/projects/austin-digital-services-discovery/">
+          <Link to="/feedback/">
             {intl.formatMessage(i18n.projectsSiteLinkText)}
-          </ExternalLink>
+          </Link>
         ),
       }}
       defaultMessage="Alpha.austin.gov is a work in progress.\n{projectsSiteLink}"
