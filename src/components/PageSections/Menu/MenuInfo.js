@@ -25,9 +25,6 @@ const MenuInfo = ({ intl }) => (
           <div className="coa-MenuInfo__svg">
             <i className="material-icons">info</i>
           </div>
-          <a href="/feedback/" className="coa-MenuInfo__link">
-            {intl.formatMessage(i18n2.giveUserFeedback)}
-          </a>
           <Link to={'/feedback/'} className="coa-MenuInfo__link">
             {intl.formatMessage(i18n2.giveUserFeedback)}
           </Link>
