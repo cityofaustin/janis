@@ -45,8 +45,33 @@ const buildPageAtUrl = async pageAtUrlInfo => {
   // our child topics and their top pages
   // (this might be able to move to the end with the "just run a query without extra vars" part)
   if (type === 'topic collection') {
-    console.log(url);
-    return;
+    return {
+      path: url,
+      component: 'src/components/Pages/TopicCollection',
+      getData: async () => {
+        const { allTopicCollections } = await client.request(
+          getTopicCollectionPageQuery,
+          { id: id },
+        );
+
+        let cleanedTopicCollections = cleanTopicCollections(
+          allTopicCollections,
+        );
+
+        cleanedTopicCollections[0].topics.push({
+          slug: 'no-topics',
+          title: 'No topics selected',
+          topiccollection: {
+            theme: {
+              slug: 'blarg',
+            },
+            slug: 'blarg',
+          },
+        });
+
+        return { tc: cleanedTopicCollections[0] };
+      },
+    };
   }
 
   // If our parent is a TC, it means we're a topic, and we need to get info for the
@@ -61,12 +86,14 @@ const buildPageAtUrl = async pageAtUrlInfo => {
   // us that information for contextual nav
   if (parent_department) {
     console.log(parent_department);
+    return;
   }
 
   // If we have a parent topic and a grandparent topic collection, then
   // we need to use the query that gets us that information for contextual nav
   if (parent_topic && grandparent_topic_collection) {
     console.log(parent_topic);
+    return;
   }
 
   // If we made it here, it means we should be a top-level page (this includes departments)
@@ -85,6 +112,11 @@ const makeAllPages = async langCode => {
   const siteStructure = await client.request(siteStructureQuery);
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
   console.log(`🎉 Site structure acquired`);
+
+  const mappedStructure = await Promise.all(
+    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo)),
+  );
+  console.log(mappedStructure);
 
   for (const pageAtUrLInfo of parsedStructure) {
     buildPageAtUrl(pageAtUrLInfo);
