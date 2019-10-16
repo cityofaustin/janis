@@ -7,7 +7,7 @@ import GovSite from 'components/PageSections/Header/GovSite';
 
 import { howYouKnowMenu as i18n } from 'js/i18n/definitions';
 
-const HowYouKnowMenu = ({ open, toggleHowYouKnowMenu, refnode, intl }) => (
+const HowYouKnowMenu = ({ open, refnode, intl }) => (
   <div
     ref={refnode}
     className={classNames('coa-HowYouKnowMenu', {

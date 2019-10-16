@@ -44,7 +44,7 @@ class Header extends Component {
     this.wrapperRef = node;
   }
 
-  // Sets up the how you know wrapper reference
+  //Sets up the how you know wrapper reference
   setHowYouKnowWrapperRef(node) {
     this.howYouKnowwrapperRef = node;
   }
@@ -149,13 +149,8 @@ class Header extends Component {
           <GovSite
             toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
             menuIsOpen={this.state.howYouKnowmenuIsOpen}
+            refnode={this.setHowYouKnowWrapperRef}
           />
-          {// <HowYouKnowMenu
-          //   refnode={this.setHowYouKnowWrapperRef}
-          //   open={this.state.howYouKnowmenuIsOpen}
-          //   toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-          // />
-        }
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar path={path} />
           </div>
