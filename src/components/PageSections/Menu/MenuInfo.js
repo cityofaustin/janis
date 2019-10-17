@@ -26,7 +26,7 @@ const MenuInfo = ({ handleFullSiteMenuClose, intl }) => (
             <i className="material-icons">info</i>
           </div>
           <Link
-            to={'/feedback/'}
+            to={`/${intl.locale}/feedback/`}
             className="coa-MenuInfo__link"
             onClick={handleFullSiteMenuClose}
           >

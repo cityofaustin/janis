@@ -22,7 +22,7 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </Link>
         ),
         projectsSiteLink: (
-          <Link to="/feedback/">
+          <Link to={`/${intl.locale}/feedback/`}>
             {intl.formatMessage(i18n.projectsSiteLinkText)}
           </Link>
         ),
