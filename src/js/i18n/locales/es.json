@@ -38,7 +38,7 @@
   "misc.workInProgressClipped":
     "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "misc.workInProgressClipped":
-    "{alphaSiteLink} está en construcción.\nEncuentre más información en nuestro {projectsSiteLink}",
+    "{alphaSiteLink} está en construcción.\n{projectsSiteLink}",
   "misc.projectsSiteLinkText": "Ayúdenos mejorar nuestro sitio web.",
   "misc.forFullVisit":
     "Para el sitio web completo de la Ciudad de Austin, visite ",
