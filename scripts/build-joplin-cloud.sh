@@ -5,8 +5,8 @@ export CMS_API='https://joplin.herokuapp.com/api/graphql'
 export CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media'
 export CMS_DOCS='multiple'
 
-if [ "$HEAD" == '3111-global-cta' ]; then
-  export CMS_API='https://joplin.herokuapp.com/api/graphql'
+if [ "$HEAD" == 'image-width-fix' ]; then
+  export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
 # SAVE 👇 Example: "Let's your branchname is 2662-service-step-styling": Note trucation of name in CMS_API link.
