@@ -39,7 +39,7 @@
     "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
   "misc.workInProgressClipped":
     "{alphaSiteLink} está en construcción.\nEncuentre más información en nuestro {projectsSiteLink}",
-  "misc.projectsSiteLinkText": "Ayúdenos mejorar.",
+  "misc.projectsSiteLinkText": "Ayúdenos mejorar nuestro sitio web.",
   "misc.forFullVisit":
     "Para el sitio web completo de la Ciudad de Austin, visite ",
   "misc.coaOfficialWeb": "Un sitio web oficial de la Ciudad de Austin.",
@@ -51,7 +51,7 @@
   "misc.workInProgressTiny": "alpha.austin.gov está en proceso de desarrollo.",
   "misc.currentSite":
     "Visite austintexas.gov para el sitio web actual de la ciudad.",
-  "misc.giveUserFeedback": "Ayúdenos mejorar.",
+  "misc.giveUserFeedback": "Ayúdenos mejorar nuestro sitio web.",
   "misc.learnMore": "Aprende más",
   "misc.relatedTo": "Relacionado con",
   "misc.relatedInfo": "Información relacionada",

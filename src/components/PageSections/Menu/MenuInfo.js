@@ -23,7 +23,7 @@ const MenuInfo = ({ handleToggleFullSiteMenu, intl }) => (
         </div>
         <div className="coa-MenuInfo__resource">
           <div className="coa-MenuInfo__svg">
-            <i className="material-icons">info</i>
+            <i className="material-icons">feedback</i>
           </div>
           <Link
             to={`/${intl.locale}/feedback/`}
