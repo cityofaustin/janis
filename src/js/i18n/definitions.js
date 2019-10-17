@@ -59,6 +59,7 @@ export const userFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
+  guidePagePlaceholder: 'Guide Page placeholder image',
   workInProgress: 'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
   workInProgressClipped:
     'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
