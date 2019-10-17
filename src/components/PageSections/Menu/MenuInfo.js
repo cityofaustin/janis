@@ -4,8 +4,9 @@ import CitySeal from 'components/SVGs/CitySeal.js';
 import LoveChicken from 'components/SVGs/LoveChicken';
 import CoaSeal from '../../SVGs/CoaSeal';
 import { misc as i18n2 } from 'js/i18n/definitions';
+import { Link } from 'react-static';
 
-const MenuInfo = ({ intl }) => (
+const MenuInfo = ({ handleToggleFullSiteMenu, intl }) => (
   <div className="coa-MenuInfo">
     <div className="wrapper container-fluid">
       <div className="coa-MenuInfo__container">
@@ -22,14 +23,15 @@ const MenuInfo = ({ intl }) => (
         </div>
         <div className="coa-MenuInfo__resource">
           <div className="coa-MenuInfo__svg">
-            <i className="material-icons">info</i>
+            <i className="material-icons">feedback</i>
           </div>
-          <a
-            href="https://projects.austintexas.io/projects/austin-digital-services-discovery/about/what-we-are-doing/"
+          <Link
+            to={`/${intl.locale}/feedback/`}
             className="coa-MenuInfo__link"
+            onClick={handleToggleFullSiteMenu}
           >
-            {intl.formatMessage(i18n2.moreAboutProject)}
-          </a>
+            {intl.formatMessage(i18n2.giveUserFeedback)}
+          </Link>
         </div>
       </div>
     </div>

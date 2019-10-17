@@ -220,6 +220,7 @@ class Header extends Component {
             handleFullSiteMenuOpen={this.openFullSiteMenu}
             handleFullSiteMenuClose={this.closeFullSiteMenu}
             isTopMenuActive={this.state.topMenuActive}
+            toggleFullSiteMenu={this.toggleFullSiteMenu}
           />
         </div>
       </header>
