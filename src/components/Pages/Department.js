@@ -75,6 +75,8 @@ const Department = ({
       <RelatedContent />
     ) : null;
 
+  debugger;
+
   return (
     <div>
       <Head>

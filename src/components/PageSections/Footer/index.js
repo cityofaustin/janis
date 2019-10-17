@@ -13,9 +13,6 @@ import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
 import citySealImg from 'images/coa_seal_color.png';
 
-import ThreeOneOne from 'components/PageSections/ThreeOneOne';
-import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
-
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +26,7 @@ import {
 
 import { Link } from 'react-static';
 
-const Footer = ({ threeoneone, intl }) => (
+const Footer = ({ intl }) => (
   <footer>
     <div className="coa-Footer">
       <FooterSiteMap />
@@ -73,10 +70,6 @@ const Footer = ({ threeoneone, intl }) => (
     </div>
   </footer>
 );
-
-Footer.propTypes = {
-  threeoneone: threeoneonePropTypes.isRequired,
-};
 
 export default injectIntl(Footer);
 
