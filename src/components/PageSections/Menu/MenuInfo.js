@@ -6,7 +6,7 @@ import CoaSeal from '../../SVGs/CoaSeal';
 import { misc as i18n2 } from 'js/i18n/definitions';
 import { Link } from 'react-static';
 
-const MenuInfo = ({ handleFullSiteMenuClose, intl }) => (
+const MenuInfo = ({ handleToggleFullSiteMenu, intl }) => (
   <div className="coa-MenuInfo">
     <div className="wrapper container-fluid">
       <div className="coa-MenuInfo__container">
@@ -28,7 +28,7 @@ const MenuInfo = ({ handleFullSiteMenuClose, intl }) => (
           <Link
             to={`/${intl.locale}/feedback/`}
             className="coa-MenuInfo__link"
-            onClick={handleFullSiteMenuClose}
+            onClick={handleToggleFullSiteMenu}
           >
             {intl.formatMessage(i18n2.giveUserFeedback)}
           </Link>
