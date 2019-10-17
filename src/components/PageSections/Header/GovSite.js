@@ -20,8 +20,7 @@ const GovSite = ({ intl, toggleHowYouKnowMenu, keyboardHowYouKnowMenu, menuIsOpe
         {menuIsOpen ? <i className="material-icons">remove</i> : <i className="material-icons">add</i>}
       </span>
     </div>
-     <HowYouKnowMenu open={menuIsOpen}
-     />
+     <HowYouKnowMenu open={menuIsOpen} />
   </div>
 );
 
