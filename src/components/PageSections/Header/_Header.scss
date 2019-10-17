@@ -212,10 +212,14 @@
 }
 
 .coa-Header__gov-site-open {
-  background: #ff1493;
+  background: $coa-color-blue-darkest;
   position: fixed;
   top:0;
   z-Index: 1;
+  max-width: $coa-top-menu-max-width;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.2rem;
   line-height: 3.1rem;
   cursor: pointer;
