@@ -23,6 +23,14 @@ const getTopicCollectionPageQuery = `
             slug
             title
             description
+            topPages {
+              edges {
+                node {
+                  title
+                  slug
+                }
+              }
+            }
           }
         }
       }

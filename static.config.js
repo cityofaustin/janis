@@ -188,6 +188,12 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
                 slug: topicCollection.theme.slug,
               },
             },
+            pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+              title: topPageEdge.node.title,
+              url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
+                edge.node.page.slug
+              }/${topPageEdge.node.slug}/`,
+            })),
             ...edge.node.page,
           }),
         );
