@@ -18,7 +18,6 @@ import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 
 import {
   cleanDepartments,
-  cleanTopics,
   cleanThemes,
   cleanServices,
   cleanInformationPages,
@@ -26,134 +25,89 @@ import {
   cleanNavigation,
   cleanOfficialDocumentPages,
   cleanGuidePages,
+  cleanLinks,
 } from 'js/helpers/cleanData';
 
-export const cleanLinks = (links, pageType) => {
-  if (!links || !links.edges) return null;
-  let pathPrefix = '';
+// export const cleanLinks = (links, pageType) => {
+//   if (!links || !links.edges) return null;
+//   let pathPrefix = '';
 
-  // Themes
-  if (pageType === 'theme') {
-    return links.edges.map(({ node: link }) => {
-      link.topics = link.topicCollectionPages.edges.map(e => e.node);
-      link.url = `${pathPrefix || ''}/${link.slug}`;
-      return link;
-    });
-  }
+//   // Themes
+//   if (pageType === 'theme') {
+//     return links.edges.map(({ node: link }) => {
+//       link.topics = link.topicCollectionPages.edges.map(e => e.node);
+//       link.url = `${pathPrefix || ''}/${link.slug}`;
+//       return link;
+//     });
+//   }
 
-  // Topic Collections
-  if (pageType === 'topiccollection') {
-    return links.edges.map(({ node: link }) => {
-      link.topics = [];
-      link.url = `${pathPrefix || ''}/${link.slug}`;
-      link.text = link.title;
+//   for (const edge of links.edges) {
+//     const link = edge.node;
 
-      return link;
-    });
-  }
+//     // Check for global
+//     if (link.coaGlobal) {
+//       link.text = link.title;
 
-  let cleanedLinks = [];
+//       // There's only one URL for these so we can push the link without copying it
+//       cleanedLinks.push(link);
+//     }
 
-  // Topics
-  if (pageType === 'topic') {
-    for (const edge of links.edges) {
-      const link = edge.node;
-      if (link.topiccollections && link.topiccollections.edges.length) {
-        for (const edge of link.topiccollections.edges) {
-          const { topiccollection } = edge.node;
+//     // If it's under a topic make it in all the right places
+//     if (link.topics && link.topics.edges.length) {
+//       for (const edge of link.topics.edges) {
+//         const { topic, toplink } = edge.node;
 
-          link.topLinks = [];
-          link.otherLinks = [];
-          link.url = `${pathPrefix || ''}/${link.slug}`;
-          link.text = link.title;
-          link.topiccollection = topiccollection;
+//         if (topic.topiccollections && topic.topiccollections.edges.length) {
+//           for (const edge of topic.topiccollections.edges) {
+//             const { topiccollection } = edge.node;
 
-          cleanedLinks.push(link);
-        }
-      }
-    }
+//             if (topiccollection.theme) {
+//               // We need to make copies here so we actually have multiple urls
+//               let linkCopy = JSON.parse(JSON.stringify(link));
 
-    return cleanedLinks;
-  }
+//               pathPrefix = `/${topiccollection.theme.slug}/${
+//                 topiccollection.slug
+//               }/${topic.slug}`;
 
-  for (const edge of links.edges) {
-    const link = edge.node;
+//               linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+//               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+//               linkCopy.text = link.title;
 
-    // Check for global
-    if (link.coaGlobal) {
-      link.text = link.title;
+//               // Give it all the parts to get back to theme
+//               linkCopy.topic = topic;
+//               linkCopy.topiccollection = topiccollection;
+//               linkCopy.theme = topiccollection.theme;
+//               linkCopy.toplink = toplink;
 
-      // There's only one URL for these so we can push the link without copying it
-      cleanedLinks.push(link);
-    }
+//               cleanedLinks.push(linkCopy);
+//             }
+//           }
+//         }
+//       }
+//     }
 
-    // If it's under a topic make it in all the right places
-    if (link.topics && link.topics.edges.length) {
-      for (const edge of link.topics.edges) {
-        const { topic, toplink } = edge.node;
+//     // If it's under any departments make sure it's there
+//     if (link.relatedDepartments && link.relatedDepartments.edges.length) {
+//       for (const edge of link.relatedDepartments.edges) {
+//         const { relatedDepartment } = edge.node;
 
-        if (topic.topiccollections && topic.topiccollections.edges.length) {
-          for (const edge of topic.topiccollections.edges) {
-            const { topiccollection } = edge.node;
+//         // We need to make copies here so we actually have multiple urls
+//         let linkCopy = JSON.parse(JSON.stringify(link));
 
-            if (topiccollection.theme) {
-              // We need to make copies here so we actually have multiple urls
-              let linkCopy = JSON.parse(JSON.stringify(link));
+//         pathPrefix = `/${relatedDepartment.slug}`;
+//         linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+//         linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+//         linkCopy.text = link.title;
 
-              pathPrefix = `/${topiccollection.theme.slug}/${
-                topiccollection.slug
-              }/${topic.slug}`;
+//         linkCopy.department = relatedDepartment;
 
-              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-              linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
-              linkCopy.text = link.title;
+//         cleanedLinks.push(linkCopy);
+//       }
+//     }
+//   }
 
-              // Give it all the parts to get back to theme
-              linkCopy.topic = topic;
-              linkCopy.topiccollection = topiccollection;
-              linkCopy.theme = topiccollection.theme;
-              linkCopy.toplink = toplink;
-
-              cleanedLinks.push(linkCopy);
-            }
-          }
-        }
-      }
-    }
-
-    // If it's under any departments make sure it's there
-    if (link.relatedDepartments && link.relatedDepartments.edges.length) {
-      for (const edge of link.relatedDepartments.edges) {
-        const { relatedDepartment } = edge.node;
-
-        // We need to make copies here so we actually have multiple urls
-        let linkCopy = JSON.parse(JSON.stringify(link));
-
-        pathPrefix = `/${relatedDepartment.slug}`;
-        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
-        linkCopy.text = link.title;
-
-        linkCopy.department = relatedDepartment;
-
-        cleanedLinks.push(linkCopy);
-      }
-    }
-  }
-
-  return cleanedLinks;
-};
-
-const cleanTopicCollections = allTopicCollections => {
-  if (!allTopicCollections || !allTopicCollections.edges) return null;
-
-  let cleanedTopicCollections = cleanLinks(
-    allTopicCollections,
-    'topiccollection',
-  );
-
-  return cleanedTopicCollections;
-};
+//   return cleanedLinks;
+// };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
@@ -179,7 +133,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           allTopicPageTopicCollections,
         } = await client.request(getTopicCollectionPageQuery, { id: id });
 
-        const topicCollection = allTopicCollections.edges[0].node;
+        let topicCollection = allTopicCollections.edges[0].node;
         topicCollection.topics = allTopicPageTopicCollections.edges.map(
           edge => ({
             topiccollection: {
@@ -198,24 +152,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           }),
         );
 
-        try {
-        } catch (e) {
-          console.err(e);
-          return;
-        }
-
-        console.log(topicCollection);
-        // cleanedTopicCollections[0].topics.push({
-        //   slug: 'no-topics',
-        //   title: 'No topics selected',
-        //   topiccollection: {
-        //     theme: {
-        //       slug: 'blarg',
-        //     },
-        //     slug: 'blarg',
-        //   },
-        // });
-
         return { tc: topicCollection };
       },
     };
@@ -225,8 +161,115 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   // contextual nav, we also need to get information about the top links and others
   // for the topic (managed in pages themselves)
   if (parent_topic_collection) {
-    // console.log(parent_topic_collection);
-    return;
+    console.log(parent_topic_collection);
+    return {
+      path: url,
+      component: 'src/components/Pages/Topic',
+      getData: async () => {
+        const {
+          allTopics,
+          allTopicCollections,
+          allTopicPageTopicCollections,
+          allGuidePageTopics,
+          allInformationPageTopics,
+          allOfficialDocumentPageTopics,
+          allServicePageTopics,
+        } = await client.request(getTopicPageQuery, {
+          id: id,
+          tc_id: parent_topic_collection,
+        });
+
+        let topic = allTopics.edges[0].node;
+        topic.topiccollection = allTopicCollections.edges[0].node;
+        if (
+          allTopicPageTopicCollections &&
+          allTopicPageTopicCollections.edges
+        ) {
+          topic.topiccollection.topics = allTopicPageTopicCollections.edges
+            .filter(edge => edge.node && edge.node.page.id !== id)
+            .map(edge => edge.node.page);
+        }
+
+        const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
+        topic.topLinks = topic.topPages.edges.map(edge => ({
+          title: edge.node.title,
+          url: `${topic.topiccollection.theme.slug}/${
+            topic.topiccollection.slug
+          }/${topic.slug}/${edge.node.slug}/`,
+        }));
+
+        // I don't like this but we still need to do some logic here
+        // to get all the pages
+        let otherLinks = [];
+        if (allServicePageTopics && allServicePageTopics.edges) {
+          for (const edge of allServicePageTopics.edges) {
+            if (edge.node) {
+              otherLinks.push(edge.node.page);
+            }
+          }
+        }
+
+        if (allInformationPageTopics && allInformationPageTopics.edges) {
+          for (const edge of allInformationPageTopics.edges) {
+            if (edge.node) {
+              otherLinks.push(edge.node.page);
+            }
+          }
+        }
+
+        if (
+          allOfficialDocumentPageTopics &&
+          allOfficialDocumentPageTopics.edges
+        ) {
+          for (const edge of allOfficialDocumentPageTopics.edges) {
+            if (edge.node) {
+              otherLinks.push(edge.node.page);
+            }
+          }
+        }
+
+        if (allGuidePageTopics && allGuidePageTopics.edges) {
+          for (const edge of allGuidePageTopics.edges) {
+            if (edge.node) {
+              otherLinks.push(edge.node.page);
+            }
+          }
+        }
+
+        console.log(otherLinks);
+
+        topic.otherLinks = otherLinks
+          .filter(page => !topLinkIds.includes(page.id))
+          .map(page => ({
+            title: page.title,
+            url: `${topic.topiccollection.theme.slug}/${
+              topic.topiccollection.slug
+            }/${topic.slug}/${page.slug}`,
+          }));
+
+        // console.log(allLinkIds);
+
+        // topic.otherLinks =
+        // for (const edge of allTopics.edges) {
+        //   const link = edge.node;
+        //   if (link.topiccollections && link.topiccollections.edges.length) {
+        //     for (const edge of link.topiccollections.edges) {
+        //       const { topiccollection } = edge.node;
+
+        //       link.topLinks = [];
+        //       link.otherLinks = [];
+        //       link.url = `${pathPrefix || ''}/${link.slug}`;
+        //       link.text = link.title;
+        //       link.topiccollection = topiccollection;
+
+        //       cleanedLinks.push(link);
+        //     }
+        //   }
+        // }
+
+        return { topic: topic };
+      },
+    };
   }
 
   // If we have a parent department, we need to use the query the gets
@@ -263,12 +306,16 @@ const makeAllPages = async langCode => {
   const topicCollectionPages = parsedStructure.filter(
     p => p.type === 'topic collection',
   );
-  const mappedStructure = await Promise.all(
+  const topicCollectionData = await Promise.all(
     topicCollectionPages.map(pageAtUrlInfo =>
       buildPageAtUrl(pageAtUrlInfo, client),
     ),
   );
-  const topicCollectionData = mappedStructure;
+
+  const topicPages = parsedStructure.filter(p => p.type === 'topic');
+  const topicData = await Promise.all(
+    topicPages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+  );
 
   // const topicCollectionPages = parsedStructure.filter(
   //   p => p.type === 'topic collection',
@@ -301,34 +348,34 @@ const makeAllPages = async langCode => {
   //   },
   // }));
 
-  const topicPages = parsedStructure.filter(p => p.type === 'topic');
-  const topicData = topicPages.map(topicPage => ({
-    path: topicPage.url,
-    component: 'src/components/Pages/Topic',
-    getData: async () => {
-      console.log(`📡 Requesting page data for ${topicPage.url}`);
-      const { allTopics } = await client.request(getTopicPageQuery, {
-        id: topicPage.id,
-      });
+  // const topicPages = parsedStructure.filter(p => p.type === 'topic');
+  // const topicData = topicPages.map(topicPage => ({
+  //   path: topicPage.url,
+  //   component: 'src/components/Pages/Topic',
+  //   getData: async () => {
+  //     console.log(`📡 Requesting page data for ${topicPage.url}`);
+  //     const { allTopics } = await client.request(getTopicPageQuery, {
+  //       id: topicPage.id,
+  //     });
 
-      let cleanedTopics = cleanTopics(allTopics);
+  //     let cleanedTopics = cleanTopics(allTopics);
 
-      cleanedTopics[0].topiccollection = {
-        theme: {
-          slug: 'blarg',
-        },
-        topics: [
-          {
-            id: 'blarg',
-          },
-        ],
-        slug: 'blarg',
-      };
+  //     cleanedTopics[0].topiccollection = {
+  //       theme: {
+  //         slug: 'blarg',
+  //       },
+  //       topics: [
+  //         {
+  //           id: 'blarg',
+  //         },
+  //       ],
+  //       slug: 'blarg',
+  //     };
 
-      console.log(`🎉 Completed building page at ${topicPage.url}`);
-      return { topic: cleanedTopics[0] };
-    },
-  }));
+  //     console.log(`🎉 Completed building page at ${topicPage.url}`);
+  //     return { topic: cleanedTopics[0] };
+  //   },
+  // }));
 
   const departmentPages = parsedStructure.filter(p => p.type === 'department');
   const departmentPageData = departmentPages.map(departmentPage => {

@@ -14,51 +14,47 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Topic = ({
   topic,
-  topic: {
-    theme,
-    text: title,
-    description,
-    topLinks,
-    otherLinks,
-    topiccollection,
-  },
+  topic: { text: title, description, topLinks, otherLinks, topiccollection },
   intl,
-}) => (
-  <Fragment>
-    <Head>
-      <title>{title}</title>
-    </Head>
+}) => {
+  debugger;
+  return (
+    <Fragment>
+      <Head>
+        <title>{topic.title}</title>
+      </Head>
 
-    <ContextualNav
-      topic={topic}
-      topiccollection={topiccollection}
-      theme={topiccollection.theme}
-      contentType={'topic'}
-    />
-    <PageHeader contentType={'topic'} description={description}>
-      {title}
-    </PageHeader>
-    <div className="wrapper container-fluid">
-      <div className="row">
-        <div className="col-xs-12 coa-TopicPage__tile-group">
-          {!!topLinks.length && (
-            <TileGroup
-              text={intl.formatMessage(i18n.topServices)}
-              tiles={topLinks}
-            />
-          )}
-          {!!otherLinks.length && (
-            <TileGroup
-              text={intl.formatMessage(i18n.allServices)}
-              tiles={otherLinks}
-            />
-          )}
+      <ContextualNav
+        topic={topic}
+        topiccollection={topiccollection}
+        theme={topiccollection.theme}
+        contentType={'topic'}
+      />
+      <PageHeader contentType={'topic'} description={description}>
+        {topic.title}
+      </PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-xs-12 coa-TopicPage__tile-group">
+            {!!topLinks.length && (
+              <TileGroup
+                title={intl.formatMessage(i18n.topServices)}
+                tiles={topLinks}
+              />
+            )}
+            {!!otherLinks.length && (
+              <TileGroup
+                title={intl.formatMessage(i18n.allServices)}
+                tiles={otherLinks}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
-    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
-  </Fragment>
-);
+      <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+    </Fragment>
+  );
+};
 
 Topic.propTypes = {
   topic: PropTypes.shape({
