@@ -44,7 +44,7 @@ class Header extends Component {
     this.wrapperRef = node;
   }
 
-  //Sets up the how you know wrapper reference
+  // Sets up the how you know wrapper reference
   setHowYouKnowWrapperRef(node) {
     this.howYouKnowwrapperRef = node;
   }
@@ -129,11 +129,9 @@ class Header extends Component {
   };
 
   toggleHowYouKnowMenu = e => {
-    console.log(e.type, this.state);
-    // this.setState(prevState => ({
-    //   howYouKnowMenuIsOpen: !prevState.howYouKnowMenuIsOpen,
-    // }));
-    this.setState({howYouKnowMenuIsOpen: !this.state.howYouKnowMenuIsOpen})
+    this.setState(prevState => ({
+      howYouKnowMenuIsOpen: !prevState.howYouKnowMenuIsOpen,
+    }));
   }
 
   keyboardHowYouKnowMenu = e => {
