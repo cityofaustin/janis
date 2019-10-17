@@ -29,7 +29,7 @@ const FullSiteMenu = props => (
           handleFullSiteMenuItem={props.handleFullSiteMenuItem}
         />
       </div>
-      <MenuInfo />
+      <MenuInfo handleToggleFullSiteMenu={props.toggleFullSiteMenu} />
     </section>
   </div>
 );
