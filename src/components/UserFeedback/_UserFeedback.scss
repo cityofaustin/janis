@@ -24,18 +24,17 @@ $loader-dotsize: 6px;     /* Specifies the size WxH of each dot in the sending a
 input[type="button"] {
   &.coa-UserFeedback__button {
   display: inline-block;
-  height: 4.2rem;
-  max-height: 4.2rem;
-  width: 8rem;
+  height: 48px;
+  width: 130px;
   padding: 0 !important;
   margin: 0 0 0 1rem;
-  font-size: 1.2rem;
+  font-size: 14px;
   position: relative;
   top: -2px;
   background-color: #fff;
   color: #0049c7;
   box-shadow: 0px 3px 6px #00000014;
-  border: #C6CACE;
+  border: 1px solid #C6CACE;
     &:hover {
       /* color: #fff; */
       background-color: #D9E8F6;
@@ -46,16 +45,15 @@ input[type="button"] {
 input[type="button"] {
   &.coa-UserFeedback__button-selected {
     display: inline-block;
-    height: 4.2rem;
-    max-height: 4.2rem;
-    width: 8rem;
+    height: 48px;
+    width: 130px;
     padding: 0 !important;
     margin: 0 0 0 1rem;
-    font-size: 1.2rem;
+    font-size: 14px;
     position: relative;
     top: -2px;
     color: #fff;
-    background-color: #2F4668;
+    background-color: #1A4480;
     box-shadow: 0px;
   }
 }
@@ -63,30 +61,30 @@ input[type="button"] {
 input[type="button"] {
   &.coa-UserFeedback__button-dimmed {
     display: inline-block;
-    height: 4.2rem;
-    max-height: 4.2rem;
-    width: 8rem;
+    height: 48px;
+    width: 130px;
     padding: 0 !important;
     margin: 0 0 0 1rem;
-    font-size: 1.2rem;
+    font-size: 14px;
     position: relative;
     box-shadow: 0px 3px 6px #00000014;
+    border: 1px solid #C6CACE;
+    border-radius: 4px;
     top: -2px;
     color: #0049c7;
-    background-color: #F0F0F0;
-    box-shadow: 0px;
+    background: #F0F0F0 0% 0% no-repeat padding-box;
+    opacity: 1;
   }
 }
 
 button {
   &.coa-UserFeedback__button-submit {
     display: inline-block;
-    height: 4.2rem;
-    max-height: 4.2rem;
-    width: 10rem;
+    height: 48px;
+    width: 180px;
     padding: 0 !important;
     /*margin: 0.5rem 0 0 1rem;*/
-    font-size: 1.2rem;
+    font-size: 14px;
     position: relative;
     color: #fff;
     text-align: center;
@@ -96,12 +94,11 @@ button {
 button {
   &.coa-UserFeedback__button-sending {
     display: inline-block;
-    height: 4.2rem;
-    max-height: 4.2rem;
-    width: 10rem;
+    height: 48px;
+    width: 180px;
     padding: 0 !important;
     /*margin: 0.5rem 0 0 1rem;*/
-    font-size: 1.2rem;
+    font-size: 14px;
     position: relative;
     background-color: #2F4668;
     color: #fff;
@@ -111,11 +108,10 @@ button {
 
 button {
   &.coa-UserFeedback__button-check {
-    background-color: #0CA900; /* is this the right green? */
+    background-color: #00A91C;
     display: inline-block;
-    height: 4.2rem;
-    max-height: 4.2rem;
-    width: 10rem;
+    height: 48px;
+    width: 180px;
     padding: 0 !important;
   }
 }
@@ -187,17 +183,17 @@ button {
 
 textarea#userfeedback-textarea {
   border-width: 0.1rem 0.1rem 0 0.1rem;
-  border-color: #919191;
+  border-color: #A9AEB1;
   border-style: solid;
   resize: none;
 }
 
 .coa-UserFeedback__charlimit {
   background-color: #fff;
-  border-top: 0.1rem solid #ADADAD;
-  border-left: 0.1rem solid #919191;
-  border-right: 0.1rem solid #919191;
-  border-bottom: 0.1rem solid #919191;
+  border-top: 0.1rem solid #DCDEE0;
+  border-left: 0.1rem solid #A9AEB1;
+  border-right: 0.1rem solid #A9AEB1;
+  border-bottom: 0.1rem solid #A9AEB1;
   color: #ADADAD;
   font-size: 1.2rem;
   text-align: right;
@@ -207,7 +203,7 @@ textarea#userfeedback-textarea {
 .coa-UserFeedback__textarea-dimmed {
   color: #ADADAD;
   border-width: 0.1rem 0.1rem 0 0.1rem;
-  border-color: #919191;
+  border-color: #A9AEB1;
   border-style: solid;
 }
 
@@ -218,7 +214,7 @@ textarea#userfeedback-textarea {
 }
 
 .coa-UserFeedback__check {
-  background-color: #0CA900;
+  background-color: #00A91C;
   color: #fff;
   border-radius: 50%;
   height:3rem;
