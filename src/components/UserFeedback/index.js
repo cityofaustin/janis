@@ -186,7 +186,7 @@ class UserFeedback extends Component {
                       <textarea
                         id="userfeedback-textarea"
                         name="userfeedback-textarea"
-                        maxlength={5000}
+                        maxLength={5000}
                         onChange={this.handleTextAreaChange}
                         className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
                       />

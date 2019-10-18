@@ -11,6 +11,9 @@ export const createGraphQLClientsByLang = lang => {
 
 export const postFeedback = data => {
   const { title, description } = data;
+  // todo: make sure this also handles when in staging
+  //const repository = (process.env.NODE_ENV === 'development') ? 'alpha-staging-feedback
+  // : 'alpha-public-feedback';
 
   return axios
     .create({
@@ -18,6 +21,7 @@ export const postFeedback = data => {
     })
     .post(`${process.env.FEEDBACK_API}`, {
       destination: 'githubIssue',
+      // repository: repository,
       repository: 'alpha-public-feedback',
       title: title,
       description: description,
