@@ -101,13 +101,18 @@ function GuideSectionCollection({
           isMobileOrTablet={isMobileOrTablet}
           resizeCount={resizeCount}
         >
-          <GuideSection
-            page={page}
-            pageNumber={index + 1}
-            numberOfPages={section.pages.length}
-            sectionHeading={section.heading}
-            intl={intl}
-          />
+        { ( page.servicePage || page.informationPage ) &&
+          (
+            <GuideSection
+              page={page}
+              pageNumber={index + 1}
+              numberOfPages={section.pages.length}
+              sectionHeading={section.heading}
+              intl={intl}
+            />
+          )
+        }
+
         </GuideSectionWrapper>
       ))}
     </div>

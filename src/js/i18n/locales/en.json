@@ -1,7 +1,8 @@
 {
   "callToAction.enterAddress": "Type your street address in the box below",
   "callToAction.submitOnlineRequest": "Submit an online request",
-  "callToAction.whatDoIDoWith": "Check the \"What do I do with\" tool below to find out what items are accepted.",
+  "callToAction.whatDoIDoWith":
+    "Check the \"What do I do with\" tool below to find out what items are accepted.",
   "contact.closed": "Closed",
   "contact.map": "Map",
   "contact.phoneTTD": "TDD/TTY",
@@ -18,7 +19,8 @@
   "emoji.neutral": "Neutral",
   "emoji.sad": "Sad",
   "emoji.slightlySmiling": "Slightly smiling",
-  "form.error": "Oh no, something went wrong! Please, try submitting your information again.",
+  "form.error":
+    "Oh no, something went wrong! Please, try submitting your information again.",
   "form.loading": "Loading...",
   "formFeedback.giveMore": "Give more feedback",
   "formFeedback.howSatisfied": "How satisfied are you with this page?",
@@ -31,9 +33,11 @@
   "misc.steps": "Steps",
   "misc.welcomeTo": "Welcome to",
   "misc.whatElse": "What else do I need to know?",
-  "misc.workInProgress": "Alpha.austin.gov is a work in progress.\n{projectsSiteLink}",
-  "misc.workInProgressClipped": "Alpha.austin.gov is a work in progress.\n{projectsSiteLink}",
-  "misc.projectsSiteLinkText": "Learn more about the project",
+  "misc.workInProgress":
+    "Alpha.austin.gov is a work in progress.\n{projectsSiteLink}",
+  "misc.workInProgressClipped":
+    "Alpha.austin.gov is a work in progress.\n{projectsSiteLink}",
+  "misc.projectsSiteLinkText": "Help us improve.",
   "misc.forFullVisit": "For the full City of Austin website, visit ",
   "misc.opoName": "Office of Police Oversight",
   "misc.opoDeptUrl": "/police-oversight",
@@ -44,7 +48,7 @@
   "misc.comingSoon": "Coming soon",
   "misc.workInProgressTiny": "alpha.austin.gov is a work in progress.",
   "misc.currentSite": "Visit austintexas.gov for the current city website.",
-  "misc.moreAboutProject": "More about the alpha.austin.gov project.",
+  "misc.giveUserFeedback": "Help us improve our website.",
   "misc.learnMore": "Learn more",
   "misc.relatedTo": "Related to",
   "misc.relatedInfo": "Related information",
@@ -71,14 +75,18 @@
   "threeoneone.call311": "Call 311",
   "threeoneone.contact311": "{call311Link} or {submit311Link}",
   "topics.topic": "topic",
-  "departmentPage.complaintFormButtonText": "File a complaint against an Austin police officer",
+  "departmentPage.complaintFormButtonText":
+    "File a complaint against an Austin police officer",
   "departmentPage.complaintFormUrl": "https://forms.austin.gov/police-complain",
   "departmentPage.thankFormButtonText": "Thank an Austin police officer",
   "departmentPage.thankFormUrl": "https://forms.austin.gov/police-thank",
   "departmentPage.yourDataLinkText": "How we store and use your data",
-  "departmentPage.yourDataUrl": "/police-oversight/how-we-store-and-use-your-data",
-  "departmentPage.investigationProcessLinkText": "Complaint investigation process",
-  "departmentPage.investigationProcessUrl": "/police-oversight/complaint-investigation-process",
+  "departmentPage.yourDataUrl":
+    "/police-oversight/how-we-store-and-use-your-data",
+  "departmentPage.investigationProcessLinkText":
+    "Complaint investigation process",
+  "departmentPage.investigationProcessUrl":
+    "/police-oversight/complaint-investigation-process",
   "departmentPage.directorTitle": "Director, Office of Police Oversight",
   "departmentPage.coa": "City of Austin",
   "departmentPage.mission": "Our mission",
@@ -86,9 +94,11 @@
   "departmentPage.meetDirector": "Leadership",
   "departmentPage.topServices": "Top services",
   "howYouKnowMenu.dotGovHeader": "The .gov means it’s official.",
-  "howYouKnowMenu.dotGovText": "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a government site.",
+  "howYouKnowMenu.dotGovText":
+    "Government websites often end in .gov. Before sharing sensitive information, make sure you’re on a government site.",
   "howYouKnowMenu.httpsHeader": "The site is secure.",
-  "howYouKnowMenu.httpsText": "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
+  "howYouKnowMenu.httpsText":
+    "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
   "officialdocuments.author": "Author",
   "officialdocuments.document": "Document",
   "guides.pageLink": "View this page on alpha.austin.gov"
