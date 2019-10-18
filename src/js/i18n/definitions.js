@@ -67,7 +67,7 @@ export const misc = defineMessages({
   officialHowYouKnow: 'Here’s how you know.',
   services: 'Services',
   info: 'Information',
-  projectsSiteLinkText: 'Help us improve our website.',
+  projectsSiteLinkText: 'Help us improve.',
   comingSoon: 'Coming soon',
   giveUserFeedback: 'Help us improve our website.',
   learnMore: 'Learn more',
