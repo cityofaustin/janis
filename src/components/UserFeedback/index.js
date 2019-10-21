@@ -114,7 +114,6 @@ class UserFeedback extends Component {
         )}\n\`\`\`\n\n`,
     })
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           feedbackSubmitted: true,
           success: true,
