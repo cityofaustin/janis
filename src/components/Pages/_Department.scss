@@ -136,10 +136,17 @@
   margin-bottom: $coa-spacing-medium;
 }
 
+.coa-DepartmentPage__related-list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
 .coa-DepartmentPage__related-item {
   list-style: none;
   display: flex;
   margin-left: $coa-spacing-small;
+  margin-bottom: 0;
 
   &:before {
     content: '•';
