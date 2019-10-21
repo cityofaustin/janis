@@ -20,6 +20,7 @@ const defaultValues = {
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
   CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
+  FEEDBACK_API: 'https://coa-test-form-api.herokuapp.com/process/',
 }
 
 // Add branch-specifc values here
