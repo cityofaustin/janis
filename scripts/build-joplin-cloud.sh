@@ -6,7 +6,7 @@ export CMS_MEDIA='https://joplin-austin-gov.s3.amazonaws.com/media'
 export CMS_DOCS='multiple'
 export FEEDBACK_API='https://coa-test-form-api.herokuapp.com/process/'
 
-if [ "$HEAD" == '3148-guide-image' ]; then
+if [ "$HEAD" == 'image-width-fix' ]; then
   export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
 fi
 
