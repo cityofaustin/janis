@@ -127,8 +127,7 @@ class UserFeedback extends Component {
         });
       })
       .catch(e => {
-        console.log(JSON.stringify(e))
-        //TODO: what should the error messaging be?
+        //TODO: incorporate error messaging / styles
         this.logEvent('post-error', e.response);
         console.log('ERROR:', e);
         this.setState({
@@ -176,9 +175,10 @@ class UserFeedback extends Component {
                   className={Boolean(this.state.buttonValue) ? noButtonStyle : "coa-UserFeedback__button"}
                 />
               </div>
-              {Boolean(this.state.buttonValue)
+              {Boolean(this.state.buttonValue) // if either button is selected, show textarea
                 &&
                   <div className="coa-UserFeedback__elaborate">
+                    <hr className="coa-UserFeedback-hr"/>
                     <p>
                       {intl.formatMessage(i18n2.tellUsMore)}
                     </p>
