@@ -7,6 +7,7 @@ import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 const GovSite = ({ intl, toggleHowYouKnowMenu, keyboardHowYouKnowMenu, menuIsOpen, refnode }) => (
   <div
   	className={menuIsOpen ? "coa-Header__gov-site-open" : "coa-Header__gov-site"}
+    // this component doesn't have a link so the browser didnt know to include it in the tab flow
     // setting tabindex to 0 is the secret sauce that allowed this to be tab focusable
   	tabindex="0"
   	onKeyDown={keyboardHowYouKnowMenu}
