@@ -1,5 +1,4 @@
-
-$loader-dotsize: 6px;     /* Specifies the size WxH of each dot in the sending animation */
+$loader-dotsize: 6px; /* Specifies the size WxH of each dot in the sending animation */
 
 .coa-UserFeedback {
   padding: $coa-spacing-large $coa-spacing-medium;
@@ -10,15 +9,21 @@ $loader-dotsize: 6px;     /* Specifies the size WxH of each dot in the sending a
 
 .coa-UserFeedback {
   p {
-    padding: 30px;
+    padding: 20px;
     margin: 0;
+    @media screen and (min-width: 768px) {
+      padding: 30px;
+    }
   }
 }
 
 .coa-UserFeedback__form {
   background: $coa-color-grey;
   text-align: center;
-  padding: 30px;
+  padding: 20px;
+  @media screen and (min-width: 768px) {
+    padding: 30px;
+  }
 }
 
 .coa-UserFeedback__prompt {
@@ -27,28 +32,27 @@ $loader-dotsize: 6px;     /* Specifies the size WxH of each dot in the sending a
   }
 }
 
-input[type="button"] {
+input[type='button'] {
   &.coa-UserFeedback__button {
-  display: inline-block;
-  height: 48px;
-  width: 130px;
-  padding: 0 !important;
-  margin: 0 0 0 1rem;
-  font-size: 14px;
-  position: relative;
-  top: -2px;
-  background-color: #fff;
-  color: #0049c7;
-  box-shadow: 0px 3px 6px #00000014;
-  border: 1px solid #C6CACE;
+    display: inline-block;
+    height: 48px;
+    width: 130px;
+    padding: 0 !important;
+    margin: 0 0 0 1rem;
+    font-size: 14px;
+    position: relative;
+    top: -2px;
+    background-color: #fff;
+    color: #0049c7;
+    box-shadow: 0px 3px 6px #00000014;
+    border: 1px solid #c6cace;
     &:hover {
-      /* color: #fff; */
-      background-color: #D9E8F6;
+      background-color: #d9e8f6;
     }
   }
 }
 
-input[type="button"] {
+input[type='button'] {
   &.coa-UserFeedback__button-selected {
     display: inline-block;
     height: 48px;
@@ -59,12 +63,12 @@ input[type="button"] {
     position: relative;
     top: -2px;
     color: #fff;
-    background-color: #1A4480;
+    background-color: #1a4480;
     box-shadow: 0px;
   }
 }
 
-input[type="button"] {
+input[type='button'] {
   &.coa-UserFeedback__button-dimmed {
     display: inline-block;
     height: 48px;
@@ -74,11 +78,11 @@ input[type="button"] {
     font-size: 14px;
     position: relative;
     box-shadow: 0px 3px 6px #00000014;
-    border: 1px solid #C6CACE;
+    border: 1px solid #c6cace;
     border-radius: 4px;
     top: -2px;
     color: #0049c7;
-    background: #F0F0F0 0% 0% no-repeat padding-box;
+    background: #f0f0f0 0% 0% no-repeat padding-box;
     opacity: 1;
   }
 }
@@ -93,9 +97,9 @@ button {
     font-size: 14px;
     position: relative;
     color: #fff;
-    background: #1A4480;
+    background: #1a4480;
     text-align: center;
-    border: 1px solid #2F54F2;
+    border: 1px solid #2f54f2;
     @media screen and (min-width: 768px) {
       width: 180px;
     }
@@ -110,7 +114,7 @@ button {
     padding: 0 !important;
     font-size: 14px;
     position: relative;
-    background-color: #2F4668;
+    background-color: #2f4668;
     color: #fff;
     text-align: center;
   }
@@ -118,7 +122,7 @@ button {
 
 button {
   &.coa-UserFeedback__button-check {
-    background-color: #00A91C;
+    background-color: #00a91c;
     display: inline-block;
     height: 48px;
     width: 180px;
@@ -133,7 +137,7 @@ button {
   width: $loader-dotsize;
   height: $loader-dotsize;
   border-radius: 50%;
-  margin: -($loader-dotsize*2) ($loader-dotsize*2) ($loader-dotsize*2);
+  margin: -($loader-dotsize * 2) ($loader-dotsize * 2) ($loader-dotsize * 2);
   animation-fill-mode: both;
   animation: coa-UserFeedback__button-loading--animation 1s infinite ease-in-out;
   animation-delay: -0.16s;
@@ -151,11 +155,11 @@ button {
   border-radius: 50%;
 }
 .coa-UserFeedback__button-loading:before {
-  left: -($loader-dotsize*2);
+  left: -($loader-dotsize * 2);
   animation-delay: -0.32s;
 }
 .coa-UserFeedback__button-loading:after {
-  left: ($loader-dotsize*2);
+  left: ($loader-dotsize * 2);
 }
 
 /*
@@ -179,23 +183,23 @@ button {
 .coa-UserFeedback-hr {
   @media screen and (min-width: 768px) {
     width: 569px;
+    margin-top: 30px;
   }
   border: 0;
-  border-top: 1px #DBDBDB solid;
-  margin-top: 30px;
+  border-top: 1px #dbdbdb solid;
+  margin-top: 20px;
   margin-bottom: 0;
 }
 
 .coa-UserFeedback__textarea-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 30px;
-}
-  @media screen and (min-width: 768px){
-    .coa-UserFeedback__textarea-wrapper {
-      width: 40%;
-    }
+  padding-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    width: 40%;
+    padding-bottom: 30px;
   }
+}
 
 .coa-UserFeedback__textarea {
   margin: 0 auto;
@@ -203,27 +207,27 @@ button {
 
 textarea#userfeedback-textarea {
   border-width: 0.1rem 0.1rem 0 0.1rem;
-  border-color: #A9AEB1;
+  border-color: #a9aeb1;
   border-style: solid;
   resize: none;
 }
 
 .coa-UserFeedback__charlimit {
   background-color: #fff;
-  border-top: 0.1rem solid #DCDEE0;
-  border-left: 0.1rem solid #A9AEB1;
-  border-right: 0.1rem solid #A9AEB1;
-  border-bottom: 0.1rem solid #A9AEB1;
-  color: #ADADAD;
+  border-top: 0.1rem solid #dcdee0;
+  border-left: 0.1rem solid #a9aeb1;
+  border-right: 0.1rem solid #a9aeb1;
+  border-bottom: 0.1rem solid #a9aeb1;
+  color: #adadad;
   font-size: 1.2rem;
   text-align: right;
   padding-right: 1rem;
 }
 
 .coa-UserFeedback__textarea-dimmed {
-  color: #ADADAD;
+  color: #adadad;
   border-width: 0.1rem 0.1rem 0 0.1rem;
-  border-color: #A9AEB1;
+  border-color: #a9aeb1;
   border-style: solid;
 }
 
@@ -234,11 +238,11 @@ textarea#userfeedback-textarea {
 }
 
 .coa-UserFeedback__check {
-  background-color: #00A91C;
+  background-color: #00a91c;
   color: #fff;
   border-radius: 50%;
-  height:3rem;
-  width:3rem;
+  height: 3rem;
+  width: 3rem;
   text-align: center;
   margin: 0 auto;
 }
