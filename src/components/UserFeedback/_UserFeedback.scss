@@ -8,14 +8,20 @@ $loader-dotsize: 6px;     /* Specifies the size WxH of each dot in the sending a
   margin-left: auto;
 }
 
+.coa-UserFeedback {
+  p {
+    padding: 30px;
+    margin: 0;
+  }
+}
+
 .coa-UserFeedback__form {
   background: $coa-color-grey;
   text-align: center;
-  padding: $coa-spacing-medium;
+  padding: 30px;
 }
 
 .coa-UserFeedback__prompt {
-  padding-bottom: $coa-spacing-medium;
   .material-icons {
     color: $coa-color-primary;
   }
@@ -81,12 +87,18 @@ button {
   &.coa-UserFeedback__button-submit {
     display: inline-block;
     height: 48px;
-    width: 180px;
+    width: 278px;
     padding: 0 !important;
+    margin: 0;
     font-size: 14px;
     position: relative;
     color: #fff;
+    background: #1A4480;
     text-align: center;
+    border: 1px solid #2F54F2;
+    @media screen and (min-width: 768px) {
+      width: 180px;
+    }
   }
 }
 
@@ -161,7 +173,7 @@ button {
 }
 
 .coa-UserFeedback__elaborate {
-  margin: $coa-spacing-small;
+  margin: 0;
 }
 
 .coa-UserFeedback-hr {
@@ -170,11 +182,14 @@ button {
   }
   border: 0;
   border-top: 1px #DBDBDB solid;
+  margin-top: 30px;
+  margin-bottom: 0;
 }
 
 .coa-UserFeedback__textarea-wrapper {
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 30px;
 }
   @media screen and (min-width: 768px){
     .coa-UserFeedback__textarea-wrapper {
