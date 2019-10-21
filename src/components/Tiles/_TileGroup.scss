@@ -41,9 +41,6 @@
 .coa-TileGroup__tiles-container {
   @include tablet-and-desktop {
     display: flex;
-  }
-
-  @include tablet {
     flex-wrap: wrap;
   }
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import Stickyfill from 'stickyfilljs';
 import { findIndex, sortBy } from 'lodash';
+import { misc as i18n } from 'js/i18n/definitions';
 import path from 'path';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
@@ -13,7 +13,9 @@ import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
-import { printSections } from 'components/Pages/Guide/helpers.js'
+import { printSections } from 'components/Pages/Guide/helpers.js';
+
+import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
@@ -88,7 +90,17 @@ function Guide(props) {
   // "position: sticky" will be used by desktop GuideMenu.
   useEffect(() => {
     const stickyElements = node.current.querySelectorAll('.sticky');
-    Stickyfill.add(stickyElements);
+
+    // stickyfill breaks the build with a 'window is not defined' error
+    // see https://github.com/react-static/react-static/issues/16
+    // see https://github.com/wilddeer/stickyfill/issues/99
+    if (typeof window !== 'undefined' && typeof Stickyfill == 'undefined') {
+      var Stickyfill = require('stickyfilljs');
+    }
+
+    if (typeof Stickyfill !== 'undefined') {
+      Stickyfill.add(stickyElements);
+    }
   }, []);
 
   // Alert state when the window resizes.
@@ -142,7 +154,17 @@ function Guide(props) {
           relatedDepartments={relatedDepartments}
         />
       )}
+
       {image && <PageBanner image={image} />}
+
+      {!image &&
+        <img
+          className = "coa-GuidePage__guide-page-placeholder"
+          src={guidePagePlaceholder}
+          alt={intl.formatMessage(i18n.guidePagePlaceholder)}
+        />
+      }
+
       <div className="coa-GuidePage__header">
         <h1 className="coa-GuidePage__header-title">{title}</h1>
         {description && (

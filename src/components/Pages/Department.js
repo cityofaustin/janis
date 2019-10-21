@@ -50,7 +50,7 @@ const Department = ({
         ))}
       </ul>
     </div>
-  )
+  );
 
   const TopServicesRelatedContent = () =>
     // if we render both TopServices and Related, wrap them in a div
@@ -97,7 +97,7 @@ const Department = ({
             <p>{mission}</p>
             <div className="coa-Page__contacts-mobile">
               {!!contacts && !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
+                <ContactDetails contacts={contacts} />
               )}
             </div>
             {directors.length > 0 && (
@@ -134,7 +134,7 @@ const Department = ({
         <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
             {!!contacts && !!contacts.length && (
-              <ContactDetails contact={contacts[0]} />
+              <ContactDetails contacts={contacts} />
             )}
           </div>
         </div>
