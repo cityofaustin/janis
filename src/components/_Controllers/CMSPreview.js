@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-static';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
+import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
 import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
@@ -48,8 +49,10 @@ class CMSPreview extends Component {
         params: { revision_id, page_type },
       },
     } = this.props;
+    // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
+    const { CMS_API } = queryString.parse(this.props.location.search)
 
-    const client = createGraphQLClientsByLang(intl.locale);
+    const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     //TODO: one endpoint for revisions data requests
     let req;
     switch (page_type) {
