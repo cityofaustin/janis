@@ -1,6 +1,9 @@
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
+import filesize from 'filesize';
+import axios from 'axios';
+
 // TODO: clean these up/remove them
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
@@ -380,6 +383,85 @@ const getGuidePageData = async (
   return { guidePage: guidePage };
 };
 
+const checkUrl = async url => {
+  return await axios({
+    method: 'HEAD',
+    url: url,
+  })
+    .then(res => url)
+    .catch(error => null);
+};
+
+const getWorkingDocumentLink = async filename => {
+  // Single source mode, example use case:
+  // If we're on PROD, we should only get prod documents
+  if (process.env.CMS_DOCS !== 'multiple') {
+    return `${process.env.CMS_DOCS}/${filename}`;
+  }
+
+  // Multi source mode, let's do some url checking and get something
+  // that works. example use case:
+  // If we're on STAGING, we want docs imported from PROD to work,
+  // as well as any new docs we added when testing on staging
+  if (process.env.CMS_DOCS === 'multiple') {
+    const docUrls = [
+      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
+      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
+    ];
+
+    for (const url of docUrls) {
+      const validUrl = await checkUrl(`${url}/${filename}`);
+      if (validUrl !== null) {
+        return validUrl;
+      }
+    }
+  }
+};
+
+const getOfficialDocumentPageData = async (
+  id,
+  parent_department,
+  parent_topic,
+  grandparent_topic_collection,
+  client,
+) => {
+  const { allOfficialDocumentPages } = await client.request(
+    getOfficialDocumentPageQuery,
+    {
+      id: id,
+    },
+  );
+
+  let officialDocumentPage = allOfficialDocumentPages.edges[0].node;
+
+  officialDocumentPage.contextualNavData = await getContextualNavData(
+    parent_department,
+    parent_topic,
+    grandparent_topic_collection,
+    officialDocumentPage.relatedDepartments,
+    client,
+  );
+
+  for (let doc of officialDocumentPage.officialDocuments.edges) {
+    // If we have a document in wagtail
+    // use that info to update the information syncronously
+    if (doc.node.document) {
+      doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
+
+      // Maybe there's a better way to handle this but meh for now
+      // If it's a pdf, add the size
+      if (doc.node.document.filename.slice(-3) === 'pdf') {
+        doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+          ' ',
+          '',
+        );
+      }
+    }
+  }
+
+  return { officialDocumentPage: officialDocumentPage };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
     url,
@@ -467,6 +549,22 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
         ),
     };
   }
+
+  // If we're an official docs page
+  if (type === 'official document page') {
+    return {
+      path: url,
+      component: 'src/components/Pages/OfficialDocumentList',
+      getData: () =>
+        getOfficialDocumentPageData(
+          id,
+          parent_department,
+          parent_topic,
+          grandparent_topic_collection,
+          client,
+        ),
+    };
+  }
 };
 
 const makeAllPages = async langCode => {
@@ -521,83 +619,54 @@ const makeAllPages = async langCode => {
   const officialDocumentPages = parsedStructure.filter(
     p => p.type === 'official document page',
   );
-  const officialDocumentPageData = officialDocumentPages.map(
-    officialDocumentPage => {
-      return {
-        path: officialDocumentPage.url,
-        component: 'src/components/Pages/OfficialDocumentList',
-        getData: async () => {
-          console.log(
-            `📡 Requesting page data for ${officialDocumentPage.url}`,
-          );
-
-          const { allOfficialDocumentPages } = await client.request(
-            getOfficialDocumentPageQuery,
-            {
-              id: officialDocumentPage.id,
-            },
-          );
-
-          let cleanedOfficialDocumentPages = cleanServices(
-            allOfficialDocumentPages,
-          );
-
-          if (cleanedOfficialDocumentPages[0].topic) {
-            cleanedOfficialDocumentPages[0].topic.topiccollection = {
-              theme: {
-                slug: 'blarg',
-              },
-              topics: [
-                {
-                  id: 'blarg',
-                },
-              ],
-              slug: 'blarg',
-            };
-          }
-
-          console.log(
-            `🎉 Completed building page at ${officialDocumentPage.url}`,
-          );
-          return { officialDocumentPage: cleanedOfficialDocumentPages[0] };
-        },
-      };
-    },
+  const officialDocumentPageData = await Promise.all(
+    officialDocumentPages.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo, client),
+    ),
   );
+  // const officialDocumentPageData = officialDocumentPages.map(
+  //   officialDocumentPage => {
+  //     return {
+  //       path: officialDocumentPage.url,
+  //       component: 'src/components/Pages/OfficialDocumentList',
+  //       getData: async () => {
+  //         console.log(
+  //           `📡 Requesting page data for ${officialDocumentPage.url}`,
+  //         );
 
-  // const guidePages = parsedStructure.filter(p => p.type === 'guide page');
-  // const guidePageData = guidePages.map(guidePage => {
-  //   return {
-  //     path: guidePage.url,
-  //     component: 'src/components/Pages/Guide',
-  //     getData: async () => {
-  //       console.log(`📡 Requesting page data for ${guidePage.url}`);
-
-  //       const { allGuidePages } = await client.request(getGuidePageQuery, {
-  //         id: guidePage.id,
-  //       });
-
-  //       let cleanedGuidePages = cleanGuidePages(allGuidePages);
-
-  //       if (cleanedGuidePages[0].topic) {
-  //         cleanedGuidePages[0].topic.topiccollection = {
-  //           theme: {
-  //             slug: 'blarg',
+  //         const { allOfficialDocumentPages } = await client.request(
+  //           getOfficialDocumentPageQuery,
+  //           {
+  //             id: officialDocumentPage.id,
   //           },
-  //           topics: [
-  //             {
-  //               id: 'blarg',
-  //             },
-  //           ],
-  //           slug: 'blarg',
-  //         };
-  //       }
+  //         );
 
-  //       console.log(`🎉 Completed building page at ${guidePage.url}`);
-  //       return { guidePage: cleanedGuidePages[0] };
-  //     },
-  //   };
-  // });
+  //         let cleanedOfficialDocumentPages = cleanServices(
+  //           allOfficialDocumentPages,
+  //         );
+
+  //         if (cleanedOfficialDocumentPages[0].topic) {
+  //           cleanedOfficialDocumentPages[0].topic.topiccollection = {
+  //             theme: {
+  //               slug: 'blarg',
+  //             },
+  //             topics: [
+  //               {
+  //                 id: 'blarg',
+  //               },
+  //             ],
+  //             slug: 'blarg',
+  //           };
+  //         }
+
+  //         console.log(
+  //           `🎉 Completed building page at ${officialDocumentPage.url}`,
+  //         );
+  //         return { officialDocumentPage: cleanedOfficialDocumentPages[0] };
+  //       },
+  //     };
+  //   },
+  // );
 
   const data = {
     path: path,
