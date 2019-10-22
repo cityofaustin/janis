@@ -9,7 +9,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.5",
     "@material-ui/core": "^4.3.3",
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "body-scroll-lock": "^2.6.1",
     "browser-locale": "^1.0.3",
@@ -76,14 +76,14 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-local-ie": "bash ./scripts/build-local-ie.sh",
-    "build-joplin-cloud": "bash ./scripts/build-joplin-cloud.sh",
     "start-js": "react-static start",
     "build-js": "react-static build",
     "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "build-storybook && start-storybook -p 80",
-    "build-storybook": "build-storybook -c .storybook -o .out"
+    "build-storybook": "build-storybook -c .storybook -o .out",
+    "publish-netlify-pr": "bash ./netlify/publish-netlify-pr.sh"
   },
   "prettier": {
     "semi": true,

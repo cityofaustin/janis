@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer, useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { findIndex, sortBy } from 'lodash';
+import { misc as i18n } from 'js/i18n/definitions';
 import path from 'path';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
@@ -13,6 +14,8 @@ import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
 import { printSections } from 'components/Pages/Guide/helpers.js';
+
+import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
@@ -149,7 +152,17 @@ function Guide(props) {
           offeredBy={contextualNavData.offeredBy}
         />
       )}
+
       {image && <PageBanner image={image} />}
+
+      {!image &&
+        <img
+          className = "coa-GuidePage__guide-page-placeholder"
+          src={guidePagePlaceholder}
+          alt={intl.formatMessage(i18n.guidePagePlaceholder)}
+        />
+      }
+
       <div className="coa-GuidePage__header">
         <h1 className="coa-GuidePage__header-title">{title}</h1>
         {description && (

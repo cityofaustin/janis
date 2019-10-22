@@ -49,6 +49,7 @@ export const formFeedback = defineMessages({
 export const misc = defineMessages({
   airport: 'Airport',
   citySeal: 'City of Austin Seal',
+  guidePagePlaceholder: 'Guide Page placeholder image',
   workInProgress: 'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
   workInProgressClipped:
     'Alpha.austin.gov is a work in progress.\n{projectsSiteLink}',
@@ -66,9 +67,9 @@ export const misc = defineMessages({
   officialHowYouKnow: 'Here’s how you know.',
   services: 'Services',
   info: 'Information',
-  projectsSiteLinkText: 'Learn more about the project',
+  projectsSiteLinkText: 'Help us improve.',
   comingSoon: 'Coming soon',
-  moreAboutProject: 'More about the alpha.austin.gov project.',
+  giveUserFeedback: 'Help us improve our website.',
   learnMore: 'Learn more',
   relatedTo: 'Related to',
   offeredBy: 'Offered by',

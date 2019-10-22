@@ -1,5 +1,0 @@
-
-# Global settings applied to the whole site.
-[build]
-  command = "yarn build-joplin-cloud"
-  publish = "dist"

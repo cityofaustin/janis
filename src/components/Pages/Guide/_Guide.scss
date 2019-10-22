@@ -58,6 +58,11 @@ $max-guide-tablet-width: $coa-medium-screen;
   }
 }
 
+.coa-GuidePage__guide-page-placeholder {
+  display: block;
+  margin: 0 auto;
+}
+
 .coa-GuidePage__content-container {
   @extend .coa-Page__all-of-the-content;
   @include tablet {

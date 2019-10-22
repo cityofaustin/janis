@@ -145,7 +145,6 @@ class Header extends Component {
         role="banner"
       >
         <div className="coa-Header--container">
-
           <GovSite
             toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
             menuIsOpen={this.state.howYouKnowmenuIsOpen}
@@ -210,6 +209,7 @@ class Header extends Component {
             handleFullSiteMenuOpen={this.openFullSiteMenu}
             handleFullSiteMenuClose={this.closeFullSiteMenu}
             isTopMenuActive={this.state.topMenuActive}
+            toggleFullSiteMenu={this.toggleFullSiteMenu}
           />
         </div>
       </header>
