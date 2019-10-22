@@ -568,111 +568,17 @@ const makeAllPages = async langCode => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-  console.log(`📡 Requesting site structure`);
   const siteStructure = await client.request(siteStructureQuery);
   const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
-  console.log(`🎉 Site structure acquired`);
 
-  const topicCollectionPages = parsedStructure.filter(
-    p => p.type === 'topic collection',
+  const allPages = await Promise.all(
+    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
   );
-  const topicCollectionData = await Promise.all(
-    topicCollectionPages.map(pageAtUrlInfo =>
-      buildPageAtUrl(pageAtUrlInfo, client),
-    ),
-  );
-
-  const topicPages = parsedStructure.filter(p => p.type === 'topic');
-  const topicData = await Promise.all(
-    topicPages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
-  );
-
-  const departmentPages = parsedStructure.filter(p => p.type === 'department');
-  const departmentPageData = await Promise.all(
-    departmentPages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
-  );
-
-  const servicePages = parsedStructure.filter(p => p.type === 'service page');
-  const servicePageData = await Promise.all(
-    servicePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
-  );
-
-  const informationPages = parsedStructure.filter(
-    p => p.type === 'information page',
-  );
-  const informationPageData = await Promise.all(
-    informationPages.map(pageAtUrlInfo =>
-      buildPageAtUrl(pageAtUrlInfo, client),
-    ),
-  );
-
-  const guidePages = parsedStructure.filter(p => p.type === 'guide page');
-  const guidePageData = await Promise.all(
-    guidePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
-  );
-
-  const officialDocumentPages = parsedStructure.filter(
-    p => p.type === 'official document page',
-  );
-  const officialDocumentPageData = await Promise.all(
-    officialDocumentPages.map(pageAtUrlInfo =>
-      buildPageAtUrl(pageAtUrlInfo, client),
-    ),
-  );
-  // const officialDocumentPageData = officialDocumentPages.map(
-  //   officialDocumentPage => {
-  //     return {
-  //       path: officialDocumentPage.url,
-  //       component: 'src/components/Pages/OfficialDocumentList',
-  //       getData: async () => {
-  //         console.log(
-  //           `📡 Requesting page data for ${officialDocumentPage.url}`,
-  //         );
-
-  //         const { allOfficialDocumentPages } = await client.request(
-  //           getOfficialDocumentPageQuery,
-  //           {
-  //             id: officialDocumentPage.id,
-  //           },
-  //         );
-
-  //         let cleanedOfficialDocumentPages = cleanServices(
-  //           allOfficialDocumentPages,
-  //         );
-
-  //         if (cleanedOfficialDocumentPages[0].topic) {
-  //           cleanedOfficialDocumentPages[0].topic.topiccollection = {
-  //             theme: {
-  //               slug: 'blarg',
-  //             },
-  //             topics: [
-  //               {
-  //                 id: 'blarg',
-  //               },
-  //             ],
-  //             slug: 'blarg',
-  //           };
-  //         }
-
-  //         console.log(
-  //           `🎉 Completed building page at ${officialDocumentPage.url}`,
-  //         );
-  //         return { officialDocumentPage: cleanedOfficialDocumentPages[0] };
-  //       },
-  //     };
-  //   },
-  // );
 
   const data = {
     path: path,
     component: 'src/components/Pages/Home',
-    children: topicCollectionData
-      .concat(topicData)
-      .concat(departmentPageData)
-      .concat(informationPageData)
-      .concat(servicePageData)
-      .concat(officialDocumentPageData)
-      .concat(guidePageData),
+    children: allPages,
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
       let services = cleanLinks(allServicePages, 'service');
