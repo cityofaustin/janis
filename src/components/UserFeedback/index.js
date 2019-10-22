@@ -185,12 +185,12 @@ class UserFeedback extends Component {
                       <textarea
                         id="userfeedback-textarea"
                         name="userfeedback-textarea"
-                        maxLength={5000}
+                        maxLength={2000}
                         onChange={this.handleTextAreaChange}
                         className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
                       />
                       <div className="coa-UserFeedback__charlimit">
-                        {`Character limit: ${this.state.char} of 5000`}
+                        {`Character limit: ${this.state.char} of 2000`}
                       </div>
                     </div>
                     {this.renderButton()}
