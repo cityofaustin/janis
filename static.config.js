@@ -172,7 +172,24 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
 
   let topic = allTopics.edges[0].node;
 
-  // we need to get info for the contextual nav
+  // we need to get info for the contextual nav,
+  // this is different for topic pages so we'll just do it here instead of using
+  // getContextualNavData
+  topic.contextualNavData = {};
+  if (
+    allTopicCollections &&
+    allTopicCollections.edges.length &&
+    allTopicCollections.edges[0].node.theme
+  ) {
+    topic.contextualNavData.parent = {
+      id: allTopicCollections.edges[0].node.id,
+      title: allTopicCollections.edges[0].node.title,
+      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+        allTopicCollections.edges[0].node.slug
+      }/`,
+    };
+  }
+
   topic.topiccollection = allTopicCollections.edges[0].node;
   if (allTopicPageTopicCollections && allTopicPageTopicCollections.edges) {
     topic.topiccollection.topics = allTopicPageTopicCollections.edges

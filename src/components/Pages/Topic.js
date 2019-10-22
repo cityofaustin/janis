@@ -14,7 +14,14 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Topic = ({
   topic,
-  topic: { text: title, description, topLinks, otherLinks, topiccollection },
+  topic: {
+    text: title,
+    description,
+    topLinks,
+    otherLinks,
+    topiccollection,
+    contextualNavData,
+  },
   intl,
 }) => {
   debugger;
@@ -24,12 +31,7 @@ const Topic = ({
         <title>{topic.title}</title>
       </Head>
 
-      <ContextualNav
-        topic={topic}
-        topiccollection={topiccollection}
-        theme={topiccollection.theme}
-        contentType={'topic'}
-      />
+      <ContextualNav parent={contextualNavData.parent} />
       <PageHeader contentType={'topic'} description={description}>
         {topic.title}
       </PageHeader>
