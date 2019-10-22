@@ -34,6 +34,7 @@ const Topic = ({
       <ContextualNav
         parent={contextualNavData.parent}
         relatedTo={contextualNavData.relatedTo}
+        offeredBy={[]}
       />
       <PageHeader contentType={'topic'} description={description}>
         {topic.title}

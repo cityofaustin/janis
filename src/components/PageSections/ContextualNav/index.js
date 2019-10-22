@@ -4,8 +4,8 @@ import { injectIntl } from 'react-intl';
 import { misc as i18n } from 'js/i18n/definitions';
 import { Link } from 'react-static';
 
-const ContextualNav = ({ parent, relatedTo, intl }) => {
-  const offeredBy = [];
+const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => {
+  // const offeredBy = [];
   debugger;
 
   // // Set the related links if we have a topic collection
