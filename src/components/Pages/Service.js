@@ -39,7 +39,12 @@ const Service = ({
     </Head>
     {image && <PageBanner image={image} />}
     <div>
-      {!coaGlobal && <ContextualNav parent={contextualNavData.parent} />}
+      {!coaGlobal && (
+        <ContextualNav
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+        />
+      )}
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>

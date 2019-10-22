@@ -287,6 +287,8 @@ const getContextualNavData = async (
   grandparent_topic_collection,
   client,
 ) => {
+  let contextualNavData = {};
+
   const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
     parent_topic && grandparent_topic_collection
       ? await client.request(getContextualNavTopicDataQuery, {
@@ -305,7 +307,7 @@ const getContextualNavData = async (
       })
     : { allDepartmentPages: null };
 
-  let contextualNavData = {};
+  // get parent
   if (
     parent_topic &&
     grandparent_topic_collection &&
@@ -336,12 +338,29 @@ const getContextualNavData = async (
     };
   }
 
-  // console.log('ALL TOPICS');
-  // console.log(allTopics.edges[0]);
-  // console.log('ALL DEPARTMENTS');
-  // console.log(allDepartmentPages);
-  // console.log('ALL TCS');
-  // console.log(allTopicPageTopicCollections);
+  // get related to
+  if (
+    parent_topic &&
+    grandparent_topic_collection &&
+    allTopicPageTopicCollections &&
+    allTopicPageTopicCollections.edges.length &&
+    allTopicCollections &&
+    allTopicCollections.edges.length &&
+    allTopicCollections.edges[0].node.theme
+  ) {
+    contextualNavData.relatedTo = allTopicPageTopicCollections.edges
+      .filter(edge => edge.node && edge.node.page.id !== parent_topic)
+      .map(edge => ({
+        id: edge.node.page.id,
+        title: edge.node.page.title,
+        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+          allTopicCollections.edges[0].node.slug
+        }/${edge.node.page.slug}/`,
+      }));
+  }
+
+  // get offered by
+  // TODO
 
   return contextualNavData;
 };

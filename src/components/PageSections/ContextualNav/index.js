@@ -4,7 +4,8 @@ import { injectIntl } from 'react-intl';
 import { misc as i18n } from 'js/i18n/definitions';
 import { Link } from 'react-static';
 
-const ContextualNav = ({ parent, intl }) => {
+const ContextualNav = ({ parent, relatedTo, intl }) => {
+  const offeredBy = [];
   debugger;
 
   // // Set the related links if we have a topic collection
@@ -40,21 +41,34 @@ const ContextualNav = ({ parent, intl }) => {
               <span>{parent.title}</span>
             </Link>
           </div>
-          {/*
-            !!related.length && (
+          {!!relatedTo.length && (
             <div className="coa-ContextualNav__related">
               <span className="coa-ContextualNav__label">
                 {`${intl.formatMessage(i18n.relatedTo)}: `}
               </span>
-              {related.map((topic, index) => (
-                <a key={index} href={topic.slug}>
-                  {topic.title}
-                  {index !== related.length - 1 && ', '}
-                </a>
+              {relatedTo.map((relatedLinkData, index) => (
+                <Link to={`/${intl.locale}${relatedLinkData.url}`}>
+                  {relatedLinkData.title}
+                  {index !== relatedTo.length - 1 && ', '}
+                </Link>
               ))}
             </div>
-          )
-        */}
+          )}
+          <div className="coa-ContextualNav__dept">
+            {!!offeredBy.length && (
+              <Fragment>
+                <span className="coa-ContextualNav__label">{`${intl.formatMessage(
+                  i18n.offeredBy,
+                )}: `}</span>
+                {offeredBy.map((department, index) => (
+                  <a href={`/${intl.locale}/${department.slug}`}>
+                    {department.title}
+                    {index !== offeredBy.length - 1 && ', '}
+                  </a>
+                ))}
+              </Fragment>
+            )}
+          </div>
         </div>
       </div>
     </div>
