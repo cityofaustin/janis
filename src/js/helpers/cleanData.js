@@ -173,24 +173,6 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-export const cleanServices = allServices => {
-  if (!allServices || !allServices.edges) return null;
-
-  let cleanedServices = cleanLinks(allServices, '/services');
-  cleanedServices.map(service => {
-    service.contacts = cleanContacts(service.contacts);
-    service.related = cleanRelatedServiceLinks(service.related);
-
-    //TODO: mapblock data should include contact data when sent via joplin
-    const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
-    if (tempkey)
-      service.dynamicContent[tempkey].value['contact'] = service.contacts.length
-        ? service.contacts[0]
-        : null;
-  });
-  return cleanedServices;
-};
-
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
 export const cleanServicesForPreview = allServices => {
@@ -204,16 +186,6 @@ export const cleanServicesForPreview = allServices => {
   service.contacts = cleanContacts(service.contacts);
 
   return service;
-};
-
-export const cleanInformationPages = allInformationPages => {
-  if (!allInformationPages || !allInformationPages.edges) return null;
-
-  let cleanedInformationPages = cleanLinks(allInformationPages, '/information');
-  cleanedInformationPages.map(informationPage => {
-    informationPage.contacts = cleanContacts(informationPage.contacts);
-  });
-  return cleanedInformationPages;
 };
 
 // Let's just do this for now, we'll probably need to make some changes
