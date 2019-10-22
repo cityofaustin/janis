@@ -487,6 +487,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_department,
           parent_topic,
           grandparent_topic_collection,
+          client,
         ),
     };
   }
@@ -602,6 +603,11 @@ const makeAllPages = async langCode => {
     departmentPages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
   );
 
+  const servicePages = parsedStructure.filter(p => p.type === 'service page');
+  const servicePageData = await Promise.all(
+    servicePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+  );
+
   const informationPages = parsedStructure.filter(
     p => p.type === 'information page',
   );
@@ -648,18 +654,6 @@ const makeAllPages = async langCode => {
       },
     };
   });
-
-  const servicePages = parsedStructure.filter(p => p.type === 'service page');
-  const servicePageData = await Promise.all(
-    servicePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
-  );
-  // const servicePageData = servicePages.map(servicePage => {
-  //   return {
-  //     path: servicePage.url,
-  //     component: 'src/components/Pages/Service',
-  //     getData: async () => {},
-  //   };
-  // });
 
   const officialDocumentPages = parsedStructure.filter(
     p => p.type === 'official document page',
