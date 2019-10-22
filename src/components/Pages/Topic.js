@@ -31,7 +31,10 @@ const Topic = ({
         <title>{topic.title}</title>
       </Head>
 
-      <ContextualNav parent={contextualNavData.parent} />
+      <ContextualNav
+        parent={contextualNavData.parent}
+        relatedTo={contextualNavData.relatedTo}
+      />
       <PageHeader contentType={'topic'} description={description}>
         {topic.title}
       </PageHeader>

@@ -188,6 +188,18 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
         allTopicCollections.edges[0].node.slug
       }/`,
     };
+
+    if (allTopicPageTopicCollections && allTopicPageTopicCollections.edges) {
+      topic.contextualNavData.relatedTo = allTopicPageTopicCollections.edges
+        .filter(edge => edge.node && edge.node.page.id !== id)
+        .map(edge => ({
+          id: edge.node.page.id,
+          title: edge.node.page.title,
+          url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+            allTopicCollections.edges[0].node.slug
+          }/${edge.node.page.slug}/`,
+        }));
+    }
   }
 
   topic.topiccollection = allTopicCollections.edges[0].node;
