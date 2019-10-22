@@ -18,7 +18,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const InformationPage = ({
   informationPage: {
-    text: title,
+    title,
     slug,
     topic,
     topics,
@@ -32,6 +32,7 @@ const InformationPage = ({
     image,
     contacts,
     coaGlobal,
+    contextualNavData,
   },
   intl,
 }) => (
@@ -41,12 +42,9 @@ const InformationPage = ({
     </Head>
     {!coaGlobal && (
       <ContextualNav
-        topic={topic}
-        topics={topics}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
-        relatedDepartments={relatedDepartments}
+        parent={contextualNavData.parent}
+        relatedTo={contextualNavData.relatedTo}
+        offeredBy={contextualNavData.offeredBy}
       />
     )}
     {image && <PageBanner image={image} />}

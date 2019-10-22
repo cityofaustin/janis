@@ -31,87 +31,6 @@ import {
   cleanLinks,
 } from 'js/helpers/cleanData';
 
-// export const cleanLinks = (links, pageType) => {
-//   if (!links || !links.edges) return null;
-//   let pathPrefix = '';
-
-//   // Themes
-//   if (pageType === 'theme') {
-//     return links.edges.map(({ node: link }) => {
-//       link.topics = link.topicCollectionPages.edges.map(e => e.node);
-//       link.url = `${pathPrefix || ''}/${link.slug}`;
-//       return link;
-//     });
-//   }
-
-//   for (const edge of links.edges) {
-//     const link = edge.node;
-
-//     // Check for global
-//     if (link.coaGlobal) {
-//       link.text = link.title;
-
-//       // There's only one URL for these so we can push the link without copying it
-//       cleanedLinks.push(link);
-//     }
-
-//     // If it's under a topic make it in all the right places
-//     if (link.topics && link.topics.edges.length) {
-//       for (const edge of link.topics.edges) {
-//         const { topic, toplink } = edge.node;
-
-//         if (topic.topiccollections && topic.topiccollections.edges.length) {
-//           for (const edge of topic.topiccollections.edges) {
-//             const { topiccollection } = edge.node;
-
-//             if (topiccollection.theme) {
-//               // We need to make copies here so we actually have multiple urls
-//               let linkCopy = JSON.parse(JSON.stringify(link));
-
-//               pathPrefix = `/${topiccollection.theme.slug}/${
-//                 topiccollection.slug
-//               }/${topic.slug}`;
-
-//               linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-//               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
-//               linkCopy.text = link.title;
-
-//               // Give it all the parts to get back to theme
-//               linkCopy.topic = topic;
-//               linkCopy.topiccollection = topiccollection;
-//               linkCopy.theme = topiccollection.theme;
-//               linkCopy.toplink = toplink;
-
-//               cleanedLinks.push(linkCopy);
-//             }
-//           }
-//         }
-//       }
-//     }
-
-//     // If it's under any departments make sure it's there
-//     if (link.relatedDepartments && link.relatedDepartments.edges.length) {
-//       for (const edge of link.relatedDepartments.edges) {
-//         const { relatedDepartment } = edge.node;
-
-//         // We need to make copies here so we actually have multiple urls
-//         let linkCopy = JSON.parse(JSON.stringify(link));
-
-//         pathPrefix = `/${relatedDepartment.slug}`;
-//         linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-//         linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
-//         linkCopy.text = link.title;
-
-//         linkCopy.department = relatedDepartment;
-
-//         cleanedLinks.push(linkCopy);
-//       }
-//     }
-//   }
-
-//   return cleanedLinks;
-// };
-
 const getAllTopicLinks = (
   allServicePageTopics,
   allInformationPageTopics,
@@ -370,10 +289,11 @@ const getContextualNavData = async (
           allTopicCollections.edges[0].node.slug
         }/${edge.node.page.slug}/`,
       }));
+  } else {
+    contextualNavData.relatedTo = [];
   }
 
   // get offered by
-  console.log(relatedDepartments);
   if (relatedDepartments && relatedDepartments.edges.length) {
     contextualNavData.offeredBy = relatedDepartments.edges.map(edge => ({
       id: edge.node.relatedDepartment.id,
@@ -416,8 +336,24 @@ const getInformationPageData = async (
   parent_department,
   parent_topic,
   grandparent_topic_collection,
+  client,
 ) => {
-  return null;
+  const { allInformationPages } = await client.request(
+    getInformationPageQuery,
+    { id: id },
+  );
+
+  let informationPage = allInformationPages.edges[0].node;
+
+  informationPage.contextualNavData = await getContextualNavData(
+    parent_department,
+    parent_topic,
+    grandparent_topic_collection,
+    informationPage.relatedDepartments,
+    client,
+  );
+
+  return { informationPage: informationPage };
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
@@ -491,86 +427,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
         ),
     };
   }
-
-  // const componentDict = {
-  //   'information page': 'src/components/Pages/Information',
-  // };
-
-  // If we have a parent department, we need to use the query the gets
-  // // us that information for contextual nav
-  // if (parent_department) {
-  //   return {
-  //     path: url,
-  //     component: componentDict[type],
-  //     getData: async () => {
-  //       console.log(`📡 Requesting page data for ${url}`);
-  //       const { allInformationPages } = await client.request(
-  //         getInformationPageQuery,
-  //         { id: id },
-  //       );
-
-  //       let cleanedInformationPages = cleanInformationPages(
-  //         allInformationPages,
-  //       );
-
-  //       if (
-  //         cleanedInformationPages &&
-  //         cleanedInformationPages[0] &&
-  //         cleanedInformationPages[0].topic
-  //       ) {
-  //         cleanedInformationPages[0].topic.topiccollection = {
-  //           theme: {
-  //             slug: 'blarg',
-  //           },
-  //           topics: [
-  //             {
-  //               id: 'blarg',
-  //             },
-  //           ],
-  //           slug: 'blarg',
-  //         };
-  //       }
-
-  //       console.log(`🎉 Completed building page at ${informationPage.url}`);
-  //       return { informationPage: cleanedInformationPages[0] };
-  //     },
-  //   };
-  // }
-
-  // If we have a parent topic and a grandparent topic collection, then
-  // we need to use the query that gets us that information for contextual nav
-  if (parent_topic && grandparent_topic_collection) {
-    // console.log(parent_topic);
-    return;
-  }
-
-  // If we made it here, it means we should be a top-level page
-  // without contextualNav.
-  // const componentDict = {
-  //   department: 'src/components/Pages/Department',
-  // };
-
-  // return {
-  //   path: url,
-  //   component: componentDict[type],
-  //   getData: async () => {
-  //     console.log(`📡 Requesting page data for ${url}`);
-
-  //     const { allDepartmentPages } = await client.request(
-  //       getDepartmentPageQuery,
-  //       {
-  //         id: departmentPage.id,
-  //       },
-  //     );
-
-  //     let cleanedDepartmentPages = cleanDepartments(allDepartmentPages);
-
-  //     console.log(`🎉 Completed building page at ${departmentPage.url}`);
-  //     return { department: cleanedDepartmentPages[0] };
-  //   },
-  // };
-
-  // console.log(type);
 };
 
 const makeAllPages = async langCode => {
@@ -611,49 +467,49 @@ const makeAllPages = async langCode => {
   const informationPages = parsedStructure.filter(
     p => p.type === 'information page',
   );
-  // const informationPageData = await Promise.all(
-  //   informationPages.map(pageAtUrlInfo =>
-  //     buildPageAtUrl(pageAtUrlInfo, client),
-  //   ),
-  // );
-  const informationPageData = informationPages.map(informationPage => {
-    return {
-      path: informationPage.url,
-      component: 'src/components/Pages/Information',
-      getData: async () => {
-        console.log(`📡 Requesting page data for ${informationPage.url}`);
-        const { allInformationPages } = await client.request(
-          getInformationPageQuery,
-          { id: informationPage.id },
-        );
+  const informationPageData = await Promise.all(
+    informationPages.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo, client),
+    ),
+  );
+  // const informationPageData = informationPages.map(informationPage => {
+  //   return {
+  //     path: informationPage.url,
+  //     component: 'src/components/Pages/Information',
+  //     getData: async () => {
+  //       console.log(`📡 Requesting page data for ${informationPage.url}`);
+  //       const { allInformationPages } = await client.request(
+  //         getInformationPageQuery,
+  //         { id: informationPage.id },
+  //       );
 
-        let cleanedInformationPages = cleanInformationPages(
-          allInformationPages,
-        );
+  //       let cleanedInformationPages = cleanInformationPages(
+  //         allInformationPages,
+  //       );
 
-        if (
-          cleanedInformationPages &&
-          cleanedInformationPages[0] &&
-          cleanedInformationPages[0].topic
-        ) {
-          cleanedInformationPages[0].topic.topiccollection = {
-            theme: {
-              slug: 'blarg',
-            },
-            topics: [
-              {
-                id: 'blarg',
-              },
-            ],
-            slug: 'blarg',
-          };
-        }
+  //       if (
+  //         cleanedInformationPages &&
+  //         cleanedInformationPages[0] &&
+  //         cleanedInformationPages[0].topic
+  //       ) {
+  //         cleanedInformationPages[0].topic.topiccollection = {
+  //           theme: {
+  //             slug: 'blarg',
+  //           },
+  //           topics: [
+  //             {
+  //               id: 'blarg',
+  //             },
+  //           ],
+  //           slug: 'blarg',
+  //         };
+  //       }
 
-        console.log(`🎉 Completed building page at ${informationPage.url}`);
-        return { informationPage: cleanedInformationPages[0] };
-      },
-    };
-  });
+  //       console.log(`🎉 Completed building page at ${informationPage.url}`);
+  //       return { informationPage: cleanedInformationPages[0] };
+  //     },
+  //   };
+  // });
 
   const officialDocumentPages = parsedStructure.filter(
     p => p.type === 'official document page',
