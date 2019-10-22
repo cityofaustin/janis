@@ -297,6 +297,7 @@ const getContextualNavData = async (
   parent_department,
   parent_topic,
   grandparent_topic_collection,
+  relatedDepartments,
   client,
 ) => {
   let contextualNavData = {};
@@ -372,7 +373,16 @@ const getContextualNavData = async (
   }
 
   // get offered by
-  // TODO
+  console.log(relatedDepartments);
+  if (relatedDepartments && relatedDepartments.edges.length) {
+    contextualNavData.offeredBy = relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  } else {
+    contextualNavData.offeredBy = [];
+  }
 
   return contextualNavData;
 };
@@ -388,34 +398,17 @@ const getServicePageData = async (
     id: id,
   });
 
-  const contextualNavData = await getContextualNavData(
+  let service = allServicePages.edges[0].node;
+
+  service.contextualNavData = await getContextualNavData(
     parent_department,
     parent_topic,
     grandparent_topic_collection,
+    service.relatedDepartments,
     client,
   );
 
-  console.log(contextualNavData);
-
-  let cleanedServicePages = cleanServices(allServicePages);
-
-  cleanedServicePages[0].contextualNavData = contextualNavData;
-
-  // if (cleanedServicePages[0].topic) {
-  //   cleanedServicePages[0].topic.topiccollection = {
-  //     theme: {
-  //       slug: 'blarg',
-  //     },
-  //     topics: [
-  //       {
-  //         id: 'blarg',
-  //       },
-  //     ],
-  //     slug: 'blarg',
-  //   };
-  // }
-
-  return { service: cleanedServicePages[0] };
+  return { service: service };
 };
 
 const getInformationPageData = async (

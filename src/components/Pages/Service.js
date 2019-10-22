@@ -19,7 +19,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 const Service = ({
   service: {
     image,
-    text: title,
+    title,
     slug,
     steps,
     dynamicContent,
@@ -43,6 +43,7 @@ const Service = ({
         <ContextualNav
           parent={contextualNavData.parent}
           relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       <PageHeader contentType={'service'} description={shortDescription}>
