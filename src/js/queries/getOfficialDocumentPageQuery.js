@@ -1,16 +1,43 @@
-import officialDocumentPageFragment from './officialDocumentPageFragment';
-
 const getOfficialDocumentPageQuery = `
   query getOfficialDocumentPage($id: ID) {
     allOfficialDocumentPages(id: $id) {
       edges {
         node {
           id
-          ...officialDocumentPageInfo
+          title
+          slug
+          description
+          relatedDepartments {
+            edges {
+              node {
+                relatedDepartment {
+                  id
+                  title
+                  slug
+                }
+              }
+            }
+          }
+          officialDocuments(orderBy: "-date") {
+            edges {
+              node {
+                id
+                date
+                title
+                authoringOffice
+                summary
+                name
+                document {
+                  fileSize
+                  filename
+                }
+              }
+            }
+          }
         }
       }
     }
-  }  ${officialDocumentPageFragment}
+  }
 `;
 
 export default getOfficialDocumentPageQuery;
