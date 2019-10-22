@@ -15,6 +15,8 @@ import getServicePageQuery from 'js/queries/getServicePageQuery';
 import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
 import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuery';
 import getGuidePageQuery from 'js/queries/getGuidePageQuery';
+import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
+import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 
 import {
   cleanContacts,
@@ -154,6 +156,57 @@ const getAllTopicLinks = (
   return allLinks;
 };
 
+const getTopicPageData = async (id, parent_topic_collection, client) => {
+  const {
+    allTopics,
+    allTopicCollections,
+    allTopicPageTopicCollections,
+    allGuidePageTopics,
+    allInformationPageTopics,
+    allOfficialDocumentPageTopics,
+    allServicePageTopics,
+  } = await client.request(getTopicPageQuery, {
+    id: id,
+    tc_id: parent_topic_collection,
+  });
+
+  let topic = allTopics.edges[0].node;
+
+  // we need to get info for the contextual nav
+  topic.topiccollection = allTopicCollections.edges[0].node;
+  if (allTopicPageTopicCollections && allTopicPageTopicCollections.edges) {
+    topic.topiccollection.topics = allTopicPageTopicCollections.edges
+      .filter(edge => edge.node && edge.node.page.id !== id)
+      .map(edge => edge.node.page);
+  }
+
+  // we also need to get information about the top links
+  const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
+  topic.topLinks = topic.topPages.edges.map(edge => ({
+    title: edge.node.title,
+    url: `/${topic.topiccollection.theme.slug}/${topic.topiccollection.slug}/${
+      topic.slug
+    }/${edge.node.slug}/`,
+  }));
+
+  // and others
+  topic.otherLinks = getAllTopicLinks(
+    allServicePageTopics,
+    allInformationPageTopics,
+    allOfficialDocumentPageTopics,
+    allGuidePageTopics,
+  )
+    .filter(page => !topLinkIds.includes(page.id))
+    .map(page => ({
+      title: page.title,
+      url: `/${topic.topiccollection.theme.slug}/${
+        topic.topiccollection.slug
+      }/${topic.slug}/${page.slug}`,
+    }));
+
+  return { topic: topic };
+};
+
 const getDepartmentPageData = async (id, client) => {
   const { allDepartmentPages } = await client.request(getDepartmentPageQuery, {
     id: id,
@@ -211,6 +264,121 @@ const getTopicCollectionPageData = async (id, client) => {
   return { tc: topicCollection };
 };
 
+const getContextualNavData = async (
+  parent_department,
+  parent_topic,
+  grandparent_topic_collection,
+  client,
+) => {
+  const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
+    parent_topic && grandparent_topic_collection
+      ? await client.request(getContextualNavTopicDataQuery, {
+          parent_topic: parent_topic,
+          grandparent_topic_collection: grandparent_topic_collection,
+        })
+      : {
+          allTopics: null,
+          allTopicPageTopicCollections: null,
+          allTopicCollections: null,
+        };
+
+  const { allDepartmentPages } = parent_department
+    ? await client.request(getContextualNavDepartmentDataQuery, {
+        parent_department: parent_department,
+      })
+    : { allDepartmentPages: null };
+
+  let contextualNavData = {};
+  if (
+    parent_topic &&
+    grandparent_topic_collection &&
+    allTopics &&
+    allTopics.edges.length &&
+    allTopicCollections &&
+    allTopicCollections.edges.length &&
+    allTopicCollections.edges[0].node.theme
+  ) {
+    contextualNavData.parent = {
+      id: allTopics.edges[0].node.id,
+      title: allTopics.edges[0].node.title,
+      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+        allTopicCollections.edges[0].node.slug
+      }/${allTopics.edges[0].node.slug}/`,
+    };
+  }
+
+  if (
+    parent_department &&
+    allDepartmentPages &&
+    allDepartmentPages.edges.length
+  ) {
+    contextualNavData.parent = {
+      id: allDepartmentPages.edges[0].node.id,
+      title: allDepartmentPages.edges[0].node.title,
+      url: `/${allDepartmentPages.edges[0].node.slug}/`,
+    };
+  }
+
+  // console.log('ALL TOPICS');
+  // console.log(allTopics.edges[0]);
+  // console.log('ALL DEPARTMENTS');
+  // console.log(allDepartmentPages);
+  // console.log('ALL TCS');
+  // console.log(allTopicPageTopicCollections);
+
+  return contextualNavData;
+};
+
+const getServicePageData = async (
+  id,
+  parent_department,
+  parent_topic,
+  grandparent_topic_collection,
+  client,
+) => {
+  const { allServicePages } = await client.request(getServicePageQuery, {
+    id: id,
+  });
+
+  const contextualNavData = await getContextualNavData(
+    parent_department,
+    parent_topic,
+    grandparent_topic_collection,
+    client,
+  );
+
+  console.log(contextualNavData);
+
+  let cleanedServicePages = cleanServices(allServicePages);
+
+  cleanedServicePages[0].contextualNavData = contextualNavData;
+
+  // if (cleanedServicePages[0].topic) {
+  //   cleanedServicePages[0].topic.topiccollection = {
+  //     theme: {
+  //       slug: 'blarg',
+  //     },
+  //     topics: [
+  //       {
+  //         id: 'blarg',
+  //       },
+  //     ],
+  //     slug: 'blarg',
+  //   };
+  // }
+
+  return { service: cleanedServicePages[0] };
+};
+
+const getInformationPageData = async (
+  id,
+  parent_department,
+  parent_topic,
+  grandparent_topic_collection,
+) => {
+  return null;
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
     url,
@@ -242,62 +410,43 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
     };
   }
 
-  // If our parent is a TC, it means we're a topic, and we need to get info for the
-  // contextual nav, we also need to get information about the top links and others
-  // for the topic (managed in pages themselves)
-  if (parent_topic_collection) {
+  // If we are a topic page, we need a parent topic collection id
+  if (type === 'topic' && parent_topic_collection) {
     return {
       path: url,
       component: 'src/components/Pages/Topic',
-      getData: async () => {
-        const {
-          allTopics,
-          allTopicCollections,
-          allTopicPageTopicCollections,
-          allGuidePageTopics,
-          allInformationPageTopics,
-          allOfficialDocumentPageTopics,
-          allServicePageTopics,
-        } = await client.request(getTopicPageQuery, {
-          id: id,
-          tc_id: parent_topic_collection,
-        });
+      getData: () => getTopicPageData(id, parent_topic_collection, client),
+    };
+  }
 
-        let topic = allTopics.edges[0].node;
-        topic.topiccollection = allTopicCollections.edges[0].node;
-        if (
-          allTopicPageTopicCollections &&
-          allTopicPageTopicCollections.edges
-        ) {
-          topic.topiccollection.topics = allTopicPageTopicCollections.edges
-            .filter(edge => edge.node && edge.node.page.id !== id)
-            .map(edge => edge.node.page);
-        }
+  // If we're a service page
+  if (type === 'service page') {
+    return {
+      path: url,
+      component: 'src/components/Pages/Service',
+      getData: () =>
+        getServicePageData(
+          id,
+          parent_department,
+          parent_topic,
+          grandparent_topic_collection,
+          client,
+        ),
+    };
+  }
 
-        const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
-        topic.topLinks = topic.topPages.edges.map(edge => ({
-          title: edge.node.title,
-          url: `/${topic.topiccollection.theme.slug}/${
-            topic.topiccollection.slug
-          }/${topic.slug}/${edge.node.slug}/`,
-        }));
-
-        topic.otherLinks = getAllTopicLinks(
-          allServicePageTopics,
-          allInformationPageTopics,
-          allOfficialDocumentPageTopics,
-          allGuidePageTopics,
-        )
-          .filter(page => !topLinkIds.includes(page.id))
-          .map(page => ({
-            title: page.title,
-            url: `/${topic.topiccollection.theme.slug}/${
-              topic.topiccollection.slug
-            }/${topic.slug}/${page.slug}`,
-          }));
-
-        return { topic: topic };
-      },
+  // If we're an information page
+  if (type === 'information page') {
+    return {
+      path: url,
+      component: 'src/components/Pages/Information',
+      getData: () =>
+        getInformationPageData(
+          id,
+          parent_department,
+          parent_topic,
+          grandparent_topic_collection,
+        ),
     };
   }
 
@@ -305,7 +454,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   //   'information page': 'src/components/Pages/Information',
   // };
 
-  // // If we have a parent department, we need to use the query the gets
+  // If we have a parent department, we need to use the query the gets
   // // us that information for contextual nav
   // if (parent_department) {
   //   return {
@@ -460,38 +609,16 @@ const makeAllPages = async langCode => {
   });
 
   const servicePages = parsedStructure.filter(p => p.type === 'service page');
-  const servicePageData = servicePages.map(servicePage => {
-    return {
-      path: servicePage.url,
-      component: 'src/components/Pages/Service',
-      getData: async () => {
-        console.log(`📡 Requesting page data for ${servicePage.url}`);
-
-        const { allServicePages } = await client.request(getServicePageQuery, {
-          id: servicePage.id,
-        });
-
-        let cleanedServicePages = cleanServices(allServicePages);
-
-        if (cleanedServicePages[0].topic) {
-          cleanedServicePages[0].topic.topiccollection = {
-            theme: {
-              slug: 'blarg',
-            },
-            topics: [
-              {
-                id: 'blarg',
-              },
-            ],
-            slug: 'blarg',
-          };
-        }
-
-        console.log(`🎉 Completed building page at ${servicePage.url}`);
-        return { service: cleanedServicePages[0] };
-      },
-    };
-  });
+  const servicePageData = await Promise.all(
+    servicePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+  );
+  // const servicePageData = servicePages.map(servicePage => {
+  //   return {
+  //     path: servicePage.url,
+  //     component: 'src/components/Pages/Service',
+  //     getData: async () => {},
+  //   };
+  // });
 
   const officialDocumentPages = parsedStructure.filter(
     p => p.type === 'official document page',

@@ -26,50 +26,57 @@ import {
 
 import { Link } from 'react-static';
 
-const Footer = ({ intl }) => (
-  <footer>
-    <div className="coa-Footer">
-      <FooterSiteMap />
-      <div className="coa-Footer__city-seal-wrapper">
-        <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
+const Footer = ({ intl }) => {
+  debugger;
+
+  return (
+    <footer>
+      <div className="coa-Footer">
+        <FooterSiteMap />
+        <div className="coa-Footer__city-seal-wrapper">
+          <img src={citySealImg} alt={intl.formatMessage(i18n.citySeal)} />
+        </div>
+        <div className="coa-Footer__work-in-progress">
+          <WorkInProgress isClipped={true} />
+        </div>
+        <div className="coa-Footer__social-links">
+          <a
+            href="https://www.facebook.com/austintexasgov"
+            aria-label="Facebook"
+          >
+            <FontAwesomeIcon icon={faFacebook} size="lg" />
+          </a>
+          <a
+            href="https://www.instagram.com/austintexasgov/"
+            aria-label="Instagram"
+          >
+            <FontAwesomeIcon icon={faInstagram} size="lg" />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/city-of-austin/"
+            aria-label="LinkedIn"
+          >
+            <FontAwesomeIcon icon={faLinkedin} size="lg" />
+          </a>
+          <a href="https://twitter.com/austintexasgov" aria-label="Twitter">
+            <FontAwesomeIcon icon={faTwitter} size="lg" />
+          </a>
+          <a
+            href="https://www.youtube.com/user/austintexasgov"
+            aria-label="YouTube"
+          >
+            <FontAwesomeIcon icon={faYoutube} size="lg" />
+          </a>
+        </div>
+        <div className="coa-Footer__links">
+          <Link to={`/${intl.locale}/privacy-policy/`}>
+            {intl.formatMessage(i18n.privacyPolicy)}
+          </Link>
+        </div>
       </div>
-      <div className="coa-Footer__work-in-progress">
-        <WorkInProgress isClipped={true} />
-      </div>
-      <div className="coa-Footer__social-links">
-        <a href="https://www.facebook.com/austintexasgov" aria-label="Facebook">
-          <FontAwesomeIcon icon={faFacebook} size="lg" />
-        </a>
-        <a
-          href="https://www.instagram.com/austintexasgov/"
-          aria-label="Instagram"
-        >
-          <FontAwesomeIcon icon={faInstagram} size="lg" />
-        </a>
-        <a
-          href="https://www.linkedin.com/company/city-of-austin/"
-          aria-label="LinkedIn"
-        >
-          <FontAwesomeIcon icon={faLinkedin} size="lg" />
-        </a>
-        <a href="https://twitter.com/austintexasgov" aria-label="Twitter">
-          <FontAwesomeIcon icon={faTwitter} size="lg" />
-        </a>
-        <a
-          href="https://www.youtube.com/user/austintexasgov"
-          aria-label="YouTube"
-        >
-          <FontAwesomeIcon icon={faYoutube} size="lg" />
-        </a>
-      </div>
-      <div className="coa-Footer__links">
-        <Link to={'/privacy-policy/'}>
-          {intl.formatMessage(i18n.privacyPolicy)}
-        </Link>
-      </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default injectIntl(Footer);
 

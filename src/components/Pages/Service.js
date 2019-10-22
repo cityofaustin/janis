@@ -21,9 +21,6 @@ const Service = ({
     image,
     text: title,
     slug,
-    topic,
-    department,
-    theme,
     steps,
     dynamicContent,
     additionalContent,
@@ -32,6 +29,7 @@ const Service = ({
     shortDescription,
     relatedDepartments,
     coaGlobal,
+    contextualNavData,
   },
   intl,
 }) => (
@@ -41,16 +39,7 @@ const Service = ({
     </Head>
     {image && <PageBanner image={image} />}
     <div>
-      {!coaGlobal && (
-        <ContextualNav
-          topic={topic}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
-          coaGlobal={coaGlobal}
-        />
-      )}
+      {!coaGlobal && <ContextualNav parent={contextualNavData.parent} />}
       <PageHeader contentType={'service'} description={shortDescription}>
         {title}
       </PageHeader>
@@ -105,12 +94,14 @@ const Service = ({
         tag={intl.formatMessage(i18n3.service)}
       />
       */}
+      {/*
       <RelatedToMobile
         topic={topic}
         topiccollection={topic && topic.topiccollection}
         theme={theme}
         department={department}
       />
+    */}
     </div>
   </div>
 );
