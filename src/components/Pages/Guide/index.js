@@ -128,6 +128,7 @@ function Guide(props) {
     image,
     contacts,
     coaGlobal,
+    contextualNavData,
   } = props.guidePage;
   let { intl } = props;
 
@@ -143,12 +144,9 @@ function Guide(props) {
       </Head>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topics={topics}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       {image && <PageBanner image={image} />}

@@ -356,6 +356,30 @@ const getInformationPageData = async (
   return { informationPage: informationPage };
 };
 
+const getGuidePageData = async (
+  id,
+  parent_department,
+  parent_topic,
+  grandparent_topic_collection,
+  client,
+) => {
+  const { allGuidePages } = await client.request(getGuidePageQuery, {
+    id: id,
+  });
+
+  let guidePage = allGuidePages.edges[0].node;
+
+  guidePage.contextualNavData = await getContextualNavData(
+    parent_department,
+    parent_topic,
+    grandparent_topic_collection,
+    guidePage.relatedDepartments,
+    client,
+  );
+
+  return { guidePage: guidePage };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
     url,
@@ -427,6 +451,22 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
         ),
     };
   }
+
+  // If we're a guide page
+  if (type === 'guide page') {
+    return {
+      path: url,
+      component: 'src/components/Pages/Guide',
+      getData: () =>
+        getGuidePageData(
+          id,
+          parent_department,
+          parent_topic,
+          grandparent_topic_collection,
+          client,
+        ),
+    };
+  }
 };
 
 const makeAllPages = async langCode => {
@@ -472,44 +512,11 @@ const makeAllPages = async langCode => {
       buildPageAtUrl(pageAtUrlInfo, client),
     ),
   );
-  // const informationPageData = informationPages.map(informationPage => {
-  //   return {
-  //     path: informationPage.url,
-  //     component: 'src/components/Pages/Information',
-  //     getData: async () => {
-  //       console.log(`📡 Requesting page data for ${informationPage.url}`);
-  //       const { allInformationPages } = await client.request(
-  //         getInformationPageQuery,
-  //         { id: informationPage.id },
-  //       );
 
-  //       let cleanedInformationPages = cleanInformationPages(
-  //         allInformationPages,
-  //       );
-
-  //       if (
-  //         cleanedInformationPages &&
-  //         cleanedInformationPages[0] &&
-  //         cleanedInformationPages[0].topic
-  //       ) {
-  //         cleanedInformationPages[0].topic.topiccollection = {
-  //           theme: {
-  //             slug: 'blarg',
-  //           },
-  //           topics: [
-  //             {
-  //               id: 'blarg',
-  //             },
-  //           ],
-  //           slug: 'blarg',
-  //         };
-  //       }
-
-  //       console.log(`🎉 Completed building page at ${informationPage.url}`);
-  //       return { informationPage: cleanedInformationPages[0] };
-  //     },
-  //   };
-  // });
+  const guidePages = parsedStructure.filter(p => p.type === 'guide page');
+  const guidePageData = await Promise.all(
+    guidePages.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+  );
 
   const officialDocumentPages = parsedStructure.filter(
     p => p.type === 'official document page',
@@ -558,39 +565,39 @@ const makeAllPages = async langCode => {
     },
   );
 
-  const guidePages = parsedStructure.filter(p => p.type === 'guide page');
-  const guidePageData = guidePages.map(guidePage => {
-    return {
-      path: guidePage.url,
-      component: 'src/components/Pages/Guide',
-      getData: async () => {
-        console.log(`📡 Requesting page data for ${guidePage.url}`);
+  // const guidePages = parsedStructure.filter(p => p.type === 'guide page');
+  // const guidePageData = guidePages.map(guidePage => {
+  //   return {
+  //     path: guidePage.url,
+  //     component: 'src/components/Pages/Guide',
+  //     getData: async () => {
+  //       console.log(`📡 Requesting page data for ${guidePage.url}`);
 
-        const { allGuidePages } = await client.request(getGuidePageQuery, {
-          id: guidePage.id,
-        });
+  //       const { allGuidePages } = await client.request(getGuidePageQuery, {
+  //         id: guidePage.id,
+  //       });
 
-        let cleanedGuidePages = cleanGuidePages(allGuidePages);
+  //       let cleanedGuidePages = cleanGuidePages(allGuidePages);
 
-        if (cleanedGuidePages[0].topic) {
-          cleanedGuidePages[0].topic.topiccollection = {
-            theme: {
-              slug: 'blarg',
-            },
-            topics: [
-              {
-                id: 'blarg',
-              },
-            ],
-            slug: 'blarg',
-          };
-        }
+  //       if (cleanedGuidePages[0].topic) {
+  //         cleanedGuidePages[0].topic.topiccollection = {
+  //           theme: {
+  //             slug: 'blarg',
+  //           },
+  //           topics: [
+  //             {
+  //               id: 'blarg',
+  //             },
+  //           ],
+  //           slug: 'blarg',
+  //         };
+  //       }
 
-        console.log(`🎉 Completed building page at ${guidePage.url}`);
-        return { guidePage: cleanedGuidePages[0] };
-      },
-    };
-  });
+  //       console.log(`🎉 Completed building page at ${guidePage.url}`);
+  //       return { guidePage: cleanedGuidePages[0] };
+  //     },
+  //   };
+  // });
 
   const data = {
     path: path,
