@@ -22,16 +22,11 @@ import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicData
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 
 import {
-  cleanContacts,
-  cleanDepartmentDirectors,
   cleanThemes,
-  cleanServices,
-  cleanInformationPages,
-  clean311,
   cleanNavigation,
-  cleanOfficialDocumentPages,
-  cleanGuidePages,
+  cleanContacts,
   cleanLinks,
+  cleanDepartmentDirectors,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
