@@ -23,44 +23,41 @@ const Topic = ({
     contextualNavData,
   },
   intl,
-}) => {
-  debugger;
-  return (
-    <Fragment>
-      <Head>
-        <title>{topic.title}</title>
-      </Head>
+}) => (
+  <Fragment>
+    <Head>
+      <title>{topic.title}</title>
+    </Head>
 
-      <ContextualNav
-        parent={contextualNavData.parent}
-        relatedTo={contextualNavData.relatedTo}
-        offeredBy={[]}
-      />
-      <PageHeader contentType={'topic'} description={description}>
-        {topic.title}
-      </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 coa-TopicPage__tile-group">
-            {!!topLinks.length && (
-              <TileGroup
-                title={intl.formatMessage(i18n.topServices)}
-                tiles={topLinks}
-              />
-            )}
-            {!!otherLinks.length && (
-              <TileGroup
-                title={intl.formatMessage(i18n.allServices)}
-                tiles={otherLinks}
-              />
-            )}
-          </div>
+    <ContextualNav
+      parent={contextualNavData.parent}
+      relatedTo={contextualNavData.relatedTo}
+      offeredBy={[]}
+    />
+    <PageHeader contentType={'topic'} description={description}>
+      {topic.title}
+    </PageHeader>
+    <div className="wrapper container-fluid">
+      <div className="row">
+        <div className="col-xs-12 coa-TopicPage__tile-group">
+          {!!topLinks.length && (
+            <TileGroup
+              title={intl.formatMessage(i18n.topServices)}
+              tiles={topLinks}
+            />
+          )}
+          {!!otherLinks.length && (
+            <TileGroup
+              title={intl.formatMessage(i18n.allServices)}
+              tiles={otherLinks}
+            />
+          )}
         </div>
       </div>
-      <RelatedToMobile topiccollection={topiccollection} topic={topic} />
-    </Fragment>
-  );
-};
+    </div>
+    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+  </Fragment>
+);
 
 Topic.propTypes = {
   topic: PropTypes.shape({
