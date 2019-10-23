@@ -185,6 +185,9 @@ const getTopicCollectionPageData = async (id, client) => {
 
   let topicCollection = allTopicCollections.edges[0].node;
   topicCollection.topics = allTopicPageTopicCollections.edges.map(edge => ({
+    title: edge.node.page.title,
+    description: edge.node.page.description,
+    slug: edge.node.page.slug,
     topiccollection: {
       slug: topicCollection.slug,
       theme: {
@@ -197,7 +200,6 @@ const getTopicCollectionPageData = async (id, client) => {
         edge.node.page.slug
       }/${topPageEdge.node.slug}/`,
     })),
-    ...edge.node.page,
   }));
 
   return { tc: topicCollection };
