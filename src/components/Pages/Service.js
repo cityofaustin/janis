@@ -93,21 +93,10 @@ const Service = ({
           </div>
         </div>
       </div>
-      {/*}
-      <TileGroup
-        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-        tiles={related}
-        tag={intl.formatMessage(i18n3.service)}
-      />
-      */}
-      {/*
       <RelatedToMobile
-        topic={topic}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
+        relatedTo={contextualNavData.relatedTo}
+        offeredBy={contextualNavData.offeredBy}
       />
-    */}
     </div>
   </div>
 );
