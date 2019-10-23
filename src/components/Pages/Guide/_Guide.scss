@@ -176,6 +176,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 .coa-GuideSection__header {
   background: #ecf1f7;
   text-align: center;
+  font-weight: 500;
 
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -195,6 +196,10 @@ $max-guide-tablet-width: $coa-medium-screen;
   > p:last-child {
     // Let parent handle padding-bottom for the last nested paragraph
     margin-bottom: 0px;
+  }
+
+  h1 {
+    font-weight: 500;
   }
 }
 
