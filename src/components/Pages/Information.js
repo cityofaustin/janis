@@ -82,10 +82,8 @@ const InformationPage = ({
       </div>
       {!coaGlobal && (
         <RelatedToMobile
-          topic={topic}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
     </div>
