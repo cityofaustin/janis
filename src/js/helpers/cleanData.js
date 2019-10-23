@@ -359,6 +359,11 @@ export const cleanTopicsForPreview = allTopics => {
 
   const cleanedTopics = allTopics.edges.map(edge => ({
     text: edge.node.title,
+    contextualNavData: {
+      relatedTo: [],
+      offeredBy: [],
+      parent: { title: 'Parent', url: '#' },
+    },
     ...edge.node,
   }));
 
