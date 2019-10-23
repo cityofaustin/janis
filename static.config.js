@@ -20,6 +20,7 @@ import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuer
 import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
+import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 
 import {
   cleanThemes,
@@ -452,6 +453,17 @@ const getOfficialDocumentPageData = async (
   return { officialDocumentPage: officialDocumentPage };
 };
 
+const getDepartmentsPageData = async client => {
+  const { allDepartmentPages } = await client.request(getDepartmentsPageQuery);
+
+  const departments = allDepartmentPages.edges.map(edge => ({
+    title: edge.node.title,
+    url: `/${edge.node.slug}/`,
+  }));
+
+  return { departments: departments };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   const {
     url,
@@ -555,6 +567,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
         ),
     };
   }
+
+  // If we're the departments page
+  if (type === 'departments') {
+    return {
+      path: url,
+      component: 'src/components/Pages/Departments',
+      getData: () => getDepartmentsPageData(client),
+    };
+  }
 };
 
 const makeAllPages = async langCode => {
@@ -564,7 +585,14 @@ const makeAllPages = async langCode => {
   const client = createGraphQLClientsByLang(langCode);
 
   const siteStructure = await client.request(siteStructureQuery);
-  const parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
+  let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
+
+  // We probably have some work to do around the documents page
+  // but for now let's just add it in here
+  parsedStructure.push({
+    url: `/departments/`,
+    type: `departments`,
+  });
 
   const allPages = await Promise.all(
     parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
