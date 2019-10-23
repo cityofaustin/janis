@@ -209,7 +209,12 @@ export const cleanGuideForPreview = allGuidePages => {
   const guides = allGuidePages.edges.map(e => e.node);
   let guide = guides[0];
 
-  guide.topic = getTopicForContextualNavPreview(guide);
+  guide.contextualNavData = {
+    relatedTo: [],
+    offeredBy: [],
+  };
+
+  guide.contextualNavData.parent = getTopicForContextualNavPreview(guide);
   guide.theme = {};
 
   return guide;
@@ -220,7 +225,7 @@ const getTopicForContextualNavPreview = page => {
   // topic describing that
   if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
     return {
-      slug: 'no-topics',
+      url: 'no-topics',
       title: 'No topics selected',
       topiccollection: {
         topics: [],
@@ -231,7 +236,7 @@ const getTopicForContextualNavPreview = page => {
   // If we have topics,
   // get info from the first one
   return {
-    slug: page.topics.edges[0].node.topic.slug,
+    url: page.topics.edges[0].node.topic.slug,
     title: page.topics.edges[0].node.topic.title,
     topiccollection: {
       topics: [],
