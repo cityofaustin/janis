@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { GraphQLClient } from 'graphql-request';
 
-export const createGraphQLClientsByLang = lang => {
-  const { CMS_API } = process.env;
+export const createGraphQLClientsByLang = (lang, CMS_API) => {
+  const joplinEndpoint = CMS_API || process.env.CMS_API
 
-  return new GraphQLClient(CMS_API, {
+  return new GraphQLClient(joplinEndpoint, {
     headers: { 'Accept-Language': lang },
   });
 };
