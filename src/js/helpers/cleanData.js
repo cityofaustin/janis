@@ -568,3 +568,8 @@ export const cleanGuidePages = allGuidePages => {
 
   return cleanedGuidePages;
 };
+
+export const cleanFormPages = allFormPages => {
+  if (!allFormPages || !allFormPages.edges) return null;
+  return cleanLinks(allFormPages, 'form');
+}

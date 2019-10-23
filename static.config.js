@@ -16,6 +16,7 @@ import globalInformationPagesQuery from 'js/queries/globalInformationPagesQuery'
 import globalGuidePagesQuery from 'js/queries/globalGuidePagesQuery';
 import globalOfficialDocumentPagesQuery from 'js/queries/globalOfficialDocumentPagesQuery';
 import globalServicePagesQuery from 'js/queries/globalServicePagesQuery';
+import allFormPagesQuery from 'js/queries/allFormPagesQuery';
 
 import {
   cleanLinks,
@@ -29,6 +30,7 @@ import {
   cleanNavigation,
   cleanOfficialDocumentPages,
   cleanGuidePages,
+  cleanFormPages,
 } from 'js/helpers/cleanData';
 
 const isRelatedDepartment = (page, departmentId) => {
@@ -180,6 +182,11 @@ const makeThemePages = async client => {
   );
   const guidePages = cleanGuidePages(allGuidePages);
 
+  const { allFormPages: allFormPages } = await client.request(
+    allFormPagesQuery,
+  );
+  const formPages = cleanFormPages(allFormPages);
+
   // Add all topic links to topic collection pages
   for (var topic of topics) {
     let matchingTopicCollectionIndex = topicCollections.findIndex(
@@ -297,6 +304,27 @@ const makeThemePages = async client => {
     page.topic = topicCopy;
   }
 
+  for (let page of formPages) {
+    if (!page.topic) continue;
+    page.type = 'form';
+
+    let matchingTopicIndex = topics.findIndex(t => t.id === page.topic.id);
+    if (page.toplink) {
+      topics[matchingTopicIndex].topLinks.push(page);
+    } else {
+      topics[matchingTopicIndex].otherLinks.push(page);
+    }
+
+    // Update the topic on the page
+    const topicCopy = {
+      id: topics[matchingTopicIndex].id,
+      title: topics[matchingTopicIndex].title,
+      slug: topics[matchingTopicIndex].slug,
+      topiccollection: topics[matchingTopicIndex].topiccollection,
+    };
+    page.topic = topicCopy;
+  }
+
   const data = themes.map(theme => ({
     path: `/${theme.slug}`,
     component: 'src/components/Pages/Theme',
@@ -363,6 +391,17 @@ const makeThemePages = async client => {
                       guidePage,
                     }),
                   })),
+              )
+              .concat(
+                formPages
+                .filter(d => d.topic != null && d.topic.id == topic.id)
+                .map(formPage => ({
+                  path: `/${formPage.slug}`,
+                  component: 'src/components/Pages/Form',
+                  getData: async () => ({
+                    formPage,
+                  }),
+                })),
               ),
           })),
       })),
@@ -424,6 +463,15 @@ const makeDepartmentPages = async (client, langCode) => {
     page.type = 'guide';
   }
 
+  const { allFormPages: allFormPages } = await client.request(
+    allFormPagesQuery,
+  );
+  const formPages = cleanFormPages(allFormPages);
+  for (var page of formPages) {
+    if (!page.department) continue;
+    page.type = 'form';
+  }
+
   const data = departments
     .map(department => ({
       path: `/${department.slug}`,
@@ -478,6 +526,19 @@ const makeDepartmentPages = async (client, langCode) => {
                 guidePage,
               }),
             })),
+        )
+        .concat(
+          formPages
+          .filter(
+            p => p.department != null && p.department.id == department.id,
+          )
+          .map(formPage => ({
+            path: `/${formPage.slug}`,
+            component: 'src/components/Pages/Form',
+            getData: async () => ({
+              formPage,
+            }),
+          })),
         ),
     }))
     .concat([
