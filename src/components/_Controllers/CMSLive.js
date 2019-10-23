@@ -8,7 +8,6 @@ import { logPageView } from 'js/helpers/googleAnalytics';
 const CMSLive = ({ intl }) => {
   ReactGA.initialize(process.env.GOOGLE_ANALYTICS, { titleCase: false });
   logPageView();
-  debugger;
   return <Routes />;
 };
 
