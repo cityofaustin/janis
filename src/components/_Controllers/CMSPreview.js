@@ -11,6 +11,7 @@ import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
+import getFormPageRevisionQuery from 'js/queries/getFormPageRevisionQuery';
 import {
   cleanServicesForPreview,
   cleanInformationForPreview,
@@ -18,6 +19,7 @@ import {
   cleanDepartments,
   cleanTopicCollections,
   cleanOfficialDocumentPagesForPreview,
+  cleanFormPagesForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -25,6 +27,7 @@ import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
 import OfficialDocumentList from 'components/Pages/OfficialDocumentList';
+import FormPage from 'components/Pages/Form';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -46,6 +49,7 @@ class CMSPreview extends Component {
         params: { revision_id, page_type },
       },
     } = this.props;
+    console.log("~~~ what is page_type?", page_type)
     // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
     const { CMS_API } = queryString.parse(this.props.location.search)
 
@@ -81,6 +85,11 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'form':
+        req = client.request(getFormPageRevisionQuery, {
+          id: revision_id,
+        });
+        break;
     }
     req.then(data => {
       let page;
@@ -103,6 +112,10 @@ class CMSPreview extends Component {
           break;
         case 'official_document':
           page = data.pageRevision.asOfficialDocumentPage;
+          break;
+        case 'form':
+          page = data.pageRevision.asFormPage;
+          break;
       }
 
       this.setState({
@@ -124,6 +137,9 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { data } = this.state;
+
+    console.log("~~~nay daya?", data)
+    console.log("~~~~ form type?", page_type)
     if (!this.state.data) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
@@ -181,6 +197,12 @@ class CMSPreview extends Component {
                 cleanOfficialDocumentPagesForPreview(data)[0]
               }
             />
+          )}
+        />
+        <Route
+          path="/form"
+          render={props => (
+            <FormPage formPage={cleanFormPagesForPreview(data)} />
           )}
         />
       </Switch>

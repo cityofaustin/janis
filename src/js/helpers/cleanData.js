@@ -573,3 +573,23 @@ export const cleanFormPages = allFormPages => {
   if (!allFormPages || !allFormPages.edges) return null;
   return cleanLinks(allFormPages, 'form');
 }
+
+// Let's just do this for now, we'll probably need to make some changes
+// when we move to rs7 anyways
+export const cleanFormPagesForPreview = allFormPages => {
+  if (!allFormPages || !allFormPages.edges) return null;
+  const forms = allFormPages.edges.map(e => e.node);
+  let form = forms[0];
+
+  form.topic = {
+    slug: 'sample-text',
+    title: 'Sample Text',
+    topiccollection: {
+      topics: [],
+    },
+  };
+  form.theme = {};
+  form.contacts = cleanContacts(form.contacts);
+
+  return form;
+};
