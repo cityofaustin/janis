@@ -209,22 +209,23 @@ export const cleanGuideForPreview = allGuidePages => {
   const guides = allGuidePages.edges.map(e => e.node);
   let guide = guides[0];
 
-  guide.contextualNavData = {
-    relatedTo: [],
-    offeredBy: [],
-  };
+  guide.contextualNavData = getContextualNavForPreview(guide);
 
-  guide.contextualNavData.parent = getTopicForContextualNavPreview(guide);
   guide.theme = {};
 
   return guide;
 };
 
-const getTopicForContextualNavPreview = page => {
+const getContextualNavForPreview = page => {
+  let contextualNavData = {
+    relatedTo: [],
+    offeredBy: [],
+  };
+
   // If we don't have a topic, return a fake
   // topic describing that
   if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
-    return {
+    contextualNavData.parent = {
       url: 'no-topics',
       title: 'No topics selected',
       topiccollection: {
@@ -235,13 +236,15 @@ const getTopicForContextualNavPreview = page => {
 
   // If we have topics,
   // get info from the first one
-  return {
+  contextualNavData.parent = {
     url: page.topics.edges[0].node.topic.slug,
     title: page.topics.edges[0].node.topic.title,
     topiccollection: {
       topics: [],
     },
   };
+
+  return contextualNavData;
 };
 
 export const cleanDepartmentDirectors = directors => {
@@ -503,13 +506,11 @@ export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => 
       officialDocumentPage.url = `/official_document/${
         officialDocumentPage.slug
       }`;
-      officialDocumentPage.topic = {
-        slug: 'sample-topic',
-        title: 'Sample Topic',
-        topiccollection: {
-          topics: [],
-        },
-      };
+
+      officialDocumentPage.contextualNavData = getContextualNavForPreview(
+        officialDocumentPage,
+      );
+
       officialDocumentPage.theme = {};
       return officialDocumentPage;
     },
