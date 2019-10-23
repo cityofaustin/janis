@@ -138,8 +138,8 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
       title: page.title,
-      url: `/${topic.topiccollection.theme.slug}/${
-        topic.topiccollection.slug
+      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+        allTopicCollections.edges[0].node.slug
       }/${topic.slug}/${page.slug}`,
     }));
 
