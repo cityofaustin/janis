@@ -388,17 +388,6 @@ export const cleanTopicCollections = allTopicCollections => {
   return cleanedTopicCollections;
 };
 
-export const cleanThemes = allThemes => {
-  if (!allThemes || !allThemes.edges) return null;
-
-  let cleanedThemes = cleanLinks(allThemes, 'theme');
-  cleanedThemes.map(theme => {
-    theme.topics = cleanTopics(theme.topics);
-  });
-
-  return cleanedThemes;
-};
-
 export const cleanNavigation = (navigation, lang) => {
   const { allThemes } = navigation;
 

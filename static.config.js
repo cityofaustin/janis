@@ -23,7 +23,6 @@ import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepa
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 
 import {
-  cleanThemes,
   cleanNavigation,
   cleanContacts,
   cleanLinks,
