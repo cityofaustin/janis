@@ -14,8 +14,6 @@ const TopicCard = ({ topic, index, intl }) => {
     topic.topiccollection.slug
   }/${topic.slug}`;
 
-  debugger;
-
   return (
     !!tiles && (
       <div key={index} className="coa-TopicCollectionCard">
