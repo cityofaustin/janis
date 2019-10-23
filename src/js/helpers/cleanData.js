@@ -180,8 +180,8 @@ export const cleanServicesForPreview = allServices => {
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
 
-  service.topic = getTopicForContextualNavPreview(service);
-  service.theme = {};
+  service.contextualNavData = getContextualNavForPreview(service);
+
   service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
 
@@ -232,17 +232,17 @@ const getContextualNavForPreview = page => {
         topics: [],
       },
     };
+  } else {
+    // If we have topics,
+    // get info from the first one
+    contextualNavData.parent = {
+      url: page.topics.edges[0].node.topic.slug,
+      title: page.topics.edges[0].node.topic.title,
+      topiccollection: {
+        topics: [],
+      },
+    };
   }
-
-  // If we have topics,
-  // get info from the first one
-  contextualNavData.parent = {
-    url: page.topics.edges[0].node.topic.slug,
-    title: page.topics.edges[0].node.topic.title,
-    topiccollection: {
-      topics: [],
-    },
-  };
 
   return contextualNavData;
 };
