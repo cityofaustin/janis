@@ -377,6 +377,17 @@ export const cleanTopics = allTopics => {
   return cleanedTopics;
 };
 
+export const cleanTopicCollections = allTopicCollections => {
+  if (!allTopicCollections || !allTopicCollections.edges) return null;
+
+  let cleanedTopicCollections = cleanLinks(
+    allTopicCollections,
+    'topiccollection',
+  );
+
+  return cleanedTopicCollections;
+};
+
 export const cleanThemes = allThemes => {
   if (!allThemes || !allThemes.edges) return null;
 
