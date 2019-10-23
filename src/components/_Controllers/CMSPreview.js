@@ -138,8 +138,6 @@ class CMSPreview extends Component {
     } = this.props;
     const { data } = this.state;
 
-    console.log("~~~nay daya?", data)
-    console.log("~~~~ form type?", page_type)
     if (!this.state.data) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
