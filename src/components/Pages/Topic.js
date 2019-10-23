@@ -13,9 +13,8 @@ import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Topic = ({
-  topic,
   topic: {
-    text: title,
+    title,
     description,
     topLinks,
     otherLinks,
@@ -26,7 +25,7 @@ const Topic = ({
 }) => (
   <Fragment>
     <Head>
-      <title>{topic.title}</title>
+      <title>{title}</title>
     </Head>
 
     <ContextualNav
@@ -35,7 +34,7 @@ const Topic = ({
       offeredBy={[]}
     />
     <PageHeader contentType={'topic'} description={description}>
-      {topic.title}
+      {title}
     </PageHeader>
     <div className="wrapper container-fluid">
       <div className="row">
@@ -55,7 +54,7 @@ const Topic = ({
         </div>
       </div>
     </div>
-    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+    <RelatedToMobile relatedTo={contextualNavData.relatedTo} offeredBy={[]} />
   </Fragment>
 );
 
