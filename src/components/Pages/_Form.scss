@@ -1,0 +1,12 @@
+#coa-FormPage__embedded-form-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.coa-FormPage__embedded-form {
+  flex-grow: 1;
+  height: 2505px; //TODO: hardcoded for now
+  width: 100%;
+}

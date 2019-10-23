@@ -4,7 +4,7 @@ const formPageFragment = `
     title
     slug
     description
-    scriptTag
+    formUrl
     topics {
       edges {
         node {
