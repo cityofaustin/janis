@@ -11,6 +11,8 @@ const OfficialDocument = ({ document: { id, date, title, authoringOffice, summar
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
     null
 
+  moment.locale(intl.locale);
+  
   return (
     <div className="coa-OfficialDocumentPage__container">
       <div className="coa-OfficialDocumentPage__date">
