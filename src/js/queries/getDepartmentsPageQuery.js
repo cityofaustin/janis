@@ -1,6 +1,6 @@
 const getDepartmentsPageQuery = `
   query getDepartmentsPageQuery {
-    allDepartmentPages {
+    allDepartmentPages(live:true) {
       edges {
         node {
           id
