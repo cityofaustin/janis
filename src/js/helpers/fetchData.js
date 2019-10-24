@@ -11,18 +11,16 @@ export const createGraphQLClientsByLang = (lang, CMS_API) => {
 
 export const postFeedback = data => {
   const { title, description } = data;
-  // todo: make sure this also handles when in staging
-  //const repository = (process.env.NODE_ENV === 'development') ? 'alpha-staging-feedback
-  // : 'alpha-public-feedback';
+  const repository = (process.env.DEPLOYMENT_MODE === 'PRODUCTION') ? 'alpha-public-feedback'
+   : 'alpha-staging-feedback';
 
   return axios
     .create({
       headers: { 'Content-Type': 'application/json' },
     })
-    .post(`${process.env.FEEDBACK_API}`, {
+    .post('https://coa-test-form-api.herokuapp.com/process/', {
       destination: 'githubIssue',
-      // repository: repository,
-      repository: 'alpha-public-feedback',
+      repository: repository,
       title: title,
       description: description,
     });
