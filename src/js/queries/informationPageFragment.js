@@ -45,7 +45,6 @@ const informationPageFragment = `
       }
     }
     description
-    options
     additionalContent
     contacts {
       edges {

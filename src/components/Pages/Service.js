@@ -25,7 +25,6 @@ const Service = ({
     department,
     theme,
     steps,
-    dynamicContent,
     additionalContent,
     contacts,
     related,
@@ -70,11 +69,6 @@ const Service = ({
                   )
                 ) : null}
 
-                {!!dynamicContent &&
-                  dynamicContent.map(content => (
-                    <ApplicationBlock key={content.id} content={content} />
-                  ))}
-
                 {additionalContent && (
                   <HtmlFromAdmin
                     title={intl.formatMessage(i18n2.whatElse)}
@@ -82,9 +76,8 @@ const Service = ({
                   />
                 )}
                 <div className="coa-Page__contacts-mobile">
-                  {!!contacts && !!contacts.length && (
-                    <ContactDetails contacts={contacts} />
-                  )}
+                  {!!contacts &&
+                    !!contacts.length && <ContactDetails contacts={contacts} />}
                 </div>
               </div>
             </div>
@@ -92,9 +85,8 @@ const Service = ({
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-ServicePage__contacts-desktop">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contacts={contacts} />
-            )}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contacts={contacts} />}
           </div>
         </div>
       </div>
