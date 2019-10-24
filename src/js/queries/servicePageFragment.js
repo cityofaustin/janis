@@ -45,7 +45,6 @@ const servicePageFragment = `
       }
     }
     steps
-    dynamicContent
     additionalContent
     shortDescription
     contacts {

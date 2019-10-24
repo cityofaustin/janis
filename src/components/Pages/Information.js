@@ -27,7 +27,6 @@ const InformationPage = ({
     relatedDepartments,
     toplink,
     description,
-    options,
     additionalContent,
     image,
     contacts,
@@ -57,16 +56,12 @@ const InformationPage = ({
           <div className="wrapper container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-8">
-                {options.map((option, index) => (
-                  <HtmlFromAdmin title={''} content={option.value} />
-                ))}
                 {additionalContent && (
                   <HtmlFromAdmin title={' '} content={additionalContent} />
                 )}
                 <div className="coa-Page__contacts-mobile">
-                  {!!contacts && !!contacts.length && (
-                    <ContactDetails contacts={contacts} />
-                  )}
+                  {!!contacts &&
+                    !!contacts.length && <ContactDetails contacts={contacts} />}
                 </div>
               </div>
             </div>
@@ -74,9 +69,8 @@ const InformationPage = ({
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-ServicePage__contacts-desktop">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contacts={contacts} />
-            )}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contacts={contacts} />}
           </div>
         </div>
       </div>
