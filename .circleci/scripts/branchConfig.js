@@ -27,6 +27,9 @@ const branchOverrides = {
   "2997-dept-links": {
     CMS_API: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
   },
+  "3202-form": {
+    CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
+  }
 }
 
 module.exports = {
