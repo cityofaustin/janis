@@ -1,8 +1,7 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
+import IframeResizer from 'iframe-resizer-react'
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
@@ -29,6 +28,8 @@ function FormPage({
   },
   intl,
 }) {
+  const iframeRef = useRef(null);
+
   return (
     <div>
       <Head>
@@ -50,15 +51,14 @@ function FormPage({
         </PageHeader>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
-            <div id="coa-FormPage__embedded-form-container">
-              <iframe
-                className="coa-FormPage__embedded-form"
+            {formUrl && (
+              <IframeResizer
+                forwardRef={iframeRef}
                 src={formUrl}
-                title={title}
-                frameborder="0"
-              >
-              </iframe>
-            </div>
+                className="coa-FormPage__IframeResizer-default"
+                frameBorder="0"
+              />
+            )}
           </div>
           <div className="coa-Page__side-content">
           </div>

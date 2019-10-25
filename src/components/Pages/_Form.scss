@@ -1,13 +1,5 @@
-#coa-FormPage__embedded-form-container {
-  position: relative;
-  overflow: hidden;
-  padding-top: 56.25%;
-}
-
-.coa-FormPage__embedded-form {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+// Recommended styling from the docs
+.coa-FormPage__IframeResizer-default {
+  width: 1px;
+  min-width: 100%;
 }
