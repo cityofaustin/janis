@@ -49,7 +49,7 @@ class CMSPreview extends Component {
         params: { revision_id, page_type },
       },
     } = this.props;
-    console.log("~~~ what is page_type?", page_type)
+
     // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
     const { CMS_API } = queryString.parse(this.props.location.search)
 
