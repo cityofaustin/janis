@@ -25,6 +25,7 @@ function FormPage({
     description,
     formUrl,
     coaGlobal,
+    contacts,
   },
   intl,
 }) {
@@ -61,6 +62,11 @@ function FormPage({
             )}
           </div>
           <div className="coa-Page__side-content">
+            <div className="coa-ServicePage__contacts-desktop">
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contact={contacts[0]} />
+              )}
+            </div>
           </div>
         </div>
         {!coaGlobal && (
