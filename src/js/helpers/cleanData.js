@@ -184,9 +184,14 @@ export const cleanServices = allServices => {
     //TODO: mapblock data should include contact data when sent via joplin
     const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
     if (tempkey)
-      service.dynamicContent[tempkey].value['contact'] = service.contacts.length
-        ? service.contacts[0]
-        : null;
+      try {
+        service.dynamicContent[tempkey].value['contact'] = service.contacts
+          .length
+          ? service.contacts[0]
+          : null;
+      } catch (e) {
+        console.log('error with dynamicContent');
+      }
   });
   return cleanedServices;
 };

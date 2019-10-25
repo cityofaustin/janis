@@ -22,7 +22,6 @@
 //headings
 @mixin heading1() {
   font-size: $coa-font-size-medium;
-  font-weight: $coa-font-medium;
   line-height: $coa-line-height-medium;
   // margin-bottom: $coa-spacing-medium; Removing the bottom margin here centers the h1 on service pages
   // margin-top: $coa-spacing-medium;
