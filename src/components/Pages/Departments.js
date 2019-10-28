@@ -10,23 +10,16 @@ import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
-const Departments = ({ departments, intl }) => {
-  const departmentLinks = departments.map(d => ({
-    url: `/${d.slug}`,
-    title: d.title,
-  }));
-
-  return (
-    <div>
-      <Head>
-        <title>Departments</title>
-      </Head>
-      <PageHeader>{intl.formatMessage(i18n2.departments)}</PageHeader>
-      <div className="wrapper container-fluid">
-        <TileGroup tiles={departmentLinks} />
-      </div>
+const Departments = ({ departments, intl }) => (
+  <div>
+    <Head>
+      <title>Departments</title>
+    </Head>
+    <PageHeader>{intl.formatMessage(i18n2.departments)}</PageHeader>
+    <div className="wrapper container-fluid">
+      <TileGroup tiles={departments} />
     </div>
-  );
-};
+  </div>
+);
 
 export default withRouteData(injectIntl(Departments));

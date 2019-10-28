@@ -5,6 +5,7 @@ const informationPageFragment = `
     id
     title
     slug
+    coaGlobal
     relatedDepartments {
       edges {
         node {
@@ -19,7 +20,6 @@ const informationPageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
