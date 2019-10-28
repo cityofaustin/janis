@@ -1,8 +1,13 @@
 import React, { useRef } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
+/**
+  In order for IframeResizer to work, you must inject iframeResizer.contentWindow.min.js
+  into the source html of page containing your iFrame.
+  On Framestack, this is done by modifying the html in the "Advanced Code Editor" of your custom template.
+  See: https://github.com/davidjbradshaw/iframe-resizer
+**/
 import IframeResizer from 'iframe-resizer-react'
-
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
