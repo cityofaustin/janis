@@ -17,7 +17,7 @@
 
 // Don't overwrite defaultValues.
 const defaultValues = {
-  DEPLOYMENT_MODE: 'LOCAL', // branches on netlify will never be production nor staging
+  DEPLOYMENT_MODE: 'REVIEW', // branches on netlify are 'REVIEW'
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
   CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
