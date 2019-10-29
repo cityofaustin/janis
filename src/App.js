@@ -40,14 +40,14 @@ const App = ({ navigation, threeoneone }) => {
         <Route
           path={`${LANG_URL_REGEX}:path*`}
           render={props => (
-            <Suspense fallback={<div>LOAD</div>}>
-              <I18nController
-                lang={props.match.params.lang}
-                path={props.match.params.path}
-              >
+            <I18nController
+              lang={props.match.params.lang}
+              path={props.match.params.path}
+            >
+              <Suspense fallback={<div>LOAD</div>}>
                 <AppView path={props.match.params.path || ''} />
-              </I18nController>
-            </Suspense>
+              </Suspense>
+            </I18nController>
           )}
         />
       </div>
