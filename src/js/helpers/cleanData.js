@@ -195,7 +195,7 @@ export const cleanInformationForPreview = allInformationPages => {
   const infos = allInformationPages.edges.map(e => e.node);
   let info = infos[0];
 
-  info.topic = getTopicForContextualNavPreview(info);
+  info.contextualNavData = getContextualNavForPreview(info);
   info.theme = {};
 
   info.text = info.title;
