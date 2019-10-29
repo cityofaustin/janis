@@ -31,7 +31,7 @@
       display: flex;
       flex-wrap: wrap;
       margin-left: 0;
-      margin-bottom: $coa-spacing-large;
+      margin-bottom: 0;
       padding-bottom: $coa-spacing-large;
       border-bottom: 1px solid $coa-color-grey;
 
@@ -46,7 +46,7 @@
         line-height: $coa-line-height-medium + 0.2;
         text-align: center;
         margin-right: 100%;
-        margin-bottom: $coa-spacing-md-small;
+        margin-bottom: 0;
 
         @include media($coa-medium-screen) {
           margin-right: $coa-spacing-large;
