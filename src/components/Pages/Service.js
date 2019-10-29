@@ -19,11 +19,8 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 const Service = ({
   service: {
     image,
-    text: title,
+    title,
     slug,
-    topic,
-    department,
-    theme,
     steps,
     additionalContent,
     contacts,
@@ -31,6 +28,7 @@ const Service = ({
     shortDescription,
     relatedDepartments,
     coaGlobal,
+    contextualNavData,
   },
   intl,
 }) => (
@@ -42,12 +40,9 @@ const Service = ({
     <div>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
-          coaGlobal={coaGlobal}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       <PageHeader contentType={'service'} description={shortDescription}>
@@ -90,18 +85,9 @@ const Service = ({
           </div>
         </div>
       </div>
-      {/*}
-      <TileGroup
-        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-        tiles={related}
-        tag={intl.formatMessage(i18n3.service)}
-      />
-      */}
       <RelatedToMobile
-        topic={topic}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
+        relatedTo={contextualNavData.relatedTo}
+        offeredBy={contextualNavData.offeredBy}
       />
     </div>
   </div>
