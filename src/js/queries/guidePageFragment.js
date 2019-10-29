@@ -1,3 +1,5 @@
+import phoneFragment from './phoneFragment';
+
 const guidePageFragment = `
   fragment guidePageInfo on GuidePageNode {
     id
@@ -10,15 +12,7 @@ const guidePageFragment = `
           contact {
             name
             email
-            phoneNumber {
-              edges {
-                node {
-                  id
-                  phoneDescription
-                  phoneNumber
-                }
-              }
-            }
+            ${phoneFragment}
             socialMedia
             hours {
               edges {
@@ -60,7 +54,6 @@ const guidePageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id
             slug
@@ -97,7 +90,6 @@ const guidePageFragment = `
           topics {
             edges {
               node {
-                toplink
                 topic {
                   id
                   slug
@@ -143,7 +135,6 @@ const guidePageFragment = `
           topics {
             edges {
               node {
-                toplink
                 topic {
                   id
                   slug

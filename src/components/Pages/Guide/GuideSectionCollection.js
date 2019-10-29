@@ -7,30 +7,6 @@ import { hyphenate } from './helpers';
 
 import { guides as i18n } from 'js/i18n/definitions';
 
-function GetUrlFromTopicsOrDepartments({ topics, departments, slug }) {
-  // Just use the first topic if we've got one
-  if (topics.length) {
-    const topic = topics[0].node.topic;
-    const topicCollection =
-      topic.topiccollections.edges[0].node.topiccollection;
-
-    return `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-      topic.slug
-    }/${slug}/`;
-  }
-
-  // Fine, then I guess just use the first department if we've got one
-  if (departments.length) {
-    const department = departments[0].node.relatedDepartment;
-
-    return `/${department.slug}/${slug}/`;
-  }
-
-  // This should make it so broken links don't break the build,
-  // and instead just keep us on the guide page
-  return '';
-}
-
 function GuideSection({
   page,
   pageNumber,
@@ -38,15 +14,13 @@ function GuideSection({
   sectionHeading,
   intl,
 }) {
+  const url = page.url;
   const pageData = page.informationPage || page.servicePage;
   const title = pageData.title;
   const description = page.informationPage
     ? pageData.description
     : pageData.shortDescription;
   const additionalContent = pageData.additionalContent;
-  const topics = pageData.topics.edges;
-  const departments = pageData.relatedDepartments.edges;
-  const slug = pageData.slug;
 
   return (
     <div className="coa-GuideSection__container">
@@ -60,14 +34,7 @@ function GuideSection({
         <HtmlFromAdmin title={' '} content={additionalContent} />
       </div>
       <div className="coa-GuideSection__link">
-        <a
-          href={GetUrlFromTopicsOrDepartments({
-            topics,
-            departments,
-            slug,
-          })}
-          target="_blank"
-        >
+        <a href={url} target="_blank">
           {intl.formatMessage(i18n.pageLink)}
           <i className="material-icons">open_in_new</i>
         </a>
@@ -101,13 +68,15 @@ function GuideSectionCollection({
           isMobileOrTablet={isMobileOrTablet}
           resizeCount={resizeCount}
         >
-          <GuideSection
-            page={page}
-            pageNumber={index + 1}
-            numberOfPages={section.pages.length}
-            sectionHeading={section.heading}
-            intl={intl}
-          />
+          {(page.servicePage || page.informationPage) && (
+            <GuideSection
+              page={page}
+              pageNumber={index + 1}
+              numberOfPages={section.pages.length}
+              sectionHeading={section.heading}
+              intl={intl}
+            />
+          )}
         </GuideSectionWrapper>
       ))}
     </div>

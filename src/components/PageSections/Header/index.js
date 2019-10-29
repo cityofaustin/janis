@@ -20,7 +20,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      howYouKnowmenuIsOpen: false,
+      howYouKnowMenuIsOpen: false,
       topMenuActive: false,
     };
 
@@ -71,7 +71,7 @@ class Header extends Component {
     ) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       this.setState({
-        howYouKnowmenuIsOpen: false,
+        howYouKnowMenuIsOpen: false,
       });
     }
   }
@@ -123,16 +123,29 @@ class Header extends Component {
   };
 
   toggleFullSiteMenu = () => {
-    this.setState({
-      topMenuActive: !this.state.topMenuActive,
-    });
+    this.setState(prevState => ({
+      topMenuActive: !prevState.topMenuActive,
+    }));
   };
 
   toggleHowYouKnowMenu = e => {
-    this.setState({
-      howYouKnowmenuIsOpen: !this.state.howYouKnowmenuIsOpen,
-    });
-  };
+    this.setState(prevState => ({
+      howYouKnowMenuIsOpen: !prevState.howYouKnowMenuIsOpen,
+    }));
+  }
+
+  keyboardHowYouKnowMenu = e => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      this.setState(prevState => ({
+        howYouKnowMenuIsOpen: !prevState.howYouKnowMenuIsOpen,
+      }));
+    }
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      this.setState({howYouKnowMenuIsOpen: false});
+    }
+  }
 
   render() {
     const { intl, navigation, path } = this.props;
@@ -141,14 +154,16 @@ class Header extends Component {
       <header
         className={classNames('coa-Header', {
           'coa-Header--menu-is-open': this.state.menuIsOpen,
+          'coa-Header--gov-is-open': this.state.howYouKnowMenuIsOpen,
         })}
         role="banner"
       >
         <div className="coa-Header--container">
-
           <GovSite
             toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-            menuIsOpen={this.state.howYouKnowmenuIsOpen}
+            keyboardHowYouKnowMenu={this.keyboardHowYouKnowMenu}
+            menuIsOpen={this.state.howYouKnowMenuIsOpen}
+            refnode={this.setHowYouKnowWrapperRef}
           />
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar path={path} />
@@ -196,11 +211,6 @@ class Header extends Component {
               </div>
             </div>
           </div>
-          <HowYouKnowMenu
-            refnode={this.setHowYouKnowWrapperRef}
-            open={this.state.howYouKnowmenuIsOpen}
-            toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-          />
 
           <FullSiteMenu
             // ref={node => this.node = node}
@@ -210,6 +220,7 @@ class Header extends Component {
             handleFullSiteMenuOpen={this.openFullSiteMenu}
             handleFullSiteMenuClose={this.closeFullSiteMenu}
             isTopMenuActive={this.state.topMenuActive}
+            toggleFullSiteMenu={this.toggleFullSiteMenu}
           />
         </div>
       </header>

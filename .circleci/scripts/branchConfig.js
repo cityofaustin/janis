@@ -17,6 +17,7 @@
 
 // Don't overwrite defaultValues.
 const defaultValues = {
+  DEPLOYMENT_MODE: 'REVIEW', // branches on netlify are 'REVIEW'
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
   CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
@@ -29,7 +30,10 @@ const branchOverrides = {
   },
   "3202-form": {
     CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
-  }
+  },
+  "3010-circleci": {
+    CMS_API: "https://joplin-pr-3173-publish.herokuapp.com/api/graphql"
+  },
 }
 
 module.exports = {

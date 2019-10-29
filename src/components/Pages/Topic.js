@@ -13,14 +13,13 @@ import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 const Topic = ({
-  topic,
   topic: {
-    theme,
-    text: title,
+    title,
     description,
     topLinks,
     otherLinks,
     topiccollection,
+    contextualNavData,
   },
   intl,
 }) => (
@@ -30,10 +29,9 @@ const Topic = ({
     </Head>
 
     <ContextualNav
-      topic={topic}
-      topiccollection={topiccollection}
-      theme={topiccollection.theme}
-      contentType={'topic'}
+      parent={contextualNavData.parent}
+      relatedTo={contextualNavData.relatedTo}
+      offeredBy={[]}
     />
     <PageHeader contentType={'topic'} description={description}>
       {title}
@@ -43,20 +41,20 @@ const Topic = ({
         <div className="col-xs-12 coa-TopicPage__tile-group">
           {!!topLinks.length && (
             <TileGroup
-              text={intl.formatMessage(i18n.topServices)}
+              title={intl.formatMessage(i18n.topServices)}
               tiles={topLinks}
             />
           )}
           {!!otherLinks.length && (
             <TileGroup
-              text={intl.formatMessage(i18n.allServices)}
+              title={intl.formatMessage(i18n.allServices)}
               tiles={otherLinks}
             />
           )}
         </div>
       </div>
     </div>
-    <RelatedToMobile topiccollection={topiccollection} topic={topic} />
+    <RelatedToMobile relatedTo={contextualNavData.relatedTo} offeredBy={[]} />
   </Fragment>
 );
 

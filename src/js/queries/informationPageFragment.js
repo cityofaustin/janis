@@ -1,8 +1,11 @@
+import phoneFragment from './phoneFragment';
+
 const informationPageFragment = `
   fragment informationPageInfo on InformationPageNode {
     id
     title
     slug
+    coaGlobal
     relatedDepartments {
       edges {
         node {
@@ -17,7 +20,6 @@ const informationPageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
@@ -43,7 +45,6 @@ const informationPageFragment = `
       }
     }
     description
-    options
     additionalContent
     contacts {
       edges {
@@ -51,6 +52,7 @@ const informationPageFragment = `
           contact {
             name
             email
+            ${phoneFragment}
             hours {
               edges {
                 node {

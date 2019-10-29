@@ -173,60 +173,6 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-export const cleanProcesses = allProcesses => {
-  if (!allProcesses || !allProcesses.edges) return null;
-
-  let cleanedProcesses = cleanLinks(allProcesses, '/processes');
-  cleanedProcesses.map(process => {
-    process.contacts = cleanContacts(process.contacts);
-    process.processSteps = cleanLinks(process.processSteps, process.url);
-
-    //build step details for overview page
-    process.stepDetailGroup = process.processSteps.map(
-      ({ title, sortOrder, linkTitle, url, overviewSteps }) => ({
-        title: `${sortOrder}. ${title}`,
-        link: { text: linkTitle, url: url },
-        content: overviewSteps,
-      }),
-    );
-
-    //build badges for process and processStep pages
-    process.badges = process.processSteps.map(
-      ({ shortTitle, url, sortOrder }) => ({
-        text: shortTitle,
-        url: url,
-        symbol: sortOrder,
-      }),
-    );
-    process.processSteps.map(processStep => {
-      processStep.processTitle = process.title;
-      processStep.processUrl = process.url;
-      processStep.badges = process.badges;
-      processStep.topic = process.topic;
-      processStep.contact = process.contact;
-    });
-  });
-  return cleanedProcesses;
-};
-
-export const cleanServices = allServices => {
-  if (!allServices || !allServices.edges) return null;
-
-  let cleanedServices = cleanLinks(allServices, '/services');
-  cleanedServices.map(service => {
-    service.contacts = cleanContacts(service.contacts);
-    service.related = cleanRelatedServiceLinks(service.related);
-
-    //TODO: mapblock data should include contact data when sent via joplin
-    const tempkey = findKey(service.dynamicContent, { type: 'map_block' });
-    if (tempkey)
-      service.dynamicContent[tempkey].value['contact'] = service.contacts.length
-        ? service.contacts[0]
-        : null;
-  });
-  return cleanedServices;
-};
-
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
 export const cleanServicesForPreview = allServices => {
@@ -234,28 +180,12 @@ export const cleanServicesForPreview = allServices => {
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
 
-  service.topic = {
-    slug: 'sample-text',
-    title: 'Sample Text',
-    topiccollection: {
-      topics: [],
-    },
-  };
-  service.theme = {};
+  service.contextualNavData = getContextualNavForPreview(service);
+
   service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
 
   return service;
-};
-
-export const cleanInformationPages = allInformationPages => {
-  if (!allInformationPages || !allInformationPages.edges) return null;
-
-  let cleanedInformationPages = cleanLinks(allInformationPages, '/information');
-  cleanedInformationPages.map(informationPage => {
-    informationPage.contacts = cleanContacts(informationPage.contacts);
-  });
-  return cleanedInformationPages;
 };
 
 // Let's just do this for now, we'll probably need to make some changes
@@ -265,18 +195,56 @@ export const cleanInformationForPreview = allInformationPages => {
   const infos = allInformationPages.edges.map(e => e.node);
   let info = infos[0];
 
-  info.topic = {
-    slug: 'sample-text',
-    title: 'Sample Text',
-    topiccollection: {
-      topics: [],
-    },
-  };
+  info.topic = getTopicForContextualNavPreview(info);
   info.theme = {};
+
   info.text = info.title;
   info.contacts = cleanContacts(info.contacts);
 
   return info;
+};
+
+export const cleanGuideForPreview = allGuidePages => {
+  if (!allGuidePages || !allGuidePages.edges) return null;
+  const guides = allGuidePages.edges.map(e => e.node);
+  let guide = guides[0];
+
+  guide.contextualNavData = getContextualNavForPreview(guide);
+
+  guide.theme = {};
+
+  return guide;
+};
+
+const getContextualNavForPreview = page => {
+  let contextualNavData = {
+    relatedTo: [],
+    offeredBy: [],
+  };
+
+  // If we don't have a topic, return a fake
+  // topic describing that
+  if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
+    contextualNavData.parent = {
+      url: 'no-topics',
+      title: 'No topics selected',
+      topiccollection: {
+        topics: [],
+      },
+    };
+  } else {
+    // If we have topics,
+    // get info from the first one
+    contextualNavData.parent = {
+      url: page.topics.edges[0].node.topic.slug,
+      title: page.topics.edges[0].node.topic.title,
+      topiccollection: {
+        topics: [],
+      },
+    };
+  }
+
+  return contextualNavData;
 };
 
 export const cleanDepartmentDirectors = directors => {
@@ -391,6 +359,11 @@ export const cleanTopicsForPreview = allTopics => {
 
   const cleanedTopics = allTopics.edges.map(edge => ({
     text: edge.node.title,
+    contextualNavData: {
+      relatedTo: [],
+      offeredBy: [],
+      parent: { title: 'Parent', url: '#' },
+    },
     ...edge.node,
   }));
 
@@ -413,17 +386,6 @@ export const cleanTopicCollections = allTopicCollections => {
   );
 
   return cleanedTopicCollections;
-};
-
-export const cleanThemes = allThemes => {
-  if (!allThemes || !allThemes.edges) return null;
-
-  let cleanedThemes = cleanLinks(allThemes, 'theme');
-  cleanedThemes.map(theme => {
-    theme.topics = cleanTopics(theme.topics);
-  });
-
-  return cleanedThemes;
 };
 
 export const cleanNavigation = (navigation, lang) => {
@@ -549,13 +511,11 @@ export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => 
       officialDocumentPage.url = `/official_document/${
         officialDocumentPage.slug
       }`;
-      officialDocumentPage.topic = {
-        slug: 'sample-topic',
-        title: 'Sample Topic',
-        topiccollection: {
-          topics: [],
-        },
-      };
+
+      officialDocumentPage.contextualNavData = getContextualNavForPreview(
+        officialDocumentPage,
+      );
+
       officialDocumentPage.theme = {};
       return officialDocumentPage;
     },

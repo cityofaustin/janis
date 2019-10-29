@@ -19,6 +19,7 @@ const OfficialDocumentList = ({
     relatedDepartments,
     officialDocuments,
     coaGlobal,
+    contextualNavData,
   },
   intl,
 }) => {
@@ -29,12 +30,9 @@ const OfficialDocumentList = ({
       </Head>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topics={topics}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       <div>

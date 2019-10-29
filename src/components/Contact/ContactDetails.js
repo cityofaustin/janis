@@ -20,33 +20,41 @@ import {
   phonePropTypes,
 } from './proptypes';
 
-const ContactDetails = ({
-  contact: { phoneNumber, email, location, hours, socialMedia },
-  intl,
-}) => (
+const ContactDetails = ({ contacts, intl }) => (
   <div className="coa-ContactDetails">
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
-    {/* We want to keep this component easy to read and streamlined, so we are
-      avoiding complicated functions in this return.
-      Consider breaking into another component and calling that here*/}
-    {email && <Email email={email} />}
-    {location && <Address location={location} />}
-    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
-    {hours && !!hours.length && <Hours hours={hours} />}
-    {/*Each social media link is it's own contact item with it's own icon,
-    so it makes sense to have the map here*/}
-    {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
+    {contacts.map(c => (
+      <ContactDetailsEntry contact={c} />
+    ))}
   </div>
 );
 
-ContactDetails.propTypes = {
+const ContactDetailsEntry = ({
+  contact: { name, phoneNumber, email, location, hours, socialMedia },
+}) => (
+  <React.Fragment>
+    {/* We want to keep this component easy to read and streamlined, so we are
+      avoiding complicated functions in this return.
+      Consider breaking into another component and calling that here*/}
+    <h3 className="coa-ContactDetails__name">{name}</h3>
+    {location && <Address location={location} />}
+    {hours && !!hours.length && <Hours hours={hours} />}
+    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
+    {email && <Email email={email} />}
+    {/*Each social media link is it's own contact item with it's own icon,
+    so it makes sense to have the map here*/}
+    {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
+  </React.Fragment>
+);
+
+ContactDetailsEntry.propTypes = {
   contact: PropTypes.shape({
     location: addressPropTypes,
     email: emailPropTypes,
     hours: hoursPropTypes,
-    phone: phonePropTypes,
+    phoneNumber: phonePropTypes,
   }).isRequired,
 };
 

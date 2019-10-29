@@ -12,6 +12,8 @@ import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevision
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
 import getFormPageRevisionQuery from 'js/queries/getFormPageRevisionQuery';
+import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
+
 import {
   cleanServicesForPreview,
   cleanInformationForPreview,
@@ -20,6 +22,7 @@ import {
   cleanTopicCollections,
   cleanOfficialDocumentPagesForPreview,
   cleanFormPagesForPreview,
+  cleanGuideForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -28,6 +31,7 @@ import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
 import OfficialDocumentList from 'components/Pages/OfficialDocumentList';
 import FormPage from 'components/Pages/Form';
+import Guide from 'components/Pages/Guide';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -51,7 +55,7 @@ class CMSPreview extends Component {
     } = this.props;
 
     // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
-    const { CMS_API } = queryString.parse(this.props.location.search)
+    const { CMS_API } = queryString.parse(this.props.location.search);
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     //TODO: one endpoint for revisions data requests
@@ -90,6 +94,10 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         break;
+      case 'guide':
+        req = client.request(getGuidePageRevisionQuery, {
+          id: revision_id,
+        });
     }
     req.then(data => {
       let page;
@@ -116,6 +124,8 @@ class CMSPreview extends Component {
         case 'form':
           page = data.pageRevision.asFormPage;
           break;
+        case 'guide':
+          page = data.pageRevision.asGuidePage;
       }
 
       this.setState({
@@ -176,7 +186,17 @@ class CMSPreview extends Component {
           path="/topiccollection"
           render={props => {
             let tc = cleanTopicCollections(data)[0];
-            tc.topics = [{ title: 'Sample Text' }];
+            tc.topics = [
+              {
+                title: 'Sample Text',
+                topiccollection: {
+                  theme: {
+                    slug: 'sample',
+                  },
+                  slug: 'sample',
+                },
+              },
+            ];
 
             return <TopicCollection tc={tc} />;
           }}
@@ -199,9 +219,11 @@ class CMSPreview extends Component {
         />
         <Route
           path="/form"
-          render={props => (
-            <FormPage formPage={cleanFormPagesForPreview(data)} />
-          )}
+          render={props => <FormPage formPage={cleanFormPagesForPreview(data)} />}
+        />
+        <Route
+          path="/guide"
+          render={props => <Guide guidePage={cleanGuideForPreview(data)} />}
         />
       </Switch>
     );
