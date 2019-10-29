@@ -19,19 +19,16 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 const Service = ({
   service: {
     image,
-    text: title,
+    title,
     slug,
-    topic,
-    department,
-    theme,
     steps,
-    dynamicContent,
     additionalContent,
     contacts,
     related,
     shortDescription,
     relatedDepartments,
     coaGlobal,
+    contextualNavData,
   },
   intl,
 }) => (
@@ -43,12 +40,9 @@ const Service = ({
     <div>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
-          coaGlobal={coaGlobal}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       <PageHeader contentType={'service'} description={shortDescription}>
@@ -70,11 +64,6 @@ const Service = ({
                   )
                 ) : null}
 
-                {!!dynamicContent &&
-                  dynamicContent.map(content => (
-                    <ApplicationBlock key={content.id} content={content} />
-                  ))}
-
                 {additionalContent && (
                   <HtmlFromAdmin
                     title={intl.formatMessage(i18n2.whatElse)}
@@ -82,9 +71,8 @@ const Service = ({
                   />
                 )}
                 <div className="coa-Page__contacts-mobile">
-                  {!!contacts && !!contacts.length && (
-                    <ContactDetails contacts={contacts} />
-                  )}
+                  {!!contacts &&
+                    !!contacts.length && <ContactDetails contacts={contacts} />}
                 </div>
               </div>
             </div>
@@ -92,24 +80,14 @@ const Service = ({
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-ServicePage__contacts-desktop">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contacts={contacts} />
-            )}
+            {!!contacts &&
+              !!contacts.length && <ContactDetails contacts={contacts} />}
           </div>
         </div>
       </div>
-      {/*}
-      <TileGroup
-        text={intl.formatMessage(i18n3.checkOutRelatedServices)}
-        tiles={related}
-        tag={intl.formatMessage(i18n3.service)}
-      />
-      */}
       <RelatedToMobile
-        topic={topic}
-        topiccollection={topic && topic.topiccollection}
-        theme={theme}
-        department={department}
+        relatedTo={contextualNavData.relatedTo}
+        offeredBy={contextualNavData.offeredBy}
       />
     </div>
   </div>

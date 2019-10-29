@@ -8,7 +8,6 @@ const servicePageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
@@ -46,7 +45,6 @@ const servicePageFragment = `
       }
     }
     steps
-    dynamicContent
     additionalContent
     shortDescription
     contacts {

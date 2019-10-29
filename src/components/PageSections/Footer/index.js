@@ -7,14 +7,12 @@ import { misc as i18n } from 'js/i18n/definitions';
 import FormFeedback from 'components/FormFeedback';
 import ExternalLink from 'components/ExternalLink';
 import WorkInProgress from 'components/WorkInProgress';
+import UserFeedback from 'components/UserFeedback';
 
 import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
 import citySealImg from 'images/coa_seal_color.png';
-
-import ThreeOneOne from 'components/PageSections/ThreeOneOne';
-import { threeoneonePropTypes } from 'components/PageSections/ThreeOneOne/proptypes';
 
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
@@ -29,8 +27,9 @@ import {
 
 import { Link } from 'react-static';
 
-const Footer = ({ threeoneone, intl }) => (
+const Footer = ({ intl }) => (
   <footer>
+    <UserFeedback />
     <div className="coa-Footer">
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">
@@ -73,10 +72,6 @@ const Footer = ({ threeoneone, intl }) => (
     </div>
   </footer>
 );
-
-Footer.propTypes = {
-  threeoneone: threeoneonePropTypes.isRequired,
-};
 
 export default injectIntl(Footer);
 

@@ -50,7 +50,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
     // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
-    const { CMS_API } = queryString.parse(this.props.location.search)
+    const { CMS_API } = queryString.parse(this.props.location.search);
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     //TODO: one endpoint for revisions data requests
@@ -172,7 +172,17 @@ class CMSPreview extends Component {
           path="/topiccollection"
           render={props => {
             let tc = cleanTopicCollections(data)[0];
-            tc.topics = [{ title: 'Sample Text' }];
+            tc.topics = [
+              {
+                title: 'Sample Text',
+                topiccollection: {
+                  theme: {
+                    slug: 'sample',
+                  },
+                  slug: 'sample',
+                },
+              },
+            ];
 
             return <TopicCollection tc={tc} />;
           }}

@@ -1,68 +1,57 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { Link } from 'react-static';
+import { misc as i18n } from 'js/i18n/definitions';
 
-const RelatedToMobile = ({ topiccollection, topic, department }) => {
-  // Making it easier on us for when we add support for multiple departments
-  const departments = !!department ? [department] : null;
-
-  // Set the related links, taken from ContextualNav
-  const related =
-    topiccollection &&
-    topiccollection.topics &&
-    topiccollection.topics
-      .filter(t => t.id !== topic.id)
-      .map(t => ({
-        slug: `/${topiccollection.theme.slug}/${topiccollection.slug}/${
-          t.slug
-        }`,
-        title: t.title,
-      }));
-
-  const weHaveTopics = !!related && related.length > 0;
-  const weHaveDepts = !!departments && departments.length > 0;
-
-  return (
-    <div className="coa-RelatedToMobile">
-      <div className="wrapper container-fluid">
-        {weHaveTopics && (
-          <div className="col-xs-12">
-            <h2 className="coa-RelatedToMobile__title">Related to</h2>
-            <ul>
-              {related.map((topic, index) => (
-                <li key={index} className="coa-RelatedToMobile__item">
-                  <a href={topic.slug} className="coa-RelatedToMobile__link">
-                    {topic.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {weHaveDepts && (
-          <div className="col-xs-12">
-            <h2
-              className={
-                weHaveTopics && weHaveDepts
-                  ? 'coa-RelatedToMobile__second-title'
-                  : 'coa-RelatedToMobile__title'
-              }
-            >
-              Offered by
-            </h2>
-            <ul>
-              {departments.map((dept, index) => (
-                <li key={index} className="coa-RelatedToMobile__item">
-                  <a href={dept.slug} className="coa-RelatedToMobile__link">
-                    {dept.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
+  <div className="coa-RelatedToMobile">
+    <div className="wrapper container-fluid">
+      {!!relatedTo.length && (
+        <div className="col-xs-12">
+          <h2 className="coa-RelatedToMobile__title">
+            {intl.formatMessage(i18n.relatedTo)}
+          </h2>
+          <ul>
+            {relatedTo.map((relatedLinkData, index) => (
+              <li key={index} className="coa-RelatedToMobile__item">
+                <Link
+                  to={`/${intl.locale}${relatedLinkData.url}`}
+                  className="coa-RelatedToMobile__link"
+                >
+                  {relatedLinkData.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {!!offeredBy.length && (
+        <div className="col-xs-12">
+          <h2
+            className={
+              relatedTo.length && offeredBy.length
+                ? 'coa-RelatedToMobile__second-title'
+                : 'coa-RelatedToMobile__title'
+            }
+          >
+            {intl.formatMessage(i18n.offeredBy)}
+          </h2>
+          <ul>
+            {offeredBy.map((department, index) => (
+              <li key={index} className="coa-RelatedToMobile__item">
+                <Link
+                  to={`/${intl.locale}${department.url}`}
+                  className="coa-RelatedToMobile__link"
+                >
+                  {department.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 export default injectIntl(RelatedToMobile);

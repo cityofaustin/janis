@@ -12,7 +12,7 @@ import Footer from 'components/PageSections/Footer';
 import 'css/coa.css';
 
 const AppView = withSiteData(
-  injectIntl(({ path, navigation, threeoneone, intl }) => (
+  injectIntl(({ path, navigation, intl }) => (
     <div>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
@@ -25,7 +25,7 @@ const AppView = withSiteData(
           <Route component={CMSLive} />
         </Switch>
       </main>
-      <Footer threeoneone={threeoneone[intl.locale]} />
+      <Footer />
     </div>
   )),
 );
