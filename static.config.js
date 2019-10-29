@@ -478,7 +478,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'department') {
     return {
       path: url,
-      component: 'src/components/Pages/Department',
+      template: 'src/components/Pages/Department',
       getData: () => getDepartmentPageData(id, client),
     };
   }
@@ -489,7 +489,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'topic collection') {
     return {
       path: url,
-      component: 'src/components/Pages/TopicCollection',
+      template: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(id, client),
     };
   }
@@ -498,7 +498,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'topic' && parent_topic_collection) {
     return {
       path: url,
-      component: 'src/components/Pages/Topic',
+      template: 'src/components/Pages/Topic',
       getData: () => getTopicPageData(id, parent_topic_collection, client),
     };
   }
@@ -507,7 +507,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'service page') {
     return {
       path: url,
-      component: 'src/components/Pages/Service',
+      template: 'src/components/Pages/Service',
       getData: () =>
         getServicePageData(
           id,
@@ -523,7 +523,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'information page') {
     return {
       path: url,
-      component: 'src/components/Pages/Information',
+      template: 'src/components/Pages/Information',
       getData: () =>
         getInformationPageData(
           id,
@@ -539,7 +539,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'guide page') {
     return {
       path: url,
-      component: 'src/components/Pages/Guide',
+      template: 'src/components/Pages/Guide',
       getData: () =>
         getGuidePageData(
           id,
@@ -555,7 +555,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'official document page') {
     return {
       path: url,
-      component: 'src/components/Pages/OfficialDocumentList',
+      template: 'src/components/Pages/OfficialDocumentList',
       getData: () =>
         getOfficialDocumentPageData(
           id,
@@ -571,7 +571,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'departments') {
     return {
       path: url,
-      component: 'src/components/Pages/Departments',
+      template: 'src/components/Pages/Departments',
       getData: () => getDepartmentsPageData(client),
     };
   }
@@ -599,7 +599,7 @@ const makeAllPages = async langCode => {
 
   const data = {
     path: path,
-    component: 'src/components/Pages/Home',
+    template: 'src/components/Pages/Home',
     children: allPages,
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
@@ -675,11 +675,11 @@ export default {
     const routes = [
       {
         path: '/search',
-        component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+        template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
-        is404: true,
-        component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
+        path: '404',
+        template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
     ];
 
