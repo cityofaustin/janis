@@ -22,8 +22,10 @@
 .coa-Steps__list {
   & > ol {
     counter-reset: step-item;
-    margin-bottom: $coa-space-level4;
     list-style-type: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 
     & > li {
       align-items: flex-start;
