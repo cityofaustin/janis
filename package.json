@@ -76,7 +76,7 @@
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
     "build-local-ie": "bash ./scripts/build-local-ie.sh",
     "start-js": "react-static start",
-    "build-js": "react-static build --debug",
+    "build-js": "react-static build",
     "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
