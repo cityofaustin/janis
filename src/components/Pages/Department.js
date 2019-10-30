@@ -20,7 +20,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
-const Department = ({ intl }) => {
+const Department = ({ department, intl }) => {
   const {
     department: {
       title,
@@ -34,7 +34,9 @@ const Department = ({ intl }) => {
       topServices,
       relatedLinks,
     },
-  } = useRouteData();
+    // not the biggest fan of this logic but
+    // it gets previews working with hooks
+  } = department ? { department } : useRouteData();
 
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
