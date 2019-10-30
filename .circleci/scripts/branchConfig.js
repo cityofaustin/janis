@@ -26,7 +26,7 @@ const defaultValues = {
 // Add branch-specifc values here
 const branchOverrides = {
   '1650-react-static-7': {
-    CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/',
+    CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
   '3010-circleci': {
     CMS_API: 'https://joplin-pr-3173-publish.herokuapp.com/api/graphql',
