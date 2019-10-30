@@ -16,7 +16,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-const Service = ({ intl }) => {
+const Service = ({ service, intl }) => {
   const {
     service: {
       image,
@@ -31,7 +31,9 @@ const Service = ({ intl }) => {
       coaGlobal,
       contextualNavData,
     },
-  } = useRouteData();
+    // not the biggest fan of this logic but
+    // it gets previews working with hooks
+  } = service ? { service } : useRouteData();
 
   return (
     <div>

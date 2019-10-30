@@ -8,10 +8,12 @@ import PageHeader from 'components/PageHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import TopicCollectionCards from '../PageSections/TopicCollectionCards';
 
-const TopicCollection = ({ intl }) => {
+const TopicCollection = ({ tc, intl }) => {
   const {
     tc: { title, description, theme, topics, slug },
-  } = useRouteData();
+    // not the biggest fan of this logic but
+    // it gets previews working with hooks
+  } = tc ? { tc } : useRouteData();
 
   return (
     <div>

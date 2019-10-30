@@ -16,7 +16,7 @@ import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-const InformationPage = ({ intl }) => {
+const InformationPage = ({ informationPage, intl }) => {
   const {
     informationPage: {
       title,
@@ -34,7 +34,9 @@ const InformationPage = ({ intl }) => {
       coaGlobal,
       contextualNavData,
     },
-  } = useRouteData();
+    // not the biggest fan of this logic but
+    // it gets previews working with hooks
+  } = informationPage ? { informationPage } : useRouteData();
 
   return (
     <div>

@@ -12,7 +12,7 @@ import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-const Topic = ({ intl }) => {
+const Topic = ({ topic, intl }) => {
   const {
     topic: {
       title,
@@ -22,7 +22,9 @@ const Topic = ({ intl }) => {
       topiccollection,
       contextualNavData,
     },
-  } = useRouteData();
+    // not the biggest fan of this logic but
+    // it gets previews working with hooks
+  } = topic ? { topic } : useRouteData();
 
   return (
     <Fragment>
