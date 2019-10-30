@@ -12,8 +12,8 @@ import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
 
-const AppView = injectIntl(({ intl }) => {
-  const { path, navigation } = useSiteData();
+const AppView = injectIntl(({ intl, path }) => {
+  const { navigation } = useSiteData();
 
   return (
     <div>
