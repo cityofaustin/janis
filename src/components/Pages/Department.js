@@ -1,6 +1,6 @@
 import React from 'react';
 import { get } from 'lodash';
-import { withRouteData, Head } from 'react-static';
+import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
@@ -20,21 +20,22 @@ import TileGroup from 'components/Tiles/TileGroup';
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
-const Department = ({
-  department: {
-    title,
-    mission,
-    contacts,
-    image,
-    directors,
-    whatWeDo,
-    socialMedia,
-    jobListings,
-    topServices,
-    relatedLinks,
-  },
-  intl,
-}) => {
+const Department = ({ intl }) => {
+  const {
+    department: {
+      title,
+      mission,
+      contacts,
+      image,
+      directors,
+      whatWeDo,
+      socialMedia,
+      jobListings,
+      topServices,
+      relatedLinks,
+    },
+  } = useRouteData();
+
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
       <h2 className="coa-DepartmentPage__related-title">
@@ -143,4 +144,4 @@ const Department = ({
   );
 };
 
-export default withRouteData(injectIntl(Department));
+export default injectIntl(Department);
