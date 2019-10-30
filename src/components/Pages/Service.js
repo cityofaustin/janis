@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { withRouteData, Head } from 'react-static';
+import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
@@ -16,81 +16,86 @@ import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-const Service = ({
-  service: {
-    image,
-    title,
-    slug,
-    steps,
-    additionalContent,
-    contacts,
-    related,
-    shortDescription,
-    relatedDepartments,
-    coaGlobal,
-    contextualNavData,
-  },
-  intl,
-}) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-    </Head>
-    {image && <PageBanner image={image} />}
-    <div>
-      {!coaGlobal && (
-        <ContextualNav
-          parent={contextualNavData.parent}
-          relatedTo={contextualNavData.relatedTo}
-          offeredBy={contextualNavData.offeredBy}
-        />
-      )}
-      <PageHeader contentType={'service'} description={shortDescription}>
-        {title}
-      </PageHeader>
-      <div className="coa-Page__all-of-the-content">
-        <div className="coa-Page__main-content">
-          <div className="wrapper container-fluid">
-            <div className="row">
-              <div className="col-xs-12 col-md-10">
-                {steps && !!steps.length ? (
-                  //just 1 step? don't display steps in list (ul)
-                  steps.length === 1 ? (
-                    <Steps steps={steps} />
-                  ) : (
-                    <Fragment>
-                      <Steps steps={steps} />
-                    </Fragment>
-                  )
-                ) : null}
+const Service = ({ intl }) => {
+  const {
+    service: {
+      image,
+      title,
+      slug,
+      steps,
+      additionalContent,
+      contacts,
+      related,
+      shortDescription,
+      relatedDepartments,
+      coaGlobal,
+      contextualNavData,
+    },
+  } = useRouteData();
 
-                {additionalContent && (
-                  <HtmlFromAdmin
-                    title={intl.formatMessage(i18n2.whatElse)}
-                    content={additionalContent}
-                  />
-                )}
-                <div className="coa-Page__contacts-mobile">
-                  {!!contacts &&
-                    !!contacts.length && <ContactDetails contacts={contacts} />}
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      {image && <PageBanner image={image} />}
+      <div>
+        {!coaGlobal && (
+          <ContextualNav
+            parent={contextualNavData.parent}
+            relatedTo={contextualNavData.relatedTo}
+            offeredBy={contextualNavData.offeredBy}
+          />
+        )}
+        <PageHeader contentType={'service'} description={shortDescription}>
+          {title}
+        </PageHeader>
+        <div className="coa-Page__all-of-the-content">
+          <div className="coa-Page__main-content">
+            <div className="wrapper container-fluid">
+              <div className="row">
+                <div className="col-xs-12 col-md-10">
+                  {steps && !!steps.length ? (
+                    //just 1 step? don't display steps in list (ul)
+                    steps.length === 1 ? (
+                      <Steps steps={steps} />
+                    ) : (
+                      <Fragment>
+                        <Steps steps={steps} />
+                      </Fragment>
+                    )
+                  ) : null}
+
+                  {additionalContent && (
+                    <HtmlFromAdmin
+                      title={intl.formatMessage(i18n2.whatElse)}
+                      content={additionalContent}
+                    />
+                  )}
+                  <div className="coa-Page__contacts-mobile">
+                    {!!contacts && !!contacts.length && (
+                      <ContactDetails contacts={contacts} />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="coa-Page__side-content">
-          <div className="coa-ServicePage__contacts-desktop">
-            {!!contacts &&
-              !!contacts.length && <ContactDetails contacts={contacts} />}
+          <div className="coa-Page__side-content">
+            <div className="coa-ServicePage__contacts-desktop">
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contacts={contacts} />
+              )}
+            </div>
           </div>
         </div>
+        <RelatedToMobile
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
+        />
       </div>
-      <RelatedToMobile
-        relatedTo={contextualNavData.relatedTo}
-        offeredBy={contextualNavData.offeredBy}
-      />
     </div>
-  </div>
-);
+  );
+};
 
-export default withRouteData(injectIntl(Service));
+export default injectIntl(Service);
