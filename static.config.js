@@ -21,7 +21,6 @@ import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
-import getFormPageQuery from 'js/queries/getFormPageQuery';
 
 import {
   cleanNavigation,
@@ -35,7 +34,6 @@ const getAllTopicLinks = (
   allInformationPageTopics,
   allOfficialDocumentPageTopics,
   allGuidePageTopics,
-  allFormPageTopics,
 ) => {
   // I don't like this but we still need to do some logic here
   // to get all the pages
@@ -72,14 +70,6 @@ const getAllTopicLinks = (
     }
   }
 
-  if (allFormPageTopics && allFormPageTopics.edges) {
-    for (const edge of allFormPageTopics.edges) {
-      if (edge.node) {
-        allLinks.push(edge.node.page);
-      }
-    }
-  }
-
   return allLinks;
 };
 
@@ -92,7 +82,6 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allInformationPageTopics,
     allOfficialDocumentPageTopics,
     allServicePageTopics,
-    allFormPageTopics,
   } = await client.request(getTopicPageQuery, {
     id: id,
     tc_id: parent_topic_collection,
@@ -145,7 +134,6 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allInformationPageTopics,
     allOfficialDocumentPageTopics,
     allGuidePageTopics,
-    allFormPageTopics,
   )
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
@@ -385,31 +373,6 @@ const getGuidePageData = async (
   return { guidePage: guidePage };
 };
 
-const getFormPageData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  client,
-) => {
-  const { allFormPages } = await client.request(
-    getFormPageQuery,
-    { id: id },
-  );
-
-  let formPage = allFormPages.edges[0].node;
-
-  formPage.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    formPage.relatedDepartments,
-    client,
-  );
-
-  return { formPage: formPage };
-};
-
 const checkUrl = async url => {
   return await axios({
     method: 'HEAD',
@@ -515,7 +478,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'department') {
     return {
       path: url,
-      template: 'src/components/Pages/Department',
+      component: 'src/components/Pages/Department',
       getData: () => getDepartmentPageData(id, client),
     };
   }
@@ -526,7 +489,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'topic collection') {
     return {
       path: url,
-      template: 'src/components/Pages/TopicCollection',
+      component: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(id, client),
     };
   }
@@ -535,7 +498,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'topic' && parent_topic_collection) {
     return {
       path: url,
-      template: 'src/components/Pages/Topic',
+      component: 'src/components/Pages/Topic',
       getData: () => getTopicPageData(id, parent_topic_collection, client),
     };
   }
@@ -544,7 +507,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'service page') {
     return {
       path: url,
-      template: 'src/components/Pages/Service',
+      component: 'src/components/Pages/Service',
       getData: () =>
         getServicePageData(
           id,
@@ -560,7 +523,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'information page') {
     return {
       path: url,
-      template: 'src/components/Pages/Information',
+      component: 'src/components/Pages/Information',
       getData: () =>
         getInformationPageData(
           id,
@@ -576,7 +539,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'guide page') {
     return {
       path: url,
-      template: 'src/components/Pages/Guide',
+      component: 'src/components/Pages/Guide',
       getData: () =>
         getGuidePageData(
           id,
@@ -592,7 +555,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'official document page') {
     return {
       path: url,
-      template: 'src/components/Pages/OfficialDocumentList',
+      component: 'src/components/Pages/OfficialDocumentList',
       getData: () =>
         getOfficialDocumentPageData(
           id,
@@ -608,24 +571,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'departments') {
     return {
       path: url,
-      template: 'src/components/Pages/Departments',
+      component: 'src/components/Pages/Departments',
       getData: () => getDepartmentsPageData(client),
-    };
-  }
-
-  // If we're a form page
-  if (type === 'form page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Form',
-      getData: () =>
-        getFormPageData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-        ),
     };
   }
 };
@@ -652,7 +599,7 @@ const makeAllPages = async langCode => {
 
   const data = {
     path: path,
-    template: 'src/components/Pages/Home',
+    component: 'src/components/Pages/Home',
     children: allPages,
     getData: async () => {
       const { allServicePages } = await client.request(topServicesQuery);
@@ -728,11 +675,11 @@ export default {
     const routes = [
       {
         path: '/search',
-        template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+        component: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       },
       {
-        path: '404',
-        template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
+        is404: true,
+        component: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
     ];
 
@@ -755,5 +702,4 @@ export default {
     }
     return config;
   },
-  plugins: ['react-static-plugin-react-router'],
 };

@@ -1,6 +1,5 @@
-import React, { Component, Fragment, Suspense } from 'react';
-import { Root, Routes, useSiteData } from 'react-static';
-import { Route, Switch } from 'react-router';
+import React, { Component, Fragment } from 'react';
+import { Router, Route, Switch, withSiteData } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
 import CMSPreview from 'components/_Controllers/CMSPreview';
@@ -12,10 +11,8 @@ import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
 
-const AppView = injectIntl(({ intl, path }) => {
-  const { navigation } = useSiteData();
-
-  return (
+const AppView = withSiteData(
+  injectIntl(({ path, navigation, intl }) => (
     <div>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
@@ -30,29 +27,25 @@ const AppView = injectIntl(({ intl, path }) => {
       </main>
       <Footer />
     </div>
-  );
-});
+  )),
+);
 
-const App = ({ navigation, threeoneone }) => {
-  return (
-    <Root>
-      <div>
-        <Route
-          path={`${LANG_URL_REGEX}:path*`}
-          render={props => (
-            <I18nController
-              lang={props.match.params.lang}
-              path={props.match.params.path}
-            >
-              <Suspense fallback={<div>LOADING</div>}>
-                <AppView path={props.match.params.path || ''} />
-              </Suspense>
-            </I18nController>
-          )}
-        />
-      </div>
-    </Root>
-  );
-};
+const App = ({ navigation, threeoneone }) => (
+  <Router>
+    <div>
+      <Route
+        path={`${LANG_URL_REGEX}:path*`}
+        render={props => (
+          <I18nController
+            lang={props.match.params.lang}
+            path={props.match.params.path}
+          >
+            <AppView path={props.match.params.path || ''} />
+          </I18nController>
+        )}
+      />
+    </div>
+  </Router>
+);
 
 export default App;

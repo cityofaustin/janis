@@ -1,29 +1,28 @@
 import React from 'react';
-import { useRouteData, Head } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
 import OfficialDocument from 'components/Pages/OfficialDocument';
 
-const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
-  const {
-    officialDocumentPage: {
-      id,
-      title,
-      description,
-      slug,
-      topic,
-      topics,
-      theme,
-      department,
-      relatedDepartments,
-      officialDocuments,
-      coaGlobal,
-      contextualNavData,
-    },
-  } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
-
+const OfficialDocumentList = ({
+  officialDocumentPage: {
+    id,
+    title,
+    description,
+    slug,
+    topic,
+    topics,
+    theme,
+    department,
+    relatedDepartments,
+    officialDocuments,
+    coaGlobal,
+    contextualNavData,
+  },
+  intl,
+}) => {
   return (
     <div>
       <Head>
@@ -56,4 +55,4 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
   );
 };
 
-export default injectIntl(OfficialDocumentList);
+export default withRouteData(injectIntl(OfficialDocumentList));

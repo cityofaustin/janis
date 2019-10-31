@@ -1,7 +1,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 
 import Tile from './Tile';
 

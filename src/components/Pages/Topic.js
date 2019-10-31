@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useRouteData, Head } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -12,56 +12,51 @@ import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-const Topic = ({ topic, intl }) => {
-  const {
-    topic: {
-      title,
-      description,
-      topLinks,
-      otherLinks,
-      topiccollection,
-      contextualNavData,
-    },
-    // not the biggest fan of this logic but
-    // it gets previews working with hooks
-  } = topic ? { topic } : useRouteData();
+const Topic = ({
+  topic: {
+    title,
+    description,
+    topLinks,
+    otherLinks,
+    topiccollection,
+    contextualNavData,
+  },
+  intl,
+}) => (
+  <Fragment>
+    <Head>
+      <title>{title}</title>
+    </Head>
 
-  return (
-    <Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
-
-      <ContextualNav
-        parent={contextualNavData.parent}
-        relatedTo={contextualNavData.relatedTo}
-        offeredBy={[]}
-      />
-      <PageHeader contentType={'topic'} description={description}>
-        {title}
-      </PageHeader>
-      <div className="wrapper container-fluid">
-        <div className="row">
-          <div className="col-xs-12 coa-TopicPage__tile-group">
-            {!!topLinks.length && (
-              <TileGroup
-                title={intl.formatMessage(i18n.topServices)}
-                tiles={topLinks}
-              />
-            )}
-            {!!otherLinks.length && (
-              <TileGroup
-                title={intl.formatMessage(i18n.allServices)}
-                tiles={otherLinks}
-              />
-            )}
-          </div>
+    <ContextualNav
+      parent={contextualNavData.parent}
+      relatedTo={contextualNavData.relatedTo}
+      offeredBy={[]}
+    />
+    <PageHeader contentType={'topic'} description={description}>
+      {title}
+    </PageHeader>
+    <div className="wrapper container-fluid">
+      <div className="row">
+        <div className="col-xs-12 coa-TopicPage__tile-group">
+          {!!topLinks.length && (
+            <TileGroup
+              title={intl.formatMessage(i18n.topServices)}
+              tiles={topLinks}
+            />
+          )}
+          {!!otherLinks.length && (
+            <TileGroup
+              title={intl.formatMessage(i18n.allServices)}
+              tiles={otherLinks}
+            />
+          )}
         </div>
       </div>
-      <RelatedToMobile relatedTo={contextualNavData.relatedTo} offeredBy={[]} />
-    </Fragment>
-  );
-};
+    </div>
+    <RelatedToMobile relatedTo={contextualNavData.relatedTo} offeredBy={[]} />
+  </Fragment>
+);
 
 Topic.propTypes = {
   topic: PropTypes.shape({
@@ -75,4 +70,4 @@ Topic.propTypes = {
   }),
 };
 
-export default injectIntl(Topic);
+export default withRouteData(injectIntl(Topic));
