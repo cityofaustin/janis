@@ -4,7 +4,7 @@ import CitySeal from 'components/SVGs/CitySeal.js';
 import LoveChicken from 'components/SVGs/LoveChicken';
 import CoaSeal from '../../SVGs/CoaSeal';
 import { misc as i18n2 } from 'js/i18n/definitions';
-import { Link } from 'react-static';
+import { Link } from 'react-router-dom';
 
 const MenuInfo = ({ handleToggleFullSiteMenu, intl }) => (
   <div className="coa-MenuInfo">
