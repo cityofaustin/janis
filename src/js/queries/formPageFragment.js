@@ -8,7 +8,6 @@ const formPageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id,
             slug,
