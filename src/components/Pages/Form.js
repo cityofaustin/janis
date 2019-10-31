@@ -19,7 +19,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
 function FormPage({
   formPage: {
-    text: title,
+    title,
     slug,
     topic,
     topics,
@@ -36,7 +36,6 @@ function FormPage({
   intl,
 }) {
   const iframeRef = useRef(null);
-  console.log("~~~ what is?", contextualNavData)
 
   return (
     <div>
