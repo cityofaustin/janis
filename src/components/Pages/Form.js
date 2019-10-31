@@ -29,12 +29,14 @@ function FormPage({
     toplink,
     description,
     formUrl,
-    coaGlobal,
     contacts,
+    coaGlobal,
+    contextualNavData,
   },
   intl,
 }) {
   const iframeRef = useRef(null);
+  console.log("~~~ what is?", contextualNavData)
 
   return (
     <div>
@@ -43,12 +45,9 @@ function FormPage({
       </Head>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topics={topics}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
       <div>
@@ -76,10 +75,8 @@ function FormPage({
         </div>
         {!coaGlobal && (
           <RelatedToMobile
-            topic={topic}
-            topiccollection={topic && topic.topiccollection}
-            theme={theme}
-            department={department}
+            relatedTo={contextualNavData.relatedTo}
+            offeredBy={contextualNavData.offeredBy}
           />
         )}
       </div>

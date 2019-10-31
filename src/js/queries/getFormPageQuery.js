@@ -10,6 +10,7 @@ const getFormPageQuery = `
       }
     }
   }
+  ${formPageFragment}
 `
 
 export default getFormPageQuery
