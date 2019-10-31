@@ -19,6 +19,7 @@
     "flexboxgrid-sass": "https://github.com/hugeinc/flexboxgrid-sass.git",
     "graphql-request": "^1.4.1",
     "html-react-parser": "^0.6.1",
+    "iframe-resizer-react": "^1.0.0",
     "intl": "^1.2.5",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",

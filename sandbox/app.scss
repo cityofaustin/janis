@@ -1,0 +1,65 @@
+$color-dark: #222;
+$color-body: #ccc;
+$color-background: white;
+
+.banner {
+  width: 100%;
+  background-color: cornflowerblue;
+  height: 200px;
+  text-align: center;
+  h2 {
+    margin: auto;
+  }
+}
+
+.sidebar {
+  width: 25%;
+  height: 25vh; // experiment with this value, try changing to 110vh
+  min-height: 200px;
+  overflow: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5%;
+}
+
+.main {
+  width: 60%;
+  height: 200vh;
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main,
+.sidebar {
+  border: 5px solid $color-dark;
+  background-color: $color-background;
+  border-radius: 10px;
+  color: $color-dark;
+  padding: 15px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+// Decoration for demo
+
+body {
+  padding: 3%;
+  background-color: $color-body;
+  font-size: 20px;
+  box-sizing: border-box;
+  font-family: Lato, sans-serif;
+}
+
+code, pre {
+  background-color: #ccc;
+  padding: 0 3px;
+  border-radius: 5px;
+}
+
+.bottom {
+  justify-self: bottom;
+}

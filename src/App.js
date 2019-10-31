@@ -44,7 +44,7 @@ const App = ({ navigation, threeoneone }) => {
               lang={props.match.params.lang}
               path={props.match.params.path}
             >
-              <Suspense fallback={<div>LOAD</div>}>
+              <Suspense fallback={<div>LOADING</div>}>
                 <AppView path={props.match.params.path || ''} />
               </Suspense>
             </I18nController>

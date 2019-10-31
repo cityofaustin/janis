@@ -28,8 +28,8 @@ const branchOverrides = {
   '1650-react-static-7': {
     CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
-  '3010-circleci': {
-    CMS_API: 'https://joplin-pr-3173-publish.herokuapp.com/api/graphql',
+  "3202-form": {
+    CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
   },
 };
 
