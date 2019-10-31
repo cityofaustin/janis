@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
+
+// TODO: replace withRouteData with useRouteData hook
 import { withRouteData, Head } from 'react-static';
+
 import { injectIntl } from 'react-intl';
 import { findIndex, sortBy } from 'lodash';
 import { misc as i18n } from 'js/i18n/definitions';
@@ -131,6 +134,7 @@ function Guide(props) {
     image,
     contacts,
     coaGlobal,
+    contextualNavData,
   } = props.guidePage;
   let { intl } = props;
 
@@ -146,24 +150,21 @@ function Guide(props) {
       </Head>
       {!coaGlobal && (
         <ContextualNav
-          topic={topic}
-          topics={topics}
-          topiccollection={topic && topic.topiccollection}
-          theme={theme}
-          department={department}
-          relatedDepartments={relatedDepartments}
+          parent={contextualNavData.parent}
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
         />
       )}
 
       {image && <PageBanner image={image} />}
 
-      {!image &&
+      {!image && (
         <img
-          className = "coa-GuidePage__guide-page-placeholder"
+          className="coa-GuidePage__guide-page-placeholder"
           src={guidePagePlaceholder}
           alt={intl.formatMessage(i18n.guidePagePlaceholder)}
         />
-      }
+      )}
 
       <div className="coa-GuidePage__header">
         <h1 className="coa-GuidePage__header-title">{title}</h1>

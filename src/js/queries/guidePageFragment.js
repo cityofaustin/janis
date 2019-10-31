@@ -54,7 +54,6 @@ const guidePageFragment = `
     topics {
       edges {
         node {
-          toplink
           topic {
             id
             slug
@@ -91,7 +90,6 @@ const guidePageFragment = `
           topics {
             edges {
               node {
-                toplink
                 topic {
                   id
                   slug
@@ -137,7 +135,6 @@ const guidePageFragment = `
           topics {
             edges {
               node {
-                toplink
                 topic {
                   id
                   slug

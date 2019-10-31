@@ -34,7 +34,7 @@ const Steps = ({ steps }) => (
       <Fragment>{mapSteps(steps, true)}</Fragment>
     ) : (
       <div className="coa-Steps__list">
-        <ul>{mapSteps(steps)}</ul>
+        <ol>{mapSteps(steps)}</ol>
       </div>
     )}
   </div>

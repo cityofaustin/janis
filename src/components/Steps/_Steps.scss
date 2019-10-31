@@ -20,7 +20,7 @@
 }
 
 .coa-Steps__list {
-  & > ul {
+  & > ol {
     counter-reset: step-item;
     margin-bottom: $coa-space-level4;
     list-style-type: none;

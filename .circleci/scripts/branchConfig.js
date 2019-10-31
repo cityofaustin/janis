@@ -17,26 +17,26 @@
 
 // Don't overwrite defaultValues.
 const defaultValues = {
+  DEPLOYMENT_MODE: 'REVIEW', // branches on netlify are 'REVIEW'
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
   CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
-  FEEDBACK_API: 'https://coa-test-form-api.herokuapp.com/process/',
-}
+};
 
 // Add branch-specifc values here
 const branchOverrides = {
   "3187-translate-dates-docs": {
     CMS_API: "https://joplin-pr-3187-janis-branch.herokuapp.com/api/graphql"
   },
-  "2997-dept-links": {
-    CMS_API: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
+  '1650-react-static-7': {
+    CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
-  "3010-circleci": {
-    CMS_API: "https://joplin-pr-3173-publish.herokuapp.com/api/graphql"
-  }
-}
+  "3202-form": {
+    CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
+  },
+};
 
 module.exports = {
   defaultValues,
-  branchOverrides
-}
+  branchOverrides,
+};
