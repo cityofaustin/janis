@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 import TileGroup from 'components/Tiles/TileGroup';
 import { misc as i18n1 } from 'js/i18n/definitions';
-import { Link } from 'react-static';
+import { Link } from 'react-router-dom';
 
 const TopicCard = ({ topic, index, intl }) => {
   const tiles =
