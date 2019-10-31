@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Routes from 'react-static-routes';
+import { Routes } from 'react-static';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import ReactGA from 'react-ga';
