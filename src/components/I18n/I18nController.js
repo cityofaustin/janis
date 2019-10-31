@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Routes from 'react-static-routes';
+import { Routes } from 'react-static';
 import { IntlProvider } from 'react-intl';
 import locale from 'browser-locale';
 import Cookies from 'js-cookie';
