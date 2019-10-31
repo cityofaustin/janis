@@ -1,16 +1,28 @@
-import formPageFragment from './formPageFragment';
-
 const getFormPageQuery = `
   query getFormPage($id: ID) {
     allFormPages(id:$id) {
       edges {
         node {
-          ...formPageInfo
+          id
+          title
+          slug
+          description
+          formUrl
+          relatedDepartments {
+            edges {
+              node {
+                relatedDepartment {
+                  id
+                  title
+                  slug
+                }
+              }
+            }
+          }
         }
       }
     }
   }
-  ${formPageFragment}
 `
 
 export default getFormPageQuery
