@@ -88,17 +88,6 @@ const getTopicPageQuery = `
         }
       }
     }
-    allFormPageTopics(topic: $id) {
-      edges {
-        node {
-          page {
-            id
-            slug
-            title
-          }
-        }
-      }
-    }
   }
 `;
 

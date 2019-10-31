@@ -1,6 +1,6 @@
 import React from 'react';
 import { get } from 'lodash';
-import { useRouteData, Head } from 'react-static';
+import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
@@ -20,24 +20,21 @@ import TileGroup from 'components/Tiles/TileGroup';
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
-const Department = ({ department, intl }) => {
-  const {
-    department: {
-      title,
-      mission,
-      contacts,
-      image,
-      directors,
-      whatWeDo,
-      socialMedia,
-      jobListings,
-      topServices,
-      relatedLinks,
-    },
-    // not the biggest fan of this logic but
-    // it gets previews working with hooks
-  } = department ? { department } : useRouteData();
-
+const Department = ({
+  department: {
+    title,
+    mission,
+    contacts,
+    image,
+    directors,
+    whatWeDo,
+    socialMedia,
+    jobListings,
+    topServices,
+    relatedLinks,
+  },
+  intl,
+}) => {
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
       <h2 className="coa-DepartmentPage__related-title">
@@ -146,4 +143,4 @@ const Department = ({ department, intl }) => {
   );
 };
 
-export default injectIntl(Department);
+export default withRouteData(injectIntl(Department));

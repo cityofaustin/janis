@@ -1,6 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 import { misc as i18n } from 'js/i18n/definitions';
 
 const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (

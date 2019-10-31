@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 
 import { misc as i18n } from 'js/i18n/definitions';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-static';
 
 const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
   <div className="coa-ContextualNav">
