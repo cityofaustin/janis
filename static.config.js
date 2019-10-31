@@ -617,7 +617,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'form page') {
     return {
       path: url,
-      component: 'src/components/Pages/Form',
+      template: 'src/components/Pages/Form',
       getData: () =>
         getFormPageData(
           id,
