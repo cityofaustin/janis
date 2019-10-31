@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { withRouteData, Head } from 'react-static';
+import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 /**
   In order for IframeResizer to work, you must inject iframeResizer.contentWindow.min.js
@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
   On Framestack, this is done by modifying the html in the "Advanced Code Editor" of your custom template.
   See: https://github.com/davidjbradshaw/iframe-resizer
 **/
-import IframeResizer from 'iframe-resizer-react'
+import IframeResizer from 'iframe-resizer-react';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
@@ -15,27 +15,28 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
-import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
-function FormPage({
-  formPage: {
-    title,
-    slug,
-    topic,
-    topics,
-    theme,
-    department,
-    relatedDepartments,
-    toplink,
-    description,
-    formUrl,
-    contacts,
-    coaGlobal,
-    contextualNavData,
-  },
-  intl,
-}) {
+function FormPage({ intl }) {
+  debugger;
   const iframeRef = useRef(null);
+  const {
+    formPage: {
+      title,
+      slug,
+      topic,
+      topics,
+      theme,
+      department,
+      relatedDepartments,
+      toplink,
+      description,
+      formUrl,
+      contacts,
+      coaGlobal,
+      contextualNavData,
+    },
+  } = useRouteData();
 
   return (
     <div>
@@ -83,4 +84,4 @@ function FormPage({
   );
 }
 
-export default withRouteData(injectIntl(FormPage));
+export default injectIntl(FormPage);
