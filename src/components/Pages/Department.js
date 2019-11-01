@@ -45,7 +45,7 @@ const Department = ({ department, intl }) => {
       </h2>
       <ul className="coa-DepartmentPage__related-list">
         {relatedLinks.map((l, index) => (
-          <li key={index} className="coa-DepartmentPage__related-item">
+          <li key={index}>
             <a href={l.url} className="coa-DepartmentPage__related-link">
               {l.title}
             </a>

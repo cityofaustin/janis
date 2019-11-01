@@ -142,10 +142,10 @@
   margin-left: 20px;
 }
 
+/* Dept page lists style not being used, check during QA */
 .coa-DepartmentPage__related-item {
   list-style: none;
   display: flex;
-  margin-left: $coa-spacing-small;
   margin-bottom: 0;
 
   &:before {
