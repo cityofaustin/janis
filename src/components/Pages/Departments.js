@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouteData, Head } from 'react-static';
+import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -10,16 +10,20 @@ import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 
-const Departments = ({ departments, intl }) => (
-  <div>
-    <Head>
-      <title>Departments</title>
-    </Head>
-    <PageHeader>{intl.formatMessage(i18n2.departments)}</PageHeader>
-    <div className="wrapper container-fluid">
-      <TileGroup tiles={departments} />
-    </div>
-  </div>
-);
+const Departments = ({ intl }) => {
+  const { departments } = useRouteData();
 
-export default withRouteData(injectIntl(Departments));
+  return (
+    <div>
+      <Head>
+        <title>Departments</title>
+      </Head>
+      <PageHeader>{intl.formatMessage(i18n2.departments)}</PageHeader>
+      <div className="wrapper container-fluid">
+        <TileGroup tiles={departments} />
+      </div>
+    </div>
+  );
+};
+
+export default injectIntl(Departments);

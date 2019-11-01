@@ -195,7 +195,7 @@ export const cleanInformationForPreview = allInformationPages => {
   const infos = allInformationPages.edges.map(e => e.node);
   let info = infos[0];
 
-  info.topic = getTopicForContextualNavPreview(info);
+  info.contextualNavData = getContextualNavForPreview(info);
   info.theme = {};
 
   info.text = info.title;
@@ -527,4 +527,23 @@ export const cleanGuidePages = allGuidePages => {
   let cleanedGuidePages = cleanLinks(allGuidePages, 'guide');
 
   return cleanedGuidePages;
+};
+
+export const cleanFormPages = allFormPages => {
+  if (!allFormPages || !allFormPages.edges) return null;
+  return cleanLinks(allFormPages, 'form');
+}
+
+// Let's just do this for now, we'll probably need to make some changes
+// when we move to rs7 anyways
+export const cleanFormPagesForPreview = allFormPages => {
+  if (!allFormPages || !allFormPages.edges) return null;
+  const forms = allFormPages.edges.map(e => e.node);
+  let form = forms[0];
+
+  form.contextualNavData = getContextualNavForPreview(form);
+  form.theme = {};
+  form.contacts = cleanContacts(form.contacts);
+
+  return form;
 };
