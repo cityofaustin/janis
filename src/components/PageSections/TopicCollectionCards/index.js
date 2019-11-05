@@ -40,7 +40,7 @@ const TopicCard = ({ topic, index, intl }) => {
   );
 };
 
-const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
+const TopicCollectionCards = ({ topics, intl }) => (
   <div className="coa-TopicCollectionCards">
     {topics.map((topic, index) => (
       <TopicCard topic={topic} index={index} intl={intl} />
