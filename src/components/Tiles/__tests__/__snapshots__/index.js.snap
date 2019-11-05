@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tile tile renders 1`] = `
+<a
+  className="coa-Tile--compact"
+  href="/https://alpha.austin.gov"
+  onClick={[Function]}
+>
+  <div
+    className="coa-Tile__content"
+  >
+    <p
+      className="coa-Tile__text"
+    >
+      home
+    </p>
+    <i
+      className="material-icons"
+    >
+      arrow_forward
+    </i>
+  </div>
+</a>
+`;
