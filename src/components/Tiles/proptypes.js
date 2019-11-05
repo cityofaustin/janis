@@ -14,8 +14,3 @@ export const tileGroupPropTypes = {
   description: PropTypes.string,
   hasBorder: PropTypes.bool,
 };
-
-export const tileGroupSetPropTypes = {
-  tileGroups: PropTypes.arrayOf(PropTypes.shape(tileGroupPropTypes)).isRequired,
-  tag: PropTypes.string,
-};
