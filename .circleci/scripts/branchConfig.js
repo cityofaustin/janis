@@ -25,6 +25,9 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
+  "3187-translate-dates-docs": {
+    CMS_API: "https://joplin-pr-3187-janis-branch.herokuapp.com/api/graphql"
+  },
   '1650-react-static-7': {
     CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
