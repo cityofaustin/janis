@@ -325,6 +325,9 @@ const getServicePageData = async (
 
   let service = allServicePages.edges[0].node;
 
+  // keeping this logic in there for now, stuff is kinda messy
+  service.contacts = cleanContacts(service.contacts);
+
   service.contextualNavData = await getContextualNavData(
     parent_department,
     parent_topic,
@@ -350,6 +353,9 @@ const getInformationPageData = async (
 
   let informationPage = allInformationPages.edges[0].node;
 
+  // keeping this logic in there for now, stuff is kinda messy
+  informationPage.contacts = cleanContacts(informationPage.contacts);
+
   informationPage.contextualNavData = await getContextualNavData(
     parent_department,
     parent_topic,
@@ -374,6 +380,14 @@ const getGuidePageData = async (
 
   let guidePage = allGuidePages.edges[0].node;
 
+  // keeping this logic in there for now, stuff is kinda messy
+  let contacts = cleanContacts(guidePage.contacts);
+
+  // Guide pages only support single contacts for now
+  if (contacts && contacts.length) {
+    guidePage.contact = contacts[0];
+  }
+
   guidePage.contextualNavData = await getContextualNavData(
     parent_department,
     parent_topic,
@@ -392,10 +406,7 @@ const getFormPageData = async (
   grandparent_topic_collection,
   client,
 ) => {
-  const { allFormPages } = await client.request(
-    getFormPageQuery,
-    { id: id },
-  );
+  const { allFormPages } = await client.request(getFormPageQuery, { id: id });
 
   let formPage = allFormPages.edges[0].node;
 
