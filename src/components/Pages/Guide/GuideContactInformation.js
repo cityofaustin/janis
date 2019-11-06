@@ -1,7 +1,9 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
 
 import Phones from 'components/Contact/Phones';
 import Email from 'components/Contact/Email';
+import { misc as i18n1 } from 'js/i18n/definitions';
 
 const GuideContactInformation = ({
   contact: {
@@ -9,10 +11,11 @@ const GuideContactInformation = ({
     phoneNumber,
     email
   },
+  intl,
 }) => {
   return (
     <div className="coa-GuideSection__collection">
-      <h1 className="coa-GuideSection__header">Contact information</h1>
+      <h1 className="coa-GuideSection__header">{intl.formatMessage(i18n1.contactInformation)}</h1>
       <div className="row coa-GuideSection__container">
         {name && (
           <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-name">
@@ -36,4 +39,4 @@ const GuideContactInformation = ({
   );
 };
 
-export default GuideContactInformation;
+export default injectIntl(GuideContactInformation);

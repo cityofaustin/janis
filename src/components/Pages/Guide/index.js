@@ -132,16 +132,11 @@ function Guide(props) {
     relatedDepartments,
     sections,
     image,
-    contacts,
+    contact,
     coaGlobal,
     contextualNavData,
   } = props.guidePage;
   let { intl } = props;
-
-  let contact = null;
-  if (contacts && contacts.edges && contacts.edges.length) {
-    contact = contacts.edges[0].node.contact;
-  }
 
   return (
     <div ref={node}>
