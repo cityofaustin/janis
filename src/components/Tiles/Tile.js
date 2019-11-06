@@ -7,6 +7,7 @@ import { tilePropTypes } from './proptypes';
 import guideIcon from 'images/guide_icon.png';
 
 const Tile = ({ url, text, compact, __typename }) => {
+  console.log("misc :", misc)
   let typename = "arrow_forward"
   if (__typename == "GuidePageNode") {
     typename = guideIcon
@@ -16,7 +17,10 @@ const Tile = ({ url, text, compact, __typename }) => {
       <div className="coa-Tile__content">
         <p className="coa-Tile__text">{text}</p>
         <i className="material-icons">
-          <img src={typename} alt={misc.guide_icon} />
+          {typename === "arrow_forward"
+            ? typename
+            : (<img src={typename} alt={misc.guideIcon.defaultMessage} />)
+          }
         </i>
       </div>
     </Link>

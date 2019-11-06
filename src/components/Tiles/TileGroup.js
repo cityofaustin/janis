@@ -38,16 +38,18 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl, content
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {tiles.map(({ type, url, title, __typename }, index) => (
-            <Tile
-              url={
-                url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
-              }
-              text={title}
-              compact={compact}
-              __typename={__typename}
-            />
-          ))}
+          {tiles.map(({ type, url, title, __typename }, index) => {
+            return (
+              <Tile
+                url={
+                  url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
+                }
+                text={title}
+                compact={compact}
+                __typename={__typename}
+              />
+            );
+          })}
         </div>
       </div>
     )

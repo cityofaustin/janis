@@ -117,6 +117,10 @@
   flex-grow: 1;
 }
 
+.coa-Tile__content i img {
+  width: 20px;
+}
+
 .coa-Tile__text {
   color: $coa-color-almost-black;
   flex-basis: 90%;
