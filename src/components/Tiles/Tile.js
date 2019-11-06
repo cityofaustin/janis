@@ -15,12 +15,10 @@ const Tile = ({ url, text, compact, pageName }) => {
     <Link className={compact ? 'coa-Tile--compact' : 'coa-Tile'} to={url}>
       <div className="coa-Tile__content">
         <p className="coa-Tile__text">{text}</p>
-        <i className="material-icons">
-          {typeIcon
-            ? (<img src={typeIcon} alt={misc.guideIcon.defaultMessage} />)
-            : "arrow_forward"
+          {typeIcon ?
+            <img src={typeIcon} alt={misc.guideIcon.defaultMessage} /> :
+            <i className="material-icons">arrow_forward</i>
           }
-        </i>
       </div>
     </Link>
   )
