@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { injectIntl } from 'react-intl';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
+import { misc as i18n1 } from 'js/i18n/definitions';
 
 function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
@@ -65,13 +67,13 @@ function GuideMenuSection({ section, currentSection }) {
   );
 }
 
-function GuideMenu({ contact, sections, currentSection }) {
+function GuideMenu({ contact, sections, currentSection, intl }) {
   return (
     <div>
       <div className="coa-GuideMenu__section">
         {contact && (
           <GuideMenuLink
-            title="Contact information"
+            title={intl.formatMessage(i18n1.contactInformation)}
             anchorTag="Contact-information"
             isHeading={true}
             isCurrentSection={currentSection === 'Contact-information'}
@@ -89,4 +91,4 @@ function GuideMenu({ contact, sections, currentSection }) {
   );
 }
 
-export default GuideMenu;
+export default injectIntl(GuideMenu);

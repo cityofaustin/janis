@@ -91,6 +91,7 @@ export const misc = defineMessages({
   or404: ', or ',
   contactUs404: 'contact us',
   privacyPolicy: 'Privacy policy',
+  contactInformation: 'Contact information'
 });
 
 export const navigation = defineMessages({

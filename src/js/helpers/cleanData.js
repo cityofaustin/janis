@@ -210,6 +210,10 @@ export const cleanGuideForPreview = allGuidePages => {
   let guide = guides[0];
 
   guide.contextualNavData = getContextualNavForPreview(guide);
+  const contacts = cleanContacts(guide.contacts);
+  if (contacts && contacts.length) {
+    guide.contact = contacts[0];
+  }
 
   guide.theme = {};
 
@@ -532,7 +536,7 @@ export const cleanGuidePages = allGuidePages => {
 export const cleanFormPages = allFormPages => {
   if (!allFormPages || !allFormPages.edges) return null;
   return cleanLinks(allFormPages, 'form');
-}
+};
 
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
