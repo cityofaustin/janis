@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Tile from './Tile';
 
-const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
+const TileGroup = ({ title, titleUrl, description, tiles, compact, intl, content_type }) => {
   return (
     !!tiles.length && (
       <div
@@ -38,17 +38,16 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {tiles.map(({ type, url, title }, index) => {
-            return (
-              <Tile
-                url={
-                  url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
-                }
-                text={title}
-                compact={compact}
-              />
-            );
-          })}
+          {tiles.map(({ type, url, title, __typename }, index) => (
+            <Tile
+              url={
+                url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
+              }
+              text={title}
+              compact={compact}
+              __typename={__typename}
+            />
+          ))}
         </div>
       </div>
     )
