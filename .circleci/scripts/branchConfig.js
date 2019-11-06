@@ -34,6 +34,9 @@ const branchOverrides = {
   "3202-form": {
     CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
   },
+  '3163-guide-espanol': {
+    CMS_API: 'https://joplin-pr-3163-guide-pages.herokuapp.com/api/graphql'
+  }
 };
 
 module.exports = {

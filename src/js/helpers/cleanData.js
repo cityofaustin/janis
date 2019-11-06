@@ -1,6 +1,7 @@
 import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -11,12 +12,15 @@ export const cleanContacts = contacts => {
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  const getTimestamp = hours => {
-    const splitHours = hours.split(':');
-    let timestamp = new Date(dateSeed);
-    timestamp.setHours(splitHours[0]);
-    timestamp.setMinutes(splitHours[1]);
-    return timestamp.getTime();
+  const formatTime = time => {
+    // Simplify time parsing. Times work on previews,
+    // but we don't do anything with timezones.
+    const momentTime = moment(time, 'HH:mm:ss');
+
+    // Only include minutes in display if there are minutes
+    const style = momentTime.minutes() ? 'h:mma' : 'ha';
+
+    return momentTime.format(style);
   };
 
   return contacts.edges.map(({ node: contact }) => {
@@ -35,8 +39,8 @@ export const cleanContacts = contacts => {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
-        startTime: getTimestamp(hours.startTime),
-        endTime: getTimestamp(hours.endTime),
+        startTime: formatTime(hours.startTime),
+        endTime: formatTime(hours.endTime),
       }));
     }
     return cleaned;
