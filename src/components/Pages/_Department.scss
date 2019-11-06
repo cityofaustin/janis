@@ -146,18 +146,6 @@
   margin-bottom: 0;
 }
 
-/* Dept page lists style not being used, check during QA */
-.coa-DepartmentPage__related-item {
-  list-style: none;
-  display: flex;
-  margin-bottom: 0;
-
-  &:before {
-    content: '•';
-    margin-right: $coa-spacing-xsmall;
-  }
-}
-
 .coa-DepartmentPage__related-link {
   text-decoration: none;
 }
