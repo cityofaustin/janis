@@ -67,7 +67,6 @@ const getAllTopicLinks = (
   if (allGuidePageTopics && allGuidePageTopics.edges) {
     for (const edge of allGuidePageTopics.edges) {
       if (edge.node) {
-        edge.node.page.content_type = "guide"
         allLinks.push(edge.node.page);
       }
     }
@@ -150,7 +149,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   )
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
-      __typename: page.__typename,
+      pageName: page.__typename,
       title: page.title,
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
