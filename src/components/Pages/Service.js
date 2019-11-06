@@ -70,7 +70,6 @@ const Service = ({ service, intl }) => {
 
                   {additionalContent && (
                     <HtmlFromAdmin
-                      title={intl.formatMessage(i18n2.whatElse)}
                       content={additionalContent}
                     />
                   )}
