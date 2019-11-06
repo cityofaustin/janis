@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
@@ -16,6 +16,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
       className={classNames('coa-GuideMenu__link-wrapper', {
         'coa-GuideMenu__current-section': isCurrentSection,
       })}
+      id={`menu-${anchorTag}`}
     >
       <div
         className={classNames('coa-GuideMenu__link', {
@@ -66,6 +67,13 @@ function GuideMenuSection({ section, currentSection }) {
 }
 
 function GuideMenu({ contact, sections, currentSection }) {
+  useEffect(() => {
+    const el = document.getElementById(`menu-${currentSection}`);
+    if (el) {
+      el.scrollIntoView();
+    }
+  });
+
   return (
     <div>
       <div className="coa-GuideMenu__section">
