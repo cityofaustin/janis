@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualNav snapshot ContextualNav renders 1`] = `
+<div
+  className="coa-ContextualNav"
+>
+  <div
+    className="wrapper container-fluid"
+  >
+    <div
+      className="coa-ContextualNav__container"
+    >
+      <div
+        className="coa-ContextualNav__parent"
+      >
+        <a
+          className="coa-ContextualNav__arrow"
+          href="/en/health-safety/healthcare-prevention/disease-prevention/"
+          onClick={[Function]}
+        >
+          <span>
+            Disease prevention
+          </span>
+        </a>
+      </div>
+      <div
+        className="coa-ContextualNav__dept"
+      />
+    </div>
+  </div>
+</div>
+`;

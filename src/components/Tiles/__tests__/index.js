@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 // BrowserRouter is necessary so the tests know where to find Link
 import { BrowserRouter } from 'react-router-dom';
 
-import createComponentWithIntl from '../../../js/helpers/createComponentWithIntl';
+import createComponentWithIntl from 'js/helpers/createComponentWithIntl';
 import Tile from './../Tile';
 import TileGroup from './../TileGroup';
 

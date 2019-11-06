@@ -91,7 +91,7 @@
     "storybook": "build-storybook && start-storybook -p 80",
     "build-storybook": "build-storybook -c .storybook -o .out",
     "publish-netlify-pr": "bash ./netlify/publish-netlify-pr.sh",
-    "test": "jest"
+    "test": "NODE_PATH=./src jest"
   },
   "resolutions": {
     "react-hot-loader/source-map": "^0.8.0-beta.0"
