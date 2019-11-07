@@ -25,8 +25,8 @@ const ContactDetails = ({ contacts, intl }) => (
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
-    {contacts.map(c => (
-      <ContactDetailsEntry contact={c} />
+    {contacts.map((c, index) => (
+      <ContactDetailsEntry contact={c} key={index} />
     ))}
   </div>
 );
@@ -55,7 +55,7 @@ ContactDetailsEntry.propTypes = {
     email: emailPropTypes,
     hours: hoursPropTypes,
     phoneNumber: phonePropTypes,
-  }).isRequired,
+  })
 };
 
 export default injectIntl(ContactDetails);
