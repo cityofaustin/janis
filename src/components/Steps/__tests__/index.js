@@ -27,7 +27,8 @@ describe('Step', () => {
             // },
             {
               option_name: "2-3 weeks by mail",
-              option_description: "<p>Mail the following items to Office of Vital Records, PO Box 1088, Austin, TX 78767-1088:</p><ol><li>A copy of one of your acceptable and current <a href=\"https://www.dshs.texas.gov/vs/reqproc/Acceptable-IDs/\">forms of government-issued photo identification</a>. If your home address is different than the address on your ID, also include a proof of residence like a utility bill, voter registration card, etc...</li><li>A self-addressed envelope with a stamp. You may use an express mail envelope for faster return delivery. If this is not included, you will not receive the certificate.</li></ol><p>If you need the certificate quickly through the mail, use an Express form of delivery, such as FedEx, USPS, or UPS, and send your application to: Office of Vital Records, 7201 Levander Loop, Bldg. C, Austin, TX 78702.</p>"
+              option_description: "<p>Mail the following items to Office of Vital Records, PO Box 1088, Austin, TX 78767-1088:</p>\
+              <ol><li>If your home address is different than the address on your ID, also include a proof of residence like a utility bill, voter registration card, etc...</li><li>A self-addressed envelope with a stamp. You may use an express mail envelope for faster return delivery. If this is not included, you will not receive the certificate.</li></ol><p>If you need the certificate quickly through the mail, use an Express form of delivery, such as FedEx, USPS, or UPS, and send your application to: Office of Vital Records, 7201 Levander Loop, Bldg. C, Austin, TX 78702.</p>"
             }]
           },
         id:"f601e59c-9e52-46f3-947e-399120fa604a"

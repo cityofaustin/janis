@@ -21,9 +21,9 @@ const StepOption = ({ option_name, option_description }) => (
           <AccordionItemState>
             {({ expanded }) =>
               expanded ? (
-                <i class="material-icons">remove</i>
+                <i className="material-icons">remove</i>
               ) : (
-                <i class="material-icons">add</i>
+                <i className="material-icons">add</i>
               )
             }
           </AccordionItemState>
