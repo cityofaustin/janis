@@ -6,11 +6,13 @@ export const stepsPropTypes = {
 
 export const stepBasicPropTypes = {
   stepAsHtmlFromAdmin: PropTypes.string.isRequired,
+  singleStep: PropTypes.bool,
 };
 
 export const stepWithOptionsPropTypes = {
   options: PropTypes.arrayOf(PropTypes.shape(optionPropTypes)).isRequired,
   description: PropTypes.string.isRequired,
+  singleStep: PropTypes.bool,
 };
 
 export const optionPropTypes = {
