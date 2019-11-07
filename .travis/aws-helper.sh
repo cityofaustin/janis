@@ -60,6 +60,7 @@ if [ "${TRAVIS_BRANCH}" == "production" ]; then
   export CMS_MEDIA=$CMS_MEDIA_PRODUCTION
   export BASE_PATH_PR="/"
   export JANIS_IMAGE_VERSION="production"
+  export CMS_DOCS=$CMS_DOCS_PRODUCTION
 elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export DEPLOYMENT_MODE="STAGING"
   export FEEDBACK_API=$FEEDBACK_API_STAGING
@@ -68,6 +69,7 @@ elif [ "${TRAVIS_BRANCH}" == "master" ]; then
   export GOOGLE_ANALYTICS=$GOOGLE_ANALYTICS_STAGING
   export BASE_PATH_PR="/"
   export JANIS_IMAGE_VERSION="master"
+  export CMS_DOCS="multiple"
 else
   helper_halt_deployment "TRAVIS_BRANCH: '${TRAVIS_BRANCH}' cannot be deployed to staging or production."
 fi;
@@ -148,6 +150,7 @@ function janis_envars {
   echo "CMS_API:          '${CMS_API}'";
   echo "CMS_MEDIA:        '${CMS_MEDIA}'";
   echo "NODE_PATH:        '${NODE_PATH}'";
+  echo "CMS_DOCS:         '${CMS_DOCS}'";
 }
 
 
@@ -156,7 +159,7 @@ function janis_envars {
 #
 function janis_build {
   janis_envars;
-  
+
   janis_print_header "Building Janis";
   mkdir _dist;
 
