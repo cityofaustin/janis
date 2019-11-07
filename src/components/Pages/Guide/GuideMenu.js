@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 
 import classNames from 'classnames';
@@ -6,13 +6,13 @@ import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
 
-function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
-  // Each GuideSectionWrapper has an id={this.props.anchorTag}
-  function goToSection(e) {
-    history.pushState(null, null, `#${anchorTag}`);
-    document.getElementById(anchorTag).scrollIntoView(true);
-  }
-
+const GuideMenuLink = ({
+  title,
+  anchorTag,
+  isHeading,
+  isCurrentSection,
+  goToSection,
+}) => {
   return (
     <div
       className={classNames('coa-GuideMenu__link-wrapper', {
@@ -26,15 +26,15 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
           'coa-GuideMenu__subheading': !isHeading,
           'coa-GuideMenu__current-section': isCurrentSection,
         })}
-        onClick={goToSection}
+        onClick={e => goToSection(e, anchorTag)}
       >
         <span className="coa-GuideMenu__title-text">{title}</span>
       </div>
     </div>
   );
-}
+};
 
-function GuideMenuSection({ section, currentSection }) {
+function GuideMenuSection({ section, currentSection, goToSection }) {
   const headingAnchorTag = hyphenate(section.heading);
   const subHeadings = section.pages.map((page, index) => {
     const title =
@@ -54,6 +54,7 @@ function GuideMenuSection({ section, currentSection }) {
         anchorTag={headingAnchorTag}
         isHeading={true}
         isCurrentSection={currentSection === headingAnchorTag}
+        goToSection={goToSection}
       />
       {subHeadings.map((subHeading, index) => (
         <GuideMenuLink
@@ -62,19 +63,39 @@ function GuideMenuSection({ section, currentSection }) {
           anchorTag={subHeading.anchorTag}
           isHeading={false}
           isCurrentSection={currentSection === subHeading.anchorTag}
+          goToSection={goToSection}
         />
       ))}
     </div>
   );
 }
 
-function GuideMenu({ contact, sections, currentSection, intl }) {
+const GuideMenu = ({ contact, sections, currentSection, intl }) => {
+  const [clickedSection, setClickedSection] = useState(null);
+
+  // Each GuideSectionWrapper has an id={this.props.anchorTag}
+  const goToSection = (e, anchorTag) => {
+    setClickedSection(anchorTag);
+    history.pushState(null, null, `#${anchorTag}`);
+    document.getElementById(anchorTag).scrollIntoView(true);
+  };
+
   useEffect(() => {
     const el = document.getElementById(`menu-${currentSection}`);
     if (el) {
-      el.scrollIntoView();
+      if (clickedSection) {
+        // If we clicked a section, we don't want to mess around with this logic
+        // until we hit that section. This fires every time we scroll to a new
+        // section, and is fired a bunch when the click fires off a scroll
+        if (currentSection === clickedSection) {
+          // We made it! back to business as usual
+          setClickedSection(null);
+        }
+      } else {
+        el.scrollIntoView();
+      }
     }
-  });
+  }, [currentSection]);
 
   return (
     <div>
@@ -85,6 +106,7 @@ function GuideMenu({ contact, sections, currentSection, intl }) {
             anchorTag="Contact-information"
             isHeading={true}
             isCurrentSection={currentSection === 'Contact-information'}
+            goToSection={goToSection}
           />
         )}
       </div>
@@ -93,10 +115,11 @@ function GuideMenu({ contact, sections, currentSection, intl }) {
           key={index}
           section={section}
           currentSection={currentSection}
+          goToSection={goToSection}
         />
       ))}
     </div>
   );
-}
+};
 
 export default injectIntl(GuideMenu);
