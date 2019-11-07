@@ -79,6 +79,18 @@ $max-guide-tablet-width: $coa-medium-screen;
   overflow-y: scroll;
   margin-top: $sticky-guide-top;
   top: 0px;
+
+  // Hide TOC scrollbar in:
+  // Webkit eg. Chrome/Safari
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  // Edge/Internet Explorer
+  -ms-overflow-style: none;
+
+  // Firefox
+  scrollbar-width: none;
 }
 
 .coa-GuidePage__main-content {

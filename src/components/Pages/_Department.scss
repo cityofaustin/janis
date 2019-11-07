@@ -136,15 +136,14 @@
   margin-bottom: $coa-spacing-medium;
 }
 
-.coa-DepartmentPage__related-item {
-  list-style: none;
-  display: flex;
-  margin-left: $coa-spacing-small;
+.coa-DepartmentPage__related-list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
 
-  &:before {
-    content: '•';
-    margin-right: $coa-spacing-xsmall;
-  }
+.coa-DepartmentPage__related-list li {
+  margin-bottom: 0;
 }
 
 .coa-DepartmentPage__related-link {
