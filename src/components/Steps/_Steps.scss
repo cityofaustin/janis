@@ -22,8 +22,10 @@
 .coa-Steps__list {
   & > ol {
     counter-reset: step-item;
-    margin-bottom: $coa-space-level4;
     list-style-type: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 
     & > li {
       align-items: flex-start;
@@ -31,8 +33,9 @@
       display: flex;
       flex-wrap: wrap;
       margin-left: 0;
-      margin-bottom: $coa-spacing-large;
-      padding-bottom: $coa-spacing-large;
+      margin-bottom: 0;
+      margin-top: 2.4rem;
+      padding-bottom: 2.4rem;
       border-bottom: 1px solid $coa-color-grey;
 
       &:before {
@@ -46,7 +49,7 @@
         line-height: $coa-line-height-medium + 0.2;
         text-align: center;
         margin-right: 100%;
-        margin-bottom: $coa-spacing-md-small;
+        margin-bottom: 0;
 
         @include media($coa-medium-screen) {
           margin-right: $coa-spacing-large;
