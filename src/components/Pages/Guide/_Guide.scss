@@ -79,6 +79,14 @@ $max-guide-tablet-width: $coa-medium-screen;
   overflow-y: scroll;
   margin-top: $sticky-guide-top;
   top: 0px;
+
+  // Hide the nav scrollbar in Chrome/Safari
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  // Hide the nav scrollbar in edge/ie
+  -ms-overflow-style: none;
 }
 
 .coa-GuidePage__main-content {
