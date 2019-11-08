@@ -1,6 +1,7 @@
 import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -11,12 +12,15 @@ export const cleanContacts = contacts => {
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  const getTimestamp = hours => {
-    const splitHours = hours.split(':');
-    let timestamp = new Date(dateSeed);
-    timestamp.setHours(splitHours[0]);
-    timestamp.setMinutes(splitHours[1]);
-    return timestamp.getTime();
+  const formatTime = time => {
+    // Simplify time parsing. Times work on previews,
+    // but we don't do anything with timezones.
+    const momentTime = moment(time, 'HH:mm:ss');
+
+    // Only include minutes in display if there are minutes
+    const style = momentTime.minutes() ? 'h:mma' : 'ha';
+
+    return momentTime.format(style);
   };
 
   return contacts.edges.map(({ node: contact }) => {
@@ -35,8 +39,8 @@ export const cleanContacts = contacts => {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
         dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
-        startTime: getTimestamp(hours.startTime),
-        endTime: getTimestamp(hours.endTime),
+        startTime: formatTime(hours.startTime),
+        endTime: formatTime(hours.endTime),
       }));
     }
     return cleaned;
@@ -210,6 +214,10 @@ export const cleanGuideForPreview = allGuidePages => {
   let guide = guides[0];
 
   guide.contextualNavData = getContextualNavForPreview(guide);
+  const contacts = cleanContacts(guide.contacts);
+  if (contacts && contacts.length) {
+    guide.contact = contacts[0];
+  }
 
   guide.theme = {};
 
@@ -532,7 +540,7 @@ export const cleanGuidePages = allGuidePages => {
 export const cleanFormPages = allFormPages => {
   if (!allFormPages || !allFormPages.edges) return null;
   return cleanLinks(allFormPages, 'form');
-}
+};
 
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
