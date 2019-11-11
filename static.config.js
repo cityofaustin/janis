@@ -208,6 +208,7 @@ const getTopicCollectionPageData = async (id, client) => {
       },
     },
     pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+      pageName: console.log(topPageEdge),
       title: topPageEdge.node.title,
       url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
         edge.node.page.slug
