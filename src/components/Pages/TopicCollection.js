@@ -36,7 +36,6 @@ const TopicCollection = ({ tc, intl }) => {
   );
 };
 
-// do we set these as isRequired?
 TopicCollection.propTypes = {
   title:PropTypes.string, 
   description:PropTypes.string, 

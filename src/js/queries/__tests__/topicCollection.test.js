@@ -7,7 +7,6 @@ import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery'
 
 describe('topic collections', ()=> {
 	test('Testing topic collections', async () => {
-		console.log(process.env.CMS_API) // coming up as undefined.
 		const id = 'VG9waWNDb2xsZWN0aW9uTm9kZTo1Ng==' // id for recyling trash & compost
 		// const testClient = createGraphQLClientsByLang('en', 'http://joplin-staging.herokuapp.com/api/graphql');
 		// const testClient = createGraphQLClientsByLang('en', 'http://joplin.herokuapp.com/api/graphql');
@@ -16,7 +15,8 @@ describe('topic collections', ()=> {
 		const tc = await testClient.request(getTopicCollectionPageQuery, {id: id});
 
 		const topPages = tc.allTopicPageTopicCollections.edges[0].node.page.topPages;
-		// could we check a snapshot?
+
+		// should we check a snapshot?
 		expect(topPages.edges.length).toBeGreaterThan(0);
 	})
 })

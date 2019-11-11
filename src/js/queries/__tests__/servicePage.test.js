@@ -7,7 +7,6 @@ import getServicePageQuery from 'js/queries/getServicePageQuery';
 
 describe('Service Pages', ()=> {
 	test('Testing service pages', async () => {
-		console.log('*** - process.env.CMS_API: ', process.env.CMS_API) // coming up as undefined.
 		// const testClient = createGraphQLClientsByLang('en', 'http://joplin-staging.herokuapp.com/api/graphql');
 		// const testClient = createGraphQLClientsByLang('en', 'http://joplin.herokuapp.com/api/graphql');
 		const testClient = createGraphQLClientsByLang('en', process.env.CMS_API);

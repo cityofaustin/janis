@@ -226,13 +226,12 @@ Your site will be running on http://localhost:8080/
 
 ### Testing with Jest
 
-Jest is set up for snapshot testing as well us used for testing our queries. `npm test`
+[Jest](https://https://jestjs.io/) is set up for snapshot testing as well us used for testing our queries. `yarn test` will run the tests in `src/components`. `yarn test-queries` will run tests against the staging graphql endpoint. 
 
 
 ### Testing with Cypress
 
-We have [Cypress](https://cypress.io) set up to run integration tests. Tests are located in janis/cypress/integration. To launch the Test Runner use `yarn run cypress open` or `npx cypress open`. You must be running janis locally in order to run tests. [Here](https://github.com/cypress-io/cypress-example-kitchensink/tree/master/cypress/integration/examples) are some example integration tests.
-
+We have [Cypress](https://cypress.io) set up to run integration tests. Tests are located in janis/cypress/integration. To launch the Test Runner use `yarn open-cypress` or `npx cypress open`. You must be running janis locally in order to run tests. [Here](https://github.com/cypress-io/cypress-example-kitchensink/tree/master/cypress/integration/examples) are some example integration tests.
 
 ## SASS Guidelines
 
