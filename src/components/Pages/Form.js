@@ -29,7 +29,6 @@ function FormPage({
     toplink,
     description,
     formUrl,
-    contacts,
     coaGlobal,
     contextualNavData,
   },
@@ -63,13 +62,6 @@ function FormPage({
                   className="coa-FormPage__IframeResizer-default"
                   frameBorder="0"
                 />
-              )}
-            </div>
-          </div>
-          <div className="coa-Page__side-content">
-            <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
               )}
             </div>
           </div>
