@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
@@ -34,5 +35,14 @@ const TopicCollection = ({ tc, intl }) => {
     </div>
   );
 };
+
+// do we set these as isRequired?
+TopicCollection.propTypes = {
+  title:PropTypes.string, 
+  description:PropTypes.string, 
+  theme:PropTypes.string, 
+  topics:PropTypes.array, 
+  slug:PropTypes.string,
+}
 
 export default injectIntl(TopicCollection);

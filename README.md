@@ -226,6 +226,7 @@ Your site will be running on http://localhost:8080/
 
 ### Testing with Jest
 
+Jest is set up for snapshot testing as well us used for testing our queries. `npm test`
 
 
 ### Testing with Cypress
