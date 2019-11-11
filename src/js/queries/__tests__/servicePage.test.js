@@ -12,10 +12,8 @@ describe('Service Pages', ()=> {
 		const testClient = createGraphQLClientsByLang('en', process.env.CMS_API);
 
 		const service = await testClient.request(getServicePageQuery);
-		console.log(service);
+		const allServicePages = service.allServicePages.edges;
 
-		//const topPages = tc.allTopicPageTopicCollections.edges[0].node.page.topPages;
-		// could we check a snapshot?
-		//expect(topPages.edges.length).toBeGreaterThan(0);
+		expect(allServicePages.length).toBeGreaterThan(0);
 	})
 })

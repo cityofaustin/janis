@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import ContactMap from 'components/Contact/ContactMap';
 import ContactDetails from 'components/Contact/ContactDetails';
-import ContactPhone from 'components/Contact/Phone';
+// import ContactPhone from 'components/Contact/Phone';
 import ContactHours from 'components/Contact/Hours';
 import ContactEmail from 'components/Contact/Email';
 import ContactAddress from 'components/Contact/Address';
@@ -21,11 +21,11 @@ storiesOf('Contact', module)
       <ContactMap location={contactData.location} />
     </div>
   ))
-  .add('Phone', () => (
-    <div className="wrapper container-fluid">
-      <ContactPhone phone={contactData.phone} />
-    </div>
-  ))
+  // .add('Phone', () => (
+  //   <div className="wrapper container-fluid">
+  //     <ContactPhone phone={contactData.phone} />
+  //   </div>
+  // ))
   .add('Hours', () => (
     <div className="wrapper container-fluid">
       <ContactHours hours={contactData.hours} />
