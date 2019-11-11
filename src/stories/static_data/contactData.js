@@ -1,10 +1,28 @@
-const contact = {
+const contact = [{
   email: 'help@austintexas.gov',
-  phone: {
+  phone: {edges: [{
     default: '512-974-2000',
-    n11: 311,
+    phoneNummber: 311,
     tty: '512-972-9848',
-  },
+    phoneDescription: 'Main office'
+  }]},
+  phone: {
+    edges: [
+      {
+        node: {
+          id: "Q29udGFjdFBob25lTnVtYmVyczo1",
+          phoneDescription:"Main office",
+          phoneNumber:"+15129749090"}
+        },
+      {
+        node: {
+          id:"Q29udGFjdFBob25lTnVtYmVyczo2",
+          phoneDescription:"Complaint and thank you hotline",
+          phoneNumber:"+15129722676"
+        }
+      }
+      ]
+    },
   hours: [
     {
       dayOfWeek: 'MONDAY',
@@ -57,6 +75,6 @@ const contact = {
     zip: '78744',
     country: 'UNITED_STATES',
   },
-};
+}];
 
 export default contact;
