@@ -1,4 +1,9 @@
-// Recommended styling from the docs
+.coa-FormPage__iframe-container {
+  padding-left: 20rem;
+  padding-right: 20rem;
+}
+
+// Recommended styling from iframe-resizer docs
 .coa-FormPage__IframeResizer-default {
   width: 1px;
   min-width: 100%;

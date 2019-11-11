@@ -55,14 +55,16 @@ function FormPage({
         </PageHeader>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
-            {formUrl && (
-              <IframeResizer
-                forwardRef={iframeRef}
-                src={formUrl}
-                className="coa-FormPage__IframeResizer-default"
-                frameBorder="0"
-              />
-            )}
+            <div className="coa-FormPage__iframe-container">
+              {formUrl && (
+                <IframeResizer
+                  forwardRef={iframeRef}
+                  src={formUrl}
+                  className="coa-FormPage__IframeResizer-default"
+                  frameBorder="0"
+                />
+              )}
+            </div>
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
