@@ -9,7 +9,7 @@ import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
 
 const HeaderWrapper = injectIntl(({ intl }) => (
-  <Header navigation={navigationData[intl.locale]} path="" />
+  <Header navigation={navigationData[intl.locale]} path="health-safety/disaster-safety-relief" />
 ));
 
 const FooterWrapper = injectIntl(({ intl }) => (

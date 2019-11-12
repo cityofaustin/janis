@@ -1,10 +1,18 @@
+/*{"id":"VGhlbWVOb2RlOjY=","slug":"government-business",
+"text":"Government and business","description":"",,"topics":null,"url":"/government-business"},{"id":"VGhlbWVOb2RlOjc=","slug":"jobs","text":"Jobs","description":"",
+"topicCollectionPages":{"edges":[]},"topics":null,"url":"/jobs"}]
+*/
+
 const staticNavData = {
   en: [
     {
-      url: '/themes/permits-tickets',
+      url: '/permits-tickets',
       text: 'Permits and tickets',
       id: 'VGhlbWVOb2RlOjE=',
       description: '',
+      topicCollectionPages: {
+        edges: []
+      },
       topics: [
         {
           url: '/topics/building-permits',
@@ -38,6 +46,17 @@ const staticNavData = {
       id: 'VGhlbWVOb2RlOjI=',
       description:
         'Find the resources to keep your home, apartment, or condo running smoothly.',
+      topicCollectionPages: {
+        edges: [
+          {
+            node: {
+              title: "Recycling, trash, and compost",
+              slug:"recycling-trash-and-compost",
+              description:""
+            }
+          }
+        ]
+      },
       topics: [
         {
           url: '/topics/pay-utility-bills',
@@ -92,6 +111,9 @@ const staticNavData = {
       text: 'Pets',
       id: 'VGhlbWVOb2RlOjM=',
       description: '',
+      topicCollectionPages: {
+        edges: []
+      },
       topics: [
         {
           url: '/topics/pet-adoption',
@@ -124,6 +146,38 @@ const staticNavData = {
       text: 'Health and safety',
       id: 'VGhlbWVOb2RlOjQ=',
       description: '',
+      topicCollectionPages: {
+        edges: [
+          {
+            node: {
+              title: "Health records and certificates",
+              slug: "health-records-certificates-2",
+              description:""
+            }
+          },
+          {
+            node: {
+              title: "Healthcare and prevention",
+              slug: "healthcare-prevention",
+              description:""
+            }
+          },
+          {
+            node: {
+              title: "Disaster and safety relief",
+              slug:"disaster-safety-relief",
+              description:""
+            }
+          },
+          {
+            node: {
+              title: "Police oversight",
+              "slug": "police-oversight-2",
+              "description": "The Office of Police Oversight provides impartial oversight of the Austin Police Department’s conduct, practices, and policies to enhance accountability, informs the public to increase transparency, and creates sustainable partnerships throughout the community."
+            }
+          }
+        ]
+      },
       topics: [
         {
           url: '/topics/birth-certificates',
@@ -168,6 +222,9 @@ const staticNavData = {
       text: 'Explore and visit',
       id: 'VGhlbWVOb2RlOjU=',
       description: '',
+      topicCollectionPages: {
+        edges: []
+      },
       topics: [
         {
           url: '/topics/events-classes',
@@ -208,10 +265,20 @@ const staticNavData = {
       ],
     },
     {
-      url: '/themes/government-business',
+      url: '/government-business',
       text: 'Government and business',
       id: 'VGhlbWVOb2RlOjY=',
       description: '',
+      topicCollectionPages: {
+        edges: [
+          {
+            node: {
+              url: "/departments",
+              title:"Departments"
+            }
+          }
+        ]
+      },
       topics: [
         {
           url: '/topics/departments',
@@ -268,6 +335,9 @@ const staticNavData = {
       text: 'Jobs',
       id: 'VGhlbWVOb2RlOjc=',
       description: '',
+      topicCollectionPages: {
+        edges: []
+      },
       topics: [
         {
           url: '/topics/job-titles-pay',
