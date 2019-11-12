@@ -13,7 +13,7 @@ const ExternalLink = ({ to, noIcon, children, intl, ariaLabel }) => (
     className="coa-ExternalLink"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={(ariaLabel) ? ariaLabel + intl.formatMessage(navigation.openInNewWindow) : intl.formatMessage(navigation.openInNewWindow)}
+    aria-label={(ariaLabel) ? ariaLabel + {' '} + intl.formatMessage(navigation.openInNewWindow) : intl.formatMessage(navigation.openInNewWindow)}
   >
     {children}
     {!noIcon && <i className="material-icons coa-ExternalLinkMaterial">
