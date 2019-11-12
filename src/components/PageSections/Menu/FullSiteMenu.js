@@ -1,7 +1,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import ThemesNav from './ThemesNav';
-import staticNavData from 'stories/static_data/navigationData.js';
+import staticNavData from 'js/helpers/menuNavData.js';
 
 import MenuInfo from './MenuInfo';
 import ThemesTopicsMenu from './ThemesTopicsMenu';
