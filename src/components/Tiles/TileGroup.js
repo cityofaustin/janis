@@ -38,7 +38,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {tiles.map(({ type, url, title, pageName }, index) => {
+          {tiles.map(({ type, url, title, pageType }, index) => {
             return (
               <Tile
                 url={
@@ -46,7 +46,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
                 }
                 text={title}
                 compact={compact}
-                pageName={pageName}
+                pageType={pageType}
               />
             );
           })}

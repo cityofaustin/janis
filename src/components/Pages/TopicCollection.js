@@ -15,8 +15,6 @@ const TopicCollection = ({ tc, intl }) => {
     // it gets previews working with hooks
   } = tc ? { tc } : useRouteData();
 
-  console.log("topics :", topics)
-
   return (
     <div>
       <Head>

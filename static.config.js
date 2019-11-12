@@ -149,7 +149,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   )
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
-      pageName: page.__typename,
+      pageType: page.pageType,
       title: page.title,
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
@@ -208,7 +208,7 @@ const getTopicCollectionPageData = async (id, client) => {
       },
     },
     pages: edge.node.page.topPages.edges.map(topPageEdge => ({
-      pageName: console.log(topPageEdge),
+      pageType: topPageEdge.node.pageType,
       title: topPageEdge.node.title,
       url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
         edge.node.page.slug

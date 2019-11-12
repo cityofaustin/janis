@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { misc } from 'js/i18n/definitions';
 import { tilePropTypes } from './proptypes';
-
 import guideIcon from 'images/guide_icon.png';
 
-const Tile = ({ url, text, compact, pageName }) => {
+const Tile = ({ url, text, compact, pageType }) => {
   let typeIcon
-  if (pageName == "GuidePageNode") {
+  if (pageType == "guide page") {
     typeIcon = guideIcon
   }
   return (

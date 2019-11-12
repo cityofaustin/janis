@@ -37,7 +37,6 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
@@ -49,7 +48,6 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
@@ -61,7 +59,6 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
@@ -73,10 +70,10 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
+            pageType
           }
         }
       }
@@ -85,7 +82,6 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
@@ -97,7 +93,6 @@ const getTopicPageQuery = `
       edges {
         node {
           page {
-            __typename
             id
             slug
             title
