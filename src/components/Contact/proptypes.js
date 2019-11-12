@@ -14,12 +14,12 @@ export const hoursPropTypes = PropTypes.arrayOf(
   PropTypes.shape({
     dayOfWeek: PropTypes.string.isRequired,
     dayOfWeekNumeric: PropTypes.number.isRequired,
-    endTime: PropTypes.number.isRequired,
-    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.string.isRequired,
+    startTime: PropTypes.string.isRequired,
   }),
 ).isRequired;
 
 export const phonePropTypes = PropTypes.shape({
-  default: PropTypes.string.isRequired,
-  tty: PropTypes.string.isRequired,
+  phoneDescription: PropTypes.string.isRequired, // is this required?
+  phoneNumber: PropTypes.string.isRequired,
 }).isRequired;

@@ -13,12 +13,15 @@ export const cleanContacts = contacts => {
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
   const formatTime = time => {
+    if (time==='12:00:00'){
+      return 'Noon';
+    }
     // Simplify time parsing. Times work on previews,
     // but we don't do anything with timezones.
     const momentTime = moment(time, 'HH:mm:ss');
 
     // Only include minutes in display if there are minutes
-    const style = momentTime.minutes() ? 'h:mma' : 'ha';
+    const style = momentTime.minutes() ? 'h:mm a' : 'h a';
 
     return momentTime.format(style);
   };
