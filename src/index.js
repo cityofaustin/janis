@@ -35,5 +35,4 @@ if (typeof document !== 'undefined') {
       render(require('./App').default);
     });
   }
-
 }
