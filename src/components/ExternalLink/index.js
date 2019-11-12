@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { navigation as i18n } from 'js/i18n/definitions';
+import { navigation } from 'js/i18n/definitions';
 
 import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
-const ExternalLink = ({ to, noIcon, children, intl }) => (
+const ExternalLink = ({ to, noIcon, children, intl, ariaLabel }) => (
+// passing ariaLabel as a way to have an accessible name + behavior (opens in new window)
   <a
     href={to}
     className="coa-ExternalLink"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={intl.formatMessage(i18n.openInNewWindow)}
+    aria-label={(ariaLabel) ? ariaLabel + intl.formatMessage(navigation.openInNewWindow) : intl.formatMessage(navigation.openInNewWindow)}
   >
     {children}
     {!noIcon && <i className="material-icons coa-ExternalLinkMaterial">
