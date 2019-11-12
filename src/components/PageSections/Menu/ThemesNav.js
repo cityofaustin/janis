@@ -5,106 +5,51 @@ import classNames from 'classnames';
 
 const themesData = {
   en: [
-    {
-      text: 'Permits and tickets',
-    },
-    {
-      text: 'Housing and utilities',
-    },
-    {
-      text: 'Pets',
-    },
-    {
-      text: 'Health and safety',
-    },
-    {
-      text: 'Explore and visit',
-    },
-    {
-      text: 'Government and business',
-    },
-    {
-      text: 'Jobs',
-    },
+    'Permits and tickets',
+    'Housing and utilities',
+    'Pets',
+    'Health and safety',
+    'Explore and visit',
+    'Government and business',
+    'Jobs'
   ],
   es: [
-    {
-      text: 'Permisos y multas',
-    },
-    {
-      text: 'Vivienda y servicios públicos',
-    },
-    {
-      text: 'Mascotas',
-    },
-    {
-      text: 'Salud y seguridad',
-    },
-    {
-      text: 'Explorar y visitar',
-    },
-    {
-      text: 'Gobierno y negocios',
-    },
-    {
-      text: 'Empleos',
-    },
+    'Permisos y multas',
+    'Vivienda y servicios públicos',
+    'Mascotas',
+    'Salud y seguridad',
+    'Explorar y visitar',
+    'Gobierno y negocios',
+    'Empleos'
   ],
   vi: [
-    {
-      text: 'Giấy phép & Giấy phạt',
-    },
-    {
-      text: 'Nhà ở & Tiện ích',
-    },
-    {
-      text: 'Thú vật nuôi',
-    },
-    {
-      text: 'Sức khỏe $ An toàn',
-    },
-    {
-      text: 'Khám phá $ Thăm viếng',
-    },
-    {
-      text: 'Chính phủ $ Doanh nghiệp',
-    },
-    {
-      text: 'Công việc',
-    },
+    'Giấy phép & Giấy phạt',
+    'Nhà ở & Tiện ích',
+    'Thú vật nuôi',
+    'Sức khỏe $ An toàn',
+    'Khám phá $ Thăm viếng',
+    'Chính phủ $ Doanh nghiệp',
+    'Công việc'
   ],
   ar: [
-    {
-      text: 'التصاريح والتذاكر',
-    },
-    {
-      text: 'الإسكان والمنافع',
-    },
-    {
-      text: 'لحيوانات الأليفة',
-    },
-    {
-      text: 'الصحة والسلامة',
-    },
-    {
-      text: 'الاستكشاف والزيارة',
-    },
-    {
-      text: 'الحكومة والأعمال',
-    },
-    {
-      text: 'الوظائف',
-    },
+    'التصاريح والتذاكر',
+    'الإسكان والمنافع',
+    'لحيوانات الأليفة',
+    'الصحة والسلامة',
+    'الاستكشاف والزيارة',
+    'الحكومة والأعمال',
+    'الوظائف'
   ],
 };
 
-const ThemesNav = props => (
+const ThemesNav = props => { console.log(themesData);
+ return (
   <nav className={classNames('coa-ThemesNav', { 'coa-ThemesNav--open': props.isTopMenuActive } )}>
     <ul className="coa-ThemesNav__list">
       {themesData[props.intl.locale].map((theme, index) => (
         <li className="coa-ThemesNav__theme" key={index} tabIndex="0" onKeyDown={props.handleOnClick}>
           <a className="coa-ThemesNav__link" onClick={props.handleOnClick} >
-            {theme.text}
+            {theme}
           </a>
         </li>
       ))}
@@ -120,7 +65,7 @@ const ThemesNav = props => (
       </a>
     ) : null}
   </nav>
-);
+)};
 
 ThemesNav.propTypes = {
   handleOnClick: PropTypes.func.isRequired,
