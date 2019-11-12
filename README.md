@@ -226,8 +226,7 @@ Your site will be running on http://localhost:8080/
 
 ### Testing with Jest
 
-[Jest](https://https://jestjs.io/) is set up for [snapshot testing](https://jestjs.io/docs/en/snapshot-testing) as well us used for testing our queries. `yarn test` will run the tests in `src/components`. `yarn test-queries` will run tests against the staging graphql endpoint.
-
+[Jest](https://https://jestjs.io/) is set up for [snapshot testing](https://jestjs.io/docs/en/snapshot-testing) as well us used for testing our queries. `yarn test` will run the tests in `src/components`. 
 If you need to update the snapshots, `jest --updateSnapshot`.
 
 

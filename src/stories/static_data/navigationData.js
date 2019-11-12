@@ -1,8 +1,3 @@
-/*{"id":"VGhlbWVOb2RlOjY=","slug":"government-business",
-"text":"Government and business","description":"",,"topics":null,"url":"/government-business"},{"id":"VGhlbWVOb2RlOjc=","slug":"jobs","text":"Jobs","description":"",
-"topicCollectionPages":{"edges":[]},"topics":null,"url":"/jobs"}]
-*/
-
 const staticNavData = {
   en: [
     {

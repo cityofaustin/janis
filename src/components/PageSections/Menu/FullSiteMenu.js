@@ -1,7 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import ThemesNav from './ThemesNav';
-import staticNavData from 'js/helpers/menuNavData.js';
 
 import MenuInfo from './MenuInfo';
 import ThemesTopicsMenu from './ThemesTopicsMenu';
@@ -18,7 +17,6 @@ const FullSiteMenu = props => (
       <ThemesNav
         handleOnClick={props.handleFullSiteMenuOpen}
         isTopMenuActive={props.isTopMenuActive}
-        themes={staticNavData}
         handleFullSiteMenuClose={props.handleFullSiteMenuClose}
       />
     </div>
