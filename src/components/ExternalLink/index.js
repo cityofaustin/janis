@@ -7,18 +7,22 @@ import { navigation } from 'js/i18n/definitions';
 import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
 const ExternalLink = ({ to, noIcon, children, intl, ariaLabel }) => (
-// passing ariaLabel as a way to have an accessible name + behavior (opens in new window)
+  // passing ariaLabel as a way to have an accessible name + behavior (opens in new window)
   <a
     href={to}
     className="coa-ExternalLink"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={(ariaLabel) ? ariaLabel + {' '} + intl.formatMessage(navigation.openInNewWindow) : intl.formatMessage(navigation.openInNewWindow)}
+    aria-label={
+      ariaLabel
+        ? ariaLabel + `, ` + intl.formatMessage(navigation.openInNewWindow)
+        : intl.formatMessage(navigation.openInNewWindow)
+    }
   >
     {children}
-    {!noIcon && <i className="material-icons coa-ExternalLinkMaterial">
-      open_in_new
-    </i>}
+    {!noIcon && (
+      <i className="material-icons coa-ExternalLinkMaterial">open_in_new</i>
+    )}
   </a>
 );
 
