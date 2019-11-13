@@ -42,10 +42,8 @@
     "react-router-dom": "^5.1.2",
     "react-static": "^7.2.2",
     "react-static-plugin-react-router": "^7.2.2",
-    "react-test-renderer": "^16.11.0",
     "react-universal-component": "^2.8.1",
     "stickyfilljs": "^2.1.0",
-    "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
     "uswds": "^1.4.5"
   },
@@ -67,8 +65,10 @@
     "jest": "^24.9.0",
     "libphonenumber-js": "^1.7.22",
     "prettier": "1.12.1",
+    "react-test-renderer": "^16.11.0",
     "sass-loader": "^7.2.0",
     "serve": "^7.0.0",
+    "storybook": "^5.1.11",
     "storybook-addon-intl": "^2.3.0",
     "svg-url-loader": "^3.0.0",
     "url-loader": "^2.1.0"
