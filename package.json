@@ -77,7 +77,7 @@
     "start-prod": "./scripts/serve-local.sh -P",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js && cp -r dist/* _dist/",
-    "build-local-ie": "bash ./scripts/build-local-ie.sh",
+    "build-joplin-pr": "bash ./scripts/build-joplin-pr.sh",
     "start-js": "react-static start",
     "build-js": "react-static build",
     "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
