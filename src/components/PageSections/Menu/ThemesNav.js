@@ -42,8 +42,7 @@ const themesData = {
   ],
 };
 
-const ThemesNav = props => { console.log(themesData);
- return (
+const ThemesNav = props => (
   <nav className={classNames('coa-ThemesNav', { 'coa-ThemesNav--open': props.isTopMenuActive } )}>
     <ul className="coa-ThemesNav__list">
       {themesData[props.intl.locale].map((theme, index) => (
@@ -65,7 +64,7 @@ const ThemesNav = props => { console.log(themesData);
       </a>
     ) : null}
   </nav>
-)};
+);
 
 ThemesNav.propTypes = {
   handleOnClick: PropTypes.func.isRequired,
