@@ -23,6 +23,7 @@ const Service = ({ service, intl }) => {
       slug,
       steps,
       additionalContent,
+      dynamicContent,
       contacts,
       related,
       shortDescription,
@@ -67,6 +68,11 @@ const Service = ({ service, intl }) => {
                     )
                   ) : null}
 
+                  {!!dynamicContent &&
+                    dynamicContent.map(content => (
+                      <ApplicationBlock key={content.id} content={content} />
+                    ))}
+
                   {additionalContent && (
                     <HtmlFromAdmin
                       title={intl.formatMessage(i18n2.whatElse)}
@@ -74,9 +80,10 @@ const Service = ({ service, intl }) => {
                     />
                   )}
                   <div className="coa-Page__contacts-mobile">
-                    {!!contacts && !!contacts.length && (
-                      <ContactDetails contacts={contacts} />
-                    )}
+                    {!!contacts &&
+                      !!contacts.length && (
+                        <ContactDetails contacts={contacts} />
+                      )}
                   </div>
                 </div>
               </div>
@@ -84,9 +91,8 @@ const Service = ({ service, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contacts={contacts} />
-              )}
+              {!!contacts &&
+                !!contacts.length && <ContactDetails contacts={contacts} />}
             </div>
           </div>
         </div>
