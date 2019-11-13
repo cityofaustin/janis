@@ -234,6 +234,8 @@ If you need to update the snapshots, `jest --updateSnapshot`.
 
 We have [Cypress](https://cypress.io) set up to run integration tests. Tests are located in janis/cypress/integration. To launch the Test Runner use `yarn open-cypress` or `npx cypress open`. You must be running janis locally in order to run tests. [Here](https://github.com/cypress-io/cypress-example-kitchensink/tree/master/cypress/integration/examples) are some example integration tests.
 
+If you would like to update/change the base url used for testing, edit `cypress.json`.
+
 ## SASS Guidelines
 
 We're using BEM for CSS naming and organization

@@ -98,6 +98,12 @@
   "resolutions": {
     "react-hot-loader/source-map": "^0.8.0-beta.0"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|ico|jpeg|png|gif)$": "<rootDir>/mocks/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+    }
+  },
   "prettier": {
     "semi": true,
     "singleQuote": true,

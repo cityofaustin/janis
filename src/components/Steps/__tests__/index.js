@@ -9,15 +9,14 @@ import Steps from 'components/Steps';
 jest.mock('react-accessible-accordion')
 
 import AccordionWrapper from '..'
+
 const {
-Accordion,
-AccordionItem,
-AccordionItemHeading,
-AccordionItemPanel,
-AccordionItemButton,
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemPanel,
+  AccordionItemButton,
 } = jest.requireActual('react-accessible-accordion')
-
-
 
 describe('Step', () => {
   test('step renders, step length > 1', () => {
@@ -27,13 +26,6 @@ describe('Step', () => {
         value: {
           options_description: "Determine how you would like to receive your certificate based on how quickly you need it",
           options: [
-            // {
-            //   option_name: "15 minutes in person",
-            //   option_description:"<ol><li>Bring your current, government-issued photo identification.</li><li>Bring cash, a money order in the exact amount, a personal check, or a credit or debit card in your name for the certificate you need.</li></ol>"},
-            // {
-            //   option_name: "2-5 business days online",
-            //   option_description: "<ol><li>Follow the prompts on VitalChek to select which kind of certificate(s) you need.</li><li>Verify your identity by answering the questions on VitalChek. If they cannot verify your identity with their standard questions, you will be instructed to upload a copy of your current government-issued identification and proof of shipping address before your application can be processed. This will delay the processing and delivery time.</li><li>Use a credit or debit card (Visa, MasterCard, American Express, or Discover) to pay for your certificate(s). Processing and UPS shipping fees will be added.</li></ol>"
-            // },
             {
               option_name:"3-5 business days by phone",
               option_description: "<ol><li>Call VitalChek, our secure online agent at 1-800-457-7586.</li><li>Verify your identity by answering a series of questions. If VitalChek cannot verify your identity with their standard questions, you will be instructed to upload a copy of your current government-issued identification and proof of shipping address before your application can be processed. This will delay the processing and delivery time.</li><li>Use a credit or debit card (Visa, MasterCard, American Express, or Discover) to pay for your certificate(s). Processing and UPS shipping fees will be added.</li></ol>"
@@ -62,6 +54,24 @@ describe('Step', () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+  test('step renders, step length equals 1', () => {
+    const step = [
+      {
+        type: "basic_step",
+        value: "<p>Make sure you have enough money for the certificate(s) you need.</p><ul><li>The cost for each birth certificate is $23.</li><li>The cost for one death certificate is $21.</li></ul>",
+        id:"2a910f7a-2063-4cb8-9f06-2d9b96c9f5cd"
+      }
+    ];
+    const component = renderer.create(
+      <BrowserRouter>
+        <Steps
+          steps={step}
+        />
+      </BrowserRouter>
+    );
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  })
 });
 
 
