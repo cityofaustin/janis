@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
+import scrollIntoView from 'scroll-into-view';
 
 const GuideMenuLink = ({
   title,
@@ -84,14 +85,33 @@ const GuideMenu = ({
   const goToSection = (e, anchorTag) => {
     setClickedSection(anchorTag);
     history.pushState(null, null, `#${anchorTag}`);
+    // scrollIntoView(document.getElementById(anchorTag));
+    // scrollIntoView(document.getElementById(anchorTag), { cancellable: false });
     document.getElementById(anchorTag).scrollIntoView(true);
   };
 
   useEffect(() => {
-    // debugger;
-    if (usingUrlAnchor) {
+    // If we're loading in an anchor url, we treat it as if we
+    // clicked on it, then let the rest of changes happen
+    // if we've already set a clickedSection, we shouldn't set it again
+    if (usingUrlAnchor && !clickedSection) {
+      // debugger;
       setClickedSection(currentSection);
-      doneWithAnchor();
+      scrollIntoView(
+        document.getElementById(`menu-${currentSection}`),
+        function(type) {
+          // Scrolling done.
+          // type will be 'complete' if the scroll completed or 'canceled' if the current scroll was canceled by a new scroll
+          scrollIntoView(document.getElementById(currentSection), function(
+            type,
+          ) {
+            // debugger;
+            doneWithAnchor();
+            // return;
+          });
+        },
+      );
+      return;
     }
 
     const el = document.getElementById(`menu-${currentSection}`);
@@ -106,6 +126,7 @@ const GuideMenu = ({
         }
       } else {
         el.scrollIntoView(true);
+        // scrollIntoView(el);
       }
     }
   }, [currentSection]);

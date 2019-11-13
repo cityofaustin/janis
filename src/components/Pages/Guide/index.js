@@ -22,6 +22,7 @@ import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
+  const [urlAnchorFuse, setUrlAnchorFuse] = useState(false);
   const [usingUrlAnchor, setUsingUrlAnchor] = useState(false);
   const [resizeCount, setResizeCount] = useState(0);
   const [sectionLocations, dispatchSectionLocations] = useReducer(
@@ -123,6 +124,7 @@ function Guide(props) {
   // passing things from useState doesn't work so we need to wrap this
   function doneWithAnchor() {
     setUsingUrlAnchor(false);
+    setUrlAnchorFuse(true);
   }
 
   // Organize variables that will be used in rendering
@@ -150,6 +152,7 @@ function Guide(props) {
   // debugger;
   if (
     !currentSection &&
+    !urlAnchorFuse &&
     document &&
     document.location &&
     document.location.hash

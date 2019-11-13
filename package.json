@@ -43,6 +43,7 @@
     "react-static": "^7.2.2",
     "react-static-plugin-react-router": "^7.2.2",
     "react-universal-component": "^2.8.1",
+    "scroll-into-view": "^1.12.2",
     "stickyfilljs": "^2.1.0",
     "storybook": "^1.0.0",
     "ua-parser-js": "^0.7.17",
