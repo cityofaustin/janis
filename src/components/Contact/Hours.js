@@ -48,7 +48,8 @@ class Hours extends Component {
                     )}
                   </th>
                   {hourIndex > -1 && (
-                    <td>{`${hours[hourIndex].startTime}-${
+                    // \u2013 is unicode for the en dash –
+                    <td>{`${hours[hourIndex].startTime}\u2013${
                       hours[hourIndex].endTime
                     }`}</td>
                   )}
