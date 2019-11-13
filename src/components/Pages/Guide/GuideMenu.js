@@ -70,7 +70,14 @@ function GuideMenuSection({ section, currentSection, goToSection }) {
   );
 }
 
-const GuideMenu = ({ contact, sections, currentSection, intl }) => {
+const GuideMenu = ({
+  contact,
+  sections,
+  currentSection,
+  usingUrlAnchor,
+  doneWithAnchor,
+  intl,
+}) => {
   const [clickedSection, setClickedSection] = useState(null);
 
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
@@ -81,6 +88,12 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
   };
 
   useEffect(() => {
+    // debugger;
+    if (usingUrlAnchor) {
+      setClickedSection(currentSection);
+      doneWithAnchor();
+    }
+
     const el = document.getElementById(`menu-${currentSection}`);
     if (el) {
       if (clickedSection) {
@@ -92,7 +105,7 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
           setClickedSection(null);
         }
       } else {
-        el.scrollIntoView();
+        el.scrollIntoView(true);
       }
     }
   }, [currentSection]);

@@ -22,6 +22,7 @@ import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
 function Guide(props) {
   const [currentSection, setCurrentSection] = useState(null);
+  const [usingUrlAnchor, setUsingUrlAnchor] = useState(false);
   const [resizeCount, setResizeCount] = useState(0);
   const [sectionLocations, dispatchSectionLocations] = useReducer(
     (sectionLocations, { action, payload }) => {
@@ -119,6 +120,11 @@ function Guide(props) {
     };
   }, [resizeCount]);
 
+  // passing things from useState doesn't work so we need to wrap this
+  function doneWithAnchor() {
+    setUsingUrlAnchor(false);
+  }
+
   // Organize variables that will be used in rendering
   let {
     id,
@@ -137,6 +143,20 @@ function Guide(props) {
     contextualNavData,
   } = props.guidePage;
   let { intl } = props;
+
+  // if we don't already have a current section set
+  // try getting the anchor from the url
+  // so we can pass it into the menu
+  // debugger;
+  if (
+    !currentSection &&
+    document &&
+    document.location &&
+    document.location.hash
+  ) {
+    setCurrentSection(document.location.hash.substring(1));
+    setUsingUrlAnchor(true);
+  }
 
   return (
     <div ref={node}>
@@ -185,6 +205,8 @@ function Guide(props) {
                   contact={contact}
                   sections={sections}
                   currentSection={currentSection}
+                  usingUrlAnchor={usingUrlAnchor}
+                  doneWithAnchor={doneWithAnchor}
                 />
               </div>
             )}
