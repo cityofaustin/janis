@@ -36,6 +36,19 @@ function FormPage({
 }) {
   const iframeRef = useRef(null);
 
+  // Go to the top of the page when we transition to the form Confirmation Page.
+  // "init" events after the first "init" means that there was a page transition within the iframe.
+  let iframeLoaded = false;
+  const onResized = ({iframe, height, width, type}) => {
+    if (type === "init") {
+      if (iframeLoaded) {
+        document.getElementById("coa-FormPage__top").scrollIntoView(true);
+      } else {
+        iframeLoaded = true;
+      }
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -48,7 +61,7 @@ function FormPage({
           offeredBy={contextualNavData.offeredBy}
         />
       )}
-      <div>
+      <div id="coa-FormPage__top">
         <PageHeader contentType={'information'} description={description}>
           {title}
         </PageHeader>
@@ -61,6 +74,7 @@ function FormPage({
                   src={formUrl}
                   className="coa-FormPage__IframeResizer-default"
                   frameBorder="0"
+                  onResized={onResized}
                 />
               )}
             </div>
