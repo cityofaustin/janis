@@ -69,7 +69,9 @@ const TrashySchedule = props => {
     </I18nLink>
   );
 
-  const errorMessage = 'Currently, no upcoming bulk item collection date has been scheduled. Please check back soon.'
+  const bulkItemMessage = nextBulkPickupDate ?
+  `${intl.formatMessage(i18n.bulkitemcollection)}: {bulkPickupDate}` 
+  : 'Currently, no upcoming bulk item collection date has been scheduled. Please check back soon.'
 
   return (
     <div className="coa-Trashy__schedule-container">
@@ -82,8 +84,8 @@ const TrashySchedule = props => {
           <h4>
             <FormattedMessage
               id="trashSchedule.bulkPickUp"
-              defaultMessage={nextBulkPickupDate ? 'Next {bulkItemPickupLink}: {bulkPickupDate}' : errorMessage}
-              values={{ bulkPickupDate, bulkItemPickupLink }}
+              defaultMessage={bulkItemMessage}
+              values={{ bulkPickupDate }}
             />
           </h4>
         </div>
