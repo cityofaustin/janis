@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { useLocation } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
@@ -80,6 +81,16 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
     document.getElementById(anchorTag).scrollIntoView(true);
   };
 
+  let location = useLocation();
+  useEffect(() => {
+    if (location && location.hash) {
+      // debugger;
+      setClickedSection(location.hash.substring(1));
+    }
+    // const initialClick = 'Learn-and-prepare-4';
+    // setClickedSection(initialClick);
+  }, [location]);
+
   useEffect(() => {
     const el = document.getElementById(`menu-${currentSection}`);
     if (el) {
@@ -90,6 +101,7 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
         if (currentSection === clickedSection) {
           // We made it! back to business as usual
           setClickedSection(null);
+          el.scrollIntoView();
         }
       } else {
         el.scrollIntoView();
