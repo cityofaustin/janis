@@ -1,11 +1,12 @@
 import React, { Component, useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { useLocation, useHistory, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
+import scrollIntoView from 'scroll-into-view';
 
 const GuideMenuLink = ({ title, anchorTag, isHeading, isCurrentSection }) => {
   return (
@@ -65,64 +66,101 @@ function GuideMenuSection({ section, currentSection }) {
 
 const GuideMenu = ({ contact, sections, currentSection, intl }) => {
   const [clickedSection, setClickedSection] = useState(null);
+  /*
 
-  // Each GuideSectionWrapper has an id={this.props.anchorTag}
-  // const goToSection = (e, anchorTag) => {
-  //   setClickedSection(anchorTag);
-  //   history.pushState(null, null, `#${anchorTag}`);
-  //   document.getElementById(anchorTag).scrollIntoView(true);
-  // };
+  Dear future developers trying to improve/replace the 
+  guide page table of contents/scrolling code, I wish you
+  all the best. 
 
+  In order to work correctly -
+  • when a user scrolls:
+    • the current section appears "selected" in the TOC
+    • the current section is on screen in the TOC
+  • when loading the page with an anchor link:
+    • the linked section is scrolled to the top
+    • the corresponding TOC section is selected and visible
+  • when clicking a link in the TOC
+    • the url is updated to reflect the link anchor
+    • the clicked section is scrolled to the top
+    • the corresponding TOC section is selected and visible
+
+
+  In this implementation, I have found a few issues, most of
+  them stem from trying to scroll 2 things at once:
+   • Table of contents
+   • Main content
+
+  Known Issues:
+   • if you enter a new anchor link in the url when the page is already loaded, 
+     it will scroll to the new section but not update the scrolling on the TOC
+
+   • if we have dynamic content (like recollect that changes height after loading)
+     we don't correctly recalculate the size of the sections, so everything will
+     be off by a little bit (existing bug I'm pretty sure)
+
+   • scrolling down after clicking a section lower down allows the selected
+     TOC item to be offscreen again (attaching gif for that)
+
+  Things I've tried:
+   • The current implementation (detailed in comments below)
+   • Playing with setTimeout to fake concurrent scrolling
+   • Using https://www.npmjs.com/package/scroll-into-view
+     • Led to UI freezes
+     • Jumpy scrolling around a bit
+   • Another branch (https://github.com/cityofaustin/janis/tree/3094-guide-page-toc) that:
+     • Didn't use any react-router-dom hooks
+     • Didn't use react-router-dom links
+     • Had complex logic including goToSection
+     • Failed super hard when trying to get anchor links to work 
+    
+  */
+
+  // This is fired every time the page location is updated
+  // This means on:
+  //  • First load (seeing if we have an anchor in the URL)
+  //  • TOC link clicks (uses react-router-dom)
   let location = useLocation();
   useEffect(() => {
     if (location && location.hash) {
-      // debugger;
-      console.log(location.hash);
+      // By setting the section to "clicked" we won't try to
+      // scroll the TOC until after we scroll to the correct section
+      // in the main content
       setClickedSection(location.hash.substring(1));
 
-      // setTimeout(() => {
+      // Scroll the main content section into view
       document.getElementById(location.hash.substring(1)).scrollIntoView();
-      // }, 5000);
-
-      // const el = document.getElementById(`menu-${currentSection}`);
-      // if (el) {
-      //   // setTimeout(() => {
-      //   el.scrollIntoView(true);
-      //   // }, 5000);
-      // }
     }
-    // const initialClick = 'Learn-and-prepare-4';
-    // setClickedSection(initialClick);
   }, [location]);
 
-  let history = useHistory();
+  // This is fired every time the main content scrolls to a new section
+  // this means it happens when:
+  //  • A user scrolls
+  //  • The page automatically scrolls when loading with an #anchor in the url
+  //  • The page automatically scrolls when a TOC link is clicked
   useEffect(() => {
-    // debugger;
-    const el = document.getElementById(`menu-${currentSection}`);
-    if (el) {
-      if (clickedSection) {
-        console.log(clickedSection);
-        // If we clicked a section, we don't want to mess around with this logic
-        // until we hit that section. This fires every time we scroll to a new
-        // section, and is fired a bunch when the click fires off a scroll
-        if (currentSection === clickedSection) {
-          // We made it! back to business as usual
-          // el.scrollIntoView(true);
-
-          setClickedSection(null);
-          // el.scrollIntoView(true);
-          // debugger;
-
-          // document.getElementById(currentSection).scrollIntoView(true);
-          return;
-        }
-      } else {
-        // console.log(currentSection);
-        el.scrollIntoView();
-        // debugger;
-        // if (currentSection) {
-        //   history.push(`#${currentSection}`);
-        // }
+    // If we clicked a section, we don't want to scroll the TOC until we
+    // finish scrolling the main content, as scrolling two things at once
+    // causes all sorts of silly problems
+    if (clickedSection) {
+      if (currentSection === clickedSection) {
+        // Once we've gotten to our section, we clear out the click and let the standard
+        // logic fire
+        setClickedSection(null);
+        return;
+      }
+    } else {
+      // If we have a menu item for this, we want to scroll to it
+      const el = document.getElementById(`menu-${currentSection}`);
+      if (el) {
+        // As per https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView -
+        // I'm using the verbose scrollIntoViewOptions here. One thing i've noticed is that
+        // changing behavior to "smooth" causes this to fail completely, this makes me think that
+        // we might be encountering issues of dom update priority between user scrolling and
+        // updating this.
+        el.scrollIntoView({
+          behavior: 'auto',
+          block: 'start',
+        });
       }
     }
   }, [currentSection]);
