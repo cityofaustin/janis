@@ -99,7 +99,7 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
      be off by a little bit (existing bug I'm pretty sure)
 
    • scrolling down after clicking a section lower down allows the selected
-     TOC item to be offscreen again (attaching gif for that)
+     TOC item to be offscreen again
 
   Things I've tried:
    • The current implementation (detailed in comments below)
