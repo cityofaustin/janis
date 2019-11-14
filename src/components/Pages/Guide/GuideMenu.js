@@ -1,19 +1,13 @@
 import React, { Component, useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
 import { isMobileOrTablet } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
 
-const GuideMenuLink = ({
-  title,
-  anchorTag,
-  isHeading,
-  isCurrentSection,
-  goToSection,
-}) => {
+const GuideMenuLink = ({ title, anchorTag, isHeading, isCurrentSection }) => {
   return (
     <div
       className={classNames('coa-GuideMenu__link-wrapper', {
@@ -21,21 +15,21 @@ const GuideMenuLink = ({
       })}
       id={`menu-${anchorTag}`}
     >
-      <div
+      <Link
         className={classNames('coa-GuideMenu__link', {
           'coa-GuideMenu__heading': isHeading,
           'coa-GuideMenu__subheading': !isHeading,
           'coa-GuideMenu__current-section': isCurrentSection,
         })}
-        onClick={e => goToSection(e, anchorTag)}
+        to={`#${anchorTag}`}
       >
         <span className="coa-GuideMenu__title-text">{title}</span>
-      </div>
+      </Link>
     </div>
   );
 };
 
-function GuideMenuSection({ section, currentSection, goToSection }) {
+function GuideMenuSection({ section, currentSection }) {
   const headingAnchorTag = hyphenate(section.heading);
   const subHeadings = section.pages.map((page, index) => {
     const title =
@@ -55,7 +49,6 @@ function GuideMenuSection({ section, currentSection, goToSection }) {
         anchorTag={headingAnchorTag}
         isHeading={true}
         isCurrentSection={currentSection === headingAnchorTag}
-        goToSection={goToSection}
       />
       {subHeadings.map((subHeading, index) => (
         <GuideMenuLink
@@ -64,7 +57,6 @@ function GuideMenuSection({ section, currentSection, goToSection }) {
           anchorTag={subHeading.anchorTag}
           isHeading={false}
           isCurrentSection={currentSection === subHeading.anchorTag}
-          goToSection={goToSection}
         />
       ))}
     </div>
@@ -75,17 +67,18 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
   const [clickedSection, setClickedSection] = useState(null);
 
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
-  const goToSection = (e, anchorTag) => {
-    setClickedSection(anchorTag);
-    history.pushState(null, null, `#${anchorTag}`);
-    document.getElementById(anchorTag).scrollIntoView(true);
-  };
+  // const goToSection = (e, anchorTag) => {
+  //   setClickedSection(anchorTag);
+  //   history.pushState(null, null, `#${anchorTag}`);
+  //   document.getElementById(anchorTag).scrollIntoView(true);
+  // };
 
   let location = useLocation();
   useEffect(() => {
     if (location && location.hash) {
       // debugger;
       setClickedSection(location.hash.substring(1));
+      document.getElementById(location.hash.substring(1)).scrollIntoView(true);
     }
     // const initialClick = 'Learn-and-prepare-4';
     // setClickedSection(initialClick);
@@ -118,7 +111,6 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
             anchorTag="Contact-information"
             isHeading={true}
             isCurrentSection={currentSection === 'Contact-information'}
-            goToSection={goToSection}
           />
         )}
       </div>
@@ -127,7 +119,6 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
           key={index}
           section={section}
           currentSection={currentSection}
-          goToSection={goToSection}
         />
       ))}
     </div>
