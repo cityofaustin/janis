@@ -77,6 +77,7 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
   useEffect(() => {
     if (location && location.hash) {
       // debugger;
+      console.log(location.hash);
       setClickedSection(location.hash.substring(1));
       document.getElementById(location.hash.substring(1)).scrollIntoView(true);
     }
@@ -85,21 +86,27 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
   }, [location]);
 
   useEffect(() => {
-    const el = document.getElementById(`menu-${currentSection}`);
-    if (el) {
-      if (clickedSection) {
-        // If we clicked a section, we don't want to mess around with this logic
-        // until we hit that section. This fires every time we scroll to a new
-        // section, and is fired a bunch when the click fires off a scroll
-        if (currentSection === clickedSection) {
-          // We made it! back to business as usual
-          setClickedSection(null);
-          el.scrollIntoView();
-        }
-      } else {
-        el.scrollIntoView();
-      }
+    console.log(currentSection);
+    if (currentSection) {
+      history.pushState(null, null, `#${currentSection}`);
     }
+
+    // debugger;
+    // const el = document.getElementById(`menu-${currentSection}`);
+    // if (el) {
+    //   if (clickedSection) {
+    //     // If we clicked a section, we don't want to mess around with this logic
+    //     // until we hit that section. This fires every time we scroll to a new
+    //     // section, and is fired a bunch when the click fires off a scroll
+    //     if (currentSection === clickedSection) {
+    //       // We made it! back to business as usual
+    //       setClickedSection(null);
+    //       el.scrollIntoView(true);
+    //     }
+    //   } else {
+    //     el.scrollIntoView(true);
+    //   }
+    // }
   }, [currentSection]);
 
   return (
