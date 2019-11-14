@@ -141,6 +141,7 @@ export const curbsideServices = defineMessages({
   brushcollection: 'Large brush collection',
   bulkitemcollection: 'Next bulk item collection',
   pickupschedule: "Here's the pickup schedule for {address}",
+  invalidDate: 'Currently, no upcoming bulk item collection date has been scheduled. Please check back soon.',
 });
 
 export const departmentPage = defineMessages({
