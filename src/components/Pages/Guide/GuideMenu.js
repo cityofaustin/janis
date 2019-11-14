@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { hyphenate } from './helpers';
@@ -79,34 +79,52 @@ const GuideMenu = ({ contact, sections, currentSection, intl }) => {
       // debugger;
       console.log(location.hash);
       setClickedSection(location.hash.substring(1));
-      document.getElementById(location.hash.substring(1)).scrollIntoView(true);
+
+      // setTimeout(() => {
+      document.getElementById(location.hash.substring(1)).scrollIntoView();
+      // }, 5000);
+
+      // const el = document.getElementById(`menu-${currentSection}`);
+      // if (el) {
+      //   // setTimeout(() => {
+      //   el.scrollIntoView(true);
+      //   // }, 5000);
+      // }
     }
     // const initialClick = 'Learn-and-prepare-4';
     // setClickedSection(initialClick);
   }, [location]);
 
+  let history = useHistory();
   useEffect(() => {
-    console.log(currentSection);
-    if (currentSection) {
-      history.pushState(null, null, `#${currentSection}`);
-    }
-
     // debugger;
-    // const el = document.getElementById(`menu-${currentSection}`);
-    // if (el) {
-    //   if (clickedSection) {
-    //     // If we clicked a section, we don't want to mess around with this logic
-    //     // until we hit that section. This fires every time we scroll to a new
-    //     // section, and is fired a bunch when the click fires off a scroll
-    //     if (currentSection === clickedSection) {
-    //       // We made it! back to business as usual
-    //       setClickedSection(null);
-    //       el.scrollIntoView(true);
-    //     }
-    //   } else {
-    //     el.scrollIntoView(true);
-    //   }
-    // }
+    const el = document.getElementById(`menu-${currentSection}`);
+    if (el) {
+      if (clickedSection) {
+        console.log(clickedSection);
+        // If we clicked a section, we don't want to mess around with this logic
+        // until we hit that section. This fires every time we scroll to a new
+        // section, and is fired a bunch when the click fires off a scroll
+        if (currentSection === clickedSection) {
+          // We made it! back to business as usual
+          // el.scrollIntoView(true);
+
+          setClickedSection(null);
+          // el.scrollIntoView(true);
+          // debugger;
+
+          // document.getElementById(currentSection).scrollIntoView(true);
+          return;
+        }
+      } else {
+        // console.log(currentSection);
+        el.scrollIntoView();
+        // debugger;
+        // if (currentSection) {
+        //   history.push(`#${currentSection}`);
+        // }
+      }
+    }
   }, [currentSection]);
 
   return (
