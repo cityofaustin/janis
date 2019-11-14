@@ -57,7 +57,7 @@ const Service = ({ service, intl }) => {
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-                  {steps && !!steps.length ? (
+                  {(steps && !!steps.length) && (
                     //just 1 step? don't display steps in list (ul)
                     steps.length === 1 ? (
                       <Steps steps={steps} />
@@ -66,7 +66,7 @@ const Service = ({ service, intl }) => {
                         <Steps steps={steps} />
                       </Fragment>
                     )
-                  ) : null}
+                  )}
 
                   {!!dynamicContent &&
                     dynamicContent.map(content => (
@@ -75,7 +75,6 @@ const Service = ({ service, intl }) => {
 
                   {additionalContent && (
                     <HtmlFromAdmin
-                      title={intl.formatMessage(i18n2.whatElse)}
                       content={additionalContent}
                     />
                   )}

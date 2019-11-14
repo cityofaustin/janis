@@ -2,6 +2,31 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import ContextualNav from '../components/PageSections/ContextualNav';
 
+const parent = {
+  id: "VG9waWNOb2RlOjUz",
+  title: "Disease prevention",
+  url: "/health-safety/healthcare-prevention/disease-prevention/"
+};
+const relatedTo = [
+  {
+    id: "VG9waWNOb2RlOjU3",
+    title: "Household waste",
+    url: "/housing-utilities/recycling-trash-and-compost/household-waste/"
+  },
+  {
+    id: "VG9waWNOb2RlOjU5",
+    title: "Recycling and reuse",
+    url: "/housing-utilities/recycling-trash-and-compost/recycling-reuse/"
+  }
+];
+const offeredBy = [
+  {
+    id: "RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==",
+    title: "Austin Public Health",
+    url: "/austin-public-health/"
+  }
+];
+
 const tempTopicData = {
   id: 'VG9waWNOb2RlOjQz',
   slug: 'healthcare-prevention',
@@ -34,8 +59,8 @@ const tempTopicsData = {
 
 storiesOf('ContextualNav', module).add('ContextualNav', () => (
   <ContextualNav
-    parent={tempTopicData}
-    related={tempTopicsData}
-    dept={'Department'}
+    parent={parent}
+    relatedTo={relatedTo}
+    offeredBy={offeredBy}
   />
 ));

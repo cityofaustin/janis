@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 import Tile from './Tile';
+import { tileGroupPropTypes } from './proptypes';
 
 const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
   return (
@@ -38,7 +40,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {tiles.map(({ type, url, title, pageType }, index) => {
+          {tiles.map(({ url, title, pageType }, index) => {
             return (
               <Tile
                 url={
@@ -46,6 +48,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
                 }
                 text={title}
                 compact={compact}
+                key={index}
                 pageType={pageType}
               />
             );
@@ -55,5 +58,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
     )
   );
 };
+
+TileGroup.propTypes = tileGroupPropTypes;
 
 export default injectIntl(TileGroup);

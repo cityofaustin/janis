@@ -15,7 +15,7 @@ const TopicCard = ({ topic, index, intl }) => {
 
   return (
     !!tiles && (
-      <div key={index} className="coa-TopicCollectionCard">
+      <div key={titleUrl} className="coa-TopicCollectionCard">
         <TileGroup
           title={`${topic.title} →`}
           titleUrl={titleUrl}
@@ -39,10 +39,10 @@ const TopicCard = ({ topic, index, intl }) => {
   );
 };
 
-const TopicCollectionCards = ({ topics, theme, slug, intl }) => (
+const TopicCollectionCards = ({ topics, intl }) => (
   <div className="coa-TopicCollectionCards">
     {topics.map((topic, index) => (
-      <TopicCard topic={topic} index={index} intl={intl} />
+      <TopicCard topic={topic} index={index} intl={intl} key={index} />
     ))}
   </div>
 );
