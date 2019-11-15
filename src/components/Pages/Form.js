@@ -73,6 +73,7 @@ function FormPage({
                   forwardRef={iframeRef}
                   src={formUrl}
                   className="coa-FormPage__IframeResizer-default"
+                  heightCalculationMethod="taggedElement"
                   frameBorder="0"
                   onResized={onResized}
                 />
