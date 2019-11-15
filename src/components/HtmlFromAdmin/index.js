@@ -39,6 +39,7 @@ const HtmlFromAdmin = ({ content }) => {
         // This makes wagtail's default video embeds work on small screens
         if (domNode.name === 'iframe') {
           domNode.attribs.width = '100%';
+          domNode.attribs.title = 'Embedded video';
         }
 
         // Turn links into buttons
