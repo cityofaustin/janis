@@ -1,5 +1,4 @@
 # 🌻 Janis ☮️
-## I'm just here to test
 
 Janis is the codename for the software that renders [alpha.austin.gov](https://alpha.austin.gov) for web browsers. It is a working prototype of static site generation front-end and decoupled CMS architecture.
 
