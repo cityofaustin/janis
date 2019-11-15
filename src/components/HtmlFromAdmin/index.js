@@ -42,6 +42,12 @@ const HtmlFromAdmin = ({ content }) => {
           domNode.attribs.title = 'Embedded video';
         }
 
+        if (domNode.attribs.class === 'responsive-object') {
+          // For some reason wagtail chucks a giant margin on the bottom here,
+          // let's clear that out and handle any additional styling using classes
+          domNode.attribs.style = '';
+        }
+
         // Turn links into buttons
         // waiting on
         // if (
