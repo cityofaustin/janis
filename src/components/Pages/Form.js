@@ -29,13 +29,25 @@ function FormPage({
     toplink,
     description,
     formUrl,
-    contacts,
     coaGlobal,
     contextualNavData,
   },
   intl,
 }) {
   const iframeRef = useRef(null);
+
+  // Go to the top of the page when we transition to the form Confirmation Page.
+  // "init" events after the first "init" means that there was a page transition within the iframe.
+  let iframeLoaded = false;
+  const onResized = ({iframe, height, width, type}) => {
+    if (type === "init") {
+      if (iframeLoaded) {
+        document.getElementById("coa-FormPage__top").scrollIntoView(true);
+      } else {
+        iframeLoaded = true;
+      }
+    }
+  }
 
   return (
     <div>
@@ -49,25 +61,22 @@ function FormPage({
           offeredBy={contextualNavData.offeredBy}
         />
       )}
-      <div>
+      <div id="coa-FormPage__top">
         <PageHeader contentType={'information'} description={description}>
           {title}
         </PageHeader>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
-            {formUrl && (
-              <IframeResizer
-                forwardRef={iframeRef}
-                src={formUrl}
-                className="coa-FormPage__IframeResizer-default"
-                frameBorder="0"
-              />
-            )}
-          </div>
-          <div className="coa-Page__side-content">
-            <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contact={contacts[0]} />
+            <div className="coa-FormPage__iframe-container">
+              {formUrl && (
+                <IframeResizer
+                  forwardRef={iframeRef}
+                  src={formUrl}
+                  className="coa-FormPage__IframeResizer-default"
+                  heightCalculationMethod="taggedElement"
+                  frameBorder="0"
+                  onResized={onResized}
+                />
               )}
             </div>
           </div>
