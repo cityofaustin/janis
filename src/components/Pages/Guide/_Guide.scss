@@ -101,6 +101,12 @@ $max-guide-tablet-width: $coa-medium-screen;
   margin-top: $sticky-guide-top;
 }
 
+.coa-GuidePage__content-container {
+  .wrapper {
+    width: 100%;
+  }
+}
+
 .coa-GuidePage__content-container > .wrapper > .row {
   margin-right: 0; //TODO: again, uswds's default .row class has built in -1rem margins!!
 }
