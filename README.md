@@ -224,6 +224,18 @@ Since we use React-Static as our framework to render our React components as a s
 
 Your site will be running on http://localhost:8080/
 
+### Testing with Jest
+
+[Jest](https://https://jestjs.io/) is set up for [snapshot testing](https://jestjs.io/docs/en/snapshot-testing) as well us used for testing our queries. `yarn test` will run the tests in `src/components`.
+If you need to update the snapshots, `jest --updateSnapshot`.
+
+
+### Testing with Cypress
+
+We have [Cypress](https://cypress.io) set up to run integration tests. Tests are located in janis/cypress/integration. To launch the Test Runner use `yarn open-cypress` or `npx cypress open`. You must be running janis locally in order to run tests. [Here](https://github.com/cypress-io/cypress-example-kitchensink/tree/master/cypress/integration/examples) are some example integration tests.
+
+If you would like to update/change the base url used for testing, edit `cypress.json`.
+
 ## SASS Guidelines
 
 We're using BEM for CSS naming and organization
@@ -239,7 +251,7 @@ Resources:
 
 * http://getbem.com/introduction/
 
-### Accessibility Guidelines
+## Accessibility Guidelines
 
 One advantage for using React components is that we can write reusable HTML-rendering modules that never forget about proper attribute tagging and ARIA labels.
 

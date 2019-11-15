@@ -28,6 +28,7 @@ const getTopicCollectionPageQuery = `
                 node {
                   title
                   slug
+                  pageType
                 }
               }
             }

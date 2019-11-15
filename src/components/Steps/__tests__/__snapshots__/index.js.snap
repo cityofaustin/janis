@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Step step renders, step length > 1 1`] = `
+<div
+  className="coa-Steps"
+>
+  <div
+    className="coa-Steps__list"
+  >
+    <ol>
+      <li
+        className="coa-StepOption__item"
+      >
+        <div
+          className="coa-StepOption__container"
+        >
+          Determine how you would like to receive your certificate based on how quickly you need it
+        </div>
+      </li>
+      <li>
+        <p>
+          <p>
+            Make sure you have enough money for the certificate(s) you need.
+          </p>
+          <ul>
+            <li>
+              The cost for each birth certificate is $23.
+            </li>
+            <li>
+              The cost for one death certificate is $21.
+            </li>
+          </ul>
+        </p>
+      </li>
+    </ol>
+  </div>
+</div>
+`;
+
+exports[`Step step renders, step length equals 1 1`] = `
+<div
+  className="coa-Steps"
+>
+  <p>
+    <p>
+      Make sure you have enough money for the certificate(s) you need.
+    </p>
+    <ul>
+      <li>
+        The cost for each birth certificate is $23.
+      </li>
+      <li>
+        The cost for one death certificate is $21.
+      </li>
+    </ul>
+  </p>
+</div>
+`;

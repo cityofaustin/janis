@@ -60,7 +60,9 @@ const ThemesTopicsMenu = props => {
 };
 
 TopicsLinks.propTypes = {
-  topics: PropTypes.array.isRequired,
+  themeSlug: PropTypes.string.isRequired,
+  topicCollections: PropTypes.array,
+  handleFullSiteMenuItem: PropTypes.func,
 };
 
 ThemesTopicsMenu.propTypes = {

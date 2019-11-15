@@ -1,10 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import FormFeedback from 'components/FormFeedback';
+import UserFeedback from 'components/UserFeedback';
 
-storiesOf('Forms', module).add('Feedback Form', () => (
-  <div className="wrapper wrapper--sm container-fluid">
-    <FormFeedback />
-  </div>
+storiesOf('Forms', module).add('UserFeedback Form', () => (
+  <UserFeedback />
 ));

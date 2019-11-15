@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tile tile renders compact true 1`] = `
+<a
+  className="coa-Tile--compact"
+  href="/https://alpha.austin.gov"
+  onClick={[Function]}
+>
+  <div
+    className="coa-Tile__content"
+  >
+    <p
+      className="coa-Tile__text"
+    >
+      home
+    </p>
+    <i
+      className="material-icons"
+    >
+      arrow_forward
+    </i>
+  </div>
+</a>
+`;
+
+exports[`Tile tile renders with compact false 1`] = `
+<a
+  className="coa-Tile"
+  href="/https://alpha.austin.gov"
+  onClick={[Function]}
+>
+  <div
+    className="coa-Tile__content"
+  >
+    <p
+      className="coa-Tile__text"
+    >
+      home
+    </p>
+    <i
+      className="material-icons"
+    >
+      arrow_forward
+    </i>
+  </div>
+</a>
+`;
+
+exports[`TileGroup tile group renders with compact false 1`] = `
+<div
+  className="coa-TileGroup"
+>
+  <h4
+    className="coa-TileGroup__title"
+  >
+    <a
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention"
+      onClick={[Function]}
+    >
+      Chronic disease prevention →
+    </a>
+  </h4>
+  <p
+    className="coa-TileGroup__description"
+  >
+    Chronic diseases are ongoing medical conditions such as diabetes...
+  </p>
+  <div
+    className="coa-TileGroup__tiles-container"
+  >
+    <a
+      className="coa-Tile"
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention/set-out-your-leaves-grass-and-branches-for-pickup/"
+      onClick={[Function]}
+    >
+      <div
+        className="coa-Tile__content"
+      >
+        <p
+          className="coa-Tile__text"
+        >
+          Set out your leaves, grass, and branches for pickup
+        </p>
+        <i
+          className="material-icons"
+        >
+          arrow_forward
+        </i>
+      </div>
+    </a>
+    <a
+      className="coa-Tile"
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention/set-out-your-leaves-grass-and-branches-for-pickup/"
+      onClick={[Function]}
+    >
+      <div
+        className="coa-Tile__content"
+      >
+        <p
+          className="coa-Tile__text"
+        >
+          Set out your leaves, grass, and branches for pickup
+        </p>
+        <i
+          className="material-icons"
+        >
+          arrow_forward
+        </i>
+      </div>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`TileGroup tile group renders with compact true 1`] = `
+<div
+  className="coa-TileGroup coa-TileGroup--compact"
+>
+  <h4
+    className="coa-TileGroup__title"
+  >
+    <a
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention"
+      onClick={[Function]}
+    >
+      Chronic disease prevention →
+    </a>
+  </h4>
+  <p
+    className="coa-TileGroup__description"
+  >
+    Chronic diseases are ongoing medical conditions such as diabetes...
+  </p>
+  <div
+    className="coa-TileGroup__tiles-container--compact"
+  >
+    <a
+      className="coa-Tile--compact"
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention/set-out-your-leaves-grass-and-branches-for-pickup/"
+      onClick={[Function]}
+    >
+      <div
+        className="coa-Tile__content"
+      >
+        <p
+          className="coa-Tile__text"
+        >
+          Set out your leaves, grass, and branches for pickup
+        </p>
+        <i
+          className="material-icons"
+        >
+          arrow_forward
+        </i>
+      </div>
+    </a>
+    <a
+      className="coa-Tile--compact"
+      href="/en/health-safety/disaster-safety-relief/chronic-disease-prevention/set-out-your-leaves-grass-and-branches-for-pickup/"
+      onClick={[Function]}
+    >
+      <div
+        className="coa-Tile__content"
+      >
+        <p
+          className="coa-Tile__text"
+        >
+          Set out your leaves, grass, and branches for pickup
+        </p>
+        <i
+          className="material-icons"
+        >
+          arrow_forward
+        </i>
+      </div>
+    </a>
+  </div>
+</div>
+`;

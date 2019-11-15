@@ -133,6 +133,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   // we also need to get information about the top links
   const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
   topic.topLinks = topic.topPages.edges.map(edge => ({
+    pageType: edge.node.pageType,
     title: edge.node.title,
     url: `/${allTopicCollections.edges[0].node.theme.slug}/${
       allTopicCollections.edges[0].node.slug
@@ -149,6 +150,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   )
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
+      pageType: page.pageType,
       title: page.title,
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
@@ -207,6 +209,7 @@ const getTopicCollectionPageData = async (id, client) => {
       },
     },
     pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+      pageType: topPageEdge.node.pageType,
       title: topPageEdge.node.title,
       url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
         edge.node.page.slug

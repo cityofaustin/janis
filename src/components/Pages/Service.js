@@ -12,7 +12,6 @@ import HtmlFromAdmin from 'components/HtmlFromAdmin';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
-import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
@@ -24,6 +23,7 @@ const Service = ({ service, intl }) => {
       slug,
       steps,
       additionalContent,
+      dynamicContent,
       contacts,
       related,
       shortDescription,
@@ -57,7 +57,7 @@ const Service = ({ service, intl }) => {
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-                  {steps && !!steps.length ? (
+                  {(steps && !!steps.length) && (
                     //just 1 step? don't display steps in list (ul)
                     steps.length === 1 ? (
                       <Steps steps={steps} />
@@ -66,18 +66,23 @@ const Service = ({ service, intl }) => {
                         <Steps steps={steps} />
                       </Fragment>
                     )
-                  ) : null}
+                  )}
+
+                  {!!dynamicContent &&
+                    dynamicContent.map(content => (
+                      <ApplicationBlock key={content.id} content={content} />
+                    ))}
 
                   {additionalContent && (
                     <HtmlFromAdmin
-                      title={intl.formatMessage(i18n2.whatElse)}
                       content={additionalContent}
                     />
                   )}
                   <div className="coa-Page__contacts-mobile">
-                    {!!contacts && !!contacts.length && (
-                      <ContactDetails contacts={contacts} />
-                    )}
+                    {!!contacts &&
+                      !!contacts.length && (
+                        <ContactDetails contacts={contacts} />
+                      )}
                   </div>
                 </div>
               </div>
@@ -85,9 +90,8 @@ const Service = ({ service, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contacts={contacts} />
-              )}
+              {!!contacts &&
+                !!contacts.length && <ContactDetails contacts={contacts} />}
             </div>
           </div>
         </div>

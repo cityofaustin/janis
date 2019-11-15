@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualNav snapshot ContextualNav renders 1`] = `
+<div
+  className="coa-ContextualNav"
+>
+  <div
+    className="wrapper container-fluid"
+  >
+    <div
+      className="coa-ContextualNav__container"
+    >
+      <div
+        className="coa-ContextualNav__parent"
+      >
+        <a
+          className="coa-ContextualNav__arrow"
+          href="/en/health-safety/healthcare-prevention/disease-prevention/"
+          onClick={[Function]}
+        >
+          <span>
+            Disease prevention
+          </span>
+        </a>
+      </div>
+      <div
+        className="coa-ContextualNav__related"
+      >
+        <span
+          className="coa-ContextualNav__label"
+        >
+          Related to: 
+        </span>
+        <a
+          href="/en/housing-utilities/recycling-trash-and-compost/household-waste/"
+          onClick={[Function]}
+        >
+          Household waste
+          , 
+        </a>
+        <a
+          href="/en/housing-utilities/recycling-trash-and-compost/recycling-reuse/"
+          onClick={[Function]}
+        >
+          Recycling and reuse
+        </a>
+      </div>
+      <div
+        className="coa-ContextualNav__dept"
+      >
+        <span
+          className="coa-ContextualNav__label"
+        >
+          Offered by: 
+        </span>
+        <a
+          href="/en/austin-public-health/"
+          onClick={[Function]}
+        >
+          Austin Public Health
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`RelatedToMobile snapshot RelatedToMobile renders 1`] = `
+<div
+  className="coa-RelatedToMobile"
+>
+  <div
+    className="wrapper container-fluid"
+  >
+    <div
+      className="col-xs-12"
+    >
+      <h2
+        className="coa-RelatedToMobile__title"
+      >
+        Related to
+      </h2>
+      <ul>
+        <li
+          className="coa-RelatedToMobile__item"
+        >
+          <a
+            className="coa-RelatedToMobile__link"
+            href="/en/housing-utilities/recycling-trash-and-compost/household-waste/"
+            onClick={[Function]}
+          >
+            Household waste
+          </a>
+        </li>
+        <li
+          className="coa-RelatedToMobile__item"
+        >
+          <a
+            className="coa-RelatedToMobile__link"
+            href="/en/housing-utilities/recycling-trash-and-compost/recycling-reuse/"
+            onClick={[Function]}
+          >
+            Recycling and reuse
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      className="col-xs-12"
+    >
+      <h2
+        className="coa-RelatedToMobile__second-title"
+      >
+        Offered by
+      </h2>
+      <ul>
+        <li
+          className="coa-RelatedToMobile__item"
+        >
+          <a
+            className="coa-RelatedToMobile__link"
+            href="/en/austin-public-health/"
+            onClick={[Function]}
+          >
+            Austin Public Health
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

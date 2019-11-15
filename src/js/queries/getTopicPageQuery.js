@@ -13,6 +13,7 @@ const getTopicPageQuery = `
                 pageId
                 slug
                 title
+                pageType
               }
             }
           }
@@ -73,6 +74,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            pageType
           }
         }
       }
