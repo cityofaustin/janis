@@ -36,6 +36,11 @@ const HtmlFromAdmin = ({ content }) => {
           return <ReactMarkdown source={content} escapeHtml={false} />;
         }
 
+        // This makes wagtail's default video embeds work on small screens
+        if (domNode.name === 'iframe') {
+          domNode.attribs.width = '100%';
+        }
+
         // Turn links into buttons
         // waiting on
         // if (
