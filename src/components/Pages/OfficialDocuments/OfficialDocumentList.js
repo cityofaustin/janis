@@ -4,7 +4,8 @@ import { injectIntl } from 'react-intl';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
-import OfficialDocument from 'components/Pages/OfficialDocument';
+
+import OfficialDocumentPage from 'components/Pages/OfficialDocuments/OfficialDocumentPage';
 
 const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
   const {
@@ -40,20 +41,10 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
         <PageHeader contentType={'official-document'} description={description}>
           {title}
         </PageHeader>
-        <div className="coa-Page__all-of-the-content">
-          <div className="wrapper container-fluid">
-            <div className="row">
-              <div className="col-xs-12 col-md-8">
-                {officialDocuments.edges.map((document, index) => (
-                  <OfficialDocument document={document.node} key={index} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <OfficialDocumentPage officialDocuments={officialDocuments} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default injectIntl(OfficialDocumentList);
+export default injectIntl(OfficialDocumentList)
