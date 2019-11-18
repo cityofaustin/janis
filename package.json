@@ -89,8 +89,7 @@
     "build-translations": "extract-messages -l=en,es,vi,ar -o src/js/i18n/locales/ --flat 'src/**/*.js'",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "storybook": "build-storybook && start-storybook -p 80",
-    "build-storybook": "build-storybook -c .storybook -o .out",
+    "storybook": "NODE_PATH=src yarn start-storybook -c .storybook -p 5000",
     "publish-netlify-pr": "bash ./netlify/publish-netlify-pr.sh",
     "test": "NODE_PATH=./src jest src/components",
     "open-cypress": "yarn run cypress open"

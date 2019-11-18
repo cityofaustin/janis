@@ -130,7 +130,10 @@ This plugin will *NOT* remove previously defined translations which are no longe
 * Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
 * To see our Storybook components:
   * visit [alpha.austin.gov/storybook/](https://alpha.austin.gov/storybook/)
-* To run Storybooks locally:
+* To run Storybooks locally (on host):
+  * `yarn storybook`
+  * open http://localhost:5000/
+* To run Storybooks locally (via Docker):
   * `./scripts/serve-storybook.sh`
   * open http://localhost:6006/
 
