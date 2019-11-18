@@ -29,7 +29,7 @@ import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
-import OfficialDocumentList from 'components/Pages/OfficialDocumentList';
+import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
 import FormPage from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 
