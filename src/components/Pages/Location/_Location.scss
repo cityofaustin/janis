@@ -1,0 +1,66 @@
+@import 'src/css/base/mixins';
+
+.coa-LocationPage__content-container {
+  flex-direction: column;
+  max-width: 758px;
+}
+
+.coa-LocationPage__header {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.coa-LocationPage__header-icon {
+  color: #0049C7;
+}
+
+.coa-LocationPage__header-title {
+  font-size: 4rem;
+}
+
+.coa-LocationPage__section {
+  background-color: #F7F7F7;
+
+  @include desktop {
+    padding: 4rem;
+  }
+  @include mobile-and-tablet {
+    padding: 2rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.coa-LocationPage__sub-section {
+  &:not(:last-child) {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #dddfe1;
+  }
+  &:not(:first-child) {
+    padding-top: 2rem;
+  }
+}
+
+.coa-LocationPage__sub-section-block-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.coa-LocationPage__sub-section-title {
+  font-weight: bold;
+}
+
+.coa-LocationPage__sub-section-block {
+  flex-grow: 1;
+  font-size: 1.7rem;
+  line-height: 2.4rem;
+}
+
+.coa-LocationPage__sub-section-block-title {
+  font-weight: bolder;
+}

@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin responsivetext() {
   font-size: $coa-font-size-small;
   line-height: $coa-line-height-small;
