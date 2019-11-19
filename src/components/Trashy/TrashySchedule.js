@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import ExternalLink from 'components/ExternalLink';
 import I18nLink from 'components/I18n/I18nLink';
 import { curbsideServices as i18n } from 'js/i18n/definitions';
 import { injectIntl } from 'react-intl';
@@ -19,11 +18,13 @@ const TrashySchedule = props => {
         trash: intl.formatMessage(i18n.trash),
         compost: intl.formatMessage(i18n.compost),
         brushcollection: intl.formatMessage(i18n.brushcollection),
-        bulkitemcollection: (
-          <I18nLink to="bulk-item-pickup">
-            {intl.formatMessage(i18n.bulkitemcollection)}
-          </I18nLink>
-        ),
+        bulkitemcollection: intl.formatMessage(i18n.bulkitemcollection),
+        // removing the link for now, may come back
+        // bulkitemcollection: (
+        //   <I18nLink to="bulk-item-pickup">
+        //     {intl.formatMessage(i18n.bulkitemcollection)}
+        //   </I18nLink>
+        // ),
       };
       return cases[service];
     }
@@ -63,11 +64,9 @@ const TrashySchedule = props => {
     />
   );
 
-  const bulkItemPickupLink = (
-    <I18nLink to="bulk-item-pickup">
-      {intl.formatMessage(i18n.bulkitemcollection)}
-    </I18nLink>
-  );
+  const bulkItemMessage = nextBulkPickupDate ?
+  `${intl.formatMessage(i18n.bulkitemcollection)}: {bulkPickupDate}` 
+  : intl.formatMessage(i18n.invalidDate)
 
   return (
     <div className="coa-Trashy__schedule-container">
@@ -80,8 +79,8 @@ const TrashySchedule = props => {
           <h4>
             <FormattedMessage
               id="trashSchedule.bulkPickUp"
-              defaultMessage={'Next {bulkItemPickupLink}: {bulkPickupDate}'}
-              values={{ bulkPickupDate, bulkItemPickupLink }}
+              defaultMessage={bulkItemMessage}
+              values={{ bulkPickupDate }}
             />
           </h4>
         </div>
