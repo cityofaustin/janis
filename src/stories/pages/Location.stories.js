@@ -19,45 +19,55 @@ export const locationPage = () => {
         "name": "Email Address",
         "value": "Address@austintexas.gov",
       },
-      location: {
-        "Physical address": "405 W Stassney Ln Austin, TX 78745",
-        "Mailing address": "P.O. Box 1088 Austin, TX 78767",
+    },
+    location: {
+      "Physical address": {
+        "street": "405 W Stassney Ln",
+        "city": "Austin",
+        "state": "TX",
+        "zip": 78745,
       },
-      image: null,
-      hours: {
-        "Monday": "7:30 am–noon, 1 pm–7 pm",
-        "Tuesday": "7:30 am–noon, 1 pm–7 pm",
-        "Wednesday": "7:30 am–noon, 1 pm–7 pm",
-        "Thursday": "7:30 am–noon, 1 pm–7 pm",
-        "Friday": "7:30 am–noon, 1 pm–7 pm",
-        "Saturday": "Closed",
-        "Sunday": "Closed",
+      "Mailing address": {
+        "street": "P.O. Box 1088",
+        "city": "Austin",
+        "state": "TX",
+        "zip": 78767,
       },
-      services: [
-        {
-          title: "Get a Birth Certificate",
-          phone: "(512) 000-0000",
-          hours: {
-            "Monday": "7:30 am–noon, 1 pm–7 pm",
-          }
-        },
-        {
-          title: "Adopt a baby tarantula",
-          phone: "(512) 000-0000",
-          hours: {
-            "Monday": "7:30 am–noon, 1 pm–7 pm",
-            "Tuesday": "7:30 am–noon, 1 pm–7 pm",
-            "Wednesday": "7:30 am–noon, 1 pm–7 pm",
-            "Thursday": "7:30 am–noon, 1 pm–7 pm",
-            "Friday": "7:30 am–noon, 1 pm–7 pm",
-            "Saturday": "Closed",
-            "Sunday": "Closed",
-          }
+    },
+    image: "https://joplin-austin-gov.s3.amazonaws.com/media/images/austincoverphoto.width-640.jpg",
+    hours: {
+      "Monday": "7:30 am–noon, 1 pm–7 pm",
+      "Tuesday": "7:30 am–noon, 1 pm–7 pm",
+      "Wednesday": "7:30 am–noon, 1 pm–7 pm",
+      "Thursday": "7:30 am–noon, 1 pm–7 pm",
+      "Friday": "7:30 am–noon, 1 pm–7 pm",
+      "Saturday": "Closed",
+      "Sunday": "Closed",
+    },
+    services: [
+      {
+        title: "Get a Birth Certificate",
+        phone: "(512) 000-0000",
+        hours: {
+          "Monday": "7:30 am–noon, 1 pm–7 pm",
         }
-      ],
-      gettingHere: {
-        buses: ["90", "180", "360"]
+      },
+      {
+        title: "Adopt a baby tarantula",
+        phone: "(512) 000-0000",
+        hours: {
+          "Monday": "7:30 am–noon, 1 pm–7 pm",
+          "Tuesday": "7:30 am–noon, 1 pm–7 pm",
+          "Wednesday": "7:30 am–noon, 1 pm–7 pm",
+          "Thursday": "7:30 am–noon, 1 pm–7 pm",
+          "Friday": "7:30 am–noon, 1 pm–7 pm",
+          "Saturday": "Closed",
+          "Sunday": "Closed",
+        }
       }
+    ],
+    gettingHere: {
+      buses: ["90", "180", "360"]
     }
   };
 

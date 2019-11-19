@@ -53,7 +53,7 @@ $max-guide-tablet-width: $coa-medium-screen;
 
   @include tablet-and-desktop {
     padding-bottom: 2rem;
-    border-bottom: 1px solid #dddfe1;
+    @include gray-section-border;
     margin-bottom: 4rem;
   }
 }

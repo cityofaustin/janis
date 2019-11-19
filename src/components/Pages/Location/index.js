@@ -3,6 +3,9 @@ import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
+import LocationInfo from 'components/Pages/Location/LocationInfo';
+import LocationServiceList from 'components/Pages/Location/LocationServiceList';
+import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
 import "components/Pages/Location/_Location.scss";
 
@@ -13,10 +16,10 @@ const LocationPage = ({ locationPage, intl }) => {
       contact: {
         phone,
         email,
-        location,
-        image,
-        hours,
       },
+      location,
+      image,
+      hours,
       services,
     }
   } = locationPage ? { locationPage } : useRouteData();
@@ -33,50 +36,17 @@ const LocationPage = ({ locationPage, intl }) => {
             {title}
           </h1>
         </div>
-        <div className="coa-LocationPage__section">
-          <div className="coa-LocationPage__sub-section">
-            <h2 className="coa-LocationPage__sub-section-title">
-              Contact
-            </h2>
-            <div className="coa-LocationPage__sub-section-block-container">
-              <div className="coa-LocationPage__sub-section-block">
-                <div className="coa-LocationPage__sub-section-block-title">
-                  Phone
-                </div>
-                <div className="coa-LocationPage__sub-section-block-contents">
-                  {`${phone.name}: ${phone.value}`}
-                </div>
-              </div>
-              <div className="coa-LocationPage__sub-section-block">
-                <div className="coa-LocationPage__sub-section-block-title">
-                  Email Address
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="coa-LocationPage__sub-section">
-            <h2 className="coa-LocationPage__sub-section-title">
-              Location
-            </h2>
-            Location info
-          </div>
-          <div className="coa-LocationPage__sub-section">
-            <h2 className="coa-LocationPage__sub-section-title">
-              Facility Hours
-            </h2>
-            Them hours
-          </div>
-        </div>
-        <div className="coa-LocationPage__section">
-          <h2 className="coa-LocationPage__sub-section-title">
-            Services offered
-          </h2>
-        </div>
-        <div className="coa-LocationPage__section">
-          <h2 className="coa-LocationPage__sub-section-title">
-            Getting here
-          </h2>
-        </div>
+        <LocationInfo
+          phone={phone}
+          email={email}
+          location={location}
+          image={image}
+          hours={hours}
+        />
+        <LocationServiceList
+          services={services}
+        />
+        <LocationGettingHere/>
       </div>
     </div>
   )

@@ -180,3 +180,10 @@
     @content;
   }
 }
+
+/**
+  Add mixins for common style components
+**/
+@mixin gray-section-border {
+  border-bottom: 1px solid #dddfe1;
+}

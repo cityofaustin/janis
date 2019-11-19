@@ -39,7 +39,7 @@
 .coa-LocationPage__sub-section {
   &:not(:last-child) {
     padding-bottom: 2rem;
-    border-bottom: 1px solid #dddfe1;
+    @include gray-section-border;
   }
   &:not(:first-child) {
     padding-top: 2rem;
@@ -59,8 +59,20 @@
   flex-grow: 1;
   font-size: 1.7rem;
   line-height: 2.4rem;
+  flex-wrap: wrap;
+
+  @include tablet-and-desktop {
+    width: 50%
+  }
+  @include mobile {
+    width: 100%
+  }
 }
 
 .coa-LocationPage__sub-section-block-title {
   font-weight: bolder;
+}
+
+.coa-LocationPage__address-line {
+  display: block;
 }
