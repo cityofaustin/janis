@@ -82,3 +82,16 @@
   @extend .coa-PageBanner__image;
   padding-top: 2rem;
 }
+
+.coa-LocationPage__hours-table {
+  margin: 1rem 0 0 0;
+}
+
+.coa-LocationPage__hours-table-td {
+  background-color: inherit;
+  border: none;
+  font-weight: inherit;
+  padding: 0 1rem 0 0;
+  font-size: 1.7rem;
+  line-height: 2.4rem;
+}

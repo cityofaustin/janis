@@ -89,6 +89,17 @@ const LocationPageLocation = ({location, image}) => {
 }
 
 const LocationPageFacilityHours = ({hours}) => {
+  const HoursText = (
+    <table className="coa-LocationPage__hours-table">
+      {Object.keys(hours).map(day => (
+        <tr>
+          <td className="coa-LocationPage__hours-table-td">{day}</td>
+          <td className="coa-LocationPage__hours-table-td">{hours[day]}</td>
+        </tr>
+      ))}
+    </table>
+  );
+
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
@@ -97,7 +108,7 @@ const LocationPageFacilityHours = ({hours}) => {
       <div className="coa-LocationPage__sub-section-block-container">
         <LocationPageBlock
           title="Standard hours"
-          content={""}
+          content={HoursText}
         />
       </div>
     </div>

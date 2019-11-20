@@ -21,6 +21,7 @@ const LocationPage = ({ locationPage, intl }) => {
       image,
       hours,
       services,
+      buses,
     }
   } = locationPage ? { locationPage } : useRouteData();
 
