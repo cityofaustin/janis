@@ -1,4 +1,5 @@
 @import 'src/css/base/mixins';
+@import 'src/components/PageBanner/PageBanner';
 
 .coa-LocationPage__content-container {
   flex-direction: column;
@@ -24,10 +25,10 @@
 .coa-LocationPage__section {
   background-color: #F7F7F7;
 
-  @include desktop {
-    padding: 4rem;
+  @include tablet-and-desktop {
+    padding: 6rem;
   }
-  @include mobile-and-tablet {
+  @include mobile {
     padding: 2rem;
   }
 
@@ -75,4 +76,9 @@
 
 .coa-LocationPage__address-line {
   display: block;
+}
+
+.coa-LocationPage__location-image {
+  @extend .coa-PageBanner__image;
+  padding-top: 2rem;
 }

@@ -34,7 +34,11 @@ export const locationPage = () => {
         "zip": 78767,
       },
     },
-    image: "https://joplin-austin-gov.s3.amazonaws.com/media/images/austincoverphoto.width-640.jpg",
+    image: {
+      filename: "Screen_Shot_2019-10-21_at_12.02.01_PM.png",
+      id: "VHJhbnNsYXRlZEltYWdlTm9kZToxOQ==",
+      title: "Aerial photo of the Austin skyline looking over from Town Lake",
+    },
     hours: {
       "Monday": "7:30 am–noon, 1 pm–7 pm",
       "Tuesday": "7:30 am–noon, 1 pm–7 pm",

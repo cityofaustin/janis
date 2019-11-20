@@ -1,6 +1,8 @@
 import React from 'react';
 
 import ResponsiveImage from 'components/ResponsiveImage';
+import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
+import getImageData from 'components/ResponsiveImage/getImageData';
 
 const LocationPageBlock = ({title, content}) => (
   <div className="coa-LocationPage__sub-section-block">
@@ -53,6 +55,9 @@ const LocationPageAddress = ({title, address}) => {
 }
 
 const LocationPageLocation = ({location, image}) => {
+  const imageData = (image) ? getImageData(image) : null;
+  console.log("imageData", imageData)
+
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
@@ -68,7 +73,17 @@ const LocationPageLocation = ({location, image}) => {
           address={location["Mailing address"]}
         />
       </div>
-      {image && <ResponsiveImage image={image} />}
+      {imageData && (
+        <ResponsiveImage
+          className="coa-LocationPage__location-image"
+          filename={imageData.imageFilename}
+          defaultWidth="width-828"
+          widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
+          extension={imageData.imageExtension}
+          aria-label={imageData.imageTitle}
+          altText={imageData.imageTitle}
+        />
+      )}
     </div>
   );
 }

@@ -6,18 +6,13 @@ import path from 'path';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import { isMobileQuery } from 'js/helpers/reactMediaQueries';
+import getImageData from 'components/ResponsiveImage/getImageData';
 
 // headerText: optional String, if you want to embed headerText within the banner image
 // mobileOptimized: optional Boolean, set to "true" if you don't want to render banner images on mobile
 function PageBanner({ image, headerText, mobileOptimized }){
   const isMobile = isMobileQuery();
-  const imagesPath = `${process.env.CMS_MEDIA}/images`;
-  const imageFilename = path.basename(
-    image.filename,
-    path.extname(image.filename),
-  );
-  const imageExtension = path.extname(image.filename).substring(1);
-  const imageTitle = image.title;
+  const { imageFilename, imageExtension, imageTitle } = getImageData(image);
 
   return (
     <div className={classNames("coa-PageBanner__container", {
@@ -26,7 +21,7 @@ function PageBanner({ image, headerText, mobileOptimized }){
       {(!isMobile || !mobileOptimized) && (
         <ResponsiveImage
           className="coa-PageBanner__image"
-          filename={`${imagesPath}/${imageFilename}`}
+          filename={imageFilename}
           defaultWidth="width-1080"
           widths={FULL_WIDTH_RESPONSIVE_IMAGE_SIZES}
           extension={imageExtension}
