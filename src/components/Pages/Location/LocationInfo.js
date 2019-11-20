@@ -90,14 +90,16 @@ const LocationPageLocation = ({location, image}) => {
 
 const LocationPageFacilityHours = ({hours}) => {
   const HoursText = (
-    <table className="coa-LocationPage__hours-table">
-      {Object.keys(hours).map(day => (
-        <tr>
-          <td className="coa-LocationPage__hours-table-td">{day}</td>
-          <td className="coa-LocationPage__hours-table-td">{hours[day]}</td>
-        </tr>
-      ))}
-    </table>
+    <div className="coa-LocationPage__facility-hours-container">
+      <table className="coa-LocationPage__table">
+        {Object.keys(hours).map((day, i) => (
+          <tr key={i}>
+            <td>{day}</td>
+            <td>{hours[day]}</td>
+          </tr>
+        ))}
+      </table>
+    </div>
   );
 
   return (

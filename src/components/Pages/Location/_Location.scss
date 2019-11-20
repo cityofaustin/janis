@@ -22,8 +22,10 @@
   font-size: 4rem;
 }
 
+$coa-location-page-section-background: #F7F7F7;
+
 .coa-LocationPage__section {
-  background-color: #F7F7F7;
+  background-color: $coa-location-page-section-background;
 
   @include tablet-and-desktop {
     padding: 6rem;
@@ -40,7 +42,7 @@
 .coa-LocationPage__sub-section {
   &:not(:last-child) {
     padding-bottom: 2rem;
-    @include gray-section-border;
+    @include gray-bottom-border;
   }
   &:not(:first-child) {
     padding-top: 2rem;
@@ -83,15 +85,70 @@
   padding-top: 2rem;
 }
 
-.coa-LocationPage__hours-table {
+.coa-LocationPage__facility-hours-container {
   margin: 1rem 0 0 0;
 }
 
-.coa-LocationPage__hours-table-td {
-  background-color: inherit;
-  border: none;
-  font-weight: inherit;
-  padding: 0 1rem 0 0;
+.coa-LocationPage__table {
+  margin: 0;
+  td {
+    background-color: inherit;
+    border: none;
+    font-weight: inherit;
+    padding: 0 1rem 0 0;
+    font-size: 1.7rem;
+    line-height: 2.4rem;
+  }
+}
+
+.coa-LocationPage__service-container {
+  background-color: #FFFFFF;
+  margin-top: 2rem;
+  box-shadow: 0px 3px 6px #00000014;
+  border-radius: 4px;
   font-size: 1.7rem;
   line-height: 2.4rem;
+}
+
+.coa-LocationPage__service-title {
+  font-weight: bolder;
+  padding: 2rem;
+  border-bottom: 1px solid #dddfe1;
+}
+
+.coa-LocationPage__service-info-container {
+  padding: 2rem;
+}
+
+.coa-LocationPage__service-phone-container {
+  border-bottom: 1px solid #dddfe1;
+  padding-bottom: 2rem;
+}
+
+.coa-LocationPage__service-hours-container {
+  padding-top: 2rem;
+}
+
+.coa-LocationPage__table-service-label {
+  min-width: 11rem;
+}
+
+.coa-LocationPage__service-link {
+  padding: 2rem;
+  border-top: 1px solid #dddfe1;
+  color: $coa-color-primary;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.coa-LocationPage__service-link-arrow {
+  font-family: 'Material Icons';
+  font-style: normal;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+
+  font-size: 2.4rem;
+  float: right;
 }
