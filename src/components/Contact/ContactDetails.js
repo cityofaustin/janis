@@ -41,7 +41,9 @@ const ContactDetailsEntry = ({
     <h3 className="coa-ContactDetails__name">{name}</h3>
     {location && <Address location={location} />}
     {hours && !!hours.length && <Hours hours={hours} />}
-    {phoneNumber && <PhonesList phoneNumbers={phoneNumber} />}
+    {!!phoneNumber && !!phoneNumber.edges.length && (
+      <PhonesList phoneNumbers={phoneNumber} />
+    )}
     {email && <Email email={email} />}
     {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
@@ -55,7 +57,7 @@ ContactDetailsEntry.propTypes = {
     email: emailPropTypes,
     hours: hoursPropTypes,
     phoneNumber: phonePropTypes,
-  })
+  }),
 };
 
 export default injectIntl(ContactDetails);

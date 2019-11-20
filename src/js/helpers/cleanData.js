@@ -13,7 +13,7 @@ export const cleanContacts = contacts => {
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
   const formatTime = time => {
-    if (time==='12:00:00'){
+    if (time === '12:00:00') {
       return 'Noon';
     }
     // Simplify time parsing. Times work on previews,
@@ -30,14 +30,6 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
-    // quick fix re: phone numbers are current inconsiently entered on the backend
-    if (cleaned.phone) {
-      try {
-        cleaned.phone = JSON.parse(cleaned.phone);
-      } catch (error) {
-        cleaned.phone = JSON.stringify({ default: cleaned.phone });
-      }
-    }
     if (cleaned.hours && cleaned.hours.edges) {
       cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
         dayOfWeek: hours.dayOfWeek.toLowerCase(),
