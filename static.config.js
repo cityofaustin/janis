@@ -657,16 +657,32 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const siteStructure = await client.request(siteStructureQuery);
   let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
 
-  // Doing this in a super naive way, let's just rebuild the page itself
-  // this should probably happen in joplin but let's just filter for now
+  // This is really something that should happen in joplin,
+  // but let's just use janis to do it for now
   if (incrementalPageId) {
-    parsedStructure = parsedStructure.filter(
-      paui => paui.id === incrementalPageId,
-    );
+    // First let's find all of the parent/grandparent ids we need
+    // to rebuild titles on links etc.
+    let idsToRebuild = [incrementalPageId];
 
     for (const pageAtUrlInfo of parsedStructure) {
-      console.log(pageAtUrlInfo.id);
+      if (pageAtUrlInfo.id === incrementalPageId) {
+        if (pageAtUrlInfo.parent_department) {
+          idsToRebuild.push(pageAtUrlInfo.parent_department);
+        }
+
+        if (pageAtUrlInfo.parent_topic) {
+          idsToRebuild.push(pageAtUrlInfo.parent_topic);
+        }
+
+        if (pageAtUrlInfo.grandparent_topic_collection) {
+          idsToRebuild.push(pageAtUrlInfo.grandparent_topic_collection);
+        }
+      }
     }
+
+    parsedStructure = parsedStructure.filter(paui =>
+      idsToRebuild.includes(paui.id),
+    );
   }
 
   // We probably have some work to do around the documents page
