@@ -15,7 +15,7 @@ export NODE_PATH='./src'
 # export CMS_API='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
 export CMS_API='http://localhost:8000/api/graphql'
 export CMS_MEDIA='https://joplin-staging.herokuapp.com/media'
-export PAGE_ID='SW5mb3JtYXRpb25QYWdlTm9kZTo3'
+# export PAGE_ID='SW5mb3JtYXRpb25QYWdlTm9kZTo3'
 
 yarn npm-run-all build-css build-js
 
