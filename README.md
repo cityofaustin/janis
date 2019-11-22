@@ -133,6 +133,9 @@ This plugin will *NOT* remove previously defined translations which are no longe
 * To run Storybooks locally (on host):
   * `yarn storybook`
   * open http://localhost:5000/
+* To build a deployable storybook static site:
+  * `yarn build-storybook`
+  * Copy ./storybook-static/ directory into netlify to deploy.
 * To run Storybooks locally (via Docker):
   * `./scripts/serve-storybook.sh`
   * open http://localhost:6006/
