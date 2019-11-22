@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
@@ -10,10 +10,23 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
   const documentsPerPage = 10
   const maxPagesShown = 7
   const allDocs = officialDocuments.edges
-  const [ pageNumber, setPageNumber ] = useState(0)
   const pages = buildPages()
+  const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+
+  useEffect(() => {
+    window.onpopstate = function(event) {
+      setPageNumber(getHash())
+      window.requestAnimationFrame( ()=> window.scroll(0,0) )
+    }
+  }, [pageNumber])
+
+  function getHash(){
+    const str = window.location.hash.split("#")[1]
+    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
+    return hash
+  }
 
   function buildPages() {
     const pages = []
@@ -84,6 +97,8 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       setPageNumber(newPage)
+      window.location.hash = newPage+1
+      // window.scroll(0,0)
     }
   }
 
