@@ -21,7 +21,9 @@ const LocationPage = ({ locationPage, intl }) => {
       image,
       hours,
       services,
-      buses,
+      gettingHere: {
+        buses,
+      },
     }
   } = locationPage ? { locationPage } : useRouteData();
 
@@ -44,10 +46,16 @@ const LocationPage = ({ locationPage, intl }) => {
           image={image}
           hours={hours}
         />
-        <LocationServiceList
-          services={services}
-        />
-        <LocationGettingHere/>
+        {!!services && services.length && (
+          <LocationServiceList
+            services={services}
+          />
+        )}
+        {!!buses && buses.length && (
+          <LocationGettingHere
+            buses={buses}
+          />
+        )}
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 @import 'src/css/base/mixins';
+@import 'src/css/base/variables';
 @import 'src/components/PageBanner/PageBanner';
 
 .coa-LocationPage__content-container {
@@ -155,4 +156,20 @@ $coa-location-page-section-background: #F7F7F7;
 
   font-size: 2.4rem;
   float: right;
+}
+
+.coa-LocationPage__bus-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.coa-LocationPage__bus {
+  background-color: $coa-color-mariner-blue;
+  width: fit-content;
+  padding: 1rem 1.5rem;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-right: 1rem;
+  border-radius: 4px;
 }
