@@ -98,6 +98,10 @@ $coa-location-page-section-background: #F7F7F7;
     padding: 0 1rem 0 0;
     font-size: 1.7rem;
     line-height: 2.4rem;
+
+    &:not(last-child) {
+      padding-top: .5rem;
+    }
   }
 }
 

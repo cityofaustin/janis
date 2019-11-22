@@ -32,7 +32,7 @@ const LocationPage = ({ locationPage, intl }) => {
       </Head>
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
         <div className="coa-LocationPage__header">
-          <i class="material-icons coa-LocationPage__header-icon">where_to_vote</i>
+          <i className="material-icons coa-LocationPage__header-icon">where_to_vote</i>
           <h1 className="coa-LocationPage__header-title">
             {title}
           </h1>

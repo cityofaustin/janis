@@ -10,7 +10,6 @@ const ResponsiveImage = ({
   altText,
   ...rest
 }) => {
-  console.log("~~~ what is?", filename)
   const sources = widths
     .map(w => `${filename}.width-${w}.${extension} ${w}w`)
     .toString();

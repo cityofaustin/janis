@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
@@ -56,7 +56,25 @@ const LocationPageAddress = ({title, address}) => {
 
 const LocationPageLocation = ({location, image}) => {
   const imageData = (image) ? getImageData(image) : null;
-  console.log("imageData", imageData)
+
+  // Only include "Physical Address" if no "Mailing Address" is present
+  const addresses = (location["Mailing address"]) ? (
+    <Fragment>
+      <LocationPageAddress
+        title="Physical Address"
+        address={location["Physical address"]}
+      />
+      <LocationPageAddress
+        title="Mailing Address"
+        address={location["Mailing address"]}
+      />
+    </Fragment>
+  ) : (
+    <LocationPageAddress
+      title="Address"
+      address={location["Physical address"]}
+    />
+  )
 
   return (
     <div className="coa-LocationPage__sub-section">
@@ -64,14 +82,7 @@ const LocationPageLocation = ({location, image}) => {
         Location
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
-        <LocationPageAddress
-          title="Physical Address"
-          address={location["Physical address"]}
-        />
-        <LocationPageAddress
-          title="Mailing Address"
-          address={location["Mailing address"]}
-        />
+        {addresses}
       </div>
       {imageData && (
         <ResponsiveImage
@@ -92,12 +103,14 @@ const LocationPageFacilityHours = ({hours}) => {
   const HoursText = (
     <div className="coa-LocationPage__facility-hours-container">
       <table className="coa-LocationPage__table">
-        {Object.keys(hours).map((day, i) => (
-          <tr key={i}>
-            <td>{day}</td>
-            <td>{hours[day]}</td>
-          </tr>
-        ))}
+        <tbody>
+          {Object.keys(hours).map((day, i) => (
+            <tr key={i}>
+              <td>{day}</td>
+              <td>{hours[day]}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
