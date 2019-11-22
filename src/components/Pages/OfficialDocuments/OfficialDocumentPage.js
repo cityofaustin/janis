@@ -1,19 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
-import ChevronRight from 'components/SVGs/ChevronRight';
-import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
-import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
+import { navigation as i18n2 } from 'js/i18n/definitions';
+import { isMobileQuery } from 'js/helpers/reactMediaQueries.js';
+
+import ChevronRight from 'components/SVGs/ChevronRight'
+import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
+import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument'
 
-const OfficialDocumentPage = ({ officialDocuments }) => {
+const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   const documentsPerPage = 10
-  const maxPagesShown = 7
+  const isMobile = isMobileQuery()
+  const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
   const allDocs = officialDocuments.edges
-  const [ pageNumber, setPageNumber ] = useState(0)
-  const pages = buildPages()
+  // QA ONLY ... 👇
+  let pages = buildPages()
+  pages = pages.concat(pages)
+  // 👆
+  // ------
+  // BACK TO AFTER QA 👇
+  // const pages = buildPages()
+  // 👆
+  const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+
+  useEffect(() => {
+    window.onpopstate = function(event) {
+      setPageNumber(getHash())
+      window.requestAnimationFrame( ()=> window.scroll(0,0) )
+    }
+  }, [pageNumber])
+
+  function getHash(){
+    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
+    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
+    return hash
+  }
 
   function buildPages() {
     const pages = []
@@ -33,7 +57,7 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
       shownPages.splice(1,0,pageNumber+1)
     }
 
-    // add elipsis for gaps greater than 1
+    // add ellipsis for gaps greater than 1
     if (pages.length >= maxPagesShown) {
       for (var i = 0; i < maxPagesShown; i++) {
         if (shownPages[i+1] - shownPages[i] == 2) {
@@ -44,7 +68,7 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
       }
     }
 
-    // fill pages arround current page page if available. Prioritizing Page Forward.
+    // fill pages arround current page if available. Prioritizing Page Forward.
     while (range+1 < maxPagesShown) {
       shownPages = addPages(range, shownPages)
       range++
@@ -84,46 +108,85 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       setPageNumber(newPage)
+      if (typeof window !== 'undefined') window.location.hash = newPage+1
     }
   }
 
   return (
     <div>
-      <div className="coa-Page__all-of-the-content">
-        <div className="wrapper container-fluid">
-          <div className="row">
+      <div className="wrapper container-fluid">
+        <div className="row">
 
-            <div className="col-xs-12 col-md-8">
-              {page && page.map((document, index) => (
-                <OfficialDocument document={document.node} key={index} />
-              ))}
-            </div>
+          {shownPages.length > 1 &&
+            <div className="coa-OfficialDocumentPage_pagination-container">
 
-            {shownPages.length > 1 &&
-              <div className="coa-OfficialDocumentPage_pagination-container">
-
-                <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
-                  <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
-                  <div className="coa-OfficialDocumentPage_text">Previous</div>
-                </div>
-
-                {pages && shownPages.map((page, index) => (
-                  <PageNumber
-                    pageNumber={pageNumber+1}
-                    index={shownPages[index]}
-                    changePage={changePage}
-                  />
-                ))}
-
-                <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page">
-                  <div className="coa-OfficialDocumentPage_text right">Next</div>
-                  <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
-                </div>
-
+              <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
+                <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+                { !isMobile &&
+                  <div className="coa-OfficialDocumentPage_text">
+                    {intl.formatMessage(i18n2.previous)}
+                  </div>
+                }
               </div>
-            }
 
+              {pages && shownPages.map((page, index) => (
+                <PageNumber
+                  pageNumber={pageNumber+1}
+                  index={shownPages[index]}
+                  changePage={changePage}
+                />
+              ))}
+
+              <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page">
+                { !isMobile &&
+                  <div className="coa-OfficialDocumentPage_text right">
+                    {intl.formatMessage(i18n2.next)}
+                  </div>
+                }
+                <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
+              </div>
+
+            </div>
+          }
+
+          <div className="col-xs-12 col-md-8">
+            {page && page.map((document, index) => (
+              <OfficialDocument document={document.node} key={index} />
+            ))}
           </div>
+
+          {shownPages.length > 1 &&
+            <div className="coa-OfficialDocumentPage_pagination-container">
+
+              <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
+                <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+                { !isMobile &&
+                  <div className="coa-OfficialDocumentPage_text">
+                    {intl.formatMessage(i18n2.previous)}
+                  </div>
+                }
+              </div>
+
+              {pages && shownPages.map((page, index) => (
+                <PageNumber
+                  pageNumber={pageNumber+1}
+                  index={shownPages[index]}
+                  changePage={changePage}
+                />
+              ))}
+
+              <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page">
+                { !isMobile &&
+                  <div className="coa-OfficialDocumentPage_text right">
+                    {intl.formatMessage(i18n2.next)}
+                  </div>
+                }
+                <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
+              </div>
+
+            </div>
+          }
+
         </div>
       </div>
     </div>
@@ -132,15 +195,18 @@ const OfficialDocumentPage = ({ officialDocuments }) => {
 }
 
 const PageNumber = ({pageNumber, index, changePage })=>{
-  const active = pageNumber === index ? 'active' : ''
+  const active = pageNumber === index ? " active" : ''
+  const ellipsis = index === "..." ? " ellipsis" : ''
   return (
     <div
       onClick={()=>changePage(index-1)}
-      className={ "coa-OfficialDocumentPage_page number " + active }
+      className={ "coa-OfficialDocumentPage_page number-container" + active + ellipsis }
     >
-      { index }
+      <div className={ "coa-OfficialDocumentPage_number" }>
+        { index }
+      </div>
     </div>
   )
 }
 
-export default OfficialDocumentPage;
+export default OfficialDocumentPage

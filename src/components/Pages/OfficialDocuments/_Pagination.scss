@@ -2,7 +2,7 @@
   margin: 40px 10px 40px;
   border-top: 1px solid $coa-color-gray-lighter;
   padding-top: 15px;
-  min-width: 740px;
+  width: 740px;
   :first-child {
     padding-left: 0px;
     margin-left: 0px;
@@ -17,7 +17,8 @@
   padding: 5px;
   margin: 2px;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 3.2rem;
   font-weight: 500;
   text-align: center;
   cursor: pointer;
@@ -28,20 +29,37 @@
   user-select: none; /* Standard syntax */
 }
 
-.coa-OfficialDocumentPage_page.number {
+.coa-OfficialDocumentPage_page.number-container {
   background-color: rgba(0,0,0,0);
   color: #212121;
-  font-weight: 900;
+  position: relative;
+  height: 48px;
+  top: -2px;
+  @include mobile {
+    width: 38px;
+    min-width: 38px;
+  }
 }
 
-.coa-OfficialDocumentPage_page.number.active {
+.coa-OfficialDocumentPage_number {
+  font-weight: 900;
+  position: relative;
+  top: 2px;
+}
+
+.coa-OfficialDocumentPage_page.number-container.active {
   color: #0049C7;
   background-color: #D9E8F6;
+}
+
+.coa-OfficialDocumentPage_page.number-container.ellipsis {
+  pointer-events: none;
 }
 
 .coa-OfficialDocumentPage_page-chevron {
   position: relative;
   width: 46px;
+  height: 24px;
   top: 7px;
   left: 1px;
 }
@@ -66,5 +84,30 @@
   border-right: 1px solid #dbdee1;
   padding-left: 8px;
   padding-right: 12px;
-  background-color: #F0F0F0;
+}
+
+.coa-OfficialDocumentPage_page:hover  {
+  background-color: #162E51;
+  color: #FFFFFF;
+}
+
+.coa-OfficialDocumentPage_page.active:hover  {
+  background-color: #162E51;
+  color: #FFFFFF;
+}
+
+.coa-OfficialDocumentPage_page:hover .coa-CheveronLeftBlue {
+  fill: #FFFFFF;
+}
+
+.coa-OfficialDocumentPage_page .coa-CheveronLeftBlue:hover{
+  fill: rgba(0,0,0,0);
+}
+
+.coa-OfficialDocumentPage_page:hover .coa-CheveronRightBlue {
+  fill: #FFFFFF;
+}
+
+.coa-OfficialDocumentPage_page .coa-CheveronRightBlue:hover{
+  fill: rgba(0,0,0,0);
 }
