@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import { capitalize } from 'lodash';
+import { useIntl } from 'react-intl';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
 import { getDaysInOrder } from 'js/helpers/date';
+import { date as i18nDate, locations as i18nLocations } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({title, content}) => (
   <div className="coa-LocationPage__sub-section-block">
@@ -18,18 +20,19 @@ const LocationPageBlock = ({title, content}) => (
 );
 
 const LocationPageContact = ({phone, email}) => {
+  const intl = useIntl();
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
-        Contact
+        {intl.formatMessage(i18nLocations.contact)}
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
         <LocationPageBlock
-          title="Phone"
+          title={intl.formatMessage(i18nLocations.phone)}
           content={`${phone.name}: ${phone.value}`}
         />
         <LocationPageBlock
-          title="Email Address"
+          title={intl.formatMessage(i18nLocations.emailAddress)}
           content={email.value}
         />
       </div>
@@ -57,23 +60,24 @@ const LocationPageAddress = ({title, address}) => {
 }
 
 const LocationPageLocation = ({location, image}) => {
+  const intl = useIntl();
   const imageData = (image) ? getImageData(image) : null;
 
   // Only include "Physical Address" if no "Mailing Address" is present
   const addresses = (location["Mailing address"]) ? (
     <Fragment>
       <LocationPageAddress
-        title="Physical Address"
+        title={intl.formatMessage(i18nLocations.physicalAddress)}
         address={location["Physical address"]}
       />
       <LocationPageAddress
-        title="Mailing Address"
+        title={intl.formatMessage(i18nLocations.mailingAddress)}
         address={location["Mailing address"]}
       />
     </Fragment>
   ) : (
     <LocationPageAddress
-      title="Address"
+      title={intl.formatMessage(i18nLocations.address)}
       address={location["Physical address"]}
     />
   )
@@ -81,7 +85,7 @@ const LocationPageLocation = ({location, image}) => {
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
-        Location
+        {intl.formatMessage(i18nLocations.location)}
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
         {addresses}
@@ -102,13 +106,19 @@ const LocationPageLocation = ({location, image}) => {
 }
 
 const LocationPageFacilityHours = ({hours}) => {
+  const intl = useIntl();
+
   const HoursText = (
     <div className="coa-LocationPage__facility-hours-container">
       <table className="coa-LocationPage__table">
         <tbody>
           {getDaysInOrder().map((day, i) => (
             <tr key={i}>
-              <td>{capitalize(day)}</td>
+              <td>
+                {intl.formatMessage(
+                  i18nDate['weekday' + capitalize(day)],
+                )}
+              </td>
               <td>{hours[day]}</td>
             </tr>
           ))}
@@ -120,11 +130,11 @@ const LocationPageFacilityHours = ({hours}) => {
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
-        Facility Hours
+        {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
         <LocationPageBlock
-          title="Standard hours"
+          title={intl.formatMessage(i18nLocations.standardHours)}
           content={HoursText}
         />
       </div>

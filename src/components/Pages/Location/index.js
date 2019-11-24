@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
-import { injectIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
 import LocationInfo from 'components/Pages/Location/LocationInfo';
@@ -9,7 +8,7 @@ import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
 import "components/Pages/Location/_Location.scss";
 
-const LocationPage = ({ locationPage, intl }) => {
+const LocationPage = ({ locationPage }) => {
   const {
     locationPage: {
       title,
@@ -61,4 +60,4 @@ const LocationPage = ({ locationPage, intl }) => {
   )
 }
 
-export default injectIntl(LocationPage);
+export default LocationPage;

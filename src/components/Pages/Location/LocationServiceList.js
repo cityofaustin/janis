@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { find, capitalize } from 'lodash';
+import { useIntl } from 'react-intl';
 
 import { getDaysInOrder } from 'js/helpers/date';
+import { date as i18nDate, locations as i18nLocations } from 'js/i18n/definitions';
 
-const DayHours = ({day, hours}) => (
-  <tr>
-    <td className="coa-LocationPage__table-service-label">{capitalize(day)}</td>
-    <td>{hours}</td>
-  </tr>
-)
+const DayHours = ({day, hours}) => {
+  const intl = useIntl();
+  return (
+    <tr>
+      <td className="coa-LocationPage__table-service-label">
+        {intl.formatMessage(
+          i18nDate['weekday' + capitalize(day)],
+        )}
+      </td>
+      <td>{hours}</td>
+    </tr>
+  );
+}
 
 const ServiceHours = ({hours}) => {
   const [expanded, setExpanded] = useState(true);
-  const days = getDaysInOrder();
+  const intl = useIntl();
 
+  const days = getDaysInOrder();
   const todayHours = {
     day: days[0],
     hours: hours[days[0]],
@@ -28,7 +38,9 @@ const ServiceHours = ({hours}) => {
     <div className="coa-LocationPage__service-hours-container">
       <table className="coa-LocationPage__table">
         <tbody>
-          <DayHours {...todayHours}/>
+          <DayHours
+            {...todayHours}
+          />
         </tbody>
       </table>
       <div
@@ -39,7 +51,10 @@ const ServiceHours = ({hours}) => {
         <table className="coa-LocationPage__table">
           <tbody>
             {otherHours.map((data, i) => (
-              <DayHours key={i} {...data}/>
+              <DayHours
+                key={i}
+                {...data}
+              />
             ))}
           </tbody>
         </table>
@@ -49,7 +64,10 @@ const ServiceHours = ({hours}) => {
         onClick={() => setExpanded(!expanded)}
       >
         <span>
-          {expanded ? 'Hide hours' : 'See more hours'}
+          {expanded ?
+            intl.formatMessage(i18nLocations.closeHours) :
+            intl.formatMessage(i18nLocations.seeMoreHours)
+          }
         </span>
         <i className="coa-LocationPage__service-hour-arrow">
           {expanded ? 'expand_less' : 'expand_more'}
@@ -60,6 +78,7 @@ const ServiceHours = ({hours}) => {
 }
 
 const Service = ({service}) => {
+  const intl = useIntl();
   return (
     <div className="coa-LocationPage__service-container">
       <div className="coa-LocationPage__service-title">
@@ -76,21 +95,24 @@ const Service = ({service}) => {
             </tbody>
           </table>
         </div>
-        <ServiceHours hours={service.hours}/>
+        <ServiceHours
+          hours={service.hours}
+        />
       </div>
       <div className="coa-LocationPage__service-link">
-        <span>Service information</span><i className="coa-LocationPage__service-link-arrow">arrow_forward</i>
+        <span>{intl.formatMessage(i18nLocations.serviceInformation)}</span><i className="coa-LocationPage__service-link-arrow">arrow_forward</i>
       </div>
     </div>
   );
 }
 
 const LocationPageServiceList = ({services}) => {
+  const intl = useIntl();
   return (
     <div className="coa-LocationPage__section">
       <div className="coa-LocationPage__sub-section">
         <h2 className="coa-LocationPage__sub-section-title">
-          Services offered
+          {intl.formatMessage(i18nLocations.servicesOffered)}
         </h2>
         {services && services.map((service, i)=>(
           <Service
