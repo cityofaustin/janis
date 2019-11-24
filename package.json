@@ -90,7 +90,7 @@
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "storybook": "NODE_PATH=src yarn start-storybook --ci -c .storybook -p 5000",
-    "build-storybook": "NODE_PATH=src yarn build-storybook -c .storybook",
+    "build-storybook": "NODE_PATH=src build-storybook -c .storybook",
     "publish-netlify-pr": "bash ./netlify/publish-netlify-pr.sh",
     "test": "NODE_PATH=./src jest src/components",
     "open-cypress": "yarn run cypress open"
