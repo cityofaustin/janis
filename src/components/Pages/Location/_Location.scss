@@ -13,6 +13,12 @@
   margin-right: auto;
   margin-top: 1.6rem;
   margin-bottom: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @include tablet {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
 
 .coa-LocationPage__header-icon {
@@ -31,11 +37,6 @@
 
   @include mobile-and-tablet {
     text-align: left;
-  }
-
-  @include tablet {
-    padding-left: 6rem;
-    padding-right: 6rem;
   }
 }
 
