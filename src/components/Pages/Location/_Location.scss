@@ -11,16 +11,32 @@
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
+  margin-top: 1.6rem;
   margin-bottom: 4rem;
 }
 
 .coa-LocationPage__header-icon {
   color: #0049C7;
+  font-size: 4rem;
 }
 
 .coa-LocationPage__header-title {
   font-size: 4rem;
+
+  @include mobile {
+    font-size: 2.8rem;
+    line-height: 3.6rem;
+    padding-top: 1.6rem;
+  }
+
+  @include mobile-and-tablet {
+    text-align: left;
+  }
+
+  @include tablet {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
 
 $coa-location-page-section-background: #F7F7F7;
@@ -53,23 +69,32 @@ $coa-location-page-section-background: #F7F7F7;
 .coa-LocationPage__sub-section-block-container {
   display: flex;
   flex-direction: row;
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .coa-LocationPage__sub-section-title {
   font-weight: bold;
+  line-height: 1;
+
+  @include mobile {
+    font-size: 2.4rem;
+    margin-bottom: 2.4rem;
+  }
 }
 
 .coa-LocationPage__sub-section-block {
   flex-grow: 1;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 2.4rem;
   flex-wrap: wrap;
+  width: 100%;
 
-  @include tablet-and-desktop {
-    width: 50%
-  }
-  @include mobile {
-    width: 100%
+  &:not(:last-child) {
+    @include mobile {
+      margin-bottom: 1.6rem;
+    }
   }
 }
 
@@ -100,9 +125,9 @@ $coa-location-page-section-background: #F7F7F7;
     font-size: 1.7rem;
     line-height: 2.4rem;
 
-    &:not(last-child) {
-      padding-top: .5rem;
-    }
+    // &:not(:last-child) {
+    //   padding-top: .5rem;
+    // }
   }
 }
 
@@ -145,6 +170,10 @@ $coa-location-page-section-background: #F7F7F7;
 
   &:hover {
     cursor: pointer;
+    background-color: $coa-color-primary;
+    color: #FFFFFF;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
 }
 

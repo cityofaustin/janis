@@ -50,7 +50,7 @@ const basicData = () => ({
   },
   services: [
     {
-      title: "Get a Birth Certificate",
+      title: "Get a birth certificate",
       phone: "(512) 000-0000",
       hours: {
         "Monday": "7:30 am–noon, 1 pm–7 pm",
