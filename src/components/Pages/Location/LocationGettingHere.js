@@ -19,8 +19,9 @@ const LocationGettingHere = ({buses}) => (
           </div>
           <div className="coa-LocationPage__sub-section-block-contents">
             <div className="coa-LocationPage__bus-container">
-              {buses.map((bus)=>(
+              {buses.map((bus, i)=>(
                 <Bus
+                  key={i}
                   bus={bus}
                 />
               ))}

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
+import { capitalize } from 'lodash';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
+import { getDaysInOrder } from 'js/helpers/date';
 
 const LocationPageBlock = ({title, content}) => (
   <div className="coa-LocationPage__sub-section-block">
@@ -104,9 +106,9 @@ const LocationPageFacilityHours = ({hours}) => {
     <div className="coa-LocationPage__facility-hours-container">
       <table className="coa-LocationPage__table">
         <tbody>
-          {Object.keys(hours).map((day, i) => (
+          {getDaysInOrder().map((day, i) => (
             <tr key={i}>
-              <td>{day}</td>
+              <td>{capitalize(day)}</td>
               <td>{hours[day]}</td>
             </tr>
           ))}

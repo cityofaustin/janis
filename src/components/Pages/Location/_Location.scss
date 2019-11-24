@@ -164,6 +164,15 @@ $coa-location-page-section-background: #F7F7F7;
   min-width: 11rem;
 }
 
+.coa-LocationPage__service-hours-menu {
+  color: $coa-color-primary;
+  padding-top: .5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .coa-LocationPage__service-link {
   padding: 2rem;
   border-top: 1px solid #dddfe1;
@@ -178,11 +187,30 @@ $coa-location-page-section-background: #F7F7F7;
   }
 }
 
-.coa-LocationPage__service-link-arrow {
+%coa-LocationPage__material-icon {
   font-family: 'Material Icons';
   font-style: normal;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+}
+
+.coa-LocationPage__service-hour-arrow {
+  @extend %coa-LocationPage__material-icon;
+
+  font-size: 2.4rem;
+  float: right;
+}
+
+.coa-LocationPage__additional-service-hours {
+  display: none;
+}
+
+.coa-LocationPage__additional-service-hours-expanded {
+  display: inherit;
+}
+
+.coa-LocationPage__service-link-arrow {
+  @extend %coa-LocationPage__material-icon;
 
   font-size: 2.4rem;
   float: right;
