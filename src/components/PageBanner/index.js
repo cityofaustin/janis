@@ -5,12 +5,12 @@ import path from 'path';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
-import { isMobileQuery } from 'js/helpers/reactMediaQueries';
+import { useMobileQuery } from 'js/helpers/reactMediaQueries';
 
 // headerText: optional String, if you want to embed headerText within the banner image
 // mobileOptimized: optional Boolean, set to "true" if you don't want to render banner images on mobile
 function PageBanner({ image, headerText, mobileOptimized }){
-  const isMobile = isMobileQuery();
+  const isMobile = useMobileQuery();
   const imagesPath = `${process.env.CMS_MEDIA}/images`;
   const imageFilename = path.basename(
     image.filename,

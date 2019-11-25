@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
 
-// TODO: replace withRouteData with useRouteData hook
-import { withRouteData, Head } from 'react-static';
+import { useRouteData, Head } from 'react-static';
 
 import { injectIntl } from 'react-intl';
 import { findIndex, sortBy } from 'lodash';
@@ -15,12 +14,30 @@ import GuideSectionCollection from 'components/Pages/Guide/GuideSectionCollectio
 import PageBanner from 'components/PageBanner';
 import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
-import { isMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
+import { useMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
 import { printSections } from 'components/Pages/Guide/helpers.js';
 
 import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
-function Guide(props) {
+function Guide({ guidePage, intl }) {
+  const {
+    guidePage: {
+      id,
+      title,
+      description,
+      slug,
+      topic,
+      topics,
+      theme,
+      department,
+      relatedDepartments,
+      sections,
+      image,
+      contact,
+      coaGlobal,
+      contextualNavData,
+    },
+  } = guidePage ? { guidePage } : useRouteData();
   const [currentSection, setCurrentSection] = useState(null);
   const [resizeCount, setResizeCount] = useState(0);
   const [sectionLocations, dispatchSectionLocations] = useReducer(
@@ -45,8 +62,9 @@ function Guide(props) {
     },
     [],
   );
-  const isMobileOrTablet = isMobileOrTabletQuery();
-  const node = useRef();
+  const isMobileOrTablet = useMobileOrTabletQuery();
+  const rootNode = useRef();
+  const desktopGuideMenuNode = useRef();
 
   // Update offsetTop of each GuideSection if the window resizes
   function updateSectionLocation(offsetTop, anchorTag) {
@@ -81,18 +99,27 @@ function Guide(props) {
       setCurrentSection(null);
     }
   }
+  function handleScrolly() {
+    // console.log('~~~the scrolly parent reccct', scrollyNode.current.getBoundingClientRect())
+    // console.log('~~~the scrolly parent scrollTop', scrollyNode.current.scrollTop)
+    // console.log('~~~the scrolly parent offsetTop', scrollyNode.current.offsetTop)
+    // scrollyNode.current.scrollTop = 200;
+  }
   useEffect(() => {
     // update "scroll" listener when sectionLocations change
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrolly);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScrolly);
     };
   }, [sectionLocations]);
 
   // Implement sticky polyfill for browsers that don't natively allow "position: sticky"
   // "position: sticky" will be used by desktop GuideMenu.
   useEffect(() => {
-    const stickyElements = node.current.querySelectorAll('.sticky');
+    const stickyElements = rootNode.current.querySelectorAll('.sticky');
 
     // stickyfill breaks the build with a 'window is not defined' error
     // see https://github.com/react-static/react-static/issues/16
@@ -119,27 +146,31 @@ function Guide(props) {
     };
   }, [resizeCount]);
 
-  // Organize variables that will be used in rendering
-  let {
-    id,
-    title,
-    description,
-    slug,
-    topic,
-    topics,
-    theme,
-    department,
-    relatedDepartments,
-    sections,
-    image,
-    contact,
-    coaGlobal,
-    contextualNavData,
-  } = props.guidePage;
-  let { intl } = props;
+
+  function scrollGuideMenu(anchorTag, currentSectionLinkRect) {
+    const guideMenuRect = desktopGuideMenuNode.current.getBoundingClientRect();
+    const guideMenuBottom = guideMenuRect.bottom;
+    const guideMenuTop = guideMenuRect.top;
+    const guideMenuScrollTop = desktopGuideMenuNode.current.scrollTop;
+    const currentSectionLinkBottom = currentSectionLinkRect.bottom;
+    const currentSectionLinkTop = currentSectionLinkRect.top;
+    if (currentSectionLinkBottom > guideMenuBottom) {
+      /*
+        If the bottom of the currentSection GuideMenuLink is below the bottom of the GuideMenu,
+        Then move the GuideMenu down.
+      */
+      desktopGuideMenuNode.current.scrollTop = (currentSectionLinkBottom - guideMenuBottom + guideMenuScrollTop);
+    } else if (currentSectionLinkTop < guideMenuTop) {
+      /*
+        If the top of the currentSection GuideMenuLink is above the top of the GuideMenu,
+        Then move the GuideMenu up.
+      */
+      desktopGuideMenuNode.current.scrollTop = (guideMenuScrollTop + currentSectionLinkTop);
+    }
+  }
 
   return (
-    <div ref={node}>
+    <div ref={rootNode}>
       <Head>
         <title>{title}</title>
       </Head>
@@ -178,13 +209,15 @@ function Guide(props) {
                 contact={contact}
                 sections={sections}
                 currentSection={currentSection}
+                scrollGuideMenu={scrollGuideMenu}
               />
             ) : (
-              <div className="coa-GuideMenu__desktop-container sticky">
+              <div ref={desktopGuideMenuNode} className="coa-GuideMenu__desktop-container sticky">
                 <GuideMenu
                   contact={contact}
                   sections={sections}
                   currentSection={currentSection}
+                  scrollGuideMenu={scrollGuideMenu}
                 />
               </div>
             )}
@@ -215,4 +248,4 @@ function Guide(props) {
   );
 }
 
-export default withRouteData(injectIntl(Guide));
+export default injectIntl(Guide);
