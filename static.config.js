@@ -680,8 +680,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       }
     }
 
-    parsedStructure = parsedStructure.filter(paui =>
-      idsToRebuild.includes(paui.id),
+    parsedStructure = parsedStructure.filter(pageAtUrlInfo =>
+      idsToRebuild.includes(pageAtUrlInfo.id),
     );
   }
 
