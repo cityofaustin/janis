@@ -43,7 +43,7 @@ const getLangFromCookie = (path) => {
 
 const getLangFromLocale = (path) => {
   if (typeof document === 'undefined') return null;
-  const lang = this.getSupportedLang(
+  const lang = getSupportedLang(
     locale()
       .split('-')[0]
       .toLowerCase()
