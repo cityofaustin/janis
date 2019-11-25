@@ -14,24 +14,24 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const isMobile = isMobileQuery()
   const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
   const allDocs = officialDocuments.edges
-  // QA ONLY ... 👇
-  let pages = buildPages()
-  pages = pages.concat(pages)
-  // 👆
-  // ------
-  // BACK TO AFTER QA 👇
-  // const pages = buildPages()
-  // 👆
+  const pages = buildPages()
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+
+  useEffect(() => {
+    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
+    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
+    setPageNumber(hash)
+  })
 
   useEffect(() => {
     window.onpopstate = function(event) {
       setPageNumber(getHash())
       window.requestAnimationFrame( ()=> window.scroll(0,0) )
     }
-  }, [pageNumber])
+    window.location.hash = pageNumber+1
+  })
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
@@ -108,7 +108,6 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       setPageNumber(newPage)
-      if (typeof window !== 'undefined') window.location.hash = newPage+1
     }
   }
 
@@ -194,7 +193,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
 }
 
-const PageNumber = ({pageNumber, index, changePage })=>{
+const PageNumber = ({ pageNumber, index, changePage })=>{
   const active = pageNumber === index ? " active" : ''
   const ellipsis = index === "..." ? " ellipsis" : ''
   return (

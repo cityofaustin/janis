@@ -50,6 +50,7 @@
 .coa-OfficialDocumentPage_page.number-container.active {
   color: #0049C7;
   background-color: #D9E8F6;
+  pointer-events: none;
 }
 
 .coa-OfficialDocumentPage_page.number-container.ellipsis {
@@ -87,12 +88,12 @@
 }
 
 .coa-OfficialDocumentPage_page:hover  {
-  background-color: #162E51;
+  background-color: #0049C7;
   color: #FFFFFF;
 }
 
 .coa-OfficialDocumentPage_page.active:hover  {
-  background-color: #162E51;
+  background-color: #0049C7;
   color: #FFFFFF;
 }
 
@@ -110,4 +111,8 @@
 
 .coa-OfficialDocumentPage_page .coa-CheveronRightBlue:hover{
   fill: rgba(0,0,0,0);
+}
+
+.coa-CheveronLeftBlue, .coa-CheveronRightBlue {
+  pointer-events: none;
 }
