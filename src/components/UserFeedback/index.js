@@ -13,7 +13,7 @@ class UserFeedback extends Component {
     this.state = {
       loading: false,
       feedback: null,
-      error: true,
+      error: null,
       feedbackSubmitted: false,
       buttonValue: null,
       char: 0,
@@ -126,13 +126,11 @@ class UserFeedback extends Component {
         });
       })
       .catch(e => {
-        //TODO: incorporate error messaging / styles
         this.logEvent('post-error', e.response);
         console.log('ERROR:', e);
         this.setState({
           loading: false,
           error: true,
-          char: 0,
         });
       });
   };
@@ -200,7 +198,7 @@ class UserFeedback extends Component {
               </form>
               {this.state.error
                 && <div className="coa-UserFeedback__error">
-                  <span style={{color:"#b82b00", margin: 0, 'line-height': '2.4rem'}}>
+                  <span>
                     <i className="material-icons">error_outline</i>
                   </span>
                   <p>

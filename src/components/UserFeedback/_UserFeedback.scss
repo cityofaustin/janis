@@ -251,17 +251,19 @@ textarea#userfeedback-textarea {
 .coa-UserFeedback__error {
   background: $coa-color-grey;
   text-align: center;
-  padding: 20px;
+  padding: 20px 16px;
   border-top: 1px #dbdbdb solid;
-  @media screen and (min-width: 768px) {
-    padding: 20px 16px;
-  }
 }
 
 .coa-UserFeedback__error {
+  span {
+    color:#b82b00;
+  }
   p {
     padding: 16px 0 0 0;
-    width: 400px;
     margin: 0 auto;
+    @media screen and (min-width: 768px) {
+      width: 400px;
+    }
   }
 }
