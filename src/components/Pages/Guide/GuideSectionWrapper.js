@@ -19,7 +19,7 @@ function GuideSectionWrapper(props) {
 
   // updateSectionLocation if the window resized or Mobile status changed
   useEffect(()=>{
-    updateSectionLocation(node.current.offsetTop, anchorTag);
+    updateSectionLocation(node, anchorTag);
   }, [isMobileOrTablet, resizeCount])
 
   return (

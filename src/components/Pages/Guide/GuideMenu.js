@@ -6,20 +6,25 @@ import { hyphenate } from './helpers';
 import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
 
-function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGuideMenu }) {
+function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGuideMenu, setClickedSection, clickedSection }) {
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
   const node = useRef();
   const isDesktop = useDesktopQuery();
 
+  /*
+    Check if we need to scroll the GuideMenu.
+    But only do that if we aren't presently scrolling to a clickedSection.
+    We want to scroll the GuideMenu sidebar only if the main content is done scrolling.
+    Otherwise the GuideMenu would get stuck on its way to the clickedSection.
+  */
   useEffect(() => {
-    if (isCurrentSection && isDesktop) {
+    if (isCurrentSection && isDesktop && !clickedSection) {
       scrollGuideMenu(anchorTag, node.current.getBoundingClientRect())
     }
-  }, [isCurrentSection, isDesktop])
+  }, [clickedSection, isCurrentSection, isDesktop])
 
-  function goToSection(e) {
-    history.pushState(null, null, `#${anchorTag}`);
-    document.getElementById(anchorTag).scrollIntoView(true);
+  function handleClick(e) {
+    setClickedSection(anchorTag);
   }
 
   return (
@@ -35,7 +40,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGu
           'coa-GuideMenu__subheading': !isHeading,
           'coa-GuideMenu__current-section': isCurrentSection,
         })}
-        onClick={goToSection}
+        onClick={handleClick}
       >
         <span className="coa-GuideMenu__title-text">{title}</span>
       </div>
@@ -43,7 +48,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGu
   );
 }
 
-function GuideMenuSection({ section, currentSection, scrollGuideMenu }) {
+function GuideMenuSection({ section, currentSection, scrollGuideMenu, setClickedSection, clickedSection }) {
   const headingAnchorTag = hyphenate(section.heading);
   const subHeadings = section.pages.map((page, index) => {
     const title =
@@ -64,6 +69,8 @@ function GuideMenuSection({ section, currentSection, scrollGuideMenu }) {
         isHeading={true}
         isCurrentSection={currentSection === headingAnchorTag}
         scrollGuideMenu={scrollGuideMenu}
+        setClickedSection={setClickedSection}
+        clickedSection={clickedSection}
       />
       {subHeadings.map((subHeading, index) => (
         <GuideMenuLink
@@ -73,13 +80,15 @@ function GuideMenuSection({ section, currentSection, scrollGuideMenu }) {
           isHeading={false}
           isCurrentSection={currentSection === subHeading.anchorTag}
           scrollGuideMenu={scrollGuideMenu}
+          setClickedSection={setClickedSection}
+          clickedSection={clickedSection}
         />
       ))}
     </div>
   );
 }
 
-function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu }) {
+function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu, setClickedSection, clickedSection }) {
   return (
     <div>
       <div className="coa-GuideMenu__section">
@@ -90,6 +99,8 @@ function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu })
             isHeading={true}
             isCurrentSection={currentSection === 'Contact-information'}
             scrollGuideMenu={scrollGuideMenu}
+            setClickedSection={setClickedSection}
+            clickedSection={clickedSection}
           />
         )}
       </div>
@@ -101,6 +112,8 @@ function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu })
               section={section}
               currentSection={currentSection}
               scrollGuideMenu={scrollGuideMenu}
+              setClickedSection={setClickedSection}
+              clickedSection={clickedSection}
             />
           </div>
         )

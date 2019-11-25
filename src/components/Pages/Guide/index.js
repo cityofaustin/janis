@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react';
-
 import { useRouteData, Head } from 'react-static';
-
 import { injectIntl } from 'react-intl';
-import { findIndex, sortBy } from 'lodash';
+import { find, findIndex, sortBy } from 'lodash';
 import { misc as i18n } from 'js/i18n/definitions';
 import path from 'path';
 
@@ -39,8 +37,13 @@ function Guide({ guidePage, intl }) {
     },
   } = guidePage ? { guidePage } : useRouteData();
   const [currentSection, setCurrentSection] = useState(null);
+  const [clickedSection, setClickedSection] = useState(null);
+  const isMobileOrTablet = useMobileOrTabletQuery();
+  const rootNode = useRef();
+  const desktopGuideMenuNode = useRef();
   const [resizeCount, setResizeCount] = useState(0);
   const [sectionLocations, dispatchSectionLocations] = useReducer(
+    // payload for each sectionLocation contains {node: useRef(), offsetTop, anchorTag}
     (sectionLocations, { action, payload }) => {
       switch (action) {
         case 'update':
@@ -62,15 +65,32 @@ function Guide({ guidePage, intl }) {
     },
     [],
   );
-  const isMobileOrTablet = useMobileOrTabletQuery();
-  const rootNode = useRef();
-  const desktopGuideMenuNode = useRef();
+
+  // Navigate to guideSection when its been clicked on in GuideMenu.
+  useEffect(()=>{
+    if (clickedSection) {
+      history.pushState(null, null, `#${clickedSection}`);
+      const guideSectionNode = find(sectionLocations, ["anchorTag", clickedSection]).node;
+      guideSectionNode.current.scrollIntoView(true);
+    }
+  }, [clickedSection, sectionLocations])
+
+  // Reset clickedSection once we've scrolled to it
+  useEffect(()=>{
+    if (currentSection === clickedSection) {
+      setClickedSection(null);
+    }
+  }, [clickedSection, currentSection])
 
   // Update offsetTop of each GuideSection if the window resizes
-  function updateSectionLocation(offsetTop, anchorTag) {
+  function updateSectionLocation(node, anchorTag) {
     return dispatchSectionLocations({
       action: 'update',
-      payload: { offsetTop, anchorTag },
+      payload: {
+        node,
+        offsetTop: node.current.offsetTop,
+        anchorTag
+      },
     });
   }
 
@@ -99,20 +119,11 @@ function Guide({ guidePage, intl }) {
       setCurrentSection(null);
     }
   }
-  function handleScrolly() {
-    // console.log('~~~the scrolly parent reccct', scrollyNode.current.getBoundingClientRect())
-    // console.log('~~~the scrolly parent scrollTop', scrollyNode.current.scrollTop)
-    // console.log('~~~the scrolly parent offsetTop', scrollyNode.current.offsetTop)
-    // scrollyNode.current.scrollTop = 200;
-  }
   useEffect(() => {
     // update "scroll" listener when sectionLocations change
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleScrolly);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleScrolly);
     };
   }, [sectionLocations]);
 
@@ -146,7 +157,7 @@ function Guide({ guidePage, intl }) {
     };
   }, [resizeCount]);
 
-
+  // Scroll the guideMenu if the currentSection's Link is not visible
   function scrollGuideMenu(anchorTag, currentSectionLinkRect) {
     const guideMenuRect = desktopGuideMenuNode.current.getBoundingClientRect();
     const guideMenuBottom = guideMenuRect.bottom;
@@ -210,6 +221,8 @@ function Guide({ guidePage, intl }) {
                 sections={sections}
                 currentSection={currentSection}
                 scrollGuideMenu={scrollGuideMenu}
+                setClickedSection={setClickedSection}
+                clickedSection={clickedSection}
               />
             ) : (
               <div ref={desktopGuideMenuNode} className="coa-GuideMenu__desktop-container sticky">
@@ -218,6 +231,8 @@ function Guide({ guidePage, intl }) {
                   sections={sections}
                   currentSection={currentSection}
                   scrollGuideMenu={scrollGuideMenu}
+                  setClickedSection={setClickedSection}
+                  clickedSection={clickedSection}
                 />
               </div>
             )}
