@@ -39,6 +39,9 @@ const branchOverrides = {
   },
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
+  },
+  '3094-guide-toc-v2': {
+    CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql'
   }
 };
 
