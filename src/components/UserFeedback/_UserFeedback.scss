@@ -252,7 +252,16 @@ textarea#userfeedback-textarea {
   background: $coa-color-grey;
   text-align: center;
   padding: 20px;
+  border-top: 1px #dbdbdb solid;
   @media screen and (min-width: 768px) {
     padding: 20px 16px;
+  }
+}
+
+.coa-UserFeedback__error {
+  p {
+    padding: 16px 0 0 0;
+    width: 400px;
+    margin: 0 auto;
   }
 }

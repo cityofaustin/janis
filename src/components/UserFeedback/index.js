@@ -200,9 +200,12 @@ class UserFeedback extends Component {
               </form>
               {this.state.error
                 && <div className="coa-UserFeedback__error">
+                  <span style={{color:"#b82b00", margin: 0, 'line-height': '2.4rem'}}>
+                    <i className="material-icons">error_outline</i>
+                  </span>
                   <p>
                     Sorry, we had trouble receiving your feedback.
-                    Please try again or email feedback@austintexas.gov.
+                    Please try again or email <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
                   </p>
                 </div>
               }
