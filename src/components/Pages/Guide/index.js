@@ -14,6 +14,7 @@ import GuideMenuMobile from 'components/Pages/Guide/GuideMenuMobile';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { useMobileOrTabletQuery } from 'js/helpers/reactMediaQueries';
 import { printSections } from 'components/Pages/Guide/helpers.js';
+import { hyphenate } from './helpers';
 
 import guidePagePlaceholder from 'images/guide_page_placeholder.png';
 
@@ -36,8 +37,6 @@ function Guide({ guidePage, intl }) {
       contextualNavData,
     },
   } = guidePage ? { guidePage } : useRouteData();
-  const [currentSection, setCurrentSection] = useState(null);
-  const [clickedSection, setClickedSection] = useState(null);
   const isMobileOrTablet = useMobileOrTabletQuery();
   const rootNode = useRef();
   const desktopGuideMenuNode = useRef();
@@ -50,28 +49,64 @@ function Guide({ guidePage, intl }) {
           const sectionIndex = findIndex(sectionLocations, {
             anchorTag: payload.anchorTag,
           });
-          if (sectionIndex === -1) {
-            // Add a new value, then re-sort array by "offsetTop"
-            return sortBy([...sectionLocations, payload], 'offsetTop');
-          } else {
-            // update "offsetTop" for an existing sectionLocation
-            return sectionLocations.map((sectionLocation, i) => {
-              return i === sectionIndex ? payload : sectionLocation;
-            });
-          }
+          return sectionLocations.map((sectionLocation, i) => {
+            return i === sectionIndex ? payload : sectionLocation;
+          });
         default:
           return sectionLocations;
       }
     },
-    [],
+    null,
+    () => {
+      /*
+        Initially just set anchorTags for sectionLocations.
+        After rendering, the components themselves will update sectionLocations
+        to include their node from useRef() and their offsetTop.
+      */
+      const sectionLocations = [
+        {anchorTag: "Contact-information"}
+      ];
+      sections.forEach(section => {
+        const heading = hyphenate(section.heading)
+        sectionLocations.push({
+          anchorTag: heading,
+        });
+        section.pages.forEach((page, index)=>{
+          sectionLocations.push({
+            anchorTag: `${heading}-${index + 1}`
+          });
+        });
+      });
+      return sectionLocations
+    },
   );
+  const [currentSection, setCurrentSection] = useState(()=>{
+    // If there is a #hash in the URL, set the currentSection to that.
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash) {
+        // Remove leading '#'
+        const initialCurrectSection = hash.slice(1);
+        // if the /#hash in the url refers to a real section, then set that to the initial currentSection
+        if (find(sectionLocations, ["anchorTag", initialCurrectSection])) {
+          return initialCurrectSection;
+        }
+      }
+    }
+    return null;
+  });
+  const [clickedSection, setClickedSection] = useState(null);
 
   // Navigate to guideSection when its been clicked on in GuideMenu.
   useEffect(()=>{
     if (clickedSection) {
       history.pushState(null, null, `#${clickedSection}`);
-      const guideSectionNode = find(sectionLocations, ["anchorTag", clickedSection]).node;
-      guideSectionNode.current.scrollIntoView(true);
+      const guideSection = find(sectionLocations, ["anchorTag", clickedSection])
+      if (guideSection) {
+        guideSection.node.current.scrollIntoView(true);
+      } else {
+        setClickedSection(null)
+      }
     }
   }, [clickedSection, sectionLocations])
 
