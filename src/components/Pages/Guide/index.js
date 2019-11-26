@@ -88,11 +88,15 @@ function Guide({ guidePage, intl }) {
         // Remove leading '#'
         const initialCurrectSection = hash.slice(1);
         // if the /#hash in the url refers to a real section, then set that to the initial currentSection
+        console.log(`~~~~ Should be our initialCurrectSection ${initialCurrectSection}`)
+        console.log(`~~~ you sectionLocations`, sectionLocations)
         if (find(sectionLocations, ["anchorTag", initialCurrectSection])) {
+          console.log(`~~~~~ yep its good`)
           return initialCurrectSection;
         }
       }
     }
+    console.log("~~~~ there is no initialCurrectSection")
     return null;
   });
   const [clickedSection, setClickedSection] = useState(null);
@@ -137,6 +141,8 @@ function Guide({ guidePage, intl }) {
     We want the GuideSection right before the first GuideSection that is past the window's position.
   **/
   function handleScroll() {
+    console.log("~~~~ a scroll event, now at:", window.pageYOffset)
+    console.log("~~~~ scrolly sectionLocations:", sectionLocations)
     // printSections(sectionLocations, window.pageYOffset)
     let i = 0;
     while (i < sectionLocations.length) {
