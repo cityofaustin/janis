@@ -1,9 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import Recollect from 'components/Recollect';
 
-storiesOf('Recollect', module).add('recollect', () => (
+export default {
+  title: 'Recollect',
+};
+
+export const recollect = () => (
   <div className="wrapper container-fluid">
     <code
       style={{
@@ -14,11 +17,15 @@ storiesOf('Recollect', module).add('recollect', () => (
       }}
     >
       <p>
-        Storybook puts everything inside an iframe. Recollect says "This widget
-        cannot function properly in an iframe. Please contact
-        support@recollect.net for help with embedding the widget." 🙃{' '}
+        Storybook puts everything inside an iframe. Recollect says "This widget cannot function
+        properly in an iframe. Please contact support@recollect.net for help with embedding the
+        widget." 🙃{' '}
       </p>
     </code>
     <Recollect options={{ name: 'calendar' }} />
   </div>
-));
+);
+
+recollect.story = {
+  name: 'recollect',
+};

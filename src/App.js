@@ -1,7 +1,7 @@
 import React, { Component, Fragment, Suspense } from 'react';
 import { Root, Routes, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
-import { injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
 import CMSPreview from 'components/_Controllers/CMSPreview';
 import CMSLive from 'components/_Controllers/CMSLive';
@@ -12,7 +12,8 @@ import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
 
-const AppView = injectIntl(({ intl, path }) => {
+const AppView = ({path}) => {
+  const intl = useIntl();
   const { navigation } = useSiteData();
 
   return (
@@ -31,7 +32,7 @@ const AppView = injectIntl(({ intl, path }) => {
       <Footer />
     </div>
   );
-});
+};
 
 const App = ({ navigation, threeoneone }) => {
   return (

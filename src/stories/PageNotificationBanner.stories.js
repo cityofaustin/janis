@@ -1,14 +1,18 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import PageNotificationBanner from 'components/PageNotificationBanner';
 import WorkInProgress from 'components/WorkInProgress';
 
-storiesOf('PageNotificationBanner', module).add(
-  'PageNotificationBanner',
-  () => (
-    <PageNotificationBanner>
-      <WorkInProgress />
-    </PageNotificationBanner>
-  ),
+export default {
+  title: 'PageNotificationBanner',
+};
+
+export const pageNotificationBanner = () => (
+  <PageNotificationBanner>
+    <WorkInProgress />
+  </PageNotificationBanner>
 );
+
+pageNotificationBanner.story = {
+  name: 'PageNotificationBanner',
+};

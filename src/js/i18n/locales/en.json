@@ -101,5 +101,20 @@
     "The https:// ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.",
   "officialdocuments.author": "Author",
   "officialdocuments.document": "Document",
-  "guides.pageLink": "View this page on alpha.austin.gov"
+  "guides.pageLink": "View this page on alpha.austin.gov",
+  "locations.contact": "Contact",
+  "locations.phone": "Phone",
+  "locations.emailAddress": "Email address",
+  "locations.location": "Location",
+  "locations.address": "Address",
+  "locations.physicalAddress": "Physical address",
+  "location.mailingAddress": "Mailing address",
+  "locations.facilityHours": "Facility hours",
+  "locations.standardHours": "Standard hours",
+  "locations.servicesOffered": "Services offered",
+  "locations.serviceInformation": "Service information",
+  "locations.seeMoreHours": "See more hours",
+  "locations.closeHours": "Close hours",
+  "locations.gettingHere": "Getting here",
+  "locations.busesServicing": "Buses servicing this area"
 }
