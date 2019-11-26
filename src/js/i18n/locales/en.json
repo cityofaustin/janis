@@ -108,7 +108,7 @@
   "locations.location": "Location",
   "locations.address": "Address",
   "locations.physicalAddress": "Physical address",
-  "location.mailingAddress": "Mailing address",
+  "locations.mailingAddress": "Mailing address",
   "locations.facilityHours": "Facility hours",
   "locations.standardHours": "Standard hours",
   "locations.servicesOffered": "Services offered",

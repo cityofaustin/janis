@@ -21,7 +21,7 @@ const DayHours = ({day, hours}) => {
 }
 
 const ServiceHours = ({hours}) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const intl = useIntl();
 
   const days = getDaysInOrder();

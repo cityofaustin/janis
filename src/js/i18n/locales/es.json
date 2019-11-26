@@ -112,7 +112,7 @@
   "locations.location": "Ubicación",
   "locations.address": "Dirección",
   "locations.physicalAddress": "Dirección física",
-  "location.mailingAddress": "Dirección postal",
+  "locations.mailingAddress": "Dirección postal",
   "locations.facilityHours": "Horario del centro",
   "locations.standardHours": "Horario regular",
   "locations.servicesOffered": "Servicios ofrecidos",
