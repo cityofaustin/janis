@@ -1,8 +1,10 @@
+@import 'src/css/base/mixins';
+
 .coa-PageBanner__container {
   display: flex;
   position: relative;
   height: 17rem;
-  @include media($coa-medium-screen) {
+  @include tablet-and-desktop {
     height: 30rem;
   }
 }
