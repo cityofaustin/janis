@@ -20,12 +20,21 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const page = pages[pageNumber]
 
   useEffect(() => {
-    window.scroll(0,0)
-    location.hash = pageNumber+1
-  }, [pageNumber])
+    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
+    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
+    setPageNumber(hash)
+  })
+
+  useEffect(() => {
+    window.onpopstate = function(event) {
+      setPageNumber(getHash())
+      window.requestAnimationFrame( ()=> window.scroll(0,0) )
+    }
+    window.location.hash = pageNumber+1
+  })
 
   function getHash(){
-    const str = location.hash.split("#")[1]
+    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
     const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
     return hash
   }
@@ -152,7 +161,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
 }
 
-const PageNumber = ({pageNumber, index, changePage })=>{
+const PageNumber = ({ pageNumber, index, changePage })=>{
   const active = pageNumber === index ? " active" : ''
   const ellipsis = index === "..." ? " ellipsis" : ''
   return (
