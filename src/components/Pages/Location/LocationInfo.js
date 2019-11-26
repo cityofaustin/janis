@@ -21,6 +21,19 @@ const LocationPageBlock = ({title, content}) => (
 
 const LocationPageContact = ({phone, email}) => {
   const intl = useIntl();
+  // TODO: use 'libphonenumber-js' for real phone from Joplin API
+  const phoneContent = (
+    <Fragment>
+      {`${phone.name}: `}
+      <a href={`tel:${phone.value}`}>
+        {phone.value}
+      </a>
+    </Fragment>
+  );
+  const emailContent = (
+    <a href={`mailto:${email.value}`}>{email.value}</a>
+  )
+
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
@@ -29,11 +42,11 @@ const LocationPageContact = ({phone, email}) => {
       <div className="coa-LocationPage__sub-section-block-container">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.phone)}
-          content={`${phone.name}: ${phone.value}`}
+          content={phoneContent}
         />
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.emailAddress)}
-          content={email.value}
+          content={emailContent}
         />
       </div>
     </div>
