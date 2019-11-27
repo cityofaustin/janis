@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
 
@@ -23,8 +22,16 @@ const content = `
   </p>
 `;
 
-storiesOf('HtmlFromAdmin', module).add('HtmlFromAdmin', () => (
+export default {
+  title: 'HtmlFromAdmin',
+};
+
+export const htmlFromAdmin = () => (
   <div className="wrapper container-fluid">
     <HtmlFromAdmin title="Lorem ipsum dolor sit amet cume" content={content} />
   </div>
-));
+);
+
+htmlFromAdmin.story = {
+  name: 'HtmlFromAdmin',
+};
