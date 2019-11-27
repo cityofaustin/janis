@@ -57,9 +57,9 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     // add ellipsis for gaps greater than 1
     if (pages.length >= maxPagesShown) {
       for (var i = 0; i < maxPagesShown; i++) {
-        if (shownPages[i+1] - shownPages[i] == 2) {
+        if (shownPages[i+1] - shownPages[i] == 2 && shownPages.length < maxPagesShown) {
           shownPages.splice(i+1,0,shownPages[i]+1)
-        } else if (shownPages[i+1] - shownPages[i] > 2) {
+        } else if (shownPages[i+1] - shownPages[i] > 2 && shownPages.length < maxPagesShown) {
           shownPages.splice(i+1,0,"...")
         }
       }
@@ -72,9 +72,13 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     }
 
     // Replace any elipsis that now actually just represent ONE number. "Thanks elipsis! But, you're not needed anymore."
+    // Also, if the ellipsis is plus-or-minus 1 to the current page, let's show acutal page number too.
     shownPages.map((num,i)=>{
+      const diff = i - shownPages.indexOf(pageNumber+1)
       if (typeof num === "string" && shownPages[i+1] - shownPages[i-1] === 2) {
         shownPages[i] = shownPages[i+1] - 1
+      } else if (typeof num === "string" && Math.abs(diff) === 1) {
+        shownPages[i] = pageNumber + 1 + diff
       }
     })
 
@@ -163,10 +167,12 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
                 }
               </div>
 
-              {pages && shownPages.map((page, index) => (
+              {pages && shownPages.map((page, i) => (
                 <PageNumber
                   pageNumber={pageNumber+1}
-                  index={shownPages[index]}
+                  index={shownPages[i]}
+                  paginationIndex={i}
+                  pageNumberIndex={shownPages.indexOf(pageNumber+1)}
                   changePage={changePage}
                 />
               ))}
@@ -190,12 +196,17 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
 }
 
-const PageNumber = ({ pageNumber, index, changePage })=>{
+const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex })=>{
   const active = pageNumber === index ? " active" : ''
-  const ellipsis = index === "..." ? " ellipsis" : ''
+  let ellipsis = ""
+  let pageIndex = index
+  if (index === "...") {
+    ellipsis = " ellipsis"
+    pageIndex = pageNumberIndex > paginationIndex ? pageNumber-1 : pageNumber+1
+  }
   return (
     <div
-      onClick={()=>changePage(index-1)}
+      onClick={()=>changePage(pageIndex-1)}
       className={ "coa-OfficialDocumentPage_page number-container" + active + ellipsis }
     >
       <div className={ "coa-OfficialDocumentPage_number" }>

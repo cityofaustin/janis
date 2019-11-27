@@ -53,10 +53,6 @@
   pointer-events: none;
 }
 
-.coa-OfficialDocumentPage_page.number-container.ellipsis {
-  pointer-events: none;
-}
-
 .coa-OfficialDocumentPage_page-chevron {
   position: relative;
   width: 46px;
@@ -66,9 +62,9 @@
 }
 
 .coa-OfficialDocumentPage_page-chevron.right {
-  width: 40px;
+  width: 42px;
   left: inherit;
-  right: -2px;
+  right: -1px;
 }
 
 .coa-OfficialDocumentPage_text {
@@ -76,7 +72,7 @@
   padding-left: 11px;
   padding-right: 10px;
   height: 32px;
-  line-height: 26px;
+  line-height: 30px;
   border-left: 1px solid #dbdee1;
 }
 
