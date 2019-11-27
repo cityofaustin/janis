@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import parser from 'ua-parser-js';
@@ -126,13 +126,11 @@ class UserFeedback extends Component {
         });
       })
       .catch(e => {
-        //TODO: incorporate error messaging / styles
         this.logEvent('post-error', e.response);
         console.log('ERROR:', e);
         this.setState({
           loading: false,
           error: true,
-          char: 0,
         });
       });
   };
@@ -155,48 +153,61 @@ class UserFeedback extends Component {
                 </div>
               </div>
           :
-            <form className="coa-UserFeedback__form">
-              <div className="coa-UserFeedback__prompt">
-                <i className="material-icons">feedback</i>
-                <p>
-                  {intl.formatMessage(i18n2.didYouFind)}
-                </p>
-                <input
-                  type="button"
-                  className={Boolean(this.state.buttonValue) ? yesButtonStyle : "coa-UserFeedback__button"}
-                  onClick={this.toggleYesButton}
-                  value={intl.formatMessage(i18n2.yes)}
-                />
-                <input
-                  type="button"
-                  onClick={this.toggleNoButton}
-                  value={intl.formatMessage(i18n2.no)}
-                  className={Boolean(this.state.buttonValue) ? noButtonStyle : "coa-UserFeedback__button"}
-                />
-              </div>
-              {Boolean(this.state.buttonValue) // if either button is selected, show textarea
-                &&
-                  <div className="coa-UserFeedback__elaborate">
-                    <hr className="coa-UserFeedback-hr"/>
-                    <p>
-                      {intl.formatMessage(i18n2.tellUsMore)}
-                    </p>
-                    <div className="coa-UserFeedback__textarea-wrapper">
-                      <textarea
-                        id="userfeedback-textarea"
-                        name="userfeedback-textarea"
-                        maxLength={2000}
-                        onChange={this.handleTextAreaChange}
-                        className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
-                      />
-                      <div className="coa-UserFeedback__charlimit">
-                        {`Character limit: ${this.state.char} of 2000`}
+            <Fragment>
+              <form className="coa-UserFeedback__form">
+                <div className="coa-UserFeedback__prompt">
+                  <i className="material-icons">feedback</i>
+                  <p>
+                    {intl.formatMessage(i18n2.didYouFind)}
+                  </p>
+                  <input
+                    type="button"
+                    className={Boolean(this.state.buttonValue) ? yesButtonStyle : "coa-UserFeedback__button"}
+                    onClick={this.toggleYesButton}
+                    value={intl.formatMessage(i18n2.yes)}
+                  />
+                  <input
+                    type="button"
+                    onClick={this.toggleNoButton}
+                    value={intl.formatMessage(i18n2.no)}
+                    className={Boolean(this.state.buttonValue) ? noButtonStyle : "coa-UserFeedback__button"}
+                  />
+                </div>
+                {Boolean(this.state.buttonValue) // if either button is selected, show textarea
+                  &&
+                    <div className="coa-UserFeedback__elaborate">
+                      <hr className="coa-UserFeedback-hr"/>
+                      <p>
+                        {intl.formatMessage(i18n2.tellUsMore)}
+                      </p>
+                      <div className="coa-UserFeedback__textarea-wrapper">
+                        <textarea
+                          id="userfeedback-textarea"
+                          name="userfeedback-textarea"
+                          maxLength={2000}
+                          onChange={this.handleTextAreaChange}
+                          className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
+                        />
+                        <div className="coa-UserFeedback__charlimit">
+                          {`Character limit: ${this.state.char} of 2000`}
+                        </div>
                       </div>
+                      {this.renderButton()}
                     </div>
-                    {this.renderButton()}
-                  </div>
+                }
+              </form>
+              {this.state.error
+                && <div className="coa-UserFeedback__error">
+                  <span>
+                    <i className="material-icons">error_outline</i>
+                  </span>
+                  <p>
+                    Sorry, we had trouble receiving your feedback.
+                    Please try again or email <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
+                  </p>
+                </div>
               }
-            </form>
+            </Fragment>
           }
       </div>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import Badge from 'components/Badges/Badge';
 import BadgeGroup from 'components/Badges/BadgeGroup';
 import ListSVG from 'components/SVGs/List';
@@ -31,34 +30,58 @@ const badges = [
   },
 ];
 
-storiesOf('Badges', module)
-  .add('Badge', () => (
-    <div className="wrapper container-fluid">
-      <Badge text="Badge Title" />
-    </div>
-  ))
-  .add('Badge active', () => (
-    <div className="wrapper container-fluid">
-      <Badge text="Badge Title" isActive={true} />
-    </div>
-  ))
-  .add('Badge with url', () => (
-    <div className="wrapper container-fluid">
-      <Badge text="Badge Title" url="#" />
-    </div>
-  ))
-  .add('Badge with symbol', () => (
-    <div className="wrapper container-fluid">
-      <Badge text="Badge Title" symbol={<ListSVG />} />
-    </div>
-  ))
-  .add('Badge active with symbol', () => (
-    <div className="wrapper container-fluid">
-      <Badge text="Badge Title" symbol={<ListSVG />} isActive={true} />
-    </div>
-  ))
-  .add('Badge Group', () => (
-    <div className="wrapper container-fluid">
-      <BadgeGroup badges={badges} activeIndex={0} />
-    </div>
-  ));
+export default {
+  title: 'Badges',
+};
+
+export const badge = () => (
+  <div className="wrapper container-fluid">
+    <Badge text="Badge Title" />
+  </div>
+);
+
+export const badgeActive = () => (
+  <div className="wrapper container-fluid">
+    <Badge text="Badge Title" isActive={true} />
+  </div>
+);
+
+badgeActive.story = {
+  name: 'Badge active',
+};
+
+export const badgeWithUrl = () => (
+  <div className="wrapper container-fluid">
+    <Badge text="Badge Title" url="#" />
+  </div>
+);
+
+badgeWithUrl.story = {
+  name: 'Badge with url',
+};
+
+export const badgeWithSymbol = () => (
+  <div className="wrapper container-fluid">
+    <Badge text="Badge Title" symbol={<ListSVG />} />
+  </div>
+);
+
+badgeWithSymbol.story = {
+  name: 'Badge with symbol',
+};
+
+export const badgeActiveWithSymbol = () => (
+  <div className="wrapper container-fluid">
+    <Badge text="Badge Title" symbol={<ListSVG />} isActive={true} />
+  </div>
+);
+
+badgeActiveWithSymbol.story = {
+  name: 'Badge active with symbol',
+};
+
+export const badgeGroup = () => (
+  <div className="wrapper container-fluid">
+    <BadgeGroup badges={badges} activeIndex={0} />
+  </div>
+);
