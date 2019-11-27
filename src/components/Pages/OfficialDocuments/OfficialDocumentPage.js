@@ -20,12 +20,6 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const page = pages[pageNumber]
 
   useEffect(() => {
-    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
-    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
-    setPageNumber(hash)
-  })
-
-  useEffect(() => {
     window.onpopstate = function(event) {
       setPageNumber(getHash())
       window.requestAnimationFrame( ()=> window.scroll(0,0) )
