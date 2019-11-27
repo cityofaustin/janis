@@ -11,7 +11,7 @@ import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
 import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
 import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
 import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
-import getFormPageRevisionQuery from 'js/queries/getFormPageRevisionQuery';
+import getFormContainerRevisionQuery from 'js/queries/getFormContainerRevisionQuery';
 import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
 
 import {
@@ -21,7 +21,7 @@ import {
   cleanDepartments,
   cleanTopicCollections,
   cleanOfficialDocumentPagesForPreview,
-  cleanFormPagesForPreview,
+  cleanFormContainersForPreview,
   cleanGuideForPreview,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
@@ -30,7 +30,7 @@ import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
 import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
-import FormPage from 'components/Pages/Form';
+import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 
 class CMSPreview extends Component {
@@ -90,7 +90,7 @@ class CMSPreview extends Component {
         });
         break;
       case 'form':
-        req = client.request(getFormPageRevisionQuery, {
+        req = client.request(getFormContainerRevisionQuery, {
           id: revision_id,
         });
         break;
@@ -122,7 +122,7 @@ class CMSPreview extends Component {
           page = data.pageRevision.asOfficialDocumentPage;
           break;
         case 'form':
-          page = data.pageRevision.asFormPage;
+          page = data.pageRevision.asFormContainer;
           break;
         case 'guide':
           page = data.pageRevision.asGuidePage;
@@ -219,7 +219,7 @@ class CMSPreview extends Component {
         />
         <Route
           path="/form"
-          render={props => <FormPage formPage={cleanFormPagesForPreview(data)} />}
+          render={props => <FormContainer formContainer={cleanFormContainersForPreview(data)} />}
         />
         <Route
           path="/guide"
