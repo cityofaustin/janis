@@ -486,3 +486,21 @@ export const officialdocuments = defineMessages({
 export const guides = defineMessages({
   pageLink: 'View this page on alpha.austin.gov',
 });
+
+export const locations = defineMessages({
+  contact: "Contact",
+  phone: "Phone",
+  emailAddress: "Email address",
+  location: "Location",
+  address: "Address",
+  physicalAddress: "Physical address",
+  mailingAddress: "Mailing address",
+  facilityHours: "Facility hours",
+  standardHours: "Standard hours",
+  servicesOffered: "Services offered",
+  serviceInformation: "Service information",
+  seeMoreHours: "See more hours",
+  closeHours: "Close hours",
+  gettingHere: "Getting here",
+  busesServicing: "Buses servicing this area",
+});

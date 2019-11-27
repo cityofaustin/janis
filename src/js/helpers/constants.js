@@ -15,6 +15,16 @@ export const WEEKDAY_MAP = {
   SATURDAY: 6,
 };
 
-export const FULL_WIDTH_RESPONSIVE_IMAGE_SIZES = 
+export const DAYS = () => ([
+  "SUNDAY",
+  "MONDAY",
+  "TUESDAY",
+  "WEDNESDAY",
+  "THURSDAY",
+  "FRIDAY",
+  "SATURDAY",
+]);
+
+export const FULL_WIDTH_RESPONSIVE_IMAGE_SIZES =
   [640, 720, 750, 828, 1080, 1440, 2160]
 ;

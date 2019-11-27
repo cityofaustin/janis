@@ -7,4 +7,4 @@ export NODE_PATH='./src'
 # They are updated by Joplin publish commands.
 # If you want to add custom env variable values for your PR branch, set them in branchConfig.js
 
-yarn npm-run-all -p build-css build-js
+yarn npm-run-all build-css build-js

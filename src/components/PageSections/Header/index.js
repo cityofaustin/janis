@@ -200,11 +200,15 @@ class Header extends Component {
               </div>
               <div className="coa-Header__right-controls-wrapper">
                 <div className="coa-Header__right-controls">
-                  <ExternalLink to="http://www.austintexas.gov/airport">
+                  <ExternalLink to="http://www.austintexas.gov/airport"
+                    ariaLabel={intl.formatMessage(i18n1.airport)}
+                    >
                     {intl.formatMessage(i18n1.airport)}
                   </ExternalLink>
                   <span className="coa-text-spacer--vertical" />
-                  <ExternalLink to="http://311.austintexas.gov/">
+                  <ExternalLink to="http://311.austintexas.gov/"
+                    ariaLabel={"three one one"}
+                    >
                     311
                   </ExternalLink>
                 </div>

@@ -247,3 +247,23 @@ textarea#userfeedback-textarea {
   text-align: center;
   margin: 0 auto;
 }
+
+.coa-UserFeedback__error {
+  background: $coa-color-grey;
+  text-align: center;
+  padding: 20px 16px;
+  border-top: 1px #dbdbdb solid;
+}
+
+.coa-UserFeedback__error {
+  span {
+    color:#D63E04;
+  }
+  p {
+    padding: 16px 0 0 0;
+    margin: 0 auto;
+    @media screen and (min-width: 768px) {
+      width: 400px;
+    }
+  }
+}

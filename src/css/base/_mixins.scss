@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin responsivetext() {
   font-size: $coa-font-size-small;
   line-height: $coa-line-height-small;
@@ -177,4 +179,11 @@
   @media (min-width: #{$coa-large-screen}) {
     @content;
   }
+}
+
+/**
+  Add mixins for common style components
+**/
+@mixin gray-bottom-border {
+  border-bottom: 1px solid #dddfe1;
 }
