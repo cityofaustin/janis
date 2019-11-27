@@ -100,6 +100,8 @@ export const navigation = defineMessages({
   openInNewWindow: 'Opens in new window',
   search: 'Search',
   skipToMain: 'Skip to main content',
+  previous: "Previous",
+  next: "Next",
 });
 
 export const processes = defineMessages({

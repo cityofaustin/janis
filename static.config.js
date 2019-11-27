@@ -606,7 +606,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'official document page') {
     return {
       path: url,
-      template: 'src/components/Pages/OfficialDocumentList',
+      template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
       getData: () =>
         getOfficialDocumentPageData(
           id,

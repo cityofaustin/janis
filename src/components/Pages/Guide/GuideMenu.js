@@ -10,7 +10,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection }) {
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
   function goToSection(e) {
     history.pushState(null, null, `#${anchorTag}`);
-    document.getElementById(anchorTag).scrollIntoView(true);
+    document.getElementById(anchorTag).scrollIntoView({behavior: "smooth"});
   }
 
   return (
