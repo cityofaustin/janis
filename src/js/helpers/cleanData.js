@@ -532,16 +532,16 @@ export const cleanGuidePages = allGuidePages => {
   return cleanedGuidePages;
 };
 
-export const cleanFormPages = allFormPages => {
-  if (!allFormPages || !allFormPages.edges) return null;
-  return cleanLinks(allFormPages, 'form');
+export const cleanFormContainers = allFormContainers => {
+  if (!allFormContainers || !allFormContainers.edges) return null;
+  return cleanLinks(allFormContainers, 'form');
 };
 
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
-export const cleanFormPagesForPreview = allFormPages => {
-  if (!allFormPages || !allFormPages.edges) return null;
-  const forms = allFormPages.edges.map(e => e.node);
+export const cleanFormContainersForPreview = allFormContainers => {
+  if (!allFormContainers || !allFormContainers.edges) return null;
+  const forms = allFormContainers.edges.map(e => e.node);
   let form = forms[0];
 
   form.contextualNavData = getContextualNavForPreview(form);
