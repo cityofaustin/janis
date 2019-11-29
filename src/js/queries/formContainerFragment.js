@@ -1,5 +1,5 @@
-const formPageFragment = `
-  fragment formPageInfo on FormPageNode {
+const formContainerFragment = `
+  fragment formContainerInfo on FormContainerNode {
     id
     title
     slug
@@ -47,4 +47,4 @@ const formPageFragment = `
   }
 `;
 
-export default formPageFragment;
+export default formContainerFragment;
