@@ -22,11 +22,13 @@ const StaticMap = ({ location, intl }) => {
   if (!location) return null;
 
   const encodedLocation = getEncodedLocation(location);
+  console.log(encodedLocation)
 
   return (
     <div className="coa-StaticMap">
       <a
         href={`//www.google.com/maps/place/${encodedLocation}`}
+        // href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={intl.formatMessage(i18n2.openInNewWindow)}
