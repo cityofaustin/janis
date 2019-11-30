@@ -21,7 +21,7 @@ import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
-import getFormPageQuery from 'js/queries/getFormPageQuery';
+import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 
 import {
   cleanNavigation,
@@ -35,7 +35,7 @@ const getAllTopicLinks = (
   allInformationPageTopics,
   allOfficialDocumentPageTopics,
   allGuidePageTopics,
-  allFormPageTopics,
+  allFormContainerTopics,
 ) => {
   // I don't like this but we still need to do some logic here
   // to get all the pages
@@ -72,8 +72,8 @@ const getAllTopicLinks = (
     }
   }
 
-  if (allFormPageTopics && allFormPageTopics.edges) {
-    for (const edge of allFormPageTopics.edges) {
+  if (allFormContainerTopics && allFormContainerTopics.edges) {
+    for (const edge of allFormContainerTopics.edges) {
       if (edge.node) {
         allLinks.push(edge.node.page);
       }
@@ -92,7 +92,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allInformationPageTopics,
     allOfficialDocumentPageTopics,
     allServicePageTopics,
-    allFormPageTopics,
+    allFormContainerTopics,
   } = await client.request(getTopicPageQuery, {
     id: id,
     tc_id: parent_topic_collection,
@@ -146,7 +146,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allInformationPageTopics,
     allOfficialDocumentPageTopics,
     allGuidePageTopics,
-    allFormPageTopics,
+    allFormContainerTopics,
   )
     .filter(page => !topLinkIds.includes(page.id))
     .map(page => ({
@@ -402,26 +402,26 @@ const getGuidePageData = async (
   return { guidePage: guidePage };
 };
 
-const getFormPageData = async (
+const getFormContainerData = async (
   id,
   parent_department,
   parent_topic,
   grandparent_topic_collection,
   client,
 ) => {
-  const { allFormPages } = await client.request(getFormPageQuery, { id: id });
+  const { allFormContainers } = await client.request(getFormContainerQuery, { id: id });
 
-  let formPage = allFormPages.edges[0].node;
+  let formContainer = allFormContainers.edges[0].node;
 
-  formPage.contextualNavData = await getContextualNavData(
+  formContainer.contextualNavData = await getContextualNavData(
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    formPage.relatedDepartments,
+    formContainer.relatedDepartments,
     client,
   );
 
-  return { formPage: formPage };
+  return { formContainer: formContainer };
 };
 
 const checkUrl = async url => {
@@ -606,7 +606,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   if (type === 'official document page') {
     return {
       path: url,
-      template: 'src/components/Pages/OfficialDocumentList',
+      template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
       getData: () =>
         getOfficialDocumentPageData(
           id,
@@ -627,13 +627,13 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
     };
   }
 
-  // If we're a form page
-  if (type === 'form page') {
+  // If we're a form container
+  if (type === 'form container') {
     return {
       path: url,
       template: 'src/components/Pages/Form',
       getData: () =>
-        getFormPageData(
+        getFormContainerData(
           id,
           parent_department,
           parent_topic,

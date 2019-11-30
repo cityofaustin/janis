@@ -107,7 +107,7 @@ function Guide({ guidePage, intl }) {
       history.pushState(null, null, `#${clickedSection}`);
       const guideSection = find(sectionLocations, ["anchorTag", clickedSection])
       if (guideSection) {
-        guideSection.node.current.scrollIntoView(true);
+        guideSection.node.current.scrollIntoView({behavior: "smooth"});
       } else {
         setClickedSection(null)
       }

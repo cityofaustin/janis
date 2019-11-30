@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Routes } from 'react-static';
 import { IntlProvider } from 'react-intl';
@@ -13,107 +13,72 @@ import {
   LANG_COOKIE_EXPIRES,
   DEFAULT_LANG,
 } from 'js/i18n/constants';
-
 import I18nDecorator from 'components/I18n/I18nDecorator';
 
-class I18nController extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lang: this.getInitialLangState(),
-    };
+// Check if lang is among our supported languages
+const getSupportedLang = (lang) => {
+  return SUPPORTED_LANG_CODES.find(validLang => validLang === lang);
+}
+
+const persistLang = (lang) => {
+  Cookies.set(LANG_COOKIE_NAME, lang, { expires: LANG_COOKIE_EXPIRES });
+}
+
+const getLangFromCookie = (path) => {
+  if (typeof document === 'undefined') return null;
+  const lang = getSupportedLang(Cookies.get(LANG_COOKIE_NAME));
+  if (!lang) {
+    //if not a supported lang, remove cookie
+    Cookies.remove(LANG_COOKIE_NAME);
+    return null;
   }
 
-  getInitialLangState() {
-    const getLang = [
-      this.getLangFromProps,
-      this.getLangFromCookie,
-      this.getLangFromLocale,
-      () => DEFAULT_LANG,
-    ];
-    const that = this;
-
-    return getLang.reduce((lang, fn) => {
-      if (!lang) return fn.call(that);
-      return lang;
-    }, null);
+  if (lang === DEFAULT_LANG) {
+    persistLang(lang);
+  } else {
+    window.location.href = `/${lang}/${path || ''}`;
   }
+  return lang
+}
 
-  persistLang(lang) {
-    Cookies.set(LANG_COOKIE_NAME, lang, { expires: LANG_COOKIE_EXPIRES });
+const getLangFromLocale = (path) => {
+  if (typeof document === 'undefined') return null;
+  const lang = getSupportedLang(
+    locale()
+      .split('-')[0]
+      .toLowerCase()
+  );
+
+  if (!lang) return null;
+  if (lang !== DEFAULT_LANG) {
+    window.location.href = `/${lang}/${path || ''}`;
   }
+  return lang
+}
 
-  getSupportedLang(langToCheck) {
-    return SUPPORTED_LANG_CODES.find(lang => lang === langToCheck);
-  }
-
-  getLangFromProps(props) {
-    props = props || this.props;
-    const lang = this.getSupportedLang(props.lang);
-
-    if (!lang) return null;
-    //TODO: if not supported, redirect to path without lang
-
-    this.persistLang(lang);
-    return lang;
-  }
-
-  getLangFromCookie() {
-    if (typeof document === 'undefined') return null;
-
-    const lang = this.getSupportedLang(Cookies.get(LANG_COOKIE_NAME));
-
-    if (!lang) return null;
-    //TODO: if not supported, unset cookie
-
-    if (lang === DEFAULT_LANG) {
-      this.persistLang(lang);
-      return lang;
+const I18nController = ({lang, path, children}) => {
+  lang = getSupportedLang(lang);
+  if (lang) {
+    persistLang(lang);
+  } else {
+    lang = getLangFromCookie(path);
+    if (!lang) {
+      lang = getLangFromLocale(path);
+      if (!lang) {
+        lang = DEFAULT_LANG;
+      }
     }
-
-    window.location.href = `/${lang}/${this.props.path || ''}`;
   }
 
-  getLangFromLocale() {
-    if (typeof document === 'undefined') return null;
-
-    const lang = this.getSupportedLang(
-      locale()
-        .split('-')[0]
-        .toLowerCase(),
-    );
-
-    if (!lang) return null;
-
-    if (lang === DEFAULT_LANG) {
-      return lang;
-    }
-
-    window.location.href = `/${lang}/${this.props.path || ''}`;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const lang = this.getLangFromProps(nextProps);
-    if (lang && lang !== this.state.lang) this.setState({ lang: lang });
-  }
-
-  render() {
-    const { children } = this.props;
-    const { lang } = this.state;
-    const messages = localeMessages[lang];
-
-    return (
-      <IntlProvider
-        locale={lang}
-        messages={messages}
-        defaultLocale={DEFAULT_LANG}
-        textComponent={Fragment}
-        key={lang}
-      >
-        <I18nDecorator>{children}</I18nDecorator>
-      </IntlProvider>
-    );
-  }
+  return (
+    <IntlProvider
+      locale={lang}
+      messages={localeMessages[lang]}
+      defaultLocale={DEFAULT_LANG}
+    >
+      <I18nDecorator>{children}</I18nDecorator>
+    </IntlProvider>
+  );
 }
 
 I18nController.propTypes = {

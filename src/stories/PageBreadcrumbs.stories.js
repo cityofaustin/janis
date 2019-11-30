@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 
@@ -15,12 +14,16 @@ const parent = {
   subpath: 'topics',
 };
 
-storiesOf('PageBreadcrumbs', module).add('PageBreadcrumbs', () => (
+export default {
+  title: 'PageBreadcrumbs',
+};
+
+export const pageBreadcrumbs = () => (
   <div className="wrapper container-fluid">
-    <PageBreadcrumbs
-      grandparent={grandparent}
-      parent={parent}
-      title="Current page"
-    />
+    <PageBreadcrumbs grandparent={grandparent} parent={parent} title="Current page" />
   </div>
-));
+);
+
+pageBreadcrumbs.story = {
+  name: 'PageBreadcrumbs',
+};

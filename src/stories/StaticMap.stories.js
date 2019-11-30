@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import StaticMap from 'components/StaticMap';
 
@@ -15,8 +14,16 @@ const value = {
   },
 };
 
-storiesOf('StaticMap', module).add('StaticMap', () => (
+export default {
+  title: 'StaticMap',
+};
+
+export const staticMap = () => (
   <div className="wrapper container-fluid">
     <StaticMap location={value.location} />
   </div>
-));
+);
+
+staticMap.story = {
+  name: 'StaticMap',
+};

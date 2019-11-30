@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { injectIntl } from 'react-intl';
 
 import navigationData from 'stories/static_data/navigationData';
@@ -16,6 +15,9 @@ const FooterWrapper = injectIntl(({ intl }) => (
   <Footer threeoneone={threeoneoneData[intl.locale]} />
 ));
 
-storiesOf('Page Sections', module)
-  .add('Header', () => <HeaderWrapper />)
-  .add('Footer', () => <FooterWrapper />);
+export default {
+  title: 'Page Sections',
+};
+
+export const header = () => <HeaderWrapper />;
+export const footer = () => <FooterWrapper />;
