@@ -2,7 +2,7 @@
   top: 90px;
   background: $coa-color-white;
   display: none;
-  position: fixed;
+  position: absolute;
   width: 100%;
   max-width: 375px;
   border-radius: 4px;
@@ -11,7 +11,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .coa-PendingTranslation--is-open {

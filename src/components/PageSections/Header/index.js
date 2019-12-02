@@ -148,6 +148,11 @@ class Header extends Component {
     }
   }
 
+  toggleTranslationMessage = (intl) => {
+    console.log('what', intl.locale)
+    return intl.locale === 'es';
+  }
+
   render() {
     const { intl, navigation, path } = this.props;
 
@@ -175,7 +180,7 @@ class Header extends Component {
               <div className="coa-Header__left-controls">
                 <div className="coa-Header__desktop-languages">
                   <LanguageSelectBar path={path} chevron={intl.locale ==='es'}/>
-                  <PendingTranslation open={intl.locale === 'es'} />
+                  <PendingTranslation open={this.toggleTranslationMessage(intl)} />
                 </div>
               </div>
               <div

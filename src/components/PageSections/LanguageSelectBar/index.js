@@ -15,7 +15,7 @@ const LanguageSelectBar = ({ path, intl, chevron }) => (
   <div className="coa-LanguageSelectBar">
     <ul className="coa-LanguageSelectBar__list">
       {SUPPORTED_LANGUAGES.map(({ title, abbr, code }, i) => (
-        <li key={i}>
+        <li key={i} onClick={()=>console.log('hiii')}>
           <Link
             to={`/${code}/${path}`}
             className={classNames('coa-LanguageSelectBar__item', {
