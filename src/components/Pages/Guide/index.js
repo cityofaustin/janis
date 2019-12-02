@@ -40,7 +40,6 @@ function Guide({ guidePage, intl }) {
   const isMobileOrTablet = useMobileOrTabletQuery();
   const rootNode = useRef();
   const desktopGuideMenuNode = useRef();
-  const [resizeCount, setResizeCount] = useState(0);
   const [sectionLocations, dispatchSectionLocations] = useReducer(
     // payload for each sectionLocation contains {node: useRef(), offsetTop, anchorTag}
     (sectionLocations, { action, payload }) => {
@@ -64,6 +63,7 @@ function Guide({ guidePage, intl }) {
         to include their node from useRef() and their offsetTop.
       */
       const sectionLocations = [
+        // Every Guide starts with Contact-information
         {anchorTag: "Contact-information"}
       ];
       sections.forEach(section => {
@@ -127,7 +127,6 @@ function Guide({ guidePage, intl }) {
       action: 'update',
       payload: {
         node,
-        offsetTop: node.current.offsetTop,
         anchorTag
       },
     });
@@ -146,7 +145,7 @@ function Guide({ guidePage, intl }) {
     // printSections(sectionLocations, window.pageYOffset)
     let i = 0;
     while (i < sectionLocations.length) {
-      if (window.pageYOffset < sectionLocations[i].offsetTop - 1) {
+      if (window.pageYOffset < sectionLocations[i].node.current.offsetTop - 1) {
         break;
       } else {
         i++;
@@ -155,6 +154,7 @@ function Guide({ guidePage, intl }) {
     i--;
     const nextCurrentSection = sectionLocations[i];
     if (nextCurrentSection) {
+      console.log("~~~~ New section!:", nextCurrentSection.anchorTag)
       setCurrentSection(nextCurrentSection.anchorTag);
     } else {
       setCurrentSection(null);
@@ -184,19 +184,6 @@ function Guide({ guidePage, intl }) {
       Stickyfill.add(stickyElements);
     }
   }, []);
-
-  // Alert state when the window resizes.
-  // This will tell the GuideSectionWrapper to update its sectionLocation
-  // resizeCount is an arbitrary number. It just needs to change so that children know when to re-initiate a useEffect()
-  function handleResize() {
-    return setResizeCount(resizeCount + 1);
-  }
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [resizeCount]);
 
   // Scroll the guideMenu if the currentSection's Link is not visible
   function scrollGuideMenu(anchorTag, currentSectionLinkRect) {
@@ -282,7 +269,6 @@ function Guide({ guidePage, intl }) {
                 anchorTag="Contact-information"
                 updateSectionLocation={updateSectionLocation}
                 isMobileOrTablet={isMobileOrTablet}
-                resizeCount={resizeCount}
               >
                 {contact && <GuideContactInformation contact={contact} />}
               </GuideSectionWrapper>
@@ -292,7 +278,6 @@ function Guide({ guidePage, intl }) {
                   section={section}
                   updateSectionLocation={updateSectionLocation}
                   isMobileOrTablet={isMobileOrTablet}
-                  resizeCount={resizeCount}
                   intl={intl}
                 />
               ))}

@@ -17,10 +17,10 @@ function GuideSectionWrapper(props) {
     children
   } = props;
 
-  // updateSectionLocation if the window resized or Mobile status changed
+  // After render, add node to sectionLocations state
   useEffect(()=>{
     updateSectionLocation(node, anchorTag);
-  }, [isMobileOrTablet, resizeCount])
+  }, [])
 
   return (
     <div
