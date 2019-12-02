@@ -148,6 +148,10 @@ class Header extends Component {
     }
   }
 
+  languageOnClick = () => {
+    this.setState({});
+  }
+
   toggleTranslationMessage = (intl) => {
     console.log('what', intl.locale)
     return intl.locale === 'es';
