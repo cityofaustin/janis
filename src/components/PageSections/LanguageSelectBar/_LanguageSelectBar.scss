@@ -1,5 +1,6 @@
 .coa-LanguageSelectBar {
-  background-color: $coa-color-primary;
+  // background-color: $coa-color-primary;
+  background-color: #FF1493;
   color: $coa-color-white;
   font-family: $coa-font-sans;
 }
@@ -51,4 +52,9 @@
     opacity: 1;
     font-weight: 600;
   }
+}
+
+.coa-LanguageChevron {
+  position: relative;
+  top: 6px;
 }

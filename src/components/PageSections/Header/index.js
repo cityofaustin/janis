@@ -12,6 +12,7 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import GovSite from 'components/PageSections/Header/GovSite';
+import PendingTranslation from 'components/PageSections/PendingTranslation'
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FullSiteMenu from '../Menu/FullSiteMenu';
@@ -167,12 +168,14 @@ class Header extends Component {
           />
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar path={path} />
+            <PendingTranslation open />
           </div>
           <div className="coa-Header__container">
             <div className="coa-Header__controls">
               <div className="coa-Header__left-controls">
                 <div className="coa-Header__desktop-languages">
-                  <LanguageSelectBar path={path} />
+                  <LanguageSelectBar path={path} chevron={intl.locale ==='es'}/>
+                  <PendingTranslation open={intl.locale === 'es'} />
                 </div>
               </div>
               <div

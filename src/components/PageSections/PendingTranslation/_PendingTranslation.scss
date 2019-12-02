@@ -1,0 +1,30 @@
+.coa-PendingTranslation {
+  top: 90px;
+  background: $coa-color-white;
+  display: none;
+  position: fixed;
+  width: 100%;
+  max-width: 375px;
+  border-radius: 4px;
+  border-color: #1493FF;
+  border-width: 1px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.coa-PendingTranslation--is-open {
+  display: inherit;
+  z-index: 1;
+}
+
+.coa-PendingTranslation--languages {
+  
+}
+
+.coa-PendingTranslation p {
+  color:  $coa-color-almost-black;
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+}
