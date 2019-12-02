@@ -1,7 +1,7 @@
 import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
-import { isMobileQuery } from 'js/helpers/reactMediaQueries.js';
+import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -11,7 +11,7 @@ import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocumen
 const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   const documentsPerPage = 10
-  const isMobile = isMobileQuery()
+  const isMobile = useMobileQuery()
   const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
   const allDocs = officialDocuments.edges
   const pages = buildPages()
