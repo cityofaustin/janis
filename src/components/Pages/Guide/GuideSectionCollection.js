@@ -47,7 +47,6 @@ function GuideSectionCollection({
   section,
   updateSectionLocation,
   isMobileOrTablet,
-  resizeCount,
   intl,
 }) {
   return (
@@ -56,7 +55,6 @@ function GuideSectionCollection({
         anchorTag={hyphenate(section.heading)}
         updateSectionLocation={updateSectionLocation}
         isMobileOrTablet={isMobileOrTablet}
-        resizeCount={resizeCount}
       >
         <h1 className="coa-GuideSection__header">{section.heading}</h1>
       </GuideSectionWrapper>
@@ -66,7 +64,6 @@ function GuideSectionCollection({
           anchorTag={`${hyphenate(section.heading)}-${index + 1}`}
           updateSectionLocation={updateSectionLocation}
           isMobileOrTablet={isMobileOrTablet}
-          resizeCount={resizeCount}
         >
           {(page.servicePage || page.informationPage) && (
             <GuideSection

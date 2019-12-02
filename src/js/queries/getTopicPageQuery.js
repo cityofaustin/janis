@@ -90,7 +90,7 @@ const getTopicPageQuery = `
         }
       }
     }
-    allFormPageTopics(topic: $id) {
+    allFormContainerTopics(topic: $id) {
       edges {
         node {
           page {
