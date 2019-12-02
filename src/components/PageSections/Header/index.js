@@ -23,13 +23,16 @@ class Header extends Component {
     this.state = {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
+      showMessage: false,
     };
 
     // Bind wrappers and outside-click functions
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.setHowYouKnowWrapperRef = this.setHowYouKnowWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.togglePendingTranslation = this.togglePendingTranslation.bind(this);
   }
+
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
     document.addEventListener('touchstart', this.handleClickOutside);
@@ -58,9 +61,11 @@ class Header extends Component {
       if (
         event.target.className !== 'coa-Header__menuIcon' &&
         event.target.parentElement.className !== 'coa-Header__menuIcon'
+        // possibly do the same for the pending translation thing?
       ) {
         this.setState({
           topMenuActive: false,
+          showMessage: false,
         });
       }
     }
@@ -152,13 +157,15 @@ class Header extends Component {
     this.setState({});
   }
 
-  toggleTranslationMessage = (intl) => {
-    console.log('what', intl.locale)
-    return intl.locale === 'es';
+  togglePendingTranslation = (intl) => {
+    console.log(intl.locale)
+    this.setState({showMessage: intl.locale === 'es'});
   }
 
   render() {
     const { intl, navigation, path } = this.props;
+
+    console.log('showMessage', this.state.showMessage)
 
     return (
       <header
@@ -183,8 +190,12 @@ class Header extends Component {
             <div className="coa-Header__controls">
               <div className="coa-Header__left-controls">
                 <div className="coa-Header__desktop-languages">
-                  <LanguageSelectBar path={path} chevron={intl.locale ==='es'}/>
-                  <PendingTranslation open={this.toggleTranslationMessage(intl)} />
+                  <LanguageSelectBar 
+                    path={path} 
+                    showMessage={this.state.showMessage}
+                    togglePendingTranslation={() => this.togglePendingTranslation(intl)}
+                  />
+                  <PendingTranslation open={this.state.showMessage} />
                 </div>
               </div>
               <div
