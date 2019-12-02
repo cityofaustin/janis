@@ -60,8 +60,10 @@ class Header extends Component {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       if (
         event.target.className !== 'coa-Header__menuIcon' &&
-        event.target.parentElement.className !== 'coa-Header__menuIcon'
-        // possibly do the same for the pending translation thing?
+        event.target.parentElement.className !== 'coa-Header__menuIcon' &&
+        event.target.parentElement.className !== 'coa-PendingTranslation coa-PendingTranslation--is-open' &&
+        event.target.parentElement.className !== 'coa-PendingTranslation--link' &&
+        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active'
       ) {
         this.setState({
           topMenuActive: false,
@@ -157,15 +159,14 @@ class Header extends Component {
     this.setState({});
   }
 
-  togglePendingTranslation = (intl) => {
-    console.log(intl.locale)
-    this.setState({showMessage: intl.locale === 'es'});
+  togglePendingTranslation = () => {
+    this.setState(prevState => ({
+      showMessage: !prevState.showMessage
+    }))
   }
 
   render() {
     const { intl, navigation, path } = this.props;
-
-    console.log('showMessage', this.state.showMessage)
 
     return (
       <header
@@ -193,7 +194,7 @@ class Header extends Component {
                   <LanguageSelectBar 
                     path={path} 
                     showMessage={this.state.showMessage}
-                    togglePendingTranslation={() => this.togglePendingTranslation(intl)}
+                    togglePendingTranslation={() => this.togglePendingTranslation()}
                   />
                   <PendingTranslation open={this.state.showMessage} />
                 </div>

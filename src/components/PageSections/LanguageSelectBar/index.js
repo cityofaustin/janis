@@ -17,7 +17,7 @@ const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }
   <div className="coa-LanguageSelectBar">
     <ul className="coa-LanguageSelectBar__list">
       {SUPPORTED_LANGUAGES.map(({ title, abbr, code, pending }, i) => (
-        <li key={i} onClick={togglePendingTranslation}>
+        <li key={i} onClick={pending && togglePendingTranslation}>
           <Link
             to={`/${code}/${path}`}
             className={classNames('coa-LanguageSelectBar__item', {
