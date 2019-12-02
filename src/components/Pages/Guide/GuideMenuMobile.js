@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { hyphenate } from './helpers';
 
-function GuideMenuMobile({ title, contact, sections, currentSection, scrollGuideMenu, setClickedSection, clickedSection }) {
+function GuideMenuMobile({ title, contact, sections, currentSection, scrollGuideMenu, handleSectionClick, clickedSection }) {
   const [menuOpened, setMenuOpened] = useState(false);
 
   // Freeze the body of the page when mobile menu is opened.
@@ -52,7 +52,7 @@ function GuideMenuMobile({ title, contact, sections, currentSection, scrollGuide
               sections={sections}
               currentSection={currentSection}
               scrollGuideMenu={scrollGuideMenu}
-              setClickedSection={setClickedSection}
+              handleSectionClick={handleSectionClick}
               clickedSection={clickedSection}
             />
           </div>

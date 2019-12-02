@@ -100,8 +100,22 @@ function Guide({ guidePage, intl }) {
     return null;
   });
   const [clickedSection, setClickedSection] = useState(null);
+  const [clickedSectionRefresh, setClickedSectionRefresh] = useState(0);
 
-  // Navigate to guideSection when its been clicked on in GuideMenu.
+  /*
+    Navigate to clickedSection when user clicks on that section in the menu.
+    Re-triggers the scroll navigation effect (with setClickedSectionRefresh)
+    if the user clicks, scrolls away, and then decides to click the same section again.
+  */
+  const handleSectionClick = (anchorTag) => {
+    if (anchorTag === clickedSection) {
+      setClickedSectionRefresh(clickedSectionRefresh + 1)
+    } else {
+      setClickedSection(anchorTag)
+    }
+  }
+
+  // Navigate to guideSection when its been clicked (or re-clicked) on in GuideMenu.
   useEffect(()=>{
     if (clickedSection) {
       history.pushState(null, null, `#${clickedSection}`);
@@ -112,7 +126,7 @@ function Guide({ guidePage, intl }) {
         setClickedSection(null)
       }
     }
-  }, [clickedSection, sectionLocations])
+  }, [clickedSection, clickedSectionRefresh, sectionLocations])
 
   // Reset clickedSection once we've scrolled to it
   useEffect(()=>{
@@ -249,7 +263,7 @@ function Guide({ guidePage, intl }) {
                 sections={sections}
                 currentSection={currentSection}
                 scrollGuideMenu={scrollGuideMenu}
-                setClickedSection={setClickedSection}
+                handleSectionClick={handleSectionClick}
                 clickedSection={clickedSection}
               />
             ) : (
@@ -259,7 +273,7 @@ function Guide({ guidePage, intl }) {
                   sections={sections}
                   currentSection={currentSection}
                   scrollGuideMenu={scrollGuideMenu}
-                  setClickedSection={setClickedSection}
+                  handleSectionClick={handleSectionClick}
                   clickedSection={clickedSection}
                 />
               </div>

@@ -6,7 +6,7 @@ import { hyphenate } from './helpers';
 import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { misc as i18n1 } from 'js/i18n/definitions';
 
-function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGuideMenu, setClickedSection, clickedSection }) {
+function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGuideMenu, handleSectionClick, clickedSection }) {
   // Each GuideSectionWrapper has an id={this.props.anchorTag}
   const node = useRef();
   const isDesktop = useDesktopQuery();
@@ -24,7 +24,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGu
   }, [clickedSection, isCurrentSection, isDesktop])
 
   function handleClick(e) {
-    setClickedSection(anchorTag);
+    handleSectionClick(anchorTag);
   }
 
   return (
@@ -48,7 +48,7 @@ function GuideMenuLink({ title, anchorTag, isHeading, isCurrentSection, scrollGu
   );
 }
 
-function GuideMenuSection({ section, currentSection, scrollGuideMenu, setClickedSection, clickedSection }) {
+function GuideMenuSection({ section, currentSection, scrollGuideMenu, handleSectionClick, clickedSection }) {
   const headingAnchorTag = hyphenate(section.heading);
   const subHeadings = section.pages.map((page, index) => {
     const title =
@@ -69,7 +69,7 @@ function GuideMenuSection({ section, currentSection, scrollGuideMenu, setClicked
         isHeading={true}
         isCurrentSection={currentSection === headingAnchorTag}
         scrollGuideMenu={scrollGuideMenu}
-        setClickedSection={setClickedSection}
+        handleSectionClick={handleSectionClick}
         clickedSection={clickedSection}
       />
       {subHeadings.map((subHeading, index) => (
@@ -80,7 +80,7 @@ function GuideMenuSection({ section, currentSection, scrollGuideMenu, setClicked
           isHeading={false}
           isCurrentSection={currentSection === subHeading.anchorTag}
           scrollGuideMenu={scrollGuideMenu}
-          setClickedSection={setClickedSection}
+          handleSectionClick={handleSectionClick}
           clickedSection={clickedSection}
         />
       ))}
@@ -88,7 +88,7 @@ function GuideMenuSection({ section, currentSection, scrollGuideMenu, setClicked
   );
 }
 
-function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu, setClickedSection, clickedSection }) {
+function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu, handleSectionClick, clickedSection }) {
   return (
     <div>
       <div className="coa-GuideMenu__section">
@@ -99,7 +99,7 @@ function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu, s
             isHeading={true}
             isCurrentSection={currentSection === 'Contact-information'}
             scrollGuideMenu={scrollGuideMenu}
-            setClickedSection={setClickedSection}
+            handleSectionClick={handleSectionClick}
             clickedSection={clickedSection}
           />
         )}
@@ -112,7 +112,7 @@ function GuideMenu({ contact, sections, currentSection, intl, scrollGuideMenu, s
               section={section}
               currentSection={currentSection}
               scrollGuideMenu={scrollGuideMenu}
-              setClickedSection={setClickedSection}
+              handleSectionClick={handleSectionClick}
               clickedSection={clickedSection}
             />
           </div>
