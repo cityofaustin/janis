@@ -12,8 +12,9 @@ const PendingTranslation = ({ open, intl }) => (
       'coa-PendingTranslation--is-open': open,
     })}
   >
-    <p>Translations for this website are a work in progress.</p>
-    <p className='coa-PendingTranslation--link'>If you would like to help us improve, please sign-up to participate in user research. 
+    <p>Continuamos trabajando y procesando las traducciones en este sitio web.</p>
+    <p className='coa-PendingTranslation--link'>
+      Si le gustaría ayudarnos a mejorar, por favor inscríbase para participar en nuestras investigaciones de usuarios 
       <Link to={'/es/feedback/'}>
         https://alpha.austin.gov/es/feedback/
       </Link></p>

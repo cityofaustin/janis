@@ -61,9 +61,11 @@ class Header extends Component {
       if (
         event.target.className !== 'coa-Header__menuIcon' &&
         event.target.parentElement.className !== 'coa-Header__menuIcon' &&
+        // for the pending translation dropdown:
         event.target.parentElement.className !== 'coa-PendingTranslation coa-PendingTranslation--is-open' &&
         event.target.parentElement.className !== 'coa-PendingTranslation--link' &&
-        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active'
+        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active' &&
+        event.target.className !== 'material-icons coa-LanguageChevron'
       ) {
         this.setState({
           topMenuActive: false,
