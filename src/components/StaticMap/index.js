@@ -27,8 +27,8 @@ const StaticMap = ({ location, intl }) => {
   return (
     <div className="coa-StaticMap">
       <a
-        href={`//www.google.com/maps/place/${encodedLocation}`}
-        // href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
+        // https://developers.google.com/maps/documentation/urls/guide#forming-the-url
+        href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={intl.formatMessage(i18n2.openInNewWindow)}
