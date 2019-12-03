@@ -22,7 +22,6 @@ const StaticMap = ({ location, intl }) => {
   if (!location) return null;
 
   const encodedLocation = getEncodedLocation(location);
-  console.log(encodedLocation)
 
   return (
     <div className="coa-StaticMap">
