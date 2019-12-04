@@ -189,7 +189,7 @@ class UserFeedback extends Component {
                           className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
                         />
                         <div className="coa-UserFeedback__charlimit">
-                          {`Character limit: ${this.state.char} of 2000`}
+                          {`${intl.formatMessage(i18n2.characterLimit)}: ${this.state.char} ${intl.formatMessage(i18n2.of)} 2000`}
                         </div>
                       </div>
                       {this.renderButton()}

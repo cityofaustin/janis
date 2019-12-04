@@ -54,6 +54,8 @@ export const userFeedback = defineMessages({
   submit: 'Submit',
   received: 'We have received your feedback.',
   thankYou: 'Thank you for helping improve this website!',
+  characterLimit: 'Character limit',
+  of: 'of',
 });
 
 export const misc = defineMessages({
