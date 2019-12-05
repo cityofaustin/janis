@@ -17,8 +17,8 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 
-function FormPage({
-  formPage: {
+function FormContainer({
+  formContainer: {
     title,
     slug,
     topic,
@@ -42,7 +42,7 @@ function FormPage({
   const onResized = ({iframe, height, width, type}) => {
     if (type === "init") {
       if (iframeLoaded) {
-        document.getElementById("coa-FormPage__top").scrollIntoView(true);
+        document.getElementById("coa-FormContainer__top").scrollIntoView(true);
       } else {
         iframeLoaded = true;
       }
@@ -61,18 +61,18 @@ function FormPage({
           offeredBy={contextualNavData.offeredBy}
         />
       )}
-      <div id="coa-FormPage__top">
+      <div id="coa-FormContainer__top">
         <PageHeader contentType={'information'} description={description}>
           {title}
         </PageHeader>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
-            <div className="coa-FormPage__iframe-container">
+            <div className="coa-FormContainer__iframe-container">
               {formUrl && (
                 <IframeResizer
                   forwardRef={iframeRef}
                   src={formUrl}
-                  className="coa-FormPage__IframeResizer-default"
+                  className="coa-FormContainer__IframeResizer-default"
                   heightCalculationMethod="taggedElement"
                   frameBorder="0"
                   onResized={onResized}
@@ -92,4 +92,4 @@ function FormPage({
   );
 }
 
-export default withRouteData(injectIntl(FormPage));
+export default withRouteData(injectIntl(FormContainer));

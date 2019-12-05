@@ -1,6 +1,6 @@
-const getFormPageQuery = `
-  query getFormPage($id: ID) {
-    allFormPages(id:$id) {
+const getFormContainerQuery = `
+  query getFormContainer($id: ID) {
+    allFormContainers(id:$id) {
       edges {
         node {
           id
@@ -25,4 +25,4 @@ const getFormPageQuery = `
   }
 `
 
-export default getFormPageQuery
+export default getFormContainerQuery

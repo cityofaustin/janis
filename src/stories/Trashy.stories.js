@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import Trashy from 'components/Trashy';
 import Address from 'components/Trashy/TrashyAddress';
@@ -18,13 +17,26 @@ const pickupDates = [
   },
 ];
 
-storiesOf('Trashy', module)
-  .add('Full component', () => <Trashy />)
-  .add('Address component', () => <Address />)
-  .add('Schedule component', () => (
-    <Schedule
-      address={address}
-      nextBulkPickupDate={nextBulkPickupDate}
-      pickupDates={pickupDates}
-    />
-  ));
+export default {
+  title: 'Trashy',
+};
+
+export const fullComponent = () => <Trashy />;
+
+fullComponent.story = {
+  name: 'Full component',
+};
+
+export const addressComponent = () => <Address />;
+
+addressComponent.story = {
+  name: 'Address component',
+};
+
+export const scheduleComponent = () => (
+  <Schedule address={address} nextBulkPickupDate={nextBulkPickupDate} pickupDates={pickupDates} />
+);
+
+scheduleComponent.story = {
+  name: 'Schedule component',
+};

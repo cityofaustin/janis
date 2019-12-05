@@ -5,6 +5,7 @@
 
 # dev
 /tmp
+/storybook-static
 
 # testing
 /coverage
