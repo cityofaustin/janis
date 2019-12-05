@@ -644,7 +644,11 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   }
 };
 
-const makeAllPages = async langCode => {
+const makeAllPages = async (langCode, incrementalPageId) => {
+  if (incrementalPageId) {
+    console.log("Looks like we're trying to do an incremental build!");
+  }
+
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
 
@@ -652,6 +656,34 @@ const makeAllPages = async langCode => {
 
   const siteStructure = await client.request(siteStructureQuery);
   let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
+
+  // This is really something that should happen in joplin,
+  // but let's just use janis to do it for now
+  if (incrementalPageId) {
+    // First let's find all of the parent/grandparent ids we need
+    // to rebuild titles on links etc.
+    let idsToRebuild = [incrementalPageId];
+
+    for (const pageAtUrlInfo of parsedStructure) {
+      if (pageAtUrlInfo.id === incrementalPageId) {
+        if (pageAtUrlInfo.parent_department) {
+          idsToRebuild.push(pageAtUrlInfo.parent_department);
+        }
+
+        if (pageAtUrlInfo.parent_topic) {
+          idsToRebuild.push(pageAtUrlInfo.parent_topic);
+        }
+
+        if (pageAtUrlInfo.grandparent_topic_collection) {
+          idsToRebuild.push(pageAtUrlInfo.grandparent_topic_collection);
+        }
+      }
+    }
+
+    parsedStructure = parsedStructure.filter(pageAtUrlInfo =>
+      idsToRebuild.includes(pageAtUrlInfo.id),
+    );
+  }
 
   // We probably have some work to do around the documents page
   // but for now let's just add it in here
@@ -738,7 +770,17 @@ export default {
 
     return data;
   },
-  getRoutes: async () => {
+  getRoutes: async ({ incremental }) => {
+    let incrementalPageId = null;
+
+    if (incremental) {
+      // TODO: Make sure we have an id of the page that was updated
+      incrementalPageId = process.env.PAGE_ID;
+      console.log(
+        `Incrementally rebuilding page with id: ${incrementalPageId}`,
+      );
+    }
+
     const routes = [
       {
         path: '/search',
@@ -753,7 +795,7 @@ export default {
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode)),
+      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
     const allRoutes = routes.concat(translatedRoutes);
 
