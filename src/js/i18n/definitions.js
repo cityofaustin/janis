@@ -56,6 +56,7 @@ export const userFeedback = defineMessages({
   thankYou: 'Thank you for helping improve this website!',
   characterLimit: 'Character limit',
   of: 'of',
+  errorMessage: 'Sorry, we had trouble receiving your feedback. Please try again or email',
 });
 
 export const misc = defineMessages({
