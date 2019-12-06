@@ -1,5 +1,5 @@
 import React, { Component, Fragment, Suspense } from 'react';
-import { Root, Routes, useSiteData } from 'react-static';
+import { Root, Routes, useSiteData, useRouteData } from 'react-static';
 import { Route, Switch } from 'react-router';
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
@@ -15,6 +15,20 @@ import 'css/coa.css';
 const AppView = ({path}) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
+  // console.log("useRouteData() :", useRouteData())
+
+  // setTimeout(()=>{
+  //   // grab all the guide pages, crete key and array for services within
+  //   // const key = {}
+  //   for (const lang in navigation) {
+  //     navigation[lang].forEach( topPage => {
+  //       topPage.topicCollectionPages.edges.forEach( page => {
+  //         console.log("page :", page.node)
+  //       })
+  //     })
+  //   }
+  //
+  // }, 1000)
 
   return (
     <div>

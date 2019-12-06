@@ -339,6 +339,8 @@ const getServicePageData = async (
     client,
   );
 
+  service.testy = "LA LA LA"
+
   return { service: service };
 };
 
@@ -692,6 +694,60 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     type: `departments`,
   });
 
+  // 🔥
+  // 🔥
+  // 🔥
+
+  // todo - guide page id -> url object creation for
+  // service/info pages part of thing
+
+  /* 🤔 BOBS NOTES
+  - each page has a gitData function. that function is where we'd need to add guide pages.
+    - BUT without calling that... we can't do much here.
+    - SEE oine ~770. that's where we do call it, BUT it'll make develoment really slowwww.
+  - !✨option 1: query allGuidePages here and parse.
+    - Need to use the contexualNav, or part of it to get url... HAVE title
+  - !✨option 2: see about joplin side wagtail getrlatedpages... thingy.
+  - !✨option 3: client side???
+    - I poked around, but couldn't figure out how to get the guide page data without being on the guide page...?
+    - Somehow useRouteDate - part of react static - only brings in the page you are on.
+    - so doing so on app. only prings in TopService and images
+  */
+
+
+
+  // OPTION 1: Query the guides to get iDS. NOTE: need to get contexual navs.
+  //
+  const { allGuidePages } = await client.request(getGuidePageQuery)
+  console.log('\n🔥\n')
+  
+  allGuidePages.edges.map( guidePage => {
+    if (guidePage.node.sections.length > 0) {
+      // console.log("👉ALL GUIDE DATA: ", guidePage)
+      console.log("⭐️Guide Page Title : ", guidePage.node.title)
+      guidePage.node.sections.map( section => {
+        console.log('  -', section.heading)
+        // maybe
+        // console.log("x :", x)
+        // console.log("section :", section)
+      })
+    }
+  })
+
+  // guidePage.contextualNavData = await getContextualNavData(
+  //   parent_department,
+  //   parent_topic,
+  //   grandparent_topic_collection,
+  //   guidePage.relatedDepartments,
+  //   client,
+  // );
+
+  console.log('\n🔥\n')
+
+  //
+  //
+  //
+
   const allPages = await Promise.all(
     parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
   );
@@ -725,6 +781,23 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       };
     },
   };
+
+
+
+
+  // HERE WE OPEN ALL THE DATA FROM getDate Method. This is the entire page content of the website.
+  // SSSLLLOOOOOOOOOOWS down develoment signifcantly.
+
+  // const openedData = await Promise.all( data.children.map(p=>p.getData()) )
+  // openedData.map( page => {
+  //   if (page.guidePage && page.guidePage.sections.length > 0) {
+  //     console.log('\n\n🆕')
+  //     console.log("title: ", page.guidePage.title)
+  //     console.log("url: ", page.guidePage.contextualNavData.parent.url)
+  //   }
+  // })
+
+
 
   return data;
 };
