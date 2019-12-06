@@ -59,7 +59,7 @@ const InformationPage = ({ informationPage, intl }) => {
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                <div className="col-xs-12 col-md-8">
+                <div className="col-xs-12 col-md-10">
                   {additionalContent && (
                     <HtmlFromAdmin title={' '} content={additionalContent} />
                   )}
