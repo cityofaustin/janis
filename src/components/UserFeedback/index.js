@@ -189,7 +189,7 @@ class UserFeedback extends Component {
                           className={this.state.loading ? "coa-UserFeedback__textarea-dimmed": "coa-UserFeedback__textarea"}
                         />
                         <div className="coa-UserFeedback__charlimit">
-                          {`Character limit: ${this.state.char} of 2000`}
+                          {`${intl.formatMessage(i18n2.characterLimit)}: ${this.state.char} ${intl.formatMessage(i18n2.of)} 2000`}
                         </div>
                       </div>
                       {this.renderButton()}
@@ -202,8 +202,8 @@ class UserFeedback extends Component {
                     <i className="material-icons">error_outline</i>
                   </span>
                   <p>
-                    Sorry, we had trouble receiving your feedback.
-                    Please try again or email <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
+                    {intl.formatMessage(i18n2.errorMessage)}{' '}
+                    <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
                   </p>
                 </div>
               }
