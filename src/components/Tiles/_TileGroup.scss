@@ -12,6 +12,14 @@
   }
 }
 
+// we need margin L/R auto on the homepage
+.coa-HeroHome__container {
+  .coa-TileGroup {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .coa-TopicPage__tile-group {
   .coa-TileGroup {
     background: none;
