@@ -202,8 +202,8 @@ class UserFeedback extends Component {
                     <i className="material-icons">error_outline</i>
                   </span>
                   <p>
-                    Sorry, we had trouble receiving your feedback.
-                    Please try again or email <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
+                    {intl.formatMessage(i18n2.errorMessage)}{' '}
+                    <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
                   </p>
                 </div>
               }
