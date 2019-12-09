@@ -14,14 +14,21 @@ const LanguageChevron = ({ showMessage, pending, selected}) => (
 );
 
 const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }) => (
+  <>
+      <div className={classNames("test-hidden", {
+      "test-shown": showMessage
+    })}> </div>
   <div className="coa-LanguageSelectBar">
-    <ul className="coa-LanguageSelectBar__list">
+    <ul className={classNames("coa-LanguageSelectBar__list", {
+      "coa-LanguageSelectBar__list--showMessage": showMessage,
+    })}>
       {SUPPORTED_LANGUAGES.map(({ title, abbr, code, pending }, i) => (
         <li key={i} onClick={pending && togglePendingTranslation}>
           <Link
             to={`/${code}/${path}`}
             className={classNames('coa-LanguageSelectBar__item', {
               'coa-LanguageSelectBar__item--active': intl.locale === code,
+              'coa-LanguageSelectBar__item--showMessage': showMessage,
             })}
           >
             {title} <LanguageChevron pending={pending} selected={code===intl.locale} showMessage={showMessage} />
@@ -30,6 +37,7 @@ const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }
       ))}
     </ul>
   </div>
+  </>
 );
 
 LanguageSelectBar.propTypes = {

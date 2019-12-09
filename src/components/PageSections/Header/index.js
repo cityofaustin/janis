@@ -99,6 +99,7 @@ class Header extends Component {
     if (e.key === 'Escape') {
       this.setState({
         topMenuActive: false,
+        showMessage: false,
       });
     }
   };
@@ -128,6 +129,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
+        showMessage: false,
       });
     }
   };

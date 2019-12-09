@@ -2,6 +2,7 @@
   background-color: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
+  z-index: 1;
 }
 
 .coa-LanguageSelectBar__list {
@@ -20,6 +21,32 @@
   li {
     margin: 0;
   }
+}
+
+.coa-LanguageSelectBar__list--showMessage {
+  background-color: $coa-color-white;
+}
+
+.test-hidden {
+  background: $coa-color-white;
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-width: 375px;
+  border-radius: 4px 4px 0px 0px;
+  border-color: #1493FF;
+  border-width: 1px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 1rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.test-shown {
+  display: inherit;
+  z-index: 0;
+  height: 50px;
 }
 
 .coa-rtl {
@@ -51,6 +78,9 @@
     opacity: 1;
     font-weight: 600;
   }
+  &.coa-LanguageSelectBar__item--showMessage {
+  color: $coa-color-almost-black;
+}
 }
 
 .coa-LanguageChevron {
