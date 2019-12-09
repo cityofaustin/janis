@@ -29,10 +29,11 @@
 
 .test-hidden {
   background: $coa-color-white;
+  margin-left: -15px;
   display: none;
   position: absolute;
   width: 100%;
-  max-width: 375px;
+  max-width: 365px;
   border-radius: 4px 4px 0px 0px;
   border-color: #1493FF;
   border-width: 1px;
@@ -79,8 +80,8 @@
     font-weight: 600;
   }
   &.coa-LanguageSelectBar__item--showMessage {
-  color: $coa-color-almost-black;
-}
+    color: $coa-color-almost-black;
+  }
 }
 
 .coa-LanguageChevron {

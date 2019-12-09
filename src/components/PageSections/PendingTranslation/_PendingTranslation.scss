@@ -1,18 +1,20 @@
 .coa-PendingTranslation {
   top: 90px;
   background: $coa-color-white;
+  margin-left: -15px;
   display: none;
   position: absolute;
   width: 100%;
-  max-width: 375px;
-  border-radius: 4px;
+  max-width: 365px;
+  border-radius: 0px 0px 4px 4px;
   border-color: #1493FF;
   border-width: 1px;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 15px;
+  padding: 0px 15px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid  #c6cace;
 }
 
 .coa-PendingTranslation--is-open {
