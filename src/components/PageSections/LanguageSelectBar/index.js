@@ -15,8 +15,8 @@ const LanguageChevron = ({ showMessage, pending, selected}) => (
 
 const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }) => (
   <>
-      <div className={classNames("test-hidden", {
-      "test-shown": showMessage
+      <div className={classNames("coa-LanguageSelectBar__background", {
+      "coa-LanguageSelectBar__background--active": showMessage
     })}> </div>
   <div className="coa-LanguageSelectBar">
     <ul className={classNames("coa-LanguageSelectBar__list", {

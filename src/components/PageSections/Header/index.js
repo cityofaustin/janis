@@ -171,6 +171,8 @@ class Header extends Component {
 
   render() {
     const { intl, navigation, path } = this.props;
+    console.log(this.state.showMessage);
+    console.log(intl.locale);
 
     return (
       <header
