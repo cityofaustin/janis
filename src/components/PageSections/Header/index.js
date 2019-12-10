@@ -159,10 +159,6 @@ class Header extends Component {
     }
   }
 
-  languageOnClick = () => {
-    this.setState({});
-  }
-
   togglePendingTranslation = () => {
     this.setState(prevState => ({
       showMessage: !prevState.showMessage
