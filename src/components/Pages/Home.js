@@ -16,7 +16,7 @@ const Home = ({ intl }) => {
   const { topServices, image } = useRouteData();
 
   return (
-    <div>
+    <div className="coa-HeroHome__container">
       <Head>
         <title>{'City of Austin'}</title>
       </Head>
