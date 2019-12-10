@@ -93,6 +93,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: true,
+        showMessage: false,
       });
     }
 
@@ -138,6 +139,7 @@ class Header extends Component {
   toggleFullSiteMenu = () => {
     this.setState(prevState => ({
       topMenuActive: !prevState.topMenuActive,
+      showMessage: false,
     }));
   };
 
@@ -162,7 +164,8 @@ class Header extends Component {
 
   togglePendingTranslation = () => {
     this.setState(prevState => ({
-      showMessage: !prevState.showMessage
+      showMessage: !prevState.showMessage,
+      topMenuActive: false,
     }))
   }
 
