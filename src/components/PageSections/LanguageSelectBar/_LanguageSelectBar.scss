@@ -82,6 +82,9 @@
   &.coa-LanguageSelectBar__item--showMessage {
     color: $coa-color-almost-black;
   }
+  coa-LanguageSelectBar__item--activeMessage {
+    color: $coa-color-primary;
+  }
 }
 
 .coa-LanguageChevron {
