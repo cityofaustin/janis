@@ -169,6 +169,10 @@ class Header extends Component {
     }))
   }
 
+  closeMessage = () => {
+    this.setState({ showMessage: false })
+  }
+
   render() {
     const { intl, navigation, path } = this.props;
 
@@ -193,7 +197,10 @@ class Header extends Component {
               showMessage={this.state.showMessage}
               togglePendingTranslation={() => this.togglePendingTranslation()}
             />
-            <PendingTranslation open={this.state.showMessage} />
+            <PendingTranslation
+              open={this.state.showMessage}
+              closeMessage={()=>this.closeMessage()}
+            />
           </div>
           <div className="coa-Header__container">
             <div className="coa-Header__controls">
@@ -204,7 +211,10 @@ class Header extends Component {
                     showMessage={this.state.showMessage}
                     togglePendingTranslation={() => this.togglePendingTranslation()}
                   />
-                  <PendingTranslation open={this.state.showMessage} />
+                  <PendingTranslation
+                    open={this.state.showMessage}
+                    closeMessage={()=>this.closeMessage()}
+                  />
                 </div>
               </div>
               <div
@@ -249,7 +259,6 @@ class Header extends Component {
           </div>
 
           <FullSiteMenu
-            // ref={node => this.node = node}
             refnode={this.setWrapperRef}
             navigation={navigation}
             handleFullSiteMenuItem={this.closeFullSiteMenuItem}
