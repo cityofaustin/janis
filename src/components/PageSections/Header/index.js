@@ -63,7 +63,7 @@ class Header extends Component {
         event.target.parentElement.className !== 'coa-Header__menuIcon' &&
         // for the pending translation dropdown:
         event.target.parentElement.className !== 'coa-PendingTranslation coa-PendingTranslation--is-open' &&
-        event.target.parentElement.className !== 'coa-PendingTranslation--link' &&
+        event.target.className !== 'coa-LanguageSelectBar__background coa-LanguageSelectBar__background--active' &&
         event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active coa-LanguageSelectBar__item--showMessage coa-LanguageSelectBar__item--activeMessage' &&
         event.target.className !== 'material-icons coa-LanguageChevron'
       ) {
@@ -171,8 +171,6 @@ class Header extends Component {
 
   render() {
     const { intl, navigation, path } = this.props;
-    console.log(this.state.showMessage);
-    console.log(intl.locale);
 
     return (
       <header
@@ -193,7 +191,7 @@ class Header extends Component {
             <LanguageSelectBar 
               path={path}
               showMessage={this.state.showMessage}
-              togglePendingTranslation={()=>this.togglePendingTranslation()}
+              togglePendingTranslation={() => this.togglePendingTranslation()}
             />
             <PendingTranslation open={this.state.showMessage} />
           </div>

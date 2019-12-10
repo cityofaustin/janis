@@ -12,10 +12,12 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 15px;
   @include media($coa-medium-screen) {
     justify-content: flex-end;
     // border-left: 1px solid #407CE2;
+    padding-left: 0px;
   }
 
   li {
@@ -28,7 +30,6 @@
 }
 
 .coa-LanguageSelectBar__background {
-  background: $coa-color-white;
   display: none;
   position: absolute;
   width: 100%;
@@ -39,11 +40,15 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   @include media($coa-medium-screen) {
     margin-left: -15px;
+    background: $coa-color-white;
   }
 }
 
 .coa-LanguageSelectBar__background--active {
-  display: inherit;
+  // should not be shown on mobile ever
+  @include media($coa-medium-screen) {
+    display: inherit;
+  }
   z-index: 0;
   height: 50px;
 }
