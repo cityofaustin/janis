@@ -29,7 +29,7 @@ const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }
             className={classNames('coa-LanguageSelectBar__item', {
               'coa-LanguageSelectBar__item--active': intl.locale === code,
               'coa-LanguageSelectBar__item--showMessage': showMessage,
-              'coa-LanguageSelectBar__item--activeMessage': showMessage && intl.locale === code,
+              'coa-LanguageSelectBar__item--activeMessage': (showMessage && intl.locale === code),
             })}
           >
             {title} <LanguageChevron pending={pending} selected={code===intl.locale} showMessage={showMessage} />

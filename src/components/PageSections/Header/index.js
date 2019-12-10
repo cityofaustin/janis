@@ -55,7 +55,6 @@ class Header extends Component {
 
   // Hides the menu
   handleClickOutside(event) {
-    console.log(event.target.className)
     // Full site
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
@@ -65,7 +64,7 @@ class Header extends Component {
         // for the pending translation dropdown:
         event.target.parentElement.className !== 'coa-PendingTranslation coa-PendingTranslation--is-open' &&
         event.target.parentElement.className !== 'coa-PendingTranslation--link' &&
-        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active coa-LanguageSelectBar__item--showMessage' &&
+        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active coa-LanguageSelectBar__item--showMessage coa-LanguageSelectBar__item--activeMessage' &&
         event.target.className !== 'material-icons coa-LanguageChevron'
       ) {
         this.setState({
