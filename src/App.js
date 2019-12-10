@@ -1,5 +1,5 @@
 import React, { Component, Fragment, Suspense } from 'react';
-import { Root, Routes, useSiteData, useRouteData } from 'react-static';
+import { Root, Routes, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';

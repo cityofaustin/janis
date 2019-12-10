@@ -341,24 +341,7 @@ const getServicePageData = async (
     client,
   );
 
-
-
-
-
-
-  // 🔥
-  console.log("pagesOfGuides :", pagesOfGuides["servicePage"][id])
-  console.log("service id :", id)
-  console.log("Injust a page is part of here... :")
-  service.pageIsPartOf = pagesOfGuides["servicePage"][id]
-  // 🔥
-
-
-
-
-
-
-
+  service.pageIsPartOf = pagesOfGuides[id]
 
   return { service: service };
 };
@@ -389,7 +372,7 @@ const getInformationPageData = async (
     client,
   );
 
-  informationPage.pageIsPartOf = pagesOfGuides["informationPage"][id]
+  informationPage.pageIsPartOf = pagesOfGuides[id]
 
   return { informationPage: informationPage };
 };
@@ -590,7 +573,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
           parent_topic,
           grandparent_topic_collection,
           client,
-          pagesOfGuides
+          pagesOfGuides.servicePage
         ),
     };
   }
@@ -607,7 +590,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
           parent_topic,
           grandparent_topic_collection,
           client,
-          pagesOfGuides
+          pagesOfGuides.informationPage
         ),
     };
   }
@@ -670,6 +653,41 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   }
 };
 
+const getPagesOfGuidesData = async (client) => {
+
+  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery)
+
+  const pagesOfGuidesData = {}
+
+  allGuidePages.edges.map( guidePage => {
+    if (guidePage.node.sections.length > 0 && guidePage.node.topics.edges.length > 0) {
+      const url = "/" + [
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.theme.slug,
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.slug,
+        guidePage.node.topics.edges[0].node.topic.slug,
+        guidePage.node.slug,
+      ].join("/")
+      guidePage.node.sections.map( section => {
+        for (const page in section.pages[0]) {
+          if (section.pages[0][page]) {
+            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {}
+            if (!pagesOfGuidesData[page][section.pages[0][page].id]) pagesOfGuidesData[page][section.pages[0][page].id] = []
+            pagesOfGuidesData[page][section.pages[0][page].id].push({
+              pageName: section.heading,
+              pageType: section.pages[0][page].pageType,
+              guidePageTitle: guidePage.node.title,
+              guidePageUrl: url
+            })
+          }
+        }
+      })
+    }
+  })
+  console.log('\n🔥pagesOfGuidesData :\n', pagesOfGuidesData)
+
+  return pagesOfGuidesData
+}
+
 const makeAllPages = async (langCode, incrementalPageId) => {
   if (incrementalPageId) {
     console.log("Looks like we're trying to do an incremental build!");
@@ -718,70 +736,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     type: `departments`,
   });
 
-  // 🔥
-  // 🔥
-  // 🔥
-
-  // todo - guide page id -> url object creation for
-  // service/info pages part of thing
-
-  /* 🤔 BOBS NOTES
-  - each page has a gitData function. that function is where we'd need to add guide pages.
-    - BUT without calling that... we can't do much here.
-    - SEE oine ~770. that's where we do call it, BUT it'll make develoment really slowwww.
-  - !✨option 1: query allGuidePages here and parse.
-    - Need to use the contexualNav, or part of it to get url... HAVE title
-  - !✨option 2: see about joplin side wagtail getrlatedpages... thingy.
-  - !✨option 3: client side???
-    - I poked around, but couldn't figure out how to get the guide page data without being on the guide page...?
-    - Somehow useRouteDate - part of react static - only brings in the page you are on.
-    - so doing so on app. only prings in TopService and images
-  */
-
-
-  // OPTION 1: Query the guides to get iDS. NOTE: need to get contexual navs.
-  //
-  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery)
-  console.log('\n🔥b4 \n')
-
-  const pagesOfGuides = {}
-
-  allGuidePages.edges.map( guidePage => {
-    if (guidePage.node.sections.length > 0 && guidePage.node.topics.edges.length > 0) {
-      const url = "/" + [
-        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.theme.slug,
-        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.slug,
-        guidePage.node.topics.edges[0].node.topic.slug,
-        guidePage.node.slug,
-      ].join("/")
-      guidePage.node.sections.map( section => {
-        for (const page in section.pages[0]) {
-          if (section.pages[0][page]) {
-            if (!pagesOfGuides[page]) pagesOfGuides[page] = {}
-            if (!pagesOfGuides[page][section.pages[0][page].id]) pagesOfGuides[page][section.pages[0][page].id] = []
-            pagesOfGuides[page][section.pages[0][page].id].push({
-              pageName: section.heading,
-              pageType: section.pages[0][page].pageType,
-              guidePageTitle: guidePage.node.title,
-              guidePageUrl: url
-            })
-          }
-        }
-      })
-    }
-  })
-
-  console.log('\n🔥after \npagesOfGuides :\n', pagesOfGuides)
-
-  //
-  //
-  //
-  //
-  //
-  //
+  const pagesOfGuidesData = await getPagesOfGuidesData(client)
 
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuides)),
+    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)),
   );
 
   const data = {
@@ -813,24 +771,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       };
     },
   };
-
-
-
-
-  // HERE WE OPEN ALL THE DATA FROM getDate Method. This is the entire page content of the website.
-  // SSSLLLOOOOOOOOOOWS down develoment signifcantly.
-
-  // const openedData = await Promise.all( data.children.map(p=>p.getData()) )
-  // openedData.map( page => {
-  //   if (page.guidePage && page.guidePage.sections.length > 0) {
-  //     console.log('\n\n🆕')
-  //     console.log("title: ", page.guidePage.title)
-  //     console.log("url: ", page.guidePage.contextualNavData.parent.url)
-  //   }
-  // })
-
-
-
 
   return data;
 };
