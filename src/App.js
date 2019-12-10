@@ -15,20 +15,6 @@ import 'css/coa.css';
 const AppView = ({path}) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
-  // console.log("useRouteData() :", useRouteData())
-
-  // setTimeout(()=>{
-  //   // grab all the guide pages, crete key and array for services within
-  //   // const key = {}
-  //   for (const lang in navigation) {
-  //     navigation[lang].forEach( topPage => {
-  //       topPage.topicCollectionPages.edges.forEach( page => {
-  //         console.log("page :", page.node)
-  //       })
-  //     })
-  //   }
-  //
-  // }, 1000)
 
   return (
     <div>

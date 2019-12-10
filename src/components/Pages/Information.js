@@ -33,10 +33,14 @@ const InformationPage = ({ informationPage, intl }) => {
       contacts,
       coaGlobal,
       contextualNavData,
+      pageIsPartOf
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = informationPage ? { informationPage } : useRouteData();
+
+  console.log('\n\n')
+  console.log("pageIsPartOf :", pageIsPartOf)
 
   return (
     <div>

@@ -30,18 +30,14 @@ const Service = ({ service, intl }) => {
       relatedDepartments,
       coaGlobal,
       contextualNavData,
-      testy,
-      okok
+      pageIsPartOf,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
   console.log('\n\n')
-  console.log("title :", title)
-  console.log("testy:", testy)
-  console.log("okok :", okok)
-  console.log("useRouteData() :", useRouteData())
+  console.log("pageIsPartOf :", pageIsPartOf)
 
   return (
     <div>

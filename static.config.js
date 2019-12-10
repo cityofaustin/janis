@@ -22,6 +22,7 @@ import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicData
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
+import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 
 import {
   cleanNavigation,
@@ -321,6 +322,7 @@ const getServicePageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides
 ) => {
   const { allServicePages } = await client.request(getServicePageQuery, {
     id: id,
@@ -339,7 +341,24 @@ const getServicePageData = async (
     client,
   );
 
-  service.testy = "LA LA LA"
+
+
+
+
+
+  // 🔥
+  console.log("pagesOfGuides :", pagesOfGuides["servicePage"][id])
+  console.log("service id :", id)
+  console.log("Injust a page is part of here... :")
+  service.pageIsPartOf = pagesOfGuides["servicePage"][id]
+  // 🔥
+
+
+
+
+
+
+
 
   return { service: service };
 };
@@ -350,6 +369,7 @@ const getInformationPageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides
 ) => {
   const { allInformationPages } = await client.request(
     getInformationPageQuery,
@@ -368,6 +388,8 @@ const getInformationPageData = async (
     informationPage.relatedDepartments,
     client,
   );
+
+  informationPage.pageIsPartOf = pagesOfGuides["informationPage"][id]
 
   return { informationPage: informationPage };
 };
@@ -516,7 +538,7 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-const buildPageAtUrl = async (pageAtUrlInfo, client) => {
+const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
     type,
@@ -568,6 +590,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides
         ),
     };
   }
@@ -584,6 +607,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides
         ),
     };
   }
@@ -715,41 +739,49 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   */
 
 
-
   // OPTION 1: Query the guides to get iDS. NOTE: need to get contexual navs.
   //
-  const { allGuidePages } = await client.request(getGuidePageQuery)
-  console.log('\n🔥\n')
-  
+  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery)
+  console.log('\n🔥b4 \n')
+
+  const pagesOfGuides = {}
+
   allGuidePages.edges.map( guidePage => {
-    if (guidePage.node.sections.length > 0) {
-      // console.log("👉ALL GUIDE DATA: ", guidePage)
-      console.log("⭐️Guide Page Title : ", guidePage.node.title)
+    if (guidePage.node.sections.length > 0 && guidePage.node.topics.edges.length > 0) {
+      const url = "/" + [
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.theme.slug,
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.slug,
+        guidePage.node.topics.edges[0].node.topic.slug,
+        guidePage.node.slug,
+      ].join("/")
       guidePage.node.sections.map( section => {
-        console.log('  -', section.heading)
-        // maybe
-        // console.log("x :", x)
-        // console.log("section :", section)
+        for (const page in section.pages[0]) {
+          if (section.pages[0][page]) {
+            if (!pagesOfGuides[page]) pagesOfGuides[page] = {}
+            if (!pagesOfGuides[page][section.pages[0][page].id]) pagesOfGuides[page][section.pages[0][page].id] = []
+            pagesOfGuides[page][section.pages[0][page].id].push({
+              pageName: section.heading,
+              pageType: section.pages[0][page].pageType,
+              guidePageTitle: guidePage.node.title,
+              guidePageUrl: url
+            })
+          }
+        }
       })
     }
   })
 
-  // guidePage.contextualNavData = await getContextualNavData(
-  //   parent_department,
-  //   parent_topic,
-  //   grandparent_topic_collection,
-  //   guidePage.relatedDepartments,
-  //   client,
-  // );
+  console.log('\n🔥after \npagesOfGuides :\n', pagesOfGuides)
 
-  console.log('\n🔥\n')
-
+  //
+  //
+  //
   //
   //
   //
 
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuides)),
   );
 
   const data = {
@@ -796,6 +828,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   //     console.log("url: ", page.guidePage.contextualNavData.parent.url)
   //   }
   // })
+
 
 
 
