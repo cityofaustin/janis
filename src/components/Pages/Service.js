@@ -37,9 +37,6 @@ const Service = ({ service, intl }) => {
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
-  console.log('\n\n')
-  console.log("SERVICE PAGE pageIsPartOf :", pageIsPartOf)
-
   return (
     <div>
       <Head>
@@ -117,7 +114,6 @@ const Service = ({ service, intl }) => {
           offeredBy={contextualNavData.offeredBy}
         />
       </div>
-
     </div>
   );
 };

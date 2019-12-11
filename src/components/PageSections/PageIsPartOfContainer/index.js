@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
+import { misc as i18n2 } from 'js/i18n/definitions';
+
 
 import PageHeader from 'components/PageHeader';
 import Tile from 'components/Tiles/Tile';
@@ -26,6 +28,7 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
                 <PageIsPartOfContent
                   pageIsPartOf={pageIsPartOf}
                   intl={intl}
+                  contentType={contentType}
                 ></PageIsPartOfContent>
 
               </div>
@@ -46,6 +49,7 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
             <PageIsPartOfContent
               pageIsPartOf={pageIsPartOf}
               intl={intl}
+              contentType={contentType}
             ></PageIsPartOfContent>
 
             {contentType === "information" && (
@@ -61,13 +65,12 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
   )
 }
 
-const PageIsPartOfContent = ({ pageIsPartOf, intl }) => {
-
+const PageIsPartOfContent = ({ pageIsPartOf, intl, contentType }) => {
   return (
     <div>
 
       <div className="coa-Tile--small-header">
-        This page is a part of:
+        {intl.formatMessage(i18n2[contentType+"PageIsPartOfMessage"])}
       </div>
 
       <div className="coa-TileGroup__tiles-container--compact">

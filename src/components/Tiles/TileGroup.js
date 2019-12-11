@@ -41,7 +41,6 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
           }
         >
           {tiles.map(({ url, title, pageType }, index) => {
-            console.log("url :", url)
             return (
               <Tile
                 url={

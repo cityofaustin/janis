@@ -73,7 +73,6 @@ const InformationPage = ({ informationPage, intl }) => {
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                {/* <div className="col-xs-12 col-md-10" style={{ "background-color": "pink" }}> */}
                 <div className="col-xs-12 col-md-10">
                   {additionalContent && (
                     <HtmlFromAdmin title={' '} content={additionalContent} />
@@ -88,7 +87,7 @@ const InformationPage = ({ informationPage, intl }) => {
             </div>
           </div>
           <div className="coa-Page__side-content">
-            <div className="coa-ServicePage__contacts-desktop" >
+            <div className="coa-ServicePage__contacts-desktop">
               {!!contacts && !!contacts.length && (
                 <ContactDetails contacts={contacts} />
               )}

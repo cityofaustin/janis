@@ -12,10 +12,9 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   const documentsPerPage = 10
   const isMobile = useMobileQuery()
-  const maxPagesShown = isMobile ? 5 : 7 // Desktop : Mobile (pagination pages shown)
+  const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
   const allDocs = officialDocuments.edges
-  let pages = buildPages()
-  pages = pages.concat(pages)
+  const pages = buildPages()
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
