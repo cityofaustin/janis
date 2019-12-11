@@ -15,6 +15,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
 
 const InformationPage = ({ informationPage, intl }) => {
   const {
@@ -39,9 +40,6 @@ const InformationPage = ({ informationPage, intl }) => {
     // it gets previews working with hooks
   } = informationPage ? { informationPage } : useRouteData();
 
-  console.log('\n\n')
-  console.log("pageIsPartOf :", pageIsPartOf)
-
   return (
     <div>
       <Head>
@@ -56,14 +54,27 @@ const InformationPage = ({ informationPage, intl }) => {
       )}
       {image && <PageBanner image={image} />}
       <div>
-        <PageHeader contentType={'information'} description={description}>
-          {title}
-        </PageHeader>
+
+        { !pageIsPartOf ? (
+          <PageHeader contentType={'information'} description={description}>
+            {title}
+          </PageHeader>
+        ) : (
+          <PageIsPartOfContainer
+            pageIsPartOf={pageIsPartOf}
+            contentType={'information'}
+            description={description}
+            title={title}
+            intl={intl}
+          />
+        )}
+
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                <div className="col-xs-12 col-md-8">
+                {/* <div className="col-xs-12 col-md-10" style={{ "background-color": "pink" }}> */}
+                <div className="col-xs-12 col-md-10">
                   {additionalContent && (
                     <HtmlFromAdmin title={' '} content={additionalContent} />
                   )}
@@ -77,7 +88,7 @@ const InformationPage = ({ informationPage, intl }) => {
             </div>
           </div>
           <div className="coa-Page__side-content">
-            <div className="coa-ServicePage__contacts-desktop">
+            <div className="coa-ServicePage__contacts-desktop" >
               {!!contacts && !!contacts.length && (
                 <ContactDetails contacts={contacts} />
               )}

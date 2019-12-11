@@ -14,6 +14,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
 
 const Service = ({ service, intl }) => {
   const {
@@ -37,7 +38,7 @@ const Service = ({ service, intl }) => {
   } = service ? { service } : useRouteData();
 
   console.log('\n\n')
-  console.log("pageIsPartOf :", pageIsPartOf)
+  console.log("SERVICE PAGE pageIsPartOf :", pageIsPartOf)
 
   return (
     <div>
@@ -53,9 +54,21 @@ const Service = ({ service, intl }) => {
             offeredBy={contextualNavData.offeredBy}
           />
         )}
-        <PageHeader contentType={'service'} description={shortDescription}>
-          {title}
-        </PageHeader>
+
+        { !pageIsPartOf ? (
+          <PageHeader contentType={'service'} description={shortDescription}>
+            {title}
+          </PageHeader>
+        ) : (
+          <PageIsPartOfContainer
+            pageIsPartOf={pageIsPartOf}
+            contentType={'service'}
+            description={shortDescription}
+            title={title}
+            intl={intl}
+          />
+        )}
+
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
@@ -104,6 +117,7 @@ const Service = ({ service, intl }) => {
           offeredBy={contextualNavData.offeredBy}
         />
       </div>
+
     </div>
   );
 };

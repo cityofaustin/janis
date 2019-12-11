@@ -5,6 +5,7 @@ const allGuidePagesSectionsQuery = `
         node {
           title
           slug
+          pageType
           topics {
             edges {
               node {

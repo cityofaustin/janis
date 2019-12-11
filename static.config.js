@@ -675,6 +675,7 @@ const getPagesOfGuidesData = async (client) => {
             pagesOfGuidesData[page][section.pages[0][page].id].push({
               pageName: section.heading,
               pageType: section.pages[0][page].pageType,
+              ofPageType: guidePage.node.pageType,
               guidePageTitle: guidePage.node.title,
               guidePageUrl: url
             })
@@ -683,7 +684,6 @@ const getPagesOfGuidesData = async (client) => {
       })
     }
   })
-  console.log('\n🔥pagesOfGuidesData :\n', pagesOfGuidesData)
 
   return pagesOfGuidesData
 }
