@@ -11,6 +11,11 @@ const getLocationPageQuery = `
           nearestBus1
           nearestBus2
           nearestBus3
+          physicalLocationPhoto {
+            id
+            filename
+            title
+          }
         }
       }
     }

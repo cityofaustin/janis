@@ -6,28 +6,20 @@ import LocationInfo from 'components/Pages/Location/LocationInfo';
 import LocationServiceList from 'components/Pages/Location/LocationServiceList';
 import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
-import "components/Pages/Location/_Location.scss";
+import 'components/Pages/Location/_Location.scss';
 
 const LocationPage = ({ locationPage }) => {
-  const blarg = locationPage ? { locationPage } : useRouteData();
-  debugger;
-
   const {
     locationPage: {
       title,
-      contact: {
-        phone,
-        email,
-      },
+      contact: { phone, email },
       location,
       image,
       hours,
       services,
-      gettingHere: {
-        buses,
-      },
-    }
-  } = blarg;
+      gettingHere: { buses },
+    },
+  } = locationPage ? { locationPage } : useRouteData();
 
   return (
     <div>
@@ -37,9 +29,7 @@ const LocationPage = ({ locationPage }) => {
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
         <div className="coa-LocationPage__header">
           <i className="material-icons coa-LocationPage__header-icon">place</i>
-          <h1 className="coa-LocationPage__header-title">
-            {title}
-          </h1>
+          <h1 className="coa-LocationPage__header-title">{title}</h1>
         </div>
         <LocationInfo
           phone={phone}
@@ -49,18 +39,12 @@ const LocationPage = ({ locationPage }) => {
           hours={hours}
         />
         {!!services && services.length && (
-          <LocationServiceList
-            services={services}
-          />
+          <LocationServiceList services={services} />
         )}
-        {!!buses && buses.length && (
-          <LocationGettingHere
-            buses={buses}
-          />
-        )}
+        {!!buses && buses.length && <LocationGettingHere buses={buses} />}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LocationPage;
