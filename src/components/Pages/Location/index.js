@@ -9,6 +9,9 @@ import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 import "components/Pages/Location/_Location.scss";
 
 const LocationPage = ({ locationPage }) => {
+  const blarg = locationPage ? { locationPage } : useRouteData();
+  debugger;
+
   const {
     locationPage: {
       title,
@@ -24,7 +27,7 @@ const LocationPage = ({ locationPage }) => {
         buses,
       },
     }
-  } = locationPage ? { locationPage } : useRouteData();
+  } = blarg;
 
   return (
     <div>
