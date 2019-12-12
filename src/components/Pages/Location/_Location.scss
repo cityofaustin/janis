@@ -152,8 +152,10 @@ $coa-location-page-section-background: #f7f7f7;
 }
 
 .coa-LocationPage__service-phone-container {
-  border-bottom: 1px solid #dddfe1;
-  padding-bottom: 2rem;
+  &:not(:last-child) {
+    border-bottom: 1px solid #dddfe1;
+    padding-bottom: 2rem;
+  }
 }
 
 .coa-LocationPage__service-hours-container {
