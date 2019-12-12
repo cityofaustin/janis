@@ -573,16 +573,18 @@ const getLocationPageData = async (id, client) => {
 
   locationPage.location = {
     'Physical address': {
-      street: '405 W Stassney Ln',
-      city: 'Austin',
-      state: 'TX',
-      zip: 78745,
+      street: locationPage.physicalUnit
+        ? `${locationPage.physicalStreet} ${locationPage.physicalUnit}`
+        : locationPage.physicalStreet,
+      city: locationPage.physicalCity,
+      state: locationPage.physicalState,
+      zip: locationPage.physicalZip,
     },
     'Mailing address': {
-      street: 'P.O. Box 1088',
-      city: 'Austin',
-      state: 'TX',
-      zip: 78767,
+      street: locationPage.mailingStreet,
+      city: locationPage.mailingCity,
+      state: locationPage.mailingState,
+      zip: locationPage.mailingZip,
     },
   };
 

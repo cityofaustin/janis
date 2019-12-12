@@ -5,6 +5,15 @@ query getLocationPage($id: ID) {
       node {
         id
         title
+        physicalStreet
+        physicalUnit
+        physicalCity
+        physicalState
+        physicalZip
+        mailingStreet
+        mailingCity
+        mailingState
+        mailingZip
         phoneNumber
         phoneDescription
         email
@@ -103,7 +112,6 @@ query getLocationPage($id: ID) {
     }
   }
 }
-
 `;
 
 export default getLocationPageQuery;
