@@ -14,9 +14,9 @@ const PendingTranslation = ({ open, intl, closeMessage }) => (
   >
     <p>Continuamos trabajando y procesando las traducciones en este sitio web.</p>
     <p className='coa-PendingTranslation--link'>
-      Si le gustaría ayudarnos a mejorar, por favor inscríbase para participar en nuestras investigaciones de usuarios {' '}
+      Si le gustaría ayudarnos a mejorar, por favor inscríbase{' '}
       <Link to={'/es/feedback/'} onClick={closeMessage}>
-        https://alpha.austin.gov/es/feedback/
+        para participar en nuestras investigaciones de usuarios.
       </Link>
     </p>
   </div>
