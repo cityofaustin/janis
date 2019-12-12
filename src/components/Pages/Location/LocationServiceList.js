@@ -88,7 +88,9 @@ const Service = ({ service }) => {
                       {phone.label}
                     </td>
                   )}
-                  <td>{phone.number}</td>
+                  <td>
+                    <a href={`tel:${phone.number}`}>{phone.number}</a>
+                  </td>
                 </tr>
               ))}
             </tbody>

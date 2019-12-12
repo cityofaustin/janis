@@ -32,6 +32,8 @@ import {
   cleanLocationPageHours,
 } from 'js/helpers/cleanData';
 
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
+
 const getAllTopicLinks = (
   allServicePageTopics,
   allInformationPageTopics,
@@ -531,7 +533,9 @@ const getLocationPageData = async (id, client) => {
 
   locationPage.contact = {
     phone: {
-      value: locationPage.phoneNumber,
+      value: parsePhoneNumberFromString(
+        locationPage.phoneNumber,
+      ).formatNational(),
       name: locationPage.phoneDescription,
     },
     email: {
@@ -558,7 +562,9 @@ const getLocationPageData = async (id, client) => {
         phoneEdge => {
           return {
             label: phoneEdge.node.phoneDescription,
-            number: phoneEdge.node.phoneNumber,
+            number: parsePhoneNumberFromString(
+              phoneEdge.node.phoneNumber,
+            ).formatNational(),
           };
         },
       ),
