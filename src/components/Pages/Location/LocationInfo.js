@@ -123,7 +123,9 @@ const LocationPageFacilityHours = ({ hours }) => {
                 {intl.formatMessage(i18nDate['weekday' + capitalize(day)])}
               </td>
               <td>
-                {hours[day] !== null ? hours[day] : 'Closed' /* todo i18n */}
+                {hours[day] !== null
+                  ? hours[day]
+                  : intl.formatMessage(i18nLocations.closed)}
               </td>
             </tr>
           ))}

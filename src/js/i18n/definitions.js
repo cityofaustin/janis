@@ -50,13 +50,15 @@ export const userFeedback = defineMessages({
   didYouFind: 'Did you find what you were looking for on this page?',
   yes: 'Yes',
   no: 'No',
-  tellUsMore: 'Please tell us more about your feedback. \n We\'ll use this information to improve the site.',
+  tellUsMore:
+    "Please tell us more about your feedback. \n We'll use this information to improve the site.",
   submit: 'Submit',
   received: 'We have received your feedback.',
   thankYou: 'Thank you for helping improve this website!',
   characterLimit: 'Character limit',
   of: 'of',
-  errorMessage: 'Sorry, we had trouble receiving your feedback. Please try again or email',
+  errorMessage:
+    'Sorry, we had trouble receiving your feedback. Please try again or email',
 });
 
 export const misc = defineMessages({
@@ -94,7 +96,7 @@ export const misc = defineMessages({
   or404: ', or ',
   contactUs404: 'contact us',
   privacyPolicy: 'Privacy policy',
-  contactInformation: 'Contact information'
+  contactInformation: 'Contact information',
 });
 
 export const navigation = defineMessages({
@@ -103,8 +105,8 @@ export const navigation = defineMessages({
   openInNewWindow: 'Opens in new window',
   search: 'Search',
   skipToMain: 'Skip to main content',
-  previous: "Previous",
-  next: "Next",
+  previous: 'Previous',
+  next: 'Next',
 });
 
 export const processes = defineMessages({
@@ -146,7 +148,8 @@ export const curbsideServices = defineMessages({
   brushcollection: 'Large brush collection',
   bulkitemcollection: 'Next bulk item collection',
   pickupschedule: "Here's the pickup schedule for {address}",
-  invalidDate: 'Currently, no upcoming bulk item collection date has been scheduled. Please check back soon.',
+  invalidDate:
+    'Currently, no upcoming bulk item collection date has been scheduled. Please check back soon.',
 });
 
 export const departmentPage = defineMessages({
@@ -491,19 +494,20 @@ export const guides = defineMessages({
 });
 
 export const locations = defineMessages({
-  contact: "Contact",
-  phone: "Phone",
-  emailAddress: "Email address",
-  location: "Location",
-  address: "Address",
-  physicalAddress: "Physical address",
-  mailingAddress: "Mailing address",
-  facilityHours: "Facility hours",
-  standardHours: "Standard hours",
-  servicesOffered: "Services offered",
-  serviceInformation: "Service information",
-  seeMoreHours: "See more hours",
-  closeHours: "Close hours",
-  gettingHere: "Getting here",
-  busesServicing: "Buses servicing this area",
+  contact: 'Contact',
+  phone: 'Phone',
+  emailAddress: 'Email address',
+  location: 'Location',
+  address: 'Address',
+  physicalAddress: 'Physical address',
+  mailingAddress: 'Mailing address',
+  facilityHours: 'Facility hours',
+  standardHours: 'Standard hours',
+  servicesOffered: 'Services offered',
+  serviceInformation: 'Service information',
+  seeMoreHours: 'See more hours',
+  closeHours: 'Close hours',
+  gettingHere: 'Getting here',
+  busesServicing: 'Buses servicing this area',
+  closed: 'Closed',
 });

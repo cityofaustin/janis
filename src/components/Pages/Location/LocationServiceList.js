@@ -17,7 +17,9 @@ const DayHours = ({ day, hours }) => {
       <td className="coa-LocationPage__table-service-label">
         {intl.formatMessage(i18nDate['weekday' + capitalize(day)])}
       </td>
-      <td>{hours !== null ? hours : 'Closed' /* todo i18n */}</td>
+      <td>
+        {hours !== null ? hours : intl.formatMessage(i18nLocations.closed)}
+      </td>
     </tr>
   );
 };
