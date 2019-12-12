@@ -5,26 +5,27 @@ import moment from 'moment-timezone';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
+export const formatTime = time => {
+  debugger;
+  if (time === '12:00:00') {
+    return 'Noon';
+  }
+  // Simplify time parsing. Times work on previews,
+  // but we don't do anything with timezones.
+  const momentTime = moment(time, 'HH:mm:ss');
+
+  // Only include minutes in display if there are minutes
+  const style = momentTime.minutes() ? 'h:mm a' : 'h a';
+
+  return momentTime.format(style);
+};
+
 export const cleanContacts = contacts => {
   if (!contacts || !contacts.edges) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
-
-  const formatTime = time => {
-    if (time === '12:00:00') {
-      return 'Noon';
-    }
-    // Simplify time parsing. Times work on previews,
-    // but we don't do anything with timezones.
-    const momentTime = moment(time, 'HH:mm:ss');
-
-    // Only include minutes in display if there are minutes
-    const style = momentTime.minutes() ? 'h:mm a' : 'h a';
-
-    return momentTime.format(style);
-  };
 
   return contacts.edges.map(({ node: contact }) => {
     // Yes, it's `contact.contact` because of the way the API returns data

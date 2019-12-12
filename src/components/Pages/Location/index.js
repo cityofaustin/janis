@@ -6,20 +6,88 @@ import LocationInfo from 'components/Pages/Location/LocationInfo';
 import LocationServiceList from 'components/Pages/Location/LocationServiceList';
 import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
+import { formatTime } from 'js/helpers/cleanData';
+
 import 'components/Pages/Location/_Location.scss';
 
+//
+// example
+// MONDAY: '7:30 am–noon, 1 pm–7 pm',
+// TUESDAY: '7:30 am–noon, 1 pm–7 pm',
+// WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
+// THURSDAY: '7:30 am–noon, 1 pm–7 pm',
+// FRIDAY: '7:30 am–noon, 1 pm–7 pm',
+// SATURDAY: 'Closed',
+// SUNDAY: 'Closed',
+const formatHours = ({ start1, end1, start2, end2 }) => {
+  debugger;
+  formatTime(start1);
+  // super naive
+  return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
+    start2,
+  )}-${formatTime(end2)}`;
+};
+
 const LocationPage = ({ locationPage }) => {
+  const blarg = useRouteData();
+
   const {
     locationPage: {
       title,
       contact: { phone, email },
       location,
       image,
-      hours,
+      // hours,
       services,
       gettingHere: { buses },
     },
-  } = locationPage ? { locationPage } : useRouteData();
+  } = locationPage ? { locationPage } : blarg;
+
+  debugger;
+  const hours = {
+    MONDAY: formatHours({
+      start1: blarg.locationPage.mondayStartTime,
+      end1: blarg.locationPage.mondayEndTime,
+      start2: blarg.locationPage.mondayStartTime2,
+      end2: blarg.locationPage.mondayEndTime2,
+    }),
+    TUESDAY: formatHours({
+      start1: blarg.locationPage.tuesdayStartTime,
+      end1: blarg.locationPage.tuesdayEndTime,
+      start2: blarg.locationPage.tuesdayStartTime2,
+      end2: blarg.locationPage.tuesdayEndTime2,
+    }),
+    WEDNESDAY: formatHours({
+      start1: blarg.locationPage.wednesdayStartTime,
+      end1: blarg.locationPage.wednesdayEndTime,
+      start2: blarg.locationPage.wednesdayStartTime2,
+      end2: blarg.locationPage.wednesdayEndTime2,
+    }),
+    THURSDAY: formatHours({
+      start1: blarg.locationPage.thursdayStartTime,
+      end1: blarg.locationPage.thursdayEndTime,
+      start2: blarg.locationPage.thursdayStartTime2,
+      end2: blarg.locationPage.thursdayEndTime2,
+    }),
+    FRIDAY: formatHours({
+      start1: blarg.locationPage.fridayStartTime,
+      end1: blarg.locationPage.fridayEndTime,
+      start2: blarg.locationPage.fridayStartTime2,
+      end2: blarg.locationPage.fridayEndTime2,
+    }),
+    SATURDAY: formatHours({
+      start1: blarg.locationPage.saturdayStartTime,
+      end1: blarg.locationPage.saturdayEndTime,
+      start2: blarg.locationPage.saturdayStartTime2,
+      end2: blarg.locationPage.saturdayEndTime2,
+    }),
+    SUNDAY: formatHours({
+      start1: blarg.locationPage.sundayStartTime,
+      end1: blarg.locationPage.sundayEndTime,
+      start2: blarg.locationPage.sundayStartTime2,
+      end2: blarg.locationPage.sundayEndTime2,
+    }),
+  };
 
   return (
     <div>

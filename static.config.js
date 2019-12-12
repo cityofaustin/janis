@@ -517,6 +517,10 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
+// const formatHours = ({ start1, end1, start2, end2 }) => {
+
+// };
+
 const getLocationPageData = async (id, client) => {
   const { allLocationPages } = await client.request(getLocationPageQuery, {
     id: id,
@@ -543,15 +547,60 @@ const getLocationPageData = async (id, client) => {
     ].filter(bus => bus !== null),
   };
 
-  locationPage.hours = {
-    MONDAY: '7:30 am–noon, 1 pm–7 pm',
-    TUESDAY: '7:30 am–noon, 1 pm–7 pm',
-    WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
-    THURSDAY: '7:30 am–noon, 1 pm–7 pm',
-    FRIDAY: '7:30 am–noon, 1 pm–7 pm',
-    SATURDAY: 'Closed',
-    SUNDAY: 'Closed',
-  };
+  // locationPage.hours = {
+  //   MONDAY: formatHours({
+  //     start1: locationPage.mondayStartTime,
+  //     end1: locationPage.mondayEndTime,
+  //     start2: locationPage.mondayStartTime2,
+  //     end2: locationPage.mondayEndTime2,
+  //   }),
+  //   TUESDAY: formatHours({
+  //     start1: locationPage.tuesdayStartTime,
+  //     end1: locationPage.tuesdayEndTime,
+  //     start2: locationPage.tuesdayStartTime2,
+  //     end2: locationPage.tuesdayEndTime2,
+  //   }),
+  //   WEDNESDAY: formatHours({
+  //     start1: locationPage.wednesdayStartTime,
+  //     end1: locationPage.wednesdayEndTime,
+  //     start2: locationPage.wednesdayStartTime2,
+  //     end2: locationPage.wednesdayEndTime2,
+  //   }),
+  //   THURSDAY: formatHours({
+  //     start1: locationPage.thursdayStartTime,
+  //     end1: locationPage.thursdayEndTime,
+  //     start2: locationPage.thursdayStartTime2,
+  //     end2: locationPage.thursdayEndTime2,
+  //   }),
+  //   FRIDAY: formatHours({
+  //     start1: locationPage.fridayStartTime,
+  //     end1: locationPage.fridayEndTime,
+  //     start2: locationPage.fridayStartTime2,
+  //     end2: locationPage.fridayEndTime2,
+  //   }),
+  //   SATURDAY: formatHours({
+  //     start1: locationPage.saturdayStartTime,
+  //     end1: locationPage.saturdayEndTime,
+  //     start2: locationPage.saturdayStartTime2,
+  //     end2: locationPage.saturdayEndTime2,
+  //   }),
+  //   SUNDAY: formatHours({
+  //     start1: locationPage.sundayStartTime,
+  //     end1: locationPage.sundayEndTime,
+  //     start2: locationPage.sundayStartTime2,
+  //     end2: locationPage.sundayEndTime2,
+  //   }),
+  // };
+
+  // locationPage.hours = {
+  //   MONDAY: '7:30 am–noon, 1 pm–7 pm',
+  //   TUESDAY: '7:30 am–noon, 1 pm–7 pm',
+  //   WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
+  //   THURSDAY: '7:30 am–noon, 1 pm–7 pm',
+  //   FRIDAY: '7:30 am–noon, 1 pm–7 pm',
+  //   SATURDAY: 'Closed',
+  //   SUNDAY: 'Closed',
+  // };
 
   locationPage.location = {
     'Physical address': {
