@@ -31,9 +31,10 @@ export const formatTime = time => {
 export const formatHours = ({ start1, end1, start2, end2 }) => {
   // If we don't have any start times, we're closed that day
   if (start1 === null && start2 === null) {
-    // todo: localize
-    return 'Closed';
+    return null;
   }
+
+  // TODO: localize?
 
   // If we don't have a second start time, just show the first ones
   if (start2 === null) {

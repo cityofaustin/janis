@@ -17,7 +17,7 @@ const DayHours = ({ day, hours }) => {
       <td className="coa-LocationPage__table-service-label">
         {intl.formatMessage(i18nDate['weekday' + capitalize(day)])}
       </td>
-      <td>{hours}</td>
+      <td>{hours !== null ? hours : 'Closed' /* todo i18n */}</td>
     </tr>
   );
 };
@@ -75,6 +75,7 @@ const ServiceHours = ({ hours }) => {
 
 const Service = ({ service }) => {
   const intl = useIntl();
+  debugger;
   return (
     <div className="coa-LocationPage__service-container">
       <div className="coa-LocationPage__service-title">{service.title}</div>
@@ -97,7 +98,9 @@ const Service = ({ service }) => {
             </tbody>
           </table>
         </div>
-        <ServiceHours hours={service.hours} />
+        {Object.values(service.hours).some(x => x !== null) && (
+          <ServiceHours hours={service.hours} />
+        )}
       </div>
       {/* TODO: fix this with localized links */}
       <a className="coa-LocationPage__service-link-link" href={service.url}>
