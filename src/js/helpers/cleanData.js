@@ -30,14 +30,17 @@ export const formatTime = time => {
 // SUNDAY: 'Closed',
 export const formatHours = ({ start1, end1, start2, end2 }) => {
   // If we don't have any start times, we're closed that day
-  debugger;
   if (start1 === null && start2 === null) {
     // todo: localize
     return 'Closed';
-    debugger;
   }
 
-  // super naive
+  // If we don't have a second start time, just show the first ones
+  if (start2 === null) {
+    return `${formatTime(start1)}-${formatTime(end1)}`;
+  }
+
+  // Since we have 2 start times, show both sets
   return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
     start2,
   )}-${formatTime(end2)}`;
