@@ -558,6 +558,7 @@ const getLocationPageData = async (id, client) => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
+      url: edge.node.relatedService.janisUrl,
       phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
         phoneEdge => {
           return {

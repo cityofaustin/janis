@@ -59,6 +59,7 @@ query getLocationPage($id: ID) {
               relatedService {
                 id
                 title
+                janisUrl
                 contacts {
                   edges {
                     node {

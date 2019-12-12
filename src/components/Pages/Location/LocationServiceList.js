@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { find, capitalize } from 'lodash';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 import { getDaysInOrder } from 'js/helpers/date';
 import {
@@ -98,10 +99,13 @@ const Service = ({ service }) => {
         </div>
         <ServiceHours hours={service.hours} />
       </div>
-      <div className="coa-LocationPage__service-link">
-        <span>{intl.formatMessage(i18nLocations.serviceInformation)}</span>
-        <i className="coa-LocationPage__service-link-arrow">arrow_forward</i>
-      </div>
+      {/* TODO: fix this with localized links */}
+      <a className="coa-LocationPage__service-link-link" href={service.url}>
+        <div className="coa-LocationPage__service-link">
+          <span>{intl.formatMessage(i18nLocations.serviceInformation)}</span>
+          <i className="coa-LocationPage__service-link-arrow">arrow_forward</i>
+        </div>
+      </a>
     </div>
   );
 };
