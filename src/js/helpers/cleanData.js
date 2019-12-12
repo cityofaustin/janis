@@ -6,7 +6,6 @@ import moment from 'moment-timezone';
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const formatTime = time => {
-  debugger;
   if (time === '12:00:00') {
     return 'Noon';
   }
@@ -18,6 +17,30 @@ export const formatTime = time => {
   const style = momentTime.minutes() ? 'h:mm a' : 'h a';
 
   return momentTime.format(style);
+};
+
+// Used for location page hours
+// example
+// MONDAY: '7:30 am–noon, 1 pm–7 pm',
+// TUESDAY: '7:30 am–noon, 1 pm–7 pm',
+// WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
+// THURSDAY: '7:30 am–noon, 1 pm–7 pm',
+// FRIDAY: '7:30 am–noon, 1 pm–7 pm',
+// SATURDAY: 'Closed',
+// SUNDAY: 'Closed',
+export const formatHours = ({ start1, end1, start2, end2 }) => {
+  // If we don't have any start times, we're closed that day
+  debugger;
+  if (start1 === null && start2 === null) {
+    // todo: localize
+    return 'Closed';
+    debugger;
+  }
+
+  // super naive
+  return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
+    start2,
+  )}-${formatTime(end2)}`;
 };
 
 export const cleanContacts = contacts => {

@@ -6,27 +6,9 @@ import LocationInfo from 'components/Pages/Location/LocationInfo';
 import LocationServiceList from 'components/Pages/Location/LocationServiceList';
 import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
-import { formatTime } from 'js/helpers/cleanData';
+import { formatHours } from 'js/helpers/cleanData';
 
 import 'components/Pages/Location/_Location.scss';
-
-//
-// example
-// MONDAY: '7:30 am–noon, 1 pm–7 pm',
-// TUESDAY: '7:30 am–noon, 1 pm–7 pm',
-// WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
-// THURSDAY: '7:30 am–noon, 1 pm–7 pm',
-// FRIDAY: '7:30 am–noon, 1 pm–7 pm',
-// SATURDAY: 'Closed',
-// SUNDAY: 'Closed',
-const formatHours = ({ start1, end1, start2, end2 }) => {
-  debugger;
-  formatTime(start1);
-  // super naive
-  return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
-    start2,
-  )}-${formatTime(end2)}`;
-};
 
 const LocationPage = ({ locationPage }) => {
   const blarg = useRouteData();
@@ -43,7 +25,6 @@ const LocationPage = ({ locationPage }) => {
     },
   } = locationPage ? { locationPage } : blarg;
 
-  debugger;
   const hours = {
     MONDAY: formatHours({
       start1: blarg.locationPage.mondayStartTime,
