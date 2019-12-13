@@ -104,7 +104,6 @@ const Service = ({ service }) => {
           <ServiceHours hours={service.hours} />
         )}
       </div>
-      {/* TODO: fix this with localized links */}
       <a className="coa-LocationPage__service-link-link" href={service.url}>
         <div className="coa-LocationPage__service-link">
           <span>{intl.formatMessage(i18nLocations.serviceInformation)}</span>
