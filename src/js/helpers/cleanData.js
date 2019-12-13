@@ -2,6 +2,7 @@ import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
@@ -131,6 +132,71 @@ export const cleanRelatedServiceLinks = links => {
       text: link.title,
     };
   });
+};
+
+export const cleanLocationPage = locationPage => {
+  debugger;
+  locationPage.contact = {
+    phone: {
+      value: parsePhoneNumberFromString(
+        locationPage.phoneNumber,
+      ).formatNational(),
+      name: locationPage.phoneDescription,
+    },
+    email: {
+      value: locationPage.email,
+      name: 'Email',
+    },
+  };
+
+  locationPage.gettingHere = {
+    buses: [
+      locationPage.nearestBus1,
+      locationPage.nearestBus2,
+      locationPage.nearestBus3,
+    ].filter(bus => bus !== null),
+  };
+
+  locationPage.hours = cleanLocationPageHours(locationPage);
+
+  locationPage.services = locationPage.relatedServices.edges.map(edge => {
+    return {
+      hours: cleanLocationPageHours(edge.node),
+      title: edge.node.relatedService.title,
+      url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
+      phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+        phoneEdge => {
+          return {
+            label: phoneEdge.node.phoneDescription,
+            number: parsePhoneNumberFromString(
+              phoneEdge.node.phoneNumber,
+            ).formatNational(),
+          };
+        },
+      ),
+    };
+  });
+
+  locationPage.location = {
+    'Physical address': {
+      street: locationPage.physicalUnit
+        ? `${locationPage.physicalStreet} ${locationPage.physicalUnit}`
+        : locationPage.physicalStreet,
+      city: locationPage.physicalCity,
+      state: locationPage.physicalState,
+      zip: locationPage.physicalZip,
+    },
+    'Mailing address': {
+      street: locationPage.mailingStreet,
+      city: locationPage.mailingCity,
+      state: locationPage.mailingState,
+      zip: locationPage.mailingZip,
+    },
+  };
+
+  locationPage.image = locationPage.physicalLocationPhoto;
+
+  return locationPage;
 };
 
 /**

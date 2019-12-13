@@ -29,11 +29,8 @@ import {
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
-  cleanLocationPageHours,
-  cleanLocationPageJanisUrl,
+  cleanLocationPage,
 } from 'js/helpers/cleanData';
-
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 const getAllTopicLinks = (
   allServicePageTopics,
@@ -528,67 +525,7 @@ const getLocationPageData = async (id, client) => {
 
   let locationPage = allLocationPages.edges[0].node;
 
-  locationPage.contact = {
-    phone: {
-      value: parsePhoneNumberFromString(
-        locationPage.phoneNumber,
-      ).formatNational(),
-      name: locationPage.phoneDescription,
-    },
-    email: {
-      value: locationPage.email,
-      name: 'Email',
-    },
-  };
-
-  locationPage.gettingHere = {
-    buses: [
-      locationPage.nearestBus1,
-      locationPage.nearestBus2,
-      locationPage.nearestBus3,
-    ].filter(bus => bus !== null),
-  };
-
-  locationPage.hours = cleanLocationPageHours(locationPage);
-
-  locationPage.services = locationPage.relatedServices.edges.map(edge => {
-    return {
-      hours: cleanLocationPageHours(edge.node),
-      title: edge.node.relatedService.title,
-      url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
-      phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
-        phoneEdge => {
-          return {
-            label: phoneEdge.node.phoneDescription,
-            number: parsePhoneNumberFromString(
-              phoneEdge.node.phoneNumber,
-            ).formatNational(),
-          };
-        },
-      ),
-    };
-  });
-
-  locationPage.location = {
-    'Physical address': {
-      street: locationPage.physicalUnit
-        ? `${locationPage.physicalStreet} ${locationPage.physicalUnit}`
-        : locationPage.physicalStreet,
-      city: locationPage.physicalCity,
-      state: locationPage.physicalState,
-      zip: locationPage.physicalZip,
-    },
-    'Mailing address': {
-      street: locationPage.mailingStreet,
-      city: locationPage.mailingCity,
-      state: locationPage.mailingState,
-      zip: locationPage.mailingZip,
-    },
-  };
-
-  locationPage.image = locationPage.physicalLocationPhoto;
-
-  return { locationPage: locationPage };
+  return { locationPage: cleanLocationPage(locationPage) };
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client) => {

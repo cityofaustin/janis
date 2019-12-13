@@ -24,6 +24,7 @@ import {
   cleanOfficialDocumentPagesForPreview,
   cleanFormContainersForPreview,
   cleanGuideForPreview,
+  cleanLocationPage,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -241,7 +242,11 @@ class CMSPreview extends Component {
         />
         <Route
           path="/location"
-          render={props => <LocationPage locationPage={data} />}
+          render={props => (
+            <LocationPage
+              locationPage={cleanLocationPage(data.edges[0].node)}
+            />
+          )}
         />
       </Switch>
     );
