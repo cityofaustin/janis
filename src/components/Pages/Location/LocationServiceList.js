@@ -77,7 +77,7 @@ const ServiceHours = ({ hours }) => {
 
 const Service = ({ service }) => {
   const intl = useIntl();
-  debugger;
+
   return (
     <div className="coa-LocationPage__service-container">
       <div className="coa-LocationPage__service-title">{service.title}</div>
