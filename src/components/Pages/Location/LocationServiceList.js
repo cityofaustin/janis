@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { find, capitalize } from 'lodash';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 
 import { getDaysInOrder } from 'js/helpers/date';
 import {
