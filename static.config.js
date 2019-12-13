@@ -30,6 +30,7 @@ import {
   cleanLinks,
   cleanDepartmentDirectors,
   cleanLocationPageHours,
+  cleanLocationPageJanisUrl,
 } from 'js/helpers/cleanData';
 
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -520,10 +521,6 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-// const formatHours = ({ start1, end1, start2, end2 }) => {
-
-// };
-
 const getLocationPageData = async (id, client) => {
   const { allLocationPages } = await client.request(getLocationPageQuery, {
     id: id,
@@ -558,7 +555,7 @@ const getLocationPageData = async (id, client) => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
-      url: edge.node.relatedService.janisUrl,
+      url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
         phoneEdge => {
           return {
