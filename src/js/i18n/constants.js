@@ -12,6 +12,7 @@ export const SUPPORTED_LANGUAGES = [
     abbr: 'es',
     code: 'es',
     direction: 'ltr',
+    pending: true,
   },
   // {
   //   // Vietnamese

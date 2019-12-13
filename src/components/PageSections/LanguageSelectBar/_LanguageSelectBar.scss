@@ -2,6 +2,7 @@
   background-color: $coa-color-primary;
   color: $coa-color-white;
   font-family: $coa-font-sans;
+  z-index: 0;
 }
 
 .coa-LanguageSelectBar__list {
@@ -11,15 +12,45 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 15px;
   @include media($coa-medium-screen) {
     justify-content: flex-end;
     // border-left: 1px solid #407CE2;
+    padding-left: 0px;
   }
 
   li {
     margin: 0;
   }
+}
+
+.coa-LanguageSelectBar__list--showMessage {
+  background-color: $coa-color-white;
+}
+
+.coa-LanguageSelectBar__background {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-width: 365px;
+  border-radius: 4px 4px 0px 0px;
+  border-color: #1493FF;
+  border-width: 1px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  @include media($coa-medium-screen) {
+    margin-left: -15px;
+    background: $coa-color-white;
+  }
+}
+
+.coa-LanguageSelectBar__background--active {
+  // should not be shown on mobile ever
+  @include media($coa-medium-screen) {
+    display: inherit;
+  }
+  z-index: 0;
+  height: 50px;
 }
 
 .coa-rtl {
@@ -51,4 +82,16 @@
     opacity: 1;
     font-weight: 600;
   }
+  &.coa-LanguageSelectBar__item--showMessage {
+    color: $coa-color-almost-black;
+  }
+  &.coa-LanguageSelectBar__item--activeMessage {
+    color: $coa-color-primary;
+  }
+}
+
+.coa-LanguageChevron {
+  position: relative;
+  top: 3px;
+  font-size: 1.8rem;
 }

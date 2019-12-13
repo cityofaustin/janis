@@ -12,6 +12,7 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import { themePropTypes } from 'components/PageSections/Menu/proptypes';
 import GovSite from 'components/PageSections/Header/GovSite';
+import PendingTranslation from 'components/PageSections/PendingTranslation'
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FullSiteMenu from '../Menu/FullSiteMenu';
@@ -22,13 +23,16 @@ class Header extends Component {
     this.state = {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
+      showMessage: false,
     };
 
     // Bind wrappers and outside-click functions
     this.setWrapperRef = this.setWrapperRef.bind(this);
     this.setHowYouKnowWrapperRef = this.setHowYouKnowWrapperRef.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.togglePendingTranslation = this.togglePendingTranslation.bind(this);
   }
+
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
     document.addEventListener('touchstart', this.handleClickOutside);
@@ -56,10 +60,17 @@ class Header extends Component {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       if (
         event.target.className !== 'coa-Header__menuIcon' &&
-        event.target.parentElement.className !== 'coa-Header__menuIcon'
+        event.target.parentElement.className !== 'coa-Header__menuIcon' &&
+        // for the pending translation dropdown:
+        event.target.parentElement.className !== 'coa-PendingTranslation coa-PendingTranslation--is-open' &&
+        event.target.parentElement.className !== 'coa-PendingTranslation--link' &&
+        event.target.className !== 'coa-LanguageSelectBar__background coa-LanguageSelectBar__background--active' &&
+        event.target.className !== 'coa-LanguageSelectBar__item coa-LanguageSelectBar__item--active coa-LanguageSelectBar__item--showMessage coa-LanguageSelectBar__item--activeMessage' &&
+        event.target.className !== 'material-icons coa-LanguageChevron'
       ) {
         this.setState({
           topMenuActive: false,
+          showMessage: false,
         });
       }
     }
@@ -82,6 +93,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: true,
+        showMessage: false,
       });
     }
 
@@ -89,6 +101,7 @@ class Header extends Component {
     if (e.key === 'Escape') {
       this.setState({
         topMenuActive: false,
+        showMessage: false,
       });
     }
   };
@@ -118,6 +131,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
+        showMessage: false,
       });
     }
   };
@@ -125,6 +139,7 @@ class Header extends Component {
   toggleFullSiteMenu = () => {
     this.setState(prevState => ({
       topMenuActive: !prevState.topMenuActive,
+      showMessage: false,
     }));
   };
 
@@ -147,6 +162,17 @@ class Header extends Component {
     }
   }
 
+  togglePendingTranslation = () => {
+    this.setState(prevState => ({
+      showMessage: !prevState.showMessage,
+      topMenuActive: false,
+    }))
+  }
+
+  closeMessage = () => {
+    this.setState({ showMessage: false })
+  }
+
   render() {
     const { intl, navigation, path } = this.props;
 
@@ -166,13 +192,29 @@ class Header extends Component {
             refnode={this.setHowYouKnowWrapperRef}
           />
           <div className="coa-Header__mobile-languages">
-            <LanguageSelectBar path={path} />
+            <LanguageSelectBar 
+              path={path}
+              showMessage={this.state.showMessage}
+              togglePendingTranslation={() => this.togglePendingTranslation()}
+            />
+            <PendingTranslation
+              open={this.state.showMessage}
+              closeMessage={()=>this.closeMessage()}
+            />
           </div>
           <div className="coa-Header__container">
             <div className="coa-Header__controls">
               <div className="coa-Header__left-controls">
                 <div className="coa-Header__desktop-languages">
-                  <LanguageSelectBar path={path} />
+                  <LanguageSelectBar 
+                    path={path} 
+                    showMessage={this.state.showMessage}
+                    togglePendingTranslation={() => this.togglePendingTranslation()}
+                  />
+                  <PendingTranslation
+                    open={this.state.showMessage}
+                    closeMessage={()=>this.closeMessage()}
+                  />
                 </div>
               </div>
               <div
@@ -217,7 +259,6 @@ class Header extends Component {
           </div>
 
           <FullSiteMenu
-            // ref={node => this.node = node}
             refnode={this.setWrapperRef}
             navigation={navigation}
             handleFullSiteMenuItem={this.closeFullSiteMenuItem}
