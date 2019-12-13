@@ -135,12 +135,11 @@ export const cleanRelatedServiceLinks = links => {
 };
 
 export const cleanLocationPage = locationPage => {
-  debugger;
   locationPage.contact = {
     phone: {
-      value: parsePhoneNumberFromString(
-        locationPage.phoneNumber,
-      ).formatNational(),
+      value: locationPage.phoneNumber
+        ? parsePhoneNumberFromString(locationPage.phoneNumber).formatNational()
+        : '',
       name: locationPage.phoneDescription,
     },
     email: {
