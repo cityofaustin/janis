@@ -22,6 +22,7 @@ import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicData
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
+import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 
 import {
   cleanNavigation,
@@ -321,6 +322,7 @@ const getServicePageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides
 ) => {
   const { allServicePages } = await client.request(getServicePageQuery, {
     id: id,
@@ -339,6 +341,8 @@ const getServicePageData = async (
     client,
   );
 
+  service.pageIsPartOf = pagesOfGuides[id]
+
   return { service: service };
 };
 
@@ -348,6 +352,7 @@ const getInformationPageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides
 ) => {
   const { allInformationPages } = await client.request(
     getInformationPageQuery,
@@ -366,6 +371,8 @@ const getInformationPageData = async (
     informationPage.relatedDepartments,
     client,
   );
+
+  informationPage.pageIsPartOf = pagesOfGuides[id]
 
   return { informationPage: informationPage };
 };
@@ -514,7 +521,7 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-const buildPageAtUrl = async (pageAtUrlInfo, client) => {
+const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
     type,
@@ -566,6 +573,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides.servicePage
         ),
     };
   }
@@ -582,6 +590,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides.informationPage
         ),
     };
   }
@@ -644,6 +653,41 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
   }
 };
 
+const getPagesOfGuidesData = async (client) => {
+
+  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery)
+
+  const pagesOfGuidesData = {}
+
+  allGuidePages.edges.map( guidePage => {
+    if (guidePage.node.sections.length > 0 && guidePage.node.topics.edges.length > 0) {
+      const url = "/" + [
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.theme.slug,
+        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.slug,
+        guidePage.node.topics.edges[0].node.topic.slug,
+        guidePage.node.slug,
+      ].join("/")
+      guidePage.node.sections.map( section => {
+        for (const page in section.pages[0]) {
+          if (section.pages[0][page]) {
+            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {}
+            if (!pagesOfGuidesData[page][section.pages[0][page].id]) pagesOfGuidesData[page][section.pages[0][page].id] = []
+            pagesOfGuidesData[page][section.pages[0][page].id].push({
+              pageName: section.heading,
+              pageType: section.pages[0][page].pageType,
+              ofPageType: guidePage.node.pageType,
+              guidePageTitle: guidePage.node.title,
+              guidePageUrl: url
+            })
+          }
+        }
+      })
+    }
+  })
+
+  return pagesOfGuidesData
+}
+
 const makeAllPages = async (langCode, incrementalPageId) => {
   if (incrementalPageId) {
     console.log("Looks like we're trying to do an incremental build!");
@@ -692,8 +736,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     type: `departments`,
   });
 
+  const pagesOfGuidesData = await getPagesOfGuidesData(client)
+
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)),
   );
 
   const data = {
