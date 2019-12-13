@@ -6,8 +6,6 @@ import LocationInfo from 'components/Pages/Location/LocationInfo';
 import LocationServiceList from 'components/Pages/Location/LocationServiceList';
 import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 
-import { formatHours } from 'js/helpers/cleanData';
-
 import 'components/Pages/Location/_Location.scss';
 
 const LocationPage = ({ locationPage }) => {
