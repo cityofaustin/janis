@@ -1,8 +1,7 @@
 {
   "callToAction.enterAddress": "Escriba su dirección en la casilla abajo",
   "callToAction.submitOnlineRequest": "Envíe una Solicitud en Línea",
-  "callToAction.whatDoIDoWith":
-    "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
+  "callToAction.whatDoIDoWith": "Use la función \"What do I do with\" abajo para ver los artículos aceptados",
   "contact.closed": "",
   "contact.map": "",
   "contact.phoneTTD": "",
@@ -34,15 +33,11 @@
   "misc.steps": "Pasos",
   "misc.welcomeTo": "Bienvenido a",
   "misc.whatElse": "¿Qué más necesito saber?",
-  "misc.workInProgress":
-    "Alpha.austin.gov es un nuevo sitio web que está en construcción. Para el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el nuevo sitio web en {projectsSiteLink}.",
-  "misc.workInProgressClipped":
-    "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
-  "misc.workInProgressClipped":
-    "{alphaSiteLink} está en construcción.\n{projectsSiteLink}",
+  "misc.workInProgress": "Alpha.austin.gov es un nuevo sitio web que está en construcción. Para el sitio web completo de la Ciudad de Austin, visite {citySiteLink}. Aprenda más sobre el nuevo sitio web en {projectsSiteLink}.",
+  "misc.workInProgressClipped": "Alpha.austin.gov es un sitio web nuevo aún en desarrollo. Aprenda más sobre el sitio web nuevo en {projectsSiteLink}.",
+  "misc.workInProgressClipped": "{alphaSiteLink} está en construcción.\n{projectsSiteLink}",
   "misc.projectsSiteLinkText": "Ayúdenos mejorar.",
-  "misc.forFullVisit":
-    "Para el sitio web completo de la Ciudad de Austin, visite ",
+  "misc.forFullVisit": "Para el sitio web completo de la Ciudad de Austin, visite ",
   "misc.coaOfficialWeb": "Un sitio web oficial de la Ciudad de Austin.",
   "misc.officialHowYouKnow": "Así es como usted puede verificarlo.",
   "misc.opoName": "Oficina de Fiscalización de la Policía",
@@ -50,8 +45,7 @@
   "misc.info": "Información",
   "misc.comingSoon": "Disponible pronto",
   "misc.workInProgressTiny": "alpha.austin.gov está en proceso de desarrollo.",
-  "misc.currentSite":
-    "Visite austintexas.gov para el sitio web actual de la ciudad.",
+  "misc.currentSite": "Visite austintexas.gov para el sitio web actual de la ciudad.",
   "misc.giveUserFeedback": "Ayúdenos mejorar nuestro sitio web.",
   "misc.learnMore": "Aprende más",
   "misc.relatedTo": "Relacionado con",
@@ -83,28 +77,22 @@
   "threeoneone.contact311": "",
   "topics.topic": "",
   "departments.departments": "Departamentos",
-  "departmentPage.complaintFormButtonText":
-    "Presente una queja contra un oficial de policía de Austin",
+  "departmentPage.complaintFormButtonText": "Presente una queja contra un oficial de policía de Austin",
   "departmentPage.complaintFormUrl": "https://forms.austin.gov/policia-queja",
   "departmentPage.thankFormUrl": "https://forms.austin.gov/policia-agradezca",
   "howYouKnowMenu.dotGovHeader": "La terminación .gov signfica que es oficial.",
-  "howYouKnowMenu.dotGovText":
-    "Los sitios web del gobierno generalmente terminan en .gov. Antes de compartir información delicada, asegúrese de estar en un sitio del gobierno.",
+  "howYouKnowMenu.dotGovText": "Los sitios web del gobierno generalmente terminan en .gov. Antes de compartir información delicada, asegúrese de estar en un sitio del gobierno.",
   "howYouKnowMenu.httpsHeader": "El sitio es seguro.",
-  "howYouKnowMenu.httpsText":
-    "El inicio https:// garantiza que se está conectando al sitio web oficial y que cualquier información que provea es encriptada y transmitida de manera segura.",
-  "departmentPage.thankFormButtonText":
-    "Agradezca al Departamento de Policía de Austin",
-  "departmentPage.directorTitle":
-    "Directora, Oficina de Fiscalización de la Policía",
+  "howYouKnowMenu.httpsText": "El inicio https:// garantiza que se está conectando al sitio web oficial y que cualquier información que provea es encriptada y transmitida de manera segura.",
+  "departmentPage.thankFormButtonText": "Agradezca al Departamento de Policía de Austin",
+  "departmentPage.directorTitle": "Directora, Oficina de Fiscalización de la Policía",
   "departmentPage.coa": "Ciudad de Austin",
   "departmentPage.mission": "Nuestra misión",
   "departmentPage.whatWeDo": "Qué hacemos",
   "departmentPage.meetDirector": "Liderazgo",
   "departmentPage.topServices": "Servicios principales",
   "departmentPage.yourDataLinkText": "Cómo almacenamos y usamos su información",
-  "departmentPage.investigationProcessLinkText":
-    "Proceso de investigación de quejas",
+  "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas",
   "officialdocuments.author": "Autor",
   "officialdocuments.document": "Documento",
   "guides.pageLink": "Visite esta página en alpha.austin.gov",
@@ -126,6 +114,7 @@
   "locations.closeHours": "Cierre horarios",
   "locations.gettingHere": "Cómo llegar",
   "locations.busesServicing": "Autobuses del área",
+  "locations.closed": "Cerrado",
   "userFeedback.didYouFind": "¿Encontró lo que estaba buscando en esta página?",
   "userFeedback.yes": "Sí",
   "userFeedback.no": "No",

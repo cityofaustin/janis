@@ -6,33 +6,30 @@ import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
 import { getDaysInOrder } from 'js/helpers/date';
-import { date as i18nDate, locations as i18nLocations } from 'js/i18n/definitions';
+import {
+  date as i18nDate,
+  locations as i18nLocations,
+} from 'js/i18n/definitions';
 
-const LocationPageBlock = ({title, content}) => (
+const LocationPageBlock = ({ title, content }) => (
   <div className="coa-LocationPage__sub-section-block">
-    <div className="coa-LocationPage__sub-section-block-title">
-      {title}
-    </div>
+    <div className="coa-LocationPage__sub-section-block-title">{title}</div>
     <div className="coa-LocationPage__sub-section-block-contents">
       {content}
     </div>
   </div>
 );
 
-const LocationPageContact = ({phone, email}) => {
+const LocationPageContact = ({ phone, email }) => {
   const intl = useIntl();
   // TODO: use 'libphonenumber-js' for real phone from Joplin API
   const phoneContent = (
     <Fragment>
       {`${phone.name}: `}
-      <a href={`tel:${phone.value}`}>
-        {phone.value}
-      </a>
+      <a href={`tel:${phone.value}`}>{phone.value}</a>
     </Fragment>
   );
-  const emailContent = (
-    <a href={`mailto:${email.value}`}>{email.value}</a>
-  )
+  const emailContent = <a href={`mailto:${email.value}`}>{email.value}</a>;
 
   return (
     <div className="coa-LocationPage__sub-section">
@@ -51,10 +48,10 @@ const LocationPageContact = ({phone, email}) => {
       </div>
     </div>
   );
-}
+};
 
-const LocationPageAddress = ({title, address}) => {
-  const {street, city, state, zip} = address;
+const LocationPageAddress = ({ title, address }) => {
+  const { street, city, state, zip } = address;
   const AddressText = (
     <div>
       <span className="coa-LocationPage__address-line">{street}</span>
@@ -64,36 +61,31 @@ const LocationPageAddress = ({title, address}) => {
     </div>
   );
 
-  return (
-    <LocationPageBlock
-      title={title}
-      content={AddressText}
-    />
-  )
-}
+  return <LocationPageBlock title={title} content={AddressText} />;
+};
 
-const LocationPageLocation = ({location, image}) => {
+const LocationPageLocation = ({ location, image }) => {
   const intl = useIntl();
-  const imageData = (image) ? getImageData(image) : null;
+  const imageData = image ? getImageData(image) : null;
 
   // Only include "Physical Address" if no "Mailing Address" is present
-  const addresses = (location["Mailing address"]) ? (
+  const addresses = location['Mailing address'] ? (
     <Fragment>
       <LocationPageAddress
         title={intl.formatMessage(i18nLocations.physicalAddress)}
-        address={location["Physical address"]}
+        address={location['Physical address']}
       />
       <LocationPageAddress
         title={intl.formatMessage(i18nLocations.mailingAddress)}
-        address={location["Mailing address"]}
+        address={location['Mailing address']}
       />
     </Fragment>
   ) : (
     <LocationPageAddress
       title={intl.formatMessage(i18nLocations.address)}
-      address={location["Physical address"]}
+      address={location['Physical address']}
     />
-  )
+  );
 
   return (
     <div className="coa-LocationPage__sub-section">
@@ -116,9 +108,9 @@ const LocationPageLocation = ({location, image}) => {
       )}
     </div>
   );
-}
+};
 
-const LocationPageFacilityHours = ({hours}) => {
+const LocationPageFacilityHours = ({ hours }) => {
   const intl = useIntl();
 
   const HoursText = (
@@ -128,11 +120,13 @@ const LocationPageFacilityHours = ({hours}) => {
           {getDaysInOrder().map((day, i) => (
             <tr key={i}>
               <td>
-                {intl.formatMessage(
-                  i18nDate['weekday' + capitalize(day)],
-                )}
+                {intl.formatMessage(i18nDate['weekday' + capitalize(day)])}
               </td>
-              <td>{hours[day]}</td>
+              <td>
+                {hours[day] !== null
+                  ? hours[day]
+                  : intl.formatMessage(i18nLocations.closed)}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -153,21 +147,13 @@ const LocationPageFacilityHours = ({hours}) => {
       </div>
     </div>
   );
-}
+};
 
-const LocationPageInfo = ({phone, email, location, image, hours}) => (
+const LocationPageInfo = ({ phone, email, location, image, hours }) => (
   <div className="coa-LocationPage__section">
-    <LocationPageContact
-      phone={phone}
-      email={email}
-    />
-    <LocationPageLocation
-      location={location}
-      image={image}
-    />
-    <LocationPageFacilityHours
-      hours={hours}
-    />
+    <LocationPageContact phone={phone} email={email} />
+    <LocationPageLocation location={location} image={image} />
+    <LocationPageFacilityHours hours={hours} />
   </div>
 );
 
