@@ -1,0 +1,31 @@
+.coa-PendingTranslation {
+  background: $coa-color-white;
+  display: none;
+  position: absolute;
+  width: 100%;
+  border-color: #1493FF;
+  border-width: 1px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 15px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid  #c6cace;
+  @include media($coa-medium-screen) {
+    margin-left: -15px;
+    top: 90px;
+    max-width: 365px;
+    border-radius: 0px 0px 4px 4px;
+  }
+}
+
+.coa-PendingTranslation--is-open {
+  display: inherit;
+  z-index: 1;
+}
+
+.coa-PendingTranslation p {
+  color:  $coa-color-almost-black;
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xsmall;
+}

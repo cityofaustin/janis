@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SectionHeader from 'components/SectionHeader';
 
-const PageHeader = ({ description, children, contentType }) => (
+const PageHeader = ({ description, children, contentType, columnWidth }) => (
   <div
     className={
       'coa-PageHeader ' + (contentType ? `coa-PageHeader--${contentType}` : '')
@@ -11,7 +11,7 @@ const PageHeader = ({ description, children, contentType }) => (
   >
     <div className="wrapper container-fluid">
       <div className="row">
-        <div className="col-xs-12 col-md-8">
+        <div className={ "col-xs-12 col-md-"+(columnWidth ? columnWidth : "8") }>
           <h1>{children}</h1>
           {description && (
             <p className="coa-PageHeader__description">{description}</p>

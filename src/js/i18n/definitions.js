@@ -97,6 +97,8 @@ export const misc = defineMessages({
   contactUs404: 'contact us',
   privacyPolicy: 'Privacy policy',
   contactInformation: 'Contact information',
+  servicePageIsPartOfMessage: 'This service is a part of:',
+  informationPageIsPartOfMessage: 'This information is a part of:'
 });
 
 export const navigation = defineMessages({

@@ -5,23 +5,41 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
-const LanguageSelectBar = ({ path, intl }) => (
-  <div className="coa-LanguageSelectBar">
-    <ul className="coa-LanguageSelectBar__list">
-      {SUPPORTED_LANGUAGES.map(({ title, abbr, code }, i) => (
-        <li key={i}>
-          <Link
-            to={`/${code}/${path}`}
-            className={classNames('coa-LanguageSelectBar__item', {
-              'coa-LanguageSelectBar__item--active': intl.locale === code,
-            })}
-          >
-            {title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
+const LanguageChevron = ({ showMessage, pending, selected}) => (
+  (pending && selected)
+  ? <i className="material-icons coa-LanguageChevron">
+    { showMessage ? "keyboard_arrow_up" : "keyboard_arrow_down" }
+  </i>
+  : null
+);
+
+const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }) => (
+  <>
+    <div className={classNames("coa-LanguageSelectBar__background", {
+      "coa-LanguageSelectBar__background--active": showMessage
+    })} />
+    <div className="coa-LanguageSelectBar">
+      <ul className={classNames("coa-LanguageSelectBar__list", {
+        "coa-LanguageSelectBar__list--showMessage": showMessage,
+      })}>
+        {SUPPORTED_LANGUAGES.map(({ title, abbr, code, pending }, i) => {
+          return (
+          <li key={i} onClick={pending && togglePendingTranslation}>
+            <Link
+              to={`/${code}/${path}`}
+              className={classNames('coa-LanguageSelectBar__item', {
+                'coa-LanguageSelectBar__item--active': intl.locale === code,
+                'coa-LanguageSelectBar__item--showMessage': showMessage,
+                'coa-LanguageSelectBar__item--activeMessage': (showMessage && intl.locale === code),
+              })}
+            >
+              {title} <LanguageChevron pending={pending} selected={code===intl.locale} showMessage={showMessage} />
+            </Link>
+          </li>
+        )})}
+      </ul>
+    </div>
+  </>
 );
 
 LanguageSelectBar.propTypes = {
