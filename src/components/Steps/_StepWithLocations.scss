@@ -13,20 +13,24 @@
   padding: 1.4rem;
   border-radius: 4px;
   justify-content: space-between;
+  text-decoration: none;
 }
 
 .coa-StepWithLocations__location-title {
   margin: 0;
   font-size: 1.6rem;
   font-weight: 600;
+  color: #2d2e2f;
 }
 
 .coa-StepWithLocations__location-address {
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.4rem;
+  color: #3d4551;
 }
 
 .coa-StepWithLocations__location-arrow {
   margin-top: auto;
+  color: #0049c7;
 }

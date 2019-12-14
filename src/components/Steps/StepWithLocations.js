@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import { useIntl } from 'react-intl';
 
 const LocationInStep = ({ location }) => {
-  debugger;
+  const intl = useIntl();
 
   return (
-    <div className="coa-StepWithLocations__location">
+    <a
+      href={`/${intl.locale}/location/${location.locationPage.slug}/`}
+      className="coa-StepWithLocations__location"
+    >
       <div className="coa-StepWithLocations__location-titleaddress">
         <p className="coa-StepWithLocations__location-title">
           {location.locationPage.title}
@@ -22,7 +26,7 @@ const LocationInStep = ({ location }) => {
       <div className="coa-StepWithLocations__location-arrow">
         <i class="material-icons">arrow_forward</i>
       </div>
-    </div>
+    </a>
   );
 };
 
