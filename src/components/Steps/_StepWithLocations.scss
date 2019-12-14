@@ -1,5 +1,6 @@
 .coa-StepWithLocations__container {
-  // background: yellow;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .coa-StepWithLocations__location-titleaddress {
@@ -8,6 +9,10 @@
 
 .coa-StepWithLocations__location {
   display: flex;
+  border: 1px solid #c6cace;
+  padding: 1.4rem;
+  border-radius: 4px;
+  justify-content: space-between;
 }
 
 .coa-StepWithLocations__location-title {
@@ -23,5 +28,5 @@
 }
 
 .coa-StepWithLocations__location-arrow {
-  background: blue;
+  margin-top: auto;
 }
