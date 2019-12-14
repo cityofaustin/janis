@@ -1,0 +1,27 @@
+.coa-StepWithLocations__container {
+  // background: yellow;
+}
+
+.coa-StepWithLocations__location-titleaddress {
+  // background: red;
+}
+
+.coa-StepWithLocations__location {
+  display: flex;
+}
+
+.coa-StepWithLocations__location-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.coa-StepWithLocations__location-address {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+}
+
+.coa-StepWithLocations__location-arrow {
+  background: blue;
+}
