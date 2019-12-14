@@ -328,6 +328,7 @@ export const cleanServicesForPreview = allServices => {
 
   service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
+  service.steps = cleanSteps(service.steps);
 
   return service;
 };

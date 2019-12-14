@@ -16,7 +16,16 @@ const getServicePageQuery = `
               }
             }
           }
-          steps
+          steps {
+            value
+            stepType
+            locations {
+              locationPage {
+                id
+                slug
+              }
+            }
+          }
           dynamicContent
           additionalContent
           shortDescription
