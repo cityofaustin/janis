@@ -23,6 +23,12 @@ const getServicePageQuery = `
               locationPage {
                 id
                 slug
+                title
+                physicalStreet
+                physicalUnit
+                physicalCity
+                physicalState
+                physicalZip
               }
             }
           }

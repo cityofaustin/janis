@@ -34,6 +34,7 @@ const mapSteps = (steps, singleStep) =>
           key={index}
           description={step.value.locations_description}
           singleStep={singleStep}
+          locations={step.locations}
         />
       );
   });
