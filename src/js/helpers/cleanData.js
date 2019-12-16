@@ -2,8 +2,51 @@ import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
+
+export const formatTime = time => {
+  if (time === '12:00:00') {
+    return 'Noon';
+  }
+  // Simplify time parsing. Times work on previews,
+  // but we don't do anything with timezones.
+  const momentTime = moment(time, 'HH:mm:ss');
+
+  // Only include minutes in display if there are minutes
+  const style = momentTime.minutes() ? 'h:mm a' : 'h a';
+
+  return momentTime.format(style);
+};
+
+// Used for location page hours
+// example
+// MONDAY: '7:30 am–noon, 1 pm–7 pm',
+// TUESDAY: '7:30 am–noon, 1 pm–7 pm',
+// WEDNESDAY: '7:30 am–noon, 1 pm–7 pm',
+// THURSDAY: '7:30 am–noon, 1 pm–7 pm',
+// FRIDAY: '7:30 am–noon, 1 pm–7 pm',
+// SATURDAY: 'Closed',
+// SUNDAY: 'Closed',
+export const formatHours = ({ start1, end1, start2, end2 }) => {
+  // If we don't have any start times, we're closed that day
+  if (start1 === null && start2 === null) {
+    return null;
+  }
+
+  // TODO: localize?
+
+  // If we don't have a second start time, just show the first ones
+  if (start2 === null) {
+    return `${formatTime(start1)}-${formatTime(end1)}`;
+  }
+
+  // Since we have 2 start times, show both sets
+  return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
+    start2,
+  )}-${formatTime(end2)}`;
+};
 
 export const cleanContacts = contacts => {
   if (!contacts || !contacts.edges) return null;
@@ -11,20 +54,6 @@ export const cleanContacts = contacts => {
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
-
-  const formatTime = time => {
-    if (time === '12:00:00') {
-      return 'Noon';
-    }
-    // Simplify time parsing. Times work on previews,
-    // but we don't do anything with timezones.
-    const momentTime = moment(time, 'HH:mm:ss');
-
-    // Only include minutes in display if there are minutes
-    const style = momentTime.minutes() ? 'h:mm a' : 'h a';
-
-    return momentTime.format(style);
-  };
 
   return contacts.edges.map(({ node: contact }) => {
     // Yes, it's `contact.contact` because of the way the API returns data
@@ -42,6 +71,58 @@ export const cleanContacts = contacts => {
   });
 };
 
+export const cleanLocationPageJanisUrl = janisUrl => {
+  // quick fix for urls until we get localized urls working in joplin
+  return janisUrl.split('en')[1];
+};
+
+export const cleanLocationPageHours = locationPage => {
+  return {
+    MONDAY: formatHours({
+      start1: locationPage.mondayStartTime,
+      end1: locationPage.mondayEndTime,
+      start2: locationPage.mondayStartTime2,
+      end2: locationPage.mondayEndTime2,
+    }),
+    TUESDAY: formatHours({
+      start1: locationPage.tuesdayStartTime,
+      end1: locationPage.tuesdayEndTime,
+      start2: locationPage.tuesdayStartTime2,
+      end2: locationPage.tuesdayEndTime2,
+    }),
+    WEDNESDAY: formatHours({
+      start1: locationPage.wednesdayStartTime,
+      end1: locationPage.wednesdayEndTime,
+      start2: locationPage.wednesdayStartTime2,
+      end2: locationPage.wednesdayEndTime2,
+    }),
+    THURSDAY: formatHours({
+      start1: locationPage.thursdayStartTime,
+      end1: locationPage.thursdayEndTime,
+      start2: locationPage.thursdayStartTime2,
+      end2: locationPage.thursdayEndTime2,
+    }),
+    FRIDAY: formatHours({
+      start1: locationPage.fridayStartTime,
+      end1: locationPage.fridayEndTime,
+      start2: locationPage.fridayStartTime2,
+      end2: locationPage.fridayEndTime2,
+    }),
+    SATURDAY: formatHours({
+      start1: locationPage.saturdayStartTime,
+      end1: locationPage.saturdayEndTime,
+      start2: locationPage.saturdayStartTime2,
+      end2: locationPage.saturdayEndTime2,
+    }),
+    SUNDAY: formatHours({
+      start1: locationPage.sundayStartTime,
+      end1: locationPage.sundayEndTime,
+      start2: locationPage.sundayStartTime2,
+      end2: locationPage.sundayEndTime2,
+    }),
+  };
+};
+
 export const cleanRelatedServiceLinks = links => {
   if (!links) return null;
 
@@ -51,6 +132,70 @@ export const cleanRelatedServiceLinks = links => {
       text: link.title,
     };
   });
+};
+
+export const cleanLocationPage = locationPage => {
+  locationPage.contact = {
+    phone: {
+      value: locationPage.phoneNumber
+        ? parsePhoneNumberFromString(locationPage.phoneNumber).formatNational()
+        : '',
+      name: locationPage.phoneDescription,
+    },
+    email: {
+      value: locationPage.email,
+      name: 'Email',
+    },
+  };
+
+  locationPage.gettingHere = {
+    buses: [
+      locationPage.nearestBus1,
+      locationPage.nearestBus2,
+      locationPage.nearestBus3,
+    ].filter(bus => bus !== null),
+  };
+
+  locationPage.hours = cleanLocationPageHours(locationPage);
+
+  locationPage.services = locationPage.relatedServices.edges.map(edge => {
+    return {
+      hours: cleanLocationPageHours(edge.node),
+      title: edge.node.relatedService.title,
+      url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
+      phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+        phoneEdge => {
+          return {
+            label: phoneEdge.node.phoneDescription,
+            number: parsePhoneNumberFromString(
+              phoneEdge.node.phoneNumber,
+            ).formatNational(),
+          };
+        },
+      ),
+    };
+  });
+
+  locationPage.location = {
+    'Physical address': {
+      street: locationPage.physicalUnit
+        ? `${locationPage.physicalStreet} ${locationPage.physicalUnit}`
+        : locationPage.physicalStreet,
+      city: locationPage.physicalCity,
+      state: locationPage.physicalState,
+      zip: locationPage.physicalZip,
+    },
+    'Mailing address': {
+      street: locationPage.mailingStreet,
+      city: locationPage.mailingCity,
+      state: locationPage.mailingState,
+      zip: locationPage.mailingZip,
+    },
+  };
+
+  locationPage.image = locationPage.physicalLocationPhoto;
+
+  return locationPage;
 };
 
 /**

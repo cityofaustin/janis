@@ -23,12 +23,14 @@ import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepa
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
+import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 
 import {
   cleanNavigation,
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
+  cleanLocationPage,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -416,7 +418,9 @@ const getFormContainerData = async (
   grandparent_topic_collection,
   client,
 ) => {
-  const { allFormContainers } = await client.request(getFormContainerQuery, { id: id });
+  const { allFormContainers } = await client.request(getFormContainerQuery, {
+    id: id,
+  });
 
   let formContainer = allFormContainers.edges[0].node;
 
@@ -519,6 +523,16 @@ const getDepartmentsPageData = async client => {
   }));
 
   return { departments: departments };
+};
+
+const getLocationPageData = async (id, client) => {
+  const { allLocationPages } = await client.request(getLocationPageQuery, {
+    id: id,
+  });
+
+  let locationPage = allLocationPages.edges[0].node;
+
+  return { locationPage: cleanLocationPage(locationPage) };
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
@@ -649,6 +663,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
           grandparent_topic_collection,
           client,
         ),
+    };
+  }
+
+  // If we're a location page
+  if (type === 'location page') {
+    return {
+      path: url,
+      template: 'src/components/Pages/Location',
+      getData: () => getLocationPageData(id, client),
     };
   }
 };

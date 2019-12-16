@@ -13,6 +13,7 @@ import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPa
 import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
 import getFormContainerRevisionQuery from 'js/queries/getFormContainerRevisionQuery';
 import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
+import getLocationPageRevisionQuery from 'js/queries/getLocationPageRevisionQuery';
 
 import {
   cleanServicesForPreview,
@@ -23,6 +24,7 @@ import {
   cleanOfficialDocumentPagesForPreview,
   cleanFormContainersForPreview,
   cleanGuideForPreview,
+  cleanLocationPage,
 } from 'js/helpers/cleanData';
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -32,6 +34,7 @@ import TopicCollection from 'components/Pages/TopicCollection';
 import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
 import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
+import LocationPage from 'components/Pages/Location';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -98,6 +101,11 @@ class CMSPreview extends Component {
         req = client.request(getGuidePageRevisionQuery, {
           id: revision_id,
         });
+        break;
+      case 'location':
+        req = client.request(getLocationPageRevisionQuery, {
+          id: revision_id,
+        });
     }
     req.then(data => {
       let page;
@@ -126,6 +134,9 @@ class CMSPreview extends Component {
           break;
         case 'guide':
           page = data.pageRevision.asGuidePage;
+          break;
+        case 'location':
+          page = data.pageRevision.asLocationPage;
       }
 
       this.setState({
@@ -219,11 +230,23 @@ class CMSPreview extends Component {
         />
         <Route
           path="/form"
-          render={props => <FormContainer formContainer={cleanFormContainersForPreview(data)} />}
+          render={props => (
+            <FormContainer
+              formContainer={cleanFormContainersForPreview(data)}
+            />
+          )}
         />
         <Route
           path="/guide"
           render={props => <Guide guidePage={cleanGuideForPreview(data)} />}
+        />
+        <Route
+          path="/location"
+          render={props => (
+            <LocationPage
+              locationPage={cleanLocationPage(data.edges[0].node)}
+            />
+          )}
         />
       </Switch>
     );
