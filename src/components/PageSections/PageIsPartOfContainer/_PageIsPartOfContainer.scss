@@ -1,0 +1,28 @@
+.coa-Page__pageIsPartOfContainer--service {
+  background: $coa-color-secondary;
+  border-bottom: 1px solid $coa-color-blue-light;
+  padding-bottom: 42px;
+}
+.coa-Page__main-content-divider {
+  height: 1px;
+  background-color: $coa-color-gray-light;
+  margin-left: 20px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 20px;
+}
+.coa-ServicePage__contacts-desktop-divider {
+  height: 1px;
+  background-color: $coa-color-gray-light;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+.coa-Page__contacts-mobile.pageIsPartOf {
+  margin: 20px;
+  margin-top: -10px;
+  max-width: 308px;
+}
+.coa-Page__contacts-mobile.pageIsPartOf.service {
+  margin-top: 5px;
+  margin-bottom: -20px;
+}
