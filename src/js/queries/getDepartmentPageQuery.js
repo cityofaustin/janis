@@ -64,6 +64,7 @@ const getDepartmentPageQuery = `
                   locationPage {
                     id
                     title
+                    slug
                     physicalStreet
                     physicalUnit
                     physicalCity

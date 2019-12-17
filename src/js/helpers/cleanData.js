@@ -60,18 +60,23 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
-    cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
-    cleaned.location = {
-      title: cleaned.locationPage.title,
-      street: cleaned.locationPage.physicalUnit
-        ? `${cleaned.locationPage.physicalStreet} ${
-            cleaned.locationPage.physicalUnit
-          }`
-        : cleaned.locationPage.physicalStreet,
-      city: cleaned.locationPage.physicalCity,
-      state: cleaned.locationPage.physicalState,
-      zip: cleaned.locationPage.physicalZip,
-    };
+    if (cleaned.locationPage) {
+      cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+      cleaned.location = {
+        title: cleaned.locationPage.title,
+        street: cleaned.locationPage.physicalUnit
+          ? `${cleaned.locationPage.physicalStreet} ${
+              cleaned.locationPage.physicalUnit
+            }`
+          : cleaned.locationPage.physicalStreet,
+        city: cleaned.locationPage.physicalCity,
+        state: cleaned.locationPage.physicalState,
+        zip: cleaned.locationPage.physicalZip,
+      };
+
+      cleaned.locationPageSlug = cleaned.locationPage.slug;
+    }
+
     // debugger;
 
     // if (cleaned.hours && cleaned.hours.edges) {

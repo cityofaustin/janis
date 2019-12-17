@@ -26,13 +26,22 @@ const ContactDetails = ({ contacts, intl }) => (
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
     {contacts.map((c, index) => (
-      <ContactDetailsEntry contact={c} key={index} />
+      <ContactDetailsEntry contact={c} key={index} intl={intl} />
     ))}
   </div>
 );
 
 const ContactDetailsEntry = ({
-  contact: { name, phoneNumber, email, location, hours, socialMedia },
+  contact: {
+    name,
+    phoneNumber,
+    email,
+    location,
+    hours,
+    socialMedia,
+    locationPageSlug,
+  },
+  intl,
 }) => {
   debugger;
   return (
@@ -51,6 +60,14 @@ const ContactDetailsEntry = ({
     so it makes sense to have the map here*/}
       {socialMedia &&
         socialMedia.map(url => <SocialMediaLink url={url.value} />)}
+
+      <a
+        href={`/${intl.locale}/location/${locationPageSlug}/`}
+        className="coa-StepWithLocations__location"
+      >
+        {' '}
+        GO TO LOCATION PAGE NOW PLZ
+      </a>
     </React.Fragment>
   );
 };
