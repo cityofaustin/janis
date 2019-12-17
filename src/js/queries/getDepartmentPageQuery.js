@@ -65,6 +65,7 @@ const getDepartmentPageQuery = `
                     id
                     title
                     physicalStreet
+                    physicalUnit
                     physicalCity
                     physicalState
                     physicalCountry

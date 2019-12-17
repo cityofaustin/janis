@@ -23,27 +23,6 @@ class Hours extends Component {
     return weekday_collection.splice(day).concat(weekday_collection);
   }
 
-  // const HoursText = (
-  //   <div className="coa-LocationPage__facility-hours-container">
-  //     <table className="coa-LocationPage__table">
-  //       <tbody>
-  //         {getDaysInOrder().map((day, i) => (
-  //           <tr key={i}>
-  //             <td>
-  //               {intl.formatMessage(i18nDate['weekday' + capitalize(day)])}
-  //             </td>
-  //             <td>
-  //               {hours[day] !== null
-  //                 ? hours[day]
-  //                 : intl.formatMessage(i18nLocations.closed)}
-  //             </td>
-  //           </tr>
-  //         ))}
-  //       </tbody>
-  //     </table>
-  //   </div>
-  // );
-
   render() {
     const { hours, intl } = this.props;
     debugger;
