@@ -343,7 +343,7 @@ const getServicePageData = async (
     client,
   );
 
-  if (pagesOfGuides[id]) {
+  if (pagesOfGuides && pagesOfGuides[id]) {
     // We're checking if this id is part of guide page because it may not be published and draw and error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
@@ -382,7 +382,7 @@ const getInformationPageData = async (
     informationPage.pageIsPartOf = pagesOfGuides[id];
   }
 
-  informationPage.pageIsPartOf = pagesOfGuides[id];
+  // informationPage.pageIsPartOf = pagesOfGuides[id];
 
   return { informationPage: informationPage };
 };
