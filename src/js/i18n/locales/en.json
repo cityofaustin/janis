@@ -107,5 +107,6 @@
   "locations.closeHours": "Close hours",
   "locations.gettingHere": "Getting here",
   "locations.busesServicing": "Buses servicing this area",
-  "locations.closed": "Closed"
+  "locations.closed": "Closed",
+  "locations.locationInformation": "Location information"
 }

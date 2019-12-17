@@ -10,12 +10,6 @@
   }
 }
 
-.coa-ContactDetails {
-  border-left: none;
-  border-right: none;
-  padding-bottom: $coa-spacing-large;
-}
-
 .coa-ContactDetails__name {
   font-size: $coa-font-size-small;
   margin-bottom: 0;
@@ -164,6 +158,9 @@ This will enable proper line wrapping for the :last-child.
 .coa-ContactDetails {
   background: #f7f7f7;
   border-radius: 4px;
+  border-left: none;
+  border-right: none;
+  // padding-bottom: $coa-spacing-large;
   .coa-SectionHeader {
     padding-top: 2rem;
     margin-top: 4rem;
@@ -171,4 +168,24 @@ This will enable proper line wrapping for the :last-child.
     padding-right: 2rem;
     margin-bottom: 0rem;
   }
+}
+
+.coa-ContactDetails__location-link {
+  display: flex;
+  padding: 1.4rem;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  text-decoration: none;
+  border-top: 1px solid #dcdee0;
+  margin-top: 1rem;
+}
+
+.coa-ContactDetails__location-link-text {
+  color: #0049c7;
+}
+
+.coa-ContactDetails__location-link-arrow {
+  display: flex;
+  color: #0049c7;
 }

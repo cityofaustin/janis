@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { contact as i18n } from 'js/i18n/definitions';
+import { contact as i18n, locations as i18n2 } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
 import PhonesList from './Phones';
@@ -63,10 +63,14 @@ const ContactDetailsEntry = ({
 
       <a
         href={`/${intl.locale}/location/${locationPageSlug}/`}
-        className="coa-StepWithLocations__location"
+        className="coa-ContactDetails__location-link"
       >
-        {' '}
-        GO TO LOCATION PAGE NOW PLZ
+        <div className="coa-ContactDetails__location-link-text">
+          {intl.formatMessage(i18n2.locationInformation)}
+        </div>
+        <div className="coa-ContactDetails__location-link-arrow">
+          <i class="material-icons">arrow_forward</i>
+        </div>
       </a>
     </React.Fragment>
   );
