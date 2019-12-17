@@ -40,13 +40,13 @@ const ContactDetailsEntry = ({
       {/* We want to keep this component easy to read and streamlined, so we are
       avoiding complicated functions in this return.
       Consider breaking into another component and calling that here*/}
-      <h3 className="coa-ContactDetails__name">{name}</h3>
-      {location && <Address location={location} />}
-      {hours && <Hours hours={hours} />}
+      {/* <h3 className="coa-ContactDetails__name">{name}</h3> */}
       {!!phoneNumber && !!phoneNumber.edges.length && (
         <PhonesList phoneNumbers={phoneNumber} />
       )}
       {email && <Email email={email} />}
+      {location && <Address location={location} />}
+      {hours && <Hours hours={hours} />}
       {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
       {socialMedia &&

@@ -35,9 +35,11 @@ This will enable proper line wrapping for the :last-child.
   display: flex;
   align-items: flex-start;
   font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-small;
+  line-height: $coa-line-height-xsmall;
   padding-top: $coa-spacing-medium;
   text-align: left;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   @include media($coa-medium-screen) {
     // font-size: $coa-font-size-small;
@@ -127,7 +129,13 @@ This will enable proper line wrapping for the :last-child.
     /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
     padding-right: 1rem !important;
     font-weight: bold;
+    background: #f7f7f7;
   }
+
+  td {
+    background: #f7f7f7;
+  }
+
   td:last-of-type {
     font-size: $coa-font-size-xsmall;
     text-align: right;
@@ -147,4 +155,20 @@ This will enable proper line wrapping for the :last-child.
   /* Yes, you need both. "word-break" fixes mobile styling */
   word-wrap: break-word;
   word-break: break-word;
+}
+
+.coa-ContactAddressTitle {
+  font-weight: 800;
+}
+
+.coa-ContactDetails {
+  background: #f7f7f7;
+  border-radius: 4px;
+  .coa-SectionHeader {
+    padding-top: 2rem;
+    margin-top: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 0rem;
+  }
 }

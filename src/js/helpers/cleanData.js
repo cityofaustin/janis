@@ -62,6 +62,7 @@ export const cleanContacts = contacts => {
 
     cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
     cleaned.location = {
+      title: cleaned.locationPage.title,
       street: cleaned.locationPage.physicalUnit
         ? `${cleaned.locationPage.physicalStreet} ${
             cleaned.locationPage.physicalUnit
