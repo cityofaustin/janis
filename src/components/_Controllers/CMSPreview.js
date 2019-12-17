@@ -165,6 +165,7 @@ class CMSPreview extends Component {
         <Route
           path="/services"
           render={props => <Service service={cleanServicesForPreview(data)} />}
+          // service page
         />
         <Route
           path="/information"
