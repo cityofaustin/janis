@@ -203,7 +203,7 @@ class UserFeedback extends Component {
                   </span>
                   <p>
                     {intl.formatMessage(i18n2.errorMessage)}{' '}
-                    <a href={'mailto:feedback@austintexas.gov'}>feedback@austintexas.gov</a>.
+                    <a href={'mailto:participate@austintexas.gov'}>participate@austintexas.gov</a>.
                   </p>
                 </div>
               }
