@@ -324,7 +324,7 @@ const getServicePageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
-  pagesOfGuides
+  pagesOfGuides,
 ) => {
   const { allServicePages } = await client.request(getServicePageQuery, {
     id: id,
@@ -343,8 +343,9 @@ const getServicePageData = async (
     client,
   );
 
-  if (pagesOfGuides[id]) { // We're checking if this id is part of guide page because it may not be published and draw and error.
-    service.pageIsPartOf = pagesOfGuides[id]
+  if (pagesOfGuides[id]) {
+    // We're checking if this id is part of guide page because it may not be published and draw and error.
+    service.pageIsPartOf = pagesOfGuides[id];
   }
 
   return { service: service };
@@ -356,7 +357,7 @@ const getInformationPageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
-  pagesOfGuides
+  pagesOfGuides,
 ) => {
   const { allInformationPages } = await client.request(
     getInformationPageQuery,
@@ -376,11 +377,12 @@ const getInformationPageData = async (
     client,
   );
 
-  if (pagesOfGuides[id]) { // We're checking if this id is part of guide page because it may not be published and draw and error.
-    informationPage.pageIsPartOf = pagesOfGuides[id]
+  if (pagesOfGuides && pagesOfGuides[id]) {
+    // We're checking if this id is part of guide page because it may not be published and draw and error.
+    informationPage.pageIsPartOf = pagesOfGuides[id];
   }
 
-  informationPage.pageIsPartOf = pagesOfGuides[id]
+  informationPage.pageIsPartOf = pagesOfGuides[id];
 
   return { informationPage: informationPage };
 };
@@ -593,7 +595,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
           parent_topic,
           grandparent_topic_collection,
           client,
-          pagesOfGuides.servicePage
+          pagesOfGuides.servicePage,
         ),
     };
   }
@@ -610,7 +612,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
           parent_topic,
           grandparent_topic_collection,
           client,
-          pagesOfGuides.informationPage
+          pagesOfGuides.informationPage,
         ),
     };
   }
@@ -682,40 +684,47 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   }
 };
 
-const getPagesOfGuidesData = async (client) => {
+const getPagesOfGuidesData = async client => {
+  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery);
 
-  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery)
+  const pagesOfGuidesData = {};
 
-  const pagesOfGuidesData = {}
-
-  allGuidePages.edges.map( guidePage => {
-    if (guidePage.node.sections.length > 0 && guidePage.node.topics.edges.length > 0) {
-      const url = "/" + [
-        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.theme.slug,
-        guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0].node.topiccollection.slug,
-        guidePage.node.topics.edges[0].node.topic.slug,
-        guidePage.node.slug,
-      ].join("/")
-      guidePage.node.sections.map( section => {
+  allGuidePages.edges.map(guidePage => {
+    if (
+      guidePage.node.sections.length > 0 &&
+      guidePage.node.topics.edges.length > 0
+    ) {
+      const url =
+        '/' +
+        [
+          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+            .node.topiccollection.theme.slug,
+          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+            .node.topiccollection.slug,
+          guidePage.node.topics.edges[0].node.topic.slug,
+          guidePage.node.slug,
+        ].join('/');
+      guidePage.node.sections.map(section => {
         for (const page in section.pages[0]) {
           if (section.pages[0][page]) {
-            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {}
-            if (!pagesOfGuidesData[page][section.pages[0][page].id]) pagesOfGuidesData[page][section.pages[0][page].id] = []
+            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {};
+            if (!pagesOfGuidesData[page][section.pages[0][page].id])
+              pagesOfGuidesData[page][section.pages[0][page].id] = [];
             pagesOfGuidesData[page][section.pages[0][page].id].push({
               pageName: section.heading,
               pageType: section.pages[0][page].pageType,
               ofPageType: guidePage.node.pageType,
               guidePageTitle: guidePage.node.title,
-              guidePageUrl: url
-            })
+              guidePageUrl: url,
+            });
           }
         }
-      })
+      });
     }
-  })
+  });
 
-  return pagesOfGuidesData
-}
+  return pagesOfGuidesData;
+};
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   if (incrementalPageId) {
@@ -765,10 +774,12 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     type: `departments`,
   });
 
-  const pagesOfGuidesData = await getPagesOfGuidesData(client)
+  const pagesOfGuidesData = await getPagesOfGuidesData(client);
 
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)),
+    parsedStructure.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData),
+    ),
   );
 
   const data = {
