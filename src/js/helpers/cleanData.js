@@ -49,6 +49,7 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
 };
 
 export const cleanContacts = contacts => {
+  debugger;
   if (!contacts || !contacts.edges) return null;
 
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
@@ -59,14 +60,17 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
-    if (cleaned.hours && cleaned.hours.edges) {
-      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
-        dayOfWeek: hours.dayOfWeek.toLowerCase(),
-        dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
-        startTime: formatTime(hours.startTime),
-        endTime: formatTime(hours.endTime),
-      }));
-    }
+    cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+    // debugger;
+
+    // if (cleaned.hours && cleaned.hours.edges) {
+    //   cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
+    //     dayOfWeek: hours.dayOfWeek.toLowerCase(),
+    //     dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
+    //     startTime: formatTime(hours.startTime),
+    //     endTime: formatTime(hours.endTime),
+    //   }));
+    // }
     return cleaned;
   });
 };

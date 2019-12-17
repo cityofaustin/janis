@@ -186,7 +186,7 @@ const getDepartmentPageData = async (id, client) => {
     : [];
 
   // keeping this logic in there for now, stuff is kinda messy
-  department.contacts = cleanContacts(department.contacts);
+  // department.contacts = cleanContacts(department.contacts);
   department.directors = cleanDepartmentDirectors(
     department.departmentDirectors,
   );

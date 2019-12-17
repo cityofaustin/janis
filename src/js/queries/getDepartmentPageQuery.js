@@ -61,23 +61,42 @@ const getDepartmentPageQuery = `
                   }
                   email
                   socialMedia
-                  location {
+                  locationPage {
                     id
-                    name
-                    street
-                    city
-                    state
-                    country
-                    zip
-                  }
-                  hours {
-                    edges {
-                      node {
-                        dayOfWeek
-                        startTime
-                        endTime
-                      }
-                    }
+                    title
+                    physicalStreet
+                    physicalCity
+                    physicalState
+                    physicalCountry
+                    physicalZip
+                    mondayStartTime
+                    mondayEndTime
+                    mondayStartTime2
+                    mondayEndTime2
+                    tuesdayStartTime
+                    tuesdayEndTime
+                    tuesdayStartTime2
+                    tuesdayEndTime2
+                    wednesdayStartTime
+                    wednesdayEndTime
+                    wednesdayStartTime2
+                    wednesdayEndTime2
+                    thursdayStartTime
+                    thursdayEndTime
+                    thursdayStartTime2
+                    thursdayEndTime2
+                    fridayStartTime
+                    fridayEndTime
+                    fridayStartTime2
+                    fridayEndTime2
+                    saturdayStartTime
+                    saturdayEndTime
+                    saturdayStartTime2
+                    saturdayEndTime2
+                    sundayStartTime
+                    sundayEndTime
+                    sundayStartTime2
+                    sundayEndTime2
                   }
                 }
               }

@@ -17,15 +17,19 @@ import WorkInProgress from 'components/WorkInProgress';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
+import { cleanContacts } from 'js/helpers/cleanData';
+
 //rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 const Department = ({ department, intl }) => {
+  const blarg = department ? { department } : useRouteData();
+
   const {
     department: {
       title,
       mission,
-      contacts,
+      // contacts,
       image,
       directors,
       whatWeDo,
@@ -36,7 +40,10 @@ const Department = ({ department, intl }) => {
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
-  } = department ? { department } : useRouteData();
+  } = blarg;
+
+  // debugger;
+  const contacts = cleanContacts(blarg.department.contacts);
 
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">

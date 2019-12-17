@@ -33,23 +33,27 @@ const ContactDetails = ({ contacts, intl }) => (
 
 const ContactDetailsEntry = ({
   contact: { name, phoneNumber, email, location, hours, socialMedia },
-}) => (
-  <React.Fragment>
-    {/* We want to keep this component easy to read and streamlined, so we are
+}) => {
+  debugger;
+  return (
+    <React.Fragment>
+      {/* We want to keep this component easy to read and streamlined, so we are
       avoiding complicated functions in this return.
       Consider breaking into another component and calling that here*/}
-    <h3 className="coa-ContactDetails__name">{name}</h3>
-    {location && <Address location={location} />}
-    {hours && !!hours.length && <Hours hours={hours} />}
-    {!!phoneNumber && !!phoneNumber.edges.length && (
-      <PhonesList phoneNumbers={phoneNumber} />
-    )}
-    {email && <Email email={email} />}
-    {/*Each social media link is it's own contact item with it's own icon,
+      <h3 className="coa-ContactDetails__name">{name}</h3>
+      {location && <Address location={location} />}
+      {hours && <Hours hours={hours} />}
+      {!!phoneNumber && !!phoneNumber.edges.length && (
+        <PhonesList phoneNumbers={phoneNumber} />
+      )}
+      {email && <Email email={email} />}
+      {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
-    {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
-  </React.Fragment>
-);
+      {socialMedia &&
+        socialMedia.map(url => <SocialMediaLink url={url.value} />)}
+    </React.Fragment>
+  );
+};
 
 ContactDetailsEntry.propTypes = {
   contact: PropTypes.shape({
