@@ -325,7 +325,6 @@ export const cleanServicesForPreview = allServices => {
   let service = services[0];
   // why do we get all the services to then just select the first one?
 
-  console.log('service', service)
   service.contextualNavData = getContextualNavForPreview(service);
 
   service.text = service.title;
