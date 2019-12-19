@@ -323,7 +323,9 @@ export const cleanServicesForPreview = allServices => {
   if (!allServices || !allServices.edges) return null;
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
+  // why do we get all the services to then just select the first one?
 
+  console.log('service', service)
   service.contextualNavData = getContextualNavForPreview(service);
 
   service.text = service.title;
@@ -369,6 +371,15 @@ const getContextualNavForPreview = page => {
     relatedTo: [],
     offeredBy: [],
   };
+
+  // get offered by
+  if (page.relatedDepartments && page.relatedDepartments.edges.length) {
+    contextualNavData.offeredBy = page.relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  }
 
   // If we don't have a topic, return a fake
   // topic describing that
