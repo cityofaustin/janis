@@ -61,17 +61,21 @@ const ContactDetailsEntry = ({
       {socialMedia &&
         socialMedia.map(url => <SocialMediaLink url={url.value} />)}
 
-      <a
-        href={`/${intl.locale}/location/${locationPageSlug}/`}
-        className="coa-ContactDetails__location-link"
-      >
-        <div className="coa-ContactDetails__location-link-text">
-          {intl.formatMessage(i18n2.locationInformation)}
-        </div>
-        <div className="coa-ContactDetails__location-link-arrow">
-          <i class="material-icons">arrow_forward</i>
-        </div>
-      </a>
+      {locationPageSlug ? (
+        <a
+          href={`/${intl.locale}/location/${locationPageSlug}/`}
+          className="coa-ContactDetails__location-link"
+        >
+          <div className="coa-ContactDetails__location-link-text">
+            {intl.formatMessage(i18n2.locationInformation)}
+          </div>
+          <div className="coa-ContactDetails__location-link-arrow">
+            <i class="material-icons">arrow_forward</i>
+          </div>
+        </a>
+      ) : (
+        <div className="coa-ContactDetails__locationless" />
+      )}
     </React.Fragment>
   );
 };
