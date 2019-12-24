@@ -14,6 +14,30 @@
   border-radius: 4px;
   justify-content: space-between;
   text-decoration: none;
+  &:hover {
+    background: $coa-color-primary;
+    .coa-StepWithLocations__location-title {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-address {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-arrow {
+      color: $coa-color-white;
+    }
+  }
+  &:focus {
+    background: $coa-color-darker-blue;
+    .coa-StepWithLocations__location-title {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-address {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-arrow {
+      color: $coa-color-white;
+    }
+  }
 }
 
 .coa-StepWithLocations__location-title {
