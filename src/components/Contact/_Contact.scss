@@ -181,6 +181,28 @@ This will enable proper line wrapping for the :last-child.
   margin-top: 1rem;
   padding-left: 2.4rem;
   padding-right: 1.8rem;
+  &:hover {
+    background: $coa-color-primary;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    .coa-ContactDetails__location-link-text {
+      color: $coa-color-white;
+    }
+    .coa-ContactDetails__location-link-arrow {
+      color: $coa-color-white;
+    }
+  }
+  &:focus {
+    background: $coa-color-darker-blue;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    .coa-ContactDetails__location-link-text {
+      color: $coa-color-white;
+    }
+    .coa-ContactDetails__location-link-arrow {
+      color: $coa-color-white;
+    }
+  }
 }
 
 .coa-ContactDetails__location-link-text {
