@@ -1,3 +1,5 @@
+import contactFragment from './contactFragment';
+
 const getServicePageQuery = `
   query getServicePage($id: ID) {
     allServicePages(id: $id) {
@@ -39,35 +41,7 @@ const getServicePageQuery = `
             edges {
               node {
                 contact {
-                  name
-                  email
-                  phoneNumber {
-                    edges {
-                      node {
-                        id
-                        phoneDescription
-                        phoneNumber
-                      }
-                    }
-                  }
-                  socialMedia
-                  hours {
-                    edges {
-                      node {
-                        dayOfWeek
-                        startTime
-                        endTime
-                      }
-                    }
-                  }
-                  location {
-                    name
-                    street
-                    city
-                    state
-                    zip
-                    country
-                  }
+                  ...contactInfo
                 }
               }
             }
@@ -76,6 +50,7 @@ const getServicePageQuery = `
       }
     }
   }
+  ${contactFragment}
 `;
 
 export default getServicePageQuery;
