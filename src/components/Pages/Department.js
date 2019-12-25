@@ -23,13 +23,11 @@ import { cleanContacts } from 'js/helpers/cleanData';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 const Department = ({ department, intl }) => {
-  const blarg = department ? { department } : useRouteData();
-
   const {
     department: {
       title,
       mission,
-      // contacts,
+      contacts,
       image,
       directors,
       whatWeDo,
@@ -38,12 +36,7 @@ const Department = ({ department, intl }) => {
       topServices,
       relatedLinks,
     },
-    // not the biggest fan of this logic but
-    // it gets previews working with hooks
-  } = blarg;
-
-  // debugger;
-  const contacts = cleanContacts(blarg.department.contacts);
+  } = department ? { department } : useRouteData();
 
   const RelatedContent = () => (
     <div className="coa-DepartmentPage__related-container">
