@@ -32,8 +32,8 @@ This will enable proper line wrapping for the :last-child.
   line-height: $coa-line-height-xsmall;
   padding-top: $coa-spacing-small;
   text-align: left;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: $coa-spacing-medium;
+  padding-right: $coa-spacing-medium;
 
   @include media($coa-medium-screen) {
     // font-size: $coa-font-size-small;
@@ -123,11 +123,11 @@ This will enable proper line wrapping for the :last-child.
     /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
     padding-right: 1rem !important;
     font-weight: bold;
-    background: #f7f7f7;
+    background: $coa-color-grey;
   }
 
   td {
-    background: #f7f7f7;
+    background: $coa-color-grey;
   }
 
   td:last-of-type {
@@ -152,33 +152,32 @@ This will enable proper line wrapping for the :last-child.
 }
 
 .coa-ContactAddressTitle {
-  font-weight: 800;
+  font-weight: $coa-font-extrabold;
 }
 
 .coa-ContactDetails {
-  background: #f7f7f7;
+  background: $coa-color-grey;
   border-radius: 4px;
   border-left: none;
   border-right: none;
-  // padding-bottom: $coa-spacing-large;
   .coa-SectionHeader {
-    padding-top: 2rem;
-    margin-top: 4rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-top: $coa-spacing-medium;
+    margin-top: $coa-space-level7;
+    padding-left: $coa-spacing-medium;
+    padding-right: $coa-spacing-medium;
     margin-bottom: 0rem;
   }
 }
 
 .coa-ContactDetails__location-link {
   display: flex;
-  padding: 1.4rem;
+  padding: $coa-spacing-md-small;
   justify-content: space-between;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-xsmall;
   text-decoration: none;
   border-top: 1px solid #dcdee0;
-  margin-top: 1rem;
+  margin-top: $coa-spacing-small;
   padding-left: 2.4rem;
   padding-right: 1.8rem;
   &:hover {

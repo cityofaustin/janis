@@ -25,7 +25,6 @@ class Hours extends Component {
 
   render() {
     const { hours, intl } = this.props;
-    debugger;
 
     return (
       <div className="coa-ContactItem coa-ContactHours">

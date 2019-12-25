@@ -68,8 +68,6 @@ const LocationPageLocation = ({ location, image }) => {
   const intl = useIntl();
   const imageData = image ? getImageData(image) : null;
 
-  debugger;
-
   // Only include "Physical Address" if no "Mailing Address" is present
   // We're using street to determine if there's an address in there
   const addresses =
