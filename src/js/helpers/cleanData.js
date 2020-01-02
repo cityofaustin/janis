@@ -370,6 +370,15 @@ const getContextualNavForPreview = page => {
     offeredBy: [],
   };
 
+  // get offered by
+  if (page.relatedDepartments && page.relatedDepartments.edges.length) {
+    contextualNavData.offeredBy = page.relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  }
+
   // If we don't have a topic, return a fake
   // topic describing that
   if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
