@@ -323,7 +323,6 @@ export const cleanServicesForPreview = allServices => {
   if (!allServices || !allServices.edges) return null;
   const services = allServices.edges.map(e => e.node);
   let service = services[0];
-  // why do we get all the services to then just select the first one?
 
   service.contextualNavData = getContextualNavForPreview(service);
 
