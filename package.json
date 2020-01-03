@@ -55,12 +55,15 @@
     "@storybook/addon-a11y": "^5.2.6",
     "@storybook/addon-actions": "^5.2.6",
     "@storybook/addon-links": "^5.2.6",
+    "@storybook/addon-storyshots": "^5.2.8",
+    "@storybook/addon-storyshots-puppeteer": "^5.2.8",
     "@storybook/addon-viewport": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.9.0",
     "babel-plugin-react-intl-auto": "^3.0.1",
+    "babel-plugin-require-context-hook": "^1.0.0",
     "cypress": "^3.6.0",
     "eslint-config-react-tools": "1.x.x",
     "extract-react-intl-messages": "^0.8.2",
@@ -106,7 +109,8 @@
     "moduleNameMapper": {
       "\\.(jpg|ico|jpeg|png|gif)$": "<rootDir>/mocks/fileMock.js",
       "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
-    }
+    },
+    "setupFiles": ["<rootDir>/.jest/register-context.js"]
   },
   "prettier": {
     "semi": true,
