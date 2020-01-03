@@ -40,6 +40,9 @@ const branchOverrides = {
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
   },
+  '3672-timeout': {
+    CMS_API: "https://joplin-pr-3672-timeout.herokuapp.com/api/graphql"
+  }
 };
 
 module.exports = {
