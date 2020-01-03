@@ -30,6 +30,9 @@ const branchOverrides = {
   },
   "3010-circleci": {
     CMS_API: "https://joplin-pr-3173-publish.herokuapp.com/api/graphql"
+  },
+  "3672-timeout-old": {
+    CMS_API: "https://joplin-pr-3672-timeout-old.herokuapp.com/api/graphql"
   }
 }
 
