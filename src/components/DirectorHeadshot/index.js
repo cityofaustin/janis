@@ -10,6 +10,8 @@ const DirectorHeadshot = ({ photo }) => {
   const photoBasename = path.basename(filename, photoExtension);
   const filepath = `${process.env.CMS_MEDIA}/images/${photoBasename}`;
 
+  console.log(photo);
+
   return (
     <div className="coa-DepartmentPage__directorcard-headshot">
       <ResponsiveImage
@@ -18,8 +20,8 @@ const DirectorHeadshot = ({ photo }) => {
         defaultWidth="width-640"
         widths={[]}
         extension={photoExtension.slice(1)}
-        aria-label={photo.title}
-        altText={photo.title}
+        aria-label={photo.title || 'Director Headshot'}
+        altText={photo.title || 'Director Headshot'}
       />
     </div>
   );
