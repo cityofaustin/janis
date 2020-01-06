@@ -123,11 +123,11 @@ This will enable proper line wrapping for the :last-child.
     /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
     padding-right: 1rem !important;
     font-weight: bold;
-    background: $coa-color-grey;
+    background: $coa-color-card-grey;
   }
 
   td {
-    background: $coa-color-grey;
+    background: $coa-color-card-grey;
   }
 
   td:last-of-type {
@@ -156,7 +156,7 @@ This will enable proper line wrapping for the :last-child.
 }
 
 .coa-ContactDetails {
-  background: $coa-color-grey;
+  background: $coa-color-card-grey;
   border-radius: 4px;
   border-left: none;
   border-right: none;
