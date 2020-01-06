@@ -1,13 +1,14 @@
 .coa-DepartmentPage__contacts-desktop {
   width: 315px;
+  margin-top: $coa-space-level7;
 }
 
 .coa-ServicePage__contacts-desktop {
   width: 315px;
   // TODO: clean this up to not need to use !important
-  .coa-SectionHeader {
-    padding-top: 0 !important;
-  }
+  // .coa-SectionHeader {
+  //   padding-top: 0 !important;
+  // }
 }
 
 .coa-ContactDetails__name {
@@ -162,7 +163,6 @@ This will enable proper line wrapping for the :last-child.
   border-right: none;
   .coa-SectionHeader {
     padding-top: $coa-spacing-medium;
-    margin-top: $coa-space-level7;
     padding-left: $coa-spacing-medium;
     padding-right: $coa-spacing-medium;
     margin-bottom: 0rem;
