@@ -34,6 +34,10 @@
       color: $coa-color-white;
     }
   }
+
+  &:not(:last-child) {
+    margin-bottom: 8px; // magic spacing number not used anywhere else
+  }
 }
 
 .coa-StepWithLocations__location-title {
