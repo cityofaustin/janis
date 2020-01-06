@@ -21,9 +21,10 @@
   @include media($coa-medium-screen) {
     display: none;
   }
+  background: #f7f7f7;
 }
 
-.coa-Page__all-of-the-content{
+.coa-Page__all-of-the-content {
   ul {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -31,7 +32,7 @@
   }
 }
 
-.coa-Page__all-of-the-content{
+.coa-Page__all-of-the-content {
   li {
     margin-bottom: 0;
   }
