@@ -1,4 +1,4 @@
-import contactFragment from './contactFragment';
+import conciseContactFragment from './conciseContactFragment';
 
 const servicePageFragment = `
   fragment servicePageInfo on ServicePageNode {
@@ -44,7 +44,7 @@ const servicePageFragment = `
       }
     }
   }
-  ${contactFragment}
+  ${conciseContactFragment}
 `;
 
 export default servicePageFragment;
