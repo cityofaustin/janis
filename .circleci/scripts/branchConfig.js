@@ -36,6 +36,9 @@ const branchOverrides = {
   },
   '3163-guide-espanol': {
     CMS_API: 'https://joplin-pr-3163-guide-pages.herokuapp.com/api/graphql'
+  },
+  "v-minus-2": {
+    CMS_API: 'https://joplin-pr-v-minus-2.herokuapp.com/api/graphql'
   }
 };
 
