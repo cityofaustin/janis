@@ -18,14 +18,43 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+  let domWindow
 
   useEffect(() => {
+    domWindow = window
     window.onpopstate = function(event) {
       setPageNumber(getHash())
-      window.requestAnimationFrame( ()=> window.scroll(0,0) )
+
+      // window.requestAnimationFrame( ()=> window.scroll(0,0) )
+
+      // window.requestAnimationFrame( ()=>
+      //   window.scroll({
+      //     top: 0,
+      //     left: 0,
+      //     behavior: 'smooth'
+      //   })
+      // )
+
+      // window.scroll({
+      //   top: 0,
+      //   left: 0,
+      //   behavior: 'smooth',
+      // })
+
     }
     window.location.hash = pageNumber+1
   })
+
+  function changePage(newPage) {
+    if (newPage >= 0 && newPage <= pages.length - 1) {
+      // setPageNumber(newPage)
+      domWindow.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    }
+  }
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
@@ -101,12 +130,6 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
       shownPages.splice(pageIndex+2-range, 0, pageBack)
     }
     return shownPages
-  }
-
-  function changePage(newPage) {
-    if (newPage >= 0 && newPage <= pages.length - 1) {
-      setPageNumber(newPage)
-    }
   }
 
   return (
