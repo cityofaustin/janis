@@ -19,7 +19,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
-  let domWindow
+  let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
   useEffect(() => {
     domWindow = window
@@ -33,10 +33,10 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       scrollTransition({
         scrollDuration: 0.5, // Scroll effect duration, regardless of height, in seconds
-        fadeDelay: 0.15, // Combines both fade in and out. so 2x times value here for full transition.
+        fadeDelay: 0.15, // for both fade in & out. so 2x times value here for full transition.
         element: domWindow,
         fadeElement: officialDocumentsPage,
-        callback:()=>{ setPageNumber(newPage) }
+        callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       })
     }
   }
@@ -130,6 +130,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
           {shownPages.length > 1 &&
             <div className="coa-OfficialDocumentPage_pagination-container">
+
               <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
                 <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
                 { !isMobile &&
