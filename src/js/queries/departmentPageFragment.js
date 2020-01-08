@@ -1,4 +1,4 @@
-import phoneFragment from './phoneFragment';
+import contactFragment from './contactFragment';
 
 const departmentPageFragment = `
   fragment departmentPageInfo on DepartmentPageNode {
@@ -48,33 +48,13 @@ const departmentPageFragment = `
       edges {
         node {
           contact {
-            name
-            ${phoneFragment}
-            email
-            socialMedia
-            location {
-              id
-              name
-              street
-              city
-              state
-              country
-              zip
-            }
-            hours {
-              edges {
-                node {
-                  dayOfWeek
-                  startTime
-                  endTime
-                }
-              }
-            }
+            ...contactInfo  
           }
         }
       }
     }
   }
+  ${contactFragment}
 `;
 
 export default departmentPageFragment;

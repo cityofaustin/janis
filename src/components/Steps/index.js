@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import StepBasic from './StepBasic';
 import StepWithOptions from './StepWithOptions';
+import StepWithLocations from './StepWithLocations';
 import { stepsPropTypes } from './proptypes';
 
 const mapSteps = (steps, singleStep) =>
   // singleStep boolean param to determine whether to render steps in a list (ul) or a single item for StepWithOptions and StepBasic
   steps.map((step, index) => {
-    if (step.type === 'step_with_options_accordian')
+    if (step.stepType === 'step_with_options_accordian')
       return (
         <StepWithOptions
           key={index}
@@ -18,12 +19,22 @@ const mapSteps = (steps, singleStep) =>
         />
       );
 
-    if (step.type === 'basic_step')
+    if (step.stepType === 'basic_step')
       return (
         <StepBasic
           key={index}
           stepAsHtmlFromAdmin={step.value}
           singleStep={singleStep}
+        />
+      );
+
+    if (step.stepType === 'step_with_locations')
+      return (
+        <StepWithLocations
+          key={index}
+          description={step.value.locations_description}
+          singleStep={singleStep}
+          locations={step.locations}
         />
       );
   });

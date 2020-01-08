@@ -52,7 +52,7 @@ const Service = ({ service, intl }) => {
           />
         )}
 
-        { !pageIsPartOf ? (
+        {!pageIsPartOf ? (
           <PageHeader contentType={'service'} description={shortDescription}>
             {title}
           </PageHeader>
@@ -71,16 +71,16 @@ const Service = ({ service, intl }) => {
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-                  {(steps && !!steps.length) && (
+                  {steps &&
+                    !!steps.length &&
                     //just 1 step? don't display steps in list (ul)
-                    steps.length === 1 ? (
+                    (steps.length === 1 ? (
                       <Steps steps={steps} />
                     ) : (
                       <Fragment>
                         <Steps steps={steps} />
                       </Fragment>
-                    )
-                  )}
+                    ))}
 
                   {!!dynamicContent &&
                     dynamicContent.map(content => (
@@ -88,25 +88,25 @@ const Service = ({ service, intl }) => {
                     ))}
 
                   {additionalContent && (
-                    <HtmlFromAdmin
-                      content={additionalContent}
-                    />
+                    <HtmlFromAdmin content={additionalContent} />
                   )}
-                  <div className="coa-Page__contacts-mobile">
-                    {!!contacts &&
-                      !!contacts.length && (
-                        <ContactDetails contacts={contacts} />
-                      )}
-                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts &&
-                !!contacts.length && <ContactDetails contacts={contacts} />}
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contacts={contacts} />
+              )}
             </div>
+          </div>
+        </div>
+        <div className="coa-Page__contacts-mobile">
+          <div className="col-xs-12 col-md-10">
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contacts={contacts} />
+            )}
           </div>
         </div>
         <RelatedToMobile

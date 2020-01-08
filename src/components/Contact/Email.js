@@ -5,7 +5,7 @@ import { emailPropTypes } from './proptypes';
 
 const Email = ({ email }) => (
   <div className="coa-ContactItem coa-ContactEmail">
-    <i className="material-icons">mail_outline</i>
+    <i className="material-icons">mail</i>
     <div className="coa-ContactItem_content">
       <a href={`mailto:${email}`}>{email}</a>
     </div>

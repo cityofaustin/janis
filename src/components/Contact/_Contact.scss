@@ -1,19 +1,10 @@
 .coa-DepartmentPage__contacts-desktop {
   width: 315px;
+  margin-top: $coa-space-level7;
 }
 
 .coa-ServicePage__contacts-desktop {
   width: 315px;
-  // TODO: clean this up to not need to use !important
-  .coa-SectionHeader {
-    padding-top: 0 !important;
-  }
-}
-
-.coa-ContactDetails {
-  border-left: none;
-  border-right: none;
-  padding-bottom: $coa-spacing-large;
 }
 
 .coa-ContactDetails__name {
@@ -35,9 +26,11 @@ This will enable proper line wrapping for the :last-child.
   display: flex;
   align-items: flex-start;
   font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-small;
-  padding-top: $coa-spacing-medium;
+  line-height: $coa-line-height-xsmall;
+  padding-top: $coa-spacing-small;
   text-align: left;
+  padding-left: $coa-spacing-medium;
+  padding-right: $coa-spacing-medium;
 
   @include media($coa-medium-screen) {
     // font-size: $coa-font-size-small;
@@ -127,7 +120,13 @@ This will enable proper line wrapping for the :last-child.
     /* ".usa-table-borderless th:first-child" uses 6rem, which is too much */
     padding-right: 1rem !important;
     font-weight: bold;
+    background: $coa-color-card-grey;
   }
+
+  td {
+    background: $coa-color-card-grey;
+  }
+
   td:last-of-type {
     font-size: $coa-font-size-xsmall;
     text-align: right;
@@ -147,4 +146,69 @@ This will enable proper line wrapping for the :last-child.
   /* Yes, you need both. "word-break" fixes mobile styling */
   word-wrap: break-word;
   word-break: break-word;
+}
+
+.coa-ContactAddressTitle {
+  font-weight: $coa-font-extrabold;
+}
+
+.coa-ContactDetails {
+  background: $coa-color-card-grey;
+  border-radius: 4px;
+  border-left: none;
+  border-right: none;
+  .coa-SectionHeader {
+    padding-top: $coa-spacing-medium;
+    padding-left: $coa-spacing-medium;
+    padding-right: $coa-spacing-medium;
+    margin-bottom: 0rem;
+  }
+}
+
+.coa-ContactDetails__location-link {
+  display: flex;
+  padding: $coa-spacing-md-small;
+  justify-content: space-between;
+  font-size: $coa-font-size-small;
+  line-height: $coa-line-height-xsmall;
+  text-decoration: none;
+  border-top: 1px solid #dcdee0;
+  margin-top: $coa-spacing-small;
+  padding-left: 2.4rem;
+  padding-right: 1.8rem;
+  &:hover {
+    background: $coa-color-primary;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    .coa-ContactDetails__location-link-text {
+      color: $coa-color-white;
+    }
+    .coa-ContactDetails__location-link-arrow {
+      color: $coa-color-white;
+    }
+  }
+  &:focus {
+    background: $coa-color-darker-blue;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    .coa-ContactDetails__location-link-text {
+      color: $coa-color-white;
+    }
+    .coa-ContactDetails__location-link-arrow {
+      color: $coa-color-white;
+    }
+  }
+}
+
+.coa-ContactDetails__location-link-text {
+  color: #0049c7;
+}
+
+.coa-ContactDetails__location-link-arrow {
+  display: flex;
+  color: #0049c7;
+}
+
+.coa-ContactDetails__locationless {
+  height: 3rem;
 }

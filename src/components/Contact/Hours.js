@@ -5,6 +5,7 @@ import { findIndex, capitalize } from 'lodash';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 import { date as i18n1, contact as i18n2 } from 'js/i18n/definitions';
+import { getDaysInOrder } from 'js/helpers/date';
 
 import { hoursPropTypes } from './proptypes';
 
@@ -36,29 +37,18 @@ class Hours extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.getOrderedWeekdays(this.today).map(weekday => {
-              const hourIndex = findIndex(hours, {
-                dayOfWeekNumeric: weekday.numeric,
-              });
-              return (
-                <tr key={weekday.name}>
-                  <th scope="row">
-                    {intl.formatMessage(
-                      i18n1['weekday' + capitalize(weekday.name)],
-                    )}
-                  </th>
-                  {hourIndex > -1 && (
-                    // \u2013 is unicode for the en dash –
-                    <td>{`${hours[hourIndex].startTime}\u2013${
-                      hours[hourIndex].endTime
-                    }`}</td>
-                  )}
-                  {hourIndex === -1 && (
-                    <td>{intl.formatMessage(i18n2.closed)}</td>
-                  )}
-                </tr>
-              );
-            })}
+            {getDaysInOrder().map((day, i) => (
+              <tr key={i}>
+                <th scope="row">
+                  {intl.formatMessage(i18n1['weekday' + capitalize(day)])}
+                </th>
+                <td>
+                  {hours[day] !== null
+                    ? hours[day]
+                    : intl.formatMessage(i18n2.closed)}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

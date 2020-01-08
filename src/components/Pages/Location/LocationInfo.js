@@ -69,23 +69,25 @@ const LocationPageLocation = ({ location, image }) => {
   const imageData = image ? getImageData(image) : null;
 
   // Only include "Physical Address" if no "Mailing Address" is present
-  const addresses = location['Mailing address'] ? (
-    <Fragment>
+  // We're using street to determine if there's an address in there
+  const addresses =
+    location['Mailing address'] && location['Mailing address'].street ? (
+      <Fragment>
+        <LocationPageAddress
+          title={intl.formatMessage(i18nLocations.physicalAddress)}
+          address={location['Physical address']}
+        />
+        <LocationPageAddress
+          title={intl.formatMessage(i18nLocations.mailingAddress)}
+          address={location['Mailing address']}
+        />
+      </Fragment>
+    ) : (
       <LocationPageAddress
-        title={intl.formatMessage(i18nLocations.physicalAddress)}
+        title={intl.formatMessage(i18nLocations.address)}
         address={location['Physical address']}
       />
-      <LocationPageAddress
-        title={intl.formatMessage(i18nLocations.mailingAddress)}
-        address={location['Mailing address']}
-      />
-    </Fragment>
-  ) : (
-    <LocationPageAddress
-      title={intl.formatMessage(i18nLocations.address)}
-      address={location['Physical address']}
-    />
-  );
+    );
 
   return (
     <div className="coa-LocationPage__sub-section">
@@ -151,7 +153,9 @@ const LocationPageFacilityHours = ({ hours }) => {
 
 const LocationPageInfo = ({ phone, email, location, image, hours }) => (
   <div className="coa-LocationPage__section">
-    <LocationPageContact phone={phone} email={email} />
+    {!!phone.value && !!email.value && (
+      <LocationPageContact phone={phone} email={email} />
+    )}
     <LocationPageLocation location={location} image={image} />
     <LocationPageFacilityHours hours={hours} />
   </div>

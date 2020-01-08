@@ -98,7 +98,7 @@ export const misc = defineMessages({
   privacyPolicy: 'Privacy policy',
   contactInformation: 'Contact information',
   servicePageIsPartOfMessage: 'This service is a part of:',
-  informationPageIsPartOfMessage: 'This information is a part of:'
+  informationPageIsPartOfMessage: 'This information is a part of:',
 });
 
 export const navigation = defineMessages({
@@ -512,4 +512,5 @@ export const locations = defineMessages({
   gettingHere: 'Getting here',
   busesServicing: 'Buses servicing this area',
   closed: 'Closed',
+  locationInformation: 'Location information',
 });
