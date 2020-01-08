@@ -41,6 +41,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            live
           }
         }
       }
@@ -52,6 +53,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            live
           }
         }
       }
@@ -63,6 +65,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            live
           }
         }
       }
@@ -75,6 +78,7 @@ const getTopicPageQuery = `
             slug
             title
             pageType
+            live
           }
         }
       }
@@ -86,6 +90,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            live
           }
         }
       }
@@ -97,6 +102,7 @@ const getTopicPageQuery = `
             id
             slug
             title
+            live
           }
         }
       }
