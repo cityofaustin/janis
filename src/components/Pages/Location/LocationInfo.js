@@ -9,6 +9,7 @@ import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
   locations as i18nLocations,
+  contact as i18nContact,
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -146,6 +147,12 @@ const LocationPageFacilityHours = ({ hours }) => {
           title={intl.formatMessage(i18nLocations.standardHours)}
           content={HoursText}
         />
+        {!!hours.exceptions && (
+          <LocationPageBlock
+            title={intl.formatMessage(i18nContact.exceptions)}
+            content={hours.exceptions}
+          />
+        )}
       </div>
     </div>
   );
