@@ -52,7 +52,7 @@ class Hours extends Component {
           </tbody>
           <tfoot>
             <div className="coa-ContactHoursExceptionsTitle">
-              hours exceptions
+              {intl.formatMessage(i18n2.exceptions)}
             </div>
             <div className="coa-ContactHoursExceptions">{hours.exceptions}</div>
           </tfoot>
