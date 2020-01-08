@@ -129,6 +129,7 @@ export const cleanLocationPageHours = locationPage => {
       start2: locationPage.sundayStartTime2,
       end2: locationPage.sundayEndTime2,
     }),
+    exceptions: locationPage.hoursExceptions,
   };
 };
 

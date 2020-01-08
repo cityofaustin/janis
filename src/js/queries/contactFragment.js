@@ -50,6 +50,7 @@ const contactFragment = `
       sundayEndTime
       sundayStartTime2
       sundayEndTime2
+      hoursExceptions
     }
   }
 `;

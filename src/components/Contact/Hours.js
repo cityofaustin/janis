@@ -50,6 +50,12 @@ class Hours extends Component {
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <div className="coa-ContactHoursExceptionsTitle">
+              hours exceptions
+            </div>
+            <div className="coa-ContactHoursExceptions">{hours.exceptions}</div>
+          </tfoot>
         </table>
       </div>
     );
