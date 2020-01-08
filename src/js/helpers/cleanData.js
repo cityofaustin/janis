@@ -45,7 +45,7 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
   // Since we have 2 start times, show both sets
   return `${formatTime(start1)}–${formatTime(end1)}, ${formatTime(
     start2,
-  )} – ${formatTime(end2)}`;
+  )}–${formatTime(end2)}`;
 };
 
 export const cleanContacts = contacts => {
