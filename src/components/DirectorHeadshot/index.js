@@ -18,8 +18,8 @@ const DirectorHeadshot = ({ photo }) => {
         defaultWidth="width-640"
         widths={[]}
         extension={photoExtension.slice(1)}
-        aria-label={photo.title}
-        altText={photo.title}
+        aria-label={photo.title || 'Director Headshot'}
+        altText={photo.title || 'Director Headshot'}
       />
     </div>
   );
