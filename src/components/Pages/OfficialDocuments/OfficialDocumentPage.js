@@ -24,23 +24,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     domWindow = window
     window.onpopstate = function(event) {
       setPageNumber(getHash())
-
       // window.requestAnimationFrame( ()=> window.scroll(0,0) )
-
-      // window.requestAnimationFrame( ()=>
-      //   window.scroll({
-      //     top: 0,
-      //     left: 0,
-      //     behavior: 'smooth'
-      //   })
-      // )
-
-      // window.scroll({
-      //   top: 0,
-      //   left: 0,
-      //   behavior: 'smooth',
-      // })
-
     }
     window.location.hash = pageNumber+1
   })
@@ -48,13 +32,45 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       // setPageNumber(newPage)
-      domWindow.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
+      scrollTransition({
+        scrollDuration: 0.5, // Scroll effect duration, regardless of height, in seconds
+        fadeDelay: 0.15,
+        element: domWindow,
+        fadeElement: officialDocumentsPage,
+        callback:()=>{ setPageNumber(newPage) }
       })
     }
   }
+
+
+
+  function scrollTransition(config){
+    config.movePercent = 1 / (config.scrollDuration * 60)
+    config.bottom = config.element.pageYOffset
+    config.t = 1
+    config.fadeElement.style.opacity = 1
+    config.fadeElement.style.transition = "opacity "+config.fadeDelay+"s"
+    scrollTransitionGo(config, config.element.pageYOffset)
+  }
+
+  function scrollTransitionGo(c, moveTo){
+    if (c.t > 0) {
+      c.element.scroll(0,moveTo)
+      requestAnimationFrame(()=>{
+        c.t -= c.movePercent || 1
+        const next = (c.t < .5 ? 2*c.t*c.t : -1+(4-2*c.t)*c.t) * c.bottom // Quadratic Transtion
+        scrollTransitionGo(c,next)
+      })
+    } else {
+      c.element.scroll(0,0)
+      c.fadeElement.style.opacity = 0
+      setTimeout(function(){
+        c.callback()
+        c.fadeElement.style.opacity = 1
+      },c.fadeDelay * 1000)
+    }
+  }
+
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
@@ -134,7 +150,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   return (
     <div>
-      <div className="wrapper container-fluid">
+      <div id="officialDocumentsPage" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
@@ -145,7 +161,6 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
           {shownPages.length > 1 &&
             <div className="coa-OfficialDocumentPage_pagination-container">
-
               <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
                 <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
                 { !isMobile &&
