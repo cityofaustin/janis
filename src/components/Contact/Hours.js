@@ -29,38 +29,40 @@ class Hours extends Component {
     return (
       <div className="coa-ContactItem coa-ContactHours">
         <i className="material-icons">access_time</i>
-        <table className="usa-table-borderless">
-          <thead className="usa-sr-only">
-            <tr>
-              <th scope="col">Day</th>
-              <th scope="col">Open - Close Hours</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getDaysInOrder().map((day, i) => (
-              <tr key={i}>
-                <th scope="row">
-                  {intl.formatMessage(i18n1['weekday' + capitalize(day)])}
-                </th>
-                <td>
-                  {hours[day] !== null
-                    ? hours[day]
-                    : intl.formatMessage(i18n2.closed)}
-                </td>
+        <div className="coa-ContactHours_table-container">
+          <table className="usa-table-borderless">
+            <thead className="usa-sr-only">
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Open - Close Hours</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {getDaysInOrder().map((day, i) => (
+                <tr key={i}>
+                  <th scope="row">
+                    {intl.formatMessage(i18n1['weekday' + capitalize(day)])}
+                  </th>
+                  <td>
+                    {hours[day] !== null
+                      ? hours[day]
+                      : intl.formatMessage(i18n2.closed)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           {!!hours.exceptions && (
-            <tfoot>
+            <React.Fragment>
               <div className="coa-ContactHoursExceptionsTitle">
                 {intl.formatMessage(i18n2.exceptions)}
               </div>
               <div className="coa-ContactHoursExceptions">
                 {hours.exceptions}
               </div>
-            </tfoot>
+            </React.Fragment>
           )}
-        </table>
+        </div>
       </div>
     );
   }
