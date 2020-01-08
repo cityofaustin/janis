@@ -214,13 +214,13 @@ This will enable proper line wrapping for the :last-child.
 }
 
 .coa-ContactHoursExceptionsTitle {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: $coa-font-size-xsmall;
+  font-weight: $coa-font-semibold;
   margin-top: 1.2rem;
-  line-height: 20px;
+  line-height: $coa-line-height-xxsmall;
 }
 
 .coa-ContactHoursExceptions {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: $coa-font-size-xsmall;
+  line-height: $coa-line-height-xxsmall;
 }
