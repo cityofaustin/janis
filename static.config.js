@@ -46,7 +46,9 @@ const getAllTopicLinks = (
   if (allServicePageTopics && allServicePageTopics.edges) {
     for (const edge of allServicePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -54,7 +56,9 @@ const getAllTopicLinks = (
   if (allInformationPageTopics && allInformationPageTopics.edges) {
     for (const edge of allInformationPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -62,7 +66,9 @@ const getAllTopicLinks = (
   if (allOfficialDocumentPageTopics && allOfficialDocumentPageTopics.edges) {
     for (const edge of allOfficialDocumentPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -70,7 +76,9 @@ const getAllTopicLinks = (
   if (allGuidePageTopics && allGuidePageTopics.edges) {
     for (const edge of allGuidePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -78,7 +86,9 @@ const getAllTopicLinks = (
   if (allFormContainerTopics && allFormContainerTopics.edges) {
     for (const edge of allFormContainerTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
