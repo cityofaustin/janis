@@ -12,7 +12,7 @@ export const contact = defineMessages({
   closed: 'Closed',
   map: 'Map',
   phoneTTD: 'TDD/TTY',
-  exceptions: 'Hours exceptions',
+  exceptions: 'Special hours',
 });
 
 export const date = defineMessages({
