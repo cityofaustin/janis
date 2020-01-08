@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
+import { scrollTransition } from 'js/helpers/scrollTransition.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -24,53 +25,21 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     domWindow = window
     window.onpopstate = function(event) {
       setPageNumber(getHash())
-      // window.requestAnimationFrame( ()=> window.scroll(0,0) )
     }
     window.location.hash = pageNumber+1
   })
 
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
-      // setPageNumber(newPage)
       scrollTransition({
         scrollDuration: 0.5, // Scroll effect duration, regardless of height, in seconds
-        fadeDelay: 0.15,
+        fadeDelay: 0.15, // Combines both fade in and out. so 2x times value here for full transition.
         element: domWindow,
         fadeElement: officialDocumentsPage,
         callback:()=>{ setPageNumber(newPage) }
       })
     }
   }
-
-
-
-  function scrollTransition(config){
-    config.movePercent = 1 / (config.scrollDuration * 60)
-    config.bottom = config.element.pageYOffset
-    config.t = 1
-    config.fadeElement.style.opacity = 1
-    config.fadeElement.style.transition = "opacity "+config.fadeDelay+"s"
-    scrollTransitionGo(config, config.element.pageYOffset)
-  }
-
-  function scrollTransitionGo(c, moveTo){
-    if (c.t > 0) {
-      c.element.scroll(0,moveTo)
-      requestAnimationFrame(()=>{
-        c.t -= c.movePercent || 1
-        const next = (c.t < .5 ? 2*c.t*c.t : -1+(4-2*c.t)*c.t) * c.bottom // Quadratic Transtion
-        scrollTransitionGo(c,next)
-      })
-    } else {
-      c.element.scroll(0,0)
-      c.fadeElement.style.opacity = 0
-      setTimeout(function(){
-        c.callback()
-        c.fadeElement.style.opacity = 1
-      },c.fadeDelay * 1000)
-    }
-  }
-
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
