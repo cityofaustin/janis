@@ -23,8 +23,6 @@
 <!--- deployed links if you have them --> 
    <!--- Netlify Example: `https://janis-<PR>.netlify.com/` --->  
 
-3583-pagination-transitions
-
 # Checklist:
 - [ ] Request reviewers
 - [ ] Slack-out message for review
