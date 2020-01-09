@@ -81,12 +81,11 @@ const Service = ({ service }) => {
     <div className="coa-LocationPage__service-container">
       <div className="coa-LocationPage__service-title">{service.title}</div>
       <div className="coa-LocationPage__service-info-container">
-        <div className="coa-LocationPage__service-phone-container">
-          <table className="coa-LocationPage__table">
-            <tbody>
-              {!!service.phones &&
-                !!service.phones.length &&
-                service.phones.map(phone => (
+        {!!service.phones && !!service.phones.length && (
+          <div className="coa-LocationPage__service-phone-container">
+            <table className="coa-LocationPage__table">
+              <tbody>
+                {service.phones.map(phone => (
                   <tr>
                     {!!phone.label && (
                       <td className="coa-LocationPage__table-service-label">
@@ -98,9 +97,10 @@ const Service = ({ service }) => {
                     </td>
                   </tr>
                 ))}
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
         {Object.values(service.hours).some(x => x !== null) && (
           <ServiceHours hours={service.hours} />
         )}
