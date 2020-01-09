@@ -20,6 +20,7 @@ const getTopicCollectionPageQuery = `
         node {
           page {
             id
+            live
             slug
             title
             description
