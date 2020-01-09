@@ -15,7 +15,13 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const isMobile = useMobileQuery()
   const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
   const allDocs = officialDocuments.edges
-  const pages = buildPages()
+  // const pages = buildPages() // 🚨What it needs to return to 👇
+  //
+  //
+  let pages = buildPages()
+  pages.concat(pages)
+  //
+  //
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
@@ -133,11 +139,13 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
               <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
                 <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+                {/*
                 { !isMobile &&
                   <div className="coa-OfficialDocumentPage_text">
                     {intl.formatMessage(i18n2.previous)}
                   </div>
                 }
+                */}
               </div>
 
               {pages && shownPages.map((page, i) => (
@@ -151,11 +159,13 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
               ))}
 
               <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page">
+                {/*
                 { !isMobile &&
                   <div className="coa-OfficialDocumentPage_text right">
                     {intl.formatMessage(i18n2.next)}
                   </div>
                 }
+                */}
                 <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
               </div>
 
