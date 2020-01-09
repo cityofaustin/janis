@@ -211,24 +211,26 @@ const getTopicCollectionPageData = async (id, client) => {
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
   let topicCollection = allTopicCollections.edges[0].node;
-  topicCollection.topics = allTopicPageTopicCollections.edges.map(edge => ({
-    title: edge.node.page.title,
-    description: edge.node.page.description,
-    slug: edge.node.page.slug,
-    topiccollection: {
-      slug: topicCollection.slug,
-      theme: {
-        slug: topicCollection.theme.slug,
+  topicCollection.topics = allTopicPageTopicCollections.edges
+    .filter(edge => edge.node.page.live)
+    .map(edge => ({
+      title: edge.node.page.title,
+      description: edge.node.page.description,
+      slug: edge.node.page.slug,
+      topiccollection: {
+        slug: topicCollection.slug,
+        theme: {
+          slug: topicCollection.theme.slug,
+        },
       },
-    },
-    pages: edge.node.page.topPages.edges.map(topPageEdge => ({
-      pageType: topPageEdge.node.pageType,
-      title: topPageEdge.node.title,
-      url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-        edge.node.page.slug
-      }/${topPageEdge.node.slug}/`,
-    })),
-  }));
+      pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+        pageType: topPageEdge.node.pageType,
+        title: topPageEdge.node.title,
+        url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
+          edge.node.page.slug
+        }/${topPageEdge.node.slug}/`,
+      })),
+    }));
 
   return { tc: topicCollection };
 };
