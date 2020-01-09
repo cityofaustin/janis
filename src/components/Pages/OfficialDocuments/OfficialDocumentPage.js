@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
+import { scrollTransition } from 'js/animations/scrollTransition.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -18,14 +19,27 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+  let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
   useEffect(() => {
+    domWindow = window
     window.onpopstate = function(event) {
       setPageNumber(getHash())
-      window.requestAnimationFrame( ()=> window.scroll(0,0) )
     }
     window.location.hash = pageNumber+1
   })
+
+  function changePage(newPage) {
+    if (newPage >= 0 && newPage <= pages.length - 1) {
+      scrollTransition({
+        scrollDuration: 0.75, // Scroll effect duration, regardless of height, in seconds
+        fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
+        element: domWindow,
+        fadeElement: officialDocumentsPage,
+        callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
+      })
+    }
+  }
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
@@ -103,15 +117,9 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
     return shownPages
   }
 
-  function changePage(newPage) {
-    if (newPage >= 0 && newPage <= pages.length - 1) {
-      setPageNumber(newPage)
-    }
-  }
-
   return (
     <div>
-      <div className="wrapper container-fluid">
+      <div id="officialDocumentsPage" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
