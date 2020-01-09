@@ -2,7 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
-import { scrollTransition } from 'js/helpers/scrollTransition.js';
+import { scrollTransition } from 'js/animations/scrollTransition.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -32,8 +32,8 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   function changePage(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
       scrollTransition({
-        scrollDuration: 0.5, // Scroll effect duration, regardless of height, in seconds
-        fadeDelay: 0.15, // for both fade in & out. so 2x times value here for full transition.
+        scrollDuration: 0.75, // Scroll effect duration, regardless of height, in seconds
+        fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         element: domWindow,
         fadeElement: officialDocumentsPage,
         callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
