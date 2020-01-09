@@ -82,7 +82,8 @@ export const cleanContacts = contacts => {
 
 export const cleanLocationPageJanisUrl = janisUrl => {
   // quick fix for urls until we get localized urls working in joplin
-  return janisUrl.split('en')[1];
+
+  return janisUrl.split('/en/')[1];
 };
 
 export const cleanLocationPageHours = locationPage => {
