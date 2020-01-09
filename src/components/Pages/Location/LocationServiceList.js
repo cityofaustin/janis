@@ -84,18 +84,20 @@ const Service = ({ service }) => {
         <div className="coa-LocationPage__service-phone-container">
           <table className="coa-LocationPage__table">
             <tbody>
-              {service.phones.map(phone => (
-                <tr>
-                  {!!phone.label && (
-                    <td className="coa-LocationPage__table-service-label">
-                      {phone.label}
+              {!!service.phones &&
+                !!service.phones.length &&
+                service.phones.map(phone => (
+                  <tr>
+                    {!!phone.label && (
+                      <td className="coa-LocationPage__table-service-label">
+                        {phone.label}
+                      </td>
+                    )}
+                    <td>
+                      <a href={`tel:${phone.number}`}>{phone.number}</a>
                     </td>
-                  )}
-                  <td>
-                    <a href={`tel:${phone.number}`}>{phone.number}</a>
-                  </td>
-                </tr>
-              ))}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
