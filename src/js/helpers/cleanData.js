@@ -173,16 +173,18 @@ export const cleanLocationPage = locationPage => {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
-      phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
-        phoneEdge => {
-          return {
-            label: phoneEdge.node.phoneDescription,
-            number: parsePhoneNumberFromString(
-              phoneEdge.node.phoneNumber,
-            ).formatNational(),
-          };
-        },
-      ),
+      phones:
+        edge.node.relatedService.contacts.edges.length &&
+        edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+          phoneEdge => {
+            return {
+              label: phoneEdge.node.phoneDescription,
+              number: parsePhoneNumberFromString(
+                phoneEdge.node.phoneNumber,
+              ).formatNational(),
+            };
+          },
+        ),
     };
   });
 
