@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { contact as i18n } from 'js/i18n/definitions';
+import { contact as i18n, locations as i18n2 } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
 import PhonesList from './Phones';
@@ -26,28 +26,52 @@ const ContactDetails = ({ contacts, intl }) => (
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
     {contacts.map((c, index) => (
-      <ContactDetailsEntry contact={c} key={index} />
+      <ContactDetailsEntry contact={c} key={index} intl={intl} />
     ))}
   </div>
 );
 
 const ContactDetailsEntry = ({
-  contact: { name, phoneNumber, email, location, hours, socialMedia },
+  contact: {
+    name,
+    phoneNumber,
+    email,
+    location,
+    hours,
+    socialMedia,
+    locationPageSlug,
+  },
+  intl,
 }) => (
   <React.Fragment>
     {/* We want to keep this component easy to read and streamlined, so we are
       avoiding complicated functions in this return.
       Consider breaking into another component and calling that here*/}
-    <h3 className="coa-ContactDetails__name">{name}</h3>
-    {location && <Address location={location} />}
-    {hours && !!hours.length && <Hours hours={hours} />}
     {!!phoneNumber && !!phoneNumber.edges.length && (
       <PhonesList phoneNumbers={phoneNumber} />
     )}
     {email && <Email email={email} />}
+    {location && <Address location={location} />}
+    {hours && <Hours hours={hours} />}
     {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
     {socialMedia && socialMedia.map(url => <SocialMediaLink url={url.value} />)}
+
+    {locationPageSlug ? (
+      <a
+        href={`/${intl.locale}/location/${locationPageSlug}/`}
+        className="coa-ContactDetails__location-link"
+      >
+        <div className="coa-ContactDetails__location-link-text">
+          {intl.formatMessage(i18n2.locationInformation)}
+        </div>
+        <div className="coa-ContactDetails__location-link-arrow">
+          <i class="material-icons">arrow_forward</i>
+        </div>
+      </a>
+    ) : (
+      <div className="coa-ContactDetails__locationless" />
+    )}
   </React.Fragment>
 );
 

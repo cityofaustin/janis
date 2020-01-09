@@ -1,38 +1,9 @@
-import phoneFragment from './phoneFragment';
+import conciseContactFragment from './conciseContactFragment';
 
 const servicePageFragment = `
   fragment servicePageInfo on ServicePageNode {
     id
     title
-    slug
-    topics {
-      edges {
-        node {
-          topic {
-            id,
-            slug,
-            title,
-            description,
-            topiccollections {
-              edges {
-                node {
-                  topiccollection {
-                    id
-                    title
-                    slug
-                    theme {
-                      id
-                      text
-                      slug
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     relatedDepartments {
       edges {
         node {
@@ -44,39 +15,36 @@ const servicePageFragment = `
         }
       }
     }
-    steps
+    steps {
+      value
+      stepType
+      locations {
+        locationPage {
+          id
+          slug
+          title
+          physicalStreet
+          physicalUnit
+          physicalCity
+          physicalState
+          physicalZip
+        }
+      }
+    }
+    dynamicContent
     additionalContent
     shortDescription
     contacts {
       edges {
         node {
           contact {
-            name
-            email
-            ${phoneFragment}
-            socialMedia
-            hours {
-              edges {
-                node {
-                  dayOfWeek
-                  startTime
-                  endTime
-                }
-              }
-            }
-            location {
-              name
-              street
-              city
-              state
-              zip
-              country
-            }
+            ...contactInfo
           }
         }
       }
     }
   }
+  ${conciseContactFragment}
 `;
 
 export default servicePageFragment;
