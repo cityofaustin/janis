@@ -46,10 +46,10 @@
   position: relative;
   height: 48px;
   top: -1px;
-  // @include mobile {
-  //   width: 38px;
-  //   min-width: 38px;
-  // }
+  @include mobile {
+    width: 38px;
+    min-width: 38px;
+  }
 }
 
 .coa-OfficialDocumentPage_page.ellipsis {
