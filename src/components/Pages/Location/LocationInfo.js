@@ -38,14 +38,18 @@ const LocationPageContact = ({ phone, email }) => {
         {intl.formatMessage(i18nLocations.contact)}
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
-        <LocationPageBlock
-          title={intl.formatMessage(i18nLocations.phone)}
-          content={phoneContent}
-        />
-        <LocationPageBlock
-          title={intl.formatMessage(i18nLocations.emailAddress)}
-          content={emailContent}
-        />
+        {!!phone.value && (
+          <LocationPageBlock
+            title={intl.formatMessage(i18nLocations.phone)}
+            content={phoneContent}
+          />
+        )}
+        {!!email.value && (
+          <LocationPageBlock
+            title={intl.formatMessage(i18nLocations.emailAddress)}
+            content={emailContent}
+          />
+        )}
       </div>
     </div>
   );
@@ -160,7 +164,7 @@ const LocationPageFacilityHours = ({ hours }) => {
 
 const LocationPageInfo = ({ phone, email, location, image, hours }) => (
   <div className="coa-LocationPage__section">
-    {!!phone.value && !!email.value && (
+    {(!!phone.value || !!email.value) && (
       <LocationPageContact phone={phone} email={email} />
     )}
     <LocationPageLocation location={location} image={image} />
