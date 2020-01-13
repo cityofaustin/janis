@@ -13,11 +13,11 @@ const Facebook = ({ url }) => {
       </div>
       <div className="coa-ContactItem_content">
         <ExternalLink to={url}>
-          @{matches[2].replace('/', '')}
+          fb.com/{matches[2].replace('/', '')}
         </ExternalLink>
       </div>
     </div>
   );
-}
+};
 
 export default Facebook;

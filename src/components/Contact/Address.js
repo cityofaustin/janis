@@ -7,6 +7,7 @@ const Address = ({ location }) => (
   <div className="coa-ContactItem coa-ContactAddress">
     <i className="material-icons">place</i>
     <div>
+      <span className="coa-ContactAddressTitle">{location.title}</span>
       <span>{location.street}</span>
       <span>
         {location.city}, {location.state} {location.zip}

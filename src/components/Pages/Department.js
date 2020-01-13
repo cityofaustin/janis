@@ -34,8 +34,6 @@ const Department = ({ department, intl }) => {
       topServices,
       relatedLinks,
     },
-    // not the biggest fan of this logic but
-    // it gets previews working with hooks
   } = department ? { department } : useRouteData();
 
   const RelatedContent = () => (

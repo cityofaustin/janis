@@ -6,6 +6,7 @@
   "contact.map": "Map",
   "contact.phoneTTD": "TDD/TTY",
   "contact.questionsTitle": "Contact information",
+  "contact.exceptions": "Special hours",
   "date.weekdayFriday": "Friday",
   "date.weekdayMonday": "Monday",
   "date.weekdaySaturday": "Saturday",
@@ -107,5 +108,6 @@
   "locations.closeHours": "Close hours",
   "locations.gettingHere": "Getting here",
   "locations.busesServicing": "Buses servicing this area",
-  "locations.closed": "Closed"
+  "locations.closed": "Closed",
+  "locations.locationInformation": "Location information"
 }

@@ -39,13 +39,13 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
 
   // If we don't have a second start time, just show the first ones
   if (start2 === null) {
-    return `${formatTime(start1)}-${formatTime(end1)}`;
+    return `${formatTime(start1)}–${formatTime(end1)}`;
   }
 
   // Since we have 2 start times, show both sets
-  return `${formatTime(start1)}-${formatTime(end1)}, ${formatTime(
+  return `${formatTime(start1)}–${formatTime(end1)}, ${formatTime(
     start2,
-  )}-${formatTime(end2)}`;
+  )}–${formatTime(end2)}`;
 };
 
 export const cleanContacts = contacts => {
@@ -59,21 +59,30 @@ export const cleanContacts = contacts => {
     // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, contact.contact);
 
-    if (cleaned.hours && cleaned.hours.edges) {
-      cleaned.hours = cleaned.hours.edges.map(({ node: hours }) => ({
-        dayOfWeek: hours.dayOfWeek.toLowerCase(),
-        dayOfWeekNumeric: getWeekday(hours.dayOfWeek),
-        startTime: formatTime(hours.startTime),
-        endTime: formatTime(hours.endTime),
-      }));
+    if (cleaned.locationPage) {
+      cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+      cleaned.location = {
+        title: cleaned.locationPage.title,
+        street: cleaned.locationPage.physicalUnit
+          ? `${cleaned.locationPage.physicalStreet} ${
+              cleaned.locationPage.physicalUnit
+            }`
+          : cleaned.locationPage.physicalStreet,
+        city: cleaned.locationPage.physicalCity,
+        state: cleaned.locationPage.physicalState,
+        zip: cleaned.locationPage.physicalZip,
+      };
+
+      cleaned.locationPageSlug = cleaned.locationPage.slug;
     }
+
     return cleaned;
   });
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
   // quick fix for urls until we get localized urls working in joplin
-  return janisUrl.split('en')[1];
+  return `/${janisUrl.split('/en/')[1]}`;
 };
 
 export const cleanLocationPageHours = locationPage => {
@@ -120,6 +129,7 @@ export const cleanLocationPageHours = locationPage => {
       start2: locationPage.sundayStartTime2,
       end2: locationPage.sundayEndTime2,
     }),
+    exceptions: locationPage.hoursExceptions,
   };
 };
 
@@ -163,16 +173,18 @@ export const cleanLocationPage = locationPage => {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
-      phones: edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
-        phoneEdge => {
-          return {
-            label: phoneEdge.node.phoneDescription,
-            number: parsePhoneNumberFromString(
-              phoneEdge.node.phoneNumber,
-            ).formatNational(),
-          };
-        },
-      ),
+      phones:
+        edge.node.relatedService.contacts.edges.length &&
+        edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+          phoneEdge => {
+            return {
+              label: phoneEdge.node.phoneDescription,
+              number: parsePhoneNumberFromString(
+                phoneEdge.node.phoneNumber,
+              ).formatNational(),
+            };
+          },
+        ),
     };
   });
 

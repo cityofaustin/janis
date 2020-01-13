@@ -46,7 +46,9 @@ const getAllTopicLinks = (
   if (allServicePageTopics && allServicePageTopics.edges) {
     for (const edge of allServicePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -54,7 +56,9 @@ const getAllTopicLinks = (
   if (allInformationPageTopics && allInformationPageTopics.edges) {
     for (const edge of allInformationPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -62,7 +66,9 @@ const getAllTopicLinks = (
   if (allOfficialDocumentPageTopics && allOfficialDocumentPageTopics.edges) {
     for (const edge of allOfficialDocumentPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -70,7 +76,9 @@ const getAllTopicLinks = (
   if (allGuidePageTopics && allGuidePageTopics.edges) {
     for (const edge of allGuidePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -78,7 +86,9 @@ const getAllTopicLinks = (
   if (allFormContainerTopics && allFormContainerTopics.edges) {
     for (const edge of allFormContainerTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -201,24 +211,26 @@ const getTopicCollectionPageData = async (id, client) => {
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
   let topicCollection = allTopicCollections.edges[0].node;
-  topicCollection.topics = allTopicPageTopicCollections.edges.map(edge => ({
-    title: edge.node.page.title,
-    description: edge.node.page.description,
-    slug: edge.node.page.slug,
-    topiccollection: {
-      slug: topicCollection.slug,
-      theme: {
-        slug: topicCollection.theme.slug,
+  topicCollection.topics = allTopicPageTopicCollections.edges
+    .filter(edge => edge.node.page.live)
+    .map(edge => ({
+      title: edge.node.page.title,
+      description: edge.node.page.description,
+      slug: edge.node.page.slug,
+      topiccollection: {
+        slug: topicCollection.slug,
+        theme: {
+          slug: topicCollection.theme.slug,
+        },
       },
-    },
-    pages: edge.node.page.topPages.edges.map(topPageEdge => ({
-      pageType: topPageEdge.node.pageType,
-      title: topPageEdge.node.title,
-      url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-        edge.node.page.slug
-      }/${topPageEdge.node.slug}/`,
-    })),
-  }));
+      pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+        pageType: topPageEdge.node.pageType,
+        title: topPageEdge.node.title,
+        url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
+          edge.node.page.slug
+        }/${topPageEdge.node.slug}/`,
+      })),
+    }));
 
   return { tc: topicCollection };
 };
