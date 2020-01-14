@@ -11,6 +11,7 @@ import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import UserFeedback from 'components/UserFeedback';
 
 const Topic = ({ topic, intl }) => {
   const {
@@ -59,6 +60,7 @@ const Topic = ({ topic, intl }) => {
         </div>
       </div>
       <RelatedToMobile relatedTo={contextualNavData.relatedTo} offeredBy={[]} />
+      <UserFeedback />
     </Fragment>
   );
 };

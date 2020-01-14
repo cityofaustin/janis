@@ -9,6 +9,7 @@ import PageNotificationBanner from 'components/PageNotificationBanner';
 import HeroHome from 'components/HeroHome';
 import ExternalLink from 'components/ExternalLink';
 import SectionHeader from 'components/SectionHeader';
+import UserFeedback from 'components/UserFeedback';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
@@ -31,10 +32,13 @@ const Home = ({ intl }) => {
         title={intl.formatMessage(i18n3.checkOutServices)}
         tiles={topServices}
       />
+
+
       {/* We are leaving it here because we might need it again.*/}
       {/*<PageNotificationBanner>*/}
       {/*  <WorkInProgress />*/}
       {/*</PageNotificationBanner>*/}
+      <UserFeedback />
     </div>
   );
 };

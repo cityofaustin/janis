@@ -17,6 +17,7 @@ import { printSections } from 'components/Pages/Guide/helpers.js';
 import { hyphenate } from './helpers';
 
 import guidePagePlaceholder from 'images/guide_page_placeholder.png';
+import UserFeedback from 'components/UserFeedback';
 
 function Guide({ guidePage, intl }) {
   const {
@@ -292,6 +293,7 @@ function Guide({ guidePage, intl }) {
           </div>
         </div>
       </div>
+      <UserFeedback />
     </div>
   );
 }

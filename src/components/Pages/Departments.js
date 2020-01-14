@@ -22,6 +22,7 @@ const Departments = ({ intl }) => {
       <div className="wrapper container-fluid">
         <TileGroup tiles={departments} />
       </div>
+      <UserFeedback />
     </div>
   );
 };

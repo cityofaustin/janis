@@ -16,6 +16,7 @@ import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
+import UserFeedback from 'components/UserFeedback';
 
 const InformationPage = ({ informationPage, intl }) => {
   const {
@@ -101,6 +102,7 @@ const InformationPage = ({ informationPage, intl }) => {
           />
         )}
       </div>
+      <UserFeedback />
     </div>
   );
 };

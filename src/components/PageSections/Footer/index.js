@@ -7,7 +7,6 @@ import { misc as i18n } from 'js/i18n/definitions';
 import FormFeedback from 'components/FormFeedback';
 import ExternalLink from 'components/ExternalLink';
 import WorkInProgress from 'components/WorkInProgress';
-import UserFeedback from 'components/UserFeedback';
 
 import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
@@ -29,7 +28,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = ({ intl }) => (
   <footer>
-    <UserFeedback />
+
     <div className="coa-Footer">
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">

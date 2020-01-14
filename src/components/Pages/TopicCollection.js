@@ -8,6 +8,7 @@ import { topics as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import TopicCollectionCards from '../PageSections/TopicCollectionCards';
+import UserFeedback from 'components/UserFeedback';
 
 const TopicCollection = ({ tc, intl }) => {
   const {
@@ -32,15 +33,16 @@ const TopicCollection = ({ tc, intl }) => {
           </div>
         </div>
       </div>
+      <UserFeedback />
     </div>
   );
 };
 
 TopicCollection.propTypes = {
-  title:PropTypes.string, 
-  description:PropTypes.string, 
-  theme:PropTypes.string, 
-  topics:PropTypes.array, 
+  title:PropTypes.string,
+  description:PropTypes.string,
+  theme:PropTypes.string,
+  topics:PropTypes.array,
   slug:PropTypes.string,
 }
 
