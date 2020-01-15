@@ -15,7 +15,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
-  const maxPagesShown = isMobile ? maxPagesMobile ? maxPagesDesktop;
+  const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
   const allDocs = officialDocuments.edges
   const pages = buildPages()
   const [ pageNumber, setPageNumber ] = useState(getHash())
