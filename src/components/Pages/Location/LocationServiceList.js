@@ -124,7 +124,7 @@ const Service = ({ service }) => {
         {Object.values(service.hours).some(x => x !== null) && (
           <ServiceHours hours={service.hours} />
         )}
-        <HoursExceptions exceptions={service.hours.exceptions}/>
+        {!!service.hours.exceptions && <HoursExceptions exceptions={service.hours.exceptions}/>}
       </div>
       <a className="coa-LocationPage__service-link-link" href={service.url}>
         <div className="coa-LocationPage__service-link">
