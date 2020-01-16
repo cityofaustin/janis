@@ -172,6 +172,7 @@ export const cleanLocationPage = locationPage => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
+      exceptions: edge.node.relatedService.hoursExceptions,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
         edge.node.relatedService.contacts.edges.length &&
