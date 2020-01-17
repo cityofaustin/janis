@@ -55,6 +55,12 @@
   border-left: 1px solid $coa-color-gray-light;
   border-right: 1px solid $coa-color-gray-light;
 
+  &.coa-Tile--blue {
+    border-top: 1px solid $coa-color-primary;
+    border-left: 1px solid $coa-color-primary;
+    border-right: 1px solid $coa-color-primary;
+  }
+
   padding: $coa-spacing-small $coa-spacing-small;
 
   &:hover {
@@ -71,6 +77,9 @@
 
   &:first-child {
     border-top: 1px solid $coa-color-gray-light;
+    &.coa-Tile--blue {
+      border-top: 1px solid $coa-color-primary;
+    }
     &:hover {
       border-color: $coa-color-primary;
     }
@@ -81,6 +90,9 @@
 
   &:last-child {
     border-bottom: 1px solid $coa-color-gray-light;
+    &.coa-Tile--blue {
+      border-bottom: 1px solid $coa-color-primary;
+    }
     &:hover {
       border: 1px solid $coa-color-primary;
     }
@@ -133,4 +145,10 @@
   padding-right: $coa-spacing-md-small;
   margin-right: $coa-spacing-md-small;
   border-right: 1px solid $coa-color-dark-grey;
+}
+
+.coa-Tile--small-header {
+  font-size: 18px;
+  font-weight: bolder;
+  padding-bottom: 7px;
 }

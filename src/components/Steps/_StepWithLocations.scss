@@ -1,0 +1,60 @@
+.coa-StepWithLocations__container {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.coa-StepWithLocations__location {
+  display: flex;
+  border: 1px solid #c6cace;
+  padding: 1.4rem;
+  border-radius: 4px;
+  justify-content: space-between;
+  text-decoration: none;
+  &:hover {
+    background: $coa-color-primary;
+    .coa-StepWithLocations__location-title {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-address {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-arrow {
+      color: $coa-color-white;
+    }
+  }
+  &:focus {
+    background: $coa-color-darker-blue;
+    .coa-StepWithLocations__location-title {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-address {
+      color: $coa-color-white;
+    }
+    .coa-StepWithLocations__location-arrow {
+      color: $coa-color-white;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 8px; // magic spacing number not used anywhere else
+  }
+}
+
+.coa-StepWithLocations__location-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2d2e2f;
+}
+
+.coa-StepWithLocations__location-address {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  color: #3d4551;
+}
+
+.coa-StepWithLocations__location-arrow {
+  margin-top: 1rem;
+  color: #0049c7;
+}

@@ -85,7 +85,22 @@ const guidePageFragment = `
           title
           shortDescription
           additionalContent
-          steps
+          steps {
+            value
+            stepType
+            locations {
+              locationPage {
+                id
+                slug
+                title
+                physicalStreet
+                physicalUnit
+                physicalCity
+                physicalState
+                physicalZip
+              }
+            }
+          }
           slug
           topics {
             edges {

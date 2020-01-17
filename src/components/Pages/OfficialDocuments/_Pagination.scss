@@ -3,6 +3,7 @@
   border-top: 1px solid $coa-color-gray-lighter;
   padding-top: 15px;
   width: 740px;
+  text-align: center;
   :first-child {
     padding-left: 0px;
     margin-left: 0px;
@@ -15,8 +16,7 @@
   height: 48px;
   min-width: 48px;
   padding: 5px;
-  margin: 2px;
-  border-radius: 4px;
+  margin-left: -1px;
   font-size: 1.6rem;
   line-height: 3.2rem;
   font-weight: 500;
@@ -29,17 +29,34 @@
   user-select: none; /* Standard syntax */
 }
 
+.coa-OfficialDocumentPage_page.previous {
+  border-radius: 4px 0px 0px 4px;
+  border: none;
+}
+
+.coa-OfficialDocumentPage_page.next {
+  border-radius: 0px 4px 4px 0px;
+  border: none;
+}
+
 .coa-OfficialDocumentPage_page.number-container {
   background-color: rgba(0,0,0,0);
   color: #212121;
+  border: solid #F0F0F0 1px;
   position: relative;
   height: 48px;
-  top: -2px;
+  top: -1px;
   @include mobile {
     width: 38px;
     min-width: 38px;
   }
 }
+
+.coa-OfficialDocumentPage_page.ellipsis {
+  border: none;
+  pointer-events: none;
+}
+
 
 .coa-OfficialDocumentPage_number {
   font-weight: 900;
@@ -55,16 +72,9 @@
 
 .coa-OfficialDocumentPage_page-chevron {
   position: relative;
-  width: 46px;
   height: 24px;
   top: 7px;
   left: 1px;
-}
-
-.coa-OfficialDocumentPage_page-chevron.right {
-  width: 42px;
-  left: inherit;
-  right: -1px;
 }
 
 .coa-OfficialDocumentPage_text {
@@ -83,12 +93,12 @@
   padding-right: 12px;
 }
 
-.coa-OfficialDocumentPage_page:hover  {
+.coa-OfficialDocumentPage_page:hover {
   background-color: #0049C7;
   color: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page.active:hover  {
+.coa-OfficialDocumentPage_page.active:hover {
   background-color: #0049C7;
   color: #FFFFFF;
 }
@@ -97,7 +107,7 @@
   fill: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page .coa-CheveronLeftBlue:hover{
+.coa-OfficialDocumentPage_page .coa-CheveronLeftBlue:hover {
   fill: rgba(0,0,0,0);
 }
 
@@ -105,7 +115,7 @@
   fill: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page .coa-CheveronRightBlue:hover{
+.coa-OfficialDocumentPage_page .coa-CheveronRightBlue:hover {
   fill: rgba(0,0,0,0);
 }
 

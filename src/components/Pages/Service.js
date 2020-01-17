@@ -14,6 +14,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
 
 const Service = ({ service, intl }) => {
   const {
@@ -30,6 +31,7 @@ const Service = ({ service, intl }) => {
       relatedDepartments,
       coaGlobal,
       contextualNavData,
+      pageIsPartOf,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
@@ -49,24 +51,36 @@ const Service = ({ service, intl }) => {
             offeredBy={contextualNavData.offeredBy}
           />
         )}
-        <PageHeader contentType={'service'} description={shortDescription}>
-          {title}
-        </PageHeader>
+
+        {!pageIsPartOf ? (
+          <PageHeader contentType={'service'} description={shortDescription}>
+            {title}
+          </PageHeader>
+        ) : (
+          <PageIsPartOfContainer
+            pageIsPartOf={pageIsPartOf}
+            contentType={'service'}
+            description={shortDescription}
+            title={title}
+            intl={intl}
+          />
+        )}
+
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-                  {(steps && !!steps.length) && (
+                  {steps &&
+                    !!steps.length &&
                     //just 1 step? don't display steps in list (ul)
-                    steps.length === 1 ? (
+                    (steps.length === 1 ? (
                       <Steps steps={steps} />
                     ) : (
                       <Fragment>
                         <Steps steps={steps} />
                       </Fragment>
-                    )
-                  )}
+                    ))}
 
                   {!!dynamicContent &&
                     dynamicContent.map(content => (
@@ -74,25 +88,25 @@ const Service = ({ service, intl }) => {
                     ))}
 
                   {additionalContent && (
-                    <HtmlFromAdmin
-                      content={additionalContent}
-                    />
+                    <HtmlFromAdmin content={additionalContent} />
                   )}
-                  <div className="coa-Page__contacts-mobile">
-                    {!!contacts &&
-                      !!contacts.length && (
-                        <ContactDetails contacts={contacts} />
-                      )}
-                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts &&
-                !!contacts.length && <ContactDetails contacts={contacts} />}
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contacts={contacts} />
+              )}
             </div>
+          </div>
+        </div>
+        <div className="coa-Page__contacts-mobile">
+          <div className="col-xs-12 col-md-10">
+            {!!contacts && !!contacts.length && (
+              <ContactDetails contacts={contacts} />
+            )}
           </div>
         </div>
         <RelatedToMobile

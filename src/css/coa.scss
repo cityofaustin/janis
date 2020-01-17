@@ -41,6 +41,7 @@
 @import 'components/PageSections/Menu/SubmenuItem';
 @import 'components/PageSections/Menu/FullSiteMenu';
 @import 'components/PageSections/ThreeOneOne/ThreeOneOne';
+@import 'components/PageSections/PageIsPartOfContainer/PageIsPartOfContainer';
 @import 'components/PageNotificationBanner/PageNotificationBanner';
 @import 'components/Recollect/Recollect';
 @import 'components/SectionHeader/SectionHeader';
@@ -49,6 +50,7 @@
 @import 'components/Steps/StepDetail';
 @import 'components/Steps/StepDetailGroup';
 @import 'components/Steps/StepOption';
+@import 'components/Steps/StepWithLocations';
 @import 'components/Tiles/Tile';
 @import 'components/Tiles/TileGroup';
 @import 'components/Trashy/Trashy';
@@ -62,3 +64,5 @@
 @import 'components/Pages/OfficialDocuments/_Pagination';
 @import 'components/Pages/Guide/Guide';
 @import 'components/Pages/Form';
+@import 'components/PageSections/PendingTranslation/PendingTranslation';
+@import 'components/Pages/Location/Location';

@@ -22,12 +22,15 @@ import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicData
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
+import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
+import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 
 import {
   cleanNavigation,
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
+  cleanLocationPage,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -43,7 +46,9 @@ const getAllTopicLinks = (
   if (allServicePageTopics && allServicePageTopics.edges) {
     for (const edge of allServicePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -51,7 +56,9 @@ const getAllTopicLinks = (
   if (allInformationPageTopics && allInformationPageTopics.edges) {
     for (const edge of allInformationPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -59,7 +66,9 @@ const getAllTopicLinks = (
   if (allOfficialDocumentPageTopics && allOfficialDocumentPageTopics.edges) {
     for (const edge of allOfficialDocumentPageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -67,7 +76,9 @@ const getAllTopicLinks = (
   if (allGuidePageTopics && allGuidePageTopics.edges) {
     for (const edge of allGuidePageTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -75,7 +86,9 @@ const getAllTopicLinks = (
   if (allFormContainerTopics && allFormContainerTopics.edges) {
     for (const edge of allFormContainerTopics.edges) {
       if (edge.node) {
-        allLinks.push(edge.node.page);
+        if (edge.node.page.live) {
+          allLinks.push(edge.node.page);
+        }
       }
     }
   }
@@ -198,24 +211,26 @@ const getTopicCollectionPageData = async (id, client) => {
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
   let topicCollection = allTopicCollections.edges[0].node;
-  topicCollection.topics = allTopicPageTopicCollections.edges.map(edge => ({
-    title: edge.node.page.title,
-    description: edge.node.page.description,
-    slug: edge.node.page.slug,
-    topiccollection: {
-      slug: topicCollection.slug,
-      theme: {
-        slug: topicCollection.theme.slug,
+  topicCollection.topics = allTopicPageTopicCollections.edges
+    .filter(edge => edge.node.page.live)
+    .map(edge => ({
+      title: edge.node.page.title,
+      description: edge.node.page.description,
+      slug: edge.node.page.slug,
+      topiccollection: {
+        slug: topicCollection.slug,
+        theme: {
+          slug: topicCollection.theme.slug,
+        },
       },
-    },
-    pages: edge.node.page.topPages.edges.map(topPageEdge => ({
-      pageType: topPageEdge.node.pageType,
-      title: topPageEdge.node.title,
-      url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-        edge.node.page.slug
-      }/${topPageEdge.node.slug}/`,
-    })),
-  }));
+      pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+        pageType: topPageEdge.node.pageType,
+        title: topPageEdge.node.title,
+        url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
+          edge.node.page.slug
+        }/${topPageEdge.node.slug}/`,
+      })),
+    }));
 
   return { tc: topicCollection };
 };
@@ -321,6 +336,7 @@ const getServicePageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides,
 ) => {
   const { allServicePages } = await client.request(getServicePageQuery, {
     id: id,
@@ -339,6 +355,11 @@ const getServicePageData = async (
     client,
   );
 
+  if (pagesOfGuides && pagesOfGuides[id]) {
+    // We're checking if this id is part of guide page because it may not be published and draw and error.
+    service.pageIsPartOf = pagesOfGuides[id];
+  }
+
   return { service: service };
 };
 
@@ -348,6 +369,7 @@ const getInformationPageData = async (
   parent_topic,
   grandparent_topic_collection,
   client,
+  pagesOfGuides,
 ) => {
   const { allInformationPages } = await client.request(
     getInformationPageQuery,
@@ -366,6 +388,13 @@ const getInformationPageData = async (
     informationPage.relatedDepartments,
     client,
   );
+
+  if (pagesOfGuides && pagesOfGuides[id]) {
+    // We're checking if this id is part of guide page because it may not be published and draw and error.
+    informationPage.pageIsPartOf = pagesOfGuides[id];
+  }
+
+  // informationPage.pageIsPartOf = pagesOfGuides[id];
 
   return { informationPage: informationPage };
 };
@@ -409,7 +438,9 @@ const getFormContainerData = async (
   grandparent_topic_collection,
   client,
 ) => {
-  const { allFormContainers } = await client.request(getFormContainerQuery, { id: id });
+  const { allFormContainers } = await client.request(getFormContainerQuery, {
+    id: id,
+  });
 
   let formContainer = allFormContainers.edges[0].node;
 
@@ -514,7 +545,17 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-const buildPageAtUrl = async (pageAtUrlInfo, client) => {
+const getLocationPageData = async (id, client) => {
+  const { allLocationPages } = await client.request(getLocationPageQuery, {
+    id: id,
+  });
+
+  let locationPage = allLocationPages.edges[0].node;
+
+  return { locationPage: cleanLocationPage(locationPage) };
+};
+
+const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
     type,
@@ -566,6 +607,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides.servicePage,
         ),
     };
   }
@@ -582,6 +624,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
           parent_topic,
           grandparent_topic_collection,
           client,
+          pagesOfGuides.informationPage,
         ),
     };
   }
@@ -642,6 +685,57 @@ const buildPageAtUrl = async (pageAtUrlInfo, client) => {
         ),
     };
   }
+
+  // If we're a location page
+  if (type === 'location page') {
+    return {
+      path: url,
+      template: 'src/components/Pages/Location',
+      getData: () => getLocationPageData(id, client),
+    };
+  }
+};
+
+const getPagesOfGuidesData = async client => {
+  const { allGuidePages } = await client.request(getAllGuidePagesSectionsQuery);
+
+  const pagesOfGuidesData = {};
+
+  allGuidePages.edges.map(guidePage => {
+    if (
+      guidePage.node.sections.length > 0 &&
+      guidePage.node.topics.edges.length > 0
+    ) {
+      const url =
+        '/' +
+        [
+          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+            .node.topiccollection.theme.slug,
+          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+            .node.topiccollection.slug,
+          guidePage.node.topics.edges[0].node.topic.slug,
+          guidePage.node.slug,
+        ].join('/');
+      guidePage.node.sections.map(section => {
+        for (const page in section.pages[0]) {
+          if (section.pages[0][page]) {
+            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {};
+            if (!pagesOfGuidesData[page][section.pages[0][page].id])
+              pagesOfGuidesData[page][section.pages[0][page].id] = [];
+            pagesOfGuidesData[page][section.pages[0][page].id].push({
+              pageName: section.heading,
+              pageType: section.pages[0][page].pageType,
+              ofPageType: guidePage.node.pageType,
+              guidePageTitle: guidePage.node.title,
+              guidePageUrl: url,
+            });
+          }
+        }
+      });
+    }
+  });
+
+  return pagesOfGuidesData;
 };
 
 const makeAllPages = async (langCode, incrementalPageId) => {
@@ -692,8 +786,12 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     type: `departments`,
   });
 
+  const pagesOfGuidesData = await getPagesOfGuidesData(client);
+
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo => buildPageAtUrl(pageAtUrlInfo, client)),
+    parsedStructure.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData),
+    ),
   );
 
   const data = {

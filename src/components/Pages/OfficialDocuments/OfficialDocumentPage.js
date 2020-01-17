@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react'
 import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
+import { scrollTransition } from 'js/animations/scrollTransition.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -12,20 +13,35 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   const documentsPerPage = 10
   const isMobile = useMobileQuery()
-  const maxPagesShown = isMobile ? 4 : 7 // Desktop : Mobile (pagination pages shown)
+  const maxPagesMobile = 5;
+  const maxPagesDesktop = 7;
+  const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
   const allDocs = officialDocuments.edges
   const pages = buildPages()
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
+  let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
   useEffect(() => {
+    domWindow = window
     window.onpopstate = function(event) {
       setPageNumber(getHash())
-      window.requestAnimationFrame( ()=> window.scroll(0,0) )
     }
     window.location.hash = pageNumber+1
   })
+
+  function changePage(newPage) {
+    if (newPage >= 0 && newPage <= pages.length - 1) {
+      scrollTransition({
+        scrollDuration: 0.75, // Scroll effect duration, regardless of height, in seconds
+        fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
+        element: domWindow,
+        fadeElement: officialDocumentsPage,
+        callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
+      })
+    }
+  }
 
   function getHash(){
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
@@ -42,76 +58,28 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   }
 
   function buildPagination() {
+
     if (pages.length < 2) return []
-    let shownPages = [1, pages.length]
-    let range = 2
+    let shownPages = [pageNumber+1]
 
-    // add current page if not first or last page.
-    if (!shownPages.includes(pageNumber+1)) {
-      shownPages.splice(1,0,pageNumber+1)
+    for (var i = 1; i < maxPagesShown; i++) {
+      // Add the next page # and/or the previous page # if page exists
+      if (pageNumber + i <= pages.length - 1) shownPages.push(pageNumber + i + 1)
+      if (pageNumber + (i*-1) >= 0) shownPages.unshift(pageNumber + (i*-1) + 1)
+      // If all slots are filled, break loop.
+      if (shownPages.length >= maxPagesShown) break
     }
 
-    // add ellipsis for gaps greater than 1
-    if (pages.length >= maxPagesShown) {
-      for (var i = 0; i < maxPagesShown; i++) {
-        if (shownPages[i+1] - shownPages[i] == 2 && shownPages.length < maxPagesShown) {
-          shownPages.splice(i+1,0,shownPages[i]+1)
-        } else if (shownPages[i+1] - shownPages[i] > 2 && shownPages.length < maxPagesShown) {
-          shownPages.splice(i+1,0,"...")
-        }
-      }
-    }
-
-    // fill pages arround current page if available. Prioritizing Page Forward.
-    while (range+1 < maxPagesShown) {
-      shownPages = addPages(range, shownPages)
-      range++
-    }
-
-    // Replace any elipsis that now actually just represent ONE number. "Thanks elipsis! But, you're not needed anymore."
-    // Also, if the ellipsis is plus-or-minus 1 to the current page, let's show acutal page number too.
-    shownPages.map((num,i)=>{
-      const diff = i - shownPages.indexOf(pageNumber+1)
-      if (typeof num === "string" && shownPages[i+1] - shownPages[i-1] === 2) {
-        shownPages[i] = shownPages[i+1] - 1
-      } else if (typeof num === "string" && Math.abs(diff) === 1) {
-        shownPages[i] = pageNumber + 1 + diff
-      }
-    })
+    // replace first and last pageNumber in list with ellipsis if there is more than 1 page in either direction...
+    if (shownPages[0] > 1) shownPages[0] = "..."
+    if (shownPages[shownPages.length -1] < pages.length) shownPages[shownPages.length -1] = "..."
 
     return shownPages
-  }
-
-  function addPages(range, shownPages) {
-    const pageIndex = shownPages.indexOf(pageNumber+1)
-    const pageForward = pageNumber+range
-    const pageBack = pageNumber-(range-2)
-    if (
-      !shownPages.includes(pageForward)
-      && pageForward < shownPages[shownPages.length - 1]
-      && maxPagesShown > shownPages.length
-    ) {
-      shownPages.splice(pageNumber === 0 ? range-1 : pageIndex+range-1, 0, pageForward)
-    }
-    if (
-      !shownPages.includes(pageBack)
-      && pageBack > 1
-      && maxPagesShown > shownPages.length
-    ) {
-      shownPages.splice(pageIndex+2-range, 0, pageBack)
-    }
-    return shownPages
-  }
-
-  function changePage(newPage) {
-    if (newPage >= 0 && newPage <= pages.length - 1) {
-      setPageNumber(newPage)
-    }
   }
 
   return (
     <div>
-      <div className="wrapper container-fluid">
+      <div id="officialDocumentsPage" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
@@ -123,13 +91,8 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
           {shownPages.length > 1 &&
             <div className="coa-OfficialDocumentPage_pagination-container">
 
-              <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page bookend">
+              <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page previous">
                 <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
-                { !isMobile &&
-                  <div className="coa-OfficialDocumentPage_text">
-                    {intl.formatMessage(i18n2.previous)}
-                  </div>
-                }
               </div>
 
               {pages && shownPages.map((page, i) => (
@@ -142,12 +105,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
                 />
               ))}
 
-              <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page">
-                { !isMobile &&
-                  <div className="coa-OfficialDocumentPage_text right">
-                    {intl.formatMessage(i18n2.next)}
-                  </div>
-                }
+              <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page next">
                 <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
               </div>
 

@@ -26,6 +26,7 @@
   padding-bottom: $coa-spacing-large;
   margin-bottom: $coa-spacing-md-small;
   background: $coa-color-secondary;
+  border-bottom: 1px solid $coa-color-blue-light;
 
   @include media($coa-medium-screen) {
     padding-top: $coa-spacing-xlarge;
