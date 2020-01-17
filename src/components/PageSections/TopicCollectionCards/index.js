@@ -6,7 +6,12 @@ import { Link } from 'react-router-dom';
 
 const TopicCard = ({ topic, index, intl }) => {
   const tiles =
-    topic.pages && topic.pages.map(p => ({ url: p.url, title: p.title, pageType: p.pageType }));
+    topic.pages &&
+    topic.pages.map(p => ({
+      url: p.url, // This is generated in getTopicCollectionPageData in static.config.js
+      title: p.title,
+      pageType: p.pageType,
+    }));
   // This and TileGroup have a fragile relationship so
   // I copypasta'd logic into the learn more link instead of modifying it
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
@@ -16,6 +21,9 @@ const TopicCard = ({ topic, index, intl }) => {
   return (
     !!tiles && (
       <div key={titleUrl} className="coa-TopicCollectionCard">
+        {/*
+            There's definitely more url logic hiding in TileGroup
+        */}
         <TileGroup
           title={`${topic.title} →`}
           titleUrl={titleUrl}
@@ -23,6 +31,10 @@ const TopicCard = ({ topic, index, intl }) => {
           tiles={tiles}
           compact
         />
+        {/*
+            This url is only localized by changing the locale slug here,
+            this will need to be changed to use localized slugs
+        */}
         <Link
           to={
             titleUrl.substring(0, 4) === 'http'
