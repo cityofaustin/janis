@@ -104,6 +104,7 @@ const locationPageFragment = `
           sundayEndTime
           sundayStartTime2
           sundayEndTime2
+          hoursExceptions
         }
       }
     }

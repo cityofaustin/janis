@@ -150,6 +150,8 @@ export const cleanLocationPage = locationPage => {
       value: locationPage.phoneNumber
         ? parsePhoneNumberFromString(locationPage.phoneNumber).formatNational()
         : '',
+        // why do we call PhoneDescripton name here, and label elsewhere?
+        // and what was wrong with calling it phone description?
       name: locationPage.phoneDescription,
     },
     email: {
@@ -172,12 +174,14 @@ export const cleanLocationPage = locationPage => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
+      exceptions: edge.node.relatedService.hoursExceptions,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
         edge.node.relatedService.contacts.edges.length &&
         edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
           phoneEdge => {
             return {
+              // why do we call phoneDescription label here,
               label: phoneEdge.node.phoneDescription,
               number: parsePhoneNumberFromString(
                 phoneEdge.node.phoneNumber,
