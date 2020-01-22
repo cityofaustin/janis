@@ -74,7 +74,7 @@ const ServiceHours = ({ hours }) => {
   );
 };
 
-const Service = ({ service }) => {
+const Service = ({ service, locationHours }) => {
   const intl = useIntl();
 
   return (
@@ -101,9 +101,12 @@ const Service = ({ service }) => {
             </table>
           </div>
         )}
-        {Object.values(service.hours).some(x => x !== null) && (
-          <ServiceHours hours={service.hours} />
-        )}
+        {/* atm service houes return null, but exceptions return undefined, so
+          we need to check both cases */}
+        {Object.values(service.hours).some(x => x !== null && x !== undefined) ?
+          <ServiceHours hours={service.hours} /> :
+              <ServiceHours hours={locationHours} />
+        }
       </div>
       <a className="coa-LocationPage__service-link-link" href={service.url}>
         <div className="coa-LocationPage__service-link">
@@ -115,7 +118,7 @@ const Service = ({ service }) => {
   );
 };
 
-const LocationPageServiceList = ({ services }) => {
+const LocationPageServiceList = ({ services, locationHours }) => {
   const intl = useIntl();
   return (
     <div className="coa-LocationPage__section">
@@ -124,7 +127,7 @@ const LocationPageServiceList = ({ services }) => {
           {intl.formatMessage(i18nLocations.servicesOffered)}
         </h2>
         {services &&
-          services.map((service, i) => <Service service={service} key={i} />)}
+          services.map((service, i) => <Service service={service} key={i} locationHours={locationHours}/>)}
       </div>
     </div>
   );

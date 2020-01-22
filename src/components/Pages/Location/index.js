@@ -39,7 +39,7 @@ const LocationPage = ({ locationPage }) => {
           hours={hours}
         />
         {!!services && !!services.length && (
-          <LocationServiceList services={services} />
+          <LocationServiceList services={services} locationHours={hours}/>
         )}
         {!!buses && !!buses.length && <LocationGettingHere buses={buses} />}
       </div>
