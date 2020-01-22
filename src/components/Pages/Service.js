@@ -15,6 +15,7 @@ import SectionHeader from 'components/SectionHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
+import UserFeedback from 'components/UserFeedback';
 
 const Service = ({ service, intl }) => {
   const {
@@ -114,6 +115,7 @@ const Service = ({ service, intl }) => {
           offeredBy={contextualNavData.offeredBy}
         />
       </div>
+      <UserFeedback />
     </div>
   );
 };

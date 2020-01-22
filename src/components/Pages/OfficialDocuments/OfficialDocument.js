@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
+import UserFeedback from 'components/UserFeedback';
 
 const OfficialDocument = ({ document: { id, date, title, authoringOffice, summary, name, link, pdfSize }, intl }) => {
   // If the link is a PDF with a pdfSize, then include it.
@@ -27,6 +28,7 @@ const OfficialDocument = ({ document: { id, date, title, authoringOffice, summar
       <div className="coa-OfficialDocumentPage__small-heading-container">
         <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.document)}:</span> <a href={link}>{name}</a> {pdfComponent}
       </div>
+      <UserFeedback />
     </div>
   );
 }
