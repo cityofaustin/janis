@@ -26,6 +26,7 @@ function GuideSectionWrapper(props) {
     <div
       id={anchorTag}
       ref={node}
+      tabIndex={-1}
     >
       {children}
     </div>
