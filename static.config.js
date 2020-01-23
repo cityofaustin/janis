@@ -555,6 +555,16 @@ const getLocationPageData = async (id, client) => {
   return { locationPage: cleanLocationPage(locationPage) };
 };
 
+const getEventPageData = async (id, client) => {
+  // const { allEventPages } = await client.request(getEventPageQuery, {
+  //   id: id,
+  // });
+
+  // let eventPage = allEventPages.edges[0].node;
+
+  return { eventPage: { number: '3' } };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
@@ -692,6 +702,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       path: url,
       template: 'src/components/Pages/Location',
       getData: () => getLocationPageData(id, client),
+    };
+  }
+
+  // If we're an event page
+  if (type === 'event page') {
+    return {
+      path: url,
+      template: 'src/components/Pages/Event',
+      getData: () => getEventPageData(id, client),
     };
   }
 };
