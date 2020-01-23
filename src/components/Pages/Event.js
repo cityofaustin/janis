@@ -76,8 +76,18 @@ const EventDetailCard = ({
             );
           }
         })}
-      <div>EVENT IS FREE? {eventIsFree ? 'YES' : 'NO'}</div>
-      <div>Registration URL: {registrationUrl}</div>
+      <div>
+        {intl.formatMessage(i18n.free)}? {eventIsFree ? 'YES' : 'NO'}
+      </div>
+      {fees.edges.map(edge => (
+        <div>
+          {edge.node.feeLabel}: {edge.node.fee}
+        </div>
+      ))}
+      <div>
+        {intl.formatMessage(i18n.register)}: {registrationUrl}
+      </div>
+      {!registrationUrl && <div>{intl.formatMessage(i18n.public)}</div>}
     </div>
   );
 };
@@ -98,6 +108,7 @@ const EventPage = ({ eventPage }) => {
       locations,
       eventIsFree,
       registrationUrl,
+      fees,
     },
   } = blarg;
 
@@ -126,6 +137,7 @@ const EventPage = ({ eventPage }) => {
                   endTime={endTime}
                   locations={locations}
                   eventIsFree={eventIsFree}
+                  fees={fees}
                   registrationUrl={registrationUrl}
                 />
                 <h2>Details</h2>

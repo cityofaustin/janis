@@ -126,5 +126,8 @@
   "userFeedback.characterLimit": "Límite de caracteres",
   "userFeedback.of": "de",
   "userFeedback.errorMessage": "Lo sentimos mucho, tuvimos problemas para recibir sus comentarios. Por favor inténtelo de nuevo o envíe un correo electrónico a",
-  "events.canceled": "Cancelado"
+  "events.canceled": "Cancelado",
+  "events.free": "Gratis",
+  "events.register": "Regístrese",
+  "events.public": "Abierto al público"
 }

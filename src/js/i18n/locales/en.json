@@ -110,5 +110,8 @@
   "locations.busesServicing": "Buses servicing this area",
   "locations.closed": "Closed",
   "locations.locationInformation": "Location information",
-  "events.canceled": "Canceled"
+  "events.canceled": "Canceled",
+  "events.free": "Free",
+  "events.register": "Register",
+  "events.public": "Open to the public"
 }

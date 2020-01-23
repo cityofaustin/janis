@@ -518,4 +518,7 @@ export const locations = defineMessages({
 
 export const events = defineMessages({
   canceled: 'Canceled',
+  free: 'Free',
+  register: 'Register',
+  public: 'Open to the public',
 });
