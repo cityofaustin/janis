@@ -42,6 +42,16 @@ const eventPageFragment = `
         zip
       }
     }
+    eventIsFree
+    fees {
+      edges {
+        node {
+          feeLabel
+          fee
+        }
+      }
+    }
+    registrationUrl
   }
   ${conciseContactFragment}
 `;

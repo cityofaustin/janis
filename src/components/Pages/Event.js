@@ -42,6 +42,7 @@ const EventDetailCard = ({
   startTime,
   endTime,
   locations,
+  eventIsFree,
   fees,
   registrationUrl,
 }) => {
@@ -69,6 +70,8 @@ const EventDetailCard = ({
             );
           }
         })}
+      <div>EVENT IS FREE? {eventIsFree ? 'YES' : 'NO'}</div>
+      <div>Registration URL: {registrationUrl}</div>
     </div>
   );
 };
@@ -87,6 +90,8 @@ const EventPage = ({ eventPage }) => {
       startTime,
       endTime,
       locations,
+      eventIsFree,
+      registrationUrl,
     },
   } = blarg;
 
@@ -114,6 +119,8 @@ const EventPage = ({ eventPage }) => {
                   startTime={startTime}
                   endTime={endTime}
                   locations={locations}
+                  eventIsFree={eventIsFree}
+                  registrationUrl={registrationUrl}
                 />
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
