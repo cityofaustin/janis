@@ -9,15 +9,25 @@ import UserFeedback from 'components/UserFeedback';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
+import ContactDetails from 'components/Contact/ContactDetails';
+
+const EventDate = ({ date, canceled }) => {
+  debugger;
+
+  return (
+    <div>
+      <div>{date}</div>
+      <div>{canceled}</div>
+    </div>
+  );
+};
 
 const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
 
   const {
-    eventPage: { title, description, date, offeredBy },
+    eventPage: { title, description, date, offeredBy, canceled, contact },
   } = blarg;
-
-  debugger;
 
   return (
     <div>
@@ -29,16 +39,34 @@ const EventPage = ({ eventPage }) => {
         relatedTo={[]}
         offeredBy={offeredBy}
       />
-      <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
-        <div className="coa-LocationPage__header">
-          <i className="material-icons coa-LocationPage__header-icon">place</i>
-          <h1 className="coa-LocationPage__header-title">{title}</h1>
-          {description && (
-            <HtmlFromRichText title={' '} content={description} />
-          )}
+      <div className="coa-Page__all-of-the-content">
+        <div className="coa-Page__main-content">
+          <div className="wrapper container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-10">
+                <EventDate date={date} canceled={canceled} />
+                <div className="coa-EventPage__header">
+                  <h1 className="coa-LocationPage__header-title">{title}</h1>
+                </div>
+                {description && (
+                  <HtmlFromRichText title={' '} content={description} />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="coa-Page__contacts-mobile">
+            <div className="col-xs-12 col-md-10">
+              {!!contact && <ContactDetails contacts={[contact]} />}
+            </div>
+          </div>
+        </div>
+        <div className="coa-Page__side-content">
+          <div className="coa-ServicePage__contacts-desktop">
+            {!!contact && <ContactDetails contacts={[contact]} />}
+          </div>
         </div>
       </div>
-      <UserFeedback />
+      {/* not sure if we want this in <UserFeedback /> */}
     </div>
   );
 };

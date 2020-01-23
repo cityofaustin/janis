@@ -1,9 +1,15 @@
+import conciseContactFragment from './conciseContactFragment';
+
 const eventPageFragment = `
   fragment eventPageInfo on EventPageNode {
     id
     title
     description
     date
+    canceled
+    contact {
+      ...contactInfo
+    }
     relatedDepartments {
       edges {
         node {
@@ -31,6 +37,7 @@ const eventPageFragment = `
       }
     }
   }
+  ${conciseContactFragment}
 `;
 
 export default eventPageFragment;
