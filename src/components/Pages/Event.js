@@ -93,6 +93,8 @@ const EventDetailCard = ({
 };
 
 const EventPage = ({ eventPage }) => {
+  const intl = useIntl();
+
   const blarg = eventPage ? { eventPage } : useRouteData();
 
   const {
@@ -118,7 +120,7 @@ const EventPage = ({ eventPage }) => {
         <title>{title}</title>
       </Head>
       <ContextualNav
-        parent={{ title: 'All Events' /*todo translate*/, url: '/events/' }}
+        parent={{ title: intl.formatMessage(i18n.allEvents), url: '/events/' }}
         relatedTo={[]}
         offeredBy={offeredBy}
       />
@@ -140,7 +142,7 @@ const EventPage = ({ eventPage }) => {
                   fees={fees}
                   registrationUrl={registrationUrl}
                 />
-                <h2>Details</h2>
+                <h2>{intl.formatMessage(i18n.details)}</h2>
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
                 )}

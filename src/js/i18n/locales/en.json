@@ -113,5 +113,7 @@
   "events.canceled": "Canceled",
   "events.free": "Free",
   "events.register": "Register",
-  "events.public": "Open to the public"
+  "events.public": "Open to the public",
+  "events.details": "Details",
+  "events.allEvents": "All events"
 }

@@ -129,5 +129,7 @@
   "events.canceled": "Cancelado",
   "events.free": "Gratis",
   "events.register": "Regístrese",
-  "events.public": "Abierto al público"
+  "events.public": "Abierto al público",
+  "events.details": "Detalles",
+  "events.allEvents": "Todos eventos"
 }

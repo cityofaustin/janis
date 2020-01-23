@@ -521,4 +521,6 @@ export const events = defineMessages({
   free: 'Free',
   register: 'Register',
   public: 'Open to the public',
+  details: 'Details',
+  allEvents: 'All events',
 });
