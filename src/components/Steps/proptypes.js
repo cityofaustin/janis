@@ -5,7 +5,7 @@ export const stepsPropTypes = {
 };
 
 export const stepBasicPropTypes = {
-  stepAsHtmlFromAdmin: PropTypes.string.isRequired,
+  stepAsHtmlFromRichText: PropTypes.string.isRequired,
   singleStep: PropTypes.bool,
 };
 

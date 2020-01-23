@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import { stepBasicPropTypes } from './proptypes';
 
-const StepBasic = ({ stepAsHtmlFromAdmin, singleStep }) =>
+const StepBasic = ({ stepAsHtmlFromRichText, singleStep }) =>
   singleStep ? (
     <p>
-      <HtmlFromAdmin content={stepAsHtmlFromAdmin} />
+      <HtmlFromRichText content={stepAsHtmlFromRichText} />
     </p>
   ) : (
     <li>
       <p>
-        <HtmlFromAdmin content={stepAsHtmlFromAdmin} />
+        <HtmlFromRichText content={stepAsHtmlFromRichText} />
       </p>
     </li>
   );

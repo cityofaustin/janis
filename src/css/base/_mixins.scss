@@ -80,7 +80,7 @@
 
 @mixin heading3() {
   font-size: $coa-font-size-md-small;
-  font-weight: $coa-font-bold; //$coa-font-regular; This makes the h3s in HtmlFromAdmin much nicer.
+  font-weight: $coa-font-bold; //$coa-font-regular; This makes the h3s in HtmlFromRichText much nicer.
   line-height: $coa-line-height-md-small;
   // margin-top: $coa-spacing-medium;
 

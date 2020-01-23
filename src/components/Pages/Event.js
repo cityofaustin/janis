@@ -7,6 +7,8 @@ import PageHeader from 'components/PageHeader';
 // import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
 import UserFeedback from 'components/UserFeedback';
 
+import HtmlFromRichText from 'components/HtmlFromRichText';
+
 const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
 
@@ -25,6 +27,9 @@ const EventPage = ({ eventPage }) => {
         <div className="coa-LocationPage__header">
           <i className="material-icons coa-LocationPage__header-icon">place</i>
           <h1 className="coa-LocationPage__header-title">{title}</h1>
+          {description && (
+            <HtmlFromRichText title={' '} content={description} />
+          )}
         </div>
       </div>
       <UserFeedback />
