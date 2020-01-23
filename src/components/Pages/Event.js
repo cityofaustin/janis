@@ -31,6 +31,10 @@ const EventDate = ({ date, canceled }) => {
   );
 };
 
+const EventLocationDetail = ({ location }) => {
+  return <div>LOC</div>;
+};
+
 const EventDetailCard = ({
   date,
   startTime,
@@ -47,11 +51,10 @@ const EventDetailCard = ({
       <div>DATE: {moment(date, 'YYYY-MM-DD').format('dddd • LL')}</div>
       <div>START TIME: {moment(startTime, 'HH:mm:ss').format('LT')}</div>
       <div>END TIME: {moment(endTime, 'HH:mm:ss').format('LT')}</div>
+      <EventLocationDetail />
     </div>
   );
 };
-
-// LT;
 
 const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
