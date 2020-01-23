@@ -28,7 +28,11 @@ const eventPageFragment = `
       locationType
       cityLocation {
         id
-        title 
+        title
+        physicalStreet
+        physicalCity
+        physicalState
+        physicalZip
       }
       remoteLocation {
         name

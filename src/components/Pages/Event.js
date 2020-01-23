@@ -31,8 +31,10 @@ const EventDate = ({ date, canceled }) => {
   );
 };
 
-const EventLocationDetail = ({ location }) => {
-  return <div>LOC</div>;
+const EventLocationDetail = ({ street }) => {
+  debugger;
+
+  return <div>LOCATION: {street}</div>;
 };
 
 const EventDetailCard = ({
@@ -51,7 +53,22 @@ const EventDetailCard = ({
       <div>DATE: {moment(date, 'YYYY-MM-DD').format('dddd • LL')}</div>
       <div>START TIME: {moment(startTime, 'HH:mm:ss').format('LT')}</div>
       <div>END TIME: {moment(endTime, 'HH:mm:ss').format('LT')}</div>
-      <EventLocationDetail />
+      {!!locations &&
+        !!locations.length &&
+        locations.map(location => {
+          if (location.locationType === 'city_location') {
+            return (
+              <EventLocationDetail
+                street={location.cityLocation.physicalStreet}
+              />
+            );
+          }
+          if (location.locationType === 'remote_location') {
+            return (
+              <EventLocationDetail street={location.remoteLocation.street} />
+            );
+          }
+        })}
     </div>
   );
 };
@@ -69,6 +86,7 @@ const EventPage = ({ eventPage }) => {
       contact,
       startTime,
       endTime,
+      locations,
     },
   } = blarg;
 
@@ -95,6 +113,7 @@ const EventPage = ({ eventPage }) => {
                   date={date}
                   startTime={startTime}
                   endTime={endTime}
+                  locations={locations}
                 />
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
