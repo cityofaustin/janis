@@ -32,6 +32,7 @@ import {
   cleanLinks,
   cleanDepartmentDirectors,
   cleanLocationPage,
+  getOfferedByFromRelatedDepartments,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -234,22 +235,6 @@ const getTopicCollectionPageData = async (id, client) => {
     }));
 
   return { tc: topicCollection };
-};
-
-const getOfferedByFromRelatedDepartments = relatedDepartments => {
-  let offeredBy;
-
-  if (relatedDepartments && relatedDepartments.edges.length) {
-    offeredBy = relatedDepartments.edges.map(edge => ({
-      id: edge.node.relatedDepartment.id,
-      title: edge.node.relatedDepartment.title,
-      url: `/${edge.node.relatedDepartment.slug}/`,
-    }));
-  } else {
-    offeredBy = [];
-  }
-
-  return offeredBy;
 };
 
 const getContextualNavData = async (
