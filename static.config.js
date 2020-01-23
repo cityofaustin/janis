@@ -236,6 +236,22 @@ const getTopicCollectionPageData = async (id, client) => {
   return { tc: topicCollection };
 };
 
+const getOfferedByFromRelatedDepartments = relatedDepartments => {
+  let offeredBy;
+
+  if (relatedDepartments && relatedDepartments.edges.length) {
+    offeredBy = relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  } else {
+    offeredBy = [];
+  }
+
+  return offeredBy;
+};
+
 const getContextualNavData = async (
   parent_department,
   parent_topic,
@@ -318,15 +334,9 @@ const getContextualNavData = async (
   }
 
   // get offered by
-  if (relatedDepartments && relatedDepartments.edges.length) {
-    contextualNavData.offeredBy = relatedDepartments.edges.map(edge => ({
-      id: edge.node.relatedDepartment.id,
-      title: edge.node.relatedDepartment.title,
-      url: `/${edge.node.relatedDepartment.slug}/`,
-    }));
-  } else {
-    contextualNavData.offeredBy = [];
-  }
+  contextualNavData.offeredBy = getOfferedByFromRelatedDepartments(
+    relatedDepartments,
+  );
 
   return contextualNavData;
 };
@@ -562,6 +572,11 @@ const getEventPageData = async (id, client) => {
   });
 
   let eventPage = allEventPages.edges[0].node;
+
+  // Fill in some contextual nav info
+  eventPage.offeredBy = getOfferedByFromRelatedDepartments(
+    eventPage.relatedDepartments,
+  );
 
   return { eventPage: eventPage };
 };
