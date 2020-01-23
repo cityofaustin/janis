@@ -14,7 +14,7 @@ const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
 
   const {
-    eventPage: { title, description, date },
+    eventPage: { title, description, date, offeredBy },
   } = blarg;
 
   debugger;
@@ -27,7 +27,7 @@ const EventPage = ({ eventPage }) => {
       <ContextualNav
         parent={{ title: 'All Events' /*todo translate*/, url: '/events/' }}
         relatedTo={[]}
-        offeredBy={[]}
+        offeredBy={offeredBy}
       />
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
         <div className="coa-LocationPage__header">

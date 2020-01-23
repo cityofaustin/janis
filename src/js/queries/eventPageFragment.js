@@ -4,6 +4,17 @@ const eventPageFragment = `
     title
     description
     date
+    relatedDepartments {
+      edges {
+        node {
+          relatedDepartment {
+            id
+            title
+            slug
+          }
+        }
+      }
+    }
     locations {
       additionalDetails
       locationType
