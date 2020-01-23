@@ -8,21 +8,23 @@ import PageHeader from 'components/PageHeader';
 import UserFeedback from 'components/UserFeedback';
 
 const EventPage = ({ eventPage }) => {
+  const blarg = eventPage ? { eventPage } : useRouteData();
+
   const {
-    eventPage: { number },
-  } = eventPage ? { eventPage } : useRouteData();
+    eventPage: { title, description },
+  } = blarg;
 
   debugger;
 
   return (
     <div>
       <Head>
-        <title>{number}</title>
+        <title>{title}</title>
       </Head>
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
         <div className="coa-LocationPage__header">
           <i className="material-icons coa-LocationPage__header-icon">place</i>
-          <h1 className="coa-LocationPage__header-title">{number}</h1>
+          <h1 className="coa-LocationPage__header-title">{title}</h1>
         </div>
       </div>
       <UserFeedback />

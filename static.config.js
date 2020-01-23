@@ -24,6 +24,7 @@ import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getLocationPageQuery from 'js/queries/getLocationPageQuery';
+import getEventPageQuery from 'js/queries/getEventPageQuery';
 
 import {
   cleanNavigation,
@@ -556,13 +557,13 @@ const getLocationPageData = async (id, client) => {
 };
 
 const getEventPageData = async (id, client) => {
-  // const { allEventPages } = await client.request(getEventPageQuery, {
-  //   id: id,
-  // });
+  const { allEventPages } = await client.request(getEventPageQuery, {
+    id: id,
+  });
 
-  // let eventPage = allEventPages.edges[0].node;
+  let eventPage = allEventPages.edges[0].node;
 
-  return { eventPage: { number: '3' } };
+  return { eventPage: eventPage };
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
