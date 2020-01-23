@@ -3,6 +3,7 @@ const eventPageFragment = `
     id
     title
     description
+    date
     locations {
       additionalDetails
       locationType

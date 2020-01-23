@@ -8,12 +8,13 @@ import PageHeader from 'components/PageHeader';
 import UserFeedback from 'components/UserFeedback';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
+import ContextualNav from 'components/PageSections/ContextualNav';
 
 const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
 
   const {
-    eventPage: { title, description },
+    eventPage: { title, description, date },
   } = blarg;
 
   debugger;
@@ -23,6 +24,11 @@ const EventPage = ({ eventPage }) => {
       <Head>
         <title>{title}</title>
       </Head>
+      <ContextualNav
+        parent={{ title: 'All Events' /*todo translate*/, url: '/events/' }}
+        relatedTo={[]}
+        offeredBy={[]}
+      />
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
         <div className="coa-LocationPage__header">
           <i className="material-icons coa-LocationPage__header-icon">place</i>
