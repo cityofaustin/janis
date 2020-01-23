@@ -125,5 +125,6 @@
   "userFeedback.thankYou": "¡Muchas gracias por ayudarnos a mejorar este sitio web!",
   "userFeedback.characterLimit": "Límite de caracteres",
   "userFeedback.of": "de",
-  "userFeedback.errorMessage": "Lo sentimos mucho, tuvimos problemas para recibir sus comentarios. Por favor inténtelo de nuevo o envíe un correo electrónico a"
+  "userFeedback.errorMessage": "Lo sentimos mucho, tuvimos problemas para recibir sus comentarios. Por favor inténtelo de nuevo o envíe un correo electrónico a",
+  "events.canceled": "Cancelado"
 }

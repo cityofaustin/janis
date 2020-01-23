@@ -15,18 +15,24 @@ import { useIntl } from 'react-intl';
 
 import moment from 'moment-timezone';
 
+import { events as i18n } from 'js/i18n/definitions';
+
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
   moment.locale(intl.locale);
 
+  let momentDate = moment(date, 'YYYY-MM-DD').format('dddd • LL');
+  // make sure to capatalize the first letter in the date
+  momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
+
   return (
     <div className="coa-EventPage__date-header">
       {canceled && (
-        <div className="coa-EventPage__cancelled-badge">Canceled</div>
+        <div className="coa-EventPage__cancelled-badge">
+          {intl.formatMessage(i18n.canceled)}
+        </div>
       )}
-      <div className="coa-EventPage__date">
-        {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
-      </div>
+      <div className="coa-EventPage__date">{momentDate}</div>
     </div>
   );
 };
@@ -122,6 +128,7 @@ const EventPage = ({ eventPage }) => {
                   eventIsFree={eventIsFree}
                   registrationUrl={registrationUrl}
                 />
+                <h2>Details</h2>
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
                 )}

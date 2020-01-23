@@ -515,3 +515,7 @@ export const locations = defineMessages({
   closed: 'Closed',
   locationInformation: 'Location information',
 });
+
+export const events = defineMessages({
+  canceled: 'Canceled',
+});
