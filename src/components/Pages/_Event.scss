@@ -1,4 +1,7 @@
-.coa-EventPage__content-container {
-  flex-direction: column;
-  max-width: 758px;
+.coa-EventPage__cancelled-badge {
+  background: red;
+}
+
+.coa-EventPage__date {
+  background: blue;
 }

@@ -11,13 +11,24 @@ import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import ContactDetails from 'components/Contact/ContactDetails';
 
+import { useIntl } from 'react-intl';
+
+import moment from 'moment-timezone';
+
 const EventDate = ({ date, canceled }) => {
-  debugger;
+  const intl = useIntl();
+
+  // set the locale configuration for moment. Sets the locale for this component only
+  moment.locale(intl.locale);
 
   return (
     <div>
-      <div>{date}</div>
-      <div>{canceled}</div>
+      {canceled && (
+        <div className="coa-EventPage__cancelled-badge">Canceled</div>
+      )}
+      <div className="coa-EventPage__date">
+        {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
+      </div>
     </div>
   );
 };
