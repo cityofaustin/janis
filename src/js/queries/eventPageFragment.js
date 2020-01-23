@@ -5,8 +5,10 @@ const eventPageFragment = `
     id
     title
     description
-    date
     canceled
+    date
+    startTime
+    endTime
     contact {
       ...contactInfo
     }

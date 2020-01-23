@@ -17,8 +17,6 @@ import moment from 'moment-timezone';
 
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
-
-  // set the locale configuration for moment. Sets the locale for this component only
   moment.locale(intl.locale);
 
   return (
@@ -33,11 +31,42 @@ const EventDate = ({ date, canceled }) => {
   );
 };
 
+const EventDetailCard = ({
+  date,
+  startTime,
+  endTime,
+  locations,
+  fees,
+  registrationUrl,
+}) => {
+  const intl = useIntl();
+  moment.locale(intl.locale);
+
+  return (
+    <div className="coa-EventPage__EventDetailCard">
+      <div>DATE: {moment(date, 'YYYY-MM-DD').format('dddd • LL')}</div>
+      <div>START TIME: {moment(startTime, 'HH:mm:ss').format('LT')}</div>
+      <div>END TIME: {moment(endTime, 'HH:mm:ss').format('LT')}</div>
+    </div>
+  );
+};
+
+// LT;
+
 const EventPage = ({ eventPage }) => {
   const blarg = eventPage ? { eventPage } : useRouteData();
 
   const {
-    eventPage: { title, description, date, offeredBy, canceled, contact },
+    eventPage: {
+      title,
+      description,
+      date,
+      offeredBy,
+      canceled,
+      contact,
+      startTime,
+      endTime,
+    },
   } = blarg;
 
   return (
@@ -59,6 +88,11 @@ const EventPage = ({ eventPage }) => {
                 <div className="coa-EventPage__header">
                   <h1 className="coa-LocationPage__header-title">{title}</h1>
                 </div>
+                <EventDetailCard
+                  date={date}
+                  startTime={startTime}
+                  endTime={endTime}
+                />
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
                 )}
