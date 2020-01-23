@@ -22,7 +22,7 @@ const EventDate = ({ date, canceled }) => {
   moment.locale(intl.locale);
 
   return (
-    <div>
+    <div className="coa-EventPage__date-header">
       {canceled && (
         <div className="coa-EventPage__cancelled-badge">Canceled</div>
       )}

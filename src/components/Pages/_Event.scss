@@ -1,7 +1,28 @@
+.coa-EventPage__date-header {
+  margin-top: 1rem;
+}
+
 .coa-EventPage__cancelled-badge {
   background: red;
+  text-transform: uppercase;
+  color: white;
+  width: fit-content;
+  padding: 4px;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+
+  display: inline;
+  @include mobile {
+    display: block;
+  }
 }
 
 .coa-EventPage__date {
-  background: blue;
+  display: inline;
+  margin-left: 1.5rem;
+  @include mobile {
+    display: block;
+    margin-left: 0;
+  }
 }
