@@ -85,6 +85,14 @@ export const cleanLocationPageJanisUrl = janisUrl => {
   return `/${janisUrl.split('/en/')[1]}`;
 };
 
+/*
+tech debt: this code is used for service hours as well, but the variable defition
+implies otherwise, could be a source of bugs
+
+also the best place to shape the data is probably the backend, why do we have to
+transform the data from the backend so much here? If so shouldn't we reformat the
+data on the backend instead, either in the model or graphql schema?
+*/
 export const cleanLocationPageHours = locationPage => {
   return {
     MONDAY: formatHours({
@@ -172,6 +180,8 @@ export const cleanLocationPage = locationPage => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
+
+      hoursSameAsLocation: edge.node.hoursSameAsLocation,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
         edge.node.relatedService.contacts.edges.length &&

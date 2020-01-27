@@ -101,9 +101,9 @@ const Service = ({ service, locationHours }) => {
             </table>
           </div>
         )}
-        {/* atm service houes return null, but exceptions return undefined, so
+        {/* atm service hours return null, but exceptions return undefined, so
           we need to check both cases */}
-        {Object.values(service.hours).some(x => x !== null && x !== undefined) ?
+        {Object.values(service.hours).some(hour => service.hoursSameAsLocation === 'true' || hour !== null && hour !== undefined) ?
           <ServiceHours hours={service.hours} /> :
               <ServiceHours hours={locationHours} />
         }
@@ -127,7 +127,7 @@ const LocationPageServiceList = ({ services, locationHours }) => {
           {intl.formatMessage(i18nLocations.servicesOffered)}
         </h2>
         {services &&
-          services.map((service, i) => <Service service={service} key={i} locationHours={locationHours}/>)}
+          services.map((service, i) => <Service service={service} key={i} locationHours={locationHours} />)}
       </div>
     </div>
   );
