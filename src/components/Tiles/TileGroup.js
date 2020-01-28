@@ -8,6 +8,12 @@ import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
 
 const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
+  // Ok, this one is kinda just a mess, we're using TileGroup in quite a few
+  // different ways, so we have extra logic in here to make sure we actually
+  // get the right URL regardless of if we're passing in an external link or
+  // a internal one, and then, once again, adding the locale at the last minute.
+  // Definitely a place that would need to change for localized slugs to work.
+
   return (
     !!tiles.length && (
       <div

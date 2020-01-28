@@ -122,6 +122,9 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allTopicCollections.edges.length &&
     allTopicCollections.edges[0].node.theme
   ) {
+    // would you look at that? definitely not doing localization here
+    // guess we need to dig into ContextualNav to see what kind of
+    // URL logic we have hiding in there
     topic.contextualNavData.parent = {
       id: allTopicCollections.edges[0].node.id,
       title: allTopicCollections.edges[0].node.title,
@@ -130,6 +133,12 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
       }/`,
     };
 
+    // Well this one is a doozy, let's see... We're getting all the topic->topic collection
+    // relationships which is already filtered in the query to only include ones for the
+    // TC we're currently under, then filtering out ourself, then creating a URL using
+    // our always-an-array-of-length-1 array to get our current topic collection, where
+    // we get our theme and topic collection slugs, then build the url
+    // this will definitely take some tinkering to support localized slugs
     if (allTopicPageTopicCollections && allTopicPageTopicCollections.edges) {
       topic.contextualNavData.relatedTo = allTopicPageTopicCollections.edges
         .filter(edge => edge.node && edge.node.page.id !== id)
@@ -148,6 +157,8 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   topic.topLinks = topic.topPages.edges.map(edge => ({
     pageType: edge.node.pageType,
     title: edge.node.title,
+    // hey look here's url making in the wild again!
+    // looks like it's getting localized somewhere else
     url: `/${allTopicCollections.edges[0].node.theme.slug}/${
       allTopicCollections.edges[0].node.slug
     }/${topic.slug}/${edge.node.slug}/`,
@@ -165,6 +176,7 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     .map(page => ({
       pageType: page.pageType,
       title: page.title,
+      // looks like this function is just a spaghetti party
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
       }/${topic.slug}/${page.slug}`,
@@ -178,6 +190,8 @@ const getDepartmentPageData = async (id, client) => {
     id: id,
   });
 
+  // We have URL construction logic in here to make sure our top page URLs are
+  // under the department. The Joplin API gives us title and slug for these
   let department = allDepartmentPages.edges[0].node;
   department.topServices = department.topPages
     ? department.topPages.edges.map(edge => ({
@@ -187,6 +201,8 @@ const getDepartmentPageData = async (id, client) => {
       }))
     : [];
 
+  // We have URL construction logic in here to make sure our related page URLs are
+  // under the department. The Joplin API gives us title and slug for these
   department.relatedLinks = department.relatedPages
     ? department.relatedPages.edges.map(edge => ({
         id: edge.node.pageId,
@@ -210,6 +226,11 @@ const getTopicCollectionPageData = async (id, client) => {
     allTopicPageTopicCollections,
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
+  // Not only do we do URL construction here, we get all of the relationships we have
+  // between topics and topic collections, and then filter by our current topic collection
+  // we then use that info to create our topic cards (more URL logic is hiding in there too)
+  // and then we go through all of the top pages for each topic and create the URLs for
+  // those links using relationships here too
   let topicCollection = allTopicCollections.edges[0].node;
   topicCollection.topics = allTopicPageTopicCollections.edges
     .filter(edge => edge.node.page.live)
@@ -275,6 +296,7 @@ const getContextualNavData = async (
     contextualNavData.parent = {
       id: allTopics.edges[0].node.id,
       title: allTopics.edges[0].node.title,
+      // more URL stuff here, once again not localized
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
       }/${allTopics.edges[0].node.slug}/`,
@@ -289,6 +311,7 @@ const getContextualNavData = async (
     contextualNavData.parent = {
       id: allDepartmentPages.edges[0].node.id,
       title: allDepartmentPages.edges[0].node.title,
+      // more URL stuff here, once again not localized
       url: `/${allDepartmentPages.edges[0].node.slug}/`,
     };
   }
@@ -537,6 +560,7 @@ const getOfficialDocumentPageData = async (
 const getDepartmentsPageData = async client => {
   const { allDepartmentPages } = await client.request(getDepartmentsPageQuery);
 
+  // We're using a tilegroup with these for the departments page
   const departments = allDepartmentPages.edges.map(edge => ({
     title: edge.node.title,
     url: `/${edge.node.slug}/`,
@@ -555,6 +579,8 @@ const getLocationPageData = async (id, client) => {
   return { locationPage: cleanLocationPage(locationPage) };
 };
 
+// This uses URLs straight from Joplin, but still needs information
+// about parents to build contextual nav data for the pages
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
