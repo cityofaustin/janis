@@ -45,9 +45,27 @@ function FormContainer({
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
       } else {
         iframeLoaded = true;
+        const msg = document.getElementById('coa-LockedIframeRequestMessage')
+        const loader = document.getElementById('coa-loadingWheel')
+        msg.style.display = "none"
+        loader.style.display = "none"
       }
     }
   };
+
+  setTimeout(function(){
+    if (!iframeLoaded) {
+      const msg = document.getElementById('coa-LockedIframeRequestMessage')
+      msg.style.display = "block"
+      msg.style.opacity = 0
+      setTimeout(function(){msg.style.opacity = 1},100)
+    }
+  },5000)
+
+  const onLoad = () => {
+    const loader = document.getElementById('coa-loadingWheel')
+    loader.style.display = "block"
+  }
 
   return (
     <div>
@@ -65,11 +83,29 @@ function FormContainer({
         <PageHeader contentType={'information'} description={description}>
           {title}
         </PageHeader>
+        <div id="coa-loadingWheel"></div>
+        <h1 id="coa-LockedIframeRequestMessage"
+          style={{
+            display: 'none',
+            padding: 100,
+            margin: 0,
+            textAlign: 'center',
+            backgroundColor: 'red',
+            opacity: 0,
+          }}>
+          ...We're still waiting on your form 😐
+          <br/>
+          ⏱... While we wait, please check that you
+          <br/>
+          don't have any browser plugins
+          blocking external content from loading
+        </h1>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="coa-FormContainer__iframe-container">
               {formUrl && (
                 <IframeResizer
+                  onLoad={onLoad}
                   forwardRef={iframeRef}
                   src={formUrl}
                   className="coa-FormContainer__IframeResizer-default"
