@@ -139,6 +139,23 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
   );
 };
 
+const EventTime = ({ startTime, endTime }) => {
+  if (startTime) {
+    return (
+      <div className="coa-EventDetailItem__time">
+        {startTime && endTime
+          ? `${moment(startTime, 'HH:mm:ss').format('LT')}—${moment(
+              endTime,
+              'HH:mm:ss',
+            ).format('LT')}`
+          : moment(startTime, 'HH:mm:ss').format('LT')}
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const EventDetailCard = ({
   date,
   startTime,
@@ -161,12 +178,7 @@ const EventDetailCard = ({
           <div className="coa-EventDetailItem__date">
             {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
           </div>
-          <div className="coa-EventDetailItem__time">
-            {`${moment(startTime, 'HH:mm:ss').format('LT')}—${moment(
-              endTime,
-              'HH:mm:ss',
-            ).format('LT')}`}
-          </div>
+          <EventTime startTime={startTime} endTime={endTime} />
         </div>
       </div>
       {location.locationType === 'city_location' ? (
