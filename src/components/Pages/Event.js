@@ -113,29 +113,23 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
       <div className="coa-EventDetailItem__content">
         {eventIsFree ? (
           <div className="coa-EventDetailItem__fees-free">
-            {`${intl.formatMessage(i18n.free)} • `}
-            {registrationLinkFragment}
+            <div>{`${intl.formatMessage(i18n.free)}`}</div>
+            <div>{registrationLinkFragment}</div>
           </div>
-        ) : fees && fees.edges && fees.edges.length && fees.edges.length > 1 ? (
-          <React.Fragment>
-            <div className="coa-EventDetailItem__fees-list">
-              {`$${smallestFee}—$${biggestFee} • `}
-              {registrationLinkFragment}
-            </div>
-            {fees.edges.map(edge => (
-              <div>
-                ${edge.node.fee} {edge.node.feeLabel}
-              </div>
-            ))}
-          </React.Fragment>
         ) : (
-          !!onlyFee && (
+          !!fees &&
+          !!fees.edges &&
+          !!fees.edges.length && (
             <React.Fragment>
-              <div className="coa-EventDetailItem__fees-single">
-                {`$${onlyFee} • `}
-                {registrationLinkFragment}
-              </div>
-              {!!onlyFeeLabel && <div>{onlyFeeLabel}</div>}
+              {fees.edges.map(edge => (
+                <div>
+                  {!!edge.node.feeLabel && `${edge.node.feeLabel}: `}
+                  {edge.node.fee === 0
+                    ? intl.formatMessage(i18n.free)
+                    : `$${edge.node.fee}`}
+                </div>
+              ))}
+              <div>{registrationLinkFragment}</div>
             </React.Fragment>
           )
         )}
