@@ -131,17 +131,23 @@ const EventPage = ({ eventPage }) => {
               <div className="col-xs-12 col-md-10">
                 <EventDate date={date} canceled={canceled} />
                 <div className="coa-EventPage__header">
-                  <h1 className="coa-LocationPage__header-title">{title}</h1>
+                  <h1 className="coa-EventPage__header-title">{title}</h1>
                 </div>
-                <EventDetailCard
-                  date={date}
-                  startTime={startTime}
-                  endTime={endTime}
-                  locations={locations}
-                  eventIsFree={eventIsFree}
-                  fees={fees}
-                  registrationUrl={registrationUrl}
-                />
+              </div>
+            </div>
+          </div>
+          <EventDetailCard
+            date={date}
+            startTime={startTime}
+            endTime={endTime}
+            locations={locations}
+            eventIsFree={eventIsFree}
+            fees={fees}
+            registrationUrl={registrationUrl}
+          />
+          <div className="wrapper container-fluid">
+            <div className="row">
+              <div className="col-xs-12 col-md-10">
                 <h2>{intl.formatMessage(i18n.details)}</h2>
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />

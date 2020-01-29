@@ -1,5 +1,5 @@
 .coa-EventPage__date-header {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .coa-EventPage__cancelled-badge {
@@ -25,8 +25,12 @@
     display: block;
     margin-left: 0;
   }
+  color: #5c5c5c;
 }
 
 .coa-EventPage__EventDetailCard {
   background: #f6f6f6;
+  @include mobile {
+    padding: 1.5rem;
+  }
 }
