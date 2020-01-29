@@ -40,7 +40,24 @@ const EventDate = ({ date, canceled }) => {
 const EventLocationDetail = ({ street }) => {
   debugger;
 
-  return <div>LOCATION: {street}</div>;
+  return (
+    <div className="coa-EventDetailItem">
+      <i className="material-icons">place</i>
+      <div className="coa-EventDetailItem__content coa-EventDetailItem__location">
+        <div className="coa-EventDetailItem__location-title">
+          Location title
+        </div>
+        <div className="coa-EventDetailItem__location-address">1122 lane</div>
+        {true && <div className="coa-EventDetailItem__location-unit">#42</div>}
+        <a
+          href="www.google.com"
+          className="coa-EventDetailItem__location-directions-link"
+        >
+          Get directions
+        </a>
+      </div>
+    </div>
+  );
 };
 
 const EventDetailCard = ({
@@ -57,9 +74,20 @@ const EventDetailCard = ({
 
   return (
     <div className="coa-EventPage__EventDetailCard">
-      <div>DATE: {moment(date, 'YYYY-MM-DD').format('dddd • LL')}</div>
-      <div>START TIME: {moment(startTime, 'HH:mm:ss').format('LT')}</div>
-      <div>END TIME: {moment(endTime, 'HH:mm:ss').format('LT')}</div>
+      <div className="coa-EventDetailItem">
+        <i className="material-icons">event</i>
+        <div className="coa-EventDetailItem__content">
+          <div className="coa-EventDetailItem__date">
+            {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
+          </div>
+          <div className="coa-EventDetailItem__time">
+            {`${moment(startTime, 'HH:mm:ss').format('LT')} - ${moment(
+              endTime,
+              'HH:mm:ss',
+            ).format('LT')}`}
+          </div>
+        </div>
+      </div>
       {!!locations &&
         !!locations.length &&
         locations.map(location => {

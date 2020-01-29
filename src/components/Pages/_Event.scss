@@ -32,5 +32,21 @@
   background: #f6f6f6;
   @include mobile {
     padding: 1.5rem;
+    margin-top: 2rem;
   }
+}
+
+.coa-EventDetailItem {
+  display: flex;
+  padding-top: $coa-space-level3;
+}
+
+.coa-EventDetailItem__content {
+  margin-left: 1.2rem;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+}
+
+.coa-EventDetailItem__location {
+  line-height: 1.8rem;
 }
