@@ -17,6 +17,8 @@ import moment from 'moment-timezone';
 
 import { events as i18n, locations as i18n2 } from 'js/i18n/definitions';
 
+import { getEncodedLocation } from 'js/helpers/location';
+
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
   moment.locale(intl.locale);
@@ -40,6 +42,9 @@ const EventDate = ({ date, canceled }) => {
 const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
   const intl = useIntl();
 
+  // Just use these 4 to get the google maps links:
+  const encodedLocation = getEncodedLocation({ street, city, state, zip });
+
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">place</i>
@@ -50,7 +55,7 @@ const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
           <div className="coa-EventDetailItem__location-unit">{unit}</div>
         )}
         <a
-          href="www.google.com"
+          href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
           className="coa-EventDetailItem__location-directions-link"
         >
           {intl.formatMessage(i18n.getDirections)}
