@@ -20,22 +20,25 @@
 
 .coa-EventPage__date {
   display: inline;
-  margin-left: 1.5rem;
+  font-size: 1.8rem;
   @include mobile {
     display: block;
-    margin-left: 0;
   }
   color: #5c5c5c;
 }
 
 .coa-EventPage__EventDetailCard {
   background: #f6f6f6;
-  @include mobile {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-bottom: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: $coa-space-level6;
+  // @include mobile {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: $coa-space-level6;
+  // }
+  @include desktop {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
   }
 }
 
