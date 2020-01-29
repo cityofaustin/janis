@@ -145,7 +145,12 @@ const EventDetailCard = ({
           if (location.locationType === 'city_location') {
             return (
               <EventLocationDetail
+                name={location.cityLocation.title}
                 street={location.cityLocation.physicalStreet}
+                city={location.cityLocation.physicalCity}
+                state={location.cityLocation.physicalState}
+                zip={location.cityLocation.physicalZip}
+                unit={location.cityLocation.physicalUnit}
               />
             );
           }
