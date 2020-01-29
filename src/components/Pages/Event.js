@@ -76,10 +76,15 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
   // Calculate fee range (we should probably move this logic out to somewhere else)
   let smallestFee;
   let biggestFee;
+  let onlyFee;
   if (fees && fees.edges && fees.edges.length && fees.edges.length > 1) {
     fees.edges.sort(edge => -edge.node.fee);
     smallestFee = fees.edges[0].node.fee;
     biggestFee = fees.edges[fees.edges.length - 1].node.fee;
+  }
+
+  if (fees && fees.edges && fees.edges.length && fees.edges.length === 1) {
+    onlyFee = fees.edges[0].node.fee;
   }
 
   return (
@@ -91,7 +96,7 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
             {`${intl.formatMessage(i18n.free)} • `}
             {registrationLinkFragment}
           </div>
-        ) : fees && fees.edges && fees.edges.length ? (
+        ) : fees && fees.edges && fees.edges.length && fees.edges.length > 1 ? (
           <React.Fragment>
             <div className="coa-EventDetailItem__fees-list">
               {`$${smallestFee}—$${biggestFee} • `}
@@ -104,7 +109,12 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
             ))}
           </React.Fragment>
         ) : (
-          <div className="coa-EventDetailItem__fees-single">JUST ONE</div>
+          !!onlyFee && (
+            <div className="coa-EventDetailItem__fees-single">
+              {`$${onlyFee} • `}
+              {registrationLinkFragment}
+            </div>
+          )
         )}
       </div>
     </div>
