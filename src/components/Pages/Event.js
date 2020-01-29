@@ -225,7 +225,7 @@ const EventPage = ({ eventPage }) => {
           </div>
         </div>
         <div className="coa-Page__side-content">
-          <div className="coa-ServicePage__contacts-desktop">
+          <div className="coa-EventsPage__contacts-desktop">
             {!!contact && <ContactDetails contacts={[contact]} />}
           </div>
         </div>

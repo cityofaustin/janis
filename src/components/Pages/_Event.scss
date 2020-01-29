@@ -36,7 +36,7 @@
   margin-top: 2rem;
   margin-bottom: $coa-space-level6;
   // }
-  @include desktop {
+  @include tablet-and-desktop {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
   }
@@ -59,4 +59,18 @@
 
 .coa-EventDetailItem__location-name {
   font-weight: 800;
+}
+
+.coa-EventsPage__contacts-desktop {
+  width: 350px;
+  margin-top: 2rem;
+
+  .material-icons {
+    color: $coa-color-black;
+  }
+
+  .coa-SectionHeader {
+    font-size: 1.8rem;
+    padding-top: 0;
+  }
 }
