@@ -175,7 +175,7 @@ const EventDetailCard = ({
         fees={fees}
         registrationUrl={registrationUrl}
       />
-      {!!(location.locationType === 'city_location') && (
+      {location.locationType === 'city_location' ? (
         <a
           href={`/${intl.locale}/location/${location.cityLocation.slug}/`}
           className="coa-EventDetailItem__location-link"
@@ -187,6 +187,8 @@ const EventDetailCard = ({
             <i class="material-icons">arrow_forward</i>
           </div>
         </a>
+      ) : (
+        <div className="coa-EventDetailCard__location-linkless" />
       ) /* Noticed the URL is getting generated in the contact details logic I copied in, it'll be nice to clean up URLs */}
     </div>
   );
