@@ -3,7 +3,7 @@
 }
 
 .coa-EventPage__cancelled-badge {
-  background: red;
+  background: #d83933;
   text-transform: uppercase;
   color: white;
   width: fit-content;
@@ -11,10 +11,10 @@
   font-size: 1.3rem;
   line-height: 1.5rem;
   font-weight: 600;
-
-  display: inline;
+  padding-left: 2rem;
+  padding-right: 2rem;
   @include mobile {
-    display: block;
+    margin-bottom: 0.5rem;
   }
 }
 
