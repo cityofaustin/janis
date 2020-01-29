@@ -115,5 +115,6 @@
   "events.register": "Register",
   "events.public": "Open to the public",
   "events.details": "Details",
-  "events.allEvents": "All events"
+  "events.allEvents": "All events",
+  "events.getDirections": "Get directions"
 }

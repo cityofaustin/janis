@@ -523,4 +523,5 @@ export const events = defineMessages({
   public: 'Open to the public',
   details: 'Details',
   allEvents: 'All events',
+  getDirections: 'Get directions',
 });

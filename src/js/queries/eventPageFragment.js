@@ -40,6 +40,7 @@ const eventPageFragment = `
         city
         state
         zip
+        unit
       }
     }
     eventIsFree

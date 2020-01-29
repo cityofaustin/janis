@@ -37,24 +37,53 @@ const EventDate = ({ date, canceled }) => {
   );
 };
 
-const EventLocationDetail = ({ street }) => {
-  debugger;
+const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
+  const intl = useIntl();
 
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">place</i>
       <div className="coa-EventDetailItem__content coa-EventDetailItem__location">
-        <div className="coa-EventDetailItem__location-title">
-          Location title
-        </div>
-        <div className="coa-EventDetailItem__location-address">1122 lane</div>
-        {true && <div className="coa-EventDetailItem__location-unit">#42</div>}
+        <div className="coa-EventDetailItem__location-name">{name}</div>
+        <div className="coa-EventDetailItem__location-address">{`${street}, ${city}, ${state} ${zip}`}</div>
+        {!!unit && (
+          <div className="coa-EventDetailItem__location-unit">{unit}</div>
+        )}
         <a
           href="www.google.com"
           className="coa-EventDetailItem__location-directions-link"
         >
-          Get directions
+          {intl.formatMessage(i18n.getDirections)}
         </a>
+      </div>
+    </div>
+  );
+};
+
+const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
+  const intl = useIntl();
+
+  return (
+    <div className="coa-EventDetailItem">
+      <i className="material-icons">local_play</i>
+      <div className="coa-EventDetailItem__content">
+        {eventIsFree ? (
+          <div className="coa-EventDetailItem__fees-free">
+            {`${intl.formatMessage(i18n.free)} • `}
+            {registrationUrl ? (
+              <a href={registrationUrl}>{intl.formatMessage(i18n.register)}</a>
+            ) : (
+              intl.formatMessage(i18n.public)
+            )}
+          </div>
+        ) : (
+          <div className="coa-EventDetailItem__fees-list">LIST</div>
+        )}
+        {fees.edges.map(edge => (
+          <div>
+            {edge.node.feeLabel}: {edge.node.fee}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -100,22 +129,22 @@ const EventDetailCard = ({
           }
           if (location.locationType === 'remote_location') {
             return (
-              <EventLocationDetail street={location.remoteLocation.street} />
+              <EventLocationDetail
+                name={location.remoteLocation.name}
+                street={location.remoteLocation.street}
+                city={location.remoteLocation.city}
+                state={location.remoteLocation.state}
+                zip={location.remoteLocation.zip}
+                unit={location.remoteLocation.unit}
+              />
             );
           }
         })}
-      <div>
-        {intl.formatMessage(i18n.free)}? {eventIsFree ? 'YES' : 'NO'}
-      </div>
-      {fees.edges.map(edge => (
-        <div>
-          {edge.node.feeLabel}: {edge.node.fee}
-        </div>
-      ))}
-      <div>
-        {intl.formatMessage(i18n.register)}: {registrationUrl}
-      </div>
-      {!registrationUrl && <div>{intl.formatMessage(i18n.public)}</div>}
+      <EventDetailFees
+        eventIsFree={eventIsFree}
+        fees={fees}
+        registrationUrl={registrationUrl}
+      />
     </div>
   );
 };
