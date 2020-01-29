@@ -63,6 +63,25 @@ const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
 const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
   const intl = useIntl();
 
+  const registrationLinkFragment = (
+    <React.Fragment>
+      {registrationUrl ? (
+        <a href={registrationUrl}>{intl.formatMessage(i18n.register)}</a>
+      ) : (
+        intl.formatMessage(i18n.public)
+      )}
+    </React.Fragment>
+  );
+
+  // Calculate fee range (we should probably move this logic out to somewhere else)
+  let smallestFee;
+  let biggestFee;
+  if (fees && fees.edges && fees.edges.length && fees.edges.length > 1) {
+    fees.edges.sort(edge => -edge.node.fee);
+    smallestFee = fees.edges[0].node.fee;
+    biggestFee = fees.edges[fees.edges.length - 1].node.fee;
+  }
+
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">local_play</i>
@@ -70,20 +89,23 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
         {eventIsFree ? (
           <div className="coa-EventDetailItem__fees-free">
             {`${intl.formatMessage(i18n.free)} • `}
-            {registrationUrl ? (
-              <a href={registrationUrl}>{intl.formatMessage(i18n.register)}</a>
-            ) : (
-              intl.formatMessage(i18n.public)
-            )}
+            {registrationLinkFragment}
           </div>
+        ) : fees && fees.edges && fees.edges.length ? (
+          <React.Fragment>
+            <div className="coa-EventDetailItem__fees-list">
+              {`$${smallestFee}—$${biggestFee} • `}
+              {registrationLinkFragment}
+            </div>
+            {fees.edges.map(edge => (
+              <div>
+                ${edge.node.fee} {edge.node.feeLabel}
+              </div>
+            ))}
+          </React.Fragment>
         ) : (
-          <div className="coa-EventDetailItem__fees-list">LIST</div>
+          <div className="coa-EventDetailItem__fees-single">JUST ONE</div>
         )}
-        {fees.edges.map(edge => (
-          <div>
-            {edge.node.feeLabel}: {edge.node.fee}
-          </div>
-        ))}
       </div>
     </div>
   );
@@ -110,7 +132,7 @@ const EventDetailCard = ({
             {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
           </div>
           <div className="coa-EventDetailItem__time">
-            {`${moment(startTime, 'HH:mm:ss').format('LT')} - ${moment(
+            {`${moment(startTime, 'HH:mm:ss').format('LT')}—${moment(
               endTime,
               'HH:mm:ss',
             ).format('LT')}`}
