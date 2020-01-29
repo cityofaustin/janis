@@ -33,6 +33,7 @@ const eventPageFragment = `
         physicalCity
         physicalState
         physicalZip
+        slug
       }
       remoteLocation {
         name

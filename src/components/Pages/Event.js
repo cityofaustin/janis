@@ -15,7 +15,7 @@ import { useIntl } from 'react-intl';
 
 import moment from 'moment-timezone';
 
-import { events as i18n } from 'js/i18n/definitions';
+import { events as i18n, locations as i18n2 } from 'js/i18n/definitions';
 
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
@@ -125,13 +125,15 @@ const EventDetailCard = ({
   date,
   startTime,
   endTime,
-  locations,
+  location,
   eventIsFree,
   fees,
   registrationUrl,
 }) => {
   const intl = useIntl();
   moment.locale(intl.locale);
+
+  debugger;
 
   return (
     <div className="coa-EventPage__EventDetailCard">
@@ -149,39 +151,43 @@ const EventDetailCard = ({
           </div>
         </div>
       </div>
-      {!!locations &&
-        !!locations.length &&
-        locations.map(location => {
-          if (location.locationType === 'city_location') {
-            return (
-              <EventLocationDetail
-                name={location.cityLocation.title}
-                street={location.cityLocation.physicalStreet}
-                city={location.cityLocation.physicalCity}
-                state={location.cityLocation.physicalState}
-                zip={location.cityLocation.physicalZip}
-                unit={location.cityLocation.physicalUnit}
-              />
-            );
-          }
-          if (location.locationType === 'remote_location') {
-            return (
-              <EventLocationDetail
-                name={location.remoteLocation.name}
-                street={location.remoteLocation.street}
-                city={location.remoteLocation.city}
-                state={location.remoteLocation.state}
-                zip={location.remoteLocation.zip}
-                unit={location.remoteLocation.unit}
-              />
-            );
-          }
-        })}
+      {location.locationType === 'city_location' ? (
+        <EventLocationDetail
+          name={location.cityLocation.title}
+          street={location.cityLocation.physicalStreet}
+          city={location.cityLocation.physicalCity}
+          state={location.cityLocation.physicalState}
+          zip={location.cityLocation.physicalZip}
+          unit={location.cityLocation.physicalUnit}
+        />
+      ) : location.locationType === 'remote_location' ? (
+        <EventLocationDetail
+          name={location.remoteLocation.name}
+          street={location.remoteLocation.street}
+          city={location.remoteLocation.city}
+          state={location.remoteLocation.state}
+          zip={location.remoteLocation.zip}
+          unit={location.remoteLocation.unit}
+        />
+      ) : null}
       <EventDetailFees
         eventIsFree={eventIsFree}
         fees={fees}
         registrationUrl={registrationUrl}
       />
+      {!!(location.locationType === 'city_location') && (
+        <a
+          href={`/${intl.locale}/location/${location.cityLocation.slug}/`}
+          className="coa-EventDetailItem__location-link"
+        >
+          <div className="coa-EventDetailItem__location-link-text">
+            {intl.formatMessage(i18n2.locationInformation)}
+          </div>
+          <div className="coa-EventDetailItem__location-link-arrow">
+            <i class="material-icons">arrow_forward</i>
+          </div>
+        </a>
+      ) /* Noticed the URL is getting generated in the contact details logic I copied in, it'll be nice to clean up URLs */}
     </div>
   );
 };
@@ -207,6 +213,9 @@ const EventPage = ({ eventPage }) => {
       fees,
     },
   } = blarg;
+
+  // until we have support for multiple locations, we're taking the first one
+  const location = locations[0];
 
   return (
     <div>
@@ -240,7 +249,7 @@ const EventPage = ({ eventPage }) => {
             date={date}
             startTime={startTime}
             endTime={endTime}
-            locations={locations}
+            location={location}
             eventIsFree={eventIsFree}
             fees={fees}
             registrationUrl={registrationUrl}
