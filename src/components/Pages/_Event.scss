@@ -31,7 +31,9 @@
 .coa-EventPage__EventDetailCard {
   background: #f6f6f6;
   @include mobile {
-    padding: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
     margin-top: 2rem;
     margin-bottom: $coa-space-level6;
   }
