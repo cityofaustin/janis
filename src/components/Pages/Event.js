@@ -205,7 +205,7 @@ const EventPage = ({ eventPage }) => {
           <div className="wrapper container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-10">
-                <h2>{intl.formatMessage(i18n.details)}</h2>
+                <h3>{intl.formatMessage(i18n.details)}</h3>
                 {description && (
                   <HtmlFromRichText title={' '} content={description} />
                 )}
