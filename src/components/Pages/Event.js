@@ -91,22 +91,6 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
     </React.Fragment>
   );
 
-  // Calculate fee range (we should probably move this logic out to somewhere else)
-  let smallestFee;
-  let biggestFee;
-  let onlyFee;
-  let onlyFeeLabel;
-  if (fees && fees.edges && fees.edges.length && fees.edges.length > 1) {
-    fees.edges.sort(edge => -edge.node.fee);
-    smallestFee = fees.edges[0].node.fee;
-    biggestFee = fees.edges[fees.edges.length - 1].node.fee;
-  }
-
-  if (fees && fees.edges && fees.edges.length && fees.edges.length === 1) {
-    onlyFee = fees.edges[0].node.fee;
-    onlyFeeLabel = fees.edges[0].node.feeLabel;
-  }
-
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">local_play</i>
