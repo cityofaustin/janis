@@ -181,16 +181,15 @@ const EventPage = ({ eventPage }) => {
         relatedTo={[]}
         offeredBy={offeredBy}
       />
+      <EventDate date={date} canceled={canceled} />
+      <div className="coa-EventPage__header">
+        <h1 className="coa-EventPage__header-title">{title}</h1>
+      </div>
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper container-fluid">
             <div className="row">
-              <div className="col-xs-12 col-md-10">
-                <EventDate date={date} canceled={canceled} />
-                <div className="coa-EventPage__header">
-                  <h1 className="coa-EventPage__header-title">{title}</h1>
-                </div>
-              </div>
+              <div className="col-xs-12 col-md-10" />
             </div>
           </div>
           <EventDetailCard
