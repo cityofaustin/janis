@@ -40,6 +40,9 @@ function FormContainer({
   // "init" events after the first "init" means that there was a page transition within the iframe.
   let iframeLoaded = false;
   const onResized = ({ iframe, height, width, type }) => {
+    // 🚨remove delay for testing!
+    setTimeout(function(){
+    //🚨remove delay for testing!
     if (type === 'init') {
       if (iframeLoaded) {
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
@@ -47,10 +50,15 @@ function FormContainer({
         iframeLoaded = true;
         const msg = document.getElementById('coa-LockedIframeRequestMessage')
         const loader = document.getElementById('coa-loadingWheel')
+        const iFrameForm = document.getElementById('coa-iFrameForm')
+        iFrameForm.style.opacity = 1
         msg.style.display = "none"
         loader.style.display = "none"
       }
     }
+    //🚨remove delay for testing!
+  },1500)
+    //🚨remove delay for testing!
   };
 
   setTimeout(function(){
@@ -58,6 +66,7 @@ function FormContainer({
       const msg = document.getElementById('coa-LockedIframeRequestMessage')
       msg.style.display = "block"
       msg.style.opacity = 0
+      // Think of a better way of setting this transition up 🤔
       setTimeout(function(){msg.style.opacity = 1},100)
     }
   },5000)
@@ -84,27 +93,30 @@ function FormContainer({
           {title}
         </PageHeader>
         <div id="coa-loadingWheel"></div>
-        <h1 id="coa-LockedIframeRequestMessage"
+        <div id="coa-LockedIframeRequestMessage"
           style={{
             display: 'none',
-            padding: 100,
-            margin: 0,
-            textAlign: 'center',
-            backgroundColor: 'red',
+            padding: 10,
+            margin: 10,
+            backgroundColor: '#ccc',
             opacity: 0,
           }}>
-          ...We're still waiting on your form 😐
-          <br/>
-          ⏱... While we wait, please check that you
-          <br/>
-          don't have any browser plugins
-          blocking external content from loading
-        </h1>
+          ...We are still waiting on the form to load. 😐
+          <br/><br/>
+          <strong> ? Why hasn't it loaded yet ? </strong> <br/>
+          &nbsp; &bull; A plugin could be blocking it (Like... "Privacy Badger") <br/>
+          &nbsp; &bull; It may have failed to load ("404 error") <br/><br/>
+
+        <strong> ! Here's an option to go to the direct link instead... 🤩</strong> <br/><br/>
+        <a href={formUrl}> {formUrl} </a>
+
+        </div>
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="coa-FormContainer__iframe-container">
               {formUrl && (
                 <IframeResizer
+                  id="coa-iFrameForm"
                   onLoad={onLoad}
                   forwardRef={iframeRef}
                   src={formUrl}

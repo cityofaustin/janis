@@ -9,9 +9,14 @@
   min-width: 100%;
 }
 
+#coa-iFrameForm {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
 #coa-LockedIframeRequestMessage {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity .3s;
 }
 
 #coa-loadingWheel {
@@ -24,7 +29,7 @@
   border-bottom: 3px solid #0049c7;
   border-radius: 50%;
   margin: auto;
-  margin-top: 50px;
+  // margin-bottom: 20px;
   -webkit-animation: rotate 2s infinite linear;
   animation: rotate 2s infinite linear;
 }
