@@ -39,7 +39,15 @@ const EventDate = ({ date, canceled }) => {
   );
 };
 
-const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
+const EventLocationDetail = ({
+  name,
+  street,
+  city,
+  state,
+  zip,
+  unit,
+  additionalDetails,
+}) => {
   const intl = useIntl();
 
   // Just use these 4 to get the google maps links:
@@ -50,9 +58,14 @@ const EventLocationDetail = ({ name, street, city, state, zip, unit }) => {
       <i className="material-icons">place</i>
       <div className="coa-EventDetailItem__content coa-EventDetailItem__location">
         <div className="coa-EventDetailItem__location-name">{name}</div>
-        <div className="coa-EventDetailItem__location-address">{`${street}, ${city}, ${state} ${zip}`}</div>
-        {!!unit && (
-          <div className="coa-EventDetailItem__location-unit">{unit}</div>
+        <div className="coa-EventDetailItem__location-address">
+          {`${street}`}
+          {!!unit && `, ${unit}`}
+        </div>
+        {!!additionalDetails && (
+          <div className="coa-EventDetailItem__location-unit">
+            {additionalDetails}
+          </div>
         )}
         <a
           href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
@@ -164,6 +177,7 @@ const EventDetailCard = ({
           state={location.cityLocation.physicalState}
           zip={location.cityLocation.physicalZip}
           unit={location.cityLocation.physicalUnit}
+          additionalDetails={location.additionalDetails}
         />
       ) : location.locationType === 'remote_location' ? (
         <EventLocationDetail
@@ -173,6 +187,7 @@ const EventDetailCard = ({
           state={location.remoteLocation.state}
           zip={location.remoteLocation.zip}
           unit={location.remoteLocation.unit}
+          additionalDetails={location.additionalDetails}
         />
       ) : null}
       <EventDetailFees
