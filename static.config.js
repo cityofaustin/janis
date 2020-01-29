@@ -564,7 +564,7 @@ const getEventPageData = async (id, client) => {
   );
 
   // reverse the order of the fees
-  eventPage.fees.edges.reverse();
+  // eventPage.fees.edges.reverse();
 
   return { eventPage: eventPage };
 };
