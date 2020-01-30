@@ -51,9 +51,14 @@ function FormContainer({
         const msg = document.getElementById('coa-LockedIframeRequestMessage')
         const loader = document.getElementById('coa-loadingWheel')
         const iFrameForm = document.getElementById('coa-iFrameForm')
-        iFrameForm.style.opacity = 1
-        msg.style.display = "none"
-        loader.style.display = "none"
+
+        msg.style.opacity = 0
+        loader.style.opacity = 0
+        setTimeout(function(){
+          msg.style.display = "none"
+          loader.style.display = "none"
+          iFrameForm.style.opacity = 1
+        },300)
       }
     }
     //🚨remove delay for testing!
@@ -64,16 +69,27 @@ function FormContainer({
   setTimeout(function(){
     if (!iframeLoaded) {
       const msg = document.getElementById('coa-LockedIframeRequestMessage')
-      msg.style.display = "block"
+      const loader = document.getElementById('coa-loadingWheel')
+
       msg.style.opacity = 0
+      loader.style.opacity = 0
       // Think of a better way of setting this transition up 🤔
-      setTimeout(function(){msg.style.opacity = 1},100)
+      setTimeout(function(){
+        loader.style.opacity = 0
+        setTimeout(function(){
+          loader.style.display = 'none'
+          msg.style.opacity = 1
+          msg.style.marginTop = "0px"
+        },300)
+      },300)
+
     }
   },5000)
 
   const onLoad = () => {
     const loader = document.getElementById('coa-loadingWheel')
-    loader.style.display = "block"
+    loader.style.display = 'block'
+    loader.style.opacity = 1
   }
 
   return (
@@ -93,24 +109,29 @@ function FormContainer({
           {title}
         </PageHeader>
         <div id="coa-loadingWheel"></div>
-        <div id="coa-LockedIframeRequestMessage"
-          style={{
-            display: 'none',
-            padding: 10,
-            margin: 10,
-            backgroundColor: '#ccc',
-            opacity: 0,
-          }}>
-          ...We are still waiting on the form to load. 😐
-          <br/><br/>
-          <strong> ? Why hasn't it loaded yet ? </strong> <br/>
-          &nbsp; &bull; A plugin could be blocking it (Like... "Privacy Badger") <br/>
-          &nbsp; &bull; It may have failed to load ("404 error") <br/><br/>
 
-        <strong> ! Here's an option to go to the direct link instead... 🤩</strong> <br/><br/>
-        <a href={formUrl}> {formUrl} </a>
+        <div class="wrapper container-fluid">
+          <div class="row">
+            <div id="coa-LockedIframeRequestMessage" class="col-xs-12 col-md-8">
 
+              <h2>We are still waiting for your form to load.</h2>
+
+              <h3>Why hasn't it loaded yet?</h3>
+
+              <p>
+                &bull; A plugin could be blocking the form (example: "Privacy Badger")
+                <br/>
+                &bull; It may have failed to load ("404 error")
+              </p>
+              <br/>
+
+              <h3>Visit the form directly</h3>
+              <a href={formUrl} target="_blank"> <p>{formUrl}</p> </a>
+
+            </div>
+          </div>
         </div>
+
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="coa-FormContainer__iframe-container">
@@ -136,6 +157,7 @@ function FormContainer({
           />
         )}
       </div>
+
     </div>
   );
 }
