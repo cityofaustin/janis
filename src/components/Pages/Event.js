@@ -164,7 +164,7 @@ const EventDetailCard = ({
           <EventTime startTime={startTime} endTime={endTime} />
         </div>
       </div>
-      {location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_location' ? (
         <EventLocationDetail
           name={location.cityLocation.title}
           street={location.cityLocation.physicalStreet}
@@ -174,7 +174,7 @@ const EventDetailCard = ({
           unit={location.cityLocation.physicalUnit}
           additionalDetails={location.additionalDetails}
         />
-      ) : location.locationType === 'remote_location' ? (
+      ) : location && location.locationType === 'remote_location' ? (
         <EventLocationDetail
           name={location.remoteLocation.name}
           street={location.remoteLocation.street}
@@ -190,7 +190,7 @@ const EventDetailCard = ({
         fees={fees}
         registrationUrl={registrationUrl}
       />
-      {location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_location' ? (
         <a
           href={`/${intl.locale}/location/${location.cityLocation.slug}/`}
           className="coa-EventDetailItem__location-link"
