@@ -17,6 +17,7 @@ import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import RowContainer from 'components/ErrorMessages/RowContainer';
 
 function FormContainer({
   formContainer: {
@@ -85,37 +86,9 @@ setTimeout(function(){ //🚨remove delay for testing!
         <PageHeader contentType={'information'} description={description}>
           {title}
         </PageHeader>
+
         <div id="coa-loadingWheel"></div>
-
-//
-//
-//
-
-        <div className="wrapper container-fluid">
-          <div className="row">
-            <div id="coa-LockedIframeRequestMessage" className="col-xs-12 col-md-8">
-
-              <h2>We are still waiting for your form to load.</h2>
-
-              <h3>Why hasn't it loaded yet?</h3>
-
-              <p>
-                &bull; A plugin could be blocking the form (example: "Privacy Badger")
-                <br/>
-                &bull; It may have failed to load ("404 error")
-              </p>
-              <br/>
-
-              <h3>Visit the form directly</h3>
-              <a href={formUrl} target="_blank"> <p>{formUrl}</p> </a>
-
-            </div>
-          </div>
-        </div>
-        
-//
-//
-//
+        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage}/>
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -141,9 +114,29 @@ setTimeout(function(){ //🚨remove delay for testing!
           />
         )}
       </div>
-
     </div>
   );
+}
+
+const ErrorMessage = ({formUrl}) => {
+  return (
+    <div>
+      <h2>We are still waiting for your form to load.</h2>
+
+      <h3>Why hasn't it loaded yet?</h3>
+
+      <p>
+        &bull; A plugin could be blocking the form (example: "Privacy Badger")
+        <br/>
+        &bull; It may have failed to load ("404 error")
+      </p>
+      <br/>
+
+      <h3>Visit the form directly</h3>
+
+      <a href={formUrl} target="_blank"> <p>{formUrl}</p> </a>
+    </div>
+  )
 }
 
 export default withRouteData(injectIntl(FormContainer));
