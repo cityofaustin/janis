@@ -131,6 +131,6 @@
   "events.register": "Regístrese",
   "events.public": "Abierto al público",
   "events.details": "Detalles",
-  "events.allEvents": "Todos eventos",
+  "events.allEvents": "Todos los eventos",
   "events.getDirections": "Obtener direcciones"
 }
