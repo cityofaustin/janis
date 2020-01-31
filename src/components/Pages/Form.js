@@ -9,6 +9,8 @@ import { injectIntl } from 'react-intl';
 **/
 import IframeResizer from 'iframe-resizer-react';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import { timeout, loader } from '../../js/animations/errorHandlers';
+
 
 import PageHeader from 'components/PageHeader';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
@@ -38,6 +40,9 @@ function FormContainer({
 
   // Go to the top of the page when we transition to the form Confirmation Page.
   // "init" events after the first "init" means that there was a page transition within the iframe.
+
+  console.log(timeout(), loader())
+
   let iframeLoaded = false;
   const onResized = ({ iframe, height, width, type }) => {
     // 🚨remove delay for testing!
@@ -58,6 +63,7 @@ function FormContainer({
           msg.style.display = "none"
           loader.style.display = "none"
           iFrameForm.style.opacity = 1
+          iFrameForm.style.marginTop = "0px"
         },300)
       }
     }
