@@ -6,16 +6,20 @@ import { events as i18n, locations as i18n2 } from 'js/i18n/definitions';
 import EventLocationDetail from 'components/Pages/Event/EventDetailCard/EventLocationDetail';
 import EventDetailFees from 'components/Pages/Event/EventDetailCard/EventDetailFees';
 
+import { formatTime, formatHours } from 'js/helpers/cleanData';
+
 const EventTime = ({ startTime, endTime }) => {
   if (startTime) {
     return (
       <div className="coa-EventDetailItem__time">
         {startTime && endTime
-          ? `${moment(startTime, 'HH:mm:ss').format('LT')}—${moment(
-              endTime,
-              'HH:mm:ss',
-            ).format('LT')}`
-          : moment(startTime, 'HH:mm:ss').format('LT')}
+          ? formatHours({
+              start1: startTime,
+              end1: endTime,
+              start2: null,
+              end2: null,
+            })
+          : formatTime(startTime)}
       </div>
     );
   }
@@ -35,14 +39,16 @@ const EventDetailCard = ({
   const intl = useIntl();
   moment.locale(intl.locale);
 
+  let momentDate = moment(date, 'YYYY-MM-DD').format('dddd • LL');
+  // make sure to capatalize the first letter in the date
+  momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
+
   return (
     <div className="coa-EventPage__EventDetailCard">
       <div className="coa-EventDetailItem">
         <i className="material-icons">event</i>
         <div className="coa-EventDetailItem__content">
-          <div className="coa-EventDetailItem__date">
-            {moment(date, 'YYYY-MM-DD').format('dddd • LL')}
-          </div>
+          <div className="coa-EventDetailItem__date">{momentDate}</div>
           <EventTime startTime={startTime} endTime={endTime} />
         </div>
       </div>
