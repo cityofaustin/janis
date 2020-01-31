@@ -14,6 +14,7 @@ import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocument
 import getFormContainerRevisionQuery from 'js/queries/getFormContainerRevisionQuery';
 import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
 import getLocationPageRevisionQuery from 'js/queries/getLocationPageRevisionQuery';
+import getEventPageRevisionQuery from 'js/queries/getEventPageRevisionQuery';
 
 import {
   cleanServicesForPreview,
@@ -25,7 +26,9 @@ import {
   cleanFormContainersForPreview,
   cleanGuideForPreview,
   cleanLocationPage,
+  getOfferedByFromRelatedDepartments,
 } from 'js/helpers/cleanData';
+
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
@@ -35,6 +38,7 @@ import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDoc
 import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
+import EventPage from 'components/Pages/Event';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -106,6 +110,11 @@ class CMSPreview extends Component {
         req = client.request(getLocationPageRevisionQuery, {
           id: revision_id,
         });
+        break;
+      case 'event':
+        req = client.request(getEventPageRevisionQuery, {
+          id: revision_id,
+        });
     }
     req.then(data => {
       let page;
@@ -137,6 +146,9 @@ class CMSPreview extends Component {
           break;
         case 'location':
           page = data.pageRevision.asLocationPage;
+          break;
+        case 'event':
+          page = data.pageRevision.asEventPage;
       }
 
       this.setState({
@@ -247,6 +259,17 @@ class CMSPreview extends Component {
               locationPage={cleanLocationPage(data.edges[0].node)}
             />
           )}
+        />
+        <Route
+          path="/event"
+          render={props => {
+            let eventPage = data.edges[0].node;
+            eventPage.offeredBy = getOfferedByFromRelatedDepartments(
+              eventPage.relatedDepartments,
+            );
+
+            return <EventPage eventPage={eventPage} />;
+          }}
         />
       </Switch>
     );

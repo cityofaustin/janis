@@ -23,7 +23,7 @@ const mapSteps = (steps, singleStep) =>
       return (
         <StepBasic
           key={index}
-          stepAsHtmlFromAdmin={step.value}
+          stepAsHtmlFromRichText={step.value}
           singleStep={singleStep}
         />
       );

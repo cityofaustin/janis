@@ -11,7 +11,7 @@ import IframeResizer from 'iframe-resizer-react';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
