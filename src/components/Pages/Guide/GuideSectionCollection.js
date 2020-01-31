@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import GuideSectionWrapper from 'components/Pages/Guide/GuideSectionWrapper';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import Steps from 'components/Steps';
 import { hyphenate } from './helpers';
 
@@ -31,7 +31,7 @@ function GuideSection({
         <h2>{title}</h2>
         <p>{description}</p>
         {page.servicePage && <Steps steps={pageData.steps} />}
-        <HtmlFromAdmin title={' '} content={additionalContent} />
+        <HtmlFromRichText title={' '} content={additionalContent} />
       </div>
       <div className="coa-GuideSection__link">
         <a href={url} target="_blank">

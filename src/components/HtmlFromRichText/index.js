@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Trashy from 'components/Trashy';
 import Recollect from 'components/Recollect';
 
-const HtmlFromAdmin = ({ content }) => {
+const HtmlFromRichText = ({ content }) => {
   return Parser(content, {
     replace: domNode => {
       // this initial if is needed to prevent undefined error
@@ -69,8 +69,8 @@ const HtmlFromAdmin = ({ content }) => {
   });
 };
 
-HtmlFromAdmin.propTypes = {
+HtmlFromRichText.propTypes = {
   content: PropTypes.string.isRequired,
 };
 
-export default HtmlFromAdmin;
+export default HtmlFromRichText;
