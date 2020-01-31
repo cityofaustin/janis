@@ -6,6 +6,7 @@ import PageHeader from 'components/PageHeader';
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import ContactDetails from 'components/Contact/ContactDetails';
+import UserFeedback from 'components/UserFeedback';
 
 import { useIntl } from 'react-intl';
 
@@ -117,6 +118,7 @@ const EventPage = ({ eventPage }) => {
           </div>
         </div>
       </div>
+      <UserFeedback />
     </div>
   );
 };

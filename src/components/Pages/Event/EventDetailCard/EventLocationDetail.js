@@ -42,6 +42,7 @@ const EventLocationDetail = ({
         <a
           href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
           className="coa-EventDetailItem__location-directions-link"
+          target="_blank"
         >
           {intl.formatMessage(i18n.getDirections)}
         </a>
