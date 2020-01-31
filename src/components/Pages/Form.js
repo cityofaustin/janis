@@ -9,8 +9,7 @@ import { injectIntl } from 'react-intl';
 **/
 import IframeResizer from 'iframe-resizer-react';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
-import { timeout, loader } from '../../js/animations/errorHandlers';
-
+import { loader } from '../../js/animations/loader';
 
 import PageHeader from 'components/PageHeader';
 import HtmlFromAdmin from 'components/HtmlFromAdmin';
@@ -40,63 +39,35 @@ function FormContainer({
 
   // Go to the top of the page when we transition to the form Confirmation Page.
   // "init" events after the first "init" means that there was a page transition within the iframe.
-
-  console.log(timeout(), loader())
-
   let iframeLoaded = false;
   const onResized = ({ iframe, height, width, type }) => {
-    // 🚨remove delay for testing!
-    setTimeout(function(){
-    //🚨remove delay for testing!
+setTimeout(function(){ //🚨remove delay for testing!
     if (type === 'init') {
       if (iframeLoaded) {
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
       } else {
         iframeLoaded = true;
-        const msg = document.getElementById('coa-LockedIframeRequestMessage')
-        const loader = document.getElementById('coa-loadingWheel')
-        const iFrameForm = document.getElementById('coa-iFrameForm')
-
-        msg.style.opacity = 0
-        loader.style.opacity = 0
-        setTimeout(function(){
-          msg.style.display = "none"
-          loader.style.display = "none"
-          iFrameForm.style.opacity = 1
-          iFrameForm.style.marginTop = "0px"
-        },300)
+        loader.end()
       }
     }
-    //🚨remove delay for testing!
-  },1500)
-    //🚨remove delay for testing!
+},1500) //🚨remove delay for testing!
   };
 
   setTimeout(function(){
+    /* We're allowing 5 sec here to give slow connections time before alerting
+    the user that the form may be having problems loading.*/
     if (!iframeLoaded) {
-      const msg = document.getElementById('coa-LockedIframeRequestMessage')
-      const loader = document.getElementById('coa-loadingWheel')
-
-      msg.style.opacity = 0
-      loader.style.opacity = 0
-      // Think of a better way of setting this transition up 🤔
-      setTimeout(function(){
-        loader.style.opacity = 0
-        setTimeout(function(){
-          loader.style.display = 'none'
-          msg.style.opacity = 1
-          msg.style.marginTop = "0px"
-        },300)
-      },300)
-
+      loader.endError()
     }
   },5000)
 
-  const onLoad = () => {
-    const loader = document.getElementById('coa-loadingWheel')
-    loader.style.display = 'block'
-    loader.style.opacity = 1
-  }
+
+  loader.start({
+    contentId: 'coa-iFrameForm',
+    loaderId: 'coa-loadingWheel',
+    errorId: 'coa-LockedIframeRequestMessage',
+    style: "popup"
+  })
 
   return (
     <div>
@@ -116,9 +87,13 @@ function FormContainer({
         </PageHeader>
         <div id="coa-loadingWheel"></div>
 
-        <div class="wrapper container-fluid">
-          <div class="row">
-            <div id="coa-LockedIframeRequestMessage" class="col-xs-12 col-md-8">
+//
+//
+//
+
+        <div className="wrapper container-fluid">
+          <div className="row">
+            <div id="coa-LockedIframeRequestMessage" className="col-xs-12 col-md-8">
 
               <h2>We are still waiting for your form to load.</h2>
 
@@ -137,6 +112,10 @@ function FormContainer({
             </div>
           </div>
         </div>
+        
+//
+//
+//
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -144,7 +123,6 @@ function FormContainer({
               {formUrl && (
                 <IframeResizer
                   id="coa-iFrameForm"
-                  onLoad={onLoad}
                   forwardRef={iframeRef}
                   src={formUrl}
                   className="coa-FormContainer__IframeResizer-default"
