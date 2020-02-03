@@ -42,7 +42,6 @@ function FormContainer({
   // "init" events after the first "init" means that there was a page transition within the iframe.
   let iframeLoaded = false;
   const onResized = ({ iframe, height, width, type }) => {
-setTimeout(function(){ //🚨remove delay for testing!
     if (type === 'init') {
       if (iframeLoaded) {
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
@@ -51,8 +50,7 @@ setTimeout(function(){ //🚨remove delay for testing!
         loader.end()
       }
     }
-},1500) //🚨remove delay for testing!
-  };
+  }
 
   setTimeout(function(){
     /* We're allowing 5 sec here to give slow connections time before alerting
