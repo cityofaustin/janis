@@ -158,6 +158,8 @@ export const cleanLocationPage = locationPage => {
       value: locationPage.phoneNumber
         ? parsePhoneNumberFromString(locationPage.phoneNumber).formatNational()
         : '',
+      // why do we call PhoneDescripton name here, and label elsewhere?
+      // and what was wrong with calling it phone description?
       name: locationPage.phoneDescription,
     },
     email: {
@@ -180,7 +182,7 @@ export const cleanLocationPage = locationPage => {
     return {
       hours: cleanLocationPageHours(edge.node),
       title: edge.node.relatedService.title,
-
+      exceptions: edge.node.relatedService.hoursExceptions,
       hoursSameAsLocation: edge.node.hoursSameAsLocation,
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
@@ -188,6 +190,7 @@ export const cleanLocationPage = locationPage => {
         edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
           phoneEdge => {
             return {
+              // why do we call phoneDescription label here,
               label: phoneEdge.node.phoneDescription,
               number: parsePhoneNumberFromString(
                 phoneEdge.node.phoneNumber,
@@ -725,4 +728,20 @@ export const cleanFormContainersForPreview = allFormContainers => {
   form.contacts = cleanContacts(form.contacts);
 
   return form;
+};
+
+export const getOfferedByFromRelatedDepartments = relatedDepartments => {
+  let offeredBy;
+
+  if (relatedDepartments && relatedDepartments.edges.length) {
+    offeredBy = relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  } else {
+    offeredBy = [];
+  }
+
+  return offeredBy;
 };

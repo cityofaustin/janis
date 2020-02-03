@@ -8,13 +8,14 @@ import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import PageBanner from 'components/PageBanner';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
+import UserFeedback from 'components/UserFeedback';
 
 const Service = ({ service, intl }) => {
   const {
@@ -88,7 +89,7 @@ const Service = ({ service, intl }) => {
                     ))}
 
                   {additionalContent && (
-                    <HtmlFromAdmin content={additionalContent} />
+                    <HtmlFromRichText content={additionalContent} />
                   )}
                 </div>
               </div>
@@ -114,6 +115,7 @@ const Service = ({ service, intl }) => {
           offeredBy={contextualNavData.offeredBy}
         />
       </div>
+      <UserFeedback />
     </div>
   );
 };

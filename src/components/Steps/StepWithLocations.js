@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import { useIntl } from 'react-intl';
 
 const LocationInStep = ({ location }) => {
@@ -33,7 +33,7 @@ const LocationInStep = ({ location }) => {
 const StepWithLocationsContainer = ({ description, locations }) => {
   return (
     <div className="coa-StepWithLocations__container">
-      <HtmlFromAdmin content={description} />
+      <HtmlFromRichText content={description} />
       {locations.map(location => (
         <LocationInStep location={location} />
       ))}

@@ -8,6 +8,7 @@ import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument'
+import UserFeedback from 'components/UserFeedback';
 
 const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
@@ -113,6 +114,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
           }
 
         </div>
+              <UserFeedback />
       </div>
     </div>
   )

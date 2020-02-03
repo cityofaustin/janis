@@ -26,7 +26,7 @@ const LocationPageContact = ({ phone, email }) => {
   // TODO: use 'libphonenumber-js' for real phone from Joplin API
   const phoneContent = (
     <Fragment>
-      {`${phone.name}: `}
+      {!!phone.name && `${phone.name}: `}
       <a href={`tel:${phone.value}`}>{phone.value}</a>
     </Fragment>
   );

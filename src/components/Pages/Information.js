@@ -9,13 +9,14 @@ import PageBanner from 'components/PageBanner';
 import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import ApplicationBlock from 'components/ApplicationBlock';
 import ContactDetails from 'components/Contact/ContactDetails';
 import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
+import UserFeedback from 'components/UserFeedback';
 
 const InformationPage = ({ informationPage, intl }) => {
   const {
@@ -34,7 +35,7 @@ const InformationPage = ({ informationPage, intl }) => {
       contacts,
       coaGlobal,
       contextualNavData,
-      pageIsPartOf
+      pageIsPartOf,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
@@ -54,8 +55,7 @@ const InformationPage = ({ informationPage, intl }) => {
       )}
       {image && <PageBanner image={image} />}
       <div>
-
-        { !pageIsPartOf ? (
+        {!pageIsPartOf ? (
           <PageHeader contentType={'information'} description={description}>
             {title}
           </PageHeader>
@@ -75,7 +75,7 @@ const InformationPage = ({ informationPage, intl }) => {
               <div className="row">
                 <div className="col-xs-12 col-md-10">
                   {additionalContent && (
-                    <HtmlFromAdmin title={' '} content={additionalContent} />
+                    <HtmlFromRichText title={' '} content={additionalContent} />
                   )}
                   <div className="coa-Page__contacts-mobile">
                     {!!contacts && !!contacts.length && (
@@ -101,6 +101,7 @@ const InformationPage = ({ informationPage, intl }) => {
           />
         )}
       </div>
+      <UserFeedback />
     </div>
   );
 };

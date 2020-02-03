@@ -24,6 +24,7 @@ import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getLocationPageQuery from 'js/queries/getLocationPageQuery';
+import getEventPageQuery from 'js/queries/getEventPageQuery';
 
 import {
   cleanNavigation,
@@ -31,6 +32,7 @@ import {
   cleanLinks,
   cleanDepartmentDirectors,
   cleanLocationPage,
+  getOfferedByFromRelatedDepartments,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -317,15 +319,9 @@ const getContextualNavData = async (
   }
 
   // get offered by
-  if (relatedDepartments && relatedDepartments.edges.length) {
-    contextualNavData.offeredBy = relatedDepartments.edges.map(edge => ({
-      id: edge.node.relatedDepartment.id,
-      title: edge.node.relatedDepartment.title,
-      url: `/${edge.node.relatedDepartment.slug}/`,
-    }));
-  } else {
-    contextualNavData.offeredBy = [];
-  }
+  contextualNavData.offeredBy = getOfferedByFromRelatedDepartments(
+    relatedDepartments,
+  );
 
   return contextualNavData;
 };
@@ -555,6 +551,24 @@ const getLocationPageData = async (id, client) => {
   return { locationPage: cleanLocationPage(locationPage) };
 };
 
+const getEventPageData = async (id, client) => {
+  const { allEventPages } = await client.request(getEventPageQuery, {
+    id: id,
+  });
+
+  let eventPage = allEventPages.edges[0].node;
+
+  // Fill in some contextual nav info
+  eventPage.offeredBy = getOfferedByFromRelatedDepartments(
+    eventPage.relatedDepartments,
+  );
+
+  // reverse the order of the fees
+  // eventPage.fees.edges.reverse();
+
+  return { eventPage: eventPage };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
@@ -692,6 +706,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       path: url,
       template: 'src/components/Pages/Location',
       getData: () => getLocationPageData(id, client),
+    };
+  }
+
+  // If we're an event page
+  if (type === 'event page') {
+    return {
+      path: url,
+      template: 'src/components/Pages/Event',
+      getData: () => getEventPageData(id, client),
     };
   }
 };

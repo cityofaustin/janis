@@ -24,7 +24,7 @@ stepsStory.story = {
 
 export const stepBasic = () => (
   <div className="wrapper container-fluid">
-    <StepBasic stepAsHtmlFromAdmin={stepData[1].value} />
+    <StepBasic stepAsHtmlFromRichText={stepData[1].value} />
   </div>
 );
 

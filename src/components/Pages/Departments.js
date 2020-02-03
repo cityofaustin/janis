@@ -9,6 +9,7 @@ import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
+import UserFeedback from 'components/UserFeedback';
 
 const Departments = ({ intl }) => {
   const { departments } = useRouteData();
@@ -22,6 +23,7 @@ const Departments = ({ intl }) => {
       <div className="wrapper container-fluid">
         <TileGroup tiles={departments} />
       </div>
+      <UserFeedback />
     </div>
   );
 };

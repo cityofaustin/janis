@@ -7,6 +7,7 @@ import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
   locations as i18nLocations,
+  contact as i18nContact,
 } from 'js/i18n/definitions';
 
 const DayHours = ({ day, hours }) => {
@@ -23,6 +24,23 @@ const DayHours = ({ day, hours }) => {
   );
 };
 
+const HoursExceptions = ({exceptions}) => {
+  const intl = useIntl();
+  return (
+    <div>
+      <div className="coa-ContactHoursExceptionsTitle">
+        {intl.formatMessage(i18nContact.exceptions)}
+      </div>
+      <div className="coa-ContactHoursExceptions">
+        {exceptions}
+      </div>
+    </div>
+  )
+}
+
+
+
+
 const ServiceHours = ({ hours }) => {
   const [expanded, setExpanded] = useState(false);
   const intl = useIntl();
@@ -36,6 +54,8 @@ const ServiceHours = ({ hours }) => {
     day,
     hours: hours[day],
   }));
+
+
 
   return (
     <div className="coa-LocationPage__service-hours-container">
@@ -107,6 +127,7 @@ const Service = ({ service, locationHours }) => {
           <ServiceHours hours={service.hours} /> :
               <ServiceHours hours={locationHours} />
         }
+        {!!service.hours.exceptions && <HoursExceptions exceptions={service.hours.exceptions}/>}
       </div>
       <a className="coa-LocationPage__service-link-link" href={service.url}>
         <div className="coa-LocationPage__service-link">

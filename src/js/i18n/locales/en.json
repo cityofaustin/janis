@@ -109,5 +109,12 @@
   "locations.gettingHere": "Getting here",
   "locations.busesServicing": "Buses servicing this area",
   "locations.closed": "Closed",
-  "locations.locationInformation": "Location information"
+  "locations.locationInformation": "Location information",
+  "events.canceled": "Canceled",
+  "events.free": "Free",
+  "events.register": "Register",
+  "events.public": "Open to the public",
+  "events.details": "Details",
+  "events.allEvents": "All events",
+  "events.getDirections": "Get directions"
 }
