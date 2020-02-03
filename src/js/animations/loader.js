@@ -1,17 +1,15 @@
 /*
-loader.js is custom build loader animation that also handles
-transtion effects! ✨
+loader.js handles loader animation that also accepts transtion effects! ✨
 
 CSS Requirements / Recommendations:
 - It's rommended to set the opacity of the elements passed to 0 in their respective css.
-- While we do that here, their is a slight delay and you may see a "flicker"
-if not done in css first
+- While we do that here, their is a slight delay and you may see a "flicker" if not done in css first
 
 HTML Requirements:
 -  <div id="coa-loadingWheel"></div>
 
 See example(s):
-- As of 1/29/31: loader.js is besing used by ./components/pages/forms.js
+- As of 1/29/20: loader.js is besing used by ./components/pages/forms.js
 */
 
 export const loader = {
@@ -32,8 +30,7 @@ export const loader = {
     window.requestAnimationFrame(()=>{
       /*
         This "window.requestAnimationFrame" waits until react components have
-        been added to the dom.
-        We need that so we can "grab" them by their Id.
+        been added to the dom - so we can "grab" them by their Id here.
       */
       this.content = document.getElementById(this.contentId)
       this.loader = document.getElementById(this.loaderId)
@@ -86,6 +83,6 @@ export const loader = {
       }
     },this.delay)
   }
-  
+
 
 }
