@@ -24,26 +24,34 @@ const DayHours = ({ day, hours }) => {
   );
 };
 
-const HoursExceptions = ({exceptions}) => {
+
+const HoursExceptions = ({
+  serviceHoursExceptions,
+  locationHoursExceptions,
+  hoursSameAsLocation,
+}) => {
   const intl = useIntl();
+  let exceptions = serviceHoursExceptions;
+  if (hoursSameAsLocation) {
+    exceptions = locationHoursExceptions;
+  }
   return (
     <div>
       <div className="coa-ContactHoursExceptionsTitle">
         {intl.formatMessage(i18nContact.exceptions)}
       </div>
-      <div className="coa-ContactHoursExceptions">
-        {exceptions}
-      </div>
+      <div className="coa-ContactHoursExceptions">{exceptions}</div>
     </div>
-  )
-}
+  );
+};
 
-
-
-
-const ServiceHours = ({ hours }) => {
+const ServiceHours = ({ serviceHours, locationHours, hoursSameAsLocation }) => {
   const [expanded, setExpanded] = useState(false);
   const intl = useIntl();
+  let hours = serviceHours;
+  if (hoursSameAsLocation) {
+    hours = locationHours;
+  }
 
   const days = getDaysInOrder();
   const todayHours = {
@@ -54,8 +62,6 @@ const ServiceHours = ({ hours }) => {
     day,
     hours: hours[day],
   }));
-
-
 
   return (
     <div className="coa-LocationPage__service-hours-container">
@@ -123,11 +129,23 @@ const Service = ({ service, locationHours }) => {
         )}
         {/* atm service hours return null, but exceptions return undefined, so
           we need to check both cases */}
-        {Object.values(service.hours).some(hour => service.hoursSameAsLocation === 'true' || hour !== null && hour !== undefined) ?
-          <ServiceHours hours={service.hours} /> :
-              <ServiceHours hours={locationHours} />
-        }
-        {!!service.hours.exceptions && <HoursExceptions exceptions={service.hours.exceptions}/>}
+        {Object.values(service.hours).some(
+          hour => hour !== null && hour !== undefined,
+        ) && (
+          <ServiceHours
+            serviceHours={service.hours}
+            locationHours={locationHours}
+            hoursSameAsLocation={service.hoursSameAsLocation}
+          />
+        )}
+        {/* we'll need similar logic to show location exception if that is checked */}
+        {(!!service.hours.exceptions || !!locationHours.exceptions)&& (
+          <HoursExceptions
+            serviceHoursExceptions={service.hours.exceptions}
+            locationHoursExceptions={locationHours.exceptions}
+            hoursSameAsLocation={service.hoursSameAsLocation}
+          />
+        )}
       </div>
       <a className="coa-LocationPage__service-link-link" href={service.url}>
         <div className="coa-LocationPage__service-link">
@@ -148,7 +166,9 @@ const LocationPageServiceList = ({ services, locationHours }) => {
           {intl.formatMessage(i18nLocations.servicesOffered)}
         </h2>
         {services &&
-          services.map((service, i) => <Service service={service} key={i} locationHours={locationHours} />)}
+          services.map((service, i) => (
+            <Service service={service} key={i} locationHours={locationHours} />
+          ))}
       </div>
     </div>
   );
