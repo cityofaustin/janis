@@ -38,7 +38,7 @@ const HoursExceptions = ({
   return (
     <div>
       <div className="coa-ContactHoursExceptionsTitle">
-        {intl.formatMessage(i18nContact.exceptions)}
+        {!!exceptions && (intl.formatMessage(i18nContact.exceptions))}
       </div>
       <div className="coa-ContactHoursExceptions">{exceptions}</div>
     </div>
