@@ -8,3 +8,8 @@
   width: 1px;
   min-width: 100%;
 }
+
+#coa-iFrameForm {
+  opacity: 0; // set at 0 because it's set at 1 by loader animation
+  margin-top: 50px;
+}
