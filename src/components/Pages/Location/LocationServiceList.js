@@ -24,7 +24,6 @@ const DayHours = ({ day, hours }) => {
   );
 };
 
-
 const HoursExceptions = ({
   serviceHoursExceptions,
   locationHoursExceptions,
@@ -49,8 +48,18 @@ const ServiceHours = ({ serviceHours, locationHours, hoursSameAsLocation }) => {
   const [expanded, setExpanded] = useState(false);
   const intl = useIntl();
   let hours = serviceHours;
+  let hoursAreEmpty = Object.values(serviceHours).every(
+    entry => entry == null || entry == undefined || entry == '',
+  );
   if (hoursSameAsLocation) {
     hours = locationHours;
+    hoursAreEmpty = Object.values(locationHours).every(
+      entry => entry == null || entry == undefined || entry == '',
+    );
+  }
+  let showHours = true;
+  if (!hoursSameAsLocation && hoursAreEmpty) {
+    showHours = false;
   }
 
   const days = getDaysInOrder();
@@ -64,6 +73,8 @@ const ServiceHours = ({ serviceHours, locationHours, hoursSameAsLocation }) => {
   }));
 
   return (
+    <div>
+      { showHours && (
     <div className="coa-LocationPage__service-hours-container">
       <table className="coa-LocationPage__table">
         <tbody>
@@ -97,6 +108,8 @@ const ServiceHours = ({ serviceHours, locationHours, hoursSameAsLocation }) => {
         </i>
       </div>
     </div>
+  )}
+        </div>
   );
 };
 
@@ -129,8 +142,9 @@ const Service = ({ service, locationHours }) => {
         )}
         {/* atm service hours return null, but exceptions return undefined, so
           we need to check both cases */}
+
         {Object.values(service.hours).some(
-          hour => hour !== null && hour !== undefined,
+          value => value !== null && value !== undefined,
         ) && (
           <ServiceHours
             serviceHours={service.hours}
@@ -139,7 +153,7 @@ const Service = ({ service, locationHours }) => {
           />
         )}
         {/* we'll need similar logic to show location exception if that is checked */}
-        {(!!service.hours.exceptions || !!locationHours.exceptions)&& (
+        {(!!service.hours.exceptions || !!locationHours.exceptions) && (
           <HoursExceptions
             serviceHoursExceptions={service.hours.exceptions}
             locationHoursExceptions={locationHours.exceptions}
