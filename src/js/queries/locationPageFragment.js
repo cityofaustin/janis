@@ -76,6 +76,7 @@ const locationPageFragment = `
               }
             }
           }
+          hoursSameAsLocation
           mondayStartTime
           mondayEndTime
           mondayStartTime2
