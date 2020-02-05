@@ -556,6 +556,9 @@ const getEventPageData = async (id, client) => {
     id: id,
   });
 
+  console.log(allEventPages);
+  // does this pull all the events?
+
   let eventPage = allEventPages.edges[0].node;
 
   // Fill in some contextual nav info
