@@ -150,8 +150,8 @@ export const cleanLocationPage = locationPage => {
       value: locationPage.phoneNumber
         ? parsePhoneNumberFromString(locationPage.phoneNumber).formatNational()
         : '',
-        // why do we call PhoneDescripton name here, and label elsewhere?
-        // and what was wrong with calling it phone description?
+      // why do we call PhoneDescripton name here, and label elsewhere?
+      // and what was wrong with calling it phone description?
       name: locationPage.phoneDescription,
     },
     email: {
@@ -719,4 +719,20 @@ export const cleanFormContainersForPreview = allFormContainers => {
   form.contacts = cleanContacts(form.contacts);
 
   return form;
+};
+
+export const getOfferedByFromRelatedDepartments = relatedDepartments => {
+  let offeredBy;
+
+  if (relatedDepartments && relatedDepartments.edges.length) {
+    offeredBy = relatedDepartments.edges.map(edge => ({
+      id: edge.node.relatedDepartment.id,
+      title: edge.node.relatedDepartment.title,
+      url: `/${edge.node.relatedDepartment.slug}/`,
+    }));
+  } else {
+    offeredBy = [];
+  }
+
+  return offeredBy;
 };

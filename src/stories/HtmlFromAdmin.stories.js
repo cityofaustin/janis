@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HtmlFromAdmin from 'components/HtmlFromAdmin';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 
 const content = `
   <h1>h1: In vel volutpat mi</h1>
@@ -23,15 +23,18 @@ const content = `
 `;
 
 export default {
-  title: 'HtmlFromAdmin',
+  title: 'HtmlFromRichText',
 };
 
-export const htmlFromAdmin = () => (
+export const HtmlFromRichText = () => (
   <div className="wrapper container-fluid">
-    <HtmlFromAdmin title="Lorem ipsum dolor sit amet cume" content={content} />
+    <HtmlFromRichText
+      title="Lorem ipsum dolor sit amet cume"
+      content={content}
+    />
   </div>
 );
 
-htmlFromAdmin.story = {
-  name: 'HtmlFromAdmin',
+HtmlFromRichText.story = {
+  name: 'HtmlFromRichText',
 };
