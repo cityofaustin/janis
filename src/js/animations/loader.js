@@ -27,11 +27,11 @@ export const loader = {
 
 
   setValues: function(){
-    window.requestAnimationFrame(()=>{
-    // setTimeout(()=>{
+    setTimeout(()=>{
       /*
-        This "window.requestAnimationFrame" waits until react components have
-        been added to the dom - so we can "grab" them by their Id here.
+        This 1ms timeout allows the react components to have
+        been added to the dom - so we can "grab" them by their Id here. 
+        - Note: the process must complete before the timeout is checked, even if more then 1ms.
       */
       this.content = document.getElementById(this.contentId)
       this.loader = document.getElementById(this.loaderId)
@@ -56,8 +56,7 @@ export const loader = {
       this.error.style.opacity = 0
       this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
 
-    })
-    // },1)
+    },1)
   },
 
 
