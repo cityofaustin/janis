@@ -27,35 +27,28 @@ export const loader = {
 
 
   setValues: function(){
-    window.requestAnimationFrame(()=>{
-      /*
-        This "window.requestAnimationFrame" waits until react components have
-        been added to the dom - so we can "grab" them by their Id here.
-      */
-      this.content = document.getElementById(this.contentId)
-      this.loader = document.getElementById(this.loaderId)
+    this.content = document.getElementById(this.contentId)
+    this.loader = document.getElementById(this.loaderId)
 
-      if (this.errorId) {
-        this.error = document.getElementById(this.errorId)
-        this.error.style.opacity = 0
-      }
-
-      if (this.style === "popup") {
-        this.contentMarginTop = this.content.style.marginTop
-      }
-
-      const delay = this.delay / 1000
-
-      this.loader.style.opacity = 0
-      this.loader.style.transition = "opacity "+delay+"s"
-
-      this.content.style.opacity = 0
-      this.content.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
-
+    if (this.errorId) {
+      this.error = document.getElementById(this.errorId)
       this.error.style.opacity = 0
-      this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    }
 
-    })
+    if (this.style === "popup") {
+      this.contentMarginTop = this.content.style.marginTop
+    }
+
+    const delay = this.delay / 1000
+
+    this.loader.style.opacity = 0
+    this.loader.style.transition = "opacity "+delay+"s"
+
+    this.content.style.opacity = 0
+    this.content.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+
+    this.error.style.opacity = 0
+    this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
   },
 
 

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { withRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 /**
@@ -60,13 +60,14 @@ function FormContainer({
     }
   },5000)
 
-
-  loader.start({
-    contentId: 'coa-iFrameForm',
-    loaderId: 'coa-loadingWheel',
-    errorId: 'coa-LockedIframeRequestMessage',
-    style: "popup"
-  })
+  useEffect(() => {
+    loader.start({
+      contentId: 'coa-iFrameForm',
+      loaderId: 'coa-loadingWheel',
+      errorId: 'coa-LockedIframeRequestMessage',
+      style: "popup"
+    })
+  }, []) // By having the second argument as an empty string, it will act as "ComponentDidMount" and execute once the component's elements have been added to the dom.
 
   return (
     <div>
