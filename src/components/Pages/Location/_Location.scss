@@ -69,7 +69,8 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__sub-section-block-container {
   display: flex;
-  flex-direction: row;
+  // flex-direction: row;
+  flex-direction: column;
   @include mobile {
     flex-direction: column;
   }
