@@ -22,8 +22,6 @@ const LocationPage = ({ locationPage }) => {
     },
   } = locationPage ? { locationPage } : useRouteData();
 
-  console.log("hours :", hours)
-
   return (
     <div>
       <Head>

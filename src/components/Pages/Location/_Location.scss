@@ -104,6 +104,11 @@ $coa-location-page-section-background: #f7f7f7;
   font-weight: bolder;
 }
 
+.coa-LocationPage__sub-section-block-title-padded {
+  font-weight: bolder;
+  padding-bottom: 1.5rem;
+}
+
 .coa-LocationPage__address-line {
   display: block;
 }
@@ -119,6 +124,7 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__table {
   margin: 0;
+  margin-bottom: 1.5rem;
   td {
     background-color: inherit;
     border: none;
@@ -126,11 +132,17 @@ $coa-location-page-section-background: #f7f7f7;
     padding: 0 1rem 0 0;
     font-size: 1.7rem;
     line-height: 2.4rem;
+    vertical-align: top;
+    padding-bottom: 0.5rem;
 
     // &:not(:last-child) {
     //   padding-top: .5rem;
     // }
   }
+}
+
+.coa-LocationPage__hours-section {
+  display: inline-block;
 }
 
 .coa-LocationPage__service-container {
