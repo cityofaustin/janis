@@ -148,15 +148,10 @@ const LocationPageFacilityHours = ({ hours }) => {
     </div>
   );
 
-  // ⏰ ⏰ ⏰ ⏰ ⏰ ⏰
-  // ⏰ ⏰ ⏰ ⏰ ⏰ ⏰
-  // ⏰ ⏰ ⏰ ⏰ ⏰ ⏰
-  // ⏰ ⏰ ⏰ ⏰ ⏰ ⏰
-
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
-        ⏰{intl.formatMessage(i18nLocations.facilityHours)}
+        {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
       <div className="coa-LocationPage__sub-section-block-container">
         <LocationPageBlock
@@ -164,12 +159,6 @@ const LocationPageFacilityHours = ({ hours }) => {
           content={HoursText}
         />
         {!!hours.exceptions && (
-          // <LocationPageBlock
-          //   title={intl.formatMessage(i18nContact.exceptions)}
-          //   content={hours.exceptions}
-          // />
-          //
-          //
           <div className="coa-LocationPage__sub-section-block">
             <div className="coa-LocationPage__sub-section-block-title-padded">
               {intl.formatMessage(i18nContact.exceptions)}
@@ -178,15 +167,11 @@ const LocationPageFacilityHours = ({ hours }) => {
               {hours.exceptions}
             </div>
           </div>
-          //
-          //
         )}
       </div>
     </div>
   );
 };
-
-
 
 const LocationPageInfo = ({ phone, email, location, image, hours }) => (
   <div className="coa-LocationPage__section">
