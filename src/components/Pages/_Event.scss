@@ -1,5 +1,17 @@
 .coa-EventPage__date-header {
-  margin-top: 2rem;
+  margin-top: 4.8rem;
+
+  @include mobile {
+    margin-top: 3.2rem;
+  }
+}
+
+.coa-EventPage__header {
+  margin-bottom: 4.8rem;
+
+  @include mobile {
+    margin-bottom: 3.2rem;
+  }
 }
 
 .coa-EventPage__cancelled-badge {
@@ -33,7 +45,7 @@
   // padding-left: 1.5rem;
   // padding-right: 1.5rem;
   // padding-bottom: 1.5rem;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   margin-bottom: $coa-space-level6;
   // }
   @include tablet-and-desktop {
