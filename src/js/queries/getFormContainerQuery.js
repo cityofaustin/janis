@@ -8,16 +8,10 @@ const getFormContainerQuery = `
           slug
           description
           formUrl
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
-                }
-              }
-            }
+          departments {
+            id
+            title
+            slug
           }
         }
       }
