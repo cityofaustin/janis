@@ -730,14 +730,14 @@ export const cleanFormContainersForPreview = allFormContainers => {
   return form;
 };
 
-export const getOfferedByFromRelatedDepartments = relatedDepartments => {
+export const getOfferedByFromDepartments = departments => {
   let offeredBy;
 
-  if (relatedDepartments && relatedDepartments.edges.length) {
-    offeredBy = relatedDepartments.edges.map(edge => ({
-      id: edge.node.relatedDepartment.id,
-      title: edge.node.relatedDepartment.title,
-      url: `/${edge.node.relatedDepartment.slug}/`,
+  if (departments && departments.length) {
+    offeredBy = departments.map(department => ({
+      id: department.id,
+      title: department.title,
+      url: `/${department.slug}/`,
     }));
   } else {
     offeredBy = [];

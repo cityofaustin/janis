@@ -33,16 +33,10 @@ const formContainerFragment = `
         }
       }
     }
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
   }
 `;

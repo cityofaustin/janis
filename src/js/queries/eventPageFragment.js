@@ -34,16 +34,10 @@ const eventPageFragment = `
     contact {
       ...contactInfo
     }
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
     locations {
       additionalDetails

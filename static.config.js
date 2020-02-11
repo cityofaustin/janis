@@ -32,7 +32,7 @@ import {
   cleanLinks,
   cleanDepartmentDirectors,
   cleanLocationPage,
-  getOfferedByFromRelatedDepartments,
+  getOfferedByFromDepartments,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -241,7 +241,7 @@ const getContextualNavData = async (
   parent_department,
   parent_topic,
   grandparent_topic_collection,
-  relatedDepartments,
+  departments,
   client,
 ) => {
   let contextualNavData = {};
@@ -319,9 +319,7 @@ const getContextualNavData = async (
   }
 
   // get offered by
-  contextualNavData.offeredBy = getOfferedByFromRelatedDepartments(
-    relatedDepartments,
-  );
+  contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
 
   return contextualNavData;
 };
@@ -347,7 +345,7 @@ const getServicePageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    service.relatedDepartments,
+    service.departments,
     client,
   );
 
@@ -381,7 +379,7 @@ const getInformationPageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    informationPage.relatedDepartments,
+    informationPage.departments,
     client,
   );
 
@@ -420,7 +418,7 @@ const getGuidePageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    guidePage.relatedDepartments,
+    guidePage.departments,
     client,
   );
 
@@ -444,7 +442,7 @@ const getFormContainerData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    formContainer.relatedDepartments,
+    formContainer.departments,
     client,
   );
 
@@ -506,7 +504,7 @@ const getOfficialDocumentPageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    officialDocumentPage.relatedDepartments,
+    officialDocumentPage.departments,
     client,
   );
 
