@@ -68,22 +68,7 @@ const allGuidePagesQuery = `
                 title
                 shortDescription
                 additionalContent
-                steps {
-                  value
-                  stepType
-                  locations {
-                    locationPage {
-                      id
-                      slug
-                      title
-                      physicalStreet
-                      physicalUnit
-                      physicalCity
-                      physicalState
-                      physicalZip
-                    }
-                  }
-                }
+                steps
                 slug
               }
               informationPage {
