@@ -9,7 +9,7 @@ import { stepsPropTypes } from './proptypes';
 const mapSteps = (steps, singleStep) =>
   // singleStep boolean param to determine whether to render steps in a list (ul) or a single item for StepWithOptions and StepBasic
   steps.map((step, index) => {
-    if (step.stepType === 'step_with_options_accordian')
+    if (step.type === 'step_with_options_accordian')
       return (
         <StepWithOptions
           key={index}
@@ -19,7 +19,7 @@ const mapSteps = (steps, singleStep) =>
         />
       );
 
-    if (step.stepType === 'basic_step')
+    if (step.type === 'basic_step')
       return (
         <StepBasic
           key={index}
@@ -28,13 +28,13 @@ const mapSteps = (steps, singleStep) =>
         />
       );
 
-    if (step.stepType === 'step_with_locations')
+    if (step.type === 'step_with_locations')
       return (
         <StepWithLocations
           key={index}
           description={step.value.locations_description}
           singleStep={singleStep}
-          locations={step.locations}
+          locations={step.value.locations}
         />
       );
   });

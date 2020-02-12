@@ -9,22 +9,7 @@ const servicePageFragment = `
       title
       slug
     }
-    steps {
-      value
-      stepType
-      locations {
-        locationPage {
-          id
-          slug
-          title
-          physicalStreet
-          physicalUnit
-          physicalCity
-          physicalState
-          physicalZip
-        }
-      }
-    }
+    steps
     dynamicContent
     additionalContent
     shortDescription
