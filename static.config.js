@@ -556,9 +556,6 @@ const getEventPageData = async (id, client) => {
     id: id,
   });
 
-  console.log(allEventPages);
-  // does this pull all the events?
-
   let eventPage = allEventPages.edges[0].node;
 
   // Fill in some contextual nav info
@@ -571,6 +568,32 @@ const getEventPageData = async (id, client) => {
 
   return { eventPage: eventPage };
 };
+
+const getAllEvents = async client => {
+  const { allEventPages } = await client.request(getEventPageQuery)
+
+  console.log(allEventPages.edges)
+
+  const events = allEventPages.edges.map(edge => ({
+    title: edge.node.title,
+    description: edge.node.description,
+    canceled: edge.node.canceled,
+    date: edge.node.date,
+    startTime: edge.node.startTime,
+    endTime: edge.node.endTime,
+    // contact: null,
+    // relatedDepartments: [Object],
+    // until we have support for multiple locations, we're taking the first one
+    location: edge.node.locations[0],
+    eventIsFree: edge.node.eventIsFree,
+    fees: edge.node.fees,
+    registrationUrl: edge.node.registrationUrl,
+  }));
+
+  console.log(events)
+
+  return { events: events };
+}
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
@@ -720,6 +743,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       getData: () => getEventPageData(id, client),
     };
   }
+
+  // If we are the list of all events
+  if (type === 'events') {
+    console.log('events')
+    return {
+      path: url,
+      template: 'src/components/Pages/EventList',
+      getData: () => getAllEvents(client)
+    }
+  }
 };
 
 const getPagesOfGuidesData = async client => {
@@ -811,6 +844,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     url: `/departments/`,
     type: `departments`,
   });
+
+  parsedStructure.push({
+    url: `/events/`,
+    type: `events`,
+  })
 
   const pagesOfGuidesData = await getPagesOfGuidesData(client);
 
@@ -906,10 +944,10 @@ export default {
     }
 
     const routes = [
-      {
-        path: '/search',
-        template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
-      },
+      // {
+      //   path: '/search',
+      //   template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+      // },
       {
         path: '404',
         template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
