@@ -1,0 +1,57 @@
+.coa-EventListPage__Entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 2px solid #f7f9fa;
+}
+
+.coa-EventListPage__DateCal {
+  width: 88px; /*desktop*/
+  height: 112px;
+  background-color: #F7F9FA;
+}
+
+.coa-EventListPage__DateCal-month {
+  background-color: #F1F3F6;
+  height: 34px;
+  line-height: 34px;
+  color: #171717;
+  text-align: center;
+  font: 14px "Ibm Plex Sans";
+}
+
+.coa-EventListPage__DateCal-date {
+  text-align: center;
+  align-items: center;
+  font: Bold 40px "Ibm Plex Sans";
+  letter-spacing: 0.01px;
+  color: #171717;
+  line-height: 78px;
+}
+
+.coa-EventListPage__EntryDetails {
+  margin-left: 24px;
+}
+
+.coa-EventListPage__Time {
+  font: Bold 16px "Ibm Plex Sans";
+}
+
+.coa-EventListPage__Title {
+  font: 24px "Ibm Plex Sans";
+  line-height: 42px;
+}
+
+.coa-EventListPage__Location{
+  font: 16px "Ibm Plex Sans";
+  line-height: 24px;
+  color: #5C5C5C;
+}
+
+.coa-EventListPage__Cost {
+  font: 16px "Ibm Plex Sans";
+  line-height: 24px;
+  color: #5C5C5C;
+}

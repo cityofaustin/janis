@@ -86,7 +86,7 @@ export const cleanLocationPageJanisUrl = janisUrl => {
 };
 
 /*
-tech debt: this code is used for service hours as well, but the variable defition
+tech debt: this code is used for service hours as well, but the variable definition
 implies otherwise, could be a source of bugs
 
 also the best place to shape the data is probably the backend, why do we have to
@@ -745,3 +745,14 @@ export const getOfferedByFromRelatedDepartments = relatedDepartments => {
 
   return offeredBy;
 };
+
+export const getEventPageUrl = (slug, date) => {
+  let year = moment(date, 'YYYY-MM-DD').format('YYYY');
+  let month = moment(date, 'YYYY-MM-DD').format('M');
+  let day = moment(date, 'YYYY-MM-DD').format('D');
+  // use moment to get the date
+  // function to format the event's page url, used in the Event List
+  let eventUrl = `/event/${year}/${month}/${day}/${slug}/`
+
+  return eventUrl;
+}

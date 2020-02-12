@@ -33,6 +33,7 @@ import {
   cleanDepartmentDirectors,
   cleanLocationPage,
   getOfferedByFromRelatedDepartments,
+  getEventPageUrl,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -573,6 +574,8 @@ const getAllEvents = async client => {
   const { allEventPages } = await client.request(getEventPageQuery)
 
   console.log(allEventPages.edges)
+  console.log(typeof(getEventPageUrl));
+  // do we format the slug here or where?
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
@@ -581,6 +584,7 @@ const getAllEvents = async client => {
     date: edge.node.date,
     startTime: edge.node.startTime,
     endTime: edge.node.endTime,
+    eventUrl: getEventPageUrl(edge.node.slug, edge.node.date),
     // contact: null,
     // relatedDepartments: [Object],
     // until we have support for multiple locations, we're taking the first one
@@ -589,8 +593,6 @@ const getAllEvents = async client => {
     fees: edge.node.fees,
     registrationUrl: edge.node.registrationUrl,
   }));
-
-  console.log(events)
 
   return { events: events };
 }
@@ -737,6 +739,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   // If we're an event page
   if (type === 'event page') {
+    console.log(url)
     return {
       path: url,
       template: 'src/components/Pages/Event',
@@ -746,7 +749,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   // If we are the list of all events
   if (type === 'events') {
-    console.log('events')
     return {
       path: url,
       template: 'src/components/Pages/EventList',
