@@ -33,7 +33,7 @@ const EventDateCalendar = ({date}) => {
 const EventDateListDetails = ({ event }) => {
   const intl = useIntl();
   moment.locale(intl.locale)
-  const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl } = event;
+  const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled } = event;
   console.log(eventUrl)
 
   let momentDay = moment(date, 'YYYY-MM-DD').format('dddd')
@@ -57,7 +57,7 @@ const EventDateListDetails = ({ event }) => {
 
   return (
     <div className="coa-EventListPage__EntryDetails">
-    { // cancelled
+    { canceled && <div className="coa-EventListPage__Canceled">canceled</div> // translate!
     }
       <div className="coa-EventListPage__Time">{ `${momentDay} • ${eventTime}`}</div>
       <div className="coa-EventListPage__Title"><a href={eventUrl}>{title}</a></div> 
@@ -92,7 +92,7 @@ const EventList = ({ intl }) => {
       </Head>
       <PageHeader contentType={'event-list'}> Events </PageHeader>
       <div className="wrapper container-fluid">
-        <div className="col-xs-12 col-md-10">
+        <div className="col-xs-12 col-md-8">
         {
         // <EventListPage eventsList={eventsList} intl={intl} />
         events.map((e) => <EventListEntry event={e} />)
@@ -102,5 +102,8 @@ const EventList = ({ intl }) => {
     </div>
   )
 }
+
+// proptypes?
+
 
 export default EventList
