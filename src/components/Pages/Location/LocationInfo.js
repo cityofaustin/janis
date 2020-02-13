@@ -131,7 +131,14 @@ const LocationPageFacilityHours = ({ hours }) => {
               </td>
               <td>
                 {hours[day] !== null
-                  ? hours[day]
+                  ? hours[day].split(',').map( (dateRange, i) => {
+                    const comma = i+1 < hours[day].split(',').length ? "," : ""
+                    return (
+                      <div class="coa-LocationPage__hours-section">
+                        {dateRange}{comma}&nbsp;
+                      </div>
+                    )
+                  })
                   : intl.formatMessage(i18nLocations.closed)}
               </td>
             </tr>
@@ -152,10 +159,14 @@ const LocationPageFacilityHours = ({ hours }) => {
           content={HoursText}
         />
         {!!hours.exceptions && (
-          <LocationPageBlock
-            title={intl.formatMessage(i18nContact.exceptions)}
-            content={hours.exceptions}
-          />
+          <div className="coa-LocationPage__sub-section-block">
+            <div className="coa-LocationPage__sub-section-block-title-padded">
+              {intl.formatMessage(i18nContact.exceptions)}
+            </div>
+            <div className="coa-LocationPage__sub-section-block-contents">
+              {hours.exceptions}
+            </div>
+          </div>
         )}
       </div>
     </div>
