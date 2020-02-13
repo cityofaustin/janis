@@ -2,24 +2,50 @@
   display: flex;
   flex-direction: row;
   justify-content: start;
-  margin-top: 40px;
-  padding-bottom: 40px;
+  margin-top: 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid #DCDEE0;
+  @include media($coa-medium-screen) {
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
 }
 
 .coa-EventListPage__DateCal {
-  width: 88px; /*desktop*/
-  height: 112px;
+  width: 71px;
+  height: 80px;
   background-color: #F7F9FA;
+  @include media($coa-medium-screen) {
+    height: 112px;
+    width: 88px;
+  }
 }
 
 .coa-EventListPage__DateCal-month {
   background-color: #F1F3F6;
-  height: 34px;
-  line-height: 34px;
+  height: 28px;
+  line-height: 28px;
   color: #171717;
   text-align: center;
-  font: 14px "Ibm Plex Sans";
+  font-size: 14px;
+  font-weight: $coa-font-bold;
+  @include media($coa-medium-screen) {
+    line-height: 34px;
+    height: 34px;
+  }
+}
+
+.coa-EventListPage__DateCal-date {
+  text-align: center;
+  align-items: center;
+  line-height: 52px;
+  font-size: 24px;
+  font-weight: $coa-font-bold;
+  color: #171717;
+  @include media($coa-medium-screen) {
+    line-height: 78px;
+    font-size: 40px;
+  }
 }
 
 .coa-EventListPage__Canceled {
@@ -29,46 +55,43 @@
   line-height: 27px;
   margin-bottom: 8px;
   text-transform: uppercase;
-  font-size: 10px;
   font-weight: $coa-font-bold;
+  font-size: 12px;
   text-align: center;
   width: 99px;
+  @include media($coa-medium-screen) {
+    font-size: 10px;
+  }
 }
-
-
-.coa-EventListPage__DateCal-date {
-  text-align: center;
-  align-items: center;
-  font: Bold 40px "Ibm Plex Sans";
-  letter-spacing: 0.01px;
-  color: #171717;
-  line-height: 78px;
-}
-
 .coa-EventListPage__EntryDetails {
   margin-left: 24px;
 }
 
 .coa-EventListPage__Time {
-  font: Bold 16px "Ibm Plex Sans";
+  font-size: 16px;
+  font-weight: $coa-font-bold
 }
 
 .coa-EventListPage__Title {
   font-size: 18px;
-  line-height: 42px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  max-width: 233px;
   @include media($coa-medium-screen) {
     font-size: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 }
 
 .coa-EventListPage__Location{
-  font: 16px "Ibm Plex Sans";
+  font-size: 16px;
   line-height: 24px;
   color: #5C5C5C;
 }
 
 .coa-EventListPage__Cost {
-  font: 16px "Ibm Plex Sans";
+  font-size: 16px;
   line-height: 24px;
   color: #5C5C5C;
 }
