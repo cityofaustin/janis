@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
-// is there a contextual nav?
+import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 // import EventListPage from 'components/Pages/Events/EventListPage';
 import { EventDate } from 'components/Pages/Event'
 import { formatTime, formatHours } from 'js/helpers/cleanData';
@@ -12,9 +12,11 @@ import { events as i18n } from 'js/i18n/definitions';
 
 const EventDateCalendar = ({date}) => {
   const intl = useIntl();
+  const isMobile = useMobileQuery()
+  
   moment.locale(intl.locale);
-
-  let momentMonth = moment(date, 'YYYY-MM-DD').format('MMMM');
+  let monthType = isMobile ? 'MMM' : 'MMMM';
+  let momentMonth = moment(date, 'YYYY-MM-DD').format(monthType);
   let momentDate = date && date.slice(-2) // check what happens if there is a single digit
 
   return (
@@ -32,11 +34,12 @@ const EventDateCalendar = ({date}) => {
 
 const EventDateListDetails = ({ event }) => {
   const intl = useIntl();
-  moment.locale(intl.locale)
+  const isMobile = useMobileQuery()
   const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled } = event;
-  console.log(eventUrl)
-
-  let momentDay = moment(date, 'YYYY-MM-DD').format('dddd')
+  
+  moment.locale(intl.locale)
+  let dayType = isMobile ? 'ddd' : 'dddd';
+  let momentDay = moment(date, 'YYYY-MM-DD').format(dayType)
   let eventTime = startTime && endTime
     ? formatHours({
         start1: startTime,
@@ -45,6 +48,7 @@ const EventDateListDetails = ({ event }) => {
         end2: null,
       })
     : formatTime(startTime);
+
   let locationName = null
   if (location) {
     locationName = location.locationType === 'city_location'
