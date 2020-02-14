@@ -159,7 +159,7 @@ const LocationPageFacilityHours = ({ hours }) => {
           content={HoursText}
         />
         {!!hours.exceptions && (
-          <div className="coa-LocationPage__sub-section-block">
+          <div className="coa-LocationPage__sub-section-block coa-LocationPage__sub-section-block__hours-exceptions">
             <div className="coa-LocationPage__sub-section-block-title-padded">
               {intl.formatMessage(i18nContact.exceptions)}
             </div>
