@@ -76,6 +76,10 @@ $coa-location-page-section-background: #f7f7f7;
   }
 }
 
+.coa-LocationPage__sub-section-block-container__hours {
+  flex-direction: column;
+}
+
 .coa-LocationPage__sub-section-title {
   font-weight: bold;
   line-height: 1;
