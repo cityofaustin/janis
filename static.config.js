@@ -3,6 +3,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 import filesize from 'filesize';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 // TODO: clean these up/remove them
 import allThemesQuery from 'js/queries/allThemesQuery';
@@ -572,7 +573,11 @@ const getEventPageData = async (id, client) => {
 };
 
 const getAllEvents = async client => {
-  const { allEventPages } = await client.request(getEventPageQuery)
+  // Is this how we want to handle it? 
+  const date_now = moment().format('YYYY-MM-DD')
+  const { allEventPages } = await client.request(getEventPageQuery, {
+    date_Gte: date_now,
+  });
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
@@ -583,8 +588,6 @@ const getAllEvents = async client => {
     endTime: edge.node.endTime,
     eventUrl: getEventPageUrl(edge.node.slug, edge.node.date),
     feesRange: formatFeesRange(edge.node.fees),
-    // contact: null,
-    // relatedDepartments: [Object],
     // until we have support for multiple locations, we're taking the first one
     location: edge.node.locations[0],
     eventIsFree: edge.node.eventIsFree,
