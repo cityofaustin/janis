@@ -153,13 +153,13 @@ const LocationPageFacilityHours = ({ hours }) => {
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
-      <div className="coa-LocationPage__sub-section-block-container">
+      <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}
           content={HoursText}
         />
         {!!hours.exceptions && (
-          <div className="coa-LocationPage__sub-section-block">
+          <div className="coa-LocationPage__sub-section-block coa-LocationPage__sub-section-block__hours-exceptions">
             <div className="coa-LocationPage__sub-section-block-title-padded">
               {intl.formatMessage(i18nContact.exceptions)}
             </div>
