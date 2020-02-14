@@ -35,7 +35,7 @@ const EventDateCalendar = ({date}) => {
 const EventDateListDetails = ({ event }) => {
   const intl = useIntl();
   const isMobile = useMobileQuery()
-  const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled } = event;
+  const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled, feesRange } = event;
   
   moment.locale(intl.locale)
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -56,7 +56,7 @@ const EventDateListDetails = ({ event }) => {
     : location.remoteLocation.title;
   }
 
-  let cost = eventIsFree ? `${intl.formatMessage(i18n.free)}` : '$999';
+  let cost = eventIsFree ? `${intl.formatMessage(i18n.free)}` : feesRange;
   let registration = registrationUrl.length ? `• Registration Required`: '';
 
   return (

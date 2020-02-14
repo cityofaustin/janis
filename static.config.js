@@ -34,6 +34,7 @@ import {
   cleanLocationPage,
   getOfferedByFromRelatedDepartments,
   getEventPageUrl,
+  formatFeesRange,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -573,10 +574,6 @@ const getEventPageData = async (id, client) => {
 const getAllEvents = async client => {
   const { allEventPages } = await client.request(getEventPageQuery)
 
-  console.log(allEventPages.edges)
-  console.log(typeof(getEventPageUrl));
-  // do we format the slug here or where?
-
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
     description: edge.node.description,
@@ -585,12 +582,12 @@ const getAllEvents = async client => {
     startTime: edge.node.startTime,
     endTime: edge.node.endTime,
     eventUrl: getEventPageUrl(edge.node.slug, edge.node.date),
+    feesRange: formatFeesRange(edge.node.fees),
     // contact: null,
     // relatedDepartments: [Object],
     // until we have support for multiple locations, we're taking the first one
     location: edge.node.locations[0],
     eventIsFree: edge.node.eventIsFree,
-    fees: edge.node.fees,
     registrationUrl: edge.node.registrationUrl,
   }));
 
@@ -739,7 +736,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   // If we're an event page
   if (type === 'event page') {
-    console.log(url)
     return {
       path: url,
       template: 'src/components/Pages/Event',

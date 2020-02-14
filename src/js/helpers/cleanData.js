@@ -756,3 +756,17 @@ export const getEventPageUrl = (slug, date) => {
 
   return eventUrl;
 }
+
+export const formatFeesRange = fees => {
+  // on the Event List View, show a range of fees, from the least to the most
+  if (fees.edges && fees.edges.length) {
+    if (fees.edges.length === 1) {
+      return `$${fees.edges[0].node.fee}`
+    }
+    let feesArray = [];
+    fees.edges.map(f=> feesArray.push(f.node.fee))
+    return `$${Math.min(...feesArray)}–$${Math.max(...feesArray)}`
+  }
+  return ''
+}
+
