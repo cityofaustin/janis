@@ -53,7 +53,7 @@ const EventDateListDetails = ({ event }) => {
   }
 
   let cost = eventIsFree ? `${intl.formatMessage(i18n.free)}` : feesRange;
-  let registration = registrationUrl.length ? `• Registration Required`: '';
+  let registration = registrationUrl.length ? `• Registration Required`: ''; // translate
 
   return (
     <div className="coa-EventListPage__EntryDetails">

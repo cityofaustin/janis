@@ -4,8 +4,8 @@ import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
-// import EventListPage from 'components/Pages/Events/EventListPage';
-import EventListEntry from 'components/Pages/EventList/EventListEntry'
+import EventListPagination from 'components/Pages/EventList/EventListPagination';
+// import EventListEntry from 'components/Pages/EventList/EventListEntry'
 import { events as i18n } from 'js/i18n/definitions'; // will need to translate to eventos
 
 
@@ -24,12 +24,13 @@ const EventList = ({ intl }) => {
       </Head>
       <PageHeader contentType={'event-list'}> Events </PageHeader>
       <div className="wrapper container-fluid">
-        <div className="col-xs-12 col-md-8">
+
+          <EventListPagination events={events} intl={intl} />
         {
-        // <EventListPage eventsList={eventsList} intl={intl} />
-        events.map((e) => <EventListEntry event={e} />)
+        // <div className="col-xs-12 col-md-8">
+        // events.map((e) => <EventListEntry event={e} />)
+        // </div>
       }
-      </div>
       </div>
     </div>
   )

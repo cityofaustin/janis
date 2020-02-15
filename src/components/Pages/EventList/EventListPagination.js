@@ -7,23 +7,24 @@ import { scrollTransition } from 'js/animations/scrollTransition.js';
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
-// import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument'
+import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import UserFeedback from 'components/UserFeedback';
 
-const EventListPage = ({ eventsList, intl }) => {
-  // I copied pasted the pagination stuff from bob. is there a way for me to pull this out for both to use?
-  const eventsPerPage = 10 // update
+const EventListPagination = ({ events, intl }) => {
+  // find what parts i can pull out and use for both here and documents
+  const eventsPerPage = 10
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
-  const allEvents = eventsList.edges // check this
+  const allEvents = events
   const pages = buildPages()
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
   let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
+  console.log(events)
   useEffect(() => {
     domWindow = window
     window.onpopstate = function(event) {
@@ -84,8 +85,8 @@ const EventListPage = ({ eventsList, intl }) => {
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
-            {page && page.map((document, index) => (
-              <EventList document={document.node} key={index} />
+            {page && page.map((event, index) => (
+              <EventListEntry event={event} key={index} />
             ))}
           </div>
 
@@ -121,6 +122,7 @@ const EventListPage = ({ eventsList, intl }) => {
 
 }
 
+// move this one and the other one from documents into its own component and import
 const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex })=>{
   const active = pageNumber === index ? " active" : ''
   let ellipsis = ""
@@ -141,4 +143,4 @@ const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumber
   )
 }
 
-export default EventListPage
+export default EventListPagination
