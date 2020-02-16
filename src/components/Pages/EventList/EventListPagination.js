@@ -12,7 +12,7 @@ import UserFeedback from 'components/UserFeedback';
 
 const EventListPagination = ({ events, intl }) => {
   // find what parts i can pull out and use for both here and documents
-  const eventsPerPage = 10
+  const eventsPerPage = 2
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;

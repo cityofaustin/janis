@@ -96,3 +96,130 @@
   line-height: 24px;
   color: #5C5C5C;
 }
+
+/* Pagination */
+
+.coa-EventListPage_pagination-container {
+  margin: 40px 10px 40px;
+  /*border-top: 1px solid $coa-color-gray-lighter;*/
+  padding-top: 15px;
+  width: 740px;
+  text-align: center;
+  :first-child {
+    padding-left: 0px;
+    margin-left: 0px;
+  }
+}
+
+.coa-EventListPage_page {
+  color: #0049C7;
+  background-color: #F0F0F0;
+  height: 48px;
+  min-width: 48px;
+  padding: 5px;
+  margin-left: -1px;
+  font-size: 1.6rem;
+  line-height: 3.2rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+}
+
+.coa-EventListPage_page.previous {
+  border-radius: 4px 0px 0px 4px;
+  border: none;
+}
+
+.coa-EventListPage_page.next {
+  border-radius: 0px 4px 4px 0px;
+  border: none;
+}
+
+.coa-EventListPage_page.number-container {
+  background-color: rgba(0,0,0,0);
+  color: #212121;
+  border: solid #F0F0F0 1px;
+  position: relative;
+  height: 48px;
+  top: -1px;
+  @include mobile {
+    width: 38px;
+    min-width: 38px;
+  }
+}
+
+.coa-EventListPage_page.ellipsis {
+  border: none;
+  pointer-events: none;
+}
+
+
+.coa-EventListPage_number {
+  font-weight: 900;
+  position: relative;
+  top: 2px;
+}
+
+.coa-EventListPage_page.number-container.active {
+  color: #0049C7;
+  background-color: #D9E8F6;
+  pointer-events: none;
+}
+
+.coa-EventListPage_page-chevron {
+  position: relative;
+  height: 24px;
+  top: 7px;
+  left: 1px;
+}
+
+.coa-EventListPage_text {
+  display: inline-block;
+  padding-left: 11px;
+  padding-right: 10px;
+  height: 32px;
+  line-height: 30px;
+  border-left: 1px solid #dbdee1;
+}
+
+.coa-EventListPage_text.right {
+  border: none;
+  border-right: 1px solid #dbdee1;
+  padding-left: 8px;
+  padding-right: 12px;
+}
+
+.coa-EventListPage_page:hover {
+  background-color: #0049C7;
+  color: #FFFFFF;
+}
+
+.coa-EventListPage_page.active:hover {
+  background-color: #0049C7;
+  color: #FFFFFF;
+}
+
+.coa-EventListPage_page:hover .coa-CheveronLeftBlue {
+  fill: #FFFFFF;
+}
+
+.coa-EventListPage_page .coa-CheveronLeftBlue:hover {
+  fill: rgba(0,0,0,0);
+}
+
+.coa-EventListPage_page:hover .coa-CheveronRightBlue {
+  fill: #FFFFFF;
+}
+
+.coa-EventListPage_page .coa-CheveronRightBlue:hover {
+  fill: rgba(0,0,0,0);
+}
+
+.coa-CheveronLeftBlue, .coa-CheveronRightBlue {
+  pointer-events: none;
+}
