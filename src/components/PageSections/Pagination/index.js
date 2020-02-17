@@ -1,5 +1,6 @@
+import React from 'react';
 
-export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex })=>{
+export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex, contentType }) => {
   const active = pageNumber === index ? " active" : ''
   let ellipsis = ""
   let pageIndex = index
@@ -10,9 +11,9 @@ export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pag
   return (
     <div
       onClick={()=>changePage(pageIndex-1)}
-      className={ "coa-EventListPage_page number-container" + active + ellipsis }
+      className={ `coa-${contentType}_page number-container` + active + ellipsis }
     >
-      <div className={ "coa-EventListPage_number" }>
+      <div className={ `coa-${contentType}_number` }>
         { index }
       </div>
     </div>

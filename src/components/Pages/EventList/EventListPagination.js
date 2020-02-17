@@ -8,6 +8,8 @@ import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
+import { PageNumber } from 'components/PageSections/Pagination'
+import { buildPages } from 'js/helpers/pagination.js'
 
 const EventListPagination = ({ events, intl }) => {
   const eventsPerPage = 2
@@ -15,14 +17,12 @@ const EventListPagination = ({ events, intl }) => {
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
-  const allEvents = events
-  const pages = buildPages()
+  const pages = buildPages(events, eventsPerPage)
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination()
   const page = pages[pageNumber]
   let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
-  console.log(events)
   useEffect(() => {
     domWindow = window
     window.onpopstate = function(event) {
@@ -49,16 +49,15 @@ const EventListPagination = ({ events, intl }) => {
     return hash
   }
 
-  function buildPages() {
-    const pages = []
-    for (var i = 0; i < allEvents.length; i += eventsPerPage) {
-      pages.push(allEvents.slice(i, i + eventsPerPage))
-    }
-    return pages
-  }
+  // function buildPages() {
+  //   const pages = []
+  //   for (var i = 0; i < allEvents.length; i += eventsPerPage) {
+  //     pages.push(allEvents.slice(i, i + eventsPerPage))
+  //   }
+  //   return pages
+  // }
 
   function buildPagination() {
-
     if (pages.length < 2) return []
     let shownPages = [pageNumber+1]
 
@@ -102,39 +101,17 @@ const EventListPagination = ({ events, intl }) => {
                   paginationIndex={i}
                   pageNumberIndex={shownPages.indexOf(pageNumber+1)}
                   changePage={changePage}
+                  contentType={"EventListPage"}
                 />
               ))}
 
               <div onClick={()=>changePage(pageNumber+1)} className="coa-EventListPage_page next">
                 <ChevronRightBlue className="coa-EventListPage_page-chevron right"/>
               </div>
-
             </div>
           }
 
         </div>
-      </div>
-    </div>
-  )
-
-}
-
-// move this one and the other one from documents into its own component and import
-const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex })=>{
-  const active = pageNumber === index ? " active" : ''
-  let ellipsis = ""
-  let pageIndex = index
-  if (index === "...") {
-    ellipsis = " ellipsis"
-    pageIndex = pageNumberIndex > paginationIndex ? pageNumber-1 : pageNumber+1
-  }
-  return (
-    <div
-      onClick={()=>changePage(pageIndex-1)}
-      className={ "coa-EventListPage_page number-container" + active + ellipsis }
-    >
-      <div className={ "coa-EventListPage_number" }>
-        { index }
       </div>
     </div>
   )
