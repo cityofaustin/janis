@@ -14,7 +14,10 @@ const EventDateCalendar = ({date}) => {
   moment.locale(intl.locale);
   let monthType = isMobile ? 'MMM' : 'MMMM';
   let momentMonth = moment(date, 'YYYY-MM-DD').format(monthType);
-  let momentDate = date && date.slice(-2) // check what happens if there is a single digit (do march!)
+  if (momentMonth.slice(-1) === '.') {
+    momentMonth = momentMonth.slice(0, -1)
+  }
+  let momentDate = date && date.slice(-2)
 
   return (
     <div className="coa-EventListPage__DateCal">
@@ -37,6 +40,10 @@ const EventDateListDetails = ({ event }) => {
   moment.locale(intl.locale)
   let dayType = isMobile ? 'ddd' : 'dddd';
   let momentDay = moment(date, 'YYYY-MM-DD').format(dayType)
+  momentDay = momentDay.charAt(0).toUpperCase() + momentDay.slice(1);
+  if (momentDay.slice(-1) === '.') {
+    momentDay = momentDay.slice(0, -1)
+  }
   let eventTime = startTime && endTime
     ? formatHours({
         start1: startTime,

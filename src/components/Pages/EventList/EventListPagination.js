@@ -3,13 +3,13 @@ import { injectIntl } from 'react-intl'
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
+import { buildPages, buildPagination } from 'js/helpers/pagination.js'
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import { PageNumber } from 'components/PageSections/Pagination'
-import { buildPages } from 'js/helpers/pagination.js'
 
 const EventListPagination = ({ events, intl }) => {
   const eventsPerPage = 2
@@ -19,7 +19,7 @@ const EventListPagination = ({ events, intl }) => {
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
   const pages = buildPages(events, eventsPerPage)
   const [ pageNumber, setPageNumber ] = useState(getHash())
-  const shownPages = buildPagination()
+  const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
   const page = pages[pageNumber]
   let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
@@ -47,33 +47,6 @@ const EventListPagination = ({ events, intl }) => {
     const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
     const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
     return hash
-  }
-
-  // function buildPages() {
-  //   const pages = []
-  //   for (var i = 0; i < allEvents.length; i += eventsPerPage) {
-  //     pages.push(allEvents.slice(i, i + eventsPerPage))
-  //   }
-  //   return pages
-  // }
-
-  function buildPagination() {
-    if (pages.length < 2) return []
-    let shownPages = [pageNumber+1]
-
-    for (var i = 1; i < maxPagesShown; i++) {
-      // Add the next page # and/or the previous page # if page exists
-      if (pageNumber + i <= pages.length - 1) shownPages.push(pageNumber + i + 1)
-      if (pageNumber + (i*-1) >= 0) shownPages.unshift(pageNumber + (i*-1) + 1)
-      // If all slots are filled, break loop.
-      if (shownPages.length >= maxPagesShown) break
-    }
-
-    // replace first and last pageNumber in list with ellipsis if there is more than 1 page in either direction...
-    if (shownPages[0] > 1) shownPages[0] = "..."
-    if (shownPages[shownPages.length -1] < pages.length) shownPages[shownPages.length -1] = "..."
-
-    return shownPages
   }
 
   return (
