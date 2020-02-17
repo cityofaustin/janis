@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { formatTime, formatHours } from 'js/helpers/cleanData';
@@ -13,7 +14,7 @@ const EventDateCalendar = ({date}) => {
   moment.locale(intl.locale);
   let monthType = isMobile ? 'MMM' : 'MMMM';
   let momentMonth = moment(date, 'YYYY-MM-DD').format(monthType);
-  let momentDate = date && date.slice(-2) // check what happens if there is a single digit
+  let momentDate = date && date.slice(-2) // check what happens if there is a single digit (do march!)
 
   return (
     <div className="coa-EventListPage__DateCal">
@@ -53,10 +54,10 @@ const EventDateListDetails = ({ event }) => {
   }
 
   let cost = eventIsFree ? `${intl.formatMessage(i18n.free)}` : feesRange;
-  let registration = registrationUrl.length ? `• Registration Required`: ''; // translate
+  let registration = registrationUrl.length ? `• ${intl.formatMessage(i18n.registrationReq)}`: '';
 
   return (
-    <div className="coa-EventListPage__EntryDetails">
+    <div className="coa-EventListPage__EntryDetails"> 
     { canceled && <div className="coa-EventListPage__Canceled">canceled</div> // translate!
     }
       <div className="coa-EventListPage__Time">{ `${momentDay} • ${eventTime}`}</div>
@@ -69,10 +70,10 @@ const EventDateListDetails = ({ event }) => {
 
 const EventListEntry = ({event}) => {
   return (
-    <div className="coa-EventListPage__Entry">
+    <Link to={event.eventUrl} className="coa-EventListPage__Entry">
       <EventDateCalendar date={event.date} />
       <EventDateListDetails event={event}/>
-    </div>
+    </Link>
   )
 }
 

@@ -5,6 +5,8 @@
   margin-top: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid #DCDEE0;
+  text-decoration: none;
+  color: #212121;
   @include media($coa-medium-screen) {
     margin-top: 40px;
     padding-bottom: 40px;
@@ -69,6 +71,7 @@
 
 .coa-EventListPage__Time {
   font-size: 16px;
+  color: #212121;
   font-weight: $coa-font-bold
 }
 

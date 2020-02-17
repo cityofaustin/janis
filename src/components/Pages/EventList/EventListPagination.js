@@ -8,10 +8,8 @@ import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
-import UserFeedback from 'components/UserFeedback';
 
 const EventListPagination = ({ events, intl }) => {
-  // find what parts i can pull out and use for both here and documents
   const eventsPerPage = 2
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
@@ -115,7 +113,6 @@ const EventListPagination = ({ events, intl }) => {
           }
 
         </div>
-        <UserFeedback />
       </div>
     </div>
   )

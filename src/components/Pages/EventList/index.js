@@ -5,12 +5,13 @@ import { useIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
 import EventListPagination from 'components/Pages/EventList/EventListPagination';
-// import EventListEntry from 'components/Pages/EventList/EventListEntry'
-import { events as i18n } from 'js/i18n/definitions'; // will need to translate to eventos
+import UserFeedback from 'components/UserFeedback';
+import { events as i18n } from 'js/i18n/definitions';
 
 
-const EventList = ({ intl }) => {
-   const { events } = useRouteData();
+const EventList = () => {
+  const intl = useIntl();
+  const { events } = useRouteData();
   // const {
   //   // fill in what we need for preview
   //   eventListPage :{
@@ -22,21 +23,15 @@ const EventList = ({ intl }) => {
       <Head>
         <title>Event List</title>
       </Head>
-      <PageHeader contentType={'event-list'}> Events </PageHeader>
+      <PageHeader contentType={'event-list'}> {intl.formatMessage(i18n.events)} </PageHeader>
       <div className="wrapper container-fluid">
-
-          <EventListPagination events={events} intl={intl} />
-        {
-        // <div className="col-xs-12 col-md-8">
-        // events.map((e) => <EventListEntry event={e} />)
-        // </div>
-      }
+        <EventListPagination events={events} intl={intl} />
+        <UserFeedback />
       </div>
     </div>
   )
 }
 
 // proptypes?
-
 
 export default EventList
