@@ -26,7 +26,7 @@ const LanguageSelectBar = ({ path, intl, showMessage, togglePendingTranslation }
           return (
           <li key={i} onClick={pending && togglePendingTranslation}>
             <Link
-              to={`/${code}/${path}`}
+              to={`/${code}/${path}/`}
               className={classNames('coa-LanguageSelectBar__item', {
                 'coa-LanguageSelectBar__item--active': intl.locale === code,
                 'coa-LanguageSelectBar__item--showMessage': showMessage,
