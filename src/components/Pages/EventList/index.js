@@ -12,12 +12,6 @@ import { events as i18n } from 'js/i18n/definitions';
 const EventList = () => {
   const intl = useIntl();
   const { events } = useRouteData();
-  // const {
-  //   // fill in what we need for preview
-  //   eventListPage :{
-
-  //   },
-  // } = eventListPage ? { eventListPage } : useRouteData();
   return (
     <div>
       <Head>
@@ -31,7 +25,5 @@ const EventList = () => {
     </div>
   )
 }
-
-// proptypes?
 
 export default EventList

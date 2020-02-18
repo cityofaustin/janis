@@ -68,12 +68,17 @@
 }
 .coa-EventListPage__EntryDetails {
   margin-left: 24px;
+  width: 233px;
+  @include media($coa-medium-screen){
+    width: 637px;
+  }
 }
 
 .coa-EventListPage__Time {
   font-size: 16px;
   color: #212121;
-  font-weight: $coa-font-bold
+  font-weight: $coa-font-bold;
+  line-height: 18px;
 }
 
 .coa-EventListPage__Title {
@@ -81,6 +86,7 @@
   padding-top: 4px;
   padding-bottom: 4px;
   max-width: 233px;
+  line-height: 26px;
   @include media($coa-medium-screen) {
     font-size: 24px;
     padding-top: 8px;

@@ -14,9 +14,11 @@ const EventDateCalendar = ({date}) => {
   moment.locale(intl.locale);
   let monthType = isMobile ? 'MMM' : 'MMMM';
   let momentMonth = moment(date, 'YYYY-MM-DD').format(monthType);
+  // Spanish is adding periods at the end of abbreviations on mobile
   if (momentMonth.slice(-1) === '.') {
     momentMonth = momentMonth.slice(0, -1)
   }
+  // the Date is the last two digits of the date
   let momentDate = date && date.slice(-2)
 
   return (
