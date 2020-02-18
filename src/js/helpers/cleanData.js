@@ -2,13 +2,15 @@ import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import Cookies from 'js-cookie';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
 export const formatTime = time => {
+  let lang = Cookies.get('lang')
   if (time === '12:00:00') {
-    return 'Noon';
+    return lang === 'es' ? 'Mediodía' : 'Noon';
   }
   // Simplify time parsing. Times work on previews,
   // but we don't do anything with timezones.

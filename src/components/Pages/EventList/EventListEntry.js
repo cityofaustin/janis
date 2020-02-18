@@ -37,10 +37,11 @@ const EventDateCalendar = ({date}) => {
 const EventDateListDetails = ({ event }) => {
   const intl = useIntl();
   const isMobile = useMobileQuery()
+  let dayType = isMobile ? 'ddd' : 'dddd';
   const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled, feesRange } = event;
   
+  // parse Date
   moment.locale(intl.locale)
-  let dayType = isMobile ? 'ddd' : 'dddd';
   let momentDay = moment(date, 'YYYY-MM-DD').format(dayType)
   momentDay = momentDay.charAt(0).toUpperCase() + momentDay.slice(1);
   if (momentDay.slice(-1) === '.') {
@@ -57,9 +58,9 @@ const EventDateListDetails = ({ event }) => {
 
   let locationName = null
   if (location) {
-    locationName = location.locationType === 'city_location'
-    ? location.cityLocation.title
-    : location.remoteLocation.name;
+    locationName = (location.locationType === 'city_location')
+      ? location.cityLocation.title
+      : location.remoteLocation.name;
   }
 
   // Joplin lets a user mark an event as free but also include costs.
@@ -67,10 +68,18 @@ const EventDateListDetails = ({ event }) => {
   let cost = (eventIsFree || feesRange === "") ? `${intl.formatMessage(i18n.free)}` : feesRange;
   let registration = registrationUrl.length ? `• ${intl.formatMessage(i18n.registrationReq)}`: '';
 
+  if (cost.slice(0,2) === '$0') {
+    cost = `${intl.formatMessage(i18n.free)}${cost.slice(2)}`
+  }
+
   return (
     <div className="coa-EventListPage__EntryDetails"> 
-    { canceled && <div className="coa-EventListPage__Canceled">canceled</div> // translate!
-    }
+      { 
+        canceled 
+        && <div className="coa-EventListPage__Canceled">
+            {intl.formatMessage(i18n.canceled)}
+           </div> 
+      }
       <div className="coa-EventListPage__Time">{ `${momentDay} • ${eventTime}`}</div>
       <div className="coa-EventListPage__Title"><a href={eventUrl}>{title}</a></div> 
       <div className="coa-EventListPage__Location">{locationName}</div>
