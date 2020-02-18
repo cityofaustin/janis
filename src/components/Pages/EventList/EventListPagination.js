@@ -12,7 +12,7 @@ import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import { PageNumber } from 'components/PageSections/Pagination'
 
 const EventListPagination = ({ events, intl }) => {
-  const eventsPerPage = 2
+  const eventsPerPage = 10
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;

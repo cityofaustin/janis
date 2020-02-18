@@ -57,10 +57,12 @@ const EventDateListDetails = ({ event }) => {
   if (location) {
     locationName = location.locationType === 'city_location'
     ? location.cityLocation.title
-    : location.remoteLocation.title;
+    : location.remoteLocation.name;
   }
 
-  let cost = eventIsFree ? `${intl.formatMessage(i18n.free)}` : feesRange;
+  // Joplin lets a user mark an event as free but also include costs.
+  // Or not mark as free, but not include fees
+  let cost = (eventIsFree || feesRange === "") ? `${intl.formatMessage(i18n.free)}` : feesRange;
   let registration = registrationUrl.length ? `• ${intl.formatMessage(i18n.registrationReq)}`: '';
 
   return (
