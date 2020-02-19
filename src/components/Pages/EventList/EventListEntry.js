@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { formatTime, formatHours } from 'js/helpers/cleanData';
@@ -90,9 +91,12 @@ const EventDateListDetails = ({ event }) => {
   )
 }
 
-const EventListEntry = ({event}) => {
+const EventListEntry = ({ event, homepage }) => {
   return (
-    <Link to={event.eventUrl} className="coa-EventListPage__Entry">
+    <Link
+      to={event.eventUrl}
+      className={classNames('coa-EventListPage__Entry', {'coa-EventListPage__Entry--homepage': homepage})}
+    >
       <EventDateCalendar date={event.date} />
       <EventDateListDetails event={event}/>
     </Link>

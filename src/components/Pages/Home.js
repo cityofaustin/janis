@@ -15,7 +15,7 @@ import UserFeedback from 'components/UserFeedback';
 import TileGroup from 'components/Tiles/TileGroup';
 
 const Home = ({ intl }) => {
-  const { topServices, image } = useRouteData();
+  const { topServices, image, events } = useRouteData();
 
   return (
     <div className="coa-HeroHome__container">
@@ -34,7 +34,9 @@ const Home = ({ intl }) => {
         tiles={topServices}
       />
 
-      <EventsHomePage />
+      <EventsHomePage
+        events={events}
+      />
 
       {/* We are leaving it here because we might need it again.*/}
       {/*<PageNotificationBanner>*/}

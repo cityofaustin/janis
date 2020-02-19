@@ -573,7 +573,6 @@ const getEventPageData = async (id, client) => {
 };
 
 const getAllEvents = async client => {
-  // Is this how we want to handle it? 
   const date_now = moment().format('YYYY-MM-DD')
   const { allEventPages } = await client.request(getEventPageQuery, {
     date_Gte: date_now,
@@ -873,11 +872,14 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           index === services.findIndex(s => s.id === service.id),
       );
 
+      // bookmark
       const topServices = services.map(s => ({
         type: !!langCode ? langCode : 'en',
         url: s.url,
         title: s.title,
       }));
+
+      const allEvents = await getAllEvents(client);
 
       return {
         topServices,
@@ -885,6 +887,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
+        events: allEvents.events,
       };
     },
   };

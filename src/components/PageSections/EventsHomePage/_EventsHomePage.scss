@@ -5,16 +5,33 @@
   margin-left: auto;
 }
 
+.coa-EventsHomePage__heading {
+  font-size: 40px;
+  color: #171717;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.coa-EventsHomePage__events {
+  display: flex;
+  flex-direction: row;
+}
+
 .coa-EventsHomePage__allEventsButton {
-  height: 48px;
   width: 260px;
+  height: 48px;
+  text-decoration: none;
+  display: block;
+}
+
+.coa-EventsHomePage__allEventsButton--inner {
+  font-size: 16px;
+  color: #FFFFFF;
+  padding-top: 14px;
+  padding-left: 75px;
+  line-height: 20px;
+  width: 260px;
+  height: 48px;
   background-color: #0050D8;
-  a {
-    text-decoration: none;
-  }
-  span {
-    font-size: 16px;
-    color: #FFFFFF;
-    padding: 14px 75px;
-  }
+  border-radius: 4px;
 }
