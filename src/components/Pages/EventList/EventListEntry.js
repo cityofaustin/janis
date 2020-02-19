@@ -35,6 +35,7 @@ const EventDateCalendar = ({date}) => {
 
 
 const EventDateListDetails = ({ event }) => {
+  console.log(event.checkDate);
   const intl = useIntl();
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -65,7 +66,7 @@ const EventDateListDetails = ({ event }) => {
 
   // Joplin lets a user mark an event as free but also include costs.
   // Or not mark as free, but not include fees
-  let cost = (eventIsFree || feesRange === "") ? `${intl.formatMessage(i18n.free)}` : feesRange;
+  let cost = (eventIsFree && feesRange.length === 0) ? `${intl.formatMessage(i18n.free)}` : feesRange;
   let registration = registrationUrl.length ? `• ${intl.formatMessage(i18n.registrationReq)}`: '';
 
   if (cost.slice(0,2) === '$0') {

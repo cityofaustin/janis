@@ -575,6 +575,7 @@ const getEventPageData = async (id, client) => {
 const getAllEvents = async client => {
   // Is this how we want to handle it? 
   const date_now = moment().format('YYYY-MM-DD')
+  const checkDate = moment();
   const { allEventPages } = await client.request(getEventPageQuery, {
     date_Gte: date_now,
   });
@@ -592,6 +593,7 @@ const getAllEvents = async client => {
     location: edge.node.locations[0],
     eventIsFree: edge.node.eventIsFree,
     registrationUrl: edge.node.registrationUrl,
+    checkDate: checkDate,
   }));
 
   return { events: events };
