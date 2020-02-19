@@ -1,0 +1,20 @@
+.coa-EventsHomePage__container {
+  padding: $coa-spacing-large $coa-spacing-medium;
+  max-width: $coa-wrapper-maxwidth;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.coa-EventsHomePage__allEventsButton {
+  height: 48px;
+  width: 260px;
+  background-color: #0050D8;
+  a {
+    text-decoration: none;
+  }
+  span {
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 14px 75px;
+  }
+}
