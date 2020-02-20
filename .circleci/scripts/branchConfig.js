@@ -25,9 +25,6 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  "3817-event-lists": {
-    CMS_API: "https://joplin-pr-3817-event-lists.herokuapp.com/api/graphql"
-  },
   '1650-react-static-7': {
     CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },

@@ -134,5 +134,6 @@
   "events.allEvents": "Todos los eventos",
   "events.getDirections": "Obtener direcciones",
   "events.events": "Eventos",
-  "events.registrationReq": "Registración requerido"
+  "events.registrationReq": "Registración requerido",
+  "events.noon": "Mediodía"
 }
