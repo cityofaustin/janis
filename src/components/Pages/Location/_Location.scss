@@ -69,10 +69,15 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__sub-section-block-container {
   display: flex;
-  flex-direction: column;
+
+  flex-direction: row;
   @include mobile {
     flex-direction: column;
   }
+}
+
+.coa-LocationPage__sub-section-block-container__hours {
+  flex-direction: column;
 }
 
 .coa-LocationPage__sub-section-title {
@@ -99,6 +104,10 @@ $coa-location-page-section-background: #f7f7f7;
   }
 }
 
+.coa-LocationPage__sub-section-block__hours-exceptions {
+  margin-top: 1.5rem;
+}
+
 .coa-LocationPage__sub-section-block-title {
   font-weight: bolder;
 }
@@ -123,7 +132,7 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__table {
   margin: 0;
-  margin-bottom: 1.5rem;
+
   td {
     background-color: inherit;
     border: none;
