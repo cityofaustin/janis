@@ -526,4 +526,5 @@ export const events = defineMessages({
   getDirections: 'Get directions',
   events: 'Events',
   registrationReq: 'Registration required',
+  noon: 'Noon',
 });

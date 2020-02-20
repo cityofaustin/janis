@@ -7,10 +7,9 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
-export const formatTime = time => {
-  let lang = Cookies.get('lang')
+export const formatTime = (time) => {
   if (time === '12:00:00') {
-    return lang === 'es' ? 'Mediodía' : 'Noon';
+    return 'Noon';
   }
   // Simplify time parsing. Times work on previews,
   // but we don't do anything with timezones.
@@ -21,6 +20,18 @@ export const formatTime = time => {
 
   return momentTime.format(style);
 };
+
+export const formatTimeLang = (time, noon) => {
+  // noon is a localized string that is passed in
+  if (time === '12:00:00') {
+    return noon;
+  }
+  const momentTime = moment(time, 'HH:mm:ss');
+  // Only include minutes in display if there are minutes
+  const style = momentTime.minutes() ? 'h:mm a' : 'h a';
+
+  return momentTime.format(style);
+}
 
 // Used for location page hours
 // example

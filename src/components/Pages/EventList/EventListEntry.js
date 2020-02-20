@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
-import { formatTime, formatHours } from 'js/helpers/cleanData';
+import { formatTimeLang } from 'js/helpers/cleanData';
 import { events as i18n } from 'js/i18n/definitions';
 
 const EventDateCalendar = ({date}) => {
@@ -42,7 +42,8 @@ const EventDateListDetails = ({ event }) => {
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
   const { date, startTime, endTime, location, title, eventIsFree, registrationUrl, eventUrl, canceled, feesRange } = event;
-  
+  const noon = intl.formatMessage(i18n.noon);
+
   // parse Date
   moment.locale(intl.locale)
   let momentDay = moment(date, 'YYYY-MM-DD').format(dayType)
@@ -50,14 +51,10 @@ const EventDateListDetails = ({ event }) => {
   if (momentDay.slice(-1) === '.') {
     momentDay = momentDay.slice(0, -1)
   }
+
   let eventTime = startTime && endTime
-    ? formatHours({
-        start1: startTime,
-        end1: endTime,
-        start2: null,
-        end2: null,
-      })
-    : formatTime(startTime);
+    ? `${formatTimeLang(startTime, noon)}–${formatTimeLang(endTime, noon)}`
+    : formatTimeLang(startTime, noon);
 
   let locationName = null
   if (location) {
