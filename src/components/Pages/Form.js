@@ -18,6 +18,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import RowContainer from 'components/ErrorMessages/RowContainer';
+import InfoISVG from 'components/SVGs/InfoI';
 
 function FormContainer({
   formContainer: {
@@ -47,27 +48,27 @@ function FormContainer({
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
       } else {
         iframeLoaded = true;
-        loader.end()
+        loader.end();
       }
     }
-  }
+  };
 
-  setTimeout(function(){
+  setTimeout(function() {
     /* We're allowing 5 sec here to give slow connections time before alerting
     the user that the form may be having problems loading.*/
     if (!iframeLoaded) {
-      loader.endError()
+      loader.endError();
     }
-  },5000)
+  }, 5000);
 
   useEffect(() => {
     loader.start({
       contentId: 'coa-iFrameForm',
       loaderId: 'coa-loadingWheel',
       errorId: 'coa-LockedIframeRequestMessage',
-      style: "popup"
-    })
-  }, []) // By having the second argument as an empty string, it will act as "ComponentDidMount" and execute once the component's elements have been added to the dom.
+      style: 'popup',
+    });
+  }, []); // By having the second argument as an empty string, it will act as "ComponentDidMount" and execute once the component's elements have been added to the dom.
 
   return (
     <div>
@@ -86,8 +87,8 @@ function FormContainer({
           {title}
         </PageHeader>
 
-        <div id="coa-loadingWheel"></div>
-        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage}/>
+        <div id="coa-loadingWheel" />
+        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage} />
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -117,25 +118,30 @@ function FormContainer({
   );
 }
 
-const ErrorMessage = ({formUrl}) => {
+const ErrorMessage = ({ formUrl }) => {
   return (
-    <div>
-      <h2>We are still waiting for your form to load.</h2>
-
-      <h3>Why hasn't it loaded yet?</h3>
-
-      <p>
-        &bull; A plugin could be blocking the form (example: "Privacy Badger")
-        <br/>
-        &bull; It may have failed to load ("404 error")
-      </p>
-      <br/>
-
-      <h3>Visit the form directly</h3>
-
-      <a href={formUrl} target="_blank"> <p>{formUrl}</p> </a>
-    </div>
-  )
-}
+    <React.Fragment>
+      <InfoISVG />
+      <div className="coa-FormFallback__content">
+        <h2 className="coa-FormFallback__heading">
+          We are still waiting for your form to load
+        </h2>
+        <a href={formUrl} target="_blank" className="coa-FormFallback__link">
+          Open the form in a new window
+          <i class="material-icons coa-ExternalLinkMaterial">open_in_new</i>
+        </a>
+        <h3 className="coa-FormFallback__subheading">
+          Why hasn't it loaded yet?
+        </h3>
+        <ul className="coa-FormFallback__list">
+          <li>
+            A plugin could be blocking the form (example: "Privacy Badger")
+          </li>
+          <li>It may have failed to load ("404 error")</li>
+        </ul>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default withRouteData(injectIntl(FormContainer));
