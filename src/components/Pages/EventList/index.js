@@ -11,7 +11,7 @@ import { events as i18n } from 'js/i18n/definitions';
 const filterOnDate = event => {
   // the api returns events greater than or equal to the time when the site is built
   // this filters out the ones between the build time and now
-  const dateNow = moment().format('YYYY-MM-DD')
+  const dateNow = moment().tz('America/Chicago').format('YYYY-MM-DD')
   return moment(event.date).isSameOrAfter(dateNow);
 }
 

@@ -19,6 +19,8 @@ const EventDateCalendar = ({date}) => {
   if (momentMonth.slice(-1) === '.') {
     momentMonth = momentMonth.slice(0, -1)
   }
+  // Spanish also lowercases the months
+  momentMonth = momentMonth.charAt(0).toUpperCase() + momentMonth.slice(1);
   // the Date is the last two digits of the date
   let momentDate = date && date.slice(-2)
 

@@ -573,7 +573,7 @@ const getEventPageData = async (id, client) => {
 };
 
 const getAllEvents = async client => {
-  const date_now = moment().format('YYYY-MM-DD')
+  const date_now = moment().tz('America/Chicago').format('YYYY-MM-DD')
   const { allEventPages } = await client.request(getEventPageQuery, {
     date_Gte: date_now,
   });
