@@ -135,5 +135,7 @@
   "events.getDirections": "Obtener direcciones",
   "events.events": "Eventos",
   "events.registrationReq": "Registración requerido",
-  "events.noon": "Mediodía"
+  "events.noon": "Mediodía",
+  "events.upcoming": "Próximos eventos",
+  "events.viewAll": "Ver todos los eventos"
 }
