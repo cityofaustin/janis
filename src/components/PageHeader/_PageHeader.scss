@@ -80,6 +80,22 @@
 
 .coa-PageHeader--event-list {
   background-color: #f7f9fa;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   padding-left: 10px;
+  margin: auto;
+  @include media($coa-medium-screen) {
+    padding-bottom: 80px;
+    padding-top: 80px;
+    margin: unset;
+  }
+}
+
+.coa-PageHeader--event-list {
+  h1 {
+    text-align: center;
+    @include media($coa-medium-screen) {
+      text-align: left;
+    }
+  }
 }

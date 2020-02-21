@@ -37,7 +37,7 @@ const EventDateCalendar = ({date}) => {
 }
 
 
-const EventDateListDetails = ({ event }) => {
+const EventDateListDetails = ({ event, homepage }) => {
   const intl = useIntl();
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -75,7 +75,9 @@ const EventDateListDetails = ({ event }) => {
   }
 
   return (
-    <div className="coa-EventListPage__EntryDetails"> 
+    <div
+      className={classNames('coa-EventListPage__EntryDetails', 
+          {'coa-EventListPage__EntryDetails--homepage': homepage} )}> 
       { 
         canceled 
         && <div className="coa-EventListPage__Canceled">
@@ -97,7 +99,7 @@ const EventListEntry = ({ event, homepage }) => {
       className={classNames('coa-EventListPage__Entry', {'coa-EventListPage__Entry--homepage': homepage})}
     >
       <EventDateCalendar date={event.date} />
-      <EventDateListDetails event={event}/>
+      <EventDateListDetails event={event} homepage={homepage}/>
     </Link>
   )
 }

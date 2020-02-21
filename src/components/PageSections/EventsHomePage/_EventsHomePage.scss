@@ -13,25 +13,39 @@
 }
 
 .coa-EventsHomePage__events {
-  display: flex;
-  flex-direction: row;
+  @include media($coa-medium-screen) {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .coa-EventsHomePage__allEventsButton {
-  width: 260px;
+  width: 314px;
   height: 48px;
   text-decoration: none;
   display: block;
+  margin: auto;
+  margin-top: 10px;
+  @include media($coa-medium-screen) {
+    width: 260px;
+    height: 48px;
+    margin: unset;
+  }
 }
 
 .coa-EventsHomePage__allEventsButton--inner {
   font-size: 16px;
   color: #FFFFFF;
   padding-top: 14px;
-  padding-left: 75px;
+  padding-left: 102px;
   line-height: 20px;
-  width: 260px;
+  width: 314px;
   height: 48px;
   background-color: #0050D8;
   border-radius: 4px;
+  @include media($coa-medium-screen) {
+    width: 260px;
+    height: 48px;
+    padding-left: 75px;
+  }
 }
