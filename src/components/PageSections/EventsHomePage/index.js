@@ -8,9 +8,8 @@ import { events as i18n } from 'js/i18n/definitions';
 
 const filterEvents = (events) => {
   const dateNow = moment().tz('America/Chicago').format('YYYY-MM-DD')
-  let currentEvents = events.filter((e) => moment(e.date).isSameOrAfter(dateNow));
 
-  return currentEvents.filter((e) => !e.canceled).slice(0,3);
+  return events.filter((e) => moment(e.date).isSameOrAfter(dateNow)).slice(0,3);
 }
 
 
