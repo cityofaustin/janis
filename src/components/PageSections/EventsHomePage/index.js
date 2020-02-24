@@ -19,7 +19,7 @@ const EventsHomePage = ({events}) => {
   console.log(threeEvents);
 
   return (
-    threeEvents && threeEvents.length &&
+    (threeEvents && !!threeEvents.length) &&
     <div className="coa-EventsHomePage__container">
       <div className="coa-EventsHomePage__heading">
         {intl.formatMessage(i18n.upcoming)}
