@@ -574,9 +574,8 @@ const getEventPageData = async (id, client) => {
 
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment().tz('America/Chicago').format('YYYY-MM-DD')
-  const {allEventPages} = await client.request(getEventPageQuery, {
-    date_Gte: date_now, canceled: !hideCanceled,
-  })
+  const gqlVariables = hideCanceled ? { date_Gte: date_now, canceled: false } : { date_Gte: date_now };
+  const {allEventPages} = await client.request(getEventPageQuery, gqlVariables)
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,

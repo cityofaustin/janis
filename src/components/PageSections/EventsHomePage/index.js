@@ -16,7 +16,6 @@ const filterEvents = (events) => {
 const EventsHomePage = ({events}) => {
   const intl = useIntl();
   const threeEvents = filterEvents(events);
-  console.log(threeEvents);
 
   return (
     (threeEvents && !!threeEvents.length) &&
