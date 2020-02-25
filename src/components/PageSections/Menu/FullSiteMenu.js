@@ -18,6 +18,7 @@ const FullSiteMenu = props => (
         handleOnClick={props.handleFullSiteMenuOpen}
         isTopMenuActive={props.isTopMenuActive}
         handleFullSiteMenuClose={props.handleFullSiteMenuClose}
+        navigation={props.navigation}
       />
     </div>
     <section className="coa-FullSiteMenu__subNav">
