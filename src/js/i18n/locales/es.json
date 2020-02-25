@@ -132,5 +132,8 @@
   "events.public": "Abierto al público",
   "events.details": "Detalles",
   "events.allEvents": "Todos los eventos",
-  "events.getDirections": "Obtener direcciones"
+  "events.getDirections": "Obtener direcciones",
+  "events.events": "Eventos",
+  "events.registrationReq": "Registración requerido",
+  "events.noon": "Mediodía"
 }

@@ -2,11 +2,12 @@ import { findKey } from 'lodash';
 import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import Cookies from 'js-cookie';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
-export const formatTime = time => {
+export const formatTime = (time) => {
   if (time === '12:00:00') {
     return 'Noon';
   }
@@ -19,6 +20,18 @@ export const formatTime = time => {
 
   return momentTime.format(style);
 };
+
+export const formatTimeLang = (time, noon) => {
+  // noon is a localized string that is passed in
+  if (time === '12:00:00') {
+    return noon;
+  }
+  const momentTime = moment(time, 'HH:mm:ss');
+  // Only include minutes in display if there are minutes
+  const style = momentTime.minutes() ? 'h:mm a' : 'h a';
+
+  return momentTime.format(style);
+}
 
 // Used for location page hours
 // example
@@ -86,7 +99,7 @@ export const cleanLocationPageJanisUrl = janisUrl => {
 };
 
 /*
-tech debt: this code is used for service hours as well, but the variable defition
+tech debt: this code is used for service hours as well, but the variable definition
 implies otherwise, could be a source of bugs
 
 also the best place to shape the data is probably the backend, why do we have to
@@ -745,3 +758,28 @@ export const getOfferedByFromRelatedDepartments = relatedDepartments => {
 
   return offeredBy;
 };
+
+export const getEventPageUrl = (slug, date) => {
+  let year = moment(date, 'YYYY-MM-DD').format('YYYY');
+  let month = moment(date, 'YYYY-MM-DD').format('M');
+  let day = moment(date, 'YYYY-MM-DD').format('D');
+  // use moment to get the date
+  // function to format the event's page url, used in the Event List
+  let eventUrl = `/event/${year}/${month}/${day}/${slug}/`
+
+  return eventUrl;
+}
+
+export const formatFeesRange = fees => {
+  // on the Event List View, show a range of fees, from the least to the most
+  if (fees.edges && fees.edges.length) {
+    if (fees.edges.length === 1) {
+      return `$${fees.edges[0].node.fee}`
+    }
+    let feesArray = [];
+    fees.edges.map(f=> feesArray.push(f.node.fee))
+    return `$${Math.min(...feesArray)}–$${Math.max(...feesArray)}`
+  }
+  return ''
+}
+
