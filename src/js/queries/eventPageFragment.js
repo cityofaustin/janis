@@ -31,6 +31,7 @@ const eventPageFragment = `
     date
     startTime
     endTime
+    slug
     contact {
       ...contactInfo
     }
