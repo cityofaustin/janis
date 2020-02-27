@@ -54,7 +54,22 @@
   margin-bottom: 0.8rem;
 }
 
-.coa-StepWithLocations__location-address {
+.coa-StepWithLocations__location-address--singleline {
+  @include mobile {
+    display: none;
+  }
+
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  color: #3d4551;
+}
+
+.coa-StepWithLocations__location-address--doubleline {
+  @include tablet-and-desktop {
+    display: none;
+  }
+
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.8rem;
