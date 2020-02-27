@@ -48,22 +48,24 @@ const HtmlFromRichText = ({ content }) => {
           domNode.attribs.style = '';
         }
 
-        // Turn links into buttons
-        // waiting on
-        // if (
-        //   domNode.attribs.hasOwnProperty('href') &&
-        //   domNode.parent.name !== 'li'
-        // ) {
-        //   // replace the node with a button
-        //   return (
-        //     <a class="usa-button-primary" href={domNode.attribs.href}>
-        //       {/* this is kinda goofy, but the 'data' is the text of the link
-        //                and html-parser reads that as a child of 'a' */}
+        // If we're getting the button div from drafttail, we need to turn it into
+        // an 'a' tag to make the whole thing a link
+        if (
+          domNode.attribs.class &&
+          domNode.attribs.class.includes('rich-text-button-link')
+        ) {
+          const child = domNode.children && domNode.children[0];
+          if (child && child.name === 'a') {
+            // make it a link not a div
+            domNode.name = 'a';
 
-        //       {domNode.children[0].data}
-        //     </a>
-        //   );
-        // }
+            // get the href from the wrapped link
+            domNode.attribs.href = child.attribs.href;
+
+            // get child text element from the wrapped link
+            domNode.children = child.children;
+          }
+        }
       }
     },
   });
