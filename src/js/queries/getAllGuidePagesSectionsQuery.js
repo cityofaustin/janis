@@ -33,10 +33,12 @@ const allGuidePagesSectionsQuery = `
               servicePage {
                 id
                 pageType
+                title
               }
               informationPage {
                 id
                 pageType
+                title
   						}
             }
           }
