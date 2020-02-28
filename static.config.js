@@ -33,7 +33,7 @@ import {
   cleanLinks,
   cleanDepartmentDirectors,
   cleanLocationPage,
-  getOfferedByFromRelatedDepartments,
+  getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
 } from 'js/helpers/cleanData';
@@ -244,7 +244,7 @@ const getContextualNavData = async (
   parent_department,
   parent_topic,
   grandparent_topic_collection,
-  relatedDepartments,
+  departments,
   client,
 ) => {
   let contextualNavData = {};
@@ -322,9 +322,7 @@ const getContextualNavData = async (
   }
 
   // get offered by
-  contextualNavData.offeredBy = getOfferedByFromRelatedDepartments(
-    relatedDepartments,
-  );
+  contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
 
   return contextualNavData;
 };
@@ -350,7 +348,7 @@ const getServicePageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    service.relatedDepartments,
+    service.departments,
     client,
   );
 
@@ -384,7 +382,7 @@ const getInformationPageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    informationPage.relatedDepartments,
+    informationPage.departments,
     client,
   );
 
@@ -423,7 +421,7 @@ const getGuidePageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    guidePage.relatedDepartments,
+    guidePage.departments,
     client,
   );
 
@@ -447,7 +445,7 @@ const getFormContainerData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    formContainer.relatedDepartments,
+    formContainer.departments,
     client,
   );
 
@@ -509,7 +507,7 @@ const getOfficialDocumentPageData = async (
     parent_department,
     parent_topic,
     grandparent_topic_collection,
-    officialDocumentPage.relatedDepartments,
+    officialDocumentPage.departments,
     client,
   );
 
@@ -573,7 +571,9 @@ const getEventPageData = async (id, client) => {
 };
 
 const getAllEvents = async (client, hideCanceled) => {
-  const date_now = moment().tz('America/Chicago').format('YYYY-MM-DD')
+  const date_now = moment()
+    .tz('America/Chicago')
+    .format('YYYY-MM-DD');
   const gqlVariables = hideCanceled ? { date_Gte: date_now, canceled: false } : { date_Gte: date_now };
   const {allEventPages} = await client.request(getEventPageQuery, gqlVariables)
 
@@ -593,7 +593,7 @@ const getAllEvents = async (client, hideCanceled) => {
   }));
 
   return { events: events };
-}
+};
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
@@ -749,8 +749,13 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: url,
       template: 'src/components/Pages/EventList',
+<<<<<<< HEAD
       getData: () => getAllEvents(client, false)
     }
+=======
+      getData: () => getAllEvents(client),
+    };
+>>>>>>> master
   }
 };
 
@@ -775,18 +780,53 @@ const getPagesOfGuidesData = async client => {
           guidePage.node.slug,
         ].join('/');
       guidePage.node.sections.map(section => {
-        for (const page in section.pages[0]) {
-          if (section.pages[0][page]) {
-            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {};
-            if (!pagesOfGuidesData[page][section.pages[0][page].id])
-              pagesOfGuidesData[page][section.pages[0][page].id] = [];
-            pagesOfGuidesData[page][section.pages[0][page].id].push({
-              pageName: section.heading,
-              pageType: section.pages[0][page].pageType,
-              ofPageType: guidePage.node.pageType,
-              guidePageTitle: guidePage.node.title,
-              guidePageUrl: url,
-            });
+        // Example section object
+        /*
+
+        {
+          heading: 'Learn and prepare',
+          pages: [
+            { servicePage: null, informationPage: [Object] },
+            { servicePage: null, informationPage: [Object] },
+            { servicePage: [Object], informationPage: null },
+            { servicePage: [Object], informationPage: null },
+            { servicePage: null, informationPage: [Object] }
+          ]
+        }
+
+        */
+        for (const pageType of ['servicePage', 'informationPage']) {
+          if (!pagesOfGuidesData[pageType]) {
+            pagesOfGuidesData[pageType] = {};
+          }
+
+          for (const pageEntry of section.pages) {
+            const page = pageEntry[pageType];
+
+            // Example page object
+            /*
+
+            {
+              id: 'SW5mb3JtYXRpb25QYWdlTm9kZToyNTc=',
+              pageType: 'information page',
+              title: 'Documents for mobile food vendors in Austin'
+            }
+
+            */
+
+            if (page) {
+              if (!pagesOfGuidesData[pageType][page.id]) {
+                pagesOfGuidesData[pageType][page.id] = [];
+              }
+
+              pagesOfGuidesData[pageType][page.id].push({
+                pageName: page.title,
+                pageType: page.pageType,
+                ofPageType: guidePage.node.pageType,
+                guidePageTitle: guidePage.node.title,
+                guidePageUrl: url,
+              });
+            }
           }
         }
       });
@@ -847,7 +887,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   parsedStructure.push({
     url: `/events/`,
     type: `events`,
-  })
+  });
 
   const pagesOfGuidesData = await getPagesOfGuidesData(client);
 

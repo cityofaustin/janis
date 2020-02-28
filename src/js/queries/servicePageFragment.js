@@ -4,16 +4,10 @@ const servicePageFragment = `
   fragment servicePageInfo on ServicePageNode {
     id
     title
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
     steps
     dynamicContent

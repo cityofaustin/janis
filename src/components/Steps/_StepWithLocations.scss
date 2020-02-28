@@ -1,6 +1,11 @@
 .coa-StepWithLocations__container {
   flex-grow: 1;
   flex-shrink: 1;
+  flex-basis: 0;
+
+  p {
+    margin-top: 0;
+  }
 }
 
 .coa-StepWithLocations__location {
@@ -43,18 +48,19 @@
 .coa-StepWithLocations__location-title {
   margin: 0;
   font-size: 1.6rem;
+  line-height: 2rem;
   font-weight: 600;
   color: #2d2e2f;
+  margin-bottom: 0.8rem;
 }
 
 .coa-StepWithLocations__location-address {
   margin: 0;
   font-size: 1.4rem;
-  line-height: 1.4rem;
+  line-height: 1.8rem;
   color: #3d4551;
 }
 
 .coa-StepWithLocations__location-arrow {
-  margin-top: 1rem;
   color: #0049c7;
 }
