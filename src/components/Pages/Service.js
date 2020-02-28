@@ -29,7 +29,6 @@ const Service = ({ service, intl }) => {
       contacts,
       related,
       shortDescription,
-      relatedDepartments,
       coaGlobal,
       contextualNavData,
       pageIsPartOf,
