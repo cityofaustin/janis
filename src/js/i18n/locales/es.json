@@ -116,6 +116,7 @@
   "locations.gettingHere": "Cómo llegar",
   "locations.busesServicing": "Autobuses del área",
   "locations.closed": "Cerrado",
+  "locations.locationInformation": "Localización",
   "userFeedback.didYouFind": "¿Encontró lo que estaba buscando en esta página?",
   "userFeedback.yes": "Sí",
   "userFeedback.no": "No",
@@ -132,5 +133,8 @@
   "events.public": "Abierto al público",
   "events.details": "Detalles",
   "events.allEvents": "Todos los eventos",
-  "events.getDirections": "Obtener direcciones"
+  "events.getDirections": "Obtener direcciones",
+  "events.events": "Eventos",
+  "events.registrationReq": "Registración requerido",
+  "events.noon": "Mediodía"
 }

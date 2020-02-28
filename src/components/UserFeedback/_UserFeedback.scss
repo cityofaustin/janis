@@ -1,13 +1,6 @@
 $loader-dotsize: 6px; /* Specifies the size WxH of each dot in the sending animation */
 
 .coa-UserFeedback {
-  padding: $coa-spacing-large $coa-spacing-medium;
-  max-width: $coa-wrapper-maxwidth;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.coa-UserFeedback {
   p {
     padding: 20px;
     margin: 0;
@@ -18,7 +11,7 @@ $loader-dotsize: 6px; /* Specifies the size WxH of each dot in the sending anima
 }
 
 .coa-UserFeedback__form {
-  background: $coa-color-grey;
+  background: #f7f7f7;
   text-align: center;
   padding: 20px;
   @media screen and (min-width: 768px) {
@@ -97,7 +90,7 @@ button {
     font-size: 14px;
     position: relative;
     color: #fff;
-    background: #0050D8;
+    background: #0050d8;
     text-align: center;
     border: 1px solid #2f54f2;
     @media screen and (min-width: 768px) {
@@ -257,7 +250,7 @@ textarea#userfeedback-textarea {
 
 .coa-UserFeedback__error {
   span {
-    color:#D63E04;
+    color: #d63e04;
   }
   p {
     padding: 16px 0 0 0;

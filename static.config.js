@@ -3,6 +3,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 import filesize from 'filesize';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 // TODO: clean these up/remove them
 import allThemesQuery from 'js/queries/allThemesQuery';
@@ -33,6 +34,8 @@ import {
   cleanDepartmentDirectors,
   cleanLocationPage,
   getOfferedByFromDepartments,
+  getEventPageUrl,
+  formatFeesRange,
 } from 'js/helpers/cleanData';
 
 const getAllTopicLinks = (
@@ -567,6 +570,32 @@ const getEventPageData = async (id, client) => {
   return { eventPage: eventPage };
 };
 
+const getAllEvents = async client => {
+  const date_now = moment()
+    .tz('America/Chicago')
+    .format('YYYY-MM-DD');
+  const { allEventPages } = await client.request(getEventPageQuery, {
+    date_Gte: date_now,
+  });
+
+  const events = allEventPages.edges.map(edge => ({
+    title: edge.node.title,
+    description: edge.node.description,
+    canceled: edge.node.canceled,
+    date: edge.node.date,
+    startTime: edge.node.startTime,
+    endTime: edge.node.endTime,
+    eventUrl: getEventPageUrl(edge.node.slug, edge.node.date),
+    feesRange: formatFeesRange(edge.node.fees),
+    // until we have support for multiple locations, we're taking the first one
+    location: edge.node.locations[0],
+    eventIsFree: edge.node.eventIsFree,
+    registrationUrl: edge.node.registrationUrl,
+  }));
+
+  return { events: events };
+};
+
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const {
     url,
@@ -715,6 +744,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       getData: () => getEventPageData(id, client),
     };
   }
+
+  // If we are the list of all events
+  if (type === 'events') {
+    return {
+      path: url,
+      template: 'src/components/Pages/EventList',
+      getData: () => getAllEvents(client),
+    };
+  }
 };
 
 const getPagesOfGuidesData = async client => {
@@ -738,18 +776,53 @@ const getPagesOfGuidesData = async client => {
           guidePage.node.slug,
         ].join('/');
       guidePage.node.sections.map(section => {
-        for (const page in section.pages[0]) {
-          if (section.pages[0][page]) {
-            if (!pagesOfGuidesData[page]) pagesOfGuidesData[page] = {};
-            if (!pagesOfGuidesData[page][section.pages[0][page].id])
-              pagesOfGuidesData[page][section.pages[0][page].id] = [];
-            pagesOfGuidesData[page][section.pages[0][page].id].push({
-              pageName: section.heading,
-              pageType: section.pages[0][page].pageType,
-              ofPageType: guidePage.node.pageType,
-              guidePageTitle: guidePage.node.title,
-              guidePageUrl: url,
-            });
+        // Example section object
+        /*
+
+        {
+          heading: 'Learn and prepare',
+          pages: [
+            { servicePage: null, informationPage: [Object] },
+            { servicePage: null, informationPage: [Object] },
+            { servicePage: [Object], informationPage: null },
+            { servicePage: [Object], informationPage: null },
+            { servicePage: null, informationPage: [Object] }
+          ]
+        }
+
+        */
+        for (const pageType of ['servicePage', 'informationPage']) {
+          if (!pagesOfGuidesData[pageType]) {
+            pagesOfGuidesData[pageType] = {};
+          }
+
+          for (const pageEntry of section.pages) {
+            const page = pageEntry[pageType];
+
+            // Example page object
+            /*
+
+            {
+              id: 'SW5mb3JtYXRpb25QYWdlTm9kZToyNTc=',
+              pageType: 'information page',
+              title: 'Documents for mobile food vendors in Austin'
+            }
+
+            */
+
+            if (page) {
+              if (!pagesOfGuidesData[pageType][page.id]) {
+                pagesOfGuidesData[pageType][page.id] = [];
+              }
+
+              pagesOfGuidesData[pageType][page.id].push({
+                pageName: page.title,
+                pageType: page.pageType,
+                ofPageType: guidePage.node.pageType,
+                guidePageTitle: guidePage.node.title,
+                guidePageUrl: url,
+              });
+            }
           }
         }
       });
@@ -805,6 +878,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   parsedStructure.push({
     url: `/departments/`,
     type: `departments`,
+  });
+
+  parsedStructure.push({
+    url: `/events/`,
+    type: `events`,
   });
 
   const pagesOfGuidesData = await getPagesOfGuidesData(client);
@@ -901,10 +979,10 @@ export default {
     }
 
     const routes = [
-      {
-        path: '/search',
-        template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
-      },
+      // {
+      //   path: '/search',
+      //   template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+      // },
       {
         path: '404',
         template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
