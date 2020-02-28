@@ -7,16 +7,10 @@ const getInformationPageQuery = `
           title
           slug
           coaGlobal
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
-                }
-              }
-            }
+          departments {
+            id
+            title
+            slug
           }
           description
           options

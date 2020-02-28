@@ -26,7 +26,7 @@ import {
   cleanFormContainersForPreview,
   cleanGuideForPreview,
   cleanLocationPage,
-  getOfferedByFromRelatedDepartments,
+  getOfferedByFromDepartments,
 } from 'js/helpers/cleanData';
 
 import Service from 'components/Pages/Service';
@@ -264,8 +264,8 @@ class CMSPreview extends Component {
           path="/event"
           render={props => {
             let eventPage = data.edges[0].node;
-            eventPage.offeredBy = getOfferedByFromRelatedDepartments(
-              eventPage.relatedDepartments,
+            eventPage.offeredBy = getOfferedByFromDepartments(
+              eventPage.departments,
             );
 
             return <EventPage eventPage={eventPage} />;
