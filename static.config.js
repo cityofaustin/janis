@@ -560,9 +560,7 @@ const getEventPageData = async (id, client) => {
   let eventPage = allEventPages.edges[0].node;
 
   // Fill in some contextual nav info
-  eventPage.offeredBy = getOfferedByFromRelatedDepartments(
-    eventPage.relatedDepartments,
-  );
+  eventPage.offeredBy = getOfferedByFromDepartments(eventPage.departments);
 
   // reverse the order of the fees
   // eventPage.fees.edges.reverse();
