@@ -749,13 +749,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: url,
       template: 'src/components/Pages/EventList',
-<<<<<<< HEAD
       getData: () => getAllEvents(client, false)
     }
-=======
-      getData: () => getAllEvents(client),
-    };
->>>>>>> master
   }
 };
 
