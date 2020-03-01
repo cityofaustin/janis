@@ -66,6 +66,9 @@
   color: #171717;
   @include media($coa-medium-screen) {
     line-height: 78px;
+    font-size: 32px;
+  }
+  @include media($coa-large-screen) {
     font-size: 40px;
   }
 }
