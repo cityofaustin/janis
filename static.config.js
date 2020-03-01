@@ -1007,4 +1007,5 @@ export default {
     return config;
   },
   plugins: ['react-static-plugin-react-router'],
+  prefetchRate: 4,
 };
