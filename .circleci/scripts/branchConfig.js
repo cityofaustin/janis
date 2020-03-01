@@ -37,6 +37,9 @@ const branchOverrides = {
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
   },
+  '3690-incremental': {
+    CMS_API: 'https://joplin-pr-3690-incremental.herokuapp.com/api/graphql'
+  }
 };
 
 module.exports = {
