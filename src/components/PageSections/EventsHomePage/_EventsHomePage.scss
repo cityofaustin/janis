@@ -17,7 +17,7 @@
 }
 
 .coa-EventsHomePage__events {
-  @include media($coa-medium-screen) {
+  @include media($coa-large-screen) {
     display: flex;
     flex-direction: row;
   }
@@ -30,6 +30,7 @@
   display: block;
   margin: auto;
   margin-top: 10px;
+  padding-top: 10px;
   @include media($coa-medium-screen) {
     width: 260px;
     height: 48px;

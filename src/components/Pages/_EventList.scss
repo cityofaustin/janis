@@ -15,9 +15,10 @@
 }
 
 .coa-EventListPage__Entry--homepage {
-  width: 364px;
-  @include media($coa-medium-screen) {
+  max-width: 760px;
+  @include media($coa-large-screen) {
     border-bottom: 0;
+    width: 356px;
   }
 }
 
@@ -87,14 +88,14 @@
 
 .coa-EventListPage__EntryDetails {
   margin-left: 24px;
-  width: 233px;
+  min-width: 189px;
   @include media($coa-medium-screen){
     width: 637px;
   }
 }
 
 .coa-EventListPage__EntryDetails--homepage {
-  @include media($coa-medium-screen){
+  @include media($coa-large-screen){
     max-width: 250px;
   }
 }
