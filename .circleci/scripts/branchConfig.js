@@ -21,6 +21,7 @@ const defaultValues = {
   CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
   CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
   CMS_DOCS: 'multiple',
+  REACT_STATIC_PREFETCH_RATE: 0, // Don't do prefetching by default
 };
 
 // Add branch-specifc values here
@@ -38,7 +39,8 @@ const branchOverrides = {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
   },
   '3690-incremental': {
-    CMS_API: 'https://joplin-pr-3690-incremental.herokuapp.com/api/graphql'
+    CMS_API: 'https://joplin-pr-3690-incremental.herokuapp.com/api/graphql',
+    REACT_STATIC_PREFETCH_RATE: 10,
   }
 };
 

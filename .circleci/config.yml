@@ -12,6 +12,17 @@ jobs:
       - run:
           name: "Triggering netlify build"
           command: node ./.circleci/scripts/buildNetlifySite.js
+  deploy-publisher-v2:
+    docker:
+      - image: cityofaustin/janis-ci-deploy:d456c15
+    steps:
+      - checkout
+      - run:
+          name: "Print App Environment Variables"
+          command: bash ./.circleci/scripts/print_vars.sh
+      - run:
+          name: "Triggering netlify build"
+          command: node ./.circleci/scripts/buildNetlifySite.js
 
 workflows:
   version: 2.1
@@ -23,3 +34,4 @@ workflows:
               ignore:
                 - master
                 - production
+      - deploy-publisher-v2
