@@ -22,7 +22,7 @@ jobs:
           command: bash ./.circleci/scripts/print_vars.sh
       - run:
           name: "Triggering netlify build"
-          command: node ./.circleci/scripts/buildNetlifySite.js
+          command: node ./.circleci/scripts/buildPublisherV2.js
 
 workflows:
   version: 2.1
