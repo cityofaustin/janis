@@ -21,7 +21,7 @@ jobs:
           name: "Print App Environment Variables"
           command: bash ./.circleci/scripts/print_vars.sh
       - run:
-          name: "Triggering netlify build"
+          name: "Triggering publisher v2 build"
           command: node ./.circleci/scripts/buildPublisherV2.js
 
 workflows:

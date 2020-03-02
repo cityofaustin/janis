@@ -21,7 +21,7 @@ const payload = {
 };
 
 let apiKey, publisherUrl;
-switch(branch):
+switch(branch) {
   case "master":
     apiKey = process.env.COA_PUBLISHER_V2_API_KEY_STAGING
     publisherUrl = process.env.CI_COA_PUBLISHER_V2_URL_STAGING
@@ -33,6 +33,7 @@ switch(branch):
   default:
     apiKey = process.env.COA_PUBLISHER_V2_API_KEY_PR
     publisherUrl = process.env.CI_COA_PUBLISHER_V2_URL_PR
+}
 
 const headers = {
   'Content-Type': 'application/json',
