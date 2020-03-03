@@ -44,7 +44,7 @@ return axios.post(publisherUrl, payload, {"headers": headers})
 .then((res) => {
   console.log("Success")
   console.log("New build instructions sent to coa-publisher v2")
-  console.log(res)
+  console.log(res.data)
   process.exit(0)
 })
 .catch((error) => {
