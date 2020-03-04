@@ -79,7 +79,7 @@ export const basicData = () => ({
     "filename": "austincoverphoto.jpg",
     "title": "Aerial photo of the Austin skyline looking over from Town Lake"
   },
-  "relatedDepartments": {
+  "departments": {
     "edges": [
       {
         "node": {
