@@ -14,6 +14,14 @@
   }
 }
 
+.coa-EventListPage__Entry--homepage {
+  max-width: 760px;
+  @include media($coa-large-screen) {
+    border-bottom: 0;
+    width: 356px;
+  }
+}
+
 .coa-EventListPage__DateCal {
   width: 71px;
   height: 80px;
@@ -23,6 +31,17 @@
     width: 88px;
   }
 }
+
+.coa-EventListPage__DateCal--homepage {
+  width: 71px;
+  height: 80px;
+  background-color: #F7F9FA;
+  @include media($coa-medium-screen) {
+    height: 112px;
+    width: 88px;
+  }
+}
+
 
 .coa-EventListPage__DateCal-month {
   background-color: #F1F3F6;
@@ -47,6 +66,9 @@
   color: #171717;
   @include media($coa-medium-screen) {
     line-height: 78px;
+    font-size: 32px;
+  }
+  @include media($coa-large-screen) {
     font-size: 40px;
   }
 }
@@ -66,11 +88,18 @@
     font-size: 10px;
   }
 }
+
 .coa-EventListPage__EntryDetails {
   margin-left: 24px;
-  width: 233px;
+  min-width: 189px;
   @include media($coa-medium-screen){
     width: 637px;
+  }
+}
+
+.coa-EventListPage__EntryDetails--homepage {
+  @include media($coa-large-screen){
+    max-width: 250px;
   }
 }
 
