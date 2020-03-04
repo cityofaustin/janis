@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { formatTimeLang } from 'js/helpers/cleanData';
@@ -36,7 +37,7 @@ const EventDateCalendar = ({date}) => {
 }
 
 
-const EventDateListDetails = ({ event }) => {
+const EventDateListDetails = ({ event, homepage }) => {
   const intl = useIntl();
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -74,7 +75,9 @@ const EventDateListDetails = ({ event }) => {
   }
 
   return (
-    <div className="coa-EventListPage__EntryDetails"> 
+    <div
+      className={classNames('coa-EventListPage__EntryDetails', 
+          {'coa-EventListPage__EntryDetails--homepage': homepage} )}> 
       { 
         canceled 
         && <div className="coa-EventListPage__Canceled">
@@ -89,11 +92,14 @@ const EventDateListDetails = ({ event }) => {
   )
 }
 
-const EventListEntry = ({event}) => {
+const EventListEntry = ({ event, homepage }) => {
   return (
-    <Link to={event.eventUrl} className="coa-EventListPage__Entry">
+    <Link
+      to={event.eventUrl}
+      className={classNames('coa-EventListPage__Entry', {'coa-EventListPage__Entry--homepage': homepage})}
+    >
       <EventDateCalendar date={event.date} />
-      <EventDateListDetails event={event}/>
+      <EventDateListDetails event={event} homepage={homepage}/>
     </Link>
   )
 }

@@ -568,13 +568,12 @@ const getEventPageData = async (id, client) => {
   return { eventPage: eventPage };
 };
 
-const getAllEvents = async client => {
+const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
     .tz('America/Chicago')
     .format('YYYY-MM-DD');
-  const { allEventPages } = await client.request(getEventPageQuery, {
-    date_Gte: date_now,
-  });
+  const gqlVariables = hideCanceled ? { date_Gte: date_now, canceled: false } : { date_Gte: date_now };
+  const {allEventPages} = await client.request(getEventPageQuery, gqlVariables)
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
@@ -748,8 +747,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: url,
       template: 'src/components/Pages/EventList',
-      getData: () => getAllEvents(client),
-    };
+      getData: () => getAllEvents(client, false)
+    }
   }
 };
 
@@ -911,12 +910,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
         title: s.title,
       }));
 
+      const allActiveEvents = await getAllEvents(client, true);
+
       return {
         topServices,
         image: {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
+        events: allActiveEvents.events,
       };
     },
   };

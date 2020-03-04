@@ -1,0 +1,56 @@
+.coa-EventsHomePage__container {
+  padding: $coa-spacing-large $coa-spacing-medium;
+  max-width: $coa-wrapper-maxwidth;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #ffffff;
+}
+
+.coa-EventsHomePage__heading {
+  font-size: 32px;
+  color: #171717;
+  font-weight: 500;
+  margin-bottom: 30px;
+  @include media($coa-medium-screen) {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.coa-EventsHomePage__events {
+  @include media($coa-large-screen) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.coa-EventsHomePage__allEventsButton {
+  width: 280px;
+  height: 48px;
+  text-decoration: none;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  padding-top: 10px;
+  @include media($coa-medium-screen) {
+    width: 260px;
+    height: 48px;
+    margin: unset;
+  }
+}
+
+.coa-EventsHomePage__allEventsButton--inner {
+  font-size: 16px;
+  color: #FFFFFF;
+  padding-top: 14px;
+  line-height: 20px;
+  width: 280px;
+  height: 48px;
+  background-color: #0050D8;
+  border-radius: 4px;
+  text-align: center;
+  @include media($coa-medium-screen) {
+    width: 260px;
+    height: 48px;
+  }
+}

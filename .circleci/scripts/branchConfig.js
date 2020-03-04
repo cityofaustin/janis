@@ -31,9 +31,6 @@ const branchOverrides = {
   "3202-form": {
     CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
   },
-  '3219-en-dash-contacts': {
-    CMS_API: 'https://joplin-pr-3163-guide-pages.herokuapp.com/api/graphql'
-  },
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
   },

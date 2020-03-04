@@ -527,4 +527,6 @@ export const events = defineMessages({
   events: 'Events',
   registrationReq: 'Registration required',
   noon: 'Noon',
+  upcoming: "Upcoming events",
+  viewAll: "View all events"
 });
