@@ -109,16 +109,10 @@ const guidePageFragment = `
               }
             }
           }
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
-                }
-              }
-            }
+          departments {
+            id
+            title
+            slug
           }
         }
         informationPage {
@@ -150,17 +144,6 @@ const guidePageFragment = `
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
                 }
               }
             }
