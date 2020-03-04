@@ -904,7 +904,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           index === services.findIndex(s => s.id === service.id),
       );
 
-      // bookmark
       const topServices = services.map(s => ({
         type: !!langCode ? langCode : 'en',
         url: s.url,
