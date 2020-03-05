@@ -20,20 +20,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import RowContainer from 'components/ErrorMessages/RowContainer';
 
 function FormContainer({
-  formContainer: {
-    title,
-    slug,
-    topic,
-    topics,
-    theme,
-    department,
-    relatedDepartments,
-    toplink,
-    description,
-    formUrl,
-    coaGlobal,
-    contextualNavData,
-  },
+  formContainer: { title, description, formUrl, coaGlobal, contextualNavData },
   intl,
 }) {
   const iframeRef = useRef(null);
@@ -47,27 +34,27 @@ function FormContainer({
         document.getElementById('coa-FormContainer__top').scrollIntoView(true);
       } else {
         iframeLoaded = true;
-        loader.end()
+        loader.end();
       }
     }
-  }
+  };
 
-  setTimeout(function(){
+  setTimeout(function() {
     /* We're allowing 5 sec here to give slow connections time before alerting
     the user that the form may be having problems loading.*/
     if (!iframeLoaded) {
-      loader.endError()
+      loader.endError();
     }
-  },5000)
+  }, 5000);
 
   useEffect(() => {
     loader.start({
       contentId: 'coa-iFrameForm',
       loaderId: 'coa-loadingWheel',
       errorId: 'coa-LockedIframeRequestMessage',
-      style: "popup"
-    })
-  }, []) // By having the second argument as an empty string, it will act as "ComponentDidMount" and execute once the component's elements have been added to the dom.
+      style: 'popup',
+    });
+  }, []); // By having the second argument as an empty string, it will act as "ComponentDidMount" and execute once the component's elements have been added to the dom.
 
   return (
     <div>
@@ -86,8 +73,8 @@ function FormContainer({
           {title}
         </PageHeader>
 
-        <div id="coa-loadingWheel"></div>
-        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage}/>
+        <div id="coa-loadingWheel" />
+        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage} />
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -117,7 +104,7 @@ function FormContainer({
   );
 }
 
-const ErrorMessage = ({formUrl}) => {
+const ErrorMessage = ({ formUrl }) => {
   return (
     <div>
       <h2>We are still waiting for your form to load.</h2>
@@ -126,16 +113,19 @@ const ErrorMessage = ({formUrl}) => {
 
       <p>
         &bull; A plugin could be blocking the form (example: "Privacy Badger")
-        <br/>
+        <br />
         &bull; It may have failed to load ("404 error")
       </p>
-      <br/>
+      <br />
 
       <h3>Visit the form directly</h3>
 
-      <a href={formUrl} target="_blank"> <p>{formUrl}</p> </a>
+      <a href={formUrl} target="_blank">
+        {' '}
+        <p>{formUrl}</p>{' '}
+      </a>
     </div>
-  )
-}
+  );
+};
 
 export default withRouteData(injectIntl(FormContainer));

@@ -27,7 +27,6 @@ const InformationPage = ({ informationPage, intl }) => {
       topics,
       theme,
       department,
-      relatedDepartments,
       toplink,
       description,
       additionalContent,
