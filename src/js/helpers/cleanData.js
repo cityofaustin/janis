@@ -7,7 +7,7 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
 
-export const formatTime = (time) => {
+export const formatTime = time => {
   if (time === '12:00:00') {
     return 'Noon';
   }
@@ -31,7 +31,7 @@ export const formatTimeLang = (time, noon) => {
   const style = momentTime.minutes() ? 'h:mm a' : 'h a';
 
   return momentTime.format(style);
-}
+};
 
 // Used for location page hours
 // example
@@ -287,12 +287,18 @@ export const cleanLinks = (links, pageType) => {
     return cleanedLinks;
   }
 
+  // The only things that makes it past this point
+  // should be the top services for the home page
   for (const edge of links.edges) {
     const link = edge.node;
 
     // Check for global
     if (link.coaGlobal) {
       link.text = link.title;
+
+      // If we end up with a global page as a top service on the home page
+      // this makes sure it doesn't cause the build to break
+      link.url = `/${link.slug}`;
 
       // There's only one URL for these so we can push the link without copying it
       cleanedLinks.push(link);
@@ -333,19 +339,17 @@ export const cleanLinks = (links, pageType) => {
     }
 
     // If it's under any departments make sure it's there
-    if (link.relatedDepartments && link.relatedDepartments.edges.length) {
-      for (const edge of link.relatedDepartments.edges) {
-        const { relatedDepartment } = edge.node;
-
+    if (link.departments && link.departments.length) {
+      for (const department of link.departments) {
         // We need to make copies here so we actually have multiple urls
         let linkCopy = JSON.parse(JSON.stringify(link));
 
-        pathPrefix = `/${relatedDepartment.slug}`;
+        pathPrefix = `/${department.slug}`;
         linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
         linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
         linkCopy.text = link.title;
 
-        linkCopy.department = relatedDepartment;
+        linkCopy.department = department;
 
         cleanedLinks.push(linkCopy);
       }
@@ -481,8 +485,8 @@ export const cleanDepartmentTopServiceLink = (topService, langCode) => {
     }
 
     // If we have a department let's make our URL from it
-    if (page.relatedDepartments && page.relatedDepartments.edges.length) {
-      const dept = page.relatedDepartments.edges[0].node.relatedDepartment;
+    if (page.departments && page.departments.length) {
+      const dept = departments[0];
 
       return {
         title: page.title,
@@ -493,35 +497,22 @@ export const cleanDepartmentTopServiceLink = (topService, langCode) => {
   }
 };
 
-export const cleanDepartmentTopServices = (topServicePages, langCode) => {
-  if (!topServicePages || !topServicePages.edges) return null;
+export const cleanDepartmentPageLinks = (
+  departmentPageLinks,
+  departmentSlug,
+) => {
+  const cleanedLinks = departmentPageLinks
+    ? departmentPageLinks.edges.map(edge => ({
+        id: edge.node.pageId,
+        title: edge.node.title,
+        url: `/${departmentSlug}/${edge.node.slug}/`,
+      }))
+    : [];
 
-  return topServicePages.edges
-    .map(({ node: topService }) => {
-      let cleaned = cleanDepartmentTopServiceLink(topService, langCode);
-
-      return cleaned;
-    })
-    .filter(x => typeof x !== 'undefined');
+  return cleanedLinks;
 };
 
-export const cleanDepartmentTopServiceIds = topServicePages => {
-  if (!topServicePages || !topServicePages.edges) return null;
-
-  return topServicePages.edges
-    .map(({ node: topService }) => {
-      const page =
-        topService.servicePage ||
-        topService.guidePage ||
-        topService.informationPage ||
-        topService.officialDocumentPage;
-
-      if (page) return page.id;
-    })
-    .filter(x => typeof x !== 'undefined');
-};
-
-export const cleanDepartments = (allDepartments, langCode) => {
+export const cleanDepartmentsForPreview = (allDepartments, langCode) => {
   if (!allDepartments || !allDepartments.edges) return null;
 
   return allDepartments.edges.map(({ node: department }) => {
@@ -531,18 +522,13 @@ export const cleanDepartments = (allDepartments, langCode) => {
     department.directors = cleanDepartmentDirectors(
       department.departmentDirectors,
     );
-    department.topServices = department.topPages;
-    department.topServices = cleanDepartmentTopServices(
+    department.topServices = cleanDepartmentPageLinks(
       department.topPages,
-      langCode,
+      department.slug,
     );
-    department.relatedLinks = department.relatedPages;
-    department.relatedLinks = cleanDepartmentTopServices(
+    department.relatedLinks = cleanDepartmentPageLinks(
       department.relatedPages,
-      langCode,
-    );
-    department.topServiceIds = cleanDepartmentTopServiceIds(
-      department.topServicePages,
+      department.slug,
     );
 
     return department;
@@ -572,7 +558,7 @@ export const cleanTopics = allTopics => {
   return cleanedTopics;
 };
 
-export const cleanTopicCollections = allTopicCollections => {
+export const cleanTopicCollectionsForPreview = allTopicCollections => {
   if (!allTopicCollections || !allTopicCollections.edges) return null;
 
   let cleanedTopicCollections = cleanLinks(
@@ -665,39 +651,6 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-export const cleanOfficialDocumentPages = async allOfficialDocumentPages => {
-  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
-
-  let cleanedOfficialDocumentPages = cleanLinks(
-    allOfficialDocumentPages,
-    'official_document',
-  );
-
-  for (let page of cleanedOfficialDocumentPages) {
-    if (!page.officialDocuments.edges) continue;
-    for (let doc of page.officialDocuments.edges) {
-      // If we have a document in wagtail
-      // use that info to update the information syncronously
-      if (doc.node.document) {
-        doc.node.link = await getWorkingDocumentLink(
-          doc.node.document.filename,
-        );
-
-        // Maybe there's a better way to handle this but meh for now
-        // If it's a pdf, add the size
-        if (doc.node.document.filename.slice(-3) === 'pdf') {
-          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
-            ' ',
-            '',
-          );
-        }
-      }
-    }
-  }
-
-  return cleanedOfficialDocumentPages;
-};
-
 export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
@@ -715,18 +668,6 @@ export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => 
       return officialDocumentPage;
     },
   );
-};
-
-export const cleanGuidePages = allGuidePages => {
-  if (!allGuidePages || !allGuidePages.edges) return null;
-  let cleanedGuidePages = cleanLinks(allGuidePages, 'guide');
-
-  return cleanedGuidePages;
-};
-
-export const cleanFormContainers = allFormContainers => {
-  if (!allFormContainers || !allFormContainers.edges) return null;
-  return cleanLinks(allFormContainers, 'form');
 };
 
 // Let's just do this for now, we'll probably need to make some changes
@@ -765,21 +706,20 @@ export const getEventPageUrl = (slug, date) => {
   let day = moment(date, 'YYYY-MM-DD').format('D');
   // use moment to get the date
   // function to format the event's page url, used in the Event List
-  let eventUrl = `/event/${year}/${month}/${day}/${slug}/`
+  let eventUrl = `/event/${year}/${month}/${day}/${slug}/`;
 
   return eventUrl;
-}
+};
 
 export const formatFeesRange = fees => {
   // on the Event List View, show a range of fees, from the least to the most
   if (fees.edges && fees.edges.length) {
     if (fees.edges.length === 1) {
-      return `$${fees.edges[0].node.fee}`
+      return `$${fees.edges[0].node.fee}`;
     }
     let feesArray = [];
-    fees.edges.map(f=> feesArray.push(f.node.fee))
-    return `$${Math.min(...feesArray)}–$${Math.max(...feesArray)}`
+    fees.edges.map(f => feesArray.push(f.node.fee));
+    return `$${Math.min(...feesArray)}–$${Math.max(...feesArray)}`;
   }
-  return ''
-}
-
+  return '';
+};
