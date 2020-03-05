@@ -32,6 +32,7 @@ import {
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
+  cleanDepartmentPageLinks,
   cleanLocationPage,
   getOfferedByFromDepartments,
   getEventPageUrl,
