@@ -31,16 +31,10 @@ const officialDocumentPageFragment = `
         }
       }
     }
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
     officialDocuments(orderBy: "-date") {
       edges {

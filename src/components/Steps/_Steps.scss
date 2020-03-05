@@ -59,6 +59,10 @@
           margin-bottom: 0;
         }
 
+        @include mobile {
+          margin-bottom: 1.6rem;
+        }
+
         // @include media($coa-large-screen) {
         //   font-size: $coa-font-size-md-small;
         //   line-height: $coa-line-height-md-small;
@@ -105,7 +109,6 @@
       padding-left: $coa-spacing-xsmall;
       padding-top: $coa-spacing-xsmall;
       list-style-type: disc;
-      width: 100%;
 
       //TODO: adjust styles below when nested lists are not formatted within paragraphs
       p {

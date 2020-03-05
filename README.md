@@ -32,7 +32,7 @@ Once Docker is installed and you've cloned the code from this repository, you ca
 yarn start-local
 ```
 
-Your react app should be running at http://localhost:3000/ and pointing to your local Joplin backend. To run against staging Joplin, use `yarn start-staging`.
+Your react app should be running at http://localhost:3000/ and pointing to your local Joplin backend. To run against staging Joplin, use `yarn start-staging` or `yarn start-joplin-staging`.
 
 **As a static build**
 To run the site locally as a static build, the way it works in production, see the [Static build script](#static-build-script) section below.
@@ -82,7 +82,7 @@ This project uses [React-Static](https://github.com/nozzle/react-static) as a ba
 
 ### 🌍 React-Intl
 
-This project uses [React-Intl](https://github.com/yahoo/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
+This project uses [React-Intl](https://github.com/formatjs/react-intl/) to format dates and numbers and handle translations of static content. Some details of our current implementation to be aware of follow:
 
 * the formatMessage() react-intl API method will return unescaped HTML. We can utilize this method, alongside the dangerouslySetInnerHTML property available to React elements, to render translations of **trusted content** which include HTML. Note translated content cannot include React Components (see note below for rendering React Components with translations). Also note that the corresponding FormattedMessage Component will NOT return unescaped HTML.
 ```
@@ -128,8 +128,6 @@ This plugin will *NOT* remove previously defined translations which are no longe
 ### 📚 Storybook
 
 * Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
-* To see our Storybook components:
-  * visit [alpha.austin.gov/storybook/](https://alpha.austin.gov/storybook/)
 * To run Storybooks locally (on host):
   * `yarn storybook`
   * open http://localhost:5000/

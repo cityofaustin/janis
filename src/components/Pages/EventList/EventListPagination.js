@@ -8,18 +8,16 @@ import { buildPages, buildPagination } from 'js/helpers/pagination.js'
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
-import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument'
-import UserFeedback from 'components/UserFeedback';
+import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import { PageNumber } from 'components/PageSections/Pagination'
 
-const OfficialDocumentPage = ({ officialDocuments, intl }) => {
-
-  const documentsPerPage = 10
+const EventListPagination = ({ events, intl }) => {
+  const eventsPerPage = 10
   const isMobile = useMobileQuery()
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
-  const pages = buildPages(officialDocuments.edges, documentsPerPage)
+  const pages = buildPages(events, eventsPerPage)
   const [ pageNumber, setPageNumber ] = useState(getHash())
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
   const page = pages[pageNumber]
@@ -39,7 +37,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
         scrollDuration: 0.75, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         element: domWindow,
-        fadeElement: officialDocumentsPage,
+        fadeElement: EventListsPage,
         callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       })
     }
@@ -53,20 +51,20 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
 
   return (
     <div>
-      <div id="officialDocumentsPage" className="wrapper container-fluid">
+      <div id="EventListsPage" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
-            {page && page.map((document, index) => (
-              <OfficialDocument document={document.node} key={index} />
+            {page && page.map((event, index) => (
+              <EventListEntry event={event} key={index} />
             ))}
           </div>
 
           {shownPages.length > 1 &&
-            <div className="coa-OfficialDocumentPage_pagination-container">
+            <div className="coa-EventListPage_pagination-container">
 
-              <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page previous">
-                <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+              <div onClick={()=>changePage(pageNumber-1)} className="coa-EventListPage_page previous">
+                <ChevronLeftBlue className="coa-EventListPage_page-chevron" />
               </div>
 
               {pages && shownPages.map((page, i) => (
@@ -76,22 +74,20 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
                   paginationIndex={i}
                   pageNumberIndex={shownPages.indexOf(pageNumber+1)}
                   changePage={changePage}
-                  contentType={"OfficialDocumentPage"}
+                  contentType={"EventListPage"}
                 />
               ))}
 
-              <div onClick={()=>changePage(pageNumber+1)} className="coa-OfficialDocumentPage_page next">
-                <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right"/>
+              <div onClick={()=>changePage(pageNumber+1)} className="coa-EventListPage_page next">
+                <ChevronRightBlue className="coa-EventListPage_page-chevron right"/>
               </div>
             </div>
           }
 
         </div>
-        <UserFeedback />
       </div>
     </div>
   )
-
 }
 
-export default OfficialDocumentPage
+export default EventListPagination

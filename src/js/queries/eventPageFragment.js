@@ -31,19 +31,14 @@ const eventPageFragment = `
     date
     startTime
     endTime
+    slug
     contact {
       ...contactInfo
     }
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
     locations {
       additionalDetails

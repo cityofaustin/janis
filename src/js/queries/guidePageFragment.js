@@ -40,16 +40,10 @@ const guidePageFragment = `
       filename
       title
     }
-    relatedDepartments {
-      edges {
-        node {
-          relatedDepartment {
-            id
-            title
-            slug
-          }
-        }
-      }
+    departments {
+      id
+      title
+      slug
     }
     topics {
       edges {
@@ -115,16 +109,10 @@ const guidePageFragment = `
               }
             }
           }
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
-                }
-              }
-            }
+          departments {
+            id
+            title
+            slug
           }
         }
         informationPage {
@@ -156,17 +144,6 @@ const guidePageFragment = `
                       }
                     }
                   }
-                }
-              }
-            }
-          }
-          relatedDepartments {
-            edges {
-              node {
-                relatedDepartment {
-                  id
-                  title
-                  slug
                 }
               }
             }

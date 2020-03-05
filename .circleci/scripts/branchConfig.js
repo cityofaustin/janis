@@ -25,17 +25,11 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  "3470-map-address": {
-    CMS_API: "https://joplin-pr-3227-permissions-mvp.herokuapp.com/api/graphql"
-  },
   '1650-react-static-7': {
     CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
   "3202-form": {
     CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
-  },
-  '3219-en-dash-contacts': {
-    CMS_API: 'https://joplin-pr-3163-guide-pages.herokuapp.com/api/graphql'
   },
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
