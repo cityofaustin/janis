@@ -88,7 +88,11 @@ function FormContainer({
         </PageHeader>
 
         <div id="coa-loadingWheel" />
-        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage} />
+        <RowContainer
+          formUrl={formUrl}
+          ErrorMessage={ErrorMessage}
+          intl={intl}
+        />
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -118,26 +122,24 @@ function FormContainer({
   );
 }
 
-const ErrorMessage = ({ formUrl }) => {
+const ErrorMessage = ({ formUrl, intl }) => {
   return (
     <React.Fragment>
       <InfoISVG />
       <div className="coa-FormFallback__content">
         <h2 className="coa-FormFallback__heading">
-          We are still waiting for your form to load
+          {intl.formatMessage(i18n2.formStillWaitingMessage)}
         </h2>
         <a href={formUrl} target="_blank" className="coa-FormFallback__link">
-          Open the form in a new window
+          {intl.formatMessage(i18n2.openFormInNewWindow)}
           <i class="material-icons coa-ExternalLinkMaterial">open_in_new</i>
         </a>
         <h3 className="coa-FormFallback__subheading">
-          Why hasn't it loaded yet?
+          {intl.formatMessage(i18n2.whyFormNotLoaded)}
         </h3>
         <ul className="coa-FormFallback__list">
-          <li>
-            A plugin could be blocking the form (example: "Privacy Badger")
-          </li>
-          <li>It may have failed to load ("404 error")</li>
+          <li>{intl.formatMessage(i18n2.pluginBlockingForm)}</li>
+          <li>{intl.formatMessage(i18n2.formFailedToLoad)}</li>
         </ul>
       </div>
     </React.Fragment>
