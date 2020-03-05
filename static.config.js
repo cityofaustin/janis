@@ -32,6 +32,7 @@ import {
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
+  cleanDepartmentPageLinks,
   cleanLocationPage,
   getOfferedByFromDepartments,
   getEventPageUrl,
@@ -184,21 +185,14 @@ const getDepartmentPageData = async (id, client) => {
   });
 
   let department = allDepartmentPages.edges[0].node;
-  department.topServices = department.topPages
-    ? department.topPages.edges.map(edge => ({
-        id: edge.node.pageId,
-        title: edge.node.title,
-        url: `/${department.slug}/${edge.node.slug}/`,
-      }))
-    : [];
-
-  department.relatedLinks = department.relatedPages
-    ? department.relatedPages.edges.map(edge => ({
-        id: edge.node.pageId,
-        title: edge.node.title,
-        url: `/${department.slug}/${edge.node.slug}/`,
-      }))
-    : [];
+  department.topServices = cleanDepartmentPageLinks(
+    department.topPages,
+    department.slug,
+  );
+  department.relatedLinks = cleanDepartmentPageLinks(
+    department.relatedPages,
+    department.slug,
+  );
 
   // keeping this logic in there for now, stuff is kinda messy
   department.contacts = cleanContacts(department.contacts);
@@ -572,8 +566,13 @@ const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
     .tz('America/Chicago')
     .format('YYYY-MM-DD');
-  const gqlVariables = hideCanceled ? { date_Gte: date_now, canceled: false } : { date_Gte: date_now };
-  const {allEventPages} = await client.request(getEventPageQuery, gqlVariables)
+  const gqlVariables = hideCanceled
+    ? { date_Gte: date_now, canceled: false }
+    : { date_Gte: date_now };
+  const { allEventPages } = await client.request(
+    getEventPageQuery,
+    gqlVariables,
+  );
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
@@ -747,8 +746,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: url,
       template: 'src/components/Pages/EventList',
-      getData: () => getAllEvents(client, false)
-    }
+      getData: () => getAllEvents(client, false),
+    };
   }
 };
 

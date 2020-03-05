@@ -20,8 +20,8 @@ import {
   cleanServicesForPreview,
   cleanInformationForPreview,
   cleanTopicsForPreview,
-  cleanDepartments,
-  cleanTopicCollections,
+  cleanDepartmentsForPreview,
+  cleanTopicCollectionsForPreview,
   cleanOfficialDocumentPagesForPreview,
   cleanFormContainersForPreview,
   cleanGuideForPreview,
@@ -208,7 +208,7 @@ class CMSPreview extends Component {
         <Route
           path="/topiccollection"
           render={props => {
-            let tc = cleanTopicCollections(data)[0];
+            let tc = cleanTopicCollectionsForPreview(data)[0];
             tc.topics = [
               {
                 title: 'Sample Text',
@@ -227,7 +227,7 @@ class CMSPreview extends Component {
         <Route
           path="/department"
           render={props => (
-            <Department department={cleanDepartments(data)[0]} />
+            <Department department={cleanDepartmentsForPreview(data)[0]} />
           )}
         />
         <Route
