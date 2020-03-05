@@ -457,46 +457,6 @@ export const cleanDepartmentDirectors = directors => {
   });
 };
 
-export const cleanDepartmentTopServiceLink = (topService, langCode) => {
-  const page =
-    topService.servicePage ||
-    topService.guidePage ||
-    topService.informationPage ||
-    topService.officialDocumentPage;
-
-  if (page) {
-    // If we have a topic let's make our URL from it
-    if (page.topics && page.topics.edges.length) {
-      const topic = page.topics.edges[0].node.topic;
-
-      if (
-        topic &&
-        topic.topiccollections &&
-        topic.topiccollections.edges.length
-      ) {
-        const tc = topic.topiccollections.edges[0].node.topiccollection;
-
-        return {
-          title: page.title,
-          url: `/${tc.theme.slug}/${tc.slug}/${topic.slug}/${page.slug}`,
-          type: !!langCode ? langCode : 'en',
-        };
-      }
-    }
-
-    // If we have a department let's make our URL from it
-    if (page.departments && page.departments.length) {
-      const dept = departments[0];
-
-      return {
-        title: page.title,
-        url: `/${dept.slug}/${page.slug}`,
-        type: !!langCode ? langCode : 'en',
-      };
-    }
-  }
-};
-
 export const cleanDepartmentPageLinks = (
   departmentPageLinks,
   departmentSlug,
