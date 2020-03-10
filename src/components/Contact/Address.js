@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { getEncodedLocation } from 'js/helpers/location';
-import { events as i18n } from 'js/i18n/definitions';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import { addressPropTypes } from './proptypes';
 
@@ -21,7 +21,6 @@ const Address = ({ location }) => {
       </span>
       <a
         href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
-        className="coa-EventDetailItem__location-directions-link"
         target="_blank"
       >
         {intl.formatMessage(i18n.getDirections)}

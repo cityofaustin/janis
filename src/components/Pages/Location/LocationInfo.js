@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { capitalize } from 'lodash';
 import { useIntl } from 'react-intl';
 import { getEncodedLocation } from 'js/helpers/location';
-import { events as i18n } from 'js/i18n/definitions';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
@@ -12,6 +11,7 @@ import {
   date as i18nDate,
   locations as i18nLocations,
   contact as i18nContact,
+  misc as i18nMisc
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -60,7 +60,7 @@ const LocationPageContact = ({ phone, email }) => {
 const LocationPageAddress = ({ title, address }) => {
   const { street, city, state, zip } = address;
   const intl = useIntl();
-  const encodedLocation = getEncodedLocation({ address });
+  const encodedLocation = getEncodedLocation(address);
   const AddressText = (
     <div>
       <span className="coa-LocationPage__address-line">{street}</span>
@@ -69,10 +69,9 @@ const LocationPageAddress = ({ title, address }) => {
       </span>
       <a
         href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
-        className="coa-EventDetailItem__location-directions-link"
         target="_blank"
       >
-        {intl.formatMessage(i18n.getDirections)}
+        {intl.formatMessage(i18nMisc.getDirections)}
       </a>
     </div>
   );
