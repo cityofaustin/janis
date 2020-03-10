@@ -222,7 +222,9 @@ const getTopicCollectionPageData = async (id, client) => {
           slug: topicCollection.theme.slug,
         },
       },
-      pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+      pages: edge.node.page.topPages.edges
+      .filter(topPageEdge => topPageEdge.node.live)
+      .map(topPageEdge => ({
         pageType: topPageEdge.node.pageType,
         title: topPageEdge.node.title,
         url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
@@ -869,7 +871,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     );
   }
 
-  // We probably have some work to do around the documents page
+  // We probably have some work to do around the departments page
   // but for now let's just add it in here
   parsedStructure.push({
     url: `/departments/`,
@@ -980,11 +982,11 @@ export default {
     const routes = [
       // {
       //   path: '/search',
-      //   template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+      //   template: 'src/components/Pages/Search',
       // },
       {
         path: '404',
-        template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
+        template: 'src/components/Pages/404',
       },
     ];
 

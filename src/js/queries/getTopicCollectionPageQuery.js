@@ -27,6 +27,7 @@ const getTopicCollectionPageQuery = `
             topPages {
               edges {
                 node {
+                  live
                   title
                   slug
                   pageType
