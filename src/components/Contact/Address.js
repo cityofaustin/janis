@@ -20,12 +20,12 @@ const Address = ({ location }) => {
         {location.city}, {location.state} {location.zip}
       </span>
       <a
-          href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
-          className="coa-EventDetailItem__location-directions-link"
-          target="_blank"
-        >
-          {intl.formatMessage(i18n.getDirections)}
-        </a>
+        href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
+        className="coa-EventDetailItem__location-directions-link"
+        target="_blank"
+      >
+        {intl.formatMessage(i18n.getDirections)}
+      </a>
     </div>
   </div>
 )};
