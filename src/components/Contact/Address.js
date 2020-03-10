@@ -11,23 +11,24 @@ const Address = ({ location }) => {
   const encodedLocation = getEncodedLocation(location);
 
   return (
-  <div className="coa-ContactItem coa-ContactAddress">
-    <i className="material-icons">place</i>
-    <div>
-      <span className="coa-ContactAddressTitle">{location.title}</span>
-      <span>{location.street}</span>
-      <span>
-        {location.city}, {location.state} {location.zip}
-      </span>
-      <a
-        href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
-        target="_blank"
-      >
-        {intl.formatMessage(i18n.getDirections)}
-      </a>
+    <div className="coa-ContactItem coa-ContactAddress">
+      <i className="material-icons">place</i>
+      <div>
+        <span className="coa-ContactAddressTitle">{location.title}</span>
+        <span>{location.street}</span>
+        <span>
+          {location.city}, {location.state} {location.zip}
+        </span>
+        <a
+          href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
+          target="_blank"
+        >
+          {intl.formatMessage(i18n.getDirections)}
+        </a>
+      </div>
     </div>
-  </div>
-)};
+  )
+};
 
 Address.propTypes = {
   location: addressPropTypes,
