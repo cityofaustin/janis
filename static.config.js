@@ -983,10 +983,6 @@ export default {
       //   template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
       // },
       {
-        path: 'es/',
-        // ...
-      },
-      {
         path: '404',
         template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
       },
