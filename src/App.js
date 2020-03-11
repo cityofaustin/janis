@@ -1,6 +1,7 @@
-import React, { Component, Fragment, Suspense } from 'react';
-import { Root, Routes, useSiteData } from 'react-static';
+import React, { Component, Fragment, Suspense, useEffect } from 'react';
+import { Root, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
+import { useLocation } from "react-router-dom";
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
 import CMSPreview from 'components/_Controllers/CMSPreview';
@@ -12,6 +13,17 @@ import Footer from 'components/PageSections/Footer';
 
 import 'css/coa.css';
 
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 const AppView = ({path}) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
@@ -21,6 +33,7 @@ const AppView = ({path}) => {
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
       <main role="main" id="main">
+        <ScrollToTop />
         <Switch>
           <Route
             path={`${LANG_URL_REGEX}preview/:page_type/:revision_id`}
