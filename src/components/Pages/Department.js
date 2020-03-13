@@ -17,7 +17,6 @@ import WorkInProgress from 'components/WorkInProgress';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
-//rmv
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 const Department = ({ department, intl }) => {

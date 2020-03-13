@@ -100,6 +100,7 @@ export const misc = defineMessages({
   contactInformation: 'Contact information',
   servicePageIsPartOfMessage: 'This service is a part of:',
   informationPageIsPartOfMessage: 'This information is a part of:',
+  getDirections: 'Get directions',
 });
 
 export const navigation = defineMessages({
