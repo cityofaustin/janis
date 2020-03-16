@@ -15,6 +15,7 @@
   align-items: center;
   @include media($coa-medium-screen) {
     flex-direction: row;
+    height: 64px;
   }
 }
 
@@ -27,6 +28,7 @@
   margin-top:18px;
   @include media($coa-medium-screen) {
     width: 266px;
+    margin-top:10px;
   }
 }
 
@@ -41,6 +43,7 @@
   font-size: 18px;
   width: 238px;
   @include media($coa-medium-screen) {
-    width: 487px;
+    width: 600px;
+    padding-left:20px;
   }
 }
