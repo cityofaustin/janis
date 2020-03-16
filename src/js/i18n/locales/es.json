@@ -139,5 +139,6 @@
   "events.registrationReq": "Registración requerido",
   "events.noon": "Mediodía",
   "events.upcoming": "Próximos eventos",
-  "events.viewAll": "Ver todos los eventos"
+  "events.viewAll": "Ver todos los eventos",
+  "alert.getLatest": "Obtenga informácion actual sobre el coronavirus (COVID-19) en Austin"
 }
