@@ -1,0 +1,32 @@
+.coa-HomepageAlert__container {
+  background-color: #ffbe2e;
+  height: 64px;
+}
+
+.coa-HomepageAlert__content {
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.coa-HomepageAlert__label {
+  width: 266px;
+  height: 43px;
+  background-color: rgba(255, 255, 255, .7);
+  padding: 10px;
+  border-radius: 22px;
+}
+
+.coa-HomepageAlert__label--text {
+  width: 238px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 27px;
+}
+
+.coa-HomepageAlert__link {
+  font-size: 18px
+}
