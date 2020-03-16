@@ -1,6 +1,9 @@
 .coa-HomepageAlert__container {
   background-color: #ffbe2e;
-  height: 64px;
+  height: 135px;
+  @include media($coa-medium-screen) {
+    height: 64px;
+  }
 }
 
 .coa-HomepageAlert__content {
@@ -8,25 +11,36 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction:column;
   align-items: center;
+  @include media($coa-medium-screen) {
+    flex-direction: row;
+  }
 }
 
 .coa-HomepageAlert__label {
-  width: 266px;
+  width: 283px;
   height: 43px;
   background-color: rgba(255, 255, 255, .7);
   padding: 10px;
   border-radius: 22px;
+  margin-top:18px;
+  @include media($coa-medium-screen) {
+    width: 266px;
+  }
 }
 
 .coa-HomepageAlert__label--text {
-  width: 238px;
+  width: 253px;
   font-size: 18px;
   font-weight: bold;
   line-height: 27px;
 }
 
 .coa-HomepageAlert__link {
-  font-size: 18px
+  font-size: 18px;
+  width: 238px;
+  @include media($coa-medium-screen) {
+    width: 487px;
+  }
 }
