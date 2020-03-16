@@ -55,11 +55,12 @@
 
 .coa-HomepageAlert__link {
   font-size: 18px;
-  width: 238px;
+  padding-left: 16px;
+  padding-right: 16px;
   color: #171717;
   padding-top:8px;
+  line-height: 2.8rem;
   @include media($coa-medium-screen) {
-    width: 600px;
     padding-left:20px;
     padding-top:unset;
   }
