@@ -163,9 +163,15 @@ const LocationPageFacilityHours = ({ hours }) => {
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
+
+
       <h4 style={{backgroundColor: "yellow"}}>
         ⚠️Due to Coronavirus(COVID_19) closures, these hours may be effected.
+        <a href="https://austintexas.gov/COVID19">Get current informaiton about Coronavirus(COVID_19) in Austin</a>
       </h4>
+
+
+      
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}
