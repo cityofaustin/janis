@@ -11,6 +11,7 @@ import I18nController from 'components/I18n/I18nController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
+import HomepageAlert from 'components/HomepageAlert';
 
 const LANG_KEY = {
   'en': 'en-US',
@@ -38,6 +39,7 @@ const AppView = ({path}) => {
     <div>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
+      <HomepageAlert/>
       <main role="main" id="main">
         <ScrollToTop />
         <Switch>
