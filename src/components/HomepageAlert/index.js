@@ -11,11 +11,13 @@ const HomepageAlert = ({ }) => {
     <div className="coa-HomepageAlert__container">
       <div className="coa-HomepageAlert__content">
         <div className="coa-HomepageAlert__label">
-          <div className="coa-HomepageAlert__label--text">
-            <i class="material-icons">
-              info_outline
-            </i>
-            Coronavirus (COVID-19)
+          <div className="coa-HomepageAlert__label--content">
+            <div className="coa-HomepageAlert__label--icon"> 
+              <i class="material-icons">
+                error_outline
+              </i>
+            </div>
+            <span className="coa-HomepageAlert__label--text"> Coronavirus (COVID-19) </span>
           </div>
         </div>
         <div className="coa-HomepageAlert__link">
@@ -30,3 +32,12 @@ const HomepageAlert = ({ }) => {
 
 
 export default HomepageAlert;
+
+
+/*
+element.style {
+    display: inline;
+    top: 10px;
+    position: relative;
+    left: 10px;
+}*/ 
