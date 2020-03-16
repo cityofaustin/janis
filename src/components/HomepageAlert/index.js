@@ -22,7 +22,7 @@ const HomepageAlert = ({ }) => {
         </div>
         <div className="coa-HomepageAlert__link">
           <a
-            href="http://www.austintexas.gov/COVID19"
+            href="https://www.austintexas.gov/COVID19"
             className="coa-HomepageAlert__link-external"
             target="_blank"
             rel="noopener noreferrer"
