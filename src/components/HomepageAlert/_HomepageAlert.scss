@@ -64,3 +64,18 @@
     padding-top:unset;
   }
 }
+
+.coa-HomepageAlert__link-external {
+  color: #171717;
+  &:visited {
+    color: #171717;
+  }
+}
+
+.coa-HomepageAlert__link-icon {
+  color: #936f38;
+  padding: 0 3px;
+  font-size: 16px;
+  position: relative;
+  top: 3px;
+}
