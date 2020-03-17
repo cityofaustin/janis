@@ -531,3 +531,7 @@ export const events = defineMessages({
   upcoming: "Upcoming events",
   viewAll: "View all events"
 });
+
+export const alert = defineMessages({
+  getLatest: 'Get current information about coronavirus (COVID-19) in Austin'
+})
