@@ -35,3 +35,8 @@ workflows:
                 - master
                 - production
       - deploy-publisher-v2
+          filters:
+            branches:
+              ignore:
+                - master
+                - production
