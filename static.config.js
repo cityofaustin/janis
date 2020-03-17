@@ -32,6 +32,7 @@ import {
   cleanContacts,
   cleanLinks,
   cleanDepartmentDirectors,
+  cleanDepartmentPageLinks,
   cleanLocationPage,
   getOfferedByFromDepartments,
   getEventPageUrl,
@@ -184,21 +185,14 @@ const getDepartmentPageData = async (id, client) => {
   });
 
   let department = allDepartmentPages.edges[0].node;
-  department.topServices = department.topPages
-    ? department.topPages.edges.map(edge => ({
-        id: edge.node.pageId,
-        title: edge.node.title,
-        url: `/${department.slug}/${edge.node.slug}/`,
-      }))
-    : [];
-
-  department.relatedLinks = department.relatedPages
-    ? department.relatedPages.edges.map(edge => ({
-        id: edge.node.pageId,
-        title: edge.node.title,
-        url: `/${department.slug}/${edge.node.slug}/`,
-      }))
-    : [];
+  department.topServices = cleanDepartmentPageLinks(
+    department.topPages,
+    department.slug,
+  );
+  department.relatedLinks = cleanDepartmentPageLinks(
+    department.relatedPages,
+    department.slug,
+  );
 
   // keeping this logic in there for now, stuff is kinda messy
   department.contacts = cleanContacts(department.contacts);
@@ -228,7 +222,9 @@ const getTopicCollectionPageData = async (id, client) => {
           slug: topicCollection.theme.slug,
         },
       },
-      pages: edge.node.page.topPages.edges.map(topPageEdge => ({
+      pages: edge.node.page.topPages.edges
+      .filter(topPageEdge => topPageEdge.node.live)
+      .map(topPageEdge => ({
         pageType: topPageEdge.node.pageType,
         title: topPageEdge.node.title,
         url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
@@ -568,13 +564,17 @@ const getEventPageData = async (id, client) => {
   return { eventPage: eventPage };
 };
 
-const getAllEvents = async client => {
+const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
     .tz('America/Chicago')
     .format('YYYY-MM-DD');
-  const { allEventPages } = await client.request(getEventPageQuery, {
-    date_Gte: date_now,
-  });
+  const gqlVariables = hideCanceled
+    ? { date_Gte: date_now, canceled: false }
+    : { date_Gte: date_now };
+  const { allEventPages } = await client.request(
+    getEventPageQuery,
+    gqlVariables,
+  );
 
   const events = allEventPages.edges.map(edge => ({
     title: edge.node.title,
@@ -748,7 +748,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: url,
       template: 'src/components/Pages/EventList',
-      getData: () => getAllEvents(client),
+      getData: () => getAllEvents(client, false),
     };
   }
 };
@@ -871,7 +871,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     );
   }
 
-  // We probably have some work to do around the documents page
+  // We probably have some work to do around the departments page
   // but for now let's just add it in here
   parsedStructure.push({
     url: `/departments/`,
@@ -911,12 +911,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
         title: s.title,
       }));
 
+      const allActiveEvents = await getAllEvents(client, true);
+
       return {
         topServices,
         image: {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
+        events: allActiveEvents.events,
       };
     },
   };
@@ -979,11 +982,11 @@ export default {
     const routes = [
       // {
       //   path: '/search',
-      //   template: 'src/components/Pages/Search', //TODO: update search page to be conscious of all languages
+      //   template: 'src/components/Pages/Search',
       // },
       {
         path: '404',
-        template: 'src/components/Pages/404', //TODO: update 404 page to be conscious of all languages
+        template: 'src/components/Pages/404',
       },
     ];
 

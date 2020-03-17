@@ -100,6 +100,7 @@ export const misc = defineMessages({
   contactInformation: 'Contact information',
   servicePageIsPartOfMessage: 'This service is a part of:',
   informationPageIsPartOfMessage: 'This information is a part of:',
+  getDirections: 'Get directions',
 });
 
 export const navigation = defineMessages({
@@ -527,4 +528,10 @@ export const events = defineMessages({
   events: 'Events',
   registrationReq: 'Registration required',
   noon: 'Noon',
+  upcoming: "Upcoming events",
+  viewAll: "View all events"
 });
+
+export const alert = defineMessages({
+  getLatest: 'Get current information about coronavirus (COVID-19) in Austin'
+})

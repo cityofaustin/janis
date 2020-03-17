@@ -1,16 +1,35 @@
-import React, { Component, Fragment, Suspense } from 'react';
-import { Root, Routes, useSiteData } from 'react-static';
+import React, { Component, Fragment, Suspense, useEffect } from 'react';
+import { Root, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
+import { useLocation } from "react-router-dom";
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
+import { Helmet } from "react-helmet"; // Helmet allows us to inject html attributes in the the document Header, body, and html tags.
 import CMSPreview from 'components/_Controllers/CMSPreview';
 import CMSLive from 'components/_Controllers/CMSLive';
 import I18nController from 'components/I18n/I18nController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
+import HomepageAlert from 'components/HomepageAlert';
+
+const LANG_KEY = {
+  'en': 'en-US',
+  'es': 'es-001'
+}
 
 import 'css/coa.css';
+
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const AppView = ({path}) => {
   const intl = useIntl();
@@ -20,7 +39,9 @@ const AppView = ({path}) => {
     <div>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
+      <HomepageAlert/>
       <main role="main" id="main">
+        <ScrollToTop />
         <Switch>
           <Route
             path={`${LANG_URL_REGEX}preview/:page_type/:revision_id`}
@@ -45,6 +66,9 @@ const App = ({ navigation, threeoneone }) => {
               lang={props.match.params.lang}
               path={props.match.params.path}
             >
+              <Helmet
+                htmlAttributes={{ lang : LANG_KEY[props.match.params.lang || "en"] }}
+              />
               <Suspense fallback={<div>LOADING</div>}>
                 <AppView path={props.match.params.path || ''} />
               </Suspense>

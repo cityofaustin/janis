@@ -6,6 +6,12 @@ const topServicesQuery = `
           id
           title
           slug
+          coaGlobal
+          departments {
+            id
+            title
+            slug
+          }
           topics {
             edges {
               node {

@@ -17,7 +17,6 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
       topics,
       theme,
       department,
-      relatedDepartments,
       officialDocuments,
       coaGlobal,
       contextualNavData,
@@ -40,10 +39,13 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
         <PageHeader contentType={'official-document'} description={description}>
           {title}
         </PageHeader>
-        <OfficialDocumentPage officialDocuments={officialDocuments} intl={intl}/>
+        <OfficialDocumentPage
+          officialDocuments={officialDocuments}
+          intl={intl}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default injectIntl(OfficialDocumentList)
+export default injectIntl(OfficialDocumentList);
