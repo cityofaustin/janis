@@ -19,7 +19,7 @@ const LocationsCOVID_19 = (x) => {
       </>)}
 
       <a
-        href='tel:311'
+        href='tel:15129742000'
         className="coa-HomepageAlert__link-external"
       >
         { ( lang=="en" ) && (<>Call 3-1-1</>)}
