@@ -1,11 +1,16 @@
 .coa-HomepageAlert__container {
   background-color: #ffbe2e;
-  height: 159px;
+  padding-bottom: 2rem;
   @include media($coa-medium-screen) {
-    height: 64px;
+    padding-bottom: 0rem;
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+.coa-HomepageAlert__container.textContent {
+  padding: 15px 24px 24px 24px;
+  margin-bottom: 20px;
 }
 
 .coa-HomepageAlert__content {
@@ -79,4 +84,10 @@
   font-size: 16px;
   position: relative;
   top: 3px;
+}
+
+.coa-HomepageAlert__label--text-content {
+  font-size: 18px;
+  line-height: 26px;
+  padding-top: 5px;
 }

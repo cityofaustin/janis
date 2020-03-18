@@ -6,12 +6,14 @@ import { getEncodedLocation } from 'js/helpers/location';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
+import Alert from 'components/Alerts';
 import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
   locations as i18nLocations,
   contact as i18nContact,
-  misc as i18nMisc
+  misc as i18nMisc,
+  alert as i18n1
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -158,20 +160,47 @@ const LocationPageFacilityHours = ({ hours }) => {
     </div>
   );
 
+  const alertContent = () => {
+    // console.log("props :", props)
+    return (
+      <div>
+      City of Austin offices and facilities may be closed or
+      have temporary emergency hours that are not up to date on this
+      website.&nbsp;
+      <a
+        href='tel:311'
+        className="coa-HomepageAlert__link-external"
+      >
+        Call 3-1-1
+      </a>
+      &nbsp;for updated hours information or&nbsp;
+      <a
+        href="https://www.austintexas.gov/COVID19"
+        className="coa-HomepageAlert__link-external"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        get current information about coronavirus (COVID-19) in Austin.
+        <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+      </a>
+    </div>
+  )}
+
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
-
-
-      <h4 style={{backgroundColor: "yellow"}}>
-        ⚠️Due to Coronavirus(COVID_19) closures, these hours may be effected.
-        <a href="https://austintexas.gov/COVID19">Get current informaiton about Coronavirus(COVID_19) in Austin</a>
-      </h4>
-
-
-      
+      {/* START
+        ⚠️COVED_19 Hardcoded HACK
+      */}
+      <Alert
+        badge="Coronavirus (COVID-19)"
+        content="locationsCOVID_19"
+      />
+      {/*
+        ⚠️COVED_19 Hardcoded HACK
+      END */}
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}

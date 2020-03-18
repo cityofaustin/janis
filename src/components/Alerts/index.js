@@ -2,42 +2,53 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { alert as i18n1 } from 'js/i18n/definitions';
 import ExternalLink from 'components/ExternalLink';
+import LocationsCOVID_19 from 'components/Alerts/locationsCOVID_19.js';
 
-
-const HomepageAlert = ({ }) => {
+const Alert = ({ badge, content, link, linkContent }) => {
+  const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
 
   return (
-    <div className="coa-HomepageAlert__container">
+    <div className={"coa-HomepageAlert__container "+styleWithContent}>
       <div className="coa-HomepageAlert__content">
         <div className="coa-HomepageAlert__label">
           <div className="coa-HomepageAlert__label--content">
-            <div className="coa-HomepageAlert__label--icon"> 
-              <i class="material-icons">
+            <div className="coa-HomepageAlert__label--icon">
+              <i className="material-icons">
                 error_outline
               </i>
             </div>
-            <span className="coa-HomepageAlert__label--text"> Coronavirus (COVID-19) </span>
+            <span className="coa-HomepageAlert__label--text"> {badge} </span>
           </div>
+
         </div>
+
         <div className="coa-HomepageAlert__link">
+        { !styleWithContent && (
           <a
-            href="https://www.austintexas.gov/COVID19"
+            href={link}
             className="coa-HomepageAlert__link-external"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {intl.formatMessage(i18n1.getLatest)}
+            {linkContent}
             <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
           </a>
+        )}
+
         </div>
       </div>
+      { (content == "locationsCOVID_19") && (
+        <div className="coa-HomepageAlert__label--text-content">
+          <LocationsCOVID_19 />
+        </div>
+      )}
     </div>
   )
 };
 
 
-export default HomepageAlert;
+export default Alert;
 
 
 /*
@@ -46,4 +57,4 @@ element.style {
     top: 10px;
     position: relative;
     left: 10px;
-}*/ 
+}*/
