@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { alert as i18n1 } from 'js/i18n/definitions';
 import ExternalLink from 'components/ExternalLink';
 
-const LocationsCOVID_19 = (x) => {
+const LocationsCOVID_19 = () => {
   const lang = useIntl().locale;
   return (
     <div>
