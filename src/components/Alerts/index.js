@@ -20,9 +20,7 @@ const Alert = ({ badge, content, link, linkContent }) => {
             </div>
             <span className="coa-HomepageAlert__label--text"> {badge} </span>
           </div>
-
         </div>
-
         <div className="coa-HomepageAlert__link">
         { !styleWithContent && (
           <a
@@ -35,7 +33,6 @@ const Alert = ({ badge, content, link, linkContent }) => {
             <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
           </a>
         )}
-
         </div>
       </div>
       { (content == "locationsCOVID_19") && (

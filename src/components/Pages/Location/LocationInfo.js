@@ -12,8 +12,7 @@ import {
   date as i18nDate,
   locations as i18nLocations,
   contact as i18nContact,
-  misc as i18nMisc,
-  alert as i18n1
+  misc as i18nMisc
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -160,47 +159,17 @@ const LocationPageFacilityHours = ({ hours }) => {
     </div>
   );
 
-  const alertContent = () => {
-    // console.log("props :", props)
-    return (
-      <div>
-      City of Austin offices and facilities may be closed or
-      have temporary emergency hours that are not up to date on this
-      website.&nbsp;
-      <a
-        href='tel:311'
-        className="coa-HomepageAlert__link-external"
-      >
-        Call 3-1-1
-      </a>
-      &nbsp;for updated hours information or&nbsp;
-      <a
-        href="https://www.austintexas.gov/COVID19"
-        className="coa-HomepageAlert__link-external"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        get current information about coronavirus (COVID-19) in Austin.
-        <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
-      </a>
-    </div>
-  )}
-
   return (
     <div className="coa-LocationPage__sub-section">
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
-      {/* START
-        ⚠️COVED_19 Hardcoded HACK
-      */}
+      {/* START ⚠️COVED_19 Hardcoded */}
       <Alert
         badge="Coronavirus (COVID-19)"
         content="locationsCOVID_19"
       />
-      {/*
-        ⚠️COVED_19 Hardcoded HACK
-      END */}
+      {/* END ⚠️COVED_19 Hardcoded */}
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}
