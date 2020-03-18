@@ -11,7 +11,8 @@ import I18nController from 'components/I18n/I18nController';
 import SkipToMain from 'components/PageSections/SkipToMain';
 import Header from 'components/PageSections/Header';
 import Footer from 'components/PageSections/Footer';
-import HomepageAlert from 'components/HomepageAlert';
+import Alert from 'components/Alerts';
+import { alert as i18n1 } from 'js/i18n/definitions';
 
 const LANG_KEY = {
   'en': 'en-US',
@@ -39,7 +40,13 @@ const AppView = ({path}) => {
     <div>
       <SkipToMain />
       <Header navigation={navigation[intl.locale]} path={path} />
-      <HomepageAlert/>
+      {/* START ⚠️COVED_19 Hardcoded */}
+      <Alert
+        badge="Coronavirus (COVID-19)"
+        link="https://www.austintexas.gov/COVID19"
+        linkContent={intl.formatMessage(i18n1.getLatest)}
+      />
+      {/* END ⚠️COVED_19 Hardcoded */}
       <main role="main" id="main">
         <ScrollToTop />
         <Switch>
