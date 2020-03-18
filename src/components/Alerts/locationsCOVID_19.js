@@ -8,11 +8,11 @@ const LocationsCOVID_19 = () => {
   return (
     <div>
 
-      { ( lang=="en" ) && (<>
+      { ( lang === "en" ) && (<>
         City of Austin offices and facilities may be closed or have temporary
         emergency hours that are not up to date on this website.&nbsp;
       </>)}
-      { ( lang=="es" ) && (<>
+      { ( lang === "es" ) && (<>
         Las oficinas e instalaciones de la Ciudad de Austin quizás estén cerradas
         o tengan horario de emergencia temporal que no se ha actualizado
         en este sitio web. &nbsp;
@@ -22,12 +22,12 @@ const LocationsCOVID_19 = () => {
         href='tel:15129742000'
         className="coa-HomepageAlert__link-external"
       >
-        { ( lang=="en" ) && (<>Call 3-1-1</>)}
-        { ( lang=="es" ) && (<>Llame al 3-1-1</>)}
+        { ( lang === "en" ) && (<>Call 3-1-1</>)}
+        { ( lang === "es" ) && (<>Llame al 3-1-1</>)}
       </a>
 
-      { ( lang=="en" ) && (<>&nbsp;for updated hours information or&nbsp;</>)}
-      { ( lang=="es" ) && (<>&nbsp;para información actualizada sobre horarios o&nbsp;</>)}
+      { ( lang === "en" ) && (<>&nbsp;for updated hours information or&nbsp;</>)}
+      { ( lang === "es" ) && (<>&nbsp;para información actualizada sobre horarios o&nbsp;</>)}
 
       <a
         href="https://www.austintexas.gov/COVID19"
@@ -35,8 +35,8 @@ const LocationsCOVID_19 = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        { ( lang=="en" ) && (<>get current information about coronavirus (COVID-19) in Austin.</>)}
-        { ( lang=="es" ) && (<>obtenga información actual sobre el coronavirus (COVID-19) en Austin.</>)}
+        { ( lang === "en" ) && (<>get current information about coronavirus (COVID-19) in Austin.</>)}
+        { ( lang === "es" ) && (<>obtenga información actual sobre el coronavirus (COVID-19) en Austin.</>)}
 
         <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
       </a>
