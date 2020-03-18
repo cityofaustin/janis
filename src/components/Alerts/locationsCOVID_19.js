@@ -13,9 +13,9 @@ const LocationsCOVID_19 = (x) => {
         emergency hours that are not up to date on this website.&nbsp;
       </>)}
       { ( lang=="es" ) && (<>
-        Es posible que oficinas y servicios de la Ciudad de Austin estén cerrados
-        o tengan horarios de emergencia temporales que no están actualizados en
-        este sitio. &nbsp;
+        Las oficinas e instalaciones de la Ciudad de Austin quizás estén cerradas
+        o tengan horario de emergencia temporal que no se ha actualizado
+        en este sitio web. &nbsp;
       </>)}
 
       <a
@@ -27,7 +27,7 @@ const LocationsCOVID_19 = (x) => {
       </a>
 
       { ( lang=="en" ) && (<>&nbsp;for updated hours information or&nbsp;</>)}
-      { ( lang=="es" ) && (<>&nbsp;para obtener horarios actualizados u&nbsp;</>)}
+      { ( lang=="es" ) && (<>&nbsp;para información actualizada sobre horarios o&nbsp;</>)}
 
       <a
         href="https://www.austintexas.gov/COVID19"
