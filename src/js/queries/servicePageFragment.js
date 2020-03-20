@@ -4,6 +4,7 @@ const servicePageFragment = `
   fragment servicePageInfo on ServicePageNode {
     id
     title
+    coaGlobal
     departments {
       id
       title
