@@ -18,6 +18,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import RowContainer from 'components/ErrorMessages/RowContainer';
+import InfoISVG from 'components/SVGs/InfoI';
 
 function FormContainer({
   formContainer: { title, description, formUrl, coaGlobal, contextualNavData },
@@ -74,7 +75,11 @@ function FormContainer({
         </PageHeader>
 
         <div id="coa-loadingWheel" />
-        <RowContainer formUrl={formUrl} ErrorMessage={ErrorMessage} />
+        <RowContainer
+          formUrl={formUrl}
+          ErrorMessage={ErrorMessage}
+          intl={intl}
+        />
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
@@ -104,27 +109,27 @@ function FormContainer({
   );
 }
 
-const ErrorMessage = ({ formUrl }) => {
+const ErrorMessage = ({ formUrl, intl }) => {
   return (
-    <div>
-      <h2>We are still waiting for your form to load.</h2>
-
-      <h3>Why hasn't it loaded yet?</h3>
-
-      <p>
-        &bull; A plugin could be blocking the form (example: "Privacy Badger")
-        <br />
-        &bull; It may have failed to load ("404 error")
-      </p>
-      <br />
-
-      <h3>Visit the form directly</h3>
-
-      <a href={formUrl} target="_blank">
-        {' '}
-        <p>{formUrl}</p>{' '}
-      </a>
-    </div>
+    <React.Fragment>
+      <InfoISVG />
+      <div className="coa-FormFallback__content">
+        <h2 className="coa-FormFallback__heading">
+          {intl.formatMessage(i18n2.formStillWaitingMessage)}
+        </h2>
+        <a href={formUrl} target="_blank" className="coa-FormFallback__link">
+          {intl.formatMessage(i18n2.openFormInNewWindow)}
+          <i class="material-icons coa-ExternalLinkMaterial">open_in_new</i>
+        </a>
+        <h3 className="coa-FormFallback__subheading">
+          {intl.formatMessage(i18n2.whyFormNotLoaded)}
+        </h3>
+        <ul className="coa-FormFallback__list">
+          <li>{intl.formatMessage(i18n2.pluginBlockingForm)}</li>
+          <li>{intl.formatMessage(i18n2.formFailedToLoad)}</li>
+        </ul>
+      </div>
+    </React.Fragment>
   );
 };
 
