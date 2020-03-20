@@ -34,6 +34,9 @@ const branchOverrides = {
   '3244-guide-icon-tiles': {
     CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
   },
+  '3899-broken-build': {
+    CMS_API: 'https://joplin-pr-3899-broken-build.herokuapp.com/api/graphql'
+  }
 };
 
 module.exports = {

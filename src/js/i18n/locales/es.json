@@ -60,6 +60,7 @@
   "misc.contactInformation": "Información de contacto",
   "misc.servicePageIsPartOfMessage": "Este servicio es parte de:",
   "misc.informationPageIsPartOfMessage": "Esta información es parte de:",
+  "misc.getDirections": "Obtener direcciones",
   "misc.formStillWaitingMessage": "Aún estamos esperando que cargue su formulario",
   "misc.openFormInNewWindow": "Abra el formulario en una nueva pantalla.",
   "misc.whyFormNotLoaded": "¿Por qué no ha cargado aún?",
@@ -143,5 +144,6 @@
   "events.registrationReq": "Registración requerido",
   "events.noon": "Mediodía",
   "events.upcoming": "Próximos eventos",
-  "events.viewAll": "Ver todos los eventos"
+  "events.viewAll": "Ver todos los eventos",
+  "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin"
 }

@@ -18,7 +18,8 @@ const EventLocationDetail = ({
   // From conversation with desi:
   /*
         Brian Smith  12:30 PM
-        right now for maps it only takes street/city/state/zip in for our links, are we cool staying there or should I make unit/floor/suite part of the search?
+        right now for maps it only takes street/city/state/zip in for our links, are we cool staying
+        there or should I make unit/floor/suite part of the search?
 
         Desi Gonzalez  12:31 PM
         I think that's cool, I wouldn't worry about it til we have evidence that that's a problem

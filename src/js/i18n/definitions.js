@@ -100,6 +100,7 @@ export const misc = defineMessages({
   contactInformation: 'Contact information',
   servicePageIsPartOfMessage: 'This service is a part of:',
   informationPageIsPartOfMessage: 'This information is a part of:',
+  getDirections: 'Get directions',
   formStillWaitingMessage: 'We are still waiting for your form to load',
   openFormInNewWindow: 'Open the form in a new window',
   whyFormNotLoaded: `Why hasn't it loaded yet?`,
@@ -536,3 +537,7 @@ export const events = defineMessages({
   upcoming: 'Upcoming events',
   viewAll: 'View all events',
 });
+
+export const alert = defineMessages({
+  getLatest: 'Get current information about coronavirus (COVID-19) in Austin'
+})

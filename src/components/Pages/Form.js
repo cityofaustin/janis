@@ -21,20 +21,7 @@ import RowContainer from 'components/ErrorMessages/RowContainer';
 import InfoISVG from 'components/SVGs/InfoI';
 
 function FormContainer({
-  formContainer: {
-    title,
-    slug,
-    topic,
-    topics,
-    theme,
-    department,
-    relatedDepartments,
-    toplink,
-    description,
-    formUrl,
-    coaGlobal,
-    contextualNavData,
-  },
+  formContainer: { title, description, formUrl, coaGlobal, contextualNavData },
   intl,
 }) {
   const iframeRef = useRef(null);

@@ -30,7 +30,6 @@ function Guide({ guidePage, intl }) {
       topics,
       theme,
       department,
-      relatedDepartments,
       sections,
       image,
       contact,
@@ -65,23 +64,23 @@ function Guide({ guidePage, intl }) {
       */
       const sectionLocations = [
         // Every Guide starts with Contact-information
-        {anchorTag: "Contact-information"}
+        { anchorTag: 'Contact-information' },
       ];
       sections.forEach(section => {
-        const heading = hyphenate(section.heading)
+        const heading = hyphenate(section.heading);
         sectionLocations.push({
           anchorTag: heading,
         });
-        section.pages.forEach((page, index)=>{
+        section.pages.forEach((page, index) => {
           sectionLocations.push({
-            anchorTag: `${heading}-${index + 1}`
+            anchorTag: `${heading}-${index + 1}`,
           });
         });
       });
-      return sectionLocations
+      return sectionLocations;
     },
   );
-  const [currentSection, setCurrentSection] = useState(()=>{
+  const [currentSection, setCurrentSection] = useState(() => {
     // If there is a #hash in the URL, set the currentSection to that.
     if (typeof window !== 'undefined') {
       const hash = window.location.hash;
@@ -89,7 +88,7 @@ function Guide({ guidePage, intl }) {
         // Remove leading '#'
         const initialCurrectSection = hash.slice(1);
         // if the /#hash in the url refers to a real section, then set that to the initial currentSection
-        if (find(sectionLocations, ["anchorTag", initialCurrectSection])) {
+        if (find(sectionLocations, ['anchorTag', initialCurrectSection])) {
           return initialCurrectSection;
         }
       }
@@ -104,34 +103,37 @@ function Guide({ guidePage, intl }) {
     Re-triggers the scroll navigation effect (with setClickedSectionRefresh)
     if the user clicks, scrolls away, and then decides to click the same section again.
   */
-  const handleSectionClick = (anchorTag) => {
+  const handleSectionClick = anchorTag => {
     if (anchorTag === clickedSection) {
-      setClickedSectionRefresh(clickedSectionRefresh + 1)
+      setClickedSectionRefresh(clickedSectionRefresh + 1);
     } else {
-      setClickedSection(anchorTag)
+      setClickedSection(anchorTag);
     }
-  }
+  };
 
   // Navigate to guideSection when its been clicked (or re-clicked) on in GuideMenu.
-  useEffect(()=>{
+  useEffect(() => {
     if (clickedSection) {
       history.pushState(null, null, `#${clickedSection}`);
-      const guideSection = find(sectionLocations, ["anchorTag", clickedSection])
+      const guideSection = find(sectionLocations, [
+        'anchorTag',
+        clickedSection,
+      ]);
       if (guideSection) {
-        guideSection.node.current.focus({preventScroll: true});
-        guideSection.node.current.scrollIntoView({behavior: "smooth"});
+        guideSection.node.current.focus({ preventScroll: true });
+        guideSection.node.current.scrollIntoView({ behavior: 'smooth' });
       } else {
-        setClickedSection(null)
+        setClickedSection(null);
       }
     }
-  }, [clickedSection, clickedSectionRefresh, sectionLocations])
+  }, [clickedSection, clickedSectionRefresh, sectionLocations]);
 
   // Reset clickedSection once we've scrolled to it
-  useEffect(()=>{
+  useEffect(() => {
     if (currentSection === clickedSection) {
       setClickedSection(null);
     }
-  }, [clickedSection, currentSection])
+  }, [clickedSection, currentSection]);
 
   // Update offsetTop of each GuideSection if the window resizes
   function updateSectionLocation(node, anchorTag) {
@@ -139,7 +141,7 @@ function Guide({ guidePage, intl }) {
       action: 'update',
       payload: {
         node,
-        anchorTag
+        anchorTag,
       },
     });
   }
@@ -207,13 +209,15 @@ function Guide({ guidePage, intl }) {
         If the bottom of the currentSection GuideMenuLink is below the bottom of the GuideMenu,
         Then move the GuideMenu down.
       */
-      desktopGuideMenuNode.current.scrollTop = (currentSectionLinkBottom - guideMenuBottom + guideMenuScrollTop);
+      desktopGuideMenuNode.current.scrollTop =
+        currentSectionLinkBottom - guideMenuBottom + guideMenuScrollTop;
     } else if (currentSectionLinkTop < guideMenuTop) {
       /*
         If the top of the currentSection GuideMenuLink is above the top of the GuideMenu,
         Then move the GuideMenu up.
       */
-      desktopGuideMenuNode.current.scrollTop = (guideMenuScrollTop + currentSectionLinkTop);
+      desktopGuideMenuNode.current.scrollTop =
+        guideMenuScrollTop + currentSectionLinkTop;
     }
   }
 
@@ -262,7 +266,10 @@ function Guide({ guidePage, intl }) {
                 clickedSection={clickedSection}
               />
             ) : (
-              <div ref={desktopGuideMenuNode} className="coa-GuideMenu__desktop-container sticky">
+              <div
+                ref={desktopGuideMenuNode}
+                className="coa-GuideMenu__desktop-container sticky"
+              >
                 <GuideMenu
                   contact={contact}
                   sections={sections}

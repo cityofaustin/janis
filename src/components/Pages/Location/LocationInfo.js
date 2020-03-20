@@ -1,15 +1,18 @@
 import React, { Fragment } from 'react';
 import { capitalize } from 'lodash';
 import { useIntl } from 'react-intl';
+import { getEncodedLocation } from 'js/helpers/location';
 
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
+import Alert from 'components/Alerts';
 import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
   locations as i18nLocations,
   contact as i18nContact,
+  misc as i18nMisc
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -57,12 +60,20 @@ const LocationPageContact = ({ phone, email }) => {
 
 const LocationPageAddress = ({ title, address }) => {
   const { street, city, state, zip } = address;
+  const intl = useIntl();
+  const encodedLocation = getEncodedLocation(address);
   const AddressText = (
     <div>
       <span className="coa-LocationPage__address-line">{street}</span>
       <span className="coa-LocationPage__address-line">
         {city}, {state} {zip}
       </span>
+      <a
+        href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
+        target="_blank"
+      >
+        {intl.formatMessage(i18nMisc.getDirections)}
+      </a>
     </div>
   );
 
@@ -153,6 +164,12 @@ const LocationPageFacilityHours = ({ hours }) => {
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
+      {/* START ⚠️COVED_19 Hardcoded */}
+      <Alert
+        badge="Coronavirus (COVID-19)"
+        content="locationsCOVID_19"
+      />
+      {/* END ⚠️COVED_19 Hardcoded */}
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}
