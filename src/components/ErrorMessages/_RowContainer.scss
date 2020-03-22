@@ -1,6 +1,60 @@
 #coa-LockedIframeRequestMessage {
+  border-left: 8px solid #0050d8;
+
   padding: 50px;
-  background-color: #F3F7FC;
+
+  @include mobile {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 21px;
+    padding-top: 29px;
+  }
+
+  background-color: #f6f6f6;
   opacity: 0; // set at 0 because it's set at 1 by loader animation
   margin-top: 50px;
+  border-radius: 4px;
+}
+
+.coa-FormFallback__heading {
+  font-size: 2.2rem;
+  line-height: 2.6rem;
+  margin-bottom: 8px;
+}
+
+.coa-FormFallback__link {
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.coa-FormFallback__subheading {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  margin-top: 2.4rem;
+}
+
+.coa-FormFallback__list {
+  margin-top: 0.8rem;
+  list-style-position: inside;
+  li {
+    line-height: 2.2rem;
+    font-size: 1.8rem;
+    @include mobile {
+      font-size: 1.6rem;
+    }
+    margin-left: 2px;
+  }
+}
+
+.coa-FormFallback__infoI {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 2.4rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.coa-FormFallback__content {
+  display: inline-block;
+  max-width: 87%;
 }

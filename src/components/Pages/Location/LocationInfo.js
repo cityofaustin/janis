@@ -6,6 +6,7 @@ import { getEncodedLocation } from 'js/helpers/location';
 import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
+import Alert from 'components/Alerts';
 import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
@@ -163,6 +164,12 @@ const LocationPageFacilityHours = ({ hours }) => {
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
+      {/* START ⚠️COVED_19 Hardcoded */}
+      <Alert
+        badge="Coronavirus (COVID-19)"
+        content="locationsCOVID_19"
+      />
+      {/* END ⚠️COVED_19 Hardcoded */}
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}

@@ -101,6 +101,12 @@ export const misc = defineMessages({
   servicePageIsPartOfMessage: 'This service is a part of:',
   informationPageIsPartOfMessage: 'This information is a part of:',
   getDirections: 'Get directions',
+  formStillWaitingMessage: 'We are still waiting for your form to load',
+  openFormInNewWindow: 'Open the form in a new window',
+  whyFormNotLoaded: `Why hasn't it loaded yet?`,
+  pluginBlockingForm:
+    'A plugin could be blocking the form (example: "Privacy Badger")',
+  formFailedToLoad: 'It may have failed to load ("404 error")',
 });
 
 export const navigation = defineMessages({
@@ -528,8 +534,8 @@ export const events = defineMessages({
   events: 'Events',
   registrationReq: 'Registration required',
   noon: 'Noon',
-  upcoming: "Upcoming events",
-  viewAll: "View all events"
+  upcoming: 'Upcoming events',
+  viewAll: 'View all events',
 });
 
 export const alert = defineMessages({
