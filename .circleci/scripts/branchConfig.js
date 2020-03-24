@@ -36,6 +36,9 @@ const branchOverrides = {
   },
   '3899-broken-build': {
     CMS_API: 'https://joplin-pr-3899-broken-build.herokuapp.com/api/graphql'
+  },
+  "pytest": {
+    CMS_API: 'https://joplin-pr-pytest.herokuapp.com/api/graphql'
   }
 };
 
