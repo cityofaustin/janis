@@ -692,14 +692,17 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
     if (informationpage) {
       return {
-        path: janisUrls[0],
+        path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Information',
         getData: () =>
           getInformationPageData(
             informationpage.id,
-            parent_department,
-            parent_topic,
-            grandparent_topic_collection,
+            '',
+            '',
+            '',
+            //parent_department,
+            //parent_topic,
+            //grandparent_topic_collection,
             client,
             pagesOfGuides.informationPage,
           ),

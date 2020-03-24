@@ -45,13 +45,14 @@ const InformationPage = ({ informationPage, intl }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      {!coaGlobal && (
-        <ContextualNav
-          parent={contextualNavData.parent}
-          relatedTo={contextualNavData.relatedTo}
-          offeredBy={contextualNavData.offeredBy}
-        />
-      )}
+      {//!coaGlobal && (
+      //   <ContextualNav
+      //     parent={contextualNavData.parent}
+      //     relatedTo={contextualNavData.relatedTo}
+      //     offeredBy={contextualNavData.offeredBy}
+      //   />
+      // )
+}
       {image && <PageBanner image={image} />}
       <div>
         {!pageIsPartOf ? (
