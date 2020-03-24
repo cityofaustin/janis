@@ -10,6 +10,10 @@ import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 // import all311Query from 'js/queries/all311Query';
 
+
+// Shinier ✨ new queries!
+import allPagesQuery from 'js/queries/allPagesQuery';
+
 // Shiny ✨ new queries!
 import siteStructureQuery from 'js/queries/siteStructureQuery';
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
@@ -595,15 +599,26 @@ const getAllEvents = async (client, hideCanceled) => {
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
+  // console.log('p: ', pageAtUrlInfo);
+  // const {
+  //   url,
+  //   type,
+  //   id,
+  //   parent_department,
+  //   parent_topic,
+  //   parent_topic_collection,
+  //   grandparent_topic_collection,
+  // } = pageAtUrlInfo;
   const {
-    url,
-    type,
-    id,
-    parent_department,
-    parent_topic,
-    parent_topic_collection,
-    grandparent_topic_collection,
+    janisUrls,
+    eventpage,
+    locationpage,
+    departmentpage,
+    topiccollectionpage,
+    janisbasepagewithtopiccollections,
+    janisbasepagewithtopics
   } = pageAtUrlInfo;
+  const type = 'blank';
 
   // If we're a department page, we need to make sure our top services/related info works
   if (type === 'department') {
@@ -623,6 +638,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       template: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(id, client),
     };
+  }
+
+  if (topiccollectionpage) {
+    console.log(topiccollectionpage.id)
+    return {
+      path: janisUrls[0],
+      template: 'src/components/Pages/TopicCollection',
+      getData: () => getTopicCollectionPageData(topiccollectionpage.id, client),
+    }
   }
 
   // If we are a topic page, we need a parent topic collection id
@@ -751,6 +775,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       getData: () => getAllEvents(client, false),
     };
   }
+  return {}
 };
 
 const getPagesOfGuidesData = async client => {
@@ -840,8 +865,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-  const siteStructure = await client.request(siteStructureQuery);
-  let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
+  const siteStructure = await client.request(allPagesQuery)
+  let pages = siteStructure.allPages.edges;
+
+  // const siteStructure = await client.request(siteStructureQuery);
+  // let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
@@ -871,55 +899,45 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     );
   }
 
-  // We probably have some work to do around the departments page
-  // but for now let's just add it in here
-  parsedStructure.push({
-    url: `/departments/`,
-    type: `departments`,
-  });
-
-  parsedStructure.push({
-    url: `/events/`,
-    type: `events`,
-  });
-
-  const pagesOfGuidesData = await getPagesOfGuidesData(client);
+  // what does pages of guides data do? what is it for?
+  // const pagesOfGuidesData = await getPagesOfGuidesData(client);
+  const pagesOfGuidesData = []
 
   const allPages = await Promise.all(
-    parsedStructure.map(pageAtUrlInfo =>
-      buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData),
+    pages.map(pageAtUrlInfo =>
+      buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData),
     ),
   );
 
   const data = {
     path: path,
     template: 'src/components/Pages/Home',
-    children: allPages,
+    // children: allPages,
     getData: async () => {
-      const { allServicePages } = await client.request(topServicesQuery);
-      let services = cleanLinks(allServicePages, 'service');
+      // const { allServicePages } = await client.request(topServicesQuery);
+      // let services = cleanLinks(allServicePages, 'service');
 
-      // Make sure we don't have any dupes in top services
-      services = services.filter(
-        (service, index) =>
-          index === services.findIndex(s => s.id === service.id),
-      );
+      // // Make sure we don't have any dupes in top services
+      // services = services.filter(
+      //   (service, index) =>
+      //     index === services.findIndex(s => s.id === service.id),
+      // );
 
-      const topServices = services.map(s => ({
-        type: !!langCode ? langCode : 'en',
-        url: s.url,
-        title: s.title,
-      }));
+      // const topServices = services.map(s => ({
+      //   type: !!langCode ? langCode : 'en',
+      //   url: s.url,
+      //   title: s.title,
+      // }));
 
-      const allActiveEvents = await getAllEvents(client, true);
+      // const allActiveEvents = await getAllEvents(client, true);
 
       return {
-        topServices,
+        // topServices,
         image: {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
-        events: allActiveEvents.events,
+        events: [],
       };
     },
   };

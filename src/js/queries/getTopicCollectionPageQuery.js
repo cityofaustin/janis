@@ -15,29 +15,6 @@ const getTopicCollectionPageQuery = `
         }
       }
     }
-    allTopicPageTopicCollections(topiccollection: $id) {
-      edges {
-        node {
-          page {
-            id
-            live
-            slug
-            title
-            description
-            topPages {
-              edges {
-                node {
-                  live
-                  title
-                  slug
-                  pageType
-                }
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `;
 
