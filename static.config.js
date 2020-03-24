@@ -621,24 +621,24 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const type = 'blank';
 
   // If we're a department page, we need to make sure our top services/related info works
-  if (type === 'department') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Department',
-      getData: () => getDepartmentPageData(id, client),
-    };
-  }
+  // if (type === 'department') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Department',
+  //     getData: () => getDepartmentPageData(id, client),
+  //   };
+  // }
 
   // If we are a topic collection page, we need to use a query to get information about
   // our child topics and their top pages
   // (this might be able to move to the end with the "just run a query without extra vars" part)
-  if (type === 'topic collection') {
-    return {
-      path: url,
-      template: 'src/components/Pages/TopicCollection',
-      getData: () => getTopicCollectionPageData(id, client),
-    };
-  }
+  // if (type === 'topic collection') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/TopicCollection',
+  //     getData: () => getTopicCollectionPageData(id, client),
+  //   };
+  // }
 
   if (topiccollectionpage) {
     console.log(topiccollectionpage.id)
@@ -649,132 +649,199 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
   }
 
-  // If we are a topic page, we need a parent topic collection id
-  if (type === 'topic' && parent_topic_collection) {
+  if (janisbasepagewithtopiccollections) {
+    // i think this can only be this
     return {
-      path: url,
+      path: janisUrls[0],
       template: 'src/components/Pages/Topic',
       getData: () => getTopicPageData(id, parent_topic_collection, client),
     };
   }
 
-  // If we're a service page
-  if (type === 'service page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Service',
-      getData: () =>
-        getServicePageData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-          pagesOfGuides.servicePage,
-        ),
-    };
+  if (janisbasepagewithtopics) {
+    const {
+      guidepage,
+      servicepage,
+      informationpage,
+      officialdocumentpage,
+      formcontainer,
+    } = janisbasepagewithtopics;
+
+    if (guidepage) {
+
+    }
+
+    if (servicepage) {
+      return {
+        path: janisUrls[0].slice(20),
+        template: 'src/components/Pages/Service',
+        getData: () =>
+          getServicePageData(
+            servicepage.id,
+            //parent_department,
+            '',
+            '',
+            //parent_topic,
+            '',
+            //grandparent_topic_collection,
+            client,
+            pagesOfGuides.servicePage,
+          ),
+      };
+    }
+
+    if (informationpage) {
+      return {
+        path: janisUrls[0],
+        template: 'src/components/Pages/Information',
+        getData: () =>
+          getInformationPageData(
+            informationpage.id,
+            parent_department,
+            parent_topic,
+            grandparent_topic_collection,
+            client,
+            pagesOfGuides.informationPage,
+          ),
+      };
+    }
+
+    if (officialdocumentpage) {
+
+    }
+    if (formcontainer) {
+
+    }
   }
+
+  // If we are a topic page, we need a parent topic collection id
+  // if (type === 'topic' && parent_topic_collection) {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Topic',
+  //     getData: () => getTopicPageData(id, parent_topic_collection, client),
+  //   };
+  // }
+
+  // If we're a service page
+  // if (type === 'service page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Service',
+  //     getData: () =>
+  //       getServicePageData(
+  //         id,
+  //         parent_department,
+  //         parent_topic,
+  //         grandparent_topic_collection,
+  //         client,
+  //         pagesOfGuides.servicePage,
+  //       ),
+  //   };
+  // }
 
   // If we're an information page
-  if (type === 'information page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Information',
-      getData: () =>
-        getInformationPageData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-          pagesOfGuides.informationPage,
-        ),
-    };
-  }
+  // if (type === 'information page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Information',
+  //     getData: () =>
+  //       getInformationPageData(
+  //         id,
+  //         parent_department,
+  //         parent_topic,
+  //         grandparent_topic_collection,
+  //         client,
+  //         pagesOfGuides.informationPage,
+  //       ),
+  //   };
+  // }
 
   // If we're a guide page
-  if (type === 'guide page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Guide',
-      getData: () =>
-        getGuidePageData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-        ),
-    };
-  }
+  // if (type === 'guide page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Guide',
+  //     getData: () =>
+  //       getGuidePageData(
+  //         id,
+  //         parent_department,
+  //         parent_topic,
+  //         grandparent_topic_collection,
+  //         client,
+  //       ),
+  //   };
+  // }
 
   // If we're an official docs page
-  if (type === 'official document page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
-      getData: () =>
-        getOfficialDocumentPageData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-        ),
-    };
-  }
+  // if (type === 'official document page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
+  //     getData: () =>
+  //       getOfficialDocumentPageData(
+  //         id,
+  //         parent_department,
+  //         parent_topic,
+  //         grandparent_topic_collection,
+  //         client,
+  //       ),
+  //   };
+  // }
 
-  // If we're the departments page
-  if (type === 'departments') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Departments',
-      getData: () => getDepartmentsPageData(client),
-    };
-  }
+  // // If we're the departments page
+  // if (type === 'departments') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Departments',
+  //     getData: () => getDepartmentsPageData(client),
+  //   };
+  // }
 
-  // If we're a form container
-  if (type === 'form container') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Form',
-      getData: () =>
-        getFormContainerData(
-          id,
-          parent_department,
-          parent_topic,
-          grandparent_topic_collection,
-          client,
-        ),
-    };
-  }
+  // // If we're a form container
+  // if (type === 'form container') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Form',
+  //     getData: () =>
+  //       getFormContainerData(
+  //         id,
+  //         parent_department,
+  //         parent_topic,
+  //         grandparent_topic_collection,
+  //         client,
+  //       ),
+  //   };
+  // }
 
-  // If we're a location page
-  if (type === 'location page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Location',
-      getData: () => getLocationPageData(id, client),
-    };
-  }
+  // // If we're a location page
+  // if (type === 'location page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Location',
+  //     getData: () => getLocationPageData(id, client),
+  //   };
+  // }
 
-  // If we're an event page
-  if (type === 'event page') {
-    return {
-      path: url,
-      template: 'src/components/Pages/Event',
-      getData: () => getEventPageData(id, client),
-    };
-  }
+  // // If we're an event page
+  // if (type === 'event page') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Event',
+  //     getData: () => getEventPageData(id, client),
+  //   };
+  // }
 
-  // If we are the list of all events
-  if (type === 'events') {
-    return {
-      path: url,
-      template: 'src/components/Pages/EventList',
-      getData: () => getAllEvents(client, false),
-    };
-  }
+  // // If we are the list of all events
+  // if (type === 'events') {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/EventList',
+  //     getData: () => getAllEvents(client, false),
+  //   };
+  // }
+  // return {}
+  console.log(pageAtUrlInfo)
   return {}
 };
 
@@ -912,7 +979,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const data = {
     path: path,
     template: 'src/components/Pages/Home',
-    // children: allPages,
+    children: allPages,
     getData: async () => {
       // const { allServicePages } = await client.request(topServicesQuery);
       // let services = cleanLinks(allServicePages, 'service');

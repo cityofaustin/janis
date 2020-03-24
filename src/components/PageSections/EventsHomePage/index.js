@@ -20,7 +20,8 @@ const filterEvents = (events) => {
 
 const EventsHomePage = ({events}) => {
   const intl = useIntl();
-  const threeEvents = filterEvents(events);
+  // const threeEvents = filterEvents(events);
+  const threeEvents = null;
 
   return (
     (threeEvents && !!threeEvents.length) &&

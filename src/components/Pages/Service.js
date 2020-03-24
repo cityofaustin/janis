@@ -37,6 +37,19 @@ const Service = ({ service, intl }) => {
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
+  console.log(      image,
+      title,
+      slug,
+      steps,
+      additionalContent,
+      dynamicContent,
+      contacts,
+      related,
+      shortDescription,
+      coaGlobal,
+      contextualNavData,
+      pageIsPartOf)
+
   return (
     <div>
       <Head>
@@ -44,13 +57,14 @@ const Service = ({ service, intl }) => {
       </Head>
       {image && <PageBanner image={image} />}
       <div>
-        {!coaGlobal && (
-          <ContextualNav
-            parent={contextualNavData.parent}
-            relatedTo={contextualNavData.relatedTo}
-            offeredBy={contextualNavData.offeredBy}
-          />
-        )}
+      {//!coaGlobal && (
+      //     <ContextualNav
+      //       parent={contextualNavData.parent}
+      //       relatedTo={contextualNavData.relatedTo}
+      //       offeredBy={contextualNavData.offeredBy}
+      //     />
+      //   )} 
+    }
 
         {!pageIsPartOf ? (
           <PageHeader contentType={'service'} description={shortDescription}>
