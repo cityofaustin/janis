@@ -11,9 +11,7 @@ import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import DirectorHeadshot from 'components/DirectorHeadshot';
-import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
-import WorkInProgress from 'components/WorkInProgress';
 
 import TileGroup from 'components/Tiles/TileGroup';
 

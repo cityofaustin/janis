@@ -245,6 +245,8 @@ const getTopicCollectionPageData = async (id, client) => {
   return { tc: topicCollection };
 };
 
+// TODO: contextual nav data!!!! for everything
+// also i think ill move this above? not sure
 const getContextualNavData = async (
   parent_department,
   parent_topic,
@@ -467,6 +469,10 @@ const checkUrl = async url => {
 };
 
 const getWorkingDocumentLink = async filename => {
+  /* 
+    depending on environment, returns a valid url from either staging or production
+    used in getOfficialDocumentPageData
+  */
   // Single source mode, example use case:
   // If we're on PROD, we should only get prod documents
   if (process.env.CMS_DOCS !== 'multiple') {
@@ -629,13 +635,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   const type = 'blank';
 
   // If we're a department page, we need to make sure our top services/related info works
-  // if (type === 'department') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Department',
-  //     getData: () => getDepartmentPageData(id, client),
-  //   };
-  // }
+  // todo: make sure the comment above still works
   if (departmentpage) {
     return {
       path: janisUrls[0].slice(20),
@@ -647,14 +647,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // If we are a topic collection page, we need to use a query to get information about
   // our child topics and their top pages
   // (this might be able to move to the end with the "just run a query without extra vars" part)
-  // if (type === 'topic collection') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/TopicCollection',
-  //     getData: () => getTopicCollectionPageData(id, client),
-  //   };
-  // }
-
+  // todo: what does this comment above mean?
   if (topiccollectionpage) {
     return {
       path: janisUrls[0].slice(20),
@@ -664,14 +657,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   }
 
   // If we are a topic page, we need a parent topic collection id
-  // if (type === 'topic' && parent_topic_collection) {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Topic',
-  //     getData: () => getTopicPageData(id, parent_topic_collection, client),
-  //   };
-  // }
-
   if (janisbasepagewithtopiccollections) {
     // i think this can only be this
     return {
@@ -784,6 +769,24 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   }
 
 
+  if (locationpage) {
+    return {
+      path: janisUrls[0].slice(20),
+      template: 'src/components/Pages/Location',
+      getData: () => getLocationPageData(locationpage.id, client),
+    }
+  }
+
+  if (eventpage) {
+    return {
+      // todo, fix this path. how did it work before?
+      path: '/eventtest/',
+      template: 'src/components/Pages/Event',
+      getData: () => getEventPageData(eventpage.id, client),
+    }
+  }
+
+
   // // If we're the departments page
   // if (type === 'departments') {
   //   return {
@@ -793,31 +796,13 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   //   };
   // }
 
-
-  // // If we're a location page
-  // if (type === 'location page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Location',
-  //     getData: () => getLocationPageData(id, client),
-  //   };
-  // }
-
-  // // If we're an event page
-  // if (type === 'event page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Event',
-  //     getData: () => getEventPageData(id, client),
-  //   };
-  // }
-
   // // If we are the list of all events
   // if (type === 'events') {
   //   return {
   //     path: url,
   //     template: 'src/components/Pages/EventList',
   //     getData: () => getAllEvents(client, false),
+          // getAllEvents takes client and boolean if we should hide the cancelled events
   //   };
   // }
 };
@@ -958,8 +943,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     template: 'src/components/Pages/Home',
     children: allPages,
     getData: async () => {
-      // const { allServicePages } = await client.request(topServicesQuery);
-      const allServicePages = {"edges":[{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjU=","title":"Get your bulk items collectedd","slug":"bulk-item-pickup","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjY=","title":"Get ready for curbside compost","slug":"compost-pickup","coaGlobal":false,"departments":[],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjU4","slug":"compost-food-waste","title":"Compost and food waste","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Ng==","title":"Recycling, trash, and compost","slug":"recycling-trash-and-compost","theme":{"id":"VGhlbWVOb2RlOjI=","slug":"housing-utilities"}}}}]}}}},{"node":{"topic":{"id":"VG9waWNOb2RlOjU3","slug":"household-waste","title":"Household waste","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Ng==","title":"Recycling, trash, and compost","slug":"recycling-trash-and-compost","theme":{"id":"VGhlbWVOb2RlOjI=","slug":"housing-utilities"}}}}]}}}}]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjc=","title":"Find free condoms and learn other ways to prevent HIV","slug":"find-free-condoms","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjUz","slug":"disease-prevention","title":"Disease prevention","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Mg==","title":"Health and prevention","slug":"health-prevention","theme":{"id":"VGhlbWVOb2RlOjQ=","slug":"health-safety"}}}}]}}}}]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjk=","title":"Get immunizations for you and your family","slug":"get-immunized","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjUz","slug":"disease-prevention","title":"Disease prevention","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Mg==","title":"Health and prevention","slug":"health-prevention","theme":{"id":"VGhlbWVOb2RlOjQ=","slug":"health-safety"}}}}]}}}}]}}}]}
+      const { allServicePages } = await client.request(topServicesQuery);
 
       let services = cleanLinks(allServicePages, 'service');
 
@@ -975,7 +959,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
         title: s.title,
       }));
 
-      // const allActiveEvents = await getAllEvents(client, true);
+      const allActiveEvents = await getAllEvents(client, true);
 
       return {
         topServices,
@@ -983,7 +967,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
-        events: [],
+        events: allActiveEvents,
       };
     },
   };
@@ -1000,6 +984,7 @@ export default {
     title: 'City of Austin',
   }),
   getSiteData: async () => {
+    // getSiteData's result is made available to the entire site via the useSiteData hook
     const queries = [
       {
         query: allThemesQuery,

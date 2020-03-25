@@ -12,6 +12,15 @@ const topServicesQuery = `
             title
             slug
           }
+        }
+      }
+    }
+  }
+`;
+
+export default topServicesQuery;
+
+/*
           topics {
             edges {
               node {
@@ -39,10 +48,4 @@ const topServicesQuery = `
               }
             }
           }
-        }
-      }
-    }
-  }
-`;
-
-export default topServicesQuery;
+    */

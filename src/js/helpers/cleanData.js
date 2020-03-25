@@ -562,20 +562,6 @@ export const cleanNavigation = (navigation, lang) => {
   return cleanedNavigation;
 };
 
-export const clean311 = threeoneone => {
-  const { all311 } = threeoneone;
-
-  if (!all311 || !all311.edges) return null;
-
-  return all311.edges.map(({ node: link }) => {
-    const { title, url } = link;
-    return {
-      url: url,
-      text: title,
-    };
-  });
-};
-
 const checkUrl = async url => {
   return await axios({
     method: 'HEAD',
