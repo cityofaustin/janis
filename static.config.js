@@ -604,7 +604,10 @@ const getAllEvents = async (client, hideCanceled) => {
 };
 
 const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
-  // console.log('p: ', pageAtUrlInfo);
+  /* 
+  buildPageAtUrl takes a page information object and the language client
+  returns object with page url, template and data from appropiate query
+  */
   // const {
   //   url,
   //   type,
@@ -633,6 +636,13 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   //     getData: () => getDepartmentPageData(id, client),
   //   };
   // }
+  if (departmentpage) {
+    return {
+      path: janisUrls[0].slice(20),
+      template: 'src/components/Pages/Department',
+      getData: () => getDepartmentPageData(departmentpage.id, client),
+    }
+  }
 
   // If we are a topic collection page, we need to use a query to get information about
   // our child topics and their top pages
@@ -646,13 +656,21 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // }
 
   if (topiccollectionpage) {
-    console.log(topiccollectionpage.id)
     return {
       path: janisUrls[0].slice(20),
       template: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(topiccollectionpage.id, client),
     }
   }
+
+  // If we are a topic page, we need a parent topic collection id
+  // if (type === 'topic' && parent_topic_collection) {
+  //   return {
+  //     path: url,
+  //     template: 'src/components/Pages/Topic',
+  //     getData: () => getTopicPageData(id, parent_topic_collection, client),
+  //   };
+  // }
 
   if (janisbasepagewithtopiccollections) {
     // i think this can only be this
@@ -673,7 +691,21 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     } = janisbasepagewithtopics;
 
     if (guidepage) {
-
+      return {
+        path: janisUrls[0].slice(20),
+        template: 'src/components/Pages/Guide',
+        getData: () =>
+          getGuidePageData(
+            guidepage.id,
+            '',
+            '',
+            '',
+            // parent_department,
+            // parent_topic,
+            // grandparent_topic_collection,
+            client,
+          ),
+        }
     }
 
     if (servicepage) {
@@ -715,87 +747,42 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (officialdocumentpage) {
-
+      return {
+        path: janisUrls[0].slice(20),
+        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
+        getData: () =>
+          getOfficialDocumentPageData(
+            officialdocumentpage.id,
+            '',
+            '',
+            '',
+            // parent_department,
+            // parent_topic,
+            // grandparent_topic_collection,
+            client,
+          ),
+      };      
     }
-    if (formcontainer) {
 
+    if (formcontainer) {
+      return {
+        path: janisUrls[0].slice(20),
+        template: 'src/components/Pages/Form',
+        getData: () =>
+          getFormContainerData(
+            formcontainer.id,
+            '',
+            '',
+            '',
+            // parent_department,
+            // parent_topic,
+            // grandparent_topic_collection,
+            client,
+          ),
+      };
     }
   }
 
-  // If we are a topic page, we need a parent topic collection id
-  // if (type === 'topic' && parent_topic_collection) {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Topic',
-  //     getData: () => getTopicPageData(id, parent_topic_collection, client),
-  //   };
-  // }
-
-  // If we're a service page
-  // if (type === 'service page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Service',
-  //     getData: () =>
-  //       getServicePageData(
-  //         id,
-  //         parent_department,
-  //         parent_topic,
-  //         grandparent_topic_collection,
-  //         client,
-  //         pagesOfGuides.servicePage,
-  //       ),
-  //   };
-  // }
-
-  // If we're an information page
-  // if (type === 'information page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Information',
-  //     getData: () =>
-  //       getInformationPageData(
-  //         id,
-  //         parent_department,
-  //         parent_topic,
-  //         grandparent_topic_collection,
-  //         client,
-  //         pagesOfGuides.informationPage,
-  //       ),
-  //   };
-  // }
-
-  // If we're a guide page
-  // if (type === 'guide page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Guide',
-  //     getData: () =>
-  //       getGuidePageData(
-  //         id,
-  //         parent_department,
-  //         parent_topic,
-  //         grandparent_topic_collection,
-  //         client,
-  //       ),
-  //   };
-  // }
-
-  // If we're an official docs page
-  // if (type === 'official document page') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
-  //     getData: () =>
-  //       getOfficialDocumentPageData(
-  //         id,
-  //         parent_department,
-  //         parent_topic,
-  //         grandparent_topic_collection,
-  //         client,
-  //       ),
-  //   };
-  // }
 
   // // If we're the departments page
   // if (type === 'departments') {
@@ -806,21 +793,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   //   };
   // }
 
-  // // If we're a form container
-  // if (type === 'form container') {
-  //   return {
-  //     path: url,
-  //     template: 'src/components/Pages/Form',
-  //     getData: () =>
-  //       getFormContainerData(
-  //         id,
-  //         parent_department,
-  //         parent_topic,
-  //         grandparent_topic_collection,
-  //         client,
-  //       ),
-  //   };
-  // }
 
   // // If we're a location page
   // if (type === 'location page') {
@@ -848,9 +820,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   //     getData: () => getAllEvents(client, false),
   //   };
   // }
-  // return {}
-  console.log(pageAtUrlInfo)
-  return {}
 };
 
 const getPagesOfGuidesData = async client => {
