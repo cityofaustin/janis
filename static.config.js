@@ -8,10 +8,9 @@ import moment from 'moment-timezone';
 // TODO: clean these up/remove them
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-// import all311Query from 'js/queries/all311Query';
 
 
-// Shinier ✨ new queries!
+// Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
 
 // Shiny ✨ new queries!
@@ -50,6 +49,12 @@ const getAllTopicLinks = (
   allGuidePageTopics,
   allFormContainerTopics,
 ) => {
+  /* 
+    getAllTopicLinks: collects all the topic links from servicepagetopics, infopage topics
+    official doc topics, guidepage topics and form container topics into one 
+    array of links.
+    Used in getTopicPageData for topics.otherLinks
+  */
   // I don't like this but we still need to do some logic here
   // to get all the pages
   let allLinks = [];
@@ -985,13 +990,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     children: allPages,
     getData: async () => {
       // const { allServicePages } = await client.request(topServicesQuery);
-      // let services = cleanLinks(allServicePages, 'service');
+      const allServicePages = {"edges":[{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjU=","title":"Get your bulk items collectedd","slug":"bulk-item-pickup","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjY=","title":"Get ready for curbside compost","slug":"compost-pickup","coaGlobal":false,"departments":[],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjU4","slug":"compost-food-waste","title":"Compost and food waste","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Ng==","title":"Recycling, trash, and compost","slug":"recycling-trash-and-compost","theme":{"id":"VGhlbWVOb2RlOjI=","slug":"housing-utilities"}}}}]}}}},{"node":{"topic":{"id":"VG9waWNOb2RlOjU3","slug":"household-waste","title":"Household waste","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Ng==","title":"Recycling, trash, and compost","slug":"recycling-trash-and-compost","theme":{"id":"VGhlbWVOb2RlOjI=","slug":"housing-utilities"}}}}]}}}}]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjc=","title":"Find free condoms and learn other ways to prevent HIV","slug":"find-free-condoms","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjUz","slug":"disease-prevention","title":"Disease prevention","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Mg==","title":"Health and prevention","slug":"health-prevention","theme":{"id":"VGhlbWVOb2RlOjQ=","slug":"health-safety"}}}}]}}}}]}}},{"node":{"id":"U2VydmljZVBhZ2VOb2RlOjk=","title":"Get immunizations for you and your family","slug":"get-immunized","coaGlobal":false,"departments":[{"id":"RGVwYXJ0bWVudFBhZ2VOb2RlOjExNw==","title":"Austin Public Health","slug":"austin-public-health"}],"topics":{"edges":[{"node":{"topic":{"id":"VG9waWNOb2RlOjUz","slug":"disease-prevention","title":"Disease prevention","description":"","topiccollections":{"edges":[{"node":{"topiccollection":{"id":"VG9waWNDb2xsZWN0aW9uTm9kZTo1Mg==","title":"Health and prevention","slug":"health-prevention","theme":{"id":"VGhlbWVOb2RlOjQ=","slug":"health-safety"}}}}]}}}}]}}}]}
 
-      // // Make sure we don't have any dupes in top services
-      // services = services.filter(
-      //   (service, index) =>
-      //     index === services.findIndex(s => s.id === service.id),
-      // );
+      let services = cleanLinks(allServicePages, 'service');
+
+      // Make sure we don't have any dupes in top services
+      services = services.filter(
+        (service, index) =>
+          index === services.findIndex(s => s.id === service.id),
+      );
 
       const topServices = services.map(s => ({
         type: !!langCode ? langCode : 'en',

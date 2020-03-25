@@ -345,8 +345,8 @@ export const cleanLinks = (links, pageType) => {
         let linkCopy = JSON.parse(JSON.stringify(link));
 
         pathPrefix = `/${department.slug}`;
-        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.slug = link.slug;
+        linkCopy.url = `${pathPrefix}/${link.slug}`;
         linkCopy.text = link.title;
 
         linkCopy.department = department;
