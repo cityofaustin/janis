@@ -643,7 +643,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   if (topiccollectionpage) {
     console.log(topiccollectionpage.id)
     return {
-      path: janisUrls[0],
+      path: janisUrls[0].slice(20),
       template: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(topiccollectionpage.id, client),
     }
@@ -652,7 +652,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   if (janisbasepagewithtopiccollections) {
     // i think this can only be this
     return {
-      path: janisUrls[0],
+      path: janisUrls[0].slice(20),
       template: 'src/components/Pages/Topic',
       getData: () => getTopicPageData(id, parent_topic_collection, client),
     };
@@ -993,16 +993,16 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       //     index === services.findIndex(s => s.id === service.id),
       // );
 
-      // const topServices = services.map(s => ({
-      //   type: !!langCode ? langCode : 'en',
-      //   url: s.url,
-      //   title: s.title,
-      // }));
+      const topServices = services.map(s => ({
+        type: !!langCode ? langCode : 'en',
+        url: s.url,
+        title: s.title,
+      }));
 
       // const allActiveEvents = await getAllEvents(client, true);
 
       return {
-        // topServices,
+        topServices,
         image: {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
