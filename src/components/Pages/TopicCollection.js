@@ -6,7 +6,6 @@ import { injectIntl } from 'react-intl';
 import { topics as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
-import ContextualNav from '../PageSections/ContextualNav';
 import TopicCollectionCards from '../PageSections/TopicCollectionCards';
 import UserFeedback from 'components/UserFeedback';
 

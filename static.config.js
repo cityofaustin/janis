@@ -5,7 +5,7 @@ import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
-// TODO: clean these up/remove them
+// TODO: clean these up/remove them <-- why remove them?
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 
@@ -14,7 +14,7 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 import allPagesQuery from 'js/queries/allPagesQuery';
 
 // Shiny ✨ new queries!
-import siteStructureQuery from 'js/queries/siteStructureQuery';
+// import siteStructureQuery from 'js/queries/siteStructureQuery';
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
 import getTopicPageQuery from 'js/queries/getTopicPageQuery';
 import getInformationPageQuery from 'js/queries/getInformationPageQuery';
@@ -30,6 +30,7 @@ import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQu
 import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 
+//todo: check if we still need all of these
 import {
   cleanNavigation,
   cleanContacts,
@@ -41,6 +42,96 @@ import {
   getEventPageUrl,
   formatFeesRange,
 } from 'js/helpers/cleanData';
+
+// TODO: contextual nav data!!!! for everything
+// also i think ill move this above? not sure
+const getContextualNavData = async (
+  parent_department, // what is this type? 
+  parent_topic,
+  grandparent_topic_collection,
+  departments,
+  client,
+) => {
+  let contextualNavData = {};
+
+  const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
+    parent_topic && grandparent_topic_collection
+      ? await client.request(getContextualNavTopicDataQuery, {
+          parent_topic: parent_topic,
+          grandparent_topic_collection: grandparent_topic_collection,
+        })
+      : {
+          allTopics: null,
+          allTopicPageTopicCollections: null,
+          allTopicCollections: null,
+        };
+
+  // again, its called all department pages, but its really just the one department page, right?
+  const { allDepartmentPages } = parent_department
+    ? await client.request(getContextualNavDepartmentDataQuery, {
+        parent_department: parent_department,
+      })
+    : { allDepartmentPages: null }; // how could you have a parent_department, but have no pages?
+
+  // get parent
+  if (
+    parent_topic &&
+    grandparent_topic_collection &&
+    allTopics &&
+    allTopics.edges.length &&
+    allTopicCollections &&
+    allTopicCollections.edges.length &&
+    allTopicCollections.edges[0].node.theme
+  ) {
+    contextualNavData.parent = {
+      id: allTopics.edges[0].node.id,
+      title: allTopics.edges[0].node.title,
+      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+        allTopicCollections.edges[0].node.slug
+      }/${allTopics.edges[0].node.slug}/`,
+    };
+  }
+
+  if (
+    parent_department &&
+    allDepartmentPages && // the result of the parent_dept query, the dept details
+    allDepartmentPages.edges.length
+  ) {
+    contextualNavData.parent = {
+      id: allDepartmentPages.edges[0].node.id,
+      title: allDepartmentPages.edges[0].node.title,
+      url: `/${allDepartmentPages.edges[0].node.slug}/`,
+    };
+  }
+
+  // get related to
+  if (
+    parent_topic &&
+    grandparent_topic_collection &&
+    allTopicPageTopicCollections &&
+    allTopicPageTopicCollections.edges.length &&
+    allTopicCollections &&
+    allTopicCollections.edges.length &&
+    allTopicCollections.edges[0].node.theme
+  ) {
+    contextualNavData.relatedTo = allTopicPageTopicCollections.edges
+      .filter(edge => edge.node && edge.node.page.id !== parent_topic)
+      .map(edge => ({
+        id: edge.node.page.id,
+        title: edge.node.page.title,
+        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+          allTopicCollections.edges[0].node.slug
+        }/${edge.node.page.slug}/`,
+      }));
+  } else {
+    contextualNavData.relatedTo = [];
+  }
+
+  // get offered by
+  contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
+
+  return contextualNavData;
+};
 
 const getAllTopicLinks = (
   allServicePageTopics,
@@ -54,6 +145,7 @@ const getAllTopicLinks = (
     official doc topics, guidepage topics and form container topics into one 
     array of links.
     Used in getTopicPageData for topics.otherLinks
+    --> gets the pages that aren't top pages. so the other pages. 
   */
   // I don't like this but we still need to do some logic here
   // to get all the pages
@@ -137,6 +229,8 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
     allTopicCollections.edges.length &&
     allTopicCollections.edges[0].node.theme
   ) {
+    // its called allTopicCollections, but its the name of the query, so if you pass in an id you dont get all
+  // of them, you only get one. 
     topic.contextualNavData.parent = {
       id: allTopicCollections.edges[0].node.id,
       title: allTopicCollections.edges[0].node.title,
@@ -219,6 +313,7 @@ const getTopicCollectionPageData = async (id, client) => {
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
   let topicCollection = allTopicCollections.edges[0].node;
+  if (allTopicPageTopicCollections.edges.length) {
   topicCollection.topics = allTopicPageTopicCollections.edges
     .filter(edge => edge.node.page.live)
     .map(edge => ({
@@ -241,97 +336,11 @@ const getTopicCollectionPageData = async (id, client) => {
         }/${topPageEdge.node.slug}/`,
       })),
     }));
+  } else {
+    topicCollection.topics = []
+  }
 
   return { tc: topicCollection };
-};
-
-// TODO: contextual nav data!!!! for everything
-// also i think ill move this above? not sure
-const getContextualNavData = async (
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  departments,
-  client,
-) => {
-  let contextualNavData = {};
-
-  const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
-    parent_topic && grandparent_topic_collection
-      ? await client.request(getContextualNavTopicDataQuery, {
-          parent_topic: parent_topic,
-          grandparent_topic_collection: grandparent_topic_collection,
-        })
-      : {
-          allTopics: null,
-          allTopicPageTopicCollections: null,
-          allTopicCollections: null,
-        };
-
-  const { allDepartmentPages } = parent_department
-    ? await client.request(getContextualNavDepartmentDataQuery, {
-        parent_department: parent_department,
-      })
-    : { allDepartmentPages: null };
-
-  // get parent
-  if (
-    parent_topic &&
-    grandparent_topic_collection &&
-    allTopics &&
-    allTopics.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length &&
-    allTopicCollections.edges[0].node.theme
-  ) {
-    contextualNavData.parent = {
-      id: allTopics.edges[0].node.id,
-      title: allTopics.edges[0].node.title,
-      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-        allTopicCollections.edges[0].node.slug
-      }/${allTopics.edges[0].node.slug}/`,
-    };
-  }
-
-  if (
-    parent_department &&
-    allDepartmentPages &&
-    allDepartmentPages.edges.length
-  ) {
-    contextualNavData.parent = {
-      id: allDepartmentPages.edges[0].node.id,
-      title: allDepartmentPages.edges[0].node.title,
-      url: `/${allDepartmentPages.edges[0].node.slug}/`,
-    };
-  }
-
-  // get related to
-  if (
-    parent_topic &&
-    grandparent_topic_collection &&
-    allTopicPageTopicCollections &&
-    allTopicPageTopicCollections.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length &&
-    allTopicCollections.edges[0].node.theme
-  ) {
-    contextualNavData.relatedTo = allTopicPageTopicCollections.edges
-      .filter(edge => edge.node && edge.node.page.id !== parent_topic)
-      .map(edge => ({
-        id: edge.node.page.id,
-        title: edge.node.page.title,
-        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-          allTopicCollections.edges[0].node.slug
-        }/${edge.node.page.slug}/`,
-      }));
-  } else {
-    contextualNavData.relatedTo = [];
-  }
-
-  // get offered by
-  contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
-
-  return contextualNavData;
 };
 
 const getServicePageData = async (
@@ -638,7 +647,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // todo: make sure the comment above still works
   if (departmentpage) {
     return {
-      path: janisUrls[0].slice(20),
+      // temporary until janis urls in dept page
+      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${departmentpage.id}`,
       template: 'src/components/Pages/Department',
       getData: () => getDepartmentPageData(departmentpage.id, client),
     }
@@ -771,7 +781,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   if (locationpage) {
     return {
-      path: janisUrls[0].slice(20),
+      // temporary until location urls
+      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${locationpage.id}`,
       template: 'src/components/Pages/Location',
       getData: () => getLocationPageData(locationpage.id, client),
     }
@@ -779,18 +790,19 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   if (eventpage) {
     return {
-      // todo, fix this path. how did it work before?
-      path: '/eventtest/',
+      // temporary until event urls
+      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${eventpage.id}`,
       template: 'src/components/Pages/Event',
       getData: () => getEventPageData(eventpage.id, client),
     }
   }
 
 
+// todo -- do we handle these in here? or should i handle thme outside of this place?
   // // If we're the departments page
   // if (type === 'departments') {
   //   return {
-  //     path: url,
+  //     path: url, //'/departments/'
   //     template: 'src/components/Pages/Departments',
   //     getData: () => getDepartmentsPageData(client),
   //   };
@@ -799,7 +811,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // // If we are the list of all events
   // if (type === 'events') {
   //   return {
-  //     path: url,
+  //     path: url, //'/events/'
   //     template: 'src/components/Pages/EventList',
   //     getData: () => getAllEvents(client, false),
           // getAllEvents takes client and boolean if we should hide the cancelled events
@@ -885,10 +897,10 @@ const getPagesOfGuidesData = async client => {
 };
 
 const makeAllPages = async (langCode, incrementalPageId) => {
-  if (incrementalPageId) {
-    console.log("Looks like we're trying to do an incremental build!");
-  }
-
+  /*
+    returns react-static data object with homepage and all built pages
+    as children per language code
+  */
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
 
@@ -897,12 +909,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const siteStructure = await client.request(allPagesQuery)
   let pages = siteStructure.allPages.edges;
 
-  // const siteStructure = await client.request(siteStructureQuery);
-  // let parsedStructure = JSON.parse(siteStructure.siteStructure.structureJson);
-
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
   if (incrementalPageId) {
+    console.log("Looks like we're trying to do an incremental build!");
     // First let's find all of the parent/grandparent ids we need
     // to rebuild titles on links etc.
     let idsToRebuild = [incrementalPageId];
@@ -929,6 +939,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   }
 
   // what does pages of guides data do? what is it for?
+  // TODO: pages of guides data
   // const pagesOfGuidesData = await getPagesOfGuidesData(client);
   const pagesOfGuidesData = []
 
@@ -948,6 +959,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       let services = cleanLinks(allServicePages, 'service');
 
       // Make sure we don't have any dupes in top services
+      // TODO: check if still needed
       services = services.filter(
         (service, index) =>
           index === services.findIndex(s => s.id === service.id),
