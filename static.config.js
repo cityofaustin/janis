@@ -639,7 +639,9 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     departmentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
-    janisbasepagewithtopics
+    janisbasepagewithtopics,
+    allDepartments,
+    allEvents,
   } = pageAtUrlInfo;
   const type = 'blank';
 
@@ -797,26 +799,24 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
   }
 
+  // If we're the departments page
+  if (allDepartments) {
+    return {
+      path: '/departments/'
+      template: 'src/components/Pages/Departments',
+      getData: () => getDepartmentsPageData(client),
+    };
+  }
 
-// todo -- do we handle these in here? or should i handle thme outside of this place?
-  // // If we're the departments page
-  // if (type === 'departments') {
-  //   return {
-  //     path: url, //'/departments/'
-  //     template: 'src/components/Pages/Departments',
-  //     getData: () => getDepartmentsPageData(client),
-  //   };
-  // }
-
-  // // If we are the list of all events
-  // if (type === 'events') {
-  //   return {
-  //     path: url, //'/events/'
-  //     template: 'src/components/Pages/EventList',
-  //     getData: () => getAllEvents(client, false),
+  // If we are the list of all events
+  if (allEvents) {
+    return {
+      path: '/events/'
+      template: 'src/components/Pages/EventList',
+      getData: () => getAllEvents(client, false),
           // getAllEvents takes client and boolean if we should hide the cancelled events
-  //   };
-  // }
+    };
+  }
 };
 
 const getPagesOfGuidesData = async client => {
@@ -942,6 +942,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // TODO: pages of guides data
   // const pagesOfGuidesData = await getPagesOfGuidesData(client);
   const pagesOfGuidesData = []
+
+  pages.push({
+    node: {
+      allDepartments: true
+    }, 
+    node: {
+      allEvents: true
+    }
+  })
 
   const allPages = await Promise.all(
     pages.map(pageAtUrlInfo =>
