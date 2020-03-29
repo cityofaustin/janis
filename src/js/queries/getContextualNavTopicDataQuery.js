@@ -9,17 +9,6 @@ const getContextualNavTopicDataQuery = `
         }
       }
     }
-    allTopicPageTopicCollections(topiccollection:$grandparent_topic_collection) {
-      edges {
-        node {
-          page {
-            id
-            slug
-            title
-          }
-        }
-      }
-    }
     allTopicCollections(id:$grandparent_topic_collection) {
       edges {
         node {
@@ -36,3 +25,18 @@ const getContextualNavTopicDataQuery = `
 `;
 
 export default getContextualNavTopicDataQuery;
+
+/*
+    allTopicPageTopicCollections(topiccollection:$grandparent_topic_collection) {
+      edges {
+        node {
+          page {
+            id
+            slug
+            title
+          }
+        }
+      }
+    }
+
+*/

@@ -9,7 +9,6 @@ import moment from 'moment-timezone';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 
-
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
 
@@ -30,7 +29,7 @@ import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQu
 import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 
-//todo: check if we still need all of these
+//todo (chia) : check if we still need all of these
 import {
   cleanNavigation,
   cleanContacts,
@@ -43,16 +42,20 @@ import {
   formatFeesRange,
 } from 'js/helpers/cleanData';
 
-// TODO: contextual nav data!!!! for everything
 const getContextualNavData = async (
-  parent_department, // what is this type? 
-  parent_topic,
-  grandparent_topic_collection,
-  departments,
+  parent_department, // id string
+  parent_topic, // id string
+  grandparent_topic_collection, // id string
+  departments, // array of department objects {id, slug, title}
   client,
 ) => {
   let contextualNavData = {};
 
+  // returns allTopics: topic object for specified parent_topic id {id, slug, title}
+  // allTopicPageTopicCollections: array of topic objs that are under grandparent_topic_collection
+  //    including the parent_topic
+  // allTopicCollections: topic_collection object for specified grandparent_topic_collection
+  //   {id, slug, theme:{id, slug}}
   const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
     parent_topic && grandparent_topic_collection
       ? await client.request(getContextualNavTopicDataQuery, {
@@ -65,12 +68,12 @@ const getContextualNavData = async (
           allTopicCollections: null,
         };
 
-  // again, its called all department pages, but its really just the one department page, right?
+  // returns department object for the specified dept id
   const { allDepartmentPages } = parent_department
     ? await client.request(getContextualNavDepartmentDataQuery, {
         parent_department: parent_department,
       })
-    : { allDepartmentPages: null }; // how could you have a parent_department, but have no pages?
+    : { allDepartmentPages: null };
 
   // get parent
   if (
@@ -85,6 +88,7 @@ const getContextualNavData = async (
     contextualNavData.parent = {
       id: allTopics.edges[0].node.id,
       title: allTopics.edges[0].node.title,
+      // url is theme/topic-collection/topic
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
       }/${allTopics.edges[0].node.slug}/`,
@@ -93,7 +97,7 @@ const getContextualNavData = async (
 
   if (
     parent_department &&
-    allDepartmentPages && // the result of the parent_dept query, the dept details
+    allDepartmentPages && // note, not all dept pages, the result of the query
     allDepartmentPages.edges.length
   ) {
     contextualNavData.parent = {
@@ -124,6 +128,7 @@ const getContextualNavData = async (
       }));
   } else {
     contextualNavData.relatedTo = [];
+    // relatedTo is empty if we are viewing page under the department
   }
 
   // get offered by
@@ -308,13 +313,16 @@ const getDepartmentPageData = async (id, client) => {
 const getTopicCollectionPageData = async (id, client) => {
   const {
     allTopicCollections,
-    allTopicPageTopicCollections,
+    // allTopicPageTopicCollections,
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
   // todo: need work around the topic collection
 
+  // all topic page topic collections gets all the topics that are under that topic collection
+
   let topicCollection = allTopicCollections.edges[0].node;
-  if (allTopicPageTopicCollections.edges.length) {
+  // temporary check todo: remove the first check
+  if (false && allTopicPageTopicCollections.edges.length) {
   topicCollection.topics = allTopicPageTopicCollections.edges
     .filter(edge => edge.node.page.live)
     .map(edge => ({
@@ -370,7 +378,7 @@ const getServicePageData = async (
   );
 
   if (pagesOfGuides && pagesOfGuides[id]) {
-    // We're checking if this id is part of guide page because it may not be published and draw and error.
+    // We're checking if this id is part of guide page because it may not be published and draw an error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
 
@@ -646,8 +654,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   } = pageAtUrlInfo;
   const type = 'blank';
 
-  console.log(pageAtUrlInfo)
-
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
   if (departmentpage) {
@@ -673,15 +679,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   // If we are a topic page, we need a parent topic collection id
   if (janisbasepagewithtopiccollections) {
-    // i think this can only be this
     console.log('***** ', janisbasepagewithtopiccollections.topicpage.id)
+    console.log(janisUrls[0])
     let id = janisbasepagewithtopiccollections.topicpage.id;
     // there can be more than one of these, cant there?
     let parent_topic_collection_id = janisbasepagewithtopiccollections.topicpage.topiccollections.id
     return {
       path: janisUrls[0].slice(20),
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(id, '', /*parent_topic_collection, */client),
+      getData: () => getTopicPageData(id, parent_topic_collection_id, client),
     };
   }
 
@@ -963,7 +969,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   })
 
-  console.log(pages);
   const allPages = await Promise.all(
     pages.map(pageAtUrlInfo =>
       buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData),

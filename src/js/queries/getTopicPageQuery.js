@@ -20,6 +20,21 @@ const getTopicPageQuery = `
         }
       }
     }
+    allTopicCollections(id: $tc_id) {
+      edges {
+        node {
+          id
+          slug
+          title
+          theme {
+            id
+            text
+            slug
+          }
+        }
+      }
+    }
+  }
 `;
 
 export default getTopicPageQuery;
