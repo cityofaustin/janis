@@ -20,6 +20,32 @@ const getTopicPageQuery = `
         }
       }
     }
+`;
+
+export default getTopicPageQuery;
+
+/*
+  query getTopicPage($id: ID, $tc_id: ID) {
+    allTopics(id: $id) {
+      edges {
+        node {
+          id
+          slug
+          title
+          description
+          topPages {
+            edges {
+              node {
+                pageId
+                slug
+                title
+                pageType
+              }
+            }
+          }
+        }
+      }
+    }
     allTopicCollections(id: $tc_id) {
       edges {
         node {
@@ -108,6 +134,6 @@ const getTopicPageQuery = `
       }
     }
   }
-`;
+  */
 
-export default getTopicPageQuery;
+

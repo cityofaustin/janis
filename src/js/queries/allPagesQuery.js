@@ -19,6 +19,9 @@ query allPagesQuery {
         janisbasepagewithtopiccollections {
           topicpage {
             id
+            topiccollections {
+              id
+            }
           }
         }
         janisbasepagewithtopics {

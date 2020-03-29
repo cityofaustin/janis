@@ -44,7 +44,6 @@ import {
 } from 'js/helpers/cleanData';
 
 // TODO: contextual nav data!!!! for everything
-// also i think ill move this above? not sure
 const getContextualNavData = async (
   parent_department, // what is this type? 
   parent_topic,
@@ -675,10 +674,14 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // If we are a topic page, we need a parent topic collection id
   if (janisbasepagewithtopiccollections) {
     // i think this can only be this
+    console.log('***** ', janisbasepagewithtopiccollections.topicpage.id)
+    let id = janisbasepagewithtopiccollections.topicpage.id;
+    // there can be more than one of these, cant there?
+    let parent_topic_collection_id = janisbasepagewithtopiccollections.topicpage.topiccollections.id
     return {
       path: janisUrls[0].slice(20),
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(id, parent_topic_collection, client),
+      getData: () => getTopicPageData(id, '', /*parent_topic_collection, */client),
     };
   }
 
