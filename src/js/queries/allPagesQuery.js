@@ -27,6 +27,11 @@ query allPagesQuery {
           }
           servicepage {
             id
+            departments {
+              id
+              title
+              slug
+            }
           }
           informationpage {
             id

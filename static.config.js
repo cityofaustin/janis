@@ -312,6 +312,8 @@ const getTopicCollectionPageData = async (id, client) => {
     allTopicPageTopicCollections,
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
+  // todo: need work around the topic collection
+
   let topicCollection = allTopicCollections.edges[0].node;
   if (allTopicPageTopicCollections.edges.length) {
   topicCollection.topics = allTopicPageTopicCollections.edges
@@ -645,6 +647,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   } = pageAtUrlInfo;
   const type = 'blank';
 
+  console.log(pageAtUrlInfo)
+
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
   if (departmentpage) {
@@ -706,6 +710,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
+      console.log(janisUrls[0].slice(20))
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Service',
@@ -802,7 +807,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // If we're the departments page
   if (allDepartments) {
     return {
-      path: '/departments/'
+      path: '/departments/',
       template: 'src/components/Pages/Departments',
       getData: () => getDepartmentsPageData(client),
     };
@@ -811,7 +816,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // If we are the list of all events
   if (allEvents) {
     return {
-      path: '/events/'
+      path: '/events/',
       template: 'src/components/Pages/EventList',
       getData: () => getAllEvents(client, false),
           // getAllEvents takes client and boolean if we should hide the cancelled events
@@ -946,12 +951,16 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   pages.push({
     node: {
       allDepartments: true
-    }, 
+    }
+  });
+
+  pages.push({
     node: {
       allEvents: true
     }
   })
 
+  console.log(pages);
   const allPages = await Promise.all(
     pages.map(pageAtUrlInfo =>
       buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData),

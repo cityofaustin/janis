@@ -14,6 +14,25 @@ const servicePageFragment = `
     dynamicContent
     additionalContent
     shortDescription
+  }
+`;
+
+export default servicePageFragment;
+
+/*
+  fragment servicePageInfo on ServicePageNode {
+    id
+    title
+    coaGlobal
+    departments {
+      id
+      title
+      slug
+    }
+    steps
+    dynamicContent
+    additionalContent
+    shortDescription
     contacts {
       edges {
         node {
@@ -24,7 +43,4 @@ const servicePageFragment = `
       }
     }
   }
-  ${conciseContactFragment}
-`;
-
-export default servicePageFragment;
+*/
