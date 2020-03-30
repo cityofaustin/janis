@@ -44,14 +44,13 @@ const Service = ({ service, intl }) => {
       </Head>
       {image && <PageBanner image={image} />}
       <div>
-      {!coaGlobal && (
+        {!coaGlobal && (
           <ContextualNav
             parent={contextualNavData.parent}
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
         )} 
-    }
 
         {!pageIsPartOf ? (
           <PageHeader contentType={'service'} description={shortDescription}>
