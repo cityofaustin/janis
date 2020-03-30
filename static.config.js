@@ -701,16 +701,17 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     } = janisbasepagewithtopics;
 
     if (guidepage) {
+      // departments is an array of departments, is the first one always the parent? polyhierarchy
+      let parentDeptId = guidepage.departments.length ? guidepage.departments[0].id : '';
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Guide',
         getData: () =>
           getGuidePageData(
             guidepage.id,
+            parentDeptId,
             '',
             '',
-            '',
-            // parent_department,
             // parent_topic,
             // grandparent_topic_collection,
             client,
@@ -719,18 +720,18 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
-      console.log(janisUrls[0].slice(20))
+       // departments is an array of departments, is the first one always the parent? polyhierarchy
+      let parentDeptId = servicepage.departments.length ? servicepage.departments[0].id : '';
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Service',
         getData: () =>
           getServicePageData(
             servicepage.id,
-            //parent_department,
+            parentDeptId,
             '',
             '',
             //parent_topic,
-            '',
             //grandparent_topic_collection,
             client,
             pagesOfGuides.servicePage,
@@ -739,16 +740,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (informationpage) {
+      let parentDeptId = informationpage.departments.length ? informationpage.departments[0].id : '';
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Information',
         getData: () =>
           getInformationPageData(
             informationpage.id,
+            parentDeptId,
             '',
             '',
-            '',
-            //parent_department,
             //parent_topic,
             //grandparent_topic_collection,
             client,
@@ -758,16 +759,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (officialdocumentpage) {
+      let parentDeptId = officialdocumentpage.departments.length ? officialdocumentpage.departments[0].id : '';
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
         getData: () =>
           getOfficialDocumentPageData(
             officialdocumentpage.id,
+            parentDeptId,
             '',
             '',
-            '',
-            // parent_department,
             // parent_topic,
             // grandparent_topic_collection,
             client,
@@ -776,16 +777,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (formcontainer) {
+      let parentDeptId = formcontainer.departments.length ? formcontainer.departments[0].id : '';
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Form',
         getData: () =>
           getFormContainerData(
             formcontainer.id,
+            parentDeptId,
             '',
             '',
-            '',
-            // parent_department,
             // parent_topic,
             // grandparent_topic_collection,
             client,
@@ -912,7 +913,7 @@ const getPagesOfGuidesData = async client => {
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
-    returns react-static data object with homepage and all built pages
+    makeAllPages returns react-static data object with homepage and all built pages
     as children per language code
   */
   const path = `/${!!langCode ? langCode : ''}`;
@@ -952,17 +953,18 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     );
   }
 
-  // what does pages of guides data do? what is it for?
   // TODO: pages of guides data
   // const pagesOfGuidesData = await getPagesOfGuidesData(client);
   const pagesOfGuidesData = []
 
+  // Build a page with all the departments
   pages.push({
     node: {
       allDepartments: true
     }
   });
 
+  // and also a page with all the events
   pages.push({
     node: {
       allEvents: true
@@ -1005,7 +1007,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           file: 'tomek-baginski-593896-unsplash',
           title: 'Lady Bird Lake',
         },
-        events: allActiveEvents,
+        events: allActiveEvents.events,
       };
     },
   };

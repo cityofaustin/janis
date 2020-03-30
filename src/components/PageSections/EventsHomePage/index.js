@@ -8,13 +8,14 @@ import { events as i18n } from 'js/i18n/definitions';
 
 const filterEvents = (events) => {
   const dateNow = moment().tz('America/Chicago').format('YYYY-MM-DD')
+
   return events.filter((e) => moment(e.date).isSameOrAfter(dateNow)).slice(0,3);
 }
 
 
 const EventsHomePage = ({events}) => {
   const intl = useIntl();
-  const threeEvents = filterEvents(events.events);
+  const threeEvents = filterEvents(events);
 
   return (
     (threeEvents && !!threeEvents.length) &&
