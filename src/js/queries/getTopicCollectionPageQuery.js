@@ -15,34 +15,33 @@ const getTopicCollectionPageQuery = `
         }
       }
     }
+    topicCollectionTopics(topiccollection: $id) {
+      edges {
+        node {
+          page {
+            topicpage {
+              id
+              live
+              slug
+              title
+              description
+              topPages {
+                edges {
+                  node {
+                    title
+                    slug
+                    pageType
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
 export default getTopicCollectionPageQuery;
-
-
-    // allTopicPageTopicCollections(topiccollection: $id) {
-    //   edges {
-    //     node {
-    //       page {
-    //         id
-    //         live
-    //         slug
-    //         title
-    //         description
-    //         topPages {
-    //           edges {
-    //             node {
-    //               live
-    //               title
-    //               slug
-    //               pageType
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
 
     
