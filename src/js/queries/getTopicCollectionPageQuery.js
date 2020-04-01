@@ -15,7 +15,7 @@ const getTopicCollectionPageQuery = `
         }
       }
     }
-    topicCollectionTopics(topiccollection: $id) {
+    topicCollectionTopics(topicCollection: $id) {
       edges {
         node {
           page {

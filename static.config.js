@@ -313,30 +313,26 @@ const getDepartmentPageData = async (id, client) => {
 const getTopicCollectionPageData = async (id, client) => {
   const {
     allTopicCollections,
-    // allTopicPageTopicCollections,
+    topicCollectionTopics,
   } = await client.request(getTopicCollectionPageQuery, { id: id });
 
-  // todo: need work around the topic collection
-
-  // all topic page topic collections gets all the topics that are under that topic collection
-
+  // topicCollectionTopics returns all the topics that are under that topic collection
   let topicCollection = allTopicCollections.edges[0].node;
-  // temporary check todo: remove the first check
-  if (false && allTopicPageTopicCollections.edges.length) {
-  topicCollection.topics = allTopicPageTopicCollections.edges
-    .filter(edge => edge.node.page.live)
+  if (topicCollectionTopics.edges.length) {
+  topicCollection.topics = topicCollectionTopics.edges
+    .filter(edge => edge.node.page.topicpage.live)
     .map(edge => ({
-      title: edge.node.page.title,
-      description: edge.node.page.description,
-      slug: edge.node.page.slug,
+      title: edge.node.page.topicpage.title,
+      description: edge.node.page.topicpage.description,
+      slug: edge.node.page.topicpage.slug,
       topiccollection: {
         slug: topicCollection.slug,
         theme: {
           slug: topicCollection.theme.slug,
         },
       },
-      pages: edge.node.page.topPages.edges
-      .filter(topPageEdge => topPageEdge.node.live)
+      pages: edge.node.page.topicpage.topPages.edges
+      // .filter(topPageEdge => topPageEdge.node.live)
       .map(topPageEdge => ({
         pageType: topPageEdge.node.pageType,
         title: topPageEdge.node.title,
