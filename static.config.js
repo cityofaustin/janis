@@ -51,12 +51,15 @@ const getContextualNavData = async (
 ) => {
   let contextualNavData = {};
 
+  parent_topic = "VG9waWNOb2RlOjg="
+  grandparent_topic_collection = "VG9waWNDb2xsZWN0aW9uTm9kZTo3"
+
   // returns allTopics: topic object for specified parent_topic id {id, slug, title}
-  // allTopicPageTopicCollections: array of topic objs that are under grandparent_topic_collection
+  // topicCollectionTopics: array of topic objs that are under grandparent_topic_collection
   //    including the parent_topic
   // allTopicCollections: topic_collection object for specified grandparent_topic_collection
   //   {id, slug, theme:{id, slug}}
-  const { allTopics, allTopicPageTopicCollections, allTopicCollections } =
+  const { allTopics, allTopicCollections, topicCollectionTopics } =
     parent_topic && grandparent_topic_collection
       ? await client.request(getContextualNavTopicDataQuery, {
           parent_topic: parent_topic,
@@ -64,8 +67,8 @@ const getContextualNavData = async (
         })
       : {
           allTopics: null,
-          allTopicPageTopicCollections: null,
           allTopicCollections: null,
+          topicCollectionTopics: null,
         };
 
   // returns department object for the specified dept id
@@ -76,6 +79,7 @@ const getContextualNavData = async (
     : { allDepartmentPages: null };
 
   // get parent
+  console.log(allTopicCollections.edges[0].node)
   if (
     parent_topic &&
     grandparent_topic_collection &&
@@ -108,23 +112,24 @@ const getContextualNavData = async (
   }
 
   // get related to
+  topicCollectionTopics.edges.map(edge=> console.log(edge.node.page.topicpage))
   if (
     parent_topic &&
     grandparent_topic_collection &&
-    allTopicPageTopicCollections &&
-    allTopicPageTopicCollections.edges.length &&
+    topicCollectionTopics &&
+    topicCollectionTopics.edges.length &&
     allTopicCollections &&
     allTopicCollections.edges.length &&
     allTopicCollections.edges[0].node.theme
   ) {
-    contextualNavData.relatedTo = allTopicPageTopicCollections.edges
-      .filter(edge => edge.node && edge.node.page.id !== parent_topic)
+    contextualNavData.relatedTo = topicCollectionTopics.edges
+      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent_topic)
       .map(edge => ({
-        id: edge.node.page.id,
-        title: edge.node.page.title,
+        id: edge.node.page.topicpage.id,
+        title: edge.node.page.topicpage.title,
         url: `/${allTopicCollections.edges[0].node.theme.slug}/${
           allTopicCollections.edges[0].node.slug
-        }/${edge.node.page.slug}/`,
+        }/${edge.node.page.topicpage.slug}/`,
       }));
   } else {
     contextualNavData.relatedTo = [];
@@ -337,7 +342,7 @@ const getTopicCollectionPageData = async (id, client) => {
         pageType: topPageEdge.node.pageType,
         title: topPageEdge.node.title,
         url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-          edge.node.page.slug
+          edge.node.page.topicpage.slug
         }/${topPageEdge.node.slug}/`,
       })),
     }));

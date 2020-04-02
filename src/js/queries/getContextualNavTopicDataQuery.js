@@ -21,22 +21,20 @@ const getContextualNavTopicDataQuery = `
         }
       }
     }
-  }
-`;
-
-export default getContextualNavTopicDataQuery;
-
-/*
-    allTopicPageTopicCollections(topiccollection:$grandparent_topic_collection) {
+  topicCollectionTopics(topicCollection:$grandparent_topic_collection) {
       edges {
         node {
           page {
-            id
-            slug
-            title
+            topicpage{
+              id
+              slug
+              title
+            }
           }
         }
       }
     }
+  }
+`;
 
-*/
+export default getContextualNavTopicDataQuery;
