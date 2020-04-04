@@ -5,7 +5,6 @@ import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
-// TODO: clean these up/remove them <-- why remove them?
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 
@@ -13,7 +12,6 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 import allPagesQuery from 'js/queries/allPagesQuery';
 
 // Shiny ✨ new queries!
-// import siteStructureQuery from 'js/queries/siteStructureQuery';
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
 import getTopicPageQuery from 'js/queries/getTopicPageQuery';
 import getInformationPageQuery from 'js/queries/getInformationPageQuery';
@@ -54,11 +52,12 @@ const getContextualNavData = async (
   parent_topic = "VG9waWNOb2RlOjg="
   grandparent_topic_collection = "VG9waWNDb2xsZWN0aW9uTm9kZTo3"
 
-  // returns allTopics: topic object for specified parent_topic id {id, slug, title}
-  // topicCollectionTopics: array of topic objs that are under grandparent_topic_collection
-  //    including the parent_topic
+  // returns
+  // allTopics: topic object for specified parent_topic id {id, slug, title}
   // allTopicCollections: topic_collection object for specified grandparent_topic_collection
   //   {id, slug, theme:{id, slug}}
+  // topicCollectionTopics: array of topic objs that are under grandparent_topic_collection
+  //    including the parent_topic
   const { allTopics, allTopicCollections, topicCollectionTopics } =
     parent_topic && grandparent_topic_collection
       ? await client.request(getContextualNavTopicDataQuery, {
@@ -78,8 +77,7 @@ const getContextualNavData = async (
       })
     : { allDepartmentPages: null };
 
-  // get parent
-  console.log(allTopicCollections.edges[0].node)
+  // get parent, either if its topics as parent or department
   if (
     parent_topic &&
     grandparent_topic_collection &&
@@ -137,6 +135,7 @@ const getContextualNavData = async (
   }
 
   // get offered by
+  console.log('departments from cn: ', departments);
   contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
 
   return contextualNavData;
@@ -383,7 +382,7 @@ const getServicePageData = async (
     service.pageIsPartOf = pagesOfGuides[id];
   }
 
-  return { service: service };
+  return service;
 };
 
 const getInformationPageData = async (
@@ -399,6 +398,7 @@ const getInformationPageData = async (
     { id: id },
   );
 
+  console.log('info page ', id)
   let informationPage = allInformationPages.edges[0].node;
 
   // keeping this logic in there for now, stuff is kinda messy
@@ -680,8 +680,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   // If we are a topic page, we need a parent topic collection id
   if (janisbasepagewithtopiccollections) {
-    console.log('***** ', janisbasepagewithtopiccollections.topicpage.id)
-    console.log(janisUrls[0])
     let id = janisbasepagewithtopiccollections.topicpage.id;
     // there can be more than one of these, cant there?
     let parent_topic_collection_id = janisbasepagewithtopiccollections.topicpage.topiccollections.id
@@ -721,13 +719,10 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
-       // departments is an array of departments, is the first one always the parent? polyhierarchy
+       // departments is an array of departments, for now we take the first one since there is only
+       // one. When multiple departments are added, need to confirm the first one is the parent
       let parentDeptId = servicepage.departments.length ? servicepage.departments[0].id : '';
-      return {
-        path: janisUrls[0].slice(20),
-        template: 'src/components/Pages/Service',
-        getData: () =>
-          getServicePageData(
+      let servicePageData = await getServicePageData(
             servicepage.id,
             parentDeptId,
             '',
@@ -735,13 +730,35 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
             //parent_topic,
             //grandparent_topic_collection,
             client,
-            pagesOfGuides.servicePage,
-          ),
+            pagesOfGuides.servicePage)
+      /*
+        for url in janisURLs {
+          contextualNavData = await getContextualNavData(url.parent, url.grandparent, url.dept, client)
+          return {
+              path: url,
+              template: 'src/components/Pages/Service',
+              getData: () => ({
+                service: servicePageData,
+                contextualNav: contextualNavData
+              })
+          }
+        }
+      */
+      return {
+        path: janisUrls[0].slice(20),
+        template: 'src/components/Pages/Service',
+        getData: () => (
+          {service: servicePageData,
+          test: '123' })
       };
     }
 
     if (informationpage) {
-      let parentDeptId = informationpage.departments.length ? informationpage.departments[0].id : '';
+      let parentDeptId = informationpage.departments ? informationpage.departments[0].id : '';
+      console.log(janisUrls[0])
+      console.log(informationpage)
+      // for url in janis urls
+      // url.
       return {
         path: janisUrls[0].slice(20),
         template: 'src/components/Pages/Information',

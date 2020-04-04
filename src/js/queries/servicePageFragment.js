@@ -14,7 +14,11 @@ const servicePageFragment = `
     dynamicContent
     additionalContent
     shortDescription
+    contact {
+      ...contactInfo
+    }
   }
+  ${conciseContactFragment}
 `;
 
 export default servicePageFragment;
