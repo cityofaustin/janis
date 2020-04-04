@@ -44,14 +44,8 @@ const departmentPageFragment = `
         }
       }
     }
-    contacts {
-      edges {
-        node {
-          contact {
-            ...contactInfo  
-          }
-        }
-      }
+    contact {
+      ...contactInfo
     }
   }
   ${contactFragment}
