@@ -1,16 +1,30 @@
-import servicePageFragment from './servicePageFragment';
+import conciseContactFragment from './conciseContactFragment';
 
 const getServicePageQuery = `
   query getServicePage($id: ID) {
     allServicePages(id: $id) {
       edges {
         node {
-          ...servicePageInfo
+          id
+          title
+          coaGlobal
+          departments {
+            id
+            title
+            slug
+          }
+          steps
+          dynamicContent
+          additionalContent
+          shortDescription
+          contact {
+            ...contactInfo
+          }
         }
       }
     }
   }
-  ${servicePageFragment}
+  ${conciseContactFragment}
 `;
 
 export default getServicePageQuery;

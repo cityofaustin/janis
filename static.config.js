@@ -365,6 +365,7 @@ const getServicePageData = async (
   });
 
   let service = allServicePages.edges[0].node;
+  console.log(service)
 
   // keeping this logic in there for now, stuff is kinda messy
   service.contacts = cleanContacts(service.contacts);
@@ -655,12 +656,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   } = pageAtUrlInfo;
   const type = 'blank';
 
+  //  console.log('$$$$$$$$ ', janisUrls)
+
+  // console.log(pageAtUrlInfo)
+
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
   if (departmentpage) {
     return {
       // temporary until janis urls in dept page
-      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${departmentpage.id}`,
+      path: janisUrls[0] ? janisUrls[0] : `/${departmentpage.id}`,
       template: 'src/components/Pages/Department',
       getData: () => getDepartmentPageData(departmentpage.id, client),
     }
@@ -672,7 +677,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // todo: what does this comment above mean?
   if (topiccollectionpage) {
     return {
-      path: janisUrls[0].slice(20),
+      path: janisUrls[0],
       template: 'src/components/Pages/TopicCollection',
       getData: () => getTopicCollectionPageData(topiccollectionpage.id, client),
     }
@@ -684,7 +689,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     // there can be more than one of these, cant there?
     let parent_topic_collection_id = janisbasepagewithtopiccollections.topicpage.topiccollections.id
     return {
-      path: janisUrls[0].slice(20),
+      path: janisUrls[0],
       template: 'src/components/Pages/Topic',
       getData: () => getTopicPageData(id, parent_topic_collection_id, client),
     };
@@ -703,7 +708,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       // departments is an array of departments, is the first one always the parent? polyhierarchy
       let parentDeptId = guidepage.departments.length ? guidepage.departments[0].id : '';
       return {
-        path: janisUrls[0].slice(20),
+        path: janisUrls[0],
         template: 'src/components/Pages/Guide',
         getData: () =>
           getGuidePageData(
@@ -719,18 +724,15 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
+      console.log(servicepage, janisUrls)
        // departments is an array of departments, for now we take the first one since there is only
        // one. When multiple departments are added, need to confirm the first one is the parent
       let parentDeptId = servicepage.departments.length ? servicepage.departments[0].id : '';
-      let servicePageData = await getServicePageData(
-            servicepage.id,
-            parentDeptId,
-            '',
-            '',
-            //parent_topic,
-            //grandparent_topic_collection,
-            client,
-            pagesOfGuides.servicePage)
+      // let servicePageData = await getServicePageData(
+      //       servicepage.id,
+      //       client,
+      //       pagesOfGuides.servicePage)
+      console.log('****** ', servicepage, client)
       /*
         for url in janisURLs {
           contextualNavData = await getContextualNavData(url.parent, url.grandparent, url.dept, client)
@@ -739,17 +741,21 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
               template: 'src/components/Pages/Service',
               getData: () => ({
                 service: servicePageData,
-                contextualNav: contextualNavData
+                contextualNav: url.contextualNavData
               })
           }
         }
       */
       return {
-        path: janisUrls[0].slice(20),
+        path: janisUrls[0],
         template: 'src/components/Pages/Service',
-        getData: () => (
-          {service: servicePageData,
-          test: '123' })
+        getData: () => getServicePageData(
+            servicepage.id,
+            client,
+            pagesOfGuides.servicePage)
+        // getData: () => (
+        //   {service: servicePageData,
+        //   test: '123' })
       };
     }
 
@@ -760,7 +766,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       // for url in janis urls
       // url.
       return {
-        path: janisUrls[0].slice(20),
+        path: janisUrls[0],
         template: 'src/components/Pages/Information',
         getData: () =>
           getInformationPageData(
@@ -779,7 +785,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     if (officialdocumentpage) {
       let parentDeptId = officialdocumentpage.departments.length ? officialdocumentpage.departments[0].id : '';
       return {
-        path: janisUrls[0].slice(20),
+        path: janisUrls[0],
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
         getData: () =>
           getOfficialDocumentPageData(
@@ -797,7 +803,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     if (formcontainer) {
       let parentDeptId = formcontainer.departments.length ? formcontainer.departments[0].id : '';
       return {
-        path: janisUrls[0].slice(20),
+        path: janisUrls[0],
         template: 'src/components/Pages/Form',
         getData: () =>
           getFormContainerData(
@@ -817,7 +823,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   if (locationpage) {
     return {
       // temporary until location urls
-      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${locationpage.id}`,
+      path: janisUrls[0] ? janisUrls[0] : `/${locationpage.id}`,
       template: 'src/components/Pages/Location',
       getData: () => getLocationPageData(locationpage.id, client),
     }
@@ -826,7 +832,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   if (eventpage) {
     return {
       // temporary until event urls
-      path: janisUrls[0] ? janisUrls[0].slice(20) : `/${eventpage.id}`,
+      path: janisUrls[0] ? janisUrls[0] : `/${eventpage.id}`,
       template: 'src/components/Pages/Event',
       getData: () => getEventPageData(eventpage.id, client),
     }

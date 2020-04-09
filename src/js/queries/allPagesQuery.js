@@ -4,6 +4,17 @@ query allPagesQuery {
     edges {
       node {
         janisUrls
+        janisInstances{
+          url
+          parent{
+            url
+            title
+          }
+          grandparent {
+            url
+            title
+          }
+        }
         eventpage {
           id
         }
@@ -34,6 +45,22 @@ query allPagesQuery {
               id
               title
               slug
+            }
+            janisUrl
+            id
+            title
+            coaGlobal
+            departments {
+              id
+              title
+              slug
+            }
+            steps
+            dynamicContent
+            additionalContent
+            shortDescription
+            contact {
+              id
             }
           }
           informationpage {
