@@ -9,7 +9,7 @@ query allPagesQuery {
         janisUrls
         janisInstances {
           url
-          parent{
+          parent {
             url
             title
             id
@@ -27,7 +27,51 @@ query allPagesQuery {
           id
         }
         departmentpage {
-          ...departmentPageInfo
+          id
+          slug
+          title
+          whatWeDo
+          image {
+            id
+            filename
+            title
+          }
+          mission
+          departmentDirectors {
+            edges {
+              node {
+                name
+                photo {
+                  id
+                  filename
+                }
+                about
+                title
+              }
+            }
+          }
+          jobListings
+          topPages {
+            edges {
+              node {
+                pageId
+                slug
+                title
+              }
+            }
+          }
+          relatedPages {
+            edges {
+              node {
+                pageId
+                slug
+                title
+              }
+            }
+          }
+          contact {
+            ...contactInfo
+          }
         }
         topiccollectionpage {
           id
@@ -43,6 +87,19 @@ query allPagesQuery {
         janisbasepagewithtopiccollections {
           topicpage {
             id
+            slug
+            title
+            description
+            topPages {
+              edges {
+                node {
+                  pageId
+                  slug
+                  title
+                  pageType
+                }
+              }
+            }
             topiccollections {
               id
             }
@@ -67,7 +124,7 @@ query allPagesQuery {
             shortDescription
             contact {
               ...contactInfo
-              }
+            }
           }
           informationpage {
             id
@@ -90,5 +147,9 @@ query allPagesQuery {
       }
     }
   }
-}  ${conciseContactFragment, departmentPageFragment}
+}  ${conciseContactFragment}
 `;
+
+
+
+export default siteStructureQuery;

@@ -225,8 +225,8 @@ const getTopicPageData = async (topicPage, instance, client) => {
   //   id: id,
   //   tc_id: parent_topic_collection,
   // });
-  const { topicCollectionTopics } = await client.request(getTopicCollectionTopicsQuery, {
-    id: instance.grandparent.id
+  const { topicCollectionTopics } = await client.request(getTopicCollectionTopicQuery, {
+    id: instance.parent.id
   });
 
   let topic = topicPage;
@@ -250,31 +250,38 @@ const getTopicPageData = async (topicPage, instance, client) => {
   }
 
   // we also need to get information about the top links
-  const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
-  topic.topLinks = topic.topPages.edges.map(edge => ({
-    pageType: edge.node.pageType,
-    title: edge.node.title,
-    url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-      allTopicCollections.edges[0].node.slug
-    }/${topic.slug}/${edge.node.slug}/`,
-  }));
-
-  // and others
-  topic.otherLinks = getAllTopicLinks(
-    allServicePageTopics,
-    allInformationPageTopics,
-    allOfficialDocumentPageTopics,
-    allGuidePageTopics,
-    allFormContainerTopics,
-  )
-    .filter(page => !topLinkIds.includes(page.id))
-    .map(page => ({
-      pageType: page.pageType,
-      title: page.title,
+  // todo: revise this when we get top pages
+  if (topic.topPages.edges && topic.topPages.edges.length) {
+    const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
+    topic.topLinks = topic.topPages.edges.map(edge => ({
+      pageType: edge.node.pageType,
+      title: edge.node.title,
       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
         allTopicCollections.edges[0].node.slug
-      }/${topic.slug}/${page.slug}`,
+      }/${topic.slug}/${edge.node.slug}/`,
     }));
+
+    // and others
+    topic.otherLinks = getAllTopicLinks(
+      allServicePageTopics,
+      allInformationPageTopics,
+      allOfficialDocumentPageTopics,
+      allGuidePageTopics,
+      allFormContainerTopics,
+    )
+      .filter(page => !topLinkIds.includes(page.id))
+      .map(page => ({
+        pageType: page.pageType,
+        title: page.title,
+        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+          allTopicCollections.edges[0].node.slug
+        }/${topic.slug}/${page.slug}`,
+      }));
+  }
+  else {
+    topic.topLinks = []
+    topic.otherLinks = []
+  }
 
   return { topic: topic };
 };
@@ -303,7 +310,7 @@ const cleanDepartmentPageData = departmentPage => {
 const getTopicCollectionPageData = async (topicCollectionPage, client) => {
   const {
     topicCollectionTopics,
-  } = await client.request(getTopicCollectionTopicsQuery, { id: topicCollectionPage.id });
+  } = await client.request(getTopicCollectionTopicQuery, { id: topicCollectionPage.id });
 
   // topicCollectionTopics returns all the topics that are under that topic collection
   let topicCollection = topicCollectionPage;
@@ -337,34 +344,28 @@ const getTopicCollectionPageData = async (topicCollectionPage, client) => {
   return { tc: topicCollection };
 };
 
-const getServicePageData = async (
+const getServicePageData = (
             servicepage,
             instance,
             client,
             pagesOfGuides
-  // id,
-  // parent_department,
-  // parent_topic,
-  // grandparent_topic_collection,
-  // client,
-  // pagesOfGuides,
+            // will have to bring async back later?
+            // when we bring related to back
 ) => {
   // keeping this logic in there for now, stuff is kinda messy
   servicepage.contacts = cleanContacts(servicepage.contact);
-
-  // service.contextualNavData = await getContextualNavData(
-  //   servicepage.departments[0].id, // nope
-  //   instance.parent.id,
-  //   instance.grandparent.id,
-  //   servicepage.departments,
-  //   client,
-  // );
+  servicepage.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: [], // todo: work around related to
+    // todo, depts may need to be cleaned
+    departments: servicepage.departments
+  }
 
   if (pagesOfGuides && pagesOfGuides[id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
-  return servicepage;
+  return { service: servicepage };
 };
 
 const getInformationPageData = async (
@@ -624,7 +625,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
   if (departmentpage) {
-    console.log("&&&&&&", departmentpage)
     return {
       path: janisInstances[0].url,
       template: 'src/components/Pages/Department',
@@ -648,7 +648,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: janisInstances[0].url,
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(topicpage, janisInstances[0], client),
+      getData: () => getTopicPageData(topicPage, janisInstances[0], client),
     };
   }
 
@@ -681,36 +681,29 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
-       // departments is an array of departments, for now we take the first one since there is only
-       // one. When multiple departments are added, need to confirm the first one is the parent
-      // let servicePageData = await getServicePageData(
-      //       servicepage.id,
-      //       client,
-      //       pagesOfGuides.servicePage)
-      // console.log('****** ', servicepage, client)
-      janisInstances.map(instance => {
-        // console.log('** ', servicepage)
-        return {
-          path: instance.url,
-          template: 'src/components/Pages/Service',
-          getData: () => {service: servicepage}
-          // getData: () => getServicePageData(
-          //   servicepage,
-          //   instance,
-          //   client,
-          //   pagesOfGuides.servicePage
-          // )
-        }
-      })
-      // return {
-      //   path: janisUrls[0],
-      //   template: 'src/components/Pages/Service',
-      //   getData: () => getServicePageData(
-      //       servicepage,
-      //       janisInstances,
-      //       client,
-      //       pagesOfGuides.servicePage)
-      // };
+      // janisInstances.map(instance => {
+      //   // console.log('** ', servicepage)
+      //   return {
+      //     path: instance.url,
+      //     template: 'src/components/Pages/Service',
+      //     getData: () => {service: servicepage}
+      //     // getData: () => getServicePageData(
+      //     //   servicepage,
+      //     //   instance,
+      //     //   client,
+      //     //   pagesOfGuides.servicePage
+      //     // )
+      //   }
+      // })
+      return {
+        path: janisInstances[0].url,
+        template: 'src/components/Pages/Service',
+        getData: () => getServicePageData(
+          servicepage,
+          janisInstances[0],
+          client, 
+          pagesOfGuides.servicePage)
+      }
     }
 
     if (informationpage) {
@@ -888,8 +881,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   console.log(`- Building routes for ${path}...`);
 
   const client = createGraphQLClientsByLang(langCode);
+  console.log(client)
 
   const siteStructure = await client.request(allPagesQuery)
+  console.log(siteStructure)
   let pages = siteStructure.allPages.edges;
   console.log('PAGES ', pages)
 
@@ -950,11 +945,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   //   }
   // })
 
-  const getInstances = async (pageAtUrlInfo, client, pagesOfGuidesData) => {
-    return (
-      buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)
-    )
-  }
+  // const getInstances = async (pageAtUrlInfo, client, pagesOfGuidesData) => {
+  //   return (
+  //     buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)
+  //   )
+  // }
 
   // const allPages = await Promise.all(
   //   pages.map(pageAtUrlInfo => {
@@ -967,9 +962,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // );
 
   const allPages = await Promise.all(
-    pages.map(pageAtUrlInfo => (
+    pages.map(pageAtUrlInfo => {
+      console.log(pageAtUrlInfo.node)
+      return (
       buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData)
-    ))
+    )})
   );
 
   const data = {

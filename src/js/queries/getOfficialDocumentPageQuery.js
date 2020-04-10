@@ -22,6 +22,7 @@ const getOfficialDocumentPageQuery = `
                 summary
                 name
                 document {
+                  fileSize
                   filename
                 }
               }
@@ -34,8 +35,3 @@ const getOfficialDocumentPageQuery = `
 `;
 
 export default getOfficialDocumentPageQuery;
-
-                // document {
-                //   fileSize
-                //   filename
-                // }
