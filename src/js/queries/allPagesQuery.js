@@ -1,5 +1,6 @@
 import conciseContactFragment from './conciseContactFragment';
 import departmentPageFragment from './departmentPageFragment';
+import informationPageFragment from './informationPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery {
@@ -127,7 +128,7 @@ query allPagesQuery {
             }
           }
           informationpage {
-            id
+            ...informationPageInfo
           }
           officialdocumentpage {
             id
@@ -147,7 +148,7 @@ query allPagesQuery {
       }
     }
   }
-}  ${conciseContactFragment}
+}  ${conciseContactFragment}${informationPageFragment}
 `;
 
 

@@ -11,6 +11,35 @@ const informationPageFragment = `
       title
       slug
     }
+    description
+    additionalContent
+    contact {
+      name
+      email
+      ${phoneFragment}
+      locationPage {
+        title
+      }
+    }
+  }
+`;
+
+export default informationPageFragment;
+
+/*
+import phoneFragment from './phoneFragment';
+
+const informationPageFragment = `
+  fragment informationPageInfo on InformationPageNode {
+    id
+    title
+    slug
+    coaGlobal
+    departments {
+      id
+      title
+      slug
+    }
     topics {
       edges {
         node {
@@ -40,35 +69,12 @@ const informationPageFragment = `
     }
     description
     additionalContent
-    contacts {
-      edges {
-        node {
-          contact {
-            name
-            email
-            ${phoneFragment}
-            hours {
-              edges {
-                node {
-                  dayOfWeek
-                  startTime
-                  endTime
-                }
-              }
-            }
-            location {
-              name
-              street
-              city
-              state
-              zip
-              country
-            }
-          }
-        }
-      }
+    contact {
+      name
+      email
+      ${phoneFragment}
     }
   }
 `;
 
-export default informationPageFragment;
+export default informationPageFragment; */

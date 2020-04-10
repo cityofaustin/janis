@@ -368,38 +368,29 @@ const getServicePageData = (
   return { service: servicepage };
 };
 
-const getInformationPageData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
+const getInformationPageData = (
+  informationpage,
+  instance,
   client,
   pagesOfGuides,
+  // will have to bring async back later?
+  // when we bring related to back
 ) => {
-  const { allInformationPages } = await client.request(
-    getInformationPageQuery,
-    { id: id },
-  );
-
-  let informationPage = allInformationPages.edges[0].node;
+  let informationPage = informationpage;
 
   // keeping this logic in there for now, stuff is kinda messy
-  informationPage.contacts = cleanContacts(informationPage.contacts);
+  informationPage.contacts = cleanContacts(informationpage.contacts);
 
-  informationPage.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    informationPage.departments,
-    client,
-  );
-
-  if (pagesOfGuides && pagesOfGuides[id]) {
-    // We're checking if this id is part of guide page because it may not be published and draw and error.
-    informationPage.pageIsPartOf = pagesOfGuides[id];
+  informationPage.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: [],
+    departments: informationpage.departments
   }
 
-  // informationPage.pageIsPartOf = pagesOfGuides[id];
+  if (pagesOfGuides && pagesOfGuides[id]) {
+    // We're checking if this id is part of guide page because it may not be published and draw an error.
+    informationPage.pageIsPartOf = pagesOfGuides[id];
+  }
 
   return { informationPage: informationPage };
 };
@@ -698,29 +689,24 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       return {
         path: janisInstances[0].url,
         template: 'src/components/Pages/Service',
-        getData: () => getServicePageData(
-          servicepage,
-          janisInstances[0],
-          client, 
-          pagesOfGuides.servicePage)
+        getData: () =>
+            getServicePageData (
+            servicepage,
+            janisInstances[0],
+            client, 
+            pagesOfGuides.servicePage
+          )
       }
     }
 
     if (informationpage) {
-      let parentDeptId = informationpage.departments ? informationpage.departments[0].id : '';
-      // for url in janis urls
-      // url.
       return {
         path: janisInstances[0].url,
         template: 'src/components/Pages/Information',
         getData: () =>
           getInformationPageData(
-            informationpage.id,
-            parentDeptId,
-            '',
-            '',
-            //parent_topic,
-            //grandparent_topic_collection,
+            informationpage,
+            janisInstances[0],
             client,
             pagesOfGuides.informationPage,
           ),
@@ -881,7 +867,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   console.log(`- Building routes for ${path}...`);
 
   const client = createGraphQLClientsByLang(langCode);
-  console.log(client)
 
   const siteStructure = await client.request(allPagesQuery)
   console.log(siteStructure)
