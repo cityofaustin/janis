@@ -353,37 +353,35 @@ const getTopicCollectionPageData = async (id, client) => {
 };
 
 const getServicePageData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  client,
-  pagesOfGuides,
+            servicepage,
+            instance,
+            client,
+            pagesOfGuides
+  // id,
+  // parent_department,
+  // parent_topic,
+  // grandparent_topic_collection,
+  // client,
+  // pagesOfGuides,
 ) => {
-  const { allServicePages } = await client.request(getServicePageQuery, {
-    id: id,
-  });
-
-  let service = allServicePages.edges[0].node;
-  console.log(service)
-
+  console.log('hi')
   // keeping this logic in there for now, stuff is kinda messy
-  service.contacts = cleanContacts(service.contacts);
+  servicepage.contacts = cleanContacts(servicepage.contact);
 
-  service.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    service.departments,
-    client,
-  );
+  // service.contextualNavData = await getContextualNavData(
+  //   servicepage.departments[0].id, // nope
+  //   instance.parent.id,
+  //   instance.grandparent.id,
+  //   servicepage.departments,
+  //   client,
+  // );
 
   if (pagesOfGuides && pagesOfGuides[id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
-
-  return service;
+  console.log('@@@@ ', servicepage)
+  return servicepage;
 };
 
 const getInformationPageData = async (
@@ -634,17 +632,9 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   buildPageAtUrl takes a page information object and the language client
   returns object with page url, template and data from appropiate query
   */
-  // const {
-  //   url,
-  //   type,
-  //   id,
-  //   parent_department,
-  //   parent_topic,
-  //   parent_topic_collection,
-  //   grandparent_topic_collection,
-  // } = pageAtUrlInfo;
   const {
     janisUrls,
+    janisInstances,
     eventpage,
     locationpage,
     departmentpage,
@@ -655,8 +645,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     allEvents,
   } = pageAtUrlInfo;
   const type = 'blank';
-
-  //  console.log('$$$$$$$$ ', janisUrls)
 
   // console.log(pageAtUrlInfo)
 
@@ -724,39 +712,37 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (servicepage) {
-      console.log(servicepage, janisUrls)
        // departments is an array of departments, for now we take the first one since there is only
        // one. When multiple departments are added, need to confirm the first one is the parent
-      let parentDeptId = servicepage.departments.length ? servicepage.departments[0].id : '';
       // let servicePageData = await getServicePageData(
       //       servicepage.id,
       //       client,
       //       pagesOfGuides.servicePage)
-      console.log('****** ', servicepage, client)
-      /*
-        for url in janisURLs {
-          contextualNavData = await getContextualNavData(url.parent, url.grandparent, url.dept, client)
-          return {
-              path: url,
-              template: 'src/components/Pages/Service',
-              getData: () => ({
-                service: servicePageData,
-                contextualNav: url.contextualNavData
-              })
-          }
+      // console.log('****** ', servicepage, client)
+      janisInstances.map(instance => {
+        console.log('I ', instance.url)
+        // console.log('** ', servicepage)
+        return {
+          path: instance.url,
+          template: 'src/components/Pages/Service',
+          getData: () => {service: servicepage}
+          // getData: () => getServicePageData(
+          //   servicepage,
+          //   instance,
+          //   client,
+          //   pagesOfGuides.servicePage
+          // )
         }
-      */
-      return {
-        path: janisUrls[0],
-        template: 'src/components/Pages/Service',
-        getData: () => getServicePageData(
-            servicepage.id,
-            client,
-            pagesOfGuides.servicePage)
-        // getData: () => (
-        //   {service: servicePageData,
-        //   test: '123' })
-      };
+      })
+      // return {
+      //   path: janisUrls[0],
+      //   template: 'src/components/Pages/Service',
+      //   getData: () => getServicePageData(
+      //       servicepage,
+      //       janisInstances,
+      //       client,
+      //       pagesOfGuides.servicePage)
+      // };
     }
 
     if (informationpage) {

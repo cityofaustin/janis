@@ -1,18 +1,22 @@
+import conciseContactFragment from './conciseContactFragment';
+
 const siteStructureQuery = `
 query allPagesQuery {
   allPages {
     edges {
       node {
         janisUrls
-        janisInstances{
+        janisInstances {
           url
           parent{
             url
             title
+            id
           }
           grandparent {
             url
             title
+            id
           }
         }
         eventpage {
@@ -41,13 +45,6 @@ query allPagesQuery {
           }
           servicepage {
             id
-            departments {
-              id
-              title
-              slug
-            }
-            janisUrl
-            id
             title
             coaGlobal
             departments {
@@ -60,8 +57,8 @@ query allPagesQuery {
             additionalContent
             shortDescription
             contact {
-              id
-            }
+              ...contactInfo
+              }
           }
           informationpage {
             id
@@ -76,7 +73,7 @@ query allPagesQuery {
       }
     }
   }
-}
+}  ${conciseContactFragment}
 `;
 
 export default siteStructureQuery;
