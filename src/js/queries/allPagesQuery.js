@@ -74,6 +74,14 @@ query allPagesQuery {
           }
           officialdocumentpage {
             id
+            title
+            slug
+            description
+            departments {
+              id
+              title
+              slug
+            }
           }
           formcontainer {
             id
@@ -84,5 +92,3 @@ query allPagesQuery {
   }
 }  ${conciseContactFragment, departmentPageFragment}
 `;
-
-export default siteStructureQuery;
