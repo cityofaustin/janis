@@ -10,6 +10,7 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
+import getTopicCollectionTopicsQuery from 'js/queries/getTopicCollectionTopicsQuery';
 
 // Shiny ✨ new queries!
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
@@ -110,7 +111,6 @@ const getContextualNavData = async (
   }
 
   // get related to
-  topicCollectionTopics.edges.map(edge=> console.log(edge.node.page.topicpage))
   if (
     parent_topic &&
     grandparent_topic_collection &&
@@ -290,12 +290,9 @@ const getTopicPageData = async (id, parent_topic_collection, client) => {
   return { topic: topic };
 };
 
-const getDepartmentPageData = async (id, client) => {
-  const { allDepartmentPages } = await client.request(getDepartmentPageQuery, {
-    id: id,
-  });
-
-  let department = allDepartmentPages.edges[0].node;
+const cleanDepartmentPageData = departmentPage => {
+  let department = departmentPage;
+  // todo: update this
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
     department.slug,
@@ -311,17 +308,16 @@ const getDepartmentPageData = async (id, client) => {
     department.departmentDirectors,
   );
 
-  return { department: department };
+  return { department: departmentPage };
 };
 
-const getTopicCollectionPageData = async (id, client) => {
+const getTopicCollectionPageData = async (topicCollectionPage, client) => {
   const {
-    allTopicCollections,
     topicCollectionTopics,
-  } = await client.request(getTopicCollectionPageQuery, { id: id });
+  } = await client.request(getTopicCollectionTopicsQuery, { id: topicCollectionPage.id });
 
   // topicCollectionTopics returns all the topics that are under that topic collection
-  let topicCollection = allTopicCollections.edges[0].node;
+  let topicCollection = topicCollectionPage;
   if (topicCollectionTopics.edges.length) {
   topicCollection.topics = topicCollectionTopics.edges
     .filter(edge => edge.node.page.topicpage.live)
@@ -364,7 +360,6 @@ const getServicePageData = async (
   // client,
   // pagesOfGuides,
 ) => {
-  console.log('hi')
   // keeping this logic in there for now, stuff is kinda messy
   servicepage.contacts = cleanContacts(servicepage.contact);
 
@@ -380,7 +375,6 @@ const getServicePageData = async (
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
-  console.log('@@@@ ', servicepage)
   return servicepage;
 };
 
@@ -397,7 +391,6 @@ const getInformationPageData = async (
     { id: id },
   );
 
-  console.log('info page ', id)
   let informationPage = allInformationPages.edges[0].node;
 
   // keeping this logic in there for now, stuff is kinda messy
@@ -646,16 +639,16 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
   } = pageAtUrlInfo;
   const type = 'blank';
 
-  // console.log(pageAtUrlInfo)
+  console.log(janisUrls[0]);
 
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
   if (departmentpage) {
+    console.log("&&&&&&", departmentpage)
     return {
-      // temporary until janis urls in dept page
-      path: janisUrls[0] ? janisUrls[0] : `/${departmentpage.id}`,
+      path: janisUrls[0],
       template: 'src/components/Pages/Department',
-      getData: () => getDepartmentPageData(departmentpage.id, client),
+      getData: () => cleanDepartmentPageData(departmentpage),
     }
   }
 
@@ -667,15 +660,13 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: janisUrls[0],
       template: 'src/components/Pages/TopicCollection',
-      getData: () => getTopicCollectionPageData(topiccollectionpage.id, client),
+      getData: () => getTopicCollectionPageData(topiccollectionpage, client),
     }
   }
 
   // If we are a topic page, we need a parent topic collection id
   if (janisbasepagewithtopiccollections) {
-    let id = janisbasepagewithtopiccollections.topicpage.id;
-    // there can be more than one of these, cant there?
-    let parent_topic_collection_id = janisbasepagewithtopiccollections.topicpage.topiccollections.id
+    let topicPage = janisbasepagewithtopiccollections.topicpage;
     return {
       path: janisUrls[0],
       template: 'src/components/Pages/Topic',
@@ -720,7 +711,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       //       pagesOfGuides.servicePage)
       // console.log('****** ', servicepage, client)
       janisInstances.map(instance => {
-        console.log('I ', instance.url)
         // console.log('** ', servicepage)
         return {
           path: instance.url,
@@ -747,8 +737,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
     if (informationpage) {
       let parentDeptId = informationpage.departments ? informationpage.departments[0].id : '';
-      console.log(janisUrls[0])
-      console.log(informationpage)
       // for url in janis urls
       // url.
       return {
@@ -769,7 +757,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (officialdocumentpage) {
-      let parentDeptId = officialdocumentpage.departments.length ? officialdocumentpage.departments[0].id : '';
       return {
         path: janisUrls[0],
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
@@ -787,7 +774,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (formcontainer) {
-      let parentDeptId = formcontainer.departments.length ? formcontainer.departments[0].id : '';
       return {
         path: janisUrls[0],
         template: 'src/components/Pages/Form',
@@ -808,8 +794,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   if (locationpage) {
     return {
-      // temporary until location urls
-      path: janisUrls[0] ? janisUrls[0] : `/${locationpage.id}`,
+      path: janisUrls[0],
       template: 'src/components/Pages/Location',
       getData: () => getLocationPageData(locationpage.id, client),
     }
@@ -817,8 +802,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
   if (eventpage) {
     return {
-      // temporary until event urls
-      path: janisUrls[0] ? janisUrls[0] : `/${eventpage.id}`,
+      path: janisUrls[0],
       template: 'src/components/Pages/Event',
       getData: () => getEventPageData(eventpage.id, client),
     }
@@ -839,7 +823,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
       path: '/events/',
       template: 'src/components/Pages/EventList',
       getData: () => getAllEvents(client, false),
-          // getAllEvents takes client and boolean if we should hide the cancelled events
+      // getAllEvents takes client and boolean if we should hide the cancelled events
     };
   }
 };
@@ -933,6 +917,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const siteStructure = await client.request(allPagesQuery)
   let pages = siteStructure.allPages.edges;
+  console.log(pages)
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
@@ -970,21 +955,47 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // Build a page with all the departments
   pages.push({
     node: {
-      allDepartments: true
+      allDepartments: true,
+      janisInstances: [
+        {
+          url: '/departments/',
+        }
+      ]
     }
   });
 
   // and also a page with all the events
   pages.push({
     node: {
-      allEvents: true
+      allEvents: true,
+      janisInstances: [
+        {
+          url: '/events/',
+        }
+      ]
     }
   })
 
+  const getInstances = async (pageAtUrlInfo, client, pagesOfGuidesData) => {
+    return (
+      buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)
+    )
+  }
+
+  // const allPages = await Promise.all(
+  //   pages.map(pageAtUrlInfo => {
+  //     return Promise.all(
+  //       pageAtUrlInfo.node.janisInstances.map(instanceOfPage => (
+  //           getInstances(pageAtUrlInfo.node, client, pagesOfGuidesData)
+  //         ))
+  //       )
+  //   }),
+  // );
+
   const allPages = await Promise.all(
-    pages.map(pageAtUrlInfo =>
-      buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData),
-    ),
+    pages.map(pageAtUrlInfo => (
+      buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData)
+    ))
   );
 
   const data = {

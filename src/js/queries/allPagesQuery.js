@@ -1,8 +1,9 @@
 import conciseContactFragment from './conciseContactFragment';
+import departmentPageFragment from './departmentPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery {
-  allPages {
+  allPages(live:true) {
     edges {
       node {
         janisUrls
@@ -26,10 +27,18 @@ query allPagesQuery {
           id
         }
         departmentpage {
-          id
+          ...departmentPageInfo
         }
         topiccollectionpage {
           id
+          slug
+          title
+          description
+          theme {
+            id
+            text
+            slug
+          }
         }
         janisbasepagewithtopiccollections {
           topicpage {
@@ -73,7 +82,7 @@ query allPagesQuery {
       }
     }
   }
-}  ${conciseContactFragment}
+}  ${conciseContactFragment, departmentPageFragment}
 `;
 
 export default siteStructureQuery;
