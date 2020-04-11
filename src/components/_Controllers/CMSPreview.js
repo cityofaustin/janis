@@ -88,7 +88,6 @@ class CMSPreview extends Component {
     const { page } = this.state;
 
     if (!page) return <h1>Loading</h1>;
-    debugger;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
