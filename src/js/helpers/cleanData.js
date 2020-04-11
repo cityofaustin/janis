@@ -361,21 +361,6 @@ export const cleanLinks = (links, pageType) => {
 
 // Let's just do this for now, we'll probably need to make some changes
 // when we move to rs7 anyways
-export const cleanServicesForPreview = allServices => {
-  if (!allServices || !allServices.edges) return null;
-  const services = allServices.edges.map(e => e.node);
-  let service = services[0];
-
-  service.contextualNavData = getContextualNavForPreview(service);
-
-  // service.text = service.title;
-  service.contacts = cleanContacts(service.contacts);
-
-  return service;
-};
-
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
 export const cleanInformationForPreview = allInformationPages => {
   if (!allInformationPages || !allInformationPages.edges) return null;
   const infos = allInformationPages.edges.map(e => e.node);

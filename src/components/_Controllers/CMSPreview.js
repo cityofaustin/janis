@@ -10,8 +10,6 @@ import {
   getAsPage,
 } from 'js/queries/getPageRevisionQuery';
 
-import { cleanServicesForPreview } from 'js/helpers/cleanData';
-
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
