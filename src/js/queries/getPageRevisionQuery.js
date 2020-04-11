@@ -68,6 +68,20 @@ import topicFragment from './topicFragment';
 //   ${topicFragment}
 // `;
 
+const janisInstanceFragment = `
+  fragment janisInstanceInfo on ContextualNavData {
+    url
+    parent {
+      url
+      title
+    }
+    grandparent {
+      url
+      title
+    }
+  }
+`;
+
 export const getServicePageRevisionQuery = `
   query getPageRevision($id: ID) {
     pageRevision(id: $id) {
@@ -75,19 +89,12 @@ export const getServicePageRevisionQuery = `
         ...servicePageInfo
       }
       previewJanisInstance {
-        url
-        parent {
-          url
-          title
-        }
-        grandparent {
-          url
-          title
-        }
+        ...janisInstanceInfo
       }
     }
   }
   ${servicePageFragment}
+  ${janisInstanceFragment}
 `;
 
 export const getOfficialDocumentsPageRevisionQuery = `
@@ -97,19 +104,12 @@ export const getOfficialDocumentsPageRevisionQuery = `
         ...officialDocumentPageInfo
       }
       previewJanisInstance {
-        url
-        parent {
-          url
-          title
-        }
-        grandparent {
-          url
-          title
-        }
+        ...janisInstanceInfo
       }
     }
   }
   ${officialDocumentPageFragment}
+  ${janisInstanceFragment}
 `;
 
 export const getPageRevisionQuery = {
