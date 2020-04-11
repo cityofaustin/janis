@@ -4,6 +4,33 @@ const officialDocumentPageFragment = `
     title
     slug
     description
+    topics {
+      edges {
+        node {
+          topic {
+            id,
+            slug,
+            title,
+            description,
+            topiccollections {
+              edges {
+                node {
+                  topiccollection {
+                    id
+                    title
+                    slug
+                    theme {
+                      id
+                      slug
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     departments {
       id
       title

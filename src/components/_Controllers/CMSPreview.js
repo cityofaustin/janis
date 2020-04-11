@@ -5,9 +5,29 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-import getPageRevisionQuery from 'js/queries/getPageRevisionQuery';
+import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
+import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
+import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
+import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
+import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
+import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
+import getFormContainerRevisionQuery from 'js/queries/getFormContainerRevisionQuery';
+import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
+import getLocationPageRevisionQuery from 'js/queries/getLocationPageRevisionQuery';
+import getEventPageRevisionQuery from 'js/queries/getEventPageRevisionQuery';
 
-import { cleanServicesForPreview } from 'js/helpers/cleanData';
+import {
+  cleanServicesForPreview,
+  cleanInformationForPreview,
+  cleanTopicsForPreview,
+  cleanDepartmentsForPreview,
+  cleanTopicCollectionsForPreview,
+  cleanOfficialDocumentPagesForPreview,
+  cleanFormContainersForPreview,
+  cleanGuideForPreview,
+  cleanLocationPage,
+  getOfferedByFromDepartments,
+} from 'js/helpers/cleanData';
 
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -34,8 +54,6 @@ class CMSPreview extends Component {
   }
 
   fetchData() {
-    debugger;
-
     const {
       intl,
       match: {
