@@ -391,46 +391,6 @@ export const cleanGuideForPreview = allGuidePages => {
   return guide;
 };
 
-const getContextualNavForPreview = page => {
-  let contextualNavData = {
-    relatedTo: [],
-    offeredBy: [],
-  };
-
-  // get offered by
-  if (page.departments && page.departments.length) {
-    contextualNavData.offeredBy = page.departments.map(department => ({
-      id: department.id,
-      title: department.title,
-      url: `/${department.slug}/`,
-    }));
-  }
-
-  // If we don't have a topic, return a fake
-  // topic describing that
-  if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
-    contextualNavData.parent = {
-      url: 'no-topics',
-      title: 'No topics selected',
-      topiccollection: {
-        topics: [],
-      },
-    };
-  } else {
-    // If we have topics,
-    // get info from the first one
-    contextualNavData.parent = {
-      url: page.topics.edges[0].node.topic.slug,
-      title: page.topics.edges[0].node.topic.title,
-      topiccollection: {
-        topics: [],
-      },
-    };
-  }
-
-  return contextualNavData;
-};
-
 export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 
