@@ -368,7 +368,7 @@ export const cleanServicesForPreview = allServices => {
 
   service.contextualNavData = getContextualNavForPreview(service);
 
-  service.text = service.title;
+  // service.text = service.title;
   service.contacts = cleanContacts(service.contacts);
 
   return service;
