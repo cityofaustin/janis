@@ -54,7 +54,7 @@ class CMSPreview extends Component {
 
     req.then(data => {
       const page = data.pageRevision[getAsPage[page_type]];
-      const page_to_clean = data.pageRevision[getAsPage[page_type]];
+      const janis_instance = data.pageRevision.previewJanisInstance;
 
       page.contextualNavData = {
         relatedTo: [],
@@ -64,13 +64,15 @@ class CMSPreview extends Component {
             url: 'department.url',
           },
         ],
-        parent: {
-          url: 'no-topics',
-          title: 'No topics selected',
-          topiccollection: {
-            topics: [],
-          },
-        },
+        parent: !!janis_instance.parent
+          ? janis_instance.parent
+          : {
+              url: 'no-topics',
+              title: 'No topics selected',
+              topiccollection: {
+                topics: [],
+              },
+            },
       };
 
       this.setState({
@@ -87,7 +89,7 @@ class CMSPreview extends Component {
     } = this.props;
     const { page } = this.state;
 
-    if (!this.state.page) return <h1>Loading</h1>;
+    if (!page) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
