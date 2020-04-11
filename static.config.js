@@ -907,28 +907,28 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const pagesOfGuidesData = []
 
   // Build a page with all the departments
-  // pages.push({
-  //   node: {
-  //     allDepartments: true,
-  //     janisInstances: [
-  //       {
-  //         url: '/departments/',
-  //       }
-  //     ]
-  //   }
-  // });
+  pages.push({
+    node: {
+      allDepartments: true,
+      janisInstances: [
+        {
+          url: '/departments/',
+        }
+      ]
+    }
+  });
 
-  // // and also a page with all the events
-  // pages.push({
-  //   node: {
-  //     allEvents: true,
-  //     janisInstances: [
-  //       {
-  //         url: '/events/',
-  //       }
-  //     ]
-  //   }
-  // })
+  // and also a page with all the events
+  pages.push({
+    node: {
+      allEvents: true,
+      janisInstances: [
+        {
+          url: '/events/',
+        }
+      ]
+    }
+  })
 
   // const getInstances = async (pageAtUrlInfo, client, pagesOfGuidesData) => {
   //   return (
@@ -948,9 +948,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
-      console.log(pageAtUrlInfo.node)
       return (
-      buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData)
+        buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData)
     )})
   );
 
