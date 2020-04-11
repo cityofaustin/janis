@@ -233,7 +233,7 @@ export const cleanLocationPage = locationPage => {
 
   locationPage.image = locationPage.physicalLocationPhoto;
 
-  return locationPage;
+  return { locationPage: locationPage };
 };
 
 /**

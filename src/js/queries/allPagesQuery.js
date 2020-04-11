@@ -1,6 +1,8 @@
 import conciseContactFragment from './conciseContactFragment';
 import departmentPageFragment from './departmentPageFragment';
 import informationPageFragment from './informationPageFragment';
+import locationPageFragment from './locationPageFragment';
+import eventPageFragment from './eventPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery {
@@ -22,10 +24,177 @@ query allPagesQuery {
           }
         }
         eventpage {
-          id
+          ...eventPageInfo
         }
         locationpage {
+          ...locationPageInfo
+        }
+        departmentpage {
           id
+          slug
+          title
+          whatWeDo
+          image {
+            id
+            filename
+            title
+          }
+          mission
+          departmentDirectors {
+            edges {
+              node {
+                name
+                photo {
+                  id
+                  filename
+                }
+                about
+                title
+              }
+            }
+          }
+          jobListings
+          topPages {
+            edges {
+              node {
+                pageId
+                slug
+                title
+              }
+            }
+          }
+          relatedPages {
+            edges {
+              node {
+                pageId
+                slug
+                title
+              }
+            }
+          }
+        }
+        topiccollectionpage {
+          id
+          slug
+          title
+          description
+          theme {
+            id
+            text
+            slug
+          }
+        }
+        janisbasepagewithtopiccollections {
+          topicpage {
+            id
+            slug
+            title
+            description
+            topPages {
+              edges {
+                node {
+                  pageId
+                  slug
+                  title
+                  pageType
+                }
+              }
+            }
+            topiccollections {
+              id
+            }
+          }
+        }
+        janisbasepagewithtopics {
+          guidepage {
+            id
+          }
+          servicepage {
+            id
+            title
+            coaGlobal
+            departments {
+              id
+              title
+              slug
+            }
+            steps
+            dynamicContent
+            additionalContent
+            shortDescription
+            contact {
+              ...contactInfo
+            }
+          }
+          informationpage {
+            ...informationPageInfo
+          }
+          officialdocumentpage {
+            id
+            title
+            slug
+            description
+            departments {
+              id
+              title
+              slug
+            }
+          }
+          formcontainer {
+            id
+            title
+            slug
+            description
+            formUrl
+            departments {
+              id
+              title
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}
+`;
+
+
+
+export default siteStructureQuery;
+
+
+/*
+import conciseContactFragment from './conciseContactFragment';
+import departmentPageFragment from './departmentPageFragment';
+import informationPageFragment from './informationPageFragment';
+import locationPageFragment from './locationPageFragment';
+import eventPageFragment from './eventPageFragment';
+
+const siteStructureQuery = `
+query allPagesQuery {
+  allPages(live:true) {
+    edges {
+      node {
+        janisUrls
+        janisInstances {
+          url
+          parent {
+            url
+            title
+            id
+          }
+          grandparent {
+            url
+            title
+            id
+          }
+        }
+        eventpage {
+          ...eventPageInfo
+        }
+        locationpage {
+          ...locationPageInfo
         }
         departmentpage {
           id
@@ -143,14 +312,26 @@ query allPagesQuery {
           }
           formcontainer {
             id
+            title
+            slug
+            description
+            formUrl
+            departments {
+              id
+              title
+              slug
+            }
           }
         }
       }
     }
   }
-}  ${conciseContactFragment}${informationPageFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}
 `;
 
 
 
 export default siteStructureQuery;
+
+
+*/

@@ -14,18 +14,10 @@ import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuer
 
 // Shiny ✨ new queries!
 import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
-import getTopicPageQuery from 'js/queries/getTopicPageQuery';
-import getInformationPageQuery from 'js/queries/getInformationPageQuery';
-import getServicePageQuery from 'js/queries/getServicePageQuery';
-import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
-import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuery';
-import getGuidePageQuery from 'js/queries/getGuidePageQuery';
 import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
 import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
-import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
-import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 
 //todo (chia) : check if we still need all of these
@@ -395,58 +387,45 @@ const getInformationPageData = (
   return { informationPage: informationPage };
 };
 
-const getGuidePageData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  client,
+const getGuidePageData = /*async */(
+  guidePageData,
+  instance,
+    // will have to bring async back later?
+  // when we bring related to back
 ) => {
-  const { allGuidePages } = await client.request(getGuidePageQuery, {
-    id: id,
-  });
 
-  let guidePage = allGuidePages.edges[0].node;
+  let guidePage = guidePageData;
 
   // keeping this logic in there for now, stuff is kinda messy
-  let contacts = cleanContacts(guidePage.contacts);
+  let contact = cleanContacts(guidePage.contact);
 
   // Guide pages only support single contacts for now
-  if (contacts && contacts.length) {
-    guidePage.contact = contacts[0];
+  if (contact) {
+    guidePage.contact = contact;
   }
 
-  guidePage.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    guidePage.departments,
-    client,
-  );
+  informationPage.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: [],
+    departments: guidepage.departments
+  }
 
   return { guidePage: guidePage };
 };
 
-const getFormContainerData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
+const getFormContainerData = /*async*/ (
+  formContainerData,
+  instance,
   client,
 ) => {
-  const { allFormContainers } = await client.request(getFormContainerQuery, {
-    id: id,
-  });
 
-  let formContainer = allFormContainers.edges[0].node;
+  let formContainer = formContainerData;
 
-  formContainer.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    formContainer.departments,
-    client,
-  );
+  formContainer.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: [],
+    departments: formContainer.departments
+  }
 
   return { formContainer: formContainer };
 };
@@ -496,7 +475,6 @@ const cleanOfficialDocumentPageData = async (
   instance
 ) => {
   let officialDocumentPage = officialDocument;
-  console.log(officialDocument, instance)
 
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
@@ -504,8 +482,8 @@ const cleanOfficialDocumentPageData = async (
     offeredBy: officialDocument.departments,
   }
 
-  // todo: remove this is temporary
-  if(officialdocumentpage.officialDocuments.length) {
+  // todo: remove the if part of this is temporary
+  if (officialdocumentpage.officialDocuments.length) {
   for (let doc of officialDocumentPage.officialDocuments.edges) {
     // If we have a document in wagtail
     // use that info to update the information syncronously
@@ -536,28 +514,16 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-const getLocationPageData = async (id, client) => {
-  const { allLocationPages } = await client.request(getLocationPageQuery, {
-    id: id,
-  });
-
-  let locationPage = allLocationPages.edges[0].node;
-
-  return { locationPage: cleanLocationPage(locationPage) };
-};
-
-const getEventPageData = async (id, client) => {
-  const { allEventPages } = await client.request(getEventPageQuery, {
-    id: id,
-  });
-
-  let eventPage = allEventPages.edges[0].node;
+const cleanEventPageData = eventPageData => {
+  let eventPage = eventPageData;
 
   // Fill in some contextual nav info
-  eventPage.offeredBy = getOfferedByFromDepartments(eventPage.departments);
+  eventPage.offeredBy = getOfferedByFromDepartments(eventPageData.departments);
 
   // reverse the order of the fees
   // eventPage.fees.edges.reverse();
+
+  console.log(eventPage)
 
   return { eventPage: eventPage };
 };
@@ -610,8 +576,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     allEvents,
   } = pageAtUrlInfo;
   const type = 'blank';
-  console.log(pageAtUrlInfo)
-  console.log('instance: ', janisInstances[0]);
 
   // If we're a department page, we need to make sure our top services/related info works
   // todo: make sure the comment above still works
@@ -653,44 +617,24 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     } = janisbasepagewithtopics;
 
     if (guidepage) {
-      // departments is an array of departments, is the first one always the parent? polyhierarchy
-      let parentDeptId = guidepage.departments.length ? guidepage.departments[0].id : '';
       return {
         path: janisInstances[0].url,
         template: 'src/components/Pages/Guide',
         getData: () =>
           getGuidePageData(
-            guidepage.id,
-            parentDeptId,
-            '',
-            '',
-            // parent_topic,
-            // grandparent_topic_collection,
-            client,
+            guidepage,
+            janisInstances[0],
+            //client
           ),
         }
     }
 
     if (servicepage) {
-      // janisInstances.map(instance => {
-      //   // console.log('** ', servicepage)
-      //   return {
-      //     path: instance.url,
-      //     template: 'src/components/Pages/Service',
-      //     getData: () => {service: servicepage}
-      //     // getData: () => getServicePageData(
-      //     //   servicepage,
-      //     //   instance,
-      //     //   client,
-      //     //   pagesOfGuides.servicePage
-      //     // )
-      //   }
-      // })
       return {
         path: janisInstances[0].url,
         template: 'src/components/Pages/Service',
         getData: () =>
-            getServicePageData (
+          getServicePageData (
             servicepage,
             janisInstances[0],
             client, 
@@ -714,7 +658,6 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (officialdocumentpage) {
-      console.log(officialdocumentpage)
       return {
         path: janisInstances[0].url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
@@ -732,12 +675,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
         template: 'src/components/Pages/Form',
         getData: () =>
           getFormContainerData(
-            formcontainer.id,
-            parentDeptId,
-            '',
-            '',
-            // parent_topic,
-            // grandparent_topic_collection,
+            formcontainer,
+            janisInstances[0],
             client,
           ),
       };
@@ -746,10 +685,11 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
 
 
   if (locationpage) {
+    console.log(janisInstances)
     return {
       path: janisInstances[0].url,
       template: 'src/components/Pages/Location',
-      getData: () => getLocationPageData(locationpage.id, client),
+      getData: () => cleanLocationPage(locationpage),
     }
   }
 
@@ -757,7 +697,7 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: janisInstances[0].url,
       template: 'src/components/Pages/Event',
-      getData: () => getEventPageData(eventpage.id, client),
+      getData: () => cleanEventPageData(eventpage),
     }
   }
 
@@ -869,9 +809,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const client = createGraphQLClientsByLang(langCode);
 
   const siteStructure = await client.request(allPagesQuery)
-  console.log(siteStructure)
   let pages = siteStructure.allPages.edges;
-  console.log('PAGES ', pages)
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now

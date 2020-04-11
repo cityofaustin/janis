@@ -10,6 +10,8 @@ import UserFeedback from 'components/UserFeedback';
 import 'components/Pages/Location/_Location.scss';
 
 const LocationPage = ({ locationPage }) => {
+
+  console.log('loc: ', locationPage)
   const {
     locationPage: {
       title,
@@ -21,6 +23,7 @@ const LocationPage = ({ locationPage }) => {
       gettingHere: { buses },
     },
   } = locationPage ? { locationPage } : useRouteData();
+
 
   return (
     <div>

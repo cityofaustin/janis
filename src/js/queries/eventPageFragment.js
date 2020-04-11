@@ -22,6 +22,60 @@ to avoid duplicated logic from differently named vars. This is currently happeni
 
 */
 
+// we need the contact info back
+const eventPageFragment = `
+  fragment eventPageInfo on EventPageNode {
+    id
+    title
+    description
+    canceled
+    date
+    startTime
+    endTime
+    slug
+    departments {
+      id
+      title
+      slug
+    }
+    locations {
+      additionalDetails
+      locationType
+      cityLocation {
+        id
+        title
+        physicalStreet
+        physicalCity
+        physicalState
+        physicalZip
+        physicalUnit
+        slug
+      }
+      remoteLocation {
+        name
+        street
+        city
+        state
+        zip
+        unit
+      }
+    }
+    eventIsFree
+    fees {
+      edges {
+        node {
+          feeLabel
+          fee
+        }
+      }
+    }
+    registrationUrl
+  }
+`;
+
+export default eventPageFragment;
+
+/*
 const eventPageFragment = `
   fragment eventPageInfo on EventPageNode {
     id
@@ -77,3 +131,7 @@ const eventPageFragment = `
 `;
 
 export default eventPageFragment;
+
+
+*/
+
