@@ -90,10 +90,34 @@ export const getServicePageRevisionQuery = `
   ${servicePageFragment}
 `;
 
+export const getOfficialDocumentsPageRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asOfficialDocumentPage {
+        ...officialDocumentPageInfo
+      }
+      previewJanisInstance {
+        url
+        parent {
+          url
+          title
+        }
+        grandparent {
+          url
+          title
+        }
+      }
+    }
+  }
+  ${officialDocumentPageFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
+  official_document: getOfficialDocumentsPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
+  official_document: 'asOfficialDocumentPage',
 };

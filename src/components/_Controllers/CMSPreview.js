@@ -90,9 +90,14 @@ class CMSPreview extends Component {
     const { page } = this.state;
 
     if (!page) return <h1>Loading</h1>;
+    debugger;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
+        <Route
+          path="/official_document"
+          render={props => <OfficialDocumentList officialDocumentPage={page} />}
+        />
         <Route
           path="/information"
           render={props => (
@@ -143,16 +148,6 @@ class CMSPreview extends Component {
           path="/department"
           render={props => (
             <Department department={cleanDepartmentsForPreview(data)[0]} />
-          )}
-        />
-        <Route
-          path="/official_document"
-          render={props => (
-            <OfficialDocumentList
-              officialDocumentPage={
-                cleanOfficialDocumentPagesForPreview(data)[0]
-              }
-            />
           )}
         />
         <Route
