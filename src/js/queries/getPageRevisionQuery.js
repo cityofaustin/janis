@@ -9,7 +9,9 @@ import officialDocumentPageFragment from './officialDocumentPageFragment';
 import topicCollectionFragment from './topicCollectionFragment';
 import topicFragment from './topicFragment';
 
-// todo: get this working
+// todo in the distant future:
+// * figure out duplicate fragment issues
+// * get this working
 // export default const getPageRevisionQuery = `
 //   query getPageRevision($id: ID) {
 //     pageRevision(id: $id) {
