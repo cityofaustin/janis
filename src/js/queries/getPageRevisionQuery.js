@@ -9,38 +9,70 @@ import officialDocumentPageFragment from './officialDocumentPageFragment';
 import topicCollectionFragment from './topicCollectionFragment';
 import topicFragment from './topicFragment';
 
-const getPageRevisionQuery = `
+// todo: get this working
+// export default const getPageRevisionQuery = `
+//   query getPageRevision($id: ID) {
+//     pageRevision(id: $id) {
+//       asServicePage {
+//         ...servicePageInfo
+//       }
+//       asDepartmentPage {
+//         ...departmentPageInfo
+//       }
+//       asEventPage {
+//         ...eventPageInfo
+//       }
+//       asFormContainer {
+//         ...formContainerInfo
+//       }
+//       asGuidePage {
+//         ...guidePageInfo
+//       }
+//       asInformationPage {
+//         ...informationPageInfo
+//       }
+//       asLocationPage {
+//         ...locationPageInfo
+//       }
+//       asOfficialDocumentPage {
+//         ...officialDocumentPageInfo
+//       }
+//       asTopicCollectionPage {
+//         ...topicCollectionInfo
+//       }
+//       asTopicPage {
+//         ...topicInfo
+//       }
+//       previewJanisInstance {
+//         url
+//         parent {
+//           url
+//           title
+//         }
+//         grandparent {
+//           url
+//           title
+//         }
+//       }
+//     }
+//   }
+//   ${servicePageFragment}
+//   ${departmentPageFragment}
+//   ${eventPageFragment}
+//   ${formContainerFragment}
+//   ${guidePageFragment}
+//   ${informationPageFragment}
+//   ${locationPageFragment}
+//   ${officialDocumentPageFragment}
+//   ${topicCollectionFragment}
+//   ${topicFragment}
+// `;
+
+export const getServicePageRevisionQuery = `
   query getPageRevision($id: ID) {
     pageRevision(id: $id) {
       asServicePage {
         ...servicePageInfo
-      }
-      asDepartmentPage {
-        ...departmentPageInfo
-      }
-      asEventPage {
-        ...eventPageInfo
-      }
-      asFormContainer {
-        ...formContainerInfo
-      }
-      asGuidePage {
-        ...guidePageInfo
-      }
-      asInformationPage {
-        ...informationPageInfo
-      }
-      asLocationPage {
-        ...locationPageInfo
-      }
-      asOfficialDocumentPage {
-        ...officialDocumentPageInfo
-      }
-      asTopicCollectionPage {
-        ...topicCollectionInfo
-      }
-      asTopicPage {
-        ...topicInfo
       }
       previewJanisInstance {
         url
@@ -56,15 +88,12 @@ const getPageRevisionQuery = `
     }
   }
   ${servicePageFragment}
-  ${departmentPageFragment}
-  ${eventPageFragment}
-  ${formContainerFragment}
-  ${guidePageFragment}
-  ${informationPageFragment}
-  ${locationPageFragment}
-  ${officialDocumentPageFragment}
-  ${topicCollectionFragment}
-  ${topicFragment}
 `;
 
-export default getPageRevisionQuery;
+export const getPageRevisionQuery = {
+  services: getServicePageRevisionQuery,
+};
+
+export const getAsPage = {
+  services: 'asServicePage',
+};

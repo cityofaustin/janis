@@ -5,7 +5,10 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-import getPageRevisionQuery from 'js/queries/getPageRevisionQuery';
+import {
+  getPageRevisionQuery,
+  getAsPage,
+} from 'js/queries/getPageRevisionQuery';
 
 import { cleanServicesForPreview } from 'js/helpers/cleanData';
 
@@ -34,8 +37,6 @@ class CMSPreview extends Component {
   }
 
   fetchData() {
-    debugger;
-
     const {
       intl,
       match: {
@@ -49,89 +50,11 @@ class CMSPreview extends Component {
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     //TODO: one endpoint for revisions data requests
     let req;
-    switch (page_type) {
-      case 'services':
-        req = client.request(getServicePageRevisionQuery, { id: revision_id });
-        break;
-      case 'information':
-        req = client.request(getInformationPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'topic':
-        req = client.request(getTopicPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'department':
-        req = client.request(getDepartmentPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'topiccollection':
-        req = client.request(getTopicCollectionPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'official_document':
-        req = client.request(getOfficialDocumentPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'form':
-        req = client.request(getFormContainerRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'guide':
-        req = client.request(getGuidePageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'location':
-        req = client.request(getLocationPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'event':
-        req = client.request(getEventPageRevisionQuery, {
-          id: revision_id,
-        });
-    }
-    req.then(data => {
-      let page;
+    req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
-      switch (page_type) {
-        case 'services':
-          page = data.pageRevision.asServicePage;
-          break;
-        case 'information':
-          page = data.pageRevision.asInformationPage;
-          break;
-        case 'topic':
-          page = data.pageRevision.asTopicPage;
-          break;
-        case 'department':
-          page = data.pageRevision.asDepartmentPage;
-          break;
-        case 'topiccollection':
-          page = data.pageRevision.asTopicCollectionPage;
-          break;
-        case 'official_document':
-          page = data.pageRevision.asOfficialDocumentPage;
-          break;
-        case 'form':
-          page = data.pageRevision.asFormContainer;
-          break;
-        case 'guide':
-          page = data.pageRevision.asGuidePage;
-          break;
-        case 'location':
-          page = data.pageRevision.asLocationPage;
-          break;
-        case 'event':
-          page = data.pageRevision.asEventPage;
-      }
+    req.then(data => {
+      const page = data.pageRevision[getAsPage[page_type]];
+      debugger;
 
       this.setState({
         data: {
