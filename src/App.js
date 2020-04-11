@@ -1,10 +1,10 @@
 import React, { Component, Fragment, Suspense, useEffect } from 'react';
 import { Root, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
-import { Helmet } from "react-helmet"; // Helmet allows us to inject html attributes in the the document Header, body, and html tags.
+import { Helmet } from 'react-helmet'; // Helmet allows us to inject html attributes in the the document Header, body, and html tags.
 import CMSPreview from 'components/_Controllers/CMSPreview';
 import CMSLive from 'components/_Controllers/CMSLive';
 import I18nController from 'components/I18n/I18nController';
@@ -15,12 +15,11 @@ import Alert from 'components/Alerts';
 import { alert as i18n1 } from 'js/i18n/definitions';
 
 const LANG_KEY = {
-  'en': 'en-US',
-  'es': 'es-001'
-}
+  en: 'en-US',
+  es: 'es-001',
+};
 
 import 'css/coa.css';
-
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -30,11 +29,12 @@ const ScrollToTop = () => {
   }, [pathname]);
 
   return null;
-}
+};
 
-const AppView = ({path}) => {
+const AppView = ({ path }) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
+  debugger;
 
   return (
     <div>
@@ -74,7 +74,9 @@ const App = ({ navigation, threeoneone }) => {
               path={props.match.params.path}
             >
               <Helmet
-                htmlAttributes={{ lang : LANG_KEY[props.match.params.lang || "en"] }}
+                htmlAttributes={{
+                  lang: LANG_KEY[props.match.params.lang || 'en'],
+                }}
               />
               <Suspense fallback={<div>LOADING</div>}>
                 <AppView path={props.match.params.path || ''} />
