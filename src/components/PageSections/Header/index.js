@@ -178,7 +178,6 @@ class Header extends Component {
 
   render() {
     const { intl, navigation, path } = this.props;
-    debugger;
 
     return (
       <header

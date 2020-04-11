@@ -34,7 +34,6 @@ const ScrollToTop = () => {
 const AppView = ({ path }) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
-  debugger;
 
   return (
     <div>

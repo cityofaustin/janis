@@ -72,7 +72,6 @@ class CMSPreview extends Component {
           },
         },
       };
-      debugger;
 
       this.setState({
         page: page,
@@ -88,7 +87,7 @@ class CMSPreview extends Component {
     } = this.props;
     const { page } = this.state;
 
-    if (!this.state.data) return <h1>Loading</h1>;
+    if (!this.state.page) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />

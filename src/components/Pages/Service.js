@@ -36,6 +36,7 @@ const Service = ({ service, intl }) => {
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
+  debugger;
 
   return (
     <div>
@@ -50,7 +51,7 @@ const Service = ({ service, intl }) => {
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
-        )} 
+        )}
 
         {!pageIsPartOf ? (
           <PageHeader contentType={'service'} description={shortDescription}>
@@ -109,12 +110,12 @@ const Service = ({ service, intl }) => {
             )}
           </div>
         </div>
-        {!coaGlobal && 
+        {!coaGlobal && (
           <RelatedToMobile
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
-        }
+        )}
       </div>
       <UserFeedback />
     </div>
