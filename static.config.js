@@ -58,87 +58,21 @@ const getRelatedTo = async (parent, grandparent, client) => {
   return relatedTo;
 };
 
-const getAllTopicLinks = (
-  allServicePageTopics,
-  allInformationPageTopics,
-  allOfficialDocumentPageTopics,
-  allGuidePageTopics,
-  allFormContainerTopics,
-) => {
-  /* 
-    getAllTopicLinks: collects all the topic links from servicepagetopics, infopage topics
-    official doc topics, guidepage topics and form container topics into one 
-    array of links.
-    Used in getTopicPageData for topics.otherLinks
-    --> gets the pages that aren't top pages. so the other pages. 
-  */
-  // I don't like this but we still need to do some logic here
-  // to get all the pages
-  let allLinks = [];
-  if (allServicePageTopics && allServicePageTopics.edges) {
-    for (const edge of allServicePageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allInformationPageTopics && allInformationPageTopics.edges) {
-    for (const edge of allInformationPageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allOfficialDocumentPageTopics && allOfficialDocumentPageTopics.edges) {
-    for (const edge of allOfficialDocumentPageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allGuidePageTopics && allGuidePageTopics.edges) {
-    for (const edge of allGuidePageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allFormContainerTopics && allFormContainerTopics.edges) {
-    for (const edge of allFormContainerTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  return allLinks;
-};
-
 const getTopicPageData = async (topicPage, instance, client) => {
-  const { topicCollectionTopics, basePageTopics } = await client.request(
-    getTopicPageAdditionalData,
-    { tc_id: instance.parent.id,
-      topic_id: topicPage.id,
-    },
-  );
+  const {
+    topicCollectionTopics,
+    basePageTopics,
+  } = await client.request(getTopicPageAdditionalData, {
+    tc_id: instance.parent.id,
+    topic_id: topicPage.id,
+  });
 
   topicPage.contextualNavData = {};
   if (instance && instance.parent) {
     topicPage.contextualNavData.parent = instance.parent;
+
+    // todo: this is returning empty
+    topicCollectionTopics.edges.map(e => console.log(e));
 
     if (topicCollectionTopics && topicCollectionTopics.edges) {
       topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
@@ -163,17 +97,17 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
     topicPage.otherLinks = [];
     // and others
-      topicPage.otherLinks = basePageTopics.edges
-        // .filter(node => !topLinkIds.includes(node.node.page.pageId))
-        .map(node => {
-          let page = node.node.page;
-          return (
-          {
-            pageType: page.pageType,
-            title: page.title,
-            url: `${instance.url}${page.slug}`,
-          })
-        });
+    topicPage.otherLinks = basePageTopics.edges
+      // todo: once this is back, fix it.
+      // .filter(node => !topLinkIds.includes(node.node.page.pageId))
+      .map(node => {
+        let page = node.node.page;
+        return {
+          pageType: page.pageType,
+          title: page.title,
+          url: `${instance.url}${page.slug}`,
+        };
+      });
   } else {
     topicPage.topLinks = [];
     topicPage.otherLinks = [];
@@ -204,12 +138,13 @@ const cleanDepartmentPageData = departmentPage => {
 };
 
 const getTopicCollectionPageData = async (topicCollectionPage, client) => {
-  //todo chia: clean this up
-  const {
-    topicCollectionTopics,
-  } = await client.request(getTopicCollectionTopicQuery, {
-    id: topicCollectionPage.id,
-  });
+  //todo chia: clean this up. the entire thing needs to be rewritten
+  const { topicCollectionTopics } = await client.request(
+    getTopicCollectionTopicQuery,
+    {
+      id: topicCollectionPage.id,
+    },
+  );
 
   // topicCollectionTopics returns all the topics that are under that topic collection
   let topicCollection = topicCollectionPage;
@@ -431,7 +366,9 @@ const getOfficialDocumentPageData = async (
 
 const cleanEventPageData = eventPageData => {
   // Fill in some contextual nav info
-  eventPageData.offeredBy = getOfferedByFromDepartments(eventPageData.departments);
+  eventPageData.offeredBy = getOfferedByFromDepartments(
+    eventPageData.departments,
+  );
 
   // reverse the order of the fees
   // eventPage.fees.edges.reverse();
