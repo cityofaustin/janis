@@ -11,10 +11,9 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
+import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
 
 // Shiny ✨ new queries!
-import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
-import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
@@ -130,78 +129,57 @@ const getAllTopicLinks = (
 };
 
 const getTopicPageData = async (topicPage, instance, client) => {
-  // const {
-  //   allTopics,
-  //   allTopicCollections,
-  //   allTopicPageTopicCollections,
-  //   allGuidePageTopics,
-  //   allInformationPageTopics,
-  //   allOfficialDocumentPageTopics,
-  //   allServicePageTopics,
-  //   allFormContainerTopics,
-  // } = await client.request(getTopicPageQuery, {
-  //   id: id,
-  //   tc_id: parent_topic_collection,
-  // });
-  const { topicCollectionTopics } = await client.request(
-    getTopicCollectionTopicQuery,
-    {
-      id: instance.parent.id,
+  const { topicCollectionTopics, basePageTopics } = await client.request(
+    getTopicPageAdditionalData,
+    { tc_id: instance.parent.id,
+      topic_id: topicPage.id,
     },
   );
 
-  let topic = topicPage;
-
-  topic.contextualNavData = {};
+  topicPage.contextualNavData = {};
   if (instance && instance.parent) {
-    topic.contextualNavData.parent = instance.parent;
+    topicPage.contextualNavData.parent = instance.parent;
 
     if (topicCollectionTopics && topicCollectionTopics.edges) {
-      topic.contextualNavData.relatedTo = topicCollectionTopics.edges
+      topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
         .filter(edge => edge.node && edge.node.page.id !== topicPage.id)
-        // todo: update or check if update?
         .map(edge => ({
           id: edge.node.page.id,
           title: edge.node.page.title,
+          // todo: update the url
           url: `/${allTopicCollections.edges[0].node.theme.slug}/${allTopicCollections.edges[0].node.slug}/${edge.node.page.slug}/`,
         }));
     }
   }
 
   // we also need to get information about the top links
-  // todo: revise this when we get top pages
-  if (topic.topPages.edges && topic.topPages.edges.length) {
-    const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
-    console.log(topLinkIds);
-    topic.topLinks = topic.topPages.edges.map(edge => ({
+  if (topicPage.topPages.edges && topicPage.topPages.edges.length) {
+    const topLinkIds = topicPage.topPages.edges.map(edge => edge.node.pageId);
+    topicPage.topLinks = topicPage.topPages.edges.map(edge => ({
       pageType: edge.node.pageType,
       title: edge.node.title,
       url: `${instance.url}/${edge.node.slug}/`,
     }));
 
-    topic.otherLinks = [];
+    topicPage.otherLinks = [];
     // and others
-    //   topic.otherLinks = getAllTopicLinks(
-    //     allServicePageTopics,
-    //     allInformationPageTopics,
-    //     allOfficialDocumentPageTopics,
-    //     allGuidePageTopics,
-    //     allFormContainerTopics,
-    //   )
-    //     .filter(page => !topLinkIds.includes(page.id))
-    //     .map(page => ({
-    //       pageType: page.pageType,
-    //       title: page.title,
-    //       url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-    //         allTopicCollections.edges[0].node.slug
-    //       }/${topic.slug}/${page.slug}`,
-    //     }));
+      topicPage.otherLinks = basePageTopics.edges
+        // .filter(node => !topLinkIds.includes(node.node.page.pageId))
+        .map(node => {
+          let page = node.node.page;
+          return (
+          {
+            pageType: page.pageType,
+            title: page.title,
+            url: `${instance.url}${page.slug}`,
+          })
+        });
   } else {
-    topic.topLinks = [];
-    topic.otherLinks = [];
+    topicPage.topLinks = [];
+    topicPage.otherLinks = [];
   }
 
-  return { topic: topic };
+  return { topic: topicPage };
 };
 
 const cleanDepartmentPageData = departmentPage => {
@@ -226,6 +204,7 @@ const cleanDepartmentPageData = departmentPage => {
 };
 
 const getTopicCollectionPageData = async (topicCollectionPage, client) => {
+  //todo chia: clean this up
   const {
     topicCollectionTopics,
   } = await client.request(getTopicCollectionTopicQuery, {
@@ -314,7 +293,7 @@ const getInformationPageData = async (
   informationPageData.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(informationpageData.departments),
+    offeredBy: getOfferedByFromDepartments(informationPageData.departments),
   };
 
   if (pagesOfGuides && pagesOfGuides[id]) {
@@ -451,15 +430,13 @@ const getOfficialDocumentPageData = async (
 };
 
 const cleanEventPageData = eventPageData => {
-  let eventPage = eventPageData;
-
   // Fill in some contextual nav info
-  eventPage.offeredBy = getOfferedByFromDepartments(eventPageData.departments);
+  eventPageData.offeredBy = getOfferedByFromDepartments(eventPageData.departments);
 
   // reverse the order of the fees
   // eventPage.fees.edges.reverse();
 
-  return { eventPage: eventPage };
+  return { eventPage: eventPageData };
 };
 
 const getDepartmentsPageData = async client => {
@@ -739,7 +716,7 @@ const getPagesOfGuidesData = async client => {
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
     makeAllPages returns react-static data object with homepage 
-    and all built pages as children per language code
+    and all built pages as children for '/en', '/es' and '/'
   */
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
@@ -863,7 +840,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
 export default {
   // siteRoot: 'https://alpha.austin.gov',
-  //basePath // Do not alter this line if you want a working PR
+  // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
