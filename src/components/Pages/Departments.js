@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 
 import { services as i18n, departments as i18n2 } from 'js/i18n/definitions';
 
-import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
-import SectionHeader from 'components/SectionHeader';
 import TileGroup from 'components/Tiles/TileGroup';
 import UserFeedback from 'components/UserFeedback';
 

@@ -1,5 +1,5 @@
 const phoneFragment = `
-phoneNumber {
+phoneNumbers {
   edges {
     node {
       id

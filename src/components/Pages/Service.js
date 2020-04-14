@@ -109,12 +109,12 @@ const Service = ({ service, intl }) => {
             )}
           </div>
         </div>
-        {!coaGlobal && 
+        {!coaGlobal && (
           <RelatedToMobile
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
-        }
+        )}
       </div>
       <UserFeedback />
     </div>
