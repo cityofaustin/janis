@@ -3,6 +3,7 @@ import departmentPageFragment from './departmentPageFragment';
 import informationPageFragment from './informationPageFragment';
 import locationPageFragment from './locationPageFragment';
 import eventPageFragment from './eventPageFragment';
+import documentPageFragment from './documentPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery {
@@ -130,15 +131,7 @@ query allPagesQuery {
             ...informationPageInfo
           }
           officialdocumentpage {
-            id
-            title
-            slug
-            description
-            departments {
-              id
-              title
-              slug
-            }
+            ...documentPageInfo
           }
           formcontainer {
             id
@@ -156,13 +149,10 @@ query allPagesQuery {
       }
     }
   }
-}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}
 `;
 
-
-
 export default siteStructureQuery;
-
 
 /*
 import conciseContactFragment from './conciseContactFragment';

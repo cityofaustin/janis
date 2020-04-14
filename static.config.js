@@ -59,13 +59,13 @@ const getRelatedTo = async (parent, grandparent, client) => {
 };
 
 const getTopicPageData = async (topicPage, instance, client) => {
-  const {
-    topicCollectionTopics,
-    basePageTopics,
-  } = await client.request(getTopicPageAdditionalData, {
-    tc_id: instance.parent.id,
-    topic_id: topicPage.id,
-  });
+  const { topicCollectionTopics, basePageTopics } = await client.request(
+    getTopicPageAdditionalData,
+    {
+      tc_id: instance.parent.id,
+      topic_id: topicPage.id,
+    },
+  );
 
   topicPage.contextualNavData = {};
   if (instance && instance.parent) {
@@ -137,8 +137,11 @@ const cleanDepartmentPageData = departmentPage => {
   return { department: departmentPage };
 };
 
-const getTopicCollectionPageData = async (topicCollectionPage, client) => {
-  //todo chia: clean this up. the entire thing needs to be rewritten
+const getTopicCollectionPageData = async (
+  topicCollectionPage,
+  instanceOfPage,
+  client,
+) => {
   const { topicCollectionTopics } = await client.request(
     getTopicCollectionTopicQuery,
     {
@@ -162,11 +165,11 @@ const getTopicCollectionPageData = async (topicCollectionPage, client) => {
           },
         },
         pages: edge.node.page.topicpage.topPages.edges
-          // .filter(topPageEdge => topPageEdge.node.live)
+          // .filter(topPageEdge => topPageEdge.node.live) // todo: can't filter on live now
           .map(topPageEdge => ({
             pageType: topPageEdge.node.pageType,
             title: topPageEdge.node.title,
-            url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
           })),
       }));
   } else {
@@ -321,11 +324,10 @@ const getWorkingDocumentLink = async filename => {
 };
 
 const getOfficialDocumentPageData = async (
-  officialDocument,
+  officialDocumentPage,
   instance,
   client,
 ) => {
-  let officialDocumentPage = officialDocument;
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -339,28 +341,24 @@ const getOfficialDocumentPageData = async (
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(officialDocument.departments),
+    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
   };
 
-  // todo: remove the if part of this is temporary
-  if (officialdocumentpage.officialDocuments.length) {
-    for (let doc of officialDocumentPage.officialDocuments.edges) {
-      // If we have a document in wagtail
-      // use that info to update the information syncronously
-      if (doc.node.document) {
-        doc.node.link = await getWorkingDocumentLink(
-          doc.node.document.filename,
+  for (let doc of officialDocumentPage.officialDocuments.edges) {
+    // If we have a document in wagtail
+    // use that info to update the information syncronously
+    if (doc.node.document) {
+      doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
+      // If it's a pdf, add the size
+      if (doc.node.document.filename.slice(-3) === 'pdf') {
+        doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+          ' ',
+          '',
         );
-        // If it's a pdf, add the size
-        if (doc.node.document.filename.slice(-3) === 'pdf') {
-          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
-            ' ',
-            '',
-          );
-        }
       }
     }
   }
+
   return { officialDocumentPage: officialDocumentPage };
 };
 
@@ -441,7 +439,7 @@ const buildPageAtUrl = async (
   } = pageAtUrlInfo;
 
   // If we're a department page, we need to make sure our top services/related info works
-  // todo: make sure the comment above still works
+  // todo: make sure the above still happens
   if (departmentpage) {
     return {
       path: instanceOfPage.url,
@@ -456,7 +454,8 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/TopicCollection',
-      getData: () => getTopicCollectionPageData(topiccollectionpage, client),
+      getData: () =>
+        getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
     };
   }
 
