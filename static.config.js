@@ -92,8 +92,7 @@ const getTopicPageData = async (topicPage, instance, client) => {
     topicPage.otherLinks = [];
     // and others
     topicPage.otherLinks = basePageTopics.edges
-      // todo: once this is back, fix it.
-      // .filter(node => !topLinkIds.includes(node.node.page.pageId))
+      .filter(node => !topLinkIds.includes(node.node.pageId))
       .map(node => {
         let page = node.node.page;
         return {
@@ -112,7 +111,6 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
 const cleanDepartmentPageData = departmentPage => {
   let department = departmentPage;
-  // todo: update this
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
     department.slug,

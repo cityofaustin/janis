@@ -33,6 +33,7 @@ const getTopicPageAdditionalData = `
             title
             slug
           }
+          pageId
         }
       }
     }
