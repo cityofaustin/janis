@@ -22,60 +22,8 @@ to avoid duplicated logic from differently named vars. This is currently happeni
 
 */
 
-// we need the contact info back
-const eventPageFragment = `
-  fragment eventPageInfo on EventPageNode {
-    id
-    title
-    description
-    canceled
-    date
-    startTime
-    endTime
-    slug
-    departments {
-      id
-      title
-      slug
-    }
-    locations {
-      additionalDetails
-      locationType
-      cityLocation {
-        id
-        title
-        physicalStreet
-        physicalCity
-        physicalState
-        physicalZip
-        physicalUnit
-        slug
-      }
-      remoteLocation {
-        name
-        street
-        city
-        state
-        zip
-        unit
-      }
-    }
-    eventIsFree
-    fees {
-      edges {
-        node {
-          feeLabel
-          fee
-        }
-      }
-    }
-    registrationUrl
-  }
-`;
-
-export default eventPageFragment;
-
-/*
+// replaced the concise contact fragment with the query so allPageQuery does not throw an error about duplicate
+// fragments
 const eventPageFragment = `
   fragment eventPageInfo on EventPageNode {
     id
@@ -87,7 +35,18 @@ const eventPageFragment = `
     endTime
     slug
     contact {
-      ...contactInfo
+      name
+      phoneNumbers {
+        edges {
+          node {
+            id
+            phoneDescription
+            phoneNumber
+          }
+        }
+      }
+      email
+      socialMedia
     }
     departments {
       id
@@ -127,11 +86,7 @@ const eventPageFragment = `
     }
     registrationUrl
   }
-  ${conciseContactFragment}
 `;
 
 export default eventPageFragment;
-
-
-*/
 
