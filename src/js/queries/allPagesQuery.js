@@ -120,7 +120,7 @@ query allPagesQuery($after: String) {
               slug
             }
             # todo: figure out why we get a 'string indices must be integers' error when we uncomment
-            # steps
+            steps
             dynamicContent
             additionalContent
             shortDescription
