@@ -40,13 +40,16 @@ const getRelatedTo = async (parent, grandparent, client) => {
     },
   );
 
-  if (topicCollectionTopics && topicCollectionTopics.edges.length) {
+  if (
+    topicCollectionTopics &&
+    topicCollectionTopics.edges.length
+  ) {
     relatedTo = topicCollectionTopics.edges
       .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
-        url: `/${grandparent.url}/${edge.node.page.topicpage.slug}/`,
+        url: `/${grandparent.url}${edge.node.page.topicpage.slug}/`,
       }));
   }
 
@@ -66,18 +69,13 @@ const getTopicPageData = async (topicPage, instance, client) => {
   if (instance && instance.parent) {
     topicPage.contextualNavData.parent = instance.parent;
 
-    // todo: this is returning empty
-    topicCollectionTopics.edges.map(e => console.log(e));
-
     if (topicCollectionTopics && topicCollectionTopics.edges) {
       topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
-        .filter(edge => edge.node && edge.node.page.id !== topicPage.id)
+        .filter(edge => edge.node && edge.node.page.topicpage.id !== topicPage.id)
         .map(edge => ({
-          id: edge.node.page.id,
-          title: edge.node.page.title,
-          url: '#blarg',
-          // todo: update the url
-          // url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+          id: edge.node.page.topicpage.id,
+          title: edge.node.page.topicpage.title,
+          url: `${instance.parent.url}/${edge.node.page.topicpage.slug}/`,
           //   allTopicCollections.edges[0].node.slug
           // }/${edge.node.page.slug}/`,
         }));
@@ -96,8 +94,7 @@ const getTopicPageData = async (topicPage, instance, client) => {
     topicPage.otherLinks = [];
     // and others
     topicPage.otherLinks = basePageTopics.edges
-      // todo: once this is back, fix it.
-      // .filter(node => !topLinkIds.includes(node.node.page.pageId))
+      .filter(node => !topLinkIds.includes(node.node.pageId))
       .map(node => {
         let page = node.node.page;
         return {
@@ -116,7 +113,6 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
 const cleanDepartmentPageData = departmentPage => {
   let department = departmentPage;
-  // todo: update this
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
     department.slug,
@@ -167,9 +163,7 @@ const getTopicCollectionPageData = async (
           .map(topPageEdge => ({
             pageType: topPageEdge.node.pageType,
             title: topPageEdge.node.title,
-            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${
-              topPageEdge.node.slug
-            }/`,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
           })),
       }));
   } else {
@@ -594,7 +588,6 @@ const getPagesOfGuidesData = async client => {
       guidePage.node.sections.map(section => {
         // Example section object
         /*
-
         {
           heading: 'Learn and prepare',
           pages: [
