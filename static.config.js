@@ -538,7 +538,7 @@ const buildPageAtUrl = async (
 
   if (locationpage) {
     return {
-      path: instanceOfPage.url,
+      path: janisUrls[0],
       template: 'src/components/Pages/Location',
       getData: () => cleanLocationPage(locationpage),
     };
@@ -546,7 +546,7 @@ const buildPageAtUrl = async (
 
   if (eventpage) {
     return {
-      path: instanceOfPage.url,
+      path: janisUrls[0],
       template: 'src/components/Pages/Event',
       getData: () => cleanEventPageData(eventpage),
     };
