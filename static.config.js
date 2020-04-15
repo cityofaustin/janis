@@ -40,12 +40,7 @@ const getRelatedTo = async (parent, grandparent, client) => {
     },
   );
 
-  if (
-    topicCollectionTopics &&
-    topicCollectionTopics.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length
-  ) {
+  if (topicCollectionTopics && topicCollectionTopics.edges.length) {
     relatedTo = topicCollectionTopics.edges
       .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
       .map(edge => ({
@@ -80,8 +75,11 @@ const getTopicPageData = async (topicPage, instance, client) => {
         .map(edge => ({
           id: edge.node.page.id,
           title: edge.node.page.title,
+          url: '#blarg',
           // todo: update the url
-          url: `/${allTopicCollections.edges[0].node.theme.slug}/${allTopicCollections.edges[0].node.slug}/${edge.node.page.slug}/`,
+          // url: `/${allTopicCollections.edges[0].node.theme.slug}/${
+          //   allTopicCollections.edges[0].node.slug
+          // }/${edge.node.page.slug}/`,
         }));
     }
   }
@@ -169,7 +167,9 @@ const getTopicCollectionPageData = async (
           .map(topPageEdge => ({
             pageType: topPageEdge.node.pageType,
             title: topPageEdge.node.title,
-            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${
+              topPageEdge.node.slug
+            }/`,
           })),
       }));
   } else {
@@ -328,7 +328,6 @@ const getOfficialDocumentPageData = async (
   instance,
   client,
 ) => {
-
   let relatedTo = [];
   if (instance.grandparent) {
     relatedTo = await getRelatedTo(
@@ -659,7 +658,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-
   let pages = [];
   let after = '';
   while (true) {
@@ -670,7 +668,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       break;
     }
   }
-
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
