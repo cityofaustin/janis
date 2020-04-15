@@ -50,7 +50,7 @@ const Service = ({ service, intl }) => {
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
-        )} 
+        )}
 
         {!pageIsPartOf ? (
           <PageHeader contentType={'service'} description={shortDescription}>
@@ -109,12 +109,12 @@ const Service = ({ service, intl }) => {
             )}
           </div>
         </div>
-        {!coaGlobal && 
+        {!coaGlobal && (
           <RelatedToMobile
             relatedTo={contextualNavData.relatedTo}
             offeredBy={contextualNavData.offeredBy}
           />
-        }
+        )}
       </div>
       <UserFeedback />
     </div>
