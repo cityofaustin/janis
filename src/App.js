@@ -14,6 +14,8 @@ import Footer from 'components/PageSections/Footer';
 import Alert from 'components/Alerts';
 import { alert as i18n1 } from 'js/i18n/definitions';
 
+// 🌵
+
 const LANG_KEY = {
   en: 'en-US',
   es: 'es-001',
