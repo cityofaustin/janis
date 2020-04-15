@@ -29,19 +29,22 @@ const branchOverrides = {
   '1650-react-static-7': {
     CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
   },
-  "3202-form": {
-    CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
+  '3202-form': {
+    CMS_API: 'https://joplin-pr-3202-form.herokuapp.com/api/graphql',
   },
   '3244-guide-icon-tiles': {
-    CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
+    CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql',
   },
   '3690-incremental': {
     CMS_API: 'https://joplin-pr-3690-incremental.herokuapp.com/api/graphql',
     REACT_STATIC_PREFETCH_RATE: '10',
-},
+  },
   '4185-make-janis-build': {
-    CMS_API: 'https://joplin-pr-v3.herokuapp.com/api/graphql'
-  }
+    CMS_API: 'https://joplin-pr-v3.herokuapp.com/api/graphql',
+  },
+  'test-big-local-build': {
+    CMS_API: 'https://joplin-pr-import-everything.herokuapp.com/api/graphql',
+  },
 };
 
 module.exports = {
