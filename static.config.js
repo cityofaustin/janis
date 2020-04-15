@@ -46,7 +46,7 @@ const getRelatedTo = async (parent, grandparent, client) => {
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
-        url: `/${grandparent.url}${edge.node.page.topicpage.slug}/`,
+        url: `${grandparent.url}${edge.node.page.topicpage.slug}/`,
       }));
   }
 
