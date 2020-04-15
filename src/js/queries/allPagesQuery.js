@@ -6,8 +6,8 @@ import eventPageFragment from './eventPageFragment';
 import documentPageFragment from './documentPageFragment';
 
 const siteStructureQuery = `
-query allPagesQuery {
-  allPages(live:true) {
+query allPagesQuery($after: String) {
+  allPages(live: true, first: 20, after: $after) {
     edges {
       node {
         janisUrls
@@ -119,7 +119,8 @@ query allPagesQuery {
               title
               slug
             }
-            steps
+            # todo: figure out why we get a 'string indices must be integers' error when we uncomment
+            # steps
             dynamicContent
             additionalContent
             shortDescription
@@ -147,6 +148,10 @@ query allPagesQuery {
           }
         }
       }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
     }
   }
 }  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}

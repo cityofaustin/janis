@@ -659,8 +659,18 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-  const siteStructure = await client.request(allPagesQuery);
-  let pages = siteStructure.allPages.edges;
+
+  let pages = [];
+  let after = '';
+  while (true) {
+    const siteStructure = await client.request(allPagesQuery, { after: after });
+    pages = pages.concat(siteStructure.allPages.edges);
+    after = siteStructure.allPages.pageInfo.endCursor;
+    if (!siteStructure.allPages.pageInfo.hasNextPage) {
+      break;
+    }
+  }
+
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
