@@ -22,11 +22,6 @@ const InformationPage = ({ informationPage, intl }) => {
     informationPage: {
       title,
       slug,
-      topic,
-      topics,
-      theme,
-      department,
-      toplink,
       description,
       additionalContent,
       image,
