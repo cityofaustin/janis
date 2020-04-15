@@ -40,10 +40,7 @@ const getRelatedTo = async (parent, grandparent, client) => {
     },
   );
 
-  if (
-    topicCollectionTopics &&
-    topicCollectionTopics.edges.length
-  ) {
+  if (topicCollectionTopics && topicCollectionTopics.edges.length) {
     relatedTo = topicCollectionTopics.edges
       .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
       .map(edge => ({
@@ -71,7 +68,12 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
     if (topicCollectionTopics && topicCollectionTopics.edges) {
       topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
-        .filter(edge => edge.node && edge.node.page.topicpage.id !== topicPage.id)
+        .filter(
+          edge =>
+            edge.node &&
+            edge.node.page.topicpage.id !== topicPage.id && // remove duplicates
+            edge.node.page.topicpage.live, // and only include live
+        )
         .map(edge => ({
           id: edge.node.page.topicpage.id,
           title: edge.node.page.topicpage.title,
@@ -86,11 +88,14 @@ const getTopicPageData = async (topicPage, instance, client) => {
     topicPage.topLinks = topicPage.topPages.edges.map(edge => ({
       pageType: edge.node.pageType,
       title: edge.node.title,
-      url: `${instance.url}/${edge.node.slug}/`,
+      url: `${instance.url}${edge.node.slug}/`,
     }));
+  } else {
+    topicPage.topLinks = [];
+  }
 
-    topicPage.otherLinks = [];
-    // and others
+  // and others
+  if (basePageTopics.edges && basePageTopics.edges.length) {
     topicPage.otherLinks = basePageTopics.edges
       .filter(node => !topLinkIds.includes(node.node.pageId))
       .map(node => {
@@ -102,7 +107,6 @@ const getTopicPageData = async (topicPage, instance, client) => {
         };
       });
   } else {
-    topicPage.topLinks = [];
     topicPage.otherLinks = [];
   }
 
@@ -320,7 +324,6 @@ const getOfficialDocumentPageData = async (
   instance,
   client,
 ) => {
-
   let relatedTo = [];
   if (instance.grandparent) {
     relatedTo = await getRelatedTo(
