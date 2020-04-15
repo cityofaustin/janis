@@ -42,16 +42,14 @@ const getRelatedTo = async (parent, grandparent, client) => {
 
   if (
     topicCollectionTopics &&
-    topicCollectionTopics.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length
+    topicCollectionTopics.edges.length
   ) {
     relatedTo = topicCollectionTopics.edges
       .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
-        url: `/${grandparent.url}/${edge.node.page.topicpage.slug}/`,
+        url: `/${grandparent.url}${edge.node.page.topicpage.slug}/`,
       }));
   }
 
@@ -71,17 +69,13 @@ const getTopicPageData = async (topicPage, instance, client) => {
   if (instance && instance.parent) {
     topicPage.contextualNavData.parent = instance.parent;
 
-    // todo: this is returning empty
-    topicCollectionTopics.edges.map(e => console.log(e));
-
     if (topicCollectionTopics && topicCollectionTopics.edges) {
       topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
-        .filter(edge => edge.node && edge.node.page.id !== topicPage.id)
+        .filter(edge => edge.node && edge.node.page.topicpage.id !== topicPage.id)
         .map(edge => ({
-          id: edge.node.page.id,
-          title: edge.node.page.title,
-          // todo: update the url
-          url: `/${allTopicCollections.edges[0].node.theme.slug}/${allTopicCollections.edges[0].node.slug}/${edge.node.page.slug}/`,
+          id: edge.node.page.topicpage.id,
+          title: edge.node.page.topicpage.title,
+          url: `${instance.parent.url}/${edge.node.page.topicpage.slug}/`,
         }));
     }
   }
@@ -595,7 +589,6 @@ const getPagesOfGuidesData = async client => {
       guidePage.node.sections.map(section => {
         // Example section object
         /*
-
         {
           heading: 'Learn and prepare',
           pages: [
