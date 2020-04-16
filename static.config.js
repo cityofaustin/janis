@@ -84,7 +84,6 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
   // we also need to get information about the top links
   if (topicPage.topPages.edges && topicPage.topPages.edges.length) {
-    const topLinkIds = topicPage.topPages.edges.map(edge => edge.node.pageId);
     topicPage.topLinks = topicPage.topPages.edges.map(edge => ({
       pageType: edge.node.pageType,
       title: edge.node.title,
@@ -96,6 +95,9 @@ const getTopicPageData = async (topicPage, instance, client) => {
 
   // and others
   if (basePageTopics.edges && basePageTopics.edges.length) {
+    const topLinkIds = topicPage.topPages.edges
+      ? topicPage.topPages.edges.map(edge => edge.node.pageId)
+      : [];
     topicPage.otherLinks = basePageTopics.edges
       .filter(
         node => !topLinkIds.includes(node.node.pageId) && node.node.page.live,

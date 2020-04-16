@@ -109,8 +109,7 @@ query allPagesQuery {
       }
     }
   }
-}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}
-${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}
 `;
 
 export default siteStructureQuery;
