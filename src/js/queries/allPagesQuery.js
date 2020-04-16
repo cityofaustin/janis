@@ -7,8 +7,8 @@ import documentPageFragment from './documentPageFragment';
 import guidePageLiveFragment from './guidePageLiveFragment';
 
 const siteStructureQuery = `
-query allPagesQuery {
-  allPages(live:true) {
+query allPagesQuery($after: String) {
+  allPages(live: true, first: 20, after: $after) {
     edges {
       node {
         janisUrls
@@ -107,6 +107,10 @@ query allPagesQuery {
           }
         }
       }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
     }
   }
 }  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}
