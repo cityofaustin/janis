@@ -32,6 +32,7 @@ const getTopicPageAdditionalData = `
             id
             title
             slug
+            live
           }
           pageId
         }

@@ -97,7 +97,9 @@ const getTopicPageData = async (topicPage, instance, client) => {
   // and others
   if (basePageTopics.edges && basePageTopics.edges.length) {
     topicPage.otherLinks = basePageTopics.edges
-      .filter(node => !topLinkIds.includes(node.node.pageId))
+      .filter(
+        node => !topLinkIds.includes(node.node.pageId) && node.node.page.live,
+      )
       .map(node => {
         let page = node.node.page;
         return {
