@@ -22,6 +22,7 @@ const LocationPage = ({ locationPage }) => {
     },
   } = locationPage ? { locationPage } : useRouteData();
 
+
   return (
     <div>
       <Head>

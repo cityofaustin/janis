@@ -58,19 +58,13 @@ const locationPageFragment = `
             id
             title
             janisUrl
-            contacts {
-              edges {
-                node {
-                  contact {
-                    phoneNumber {
-                      edges {
-                        node {
-                          id
-                          phoneNumber
-                          phoneDescription
-                        }
-                      }
-                    }
+            contact {
+              phoneNumbers {
+                edges {
+                  node {
+                    id
+                    phoneNumber
+                    phoneDescription
                   }
                 }
               }

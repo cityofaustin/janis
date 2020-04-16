@@ -1,10 +1,14 @@
 import conciseContactFragment from './conciseContactFragment';
 import departmentPageFragment from './departmentPageFragment';
 import informationPageFragment from './informationPageFragment';
+import locationPageFragment from './locationPageFragment';
+import eventPageFragment from './eventPageFragment';
+import documentPageFragment from './documentPageFragment';
+import guidePageLiveFragment from './guidePageLiveFragment';
 
 const siteStructureQuery = `
-query allPagesQuery {
-  allPages(live:true) {
+query allPagesQuery($after: String) {
+  allPages(live: true, first: 20, after: $after) {
     edges {
       node {
         janisUrls
@@ -22,57 +26,13 @@ query allPagesQuery {
           }
         }
         eventpage {
-          id
+          ...eventPageInfo
         }
         locationpage {
-          id
+          ...locationPageInfo
         }
         departmentpage {
-          id
-          slug
-          title
-          whatWeDo
-          image {
-            id
-            filename
-            title
-          }
-          mission
-          departmentDirectors {
-            edges {
-              node {
-                name
-                photo {
-                  id
-                  filename
-                }
-                about
-                title
-              }
-            }
-          }
-          jobListings
-          topPages {
-            edges {
-              node {
-                pageId
-                slug
-                title
-              }
-            }
-          }
-          relatedPages {
-            edges {
-              node {
-                pageId
-                slug
-                title
-              }
-            }
-          }
-          contact {
-            ...contactInfo
-          }
+          ...departmentPageInfo
         }
         topiccollectionpage {
           id
@@ -108,7 +68,7 @@ query allPagesQuery {
         }
         janisbasepagewithtopics {
           guidepage {
-            id
+            ...guidePageLiveInfo
           }
           servicepage {
             id
@@ -131,26 +91,30 @@ query allPagesQuery {
             ...informationPageInfo
           }
           officialdocumentpage {
+            ...documentPageInfo
+          }
+          formcontainer {
             id
             title
             slug
             description
+            formUrl
             departments {
               id
               title
               slug
             }
           }
-          formcontainer {
-            id
-          }
         }
       }
     }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
   }
-}  ${conciseContactFragment}${informationPageFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}
 `;
 
-
-
 export default siteStructureQuery;
+

@@ -11,24 +11,13 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
+import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
 
 // Shiny ✨ new queries!
-import getTopicCollectionPageQuery from 'js/queries/getTopicCollectionPageQuery';
-import getTopicPageQuery from 'js/queries/getTopicPageQuery';
-import getInformationPageQuery from 'js/queries/getInformationPageQuery';
-import getServicePageQuery from 'js/queries/getServicePageQuery';
-import getDepartmentPageQuery from 'js/queries/getDepartmentPageQuery';
-import getOfficialDocumentPageQuery from 'js/queries/getOfficialDocumentPageQuery';
-import getGuidePageQuery from 'js/queries/getGuidePageQuery';
-import getContextualNavTopicDataQuery from 'js/queries/getContextualNavTopicDataQuery';
-import getContextualNavDepartmentDataQuery from 'js/queries/getContextualNavDepartmentDataQuery';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
-import getFormContainerQuery from 'js/queries/getFormContainerQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
-import getLocationPageQuery from 'js/queries/getLocationPageQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 
-//todo (chia) : check if we still need all of these
 import {
   cleanNavigation,
   cleanContacts,
@@ -41,254 +30,95 @@ import {
   formatFeesRange,
 } from 'js/helpers/cleanData';
 
-const getContextualNavData = async (
-  parent_department, // id string
-  parent_topic, // id string
-  grandparent_topic_collection, // id string
-  departments, // array of department objects {id, slug, title}
-  client,
-) => {
-  let contextualNavData = {};
+const getRelatedTo = async (parent, grandparent, client) => {
+  let relatedTo = [];
 
-  parent_topic = "VG9waWNOb2RlOjg="
-  grandparent_topic_collection = "VG9waWNDb2xsZWN0aW9uTm9kZTo3"
+  const { topicCollectionTopics } = await client.request(
+    getTopicCollectionTopicQuery,
+    {
+      id: grandparent.id,
+    },
+  );
 
-  // returns
-  // allTopics: topic object for specified parent_topic id {id, slug, title}
-  // allTopicCollections: topic_collection object for specified grandparent_topic_collection
-  //   {id, slug, theme:{id, slug}}
-  // topicCollectionTopics: array of topic objs that are under grandparent_topic_collection
-  //    including the parent_topic
-  const { allTopics, allTopicCollections, topicCollectionTopics } =
-    parent_topic && grandparent_topic_collection
-      ? await client.request(getContextualNavTopicDataQuery, {
-          parent_topic: parent_topic,
-          grandparent_topic_collection: grandparent_topic_collection,
-        })
-      : {
-          allTopics: null,
-          allTopicCollections: null,
-          topicCollectionTopics: null,
-        };
-
-  // returns department object for the specified dept id
-  const { allDepartmentPages } = parent_department
-    ? await client.request(getContextualNavDepartmentDataQuery, {
-        parent_department: parent_department,
-      })
-    : { allDepartmentPages: null };
-
-  // get parent, either if its topics as parent or department
-  if (
-    parent_topic &&
-    grandparent_topic_collection &&
-    allTopics &&
-    allTopics.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length &&
-    allTopicCollections.edges[0].node.theme
-  ) {
-    contextualNavData.parent = {
-      id: allTopics.edges[0].node.id,
-      title: allTopics.edges[0].node.title,
-      // url is theme/topic-collection/topic
-      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-        allTopicCollections.edges[0].node.slug
-      }/${allTopics.edges[0].node.slug}/`,
-    };
-  }
-
-  if (
-    parent_department &&
-    allDepartmentPages && // note, not all dept pages, the result of the query
-    allDepartmentPages.edges.length
-  ) {
-    contextualNavData.parent = {
-      id: allDepartmentPages.edges[0].node.id,
-      title: allDepartmentPages.edges[0].node.title,
-      url: `/${allDepartmentPages.edges[0].node.slug}/`,
-    };
-  }
-
-  // get related to
-  if (
-    parent_topic &&
-    grandparent_topic_collection &&
-    topicCollectionTopics &&
-    topicCollectionTopics.edges.length &&
-    allTopicCollections &&
-    allTopicCollections.edges.length &&
-    allTopicCollections.edges[0].node.theme
-  ) {
-    contextualNavData.relatedTo = topicCollectionTopics.edges
-      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent_topic)
+  if (topicCollectionTopics && topicCollectionTopics.edges.length) {
+    relatedTo = topicCollectionTopics.edges
+      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
-        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-          allTopicCollections.edges[0].node.slug
-        }/${edge.node.page.topicpage.slug}/`,
+        url: `${grandparent.url}${edge.node.page.topicpage.slug}/`,
       }));
-  } else {
-    contextualNavData.relatedTo = [];
-    // relatedTo is empty if we are viewing page under the department
   }
 
-  // get offered by
-  console.log('departments from cn: ', departments);
-  contextualNavData.offeredBy = getOfferedByFromDepartments(departments);
-
-  return contextualNavData;
-};
-
-const getAllTopicLinks = (
-  allServicePageTopics,
-  allInformationPageTopics,
-  allOfficialDocumentPageTopics,
-  allGuidePageTopics,
-  allFormContainerTopics,
-) => {
-  /* 
-    getAllTopicLinks: collects all the topic links from servicepagetopics, infopage topics
-    official doc topics, guidepage topics and form container topics into one 
-    array of links.
-    Used in getTopicPageData for topics.otherLinks
-    --> gets the pages that aren't top pages. so the other pages. 
-  */
-  // I don't like this but we still need to do some logic here
-  // to get all the pages
-  let allLinks = [];
-  if (allServicePageTopics && allServicePageTopics.edges) {
-    for (const edge of allServicePageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allInformationPageTopics && allInformationPageTopics.edges) {
-    for (const edge of allInformationPageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allOfficialDocumentPageTopics && allOfficialDocumentPageTopics.edges) {
-    for (const edge of allOfficialDocumentPageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allGuidePageTopics && allGuidePageTopics.edges) {
-    for (const edge of allGuidePageTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  if (allFormContainerTopics && allFormContainerTopics.edges) {
-    for (const edge of allFormContainerTopics.edges) {
-      if (edge.node) {
-        if (edge.node.page.live) {
-          allLinks.push(edge.node.page);
-        }
-      }
-    }
-  }
-
-  return allLinks;
+  return relatedTo;
 };
 
 const getTopicPageData = async (topicPage, instance, client) => {
-  // const {
-  //   allTopics,
-  //   allTopicCollections,
-  //   allTopicPageTopicCollections,
-  //   allGuidePageTopics,
-  //   allInformationPageTopics,
-  //   allOfficialDocumentPageTopics,
-  //   allServicePageTopics,
-  //   allFormContainerTopics,
-  // } = await client.request(getTopicPageQuery, {
-  //   id: id,
-  //   tc_id: parent_topic_collection,
-  // });
-  const { topicCollectionTopics } = await client.request(getTopicCollectionTopicQuery, {
-    id: instance.parent.id
-  });
+  const { topicCollectionTopics, basePageTopics } = await client.request(
+    getTopicPageAdditionalData,
+    {
+      tc_id: instance.parent.id,
+      topic_id: topicPage.id,
+    },
+  );
 
-  let topic = topicPage;
-
-  topic.contextualNavData = {};
-  if ( instance && instance.parent) {
-    topic.contextualNavData.parent = instance.parent;
+  topicPage.contextualNavData = {};
+  if (instance && instance.parent) {
+    topicPage.contextualNavData.parent = instance.parent;
 
     if (topicCollectionTopics && topicCollectionTopics.edges) {
-      topic.contextualNavData.relatedTo = topicCollectionTopics.edges
-        .filter(edge => edge.node && edge.node.page.id !== topicPage.id)
-        // todo: update or check if update?
+      topicPage.contextualNavData.relatedTo = topicCollectionTopics.edges
+        .filter(
+          edge =>
+            edge.node &&
+            edge.node.page.topicpage.id !== topicPage.id && // remove duplicates
+            edge.node.page.topicpage.live, // and only include live
+        )
         .map(edge => ({
-          id: edge.node.page.id,
-          title: edge.node.page.title,
-          url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-            allTopicCollections.edges[0].node.slug
-          }/${edge.node.page.slug}/`,
+          id: edge.node.page.topicpage.id,
+          title: edge.node.page.topicpage.title,
+          url: `${instance.parent.url}/${edge.node.page.topicpage.slug}/`,
         }));
     }
   }
 
   // we also need to get information about the top links
-  // todo: revise this when we get top pages
-  if (topic.topPages.edges && topic.topPages.edges.length) {
-    const topLinkIds = topic.topPages.edges.map(edge => edge.node.pageId);
-    topic.topLinks = topic.topPages.edges.map(edge => ({
+  if (topicPage.topPages.edges && topicPage.topPages.edges.length) {
+    topicPage.topLinks = topicPage.topPages.edges.map(edge => ({
       pageType: edge.node.pageType,
       title: edge.node.title,
-      url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-        allTopicCollections.edges[0].node.slug
-      }/${topic.slug}/${edge.node.slug}/`,
+      url: `${instance.url}${edge.node.slug}/`,
     }));
-
-    // and others
-    topic.otherLinks = getAllTopicLinks(
-      allServicePageTopics,
-      allInformationPageTopics,
-      allOfficialDocumentPageTopics,
-      allGuidePageTopics,
-      allFormContainerTopics,
-    )
-      .filter(page => !topLinkIds.includes(page.id))
-      .map(page => ({
-        pageType: page.pageType,
-        title: page.title,
-        url: `/${allTopicCollections.edges[0].node.theme.slug}/${
-          allTopicCollections.edges[0].node.slug
-        }/${topic.slug}/${page.slug}`,
-      }));
-  }
-  else {
-    topic.topLinks = []
-    topic.otherLinks = []
+  } else {
+    topicPage.topLinks = [];
   }
 
-  return { topic: topic };
+  // and others
+  if (basePageTopics.edges && basePageTopics.edges.length) {
+    const topLinkIds = topicPage.topPages.edges
+      ? topicPage.topPages.edges.map(edge => edge.node.pageId)
+      : [];
+    topicPage.otherLinks = basePageTopics.edges
+      .filter(
+        node => !topLinkIds.includes(node.node.pageId) && node.node.page.live,
+      )
+      .map(node => {
+        let page = node.node.page;
+        return {
+          pageType: page.pageType,
+          title: page.title,
+          url: `${instance.url}${page.slug}`,
+        };
+      });
+  } else {
+    topicPage.otherLinks = [];
+  }
+
+  return { topic: topicPage };
 };
 
 const cleanDepartmentPageData = departmentPage => {
   let department = departmentPage;
-  // todo: update this
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
     department.slug,
@@ -307,148 +137,150 @@ const cleanDepartmentPageData = departmentPage => {
   return { department: departmentPage };
 };
 
-const getTopicCollectionPageData = async (topicCollectionPage, client) => {
-  const {
-    topicCollectionTopics,
-  } = await client.request(getTopicCollectionTopicQuery, { id: topicCollectionPage.id });
+const getTopicCollectionPageData = async (
+  topicCollectionPage,
+  instanceOfPage,
+  client,
+) => {
+  const { topicCollectionTopics } = await client.request(
+    getTopicCollectionTopicQuery,
+    {
+      id: topicCollectionPage.id,
+    },
+  );
 
   // topicCollectionTopics returns all the topics that are under that topic collection
   let topicCollection = topicCollectionPage;
   if (topicCollectionTopics.edges.length) {
-  topicCollection.topics = topicCollectionTopics.edges
-    .filter(edge => edge.node.page.topicpage.live)
-    .map(edge => ({
-      title: edge.node.page.topicpage.title,
-      description: edge.node.page.topicpage.description,
-      slug: edge.node.page.topicpage.slug,
-      topiccollection: {
-        slug: topicCollection.slug,
-        theme: {
-          slug: topicCollection.theme.slug,
+    topicCollection.topics = topicCollectionTopics.edges
+      .filter(edge => edge.node.page.topicpage.live)
+      .map(edge => ({
+        title: edge.node.page.topicpage.title,
+        description: edge.node.page.topicpage.description,
+        slug: edge.node.page.topicpage.slug,
+        topiccollection: {
+          slug: topicCollection.slug,
+          theme: {
+            slug: topicCollection.theme.slug,
+          },
         },
-      },
-      pages: edge.node.page.topicpage.topPages.edges
-      // .filter(topPageEdge => topPageEdge.node.live)
-      .map(topPageEdge => ({
-        pageType: topPageEdge.node.pageType,
-        title: topPageEdge.node.title,
-        url: `/${topicCollection.theme.slug}/${topicCollection.slug}/${
-          edge.node.page.topicpage.slug
-        }/${topPageEdge.node.slug}/`,
-      })),
-    }));
+        pages: edge.node.page.topicpage.topPages.edges
+          // .filter(topPageEdge => topPageEdge.node.live) // todo: can't filter on live now
+          .map(topPageEdge => ({
+            pageType: topPageEdge.node.pageType,
+            title: topPageEdge.node.title,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
+          })),
+      }));
   } else {
-    topicCollection.topics = []
+    topicCollection.topics = [];
   }
 
   return { tc: topicCollection };
 };
 
-const getServicePageData = (
-            servicepage,
-            instance,
-            client,
-            pagesOfGuides
-            // will have to bring async back later?
-            // when we bring related to back
+const getServicePageData = async (
+  servicePageData,
+  instance,
+  client,
+  pagesOfGuides,
 ) => {
-  // keeping this logic in there for now, stuff is kinda messy
-  servicepage.contacts = cleanContacts(servicepage.contact);
-  servicepage.contextualNavData = {
-    parent: instance.parent,
-    relatedTo: [], // todo: work around related to
-    // todo, depts may need to be cleaned
-    departments: servicepage.departments
+  let relatedTo = [];
+  if (instance.grandparent) {
+    relatedTo = await getRelatedTo(
+      instance.parent,
+      instance.grandparent,
+      client,
+    );
   }
+
+  // keeping this logic in there for now, stuff is kinda messy
+  servicePageData.contacts = cleanContacts(servicePageData.contact);
+
+  servicePageData.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: relatedTo,
+    offeredBy: getOfferedByFromDepartments(servicePageData.departments),
+  };
 
   if (pagesOfGuides && pagesOfGuides[id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     service.pageIsPartOf = pagesOfGuides[id];
   }
-  return { service: servicepage };
+  return { service: servicePageData };
 };
 
-const getInformationPageData = (
-  informationpage,
+const getInformationPageData = async (
+  informationPageData,
   instance,
   client,
   pagesOfGuides,
-  // will have to bring async back later?
-  // when we bring related to back
 ) => {
-  let informationPage = informationpage;
+  let relatedTo = [];
+  if (instance.grandparent) {
+    relatedTo = await getRelatedTo(
+      instance.parent,
+      instance.grandparent,
+      client,
+    );
+  }
 
   // keeping this logic in there for now, stuff is kinda messy
-  informationPage.contacts = cleanContacts(informationpage.contacts);
+  informationPageData.contacts = cleanContacts(informationPageData.contacts);
 
-  informationPage.contextualNavData = {
+  informationPageData.contextualNavData = {
     parent: instance.parent,
-    relatedTo: [],
-    departments: informationpage.departments
-  }
+    relatedTo: relatedTo,
+    offeredBy: getOfferedByFromDepartments(informationPageData.departments),
+  };
 
   if (pagesOfGuides && pagesOfGuides[id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     informationPage.pageIsPartOf = pagesOfGuides[id];
   }
 
-  return { informationPage: informationPage };
+  return { informationPage: informationPageData };
 };
 
-const getGuidePageData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  client,
-) => {
-  const { allGuidePages } = await client.request(getGuidePageQuery, {
-    id: id,
-  });
-
-  let guidePage = allGuidePages.edges[0].node;
-
-  // keeping this logic in there for now, stuff is kinda messy
-  let contacts = cleanContacts(guidePage.contacts);
-
-  // Guide pages only support single contacts for now
-  if (contacts && contacts.length) {
-    guidePage.contact = contacts[0];
+const getGuidePageData = async (guidePageData, instance, client) => {
+  let relatedTo = [];
+  if (instance.grandparent) {
+    relatedTo = await getRelatedTo(
+      instance.parent,
+      instance.grandparent,
+      client,
+    );
   }
 
-  guidePage.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    guidePage.departments,
-    client,
-  );
+  // keeping this logic in there for now, stuff is kinda messy
+  guidePageData.contact = cleanContacts(guidePageData.contact);
+
+  informationPage.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: relatedTo,
+    offeredBy: getOfferedByFromDepartments(guidepageData.departments),
+  };
 
   return { guidePage: guidePage };
 };
 
-const getFormContainerData = async (
-  id,
-  parent_department,
-  parent_topic,
-  grandparent_topic_collection,
-  client,
-) => {
-  const { allFormContainers } = await client.request(getFormContainerQuery, {
-    id: id,
-  });
+const getFormContainerData = async (formContainerData, instance, client) => {
+  let relatedTo = [];
+  if (instance.grandparent) {
+    relatedTo = await getRelatedTo(
+      instance.parent,
+      instance.grandparent,
+      client,
+    );
+  }
 
-  let formContainer = allFormContainers.edges[0].node;
+  formContainerData.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: relatedTo,
+    offeredBy: getOfferedByFromDepartments(formContainerData.departments),
+  };
 
-  formContainer.contextualNavData = await getContextualNavData(
-    parent_department,
-    parent_topic,
-    grandparent_topic_collection,
-    formContainer.departments,
-    client,
-  );
-
-  return { formContainer: formContainer };
+  return { formContainer: formContainerData };
 };
 
 const checkUrl = async url => {
@@ -491,21 +323,26 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-const cleanOfficialDocumentPageData = async (
-  officialDocument,
-  instance
+const getOfficialDocumentPageData = async (
+  officialDocumentPage,
+  instance,
+  client,
 ) => {
-  let officialDocumentPage = officialDocument;
-  console.log(officialDocument, instance)
+  let relatedTo = [];
+  if (instance.grandparent) {
+    relatedTo = await getRelatedTo(
+      instance.parent,
+      instance.grandparent,
+      client,
+    );
+  }
 
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
-    relatedTo: [],
-    offeredBy: officialDocument.departments,
-  }
+    relatedTo: relatedTo,
+    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
+  };
 
-  // todo: remove this is temporary
-  if(officialdocumentpage.officialDocuments.length) {
   for (let doc of officialDocumentPage.officialDocuments.edges) {
     // If we have a document in wagtail
     // use that info to update the information syncronously
@@ -520,9 +357,20 @@ const cleanOfficialDocumentPageData = async (
       }
     }
   }
-}
 
   return { officialDocumentPage: officialDocumentPage };
+};
+
+const cleanEventPageData = eventPageData => {
+  // Fill in some contextual nav info
+  eventPageData.offeredBy = getOfferedByFromDepartments(
+    eventPageData.departments,
+  );
+
+  // reverse the order of the fees
+  // eventPage.fees.edges.reverse();
+
+  return { eventPage: eventPageData };
 };
 
 const getDepartmentsPageData = async client => {
@@ -534,32 +382,6 @@ const getDepartmentsPageData = async client => {
   }));
 
   return { departments: departments };
-};
-
-const getLocationPageData = async (id, client) => {
-  const { allLocationPages } = await client.request(getLocationPageQuery, {
-    id: id,
-  });
-
-  let locationPage = allLocationPages.edges[0].node;
-
-  return { locationPage: cleanLocationPage(locationPage) };
-};
-
-const getEventPageData = async (id, client) => {
-  const { allEventPages } = await client.request(getEventPageQuery, {
-    id: id,
-  });
-
-  let eventPage = allEventPages.edges[0].node;
-
-  // Fill in some contextual nav info
-  eventPage.offeredBy = getOfferedByFromDepartments(eventPage.departments);
-
-  // reverse the order of the fees
-  // eventPage.fees.edges.reverse();
-
-  return { eventPage: eventPage };
 };
 
 const getAllEvents = async (client, hideCanceled) => {
@@ -592,10 +414,15 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
-const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
+const buildPageAtUrl = async (
+  pageAtUrlInfo,
+  instanceOfPage,
+  client,
+  pagesOfGuides,
+) => {
   /* 
   buildPageAtUrl takes a page information object and the language client
-  returns object with page url, template and data from appropiate query
+  returns object with page url, template and data from appropriate query
   */
   const {
     janisUrls,
@@ -609,37 +436,34 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     allDepartments,
     allEvents,
   } = pageAtUrlInfo;
-  const type = 'blank';
-  console.log(pageAtUrlInfo)
-  console.log('instance: ', janisInstances[0]);
 
   // If we're a department page, we need to make sure our top services/related info works
-  // todo: make sure the comment above still works
+  // todo: make sure the above still happens
   if (departmentpage) {
     return {
-      path: janisInstances[0].url,
+      path: instanceOfPage.url,
       template: 'src/components/Pages/Department',
       getData: () => cleanDepartmentPageData(departmentpage),
-    }
+    };
   }
 
   // If we are a topic collection page, we need to use a query to get information about
   // our child topics and their top pages
   if (topiccollectionpage) {
     return {
-      path: janisInstances[0].url,
+      path: instanceOfPage.url,
       template: 'src/components/Pages/TopicCollection',
-      getData: () => getTopicCollectionPageData(topiccollectionpage, client),
-    }
+      getData: () =>
+        getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
+    };
   }
 
-  // If we are a topic page, we need a parent topic collection id
   if (janisbasepagewithtopiccollections) {
     let topicPage = janisbasepagewithtopiccollections.topicpage;
     return {
-      path: janisInstances[0].url,
+      path: instanceOfPage.url,
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(topicPage, janisInstances[0], client),
+      getData: () => getTopicPageData(topicPage, instanceOfPage, client),
     };
   }
 
@@ -653,60 +477,35 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     } = janisbasepagewithtopics;
 
     if (guidepage) {
-      // departments is an array of departments, is the first one always the parent? polyhierarchy
-      let parentDeptId = guidepage.departments.length ? guidepage.departments[0].id : '';
       return {
-        path: janisInstances[0].url,
+        path: instanceOfPage.url,
         template: 'src/components/Pages/Guide',
-        getData: () =>
-          getGuidePageData(
-            guidepage.id,
-            parentDeptId,
-            '',
-            '',
-            // parent_topic,
-            // grandparent_topic_collection,
-            client,
-          ),
-        }
+        getData: () => getGuidePageData(guidepage, instanceOfPage, client),
+      };
     }
 
     if (servicepage) {
-      // janisInstances.map(instance => {
-      //   // console.log('** ', servicepage)
-      //   return {
-      //     path: instance.url,
-      //     template: 'src/components/Pages/Service',
-      //     getData: () => {service: servicepage}
-      //     // getData: () => getServicePageData(
-      //     //   servicepage,
-      //     //   instance,
-      //     //   client,
-      //     //   pagesOfGuides.servicePage
-      //     // )
-      //   }
-      // })
       return {
-        path: janisInstances[0].url,
+        path: instanceOfPage.url,
         template: 'src/components/Pages/Service',
         getData: () =>
-            getServicePageData (
+          getServicePageData(
             servicepage,
-            janisInstances[0],
-            client, 
-            pagesOfGuides.servicePage
-          )
-      }
+            instanceOfPage,
+            client,
+            pagesOfGuides.servicePage,
+          ),
+      };
     }
 
     if (informationpage) {
       return {
-        path: janisInstances[0].url,
+        path: instanceOfPage.url,
         template: 'src/components/Pages/Information',
         getData: () =>
           getInformationPageData(
             informationpage,
-            janisInstances[0],
+            instanceOfPage,
             client,
             pagesOfGuides.informationPage,
           ),
@@ -714,51 +513,42 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     }
 
     if (officialdocumentpage) {
-      console.log(officialdocumentpage)
       return {
-        path: janisInstances[0].url,
+        path: instanceOfPage.url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
         getData: () =>
-          cleanOfficialDocumentPageData(
+          getOfficialDocumentPageData(
             officialdocumentpage,
-            janisInstances[0]
+            instanceOfPage,
+            client,
           ),
       };
     }
 
     if (formcontainer) {
       return {
-        path: janisInstances[0].url,
+        path: instanceOfPage.url,
         template: 'src/components/Pages/Form',
         getData: () =>
-          getFormContainerData(
-            formcontainer.id,
-            parentDeptId,
-            '',
-            '',
-            // parent_topic,
-            // grandparent_topic_collection,
-            client,
-          ),
+          getFormContainerData(formcontainer, instanceOfPage, client),
       };
     }
   }
 
-
   if (locationpage) {
     return {
-      path: janisInstances[0].url,
+      path: janisUrls[0],
       template: 'src/components/Pages/Location',
-      getData: () => getLocationPageData(locationpage.id, client),
-    }
+      getData: () => cleanLocationPage(locationpage),
+    };
   }
 
   if (eventpage) {
     return {
-      path: janisInstances[0].url,
+      path: janisUrls[0],
       template: 'src/components/Pages/Event',
-      getData: () => getEventPageData(eventpage.id, client),
-    }
+      getData: () => cleanEventPageData(eventpage),
+    };
   }
 
   // If we're the departments page
@@ -775,8 +565,8 @@ const buildPageAtUrl = async (pageAtUrlInfo, client, pagesOfGuides) => {
     return {
       path: '/events/',
       template: 'src/components/Pages/EventList',
+      // getAllEvents takes client and boolean: if we should hide the cancelled events
       getData: () => getAllEvents(client, false),
-      // getAllEvents takes client and boolean if we should hide the cancelled events
     };
   }
 };
@@ -804,7 +594,6 @@ const getPagesOfGuidesData = async client => {
       guidePage.node.sections.map(section => {
         // Example section object
         /*
-
         {
           heading: 'Learn and prepare',
           pages: [
@@ -860,18 +649,26 @@ const getPagesOfGuidesData = async client => {
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
-    makeAllPages returns react-static data object with homepage and all built pages
-    as children per language code
+    makeAllPages returns react-static data object with homepage 
+    and all built pages as children for '/en', '/es' and '/'
   */
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
 
   const client = createGraphQLClientsByLang(langCode);
 
-  const siteStructure = await client.request(allPagesQuery)
-  console.log(siteStructure)
-  let pages = siteStructure.allPages.edges;
-  console.log('PAGES ', pages)
+  const siteStructure = await client.request(allPagesQuery);
+  let pages = [];
+  let after = '';
+  while (true) {
+    const siteStructure = await client.request(allPagesQuery, { after: after });
+    pages = pages.concat(siteStructure.allPages.edges);
+    after = siteStructure.allPages.pageInfo.endCursor;
+    if (!siteStructure.allPages.pageInfo.hasNextPage) {
+      break;
+    }
+  }
+
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
@@ -904,55 +701,49 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   // TODO: pages of guides data
   // const pagesOfGuidesData = await getPagesOfGuidesData(client);
-  const pagesOfGuidesData = []
+  const pagesOfGuidesData = [];
 
   // Build a page with all the departments
-  // pages.push({
-  //   node: {
-  //     allDepartments: true,
-  //     janisInstances: [
-  //       {
-  //         url: '/departments/',
-  //       }
-  //     ]
-  //   }
-  // });
+  pages.push({
+    node: {
+      allDepartments: true,
+      janisInstances: [
+        {
+          url: '/departments/',
+        },
+      ],
+    },
+  });
 
-  // // and also a page with all the events
-  // pages.push({
-  //   node: {
-  //     allEvents: true,
-  //     janisInstances: [
-  //       {
-  //         url: '/events/',
-  //       }
-  //     ]
-  //   }
-  // })
+  // and also a page with all the events
+  pages.push({
+    node: {
+      allEvents: true,
+      janisInstances: [
+        {
+          url: '/events/',
+        },
+      ],
+    },
+  });
 
-  // const getInstances = async (pageAtUrlInfo, client, pagesOfGuidesData) => {
-  //   return (
-  //     buildPageAtUrl(pageAtUrlInfo, client, pagesOfGuidesData)
-  //   )
-  // }
-
-  // const allPages = await Promise.all(
-  //   pages.map(pageAtUrlInfo => {
-  //     return Promise.all(
-  //       pageAtUrlInfo.node.janisInstances.map(instanceOfPage => (
-  //           getInstances(pageAtUrlInfo.node, client, pagesOfGuidesData)
-  //         ))
-  //       )
-  //   }),
-  // );
-
-  const allPages = await Promise.all(
+  let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
-      console.log(pageAtUrlInfo.node)
-      return (
-      buildPageAtUrl(pageAtUrlInfo.node, client, pagesOfGuidesData)
-    )})
+      return Promise.all(
+        pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
+          buildPageAtUrl(
+            pageAtUrlInfo.node,
+            instanceOfPage,
+            client,
+            pagesOfGuidesData,
+          ),
+        ),
+      );
+    }),
   );
+
+  // the nested maps return nested arrays that need to be flattened
+  allPages = allPages.flat();
 
   const data = {
     path: path,
@@ -964,7 +755,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       let services = cleanLinks(allServicePages, 'service');
 
       // Make sure we don't have any dupes in top services
-      // TODO: check if still needed
       services = services.filter(
         (service, index) =>
           index === services.findIndex(s => s.id === service.id),
@@ -994,7 +784,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
 export default {
   // siteRoot: 'https://alpha.austin.gov',
-  //basePath // Do not alter this line if you want a working PR
+  // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
