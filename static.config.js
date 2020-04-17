@@ -43,7 +43,12 @@ const getRelatedTo = async (parent, grandparent, client) => {
 
   if (topicCollectionTopics && topicCollectionTopics.edges.length) {
     relatedTo = topicCollectionTopics.edges
-      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id && edge.node.page.topicpage.live )
+      .filter(
+        edge =>
+          edge.node &&
+          edge.node.page.topicpage.id !== parent.id &&
+          edge.node.page.topicpage.live,
+      )
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
@@ -582,16 +587,18 @@ const getPagesOfGuidesData = async client => {
       const guideUrl = await client.request(getPageUrlQuery, {
         id: guidePage.node.id,
       });
-      const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
-      // const url = '/' +
-      // [
-      //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-      //     .node.topiccollection.theme.slug,
-      //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-      //     .node.topiccollection.slug,
-      //   guidePage.node.topics.edges[0].node.topic.slug,
-      //   guidePage.node.slug,
-      // ].join('/');
+
+      if (
+        guideUrl.allPages &&
+        guideUrl.allPages.edges &&
+        guideUrl.allPages.edges[0].node &&
+        guideUrl.allPages.edges[0].node.janisInstances
+      ) {
+        const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
+      }
+      else {
+        const url = '/'
+      }
       guidePage.node.sections.map(section => {
         // Example section object
         /*
