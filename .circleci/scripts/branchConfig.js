@@ -39,7 +39,7 @@ const branchOverrides = {
     CMS_API: 'https://joplin-pr-3690-incremental.herokuapp.com/api/graphql',
     REACT_STATIC_PREFETCH_RATE: '10',
 },
-  '4185-make-janis-build': {
+  '4289-page-guide': {
     CMS_API: 'https://joplin-pr-v3.herokuapp.com/api/graphql'
   }
 };
