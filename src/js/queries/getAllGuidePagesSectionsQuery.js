@@ -3,30 +3,10 @@ const allGuidePagesSectionsQuery = `
     allGuidePages {
       edges {
         node {
+          id
           title
           slug
           pageType
-          topics {
-            edges {
-              node {
-                topic {
-                  slug
-                  topiccollections {
-                    edges {
-                      node {
-                        topiccollection {
-                          slug
-                          theme {
-                            slug
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
           sections {
             heading
             pages {
