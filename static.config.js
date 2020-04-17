@@ -43,7 +43,7 @@ const getRelatedTo = async (parent, grandparent, client) => {
 
   if (topicCollectionTopics && topicCollectionTopics.edges.length) {
     relatedTo = topicCollectionTopics.edges
-      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
+      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id && edge.node.page.topicpage.live )
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
