@@ -205,7 +205,6 @@ const getServicePageData = async (
   };
 
   if (pagesOfGuides && pagesOfGuides[servicePageData.id]) {
-    console.log(pagesOfGuides[servicePageData.id])
     // We're checking if this id is part of guide page because it may not be published and draw an error.
     servicePageData.pageIsPartOf = pagesOfGuides[servicePageData.id];
   }
@@ -579,22 +578,20 @@ const getPagesOfGuidesData = async client => {
   const pagesOfGuidesData = {};
 
   allGuidePages.edges.map(async guidePage => {
-    console.log(guidePage)
-    if (
-      guidePage.node.sections.length > 0
-    ) {
-      const guideUrl = await client.request(getPageUrlQuery, {id: guidePage.id})
-      console.log(guideUrl);
-      const url = guideUrl.edges.node
-        // '/' +
-        // [
-        //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-        //     .node.topiccollection.theme.slug,
-        //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-        //     .node.topiccollection.slug,
-        //   guidePage.node.topics.edges[0].node.topic.slug,
-        //   guidePage.node.slug,
-        // ].join('/');
+    if (guidePage.node.sections.length > 0) {
+      const guideUrl = await client.request(getPageUrlQuery, {
+        id: guidePage.node.id,
+      });
+      const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
+      // const url = '/' +
+      // [
+      //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+      //     .node.topiccollection.theme.slug,
+      //   guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
+      //     .node.topiccollection.slug,
+      //   guidePage.node.topics.edges[0].node.topic.slug,
+      //   guidePage.node.slug,
+      // ].join('/');
       guidePage.node.sections.map(section => {
         // Example section object
         /*
@@ -667,7 +664,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       break;
     }
   }
-
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
