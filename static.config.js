@@ -12,6 +12,7 @@ import topServicesQuery from 'js/queries/topServicesQuery';
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
 import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
+import getPageUrlQuery from 'js/queries/getPageUrl';
 
 // Shiny ✨ new queries!
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
@@ -42,7 +43,12 @@ const getRelatedTo = async (parent, grandparent, client) => {
 
   if (topicCollectionTopics && topicCollectionTopics.edges.length) {
     relatedTo = topicCollectionTopics.edges
-      .filter(edge => edge.node && edge.node.page.topicpage.id !== parent.id)
+      .filter(
+        edge =>
+          edge.node &&
+          edge.node.page.topicpage.id !== parent.id &&
+          edge.node.page.topicpage.live,
+      )
       .map(edge => ({
         id: edge.node.page.topicpage.id,
         title: edge.node.page.topicpage.title,
@@ -203,9 +209,9 @@ const getServicePageData = async (
     offeredBy: getOfferedByFromDepartments(servicePageData.departments),
   };
 
-  if (pagesOfGuides && pagesOfGuides[id]) {
+  if (pagesOfGuides && pagesOfGuides[servicePageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    service.pageIsPartOf = pagesOfGuides[id];
+    servicePageData.pageIsPartOf = pagesOfGuides[servicePageData.id];
   }
   return { service: servicePageData };
 };
@@ -234,9 +240,9 @@ const getInformationPageData = async (
     offeredBy: getOfferedByFromDepartments(informationPageData.departments),
   };
 
-  if (pagesOfGuides && pagesOfGuides[id]) {
+  if (pagesOfGuides && pagesOfGuides[informationPageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    informationPage.pageIsPartOf = pagesOfGuides[id];
+    informationPage.pageIsPartOf = pagesOfGuides[informationPageData.id];
   }
 
   return { informationPage: informationPageData };
@@ -255,13 +261,13 @@ const getGuidePageData = async (guidePageData, instance, client) => {
   // keeping this logic in there for now, stuff is kinda messy
   guidePageData.contact = cleanContacts(guidePageData.contact);
 
-  informationPage.contextualNavData = {
+  guidePageData.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(guidepageData.departments),
+    offeredBy: getOfferedByFromDepartments(guidePageData.departments),
   };
 
-  return { guidePage: guidePage };
+  return { guidePage: guidePageData };
 };
 
 const getFormContainerData = async (formContainerData, instance, client) => {
@@ -576,21 +582,23 @@ const getPagesOfGuidesData = async client => {
 
   const pagesOfGuidesData = {};
 
-  allGuidePages.edges.map(guidePage => {
-    if (
-      guidePage.node.sections.length > 0 &&
-      guidePage.node.topics.edges.length > 0
-    ) {
-      const url =
-        '/' +
-        [
-          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-            .node.topiccollection.theme.slug,
-          guidePage.node.topics.edges[0].node.topic.topiccollections.edges[0]
-            .node.topiccollection.slug,
-          guidePage.node.topics.edges[0].node.topic.slug,
-          guidePage.node.slug,
-        ].join('/');
+  allGuidePages.edges.map(async guidePage => {
+    if (guidePage.node.sections.length > 0) {
+      const guideUrl = await client.request(getPageUrlQuery, {
+        id: guidePage.node.id,
+      });
+
+      if (
+        guideUrl.allPages &&
+        guideUrl.allPages.edges &&
+        guideUrl.allPages.edges[0].node &&
+        guideUrl.allPages.edges[0].node.janisInstances
+      ) {
+        const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
+      }
+      else {
+        const url = '/'
+      }
       guidePage.node.sections.map(section => {
         // Example section object
         /*
@@ -598,10 +606,7 @@ const getPagesOfGuidesData = async client => {
           heading: 'Learn and prepare',
           pages: [
             { servicePage: null, informationPage: [Object] },
-            { servicePage: null, informationPage: [Object] },
             { servicePage: [Object], informationPage: null },
-            { servicePage: [Object], informationPage: null },
-            { servicePage: null, informationPage: [Object] }
           ]
         }
 
@@ -616,13 +621,11 @@ const getPagesOfGuidesData = async client => {
 
             // Example page object
             /*
-
             {
               id: 'SW5mb3JtYXRpb25QYWdlTm9kZToyNTc=',
               pageType: 'information page',
               title: 'Documents for mobile food vendors in Austin'
             }
-
             */
 
             if (page) {
@@ -669,7 +672,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
-
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
   if (incrementalPageId) {
@@ -699,9 +701,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     );
   }
 
-  // TODO: pages of guides data
-  // const pagesOfGuidesData = await getPagesOfGuidesData(client);
-  const pagesOfGuidesData = [];
+  const pagesOfGuidesData = await getPagesOfGuidesData(client);
 
   // Build a page with all the departments
   pages.push({
