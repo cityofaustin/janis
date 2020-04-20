@@ -144,16 +144,33 @@ export const getEventPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getLocationPageRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asLocationPage {
+        ...locationPageInfo
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${locationPageFragment}
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
   official_document: getOfficialDocumentsPageRevisionQuery,
   department: getDepartmentPageRevisionQuery,
   event: getEventPageRevisionQuery,
+  location: getLocationPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
   official_document: 'asOfficialDocumentPage',
   department: 'asDepartmentPage',
-  event: 'asEventPage'
+  event: 'asEventPage',
+  location: 'asLocationPage',
 };

@@ -35,7 +35,6 @@ import {
   cleanFormContainersForPreview,
   // chia do we need this
   cleanGuideForPreview,
-  // chia do we need this
   cleanLocationPage,
   // chia do we need this
   getOfferedByFromDepartments,
@@ -185,7 +184,7 @@ class CMSPreview extends Component {
           path="/location"
           render={props => (
             <LocationPage
-              locationPage={cleanLocationPage(data.edges[0].node)}
+              locationPage={cleanLocationPage(page).locationPage}
             />
           )}
         />
