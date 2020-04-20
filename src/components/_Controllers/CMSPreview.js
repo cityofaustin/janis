@@ -22,7 +22,6 @@ import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
 
 import {
-  // chia do we need this
   cleanInformationForPreview,
   // chia do we need this
   cleanTopicsForPreview,
@@ -120,7 +119,7 @@ class CMSPreview extends Component {
           path="/information"
           render={props => (
             <InformationPage
-              informationPage={cleanInformationForPreview(data)}
+              informationPage={cleanInformationForPreview(page)}
             />
           )}
         />

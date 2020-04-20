@@ -359,20 +359,10 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanInformationForPreview = allInformationPages => {
-  if (!allInformationPages || !allInformationPages.edges) return null;
-  const infos = allInformationPages.edges.map(e => e.node);
-  let info = infos[0];
+export const cleanInformationForPreview = informationPage => {
+  informationPage.contacts = cleanContacts(informationPage.contacts);
 
-  info.contextualNavData = getContextualNavForPreview(info);
-  info.theme = {};
-
-  info.text = info.title;
-  info.contacts = cleanContacts(info.contacts);
-
-  return info;
+  return informationPage;
 };
 
 export const cleanGuideForPreview = allGuidePages => {
