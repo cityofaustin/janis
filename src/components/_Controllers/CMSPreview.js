@@ -21,17 +21,23 @@ import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
 
-// chia do we need this
 import {
-  cleanServicesForPreview,
+  // chia do we need this
   cleanInformationForPreview,
+  // chia do we need this
   cleanTopicsForPreview,
   cleanDepartmentForPreview,
+  // chia do we need this
   cleanTopicCollectionsForPreview,
+  // chia do we need this
   cleanOfficialDocumentPagesForPreview,
+  // chia do we need this
   cleanFormContainersForPreview,
+  // chia do we need this
   cleanGuideForPreview,
+  // chia do we need this
   cleanLocationPage,
+  // chia do we need this
   getOfferedByFromDepartments,
 } from 'js/helpers/cleanData';
 
@@ -64,17 +70,17 @@ class CMSPreview extends Component {
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
     req.then(data => {
-      console.log(getAsPage[page_type])
-      console.log(data.pageRevision)
       const page = data.pageRevision[getAsPage[page_type]];
       const janis_instance = data.pageRevision.previewJanisInstance;
+
+      console.log('P', page)
 
       page.contextualNavData = {
         relatedTo: [],
         offeredBy: [
           {
-            title: 'department.title',
-            url: 'department.url',
+            title: page.departments[0].title,
+            url: `\${page.departments[0].slug}`,
           },
         ],
         parent: !!janis_instance.parent
@@ -101,8 +107,6 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { page } = this.state;
-
-    console.log(this.props)
 
     if (!page) return <h1>Loading</h1>;
     return (
