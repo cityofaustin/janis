@@ -129,14 +129,31 @@ export const getDepartmentPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getEventPageRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asEventPage {
+        ...eventPageInfo
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${eventPageFragment}
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
   official_document: getOfficialDocumentsPageRevisionQuery,
   department: getDepartmentPageRevisionQuery,
+  event: getEventPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
   official_document: 'asOfficialDocumentPage',
   department: 'asDepartmentPage',
+  event: 'asEventPage'
 };

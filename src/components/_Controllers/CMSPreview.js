@@ -70,6 +70,7 @@ class CMSPreview extends Component {
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
     req.then(data => {
+      console.log(page_type)
       const page = data.pageRevision[getAsPage[page_type]];
       const janis_instance = data.pageRevision.previewJanisInstance;
 
@@ -191,7 +192,7 @@ class CMSPreview extends Component {
         <Route
           path="/event"
           render={props => {
-            let eventPage = data.edges[0].node;
+            let eventPage = page;
             eventPage.offeredBy = getOfferedByFromDepartments(
               eventPage.departments,
             );
