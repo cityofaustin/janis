@@ -588,16 +588,15 @@ const getPagesOfGuidesData = async client => {
         id: guidePage.node.id,
       });
 
+      let url ='/'
+
       if (
         guideUrl.allPages &&
         guideUrl.allPages.edges &&
         guideUrl.allPages.edges[0].node &&
         guideUrl.allPages.edges[0].node.janisInstances
       ) {
-        const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
-      }
-      else {
-        const url = '/'
+        url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
       }
       guidePage.node.sections.map(section => {
         // Example section object

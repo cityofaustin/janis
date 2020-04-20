@@ -21,6 +21,20 @@ import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
 
+// chia do we need this
+import {
+  cleanServicesForPreview,
+  cleanInformationForPreview,
+  cleanTopicsForPreview,
+  cleanDepartmentForPreview,
+  cleanTopicCollectionsForPreview,
+  cleanOfficialDocumentPagesForPreview,
+  cleanFormContainersForPreview,
+  cleanGuideForPreview,
+  cleanLocationPage,
+  getOfferedByFromDepartments,
+} from 'js/helpers/cleanData';
+
 class CMSPreview extends Component {
   constructor(props) {
     super(props);
@@ -46,11 +60,12 @@ class CMSPreview extends Component {
     const { CMS_API } = queryString.parse(this.props.location.search);
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
-    //TODO: one endpoint for revisions data requests
     let req;
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
     req.then(data => {
+      console.log(getAsPage[page_type])
+      console.log(data.pageRevision)
       const page = data.pageRevision[getAsPage[page_type]];
       const janis_instance = data.pageRevision.previewJanisInstance;
 
@@ -86,6 +101,8 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { page } = this.state;
+
+    console.log(this.props)
 
     if (!page) return <h1>Loading</h1>;
     return (
@@ -144,7 +161,7 @@ class CMSPreview extends Component {
         <Route
           path="/department"
           render={props => (
-            <Department department={cleanDepartmentsForPreview(data)[0]} />
+            <Department department={cleanDepartmentForPreview(page)} />
           )}
         />
         <Route

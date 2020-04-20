@@ -114,12 +114,29 @@ export const getOfficialDocumentsPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getDepartmentPageRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asDepartmentPage {
+        ...departmentPageInfo
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${departmentPageFragment}
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
   official_document: getOfficialDocumentsPageRevisionQuery,
+  department: getDepartmentPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
   official_document: 'asOfficialDocumentPage',
+  department: 'asDepartmentPage',
 };

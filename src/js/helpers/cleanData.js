@@ -417,27 +417,23 @@ export const cleanDepartmentPageLinks = (
   return cleanedLinks;
 };
 
-export const cleanDepartmentsForPreview = (allDepartments, langCode) => {
-  if (!allDepartments || !allDepartments.edges) return null;
+export const cleanDepartmentForPreview = (department, langCode) => {
+  if (!department) return null;
 
-  return allDepartments.edges.map(({ node: department }) => {
-    department.url = `/departments/${department.slug}`;
-    department.text = department.title;
-    department.contacts = cleanContacts(department.contacts);
-    department.directors = cleanDepartmentDirectors(
-      department.departmentDirectors,
-    );
-    department.topServices = cleanDepartmentPageLinks(
-      department.topPages,
-      department.slug,
-    );
-    department.relatedLinks = cleanDepartmentPageLinks(
-      department.relatedPages,
-      department.slug,
-    );
+  department.url = `/departments/${department.slug}`;
+  department.text = department.title;
+  department.contacts = cleanContacts(department.contacts);
+  department.directors = cleanDepartmentDirectors(department.departmentDirectors);
+  department.topServices = cleanDepartmentPageLinks(
+    department.topPages,
+    department.slug,
+  );
+  department.relatedLinks = cleanDepartmentPageLinks(
+    department.relatedPages,
+    department.slug,
+  );
 
-    return department;
-  });
+  return department;
 };
 
 export const cleanTopicsForPreview = allTopics => {
