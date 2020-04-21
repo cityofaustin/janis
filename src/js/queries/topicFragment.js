@@ -5,9 +5,6 @@ const topicFragment = `
     title,
     description,
     topiccollections {
-      edges {
-        node {
-          topiccollection {
             id
             title
             slug
@@ -18,9 +15,6 @@ const topicFragment = `
             }
           }
         }
-      }
-    }
-  }
 `;
 
 export default topicFragment;

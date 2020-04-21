@@ -106,6 +106,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { page } = this.state;
+    console.log(page_type)
 
     if (!page) return <h1>Loading</h1>;
     return (
