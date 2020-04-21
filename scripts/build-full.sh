@@ -1,5 +1,5 @@
 # Add your Joplin PR API and Media Links here...
-# - NOTE: make sure CMS_API has `/api/graphiql` endpoints
+# - NOTE: make sure CMS_API has `/api/graphql` endpoints
 # - AND... CMS_MEDIA has `/media` endpoints
 
 # Examples

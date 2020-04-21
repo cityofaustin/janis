@@ -1,5 +1,5 @@
 # Add your Joplin PR API and Media Links here...
-# - NOTE: make sure CMS_API has `/api/graphiql` endpoints
+# - NOTE: make sure CMS_API has `/api/graphql` endpoints
 # - AND... CMS_MEDIA has `/media` endpoints
 
 # Examples
@@ -13,7 +13,7 @@
 export NODE_PATH='./src'
 
 export REACT_STATIC_PREFETCH_RATE=5
-# Must be 127.0.0.1, not localhost
+# Must be 127.0.0.1, not localhost, or else requests to Django will cut out
 export CMS_API='http://127.0.0.1:8000/api/graphql'
 export CMS_MEDIA='http://127.0.0.1:8000/media'
 
