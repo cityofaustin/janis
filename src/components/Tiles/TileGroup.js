@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
+const TileGroup = ({ title, titleUrl, description, tiles, compact, allowEmptyTiles, intl }) => {
   return (
-    !!tiles.length && (
+    (!!tiles.length || allowEmptyTiles) && (
       <div
         className={classNames('coa-TileGroup', {
           'coa-TileGroup--compact': compact,
@@ -40,7 +40,7 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, intl }) => {
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {tiles.map(({ url, title, pageType }, index) => {
+          {!!tiles.length && tiles.map(({ url, title, pageType }, index) => {
             return (
               <Tile
                 url={
