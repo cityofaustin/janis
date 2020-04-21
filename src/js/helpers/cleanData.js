@@ -426,20 +426,17 @@ export const cleanDepartmentForPreview = (department, langCode) => {
   return department;
 };
 
-export const cleanTopicsForPreview = allTopics => {
-  if (!allTopics || !allTopics.edges) return null;
+export const cleanTopicsForPreview = topic => {
+  console.log('T ', topic)
+  if (topic.topPages.edges && topic.topPages.edges.length) {
+    topic.topLinks = topic.topPages.edges.map(edge => ({
+      pageType: edge.node.pageType,
+      title: edge.node.title,
+      url: `${topic.contextualNavData.parent.url}${edge.node.slug}/`,
+    }));
+  }
 
-  const cleanedTopics = allTopics.edges.map(edge => ({
-    text: edge.node.title,
-    contextualNavData: {
-      relatedTo: [],
-      offeredBy: [],
-      parent: { title: 'Parent', url: '#' },
-    },
-    ...edge.node,
-  }));
-
-  return cleanedTopics;
+  return topic;
 };
 
 export const cleanTopics = allTopics => {

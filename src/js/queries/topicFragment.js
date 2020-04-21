@@ -4,17 +4,16 @@ const topicFragment = `
     slug,
     title,
     description,
-    topiccollections {
-            id
-            title
-            slug
-            theme {
-              id
-              text
-              slug
-            }
-          }
+    topPages {
+      edges {
+        node {
+          id
+          title
+          slug
         }
+      }
+    }
+  }
 `;
 
 export default topicFragment;

@@ -78,8 +78,8 @@ class CMSPreview extends Component {
         relatedTo: [],
         offeredBy: [
           {
-            title: page.departments[0].title,
-            url: `\${page.departments[0].slug}`,
+            title: !!page.department && page.departments[0].title,
+            url: !!page.department && `\${page.departments[0].slug}`,
           },
         ],
         parent: !!janis_instance.parent
@@ -127,11 +127,13 @@ class CMSPreview extends Component {
         <Route
           path="/topic"
           render={props => {
-            let topic = cleanTopicsForPreview(data)[0];
-            topic.topLinks = [
+            let topic = cleanTopicsForPreview(page);
+            if (!topic.topLinks) {
+              topic.topLinks = [
               { title: 'Top link', url: '' },
               { title: 'Other top link', url: '' },
             ];
+            }
             topic.otherLinks = [
               { title: 'First link', url: '' },
               { title: 'Second link', url: '' },
