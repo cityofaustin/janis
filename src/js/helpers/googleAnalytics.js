@@ -55,3 +55,26 @@ export const logFormEvent = ({
 
   return null;
 };
+
+export const logSearch = search => {
+  //
+  // 🤔 Todo ?: Add searches entered to Google Analytics .
+  // - If So. How? 
+  //
+  // if (typeof document === 'undefined') return null;
+  // const {
+  //   category = 'UNSET',
+  //   action = 'UNSET',
+  //   label = null,
+  //   nonInteraction = false,
+  // } = search;
+  //
+  // ReactGA.event({
+  //   category: category,
+  //   action: action,
+  //   label: label,
+  //   nonInteraction: nonInteraction,
+  // });
+  //
+  // return null;
+};

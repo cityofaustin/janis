@@ -538,6 +538,10 @@ export const events = defineMessages({
   viewAll: 'View all events',
 });
 
+// export const search = defineMessages({
+//   search: "Search",
+// });
+
 export const alert = defineMessages({
   getLatest: 'Get current information about coronavirus (COVID-19) in Austin'
 })

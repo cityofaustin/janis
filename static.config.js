@@ -18,6 +18,8 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
+import getSearchPageQuery from 'js/queries/getSearchPageQuery';
+
 
 import {
   cleanNavigation,
@@ -28,6 +30,7 @@ import {
   cleanLocationPage,
   getOfferedByFromDepartments,
   getEventPageUrl,
+  getSearchPageUrl,
   formatFeesRange,
 } from 'js/helpers/cleanData';
 
@@ -300,7 +303,7 @@ const checkUrl = async url => {
 
 const getWorkingDocumentLink = async filename => {
   // is this still needed? with brians new work?
-  /* 
+  /*
     depending on environment, returns a valid url from either staging or production
     used in getOfficialDocumentPageData
   */
@@ -367,8 +370,18 @@ const getOfficialDocumentPageData = async (
   return { officialDocumentPage: officialDocumentPage };
 };
 
+
+
+
+
+
+
+
+
+
 const cleanEventPageData = eventPageData => {
   // Fill in some contextual nav info
+  console.log('EVENT')
   eventPageData.offeredBy = getOfferedByFromDepartments(
     eventPageData.departments,
   );
@@ -420,13 +433,20 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
+const cleanSearchPageData = searchPageData => {
+
+  console.log("searchPageData :", searchPageData)
+
+  return { searchPage: searchPageData };
+};
+
 const buildPageAtUrl = async (
   pageAtUrlInfo,
   instanceOfPage,
   client,
   pagesOfGuides,
 ) => {
-  /* 
+  /*
   buildPageAtUrl takes a page information object and the language client
   returns object with page url, template and data from appropriate query
   */
@@ -435,6 +455,7 @@ const buildPageAtUrl = async (
     janisInstances,
     eventpage,
     locationpage,
+    searchpage,
     departmentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
@@ -575,6 +596,16 @@ const buildPageAtUrl = async (
       getData: () => getAllEvents(client, false),
     };
   }
+
+  // if (searchpage) {
+  //   console.log("\n\nsearchPage :", searchPage)
+  //   return {
+  //     path: '/search/',
+  //     template: 'src/components/Pages/Search',
+  //     getData: () => cleanSearchPageData(searchpage),
+  //   };
+  // }
+
 };
 
 const getPagesOfGuidesData = async client => {
@@ -652,7 +683,7 @@ const getPagesOfGuidesData = async client => {
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
-    makeAllPages returns react-static data object with homepage 
+    makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
   const path = `/${!!langCode ? langCode : ''}`;
@@ -836,10 +867,10 @@ export default {
     }
 
     const routes = [
-      // {
-      //   path: '/search',
-      //   template: 'src/components/Pages/Search',
-      // },
+      {
+        path: 'search', // 'en/search' works
+        template: 'src/components/Pages/Search/index.js',
+      },
       {
         path: '404',
         template: 'src/components/Pages/404',
