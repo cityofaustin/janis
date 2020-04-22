@@ -18,7 +18,7 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
-import getSearchPageQuery from 'js/queries/getSearchPageQuery';
+import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
 
 import {
@@ -370,18 +370,8 @@ const getOfficialDocumentPageData = async (
   return { officialDocumentPage: officialDocumentPage };
 };
 
-
-
-
-
-
-
-
-
-
 const cleanEventPageData = eventPageData => {
   // Fill in some contextual nav info
-  console.log('EVENT')
   eventPageData.offeredBy = getOfferedByFromDepartments(
     eventPageData.departments,
   );
@@ -433,11 +423,13 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
-const cleanSearchPageData = searchPageData => {
+const getSearchIndex = async (client, langCode) => {
 
-  console.log("searchPageData :", searchPageData)
+  const { allPages } = await client.request(
+    getSearchIndexQuery,
+  );
 
-  return { searchPage: searchPageData };
+  return { search: allPages };
 };
 
 const buildPageAtUrl = async (
@@ -602,7 +594,7 @@ const buildPageAtUrl = async (
   //   return {
   //     path: '/search/',
   //     template: 'src/components/Pages/Search',
-  //     getData: () => cleanSearchPageData(searchpage),
+  //     getData: () => getSearchIndex(searchpage),
   //   };
   // }
 
@@ -758,8 +750,20 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     },
   });
 
+  // pages.push({
+  //   node: {
+  //     allSearchs: true,
+  //     janisInstances: [
+  //       {
+  //         url: '/search/',
+  //       },
+  //     ],
+  //   },
+  // });
+
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
+      // console.log("pageAtUrlInfo :", pageAtUrlInfo)
       return Promise.all(
         pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
           buildPageAtUrl(
@@ -868,8 +872,10 @@ export default {
 
     const routes = [
       {
-        path: 'search', // 'en/search' works
-        template: 'src/components/Pages/Search/index.js',
+        path: 'search',
+        template: 'src/components/Pages/Search',
+        getData: (client, lang) => getSearchIndex(client, lang),
+        // ☝️this gets it THREE times.... really should be one request
       },
       {
         path: '404',
@@ -879,11 +885,31 @@ export default {
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
     allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
+
+    // Adds languege urls prefix to static routes.
+    [...routes].forEach( route => {
+      allLangs.forEach( lang => {
+        const client = createGraphQLClientsByLang(lang);
+        if (lang) {
+          const langRoute = {
+            path: lang + "/" + route.path,
+            template: route.template,
+          }
+          if (route.getData) {
+            langRoute.getData = () => route.getData(client, lang)
+          }
+          routes.push(langRoute)
+        }
+      })
+    });
+
+    let translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
-    const allRoutes = routes.concat(translatedRoutes);
 
+    console.log("routes :", routes)
+    const allRoutes = routes.concat(translatedRoutes);
+    // console.log("allRoutes :", JSON.stringify(allRoutes, null, 2))
     return allRoutes;
   },
   webpack: (config, { stage }) => {

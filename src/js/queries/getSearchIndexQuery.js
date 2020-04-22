@@ -1,5 +1,6 @@
-const getSearchPageQuery = `
-  query allPages(live: true) {
+const getSearchIndexQuery = `
+  query getSearchIndex {
+    allPages(live: true) {
       edges {
         node {
           id
@@ -13,4 +14,4 @@ const getSearchPageQuery = `
   }
 `;
 
-export default getSearchPageQuery
+export default getSearchIndexQuery
