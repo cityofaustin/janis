@@ -31,7 +31,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
 },
-  '4289-make-janis-preview': {
+  '4302-make-janis-preview': {
     joplin_appname: 'joplin-pr-v3'
   },
   '4289-page-guide': {
