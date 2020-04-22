@@ -26,7 +26,6 @@ import {
   cleanTopicsForPreview,
   cleanDepartmentForPreview,
   cleanLocationPage,
-  // chia do we need this
   getOfferedByFromDepartments,
 } from 'js/helpers/cleanData';
 
@@ -59,18 +58,15 @@ class CMSPreview extends Component {
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
     req.then(data => {
-      console.log(page_type)
       const page = data.pageRevision[getAsPage[page_type]];
       const janis_instance = data.pageRevision.previewJanisInstance;
-
-      console.log('P', page)
 
       page.contextualNavData = {
         relatedTo: [],
         offeredBy: [
           {
-            title: !!page.department && page.departments[0].title,
-            url: !!page.department && `\${page.departments[0].slug}`,
+            title: !!page.departments && page.departments[0].title,
+            url: !!page.departments && `\${page.departments[0].slug}`,
           },
         ],
         parent: !!janis_instance.parent
@@ -97,7 +93,6 @@ class CMSPreview extends Component {
       },
     } = this.props;
     const { page } = this.state;
-    console.log(page_type)
 
     if (!page) return <h1>Loading</h1>;
     return (
