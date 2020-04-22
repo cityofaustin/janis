@@ -6,7 +6,6 @@ import path from 'path';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
-import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
 import HtmlFromRichText from 'components/HtmlFromRichText';
@@ -23,11 +22,6 @@ const InformationPage = ({ informationPage, intl }) => {
     informationPage: {
       title,
       slug,
-      topic,
-      topics,
-      theme,
-      department,
-      toplink,
       description,
       additionalContent,
       image,

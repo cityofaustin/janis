@@ -1,5 +1,5 @@
-const officialDocumentPageFragment = `
-  fragment officialDocumentPageInfo on OfficialDocumentPageNode {
+const documentPageFragment = `
+  fragment documentPageInfo on OfficialDocumentPageNode {
     id
     title
     slug
@@ -28,4 +28,4 @@ const officialDocumentPageFragment = `
   }
 `;
 
-export default officialDocumentPageFragment;
+export default documentPageFragment;

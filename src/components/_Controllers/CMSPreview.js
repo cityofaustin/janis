@@ -5,29 +5,10 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-import getServicePageRevisionQuery from 'js/queries/getServicePageRevisionQuery';
-import getInformationPageRevisionQuery from 'js/queries/getInformationPageRevisionQuery';
-import getTopicPageRevisionQuery from 'js/queries/getTopicPageRevisionQuery';
-import getDepartmentPageRevisionQuery from 'js/queries/getDepartmentPageRevisionQuery';
-import getTopicCollectionPageRevisionQuery from 'js/queries/getTopicCollectionPageRevisionQuery';
-import getOfficialDocumentPageRevisionQuery from 'js/queries/getOfficialDocumentPageRevisionQuery';
-import getFormContainerRevisionQuery from 'js/queries/getFormContainerRevisionQuery';
-import getGuidePageRevisionQuery from 'js/queries/getGuidePageRevisionQuery';
-import getLocationPageRevisionQuery from 'js/queries/getLocationPageRevisionQuery';
-import getEventPageRevisionQuery from 'js/queries/getEventPageRevisionQuery';
-
 import {
-  cleanServicesForPreview,
-  cleanInformationForPreview,
-  cleanTopicsForPreview,
-  cleanDepartmentsForPreview,
-  cleanTopicCollectionsForPreview,
-  cleanOfficialDocumentPagesForPreview,
-  cleanFormContainersForPreview,
-  cleanGuideForPreview,
-  cleanLocationPage,
-  getOfferedByFromDepartments,
-} from 'js/helpers/cleanData';
+  getPageRevisionQuery,
+  getAsPage,
+} from 'js/queries/getPageRevisionQuery';
 
 import Service from 'components/Pages/Service';
 import InformationPage from 'components/Pages/Information';
@@ -67,98 +48,33 @@ class CMSPreview extends Component {
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     //TODO: one endpoint for revisions data requests
     let req;
-    switch (page_type) {
-      case 'services':
-        req = client.request(getServicePageRevisionQuery, { id: revision_id });
-        break;
-      case 'information':
-        req = client.request(getInformationPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'topic':
-        req = client.request(getTopicPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'department':
-        req = client.request(getDepartmentPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'topiccollection':
-        req = client.request(getTopicCollectionPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'official_document':
-        req = client.request(getOfficialDocumentPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'form':
-        req = client.request(getFormContainerRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'guide':
-        req = client.request(getGuidePageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'location':
-        req = client.request(getLocationPageRevisionQuery, {
-          id: revision_id,
-        });
-        break;
-      case 'event':
-        req = client.request(getEventPageRevisionQuery, {
-          id: revision_id,
-        });
-    }
-    req.then(data => {
-      let page;
+    req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
-      switch (page_type) {
-        case 'services':
-          page = data.pageRevision.asServicePage;
-          break;
-        case 'information':
-          page = data.pageRevision.asInformationPage;
-          break;
-        case 'topic':
-          page = data.pageRevision.asTopicPage;
-          break;
-        case 'department':
-          page = data.pageRevision.asDepartmentPage;
-          break;
-        case 'topiccollection':
-          page = data.pageRevision.asTopicCollectionPage;
-          break;
-        case 'official_document':
-          page = data.pageRevision.asOfficialDocumentPage;
-          break;
-        case 'form':
-          page = data.pageRevision.asFormContainer;
-          break;
-        case 'guide':
-          page = data.pageRevision.asGuidePage;
-          break;
-        case 'location':
-          page = data.pageRevision.asLocationPage;
-          break;
-        case 'event':
-          page = data.pageRevision.asEventPage;
-      }
+    req.then(data => {
+      const page = data.pageRevision[getAsPage[page_type]];
+      const janis_instance = data.pageRevision.previewJanisInstance;
+
+      page.contextualNavData = {
+        relatedTo: [],
+        offeredBy: [
+          {
+            title: 'department.title',
+            url: 'department.url',
+          },
+        ],
+        parent: !!janis_instance.parent
+          ? janis_instance.parent
+          : {
+              url: 'no-topics',
+              title: 'No topics selected',
+              topiccollection: {
+                topics: [],
+              },
+            },
+      };
 
       this.setState({
-        data: {
-          edges: [
-            {
-              node: page,
-            },
-          ],
-        },
+        page: page,
       });
     });
   }
@@ -169,14 +85,15 @@ class CMSPreview extends Component {
         params: { revision_id, page_type },
       },
     } = this.props;
-    const { data } = this.state;
+    const { page } = this.state;
 
-    if (!this.state.data) return <h1>Loading</h1>;
+    if (!page) return <h1>Loading</h1>;
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
+        <Route path="/services" render={props => <Service service={page} />} />
         <Route
-          path="/services"
-          render={props => <Service service={cleanServicesForPreview(data)} />}
+          path="/official_document"
+          render={props => <OfficialDocumentList officialDocumentPage={page} />}
         />
         <Route
           path="/information"
@@ -228,16 +145,6 @@ class CMSPreview extends Component {
           path="/department"
           render={props => (
             <Department department={cleanDepartmentsForPreview(data)[0]} />
-          )}
-        />
-        <Route
-          path="/official_document"
-          render={props => (
-            <OfficialDocumentList
-              officialDocumentPage={
-                cleanOfficialDocumentPagesForPreview(data)[0]
-              }
-            />
           )}
         />
         <Route

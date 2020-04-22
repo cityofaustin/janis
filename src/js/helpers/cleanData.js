@@ -233,7 +233,7 @@ export const cleanLocationPage = locationPage => {
 
   locationPage.image = locationPage.physicalLocationPhoto;
 
-  return locationPage;
+  return { locationPage: locationPage };
 };
 
 /**
@@ -345,8 +345,8 @@ export const cleanLinks = (links, pageType) => {
         let linkCopy = JSON.parse(JSON.stringify(link));
 
         pathPrefix = `/${department.slug}`;
-        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.slug = link.slug;
+        linkCopy.url = `${pathPrefix}/${link.slug}`;
         linkCopy.text = link.title;
 
         linkCopy.department = department;
@@ -357,21 +357,6 @@ export const cleanLinks = (links, pageType) => {
   }
 
   return cleanedLinks;
-};
-
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanServicesForPreview = allServices => {
-  if (!allServices || !allServices.edges) return null;
-  const services = allServices.edges.map(e => e.node);
-  let service = services[0];
-
-  service.contextualNavData = getContextualNavForPreview(service);
-
-  service.text = service.title;
-  service.contacts = cleanContacts(service.contacts);
-
-  return service;
 };
 
 // Let's just do this for now, we'll probably need to make some changes
@@ -404,46 +389,6 @@ export const cleanGuideForPreview = allGuidePages => {
   guide.theme = {};
 
   return guide;
-};
-
-const getContextualNavForPreview = page => {
-  let contextualNavData = {
-    relatedTo: [],
-    offeredBy: [],
-  };
-
-  // get offered by
-  if (page.departments && page.departments.length) {
-    contextualNavData.offeredBy = page.departments.map(department => ({
-      id: department.id,
-      title: department.title,
-      url: `/${department.slug}/`,
-    }));
-  }
-
-  // If we don't have a topic, return a fake
-  // topic describing that
-  if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
-    contextualNavData.parent = {
-      url: 'no-topics',
-      title: 'No topics selected',
-      topiccollection: {
-        topics: [],
-      },
-    };
-  } else {
-    // If we have topics,
-    // get info from the first one
-    contextualNavData.parent = {
-      url: page.topics.edges[0].node.topic.slug,
-      title: page.topics.edges[0].node.topic.title,
-      topiccollection: {
-        topics: [],
-      },
-    };
-  }
-
-  return contextualNavData;
 };
 
 export const cleanDepartmentDirectors = directors => {
@@ -560,20 +505,6 @@ export const cleanNavigation = (navigation, lang) => {
   });
 
   return cleanedNavigation;
-};
-
-export const clean311 = threeoneone => {
-  const { all311 } = threeoneone;
-
-  if (!all311 || !all311.edges) return null;
-
-  return all311.edges.map(({ node: link }) => {
-    const { title, url } = link;
-    return {
-      url: url,
-      text: title,
-    };
-  });
 };
 
 const checkUrl = async url => {
