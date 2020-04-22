@@ -365,22 +365,6 @@ export const cleanInformationForPreview = informationPage => {
   return informationPage;
 };
 
-export const cleanGuideForPreview = allGuidePages => {
-  if (!allGuidePages || !allGuidePages.edges) return null;
-  const guides = allGuidePages.edges.map(e => e.node);
-  let guide = guides[0];
-
-  guide.contextualNavData = getContextualNavForPreview(guide);
-  const contacts = cleanContacts(guide.contacts);
-  if (contacts && contacts.length) {
-    guide.contact = contacts[0];
-  }
-
-  guide.theme = {};
-
-  return guide;
-};
-
 export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 
@@ -521,38 +505,25 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
-  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
+// export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
+//   if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
 
-  return allOfficialDocumentPages.edges.map(
-    ({ node: officialDocumentPage }) => {
-      officialDocumentPage.url = `/official_document/${
-        officialDocumentPage.slug
-      }`;
+//   return allOfficialDocumentPages.edges.map(
+//     ({ node: officialDocumentPage }) => {
+//       officialDocumentPage.url = `/official_document/${
+//         officialDocumentPage.slug
+//       }`;
 
-      officialDocumentPage.contextualNavData = getContextualNavForPreview(
-        officialDocumentPage,
-      );
+//       officialDocumentPage.contextualNavData = getContextualNavForPreview(
+//         officialDocumentPage,
+//       );
 
-      officialDocumentPage.theme = {};
-      return officialDocumentPage;
-    },
-  );
-};
+//       officialDocumentPage.theme = {};
+//       return officialDocumentPage;
+//     },
+//   );
+// };
 
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanFormContainersForPreview = allFormContainers => {
-  if (!allFormContainers || !allFormContainers.edges) return null;
-  const forms = allFormContainers.edges.map(e => e.node);
-  let form = forms[0];
-
-  form.contextualNavData = getContextualNavForPreview(form);
-  form.theme = {};
-  form.contacts = cleanContacts(form.contacts);
-
-  return form;
-};
 
 export const getOfferedByFromDepartments = departments => {
   let offeredBy;

@@ -25,14 +25,6 @@ import {
   cleanInformationForPreview,
   cleanTopicsForPreview,
   cleanDepartmentForPreview,
-  // chia do we need this
-  cleanTopicCollectionsForPreview,
-  // chia do we need this
-  cleanOfficialDocumentPagesForPreview,
-  // chia do we need this
-  cleanFormContainersForPreview,
-  // chia do we need this
-  cleanGuideForPreview,
   cleanLocationPage,
   // chia do we need this
   getOfferedByFromDepartments,
@@ -147,6 +139,7 @@ class CMSPreview extends Component {
         <Route
           path="/topiccollection"
           render={props => {
+            //come back to this.
             let tc = page;
             tc.topics = [
               {
@@ -172,13 +165,13 @@ class CMSPreview extends Component {
           path="/form"
           render={props => (
             <FormContainer
-              formContainer={cleanFormContainersForPreview(data)}
+              formContainer={page}
             />
           )}
         />
         <Route
           path="/guide"
-          render={props => <Guide guidePage={cleanGuideForPreview(data)} />}
+          render={props => <Guide guidePage={page} />}
         />
         <Route
           path="/location"
