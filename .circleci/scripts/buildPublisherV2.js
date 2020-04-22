@@ -9,9 +9,8 @@ const env_vars = Object.assign(
 );
 
 // In Publisher v2, the joplin_appname is passed separately from the rest of the env_vars
-const CMS_API = env_vars.CMS_API;
-delete env_vars.CMS_API;
-const joplin_appname = CMS_API.match(new RegExp('(?:https://)(.*)(?:.herokuapp.com/api/graphql)'))[1]
+const joplin_appname = env_vars.joplin_appname
+delete env_vars.joplin_appname
 
 const payload = {
   "janis_branch": branch,
