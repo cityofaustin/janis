@@ -21,6 +21,7 @@ const TopicCard = ({ topic, index, intl }) => {
           titleUrl={titleUrl}
           description={topic.description}
           tiles={tiles}
+          allowEmptyTiles
           compact
         />
         <Link
