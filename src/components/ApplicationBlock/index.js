@@ -27,24 +27,6 @@ const ApplicationBlock = ({ content: { id, type, value }, intl }) => {
       title = intl.formatMessage(i18n.whatDoIDoWith);
       pageanchorId = 'HashLink-Recollect';
       break;
-    case 'map_block':
-      let contact;
-      if (value.contact) {
-        contact = value.contact;
-      } else {
-        contact = {
-          location: value.location,
-        };
-      }
-
-      app = (
-        <div>
-          <ContactMap location={contact.location} />
-        </div>
-      );
-      title = value.description;
-      pageanchorId = `HashLink-Map-${id}`;
-      break;
   }
 
   if (!app) return null;
