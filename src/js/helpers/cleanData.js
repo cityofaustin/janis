@@ -427,7 +427,6 @@ export const cleanDepartmentForPreview = (department, langCode) => {
 };
 
 export const cleanTopicsForPreview = topic => {
-  console.log('T ', topic)
   if (topic.topPages.edges && topic.topPages.edges.length) {
     topic.topLinks = topic.topPages.edges.map(edge => ({
       pageType: edge.node.pageType,
@@ -446,16 +445,13 @@ export const cleanTopics = allTopics => {
   return cleanedTopics;
 };
 
-export const cleanTopicCollectionsForPreview = allTopicCollections => {
-  if (!allTopicCollections || !allTopicCollections.edges) return null;
-
-  let cleanedTopicCollections = cleanLinks(
-    allTopicCollections,
-    'topiccollection',
-  );
-
-  return cleanedTopicCollections;
-};
+// export const cleanTopicCollectionsForPreview = topicCollection => {
+//   let cleanedTopicCollection = cleanLinks(
+//     topicCollection,
+//     'topiccollection',
+//   );
+//   return cleanedTopicCollection;
+// };
 
 export const cleanNavigation = (navigation, lang) => {
   const { allThemes } = navigation;

@@ -189,6 +189,21 @@ export const getTopicPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getTopicCollectionRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asTopicCollectionPage {
+        ...topicCollectionInfo
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${topicCollectionFragment}
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
   official_document: getOfficialDocumentsPageRevisionQuery,
@@ -197,6 +212,7 @@ export const getPageRevisionQuery = {
   location: getLocationPageRevisionQuery,
   information: getInformationPageRevisionQuery,
   topic: getTopicPageRevisionQuery,
+  topiccollection: getTopicCollectionRevisionQuery,
 };
 
 export const getAsPage = {
@@ -207,4 +223,5 @@ export const getAsPage = {
   location: 'asLocationPage',
   information: 'asInformationPage',
   topic: 'asTopicPage',
+  topiccollection: 'asTopicCollectionPage'
 };

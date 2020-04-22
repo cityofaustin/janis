@@ -23,7 +23,6 @@ import EventPage from 'components/Pages/Event';
 
 import {
   cleanInformationForPreview,
-  // chia do we need this
   cleanTopicsForPreview,
   cleanDepartmentForPreview,
   // chia do we need this
@@ -130,9 +129,9 @@ class CMSPreview extends Component {
             let topic = cleanTopicsForPreview(page);
             if (!topic.topLinks) {
               topic.topLinks = [
-              { title: 'Top link', url: '' },
-              { title: 'Other top link', url: '' },
-            ];
+                { title: 'Top link', url: '' },
+                { title: 'Other top link', url: '' },
+              ];
             }
             topic.otherLinks = [
               { title: 'First link', url: '' },
@@ -148,7 +147,7 @@ class CMSPreview extends Component {
         <Route
           path="/topiccollection"
           render={props => {
-            let tc = cleanTopicCollectionsForPreview(data)[0];
+            let tc = page;
             tc.topics = [
               {
                 title: 'Sample Text',
@@ -160,7 +159,6 @@ class CMSPreview extends Component {
                 },
               },
             ];
-
             return <TopicCollection tc={tc} />;
           }}
         />
