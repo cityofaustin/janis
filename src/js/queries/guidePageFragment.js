@@ -6,34 +6,11 @@ const guidePageFragment = `
     title
     description
     slug
-    contacts {
-      edges {
-        node {
-          contact {
-            name
-            email
-            ${phoneFragment}
-            socialMedia
-            hours {
-              edges {
-                node {
-                  dayOfWeek
-                  startTime
-                  endTime
-                }
-              }
-            }
-            location {
-              name
-              street
-              city
-              state
-              zip
-              country
-            }
-          }
-        }
-      }
+    contact {
+      name
+      email
+      ${phoneFragment}
+      socialMedia
     }
     image {
       id
@@ -45,70 +22,16 @@ const guidePageFragment = `
       title
       slug
     }
-    topics {
-      edges {
-        node {
-          topic {
-            id
-            slug
-            title
-            description
-            topiccollections {
-              edges {
-                node {
-                  topiccollection {
-                    id
-                    title
-                    slug
-                    theme {
-                      id
-                      slug
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     sections {
       heading
       pages {
+        url
         servicePage {
           title
           shortDescription
           additionalContent
           steps
           slug
-          topics {
-            edges {
-              node {
-                topic {
-                  id
-                  slug
-                  title
-                  description
-                  topiccollections {
-                    edges {
-                      node {
-                        topiccollection {
-                          id
-                          title
-                          slug
-                          theme {
-                            id
-                            text
-                            slug
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
           departments {
             id
             title
@@ -120,33 +43,10 @@ const guidePageFragment = `
           description
           additionalContent
           slug
-          topics {
-            edges {
-              node {
-                topic {
-                  id
-                  slug
-                  title
-                  description
-                  topiccollections {
-                    edges {
-                      node {
-                        topiccollection {
-                          id
-                          title
-                          slug
-                          theme {
-                            id
-                            text
-                            slug
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          departments {
+            id
+            title
+            slug
           }
         }
       }
