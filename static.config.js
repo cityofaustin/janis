@@ -422,14 +422,13 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
-
 const getSearchIndex = async (client) => {
 
   const { allPages } = await client.request(
     getSearchIndexQuery,
   );
 
-  return { search: allPages };
+  return { searchIndex: allPages };
 };
 
 const buildPageAtUrl = async (
@@ -867,11 +866,11 @@ export default {
     })
 
     allLangs.unshift(undefined);
-    let translatedRoutes = await Promise.all(
+    const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
-
     const allRoutes = routes.concat(translatedRoutes);
+
     return allRoutes;
   },
   webpack: (config, { stage }) => {
