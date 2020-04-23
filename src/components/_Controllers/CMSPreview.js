@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
-import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
@@ -50,7 +49,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
 
-    // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
+    // CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
     const { CMS_API } = queryString.parse(this.props.location.search);
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
@@ -141,7 +140,6 @@ class CMSPreview extends Component {
         <Route
           path="/topiccollection"
           render={props => {
-            //come back to this.
             let tc = page;
             tc.topics = [
               {
