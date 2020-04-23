@@ -19,8 +19,6 @@ const EventList = () => {
   const intl = useIntl();
   const { events } = useRouteData();
 
-  console.log("events :", events)
-
   return (
     <div>
       <Head>

@@ -20,7 +20,6 @@ import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQu
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
-
 import {
   cleanNavigation,
   cleanContacts,
@@ -424,45 +423,13 @@ const getAllEvents = async (client, hideCanceled) => {
 };
 
 
-
-
-/*
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-🔥
-
-*/
-
 const getSearchIndex = async (client) => {
 
   const { allPages } = await client.request(
     getSearchIndexQuery,
   );
 
-  return {
-    search: allPages,
-    language: client.options.headers["Accept-Language"]
-  };
+  return { search: allPages };
 };
 
 const buildPageAtUrl = async (
@@ -621,7 +588,6 @@ const buildPageAtUrl = async (
       getData: () => getAllEvents(client, false),
     };
   }
-
 };
 
 const getPagesOfGuidesData = async client => {
@@ -776,7 +742,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
-      // console.log("pageAtUrlInfo :", pageAtUrlInfo)
       return Promise.all(
         pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
           buildPageAtUrl(
@@ -884,50 +849,16 @@ export default {
     }
 
     const routes = [
-      // {
-      //   path: 'search',
-      //   template: 'src/components/Pages/Search',
-      //   getData: (client, lang) => getSearchIndex(client),
-      //   // ☝️this gets it THREE times.... really should be one request
-      // },
-      // {
-      //   path: 'search',
-      //   template: 'src/components/Pages/Search',
-      //   // getData: (client, lang) => getSearchIndex(createGraphQLClientsByLang('en')),
-      // },
-      // {
-      //   path: 'en/search',
-      //   template: 'src/components/Pages/Search',
-      //   getData: () => getSearchIndex(createGraphQLClientsByLang('en')),
-      // },
-      // {
-      //   path: 'es/search',
-      //   template: 'src/components/Pages/Search',
-      //   getData: () => getSearchIndex(createGraphQLClientsByLang('es')),
-      // },
       {
         path: '404',
         template: 'src/components/Pages/404',
       },
     ];
 
-
-    /*
-    🔥
-
-    🔥
-
-    🔥
-
-    🔥
-
-    */
-
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
 
-    //Adds languege urls prefix to static routes.
+    //Adds languege url prefixes to static routes.
     allLangs.forEach( lang => {
-      console.log("lang :", lang)
       routes.push({
         path: lang+'/search',
         template: 'src/components/Pages/Search',
@@ -936,33 +867,11 @@ export default {
     })
 
     allLangs.unshift(undefined);
-
-
-    console.log("routes :", routes)
-
-
-    // [...routes].forEach( route => {
-    //   allLangs.forEach( lang => {
-    //     const client = createGraphQLClientsByLang(lang);
-    //     if (lang) {
-    //       const langRoute = {
-    //         path: lang + "/" + route.path,
-    //         template: route.template,
-    //       }
-    //       if (route.getData) {
-    //         langRoute.getData = () => route.getData(client)
-    //       }
-    //       routes.push(langRoute)
-    //     }
-    //   })
-    // });
-
     let translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
 
     const allRoutes = routes.concat(translatedRoutes);
-    // console.log("allRoutes :", JSON.stringify(allRoutes, null, 2))
     return allRoutes;
   },
   webpack: (config, { stage }) => {

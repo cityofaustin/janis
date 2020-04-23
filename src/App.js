@@ -74,7 +74,7 @@ const App = ({ navigation, threeoneone }) => {
             >
               <Helmet
                 htmlAttributes={{
-                  lang: LANG_KEY[props.match.params.lang || 'en']
+                  lang: LANG_KEY[props.match.params.lang || 'en'],
                 }}
               />
               <Suspense fallback={<div>LOADING</div>}>

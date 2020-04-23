@@ -36,7 +36,9 @@ const getLangFromCookie = (path) => {
   if (lang === DEFAULT_LANG && path === "search") {
     /*
       For search page specifically, we'll want to catch '/search' urls
-      without langs and add current lang to prevent search errors.
+      without langs and add current lang to prevent search errors. Also, this
+      will allow for language ambingious urls! Which, will then be set to
+      users set language!
     */
     window.location.href = `/${lang}/${path || ''}`;
   } else if (lang === DEFAULT_LANG) {
