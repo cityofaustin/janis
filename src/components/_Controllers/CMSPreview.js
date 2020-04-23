@@ -63,12 +63,19 @@ class CMSPreview extends Component {
 
       page.contextualNavData = {
         relatedTo: [],
-        offeredBy: [
-          {
-            title: !!page.departments && page.departments[0].title,
-            url: !!page.departments && `\${page.departments[0].slug}`,
-          },
-        ],
+        offeredBy: !!page.departments && !!page.departments[0]
+          ? [
+              {
+                title: page.departments[0].title,
+                url: `\${page.departments[0].slug}`,
+              },
+            ]
+          : [
+              {
+                title: 'no department selected',
+                url: 'no-department',
+              }
+            ],
         parent: !!janis_instance.parent
           ? janis_instance.parent
           : {
