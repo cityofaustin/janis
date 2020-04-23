@@ -38,7 +38,7 @@ const branchOverrides = {
     joplin_appname: "joplin-pr-v3"
   },
   'search-page': {
-    joplin_appname: "joplin-pr-v3"
+    joplin_appname: "joplin-pr-search-page"
   }
 };
 

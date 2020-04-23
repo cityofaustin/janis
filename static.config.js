@@ -423,13 +423,46 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
+
+
+
+/*
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+🔥
+
+*/
+
 const getSearchIndex = async (client) => {
 
   const { allPages } = await client.request(
     getSearchIndexQuery,
   );
 
-  return { search: allPages };
+  return {
+    search: allPages,
+    language: client.options.headers["Accept-Language"]
+  };
 };
 
 const buildPageAtUrl = async (
@@ -589,15 +622,6 @@ const buildPageAtUrl = async (
     };
   }
 
-  // if (searchpage) {
-  //   console.log("\n\nsearchPage :", searchPage)
-  //   return {
-  //     path: '/search/',
-  //     template: 'src/components/Pages/Search',
-  //     getData: () => getSearchIndex(searchpage),
-  //   };
-  // }
-
 };
 
 const getPagesOfGuidesData = async client => {
@@ -750,17 +774,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     },
   });
 
-  // pages.push({
-  //   node: {
-  //     allSearchs: true,
-  //     janisInstances: [
-  //       {
-  //         url: '/search/',
-  //       },
-  //     ],
-  //   },
-  // });
-
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
       // console.log("pageAtUrlInfo :", pageAtUrlInfo)
@@ -877,31 +890,57 @@ export default {
       //   getData: (client, lang) => getSearchIndex(client),
       //   // ☝️this gets it THREE times.... really should be one request
       // },
-      {
-        path: 'search',
-        template: 'src/components/Pages/Search',
-        // getData: (client, lang) => getSearchIndex(createGraphQLClientsByLang('en')),
-      },
-      {
-        path: 'en/search',
-        template: 'src/components/Pages/Search',
-        getData: () => getSearchIndex(createGraphQLClientsByLang('en')),
-      },
-      {
-        path: 'es/search',
-        template: 'src/components/Pages/Search',
-        getData: () => getSearchIndex(createGraphQLClientsByLang('es')),
-      },
+      // {
+      //   path: 'search',
+      //   template: 'src/components/Pages/Search',
+      //   // getData: (client, lang) => getSearchIndex(createGraphQLClientsByLang('en')),
+      // },
+      // {
+      //   path: 'en/search',
+      //   template: 'src/components/Pages/Search',
+      //   getData: () => getSearchIndex(createGraphQLClientsByLang('en')),
+      // },
+      // {
+      //   path: 'es/search',
+      //   template: 'src/components/Pages/Search',
+      //   getData: () => getSearchIndex(createGraphQLClientsByLang('es')),
+      // },
       {
         path: '404',
         template: 'src/components/Pages/404',
       },
     ];
 
+
+    /*
+    🔥
+
+    🔥
+
+    🔥
+
+    🔥
+
+    */
+
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
+
+    //Adds languege urls prefix to static routes.
+    allLangs.forEach( lang => {
+      console.log("lang :", lang)
+      routes.push({
+        path: lang+'/search',
+        template: 'src/components/Pages/Search',
+        getData: () => getSearchIndex(createGraphQLClientsByLang(lang)),
+      })
+    })
+
     allLangs.unshift(undefined);
 
-    // Adds languege urls prefix to static routes.
+
+    console.log("routes :", routes)
+
+
     // [...routes].forEach( route => {
     //   allLangs.forEach( lang => {
     //     const client = createGraphQLClientsByLang(lang);
@@ -922,7 +961,6 @@ export default {
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
 
-    console.log("routes :", routes)
     const allRoutes = routes.concat(translatedRoutes);
     // console.log("allRoutes :", JSON.stringify(allRoutes, null, 2))
     return allRoutes;
