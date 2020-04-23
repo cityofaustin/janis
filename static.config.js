@@ -423,7 +423,7 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
-const getSearchIndex = async (client, langCode) => {
+const getSearchIndex = async (client) => {
 
   const { allPages } = await client.request(
     getSearchIndexQuery,
@@ -871,11 +871,26 @@ export default {
     }
 
     const routes = [
+      // {
+      //   path: 'search',
+      //   template: 'src/components/Pages/Search',
+      //   getData: (client, lang) => getSearchIndex(client),
+      //   // ☝️this gets it THREE times.... really should be one request
+      // },
       {
         path: 'search',
         template: 'src/components/Pages/Search',
-        getData: (client, lang) => getSearchIndex(client, lang),
-        // ☝️this gets it THREE times.... really should be one request
+        // getData: (client, lang) => getSearchIndex(createGraphQLClientsByLang('en')),
+      },
+      {
+        path: 'en/search',
+        template: 'src/components/Pages/Search',
+        getData: () => getSearchIndex(createGraphQLClientsByLang('en')),
+      },
+      {
+        path: 'es/search',
+        template: 'src/components/Pages/Search',
+        getData: () => getSearchIndex(createGraphQLClientsByLang('es')),
       },
       {
         path: '404',
@@ -887,21 +902,21 @@ export default {
     allLangs.unshift(undefined);
 
     // Adds languege urls prefix to static routes.
-    [...routes].forEach( route => {
-      allLangs.forEach( lang => {
-        const client = createGraphQLClientsByLang(lang);
-        if (lang) {
-          const langRoute = {
-            path: lang + "/" + route.path,
-            template: route.template,
-          }
-          if (route.getData) {
-            langRoute.getData = () => route.getData(client, lang)
-          }
-          routes.push(langRoute)
-        }
-      })
-    });
+    // [...routes].forEach( route => {
+    //   allLangs.forEach( lang => {
+    //     const client = createGraphQLClientsByLang(lang);
+    //     if (lang) {
+    //       const langRoute = {
+    //         path: lang + "/" + route.path,
+    //         template: route.template,
+    //       }
+    //       if (route.getData) {
+    //         langRoute.getData = () => route.getData(client)
+    //       }
+    //       routes.push(langRoute)
+    //     }
+    //   })
+    // });
 
     let translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),

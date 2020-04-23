@@ -12,7 +12,16 @@ const SearchPage = ( dummy ) => {
 
   const intl = useIntl();
   const { search } = useRouteData();
-  console.log("search :", search)
+
+  // Should this be moved up the inhertance. I think it's faster
+  // ... - maybe App.js or index.js ???
+  // ... - But, my thought is that it's safer here...
+  const lang = window.location.pathname.split('/').filter(Boolean)
+  console.log("lang :", lang)
+  // if (lang[0] === "search") {
+  if (!["en","es","vi","ar"].includes(lang[0])) {
+    window.location.href = `/en${window.location.pathname}`;
+  }
 
   // TO DO ...
   // Get Dynamic Title
@@ -27,9 +36,11 @@ const SearchPage = ( dummy ) => {
 
       <PageHeader> {title} </PageHeader>
 
+      <input type="text" />
+
       { search.edges.map( (page, i) => (
         <div key={i}>
-          {page.node.title}
+          {page.node.title} :
         </div>
       )) }
 

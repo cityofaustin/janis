@@ -73,9 +73,9 @@ const App = ({ navigation, threeoneone }) => {
               path={props.match.params.path}
             >
               <Helmet
-                htmlAttributes={{
-                  lang: LANG_KEY[props.match.params.lang || 'en'],
-                }}
+                htmlAttributes={ props => (
+                  lang=LANG_KEY[props.match.params.lang || 'en']
+                )}
               />
               <Suspense fallback={<div>LOADING</div>}>
                 <AppView path={props.match.params.path || ''} />
