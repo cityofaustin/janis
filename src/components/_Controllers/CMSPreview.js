@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
-import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
@@ -20,6 +19,14 @@ import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
+
+import {
+  cleanInformationForPreview,
+  cleanTopicsForPreview,
+  cleanDepartmentForPreview,
+  cleanLocationPage,
+  getOfferedByFromDepartments,
+} from 'js/helpers/cleanData';
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -42,11 +49,10 @@ class CMSPreview extends Component {
       },
     } = this.props;
 
-    // Optional CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:3000)
+    // CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
     const { CMS_API } = queryString.parse(this.props.location.search);
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
-    //TODO: one endpoint for revisions data requests
     let req;
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
@@ -56,12 +62,19 @@ class CMSPreview extends Component {
 
       page.contextualNavData = {
         relatedTo: [],
-        offeredBy: [
-          {
-            title: 'department.title',
-            url: 'department.url',
-          },
-        ],
+        offeredBy: !!page.departments && !!page.departments[0]
+          ? [
+              {
+                title: page.departments[0].title,
+                url: `\${page.departments[0].slug}`,
+              },
+            ]
+          : [
+              {
+                title: 'no department selected',
+                url: 'no-department',
+              }
+            ],
         parent: !!janis_instance.parent
           ? janis_instance.parent
           : {
@@ -99,18 +112,20 @@ class CMSPreview extends Component {
           path="/information"
           render={props => (
             <InformationPage
-              informationPage={cleanInformationForPreview(data)}
+              informationPage={cleanInformationForPreview(page)}
             />
           )}
         />
         <Route
           path="/topic"
           render={props => {
-            let topic = cleanTopicsForPreview(data)[0];
-            topic.topLinks = [
-              { title: 'Top link', url: '' },
-              { title: 'Other top link', url: '' },
-            ];
+            let topic = cleanTopicsForPreview(page);
+            if (!topic.topLinks) {
+              topic.topLinks = [
+                { title: 'Top link', url: '' },
+                { title: 'Other top link', url: '' },
+              ];
+            }
             topic.otherLinks = [
               { title: 'First link', url: '' },
               { title: 'Second link', url: '' },
@@ -125,7 +140,7 @@ class CMSPreview extends Component {
         <Route
           path="/topiccollection"
           render={props => {
-            let tc = cleanTopicCollectionsForPreview(data)[0];
+            let tc = page;
             tc.topics = [
               {
                 title: 'Sample Text',
@@ -137,40 +152,39 @@ class CMSPreview extends Component {
                 },
               },
             ];
-
             return <TopicCollection tc={tc} />;
           }}
         />
         <Route
           path="/department"
           render={props => (
-            <Department department={cleanDepartmentsForPreview(data)[0]} />
+            <Department department={cleanDepartmentForPreview(page)} />
           )}
         />
         <Route
           path="/form"
           render={props => (
             <FormContainer
-              formContainer={cleanFormContainersForPreview(data)}
+              formContainer={page}
             />
           )}
         />
         <Route
           path="/guide"
-          render={props => <Guide guidePage={cleanGuideForPreview(data)} />}
+          render={props => <Guide guidePage={page} />}
         />
         <Route
           path="/location"
           render={props => (
             <LocationPage
-              locationPage={cleanLocationPage(data.edges[0].node)}
+              locationPage={cleanLocationPage(page).locationPage}
             />
           )}
         />
         <Route
           path="/event"
           render={props => {
-            let eventPage = data.edges[0].node;
+            let eventPage = page;
             eventPage.offeredBy = getOfferedByFromDepartments(
               eventPage.departments,
             );

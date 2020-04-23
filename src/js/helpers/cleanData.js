@@ -359,36 +359,10 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanInformationForPreview = allInformationPages => {
-  if (!allInformationPages || !allInformationPages.edges) return null;
-  const infos = allInformationPages.edges.map(e => e.node);
-  let info = infos[0];
+export const cleanInformationForPreview = informationPage => {
+  informationPage.contacts = cleanContacts(informationPage.contacts);
 
-  info.contextualNavData = getContextualNavForPreview(info);
-  info.theme = {};
-
-  info.text = info.title;
-  info.contacts = cleanContacts(info.contacts);
-
-  return info;
-};
-
-export const cleanGuideForPreview = allGuidePages => {
-  if (!allGuidePages || !allGuidePages.edges) return null;
-  const guides = allGuidePages.edges.map(e => e.node);
-  let guide = guides[0];
-
-  guide.contextualNavData = getContextualNavForPreview(guide);
-  const contacts = cleanContacts(guide.contacts);
-  if (contacts && contacts.length) {
-    guide.contact = contacts[0];
-  }
-
-  guide.theme = {};
-
-  return guide;
+  return informationPage;
 };
 
 export const cleanDepartmentDirectors = directors => {
@@ -417,43 +391,35 @@ export const cleanDepartmentPageLinks = (
   return cleanedLinks;
 };
 
-export const cleanDepartmentsForPreview = (allDepartments, langCode) => {
-  if (!allDepartments || !allDepartments.edges) return null;
+export const cleanDepartmentForPreview = (department, langCode) => {
+  if (!department) return null;
 
-  return allDepartments.edges.map(({ node: department }) => {
-    department.url = `/departments/${department.slug}`;
-    department.text = department.title;
-    department.contacts = cleanContacts(department.contacts);
-    department.directors = cleanDepartmentDirectors(
-      department.departmentDirectors,
-    );
-    department.topServices = cleanDepartmentPageLinks(
-      department.topPages,
-      department.slug,
-    );
-    department.relatedLinks = cleanDepartmentPageLinks(
-      department.relatedPages,
-      department.slug,
-    );
+  department.url = `/departments/${department.slug}`;
+  department.text = department.title;
+  department.contacts = cleanContacts(department.contacts);
+  department.directors = cleanDepartmentDirectors(department.departmentDirectors);
+  department.topServices = cleanDepartmentPageLinks(
+    department.topPages,
+    department.slug,
+  );
+  department.relatedLinks = cleanDepartmentPageLinks(
+    department.relatedPages,
+    department.slug,
+  );
 
-    return department;
-  });
+  return department;
 };
 
-export const cleanTopicsForPreview = allTopics => {
-  if (!allTopics || !allTopics.edges) return null;
+export const cleanTopicsForPreview = topic => {
+  if (topic.topPages.edges && topic.topPages.edges.length) {
+    topic.topLinks = topic.topPages.edges.map(edge => ({
+      pageType: edge.node.pageType,
+      title: edge.node.title,
+      url: `${topic.contextualNavData.parent.url}${edge.node.slug}/`,
+    }));
+  }
 
-  const cleanedTopics = allTopics.edges.map(edge => ({
-    text: edge.node.title,
-    contextualNavData: {
-      relatedTo: [],
-      offeredBy: [],
-      parent: { title: 'Parent', url: '#' },
-    },
-    ...edge.node,
-  }));
-
-  return cleanedTopics;
+  return topic;
 };
 
 export const cleanTopics = allTopics => {
@@ -463,15 +429,12 @@ export const cleanTopics = allTopics => {
   return cleanedTopics;
 };
 
-export const cleanTopicCollectionsForPreview = allTopicCollections => {
-  if (!allTopicCollections || !allTopicCollections.edges) return null;
-
-  let cleanedTopicCollections = cleanLinks(
-    allTopicCollections,
+export const cleanTopicCollectionsForPreview = topicCollection => {
+  let cleanedTopicCollection = cleanLinks(
+    topicCollection,
     'topiccollection',
   );
-
-  return cleanedTopicCollections;
+  return cleanedTopicCollection;
 };
 
 export const cleanNavigation = (navigation, lang) => {
@@ -507,73 +470,6 @@ export const cleanNavigation = (navigation, lang) => {
   return cleanedNavigation;
 };
 
-const checkUrl = async url => {
-  return await axios({
-    method: 'HEAD',
-    url: url,
-  })
-    .then(res => url)
-    .catch(error => null);
-};
-
-const getWorkingDocumentLink = async filename => {
-  // Single source mode, example use case:
-  // If we're on PROD, we should only get prod documents
-  if (process.env.CMS_DOCS !== 'multiple') {
-    return `${process.env.CMS_DOCS}/${filename}`;
-  }
-
-  // Multi source mode, let's do some url checking and get something
-  // that works. example use case:
-  // If we're on STAGING, we want docs imported from PROD to work,
-  // as well as any new docs we added when testing on staging
-  if (process.env.CMS_DOCS === 'multiple') {
-    const docUrls = [
-      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
-    ];
-
-    for (const url of docUrls) {
-      const validUrl = await checkUrl(`${url}/${filename}`);
-      if (validUrl !== null) {
-        return validUrl;
-      }
-    }
-  }
-};
-
-export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
-  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
-
-  return allOfficialDocumentPages.edges.map(
-    ({ node: officialDocumentPage }) => {
-      officialDocumentPage.url = `/official_document/${
-        officialDocumentPage.slug
-      }`;
-
-      officialDocumentPage.contextualNavData = getContextualNavForPreview(
-        officialDocumentPage,
-      );
-
-      officialDocumentPage.theme = {};
-      return officialDocumentPage;
-    },
-  );
-};
-
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanFormContainersForPreview = allFormContainers => {
-  if (!allFormContainers || !allFormContainers.edges) return null;
-  const forms = allFormContainers.edges.map(e => e.node);
-  let form = forms[0];
-
-  form.contextualNavData = getContextualNavForPreview(form);
-  form.theme = {};
-  form.contacts = cleanContacts(form.contacts);
-
-  return form;
-};
 
 export const getOfferedByFromDepartments = departments => {
   let offeredBy;
