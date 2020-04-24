@@ -25,7 +25,7 @@ const InformationPage = ({ informationPage, intl }) => {
       description,
       additionalContent,
       image,
-      contact,
+      contacts,
       coaGlobal,
       contextualNavData,
       pageIsPartOf,
@@ -33,10 +33,6 @@ const InformationPage = ({ informationPage, intl }) => {
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = informationPage ? { informationPage } : useRouteData();
-
-  console.log(useRouteData())
-
-  console.log(contact, !!contact)
 
   return (
     <div>
@@ -75,8 +71,8 @@ const InformationPage = ({ informationPage, intl }) => {
                     <HtmlFromRichText title={' '} content={additionalContent} />
                   )}
                   <div className="coa-Page__contacts-mobile">
-                    {!!contact && (
-                      <ContactDetails contact={contact} />
+                    {!!contacts && !!contacts.length && (
+                      <ContactDetails contacts={contacts} />
                     )}
                   </div>
                 </div>
@@ -85,8 +81,8 @@ const InformationPage = ({ informationPage, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contact && (
-                <ContactDetails contact={contact} />
+              {!!contacts && !!contacts.length && (
+                <ContactDetails contacts={contacts} />
               )}
             </div>
           </div>

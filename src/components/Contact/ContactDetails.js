@@ -20,19 +20,21 @@ import {
   phonePropTypes,
 } from './proptypes';
 
-const ContactDetails = ({ contact, intl }) => (
+const ContactDetails = ({ contacts, intl }) => (
   <div className="coa-ContactDetails">
     <SectionHeader isSerif={true}>
       {intl.formatMessage(i18n.questionsTitle)}
     </SectionHeader>
-    <ContactDetailsEntry contact={contact} intl={intl} />
+    {contacts.map((c, index) => (
+      <ContactDetailsEntry contact={c} key={index} intl={intl} />
+    ))}
   </div>
 );
 
 const ContactDetailsEntry = ({
   contact: {
     name,
-    phoneNumbers,
+    phoneNumber,
     email,
     location,
     hours,
@@ -45,8 +47,8 @@ const ContactDetailsEntry = ({
     {/* We want to keep this component easy to read and streamlined, so we are
       avoiding complicated functions in this return.
       Consider breaking into another component and calling that here*/}
-    {!!phoneNumbers && !!phoneNumbers.edges.length && (
-      <PhonesList phoneNumbers={phoneNumbers} />
+    {!!phoneNumber && !!phoneNumber.edges.length && (
+      <PhonesList phoneNumbers={phoneNumber} />
     )}
     {email && <Email email={email} />}
     {location && <Address location={location} />}
