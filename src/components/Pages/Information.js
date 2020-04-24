@@ -81,7 +81,7 @@ const InformationPage = ({ informationPage, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && (
+              {!!contact && (
                 <ContactDetails contact={contact} />
               )}
             </div>

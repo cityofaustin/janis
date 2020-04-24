@@ -26,7 +26,7 @@ const Service = ({ service, intl }) => {
       steps,
       additionalContent,
       dynamicContent,
-      contacts,
+      contact,
       related,
       shortDescription,
       coaGlobal,
@@ -96,16 +96,16 @@ const Service = ({ service, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contacts={contacts} />
+              {!!contact && (
+                <ContactDetails contact={contact} />
               )}
             </div>
           </div>
         </div>
         <div className="coa-Page__contacts-mobile">
           <div className="col-xs-12 col-md-10">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contacts={contacts} />
+            {!!contact && (
+              <ContactDetails contact={contact} />
             )}
           </div>
         </div>
