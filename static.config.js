@@ -442,9 +442,6 @@ const buildPageAtUrl = async (
     allDepartments,
     allEvents,
   } = pageAtUrlInfo;
-
-  // If we're a department page, we need to make sure our top services/related info works
-  // todo: make sure the above still happens
   if (departmentpage) {
     return {
       path: instanceOfPage.url,

@@ -108,13 +108,13 @@ const EventPage = ({ eventPage }) => {
           </div>
           <div className="coa-Page__contacts-mobile">
             <div className="col-xs-12 col-md-10">
-              {!!contact && <ContactDetails contacts={[contact]} />}
+              {!!contact && <ContactDetails contact={contact} />}
             </div>
           </div>
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-EventsPage__contacts-desktop">
-            {!!contact && <ContactDetails contacts={[contact]} />}
+            {!!contact && <ContactDetails contact={contact} />}
           </div>
         </div>
       </div>
