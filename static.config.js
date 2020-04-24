@@ -21,7 +21,7 @@ import getEventPageQuery from 'js/queries/getEventPageQuery';
 
 import {
   cleanNavigation,
-  cleanContacts,
+  cleanContact,
   cleanLinks,
   cleanDepartmentDirectors,
   cleanDepartmentPageLinks,
@@ -135,7 +135,7 @@ const cleanDepartmentPageData = departmentPage => {
   );
 
   // keeping this logic in there for now, stuff is kinda messy
-  department.contacts = cleanContacts(department.contacts);
+  department.contact = cleanContact(department.contact);
   department.directors = cleanDepartmentDirectors(
     department.departmentDirectors,
   );
@@ -201,7 +201,7 @@ const getServicePageData = async (
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  servicePageData.contacts = cleanContacts(servicePageData.contact);
+  servicePageData.contact = cleanContact(servicePageData.contact);
 
   servicePageData.contextualNavData = {
     parent: instance.parent,
@@ -232,7 +232,7 @@ const getInformationPageData = async (
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  informationPageData.contacts = cleanContacts(informationPageData.contacts);
+  informationPageData.contact = cleanContact(informationPageData.contact);
 
   informationPageData.contextualNavData = {
     parent: instance.parent,
@@ -259,7 +259,7 @@ const getGuidePageData = async (guidePageData, instance, client) => {
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  guidePageData.contact = cleanContacts(guidePageData.contact);
+  guidePageData.contact = cleanContact(guidePageData.contact);
 
   guidePageData.contextualNavData = {
     parent: instance.parent,

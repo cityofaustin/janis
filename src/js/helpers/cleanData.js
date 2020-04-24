@@ -61,36 +61,33 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
   )}–${formatTime(end2)}`;
 };
 
-export const cleanContacts = contacts => {
-  if (!contacts || !contacts.edges) return null;
-
+export const cleanContact = contact => {
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
   const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  return contacts.edges.map(({ node: contact }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
-    let cleaned = Object.assign({}, contact.contact);
+  console.log('C :', contact);
 
-    if (cleaned.locationPage) {
-      cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
-      cleaned.location = {
-        title: cleaned.locationPage.title,
-        street: cleaned.locationPage.physicalUnit
-          ? `${cleaned.locationPage.physicalStreet} ${
-              cleaned.locationPage.physicalUnit
-            }`
-          : cleaned.locationPage.physicalStreet,
-        city: cleaned.locationPage.physicalCity,
-        state: cleaned.locationPage.physicalState,
-        zip: cleaned.locationPage.physicalZip,
-      };
+  let cleaned = Object.assign({}, contact);
 
-      cleaned.locationPageSlug = cleaned.locationPage.slug;
-    }
+  if (cleaned.locationPage) {
+    cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+    cleaned.location = {
+      title: cleaned.locationPage.title,
+      street: cleaned.locationPage.physicalUnit
+        ? `${cleaned.locationPage.physicalStreet} ${
+            cleaned.locationPage.physicalUnit
+          }`
+        : cleaned.locationPage.physicalStreet,
+      city: cleaned.locationPage.physicalCity,
+      state: cleaned.locationPage.physicalState,
+      zip: cleaned.locationPage.physicalZip,
+    };
 
-    return cleaned;
-  });
+    cleaned.locationPageSlug = cleaned.locationPage.slug;
+  }
+
+  return cleaned;
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
@@ -293,7 +290,8 @@ export const cleanLinks = (links, pageType) => {
     const link = edge.node;
 
     // Check for global
-    if (link.coaGlobal) {
+    // CHIA put this back to link.coaGLobal
+    if (!link.coaGlobal) {
       link.text = link.title;
 
       // If we end up with a global page as a top service on the home page
@@ -360,7 +358,7 @@ export const cleanLinks = (links, pageType) => {
 };
 
 export const cleanInformationForPreview = informationPage => {
-  informationPage.contacts = cleanContacts(informationPage.contacts);
+  informationPage.contacts = cleanContact(informationPage.contacts);
 
   return informationPage;
 };
@@ -396,7 +394,7 @@ export const cleanDepartmentForPreview = (department, langCode) => {
 
   department.url = `/departments/${department.slug}`;
   department.text = department.title;
-  department.contacts = cleanContacts(department.contacts);
+  department.contact = cleanContact(department.contacts);
   department.directors = cleanDepartmentDirectors(department.departmentDirectors);
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
