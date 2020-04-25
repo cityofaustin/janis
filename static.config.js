@@ -242,7 +242,7 @@ const getInformationPageData = async (
 
   if (pagesOfGuides && pagesOfGuides[informationPageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    informationPage.pageIsPartOf = pagesOfGuides[informationPageData.id];
+    informationPageData.pageIsPartOf = pagesOfGuides[informationPageData.id];
   }
 
   return { informationPage: informationPageData };
