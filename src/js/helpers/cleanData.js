@@ -291,8 +291,7 @@ export const cleanLinks = (links, pageType) => {
     const link = edge.node;
 
     // Check for global
-    //chia put this back, this is for local build
-    if (!link.coaGlobal) {
+    if (link.coaGlobal) {
       link.text = link.title;
 
       // If we end up with a global page as a top service on the home page
