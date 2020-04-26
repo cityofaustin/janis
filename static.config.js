@@ -725,6 +725,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
+      if (!!pageAtUrlInfo.node.janisInstances.length) {
       return Promise.all(
         pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
           buildPageAtUrl(
@@ -735,6 +736,21 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           ),
         ),
       );
+    }
+    //if (!pageAtUrlInfo.node.janisUrls.length) {
+      // console.log(pageAtUrlInfo.node)
+    //}
+    // not all pages have instances
+    return Promise.all(
+      pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
+        buildPageAtUrl(
+          pageAtUrlInfo.node,
+          instanceOfPage,
+          client,
+          pagesOfGuidesData,
+        ),
+      ),
+    );
     }),
   );
 
