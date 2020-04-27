@@ -61,41 +61,38 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
   )}–${formatTime(end2)}`;
 };
 
-export const cleanContacts = contacts => {
-  if (!contacts || !contacts.edges) return null;
-
+export const cleanContact = contact => {
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
-  const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
+  // const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  return contacts.edges.map(({ node: contact }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
-    let cleaned = Object.assign({}, contact.contact);
+  let cleaned = Object.assign({}, contact);
 
-    if (cleaned.locationPage) {
-      cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
-      cleaned.location = {
-        title: cleaned.locationPage.title,
-        street: cleaned.locationPage.physicalUnit
-          ? `${cleaned.locationPage.physicalStreet} ${
-              cleaned.locationPage.physicalUnit
-            }`
-          : cleaned.locationPage.physicalStreet,
-        city: cleaned.locationPage.physicalCity,
-        state: cleaned.locationPage.physicalState,
-        zip: cleaned.locationPage.physicalZip,
-      };
+  if (cleaned.locationPage) {
+    cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+    cleaned.location = {
+      title: cleaned.locationPage.title,
+      street: cleaned.locationPage.physicalUnit
+        ? `${cleaned.locationPage.physicalStreet} ${
+            cleaned.locationPage.physicalUnit
+          }`
+        : cleaned.locationPage.physicalStreet,
+      city: cleaned.locationPage.physicalCity,
+      state: cleaned.locationPage.physicalState,
+      zip: cleaned.locationPage.physicalZip,
+    };
 
-      cleaned.locationPageSlug = cleaned.locationPage.slug;
-    }
+    cleaned.locationPageSlug = cleaned.locationPage.slug;
+  }
 
-    return cleaned;
-  });
+  return cleaned;
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
-  // quick fix for urls until we get localized urls working in joplin
-  return `/${janisUrl.split('/en/')[1]}`;
+  if(!!janisUrl.length){
+    return janisUrl[0];
+  }
+  return '/';
 };
 
 /*
@@ -197,13 +194,14 @@ export const cleanLocationPage = locationPage => {
       title: edge.node.relatedService.title,
       exceptions: edge.node.relatedService.hoursExceptions,
       hoursSameAsLocation: edge.node.hoursSameAsLocation,
+      //janisUrl is an array of urls, checks to see if there is length and if so takes the 1st one
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
-        edge.node.relatedService.contacts.edges.length &&
-        edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+        edge.node.relatedService.contact &&
+        edge.node.relatedService.contact.phoneNumbers &&
+        edge.node.relatedService.contact.phoneNumbers.edges.map(
           phoneEdge => {
             return {
-              // why do we call phoneDescription label here,
               label: phoneEdge.node.phoneDescription,
               number: parsePhoneNumberFromString(
                 phoneEdge.node.phoneNumber,
@@ -360,7 +358,7 @@ export const cleanLinks = (links, pageType) => {
 };
 
 export const cleanInformationForPreview = informationPage => {
-  informationPage.contacts = cleanContacts(informationPage.contacts);
+  informationPage.contact = cleanContact(informationPage.contact);
 
   return informationPage;
 };
@@ -396,7 +394,7 @@ export const cleanDepartmentForPreview = (department, langCode) => {
 
   department.url = `/departments/${department.slug}`;
   department.text = department.title;
-  department.contacts = cleanContacts(department.contacts);
+  department.contact = cleanContact(department.contact);
   department.directors = cleanDepartmentDirectors(department.departmentDirectors);
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
