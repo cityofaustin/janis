@@ -737,10 +737,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
         ),
       );
     }
-    //if (!pageAtUrlInfo.node.janisUrls.length) {
-      // console.log(pageAtUrlInfo.node)
-    //}
-    // not all pages have instances
+
+    // not all pages have instances (events and locations not under departments)
     return Promise.all(
       pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
         buildPageAtUrl(
