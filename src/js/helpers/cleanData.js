@@ -89,8 +89,10 @@ export const cleanContact = contact => {
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
-  // quick fix for urls until we get localized urls working in joplin
-  return `/${janisUrl.split('/en/')[1]}`;
+  if(!!janisUrl.length){
+    return janisUrl[0];
+  }
+  return '/';
 };
 
 /*
@@ -192,13 +194,14 @@ export const cleanLocationPage = locationPage => {
       title: edge.node.relatedService.title,
       exceptions: edge.node.relatedService.hoursExceptions,
       hoursSameAsLocation: edge.node.hoursSameAsLocation,
+      //janisUrl is an array of urls, checks to see if there is length and if so takes the 1st one
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
-        edge.node.relatedService.contacts.edges.length &&
-        edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
+        edge.node.relatedService.contact &&
+        edge.node.relatedService.contact.phoneNumbers &&
+        edge.node.relatedService.contact.phoneNumbers.edges.map(
           phoneEdge => {
             return {
-              // why do we call phoneDescription label here,
               label: phoneEdge.node.phoneDescription,
               number: parsePhoneNumberFromString(
                 phoneEdge.node.phoneNumber,
@@ -288,8 +291,7 @@ export const cleanLinks = (links, pageType) => {
     const link = edge.node;
 
     // Check for global
-    //chia put this back, this is for local build
-    if (!link.coaGlobal) {
+    if (link.coaGlobal) {
       link.text = link.title;
 
       // If we end up with a global page as a top service on the home page
