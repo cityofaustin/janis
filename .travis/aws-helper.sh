@@ -23,7 +23,6 @@ function helper_halt_deployment {
 }
 
 
-
 #
 # Identify 'Production' or 'Staging' branches
 #
