@@ -22,7 +22,7 @@ const Department = ({ department, intl }) => {
     department: {
       title,
       mission,
-      contacts,
+      contact,
       image,
       directors,
       whatWeDo,
@@ -94,8 +94,8 @@ const Department = ({ department, intl }) => {
             </h2>
             <p>{mission}</p>
             <div className="coa-Page__contacts-mobile">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contacts={contacts} />
+              {!!contact && (
+                <ContactDetails contact={contact} />
               )}
             </div>
             {directors.length > 0 && (
@@ -131,8 +131,8 @@ const Department = ({ department, intl }) => {
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contacts && !!contacts.length && (
-              <ContactDetails contacts={contacts} />
+            {!!contact && (
+              <ContactDetails contact={contact} />
             )}
           </div>
         </div>
