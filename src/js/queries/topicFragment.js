@@ -4,19 +4,12 @@ const topicFragment = `
     slug,
     title,
     description,
-    topiccollections {
+    topPages {
       edges {
         node {
-          topiccollection {
-            id
-            title
-            slug
-            theme {
-              id
-              text
-              slug
-            }
-          }
+          id
+          title
+          slug
         }
       }
     }

@@ -2,6 +2,11 @@ const locationPageFragment = `
   fragment locationPageInfo on LocationPageNode {
     id
     title
+    departments {
+      id
+      title
+      slug
+    }
     physicalStreet
     physicalUnit
     physicalCity

@@ -22,7 +22,7 @@ import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
 import {
   cleanNavigation,
-  cleanContacts,
+  cleanContact,
   cleanLinks,
   cleanDepartmentDirectors,
   cleanDepartmentPageLinks,
@@ -137,7 +137,7 @@ const cleanDepartmentPageData = departmentPage => {
   );
 
   // keeping this logic in there for now, stuff is kinda messy
-  department.contacts = cleanContacts(department.contacts);
+  department.contact = cleanContact(department.contact);
   department.directors = cleanDepartmentDirectors(
     department.departmentDirectors,
   );
@@ -203,7 +203,7 @@ const getServicePageData = async (
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  servicePageData.contacts = cleanContacts(servicePageData.contact);
+  servicePageData.contact = cleanContact(servicePageData.contact);
 
   servicePageData.contextualNavData = {
     parent: instance.parent,
@@ -234,7 +234,7 @@ const getInformationPageData = async (
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  informationPageData.contacts = cleanContacts(informationPageData.contacts);
+  informationPageData.contact = cleanContact(informationPageData.contact);
 
   informationPageData.contextualNavData = {
     parent: instance.parent,
@@ -244,7 +244,7 @@ const getInformationPageData = async (
 
   if (pagesOfGuides && pagesOfGuides[informationPageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    informationPage.pageIsPartOf = pagesOfGuides[informationPageData.id];
+    informationPageData.pageIsPartOf = pagesOfGuides[informationPageData.id];
   }
 
   return { informationPage: informationPageData };
@@ -261,7 +261,7 @@ const getGuidePageData = async (guidePageData, instance, client) => {
   }
 
   // keeping this logic in there for now, stuff is kinda messy
-  guidePageData.contact = cleanContacts(guidePageData.contact);
+  guidePageData.contact = cleanContact(guidePageData.contact);
 
   guidePageData.contextualNavData = {
     parent: instance.parent,
@@ -454,9 +454,6 @@ const buildPageAtUrl = async (
     allDepartments,
     allEvents,
   } = pageAtUrlInfo;
-
-  // If we're a department page, we need to make sure our top services/related info works
-  // todo: make sure the above still happens
   if (departmentpage) {
     return {
       path: instanceOfPage.url,
@@ -600,16 +597,15 @@ const getPagesOfGuidesData = async client => {
         id: guidePage.node.id,
       });
 
+      let url ='/'
+
       if (
         guideUrl.allPages &&
         guideUrl.allPages.edges &&
         guideUrl.allPages.edges[0].node &&
         guideUrl.allPages.edges[0].node.janisInstances
       ) {
-        const url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
-      }
-      else {
-        const url = '/'
+        url = guideUrl.allPages.edges[0].node.janisInstances[0].url;
       }
       guidePage.node.sections.map(section => {
         // Example section object
@@ -756,6 +752,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
+
 
   const data = {
     path: path,
