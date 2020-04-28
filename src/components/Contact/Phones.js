@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-
 import { contact as i18n } from 'js/i18n/definitions';
-
 import { phonePropTypes } from './proptypes';
-
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 const Phone = ({ phone }) => {
@@ -25,11 +22,8 @@ const Phone = ({ phone }) => {
 
 const PhonesList = ({ phoneNumbers, intl }) => {
   if (!phoneNumbers) return null;
-  {/*phone list should probably be a list
-    for semantics but it affects styling atm */}
 
   return (
-
     <div className="coa-ContactItem coa-ContactPhoneList">
       <i className="material-icons">contact_phone</i>
       <div className="coa-ContactItem_content">

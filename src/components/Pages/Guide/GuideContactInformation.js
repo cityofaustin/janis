@@ -8,7 +8,7 @@ import { misc as i18n1 } from 'js/i18n/definitions';
 const GuideContactInformation = ({
   contact: {
     name,
-    phoneNumber,
+    phoneNumbers,
     email
   },
   intl,
@@ -23,9 +23,9 @@ const GuideContactInformation = ({
           </div>
         )}
         <div className="col-xs-12 col-md-6 coa-GuidePage__contact-block coa-GuidePage__contact-info">
-          {phoneNumber && (
+          {phoneNumbers && (
             <div className="coa-GuidePage__contact-item">
-              <Phones phoneNumbers={phoneNumber} />
+              <Phones phoneNumbers={phoneNumbers} />
             </div>
           )}
           {email && (
