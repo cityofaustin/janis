@@ -17,9 +17,4 @@ workflows:
   version: 2.1
   build-and-deploy:
     jobs:
-      - deploy-publisher-v2:
-          filters:
-            branches:
-              ignore:
-                - master
-                - production
+      - deploy-publisher-v2
