@@ -8,4 +8,4 @@ function print_var {
 echo "########"
 echo "Here's what's stored in CircleCI:"
 echo "########"
-print_var "CI_COA_PUBLISHER_URL"
+# TODO: print_vars as needed.
