@@ -18,6 +18,7 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
+import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
 import {
   cleanNavigation,
@@ -29,6 +30,7 @@ import {
   getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
+  getSearchPageUrl,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -300,7 +302,7 @@ const checkUrl = async url => {
 
 const getWorkingDocumentLink = async filename => {
   // is this still needed? with brians new work?
-  /* 
+  /*
     depending on environment, returns a valid url from either staging or production
     used in getOfficialDocumentPageData
   */
@@ -420,13 +422,23 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
+const getSearchIndex = async (client) => {
+
+  const { allPages } = await client.request(
+    getSearchIndexQuery,
+  );
+
+  return { searchIndex: allPages };
+};
+
+
 const buildPageAtUrl = async (
   pageAtUrlInfo,
   instanceOfPage,
   client,
   pagesOfGuides,
 ) => {
-  /* 
+  /*
   buildPageAtUrl takes a page information object and the language client
   returns object with page url, template and data from appropriate query
   */
@@ -437,6 +449,7 @@ const buildPageAtUrl = async (
     locationpage,
     departmentpage,
     topiccollectionpage,
+    searchpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
     allDepartments,
@@ -648,7 +661,7 @@ const getPagesOfGuidesData = async client => {
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
-    makeAllPages returns react-static data object with homepage 
+    makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
   const path = `/${!!langCode ? langCode : ''}`;
@@ -847,10 +860,6 @@ export default {
     }
 
     const routes = [
-      // {
-      //   path: '/search',
-      //   template: 'src/components/Pages/Search',
-      // },
       {
         path: '404',
         template: 'src/components/Pages/404',
@@ -858,6 +867,16 @@ export default {
     ];
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
+
+    //Adds languege url prefixes to static routes.
+    allLangs.forEach( lang => {
+      routes.push({
+        path: lang+'/search',
+        template: 'src/components/Pages/Search',
+        getData: () => getSearchIndex(createGraphQLClientsByLang(lang)),
+      })
+    })
+
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),

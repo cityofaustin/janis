@@ -39,6 +39,9 @@ const branchOverrides = {
   },
   'v3': {
     joplin_appname: "joplin-pr-v3"
+  },
+  'search': {
+    joplin_appname: 'joplin-pr-import-everything'
   }
 };
 
