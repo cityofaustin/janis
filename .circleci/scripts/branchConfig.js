@@ -37,7 +37,7 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
   },
-  'v3': {
+  '4336-guide-contact': {
     joplin_appname: "joplin-pr-v3"
   }
 };
