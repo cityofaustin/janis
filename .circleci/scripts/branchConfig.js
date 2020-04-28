@@ -17,11 +17,7 @@
 
 // Don't overwrite defaultValues.
 const defaultValues = {
-  DEPLOYMENT_MODE: 'REVIEW', // branches on netlify are 'REVIEW'
-  // TODO: add correct joplin_appname for staging
   joplin_appname: 'joplin-staging',
-  CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
-  CMS_DOCS: 'multiple',
   REACT_STATIC_PREFETCH_RATE: '0', // Don't do prefetching by default
 };
 
