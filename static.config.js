@@ -316,8 +316,8 @@ const getWorkingDocumentLink = async filename => {
   // as well as any new docs we added when testing on staging
   if (process.env.CMS_DOCS === 'multiple') {
     const docUrls = [
-      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
+      'https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents',
+      'https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media/documents',
     ];
 
     for (const url of docUrls) {

@@ -17,7 +17,7 @@ module.exports = async ({ config, mode }) => {
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
-        "CMS_MEDIA": JSON.stringify("https://joplin-austin-gov-static.s3.amazonaws.com/staging/media"),
+        "CMS_MEDIA": JSON.stringify("https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media"),
       }
     })
   );
