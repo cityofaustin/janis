@@ -17,6 +17,11 @@ const servicePageFragment = `
     contact {
       ...contactInfo
     }
+    events {
+      id
+      slug
+      title
+    }
   }
   ${conciseContactFragment}
 `;

@@ -15,6 +15,7 @@ import SectionHeader from 'components/SectionHeader';
 import ContextualNav from '../PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
+import RelatedEvents from 'components/PageSections/RelatedEvents';
 import UserFeedback from 'components/UserFeedback';
 
 const Service = ({ service, intl }) => {
@@ -32,6 +33,7 @@ const Service = ({ service, intl }) => {
       coaGlobal,
       contextualNavData,
       pageIsPartOf,
+      events,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
@@ -115,6 +117,7 @@ const Service = ({ service, intl }) => {
             offeredBy={contextualNavData.offeredBy}
           />
         )}
+        <RelatedEvents events={events} />
       </div>
       <UserFeedback />
     </div>
