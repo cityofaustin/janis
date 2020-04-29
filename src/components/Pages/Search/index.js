@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, use  } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
@@ -6,91 +6,73 @@ import { events as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import { buildPages, buildPagination } from 'js/helpers/pagination.js'
 
+// ...Make this a js/helpers function
+// 🔥It'll be easy and worth it!
+const searchWorker = function(currentResults, searchString) {
+
+  const priortizeFirstChar = []
+
+  if (searchString) {
+
+    const filteredSearch = currentResults.filter( result => {
+
+      // Make search term and querys all lowercase
+      const ltitle = result.node.title.toLocaleLowerCase()
+      const lsearch = searchString+"".toLocaleLowerCase()
+
+      // 🚨Bob. better notes here... Prioritize alphabatize by
+      if (lsearch[0] === ltitle[0] && ltitle.includes(lsearch)) {
+        priortizeFirstChar.push(result)
+      } else {
+        return ltitle.includes(lsearch)
+      }
+
+    })
+
+    return priortizeFirstChar.concat(filteredSearch)
+
+  } else {
+    return currentResults
+  }
+  
+}
+
 const SearchPage = () => {
 
   const intl = useIntl();
   const { searchIndex } = useRouteData();
+  const title = "Search" // ⚠️useIntl
+  let uri_dec = decodeURIComponent(window.location.search).split('?')[1];
+  // let [ searchString, setSearchString ] = useState(uri_dec)
+  let searchString = uri_dec
 
   // Don't show pages without Url
   const searchIndexWithUrl = searchIndex.edges.filter( page => page.node.janisUrls.length > 0)
-  console.log("searchIndexWithUrl :", searchIndexWithUrl)
+  const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
 
-  // let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
-  let searchResults = searchIndexWithUrl
+  let [ searchResults, setSearchResults ] = useState(filteredSearch)
+  // let searchResults = searchIndexWithUrl
 
 
-  const title = "Search" // ⚠️useIntl
-  let uri_dec = decodeURIComponent(window.location.search).split('?')[1];
-  let [ searchString, setSearchString ] = useState(uri_dec)
-  // let searchString = uri_dec
-
-  useEffect((x) => {
-    console.log('useEffect, x', x)
-    // searchWorker()
-    searchPageInputId.focus()
-    hold = true
-  })
-
-  console.log("searchString :", searchString)
-  console.log("searchResults :", searchResults)
+  // useEffect((x) => {
+  //   console.log('useEffect, x', x)
+  //   // searchWorker()
+  //   searchPageInputId.focus()
+  // })
 
   const searchButtonPressed = function(x) {
     // window.location.search = searchString
     window.location.search = searchPageInputId.value
   }
 
-  let hold = false
-
   const searchKeyInput = function(event) {
-    setSearchString(event.target.value, 'ok') // 🔥x
+    console.log('click')
+    // setSearchString(event.target.value, 'ok') // 🔥x
     // searchString = event.target.value
+    // const filtered = searchWorker(searchResults)
   }
 
-  // Make this a js/helpers function
-
-  const searchWorker = function() {
-      if (!hold) {
-        console.log('filter')
-        let filteredSearch = [...searchResults]
-        const priortizeFirstChar = []
-        if (searchString) {
-          // const searchSubString = searchString+""
-
-          filteredSearch = filteredSearch.filter( result => {
-            const ltitle = result.node.title.toLocaleLowerCase()
-            const lsearch = searchString+"".toLocaleLowerCase()
-            if (lsearch[0] === ltitle[0] && ltitle.includes(lsearch)) {
-              priortizeFirstChar.push(result)
-            } else {
-              return ltitle.includes(lsearch)
-            }
-          })
-          filteredSearch = priortizeFirstChar.concat(filteredSearch)
-          searchResults = filteredSearch
-          console.log(filteredSearch)
-          hold = true
-      }
-
-
-      // console.log(filteredSearch)
-      // 🚨
-      // 🚨
-      // 🚨
-      // 🚨HEYOOO, you're causing an infinate loop!!!!
-      // 🚨
-      // 🚨WITH DAT 👇
-      // 🚨
-      // setSearchResults(filteredSearch)
-      //
-      // Maybe Figure out how send conditionals to useEffect
-
-    }
-
-  }
-
-  searchWorker()
-
-  // value={searchString}
+  // searchWorker()
 
   return (
     <div>
@@ -106,8 +88,8 @@ const SearchPage = () => {
           id="searchPageInputId"
           placeholder="..."
           onChange={()=>searchKeyInput(event)}
-
         />
+
         <button
           className="coa-searchPage_search-button"
           onClick={()=>searchButtonPressed('click')}
@@ -116,9 +98,9 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div> &nbsp; {searchResults.length} Results </div>
+      <div> &nbsp; {searchResults && searchResults.length} Results </div>
 
-      { searchResults.map( (page, i) => (
+      { searchResults && searchResults.map( (page, i) => (
         <div key={i} style={{paddingLeft: 20 }}>
           <hr />
 

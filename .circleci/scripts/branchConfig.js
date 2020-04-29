@@ -33,11 +33,11 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
   },
-  'v3': {
-    joplin_appname: "joplin-pr-v3"
+  '4340-official-documents': {
+    joplin_appname: 'joplin-pr-4340-official-docume'
   },
   'search': {
-    joplin_appname: 'joplin-pr-import-everything'
+    joplin_appname: 'joplin-pr-import-search'
   }
 };
 
