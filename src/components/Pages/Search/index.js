@@ -110,9 +110,13 @@ const SearchPage = () => {
         </div>
       )) }
 
-      <PaginationContainer
-        results={searchResults}
-      ></PaginationContainer>
+{/*
+  <PaginationContainer
+    results={searchResults}
+  ></PaginationContainer>
+
+*/}
+
 
     </div>
   )
