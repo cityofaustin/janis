@@ -9,7 +9,7 @@ const officialDocumentPageFragment = `
       title
       slug
     }
-    officialDocuments(orderBy: "-date") {
+    documents(orderBy: "-date") {
       edges {
         node {
           id

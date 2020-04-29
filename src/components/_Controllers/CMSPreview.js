@@ -19,6 +19,7 @@ import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
+// import SearchPage from 'components/Pages/Search'; // See noted out searchpage section for noted notes...
 
 import {
   cleanInformationForPreview,
@@ -192,6 +193,17 @@ class CMSPreview extends Component {
             return <EventPage eventPage={eventPage} />;
           }}
         />
+        {/*
+          // 🤔 TODO: Do we need to add search to CMS preview ???
+          <Route
+            path="/search"
+            render={ props => (
+              <SearchPage
+                searchPage={ cleanSearchPage(data.edges[0].node) }
+              />
+            )}
+          />
+        */}
       </Switch>
     );
   }

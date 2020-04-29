@@ -33,9 +33,9 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
   },
-  'search-nav': {
-    joplin_appname: 'joplin-pr-import-everything'
-  }
+  // 'search-nav': {
+  //   joplin_appname: 'joplin-pr-import-everything'
+  // }
 };
 
 module.exports = {
