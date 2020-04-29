@@ -34,7 +34,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3'
   },
   '4340-official-documents': {
-    joplin_appname: '4340-official-documents'
+    joplin_appname: '4340-official-docume'
   }
 };
 
