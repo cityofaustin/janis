@@ -22,6 +22,14 @@
   }
 }
 
+.coa-EventListPage__Entry--relatedPage {
+  max-width: 760px;
+  border: 1px solid #DCDEE0;
+  padding: 16px;
+  @include media($coa-large-screen) {
+  }
+}
+
 .coa-EventListPage__DateCal {
   width: 71px;
   height: 80px;

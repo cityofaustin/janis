@@ -97,6 +97,9 @@ const Service = ({ service, intl }) => {
                 </div>
               </div>
             </div>
+                    {!!events && events.length &&
+          <RelatedEvents events={events} />
+        }
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
@@ -119,7 +122,6 @@ const Service = ({ service, intl }) => {
             offeredBy={contextualNavData.offeredBy}
           />
         )}
-        <RelatedEvents events={events} />
       </div>
       <UserFeedback />
     </div>

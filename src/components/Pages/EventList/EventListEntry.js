@@ -37,7 +37,8 @@ const EventDateCalendar = ({date}) => {
 }
 
 
-const EventDateListDetails = ({ event, homepage }) => {
+const EventDateListDetails = ({ event, homepage, relatedPage }) => {
+  console.log(relatedPage);
   const intl = useIntl();
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -92,14 +93,14 @@ const EventDateListDetails = ({ event, homepage }) => {
   )
 }
 
-const EventListEntry = ({ event, homepage }) => {
+const EventListEntry = ({ event, homepage, relatedPage }) => {
   return (
     <Link
       to={event.eventUrl}
-      className={classNames('coa-EventListPage__Entry', {'coa-EventListPage__Entry--homepage': homepage})}
+      className={classNames('coa-EventListPage__Entry', {'coa-EventListPage__Entry--homepage': homepage, 'coa-EventListPage__Entry--relatedPage': relatedPage})}
     >
       <EventDateCalendar date={event.date} />
-      <EventDateListDetails event={event} homepage={homepage}/>
+      <EventDateListDetails event={event} homepage={homepage} relatedPage={relatedPage}/>
     </Link>
   )
 }

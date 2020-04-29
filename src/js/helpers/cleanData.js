@@ -485,7 +485,7 @@ export const getEventPageUrl = (slug, date) => {
 
 export const formatFeesRange = fees => {
   // on the Event List View, show a range of fees, from the least to the most
-  if (fees.edges && fees.edges.length) {
+  if (fees && fees.edges && fees.edges.length) {
     if (fees.edges.length === 1) {
       return `$${fees.edges[0].node.fee}`;
     }
@@ -511,7 +511,6 @@ export const cleanRelatedServiceLinks = links => {
 */
 
 export const cleanEvents = events => {
-  console.log('clean data', events)
   // takes an array of events and creates the event Url, formats the fees and picks first location
   if (!events) return null;
 

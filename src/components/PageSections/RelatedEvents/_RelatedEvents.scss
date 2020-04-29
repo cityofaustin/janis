@@ -1,0 +1,18 @@
+.coa-RelatedEvents__container {
+  padding: $coa-spacing-large $coa-spacing-medium;
+}
+
+.coa-RelatedEvents__heading {
+  font-size: 32px;
+  color: #171717;
+  font-weight: 500;
+  margin-bottom: 30px;
+  @include media($coa-medium-screen) {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.coa-RelatedEvents__events {
+  
+}

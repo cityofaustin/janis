@@ -13,21 +13,19 @@ const filterEvents = (events) => {
 }
 
 const RelatedEvents = ({events}) => {
-
-  console.log('E', events);
   const intl = useIntl();
   const threeEvents = filterEvents(events);
 
   return (
     (threeEvents && !!threeEvents.length) &&
-    <div className="coa-EventsHomePage__container">
-      <div className="coa-EventsHomePage__heading">
+    <div className="coa-RelatedEvents__container">
+      <div className="coa-RelatedEvents__heading">
         {intl.formatMessage(i18n.upcoming)}
       </div>
 
-      <div className="coa-EventsHomePage__events">
+      <div className="coa-RelatedEvents__events">
         {threeEvents.map(e => (
-          <EventListEntry event={e} homepage={true} />
+          <EventListEntry event={e} relatedPage={true} />
         ))}
       </div>
     </div>
