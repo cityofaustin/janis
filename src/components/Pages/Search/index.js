@@ -5,7 +5,16 @@ import { events as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import { searchWorker } from 'js/helpers/searchWorker'
-import { buildPages, buildPagination } from 'js/helpers/pagination.js'
+
+// Pagination
+import { PaginationContainer } from 'components/PageSections/Pagination/paginationContainer.js'
+// import ChevronRight from 'components/SVGs/ChevronRight'
+// import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
+// import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
+// import { buildPages, buildPagination } from 'js/helpers/pagination.js'
+// import { PageNumber } from 'components/PageSections/Pagination'
+// Pagination End
+
 
 const SearchPage = () => {
 
@@ -100,6 +109,10 @@ const SearchPage = () => {
 
         </div>
       )) }
+
+      <PaginationContainer
+        results={searchResults}
+      ></PaginationContainer>
 
     </div>
   )
