@@ -32,6 +32,9 @@ const branchOverrides = {
   },
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
+  },
+  '4340-official-documents': {
+    joplin_appname: '4340-official-documents'
   }
 };
 
