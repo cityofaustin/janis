@@ -349,7 +349,7 @@ const getOfficialDocumentPageData = async (
     offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
   };
 
-  for (let doc of officialDocumentPage.officialDocuments.edges) {
+  for (let doc of officialDocumentPage.documents.edges) {
     // If we have a document in wagtail
     // use that info to update the information syncronously
     if (doc.node.document) {
