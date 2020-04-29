@@ -81,9 +81,9 @@
   },
   "scripts": {
     "start-local": "./scripts/serve-local.sh",
-    "start-joplin-prod": "NODE_PATH=./src CMS_API='http://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents' npm-run-all -p watch-css start-js",
-    "start-joplin-staging": "NODE_PATH=./src CMS_API='http://joplin-staging.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
-    "start-joplin-pr": "NODE_PATH=./src CMS_API='https://joplin-pr-4340-official-docume.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
+    "start-joplin-prod": "NODE_PATH=./src CMS_API='http://joplin.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents' npm-run-all -p watch-css start-js",
+    "start-joplin-staging": "NODE_PATH=./src CMS_API='http://joplin-staging.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
+    "start-joplin-pr": "NODE_PATH=./src CMS_API='https://joplin-pr-4340-official-docume.herokuapp.com/api/graphql' CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
     "start-joplin-local": "NODE_PATH=./src CMS_API='http://127.0.0.1:8000/api/graphql' CMS_MEDIA='http://127.0.0.1:8000/media' CMS_DOCS='multiple' npm-run-all -p watch-css start-js",
     "start-staging": "./scripts/serve-local.sh -S",
     "start-prod": "./scripts/serve-local.sh -P",

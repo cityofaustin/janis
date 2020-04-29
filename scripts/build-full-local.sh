@@ -7,8 +7,8 @@
 # - export CMS_MEDIA='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/media'
 
 # Or,  maybe you want to use staging or production media
-# - Staging Media: `https://joplin-austin-gov-static.s3.amazonaws.com/staging/media`
-# - Production Media: `https://joplin-austin-gov-static.s3.amazonaws.com/production/media`
+# - Staging Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media`
+# - Production Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/production/media`
 
 export NODE_PATH='./src'
 
