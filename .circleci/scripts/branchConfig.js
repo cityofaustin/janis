@@ -35,10 +35,10 @@ const branchOverrides = {
   },
   '4340-official-documents': {
     joplin_appname: 'joplin-pr-4340-official-docume'
-  },
-  'search': {
-    joplin_appname: 'joplin-pr-import-search'
   }
+  // 'search': {
+  //   joplin_appname: 'joplin-pr-import-search'
+  // }
 };
 
 module.exports = {

@@ -4,75 +4,41 @@ import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
+import { searchWorker } from 'js/helpers/searchWorker'
 import { buildPages, buildPagination } from 'js/helpers/pagination.js'
-
-// ...Make this a js/helpers function
-// 🔥It'll be easy and worth it!
-const searchWorker = function(currentResults, searchString) {
-
-  const priortizeFirstChar = []
-
-  if (searchString) {
-
-    const filteredSearch = currentResults.filter( result => {
-
-      // Make search term and querys all lowercase
-      const ltitle = result.node.title.toLocaleLowerCase()
-      const lsearch = searchString+"".toLocaleLowerCase()
-
-      // 🚨Bob. better notes here... Prioritize alphabatize by
-      if (lsearch[0] === ltitle[0] && ltitle.includes(lsearch)) {
-        priortizeFirstChar.push(result)
-      } else {
-        return ltitle.includes(lsearch)
-      }
-
-    })
-
-    return priortizeFirstChar.concat(filteredSearch)
-
-  } else {
-    return currentResults
-  }
-  
-}
 
 const SearchPage = () => {
 
   const intl = useIntl();
   const { searchIndex } = useRouteData();
   const title = "Search" // ⚠️useIntl
-  let uri_dec = decodeURIComponent(window.location.search).split('?')[1];
-  // let [ searchString, setSearchString ] = useState(uri_dec)
-  let searchString = uri_dec
+  let searchedTerm = ""
+
+  // Check the url has for a search term to apply
+  if (window.location.hash.length > 1) {
+    searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
+  }
+
+  // User react hook to make our input dynamic
+  let [ searchString, setSearchString ] = useState(searchedTerm)
 
   // Don't show pages without Url
   const searchIndexWithUrl = searchIndex.edges.filter( page => page.node.janisUrls.length > 0)
   const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
 
+  // Use react hooks to allow dymanic updates without reload
+  // - Note: we'll still be able to send these queries to Google Analyticss programatically.
   let [ searchResults, setSearchResults ] = useState(filteredSearch)
-  // let searchResults = searchIndexWithUrl
-
-
-  // useEffect((x) => {
-  //   console.log('useEffect, x', x)
-  //   // searchWorker()
-  //   searchPageInputId.focus()
-  // })
 
   const searchButtonPressed = function(x) {
-    // window.location.search = searchString
-    window.location.search = searchPageInputId.value
+    window.location.hash = searchString.toLocaleLowerCase()
+    const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
+    setSearchResults(filteredSearch)
   }
 
   const searchKeyInput = function(event) {
-    console.log('click')
-    // setSearchString(event.target.value, 'ok') // 🔥x
-    // searchString = event.target.value
-    // const filtered = searchWorker(searchResults)
+    setSearchString(event.target.value)
   }
-
-  // searchWorker()
 
   return (
     <div>
@@ -85,7 +51,6 @@ const SearchPage = () => {
       <div>
         <input
           className="coa-searchPage_input"
-          id="searchPageInputId"
           placeholder="..."
           onChange={()=>searchKeyInput(event)}
         />
@@ -98,7 +63,13 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div> &nbsp; {searchResults && searchResults.length} Results </div>
+      <div> &nbsp; {searchResults && searchResults.length} Results
+        {searchedTerm && (
+          <span>
+            &nbsp;for <em>"{searchedTerm}"</em>
+          </span>
+        )}
+      </div>
 
       { searchResults && searchResults.map( (page, i) => (
         <div key={i} style={{paddingLeft: 20 }}>
@@ -114,7 +85,7 @@ const SearchPage = () => {
 
           <div>
             <span style={{fontSize: 16}}>  &nbsp; Url: &nbsp;</span>
-            <a style={{fontSize: 14}} href={page.node.janisUrls}>
+            <a style={{fontSize: 14}} href={page.node.janisUrls[0]}>
               {window.location.origin+page.node.janisUrls[0]}
             </a>
           </div>
