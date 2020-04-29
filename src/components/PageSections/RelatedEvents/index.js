@@ -13,6 +13,8 @@ const filterEvents = (events) => {
 }
 
 const RelatedEvents = ({events}) => {
+
+  console.log('E', events);
   const intl = useIntl();
   const threeEvents = filterEvents(events);
 

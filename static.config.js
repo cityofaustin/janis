@@ -29,6 +29,7 @@ import {
   getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
+  cleanEvents
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -208,6 +209,9 @@ const getServicePageData = async (
     relatedTo: relatedTo,
     offeredBy: getOfferedByFromDepartments(servicePageData.departments),
   };
+
+  servicePageData.events = cleanEvents(servicePageData.events);
+    console.log(servicePageData)
 
   if (pagesOfGuides && pagesOfGuides[servicePageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.

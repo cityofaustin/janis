@@ -1,8 +1,4 @@
-import { findKey } from 'lodash';
-import filesize from 'filesize';
-import axios from 'axios';
 import moment from 'moment-timezone';
-import Cookies from 'js-cookie';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
@@ -319,7 +315,7 @@ export const cleanLinks = (links, pageType) => {
                 topiccollection.slug
               }/${topic.slug}`;
 
-              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+              linkCopy.slug = link.slug ;
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
 
@@ -367,7 +363,6 @@ export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 
   return directors.edges.map(({ node: director }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, director);
 
     return cleaned;
@@ -425,14 +420,6 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
-};
-
-export const cleanTopicCollectionsForPreview = topicCollection => {
-  let cleanedTopicCollection = cleanLinks(
-    topicCollection,
-    'topiccollection',
-  );
-  return cleanedTopicCollection;
 };
 
 export const cleanNavigation = (navigation, lang) => {
@@ -508,3 +495,42 @@ export const formatFeesRange = fees => {
   }
   return '';
 };
+
+/*
+export const cleanRelatedServiceLinks = links => {
+  if (!links) return null;
+
+  return links.map(link => {
+    return {
+      url: `/${link.topic.theme.slug}/${link.topic.slug}/${link.slug}`,
+      text: link.title,
+    };
+  });
+};
+
+*/
+
+export const cleanEvents = events => {
+  console.log('clean data', events)
+  // takes an array of events and creates the event Url, formats the fees and picks first location
+  if (!events) return null;
+
+  return events.map(event => {
+    return {
+      title: event.title,
+      description: event.description,
+      canceled: event.canceled,
+      date: event.date,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      eventUrl: getEventPageUrl(event.slug, event.date),
+      feesRange: formatFeesRange(event.fees),
+      // until we have support for multiple locations, we're taking the first one
+      location: event.locations[0],
+      eventIsFree: event.eventIsFree,
+      registrationUrl: event.registrationUrl,
+    }
+  });
+};
+
+
