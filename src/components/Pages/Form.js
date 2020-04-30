@@ -44,7 +44,7 @@ function FormContainer({
     /* We're allowing 5 sec here to give slow connections time before alerting
     the user that the form may be having problems loading.*/
     if (!iframeLoaded) {
-      loader.endError();
+      loader.end();
     }
   }, 5000);
 

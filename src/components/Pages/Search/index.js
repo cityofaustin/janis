@@ -1,19 +1,12 @@
-import React, { useState, use  } from 'react'
+import React, { useState, useEffect  } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import { searchWorker } from 'js/helpers/searchWorker'
-
-// Pagination
 import { PaginationContainer } from 'components/PageSections/Pagination/paginationContainer.js'
-// import ChevronRight from 'components/SVGs/ChevronRight'
-// import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
-// import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
-// import { buildPages, buildPagination } from 'js/helpers/pagination.js'
-// import { PageNumber } from 'components/PageSections/Pagination'
-// Pagination End
+import { loader } from 'js/animations/loader';
 
 
 const SearchPage = () => {
@@ -33,16 +26,25 @@ const SearchPage = () => {
 
   // Don't show pages without Url
   const searchIndexWithUrl = searchIndex.edges.filter( page => page.node.janisUrls.length > 0)
+
   const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
 
   // Use react hooks to allow dymanic updates without reload
   // - Note: we'll still be able to send these queries to Google Analyticss programatically.
   let [ searchResults, setSearchResults ] = useState(filteredSearch)
 
-  const searchButtonPressed = function(x) {
+  const searchButtonPressed = function() {
     window.location.hash = searchString.toLocaleLowerCase()
-    const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
-    setSearchResults(filteredSearch)
+    loader.start({
+      contentId: 'coa-search_results',
+      loaderId: 'coa-search_loading_wheel',
+    });
+    setTimeout(function(){
+      const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
+      setSearchResults(filteredSearch)
+      loader.end();
+    },1000)
+
   }
 
   const searchKeyInput = function(event) {
@@ -62,6 +64,7 @@ const SearchPage = () => {
           className="coa-searchPage_input"
           placeholder="..."
           onChange={()=>searchKeyInput(event)}
+          value={searchString}
         />
 
         <button
@@ -72,47 +75,72 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div> &nbsp; {searchResults && searchResults.length} Results
-        {searchedTerm && (
-          <span>
-            &nbsp;for <em>"{searchedTerm}"</em>
-          </span>
-        )}
+      <div id="coa-search_loading_wheel" class="coa-loading_wheel"></div>
+
+      <div id="coa-search_results">
+
+        <div> &nbsp; {searchResults && searchResults.length} Results
+          {searchedTerm && (
+            <span>
+              &nbsp;for <em>"{searchedTerm}"</em>
+            </span>
+          )}
+        </div>
+
+        { searchResults && searchResults.map( (page, i) => (
+          <div key={i} style={{paddingLeft: 20 }}>
+            <hr />
+
+            Page Title : {page.node.title}
+
+            <div> &nbsp; &bull; &nbsp;
+              <span style={{fontSize: 16}}>
+                {page.node.pageType}
+              </span>
+            </div>
+
+            { page.node.janisbasepagewithtopics &&
+              <div> &nbsp; &bull; &nbsp;
+                <span style={{fontSize: 16}}>
+                  topic{page.node.janisbasepagewithtopics.length > 1 && "s"}: &nbsp;
+                  { page.node.janisbasepagewithtopics.join(', ') }
+                </span>
+              </div>
+            }
+
+            <div>
+              <span style={{fontSize: 16}}>  &nbsp; Url: &nbsp;</span>
+              <a style={{fontSize: 14}} href={page.node.janisUrls[0]}>
+                {window.location.origin+page.node.janisUrls[0]}
+              </a>
+            </div>
+
+            {page.node.summery &&
+              <div>
+                <p style={{fontSize: 14}}>
+                  {page.node.summery}
+                </p>
+              </div>
+            }
+
+          </div>
+        )) }
+
       </div>
 
-      { searchResults && searchResults.map( (page, i) => (
-        <div key={i} style={{paddingLeft: 20 }}>
-          <hr />
+    {/*
+      TODO: PAGINATION ( <Issue-here> )
+      NOTE: it would be too much to handle all in one with this component like we've
+      done on other Pages. Needs to be cleaned up as a component and checked for
+      regression with other pages.
+      👀SEE: paginationContainer.js
 
-          Page Title : {page.node.title}
+        <PaginationContainer
+          results={searchResults}
+        />
 
-          <div> &nbsp; &bull; &nbsp;
-            <span style={{fontSize: 16}}>
-              {page.node.pageType}
-            </span>
-          </div>
+    */}
 
-          <div>
-            <span style={{fontSize: 16}}>  &nbsp; Url: &nbsp;</span>
-            <a style={{fontSize: 14}} href={page.node.janisUrls[0]}>
-              {window.location.origin+page.node.janisUrls[0]}
-            </a>
-          </div>
-
-          {page.node.summery &&
-            <div>
-              <p style={{fontSize: 14}}>
-                {page.node.summery}
-              </p>
-            </div>
-          }
-
-        </div>
-      )) }
-
-      <PaginationContainer
-        results={searchResults}
-      ></PaginationContainer>
 
     </div>
   )

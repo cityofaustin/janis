@@ -3,11 +3,15 @@ const getSearchIndexQuery = `
     allPages(live: true) {
       edges {
         node {
-          id
           title
           janisUrls
           pageType
           summery
+          janisbasepagewithtopics {
+            topics {
+              title
+            }
+          }
         }
       }
     }

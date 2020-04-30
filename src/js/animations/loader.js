@@ -47,8 +47,10 @@ export const loader = {
     this.content.style.opacity = 0
     this.content.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
 
-    this.error.style.opacity = 0
-    this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    if (this.errorId) {
+      this.error.style.opacity = 0
+      this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    }
   },
 
 
@@ -57,6 +59,7 @@ export const loader = {
       this.error.style.display = "none"
     }
     this.loader.style.opacity = 0
+    console.log('ok')
     setTimeout(()=>{
       this.loader.style.display = "none"
       this.content.style.opacity = 1

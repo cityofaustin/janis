@@ -426,10 +426,25 @@ const getSearchIndex = async (client) => {
 
   const { allPages } = await client.request(
     getSearchIndexQuery,
-  );
+  )
 
-  return { searchIndex: allPages };
-};
+  // This cleans and clears up the Search Index for the search component.
+  let searchIndex = {}
+  searchIndex.edges = allPages.edges.map( page => {
+    if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics.topics) {
+      if (page.node.janisbasepagewithtopics.topics.length > 0) {
+        page.node.janisbasepagewithtopics = page.node.janisbasepagewithtopics.topics.map(t=>t.title)
+      } else {
+        page.node.janisbasepagewithtopics = false
+      }
+    }
+    return page
+  })
+
+  // return { searchIndex: allPages };
+  return { searchIndex }
+
+}
 
 
 const buildPageAtUrl = async (

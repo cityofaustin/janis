@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex, contentType }) => {
+
   const active = pageNumber === index ? " active" : ''
   let ellipsis = ""
   let pageIndex = index

@@ -1,4 +1,12 @@
-import React from 'react';
+{/*
+  TODO: PAGINATION ( <Issue-here> )
+  NOTE: it would be too much to handle all in one with this component like we've
+  done on other Pages. Needs to be cleaned up as a component and checked for
+  regression with other pages.
+  👀SEE: /Search/index.js
+
+import React, { useState, useEffect  } from 'react'
+import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -6,11 +14,27 @@ import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import { buildPages, buildPagination } from 'js/helpers/pagination.js'
 import { PageNumber } from 'components/PageSections/Pagination'
 
-export const PaginationContainer = (x) => {
+export const PaginationContainer = ({ results }) => {
 
-  const pages = 12
+  const pages = 92
   const pageNumber = 1
+  // const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
+  console.log("results :", results)
+
+  // const documentsPerPage = 10
+  const isMobile = useMobileQuery()
+  const maxPagesMobile = 5;
+  const maxPagesDesktop = 7;
+  const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
+  // const pages = buildPages(results, documentsPerPage)
+
+  // const [ pageNumber, setPageNumber ] = useState(getHash())
+  // const [ pageNumber, setPageNumber ] = 1 // HARD CODED
+  // let pageNumber = 0
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
+  const page = pages[pageNumber]
+
+  console.log("pages :", pages)
 
   const changePage = function(newPage) {
     if (newPage >= 0 && newPage <= pages.length - 1) {
@@ -27,7 +51,8 @@ export const PaginationContainer = (x) => {
   return (
     <div>
       <h1>...Pagiation Container Here...</h1>
-      {pages > 1 &&
+
+      {shownPages.length > 1 &&
         <div className="coa-OfficialDocumentPage_pagination-container">
 
           <div onClick={()=>changePage(pageNumber-1)} className="coa-OfficialDocumentPage_page previous">
@@ -54,3 +79,5 @@ export const PaginationContainer = (x) => {
 
   )
 }
+
+*/}
