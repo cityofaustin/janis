@@ -23,11 +23,26 @@
 }
 
 .coa-EventListPage__Entry--relatedPage {
+  margin-top: unset;
   max-width: 760px;
   border: 1px solid #DCDEE0;
   padding: 16px;
   @include media($coa-large-screen) {
   }
+}
+
+.coa-EventListPage__Entry--relatedPage:first-of-type {
+  border-radius: 4px 4px 0px 0px;
+}
+
+.coa-EventListPage__Entry--relatedPage:last-of-type {
+  border-radius: 0px 0px 4px 4px;
+}
+
+.coa-EventListPage__icon {
+  font-size: 32px;
+  margin-top: 37px;
+  color: #0049c7;
 }
 
 .coa-EventListPage__DateCal {

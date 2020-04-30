@@ -211,7 +211,6 @@ const getServicePageData = async (
   };
 
   servicePageData.events = cleanEvents(servicePageData.events);
-    console.log(servicePageData)
 
   if (pagesOfGuides && pagesOfGuides[servicePageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.

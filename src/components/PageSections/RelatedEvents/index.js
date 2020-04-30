@@ -20,6 +20,7 @@ const RelatedEvents = ({events}) => {
     (threeEvents && !!threeEvents.length) &&
     <div className="coa-RelatedEvents__container">
       <div className="coa-RelatedEvents__heading">
+        <i className="material-icons coa-RelatedEvents__icon">event</i> 
         {intl.formatMessage(i18n.upcoming)}
       </div>
 

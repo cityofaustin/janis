@@ -1,5 +1,13 @@
 .coa-RelatedEvents__container {
-  padding: $coa-spacing-large $coa-spacing-medium;
+  margin-width: $coa-spacing-large $coa-spacing-medium;
+  padding-top: 20px;
+  border-top: 1px solid #DCDEE0;
+}
+
+.coa-RelatedEvents__icon {
+  font-size: 32px;
+  margin-right: 16px;
+  color: #0049c7;
 }
 
 .coa-RelatedEvents__heading {

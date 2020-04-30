@@ -101,6 +101,7 @@ const EventListEntry = ({ event, homepage, relatedPage }) => {
     >
       <EventDateCalendar date={event.date} />
       <EventDateListDetails event={event} homepage={homepage} relatedPage={relatedPage}/>
+      {relatedPage && <i className="material-icons coa-EventListPage__icon">arrow_forward</i>}
     </Link>
   )
 }
