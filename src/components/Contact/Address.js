@@ -9,7 +9,7 @@ import { addressPropTypes } from './proptypes';
 const Address = ({ location }) => {
   const intl = useIntl();
   const encodedLocation = getEncodedLocation(location);
-  
+
   return (
     <div className="coa-ContactItem coa-ContactAddress">
       <i className="material-icons">place</i>
@@ -25,7 +25,6 @@ const Address = ({ location }) => {
         >
           {intl.formatMessage(i18n.getDirections)}
         </a>
-
       </div>
     </div>
   )
