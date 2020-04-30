@@ -17,7 +17,7 @@ const Address = ({ location }) => {
         <span className="coa-ContactAddressTitle">{location.title}</span>
         <span>{location.street}</span>
         <span>
-          {location.city}{ (location.city && location.state) && ", "}{location.state} {location.zip}
+          {location.city}, {location.state} {location.zip}
         </span>
         <a
           href={`//www.google.com/maps/search/?api=1&query=${encodedLocation}`}
@@ -25,6 +25,7 @@ const Address = ({ location }) => {
         >
           {intl.formatMessage(i18n.getDirections)}
         </a>
+
       </div>
     </div>
   )
