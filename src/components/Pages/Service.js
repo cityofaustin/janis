@@ -103,7 +103,7 @@ const Service = ({ service, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contact && (
+              {!!contact && !!contact.phoneNumbers && (
                 <ContactDetails contact={contact} />
               )}
             </div>
@@ -111,7 +111,7 @@ const Service = ({ service, intl }) => {
         </div>
         <div className="coa-Page__contacts-mobile">
           <div className="col-xs-12 col-md-10">
-            {!!contact && (
+            {!!contact && !!contact.phoneNumbers && (
               <ContactDetails contact={contact} />
             )}
           </div>
