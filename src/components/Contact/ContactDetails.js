@@ -49,9 +49,8 @@ const ContactDetailsEntry = ({
       <PhonesList phoneNumbers={phoneNumbers} />
     )}
     {email && <Email email={email} />}
-    {/* Removing incomplete location details 
-      {location && <Address location={location} />}
-    */}
+    {/* Only if a location has a city should we pass the location info comopoonent in. */}
+    { (location && location.city) && <Address location={location} />}
     {hours && !!hours.length && <Hours hours={hours} />}
     {/*Each social media link is it's own contact item with it's own icon,
     so it makes sense to have the map here*/}
