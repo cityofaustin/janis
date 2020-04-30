@@ -34,6 +34,8 @@ const InformationPage = ({ informationPage, intl }) => {
     // it gets previews working with hooks
   } = informationPage ? { informationPage } : useRouteData();
 
+  console.log("contact :", contact)
+
   return (
     <div>
       <Head>
