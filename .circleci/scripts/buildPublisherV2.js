@@ -31,7 +31,7 @@ switch(branch) {
 
     payload = {
       "janis_branch": "production",
-      "env_vars": {REACT_STATIC_PREFETCH_RATE: 0},
+      "env_vars": {},
       "joplin_appname": "joplin",
       "build_type": "rebuild",
     }
