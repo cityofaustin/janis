@@ -30,7 +30,7 @@ switch(branch) {
     publisherUrl = process.env.CI_COA_PUBLISHER_V2_URL_PROD
 
     payload = {
-      "janis_branch": "master",
+      "janis_branch": "production",
       "env_vars": {REACT_STATIC_PREFETCH_RATE: 0},
       "joplin_appname": "joplin",
       "build_type": "rebuild",
