@@ -32,11 +32,10 @@ const Home = ({ intl }) => {
       <TileGroup
         title={intl.formatMessage(i18n3.checkOutServices)}
         tiles={topServices}
+        allowEmptyTiles
       />
 
-      <EventsHomePage
-        events={events}
-      />
+      <EventsHomePage events={events} />
 
       {/* We are leaving it here because we might need it again.*/}
       {/*<PageNotificationBanner>*/}
