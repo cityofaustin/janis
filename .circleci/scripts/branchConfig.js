@@ -8,7 +8,7 @@
 
   Example:
   "2997-dept-links": {
-    CMS_API: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
+    joplin_appname: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
   }
   "2997-dept-links" is the name of the janis branch.
   "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql" is the address of the deployed joplin instance you want to query data from.
@@ -17,25 +17,24 @@
 
 // Don't overwrite defaultValues.
 const defaultValues = {
-  DEPLOYMENT_MODE: 'REVIEW', // branches on netlify are 'REVIEW'
-  CMS_API: 'https://joplin-staging.herokuapp.com/api/graphql',
-  CMS_MEDIA: 'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media',
-  CMS_DOCS: 'multiple',
+  joplin_appname: 'joplin-staging',
+  REACT_STATIC_PREFETCH_RATE: '0', // Don't do prefetching by default
 };
 
 // Add branch-specifc values here
 const branchOverrides = {
-  '1650-react-static-7': {
-    CMS_API: 'https://joplin-pr-brians-janis-testing.herokuapp.com/api/graphql',
+  '3690-incremental': {
+    joplin_appname: 'joplin-pr-3690-incremental',
+    REACT_STATIC_PREFETCH_RATE: '10',
+},
+  '4325-site-struct': {
+    joplin_appname: 'joplin-pr-import-everything'
   },
-  "3202-form": {
-    CMS_API: "https://joplin-pr-3202-form.herokuapp.com/api/graphql"
+  '4289-page-guide': {
+    joplin_appname: 'joplin-pr-v3'
   },
-  '3244-guide-icon-tiles': {
-    CMS_API: 'https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
-  },
-  '3899-broken-build': {
-    CMS_API: 'https://joplin-pr-3899-broken-build.herokuapp.com/api/graphql'
+  '4340-official-documents': {
+    joplin_appname: 'joplin-pr-4340-official-docume'
   }
 };
 

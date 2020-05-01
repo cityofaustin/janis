@@ -1,21 +1,6 @@
-const getTopicCollectionPageQuery = `
-  query getTopicCollectionPage($id: ID) {
-    allTopicCollections(id: $id) {
-      edges {
-        node {
-          id
-          slug
-          title
-          description
-          theme {
-            id
-            text
-            slug
-          }
-        }
-      }
-    }
-    topicCollectionTopics(topicCollection: $id) {
+const getTopicPageAdditionalData = `
+  query getTopicPageAdditionalData($tc_id: ID, $topic_id: ID) {
+    topicCollectionTopics(topicCollection: $tc_id) {
       edges {
         node {
           page {
@@ -31,6 +16,7 @@ const getTopicCollectionPageQuery = `
                     title
                     slug
                     pageType
+                    id
                   }
                 }
               }
@@ -39,9 +25,22 @@ const getTopicCollectionPageQuery = `
         }
       }
     }
+    basePageTopics(topic: $topic_id) {
+      edges {
+        node {
+          page {
+            id
+            title
+            slug
+            live
+          }
+          pageId
+        }
+      }
+    }
   }
 `;
 
-export default getTopicCollectionPageQuery;
+export default getTopicPageAdditionalData;
 
     

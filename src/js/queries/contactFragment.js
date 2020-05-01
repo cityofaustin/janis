@@ -1,7 +1,7 @@
 const contactFragment = `
   fragment contactInfo on ContactNode {
     name
-    phoneNumber {
+    phoneNumbers {
       edges {
         node {
           id

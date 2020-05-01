@@ -14,14 +14,8 @@ const servicePageFragment = `
     dynamicContent
     additionalContent
     shortDescription
-    contacts {
-      edges {
-        node {
-          contact {
-            ...contactInfo
-          }
-        }
-      }
+    contact {
+      ...contactInfo
     }
   }
   ${conciseContactFragment}

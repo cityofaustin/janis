@@ -17,7 +17,7 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
       topics,
       theme,
       department,
-      officialDocuments,
+      documents,
       coaGlobal,
       contextualNavData,
     },
@@ -40,7 +40,7 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
           {title}
         </PageHeader>
         <OfficialDocumentPage
-          officialDocuments={officialDocuments}
+          officialDocuments={documents}
           intl={intl}
         />
       </div>

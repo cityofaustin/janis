@@ -61,41 +61,46 @@ export const formatHours = ({ start1, end1, start2, end2 }) => {
   )}–${formatTime(end2)}`;
 };
 
-export const cleanContacts = contacts => {
-  if (!contacts || !contacts.edges) return null;
-
+export const cleanContact = contact => {
   const dateSeed = 'Oct 18 1982 00:00:00 GMT-0500 (CDT)';
 
-  const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
+  // const getWeekday = day => WEEKDAY_MAP[day.toUpperCase()];
 
-  return contacts.edges.map(({ node: contact }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
-    let cleaned = Object.assign({}, contact.contact);
+  let cleaned = Object.assign({}, contact);
 
-    if (cleaned.locationPage) {
-      cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
-      cleaned.location = {
-        title: cleaned.locationPage.title,
-        street: cleaned.locationPage.physicalUnit
-          ? `${cleaned.locationPage.physicalStreet} ${
-              cleaned.locationPage.physicalUnit
-            }`
-          : cleaned.locationPage.physicalStreet,
-        city: cleaned.locationPage.physicalCity,
-        state: cleaned.locationPage.physicalState,
-        zip: cleaned.locationPage.physicalZip,
-      };
+  if (cleaned.locationPage) {
+    cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
+    cleaned.location = {
+      title: cleaned.locationPage.title,
+      street: cleaned.locationPage.physicalUnit
+        ? `${cleaned.locationPage.physicalStreet} ${
+            cleaned.locationPage.physicalUnit
+          }`
+        : cleaned.locationPage.physicalStreet,
+      city: cleaned.locationPage.physicalCity,
+      state: cleaned.locationPage.physicalState,
+      zip: cleaned.locationPage.physicalZip,
+    };
 
-      cleaned.locationPageSlug = cleaned.locationPage.slug;
-    }
+    cleaned.locationPageSlug = cleaned.locationPage.slug;
+  }
 
-    return cleaned;
-  });
+  // we do !! operations on these to see if we should render the contact info blocks
+  // so we can't just have it as an empty object ( !!{} == true ) so let's do a quick
+  // check and set it to null if it's an empty object
+  // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
+  if (Object.keys(cleaned).length === 0 && cleaned.constructor === Object) {
+    cleaned = null;
+  }
+
+  return cleaned;
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
-  // quick fix for urls until we get localized urls working in joplin
-  return `/${janisUrl.split('/en/')[1]}`;
+  if (!!janisUrl.length) {
+    return janisUrl[0];
+  }
+  return '/';
 };
 
 /*
@@ -197,20 +202,19 @@ export const cleanLocationPage = locationPage => {
       title: edge.node.relatedService.title,
       exceptions: edge.node.relatedService.hoursExceptions,
       hoursSameAsLocation: edge.node.hoursSameAsLocation,
+      //janisUrl is an array of urls, checks to see if there is length and if so takes the 1st one
       url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
       phones:
-        edge.node.relatedService.contacts.edges.length &&
-        edge.node.relatedService.contacts.edges[0].node.contact.phoneNumber.edges.map(
-          phoneEdge => {
-            return {
-              // why do we call phoneDescription label here,
-              label: phoneEdge.node.phoneDescription,
-              number: parsePhoneNumberFromString(
-                phoneEdge.node.phoneNumber,
-              ).formatNational(),
-            };
-          },
-        ),
+        edge.node.relatedService.contact &&
+        edge.node.relatedService.contact.phoneNumbers &&
+        edge.node.relatedService.contact.phoneNumbers.edges.map(phoneEdge => {
+          return {
+            label: phoneEdge.node.phoneDescription,
+            number: parsePhoneNumberFromString(
+              phoneEdge.node.phoneNumber,
+            ).formatNational(),
+          };
+        }),
     };
   });
 
@@ -233,7 +237,7 @@ export const cleanLocationPage = locationPage => {
 
   locationPage.image = locationPage.physicalLocationPhoto;
 
-  return locationPage;
+  return { locationPage: locationPage };
 };
 
 /**
@@ -345,8 +349,8 @@ export const cleanLinks = (links, pageType) => {
         let linkCopy = JSON.parse(JSON.stringify(link));
 
         pathPrefix = `/${department.slug}`;
-        linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
-        linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
+        linkCopy.slug = link.slug;
+        linkCopy.url = `${pathPrefix}/${link.slug}`;
         linkCopy.text = link.title;
 
         linkCopy.department = department;
@@ -359,91 +363,10 @@ export const cleanLinks = (links, pageType) => {
   return cleanedLinks;
 };
 
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanServicesForPreview = allServices => {
-  if (!allServices || !allServices.edges) return null;
-  const services = allServices.edges.map(e => e.node);
-  let service = services[0];
+export const cleanInformationForPreview = informationPage => {
+  informationPage.contact = cleanContact(informationPage.contact);
 
-  service.contextualNavData = getContextualNavForPreview(service);
-
-  service.text = service.title;
-  service.contacts = cleanContacts(service.contacts);
-
-  return service;
-};
-
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanInformationForPreview = allInformationPages => {
-  if (!allInformationPages || !allInformationPages.edges) return null;
-  const infos = allInformationPages.edges.map(e => e.node);
-  let info = infos[0];
-
-  info.contextualNavData = getContextualNavForPreview(info);
-  info.theme = {};
-
-  info.text = info.title;
-  info.contacts = cleanContacts(info.contacts);
-
-  return info;
-};
-
-export const cleanGuideForPreview = allGuidePages => {
-  if (!allGuidePages || !allGuidePages.edges) return null;
-  const guides = allGuidePages.edges.map(e => e.node);
-  let guide = guides[0];
-
-  guide.contextualNavData = getContextualNavForPreview(guide);
-  const contacts = cleanContacts(guide.contacts);
-  if (contacts && contacts.length) {
-    guide.contact = contacts[0];
-  }
-
-  guide.theme = {};
-
-  return guide;
-};
-
-const getContextualNavForPreview = page => {
-  let contextualNavData = {
-    relatedTo: [],
-    offeredBy: [],
-  };
-
-  // get offered by
-  if (page.departments && page.departments.length) {
-    contextualNavData.offeredBy = page.departments.map(department => ({
-      id: department.id,
-      title: department.title,
-      url: `/${department.slug}/`,
-    }));
-  }
-
-  // If we don't have a topic, return a fake
-  // topic describing that
-  if (!page.topics || !page.topics.edges || !page.topics.edges.length) {
-    contextualNavData.parent = {
-      url: 'no-topics',
-      title: 'No topics selected',
-      topiccollection: {
-        topics: [],
-      },
-    };
-  } else {
-    // If we have topics,
-    // get info from the first one
-    contextualNavData.parent = {
-      url: page.topics.edges[0].node.topic.slug,
-      title: page.topics.edges[0].node.topic.title,
-      topiccollection: {
-        topics: [],
-      },
-    };
-  }
-
-  return contextualNavData;
+  return informationPage;
 };
 
 export const cleanDepartmentDirectors = directors => {
@@ -472,43 +395,37 @@ export const cleanDepartmentPageLinks = (
   return cleanedLinks;
 };
 
-export const cleanDepartmentsForPreview = (allDepartments, langCode) => {
-  if (!allDepartments || !allDepartments.edges) return null;
+export const cleanDepartmentForPreview = (department, langCode) => {
+  if (!department) return null;
 
-  return allDepartments.edges.map(({ node: department }) => {
-    department.url = `/departments/${department.slug}`;
-    department.text = department.title;
-    department.contacts = cleanContacts(department.contacts);
-    department.directors = cleanDepartmentDirectors(
-      department.departmentDirectors,
-    );
-    department.topServices = cleanDepartmentPageLinks(
-      department.topPages,
-      department.slug,
-    );
-    department.relatedLinks = cleanDepartmentPageLinks(
-      department.relatedPages,
-      department.slug,
-    );
+  department.url = `/departments/${department.slug}`;
+  department.text = department.title;
+  department.contact = cleanContact(department.contact);
+  department.directors = cleanDepartmentDirectors(
+    department.departmentDirectors,
+  );
+  department.topServices = cleanDepartmentPageLinks(
+    department.topPages,
+    department.slug,
+  );
+  department.relatedLinks = cleanDepartmentPageLinks(
+    department.relatedPages,
+    department.slug,
+  );
 
-    return department;
-  });
+  return department;
 };
 
-export const cleanTopicsForPreview = allTopics => {
-  if (!allTopics || !allTopics.edges) return null;
+export const cleanTopicsForPreview = topic => {
+  if (topic.topPages.edges && topic.topPages.edges.length) {
+    topic.topLinks = topic.topPages.edges.map(edge => ({
+      pageType: edge.node.pageType,
+      title: edge.node.title,
+      url: `${topic.contextualNavData.parent.url}${edge.node.slug}/`,
+    }));
+  }
 
-  const cleanedTopics = allTopics.edges.map(edge => ({
-    text: edge.node.title,
-    contextualNavData: {
-      relatedTo: [],
-      offeredBy: [],
-      parent: { title: 'Parent', url: '#' },
-    },
-    ...edge.node,
-  }));
-
-  return cleanedTopics;
+  return topic;
 };
 
 export const cleanTopics = allTopics => {
@@ -518,15 +435,9 @@ export const cleanTopics = allTopics => {
   return cleanedTopics;
 };
 
-export const cleanTopicCollectionsForPreview = allTopicCollections => {
-  if (!allTopicCollections || !allTopicCollections.edges) return null;
-
-  let cleanedTopicCollections = cleanLinks(
-    allTopicCollections,
-    'topiccollection',
-  );
-
-  return cleanedTopicCollections;
+export const cleanTopicCollectionsForPreview = topicCollection => {
+  let cleanedTopicCollection = cleanLinks(topicCollection, 'topiccollection');
+  return cleanedTopicCollection;
 };
 
 export const cleanNavigation = (navigation, lang) => {
@@ -560,88 +471,6 @@ export const cleanNavigation = (navigation, lang) => {
   });
 
   return cleanedNavigation;
-};
-
-export const clean311 = threeoneone => {
-  const { all311 } = threeoneone;
-
-  if (!all311 || !all311.edges) return null;
-
-  return all311.edges.map(({ node: link }) => {
-    const { title, url } = link;
-    return {
-      url: url,
-      text: title,
-    };
-  });
-};
-
-const checkUrl = async url => {
-  return await axios({
-    method: 'HEAD',
-    url: url,
-  })
-    .then(res => url)
-    .catch(error => null);
-};
-
-const getWorkingDocumentLink = async filename => {
-  // Single source mode, example use case:
-  // If we're on PROD, we should only get prod documents
-  if (process.env.CMS_DOCS !== 'multiple') {
-    return `${process.env.CMS_DOCS}/${filename}`;
-  }
-
-  // Multi source mode, let's do some url checking and get something
-  // that works. example use case:
-  // If we're on STAGING, we want docs imported from PROD to work,
-  // as well as any new docs we added when testing on staging
-  if (process.env.CMS_DOCS === 'multiple') {
-    const docUrls = [
-      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
-    ];
-
-    for (const url of docUrls) {
-      const validUrl = await checkUrl(`${url}/${filename}`);
-      if (validUrl !== null) {
-        return validUrl;
-      }
-    }
-  }
-};
-
-export const cleanOfficialDocumentPagesForPreview = allOfficialDocumentPages => {
-  if (!allOfficialDocumentPages || !allOfficialDocumentPages.edges) return null;
-
-  return allOfficialDocumentPages.edges.map(
-    ({ node: officialDocumentPage }) => {
-      officialDocumentPage.url = `/official_document/${
-        officialDocumentPage.slug
-      }`;
-
-      officialDocumentPage.contextualNavData = getContextualNavForPreview(
-        officialDocumentPage,
-      );
-
-      officialDocumentPage.theme = {};
-      return officialDocumentPage;
-    },
-  );
-};
-
-// Let's just do this for now, we'll probably need to make some changes
-// when we move to rs7 anyways
-export const cleanFormContainersForPreview = allFormContainers => {
-  if (!allFormContainers || !allFormContainers.edges) return null;
-  const forms = allFormContainers.edges.map(e => e.node);
-  let form = forms[0];
-
-  form.contextualNavData = getContextualNavForPreview(form);
-  form.theme = {};
-  form.contacts = cleanContacts(form.contacts);
-
-  return form;
 };
 
 export const getOfferedByFromDepartments = departments => {

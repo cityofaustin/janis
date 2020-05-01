@@ -6,7 +6,6 @@ import path from 'path';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
-import PageBreadcrumbs from 'components/PageBreadcrumbs';
 import PageHeader from 'components/PageHeader';
 import Steps from 'components/Steps';
 import HtmlFromRichText from 'components/HtmlFromRichText';
@@ -23,15 +22,10 @@ const InformationPage = ({ informationPage, intl }) => {
     informationPage: {
       title,
       slug,
-      topic,
-      topics,
-      theme,
-      department,
-      toplink,
       description,
       additionalContent,
       image,
-      contacts,
+      contact,
       coaGlobal,
       contextualNavData,
       pageIsPartOf,
@@ -77,9 +71,7 @@ const InformationPage = ({ informationPage, intl }) => {
                     <HtmlFromRichText title={' '} content={additionalContent} />
                   )}
                   <div className="coa-Page__contacts-mobile">
-                    {!!contacts && !!contacts.length && (
-                      <ContactDetails contacts={contacts} />
-                    )}
+                    {!!contact && <ContactDetails contact={contact} />}
                   </div>
                 </div>
               </div>
@@ -87,9 +79,7 @@ const InformationPage = ({ informationPage, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contacts && !!contacts.length && (
-                <ContactDetails contacts={contacts} />
-              )}
+              {!!contact && <ContactDetails contact={contact} />}
             </div>
           </div>
         </div>

@@ -1,20 +1,5 @@
-const getTopicCollectionPageQuery = `
-  query getTopicCollectionPage($id: ID) {
-    allTopicCollections(id: $id) {
-      edges {
-        node {
-          id
-          slug
-          title
-          description
-          theme {
-            id
-            text
-            slug
-          }
-        }
-      }
-    }
+const getTopicCollectionTopicsQuery = `
+  query getTopicCollectionTopics($id: ID) {
     topicCollectionTopics(topicCollection: $id) {
       edges {
         node {
@@ -42,6 +27,6 @@ const getTopicCollectionPageQuery = `
   }
 `;
 
-export default getTopicCollectionPageQuery;
+export default getTopicCollectionTopicsQuery;
 
     

@@ -6,7 +6,7 @@ import { misc as i18n } from 'js/i18n/definitions';
 const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
   <div className="coa-RelatedToMobile">
     <div className="wrapper container-fluid">
-      {!!relatedTo.length && (
+      {!!relatedTo && !!relatedTo.length && (
         <div className="col-xs-12">
           <h2 className="coa-RelatedToMobile__title">
             {intl.formatMessage(i18n.relatedTo)}
@@ -25,7 +25,7 @@ const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
           </ul>
         </div>
       )}
-      {!!offeredBy.length && (
+      {!!offeredBy && !!offeredBy.length && (
         <div className="col-xs-12">
           <h2
             className={

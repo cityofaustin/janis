@@ -1,7 +1,8 @@
-import phoneFragment from './phoneFragment';
+// fragment for the allPagesQuery. 
+// the other guide page fragment is for preview
 
-const guidePageFragment = `
-  fragment guidePageInfo on GuidePageNode {
+const guidePageLiveFragment = `
+  fragment guidePageLiveInfo on GuidePageNode {
     id
     title
     description
@@ -9,7 +10,15 @@ const guidePageFragment = `
     contact {
       name
       email
-      ${phoneFragment}
+      phoneNumbers {
+        edges {
+          node {
+            id
+            phoneDescription
+            phoneNumber
+          }
+        }
+      }
       socialMedia
     }
     image {
@@ -32,26 +41,16 @@ const guidePageFragment = `
           additionalContent
           steps
           slug
-          departments {
-            id
-            title
-            slug
-          }
         }
         informationPage {
           title
           description
           additionalContent
           slug
-          departments {
-            id
-            title
-            slug
-          }
         }
       }
     }
   }
 `;
 
-export default guidePageFragment;
+export default guidePageLiveFragment;

@@ -2,6 +2,11 @@ const locationPageFragment = `
   fragment locationPageInfo on LocationPageNode {
     id
     title
+    departments {
+      id
+      title
+      slug
+    }
     physicalStreet
     physicalUnit
     physicalCity
@@ -58,19 +63,13 @@ const locationPageFragment = `
             id
             title
             janisUrl
-            contacts {
-              edges {
-                node {
-                  contact {
-                    phoneNumber {
-                      edges {
-                        node {
-                          id
-                          phoneNumber
-                          phoneDescription
-                        }
-                      }
-                    }
+            contact {
+              phoneNumbers {
+                edges {
+                  node {
+                    id
+                    phoneNumber
+                    phoneDescription
                   }
                 }
               }
