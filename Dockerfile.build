@@ -29,7 +29,7 @@ ARG CMS_MEDIA
 ENV CMS_MEDIA=${CMS_MEDIA:-https://joplin-austin-gov.s3.amazonaws.com/media}
 
 ARG CMS_DOCS
-ENV CMS_DOCS=${CMS_DOCS:-https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents}
+ENV CMS_DOCS=${CMS_DOCS:-https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents}
 
 COPY public /app/public
 COPY src /app/src

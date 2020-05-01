@@ -7,13 +7,13 @@
 # - export CMS_MEDIA='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/media'
 
 # Or,  maybe you want to use staging or production media
-# - Staging Media: `https://joplin-austin-gov-static.s3.amazonaws.com/staging/media`
-# - Production Media: `https://joplin-austin-gov-static.s3.amazonaws.com/production/media`
+# - Staging Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media`
+# - Production Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/production/media`
 
 export NODE_PATH='./src'
 
-export CMS_API='https://joplin-pr-import-everything.herokuapp.com/api/graphql'
-export CMS_MEDIA='https://joplin-austin-gov-static.s3.amazonaws.com/staging/media'
+export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+export CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media'
 
 yarn npm-run-all build-css build-js
 
