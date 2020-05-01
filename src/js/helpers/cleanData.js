@@ -83,6 +83,7 @@ export const cleanContact = contact => {
         zip: cleaned.locationPage.physicalZip,
       };
     }
+    
     cleaned.locationPageSlug = cleaned.locationPage.slug;
   }
 
