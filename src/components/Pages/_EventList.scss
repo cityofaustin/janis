@@ -45,10 +45,16 @@
   @include media($coa-large-screen) {
   }
   div {
-    color: #fff
+    color: #fff;
   }
   a {
-    color: #fff
+    color: #fff;
+  }
+  .coa-EventListPage__icon {
+    color: #fff;
+  }
+  .coa-EventListPage__DateCal {
+    color: red;
   }
 }
 
