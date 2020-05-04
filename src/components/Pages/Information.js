@@ -71,9 +71,7 @@ const InformationPage = ({ informationPage, intl }) => {
                     <HtmlFromRichText title={' '} content={additionalContent} />
                   )}
                   <div className="coa-Page__contacts-mobile">
-                    {!!contact && (
-                      <ContactDetails contact={contact} />
-                    )}
+                    {!!contact && <ContactDetails contact={contact} />}
                   </div>
                 </div>
               </div>
@@ -81,9 +79,7 @@ const InformationPage = ({ informationPage, intl }) => {
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
-              {!!contact && (
-                <ContactDetails contact={contact} />
-              )}
+              {!!contact && <ContactDetails contact={contact} />}
             </div>
           </div>
         </div>

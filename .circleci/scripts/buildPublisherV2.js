@@ -12,7 +12,7 @@ const env_vars = Object.assign(
 const joplin_appname = env_vars.joplin_appname
 delete env_vars.joplin_appname
 
-const payload = {
+let payload = {
   "janis_branch": branch,
   "env_vars": env_vars,
   "joplin_appname": joplin_appname,
@@ -28,6 +28,13 @@ switch(branch) {
   case "production":
     apiKey = process.env.COA_PUBLISHER_V2_API_KEY_PROD
     publisherUrl = process.env.CI_COA_PUBLISHER_V2_URL_PROD
+
+    payload = {
+      "janis_branch": "production",
+      "env_vars": {},
+      "joplin_appname": "joplin",
+      "build_type": "rebuild",
+    }
     break;
   default:
     apiKey = process.env.COA_PUBLISHER_V2_API_KEY_PR

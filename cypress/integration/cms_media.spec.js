@@ -8,6 +8,6 @@ describe('Testing that document/pdf urls contain a valid path', () => {
       .eq(3)
       .find('a')
       .should('have.attr', 'href')
-      .and('match', /joplin-austin-gov-static.s3.amazonaws.com/)
+      .and('match', /joplin3-austin-gov-static.s3.amazonaws.com/)
 	})
 })

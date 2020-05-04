@@ -303,7 +303,7 @@ const checkUrl = async url => {
 
 const getWorkingDocumentLink = async filename => {
   // is this still needed? with brians new work?
-  /* 
+  /*
     depending on environment, returns a valid url from either staging or production
     used in getOfficialDocumentPageData
   */
@@ -319,8 +319,8 @@ const getWorkingDocumentLink = async filename => {
   // as well as any new docs we added when testing on staging
   if (process.env.CMS_DOCS === 'multiple') {
     const docUrls = [
-      'https://joplin-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin-austin-gov-static.s3.amazonaws.com/staging/media/documents',
+      'https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents',
+      'https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media/documents',
     ];
 
     for (const url of docUrls) {
@@ -429,7 +429,7 @@ const buildPageAtUrl = async (
   client,
   pagesOfGuides,
 ) => {
-  /* 
+  /*
   buildPageAtUrl takes a page information object and the language client
   returns object with page url, template and data from appropriate query
   */
@@ -651,7 +651,7 @@ const getPagesOfGuidesData = async client => {
 
 const makeAllPages = async (langCode, incrementalPageId) => {
   /*
-    makeAllPages returns react-static data object with homepage 
+    makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
   const path = `/${!!langCode ? langCode : ''}`;

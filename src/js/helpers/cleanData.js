@@ -81,11 +81,19 @@ export const cleanContact = contact => {
     cleaned.locationPageSlug = cleaned.locationPage.slug;
   }
 
+  // we do !! operations on these to see if we should render the contact info blocks
+  // so we can't just have it as an empty object ( !!{} == true ) so let's do a quick
+  // check and set it to null if it's an empty object
+  // https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
+  if (Object.keys(cleaned).length === 0 && cleaned.constructor === Object) {
+    cleaned = null;
+  }
+
   return cleaned;
 };
 
 export const cleanLocationPageJanisUrl = janisUrl => {
-  if(!!janisUrl.length){
+  if (!!janisUrl.length) {
     return janisUrl[0];
   }
   return '/';
@@ -195,16 +203,14 @@ export const cleanLocationPage = locationPage => {
       phones:
         edge.node.relatedService.contact &&
         edge.node.relatedService.contact.phoneNumbers &&
-        edge.node.relatedService.contact.phoneNumbers.edges.map(
-          phoneEdge => {
-            return {
-              label: phoneEdge.node.phoneDescription,
-              number: parsePhoneNumberFromString(
-                phoneEdge.node.phoneNumber,
-              ).formatNational(),
-            };
-          },
-        ),
+        edge.node.relatedService.contact.phoneNumbers.edges.map(phoneEdge => {
+          return {
+            label: phoneEdge.node.phoneDescription,
+            number: parsePhoneNumberFromString(
+              phoneEdge.node.phoneNumber,
+            ).formatNational(),
+          };
+        }),
     };
   });
 
@@ -390,7 +396,9 @@ export const cleanDepartmentForPreview = (department, langCode) => {
   department.url = `/departments/${department.slug}`;
   department.text = department.title;
   department.contact = cleanContact(department.contact);
-  department.directors = cleanDepartmentDirectors(department.departmentDirectors);
+  department.directors = cleanDepartmentDirectors(
+    department.departmentDirectors,
+  );
   department.topServices = cleanDepartmentPageLinks(
     department.topPages,
     department.slug,
@@ -420,6 +428,11 @@ export const cleanTopics = allTopics => {
 
   let cleanedTopics = cleanLinks(allTopics, 'topic');
   return cleanedTopics;
+};
+
+export const cleanTopicCollectionsForPreview = topicCollection => {
+  let cleanedTopicCollection = cleanLinks(topicCollection, 'topiccollection');
+  return cleanedTopicCollection;
 };
 
 export const cleanNavigation = (navigation, lang) => {
@@ -454,7 +467,6 @@ export const cleanNavigation = (navigation, lang) => {
 
   return cleanedNavigation;
 };
-
 
 export const getOfferedByFromDepartments = departments => {
   let offeredBy;
