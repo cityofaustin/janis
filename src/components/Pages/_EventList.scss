@@ -53,8 +53,12 @@
   .coa-EventListPage__icon {
     color: #fff;
   }
-  .coa-EventListPage__DateCal {
-    color: red;
+  .coa-EventListPage__DateCal-month {
+    color: #0050d8;
+  }
+
+  .coa-EventListPage__DateCal-date {
+    color: #0050d8;
   }
 }
 
@@ -68,6 +72,7 @@
   width: 71px;
   height: 80px;
   background-color: #f7f9fa;
+  border-radius: 4px;
   @include media($coa-medium-screen) {
     height: 112px;
     width: 88px;
@@ -85,6 +90,7 @@
 }
 
 .coa-EventListPage__DateCal-month {
+  border-radius: 4px 4px 0px 0px;
   background-color: #f1f3f6;
   height: 28px;
   line-height: 28px;
