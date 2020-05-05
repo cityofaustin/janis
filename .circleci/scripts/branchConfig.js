@@ -36,9 +36,9 @@ const branchOverrides = {
   '4340-official-documents': {
     joplin_appname: 'joplin-pr-4340-official-docume'
   },
-  'build-search': {
-    joplin_appname: 'production'
-  }
+  // 'build-search': {
+  //   joplin_appname: 'production'
+  // }
 };
 
 module.exports = {

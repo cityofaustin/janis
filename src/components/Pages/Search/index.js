@@ -4,11 +4,11 @@ import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
+import SearchResult from 'components/Pages/Search/searchResult.js'
 
-/*
-  TO ADD...
+/* - - - TO DO: Finish Janis Search Page
+  - Issue: https://github.com/cityofaustin/techstack/issues/4285
   // import { searchWorker } from 'js/helpers/searchWorker'
-  // import { PaginationContainer } from 'components/PageSections/Pagination/paginationContainer.js'
   // import { loader } from 'js/animations/loader';
 */
 
@@ -16,19 +16,28 @@ const SearchPage = () => {
 
   const { searchIndex } = useRouteData();
 
-  console.log("searchIndex :", searchIndex)
-
-  const title = "Search" // ⚠️useIntl
+  const title = "Search" // TODDO: ⚠️useIntl
 
   return (
     <div>
       <Head>
-        <title>Search</title>
+        <title> {title} </title>
       </Head>
 
       <PageHeader> {title} </PageHeader>
 
-      <br /><h1> 🚧... Under Construction 🏗</h1>
+      <br /><h1> &nbsp; &nbsp; 🚧... Under Construction 🏗</h1>
+
+      {/* - - - TO DO: Finish Janis Search Page
+
+      { searchIndex && searchIndex.edges.map( (page, i) => (
+        <SearchResult
+          page={page}
+          index={i}
+        ></SearchResult>
+      )) }
+
+      */}
 
     </div>
   )
