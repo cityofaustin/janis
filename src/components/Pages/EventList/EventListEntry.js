@@ -38,7 +38,7 @@ const EventDateCalendar = ({date}) => {
 
 
 const EventDateListDetails = ({ event, homepage, relatedPage }) => {
-  console.log(relatedPage);
+  console.log(event.eventUrl);
   const intl = useIntl();
   const isMobile = useMobileQuery()
   let dayType = isMobile ? 'ddd' : 'dddd';
