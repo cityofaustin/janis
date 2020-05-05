@@ -18,6 +18,7 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
+import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
 import {
   cleanNavigation,
@@ -29,6 +30,7 @@ import {
   getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
+  getSearchPageUrl,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -420,6 +422,29 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
+const getSearchIndex = async (client) => {
+
+  const { allPages } = await client.request(
+    getSearchIndexQuery,
+  )
+
+  // This cleans and clears up the Search Index for the search component.
+  let searchIndex = {}
+  searchIndex.edges = allPages.edges.map( page => {
+    if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics.topics) {
+      if (page.node.janisbasepagewithtopics.topics.length > 0) {
+        page.node.janisbasepagewithtopics = page.node.janisbasepagewithtopics.topics.map(t=>t.title)
+      } else {
+        page.node.janisbasepagewithtopics = false
+      }
+    }
+    return page
+  })
+
+  return { searchIndex }
+
+}
+
 const buildPageAtUrl = async (
   pageAtUrlInfo,
   instanceOfPage,
@@ -436,6 +461,7 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
+    searchpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -847,10 +873,6 @@ export default {
     }
 
     const routes = [
-      // {
-      //   path: '/search',
-      //   template: 'src/components/Pages/Search',
-      // },
       {
         path: '404',
         template: 'src/components/Pages/404',
@@ -858,6 +880,16 @@ export default {
     ];
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
+
+    // Adds languege url prefixes to static routes.
+    allLangs.forEach( lang => {
+      routes.push({
+        path: lang+'/search',
+        template: 'src/components/Pages/Search',
+        getData: () => getSearchIndex(createGraphQLClientsByLang(lang)),
+      })
+    })
+
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
