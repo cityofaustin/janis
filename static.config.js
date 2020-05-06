@@ -656,7 +656,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   const client = createGraphQLClientsByLang(langCode);
 
-  const siteStructure = await client.request(allPagesQuery);
   let pages = [];
   let after = '';
   while (true) {
