@@ -66,18 +66,20 @@ export const cleanContact = contact => {
 
   if (cleaned.locationPage) {
     cleaned.hours = cleanLocationPageHours(cleaned.locationPage);
-    cleaned.location = {
-      title: cleaned.locationPage.title,
-      street: cleaned.locationPage.physicalUnit
-        ? `${cleaned.locationPage.physicalStreet} ${
-            cleaned.locationPage.physicalUnit
-          }`
-        : cleaned.locationPage.physicalStreet,
-      city: cleaned.locationPage.physicalCity,
-      state: cleaned.locationPage.physicalState,
-      zip: cleaned.locationPage.physicalZip,
-    };
-
+    if (cleaned.locationPage.physicalCity) {
+      cleaned.location = {
+        title: cleaned.locationPage.title,
+        street: cleaned.locationPage.physicalUnit
+          ? `${cleaned.locationPage.physicalStreet} ${
+              cleaned.locationPage.physicalUnit
+            }`
+          : cleaned.locationPage.physicalStreet,
+        city: cleaned.locationPage.physicalCity,
+        state: cleaned.locationPage.physicalState,
+        zip: cleaned.locationPage.physicalZip,
+      };
+    }
+    
     cleaned.locationPageSlug = cleaned.locationPage.slug;
   }
 
