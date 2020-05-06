@@ -6,7 +6,7 @@ const SearchResult = ({page, index}) => {
     <div>
       <hr />
       Title: {page.node.title} <br />
-      Urls: {page.node.janisUrls} <br />
+      <a href={page.node.janisUrls}> Internal Page Link </a> <br />
       Summery: {page.node.summery} <br />
       Content Type: {page.node.pageType}
     </div>

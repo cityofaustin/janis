@@ -28,7 +28,7 @@ const SearchPage = () => {
 
       <br /><h1> &nbsp; &nbsp; 🚧... Under Construction 🏗</h1>
 
-      {/* - - - TO DO: Finish Janis Search Page
+      {/* - - - TO DO: Finish Janis Search Page - - - - - */}
 
       { searchIndex && searchIndex.edges.map( (page, i) => (
         <SearchResult
@@ -37,7 +37,7 @@ const SearchPage = () => {
         ></SearchResult>
       )) }
 
-      */}
+      {/* - - - TO DO: Finish Janis Search Page - - - - - */}
 
     </div>
   )
