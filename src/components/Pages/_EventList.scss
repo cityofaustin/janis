@@ -24,10 +24,14 @@
 
 .coa-EventListPage__Entry--relatedPage {
   margin-top: unset;
+  margin-left: 16px;
+  margin-right: 16px;
   max-width: 760px;
   border: 1px solid #dcdee0;
   padding: 16px;
   @include media($coa-large-screen) {
+    margin-left: unset;
+    margin-right: unset;
   }
 }
 
@@ -63,9 +67,13 @@
 }
 
 .coa-EventListPage__icon {
-  font-size: 32px;
-  margin-top: 37px;
-  color: #0049c7;
+  display: none;
+  @include media($coa-medium-screen) {
+    display: block;
+    font-size: 32px;
+    margin-top: 37px;
+    color: #0049c7;
+  }
 }
 
 .coa-EventListPage__DateCal {

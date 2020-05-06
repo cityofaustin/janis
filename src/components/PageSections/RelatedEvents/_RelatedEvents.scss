@@ -5,19 +5,29 @@
 }
 
 .coa-RelatedEvents__icon {
-  font-size: 32px;
-  margin-right: 16px;
+  font-size: 24px;
+  margin-right: 4px;
   color: #0049c7;
+  display:inline;
+  position: relative;
+  top: 4px;
+  @include media($coa-medium-screen) {
+    font-size: 32px;
+    margin-right: 16px;
+  }
 }
 
 .coa-RelatedEvents__heading {
-  font-size: 32px;
+  font-size: 24px;
   color: #171717;
   font-weight: 500;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  margin-left: 16px;
   @include media($coa-medium-screen) {
-    font-size: 40px;
+    font-size: 32px;
     margin-bottom: 40px;
+    margin-left: unset;
+    margin-bottom: 30px;
   }
 }
 
