@@ -5,6 +5,7 @@ import PageHeader from 'components/PageHeader';
 import LocationInfo from 'components/Pages/Location/LocationInfo';
 import LocationServiceList from 'components/Pages/Location/LocationServiceList';
 import LocationGettingHere from 'components/Pages/Location/LocationGettingHere';
+import LocationRelatedEvents from 'components/Pages/Location/LocationRelatedEvents';
 import UserFeedback from 'components/UserFeedback';
 
 import 'components/Pages/Location/_Location.scss';
@@ -19,9 +20,9 @@ const LocationPage = ({ locationPage }) => {
       hours,
       services,
       gettingHere: { buses },
+      events,
     },
   } = locationPage ? { locationPage } : useRouteData();
-
 
   return (
     <div>
@@ -44,6 +45,9 @@ const LocationPage = ({ locationPage }) => {
           <LocationServiceList services={services} locationHours={hours} />
         )}
         {!!buses && !!buses.length && <LocationGettingHere buses={buses} />}
+        {!!events && !!events.length && (
+          <LocationRelatedEvents events={events} />
+        )}
       </div>
       <UserFeedback />
     </div>

@@ -235,6 +235,8 @@ export const cleanLocationPage = locationPage => {
 
   locationPage.image = locationPage.physicalLocationPhoto;
 
+  locationPage.events = cleanEvents(locationPage.events)
+
   return { locationPage: locationPage };
 };
 
