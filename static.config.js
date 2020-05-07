@@ -18,7 +18,6 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
-import getSearchIndexQuery from 'js/queries/getSearchIndexQuery';
 
 import {
   cleanNavigation,
@@ -30,7 +29,6 @@ import {
   getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
-  getSearchPageUrl,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -422,29 +420,6 @@ const getAllEvents = async (client, hideCanceled) => {
   return { events: events };
 };
 
-const getSearchIndex = async (client) => {
-
-  const { allPages } = await client.request(
-    getSearchIndexQuery,
-  )
-
-  // This cleans and clears up the Search Index for the search component.
-  let searchIndex = {}
-  searchIndex.edges = allPages.edges.map( page => {
-    if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics.topics) {
-      if (page.node.janisbasepagewithtopics.topics.length > 0) {
-        page.node.janisbasepagewithtopics = page.node.janisbasepagewithtopics.topics.map(t=>t.title)
-      } else {
-        page.node.janisbasepagewithtopics = false
-      }
-    }
-    return page
-  })
-
-  return { searchIndex }
-
-}
-
 const buildPageAtUrl = async (
   pageAtUrlInfo,
   instanceOfPage,
@@ -461,7 +436,6 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
-    searchpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -693,6 +667,138 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
+  const searchIndex = []
+
+  // Create our site Index from each page type
+  pages.forEach( page =>{
+
+    if (page.node.janisUrls.length > 0) {
+
+      const janisPages = [
+        "locationpage",
+        "eventpage",
+        "departmentpage",
+        "topiccollectionpage"
+      ]
+
+      const janisBasePageWithTopics = [
+        "servicepage",
+        "guidepage",
+        "informationpage",
+        "officialdocumentpage",
+        "formcontainer"
+      ]
+
+      janisPages.forEach( pageType => {
+        if (page.node[pageType]) {
+          searchIndex.push({
+            title: page.node[pageType].title,
+            janisUrls: page.node.janisUrls,
+            pageType: pageType,
+            summery: page.node[pageType].mission ?? page.node[pageType].shortDescription ?? ""
+          })
+        }
+      })
+
+      janisBasePageWithTopics.forEach( pageType => {
+        if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics[pageType]) {
+          const pageToAdd = page.node.janisbasepagewithtopics[pageType]
+          searchIndex.push({
+            title: pageToAdd.title,
+            janisUrls: page.node.janisUrls,
+            pageType: pageType,
+            summery: pageToAdd.searchDescription ?? pageToAdd.mission ?? pageToAdd.shortDescription ?? ""
+          })
+        }
+      })
+
+      // ...finally add the Topic collection pages
+      if (page.node.janisbasepagewithtopiccollections) {
+        if (page.node.janisbasepagewithtopiccollections.topicpage) {
+          searchIndex.push({
+            title: page.node.janisbasepagewithtopiccollections.topicpage.title,
+            pageType: "topicpage",
+          })
+        }
+      }
+
+    }
+
+    // if (page.node.locationpage) { //✅
+    //   searchIndex.push({
+    //     title: page.node.locationpage.title,
+    //     janisUrls: page.node.janisUrls,
+    //     pageType: "locationpage",
+    //   })
+    // } else if (page.node.eventpage) {  //✅
+    //   searchIndex.push({
+    //     title: page.node.eventpage.title,
+    //     janisUrls: page.node.janisUrls,
+    //     pageType: "eventpage",
+    //   })
+    // } else if (page.node.departmentpage) { //✅
+    //   searchIndex.push({
+    //     title: page.node.departmentpage.title,
+    //     janisUrls: page.node.janisUrls,
+    //     pageType: "departmentpage",
+    //     summery: page.node.departmentpage.mission,
+    //   })
+    // } else if (page.node.topiccollectionpage) {  //✅
+    //   searchIndex.push({
+    //     title: page.node.topiccollectionpage.title,
+    //     janisUrls: page.node.janisUrls,
+    //     pageType: "topiccollectionpage",
+    //   })
+    // } else
+
+    // if (page.node.janisbasepagewithtopics) {
+    //   if (page.node.janisbasepagewithtopics.servicepage) { //✅
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopics.servicepage.title,
+    //       pageType: "servicepage",
+    //       janisUrls: page.node.janisUrls,
+    //       summery: page.node.janisbasepagewithtopics.servicepage.shortDescription
+    //     })
+    //   } else if (page.node.janisbasepagewithtopics.guidepage) { // 🌕 ...
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopics.guidepage.title,
+    //       janisUrls: page.node.janisUrls,
+    //       pageType: "guidepage",
+    //     })
+    //   } else if (page.node.janisbasepagewithtopics.informationpage) {
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopics.informationpage.title,
+    //       janisUrls: page.node.janisUrls,
+    //       pageType: "informationpage",
+    //     })
+    //   } else if (page.node.janisbasepagewithtopics.officialdocumentpage) {
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopics.officialdocumentpage.title,
+    //       janisUrls: page.node.janisUrls,
+    //       pageType: "officialdocumentpage",
+    //     })
+    //   } else if (page.node.janisbasepagewithtopics.formcontainer) {
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopics.formcontainer.title,
+    //       janisUrls: page.node.janisUrls,
+    //       pageType: "formcontainer",
+    //     })
+    //   }
+    // } else
+
+    // if (page.node.janisbasepagewithtopiccollections) {
+    //   if (page.node.janisbasepagewithtopiccollections.topicpage) {
+    //     searchIndex.push({
+    //       title: page.node.janisbasepagewithtopiccollections.topicpage.title,
+    //       pageType: "topicpage",
+    //     })
+    //   }
+    // }
+
+  })
+
+  // console.log("searchIndex :", searchIndex)
+
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
   if (incrementalPageId) {
@@ -780,6 +886,12 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
 
+  // Add the search page with the site search Index.
+  allPages.push({
+    path: '/search/',
+    template: 'src/components/Pages/Search',
+    getData: () => { return { searchIndex: searchIndex } }
+  })
 
   const data = {
     path: path,
@@ -879,16 +991,6 @@ export default {
     ];
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
-
-    // Adds languege url prefixes to static routes.
-    allLangs.forEach( lang => {
-      routes.push({
-        path: lang+'/search',
-        template: 'src/components/Pages/Search',
-        getData: () => getSearchIndex(createGraphQLClientsByLang(lang)),
-      })
-    })
-
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),

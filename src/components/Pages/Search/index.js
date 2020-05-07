@@ -16,6 +16,8 @@ const SearchPage = () => {
 
   const { searchIndex } = useRouteData();
 
+  console.log("searchIndex :", searchIndex)
+
   const title = "Search" // TODDO: ⚠️useIntl
 
   return (
@@ -30,10 +32,10 @@ const SearchPage = () => {
 
       {/* - - - TO DO: Finish Janis Search Page - - - - - */}
 
-      { searchIndex && searchIndex.edges.map( (page, i) => (
+      { searchIndex && searchIndex.map( (page, i) => (
         <SearchResult
           page={page}
-          index={i}
+          key={i}
         ></SearchResult>
       )) }
 
