@@ -39,8 +39,6 @@ const Service = ({ service, intl }) => {
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
-  console.log(useRouteData());
-
   return (
     <div>
       <Head>
@@ -97,9 +95,7 @@ const Service = ({ service, intl }) => {
                 </div>
               </div>
             </div>
-                    {!!events && events.length &&
-          <RelatedEvents events={events} />
-        }
+            {!!events && events.length && <RelatedEvents events={events} />}
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
