@@ -66,6 +66,10 @@
   }
 }
 
+.coa-EventListPage__Entry--relatedLocation {
+  width: auto;
+}
+
 .coa-EventListPage__icon {
   display: none;
   @include media($coa-medium-screen) {
@@ -155,6 +159,12 @@
 .coa-EventListPage__EntryDetails--homepage {
   @include media($coa-large-screen) {
     max-width: 250px;
+  }
+}
+
+.coa-EventListPage__EntryDetails--relatedLocation {
+  @include media($coa-large-screen) {
+    max-width: 470px;
   }
 }
 
