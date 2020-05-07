@@ -201,22 +201,24 @@ const getServicePageData = async (
     );
   }
 
-  // keeping this logic in there for now, stuff is kinda messy
-  servicePageData.contact = cleanContact(servicePageData.contact);
+  let servicePage = {};
 
-  servicePageData.contextualNavData = {
+  // keeping this logic in there for now, stuff is kinda messy
+  servicePage.contact = cleanContact(servicePageData.contact);
+
+  servicePage.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
     offeredBy: getOfferedByFromDepartments(servicePageData.departments),
   };
 
-  servicePageData.events = cleanEvents(servicePageData.events);
+  servicePage.events = cleanEvents(servicePageData.events);
 
   if (pagesOfGuides && pagesOfGuides[servicePageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    servicePageData.pageIsPartOf = pagesOfGuides[servicePageData.id];
+    servicePage.pageIsPartOf = pagesOfGuides[servicePageData.id];
   }
-  return { service: servicePageData };
+  return { service: servicePage };
 };
 
 const getInformationPageData = async (

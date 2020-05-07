@@ -548,4 +548,12 @@ export const cleanEvents = events => {
   });
 };
 
+export const filterEvents = events => {
+  const dateNow = moment()
+    .tz('America/Chicago')
+    .format('YYYY-MM-DD');
+
+  return events.filter(e => moment(e.date).isSameOrAfter(dateNow)).slice(0, 3);
+}
+
 
