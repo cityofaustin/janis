@@ -9,6 +9,8 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
+import { Link } from 'react-router-dom';
+
 import { useIntl } from 'react-intl';
 
 const ByLine = ({ byDepartment, fromDepartment, date }) => {
@@ -33,6 +35,7 @@ const NewsPage = ({ newsPage }) => {
     parent,
     contact,
   } = newsPage ? { newsPage } : blarg;
+  debugger;
 
   return (
     <div>
@@ -49,7 +52,16 @@ const NewsPage = ({ newsPage }) => {
             <div className="coa-NewsPage__published-date">
               Published April 1, 2020
             </div>
-            <div className="coa-NewsPage__by-line">Published April 1, 2020</div>
+            <div className="coa-NewsPage__by-line">
+              From{' '}
+              <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                {fromDepartment.title}
+              </Link>
+              , written by{' '}
+              <Link to={`/${intl.locale}${byDepartment.url}`}>
+                {byDepartment.title}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
