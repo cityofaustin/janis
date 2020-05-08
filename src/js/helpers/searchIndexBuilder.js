@@ -55,7 +55,7 @@ const searchIndexBuilder = function(pages) {
             title:  pageToAdd.title,
             janisUrls: page.node.janisUrls,
             pageType: "topicpage",
-            summery: pageToAdd.searchDescription ?? pageToAdd.mission ?? pageToAdd.shortDescription ?? ""
+            summery: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
       }
