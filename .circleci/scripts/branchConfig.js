@@ -37,7 +37,7 @@ const branchOverrides = {
     joplin_appname: 'joplin'
   },
   'build-search': {
-    joplin_appname: 'production'
+    joplin_appname: 'joplin'
   }
 };
 
