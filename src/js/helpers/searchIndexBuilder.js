@@ -29,7 +29,7 @@ const searchIndexBuilder = function(pages) {
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
             pageType: pageType,
-            summery: page.node[pageType].mission ?? page.node[pageType].shortDescription ?? ""
+            summery: page.node[pageType].mission || page.node[pageType].shortDescription || ""
           })
         }
       })
@@ -42,7 +42,7 @@ const searchIndexBuilder = function(pages) {
             title: pageToAdd.title,
             janisUrls: page.node.janisUrls,
             pageType: pageType,
-            summery: pageToAdd.searchDescription ?? pageToAdd.mission ?? pageToAdd.shortDescription ?? ""
+            summery: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
       })
