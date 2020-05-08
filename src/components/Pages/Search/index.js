@@ -16,8 +16,6 @@ const SearchPage = () => {
 
   const { searchIndex } = useRouteData();
 
-  console.log("searchIndex :", searchIndex)
-
   const title = "Search" // TODDO: ⚠️useIntl
 
   return (
