@@ -1,6 +1,10 @@
 .coa-PageHeader--news {
   h1 {
     color: #171717;
+    @include mobile {
+      font-size: 2.4rem;
+      line-height: 3rem;
+    }
   }
 }
 
@@ -28,8 +32,11 @@
 .coa-NewsPage__by-line {
   color: #5c5c5c;
   font-size: 1.6rem;
-  line-height: 1.6rem;
+  line-height: 2.2rem;
   margin-bottom: 3rem;
+  @include mobile {
+    margin-bottom: 1rem;
+  }
 }
 
 .coa-NewsPage__footer-published-date {

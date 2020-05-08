@@ -28,9 +28,7 @@ const PageHeader = ({ description, children, contentType, columnWidth }) => {
                     alt={intl.formatMessage(i18n.citySeal)}
                   />
                 </div>
-                <div className="coa-PageHeader--news__release-text">
-                  Media release
-                </div>
+                <div className="coa-PageHeader--news__release-text">News</div>
               </>
             ) : null}
 
