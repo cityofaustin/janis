@@ -143,6 +143,10 @@ const cleanDepartmentPageData = departmentPage => {
   return { department: departmentPage };
 };
 
+const cleanNewsPageData = (newsPage, instanceOfPage) => {
+  return { ...newsPage, ...instanceOfPage };
+};
+
 const getTopicCollectionPageData = async (
   topicCollectionPage,
   instanceOfPage,
@@ -580,8 +584,8 @@ const buildPageAtUrl = async (
   if (newspage) {
     return {
       path: instanceOfPage.url,
-      template: 'src/components/Pages/EventList',
-      getData: () => getAllEvents(client, false),
+      template: 'src/components/Pages/News',
+      getData: () => cleanNewsPageData(newspage, instanceOfPage),
     };
   }
 };
@@ -737,8 +741,21 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
+        return Promise.all(
+          pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
+            buildPageAtUrl(
+              pageAtUrlInfo.node,
+              instanceOfPage,
+              client,
+              pagesOfGuidesData,
+            ),
+          ),
+        );
+      }
+
+      // not all pages have instances (events and locations not under departments)
       return Promise.all(
-        pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
+        pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
           buildPageAtUrl(
             pageAtUrlInfo.node,
             instanceOfPage,
@@ -747,25 +764,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           ),
         ),
       );
-    }
-
-    // not all pages have instances (events and locations not under departments)
-    return Promise.all(
-      pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
-        buildPageAtUrl(
-          pageAtUrlInfo.node,
-          instanceOfPage,
-          client,
-          pagesOfGuidesData,
-        ),
-      ),
-    );
     }),
   );
 
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
-
 
   const data = {
     path: path,
