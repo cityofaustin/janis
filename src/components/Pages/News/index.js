@@ -53,14 +53,25 @@ const NewsPage = ({ newsPage }) => {
               Published April 1, 2020
             </div>
             <div className="coa-NewsPage__by-line">
-              From{' '}
-              <Link to={`/${intl.locale}${fromDepartment.url}`}>
-                {fromDepartment.title}
-              </Link>
-              , written by{' '}
-              <Link to={`/${intl.locale}${byDepartment.url}`}>
-                {byDepartment.title}
-              </Link>
+              {byDepartment ? (
+                <>
+                  From{' '}
+                  <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                    {fromDepartment.title}
+                  </Link>
+                  , written by{' '}
+                  <Link to={`/${intl.locale}${byDepartment.url}`}>
+                    {byDepartment.title}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  From{' '}
+                  <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                    {fromDepartment.title}
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
