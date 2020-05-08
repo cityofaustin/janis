@@ -29,12 +29,12 @@ const searchIndexBuilder = function(pages) {
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
             pageType: pageType,
-            summery: page.node[pageType].mission || page.node[pageType].shortDescription || ""
+            summary: page.node[pageType].mission || page.node[pageType].shortDescription || ""
           })
         }
       })
 
-      // And here, we're filting out all the pages with topics into the search index.
+      // And here, we're filtering out all the pages with topics into the search index.
       janisBasePagesWithTopics.forEach( pageType => {
         if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics[pageType]) {
           const pageToAdd = page.node.janisbasepagewithtopics[pageType]
@@ -42,7 +42,7 @@ const searchIndexBuilder = function(pages) {
             title: pageToAdd.title,
             janisUrls: page.node.janisUrls,
             pageType: pageType,
-            summery: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
+            summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
       })
@@ -55,7 +55,7 @@ const searchIndexBuilder = function(pages) {
             title:  pageToAdd.title,
             janisUrls: page.node.janisUrls,
             pageType: "topicpage",
-            summery: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
+            summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
       }
