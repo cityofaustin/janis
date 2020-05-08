@@ -25,16 +25,6 @@ query allPagesQuery($after: String) {
             title
             id
           }
-          byDepartmeent {
-            url
-            title
-            id
-          }
-          fromDepartment {
-            id
-            title
-            url
-          }
         }
         ...newsPageInfo
         eventpage {

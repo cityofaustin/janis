@@ -175,7 +175,9 @@ const getTopicCollectionPageData = async (
           .map(topPageEdge => ({
             pageType: topPageEdge.node.pageType,
             title: topPageEdge.node.title,
-            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${
+              topPageEdge.node.slug
+            }/`,
           })),
       }));
   } else {
@@ -441,6 +443,7 @@ const buildPageAtUrl = async (
     janisbasepagewithtopics,
     allDepartments,
     allEvents,
+    newspage,
   } = pageAtUrlInfo;
   if (departmentpage) {
     return {
@@ -572,6 +575,15 @@ const buildPageAtUrl = async (
       getData: () => getAllEvents(client, false),
     };
   }
+
+  // If we are a news page
+  if (newspage) {
+    return {
+      path: instanceOfPage.url,
+      template: 'src/components/Pages/EventList',
+      getData: () => getAllEvents(client, false),
+    };
+  }
 };
 
 const getPagesOfGuidesData = async client => {
@@ -585,7 +597,7 @@ const getPagesOfGuidesData = async client => {
         id: guidePage.node.id,
       });
 
-      let url ='/'
+      let url = '/';
 
       if (
         guideUrl.allPages &&
