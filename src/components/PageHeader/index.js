@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import SectionHeader from 'components/SectionHeader';
 import citySealImg from 'images/coa_seal_color.png';
 import { useIntl } from 'react-intl';
-import { misc as i18n } from 'js/i18n/definitions';
+import { misc as i18n, news as i18n2 } from 'js/i18n/definitions';
 
 const PageHeader = ({ description, children, contentType, columnWidth }) => {
   const intl = useIntl();
@@ -28,7 +28,9 @@ const PageHeader = ({ description, children, contentType, columnWidth }) => {
                     alt={intl.formatMessage(i18n.citySeal)}
                   />
                 </div>
-                <div className="coa-PageHeader--news__release-text">News</div>
+                <div className="coa-PageHeader--news__release-text">
+                  {intl.formatMessage(i18n2.news)}
+                </div>
               </>
             ) : null}
 

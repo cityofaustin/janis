@@ -12,6 +12,7 @@ import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobi
 import { Link } from 'react-router-dom';
 
 import { useIntl } from 'react-intl';
+import { news as i18n } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
@@ -47,28 +48,29 @@ const NewsPage = ({ newsPage }) => {
         <div className="row">
           <div className="col-xs-12 col-md-12">
             <div className="coa-NewsPage__published-date">
-              Published {momentDate}
+              {intl.formatMessage(i18n.publishedDate, { date: momentDate })}
             </div>
             <div className="coa-NewsPage__by-line">
-              {byDepartment ? (
-                <>
-                  From{' '}
-                  <Link to={`/${intl.locale}${fromDepartment.url}`}>
-                    {fromDepartment.title}
-                  </Link>
-                  , written by{' '}
-                  <Link to={`/${intl.locale}${byDepartment.url}`}>
-                    {byDepartment.title}
-                  </Link>
-                </>
-              ) : (
-                <>
-                  From{' '}
-                  <Link to={`/${intl.locale}${fromDepartment.url}`}>
-                    {fromDepartment.title}
-                  </Link>
-                </>
-              )}
+              {byDepartment
+                ? intl.formatMessage(i18n.fromAndByLine, {
+                    fromDepartment: (
+                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                        {fromDepartment.title}
+                      </Link>
+                    ),
+                    byDepartment: (
+                      <Link to={`/${intl.locale}${byDepartment.url}`}>
+                        {byDepartment.title}
+                      </Link>
+                    ),
+                  })
+                : intl.formatMessage(i18n.fromLine, {
+                    fromDepartment: (
+                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                        {fromDepartment.title}
+                      </Link>
+                    ),
+                  })}
             </div>
           </div>
         </div>
