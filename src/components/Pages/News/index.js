@@ -77,7 +77,7 @@ const NewsPage = ({ newsPage }) => {
         <div className="coa-Page__main-content">
           <div className="wrapper container-fluid">
             <div className="row">
-              <div className="col-xs-12 col-md-10">
+              <div className="col-xs-12 col-md-12">
                 {body && <HtmlFromRichText title={' '} content={body} />}
                 <div className="coa-NewsPage__footer-published-date">
                   Published {momentDate}
