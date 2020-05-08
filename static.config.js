@@ -236,23 +236,24 @@ const getInformationPageData = async (
     );
   }
 
+  let informationPage = {}
   // keeping this logic in there for now, stuff is kinda messy
-  informationPageData.contact = cleanContact(informationPageData.contact);
+  informationPage.contact = cleanContact(informationPageData.contact);
 
-  informationPageData.contextualNavData = {
+  informationPage.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
     offeredBy: getOfferedByFromDepartments(informationPageData.departments),
   };
 
-  informationPageData.events = cleanEvents(informationPageData.events);
+  informationPage.events = cleanEvents(informationPageData.events);
 
   if (pagesOfGuides && pagesOfGuides[informationPageData.id]) {
     // We're checking if this id is part of guide page because it may not be published and draw an error.
-    informationPageData.pageIsPartOf = pagesOfGuides[informationPageData.id];
+    informationPage.pageIsPartOf = pagesOfGuides[informationPageData.id];
   }
 
-  return { informationPage: informationPageData };
+  return { informationPage: informationPage };
 };
 
 const getGuidePageData = async (guidePageData, instance, client) => {

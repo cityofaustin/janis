@@ -512,20 +512,6 @@ export const formatFeesRange = fees => {
   return '';
 };
 
-/*
-export const cleanRelatedServiceLinks = links => {
-  if (!links) return null;
-
-  return links.map(link => {
-    return {
-      url: `/${link.topic.theme.slug}/${link.topic.slug}/${link.slug}`,
-      text: link.title,
-    };
-  });
-};
-
-*/
-
 export const cleanEvents = events => {
   // takes an array of events and creates the event Url, formats the fees and picks first location
   if (!events) return null;
