@@ -1,7 +1,6 @@
-const newsPageFragment = `
-  fragment newsPageInfo on NewsPageNode {
+const newsPageContentFragment = `
+  fragment newsPageContentInfo on NewsPageNode {
     id
-    lastPublishedAt
     title
     body
     contact {
@@ -14,9 +13,8 @@ const newsPageFragment = `
         }
       }
       email
-      socialMedia
     }
   }
 `;
 
-export default newsPageFragment;
+export default newsPageContentFragment;

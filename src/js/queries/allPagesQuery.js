@@ -25,8 +25,20 @@ query allPagesQuery($after: String) {
             title
             id
           }
+          fromDepartment {
+            id
+            title
+            url
+          }
+          byDepartment {
+            id
+            title
+            url
+          }
         }
-        ...newsPageInfo
+        newspage {
+          ...newsPageInfo
+        }
         eventpage {
           ...eventPageInfo
         }

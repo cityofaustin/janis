@@ -18,7 +18,6 @@ import moment from 'moment-timezone';
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
   moment.locale(intl.locale);
-  const blarg = useRouteData();
 
   const {
     title,
@@ -28,10 +27,12 @@ const NewsPage = ({ newsPage }) => {
     parent,
     contact,
     lastPublishedAt,
-  } = newsPage ? { newsPage } : blarg;
-  debugger;
+  } = newsPage ? newsPage : useRouteData();
 
-  let momentDate = moment(lastPublishedAt, 'YYYY-MM-DD').format('LL');
+  // Since previews aren't published, just use the current date for them
+  let momentDate = lastPublishedAt
+    ? moment(lastPublishedAt, 'YYYY-MM-DD').format('LL')
+    : moment().format('LL');
 
   return (
     <div>
