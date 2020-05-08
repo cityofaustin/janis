@@ -201,7 +201,7 @@ const getServicePageData = async (
     );
   }
 
-  let servicePage = {};
+  let servicePage = servicePageData;
 
   // keeping this logic in there for now, stuff is kinda messy
   servicePage.contact = cleanContact(servicePageData.contact);
@@ -236,7 +236,7 @@ const getInformationPageData = async (
     );
   }
 
-  let informationPage = {}
+  let informationPage = informationPageData;
   // keeping this logic in there for now, stuff is kinda messy
   informationPage.contact = cleanContact(informationPageData.contact);
 
