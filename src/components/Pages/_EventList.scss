@@ -46,8 +46,6 @@
 .coa-EventListPage__Entry--relatedPage:hover {
   background-color: #0050d8;
   padding: 16px;
-  @include media($coa-large-screen) {
-  }
   div {
     color: #fff;
   }

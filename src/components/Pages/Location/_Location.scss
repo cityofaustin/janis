@@ -271,5 +271,9 @@ $coa-location-page-section-background: #f7f7f7;
   border-radius: 4px;
   font-size: 1.7rem;
   line-height: 2.4rem;
+  @include media($coa-medium-screen) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 
