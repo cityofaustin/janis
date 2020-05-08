@@ -28,6 +28,7 @@ const newsPageFragment = `
         url
       }
     }
+    lastPublishedAt
   }
 `;
 

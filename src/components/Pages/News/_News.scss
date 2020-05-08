@@ -1,3 +1,9 @@
+.coa-PageHeader--news {
+  h1 {
+    color: #171717;
+  }
+}
+
 .coa-PageHeader--news__city-seal-wrapper {
   width: 28.78px;
   height: 28.78px;
@@ -23,5 +29,13 @@
   color: #5c5c5c;
   font-size: 1.6rem;
   line-height: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.coa-NewsPage__footer-published-date {
+  font-size: 1.6rem;
+  border-top: 1px solid #dfe1e2;
+  color: #5c5c5c;
+  padding-top: 2rem;
   margin-bottom: 3rem;
 }

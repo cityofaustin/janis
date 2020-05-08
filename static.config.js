@@ -143,8 +143,8 @@ const cleanDepartmentPageData = departmentPage => {
   return { department: departmentPage };
 };
 
-const cleanNewsPageData = (newsPage, instanceOfPage) => {
-  return { ...newsPage, ...instanceOfPage };
+const cleanNewsPageData = (newsPage, instanceOfPage, lastPublishedAt) => {
+  return { ...newsPage, ...instanceOfPage, lastPublishedAt };
 };
 
 const getTopicCollectionPageData = async (
@@ -448,6 +448,7 @@ const buildPageAtUrl = async (
     allDepartments,
     allEvents,
     newspage,
+    lastPublishedAt,
   } = pageAtUrlInfo;
   if (departmentpage) {
     return {
@@ -585,7 +586,8 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/News',
-      getData: () => cleanNewsPageData(newspage, instanceOfPage),
+      getData: () =>
+        cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
   }
 };

@@ -13,18 +13,11 @@ import { Link } from 'react-router-dom';
 
 import { useIntl } from 'react-intl';
 
-const ByLine = ({ byDepartment, fromDepartment, date }) => {
-  return (
-    <>
-      <div>date goes here</div>
-      <div>by goes here</div>
-    </>
-  );
-};
+import moment from 'moment-timezone';
 
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
-
+  moment.locale(intl.locale);
   const blarg = useRouteData();
 
   const {
@@ -34,8 +27,11 @@ const NewsPage = ({ newsPage }) => {
     fromDepartment,
     parent,
     contact,
+    lastPublishedAt,
   } = newsPage ? { newsPage } : blarg;
   debugger;
+
+  let momentDate = moment(lastPublishedAt, 'YYYY-MM-DD').format('LL');
 
   return (
     <div>
@@ -50,7 +46,7 @@ const NewsPage = ({ newsPage }) => {
         <div className="row">
           <div className="col-xs-12 col-md-12">
             <div className="coa-NewsPage__published-date">
-              Published April 1, 2020
+              Published {momentDate}
             </div>
             <div className="coa-NewsPage__by-line">
               {byDepartment ? (
@@ -83,6 +79,9 @@ const NewsPage = ({ newsPage }) => {
             <div className="row">
               <div className="col-xs-12 col-md-10">
                 {body && <HtmlFromRichText title={' '} content={body} />}
+                <div className="coa-NewsPage__footer-published-date">
+                  Published {momentDate}
+                </div>
                 <div className="coa-Page__contacts-mobile">
                   {!!contact && <ContactDetails contact={contact} />}
                 </div>
