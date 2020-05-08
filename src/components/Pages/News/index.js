@@ -7,7 +7,7 @@ import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import ContactDetails from 'components/Contact/ContactDetails';
 import UserFeedback from 'components/UserFeedback';
-import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
+import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
 import { useIntl } from 'react-intl';
 
@@ -24,7 +24,6 @@ const NewsPage = ({ newsPage }) => {
     parent,
     contact,
   } = newsPage ? { newsPage } : blarg;
-  debugger;
 
   return (
     <div>
@@ -32,7 +31,9 @@ const NewsPage = ({ newsPage }) => {
         <title>{title}</title>
       </Head>
       <ContextualNav parent={parent} relatedTo={[]} offeredBy={[]} />
-      <PageHeader contentType={'information'}>{title}</PageHeader>
+      <PageHeader contentType={'news'} columnWidth={12}>
+        {title}
+      </PageHeader>
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper container-fluid">
