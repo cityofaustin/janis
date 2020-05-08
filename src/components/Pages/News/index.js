@@ -11,6 +11,15 @@ import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobi
 
 import { useIntl } from 'react-intl';
 
+const ByLine = ({ byDepartment, fromDepartment, date }) => {
+  return (
+    <>
+      <div>date goes here</div>
+      <div>by goes here</div>
+    </>
+  );
+};
+
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
 
@@ -34,6 +43,17 @@ const NewsPage = ({ newsPage }) => {
       <PageHeader contentType={'news'} columnWidth={12}>
         {title}
       </PageHeader>
+      <div className="wrapper container-fluid">
+        <div className="row">
+          <div className="col-xs-12 col-md-12">
+            <div className="coa-NewsPage__published-date">
+              Published April 1, 2020
+            </div>
+            <div className="coa-NewsPage__by-line">Published April 1, 2020</div>
+          </div>
+        </div>
+      </div>
+
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper container-fluid">
