@@ -35,6 +35,9 @@ const branchOverrides = {
   },
   'clean-static-config': {
     joplin_appname: 'joplin'
+  },
+  'build-search': {
+    joplin_appname: 'production'
   }
 };
 
