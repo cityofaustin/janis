@@ -90,9 +90,9 @@ query allPagesQuery($after: String) {
               id
               title
               slug
-              date,
-              startTime,
-              endTime,
+              date
+              startTime
+              endTime
               locations {
                 additionalDetails
                 locationType
