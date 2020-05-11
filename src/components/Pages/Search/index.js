@@ -22,9 +22,9 @@ const SearchPage = () => {
   let searchedTerm = ""
 
   // Check the url has for a search term to apply
-  if (window.location.hash.length > 1) {
-    searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
-  }
+  // if (window.location.hash.length > 1) {
+  //   searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
+  // }
 
   // User react hook to make our input dynamic
   let [ searchString, setSearchString ] = useState(searchedTerm)
@@ -39,7 +39,7 @@ const SearchPage = () => {
   let [ searchResults, setSearchResults ] = useState(filteredSearch)
 
   const searchButtonPressed = function() {
-    window.location.hash = searchString.toLocaleLowerCase()
+    // window.location.hash = searchString.toLocaleLowerCase()
     loader.start({
       contentId: 'coa-search_results',
       loaderId: 'coa-search_loading_wheel',
