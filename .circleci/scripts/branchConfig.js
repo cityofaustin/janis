@@ -26,7 +26,7 @@ const branchOverrides = {
   '3690-incremental': {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
-},
+  },
   '4325-site-struct': {
     joplin_appname: 'joplin-pr-import-everything'
   },
@@ -34,6 +34,9 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3'
   },
   'clean-static-config': {
+    joplin_appname: 'joplin'
+  },
+  'build-search': {
     joplin_appname: 'joplin'
   }
 };

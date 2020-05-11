@@ -117,4 +117,3 @@ query allPagesQuery($after: String) {
 `;
 
 export default siteStructureQuery;
-
