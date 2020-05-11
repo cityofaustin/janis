@@ -47,8 +47,10 @@ export const loader = {
     this.content.style.opacity = 0
     this.content.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
 
-    this.error.style.opacity = 0
-    this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    if (this.errorId) {
+      this.error.style.opacity = 0
+      this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    }
   },
 
 

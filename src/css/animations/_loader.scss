@@ -1,4 +1,4 @@
-#coa-loadingWheel {
+#coa-loadingWheel, .coa-loading_wheel {
   width: 80px;
   height: 80px;
   border-top: 5px solid #F0F0F0;
@@ -7,7 +7,6 @@
   border-bottom: 5px solid #0049c7;
   border-radius: 50%;
   margin: auto;
-  margin-bottom: 50px;
   margin-bottom: 80px;
   opacity: 0;
   animation-name: rotate;

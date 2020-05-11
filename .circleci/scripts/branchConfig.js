@@ -36,7 +36,7 @@ const branchOverrides = {
   'clean-static-config': {
     joplin_appname: 'joplin'
   },
-  'build-search': {
+  '4285-search-page': {
     joplin_appname: 'joplin'
   }
 };
