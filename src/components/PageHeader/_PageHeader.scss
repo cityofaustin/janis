@@ -35,6 +35,7 @@
   }
 }
 
+
 .coa-PageHeader--information {
   padding-top: $coa-spacing-large;
 
@@ -96,6 +97,31 @@
     text-align: center;
     @include media($coa-medium-screen) {
       text-align: left;
+    }
+  }
+}
+
+.coa-PageHeader--search {
+  padding-top: $coa-spacing-large;
+  padding-bottom: $coa-space-level3;
+  margin-bottom: $coa-spacing-md-small;
+  background: $coa-color-secondary;
+  h1 {
+    padding-top: $coa-spacing-xsmall;
+    font-size: $coa-font-size-medium;
+    text-align: center;
+  }
+  @include media($coa-medium-screen) {
+    padding-top: $coa-spacing-xlarge;
+    margin-bottom: $coa-spacing-large;
+    h1 {
+      text-align: left;
+      font-size: $coa-font-size-xxlarge;
+    }
+  }
+  @include media($coa-small-screen) {
+    h1 {
+      font-size: $coa-font-size-xxlarge;
     }
   }
 }

@@ -21,6 +21,11 @@ const SearchPage = () => {
   const title = "Search" // TODO: ⚠️useIntl
   let searchedTerm = ""
 
+  useEffect(() => {
+    const input = document.getElementById("coa-search_input")
+    input.focus()
+  }, []);
+
   // Check the url has for a search term to apply
   if (typeof window !== 'undefined' && window.location.hash.length > 1) {
     searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
@@ -55,36 +60,43 @@ const SearchPage = () => {
 
   const searchKeyInput = function(event) {
     setSearchString(event.target.value)
+
+    // 📝Quick Search Delay...
+    const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
+    setSearchResults(filteredSearch)
+    // ...
   }
 
   return (
     <div>
+
       <Head>
         <title> {title} </title>
       </Head>
 
-      <PageHeader> {title} </PageHeader>
+      <PageHeader contentType={'search'}>
+        {title}
+        <div className="coa-search_bar_container">
+          <input
+            id="coa-search_input"
+            className="coa-search_inputs"
+            onChange={()=>searchKeyInput(event)}
+            value={searchString}
+          />
 
-      <div>
-        <input
-          className="coa-searchPage_input"
-          placeholder="..."
-          onChange={()=>searchKeyInput(event)}
-          value={searchString}
-        />
-
-        <button
-          className="coa-searchPage_search-button"
-          onClick={()=>searchButtonPressed('click')}
-        >
-          Search
-        </button>
-      </div>
+          <button
+            className="coa-search_button"
+            onClick={()=>searchButtonPressed('click')}
+          >
+            Search
+          </button>
+        </div>
+      </PageHeader>
 
       <div id="coa-search_loading_wheel" className="coa-loading_wheel"></div>
 
       <div id="coa-search_results">
-
+        
         <div> &nbsp; {searchResults && searchResults.length} Results
           {searchedTerm && (
             <span>
@@ -99,7 +111,7 @@ const SearchPage = () => {
             key={i}
           ></SearchResult>
         )) }
-        
+
       </div>
 
       {/*

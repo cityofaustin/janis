@@ -28,7 +28,7 @@ const searchIndexBuilder = function(pages) {
           searchIndex.push({
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
-            pageType: pageType,
+            pageType: page.node.pageType,
             summary: page.node[pageType].mission || page.node[pageType].shortDescription || ""
           })
         }

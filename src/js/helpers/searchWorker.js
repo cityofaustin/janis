@@ -2,7 +2,7 @@ export function searchWorker(currentResults, searchString) {
 
   const terms = searchString.split(' ')
 
-  return currentResults.filter( result => {
+  const filteredResults = currentResults.filter( result => {
     const title = result.title.toLocaleLowerCase()
 
     /*
@@ -17,5 +17,7 @@ export function searchWorker(currentResults, searchString) {
 
     return titleHasAllTerms
   })
+
+  return filteredResults
 
 }

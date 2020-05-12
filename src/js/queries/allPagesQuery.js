@@ -11,6 +11,7 @@ query allPagesQuery($after: String) {
   allPages(live: true, first: 20, after: $after) {
     edges {
       node {
+        pageType
         janisUrls
         janisInstances {
           url

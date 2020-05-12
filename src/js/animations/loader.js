@@ -6,7 +6,7 @@ CSS Requirements / Recommendations:
 - While we do that here, their is a slight delay and you may see a "flicker" if not done in css first
 
 HTML Requirements:
--  <div id="coa-loadingWheel"></div>
+-  <div id="coa-<component-anme>_loading-wheel"></div>
 
 See example(s):
 - As of 1/29/20: loader.js is besing used by ./components/pages/forms.js
