@@ -33,9 +33,6 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
   },
-  'clean-static-config': {
-    joplin_appname: 'joplin'
-  },
   'build-search': {
     joplin_appname: 'joplin'
   }
