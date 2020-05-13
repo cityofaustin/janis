@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: start;
   margin-top: 24px;
+  margin-left:0px;
   padding-bottom: 24px;
   border-bottom: 1px solid #dcdee0;
   text-decoration: none;
@@ -40,7 +41,7 @@
 }
 
 .coa-EventListPage__Entry--relatedPage:last-of-type {
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 4px;
 }
 
 .coa-EventListPage__Entry--relatedPage:hover {
