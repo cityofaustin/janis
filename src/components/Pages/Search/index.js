@@ -44,17 +44,17 @@ const SearchPage = () => {
   let [ searchResults, setSearchResults ] = useState(filteredSearch)
 
   const searchButtonPressed = function() {
-    if (typeof window !== 'undefined') {
-      window.location.hash = searchString.toLocaleLowerCase()
-    }
     loader.start({
       contentId: 'coa-search_results',
       loaderId: 'coa-search_loading_wheel',
-    });
+    })
     setTimeout(function(){
+      if (typeof window !== 'undefined') {
+        window.location.hash = searchString.toLocaleLowerCase()
+      }
       const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
       setSearchResults(filteredSearch)
-      loader.end();
+      loader.end()
     },1000)
   }
 
@@ -62,8 +62,8 @@ const SearchPage = () => {
     setSearchString(event.target.value)
 
     // 📝Quick Search Delay...
-    const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
-    setSearchResults(filteredSearch)
+    // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
+    // setSearchResults(filteredSearch)
     // ...
   }
 
@@ -95,24 +95,32 @@ const SearchPage = () => {
 
       <div id="coa-search_loading_wheel" className="coa-loading_wheel"></div>
 
-      <div id="coa-search_results">
-        
-        <div> &nbsp; {searchResults && searchResults.length} Results
-          {searchedTerm && (
-            <span>
-              &nbsp;for <em>"{searchedTerm}"</em>
-            </span>
-          )}
+      <div className="wrapper container-fluid">
+        <div className="row">
+
+          <div id="coa-search_results" className="col-xs-12 col-md-8">
+
+            <div className="coa-search_results-total">
+              {searchResults && searchResults.length} Results
+              {searchedTerm && (
+                <span>
+                  &nbsp;for <em>"{searchedTerm}"</em>
+                </span>
+              )}
+            </div>
+
+            { searchResults && searchResults.map( (page, i) => (
+              <SearchResult
+                page={page}
+                key={i}
+              ></SearchResult>
+            )) }
+
+          </div>
+
         </div>
-
-        { searchResults && searchResults.map( (page, i) => (
-          <SearchResult
-            page={page}
-            key={i}
-          ></SearchResult>
-        )) }
-
       </div>
+
 
       {/*
         TODO: PAGINATION ( https://github.com/cityofaustin/techstack/issues/4358 )

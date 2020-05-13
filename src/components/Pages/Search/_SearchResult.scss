@@ -1,0 +1,23 @@
+.coa-search_result {
+  border-bottom: $coa-border-bottom-small-light-gray;
+  margin-top: $coa-space-level4;
+  padding-bottom: $coa-space-level3;
+  a {
+    text-decoration: none;
+    font-weight: $coa-font-medium;
+    font-size: $coa-font-size-md-small;
+  }
+}
+
+.coa-search_result-summary {
+  margin-top: $coa-space-level2;
+  font-weight: $coa-font-regular;
+  font-size: 1.8rem;
+  line-height: $coa-line-height-xsmall;
+}
+
+.coa-search_result-topics {
+  margin-top: $coa-space-level1;
+  color: #454545;
+  font-size: 1.6rem;
+}

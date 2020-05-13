@@ -112,14 +112,13 @@
     text-align: center;
   }
   @include media($coa-medium-screen) {
-    padding-top: $coa-spacing-xlarge;
-    margin-bottom: $coa-spacing-large;
     h1 {
       text-align: left;
       font-size: $coa-font-size-xxlarge;
     }
   }
   @include media($coa-small-screen) {
+    padding-top: $coa-spacing-xlarge;
     h1 {
       font-size: $coa-font-size-xxlarge;
     }

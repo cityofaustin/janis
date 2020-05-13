@@ -112,9 +112,11 @@ $coa-color-gray: #919191;
 $coa-color-gray-dark: #363636;
 $coa-color-cod-gray: #171717;
 
-//borders
+//borders & border-ish (radius, box shaddows etc...)
 $coa-border-radius-medium: 4px;
 $coa-border-small-light-gray: 1px solid #e6e6e6;
+$coa-border-bottom-small-light-gray: 1.5px solid $coa-color-gray-lighter;
+
 
 $coa-box-shaddow-medium: 0px 3px 6px rgba(0,0,0,0.08);
 

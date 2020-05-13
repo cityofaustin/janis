@@ -10,12 +10,16 @@
 }
 
 .coa-search_inputs {
-  margin: 8px;
+  margin: 9px;
   padding-left: 6px;
   border: none;
   background-color: $coa-color-white;
   font-size: $coa-font-size-md-small;
   font-weight: 100;
+}
+
+.coa-search_inputs:focus {
+  outline: none !important;
 }
 
 .coa-search_button {
@@ -31,6 +35,7 @@
 
 #coa-search_results {
   opacity: 1;
+  margin-bottom: $coa-space-level7;
 }
 
 #coa-search_loading_wheel {
@@ -38,6 +43,13 @@
   margin-top: 100px;
 }
 
+.coa-search_results-total {
+  font-size: $coa-font-size-medium;
+  font-weight: $coa-font-medium;
+  color: $coa-color-darker-grey;
+  margin: $coa-space-level7;
+  margin-left: 0px;
+}
 
 // 📱Styles for screen at or less than 480px
 @media only screen and (max-device-width: $coa-small-screen) {
@@ -53,12 +65,16 @@
     border: $coa-border-small-light-gray;
     border-radius: $coa-border-radius-medium;
     box-shadow: $coa-box-shaddow-medium;
+    font-size: $coa-font-size-xxsmall;
     margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 10px;
   }
   .coa-search_button {
     padding: $coa-space-level2 $coa-space-level3;
+    margin-top: 10px;
+    margin-right: 0px;
     margin-left: 5px;
-    margin-top: 9px;
     height: 42px;
   }
 }

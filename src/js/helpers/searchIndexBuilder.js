@@ -38,12 +38,20 @@ const searchIndexBuilder = function(pages) {
       janisBasePagesWithTopics.forEach( pageType => {
         if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics[pageType]) {
           const pageToAdd = page.node.janisbasepagewithtopics[pageType]
-          searchIndex.push({
+          const searchIndexData = {
             title: pageToAdd.title,
             janisUrls: page.node.janisUrls,
-            pageType: pageType,
+            pageType: page.node.pageType,
             summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
-          })
+          }
+          // Add topic janis instance if instances have parent.
+          if (page.node.janisInstances.length > 0) {
+            const topics = getTopics(page.node.janisInstances, pageToAdd)
+            if (topics.length > 0) {
+              searchIndexData.topics = topics
+            }
+          }
+          searchIndex.push(searchIndexData)
         }
       })
 
@@ -54,7 +62,7 @@ const searchIndexBuilder = function(pages) {
           searchIndex.push({
             title:  pageToAdd.title,
             janisUrls: page.node.janisUrls,
-            pageType: "topicpage",
+            pageType: "topic page",
             summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
@@ -66,6 +74,16 @@ const searchIndexBuilder = function(pages) {
 
   return searchIndex
 
+}
+
+const getTopics = function(instances, pageToAdd) {
+  const instanceIndex = []
+  instances.forEach( instance => {
+    if (instance.parent && instance.parent.title) {
+      instanceIndex.push(instance.parent.title)
+    }
+  })
+  return instanceIndex
 }
 
 
