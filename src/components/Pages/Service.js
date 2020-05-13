@@ -95,7 +95,7 @@ const Service = ({ service, intl }) => {
                 </div>
               </div>
             </div>
-            {!!events && events.length && <RelatedEvents events={events} />}
+            {!!events && !!events.length && <RelatedEvents events={events} />}
           </div>
           <div className="coa-Page__side-content">
             <div className="coa-ServicePage__contacts-desktop">
