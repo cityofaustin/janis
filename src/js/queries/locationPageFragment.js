@@ -108,6 +108,47 @@ const locationPageFragment = `
         }
       }
     }
+    events {
+      id
+      title
+      slug
+      date,
+      startTime,
+      endTime,
+      locations {
+        additionalDetails
+        locationType
+        cityLocation {
+          id
+          title
+          physicalStreet
+          physicalCity
+          physicalState
+          physicalZip
+          physicalUnit
+          slug
+        }
+        remoteLocation {
+          name
+          street
+          city
+          state
+          zip
+          unit
+        }
+      }
+      eventIsFree,
+      registrationUrl,
+      canceled,
+      fees {
+        edges {
+          node {
+            feeLabel
+            fee
+          }
+        }
+      }
+    }
   }
 `;
 

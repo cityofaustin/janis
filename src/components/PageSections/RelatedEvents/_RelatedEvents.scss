@@ -1,0 +1,37 @@
+.coa-RelatedEvents__container {
+  margin-width: $coa-spacing-large $coa-spacing-medium;
+  padding-left: 20px;
+  padding-top: 40px;
+  border-top: 1px solid #DCDEE0;
+}
+
+.coa-RelatedEvents__icon {
+  font-size: 24px;
+  margin-right: 4px;
+  color: #0049c7;
+  display:inline;
+  position: relative;
+  top: 4px;
+  @include media($coa-medium-screen) {
+    font-size: 32px;
+    margin-right: 16px;
+  }
+}
+
+.coa-RelatedEvents__heading {
+  font-size: 24px;
+  color: #171717;
+  font-weight: 500;
+  margin-bottom: 16px;
+  margin-left: 0px;
+  @include media($coa-medium-screen) {
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-left: unset;
+    margin-bottom: 30px;
+  }
+}
+
+.coa-RelatedEvents__events {
+  
+}
