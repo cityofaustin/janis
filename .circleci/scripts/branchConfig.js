@@ -33,6 +33,9 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3'
   },
+  'build-search': {
+    joplin_appname: 'joplin'
+  }
 };
 
 module.exports = {

@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
+import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js'
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -675,6 +676,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
+  // Build search index here before pages is altered.
+  const searchIndex = searchIndexBuilder(pages)
+
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
   if (incrementalPageId) {
@@ -762,6 +766,12 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
 
+  // Add the search page with the site search Index.
+  allPages.push({
+    path: '/search/',
+    template: 'src/components/Pages/Search',
+    getData: () => { return { searchIndex } }
+  })
 
   const data = {
     path: path,
@@ -854,10 +864,6 @@ export default {
     }
 
     const routes = [
-      // {
-      //   path: '/search',
-      //   template: 'src/components/Pages/Search',
-      // },
       {
         path: '404',
         template: 'src/components/Pages/404',
