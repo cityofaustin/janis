@@ -3,8 +3,9 @@
   flex-direction: row;
   justify-content: start;
   margin-top: 24px;
+  margin-left:0px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #DCDEE0;
+  border-bottom: 1px solid #dcdee0;
   text-decoration: none;
   color: #212121;
   @include media($coa-medium-screen) {
@@ -22,10 +23,66 @@
   }
 }
 
+.coa-EventListPage__Entry--relatedPage {
+  margin-top: unset;
+  margin-left: 16px;
+  margin-right: 16px;
+  max-width: 760px;
+  border: 1px solid #dcdee0;
+  padding: 16px;
+  @include media($coa-large-screen) {
+    margin-left: unset;
+    margin-right: unset;
+  }
+}
+
+.coa-EventListPage__Entry--relatedPage:first-of-type {
+  border-radius: 4px 4px 0px 0px;
+}
+
+.coa-EventListPage__Entry--relatedPage:last-of-type {
+  border-radius: 4px;
+}
+
+.coa-EventListPage__Entry--relatedPage:hover {
+  background-color: #0050d8;
+  padding: 16px;
+  div {
+    color: #fff;
+  }
+  a {
+    color: #fff;
+  }
+  .coa-EventListPage__icon {
+    color: #fff;
+  }
+  .coa-EventListPage__DateCal-month {
+    color: #0050d8;
+  }
+  .coa-EventListPage__DateCal-date {
+    color: #0050d8;
+  }
+}
+
+.coa-EventListPage__Entry--relatedLocation {
+  width: auto;
+}
+
+.coa-EventListPage__icon {
+  display: none;
+  @include media($coa-medium-screen) {
+    display: block;
+    font-size: 32px;
+    margin-top: 37px;
+    color: #0049c7;
+  }
+}
+
 .coa-EventListPage__DateCal {
   width: 71px;
   height: 80px;
-  background-color: #F7F9FA;
+  background-color: #f7f9fa;
+  border-radius: 4px;
   @include media($coa-medium-screen) {
     height: 112px;
     width: 88px;
@@ -35,16 +92,16 @@
 .coa-EventListPage__DateCal--homepage {
   width: 71px;
   height: 80px;
-  background-color: #F7F9FA;
+  background-color: #f7f9fa;
   @include media($coa-medium-screen) {
     height: 112px;
     width: 88px;
   }
 }
 
-
 .coa-EventListPage__DateCal-month {
-  background-color: #F1F3F6;
+  border-radius: 4px 4px 0px 0px;
+  background-color: #f1f3f6;
   height: 28px;
   line-height: 28px;
   color: #171717;
@@ -74,8 +131,8 @@
 }
 
 .coa-EventListPage__Canceled {
-  background-color: #D83933;
-  color: #FFFFFF;
+  background-color: #d83933;
+  color: #ffffff;
   height: 27px;
   line-height: 27px;
   margin-bottom: 8px;
@@ -92,14 +149,20 @@
 .coa-EventListPage__EntryDetails {
   margin-left: 24px;
   min-width: 189px;
-  @include media($coa-medium-screen){
+  @include media($coa-medium-screen) {
     width: 637px;
   }
 }
 
 .coa-EventListPage__EntryDetails--homepage {
-  @include media($coa-large-screen){
+  @include media($coa-large-screen) {
     max-width: 250px;
+  }
+}
+
+.coa-EventListPage__EntryDetails--relatedLocation {
+  @include media($coa-large-screen) {
+    max-width: 470px;
   }
 }
 
@@ -125,16 +188,38 @@
   }
 }
 
-.coa-EventListPage__Location{
+.coa-EventListPage__Title {
+  a {
+    text-decoration: none;
+  }
+}
+
+.coa-EventListPage__Location {
   font-size: 16px;
   line-height: 24px;
-  color: #5C5C5C;
+  color: #5c5c5c;
 }
 
 .coa-EventListPage__Cost {
   font-size: 16px;
   line-height: 24px;
-  color: #5C5C5C;
+  color: #5c5c5c;
+}
+
+.coa-EventListPage__Time--relatedPage:hover {
+  color: #fff;
+}
+
+.coa-EventListPage__Title--relatedPage:hover {
+  color: #fff;
+}
+
+.coa-EventListPage__Location--relatedPage:hover {
+  color: #fff;
+}
+
+.coa-EventListPage__Cost--relatedPage:hover {
+  color: #fff;
 }
 
 /* Pagination */
@@ -155,8 +240,8 @@
 }
 
 .coa-EventListPage_page {
-  color: #0049C7;
-  background-color: #F0F0F0;
+  color: #0049c7;
+  background-color: #f0f0f0;
   height: 48px;
   min-width: 48px;
   padding: 5px;
@@ -184,9 +269,9 @@
 }
 
 .coa-EventListPage_page.number-container {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   color: #212121;
-  border: solid #F0F0F0 1px;
+  border: solid #f0f0f0 1px;
   position: relative;
   height: 48px;
   top: -1px;
@@ -201,7 +286,6 @@
   pointer-events: none;
 }
 
-
 .coa-EventListPage_number {
   font-weight: 900;
   position: relative;
@@ -209,8 +293,8 @@
 }
 
 .coa-EventListPage_page.number-container.active {
-  color: #0049C7;
-  background-color: #D9E8F6;
+  color: #0049c7;
+  background-color: #d9e8f6;
   pointer-events: none;
 }
 
@@ -238,31 +322,32 @@
 }
 
 .coa-EventListPage_page:hover {
-  background-color: #0049C7;
-  color: #FFFFFF;
+  background-color: #0049c7;
+  color: #ffffff;
 }
 
 .coa-EventListPage_page.active:hover {
-  background-color: #0049C7;
-  color: #FFFFFF;
+  background-color: #0049c7;
+  color: #ffffff;
 }
 
 .coa-EventListPage_page:hover .coa-CheveronLeftBlue {
-  fill: #FFFFFF;
+  fill: #ffffff;
 }
 
 .coa-EventListPage_page .coa-CheveronLeftBlue:hover {
-  fill: rgba(0,0,0,0);
+  fill: rgba(0, 0, 0, 0);
 }
 
 .coa-EventListPage_page:hover .coa-CheveronRightBlue {
-  fill: #FFFFFF;
+  fill: #ffffff;
 }
 
 .coa-EventListPage_page .coa-CheveronRightBlue:hover {
-  fill: rgba(0,0,0,0);
+  fill: rgba(0, 0, 0, 0);
 }
 
-.coa-CheveronLeftBlue, .coa-CheveronRightBlue {
+.coa-CheveronLeftBlue,
+.coa-CheveronRightBlue {
   pointer-events: none;
 }

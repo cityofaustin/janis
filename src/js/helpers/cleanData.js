@@ -1,8 +1,4 @@
-import { findKey } from 'lodash';
-import filesize from 'filesize';
-import axios from 'axios';
 import moment from 'moment-timezone';
-import Cookies from 'js-cookie';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 
 import { WEEKDAY_MAP } from 'js/helpers/constants';
@@ -239,6 +235,8 @@ export const cleanLocationPage = locationPage => {
 
   locationPage.image = locationPage.physicalLocationPhoto;
 
+  locationPage.events = cleanEvents(locationPage.events)
+
   return { locationPage: locationPage };
 };
 
@@ -327,7 +325,7 @@ export const cleanLinks = (links, pageType) => {
                 topiccollection.slug
               }/${topic.slug}`;
 
-              linkCopy.slug = link.slug || link.sortOrder; //TODO: I think sort order is an old process page thing, we should clean it up
+              linkCopy.slug = link.slug ;
               linkCopy.url = `${pathPrefix || ''}/${link.slug}`;
               linkCopy.text = link.title;
 
@@ -375,7 +373,6 @@ export const cleanDepartmentDirectors = directors => {
   if (!directors || !directors.edges) return null;
 
   return directors.edges.map(({ node: director }) => {
-    // Yes, it's `contact.contact` because of the way the API returns data
     let cleaned = Object.assign({}, director);
 
     return cleaned;
@@ -504,7 +501,7 @@ export const getEventPageUrl = (slug, date) => {
 
 export const formatFeesRange = fees => {
   // on the Event List View, show a range of fees, from the least to the most
-  if (fees.edges && fees.edges.length) {
+  if (fees && fees.edges && fees.edges.length) {
     if (fees.edges.length === 1) {
       return `$${fees.edges[0].node.fee}`;
     }
@@ -514,3 +511,35 @@ export const formatFeesRange = fees => {
   }
   return '';
 };
+
+export const cleanEvents = events => {
+  // takes an array of events and creates the event Url, formats the fees and picks first location
+  if (!events) return null;
+
+  return events.map(event => {
+    return {
+      title: event.title,
+      description: event.description,
+      canceled: event.canceled,
+      date: event.date,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      eventUrl: event.eventUrl ? event.eventUrl : getEventPageUrl(event.slug, event.date),
+      feesRange: formatFeesRange(event.fees),
+      // until we have support for multiple locations, we're taking the first one
+      location: event.locations && event.locations.length ? event.locations[0] : null,
+      eventIsFree: event.eventIsFree,
+      registrationUrl: event.registrationUrl,
+    }
+  });
+};
+
+export const filterEvents = events => {
+  const dateNow = moment()
+    .tz('America/Chicago')
+    .format('YYYY-MM-DD');
+
+  return events.filter(e => moment(e.date).isSameOrAfter(dateNow)).slice(0, 3);
+}
+
+
