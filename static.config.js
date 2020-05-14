@@ -113,11 +113,11 @@ const getTopicPageData = async (page, instance, client) => {
         edge => !topLinkIds.includes(edge.node.pageId) && edge.node.page.live,
       )
       .map(edge => {
-        let linkedPage = edge.node.page;
+        let page = edge.node.page;
         return {
-          pageType: linkedPage.pageType,
-          title: linkedPage.title,
-          url: `${instance.url}${linkedPage.slug}`,
+          pageType: page.pageType,
+          title: page.title,
+          url: `${instance.url}${page.slug}`,
         };
       });
   } else {
