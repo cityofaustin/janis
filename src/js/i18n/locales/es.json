@@ -145,9 +145,5 @@
   "events.noon": "Mediodía",
   "events.upcoming": "Próximos eventos",
   "events.viewAll": "Ver todos los eventos",
-  "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin",
-  "news.news": "🤠",
-  "news.fromLine": "🌵 {fromDepartment}",
-  "news.fromAndByLine": "🌵 {fromDepartment}, 🤠 {byDepartment}",
-  "news.publishedDate": "🤠 {date}"
+  "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin"
 }
