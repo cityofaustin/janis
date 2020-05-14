@@ -18,10 +18,6 @@
   font-weight: 100;
 }
 
-.coa-search_inputs:focus {
-  outline: none !important;
-}
-
 .coa-search_button {
   color: $coa-color-white;
   font-weight: $coa-font-medium;
@@ -46,6 +42,8 @@
 .coa-search_results-total {
   font-size: $coa-font-size-medium;
   font-weight: $coa-font-medium;
+  line-height: $coa-line-height-medium;
+
   color: $coa-color-darker-grey;
   margin: $coa-space-level7;
   margin-left: 0px;

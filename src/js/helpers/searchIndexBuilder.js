@@ -25,12 +25,30 @@ const searchIndexBuilder = function(pages) {
       // - If so, Add it to our search index.
       janisPages.forEach( pageType => {
         if (page.node[pageType]) {
-          searchIndex.push({
+          const searchIndexData = {
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
             pageType: page.node.pageType,
             summary: page.node[pageType].mission || page.node[pageType].shortDescription || ""
-          })
+          }
+          if (pageType === "eventpage") {
+            searchIndexData.date = page.node[pageType].date
+            searchIndexData.startTime = page.node[pageType].startTime
+            searchIndexData.startTime = page.node[pageType].endTime
+            searchIndexData.locations = page.node[pageType].locations.filter( l => l.cityLocation && l.cityLocation.title )
+            if (page.node[pageType].registrationUrl) {
+              searchIndexData.registrationUrl = page.node[pageType].registrationUrl
+            }
+            if (page.node[pageType].eventIsFree) {
+              searchIndexData.fees = "eventIsFree"
+            } else {
+              searchIndexData.fees = page.node[pageType].fees
+            }
+          }
+          if (pageType === "locationpage") {
+            console.log("locationpage :", page.node[pageType])
+          }
+          searchIndex.push(searchIndexData)
         }
       })
 
