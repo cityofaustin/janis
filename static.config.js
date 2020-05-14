@@ -7,7 +7,7 @@ import moment from 'moment-timezone';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js'
+import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -30,7 +30,7 @@ import {
   getOfferedByFromDepartments,
   getEventPageUrl,
   formatFeesRange,
-  cleanEvents
+  cleanEvents,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -177,7 +177,9 @@ const getTopicCollectionPageData = async (
           .map(topPageEdge => ({
             pageType: topPageEdge.node.pageType,
             title: topPageEdge.node.title,
-            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${topPageEdge.node.slug}/`,
+            url: `${instanceOfPage.url}${edge.node.page.topicpage.slug}/${
+              topPageEdge.node.slug
+            }/`,
           })),
       }));
   } else {
@@ -594,7 +596,7 @@ const getPagesOfGuidesData = async client => {
         id: guidePage.node.id,
       });
 
-      let url ='/'
+      let url = '/';
 
       if (
         guideUrl.allPages &&
@@ -677,7 +679,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   }
 
   // Build search index here before pages is altered.
-  const searchIndex = searchIndexBuilder(pages)
+  const searchIndex = searchIndexBuilder(pages);
 
   // This is really something that should happen in joplin,
   // but let's just use janis to do it for now
@@ -737,8 +739,21 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   let allPages = await Promise.all(
     pages.map(pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
+        return Promise.all(
+          pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
+            buildPageAtUrl(
+              pageAtUrlInfo.node,
+              instanceOfPage,
+              client,
+              pagesOfGuidesData,
+            ),
+          ),
+        );
+      }
+
+      // not all pages have instances (events and locations not under departments)
       return Promise.all(
-        pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
+        pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
           buildPageAtUrl(
             pageAtUrlInfo.node,
             instanceOfPage,
@@ -747,19 +762,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
           ),
         ),
       );
-    }
-
-    // not all pages have instances (events and locations not under departments)
-    return Promise.all(
-      pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
-        buildPageAtUrl(
-          pageAtUrlInfo.node,
-          instanceOfPage,
-          client,
-          pagesOfGuidesData,
-        ),
-      ),
-    );
     }),
   );
 
@@ -770,8 +772,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => { return { searchIndex } }
-  })
+    getData: () => {
+      return { searchIndex };
+    },
+  });
 
   const data = {
     path: path,
