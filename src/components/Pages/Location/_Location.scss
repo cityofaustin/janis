@@ -5,20 +5,29 @@
 .coa-LocationPage__content-container {
   flex-direction: column;
   max-width: 758px;
-  margin-bottom: 2rem;
 }
 
 .coa-LocationPage__header {
+  background-color: #ffffff;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1.6rem;
-  margin-bottom: 4rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
   @include tablet {
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  @include mobile {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  margin-bottom: 3rem;
+  @include desktop {
+    margin-bottom: 5rem;
+  }
+  @include mobile {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -31,40 +40,48 @@
   font-size: 4rem;
 
   @include mobile {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     line-height: 3.6rem;
-    padding-top: 1.6rem;
-  }
-
-  @include mobile-and-tablet {
-    text-align: left;
   }
 }
 
-$coa-location-page-section-background: #f7f7f7;
+$coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__section {
   background-color: $coa-location-page-section-background;
 
-  @include tablet-and-desktop {
+  @include desktop {
+    padding: 8rem;
+  }
+  @include tablet {
     padding: 6rem;
+    width: 704px;
+    margin-left: auto;
+    margin-right: auto;
   }
   @include mobile {
     padding: 2rem;
   }
 
-  &:not(:last-child) {
-    margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  @include mobile {
+    margin-bottom: 1.5rem;
   }
 }
 
 .coa-LocationPage__sub-section {
   &:not(:last-child) {
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
+    @include mobile {
+      padding-bottom: 2rem;
+    }
     @include gray-bottom-border;
   }
   &:not(:first-child) {
-    padding-top: 2rem;
+    padding-top: 3rem;
+    @include mobile {
+      padding-top: 2rem;
+    }
   }
 }
 
@@ -83,6 +100,7 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__sub-section-title {
   font-weight: bold;
+  font-size: 40px;
   line-height: 1;
 
   @include mobile {
@@ -161,16 +179,23 @@ $coa-location-page-section-background: #f7f7f7;
   border-radius: 4px;
   font-size: 1.7rem;
   line-height: 2.4rem;
+  border: 1px solid #dcdee0;
 }
 
 .coa-LocationPage__service-title {
   font-weight: bolder;
   padding: 2rem;
+  @include mobile {
+    padding: 0.8rem;
+  }
   border-bottom: 1px solid #dddfe1;
 }
 
 .coa-LocationPage__service-info-container {
   padding: 2rem;
+  @include mobile {
+    padding: 0.8rem;
+  }
 }
 
 .coa-LocationPage__service-phone-container {
@@ -180,17 +205,19 @@ $coa-location-page-section-background: #f7f7f7;
   }
 }
 
-.coa-LocationPage__service-hours-container {
-  padding-top: 2rem;
-}
-
 .coa-LocationPage__table-service-label {
   min-width: 11rem;
+  @include mobile {
+    min-width: 10rem;
+  }
 }
 
 .coa-LocationPage__service-hours-menu {
   color: $coa-color-primary;
   padding-top: 0.5rem;
+  background-color: #f6f6f6;
+  padding: 0.8rem;
+  border-radius: 4px;
 
   &:hover {
     cursor: pointer;
@@ -199,6 +226,9 @@ $coa-location-page-section-background: #f7f7f7;
 
 .coa-LocationPage__service-link {
   padding: 2rem;
+  @include mobile {
+    padding: 0.8rem;
+  }
   border-top: 1px solid #dddfe1;
   color: $coa-color-primary;
 
@@ -277,3 +307,6 @@ $coa-location-page-section-background: #f7f7f7;
   }
 }
 
+.coa-LocationPage__container {
+  background-color: #f3f3f3;
+}
