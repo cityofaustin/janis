@@ -1,7 +1,7 @@
 import React, { useState, useEffect  } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
-import { events as i18n } from 'js/i18n/definitions';
+import { search as i18n } from 'js/i18n/definitions';
 
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
@@ -75,7 +75,7 @@ const SearchPage = () => {
       </Head>
 
       <PageHeader contentType={'search'}>
-        {title}
+        {intl.formatMessage(i18n.search)}
         <div className="coa-search_bar_container">
           <input
             id="coa-search_input"
@@ -109,10 +109,10 @@ const SearchPage = () => {
               )}
             </div>
 
-            { searchResults && searchResults.map( (page, i) => (
+            { searchResults && searchResults.map( (page, index) => (
               <SearchResult
                 page={page}
-                key={i}
+                key={index}
               ></SearchResult>
             )) }
 

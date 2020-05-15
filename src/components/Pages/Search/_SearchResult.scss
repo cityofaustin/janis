@@ -1,5 +1,5 @@
 .coa-search_result {
-  border-bottom: $coa-border-bottom-small-light-gray;
+  border-bottom: $coa-border-small-light-gray;
   margin-top: $coa-space-level4;
   padding-bottom: $coa-space-level3;
   a {
@@ -21,4 +21,18 @@
   line-height: $coa-line-height-xxsmall;
   color: #454545;
   font-size: 1.6rem;
+}
+
+// .coa-search_result {
+//   border-bottom: $coa-border-small-light-gray;
+//   margin-top: $coa-space-level4;
+//   padding-bottom: $coa-space-level3;
+// }
+
+.coa-search_results-calendar {
+  height: 112px;
+  .coa-EventListPage__DateCal-date {
+    line-height: 70px;
+    font-size: 4.8rem;
+  }
 }

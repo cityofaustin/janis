@@ -34,19 +34,21 @@ const searchIndexBuilder = function(pages) {
           if (pageType === "eventpage") {
             searchIndexData.date = page.node[pageType].date
             searchIndexData.startTime = page.node[pageType].startTime
-            searchIndexData.startTime = page.node[pageType].endTime
-            searchIndexData.locations = page.node[pageType].locations.filter( l => l.cityLocation && l.cityLocation.title )
+            searchIndexData.endTime = page.node[pageType].endTime
+            searchIndexData.locations = page.node[pageType].locations
+            searchIndexData.eventIsFree = page.node[pageType].eventIsFree
             if (page.node[pageType].registrationUrl) {
               searchIndexData.registrationUrl = page.node[pageType].registrationUrl
             }
             if (page.node[pageType].eventIsFree) {
-              searchIndexData.fees = "eventIsFree"
+              searchIndexData.feesRange = ""
             } else {
-              searchIndexData.fees = page.node[pageType].fees
+              const feesRange = page.node[pageType].fees.edges.map(f=>"$"+f.node.fee)
+              searchIndexData.feesRange = feesRange.join()
             }
           }
           if (pageType === "locationpage") {
-            console.log("locationpage :", page.node[pageType])
+            // console.log("locationpage :", page.node[pageType])
           }
           searchIndex.push(searchIndexData)
         }
