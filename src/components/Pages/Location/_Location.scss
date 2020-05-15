@@ -9,11 +9,13 @@
 }
 
 .coa-LocationPage__header {
+  background-color: #ffffff;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1.6rem;
-  margin-bottom: 4rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 3rem;
   padding-left: 2rem;
   padding-right: 2rem;
   @include tablet {
@@ -47,24 +49,22 @@ $coa-location-page-section-background: #ffffff;
   background-color: $coa-location-page-section-background;
 
   @include tablet-and-desktop {
-    padding: 6rem;
+    padding: 8rem;
   }
   @include mobile {
     padding: 2rem;
   }
 
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+  margin-bottom: 3rem;
 }
 
 .coa-LocationPage__sub-section {
   &:not(:last-child) {
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
     @include gray-bottom-border;
   }
   &:not(:first-child) {
-    padding-top: 2rem;
+    padding-top: 3rem;
   }
 }
 
@@ -83,6 +83,7 @@ $coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__sub-section-title {
   font-weight: bold;
+  font-size: 40px;
   line-height: 1;
 
   @include mobile {
