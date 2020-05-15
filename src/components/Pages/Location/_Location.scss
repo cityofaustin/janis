@@ -205,12 +205,6 @@ $coa-location-page-section-background: #ffffff;
   }
 }
 
-.coa-LocationPage__service-hours-container {
-  @include tablet-and-desktop {
-    padding-top: 2rem;
-  }
-}
-
 .coa-LocationPage__table-service-label {
   min-width: 11rem;
   @include mobile {
