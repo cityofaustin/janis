@@ -25,15 +25,15 @@ const LocationPage = ({ locationPage }) => {
   } = locationPage ? { locationPage } : useRouteData();
 
   return (
-    <div>
+    <div className="coa-LocationPage__container">
       <Head>
         <title>{title}</title>
       </Head>
+      <div className="coa-LocationPage__header">
+        <i className="material-icons coa-LocationPage__header-icon">place</i>
+        <h1 className="coa-LocationPage__header-title">{title}</h1>
+      </div>
       <div className="coa-Page__all-of-the-content coa-LocationPage__content-container">
-        <div className="coa-LocationPage__header">
-          <i className="material-icons coa-LocationPage__header-icon">place</i>
-          <h1 className="coa-LocationPage__header-title">{title}</h1>
-        </div>
         <LocationInfo
           phone={phone}
           email={email}
