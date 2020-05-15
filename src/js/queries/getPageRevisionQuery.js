@@ -8,6 +8,7 @@ import locationPageFragment from './locationPageFragment';
 import officialDocumentPageFragment from './officialDocumentPageFragment';
 import topicCollectionFragment from './topicCollectionFragment';
 import topicFragment from './topicFragment';
+import newsPageFragment from './newsPageFragment';
 
 // todo in the distant future:
 // * figure out duplicate fragment issues
@@ -80,6 +81,14 @@ const janisInstanceFragment = `
     grandparent {
       url
       title
+    }
+    fromDepartment {
+      title
+      url
+    }
+    byDepartment {
+      title
+      url
     }
   }
 `;
@@ -234,6 +243,21 @@ export const getFormPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getNewsPageRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asNewsPage {
+        ...newsPageInfo  
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${newsPageFragment}
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
   official_document: getOfficialDocumentsPageRevisionQuery,
@@ -245,6 +269,7 @@ export const getPageRevisionQuery = {
   topiccollection: getTopicCollectionRevisionQuery,
   guide: getGuidePageRevisionQuery,
   form: getFormPageRevisionQuery,
+  news: getNewsPageRevisionQuery,
 };
 
 export const getAsPage = {
@@ -257,5 +282,6 @@ export const getAsPage = {
   topic: 'asTopicPage',
   topiccollection: 'asTopicCollectionPage',
   guide: 'asGuidePage',
-  form: 'asFormContainer'
+  form: 'asFormContainer',
+  news: 'asNewsPage',
 };

@@ -5,6 +5,7 @@ import locationPageFragment from './locationPageFragment';
 import eventPageFragment from './eventPageFragment';
 import documentPageFragment from './documentPageFragment';
 import guidePageLiveFragment from './guidePageLiveFragment';
+import newsPageFragment from './newsPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery($after: String) {
@@ -24,6 +25,19 @@ query allPagesQuery($after: String) {
             title
             id
           }
+          fromDepartment {
+            id
+            title
+            url
+          }
+          byDepartment {
+            id
+            title
+            url
+          }
+        }
+        newspage {
+          ...newsPageInfo
         }
         eventpage {
           ...eventPageInfo
@@ -154,7 +168,7 @@ query allPagesQuery($after: String) {
       endCursor
     }
   }
-}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}${newsPageFragment}
 `;
 
 export default siteStructureQuery;
