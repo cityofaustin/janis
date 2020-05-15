@@ -4,16 +4,16 @@ import { date as i18n } from 'js/i18n/definitions';
 
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
 
-
-
 const SearchResult = ({page, index}) => {
 
   const intl = useIntl();
 
   if ( page.pageType === "event page" ) {
-    return <EventPage page={page} intl={intl}></EventPage>
+    return <EventPage page={page} intl={intl}/>
+  } else if ( page.pageType === "officialdocumentpagedocument") {
+    return <OfficialDocumentPageDocument page={page} intl={intl}/>
   } else {
-    return <DefaultPage page={page} intl={intl}></DefaultPage>
+    return <DefaultPage page={page} intl={intl}/>
   }
 
 }
@@ -47,22 +47,58 @@ const DefaultPage = function({ page, intl }) {
       )}
 
       { page.pageType === "location page" && (
-        <div>
-          Location page! > TODO: Need address
+        <div className="coa-search_result-summary">
+          <i className="material-icons coa-LocationPage__header-icon">place</i>
+          - Location page 📝TODO: Need address
         </div>
       )}
 
       { page.pageType === "topic collection page" && (
-        <div> 📭NO META DATA FOR: topic collection page </div>
+        <div className="coa-search_result-summary">
+          📭NO Additional Info for <strong>topic collection page</strong>
+        </div>
       )}
 
       { page.pageType === "topic page" && (
-        <div> 📭NO META DATA FOR: topic page </div>
+        <div className="coa-search_result-summary">
+          📭NO Additional Info for: <strong>topic page</strong>
+        </div>
       )}
 
     </div>
   )
 
+}
+
+const OfficialDocumentPageDocument = function({page, intl}) {
+
+  return (
+    <div className="coa-search_result">
+
+      <div className="coa-search_result-summary">
+        {page.date}
+      </div>
+      <div className="coa-search_result-title">
+        {page.title}
+      </div>
+      <div className="coa-search_result-summary">
+        {page.summary}
+      </div>
+      <div className="coa-search_result-topics">
+        Document:
+        <a
+          style={{
+            fontSize: "18px",
+            paddingTop: "10px;"
+          }}
+          href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+page.document[0].filename}
+        >
+          &nbsp; {page.document[0].filename}
+        </a>
+      </div>
+    </div>
+
+  )
 }
 
 

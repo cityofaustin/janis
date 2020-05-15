@@ -17,9 +17,10 @@ import { loader } from 'js/animations/loader';
 const SearchPage = () => {
 
   const intl = useIntl();
-  const { searchIndex } = useRouteData();
+  let { searchIndex } = useRouteData();
   const title = "Search" // TODO: ⚠️useIntl
   let searchedTerm = ""
+  let showDocs = false
 
   useEffect(() => {
     const input = document.getElementById("coa-search_input")
@@ -28,7 +29,15 @@ const SearchPage = () => {
 
   // Check the url has for a search term to apply
   if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-    searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
+    const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
+    searchedTerm = queryArr[0]
+    if (queryArr[1] === 'docs') {
+      showDocs=true
+    }
+  }
+
+  if (!showDocs) {
+    searchIndex = searchIndex.filter( p => p.pageType !== "officialdocumentpagedocument")
   }
 
   // User react hook to make our input dynamic
@@ -50,7 +59,7 @@ const SearchPage = () => {
     })
     setTimeout(function(){
       if (typeof window !== 'undefined') {
-        window.location.hash = searchString.toLocaleLowerCase()
+        window.location.hash = searchString.toLocaleLowerCase() + (showDocs ? "&docs" : "")
       }
       const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
       setSearchResults(filteredSearch)
@@ -113,6 +122,7 @@ const SearchPage = () => {
               <SearchResult
                 page={page}
                 key={index}
+                showDocs
               ></SearchResult>
             )) }
 

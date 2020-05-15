@@ -71,6 +71,22 @@ const searchIndexBuilder = function(pages) {
               searchIndexData.topics = topics
             }
           }
+          if (pageType === "officialdocumentpage") {
+            // console.log("officialdocumentpage :", page.node.janisbasepagewithtopics[pageType].documents.edges.node)
+            page.node.janisbasepagewithtopics[pageType].documents.edges.forEach( doc => {
+
+              // console.log("author", doc.node)
+              searchIndex.push({
+                pageType: 'officialdocumentpagedocument',
+                title: doc.node.title,
+                summary: doc.node.summary,
+                date: doc.node.date,
+                janisUrls: [doc.node.document.filename],
+                document: [doc.node.document]
+              })
+            })
+
+          }
           searchIndex.push(searchIndexData)
         }
       })

@@ -9,6 +9,11 @@
   }
 }
 
+.coa-search_result-title {
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-md-small;
+}
+
 .coa-search_result-summary {
   margin-top: $coa-space-level2;
   font-weight: $coa-font-regular;

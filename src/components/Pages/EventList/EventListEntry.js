@@ -138,12 +138,3 @@ const EventListEntry = ({ event, homepage, relatedPage, relatedLocation, isSearc
 };
 
 export default EventListEntry;
-
-// <Link
-//   to={event.eventUrl}
-//   className={classNames('coa-EventListPage__Entry', {
-//     'coa-EventListPage__Entry--homepage': homepage,
-//     'coa-EventListPage__Entry--relatedPage': relatedPage,
-//     'coa-EventListPage__Entry--relatedLocation': relatedLocation,
-//   })}
-// >
