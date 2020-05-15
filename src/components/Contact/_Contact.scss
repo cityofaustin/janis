@@ -81,6 +81,9 @@ This will enable proper line wrapping for the :last-child.
 }
 
 .coa-ContactItem__svg {
+  // Getting these to line up with material icons isn't pretty
+  margin-right: 6px !important;
+
   svg {
     // height: $coa-font-size-medium; fb icon looks better this way, twitter is a little small
     //   maybe figure out an icon set for these in the future to suppliment material-icons
@@ -90,6 +93,10 @@ This will enable proper line wrapping for the :last-child.
     path {
       fill: $coa-color-primary;
     }
+
+    // Getting these to line up with material icons isn't pretty
+    margin-left: -4px;
+
     // @include media($coa-medium-screen) {
     //   height: $coa-font-size-small - .1rem;
     //   width: $coa-font-size-small - .1rem;
