@@ -179,6 +179,7 @@ $coa-location-page-section-background: #ffffff;
   border-radius: 4px;
   font-size: 1.7rem;
   line-height: 2.4rem;
+  border: 1px solid #dcdee0;
 }
 
 .coa-LocationPage__service-title {
@@ -204,11 +205,15 @@ $coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__table-service-label {
   min-width: 11rem;
+  @include mobile {
+    min-width: 10rem;
+  }
 }
 
 .coa-LocationPage__service-hours-menu {
   color: $coa-color-primary;
   padding-top: 0.5rem;
+  background-color: #f6f6f6;
 
   &:hover {
     cursor: pointer;
