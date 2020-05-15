@@ -5,7 +5,6 @@
 .coa-LocationPage__content-container {
   flex-direction: column;
   max-width: 758px;
-  margin-bottom: 2rem;
 }
 
 .coa-LocationPage__header {
@@ -15,15 +14,20 @@
   margin-right: auto;
   padding-top: 6rem;
   padding-bottom: 6rem;
+  @include tablet {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  @include mobile {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
   margin-bottom: 3rem;
   @include desktop {
     margin-bottom: 5rem;
   }
-  padding-left: 2rem;
-  padding-right: 2rem;
-  @include tablet {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  @include mobile {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -36,9 +40,8 @@
   font-size: 4rem;
 
   @include mobile {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     line-height: 3.6rem;
-    padding-top: 1.6rem;
   }
 }
 
@@ -61,15 +64,24 @@ $coa-location-page-section-background: #ffffff;
   }
 
   margin-bottom: 3rem;
+  @include mobile {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .coa-LocationPage__sub-section {
   &:not(:last-child) {
     padding-bottom: 3rem;
+    @include mobile {
+      padding-bottom: 2rem;
+    }
     @include gray-bottom-border;
   }
   &:not(:first-child) {
     padding-top: 3rem;
+    @include mobile {
+      padding-top: 2rem;
+    }
   }
 }
 
