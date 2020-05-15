@@ -16,11 +16,14 @@
   padding-top: 6rem;
   padding-bottom: 6rem;
   margin-bottom: 3rem;
+  @include desktop {
+    margin-bottom: 5rem;
+  }
   padding-left: 2rem;
   padding-right: 2rem;
   @include tablet {
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 
@@ -37,10 +40,6 @@
     line-height: 3.6rem;
     padding-top: 1.6rem;
   }
-
-  @include mobile-and-tablet {
-    text-align: left;
-  }
 }
 
 $coa-location-page-section-background: #ffffff;
@@ -48,8 +47,14 @@ $coa-location-page-section-background: #ffffff;
 .coa-LocationPage__section {
   background-color: $coa-location-page-section-background;
 
-  @include tablet-and-desktop {
+  @include desktop {
     padding: 8rem;
+  }
+  @include tablet {
+    padding: 6rem;
+    width: 704px;
+    margin-left: auto;
+    margin-right: auto;
   }
   @include mobile {
     padding: 2rem;
