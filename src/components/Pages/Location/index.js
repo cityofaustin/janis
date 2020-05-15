@@ -25,7 +25,7 @@ const LocationPage = ({ locationPage }) => {
   } = locationPage ? { locationPage } : useRouteData();
 
   return (
-    <div>
+    <div className="coa-LocationPage__container">
       <Head>
         <title>{title}</title>
       </Head>

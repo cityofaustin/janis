@@ -41,7 +41,7 @@
   }
 }
 
-$coa-location-page-section-background: #f7f7f7;
+$coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__section {
   background-color: $coa-location-page-section-background;
@@ -277,3 +277,6 @@ $coa-location-page-section-background: #f7f7f7;
   }
 }
 
+.coa-LocationPage__container {
+  background-color: #f3f3f3;
+}
