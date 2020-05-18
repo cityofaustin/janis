@@ -148,6 +148,9 @@ const cleanDepartmentPageData = page => {
   return { department: departmentPage };
 };
 
+const cleanNewsPageData = (newsPage, instanceOfPage, lastPublishedAt) => {
+  return { ...newsPage, ...instanceOfPage, lastPublishedAt };
+};
 const getTopicCollectionPageData = async (page, instanceOfPage, client) => {
   let topicCollectionPage = { ...page };
 
@@ -452,6 +455,8 @@ const buildPageAtUrl = async (
     janisbasepagewithtopics,
     allDepartments,
     allEvents,
+    newspage,
+    lastPublishedAt,
   } = pageAtUrlInfo;
   if (departmentpage) {
     return {
@@ -581,6 +586,16 @@ const buildPageAtUrl = async (
       template: 'src/components/Pages/EventList',
       // getAllEvents takes client and boolean: if we should hide the cancelled events
       getData: () => getAllEvents(client, false),
+    };
+  }
+
+  // If we are a news page
+  if (newspage) {
+    return {
+      path: instanceOfPage.url,
+      template: 'src/components/Pages/News',
+      getData: () =>
+        cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
   }
 };
@@ -767,7 +782,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
-
   // Add the search page with the site search Index.
   allPages.push({
     path: '/search/',

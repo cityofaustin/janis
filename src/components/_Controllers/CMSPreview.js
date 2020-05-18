@@ -19,6 +19,7 @@ import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
+import NewsPage from 'components/Pages/News';
 
 import {
   cleanInformationForPreview,
@@ -62,19 +63,20 @@ class CMSPreview extends Component {
 
       page.contextualNavData = {
         relatedTo: [],
-        offeredBy: !!page.departments && !!page.departments[0]
-          ? [
-              {
-                title: page.departments[0].title,
-                url: `\${page.departments[0].slug}`,
-              },
-            ]
-          : [
-              {
-                title: 'no department selected',
-                url: 'no-department',
-              }
-            ],
+        offeredBy:
+          !!page.departments && !!page.departments[0]
+            ? [
+                {
+                  title: page.departments[0].title,
+                  url: `\${page.departments[0].slug}`,
+                },
+              ]
+            : [
+                {
+                  title: 'no department selected',
+                  url: 'no-department',
+                },
+              ],
         parent: !!janis_instance.parent
           ? janis_instance.parent
           : {
@@ -87,7 +89,7 @@ class CMSPreview extends Component {
       };
 
       this.setState({
-        page: page,
+        page: { ...page, ...janis_instance },
       });
     });
   }
@@ -163,22 +165,13 @@ class CMSPreview extends Component {
         />
         <Route
           path="/form"
-          render={props => (
-            <FormContainer
-              formContainer={page}
-            />
-          )}
+          render={props => <FormContainer formContainer={page} />}
         />
-        <Route
-          path="/guide"
-          render={props => <Guide guidePage={page} />}
-        />
+        <Route path="/guide" render={props => <Guide guidePage={page} />} />
         <Route
           path="/location"
           render={props => (
-            <LocationPage
-              locationPage={cleanLocationPage(page).locationPage}
-            />
+            <LocationPage locationPage={cleanLocationPage(page).locationPage} />
           )}
         />
         <Route
@@ -192,6 +185,7 @@ class CMSPreview extends Component {
             return <EventPage eventPage={eventPage} />;
           }}
         />
+        <Route path="/news" render={props => <NewsPage newsPage={page} />} />
       </Switch>
     );
   }

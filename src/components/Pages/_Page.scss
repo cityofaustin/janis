@@ -11,7 +11,7 @@
 
 .coa-Page__side-content {
   display: none;
-  @include media($coa-medium-screen) {
+  @include media($coa-large-screen) {
     display: inherit;
   }
   padding-left: 2rem;
@@ -19,7 +19,7 @@
 }
 
 .coa-Page__contacts-mobile {
-  @include media($coa-medium-screen) {
+  @include media($coa-large-screen) {
     display: none;
   }
   background: #f7f7f7;

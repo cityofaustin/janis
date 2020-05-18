@@ -121,5 +121,9 @@
   "events.public": "Open to the public",
   "events.details": "Details",
   "events.allEvents": "All events",
-  "events.getDirections": "Get directions"
+  "events.getDirections": "Get directions",
+  "news.news": "News",
+  "news.fromLine": "From {fromDepartment}",
+  "news.fromAndByLine": "From {fromDepartment}, written by {byDepartment}",
+  "news.publishedDate": "Published {date}"
 }
