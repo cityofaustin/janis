@@ -6,6 +6,7 @@
     text-decoration: none;
     font-weight: $coa-font-medium;
     font-size: $coa-font-size-md-small;
+    border-bottom: none;
   }
 }
 
@@ -28,16 +29,46 @@
   font-size: 1.6rem;
 }
 
-// .coa-search_result {
-//   border-bottom: $coa-border-small-light-gray;
-//   margin-top: $coa-space-level4;
-//   padding-bottom: $coa-space-level3;
-// }
+.coa-search_result-locations {
+  display: flex;
+}
 
-.coa-search_results-calendar {
+
+
+/*
+  Most of the event page results are styled by ../_Event.scss.
+  .. Here, we have specific overrides from classes placed in../EventList/EventListEntry.js
+*/
+.coa-SearchPage_result {
+  margin-top: $coa-space-level4;
+  padding-bottom: $coa-space-level3;
+}
+
+.coa-SearchPage_results-calendar {
   height: 112px;
+  min-width: 88px;
   .coa-EventListPage__DateCal-date {
-    line-height: 70px;
+    line-height: 75px;
+    min-width: 70px;
     font-size: 4.8rem;
   }
+  @include mobile {
+    width: 63px;
+    min-width: 81px;
+  }
+}
+
+// 📱Styles for screen at or less than 480px
+@media only screen and (max-device-width: $coa-small-screen) {
+  .coa-SearchPage_results-calendar {
+    height: 80px;
+    width: 63px !important;
+    min-width: 63px !important;
+    .coa-EventListPage__DateCal-date {
+      line-height: 51px;
+      min-width: 63px !important;
+      font-size: $coa-font-size-md-small;
+    }
+  }
+
 }

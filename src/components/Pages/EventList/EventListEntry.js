@@ -26,7 +26,7 @@ const EventDateCalendar = ({ date, isSearchResult }) => {
 
   return (
     <div className={classNames('coa-EventListPage__DateCal', {
-        'coa-search_results-calendar': isSearchResult
+        'coa-SearchPage_results-calendar': isSearchResult // styled in search component's .scss.
       })}
     >
       <div className="coa-EventListPage__DateCal-month">{momentMonth}</div>
@@ -119,7 +119,7 @@ const EventListEntry = ({ event, homepage, relatedPage, relatedLocation, isSearc
         'coa-EventListPage__Entry--homepage': homepage,
         'coa-EventListPage__Entry--relatedPage': relatedPage,
         'coa-EventListPage__Entry--relatedLocation': relatedLocation,
-        'coa-search_result': isSearchResult
+        'coa-SearchPage_result': isSearchResult
       })}
     >
       <EventDateCalendar date={event.date} isSearchResult/>

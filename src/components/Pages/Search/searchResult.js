@@ -10,7 +10,9 @@ const SearchResult = ({page, index}) => {
 
   if ( page.pageType === "event page" ) {
     return <EventPage page={page} intl={intl}/>
-  } else if ( page.pageType === "officialdocumentpagedocument") {
+  } else if ( page.pageType === "location page" ) {
+    return <LocationPage page={page} intl={intl}/>
+  } else if ( page.pageType === "official document page document") {
     return <OfficialDocumentPageDocument page={page} intl={intl}/>
   } else {
     return <DefaultPage page={page} intl={intl}/>
@@ -49,19 +51,7 @@ const DefaultPage = function({ page, intl }) {
       { page.pageType === "location page" && (
         <div className="coa-search_result-summary">
           <i className="material-icons coa-LocationPage__header-icon">place</i>
-          - Location page 📝TODO: Need address
-        </div>
-      )}
-
-      { page.pageType === "topic collection page" && (
-        <div className="coa-search_result-summary">
-          📭NO Additional Info for <strong>topic collection page</strong>
-        </div>
-      )}
-
-      { page.pageType === "topic page" && (
-        <div className="coa-search_result-summary">
-          📭NO Additional Info for: <strong>topic page</strong>
+          {page.physicalStreet+" #"+page.physicalUnit}
         </div>
       )}
 
@@ -101,58 +91,51 @@ const OfficialDocumentPageDocument = function({page, intl}) {
   )
 }
 
+const LocationPage = function({page, intl}) {
+  const {
+    title,
+    physicalStreet,
+    physicalUnit,
+    physicalCity,
+    physicalState,
+    physicalZip,
+    janisUrls
+  } = page
+
+  return (
+    <div className="coa-search_result coa-search_result-locations">
+      <div style={{display: "inline-block", backgroundColor: '#F7F9FA', width: '88px', textAlign: 'center', paddingTop: 30, marginRight: 20, borderRadius: 4}}>
+        <i className="material-icons coa-LocationPage__header-icon">place</i>
+      </div>
+      <div style={{display: "inline-block"}}>
+        <a href={janisUrls && janisUrls[0]}> {title} </a> <br />
+        {physicalStreet}
+        {physicalUnit && (" #"+physicalUnit)}
+        <br />
+        {physicalCity},
+        {physicalState}
+        {physicalZip}
+      </div>
+    </div>
+  )
+}
+
 
 const EventPage = function({page, intl}) {
 
-  // const daysOfWeek_en = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-  // const daysOfWeek_es = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"]
-  // const monthsOfYear_en = [ "January", "February","March","April","May","June","July","August","September","October","November","December"]
-  // const spanishFullMonths_es = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
-
-  // const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-  //
-  // const formatedDate = page.date.split("-")
-  // const date = new Date(formatedDate[0],formatedDate[1],formatedDate[2])
-  //
-  //
-  // let fees = ""
-  // if (page.fees === "eventIsFree" && !page.registrationUrl) {
-  //   fees = "Event is free"
-  // } else if (page.fees === "eventIsFree" && page.registrationUrl) {
-  //   fees = "Free • Registration required"
-  // } else {
-  //   fees = "MORE STUFF TO DO"
-  // }
-
-  // page.isSearchResult = true
   page.location = page.locations[0] // Add in BUild??? might only
   page.eventUrl = page.janisUrls[0] // Add in BUild???
   if (!page.registrationUrl) {
     page.registrationUrl = []
   }
-  // if (page.feesRange && page.feesRange.length > 0) {
-  //   // const fees = page.feesRange.map(fee=>"$"+fee.fee)
-  //   const fees = []
-  //   for (var i = 0; i < page.feesRange.length; i++) {
-  //     fees.push("$"+page.feesRange[i].fee)
-  //   }
-  //   page.feesRange = fees.join('-')
-  // }
 
-  return ( <EventListEntry event={page} isSearchResult /> )
+  return (
+    <div className="coa-search_result">
+      <EventListEntry event={page} isSearchResult />
+    </div>
+  )
 
 }
-
-  // <a href={page.janisUrls && page.janisUrls[0]}> {page.title} </a> <br />
-  // - - - <br />
-  // Event page TODO: Needs summery, price, weekday, event range.
-  // date: {page.date}<br />
-  // weekday: {daysOfWeek[date.getDay()]}<br />
-  // time: {page.startTime}<br />
-  // summery: {page.summary} <br />
-  // fees: {fees}
-
-
 
 
 export default SearchResult

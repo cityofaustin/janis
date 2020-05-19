@@ -48,7 +48,11 @@ const searchIndexBuilder = function(pages) {
             }
           }
           if (pageType === "locationpage") {
-            // console.log("locationpage :", page.node[pageType])
+            searchIndexData.physicalStreet = page.node[pageType].physicalStreet
+            searchIndexData.physicalUnit = page.node[pageType].physicalUnit
+            searchIndexData.physicalCity = page.node[pageType].physicalCity
+            searchIndexData.physicalState = page.node[pageType].physicalZip
+            searchIndexData.physicalZip = page.node[pageType].physicalZip
           }
           searchIndex.push(searchIndexData)
         }
@@ -72,12 +76,9 @@ const searchIndexBuilder = function(pages) {
             }
           }
           if (pageType === "officialdocumentpage") {
-            // console.log("officialdocumentpage :", page.node.janisbasepagewithtopics[pageType].documents.edges.node)
             page.node.janisbasepagewithtopics[pageType].documents.edges.forEach( doc => {
-
-              // console.log("author", doc.node)
               searchIndex.push({
-                pageType: 'officialdocumentpagedocument',
+                pageType: 'official document page document',
                 title: doc.node.title,
                 summary: doc.node.summary,
                 date: doc.node.date,
@@ -85,7 +86,6 @@ const searchIndexBuilder = function(pages) {
                 document: [doc.node.document]
               })
             })
-
           }
           searchIndex.push(searchIndexData)
         }
