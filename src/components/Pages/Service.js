@@ -39,8 +39,6 @@ const Service = ({ service, intl }) => {
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
-  console.log("title :", title)
-  console.log("shortDescription :", shortDescription)
 
   return (
     <div>

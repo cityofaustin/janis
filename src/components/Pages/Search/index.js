@@ -24,7 +24,12 @@ const SearchPage = () => {
   useEffect(() => {
     const input = document.getElementById("coa-search_input")
     input.focus()
-  }, []);
+    const filteredSearch = searchWorker(searchIndexWithUrl, input.value)
+    setSearchResults(filteredSearch)
+    if (typeof window !== 'undefined') {
+      window.location.hash = input.value.toLocaleLowerCase()
+    }
+  }, [searchIndex]);
 
   // Check the url has for a search term to apply
   if (typeof window !== 'undefined' && window.location.hash.length > 1) {
@@ -40,11 +45,9 @@ const SearchPage = () => {
   // Don't show pages without Url
   const searchIndexWithUrl = searchIndex.filter( page => page.janisUrls.length > 0)
 
-  const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
-
   // Use react hooks to allow dymanic updates without reload
   // - Note: we'll still be able to send these queries to Google Analyticss programatically.
-  let [ searchResults, setSearchResults ] = useState(filteredSearch)
+  let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
 
   const searchButtonPressed = function() {
     loader.start({
@@ -73,7 +76,7 @@ const SearchPage = () => {
     <div>
 
       <Head>
-        <title> {title} </title>
+        <title> {intl.formatMessage(i18n.search)} </title>
       </Head>
 
       <PageHeader contentType={'search'}>
@@ -90,10 +93,12 @@ const SearchPage = () => {
             className="coa-search_button"
             onClick={()=>searchButtonPressed('click')}
           >
-            Search
+            {intl.formatMessage(i18n.search)}
           </button>
         </div>
       </PageHeader>
+
+
 
       <div id="coa-search_loading_wheel" className="coa-loading_wheel"></div>
 
@@ -102,11 +107,15 @@ const SearchPage = () => {
 
           <div id="coa-search_results" className="col-xs-12 col-md-8">
 
+            {searchedTerm && searchResults.length < 1 && (
+              <NoResults />
+            )}
+
             <div className="coa-search_results-total">
-              {searchResults && searchResults.length} Results
-              {searchedTerm && (
+              {searchedTerm && searchResults.length > 0 && (
                 <span>
-                  &nbsp;for <em>"{searchedTerm}"</em>
+                  {searchResults && searchResults.length}
+                  &nbsp;{intl.formatMessage(i18n.results)} <em>"{searchedTerm}"</em>
                 </span>
               )}
             </div>
@@ -135,6 +144,27 @@ const SearchPage = () => {
           />
       */}
 
+    </div>
+  )
+}
+
+const NoResults = function() {
+
+  // TODO: Add '/es' translations 
+
+  return (
+    <div>
+      <div className="coa-search_results-total">
+        0 results
+      </div>
+      <h2 className="coa-search_results-zero-message">
+        There are no matching results. Improve your search results by:
+      </h2>
+      <div className="coa-search_results-zero">
+        • double-checking your spelling <br />
+        • using fewer keywords <br />
+        • searching for something less specific <br />
+      </div>
     </div>
   )
 }

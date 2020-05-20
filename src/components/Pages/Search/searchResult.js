@@ -1,27 +1,25 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
-import { date as i18n } from 'js/i18n/definitions';
+import moment from 'moment-timezone';
 
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
 
-const SearchResult = ({page, index}) => {
 
-  const intl = useIntl();
+const SearchResult = ({ page }) => {
 
   if ( page.pageType === "event page" ) {
-    return <EventPage page={page} intl={intl}/>
+    return <EventPage page={page}/>
   } else if ( page.pageType === "location page" ) {
-    return <LocationPage page={page} intl={intl}/>
+    return <LocationPage page={page}/>
   } else if ( page.pageType === "official document page document") {
-    return <OfficialDocumentPageDocument page={page} intl={intl}/>
+    return <OfficialDocumentPageDocument page={page}/>
   } else {
-    return <DefaultPage page={page} intl={intl}/>
+    return <DefaultPage page={page}/>
   }
 
 }
 
 
-const DefaultPage = function({ page, intl }) {
+const DefaultPage = function({ page }) {
   const {
     title,
     summary,
@@ -33,25 +31,18 @@ const DefaultPage = function({ page, intl }) {
   return (
     <div className="coa-search_result">
 
-      <a href={page.janisUrls && page.janisUrls[0]}> {title} </a> <br />
+      <a href={janisUrls && janisUrls[0]}> {title} </a> <br />
 
-      { page.summary && (
-        <div className="coa-search_result-summary">
-          {page.summary}
+      { summary && (
+        <div className="coa-search_result-text">
+          {summary}
         </div>
       )}
 
-      { (page.topics && page.topics.length > 0) && (
+      { (topics && topics.length > 0) && (
         <div className="coa-search_result-topics">
-          Topic{page.topics.length > 1 ? "s: " : ": "}
-          {page.topics.join(", ")}
-        </div>
-      )}
-
-      { page.pageType === "location page" && (
-        <div className="coa-search_result-summary">
-          <i className="material-icons coa-LocationPage__header-icon">place</i>
-          {page.physicalStreet+" #"+page.physicalUnit}
+          Topic{topics.length > 1 ? "s: " : ": "}
+          {topics.join(", ")}
         </div>
       )}
 
@@ -60,38 +51,48 @@ const DefaultPage = function({ page, intl }) {
 
 }
 
-const OfficialDocumentPageDocument = function({page, intl}) {
+
+const OfficialDocumentPageDocument = function({ page }) {
+  const {
+    title,
+    date,
+    summary,
+    startTime,
+    document,
+    topics,
+  } = page
 
   return (
     <div className="coa-search_result">
 
-      <div className="coa-search_result-summary">
-        {page.date}
+      <div className="coa-search_result-text">
+        {date}
       </div>
       <div className="coa-search_result-title">
-        {page.title}
+        {title}
       </div>
-      <div className="coa-search_result-summary">
-        {page.summary}
+      <div className="coa-search_result-text">
+        {summary}
       </div>
       <div className="coa-search_result-topics">
         Document:
-        <a
-          style={{
-            fontSize: "18px",
-            paddingTop: "10px;"
-          }}
-          href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+page.document[0].filename}
-        >
-          &nbsp; {page.document[0].filename}
+        <a href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+document[0].filename}>
+          &nbsp; {document[0].filename}
         </a>
       </div>
+      { (topics && topics.length > 0) && (
+        <div className="coa-search_result-topics">
+          Topic{topics.length > 1 ? "s: " : ": "}
+          {topics.join(", ")}
+        </div>
+      )}
     </div>
 
   )
 }
 
-const LocationPage = function({page, intl}) {
+
+const LocationPage = function({ page }) {
   const {
     title,
     physicalStreet,
@@ -104,27 +105,25 @@ const LocationPage = function({page, intl}) {
 
   return (
     <div className="coa-search_result coa-search_result-locations">
-      <div style={{display: "inline-block", backgroundColor: '#F7F9FA', width: '88px', textAlign: 'center', paddingTop: 30, marginRight: 20, borderRadius: 4}}>
+      <div className="coa-search_result-icon-container">
         <i className="material-icons coa-LocationPage__header-icon">place</i>
       </div>
-      <div style={{display: "inline-block"}}>
-        <a href={janisUrls && janisUrls[0]}> {title} </a> <br />
-        {physicalStreet}
-        {physicalUnit && (" #"+physicalUnit)}
+      <div>
+        <a href={janisUrls && janisUrls[0]}> {title} </a>
         <br />
-        {physicalCity},
-        {physicalState}
-        {physicalZip}
+        <div className="coa-search_result-text coa-search_results-address">
+          {physicalStreet}{physicalUnit && (" #"+physicalUnit)}
+          <br />
+          {physicalCity}, {physicalState} {physicalZip}
+        </div>
       </div>
     </div>
   )
 }
 
 
-const EventPage = function({page, intl}) {
+const EventPage = function({ page }) {
 
-  page.location = page.locations[0] // Add in BUild??? might only
-  page.eventUrl = page.janisUrls[0] // Add in BUild???
   if (!page.registrationUrl) {
     page.registrationUrl = []
   }

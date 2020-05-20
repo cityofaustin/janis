@@ -7,6 +7,13 @@
   margin-bottom: 37px;
   height: 64px;
   display: flex;
+  @include mobile {
+    background-color: rgba(0,0,0,0);
+    box-shadow: none;
+    border: none;
+    margin-top: 8px;
+    margin-bottom: 0px;
+  }
 }
 
 .coa-search_inputs {
@@ -16,6 +23,16 @@
   background-color: $coa-color-white;
   font-size: $coa-font-size-md-small;
   font-weight: 100;
+  @include mobile {
+    background-color: $coa-color-white;
+    border: $coa-border-small-light-gray;
+    border-radius: $coa-border-radius-medium;
+    box-shadow: $coa-box-shaddow-medium;
+    font-size: $coa-font-size-xxsmall;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 10px;
+  }
 }
 
 .coa-search_button {
@@ -27,6 +44,13 @@
   margin: $coa-space-level2;
   padding: $coa-space-level2 $coa-space-level4;
   opacity: 1;
+  @include mobile {
+    padding: $coa-space-level2 $coa-space-level3;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-left: 5px;
+    height: 42px;
+  }
 }
 
 #coa-search_results {
@@ -49,30 +73,12 @@
   margin-left: 0px;
 }
 
-// 📱Styles for screen at or less than 480px
-@media only screen and (max-device-width: $coa-small-screen) {
-  .coa-search_bar_container {
-    background-color: rgba(0,0,0,0);
-    box-shadow: none;
-    border: none;
-    margin-top: 8px;
-    margin-bottom: 0px;
-  }
-  .coa-search_inputs {
-    background-color: $coa-color-white;
-    border: $coa-border-small-light-gray;
-    border-radius: $coa-border-radius-medium;
-    box-shadow: $coa-box-shaddow-medium;
-    font-size: $coa-font-size-xxsmall;
-    margin-right: 0px;
-    margin-left: 0px;
-    padding-left: 10px;
-  }
-  .coa-search_button {
-    padding: $coa-space-level2 $coa-space-level3;
-    margin-top: 10px;
-    margin-right: 0px;
-    margin-left: 5px;
-    height: 42px;
-  }
+.coa-search_results-zero-message {
+  margin-top: -15px;
+  margin-bottom: 12px;
+}
+
+.coa-search_results-zero {
+  font-size: 1.8rem;
+  line-height: $coa-line-height-small;
 }

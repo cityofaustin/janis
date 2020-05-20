@@ -1,7 +1,7 @@
 .coa-search_result {
   border-bottom: $coa-border-small-light-gray;
   margin-top: $coa-space-level4;
-  padding-bottom: $coa-space-level3;
+  padding-bottom: $coa-space-level4;
   a {
     text-decoration: none;
     font-weight: $coa-font-medium;
@@ -15,24 +15,50 @@
   font-size: $coa-font-size-md-small;
 }
 
-.coa-search_result-summary {
-  margin-top: $coa-space-level2;
+.coa-search_result-text {
+  margin-top: $coa-space-level1;
   font-weight: $coa-font-regular;
   font-size: 1.8rem;
   line-height: $coa-line-height-xsmall;
 }
 
 .coa-search_result-topics {
-  margin-top: $coa-space-level1;
+  margin-top: $coa-space-level2;
   line-height: $coa-line-height-xxsmall;
   color: #454545;
   font-size: 1.6rem;
+  a {
+    font-size: 1.8rem;
+  }
 }
 
 .coa-search_result-locations {
   display: flex;
 }
 
+.coa-search_result-icon-container {
+  display: inline;
+  background-color: #F7F9FA;
+  width: 88px;
+  height: 96px;
+  text-align: center;
+  padding-top: 30px;
+  margin-right: 20px;
+  border-radius: 4px;
+  min-width: 71px;
+  flex-shrink: 0;
+  @include mobile {
+    width: 63px;
+    height: 80px;
+    min-width: 63px;
+    padding-top: 20px;
+
+  }
+}
+
+.coa-search_results-address {
+  color: $coa-color-almost-black;
+}
 
 
 /*
@@ -41,7 +67,7 @@
 */
 .coa-SearchPage_result {
   margin-top: $coa-space-level4;
-  padding-bottom: $coa-space-level3;
+  padding-bottom: 0px;
 }
 
 .coa-SearchPage_results-calendar {
@@ -53,22 +79,13 @@
     font-size: 4.8rem;
   }
   @include mobile {
-    width: 63px;
-    min-width: 81px;
-  }
-}
-
-// 📱Styles for screen at or less than 480px
-@media only screen and (max-device-width: $coa-small-screen) {
-  .coa-SearchPage_results-calendar {
     height: 80px;
-    width: 63px !important;
-    min-width: 63px !important;
+    width: 63px;
+    min-width: 63px;
     .coa-EventListPage__DateCal-date {
       line-height: 51px;
-      min-width: 63px !important;
+      min-width: 63px;
       font-size: $coa-font-size-md-small;
     }
   }
-
 }

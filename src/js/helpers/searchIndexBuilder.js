@@ -35,7 +35,8 @@ const searchIndexBuilder = function(pages) {
             searchIndexData.date = page.node[pageType].date
             searchIndexData.startTime = page.node[pageType].startTime
             searchIndexData.endTime = page.node[pageType].endTime
-            searchIndexData.locations = page.node[pageType].locations
+            searchIndexData.location = page.node[pageType].locations[0]
+            searchIndexData.eventUrl = page.node.janisUrls[0]
             searchIndexData.eventIsFree = page.node[pageType].eventIsFree
             if (page.node[pageType].registrationUrl) {
               searchIndexData.registrationUrl = page.node[pageType].registrationUrl
@@ -44,14 +45,14 @@ const searchIndexBuilder = function(pages) {
               searchIndexData.feesRange = ""
             } else {
               const feesRange = page.node[pageType].fees.edges.map(f=>"$"+f.node.fee)
-              searchIndexData.feesRange = feesRange.join()
+              searchIndexData.feesRange = feesRange.join('-')
             }
           }
           if (pageType === "locationpage") {
             searchIndexData.physicalStreet = page.node[pageType].physicalStreet
             searchIndexData.physicalUnit = page.node[pageType].physicalUnit
             searchIndexData.physicalCity = page.node[pageType].physicalCity
-            searchIndexData.physicalState = page.node[pageType].physicalZip
+            searchIndexData.physicalState = page.node[pageType].physicalState
             searchIndexData.physicalZip = page.node[pageType].physicalZip
           }
           searchIndex.push(searchIndexData)
@@ -69,8 +70,9 @@ const searchIndexBuilder = function(pages) {
             summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           }
           // Add topic janis instance if instances have parent.
+          let topics = []
           if (page.node.janisInstances.length > 0) {
-            const topics = getTopics(page.node.janisInstances, pageToAdd)
+            topics = getTopics(page.node.janisInstances, pageToAdd)
             if (topics.length > 0) {
               searchIndexData.topics = topics
             }
@@ -83,7 +85,8 @@ const searchIndexBuilder = function(pages) {
                 summary: doc.node.summary,
                 date: doc.node.date,
                 janisUrls: [doc.node.document.filename],
-                document: [doc.node.document]
+                document: [doc.node.document],
+                topics: topics
               })
             })
           }
