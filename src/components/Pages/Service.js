@@ -39,7 +39,6 @@ const Service = ({ service, intl }) => {
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
 
-
   return (
     <div>
       <Head>

@@ -93,7 +93,7 @@ const EventDateListDetails = ({ event, homepage, relatedPage, relatedLocation })
     <div
       className={classNames('coa-EventListPage__EntryDetails', {
         'coa-EventListPage__EntryDetails--homepage': homepage,
-        'coa-EventListPage__EntryDetails--relatedLocation': relatedLocation
+        'coa-EventListPage__EntryDetails--relatedLocation': relatedLocation,
       })}
     >
       {canceled && (
