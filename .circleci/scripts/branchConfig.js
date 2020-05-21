@@ -28,14 +28,17 @@ const branchOverrides = {
     REACT_STATIC_PREFETCH_RATE: '10',
   },
   '4325-site-struct': {
-    joplin_appname: 'joplin-pr-import-everything'
+    joplin_appname: 'joplin-pr-import-everything',
   },
   '4289-page-guide': {
-    joplin_appname: 'joplin-pr-v3'
+    joplin_appname: 'joplin-pr-v3',
   },
   'build-search': {
-    joplin_appname: 'joplin'
-  }
+    joplin_appname: 'joplin',
+  },
+  '4422-20-to-10': {
+    joplin_appname: 'joplin',
+  },
 };
 
 module.exports = {
