@@ -8,6 +8,8 @@ import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
 import { loader } from 'js/animations/loader';
 
+import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js'
+
 
 const SearchPage = () => {
 
@@ -110,32 +112,34 @@ const SearchPage = () => {
               )}
             </div>
 
-            { searchResults && searchResults.map( (page, index) => (
-              <SearchResult
-                page={page}
-                key={index}
-              />
-            )) }
+{/*
+
+              { searchResults && searchResults.map( (page, index) => (
+                <SearchResult
+                  page={page}
+                  key={index}
+                />
+              )) }
+
+*/}
+
 
           </div>
 
-        </div>
-      </div>
-
-
-      {/*
-        TODO: PAGINATION ( https://github.com/cityofaustin/techstack/issues/4358 )
-        NOTE: It would be too much to handle all in one with this component like we've
-        done on other pages.
-        - Make paginationContainer.js
           <PaginationContainer
-            results={searchResults}
+            pagesArray={searchResults}
+            PageComponent={SearchResult}
+            intl={intl}
           />
-      */}
+
+        </div>
+
+      </div>
 
     </div>
   )
 }
+
 
 const NoResults = function() {
 
@@ -156,5 +160,6 @@ const NoResults = function() {
   )
 
 }
+
 
 export default SearchPage
