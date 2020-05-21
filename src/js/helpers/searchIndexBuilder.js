@@ -84,6 +84,7 @@ const searchIndexBuilder = function(pages) {
                 title: doc.node.title,
                 summary: doc.node.summary,
                 date: doc.node.date,
+                janisUrls: [doc.node.document.filename],
                 document: [doc.node.document],
                 topics: topics
               })
