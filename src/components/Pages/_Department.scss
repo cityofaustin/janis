@@ -164,6 +164,11 @@
 .coa-DepartmentPage__news-date {
   font-size: 1.6rem;
   color: #757575;
+
+  @include mobile {
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+  }
 }
 
 .coa-DepartmentPage__news-link {
@@ -174,6 +179,11 @@
   margin-bottom: 14px;
   a {
     text-decoration: none;
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
   }
 }
 
