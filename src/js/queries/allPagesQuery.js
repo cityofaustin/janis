@@ -9,7 +9,7 @@ import newsPageFragment from './newsPageFragment';
 
 const siteStructureQuery = `
 query allPagesQuery($after: String) {
-  allPages(live: true, first: 20, after: $after) {
+  allPages(live: true, first: 10, after: $after) {
     edges {
       node {
         janisUrls
