@@ -33,6 +33,7 @@ const Department = ({ department, intl }) => {
       topServices,
       relatedLinks,
       news,
+      slug,
     },
   } = department ? { department } : useRouteData();
 
@@ -104,7 +105,7 @@ const Department = ({ department, intl }) => {
               </>
             ))}
             <div className="coa-DepartmentPage__news-more-link">
-              More dept news
+              <Link to={`/${intl.locale}/${slug}/news/`}>more dept news</Link>
             </div>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
