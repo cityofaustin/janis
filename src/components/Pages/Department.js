@@ -76,7 +76,6 @@ const Department = ({ department, intl }) => {
       <RelatedContent />
     ) : null;
 
-  debugger;
   return (
     <div>
       <Head>
@@ -97,14 +96,16 @@ const Department = ({ department, intl }) => {
                 <div className="coa-DepartmentPage__news-date">
                   {moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format('LL')}
                 </div>
-                <Link
-                  to={`/${intl.locale}${newsItem.url}`}
-                  className="coa-DepartmentPage__news-link"
-                >
-                  {newsItem.title}
-                </Link>
+                <div className="coa-DepartmentPage__news-link">
+                  <Link to={`/${intl.locale}${newsItem.url}`}>
+                    {newsItem.title}
+                  </Link>
+                </div>
               </>
             ))}
+            <div className="coa-DepartmentPage__news-more-link">
+              More dept news
+            </div>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>

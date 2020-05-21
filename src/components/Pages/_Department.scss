@@ -162,9 +162,21 @@
 }
 
 .coa-DepartmentPage__news-date {
-  color: red;
+  font-size: 1.6rem;
+  color: #757575;
 }
 
 .coa-DepartmentPage__news-link {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+  border-bottom: 1px solid #dfe1e2;
+  padding-bottom: 16px;
+  margin-bottom: 14px;
+  a {
+    text-decoration: none;
+  }
+}
+
+.coa-DepartmentPage__news-more-link {
   color: red;
 }
