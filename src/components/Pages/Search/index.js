@@ -8,11 +8,6 @@ import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
 import { loader } from 'js/animations/loader';
 
-/* - - - TO DO: Finish Janis Search Page
-  - Issue: https://github.com/cityofaustin/techstack/issues/4285
-  // import { searchWorker } from 'js/helpers/searchWorker'
-  // import { loader } from 'js/animations/loader';
-*/
 
 const SearchPage = () => {
 
@@ -64,7 +59,7 @@ const SearchPage = () => {
   const searchKeyInput = function(event) {
     setSearchString(event.target.value)
 
-    // For Quick Search (no-delay)... use 👇this instead of 👆.
+    // For Quick Search (no-delay)... use 👇this, instead of that 👆.
     // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
     // setSearchResults(filteredSearch)
   }
@@ -159,7 +154,7 @@ const NoResults = function() {
       </div>
     </div>
   )
-  
+
 }
 
 export default SearchPage
