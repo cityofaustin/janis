@@ -105,7 +105,11 @@ const Department = ({ department, intl }) => {
               </>
             ))}
             <div className="coa-DepartmentPage__news-more-link">
-              <Link to={`/${intl.locale}/${slug}/news/`}>more dept news</Link>
+              <Link to={`/${intl.locale}/${slug}/news/`}>
+                {intl.formatMessage(i18n.moreDeptNews, {
+                  department: title,
+                })}
+              </Link>
             </div>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
