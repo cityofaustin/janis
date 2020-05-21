@@ -7,7 +7,7 @@
   margin-bottom: 37px;
   height: 64px;
   display: flex;
-  @include mobile {
+  @include mobile-small {
     background-color: rgba(0,0,0,0);
     box-shadow: none;
     border: none;
@@ -23,7 +23,7 @@
   background-color: $coa-color-white;
   font-size: $coa-font-size-md-small;
   font-weight: 100;
-  @include mobile {
+  @include mobile-small {
     background-color: $coa-color-white;
     border: $coa-border-small-light-gray;
     border-radius: $coa-border-radius-medium;
@@ -44,7 +44,7 @@
   margin: $coa-space-level2;
   padding: $coa-space-level2 $coa-space-level4;
   opacity: 1;
-  @include mobile {
+  @include mobile-small {
     padding: $coa-space-level2 $coa-space-level3;
     margin-top: 10px;
     margin-right: 0px;
@@ -56,6 +56,7 @@
 #coa-search_results {
   opacity: 1;
   margin-bottom: $coa-space-level7;
+  transition: opacity .3s;
 }
 
 #coa-search_loading_wheel {

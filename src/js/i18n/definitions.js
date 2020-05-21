@@ -545,7 +545,9 @@ export const alert = defineMessages({
 export const search = defineMessages({
   search: "Search",
   getLatest: 'Get current information about coronavirus (COVID-19) in Austin',
-  results: "results for"
+  results: {
+    defaultMessage: ' results for {searchedTerm}',
+  }//"results for"
 });
 
 export const news = defineMessages({

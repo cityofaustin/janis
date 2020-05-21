@@ -6,13 +6,12 @@ import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
-import { loader } from 'js/animations/loader';
 
 
 const SearchPage = () => {
 
   const intl = useIntl();
-  let { searchIndex } = useRouteData();
+  const { searchIndex } = useRouteData();
   let searchedTerm = ""
 
   useEffect(() => {
@@ -42,18 +41,16 @@ const SearchPage = () => {
   let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
 
   const searchButtonPressed = function() {
-    loader.start({
-      contentId: 'coa-search_results',
-      loaderId: 'coa-search_loading_wheel',
-    })
+    const results = document.getElementById('coa-search_results')
+    results.style.opacity = 0
+    if (typeof window !== 'undefined') {
+      window.location.hash = searchString.toLocaleLowerCase()
+    }
+    const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
     setTimeout(function(){
-      if (typeof window !== 'undefined') {
-        window.location.hash = searchString.toLocaleLowerCase()
-      }
-      const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
       setSearchResults(filteredSearch)
-      loader.end()
-    },1000)
+      results.style.opacity = 1
+    },300) // Allows for CSS transtion to complete (./_Search.scss).
   }
 
   const searchKeyInput = function(event) {
@@ -90,8 +87,6 @@ const SearchPage = () => {
         </div>
       </PageHeader>
 
-      <div id="coa-search_loading_wheel" className="coa-loading_wheel"></div>
-
       <div className="wrapper container-fluid">
         <div className="row">
 
@@ -105,7 +100,15 @@ const SearchPage = () => {
               {searchedTerm && searchResults.length > 0 && (
                 <span>
                   {searchResults && searchResults.length}
-                  &nbsp;{intl.formatMessage(i18n.results)} <em>"{searchedTerm}"</em>
+
+                  {intl.formatMessage(i18n.results, {
+                    searchedTerm: (
+                      <em>
+                        "{searchedTerm}"
+                      </em>
+                    ),
+                  })}
+
                 </span>
               )}
             </div>

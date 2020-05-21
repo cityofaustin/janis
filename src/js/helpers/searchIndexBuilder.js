@@ -80,11 +80,10 @@ const searchIndexBuilder = function(pages) {
           if (pageType === "officialdocumentpage") {
             page.node.janisbasepagewithtopics[pageType].documents.edges.forEach( doc => {
               searchIndex.push({
-                pageType: 'official document page document',
+                pageType: 'document page',
                 title: doc.node.title,
                 summary: doc.node.summary,
                 date: doc.node.date,
-                janisUrls: [doc.node.document.filename],
                 document: [doc.node.document],
                 topics: topics
               })
