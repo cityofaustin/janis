@@ -74,6 +74,7 @@ const Department = ({ department, intl }) => {
       <RelatedContent />
     ) : null;
 
+  debugger;
   return (
     <div>
       <Head>
@@ -89,7 +90,14 @@ const Department = ({ department, intl }) => {
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.news)}
             </h2>
-            <p>news goes here my dudes</p>
+            {news.map(newsItem => (
+              <>
+                <div className="coa-DepartmentPage__news-date">date</div>
+                <a href="#" className="coa-DepartmentPage__news-link">
+                  News link
+                </a>
+              </>
+            ))}
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>
