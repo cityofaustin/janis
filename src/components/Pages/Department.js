@@ -106,6 +106,7 @@ const Department = ({ department, intl }) => {
             ))}
             <div className="coa-DepartmentPage__news-more-link">
               <Link to={`/${intl.locale}/${slug}/news/`}>
+                <i class="material-icons">arrow_forward</i>
                 {intl.formatMessage(i18n.moreDeptNews, {
                   department: title,
                 })}

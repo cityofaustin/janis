@@ -178,5 +178,27 @@
 }
 
 .coa-DepartmentPage__news-more-link {
-  color: red;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2.7rem;
+  a {
+    text-decoration: none;
+  }
+  i {
+    vertical-align: middle;
+    margin-top: -3px;
+    height: 24px;
+    margin-right: 8px;
+
+    @include mobile {
+      height: 20px;
+      margin-top: -6px;
+    }
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2rem;
+  }
 }
