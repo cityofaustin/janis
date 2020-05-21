@@ -33,6 +33,11 @@ const ThemesNav = props => (
         <i className="material-icons">close</i>
       </a>
     ) : null}
+
+
+    <a href='/search'> 🔍Search </a>
+
+
   </nav>
 );
 
