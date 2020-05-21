@@ -19,6 +19,7 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
+import getNewsListPageQuery from 'js/queries/getNewsListPageQuery';
 
 import {
   cleanNavigation,
@@ -156,6 +157,7 @@ const cleanDepartmentPageData = page => {
 const cleanNewsPageData = (newsPage, instanceOfPage, lastPublishedAt) => {
   return { ...newsPage, ...instanceOfPage, lastPublishedAt };
 };
+
 const getTopicCollectionPageData = async (page, instanceOfPage, client) => {
   let topicCollectionPage = { ...page };
 
@@ -409,6 +411,18 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
+const getNewsListForDepartment = async (client, departmentId) => {
+  const { allPages } = await client.request(getNewsListPageQuery, {
+    departmentPageId: departmentId,
+  });
+
+  const newsList = allPages.edges[0].node.departmentpage.news.map(newsItem => ({
+    title: newsItem.title,
+  }));
+
+  return { title: 'blarg', newsList: newsList };
+};
+
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
     .tz('America/Chicago')
@@ -464,9 +478,16 @@ const buildPageAtUrl = async (
     lastPublishedAt,
   } = pageAtUrlInfo;
   if (departmentpage) {
+    const departmentNewsPage = {
+      path: 'news',
+      template: 'src/components/Pages/News/NewsList',
+      getData: () => getNewsListForDepartment(client, departmentpage.id),
+    };
+
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Department',
+      children: [departmentNewsPage],
       getData: () => cleanDepartmentPageData(departmentpage),
     };
   }
