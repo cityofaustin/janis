@@ -18,7 +18,6 @@ const SearchPage = () => {
 
   const intl = useIntl();
   let { searchIndex } = useRouteData();
-  const title = "Search" // TODO: ⚠️useIntl
   let searchedTerm = ""
 
   useEffect(() => {
@@ -31,22 +30,20 @@ const SearchPage = () => {
     }
   }, [searchIndex]);
 
-  // Check the url has for a search term to apply
+  // Check the url for a search term to apply
   if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-    // TODO: ...when filters are added to the url. Create an array instead
+    // TODO: ...when filters are added to the url, create an array instead and use the '&' standard.
     // const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
     // searchedTerm = queryArr[0]
     searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
   }
 
-  // User react hook to make our input dynamic
+  // hook makes our input dynamic (useful for "as-you-type" filtering)
   let [ searchString, setSearchString ] = useState(searchedTerm)
 
-  // Don't show pages without Url
+  // Don't show pages without Url (there seems to be some pages that are 'live', but without a url - catch those here...)
   const searchIndexWithUrl = searchIndex.filter( page => page.janisUrls.length > 0)
 
-  // Use react hooks to allow dymanic updates without reload
-  // - Note: we'll still be able to send these queries to Google Analyticss programatically.
   let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
 
   const searchButtonPressed = function() {
@@ -67,7 +64,7 @@ const SearchPage = () => {
   const searchKeyInput = function(event) {
     setSearchString(event.target.value)
 
-    // 📝 For Quick Search (no-delay)...
+    // For Quick Search (no-delay)... use 👇this instead of 👆.
     // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
     // setSearchResults(filteredSearch)
   }
@@ -97,8 +94,6 @@ const SearchPage = () => {
           </button>
         </div>
       </PageHeader>
-
-
 
       <div id="coa-search_loading_wheel" className="coa-loading_wheel"></div>
 
@@ -135,10 +130,9 @@ const SearchPage = () => {
 
       {/*
         TODO: PAGINATION ( https://github.com/cityofaustin/techstack/issues/4358 )
-        NOTE: it would be too much to handle all in one with this component like we've
-        done on other Pages. Needs to be cleaned up as a component and checked for
-        regression with other pages.
-        👀SEE: paginationContainer.js
+        NOTE: It would be too much to handle all in one with this component like we've
+        done on other pages.
+        - Make paginationContainer.js
           <PaginationContainer
             results={searchResults}
           />
@@ -149,8 +143,6 @@ const SearchPage = () => {
 }
 
 const NoResults = function() {
-
-  // TODO: Add '/es' translations 
 
   return (
     <div>
@@ -167,6 +159,7 @@ const NoResults = function() {
       </div>
     </div>
   )
+  
 }
 
 export default SearchPage
