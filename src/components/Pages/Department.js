@@ -4,6 +4,7 @@ import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
+import moment from 'moment-timezone';
 
 import { departmentPage as i18n } from 'js/i18n/definitions';
 
@@ -12,6 +13,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageHeader from 'components/PageHeader';
+import { Link } from 'react-router-dom';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
@@ -92,10 +94,15 @@ const Department = ({ department, intl }) => {
             </h2>
             {news.map(newsItem => (
               <>
-                <div className="coa-DepartmentPage__news-date">date</div>
-                <a href="#" className="coa-DepartmentPage__news-link">
-                  News link
-                </a>
+                <div className="coa-DepartmentPage__news-date">
+                  {moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format('LL')}
+                </div>
+                <Link
+                  to={`/${intl.locale}${newsItem.url}`}
+                  className="coa-DepartmentPage__news-link"
+                >
+                  {newsItem.title}
+                </Link>
               </>
             ))}
             <h2 className="coa-SectionHeader">
