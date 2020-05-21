@@ -179,6 +179,7 @@ export const departmentPage = defineMessages({
   whatWeDo: 'What we do',
   meetDirector: 'Leadership',
   topServices: 'Top services',
+  news: 'News',
 });
 
 export const howYouKnowMenu = defineMessages({

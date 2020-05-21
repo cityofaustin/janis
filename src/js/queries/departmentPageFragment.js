@@ -97,6 +97,11 @@ const departmentPageFragment = `
         hoursExceptions
       }
     }
+    news(first:3) {
+      title
+      firstPublishedAt
+      janisUrls
+    }
   }
 `;
 

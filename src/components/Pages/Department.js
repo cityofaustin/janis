@@ -30,6 +30,7 @@ const Department = ({ department, intl }) => {
       jobListings,
       topServices,
       relatedLinks,
+      news,
     },
   } = department ? { department } : useRouteData();
 
@@ -86,6 +87,10 @@ const Department = ({ department, intl }) => {
         <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">
             <h2 className="coa-SectionHeader">
+              {intl.formatMessage(i18n.news)}
+            </h2>
+            <p>news goes here my dudes</p>
+            <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>
             <p>{Parser(whatWeDo)}</p>
@@ -94,9 +99,7 @@ const Department = ({ department, intl }) => {
             </h2>
             <p>{mission}</p>
             <div className="coa-Page__contacts-mobile">
-              {!!contact && (
-                <ContactDetails contact={contact} />
-              )}
+              {!!contact && <ContactDetails contact={contact} />}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -131,9 +134,7 @@ const Department = ({ department, intl }) => {
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contact && (
-              <ContactDetails contact={contact} />
-            )}
+            {!!contact && <ContactDetails contact={contact} />}
           </div>
         </div>
       </div>
