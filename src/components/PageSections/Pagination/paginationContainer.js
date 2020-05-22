@@ -12,9 +12,6 @@ import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocumen
 import { PageNumber } from 'components/PageSections/Pagination'
 
 const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
-// const PaginationContainer = ({ officialDocuments, intl }) => {
-
-console.log("pagesArray, pagesComponent :", pagesArray, PageComponent)
 
   const documentsPerPage = 10
   const isMobile = useMobileQuery()
@@ -22,9 +19,7 @@ console.log("pagesArray, pagesComponent :", pagesArray, PageComponent)
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
   const pages = buildPages(pagesArray, documentsPerPage)
-  // const [ pageNumber, setPageNumber ] = useState(getHash())
-  const [ pageNumber, setPageNumber ] = useState(1) //🚨How we gonna do this...???
-  // let pageNumber = 0
+  const [ pageNumber, setPageNumber ] = useState(getPage())
 
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
   const currentPage = pages[pageNumber]
@@ -33,9 +28,10 @@ console.log("pagesArray, pagesComponent :", pagesArray, PageComponent)
   useEffect(() => {
     domWindow = window
     window.onpopstate = function(event) {
-      setPageNumber(getHash())
+      setPageNumber(getPage())
     }
-    window.location.hash = pageNumber+1
+    console.log(" :", window.location.hash, window.location.hash.split('&page='))
+    // window.location.hash = `&page=${pageNumber}`
   })
 
   function changePage(newPage) {
@@ -44,24 +40,36 @@ console.log("pagesArray, pagesComponent :", pagesArray, PageComponent)
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         element: domWindow,
-        fadeElement: officialDocumentsPage,
+        fadeElement: paginationContainer,
         callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
-        // callback:()=>{ pageNumber = newPage } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
-
       })
     }
   }
-  
-  function getHash(){
-    const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
-    const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
-    return hash
+
+  function getPage(){
+
+
+    if (typeof window !== 'undefined' && window.location.hash.length > 1) {
+      const query = decodeURIComponent(window.location.hash.split("#")[1]).split('&')
+      const queryObject = {}
+      query.map( keyValue => {
+        const keyValueArray = keyValue.split('=')
+        queryObject[keyValueArray[0]] = keyValueArray[1]
+      })
+      const page = queryObject.page || 0
+      return page
+    } else {
+      return 0
+    }
+    // const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
+    // const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
+    // return hash
   }
 
 
   return (
     <div>
-      <div id="officialDocumentsPage" className="wrapper container-fluid">
+      <div id="paginationContainer" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">

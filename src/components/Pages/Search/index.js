@@ -6,6 +6,7 @@ import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
+import { queryObjectBuilder } from 'js/helpers/queryObjectBuilder'
 
 import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js'
 
@@ -21,8 +22,8 @@ const SearchPage = () => {
     input.focus()
     const filteredSearch = searchWorker(searchIndexWithUrl, input.value)
     setSearchResults(filteredSearch)
-    if (typeof window !== 'undefined') {
-      window.location.hash = input.value.toLocaleLowerCase()
+    if (typeof window !== 'undefined' && input.value.toLocaleLowerCase()) {
+      window.location.hash = `?=${input.value.toLocaleLowerCase()}`
     }
   }, [searchIndex]);
 
@@ -31,7 +32,8 @@ const SearchPage = () => {
     // TODO: ...when filters are added to the url, create an array instead and use the '&' standard.
     // const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
     // searchedTerm = queryArr[0]
-    searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
+    // const queryObject = queryObjectBuilder()
+    searchedTerm = queryObjectBuilder()['?']
   }
 
   // hook makes our input dynamic (useful for "as-you-type" filtering)
@@ -45,11 +47,11 @@ const SearchPage = () => {
   const searchButtonPressed = function() {
     const results = document.getElementById('coa-search_results')
     results.style.opacity = 0
-    if (typeof window !== 'undefined') {
-      window.location.hash = searchString.toLocaleLowerCase()
-    }
-    const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
     setTimeout(function(){
+      if (typeof window !== 'undefined') {
+        window.location.hash = `?=${searchString.toLocaleLowerCase()}`
+      }
+      const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
       setSearchResults(filteredSearch)
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
@@ -125,15 +127,15 @@ const SearchPage = () => {
               )) }
 
 */}
-
-
-          </div>
-
           <PaginationContainer
             pagesArray={searchResults}
             PageComponent={SearchResult}
             intl={intl}
           />
+
+          </div>
+
+
 
         </div>
 
