@@ -43,11 +43,11 @@ const SearchPage = () => {
   const searchButtonPressed = function() {
     const results = document.getElementById('coa-search_results')
     results.style.opacity = 0
-    if (typeof window !== 'undefined') {
-      window.location.hash = searchString.toLocaleLowerCase()
-    }
-    const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
     setTimeout(function(){
+      if (typeof window !== 'undefined') {
+        window.location.hash = searchString.toLocaleLowerCase()
+      }
+      const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
       setSearchResults(filteredSearch)
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
