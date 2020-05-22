@@ -32,8 +32,8 @@ const SearchPage = () => {
     // TODO: ...when filters are added to the url, create an array instead and use the '&' standard.
     // const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
     // searchedTerm = queryArr[0]
-    // const queryObject = queryObjectBuilder()
-    searchedTerm = queryObjectBuilder()['?']
+    const queryObject = queryObjectBuilder()
+    searchedTerm = queryObject['?']
   }
 
   // hook makes our input dynamic (useful for "as-you-type" filtering)
@@ -91,56 +91,44 @@ const SearchPage = () => {
         </div>
       </PageHeader>
 
-      <div className="wrapper container-fluid">
-        <div className="row">
+      <div id="coa-search_results" >
+        <div className="wrapper container-fluid">
+          <div className="row">
 
-          <div id="coa-search_results" className="col-xs-12 col-md-8">
+            <div className="col-xs-12 col-md-8">
 
-            {searchedTerm && searchResults.length < 1 && (
-              <NoResults />
-            )}
-
-            <div className="coa-search_results-total">
-              {searchedTerm && searchResults.length > 0 && (
-                <span>
-                  {searchResults && searchResults.length}
-
-                  {intl.formatMessage(i18n.results, {
-                    searchedTerm: (
-                      <em>
-                        "{searchedTerm}"
-                      </em>
-                    ),
-                  })}
-
-                </span>
+              {searchedTerm && searchResults.length < 1 && (
+                <NoResults />
               )}
+
+              <div className="coa-search_results-total">
+                {searchedTerm && searchResults.length > 0 && (
+                  <span>
+                    {searchResults && searchResults.length}
+
+                    {intl.formatMessage(i18n.results, {
+                      searchedTerm: (
+                        <em>
+                          "{searchedTerm}"
+                        </em>
+                      ),
+                    })}
+
+                  </span>
+                )}
+              </div>
+
             </div>
-
-{/*
-
-              { searchResults && searchResults.map( (page, index) => (
-                <SearchResult
-                  page={page}
-                  key={index}
-                />
-              )) }
-
-*/}
-          <PaginationContainer
-            pagesArray={searchResults}
-            PageComponent={SearchResult}
-            intl={intl}
-          />
-
           </div>
-
-
-
         </div>
+        
+        <PaginationContainer
+          pagesArray={searchResults}
+          PageComponent={SearchResult}
+          intl={intl}
+        />
 
       </div>
-
     </div>
   )
 }

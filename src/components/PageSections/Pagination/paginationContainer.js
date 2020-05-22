@@ -4,6 +4,7 @@ import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPagination } from 'js/helpers/pagination.js'
+import { queryObjectBuilder } from 'js/helpers/queryObjectBuilder'
 
 import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
@@ -28,10 +29,18 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
   useEffect(() => {
     domWindow = window
     window.onpopstate = function(event) {
-      setPageNumber(getPage())
+      const queryObject = queryObjectBuilder()
+      if (pageNumber !== parseInt(queryObject.page)-1) {
+        setPageNumber(getPage())
+      }
     }
-    console.log(" :", window.location.hash, window.location.hash.split('&page='))
-    // window.location.hash = `&page=${pageNumber}`
+    const hash = window.location.hash.split('&page=')[0]
+    const p = pageNumber + 1
+    if (pages.length > 1) {
+      window.location.hash = `${hash}&page=${pageNumber+1}`
+    } else {
+      window.location.hash = hash
+    }
   })
 
   function changePage(newPage) {
@@ -47,25 +56,12 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
   }
 
   function getPage(){
-
-
     if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-      const query = decodeURIComponent(window.location.hash.split("#")[1]).split('&')
-      const queryObject = {}
-      query.map( keyValue => {
-        const keyValueArray = keyValue.split('=')
-        queryObject[keyValueArray[0]] = keyValueArray[1]
-      })
-      const page = queryObject.page || 0
+      const queryObject = queryObjectBuilder()
+      const page = parseInt(queryObject.page) || 0
       return page
-    } else {
-      return 0
     }
-    // const str = typeof window !== 'undefined' ? window.location.hash.split("#")[1] : 0
-    // const hash = (str > 0 && str <= pages.length) ? parseInt(str)-1 : 0
-    // return hash
   }
-
 
   return (
     <div>
