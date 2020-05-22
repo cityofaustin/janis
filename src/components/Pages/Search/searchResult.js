@@ -7,19 +7,19 @@ import EventListEntry from 'components/Pages/EventList/EventListEntry';
 const SearchResult = ({ page }) => {
 
   if ( page.pageType === "event page" ) {
-    return <EventPage page={page}/>
+    return <EventPageResult page={page}/>
   } else if ( page.pageType === "location page" ) {
-    return <LocationPage page={page}/>
-  } else if ( page.pageType === "official document page document") {
-    return <OfficialDocumentPageDocument page={page}/>
+    return <LocationPageResult page={page}/>
+  } else if ( page.pageType === "official document") {
+    return <OfficialDocumentPageDocumentResult page={page}/>
   } else {
-    return <DefaultPage page={page}/>
+    return <DefaultPageResult page={page}/>
   }
 
 }
 
 
-const DefaultPage = function({ page }) {
+const DefaultPageResult = function({ page }) {
   const {
     title,
     summary,
@@ -48,11 +48,10 @@ const DefaultPage = function({ page }) {
 
     </div>
   )
-
 }
 
 
-const OfficialDocumentPageDocument = function({ page }) {
+const OfficialDocumentPageDocumentResult = function({ page }) {
   const {
     title,
     date,
@@ -87,12 +86,11 @@ const OfficialDocumentPageDocument = function({ page }) {
         </div>
       )}
     </div>
-
   )
 }
 
 
-const LocationPage = function({ page }) {
+const LocationPageResult = function({ page }) {
   const {
     title,
     physicalStreet,
@@ -122,7 +120,7 @@ const LocationPage = function({ page }) {
 }
 
 
-const EventPage = function({ page }) {
+const EventPageResult = function({ page }) {
 
   if (!page.registrationUrl) {
     page.registrationUrl = []
@@ -133,7 +131,6 @@ const EventPage = function({ page }) {
       <EventListEntry event={page} isSearchResult />
     </div>
   )
-
 }
 
 
