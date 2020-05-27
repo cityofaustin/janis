@@ -41,10 +41,12 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl, searchedTerm }) 
   },[searchedTerm])
 
   const updatePage = (newPage)=>{
-    const hash = window.location.hash.split('&page=')[0]
-    window.location.hash = `${hash}&page=${parseInt(newPage)+1}`
-    setPageNumber(newPage)// NOTE: hooks must be in the order
-    setIsTransition(false)
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.split('&page=')[0]
+      window.location.hash = `${hash}&page=${parseInt(newPage)+1}`
+      setPageNumber(newPage)// NOTE: hooks must be in the order
+      setIsTransition(false)
+    }
   }
 
   function changePage(newPage) {
@@ -53,12 +55,9 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl, searchedTerm }) 
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
-        //element: domWindow,
         element: window,
         fadeElement: paginationContainerElm,
-        callback:()=>{
-          updatePage(newPage)
-        } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
+        callback:()=>{ updatePage(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       })
     }
   }
