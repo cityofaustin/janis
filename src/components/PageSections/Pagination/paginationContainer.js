@@ -26,9 +26,7 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl, searchedTerm }) 
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
   const currentPage = pages[pageNumber]
 
-  let domWindow;
   useEffect(()=>{
-    domWindow = window
     if (query.page && pageNumber !== parseInt(query.page) - 1 && isTransition === false) {
       setPageNumber(parseInt(query.page - 1))
     }
@@ -57,20 +55,12 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl, searchedTerm }) 
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
-        element: domWindow,
+        element: window,
         fadeElement: paginationContainerElm,
         callback:()=>{ updatePage(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       })
     }
   }
-
-  // const getPage = function(){
-  //   if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-  //     const queryObject = queryObjectBuilder()
-  //     const page = parseInt(queryObject.page) || 0
-  //     return page
-  //   }
-  // }
 
   return (
     <div>
