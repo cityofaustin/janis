@@ -1,7 +1,13 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
+import { useIntl } from 'react-intl';
+
+import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js';
+
+const NewsListItem = ({ page }) => <div>{page.title}</div>;
 
 const NewsListPage = ({ newsListPage }) => {
+  const intl = useIntl();
   const { title, newsList } = newsListPage ? newsListPage : useRouteData();
 
   return (
@@ -14,9 +20,11 @@ const NewsListPage = ({ newsListPage }) => {
           <div className="wrapper container-fluid">
             <div className="row">
               <div className="col-xs-12 col-md-12">
-                {newsList.map(newsItem => (
-                  <div>{newsItem.title}</div>
-                ))}
+                <PaginationContainer
+                  pagesArray={newsList}
+                  PageComponent={NewsListItem}
+                  intl={intl}
+                />
               </div>
             </div>
           </div>
