@@ -13,8 +13,8 @@ const NewsListItem = ({ page }) => {
 
   return (
     <>
-      <div className="coa-DepartmentPage__news-date">{page.newsDate}</div>
-      <div className="coa-DepartmentPage__news-link">
+      <div className="coa-NewsListPage__news-date">{page.newsDate}</div>
+      <div className="coa-NewsListPage__news-link">
         <Link to={`/${intl.locale}${page.url}`}>{page.title}</Link>
       </div>
     </>
@@ -37,17 +37,11 @@ const NewsListPage = ({ newsListPage }) => {
       </PageHeader>
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
-          <div className="wrapper container-fluid">
-            <div className="row">
-              <div className="col-xs-12 col-md-12">
-                <PaginationContainer
-                  pagesArray={newsList}
-                  PageComponent={NewsListItem}
-                  intl={intl}
-                />
-              </div>
-            </div>
-          </div>
+          <PaginationContainer
+            pagesArray={newsList}
+            PageComponent={NewsListItem}
+            intl={intl}
+          />
         </div>
       </div>
     </div>

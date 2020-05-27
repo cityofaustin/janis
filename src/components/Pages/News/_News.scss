@@ -56,3 +56,30 @@
     line-height: 5rem;
   }
 }
+
+.coa-NewsListPage__news-date {
+  font-size: 1.6rem;
+  line-height: 2.8rem;
+  color: #757575;
+
+  @include tablet {
+    font-size: 1.4rem;
+    line-height: 2.5rem;
+  }
+}
+
+.coa-NewsListPage__news-link {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  border-bottom: 1px solid #dfe1e2;
+  padding-top: 8px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  a {
+    text-decoration: none;
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+  }
+}
