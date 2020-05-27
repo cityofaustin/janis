@@ -4,7 +4,6 @@ import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
-import moment from 'moment-timezone';
 
 import { departmentPage as i18n } from 'js/i18n/definitions';
 
@@ -95,7 +94,7 @@ const Department = ({ department, intl }) => {
             {news.map(newsItem => (
               <>
                 <div className="coa-DepartmentPage__news-date">
-                  {moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format('LL')}
+                  {newsItem.newsDate}
                 </div>
                 <div className="coa-DepartmentPage__news-link">
                   <Link to={`/${intl.locale}${newsItem.url}`}>

@@ -128,7 +128,7 @@ const getTopicPageData = async (page, instance, client) => {
   return { topic: topicPage };
 };
 
-const cleanDepartmentPageData = page => {
+const cleanDepartmentPageData = (page, locale) => {
   let departmentPage = { ...page };
 
   departmentPage.topServices = cleanDepartmentPageLinks(
@@ -151,6 +151,11 @@ const cleanDepartmentPageData = page => {
     newsItem.url = newsItem.janisbasepagePtr.janisUrls
       ? newsItem.janisbasepagePtr.janisUrls[0]
       : '';
+
+    moment.locale(locale);
+    newsItem.newsDate = moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format(
+      'LL',
+    );
   }
 
   return { department: departmentPage };
@@ -486,11 +491,16 @@ const buildPageAtUrl = async (
       getData: () => getNewsListForDepartment(client, departmentpage.id),
     };
 
+    let locale = 'en';
+    if (['en', 'es'].includes(client.options.headers['Accept-Language'])) {
+      locale = client.options.headers['Accept-Language'];
+    }
+
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Department',
       children: [departmentNewsPage],
-      getData: () => cleanDepartmentPageData(departmentpage),
+      getData: () => cleanDepartmentPageData(departmentpage, locale),
     };
   }
 
