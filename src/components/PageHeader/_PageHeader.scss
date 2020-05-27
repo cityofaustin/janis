@@ -35,6 +35,7 @@
   }
 }
 
+
 .coa-PageHeader--information {
   padding-top: $coa-spacing-large;
 
@@ -96,6 +97,26 @@
     text-align: center;
     @include media($coa-medium-screen) {
       text-align: left;
+    }
+  }
+}
+
+.coa-PageHeader--search {
+  padding-top: $coa-spacing-xlarge;
+  padding-bottom: $coa-space-level3;
+  margin-bottom: $coa-spacing-md-small;
+  background: $coa-color-secondary;
+  h1 {
+    text-align: left;
+    padding-top: $coa-spacing-xsmall;
+    font-size: $coa-font-size-xxlarge;
+    @include mobile {
+      text-align: center;
+    }
+    @include mobile-small {
+      font-size: $coa-font-size-xxlarge;
+      padding-top: $coa-spacing-xsmall;
+      font-size: $coa-font-size-medium;
     }
   }
 }

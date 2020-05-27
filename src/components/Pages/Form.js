@@ -51,7 +51,7 @@ function FormContainer({
   useEffect(() => {
     loader.start({
       contentId: 'coa-iFrameForm',
-      loaderId: 'coa-loadingWheel',
+      loaderId: 'coa-form_loading_wheel',
       errorId: 'coa-LockedIframeRequestMessage',
       style: 'popup',
     });
@@ -74,7 +74,7 @@ function FormContainer({
           {title}
         </PageHeader>
 
-        <div id="coa-loadingWheel" />
+        <div id="coa-form_loading_wheel" className="coa-loading_wheel"/>
         <RowContainer
           formUrl={formUrl}
           ErrorMessage={ErrorMessage}
@@ -119,7 +119,7 @@ const ErrorMessage = ({ formUrl, intl }) => {
         </h2>
         <a href={formUrl} target="_blank" className="coa-FormFallback__link">
           {intl.formatMessage(i18n2.openFormInNewWindow)}
-          <i class="material-icons coa-ExternalLinkMaterial">open_in_new</i>
+          <i className="material-icons coa-ExternalLinkMaterial">open_in_new</i>
         </a>
         <h3 className="coa-FormFallback__subheading">
           {intl.formatMessage(i18n2.whyFormNotLoaded)}
