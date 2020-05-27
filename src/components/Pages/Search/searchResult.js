@@ -1,17 +1,137 @@
 import React from 'react';
+import moment from 'moment-timezone';
 
-const SearchResult = ({page, index}) => {
+import EventListEntry from 'components/Pages/EventList/EventListEntry';
 
-  return (
-    <div>
-      <hr />
-      Title: {page.title} <br />
-      <a href={page.janisUrls && page.janisUrls[0]}> Internal Page Link </a> <br />
-      Summary: {page.summary} <br />
-      Content Type: {page.pageType}
-    </div>
-  )
+
+const SearchResult = ({ page }) => {
+
+  if ( page.pageType === "event page" ) {
+    return <EventPageResult page={page}/>
+  } else if ( page.pageType === "location page" ) {
+    return <LocationPageResult page={page}/>
+  } else if ( page.pageType === "official document") {
+    return <OfficialDocumentPageDocumentResult page={page}/>
+  } else {
+    return <DefaultPageResult page={page}/>
+  }
 
 }
+
+
+const DefaultPageResult = function({ page }) {
+  const {
+    title,
+    summary,
+    topics,
+    pageType,
+    janisUrls
+  } = page
+
+  return (
+    <div className="coa-search_result">
+
+      <a href={janisUrls && janisUrls[0]}> {title} </a> <br />
+
+      { summary && (
+        <div className="coa-search_result-text">
+          {summary}
+        </div>
+      )}
+
+      { (topics && topics.length > 0) && (
+        <div className="coa-search_result-topics">
+          Topic{topics.length > 1 ? "s: " : ": "}
+          {topics.join(", ")}
+        </div>
+      )}
+
+    </div>
+  )
+}
+
+
+const OfficialDocumentPageDocumentResult = function({ page }) {
+  const {
+    title,
+    date,
+    summary,
+    startTime,
+    document,
+    topics,
+  } = page
+
+  return (
+    <div className="coa-search_result">
+
+      <div className="coa-search_result-text">
+        {date}
+      </div>
+      <div className="coa-search_result-title">
+        {title}
+      </div>
+      <div className="coa-search_result-text">
+        {summary}
+      </div>
+      <div className="coa-search_result-topics">
+        Document:
+        <a href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+document[0].filename}>
+          &nbsp; {document[0].filename}
+        </a>
+      </div>
+      { (topics && topics.length > 0) && (
+        <div className="coa-search_result-topics">
+          Topic{topics.length > 1 ? "s: " : ": "}
+          {topics.join(", ")}
+        </div>
+      )}
+    </div>
+  )
+}
+
+
+const LocationPageResult = function({ page }) {
+  const {
+    title,
+    physicalStreet,
+    physicalUnit,
+    physicalCity,
+    physicalState,
+    physicalZip,
+    janisUrls
+  } = page
+
+  return (
+    <div className="coa-search_result coa-search_result-locations">
+      <div className="coa-search_result-icon-container">
+        <i className="material-icons coa-LocationPage__header-icon">place</i>
+      </div>
+      <div>
+        <a href={janisUrls && janisUrls[0]}> {title} </a>
+        <br />
+        <div className="coa-search_result-text coa-search_results-address">
+          {physicalStreet}{physicalUnit && (" #"+physicalUnit)}
+          <br />
+          {physicalCity}, {physicalState} {physicalZip}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+const EventPageResult = function({ page }) {
+
+  if (!page.registrationUrl) {
+    page.registrationUrl = []
+  }
+
+  return (
+    <div className="coa-search_result">
+      <EventListEntry event={page} isSearchResult />
+    </div>
+  )
+}
+
 
 export default SearchResult

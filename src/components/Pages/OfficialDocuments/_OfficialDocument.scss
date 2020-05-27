@@ -2,11 +2,13 @@
   font-size: $coa-font-size-small;
   margin-bottom: 3rem;
   margin-top: 3rem;
-
-  &:not(:last-child) {
-    border-bottom: 1.5px solid $coa-color-gray-lighter;
-    padding-bottom: 3rem;
-  }
+  border-bottom: $coa-border-bottom-small-light-gray;
+  padding-bottom: 3rem;
+  
+  // &:not(:last-child) {
+  //   border-bottom: $coa-border-bottom-small-light-gray;
+  //   padding-bottom: 3rem;
+  // }
 }
 
 .coa-OfficialDocumentPage__date {
