@@ -81,7 +81,6 @@ const SearchPage = () => {
             onChange={()=>searchKeyInput(event)}
             value={searchString}
           />
-
           <button
             className="coa-search_button"
             onClick={()=>searchButtonPressed('click')}
@@ -91,7 +90,7 @@ const SearchPage = () => {
         </div>
       </PageHeader>
 
-      <div id="coa-search_results" >
+      <div id="coa-search_results">
         <div className="wrapper container-fluid">
           <div className="row">
 
@@ -121,10 +120,11 @@ const SearchPage = () => {
             </div>
           </div>
         </div>
-        
+
         <PaginationContainer
           pagesArray={searchResults}
           PageComponent={SearchResult}
+          searchedTerm={searchedTerm}
           intl={intl}
         />
 

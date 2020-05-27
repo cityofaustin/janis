@@ -34,9 +34,12 @@ const ThemesNav = props => (
       </a>
     ) : null}
 
-
-    <a href='/search'> 🔍Search </a>
-
+    <a href='/search' className="coa-ThemesNav__search-container">
+      <i className="material-icons coa-ThemesNav__search-icon">search</i>
+      <span className="coa-ThemesNav__search-title">
+        Search
+      </span>
+    </a>
 
   </nav>
 );
