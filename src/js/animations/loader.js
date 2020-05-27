@@ -6,7 +6,7 @@ CSS Requirements / Recommendations:
 - While we do that here, their is a slight delay and you may see a "flicker" if not done in css first
 
 HTML Requirements:
--  <div id="coa-loadingWheel"></div>
+-  <div id="coa-<component-anme>_loading-wheel"></div>
 
 See example(s):
 - As of 1/29/20: loader.js is besing used by ./components/pages/forms.js
@@ -42,13 +42,15 @@ export const loader = {
     const delay = this.delay / 1000
 
     this.loader.style.opacity = 0
-    this.loader.style.transition = "opacity "+delay+"s"
+    this.loader.style.transition =`opacity ${delay}s`
 
     this.content.style.opacity = 0
-    this.content.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    this.content.style.transition = `opacity ${delay}s, margin-top ${delay}s`
 
-    this.error.style.opacity = 0
-    this.error.style.transition = "opacity "+delay+"s, margin-top "+delay+"s"
+    if (this.errorId) {
+      this.error.style.opacity = 0
+      this.error.style.transition = `opacity ${delay}s, margin-top ${delay}s`
+    }
   },
 
 

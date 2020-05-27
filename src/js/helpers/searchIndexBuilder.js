@@ -25,12 +25,37 @@ const searchIndexBuilder = function(pages) {
       // - If so, Add it to our search index.
       janisPages.forEach( pageType => {
         if (page.node[pageType]) {
-          searchIndex.push({
+          const searchIndexData = {
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
-            pageType: pageType,
+            pageType: page.node.pageType,
             summary: page.node[pageType].mission || page.node[pageType].shortDescription || ""
-          })
+          }
+          if (pageType === "eventpage") {
+            searchIndexData.date = page.node[pageType].date
+            searchIndexData.startTime = page.node[pageType].startTime
+            searchIndexData.endTime = page.node[pageType].endTime
+            searchIndexData.location = page.node[pageType].locations[0]
+            searchIndexData.eventUrl = page.node.janisUrls[0]
+            searchIndexData.eventIsFree = page.node[pageType].eventIsFree
+            if (page.node[pageType].registrationUrl) {
+              searchIndexData.registrationUrl = page.node[pageType].registrationUrl
+            }
+            if (page.node[pageType].eventIsFree) {
+              searchIndexData.feesRange = ""
+            } else {
+              const feesRange = page.node[pageType].fees.edges.map(f=>"$"+f.node.fee)
+              searchIndexData.feesRange = feesRange.join('-')
+            }
+          }
+          if (pageType === "locationpage") {
+            searchIndexData.physicalStreet = page.node[pageType].physicalStreet
+            searchIndexData.physicalUnit = page.node[pageType].physicalUnit
+            searchIndexData.physicalCity = page.node[pageType].physicalCity
+            searchIndexData.physicalState = page.node[pageType].physicalState
+            searchIndexData.physicalZip = page.node[pageType].physicalZip
+          }
+          searchIndex.push(searchIndexData)
         }
       })
 
@@ -38,12 +63,34 @@ const searchIndexBuilder = function(pages) {
       janisBasePagesWithTopics.forEach( pageType => {
         if (page.node.janisbasepagewithtopics && page.node.janisbasepagewithtopics[pageType]) {
           const pageToAdd = page.node.janisbasepagewithtopics[pageType]
-          searchIndex.push({
+          const searchIndexData = {
             title: pageToAdd.title,
             janisUrls: page.node.janisUrls,
-            pageType: pageType,
+            pageType: page.node.pageType,
             summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
-          })
+          }
+          // Add topic janis instance if instances have parent.
+          let topics = []
+          if (page.node.janisInstances.length > 0) {
+            topics = getTopics(page.node.janisInstances, pageToAdd)
+            if (topics.length > 0) {
+              searchIndexData.topics = topics
+            }
+          }
+          if (pageType === "officialdocumentpage") {
+            page.node.janisbasepagewithtopics[pageType].documents.edges.forEach( doc => {
+              searchIndex.push({
+                pageType: 'document page',
+                title: doc.node.title,
+                summary: doc.node.summary,
+                date: doc.node.date,
+                janisUrls: [doc.node.document.filename],
+                document: [doc.node.document],
+                topics: topics
+              })
+            })
+          }
+          searchIndex.push(searchIndexData)
         }
       })
 
@@ -54,7 +101,7 @@ const searchIndexBuilder = function(pages) {
           searchIndex.push({
             title:  pageToAdd.title,
             janisUrls: page.node.janisUrls,
-            pageType: "topicpage",
+            pageType: "topic page",
             summary: pageToAdd.searchDescription || pageToAdd.mission || pageToAdd.shortDescription || ""
           })
         }
@@ -66,6 +113,16 @@ const searchIndexBuilder = function(pages) {
 
   return searchIndex
 
+}
+
+const getTopics = function(instances, pageToAdd) {
+  const instanceIndex = []
+  instances.forEach( instance => {
+    if (instance.parent && instance.parent.title) {
+      instanceIndex.push(instance.parent.title)
+    }
+  })
+  return instanceIndex
 }
 
 
