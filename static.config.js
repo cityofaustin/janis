@@ -147,12 +147,12 @@ const cleanDepartmentPageData = (page, locale) => {
   );
 
   // get the first janisUrl from the array here so we don't need to deal with it in the component
+  moment.locale(locale);
   for (let newsItem of departmentPage.news) {
     newsItem.url = newsItem.janisbasepagePtr.janisUrls
       ? newsItem.janisbasepagePtr.janisUrls[0]
       : '';
 
-    moment.locale(locale);
     newsItem.newsDate = moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format(
       'LL',
     );
@@ -418,7 +418,7 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-const getNewsListForDepartment = async (client, departmentId) => {
+const getNewsListForDepartment = async (client, departmentId, locale) => {
   const { allPages } = await client.request(getNewsListPageQuery, {
     departmentPageId: departmentId,
   });
@@ -431,8 +431,13 @@ const getNewsListForDepartment = async (client, departmentId) => {
     url: departmentPage.janisbasepagePtr.janisUrls[0],
   };
 
+  moment.locale(locale);
   const newsList = departmentPage.news.map(newsItem => ({
     title: newsItem.title,
+    url: newsItem.janisbasepagePtr.janisUrls
+      ? newsItem.janisbasepagePtr.janisUrls[0]
+      : '',
+    newsDate: moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format('LL'),
   }));
 
   return { newsList: newsList, parent: parent };
@@ -493,16 +498,17 @@ const buildPageAtUrl = async (
     lastPublishedAt,
   } = pageAtUrlInfo;
   if (departmentpage) {
-    const departmentNewsPage = {
-      path: 'news',
-      template: 'src/components/Pages/News/NewsList',
-      getData: () => getNewsListForDepartment(client, departmentpage.id),
-    };
-
     let locale = 'en';
     if (['en', 'es'].includes(client.options.headers['Accept-Language'])) {
       locale = client.options.headers['Accept-Language'];
     }
+
+    const departmentNewsPage = {
+      path: 'news',
+      template: 'src/components/Pages/News/NewsList',
+      getData: () =>
+        getNewsListForDepartment(client, departmentpage.id, locale),
+    };
 
     return {
       path: instanceOfPage.url,

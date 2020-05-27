@@ -10,6 +10,10 @@ const getNewsListPageQuery = `
             title
             news {
               title
+              firstPublishedAt
+              janisbasepagePtr {
+                janisUrls
+              }
             }
           }
         }
