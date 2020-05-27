@@ -53,6 +53,11 @@
   }
 }
 
+.coa-search_button:hover {
+  background-color: #2672DE;
+  color: $coa-color-white;
+}
+
 #coa-search_results {
   opacity: 1;
   // margin-bottom: $coa-space-level7;
