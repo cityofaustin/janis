@@ -7,6 +7,7 @@ import PageHeader from 'components/PageHeader';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js';
+import UserFeedback from 'components/UserFeedback';
 
 const NewsListItem = ({ page }) => {
   const intl = useIntl();
@@ -42,9 +43,11 @@ const NewsListPage = ({ newsListPage }) => {
             PageComponent={NewsListItem}
             intl={intl}
             fullWidthTablet
+            smallerBottomMargin
           />
         </div>
       </div>
+      <UserFeedback />
     </div>
   );
 };

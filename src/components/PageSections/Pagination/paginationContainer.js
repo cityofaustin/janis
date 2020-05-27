@@ -17,6 +17,7 @@ const PaginationContainer = ({
   PageComponent,
   intl,
   fullWidthTablet = false,
+  smallerBottomMargin = false,
 }) => {
   const documentsPerPage = 10;
   const isMobile = useMobileQuery();
@@ -85,7 +86,14 @@ const PaginationContainer = ({
           </div>
 
           {shownPages.length > 1 && (
-            <div className="coa-OfficialDocumentPage_pagination-container">
+            <div
+              className={
+                'coa-OfficialDocumentPage_pagination-container ' +
+                (smallerBottomMargin
+                  ? 'coa-OfficialDocumentPage_pagination-container--smaller-bottom-margin'
+                  : '')
+              }
+            >
               <div
                 onClick={() => changePage(pageNumber - 1)}
                 className="coa-OfficialDocumentPage_page previous"
