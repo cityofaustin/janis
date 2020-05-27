@@ -97,3 +97,24 @@
 .coa-OfficialDocumentPage_pagination-container--smaller-bottom-margin {
   margin-bottom: 2rem !important;
 }
+
+.coa-NewsPage__list-page-link {
+  background: #f6f6f6;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  padding-left: 16px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  display: flex;
+  text-decoration: none;
+}
+
+.coa-NewsPage__list-page-link-text {
+  font-size: 1.6rem;
+  line-height: 2rem;
+  flex-grow: 1;
+}
+
+.coa-NewsPage__list-page-link-arrow {
+  padding-right: 16px;
+}

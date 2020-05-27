@@ -16,6 +16,20 @@ import { news as i18n } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
+// const NewsListPageLink = ({ blarg }) => {
+//             <Link
+//             className="coa-NewsPage__list-page-link"
+//             to={`/${intl.locale}${fromDepartment.url}news/`}
+//           >
+//             <div className="coa-NewsPage__list-page-link-text">
+//               {`More ${fromDepartment.title} news`}
+//             </div>
+//             <i class="material-icons coa-NewsPage__list-page-link-arrow">
+//               arrow_forward
+//             </i>
+//           </Link>
+// }
+
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
   moment.locale(intl.locale);
@@ -93,6 +107,17 @@ const NewsPage = ({ newsPage }) => {
           </div>
         </div>
         <div className="coa-Page__side-content">
+          <Link
+            className="coa-NewsPage__list-page-link"
+            to={`/${intl.locale}${fromDepartment.url}news/`}
+          >
+            <div className="coa-NewsPage__list-page-link-text">
+              {`More ${fromDepartment.title} news`}
+            </div>
+            <i class="material-icons coa-NewsPage__list-page-link-arrow">
+              arrow_forward
+            </i>
+          </Link>
           <div className="coa-ServicePage__contacts-desktop">
             {!!contact && <ContactDetails contact={contact} />}
           </div>
