@@ -148,7 +148,9 @@ const cleanDepartmentPageData = page => {
 
   // get the first janisUrl from the array here so we don't need to deal with it in the component
   for (let newsItem of departmentPage.news) {
-    newsItem.url = newsItem.janisUrls ? newsItem.janisUrls[0] : '';
+    newsItem.url = newsItem.janisbasepagePtr.janisUrls
+      ? newsItem.janisbasepagePtr.janisUrls[0]
+      : '';
   }
 
   return { department: departmentPage };

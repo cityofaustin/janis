@@ -100,7 +100,9 @@ const departmentPageFragment = `
     news(first:3) {
       title
       firstPublishedAt
-      janisUrls
+      janisbasepagePtr {
+        janisUrls
+      }
     }
   }
 `;
