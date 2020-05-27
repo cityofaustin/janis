@@ -113,8 +113,16 @@
   font-size: 1.6rem;
   line-height: 2rem;
   flex-grow: 1;
+  font-weight: 500;
 }
 
 .coa-NewsPage__list-page-link-arrow {
   padding-right: 16px;
+}
+
+.coa-NewsPage__list-page-link-mobile {
+  display: none;
+  @include mobile-and-tablet {
+    display: block;
+  }
 }

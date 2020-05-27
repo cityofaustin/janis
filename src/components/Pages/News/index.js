@@ -16,19 +16,19 @@ import { news as i18n } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
-// const NewsListPageLink = ({ blarg }) => {
-//             <Link
-//             className="coa-NewsPage__list-page-link"
-//             to={`/${intl.locale}${fromDepartment.url}news/`}
-//           >
-//             <div className="coa-NewsPage__list-page-link-text">
-//               {`More ${fromDepartment.title} news`}
-//             </div>
-//             <i class="material-icons coa-NewsPage__list-page-link-arrow">
-//               arrow_forward
-//             </i>
-//           </Link>
-// }
+const NewsListPageLink = ({ locale, departmentUrl, departmentTitle }) => (
+  <Link
+    className="coa-NewsPage__list-page-link"
+    to={`/${locale}${departmentUrl}news/`}
+  >
+    <div className="coa-NewsPage__list-page-link-text">
+      {`More ${departmentTitle} news`}
+    </div>
+    <i class="material-icons coa-NewsPage__list-page-link-arrow">
+      arrow_forward
+    </i>
+  </Link>
+);
 
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
@@ -99,6 +99,13 @@ const NewsPage = ({ newsPage }) => {
                 <div className="coa-NewsPage__footer-published-date">
                   Published {momentDate}
                 </div>
+                <div className="coa-NewsPage__list-page-link-mobile">
+                  <NewsListPageLink
+                    locale={intl.locale}
+                    departmentUrl={fromDepartment.url}
+                    departmentTitle={fromDepartment.title}
+                  />
+                </div>
                 <div className="coa-Page__contacts-mobile">
                   {!!contact && <ContactDetails contact={contact} />}
                 </div>
@@ -107,17 +114,11 @@ const NewsPage = ({ newsPage }) => {
           </div>
         </div>
         <div className="coa-Page__side-content">
-          <Link
-            className="coa-NewsPage__list-page-link"
-            to={`/${intl.locale}${fromDepartment.url}news/`}
-          >
-            <div className="coa-NewsPage__list-page-link-text">
-              {`More ${fromDepartment.title} news`}
-            </div>
-            <i class="material-icons coa-NewsPage__list-page-link-arrow">
-              arrow_forward
-            </i>
-          </Link>
+          <NewsListPageLink
+            locale={intl.locale}
+            departmentUrl={fromDepartment.url}
+            departmentTitle={fromDepartment.title}
+          />
           <div className="coa-ServicePage__contacts-desktop">
             {!!contact && <ContactDetails contact={contact} />}
           </div>
