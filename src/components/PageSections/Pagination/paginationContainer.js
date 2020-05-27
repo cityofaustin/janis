@@ -12,7 +12,7 @@ import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument'
 import { PageNumber } from 'components/PageSections/Pagination'
 
-const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
+const PaginationContainer = ({ pagesArray, PageComponent, intl, searchedTerm }) => {
 
   const documentsPerPage = 10
   const isMobile = useMobileQuery()
@@ -20,42 +20,50 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop
   const pages = buildPages(pagesArray, documentsPerPage)
-  const [ pageNumber, setPageNumber ] = useState(getPage())
-
+  const query = queryObjectBuilder()
+  const [ isTransition, setIsTransition ] = useState(false)
+  const [ pageNumber, setPageNumber ] = useState(0)
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber)
   const currentPage = pages[pageNumber]
-  let domWindow // this localized variable allows us to pass the DOM 'window' between methods without drawing errors on node js builds in react.
 
-  useEffect(() => {
-    domWindow = window
-    window.onpopstate = function(event) {
-      const queryObject = queryObjectBuilder()
-      if (pageNumber !== parseInt(queryObject.page)-1) {
-        setPageNumber(getPage())
-      }
-    }
-    const hash = window.location.hash.split('&page=')[0]
-    const p = pageNumber + 1
-    if (pages.length > 1) {
-      window.location.hash = `${hash}&page=${pageNumber+1}`
-    } else {
-      window.location.hash = hash
+  useEffect(()=>{
+    if (query.page && pageNumber !== parseInt(query.page) - 1 && isTransition === false) {
+      setPageNumber(parseInt(query.page - 1))
     }
   })
 
+  useEffect(()=>{
+    if (query.page) {
+      setPageNumber(parseInt(query.page)-1)
+    } else {
+      setPageNumber(0)
+    }
+  },[searchedTerm])
+
+  const updatePage = (newPage)=>{
+    const hash = window.location.hash.split('&page=')[0]
+    window.location.hash = `${hash}&page=${parseInt(newPage)+1}`
+    setPageNumber(newPage)// NOTE: hooks must be in the order
+    setIsTransition(false)
+  }
+
   function changePage(newPage) {
-    if (newPage >= 0 && newPage <= pages.length - 1) {
+    setIsTransition(true)
+    if (newPage >= 0 && newPage <= pages.length - 1 && typeof window !== 'undefined') {
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
-        element: domWindow,
-        fadeElement: paginationContainer,
-        callback:()=>{ setPageNumber(newPage) } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
+        //element: domWindow,
+        element: window,
+        fadeElement: paginationContainerElm,
+        callback:()=>{
+          updatePage(newPage)
+        } // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       })
     }
   }
 
-  function getPage(){
+  const getPage = function(){
     if (typeof window !== 'undefined' && window.location.hash.length > 1) {
       const queryObject = queryObjectBuilder()
       const page = parseInt(queryObject.page) || 0
@@ -65,7 +73,7 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
 
   return (
     <div>
-      <div id="paginationContainer" className="wrapper container-fluid">
+      <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
 
           <div className="col-xs-12 col-md-8">
@@ -86,6 +94,7 @@ const PaginationContainer = ({ pagesArray, PageComponent, intl }) => {
                   pageNumber={pageNumber+1}
                   index={shownPages[i]}
                   paginationIndex={i}
+                  key={i}
                   pageNumberIndex={shownPages.indexOf(pageNumber+1)}
                   changePage={changePage}
                   contentType={"OfficialDocumentPage"}
