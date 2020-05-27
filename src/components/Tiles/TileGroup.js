@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
 import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
 
-const TileGroup = ({ title, titleUrl, description, tiles, compact, allowEmptyTiles, intl }) => {
+const TileGroup = ({
+  title,
+  titleUrl,
+  description,
+  tiles,
+  compact,
+  allowEmptyTiles,
+  intl,
+}) => {
   return (
     (!!tiles.length || allowEmptyTiles) && (
       <div
@@ -17,15 +24,15 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, allowEmptyTil
       >
         <h4 className="coa-TileGroup__title">
           {titleUrl ? (
-            <Link
-              to={
+            <a
+              href={
                 titleUrl.substring(0, 4) === 'http'
                   ? titleUrl
                   : `/${intl.locale}${titleUrl}`
               }
             >
               {title}
-            </Link>
+            </a>
           ) : (
             title
           )}
@@ -40,19 +47,22 @@ const TileGroup = ({ title, titleUrl, description, tiles, compact, allowEmptyTil
               : 'coa-TileGroup__tiles-container'
           }
         >
-          {!!tiles.length && tiles.map(({ url, title, pageType }, index) => {
-            return (
-              <Tile
-                url={
-                  url.substring(0, 4) === 'http' ? url : `/${intl.locale}${url}`
-                }
-                text={title}
-                compact={compact}
-                key={index}
-                pageType={pageType}
-              />
-            );
-          })}
+          {!!tiles.length &&
+            tiles.map(({ url, title, pageType }, index) => {
+              return (
+                <Tile
+                  url={
+                    url.substring(0, 4) === 'http'
+                      ? url
+                      : `/${intl.locale}${url}`
+                  }
+                  text={title}
+                  compact={compact}
+                  key={index}
+                  pageType={pageType}
+                />
+              );
+            })}
         </div>
       </div>
     )

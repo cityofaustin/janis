@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
@@ -25,8 +24,9 @@ const EventDateCalendar = ({ date, isSearchResult }) => {
   let momentDate = date && date.slice(-2);
 
   return (
-    <div className={classNames('coa-EventListPage__DateCal', {
-        'coa-SearchPage_results-calendar': isSearchResult // styled in search component's .scss.
+    <div
+      className={classNames('coa-EventListPage__DateCal', {
+        'coa-SearchPage_results-calendar': isSearchResult, // styled in search component's .scss.
       })}
     >
       <div className="coa-EventListPage__DateCal-month">{momentMonth}</div>
@@ -35,7 +35,12 @@ const EventDateCalendar = ({ date, isSearchResult }) => {
   );
 };
 
-const EventDateListDetails = ({ event, homepage, relatedPage, relatedLocation }) => {
+const EventDateListDetails = ({
+  event,
+  homepage,
+  relatedPage,
+  relatedLocation,
+}) => {
   const intl = useIntl();
   const isMobile = useMobileQuery();
   let dayType = isMobile ? 'ddd' : 'dddd';
@@ -88,7 +93,6 @@ const EventDateListDetails = ({ event, homepage, relatedPage, relatedLocation })
     cost = `${intl.formatMessage(i18n.free)}${cost.slice(2)}`;
   }
 
-
   return (
     <div
       className={classNames('coa-EventListPage__EntryDetails', {
@@ -111,18 +115,24 @@ const EventDateListDetails = ({ event, homepage, relatedPage, relatedLocation })
   );
 };
 
-const EventListEntry = ({ event, homepage, relatedPage, relatedLocation, isSearchResult }) => {
+const EventListEntry = ({
+  event,
+  homepage,
+  relatedPage,
+  relatedLocation,
+  isSearchResult,
+}) => {
   return (
-    <Link
-      to={event.eventUrl}
+    <a
+      href={event.eventUrl}
       className={classNames('coa-EventListPage__Entry', {
         'coa-EventListPage__Entry--homepage': homepage,
         'coa-EventListPage__Entry--relatedPage': relatedPage,
         'coa-EventListPage__Entry--relatedLocation': relatedLocation,
-        'coa-SearchPage_result': isSearchResult
+        'coa-SearchPage_result': isSearchResult,
       })}
     >
-      <EventDateCalendar date={event.date} isSearchResult/>
+      <EventDateCalendar date={event.date} isSearchResult />
       <EventDateListDetails
         event={event}
         homepage={homepage}
@@ -133,7 +143,7 @@ const EventListEntry = ({ event, homepage, relatedPage, relatedLocation, isSearc
       {relatedPage && (
         <i className="material-icons coa-EventListPage__icon">arrow_forward</i>
       )}
-    </Link>
+    </a>
   );
 };
 
