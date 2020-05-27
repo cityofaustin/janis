@@ -423,11 +423,19 @@ const getNewsListForDepartment = async (client, departmentId) => {
     departmentPageId: departmentId,
   });
 
-  const newsList = allPages.edges[0].node.departmentpage.news.map(newsItem => ({
+  const departmentPage = allPages.edges[0].node.departmentpage;
+
+  const parent = {
+    id: departmentId,
+    title: departmentPage.title,
+    url: departmentPage.janisbasepagePtr.janisUrls[0],
+  };
+
+  const newsList = departmentPage.news.map(newsItem => ({
     title: newsItem.title,
   }));
 
-  return { title: 'blarg', newsList: newsList };
+  return { newsList: newsList, parent: parent };
 };
 
 const getAllEvents = async (client, hideCanceled) => {

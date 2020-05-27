@@ -4,6 +4,10 @@ const getNewsListPageQuery = `
       edges {
         node {
           departmentpage {
+            janisbasepagePtr {
+              janisUrls
+            }
+            title
             news {
               title
             }
