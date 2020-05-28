@@ -138,3 +138,5 @@ const Department = ({ department, intl }) => {
 };
 
 export default injectIntl(Department);
+
+// commenting because I want to have my PR look pretty on GH
