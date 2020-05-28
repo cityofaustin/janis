@@ -23,8 +23,7 @@ const NewsListItem = ({ page }) => {
 
 const NewsListPage = ({ newsListPage }) => {
   const intl = useIntl();
-  const blarg = useRouteData();
-  const { newsList, parent } = newsListPage ? newsListPage : blarg;
+  const { newsList, parent } = newsListPage ? newsListPage : useRouteData();
 
   return (
     <div>
