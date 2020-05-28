@@ -94,9 +94,7 @@ const Department = ({ department, intl }) => {
             </h2>
             <p>{mission}</p>
             <div className="coa-Page__contacts-mobile">
-              {!!contact && (
-                <ContactDetails contact={contact} />
-              )}
+              {!!contact && <ContactDetails contact={contact} />}
             </div>
             {directors.length > 0 && (
               <h2 className="coa-SectionHeader">
@@ -131,9 +129,7 @@ const Department = ({ department, intl }) => {
         </div>
         <div className="coa-Page__side-content">
           <div className="coa-DepartmentPage__contacts-desktop">
-            {!!contact && (
-              <ContactDetails contact={contact} />
-            )}
+            {!!contact && <ContactDetails contact={contact} />}
           </div>
         </div>
       </div>
