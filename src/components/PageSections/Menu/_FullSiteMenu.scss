@@ -251,6 +251,8 @@
 
 .coa-ThemesNav__search-container-icon {
   display: none;
+  position: absolute;
+  right: 0;
   padding-right: $coa-space-level4;
   font-size: $coa-font-size-medium;
   .coa-ThemesNav__search-icon {
