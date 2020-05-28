@@ -77,7 +77,7 @@ const App = ({ navigation, threeoneone }) => {
                   lang: LANG_KEY[props.match.params.lang || 'en'],
                 }}
               />
-              <Suspense fallback={<div />}>
+              <Suspense fallback={<div>LOADING</div>}>
                 <AppView path={props.match.params.path || ''} />
               </Suspense>
             </I18nController>
