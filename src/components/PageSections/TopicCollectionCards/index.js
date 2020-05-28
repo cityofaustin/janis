@@ -6,7 +6,12 @@ import { Link } from 'react-router-dom';
 
 const TopicCard = ({ topic, index, intl }) => {
   const tiles =
-    topic.pages && topic.pages.map(p => ({ url: p.url, title: p.title, pageType: p.pageType }));
+    topic.pages &&
+    topic.pages.map(p => ({
+      url: p.url,
+      title: p.title,
+      pageType: p.pageType,
+    }));
   // This and TileGroup have a fragile relationship so
   // I copypasta'd logic into the learn more link instead of modifying it
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
