@@ -23,7 +23,10 @@ const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
               {`${intl.formatMessage(i18n.relatedTo)}: `}
             </span>
             {relatedTo.map((relatedLinkData, index) => (
-              <Link to={`/${intl.locale}${relatedLinkData.url}`} key={relatedLinkData.url}>
+              <Link
+                to={`/${intl.locale}${relatedLinkData.url}`}
+                key={relatedLinkData.url}
+              >
                 {relatedLinkData.title}
                 {index !== relatedTo.length - 1 && ', '}
               </Link>
@@ -37,7 +40,10 @@ const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
                 i18n.offeredBy,
               )}: `}</span>
               {offeredBy.map((department, index) => (
-                <Link to={`/${intl.locale}${department.url}`} key={department.url}>
+                <Link
+                  to={`/${intl.locale}${department.url}`}
+                  key={department.url}
+                >
                   {department.title}
                   {index !== offeredBy.length - 1 && ', '}
                 </Link>
@@ -58,6 +64,6 @@ ContextualNav.propTypes = {
   }).isRequired,
   relatedTo: PropTypes.array,
   offeredBy: PropTypes.array,
-}
+};
 
 export default injectIntl(ContextualNav);
