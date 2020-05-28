@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import { howYouKnowMenu as i18n } from 'js/i18n/definitions';
 
@@ -11,14 +12,12 @@ const PendingTranslation = ({ open, intl, closeMessage }) => (
       'coa-PendingTranslation--is-open': open,
     })}
   >
-    <p>
-      Continuamos trabajando y procesando las traducciones en este sitio web.
-    </p>
-    <p className="coa-PendingTranslation--link">
+    <p>Continuamos trabajando y procesando las traducciones en este sitio web.</p>
+    <p className='coa-PendingTranslation--link'>
       Si le gustaría ayudarnos a mejorar, por favor inscríbase{' '}
-      <a href={'/es/feedback/'} onClick={closeMessage}>
+      <Link to={'/es/feedback/'} onClick={closeMessage}>
         para participar en nuestras investigaciones de usuarios.
-      </a>
+      </Link>
     </p>
   </div>
 );

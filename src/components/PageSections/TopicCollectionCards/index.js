@@ -2,15 +2,11 @@ import React, { Fragment } from 'react';
 import { injectIntl } from 'react-intl';
 import TileGroup from 'components/Tiles/TileGroup';
 import { misc as i18n1 } from 'js/i18n/definitions';
+import { Link } from 'react-router-dom';
 
 const TopicCard = ({ topic, index, intl }) => {
   const tiles =
-    topic.pages &&
-    topic.pages.map(p => ({
-      url: p.url,
-      title: p.title,
-      pageType: p.pageType,
-    }));
+    topic.pages && topic.pages.map(p => ({ url: p.url, title: p.title, pageType: p.pageType }));
   // This and TileGroup have a fragile relationship so
   // I copypasta'd logic into the learn more link instead of modifying it
   const titleUrl = `/${topic.topiccollection.theme.slug}/${
@@ -28,8 +24,8 @@ const TopicCard = ({ topic, index, intl }) => {
           allowEmptyTiles
           compact
         />
-        <a
-          href={
+        <Link
+          to={
             titleUrl.substring(0, 4) === 'http'
               ? titleUrl
               : `/${intl.locale}${titleUrl}`
@@ -38,7 +34,7 @@ const TopicCard = ({ topic, index, intl }) => {
         >
           <p>{intl.formatMessage(i18n1.learnMore)}</p>
           <i className="material-icons">arrow_forward</i>
-        </a>
+        </Link>
       </div>
     )
   );

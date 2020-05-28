@@ -3,18 +3,19 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import { misc as i18n } from 'js/i18n/definitions';
+import { Link } from 'react-router-dom';
 
 const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
   <div className="coa-ContextualNav">
     <div className="wrapper container-fluid">
       <div className="coa-ContextualNav__container">
         <div className="coa-ContextualNav__parent">
-          <a
-            href={`/${intl.locale}${parent.url}`}
+          <Link
+            to={`/${intl.locale}${parent.url}`}
             className="coa-ContextualNav__arrow"
           >
             <span>{parent.title}</span>
-          </a>
+          </Link>
         </div>
         {!!relatedTo && !!relatedTo.length && (
           <div className="coa-ContextualNav__related">
@@ -22,13 +23,10 @@ const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
               {`${intl.formatMessage(i18n.relatedTo)}: `}
             </span>
             {relatedTo.map((relatedLinkData, index) => (
-              <a
-                href={`/${intl.locale}${relatedLinkData.url}`}
-                key={relatedLinkData.url}
-              >
+              <Link to={`/${intl.locale}${relatedLinkData.url}`} key={relatedLinkData.url}>
                 {relatedLinkData.title}
                 {index !== relatedTo.length - 1 && ', '}
-              </a>
+              </Link>
             ))}
           </div>
         )}
@@ -39,13 +37,10 @@ const ContextualNav = ({ parent, relatedTo, offeredBy, intl }) => (
                 i18n.offeredBy,
               )}: `}</span>
               {offeredBy.map((department, index) => (
-                <a
-                  href={`/${intl.locale}${department.url}`}
-                  key={department.url}
-                >
+                <Link to={`/${intl.locale}${department.url}`} key={department.url}>
                   {department.title}
                   {index !== offeredBy.length - 1 && ', '}
-                </a>
+                </Link>
               ))}
             </Fragment>
           )}
@@ -63,6 +58,6 @@ ContextualNav.propTypes = {
   }).isRequired,
   relatedTo: PropTypes.array,
   offeredBy: PropTypes.array,
-};
+}
 
 export default injectIntl(ContextualNav);

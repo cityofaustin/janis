@@ -12,6 +12,7 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageHeader from 'components/PageHeader';
+import { Link } from 'react-router-dom';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
@@ -80,10 +81,8 @@ const Department = ({ department, intl }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      {image ? (
+      {image && (
         <PageBanner image={image} headerText={title} mobileOptimized={true} />
-      ) : (
-        <PageHeader contentType={'department'}>{title}</PageHeader>
       )}
       <TopServicesRelatedContent />
       <div className="coa-Page__all-of-the-content">
@@ -98,19 +97,19 @@ const Department = ({ department, intl }) => {
                   {newsItem.newsDate}
                 </div>
                 <div className="coa-DepartmentPage__news-link">
-                  <a href={`/${intl.locale}${newsItem.url}`}>
+                  <Link to={`/${intl.locale}${newsItem.url}`}>
                     {newsItem.title}
-                  </a>
+                  </Link>
                 </div>
               </>
             ))}
             <div className="coa-DepartmentPage__news-more-link">
-              <a href={`/${intl.locale}/${slug}/news/`}>
+              <Link to={`/${intl.locale}/${slug}/news/`}>
                 <i class="material-icons">arrow_forward</i>
                 {intl.formatMessage(i18n.moreDeptNews, {
                   department: title,
                 })}
-              </a>
+              </Link>
             </div>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}

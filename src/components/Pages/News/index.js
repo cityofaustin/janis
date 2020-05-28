@@ -9,15 +9,17 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
+import { Link } from 'react-router-dom';
+
 import { useIntl } from 'react-intl';
 import { news as i18n } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
 const NewsListPageLink = ({ locale, departmentUrl, departmentTitle }) => (
-  <a
+  <Link
     className="coa-NewsPage__list-page-link"
-    href={`/${locale}${departmentUrl}news/`}
+    to={`/${locale}${departmentUrl}news/`}
   >
     <div className="coa-NewsPage__list-page-link-text">
       {`More ${departmentTitle} news`}
@@ -25,7 +27,7 @@ const NewsListPageLink = ({ locale, departmentUrl, departmentTitle }) => (
     <i class="material-icons coa-NewsPage__list-page-link-arrow">
       arrow_forward
     </i>
-  </a>
+  </Link>
 );
 
 const NewsPage = ({ newsPage }) => {
@@ -66,21 +68,21 @@ const NewsPage = ({ newsPage }) => {
               {byDepartment
                 ? intl.formatMessage(i18n.fromAndByLine, {
                     fromDepartment: (
-                      <a href={`/${intl.locale}${fromDepartment.url}`}>
+                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
                         {fromDepartment.title}
-                      </a>
+                      </Link>
                     ),
                     byDepartment: (
-                      <a href={`/${intl.locale}${byDepartment.url}`}>
+                      <Link to={`/${intl.locale}${byDepartment.url}`}>
                         {byDepartment.title}
-                      </a>
+                      </Link>
                     ),
                   })
                 : intl.formatMessage(i18n.fromLine, {
                     fromDepartment: (
-                      <a href={`/${intl.locale}${fromDepartment.url}`}>
+                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
                         {fromDepartment.title}
-                      </a>
+                      </Link>
                     ),
                   })}
             </div>

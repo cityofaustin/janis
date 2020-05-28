@@ -1,5 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { misc as i18n } from 'js/i18n/definitions';
 
 const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
@@ -13,12 +14,12 @@ const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
           <ul>
             {relatedTo.map((relatedLinkData, index) => (
               <li key={index} className="coa-RelatedToMobile__item">
-                <a
-                  href={`/${intl.locale}${relatedLinkData.url}`}
+                <Link
+                  to={`/${intl.locale}${relatedLinkData.url}`}
                   className="coa-RelatedToMobile__link"
                 >
                   {relatedLinkData.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -38,12 +39,12 @@ const RelatedToMobile = ({ relatedTo, offeredBy, intl }) => (
           <ul>
             {offeredBy.map((department, index) => (
               <li key={index} className="coa-RelatedToMobile__item">
-                <a
-                  href={`/${intl.locale}${department.url}`}
+                <Link
+                  to={`/${intl.locale}${department.url}`}
                   className="coa-RelatedToMobile__link"
                 >
                   {department.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -24,8 +24,11 @@ import {
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 
+import { Link } from 'react-router-dom';
+
 const Footer = ({ intl }) => (
   <footer>
+
     <div className="coa-Footer">
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">
@@ -61,9 +64,9 @@ const Footer = ({ intl }) => (
         </a>
       </div>
       <div className="coa-Footer__links">
-        <a href={`/${intl.locale}/privacy-policy/`}>
+        <Link to={`/${intl.locale}/privacy-policy/`}>
           {intl.formatMessage(i18n.privacyPolicy)}
-        </a>
+        </Link>
       </div>
     </div>
   </footer>
