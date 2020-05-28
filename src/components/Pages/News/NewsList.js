@@ -41,8 +41,8 @@ const NewsListPage = ({ newsListPage }) => {
             pagesArray={newsList}
             PageComponent={NewsListItem}
             intl={intl}
-            fullWidthTablet
-            smallerBottomMargin
+            fillTablet
+            smallMargins
           />
         </div>
       </div>
