@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
 import { news as i18n } from 'js/i18n/definitions';
-import { Link } from 'react-router-dom';
 import PageHeader from 'components/PageHeader';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
@@ -16,7 +15,7 @@ const NewsListItem = ({ page }) => {
     <>
       <div className="coa-NewsListPage__news-date">{page.newsDate}</div>
       <div className="coa-NewsListPage__news-link">
-        <Link to={`/${intl.locale}${page.url}`}>{page.title}</Link>
+        <a href={`/${intl.locale}${page.url}`}>{page.title}</a>
       </div>
     </>
   );

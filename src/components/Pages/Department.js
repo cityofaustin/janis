@@ -12,7 +12,6 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageHeader from 'components/PageHeader';
-import { Link } from 'react-router-dom';
 
 import TileGroup from 'components/Tiles/TileGroup';
 
@@ -97,19 +96,19 @@ const Department = ({ department, intl }) => {
                   {newsItem.newsDate}
                 </div>
                 <div className="coa-DepartmentPage__news-link">
-                  <Link to={`/${intl.locale}${newsItem.url}`}>
+                  <a href={`/${intl.locale}${newsItem.url}`}>
                     {newsItem.title}
-                  </Link>
+                  </a>
                 </div>
               </>
             ))}
             <div className="coa-DepartmentPage__news-more-link">
-              <Link to={`/${intl.locale}/${slug}/news/`}>
+              <a href={`/${intl.locale}/${slug}/news/`}>
                 <i class="material-icons">arrow_forward</i>
                 {intl.formatMessage(i18n.moreDeptNews, {
                   department: title,
                 })}
-              </Link>
+              </a>
             </div>
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
