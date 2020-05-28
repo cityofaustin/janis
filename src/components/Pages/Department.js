@@ -80,10 +80,8 @@ const Department = ({ department, intl }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      {image ? (
+      {image && (
         <PageBanner image={image} headerText={title} mobileOptimized={true} />
-      ) : (
-        <PageHeader contentType={'department'}>{title}</PageHeader>
       )}
       <TopServicesRelatedContent />
       <div className="coa-Page__all-of-the-content">
