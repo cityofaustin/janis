@@ -4,7 +4,7 @@ import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPagination } from 'js/helpers/pagination.js';
-import { queryObjectBuilder } from 'js/helpers/queryObjectBuilder';
+import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder';
 
 import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
@@ -24,7 +24,7 @@ const PaginationContainer = ({
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
   const pages = buildPages(pagesArray, documentsPerPage);
-  const query = queryObjectBuilder();
+  let query = queryObjectBuilder();
   const [isTransition, setIsTransition] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber);
@@ -41,6 +41,12 @@ const PaginationContainer = ({
   });
 
   useEffect(() => {
+    if (pageNumber === 0 && isTransition === false) {
+      updateUrl(0)
+    }
+  },[]);
+
+  useEffect(() => {
     if (query.page) {
       setPageNumber(parseInt(query.page) - 1);
     } else {
@@ -49,13 +55,28 @@ const PaginationContainer = ({
   }, [searchedTerm]);
 
   const updatePage = newPage => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.split('&page=')[0];
-      window.location.hash = `${hash}&page=${parseInt(newPage) + 1}`;
-      setPageNumber(newPage); // NOTE: hooks must be in the order
-      setIsTransition(false);
-    }
+    //
+    //
+    // if (typeof window !== 'undefined') {
+    //   const hash = window.location.hash.split('&page=')[0];
+    // }
+
+    //
+    //
+    updateUrl(newPage)
+    setPageNumber(newPage); // NOTE: hooks must be in the order
+    setIsTransition(false);
   };
+
+
+  //
+  //
+  const updateUrl = page => {
+    query.page = parseInt(page) + 1
+    if (typeof window !== 'undefined') {
+      window.location.hash = queryStringBuilder(query)
+    }
+  }
 
   function changePage(newPage) {
     setIsTransition(true);
