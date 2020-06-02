@@ -129,7 +129,6 @@ const PaginationContainer = ({
                     key={i}
                     pageNumberIndex={shownPages.indexOf(pageNumber + 1)}
                     changePage={changePage}
-                    contentType={'OfficialDocumentPage'}
                   />
                 ))}
 
