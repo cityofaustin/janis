@@ -19,15 +19,15 @@ const SearchPage = () => {
   let searchedTerm = query["?"] || ""
 
   useEffect(() => {
-    //
-    //
+    /*
+      This will catch a browser back or forward interaction and apply a new search
+      if the search is different.
+    */
     window.onpopstate = function(event) {
       query = queryObjectBuilder()
       const filteredSearch = searchWorker(searchIndexWithUrl, query['?'])
       setSearchResults(filteredSearch)
     };
-    //
-    //
 
     const input = document.getElementById("coa-search_input")
     input.focus()
@@ -35,33 +35,19 @@ const SearchPage = () => {
     setSearchResults(filteredSearch)
     if (typeof window !== 'undefined' && input.value.toLocaleLowerCase()) {
       query = queryObjectBuilder()
-      const page = query.page ? query.page : 1
-      query.page = page
+      query.page = query.page ? query.page : 1
       window.location.hash = queryStringBuilder(query)
       searchedTerm = query['?'] || ""
-      //
-      //
-      // window.location.hash = `?=${input.value.toLocaleLowerCase()}`
     }
   }, []);
 
-  //
-  //
-  // Check the url for a search term to apply
-  // if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-  //   // TODO: ...when filters are added to the url, create an array instead and use the '&' standard.
-  //   // const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
-  //   // searchedTerm = queryArr[0]
-  //   const query = queryObjectBuilder()
-  //   searchedTerm = query['?']
-  // }
-
-
-
-  // hook makes our input dynamic (useful for "as-you-type" filtering)
+  // React hook makes our input dynamic (useful for "as-you-type" filtering)
   let [ searchString, setSearchString ] = useState(searchedTerm)
 
-  // Don't show pages without Url (there seems to be some pages that are 'live', but without a url - catch those here...)
+  /* 
+   Don't show pages without Urls. There seems to be some pages that are 'live',
+   but without a url - catch those here...
+  */
   const searchIndexWithUrl = searchIndex.filter( page => page.janisUrls.length > 0)
 
   let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
@@ -75,12 +61,7 @@ const SearchPage = () => {
         query.page = 1
         query["?"] = searchString.toLocaleLowerCase()
         window.location.hash = queryStringBuilder(query)
-        //
-        //
-        // window.location.hash = `?=${searchString.toLocaleLowerCase()}`
       }
-      // const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
-      // setSearchResults(filteredSearch)
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
   }

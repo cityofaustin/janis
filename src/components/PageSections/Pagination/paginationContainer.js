@@ -31,6 +31,10 @@ const PaginationContainer = ({
   const currentPage = pages[pageNumber];
 
   useEffect(() => {
+    /*
+      This hook will fire whenever there's a browser interaction.
+      Like, a back button or a change in the url.
+    */
     if (
       query.page &&
       pageNumber !== parseInt(query.page) - 1 &&
@@ -41,12 +45,22 @@ const PaginationContainer = ({
   });
 
   useEffect(() => {
+    /*
+      The transition effect of changing pages puts a block on new renderings.
+      So, we need to make sure there isn't a transition in effect before
+      we zero-out the page when a new one renders.
+    */
     if (pageNumber === 0 && isTransition === false) {
       updateUrl(0)
     }
   },[]);
 
   useEffect(() => {
+    /*
+      This hook checks to see if a new search term is used. And, sets it back
+      to the first page. Like, if you are on page 3 of searching "police",
+      and then search "recycling", you don't wanna go page 3 of the new search.
+    */
     if (query.page) {
       setPageNumber(parseInt(query.page) - 1);
     } else {
@@ -55,22 +69,11 @@ const PaginationContainer = ({
   }, [searchedTerm]);
 
   const updatePage = newPage => {
-    //
-    //
-    // if (typeof window !== 'undefined') {
-    //   const hash = window.location.hash.split('&page=')[0];
-    // }
-
-    //
-    //
     updateUrl(newPage)
     setPageNumber(newPage); // NOTE: hooks must be in the order
     setIsTransition(false);
   };
 
-
-  //
-  //
   const updateUrl = page => {
     query.page = parseInt(page) + 1
     if (typeof window !== 'undefined') {
