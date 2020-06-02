@@ -112,12 +112,12 @@ const PaginationContainer = ({
           </div>
 
           {shownPages.length > 1 && (
-            <div className="coa-OfficialDocumentPage_pagination-container">
+            <div className="coa-PaginationContainer">
               <div
                 onClick={() => changePage(pageNumber - 1)}
-                className="coa-OfficialDocumentPage_page previous"
+                className="coa-PaginationContainer_page previous"
               >
-                <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+                <ChevronLeftBlue className="coa-PaginationContainer_page-chevron" />
               </div>
 
               {pages &&
@@ -135,9 +135,9 @@ const PaginationContainer = ({
 
               <div
                 onClick={() => changePage(pageNumber + 1)}
-                className="coa-OfficialDocumentPage_page next"
+                className="coa-PaginationContainer_page next"
               >
-                <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right" />
+                <ChevronRightBlue className="coa-PaginationContainer_page-chevron right" />
               </div>
             </div>
           )}
