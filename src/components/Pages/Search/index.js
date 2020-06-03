@@ -6,56 +6,68 @@ import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
+import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder'
+
+import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js'
 
 
 const SearchPage = () => {
 
   const intl = useIntl();
   const { searchIndex } = useRouteData();
-  let searchedTerm = ""
+  let query = queryObjectBuilder()
+  let searchedTerm = query["?"] || ""
 
   useEffect(() => {
+    /*
+      This will catch a browser back or forward interaction and apply a new search
+      if the search is different.
+    */
+    window.onpopstate = function(event) {
+      query = queryObjectBuilder()
+      const filteredSearch = searchWorker(searchIndexWithUrl, query['?'])
+      setSearchResults(filteredSearch)
+    };
+
     const input = document.getElementById("coa-search_input")
     input.focus()
     const filteredSearch = searchWorker(searchIndexWithUrl, input.value)
     setSearchResults(filteredSearch)
-    if (typeof window !== 'undefined') {
-      window.location.hash = input.value.toLocaleLowerCase()
+    if (typeof window !== 'undefined' && input.value.toLocaleLowerCase()) {
+      query = queryObjectBuilder()
+      query.page = query.page ? query.page : 1
+      window.location.hash = queryStringBuilder(query)
+      searchedTerm = query['?'] || ""
     }
-  }, [searchIndex]);
+  }, []);
 
-  // Check the url for a search term to apply
-  if (typeof window !== 'undefined' && window.location.hash.length > 1) {
-    // TODO: ...when filters are added to the url, create an array instead and use the '&' standard.
-    // const queryArr = decodeURIComponent(window.location.hash.split("#")[1]).split("&")
-    // searchedTerm = queryArr[0]
-    searchedTerm = decodeURIComponent(window.location.hash.split("#")[1])
-  }
-
-  // hook makes our input dynamic (useful for "as-you-type" filtering)
+  // React hook makes our input dynamic (useful for "as-you-type" filtering)
   let [ searchString, setSearchString ] = useState(searchedTerm)
 
-  // Don't show pages without Url (there seems to be some pages that are 'live', but without a url - catch those here...)
+  /* 
+   Don't show pages without Urls. There seems to be some pages that are 'live',
+   but without a url - catch those here...
+  */
   const searchIndexWithUrl = searchIndex.filter( page => page.janisUrls.length > 0)
 
   let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
 
-  const searchButtonPressed = function() {
+  const searchButtonPressed = () => {
     const results = document.getElementById('coa-search_results')
     results.style.opacity = 0
     setTimeout(function(){
       if (typeof window !== 'undefined') {
-        window.location.hash = searchString.toLocaleLowerCase()
+        query = queryObjectBuilder()
+        query.page = 1
+        query["?"] = searchString.toLocaleLowerCase()
+        window.location.hash = queryStringBuilder(query)
       }
-      const filteredSearch = searchWorker(searchIndexWithUrl, searchString)
-      setSearchResults(filteredSearch)
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
   }
 
-  const searchKeyInput = function(event) {
+  const searchKeyInput = event => {
     setSearchString(event.target.value)
-
     // For Quick Search (no-delay)... use 👇this, instead of that 👆.
     // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
     // setSearchResults(filteredSearch)
@@ -77,7 +89,6 @@ const SearchPage = () => {
             onChange={()=>searchKeyInput(event)}
             value={searchString}
           />
-
           <button
             className="coa-search_button"
             onClick={()=>searchButtonPressed('click')}
@@ -87,58 +98,49 @@ const SearchPage = () => {
         </div>
       </PageHeader>
 
-      <div className="wrapper container-fluid">
-        <div className="row">
+      <div id="coa-search_results">
+        <div className="wrapper container-fluid">
+          <div className="row">
 
-          <div id="coa-search_results" className="col-xs-12 col-md-8">
+            <div className="col-xs-12 col-md-8">
 
-            {searchedTerm && searchResults.length < 1 && (
-              <NoResults />
-            )}
-
-            <div className="coa-search_results-total">
-              {searchedTerm && searchResults.length > 0 && (
-                <span>
-                  {searchResults && searchResults.length}
-
-                  {intl.formatMessage(i18n.results, {
-                    searchedTerm: (
-                      <em>
-                        "{searchedTerm}"
-                      </em>
-                    ),
-                  })}
-
-                </span>
+              {searchedTerm && searchResults.length < 1 && (
+                <NoResults />
               )}
+
+              <div className="coa-search_results-total">
+                {searchedTerm && searchResults.length > 0 && (
+                  <span>
+                    {searchResults && searchResults.length}
+
+                    {intl.formatMessage(i18n.results, {
+                      searchedTerm: (
+                        <em>
+                          "{searchedTerm}"
+                        </em>
+                      ),
+                    })}
+
+                  </span>
+                )}
+              </div>
+
             </div>
-
-            { searchResults && searchResults.map( (page, index) => (
-              <SearchResult
-                page={page}
-                key={index}
-              />
-            )) }
-
           </div>
-
         </div>
+
+        <PaginationContainer
+          pagesArray={searchResults}
+          PageComponent={SearchResult}
+          searchedTerm={searchedTerm}
+          intl={intl}
+        />
+
       </div>
-
-
-      {/*
-        TODO: PAGINATION ( https://github.com/cityofaustin/techstack/issues/4358 )
-        NOTE: It would be too much to handle all in one with this component like we've
-        done on other pages.
-        - Make paginationContainer.js
-          <PaginationContainer
-            results={searchResults}
-          />
-      */}
-
     </div>
   )
 }
+
 
 const NoResults = function() {
 
@@ -159,5 +161,6 @@ const NoResults = function() {
   )
 
 }
+
 
 export default SearchPage
