@@ -93,7 +93,7 @@ const SearchPage = () => {
           <div id="coa-search_results" className="col-xs-12 col-md-8">
 
             {searchedTerm && searchResults.length < 1 && (
-              <NoResults />
+              <NoResults intl={intl} searchedTerm={searchedTerm}/>
             )}
 
             <div className="coa-search_results-total">
@@ -140,12 +140,19 @@ const SearchPage = () => {
   )
 }
 
-const NoResults = function() {
+const NoResults = function({intl, searchedTerm}) {
 
   return (
     <div>
       <div className="coa-search_results-total">
-        0 results
+        0
+        {intl.formatMessage(i18n.results, {
+          searchedTerm: (
+            <em>
+              "{searchedTerm}"
+            </em>
+          ),
+        })}
       </div>
       <h2 className="coa-search_results-zero-message">
         There are no matching results. Improve your search results by:
