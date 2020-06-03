@@ -244,6 +244,9 @@ class Header extends Component {
                 <I18nLink className="coa-Header__logo" to="/">
                   City of Austin
                 </I18nLink>
+                <a href='/search' className="coa-ThemesNav__search-container-icon">
+                  <i className="material-icons coa-ThemesNav__search-icon">search</i>
+                </a>
               </div>
               <div className="coa-Header__right-controls-wrapper">
                 <div className="coa-Header__right-controls">

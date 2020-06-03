@@ -60,13 +60,7 @@
 
 #coa-search_results {
   opacity: 1;
-  margin-bottom: $coa-space-level7;
   transition: opacity .3s;
-}
-
-#coa-search_loading_wheel {
-  display: none;
-  margin-top: 100px;
 }
 
 .coa-search_results-total {
