@@ -17,7 +17,9 @@ const LanguageSelectBar = ({
   intl,
   showMessage,
   togglePendingTranslation,
-}) => (
+}) => {
+  console.log(" top of languageSelectBar window.location.hash :", window.location.hash)
+  return (
   <>
     <div
       className={classNames('coa-LanguageSelectBar__background', {
@@ -55,7 +57,7 @@ const LanguageSelectBar = ({
       </ul>
     </div>
   </>
-);
+);}
 
 LanguageSelectBar.propTypes = {
   path: PropTypes.string.isRequired,

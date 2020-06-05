@@ -23,6 +23,7 @@ class Header extends Component {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
       showMessage: false,
+      query: window.location.hash
     };
 
     // Bind wrappers and outside-click functions
@@ -54,6 +55,8 @@ class Header extends Component {
 
   // Hides the menu
   handleClickOutside(event) {
+    console.log("lang toggle, window.location.hash :", window.location.hash)
+    
     // Full site
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
@@ -178,6 +181,10 @@ class Header extends Component {
 
   render() {
     const { intl, navigation, path } = this.props;
+
+    console.log("this.props :", this.props)
+    console.log("windwo.location.hash :", window.location.hash)
+    console.log("this.state :", this.state)
 
     return (
       <header

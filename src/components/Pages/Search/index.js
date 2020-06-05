@@ -104,15 +104,9 @@ const SearchPage = () => {
 
             <div className="col-xs-12 col-md-8">
 
-<<<<<<< HEAD
             {searchedTerm && searchResults.length < 1 && (
               <NoResults intl={intl} searchedTerm={searchedTerm}/>
             )}
-=======
-              {searchedTerm && searchResults.length < 1 && (
-                <NoResults />
-              )}
->>>>>>> master
 
               <div className="coa-search_results-total">
                 {searchedTerm && searchResults.length > 0 && (
@@ -152,7 +146,7 @@ const NoResults = function({intl, searchedTerm}) {
   return (
     <div>
       <div className="coa-search_results-total">
-        0
+        0&nbsp;
         {intl.formatMessage(i18n.results, {
           searchedTerm: (
             <em>
@@ -162,12 +156,12 @@ const NoResults = function({intl, searchedTerm}) {
         })}
       </div>
       <h2 className="coa-search_results-zero-message">
-        There are no matching results. Improve your search results by:
+        {intl.formatMessage(i18n.noResultsHeader)}
       </h2>
       <div className="coa-search_results-zero">
-        • double-checking your spelling <br />
-        • using fewer keywords <br />
-        • searching for something less specific <br />
+        • {intl.formatMessage(i18n.suggestion1)} <br />
+        • {intl.formatMessage(i18n.suggestion2)} <br />
+        • {intl.formatMessage(i18n.suggestion3)} <br />
       </div>
     </div>
   )
