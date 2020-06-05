@@ -34,7 +34,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3',
   },
   'search-pag': {
-    joplin_appname: 'joplin'
+    joplin_appname: 'joplin',
   },
   '4285-search-page': {
     joplin_appname: 'joplin',
@@ -44,6 +44,9 @@ const branchOverrides = {
   },
   '4450-button': {
     joplin_appname: 'joplin-staging',
+  },
+  'style-change': {
+    joplin_appname: 'joplin',
   },
 };
 
