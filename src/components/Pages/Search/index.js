@@ -14,19 +14,35 @@ import PaginationContainer from 'components/PageSections/Pagination/paginationCo
 const SearchPage = () => {
 
   const intl = useIntl();
+  const lang = intl.locale
   const { searchIndex } = useRouteData();
   let query = queryObjectBuilder()
   let searchedTerm = query["?"] || ""
+
+
+  useEffect(() => {
+    /*
+      This will catch if the language is changed
+      ???...if the search is different.
+    */
+
+    updateSearch()
+    // query = queryObjectBuilder()
+    // const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
+    // setSearchResults(filteredSearch)
+  }, [lang])
 
   useEffect(() => {
     /*
       This will catch a browser back or forward interaction and apply a new search
       if the search is different.
     */
+    console.log(' [] is triggered')
     window.onpopstate = function(event) {
-      query = queryObjectBuilder()
-      const filteredSearch = searchWorker(searchIndexWithUrl, query['?'])
-      setSearchResults(filteredSearch)
+      updateSearch()
+      // query = queryObjectBuilder()
+      // const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
+      // setSearchResults(filteredSearch)
     };
 
     const input = document.getElementById("coa-search_input")
@@ -40,6 +56,7 @@ const SearchPage = () => {
       searchedTerm = query['?'] || ""
     }
   }, []);
+
 
   // React hook makes our input dynamic (useful for "as-you-type" filtering)
   let [ searchString, setSearchString ] = useState(searchedTerm)
@@ -64,6 +81,12 @@ const SearchPage = () => {
       }
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
+  }
+
+  const updateSearch = () => {
+    query = queryObjectBuilder()
+    const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
+    setSearchResults(filteredSearch)
   }
 
   const searchKeyInput = event => {
@@ -111,7 +134,7 @@ const SearchPage = () => {
               <div className="coa-search_results-total">
                 {searchedTerm && searchResults.length > 0 && (
                   <span>
-                    {searchResults && searchResults.length}
+                    {searchResults && searchResults.length + " "}
 
                     {intl.formatMessage(i18n.results, {
                       searchedTerm: (
