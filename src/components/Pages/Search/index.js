@@ -21,15 +21,8 @@ const SearchPage = () => {
 
 
   useEffect(() => {
-    /*
-      This will catch if the language is changed
-      ???...if the search is different.
-    */
-
+    // This will catch if the language is changed and refilter the search.
     updateSearch()
-    // query = queryObjectBuilder()
-    // const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
-    // setSearchResults(filteredSearch)
   }, [lang])
 
   useEffect(() => {
@@ -37,12 +30,8 @@ const SearchPage = () => {
       This will catch a browser back or forward interaction and apply a new search
       if the search is different.
     */
-    console.log(' [] is triggered')
     window.onpopstate = function(event) {
       updateSearch()
-      // query = queryObjectBuilder()
-      // const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
-      // setSearchResults(filteredSearch)
     };
 
     const input = document.getElementById("coa-search_input")

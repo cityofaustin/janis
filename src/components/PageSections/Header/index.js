@@ -22,7 +22,7 @@ class Header extends Component {
     this.state = {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
-      showMessage: false
+      showMessage: false,
     };
 
     // Bind wrappers and outside-click functions

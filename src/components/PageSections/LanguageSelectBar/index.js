@@ -16,9 +16,8 @@ const LanguageSelectBar = ({
   path,
   intl,
   showMessage,
-  togglePendingTranslation
-}) => {
-  return (
+  togglePendingTranslation,
+}) => (
   <>
     <div
       className={classNames('coa-LanguageSelectBar__background', {
@@ -35,7 +34,7 @@ const LanguageSelectBar = ({
           return (
             <li key={i} onClick={pending && togglePendingTranslation}>
               <Link
-                to={`/${code}/${path}${window.location.hash}`}
+                to={`/${code}/${path}${typeof window !== 'undefined' ? window.location.hash : ""}`}
                 className={classNames('coa-LanguageSelectBar__item', {
                   'coa-LanguageSelectBar__item--active': intl.locale === code,
                   'coa-LanguageSelectBar__item--showMessage': showMessage,
@@ -56,7 +55,7 @@ const LanguageSelectBar = ({
       </ul>
     </div>
   </>
-);}
+);
 
 LanguageSelectBar.propTypes = {
   path: PropTypes.string.isRequired,
