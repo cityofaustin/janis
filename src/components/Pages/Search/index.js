@@ -19,7 +19,6 @@ const SearchPage = () => {
   let query = queryObjectBuilder()
   let searchedTerm = query["?"] || ""
 
-
   useEffect(() => {
     // This will catch if the language is changed and refilter the search.
     updateSearch()
@@ -67,6 +66,7 @@ const SearchPage = () => {
         query.page = 1
         query["?"] = searchString.toLocaleLowerCase()
         window.location.hash = queryStringBuilder(query)
+        updateSearch()
       }
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
