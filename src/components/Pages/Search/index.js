@@ -14,9 +14,15 @@ import PaginationContainer from 'components/PageSections/Pagination/paginationCo
 const SearchPage = () => {
 
   const intl = useIntl();
+  const lang = intl.locale
   const { searchIndex } = useRouteData();
   let query = queryObjectBuilder()
   let searchedTerm = query["?"] || ""
+
+  useEffect(() => {
+    // This will catch if the language is changed and refilter the search.
+    updateSearch()
+  }, [lang])
 
   useEffect(() => {
     /*
@@ -24,9 +30,7 @@ const SearchPage = () => {
       if the search is different.
     */
     window.onpopstate = function(event) {
-      query = queryObjectBuilder()
-      const filteredSearch = searchWorker(searchIndexWithUrl, query['?'])
-      setSearchResults(filteredSearch)
+      updateSearch()
     };
 
     const input = document.getElementById("coa-search_input")
@@ -41,10 +45,11 @@ const SearchPage = () => {
     }
   }, []);
 
+
   // React hook makes our input dynamic (useful for "as-you-type" filtering)
   let [ searchString, setSearchString ] = useState(searchedTerm)
 
-  /* 
+  /*
    Don't show pages without Urls. There seems to be some pages that are 'live',
    but without a url - catch those here...
   */
@@ -61,9 +66,16 @@ const SearchPage = () => {
         query.page = 1
         query["?"] = searchString.toLocaleLowerCase()
         window.location.hash = queryStringBuilder(query)
+        updateSearch()
       }
       results.style.opacity = 1
     },300) // Allows for CSS transtion to complete (./_Search.scss).
+  }
+
+  const updateSearch = () => {
+    query = queryObjectBuilder()
+    const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
+    setSearchResults(filteredSearch)
   }
 
   const searchKeyInput = event => {
@@ -104,14 +116,14 @@ const SearchPage = () => {
 
             <div className="col-xs-12 col-md-8">
 
-              {searchedTerm && searchResults.length < 1 && (
-                <NoResults />
-              )}
+            {searchedTerm && searchResults.length < 1 && (
+              <NoResults intl={intl} searchedTerm={searchedTerm}/>
+            )}
 
               <div className="coa-search_results-total">
                 {searchedTerm && searchResults.length > 0 && (
                   <span>
-                    {searchResults && searchResults.length}
+                    {searchResults && searchResults.length + " "}
 
                     {intl.formatMessage(i18n.results, {
                       searchedTerm: (
@@ -141,21 +153,27 @@ const SearchPage = () => {
   )
 }
 
-
-const NoResults = function() {
+const NoResults = function({intl, searchedTerm}) {
 
   return (
     <div>
       <div className="coa-search_results-total">
-        0 results
+        0&nbsp;
+        {intl.formatMessage(i18n.results, {
+          searchedTerm: (
+            <em>
+              "{searchedTerm}"
+            </em>
+          ),
+        })}
       </div>
       <h2 className="coa-search_results-zero-message">
-        There are no matching results. Improve your search results by:
+        {intl.formatMessage(i18n.noResultsHeader)}
       </h2>
       <div className="coa-search_results-zero">
-        • double-checking your spelling <br />
-        • using fewer keywords <br />
-        • searching for something less specific <br />
+        • {intl.formatMessage(i18n.suggestion1)} <br />
+        • {intl.formatMessage(i18n.suggestion2)} <br />
+        • {intl.formatMessage(i18n.suggestion3)} <br />
       </div>
     </div>
   )
