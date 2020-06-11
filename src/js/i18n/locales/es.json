@@ -147,5 +147,9 @@
   "events.viewAll": "Ver todos los eventos",
   "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin",
   "search.search": "Buscar",
-  "search.results": " resultados para {searchedTerm}"
+  "search.results": "resultados para {searchedTerm}",
+  "search.noResultsHeader": "No hay resultados para su selección. Para mejorar los resultados de la búsqueda:",
+  "search.suggestion1": "revise la ortografía",
+  "search.suggestion2": "use menos palabras claves",
+  "search.suggestion3": "busque algo menos especifico"
 }
