@@ -10,7 +10,7 @@ const SearchResult = ({ page }) => {
     return <EventPageResult page={page}/>
   } else if ( page.pageType === "location page" ) {
     return <LocationPageResult page={page}/>
-  } else if ( page.pageType === "official document") {
+  } else if ( page.pageType === "document page") {
     return <OfficialDocumentPageDocumentResult page={page}/>
   } else {
     return <DefaultPageResult page={page}/>
