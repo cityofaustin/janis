@@ -58,7 +58,14 @@
     font-size: $coa-font-size-xxsmall;
     height: 8rem;
   }
+
 }
+
+.coa-ThemesNav__link.es {
+  font-size: 14px; // 🚨USE coa- ....
+}
+
+
 
 .coa-ThemesNav--open {
   border-top: $coa-menu-border-width solid $coa-menu-bodercolor;

@@ -2,11 +2,15 @@ import React from 'react';
 import { injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { search as i18n } from 'js/i18n/definitions';
+import { misc as i18n } from 'js/i18n/definitions';
+import ExternalLink from 'components/ExternalLink';
 
 const ThemesNav = props => {
 
   const intl = useIntl();
+  const lang = intl.locale
+
+  console.log("coa-ThemesNav__link "+lang)
 
   return (
     <nav
@@ -22,7 +26,7 @@ const ThemesNav = props => {
             tabIndex="0"
             onKeyDown={props.handleOnClick}
           >
-            <a className="coa-ThemesNav__link" onClick={props.handleOnClick}>
+            <a className={"coa-ThemesNav__link "+lang} onClick={props.handleOnClick}>
               {theme.text}
             </a>
           </li>
@@ -39,12 +43,30 @@ const ThemesNav = props => {
         </a>
       ) : null}
 
-      <a href='/search' className="coa-ThemesNav__search-container">
-        <i className="material-icons coa-ThemesNav__search-icon">search</i>
-        <span className="coa-ThemesNav__search-title">
-          {intl.formatMessage(i18n.search)}
-        </span>
-      </a>
+
+
+      {/*  🚨CSS NAME CHANGE!!!! */}
+      <div className="coa-Header__right-controls-wrapper">
+
+        <div className="coa-Header__right-controls">
+          <ExternalLink
+            to="http://www.austintexas.gov/airport"
+            ariaLabel={intl.formatMessage(i18n.airport)}
+          >
+            {intl.formatMessage(i18n.airport)}
+          </ExternalLink>
+          <span className="coa-text-spacer--vertical" />
+          <ExternalLink
+            to="http://311.austintexas.gov/"
+            ariaLabel={'three one one'}
+          >
+            311
+          </ExternalLink>
+        </div>
+      </div>
+
+
+
 
     </nav>
   )
