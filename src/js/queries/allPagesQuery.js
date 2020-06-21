@@ -3,7 +3,6 @@ import departmentPageFragment from './departmentPageFragment';
 import informationPageFragment from './informationPageFragment';
 import locationPageFragment from './locationPageFragment';
 import eventPageFragment from './eventPageFragment';
-import documentPageFragment from './documentPageFragment';
 import guidePageLiveFragment from './guidePageLiveFragment';
 import newsPageFragment from './newsPageFragment';
 
@@ -146,8 +145,15 @@ query allPagesQuery($after: String) {
           informationpage {
             ...informationPageInfo
           }
-          officialdocumentpage {
-            ...documentPageInfo
+          officialdocumentlist {
+            id
+            title
+            slug
+            departments {
+              id
+              title
+              slug
+            }
           }
           formcontainer {
             id
@@ -169,7 +175,7 @@ query allPagesQuery($after: String) {
       endCursor
     }
   }
-}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${documentPageFragment}${departmentPageFragment}${guidePageLiveFragment}${newsPageFragment}
+}  ${conciseContactFragment}${informationPageFragment}${locationPageFragment}${eventPageFragment}${departmentPageFragment}${guidePageLiveFragment}${newsPageFragment}
 `;
 
 export default siteStructureQuery;
