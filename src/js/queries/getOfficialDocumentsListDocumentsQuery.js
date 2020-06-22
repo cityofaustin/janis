@@ -23,7 +23,6 @@ const getOfficialDocumentsListDocumentsQuery = `
       }
     }
   }
-}
 `;
 
 export default getOfficialDocumentsListDocumentsQuery;

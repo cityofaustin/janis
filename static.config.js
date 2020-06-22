@@ -347,6 +347,7 @@ const getWorkingDocumentLink = async filename => {
 };
 
 const getOfficialDocumentListData = async (page, instance, client) => {
+  console.log(instance)
   let officialDocumentList = { ...page };
 
   let relatedTo = [];
@@ -359,20 +360,22 @@ const getOfficialDocumentListData = async (page, instance, client) => {
   }
 
   const { officialDocumentListDocuments } = await client.request(
-    getOfficialDocumentListDocumentsQuery,
+    getOfficialDocumentsListDocumentsQuery,
     {
       id: officialDocumentList.id,
     },
   );
 
-  officialDocumentPage.contextualNavData = {
+  officialDocumentList.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
+    offeredBy: getOfferedByFromDepartments(officialDocumentList.departments),
   };
 
-  // todo: update this
-  for (let doc of officialDocumentPage.documents.edges) {
+  officialDocumentList.documents = {}
+
+  for (let doc of officialDocumentListDocuments.edges[0].node.documentPages.edges) {
+    console.log(doc)
     // If we have a document in wagtail
     // use that info to update the information syncronously
     if (doc.node.document) {
