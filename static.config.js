@@ -347,7 +347,6 @@ const getWorkingDocumentLink = async filename => {
 };
 
 const getOfficialDocumentListData = async (page, instance, client) => {
-  console.log(instance)
   let officialDocumentList = { ...page };
 
   let relatedTo = [];
@@ -372,10 +371,9 @@ const getOfficialDocumentListData = async (page, instance, client) => {
     offeredBy: getOfferedByFromDepartments(officialDocumentList.departments),
   };
 
-  officialDocumentList.documents = {}
+  let documentArray = [];
 
   for (let doc of officialDocumentListDocuments.edges[0].node.documentPages.edges) {
-    console.log(doc)
     // If we have a document in wagtail
     // use that info to update the information syncronously
     if (doc.node.document) {
@@ -388,9 +386,11 @@ const getOfficialDocumentListData = async (page, instance, client) => {
         );
       }
     }
+    documentArray.push(doc.node)
   }
 
-  // todo: update this too
+  officialDocumentList.documents = documentArray;
+
   return { officialDocumentList: officialDocumentList };
 };
 
