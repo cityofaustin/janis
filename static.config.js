@@ -13,6 +13,7 @@ import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
 import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
+import getOfficialDocumentsListDocumentsQuery from 'js/queries/getOfficialDocumentsListDocumentsQuery';
 import getPageUrlQuery from 'js/queries/getPageUrl';
 
 // Shiny ✨ new queries!
@@ -345,8 +346,8 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-const getOfficialDocumentPageData = async (page, instance, client) => {
-  let officialDocumentPage = { ...page };
+const getOfficialDocumentListData = async (page, instance, client) => {
+  let officialDocumentList = { ...page };
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -357,12 +358,20 @@ const getOfficialDocumentPageData = async (page, instance, client) => {
     );
   }
 
+  const { officialDocumentListDocuments } = await client.request(
+    getOfficialDocumentListDocumentsQuery,
+    {
+      id: officialDocumentList.id,
+    },
+  );
+
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
     offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
   };
 
+  // todo: update this
   for (let doc of officialDocumentPage.documents.edges) {
     // If we have a document in wagtail
     // use that info to update the information syncronously
@@ -378,7 +387,8 @@ const getOfficialDocumentPageData = async (page, instance, client) => {
     }
   }
 
-  return { officialDocumentPage: officialDocumentPage };
+  // todo: update this too
+  return { officialDocumentList: officialDocumentList };
 };
 
 const cleanEventPageData = page => {
@@ -491,7 +501,7 @@ const buildPageAtUrl = async (
       guidepage,
       servicepage,
       informationpage,
-      officialdocumentpage,
+      officialdocumentlist,
       formcontainer,
     } = janisbasepagewithtopics;
 
@@ -531,13 +541,13 @@ const buildPageAtUrl = async (
       };
     }
 
-    if (officialdocumentpage) {
+    if (officialdocumentlist) {
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
         getData: () =>
-          getOfficialDocumentPageData(
-            officialdocumentpage,
+          getOfficialDocumentListData(
+            officialdocumentlist,
             instanceOfPage,
             client,
           ),
@@ -598,6 +608,8 @@ const buildPageAtUrl = async (
         cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
   }
+  // need to figure out what official document pages are going to do.
+  console.log('last thing', pageAtUrlInfo)
 };
 
 const getPagesOfGuidesData = async client => {
