@@ -11,6 +11,13 @@ const ThemesNav = props => {
   const lang = intl.locale
 
   console.log("coa-ThemesNav__link "+lang)
+  console.log("props.navigation :", props.navigation)
+
+  if (lang === 'en') {
+    props.navigation.map( theme => {
+      theme.text = theme.text.split('and').join('&')
+    })
+  }
 
   return (
     <nav
@@ -50,18 +57,19 @@ const ThemesNav = props => {
 
         <div className="coa-Header__right-controls">
           <ExternalLink
-            to="http://www.austintexas.gov/airport"
-            ariaLabel={intl.formatMessage(i18n.airport)}
-          >
-            {intl.formatMessage(i18n.airport)}
-          </ExternalLink>
-          <span className="coa-text-spacer--vertical" />
-          <ExternalLink
             to="http://311.austintexas.gov/"
             ariaLabel={'three one one'}
           >
             311
           </ExternalLink>
+          <span className="coa-text-spacer--vertical" />
+          <ExternalLink
+            to="http://www.austintexas.gov/airport"
+            ariaLabel={intl.formatMessage(i18n.airport)}
+          >
+            {intl.formatMessage(i18n.airport)}
+          </ExternalLink>
+
         </div>
       </div>
 
