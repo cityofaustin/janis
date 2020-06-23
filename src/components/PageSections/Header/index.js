@@ -187,12 +187,6 @@ class Header extends Component {
         role="banner"
       >
         <div className="coa-Header--container">
-          <GovSite
-            toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-            keyboardHowYouKnowMenu={this.keyboardHowYouKnowMenu}
-            menuIsOpen={this.state.howYouKnowMenuIsOpen}
-            refnode={this.setHowYouKnowWrapperRef}
-          />
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar
               path={path}

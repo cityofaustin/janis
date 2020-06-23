@@ -52,7 +52,7 @@ const ThemesNav = props => {
 
 
 
-      {/*  🚨CSS NAME CHANGE!!!! */}
+      {/*  🚨CSS NAME CHANGE!!!! in themesNav, not header.  */}
       <div className="coa-Header__right-controls-wrapper">
 
         <div className="coa-Header__right-controls">
