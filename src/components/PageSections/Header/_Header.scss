@@ -6,9 +6,10 @@
 }
 
 .coa-Header--container {
-  max-width: $coa-top-menu-max-width;
-  margin-left: auto;
-  margin-right: auto;
+  // max-width: $coa-top-menu-max-width;
+  // margin-left: auto;
+  // margin-right: auto;
+  // text-align: center;
 }
 
 // .coa-Header--menu-is-open ~ main,
@@ -26,7 +27,7 @@
 }
 
 .coa-Header__container {
-  max-width: 1325px;
+  max-width: $coa-top-menu-max-width;
   margin-left: auto;
   margin-right: auto;
 
@@ -38,10 +39,8 @@
 
 .coa-Header__controls {
   display: flex;
-  // height: $coa-header-toprow-height;
   justify-content: space-between;
   flex-wrap: wrap;
-
   @include media($coa-medium-screen) {
     padding-top: $coa-spacing-small;
     padding-bottom: $coa-spacing-small;
@@ -54,15 +53,18 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 2rem;
-
-  .coa-text-spacer--vertical:after {
-    display: block;
-    height: $coa-header-toprow-height;
-  }
+  // .coa-text-spacer--vertical:after {
+  //   display: block;
+  //   height: $coa-header-toprow-height;
+  // }
 
   @include media($coa-medium-screen) {
     margin-left: 0;
   }
+}
+
+.coa-text-spacer--vertical {
+  width: 1.5rem;
 }
 
 .coa-Header__center-controls {
@@ -144,9 +146,9 @@
   }
 
   a {
-    color: $coa-color-white;
+    color: $coa-color-primary;
     &:visited {
-      color: $coa-color-white;
+      color: $coa-color-primary;
     }
     svg {
       margin-left: $coa-space-level1;
@@ -197,11 +199,11 @@
 }
 
 .coa-Header__gov-site {
-  background: $coa-color-blue-darkest;
+  // text-align: center;
+  // background: $coa-color-blue-darkest;
   font-size: 1.2rem;
   line-height: 3.1rem;
-  cursor: pointer;
-  border-radius: 0px 0px 4px 4px;
+
   svg {
     vertical-align: middle;
     height: 1.6rem;
@@ -231,6 +233,12 @@
     margin-right: 0.4rem;
     margin-left: 0.4rem;
   }
+}
+
+.coa-Header__gov-site-title {
+  background: $coa-color-blue-darkest;
+  cursor: pointer;
+  border-radius: 0px 0px 4px 4px;
 }
 
 .coa-Header__gov-site-toggle {

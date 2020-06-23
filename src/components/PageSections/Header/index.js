@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
 
-import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
+import { search as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
 import I18nLink from 'components/I18n/I18nLink';
-import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
@@ -188,12 +187,6 @@ class Header extends Component {
         role="banner"
       >
         <div className="coa-Header--container">
-          <GovSite
-            toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-            keyboardHowYouKnowMenu={this.keyboardHowYouKnowMenu}
-            menuIsOpen={this.state.howYouKnowMenuIsOpen}
-            refnode={this.setHowYouKnowWrapperRef}
-          />
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar
               path={path}
@@ -242,29 +235,29 @@ class Header extends Component {
                   {intl.formatMessage(i18n2.menu)}
                 </a>
                 <I18nLink className="coa-Header__logo" to="/">
-                  City of Austin
+                  austin.gov
                 </I18nLink>
                 <a href='/search' className="coa-ThemesNav__search-container-icon">
                   <i className="material-icons coa-ThemesNav__search-icon">search</i>
                 </a>
               </div>
+
+              {/*  🚨CSS NAME CHANGE!!!! */}
+
               <div className="coa-Header__right-controls-wrapper">
-                <div className="coa-Header__right-controls">
-                  <ExternalLink
-                    to="http://www.austintexas.gov/airport"
-                    ariaLabel={intl.formatMessage(i18n1.airport)}
-                  >
-                    {intl.formatMessage(i18n1.airport)}
-                  </ExternalLink>
-                  <span className="coa-text-spacer--vertical" />
-                  <ExternalLink
-                    to="http://311.austintexas.gov/"
-                    ariaLabel={'three one one'}
-                  >
-                    311
-                  </ExternalLink>
-                </div>
+
+                <a href='/search' className="coa-ThemesNav__search-container">
+                  <i className="material-icons coa-ThemesNav__search-icon">search</i>
+                  <span className="coa-ThemesNav__search-title">
+                    {intl.formatMessage(i18n1.search)}
+                  </span>
+                </a>
+
+
               </div>
+
+
+
             </div>
           </div>
 
