@@ -15,7 +15,7 @@ const GovSite = ({ intl, toggleHowYouKnowMenu, keyboardHowYouKnowMenu, menuIsOpe
   	ref={refnode}
   >
     <div
-    	className="coa-Header__gov-site-title container-fluid wrapper center-xs"
+    	className="container-fluid wrapper center-xs"
     	onClick={toggleHowYouKnowMenu}
     >
       {intl.formatMessage(i18n1.coaOfficialWeb)}
