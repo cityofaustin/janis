@@ -48,6 +48,9 @@ query allPagesQuery($after: String) {
         departmentpage {
           ...departmentPageInfo
         }
+        officialdocumentpage {
+          id
+        }
         topiccollectionpage {
           id
           slug
@@ -149,6 +152,7 @@ query allPagesQuery($after: String) {
             id
             title
             slug
+            description
             departments {
               id
               title

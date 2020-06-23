@@ -373,21 +373,28 @@ const getOfficialDocumentListData = async (page, instance, client) => {
 
   let documentArray = [];
 
-  for (let doc of officialDocumentListDocuments.edges[0].node.documentPages.edges) {
-    // If we have a document in wagtail
-    // use that info to update the information syncronously
-    if (doc.node.document) {
-      doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
-      // If it's a pdf, add the size
-      if (doc.node.document.filename.slice(-3) === 'pdf') {
-        doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
-          ' ',
-          '',
-        );
+  if (
+    officialDocumentListDocuments &&
+    officialDocumentListDocuments.edges &&
+    officialDocumentListDocuments.edges.length > 0
+  ) {
+    for (let doc of officialDocumentListDocuments.edges[0].node.documentPages.edges) {
+      // If we have a document in wagtail
+      // use that info to update the information syncronously
+      if (doc.node.document) {
+        doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
+        // If it's a pdf, add the size
+        if (doc.node.document.filename.slice(-3) === 'pdf') {
+          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+            ' ',
+            '',
+          );
+        }
+        documentArray.push(doc.node);
       }
     }
-    documentArray.push(doc.node)
   }
+
 
   officialDocumentList.documents = documentArray;
 
@@ -463,6 +470,7 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
+    officialdocumentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -611,8 +619,14 @@ const buildPageAtUrl = async (
         cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
   }
+
   // need to figure out what official document pages are going to do.
-  console.log('last thing', pageAtUrlInfo)
+  if (officialdocumentpage) {
+    return {
+      path: '404',
+      template: 'src/components/Pages/404',
+    }
+  }
 };
 
 const getPagesOfGuidesData = async client => {
