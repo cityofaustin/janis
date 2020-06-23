@@ -8,6 +8,7 @@ const getOfficialDocumentsListDocumentsQuery = `
               node {
                 id
                 date
+                live
                 title
                 authoringOffice
                 summary
