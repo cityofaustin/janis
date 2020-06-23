@@ -33,7 +33,7 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  'dummy2-bob': { // note
+  '4392-nav-v2': { 
     joplin_appname: 'joplin'
   },
   '4422-20-to-10': {
