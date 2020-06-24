@@ -349,8 +349,6 @@ const getWorkingDocumentLink = async filename => {
 const getOfficialDocumentCollectionData = async (page, instance, client) => {
   let officialDocumentCollection = { ...page };
 
-  console.log(officialDocumentCollection)
-
   let relatedTo = [];
   if (instance.grandparent) {
     relatedTo = await getRelatedTo(
