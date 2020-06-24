@@ -14,7 +14,7 @@ import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
-import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
+import OfficialDocumentCollection from 'components/Pages/OfficialDocuments/OfficialDocumentCollection';
 import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
@@ -108,7 +108,7 @@ class CMSPreview extends Component {
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
           path="/official_document"
-          render={props => <OfficialDocumentList officialDocumentPage={page} />}
+          render={props => <OfficialDocumentCollection officialDocumentPage={page} />}
         />
         <Route
           path="/information"

@@ -1,6 +1,6 @@
-const getOfficialDocumentsListDocumentsQuery = `
-  query getOfficialDocumentsListDocumentsQuery($id: ID) {
-    officialDocumentListDocuments(officialDocumentList: $id) {
+const getOfficialDocumentsCollectionDocumentsQuery = `
+  query getOfficialDocumentsCollectionDocumentsQuery($id: ID) {
+    officialDocumentCollectionDocuments(officialDocumentCollection: $id) {
       edges {
         node {
           documentPages(orderBy: "-date") {
@@ -26,6 +26,6 @@ const getOfficialDocumentsListDocumentsQuery = `
   }
 `;
 
-export default getOfficialDocumentsListDocumentsQuery;
+export default getOfficialDocumentsCollectionDocumentsQuery;
 
     

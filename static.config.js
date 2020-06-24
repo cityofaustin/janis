@@ -13,7 +13,7 @@ import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
 import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
-import getOfficialDocumentsListDocumentsQuery from 'js/queries/getOfficialDocumentsListDocumentsQuery';
+import getOfficialDocumentsCollectionDocumentsQuery from 'js/queries/getOfficialDocumentsCollectionDocumentsQuery';
 import getPageUrlQuery from 'js/queries/getPageUrl';
 
 // Shiny ✨ new queries!
@@ -346,8 +346,10 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-const getOfficialDocumentListData = async (page, instance, client) => {
-  let officialDocumentList = { ...page };
+const getOfficialDocumentCollectionData = async (page, instance, client) => {
+  let officialDocumentCollection = { ...page };
+
+  console.log(officialDocumentCollection)
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -358,27 +360,27 @@ const getOfficialDocumentListData = async (page, instance, client) => {
     );
   }
 
-  const { officialDocumentListDocuments } = await client.request(
-    getOfficialDocumentsListDocumentsQuery,
+  const { officialDocumentCollectionDocuments } = await client.request(
+    getOfficialDocumentsCollectionDocumentsQuery,
     {
-      id: officialDocumentList.id,
+      id: officialDocumentCollection.id,
     },
   );
 
-  officialDocumentList.contextualNavData = {
+  officialDocumentCollection.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(officialDocumentList.departments),
+    offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
   let documentArray = [];
 
   if (
-    officialDocumentListDocuments &&
-    officialDocumentListDocuments.edges &&
-    officialDocumentListDocuments.edges.length > 0
+    officialDocumentCollectionDocuments &&
+    officialDocumentCollectionDocuments.edges &&
+    officialDocumentCollectionDocuments.edges.length > 0
   ) {
-    for (let doc of officialDocumentListDocuments.edges[0].node.documentPages.edges) {
+    for (let doc of officialDocumentCollectionDocuments.edges[0].node.documentPages.edges) {
       // If we have a document in wagtail
       // use that info to update the information syncronously
       if (doc.node.live && doc.node.document) { // if the page is draft form, do not add
@@ -396,9 +398,9 @@ const getOfficialDocumentListData = async (page, instance, client) => {
   }
 
 
-  officialDocumentList.documents = documentArray;
+  officialDocumentCollection.documents = documentArray;
 
-  return { officialDocumentList: officialDocumentList };
+  return { officialDocumentCollection: officialDocumentCollection };
 };
 
 const cleanEventPageData = page => {
@@ -512,7 +514,7 @@ const buildPageAtUrl = async (
       guidepage,
       servicepage,
       informationpage,
-      officialdocumentlist,
+      officialdocumentcollection,
       formcontainer,
     } = janisbasepagewithtopics;
 
@@ -552,13 +554,13 @@ const buildPageAtUrl = async (
       };
     }
 
-    if (officialdocumentlist) {
+    if (officialdocumentcollection) {
       return {
         path: instanceOfPage.url,
-        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
+        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
         getData: () =>
-          getOfficialDocumentListData(
-            officialdocumentlist,
+          getOfficialDocumentCollectionData(
+            officialdocumentcollection,
             instanceOfPage,
             client,
           ),

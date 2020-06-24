@@ -148,7 +148,7 @@ query allPagesQuery($after: String) {
           informationpage {
             ...informationPageInfo
           }
-          officialdocumentlist {
+          officialdocumentcollection {
             id
             title
             slug
