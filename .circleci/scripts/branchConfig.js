@@ -42,6 +42,9 @@ const branchOverrides = {
   '4450-button': {
     joplin_appname: 'joplin-staging',
   },
+  '4558-pr-failures': {
+    joplin_appname: 'joplin-pr-4558-pr-failures'
+  }
 };
 
 module.exports = {
