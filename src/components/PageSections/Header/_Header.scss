@@ -41,11 +41,14 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  @include media($coa-medium-screen) {
-    padding-top: $coa-spacing-small;
-    padding-bottom: $coa-spacing-small;
-    padding-right: $coa-spacing-small;
-  }
+  height: 56px;
+  // padding-top: 0px;
+  // padding-bottom: 0px;
+  // @include media($coa-medium-screen) {
+  //   padding-top: $coa-spacing-small;
+  //   padding-bottom: $coa-spacing-small;
+  //   padding-right: $coa-spacing-small;
+  // }
 }
 
 .coa-Header__left-controls {
