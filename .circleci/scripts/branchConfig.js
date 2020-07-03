@@ -8,7 +8,7 @@
 
   Example:
   "2997-dept-links": {
-    joplin_appname: "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql"
+    joplin_appname: "joplin-pr-2997"
   }
   "2997-dept-links" is the name of the janis branch.
   "https://joplin-pr-2997-dept-links.herokuapp.com/api/graphql" is the address of the deployed joplin instance you want to query data from.
@@ -39,8 +39,8 @@ const branchOverrides = {
   '4422-20-to-10': {
     joplin_appname: 'joplin',
   },
-  '4450-button': {
-    joplin_appname: 'joplin-staging',
+  '4587-video': {
+    joplin_appname: 'joplin-pr-4587-video',
   },
 };
 
