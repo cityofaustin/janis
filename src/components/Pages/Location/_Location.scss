@@ -267,6 +267,7 @@ $coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__additional-service-hours-expanded {
   display: inherit;
+  padding-bottom: 12px;
 }
 
 .coa-LocationPage__service-link-arrow {
@@ -309,4 +310,8 @@ $coa-location-page-section-background: #ffffff;
 
 .coa-LocationPage__container {
   background-color: #f3f3f3;
+}
+
+.coa-LocationPage__service-hours-container {
+  padding-top: 16px;
 }
