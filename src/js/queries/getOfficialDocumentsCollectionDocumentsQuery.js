@@ -1,6 +1,6 @@
 const getOfficialDocumentsCollectionDocumentsQuery = `
   query getOfficialDocumentsCollectionDocumentsQuery($id: ID) {
-    officialDocumentCollectionDocuments(officialDocumentCollection: $id) {
+    officialDocumentCollectionDocuments(officialDocumentCollection: $id, first:1) {
       edges {
         node {
           documentPages(orderBy: "-date") {
