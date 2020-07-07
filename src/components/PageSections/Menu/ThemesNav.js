@@ -52,7 +52,6 @@ const ThemesNav = props => {
 
 
 
-      {/*  🚨CSS NAME CHANGE!!!! in themesNav, not header.  */}
       <div className="coa-Header__right-controls-wrapper">
 
         <div className="coa-Header__right-controls">
@@ -62,6 +61,8 @@ const ThemesNav = props => {
           >
             311
           </ExternalLink>
+
+          {/*  Note that this class is in _Header.scss  */}
           <span className="coa-text-spacer--vertical" />
           <ExternalLink
             to="http://www.austintexas.gov/airport"

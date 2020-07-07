@@ -11,6 +11,8 @@ import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import GovSite from 'components/PageSections/Header/GovSite';
 import PendingTranslation from 'components/PageSections/PendingTranslation';
+import SearchBar from 'components/PageSections/SearchBar';
+import SearchIcon from 'components/PageSections/SearchBar/SearchIcon';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FullSiteMenu from '../Menu/FullSiteMenu';
@@ -223,6 +225,7 @@ class Header extends Component {
                     : null)
                 }
               >
+
                 <a
                   className="coa-Header__menuIcon"
                   onClick={this.toggleFullSiteMenu}
@@ -234,29 +237,16 @@ class Header extends Component {
                   )}
                   {intl.formatMessage(i18n2.menu)}
                 </a>
+
                 <I18nLink className="coa-Header__logo" to="/">
                   austin.gov
                 </I18nLink>
-                <a href='/search' className="coa-ThemesNav__search-container-icon">
-                  <i className="material-icons coa-ThemesNav__search-icon">search</i>
-                </a>
-              </div>
 
-              {/*  🚨CSS NAME CHANGE!!!! */}
-
-              <div className="coa-Header__right-controls-wrapper">
-
-                <a href='/search' className="coa-ThemesNav__search-container">
-                  <i className="material-icons coa-ThemesNav__search-icon">search</i>
-                  <span className="coa-ThemesNav__search-title">
-                    {intl.formatMessage(i18n1.search)}
-                  </span>
-                </a>
-
+                <SearchIcon />
 
               </div>
 
-
+              <SearchBar intl={intl} />
 
             </div>
           </div>
