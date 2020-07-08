@@ -33,9 +33,16 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  'microcopy-fixes': {
+
+  /* 👇 bob's */
+  '4392-nav-v2': { // Ok to remove
     joplin_appname: 'joplin'
   },
+  'enter-search': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
+  /* 👆 bob's */
+
   '4422-20-to-10': {
     joplin_appname: 'joplin',
   },
