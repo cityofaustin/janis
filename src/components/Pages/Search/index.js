@@ -79,7 +79,6 @@ const SearchPage = () => {
   }
 
   const searchKeyInput = event => {
-    console.log("event.key, event.target.value :", event.key, event.target.value)
     if (event.key === "Enter") {
       searchButtonPressed()
     } else {
