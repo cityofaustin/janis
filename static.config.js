@@ -378,19 +378,19 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
     officialDocumentCollectionDocuments.edges &&
     officialDocumentCollectionDocuments.edges.length > 0
   ) {
-    for (let doc of officialDocumentCollectionDocuments.edges[0].node.documentPages.edges) {
+    for (let doc of officialDocumentCollectionDocuments.edges) {
       // If we have a document in wagtail
       // use that info to update the information syncronously
-      if (doc.node.live && doc.node.document) { // if the page is draft form, do not add
-        doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
+      if (doc.node.page.live && doc.node.page.document) { // if the page is draft form, do not add
+        doc.node.page.link = await getWorkingDocumentLink(doc.node.page.document.filename);
         // If it's a pdf, add the size
-        if (doc.node.document.filename.slice(-3) === 'pdf') {
-          doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
+        if (doc.node.page.document.filename.slice(-3) === 'pdf') {
+          doc.node.page.pdfSize = filesize(doc.node.page.document.fileSize).replace(
             ' ',
             '',
           );
         }
-        documentArray.push(doc.node);
+        documentArray.push(doc.node.page);
       }
     }
   }
