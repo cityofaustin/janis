@@ -40,7 +40,7 @@ const branchOverrides = {
     joplin_appname: 'joplin',
   },
   '4504-mvp-docs': {
-    joplin_appname: 'joplin-pr-4504-doc-migration',
+    joplin_appname: 'joplin-pr-4504-docs-round2',
   },
 };
 

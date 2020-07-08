@@ -470,7 +470,7 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
-    officialdocumentpagenew,
+    officialdocumentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -621,7 +621,7 @@ const buildPageAtUrl = async (
   }
 
   // need to figure out what official document pages are going to do.
-  if (officialdocumentpagenew) {
+  if (officialdocumentpage) {
     return {
       path: '404',
       template: 'src/components/Pages/404',

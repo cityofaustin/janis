@@ -48,7 +48,7 @@ query allPagesQuery($after: String) {
         departmentpage {
           ...departmentPageInfo
         }
-        officialdocumentpagenew {
+        officialdocumentpage {
           id
         }
         topiccollectionpage {
