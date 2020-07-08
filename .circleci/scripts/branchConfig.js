@@ -39,8 +39,8 @@ const branchOverrides = {
   '4422-20-to-10': {
     joplin_appname: 'joplin',
   },
-  '4450-button': {
-    joplin_appname: 'joplin-staging',
+  'demo': {
+    joplin_appname: 'joplin-pr-demo',
   },
 };
 
