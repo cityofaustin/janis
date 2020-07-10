@@ -1,6 +1,3 @@
-// TODO: make jest work again. (Without having babel.config.js in the root directory)
-// https://github.com/cityofaustin/techstack/issues/4597
-
 module.exports = {
   verbose: true,
   rootDir: "../",
