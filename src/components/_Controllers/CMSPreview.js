@@ -107,7 +107,7 @@ class CMSPreview extends Component {
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
-          path="/official_document"
+          path="/official_document_collection"
           render={props => <OfficialDocumentCollection officialDocumentPage={page} />}
         />
         <Route
