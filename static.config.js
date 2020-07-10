@@ -1,9 +1,9 @@
-import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
-import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-
 import filesize from 'filesize';
 import axios from 'axios';
 import moment from 'moment-timezone';
+
+import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
+import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
@@ -896,16 +896,6 @@ export default {
     const allRoutes = routes.concat(translatedRoutes);
 
     return allRoutes;
-  },
-  webpack: (config, { stage }) => {
-    // Include babel poyfill for IE 11 and below
-    // https://github.com/nozzle/react-static/blob/811ebe1b5a5b8e24fffec99fcdb3375818383711/docs/concepts.md#browser-support
-    if (stage === 'prod') {
-      config.entry = ['babel-polyfill', config.entry];
-    } else if (stage === 'dev') {
-      config.entry = ['babel-polyfill', ...config.entry];
-    }
-    return config;
   },
   plugins: ['react-static-plugin-react-router'],
   prefetchRate: Number(process.env.REACT_STATIC_PREFETCH_RATE) || 0,
