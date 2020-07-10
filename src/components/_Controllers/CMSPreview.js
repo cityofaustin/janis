@@ -55,11 +55,14 @@ class CMSPreview extends Component {
 
     const client = createGraphQLClientsByLang(intl.locale, CMS_API);
     let req;
+    console.log(page_type, revision_id)
     req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
 
     req.then(data => {
+      console.log(data);
       const page = data.pageRevision[getAsPage[page_type]];
       const janis_instance = data.pageRevision.previewJanisInstance;
+      console.log('page!!! ', page)
 
       page.contextualNavData = {
         relatedTo: [],
@@ -95,6 +98,7 @@ class CMSPreview extends Component {
   }
 
   render() {
+    console.log(this.props)
     const {
       match: {
         params: { revision_id, page_type },
@@ -108,7 +112,7 @@ class CMSPreview extends Component {
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
           path="/official_document_collection"
-          render={props => <OfficialDocumentCollection officialDocumentPage={page} />}
+          render={props => <OfficialDocumentCollection officialDocumentCollection={page} />}
         />
         <Route
           path="/information"
