@@ -23,24 +23,8 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  '3690-incremental': {
-    joplin_appname: 'joplin-pr-3690-incremental',
-    REACT_STATIC_PREFETCH_RATE: '10',
-  },
-  '4325-site-struct': {
-    joplin_appname: 'joplin-pr-import-everything',
-  },
-  '4289-page-guide': {
-    joplin_appname: 'joplin-pr-v3',
-  },
-  'microcopy-fixes': {
-    joplin_appname: 'joplin'
-  },
-  '4422-20-to-10': {
+  '4611-gzip': {
     joplin_appname: 'joplin',
-  },
-  '4450-button': {
-    joplin_appname: 'joplin-staging',
   },
 };
 
