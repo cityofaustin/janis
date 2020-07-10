@@ -108,7 +108,11 @@ class CMSPreview extends Component {
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
           path="/official_document_collection"
-          render={props => <OfficialDocumentCollection officialDocumentCollection={page} />}
+          render={props => {
+            let collection = page;
+            page.documents = [];
+            return <OfficialDocumentCollection officialDocumentCollection={page} />
+          }}
         />
         <Route
           path="/information"
