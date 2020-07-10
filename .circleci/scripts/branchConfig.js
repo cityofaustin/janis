@@ -33,7 +33,7 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  'broken-link': {
+  'microcopy-fixes': {
     joplin_appname: 'joplin'
   },
   '4422-20-to-10': {
@@ -41,6 +41,9 @@ const branchOverrides = {
   },
   '4504-mvp-docs': {
     joplin_appname: 'joplin-pr-4504-docs-round2',
+  },
+  'demo': {
+    joplin_appname: 'joplin-pr-demo',
   },
 };
 
