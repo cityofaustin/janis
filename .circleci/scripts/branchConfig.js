@@ -39,6 +39,9 @@ const branchOverrides = {
   '4422-20-to-10': {
     joplin_appname: 'joplin',
   },
+  '4504-mvp-docs': {
+    joplin_appname: 'joplin-pr-4504-docs-round2',
+  },
   'demo': {
     joplin_appname: 'joplin-pr-demo',
   },
