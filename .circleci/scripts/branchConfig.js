@@ -42,6 +42,9 @@ const branchOverrides = {
   '4504-mvp-docs': {
     joplin_appname: 'joplin-pr-4504-docs-round2',
   },
+  'demo': {
+    joplin_appname: 'joplin-pr-demo',
+  },
 };
 
 module.exports = {
