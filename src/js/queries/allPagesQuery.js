@@ -50,6 +50,15 @@ query allPagesQuery($after: String) {
         }
         officialdocumentpage {
           id
+          date
+          title
+          authoringOffice
+          summary
+          name
+          document {
+            fileSize
+            filename
+          }
         }
         topiccollectionpage {
           id

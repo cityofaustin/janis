@@ -390,16 +390,25 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
             '',
           );
         }
+        console.log(doc.node.page.slug)
         documentArray.push(doc.node.page);
       }
     }
   }
 
-
   officialDocumentCollection.documents = documentArray;
 
   return { officialDocumentCollection: officialDocumentCollection };
 };
+
+const getOfficialDocumentPageData = (page, instance) => {
+  let officialDocumentPage = { ...page };
+  console.log(instance);
+
+  return { officialDocumentPage: officialDocumentPage}
+
+}
+
 
 const cleanEventPageData = page => {
   let eventPage = { ...page };
@@ -423,6 +432,7 @@ const getDepartmentsPageData = async client => {
 
   return { departments: departments };
 };
+
 
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
@@ -622,9 +632,11 @@ const buildPageAtUrl = async (
 
   // need to figure out what official document pages are going to do.
   if (officialdocumentpage) {
+    console.log('** ', instanceOfPage.url)
     return {
-      path: '404',
-      template: 'src/components/Pages/404',
+      path: instanceOfPage.url,
+      template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
+      getData: () => getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
     }
   }
 
@@ -922,8 +934,9 @@ export default {
       },
     ];
 
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
+    // const allLangs = Array.from(SUPPORTED_LANG_CODES);
+    // allLangs.unshift(undefined);
+    const allLangs = [undefined, 'en']
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );

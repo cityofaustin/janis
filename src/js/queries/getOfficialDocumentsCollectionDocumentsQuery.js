@@ -7,6 +7,7 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
             id
             date
             live
+            slug
             title
             authoringOffice
             summary
