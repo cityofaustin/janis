@@ -13,6 +13,7 @@ import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
 import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
+import getOfficialDocumentsCollectionDocumentsQuery from 'js/queries/getOfficialDocumentsCollectionDocumentsQuery';
 import getPageUrlQuery from 'js/queries/getPageUrl';
 
 // Shiny ✨ new queries!
@@ -345,8 +346,8 @@ const getWorkingDocumentLink = async filename => {
   }
 };
 
-const getOfficialDocumentPageData = async (page, instance, client) => {
-  let officialDocumentPage = { ...page };
+const getOfficialDocumentCollectionData = async (page, instance, client) => {
+  let officialDocumentCollection = { ...page };
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -357,28 +358,47 @@ const getOfficialDocumentPageData = async (page, instance, client) => {
     );
   }
 
-  officialDocumentPage.contextualNavData = {
+  const { officialDocumentCollectionDocuments } = await client.request(
+    getOfficialDocumentsCollectionDocumentsQuery,
+    {
+      id: officialDocumentCollection.id,
+    },
+  );
+
+  officialDocumentCollection.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
+    offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  for (let doc of officialDocumentPage.documents.edges) {
-    // If we have a document in wagtail
-    // use that info to update the information syncronously
-    if (doc.node.document) {
-      doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
-      // If it's a pdf, add the size
-      if (doc.node.document.filename.slice(-3) === 'pdf') {
-        doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
-          ' ',
-          '',
-        );
+  let documentArray = [];
+
+  if (
+    officialDocumentCollectionDocuments &&
+    officialDocumentCollectionDocuments.edges &&
+    officialDocumentCollectionDocuments.edges.length > 0
+  ) {
+    for (let doc of officialDocumentCollectionDocuments.edges) {
+      // If we have a document in wagtail
+      // use that info to update the information syncronously
+      if (doc.node.page.live && doc.node.page.document) { // if the page is draft form, do not add
+        doc.node.page.link = await getWorkingDocumentLink(doc.node.page.document.filename);
+        // If it's a pdf, add the size
+        if (doc.node.page.document.filename.slice(-3) === 'pdf') {
+          doc.node.page.pdfSize = filesize(doc.node.page.document.fileSize).replace(
+            ' ',
+            '',
+          );
+        }
+        documentArray.push(doc.node.page);
       }
     }
   }
 
-  return { officialDocumentPage: officialDocumentPage };
+
+  officialDocumentCollection.documents = documentArray;
+
+  return { officialDocumentCollection: officialDocumentCollection };
 };
 
 const cleanEventPageData = page => {
@@ -450,6 +470,7 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
+    officialdocumentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -491,7 +512,7 @@ const buildPageAtUrl = async (
       guidepage,
       servicepage,
       informationpage,
-      officialdocumentpage,
+      officialdocumentcollection,
       formcontainer,
     } = janisbasepagewithtopics;
 
@@ -531,13 +552,13 @@ const buildPageAtUrl = async (
       };
     }
 
-    if (officialdocumentpage) {
+    if (officialdocumentcollection) {
       return {
         path: instanceOfPage.url,
-        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
+        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
         getData: () =>
-          getOfficialDocumentPageData(
-            officialdocumentpage,
+          getOfficialDocumentCollectionData(
+            officialdocumentcollection,
             instanceOfPage,
             client,
           ),
@@ -597,6 +618,19 @@ const buildPageAtUrl = async (
       getData: () =>
         cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
+  }
+
+  // need to figure out what official document pages are going to do.
+  if (officialdocumentpage) {
+    return {
+      path: '404',
+      template: 'src/components/Pages/404',
+    }
+  }
+
+  return {
+    path: '404',
+    template: 'src/components/Pages/404',
   }
 };
 
