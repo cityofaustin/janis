@@ -6,7 +6,7 @@ import UserFeedback from 'components/UserFeedback';
 import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js';
 
 const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => {
-  console.log(officialDocuments)
+  console.log('OD', officialDocuments)
   return (
     <div id="officialDocumentsPaginationPage">
       <PaginationContainer
