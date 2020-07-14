@@ -1,32 +1,9 @@
-// import React, { useState, useEffect } from 'react';
-// import { injectIntl } from 'react-intl';
-
-// import OfficialDocumentEntry from 'components/Pages/OfficialDocuments/OfficialDocumentEntry';
-// import UserFeedback from 'components/UserFeedback';
-// import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js';
-
-// const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => {
-//   return (
-//     <div id="officialDocumentsPage">
-//       <PaginationContainer
-//         pagesArray={officialDocuments}
-//         PageComponent={OfficialDocumentEntry}
-//         intl={intl}
-//       />
-//       <UserFeedback />
-//     </div>
-//   );
-// };
-
-// export default OfficialDocumentPage;
-
-
 import React, { Fragment } from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import path from 'path';
 
-import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import { officialdocuments as i18n } from 'js/i18n/definitions';
 
 import PageBanner from 'components/PageBanner';
 import PageHeader from 'components/PageHeader';
@@ -46,32 +23,40 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
     officialDocumentPage: {
       title,
       description,
-      // additionalContent,
-      // contact,
       contextualNavData,
       pageIsPartOf, // what is this?
+      authoringOffice,
+      summary,
+      date,
+      name,
+      link,
+      pdfSize
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
+
+    // If the link is a PDF with a pdfSize, then include it.
+  const pdfComponent = (!!pdfSize) ?
+    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
+    null
 
   return (
     <div>
       <Head>
         <title>{title}</title>
       </Head>
-      {!coaGlobal && (
-        <ContextualNav
+      {// assuming cant be global?
+        /*<ContextualNav
           parent={contextualNavData.parent}
           relatedTo={contextualNavData.relatedTo}
           offeredBy={contextualNavData.offeredBy}
-        />
-      )}
+        /> for now */
+      }
       <div>
         {!pageIsPartOf ? (
           <PageHeader contentType={'officialDocumentPage'} description={description}> {/*chia*/} 
             {title}
-          }
           </PageHeader>
         ) : (
           <PageIsPartOfContainer
@@ -88,9 +73,13 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-                  {additionalContent && (
-                    <HtmlFromRichText title={' '} content={additionalContent} />
-                  )}
+      <p>{summary}</p>
+      <div className="coa-OfficialDocumentPage__small-heading-container">
+        <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}
+      </div>
+      <div className="coa-OfficialDocumentPage__small-heading-container">
+        <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.document)}:</span> <a href={link}>{name}</a> {pdfComponent}
+      </div>
                 </div>
               </div>
             </div>
@@ -98,12 +87,10 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           <div className="coa-Page__side-content">
           </div>
         </div>
-        {!coaGlobal && (
-          <RelatedToMobile
-            relatedTo={contextualNavData.relatedTo}
-            offeredBy={contextualNavData.offeredBy}
-          />
-        )}
+        {/*<RelatedToMobile
+          relatedTo={contextualNavData.relatedTo}
+          offeredBy={contextualNavData.offeredBy}
+        /> */}
       </div>
       <UserFeedback />
     </div>
