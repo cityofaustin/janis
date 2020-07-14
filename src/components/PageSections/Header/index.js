@@ -12,7 +12,6 @@ import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import GovSite from 'components/PageSections/Header/GovSite';
 import PendingTranslation from 'components/PageSections/PendingTranslation';
 import SearchBar from 'components/PageSections/SearchBar';
-import SearchIcon from 'components/PageSections/SearchBar/SearchIcon';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FullSiteMenu from '../Menu/FullSiteMenu';
@@ -237,13 +236,9 @@ class Header extends Component {
                   )}
                   {intl.formatMessage(i18n2.menu)}
                 </a>
-
                 <I18nLink className="coa-Header__logo" to="/">
                   austin.gov
                 </I18nLink>
-
-                <SearchIcon />
-
               </div>
 
               <SearchBar intl={intl} />

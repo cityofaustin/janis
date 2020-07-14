@@ -1,0 +1,15 @@
+.coa-SearchBar__search-container-icon {
+  display: none;
+  position: absolute;
+  right: 0px;
+  padding-right: $coa-space-level4;
+  font-size: $coa-font-size-medium;
+  padding-top: $coa-space-level4;
+  @include mobile {
+    display: block;
+  }
+}
+
+.coa-SearchBar__search-icon {
+  color: $coa-color-white;
+}
