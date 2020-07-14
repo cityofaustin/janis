@@ -30,37 +30,44 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       date,
       name,
       link,
-      pdfSize
+      pdfSize,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
 
-    // If the link is a PDF with a pdfSize, then include it.
-  const pdfComponent = (!!pdfSize) ?
-    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
-    null
+  // If the link is a PDF with a pdfSize, then include it.
+  console.log(pdfSize)
+  const pdfComponent = !!pdfSize ? (
+    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span>
+  ) : null;
 
   return (
     <div>
       <Head>
         <title>{title}</title>
       </Head>
-      {// assuming cant be global?
-        /*<ContextualNav
+        <ContextualNav
+          parent={{title: 'Office of police oversight'}}
+          offeredBy={["OPO"]}
+          /*
           parent={contextualNavData.parent}
           relatedTo={contextualNavData.relatedTo}
           offeredBy={contextualNavData.offeredBy}
-        /> for now */
-      }
+          */
+        />
       <div>
         {!pageIsPartOf ? (
-          <PageHeader contentType={'officialDocumentPage'} description={description}> {/*chia*/} 
+          <PageHeader
+            contentType={'officialDocumentPage'}
+            description={description}
+            columnWidth={12}
+          >
             {title}
           </PageHeader>
         ) : (
           <PageIsPartOfContainer
-            pageIsPartOf={pageIsPartOf}
+            pageIsPartOf={[{guidePageUrl: '/', guidePageTitle: 'a', ofPageType:'hi', pageType: 'c' }]}
             contentType={'information'}
             description={description}
             title={title}
@@ -73,19 +80,16 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
             <div className="wrapper container-fluid">
               <div className="row">
                 <div className="col-xs-12 col-md-10">
-      <p>{summary}</p>
-      <div className="coa-OfficialDocumentPage__small-heading-container">
-        <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}
-      </div>
-      <div className="coa-OfficialDocumentPage__small-heading-container">
-        <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.document)}:</span> <a href={link}>{name}</a> {pdfComponent}
-      </div>
+                  <p className="coa-OfficialDocumentPage__summary">{summary}</p>
+                  <div className="coa-OfficialDocumentPage__document">
+                    <h2>{intl.formatMessage(i18n.document)}</h2>
+                    <a href={link}>{name}</a> {pdfComponent}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="coa-Page__side-content">
-          </div>
+          <div className="coa-Page__side-content"></div>
         </div>
         {/*<RelatedToMobile
           relatedTo={contextualNavData.relatedTo}
