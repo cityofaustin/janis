@@ -390,7 +390,6 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
             '',
           );
         }
-        console.log(doc.node.page.slug)
         documentArray.push(doc.node.page);
       }
     }
@@ -403,7 +402,6 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
 
 const getOfficialDocumentPageData = (page, instance) => {
   let officialDocumentPage = { ...page };
-  console.log(instance);
 
   return { officialDocumentPage: officialDocumentPage}
 
@@ -630,9 +628,7 @@ const buildPageAtUrl = async (
     };
   }
 
-  // need to figure out what official document pages are going to do.
   if (officialdocumentpage) {
-    console.log('** ', instanceOfPage.url)
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
@@ -934,9 +930,9 @@ export default {
       },
     ];
 
-    // const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    // allLangs.unshift(undefined);
-    const allLangs = [undefined, 'en']
+    const allLangs = Array.from(SUPPORTED_LANG_CODES);
+    allLangs.unshift(undefined);
+    // const allLangs = [undefined, 'en']
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );

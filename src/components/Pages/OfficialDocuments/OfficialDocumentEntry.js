@@ -20,6 +20,7 @@ const OfficialDocumentEntry = ({ page: {id, date, title, authoringOffice, summar
       <div className="coa-OfficialDocumentPage__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
+    {/*should not be hardcoded, I can get it from the pages parent, is it the same parent as the official collectoin?*/}
       <Link to={`/police-oversight/${slug}`} ><h2 className="coa-OfficialDocumentPage__title">{title}</h2></Link>
       <p>{summary}</p>
       <div className="coa-OfficialDocumentPage__small-heading-container">
