@@ -14,6 +14,7 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
             document {
               fileSize
               filename
+              url
             }
           }
         }

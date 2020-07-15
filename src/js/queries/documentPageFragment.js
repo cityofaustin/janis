@@ -21,6 +21,7 @@ const documentPageFragment = `
           document {
             fileSize
             filename
+            url
           }
         }
       }

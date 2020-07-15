@@ -24,6 +24,7 @@ const getOfficialDocumentPageQuery = `
                 document {
                   fileSize
                   filename
+                  url
                 }
               }
             }
