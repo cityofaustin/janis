@@ -116,7 +116,6 @@ class CMSPreview extends Component {
           path="/official_document_collection"
           render={props => {
             let collection = page;
-            page.documents = [];
             return <OfficialDocumentCollection officialDocumentCollection={page} />
           }}
         />
