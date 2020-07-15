@@ -11,7 +11,6 @@ import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobi
 import Tile from 'components/Tiles/Tile';
 import UserFeedback from 'components/UserFeedback';
 
-
 const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   const {
     officialDocumentPage: {
@@ -30,8 +29,10 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
 
+  const officialDocumentCollections = [];
+
   // If the link is a PDF with a pdfSize, then include it.
-  console.log(pdfSize)
+  console.log(pdfSize);
   const pdfComponent = !!pdfSize ? (
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span>
   ) : null;
@@ -41,15 +42,15 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       <Head>
         <title>{title}</title>
       </Head>
-        <ContextualNav
-          parent={{title: 'Office of police oversight'}}
-          offeredBy={["OPO"]}
-          /*
+      <ContextualNav
+        parent={{ title: 'Office of police oversight' }}
+        offeredBy={['OPO']}
+        /*
           parent={contextualNavData.parent}
           relatedTo={contextualNavData.relatedTo}
           offeredBy={contextualNavData.offeredBy}
           */
-        />
+      />
       <div>
         {!pageIsPartOf ? (
           <PageHeader
@@ -61,7 +62,14 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           </PageHeader>
         ) : (
           <PageIsPartOfContainer
-            pageIsPartOf={[{guidePageUrl: '/', guidePageTitle: 'a', ofPageType:'hi', pageType: 'c' }]}
+            pageIsPartOf={[
+              {
+                guidePageUrl: '/',
+                guidePageTitle: 'a',
+                ofPageType: 'hi',
+                pageType: 'c',
+              },
+            ]}
             contentType={'information'}
             description={description}
             title={title}
@@ -84,20 +92,21 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
             </div>
           </div>
           <div className="coa-Page__side-content">
-            <div className="coa-TileGroup__tiles-container--compact">
-            <Tile
-              url={'url'
-                // page.guidePageUrl.substring(0, 4) === 'http'
-                // ? page.guidePageUrl
-                // : `/${intl.locale}${page.guidePageUrl}`
-              }
-              text="text"
-              compact={true}
-              key={1}
-              pageType={'pagetype'}
-              isPageType={'ispagetype'}
-            />
-            </div>
+            {!!officialDocumentCollections &&
+              !!officialDocumentCollections.length && (
+                <div className="coa-TileGroup__tiles-container--compact">
+                  <span>Part of</span>
+                  {officialDocumentCollections.map((collection, index) => (
+                    <Tile
+                      url={collection.url}
+                      text={collection.title}
+                      compact={true}
+                      key={index}
+                      pageType={'officialdocument'}
+                    />
+                  ))}
+                </div>
+              )}
           </div>
         </div>
         {/*<RelatedToMobile
