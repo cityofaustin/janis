@@ -26,8 +26,8 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
-  '4504-mvp-docs': {
-    joplin_appname: 'joplin-pr-4504-docs-round2',
+  '4621-preview': {
+    joplin_appname: 'joplin-pr-4621-preview',
   },
 };
 
