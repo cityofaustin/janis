@@ -24,12 +24,11 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       name,
       link,
       pdfSize,
+      officialDocumentCollections,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
-
-  const officialDocumentCollections = [];
 
   // If the link is a PDF with a pdfSize, then include it.
   console.log(pdfSize);

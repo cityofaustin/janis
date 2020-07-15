@@ -59,6 +59,19 @@ query allPagesQuery($after: String) {
             fileSize
             filename
           }
+          officialDocumentCollection{
+            edges {
+              node {
+                officialDocumentCollection {
+                  title
+                  slug
+                  departments {
+                    slug
+                  }
+                }
+              }
+            }
+          }
         }
         topiccollectionpage {
           id
