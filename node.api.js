@@ -19,6 +19,8 @@ export default pluginOptions => ({
       new CompressionPlugin(),
     ])
 
+    config.devtool = process.env.NODE_ENV === 'production' ? false : 'eval'
+    
     return config;
   }
 })
