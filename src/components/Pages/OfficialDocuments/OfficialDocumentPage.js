@@ -5,18 +5,12 @@ import path from 'path';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
-import PageBanner from 'components/PageBanner';
 import PageHeader from 'components/PageHeader';
-import Steps from 'components/Steps';
-import HtmlFromRichText from 'components/HtmlFromRichText';
-import ApplicationBlock from 'components/ApplicationBlock';
-import ContactDetails from 'components/Contact/ContactDetails';
-import SectionHeader from 'components/SectionHeader';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
-import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
-import RelatedEvents from 'components/PageSections/RelatedEvents';
+import Tile from 'components/Tiles/Tile';
 import UserFeedback from 'components/UserFeedback';
+
 
 const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   const {
@@ -89,7 +83,22 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
               </div>
             </div>
           </div>
-          <div className="coa-Page__side-content"></div>
+          <div className="coa-Page__side-content">
+            <div className="coa-TileGroup__tiles-container--compact">
+            <Tile
+              url={'url'
+                // page.guidePageUrl.substring(0, 4) === 'http'
+                // ? page.guidePageUrl
+                // : `/${intl.locale}${page.guidePageUrl}`
+              }
+              text="text"
+              compact={true}
+              key={1}
+              pageType={'pagetype'}
+              isPageType={'ispagetype'}
+            />
+            </div>
+          </div>
         </div>
         {/*<RelatedToMobile
           relatedTo={contextualNavData.relatedTo}
