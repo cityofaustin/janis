@@ -6,25 +6,58 @@ import SearchIcon from 'components/PageSections/SearchBar/SearchIcon'
 
 const SearchBar = ({ intl }) => {
 
-  const [searchBarOpen, setSearchBarOpen] = useState(true)
-  const toggleSearchBar = () => { setSearchBarOpen(!searchBarOpen) }
+  const [searchBarOpen, setSearchBarOpen] = useState(false)
+  const searchBarState = searchBarOpen ? "open" : "closed"
+
+  const toggleSearchBar = isOpen => {
+    // setSearchBarOpen(!searchBarOpen)
+    console.log("isOpen :", isOpen)
+    if (isOpen) {
+      if (typeof window !== 'undefined') {
+        console.log('OK GO SEARCH', window.location)
+      }
+    } else {
+      const input = document.getElementById('coa_SearchBar__input')
+      input.focus()
+      setSearchBarOpen(true)
+    }
+  }
+
+  const searchKeyInput = event => {
+    if (event.key === "Enter") {
+      toggleSearchBar(true)
+    }
+  }
+
 
   return (
     <div className="coa-SearchBar">
 
-      { searchBarOpen ? (
-        <div className="coa-SearchBar__container">
-          <input className="coa-SearchBar__input"/>
-          <a href='/search' className="coa-SearchBar__search-button">
-            <span className="coa-SearchBar__search-button-text">
+      <div className={"coa-SearchBar__container "+searchBarState}>
+        <input
+          id="coa_SearchBar__input"
+          className="coa-SearchBar__input"
+          onKeyPress={()=>searchKeyInput(event)}
+          tabindex={searchBarOpen ? "0" : "-1"}
+        />
+        {/*
+          <a href='/search'>
+          🚨YOU should really just change this to a button BOBOBOB
+        */}
+        <a
+          onClick={()=>toggleSearchBar(searchBarOpen)}
+          onKeyPress={()=>toggleSearchBar(searchBarOpen)}
+          tabindex="0"
+        >
+          <div className={"coa-SearchBar__search-button "+searchBarState}>
+            <span className={"coa-SearchBar__search-button-text "+searchBarState}>
+              <i className={"material-icons coa-SearchBar__search-button-search "+searchBarState}>search</i>
               {intl.formatMessage(i18n1.search)}
+              <i className={"material-icons coa-SearchBar__search-button-arrow "+searchBarState}>arrow_forward</i>
             </span>
-            <i className="material-icons coa-SearchBar__search-button-text">arrow_forward</i>
-          </a>
-        </div>
-      ) : (
-        <div> closed </div>
-      )}
+          </div>
+        </a>
+      </div>
 
       <SearchIcon />
 
@@ -36,13 +69,3 @@ const SearchBar = ({ intl }) => {
 
 
 export default injectIntl(SearchBar)
-//
-// <div
-//   className="coa-SearchBar__search-button"
-//   onClick={()=>toggleSearchBar()}
-// >
-//   <i className="material-icons coa-SearchBar__search-icon">search</i>
-//   <span className="coa-SearchBar__search-title">
-//     {intl.formatMessage(i18n1.search)}
-//   </span>
-// </div>

@@ -1,14 +1,15 @@
 .coa-SearchBar { // 🚨if noted out remove class name too!
-  text-decoration: none;
-  // padding-top: $coa-space-level1;
 }
 
 .coa-SearchBar__container {
-  background-color: $coa-color-white;
+  background-color: none;
   border-radius: $coa-border-radius-medium;
-  // margin-top: $coa-space-level1;
   height: 40px;
-  max-height: 40px;
+  margin-top: 8px;
+  padding: 3px;
+  &.open {
+    background-color: $coa-color-white;
+  }
   @include mobile {
     display: none;
   }
@@ -16,134 +17,57 @@
 
 .coa-SearchBar__input {
   display: inline-block;
-  width: 360px;
-  // padding: 5px;
-  text-decoration: none;
+  background-color: inherit;
   border: none;
+  height: 100%;
+  width: 367px;
+  vertical-align: top;
+  margin-right: 7px;
   border-radius: $coa-border-radius-medium;
 }
 
 .coa-SearchBar__search-button {
-  text-decoration: none;
-  background-color: $coa-color-primary;
+  display: inline-block;
+  background-color: $coa-color-white;
   border-radius: $coa-border-radius-medium;
-  color: $coa-color-white !important; // Overides needed here for default <a> tags.
+  text-align: center;
+  width: 91px;
   height: 34px;
+  transition: background-color .3s;
   cursor: pointer;
+  &.open {
+    background-color: $coa-color-primary;
+    transition: background-color .3s;
+  }
 }
 
-.coa-SearchBar__search-button-text {
-  font-weight: $coa-font-semibold;
-  font-size: $coa-font-size-xsmall;
+.coa-SearchBar__search-button-text,
+.coa-SearchBar__search-button-search,
+.coa-SearchBar__search-button-arrow, {
+  vertical-align: top;
+  font-weight: $coa-font-medium;
+  font-size: $coa-font-size-xxsmall;
+  color: $coa-color-primary;
+  &.open {
+    color: $coa-color-white;
+  }
 }
 
+.coa-SearchBar__search-button-search {
+  display: inline-block;
+  font-size: 18px;
+  padding-top: 8px;
+  padding-right: 5px;
+  &.open {
+    display: none;
+  }
+}
 
-// OLD OLD OLD OLD OLD
-
-
-// .coa-SearchBar {
-//   order: 3;
-//   align-items: center;
-//   justify-content: flex-end;
-//   margin-right: 2rem;
-//   padding-right: 2rem;
-//
-//   @include media($coa-medium-screen) {
-//     margin-right: 0;
-//   }
-//
-//   display: flex;
-//
-//   a {
-//     font-size: $coa-font-size-xsmall;
-//   }
-//   svg {
-//     height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-//     width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-//     vertical-align: -0.2rem;
-//   }
-// }
-//
-// .coa-SearchBar__search-icon {
-//   padding-top: 0.8rem;
-//   padding-left: 1.7rem;
-//   padding-right: $coa-space-level1;
-//   color: $coa-color-primary;
-//   font-size: $coa-font-size-smedium;
-// }
-//
-// .coa-SearchBar__search-title {
-//   font-size: 1.6rem;
-//   vertical-align: top;
-//   color: $coa-color-primary;
-// }
-// /*
-//   🚨NOTE
-//   - let's just use classes its WAY off how we've done it.
-// */
-// .coa-SearchBar__search-button, .coa-SearchBar__container {
-//   @include mobile {
-//     display: none;
-//   }
-// }
-//
-//
-// /*  SearchBar CLOSED  */
-// // .coa-SearchBar__search-button {
-// //   background-color: $coa-color-white;
-// //   border-radius: $coa-border-radius-medium;
-// //   font-weight: $coa-font-semibold;
-// //   padding-right: $coa-space-level4;
-// //   padding-top: $coa-space-level1;
-// //   text-decoration: none;
-// //   height: 34px;
-// //   cursor: pointer;
-// // }
-//
-//
-// /*  SearchBar OPEN  */
-// .coa-SearchBar__container {
-//   background-color: $coa-color-white;
-//   border-radius: $coa-border-radius-medium;
-//   width: 472px;
-//   height: 40px;
-//   input {
-//     display: inline-block;
-//     width: 360px;
-//     padding: 5px;
-//   }
-//   div {
-//     display: inline-block;
-//     width: 91px;
-//     height: 34px;
-//     float: right;
-//     margin-top: 3px;
-//     margin-right: 3px;
-//
-//     background-color: $coa-color-primary;
-//     border-radius: $coa-border-radius-medium;
-//     text-align: center;
-//     a {
-//       text-decoration: none;
-//     }
-//     span, i {
-//       color: $coa-color-white;
-//       font-size: $coa-font-size-xxsmall;
-//       font-weight: $coa-font-medium;
-//     }
-//     i {
-//       font-size: 16px;
-//     }
-//   }
-// }
-//
-// .coa-SearchBar__search-container {
-//   position: relative;
-//   top: 0px;
-//   right: 0px;
-//   text-decoration: none;
-//   color: $coa-color-white;
-//   background-color: $coa-color-primary;
-// }
-//
-//
+.coa-SearchBar__search-button-arrow {
+  display: none;
+  padding-top: 10px;
+  padding-left: 12px;
+  &.open {
+    display: inline-block;
+  }
+}
