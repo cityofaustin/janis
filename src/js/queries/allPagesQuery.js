@@ -59,6 +59,11 @@ query allPagesQuery($after: String) {
             fileSize
             filename
           }
+          departments {
+            id
+            title
+            slug
+          }
           officialDocumentCollection{
             edges {
               node {

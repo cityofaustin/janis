@@ -428,7 +428,7 @@ const getOfficialDocumentPageData = (page, instance) => {
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
     relatedTo: [],
-    offeredBy: getOfferedByFromDepartments([]),
+    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
   };
 
   return { officialDocumentPage: officialDocumentPage}

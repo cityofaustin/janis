@@ -26,6 +26,9 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
+  '4591-janis-docs': {
+    joplin_appname: 'joplin-pr-4591-janis-docs',
+  }
 };
 
 module.exports = {

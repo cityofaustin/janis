@@ -11,6 +11,30 @@ import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobi
 import Tile from 'components/Tiles/Tile';
 import UserFeedback from 'components/UserFeedback';
 
+const OfficialDocumentCollectionsList = ({
+  officialDocumentCollections,
+  mobile,
+}) =>
+  !!officialDocumentCollections && !!officialDocumentCollections.length ? (
+    <div
+      className={
+        'coa-OfficialDocumentPage__tiles-container' +
+        (mobile ? ' coa-OfficialDocumentPage__tiles-mobile' : '')
+      }
+    >
+      <p className="coa-OfficialDocumentPage__side-content-heading">Part of</p>
+      {officialDocumentCollections.map((collection, index) => (
+        <Tile
+          url={collection.url}
+          text={collection.title}
+          compact={true}
+          key={index}
+          pageType={'officialdocument'}
+        />
+      ))}
+    </div>
+  ) : null;
+
 const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   const {
     officialDocumentPage: {
@@ -31,7 +55,6 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
 
   // If the link is a PDF with a pdfSize, then include it.
-  console.log(pdfSize);
   const pdfComponent = !!pdfSize ? (
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span>
   ) : null;
@@ -47,59 +70,34 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
         offeredBy={contextualNavData.offeredBy}
       />
       <div>
-        {!pageIsPartOf ? (
-          <PageHeader
-            contentType={'officialDocumentPage'}
-            description={description}
-            columnWidth={12}
-          >
-            {title}
-          </PageHeader>
-        ) : (
-          <PageIsPartOfContainer
-            pageIsPartOf={[
-              {
-                guidePageUrl: '/',
-                guidePageTitle: 'a',
-                ofPageType: 'hi',
-                pageType: 'c',
-              },
-            ]}
-            contentType={'information'}
-            description={description}
-            title={title}
-            intl={intl}
-          />
-        )}
+        <PageHeader
+          contentType={'officialDocumentPage'}
+          description={description}
+          columnWidth={12}
+        >
+          {title}
+        </PageHeader>
 
         <div className="coa-Page__all-of-the-content">
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                  <p className="coa-OfficialDocumentPage__summary">{summary}</p>
-                  <div className="coa-OfficialDocumentPage__document">
-                    <h2>{intl.formatMessage(i18n.document)}</h2>
-                    <a href={link}>{name}</a> {pdfComponent}
-                  </div>
+                <p className="coa-OfficialDocumentPage__summary">{summary}</p>
+                <OfficialDocumentCollectionsList
+                  officialDocumentCollections={officialDocumentCollections}
+                  mobile
+                />
+                <div className="coa-OfficialDocumentPage__document">
+                  <h2>{intl.formatMessage(i18n.document)}</h2>
+                  <a href={link}>{name}</a> {pdfComponent}
                 </div>
               </div>
+            </div>
           </div>
           <div className="coa-OfficialDocumentPage__side-content">
-            {!!officialDocumentCollections &&
-              !!officialDocumentCollections.length && (
-                <div className="coa-OfficialDocumentPage__tiles-container">
-                  <p className="coa-OfficialDocumentPage__side-content-heading">Part of</p>
-                  {officialDocumentCollections.map((collection, index) => (
-                    <Tile
-                      url={collection.url}
-                      text={collection.title}
-                      compact={true}
-                      key={index}
-                      pageType={'officialdocument'}
-                    />
-                  ))}
-                </div>
-              )}
+            <OfficialDocumentCollectionsList
+              officialDocumentCollections={officialDocumentCollections}
+            />
           </div>
         </div>
         <RelatedToMobile
