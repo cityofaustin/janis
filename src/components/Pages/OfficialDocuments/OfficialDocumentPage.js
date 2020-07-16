@@ -42,13 +42,9 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
         <title>{title}</title>
       </Head>
       <ContextualNav
-        parent={{ title: 'Office of police oversight' }}
-        offeredBy={['OPO']}
-        /*
-          parent={contextualNavData.parent}
-          relatedTo={contextualNavData.relatedTo}
-          offeredBy={contextualNavData.offeredBy}
-          */
+        parent={contextualNavData.parent}
+        relatedTo={contextualNavData.relatedTo}
+        offeredBy={contextualNavData.offeredBy}
       />
       <div>
         {!pageIsPartOf ? (
@@ -80,7 +76,6 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                <div className="col-xs-12 col-md-10">
                   <p className="coa-OfficialDocumentPage__summary">{summary}</p>
                   <div className="coa-OfficialDocumentPage__document">
                     <h2>{intl.formatMessage(i18n.document)}</h2>
@@ -88,13 +83,12 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                   </div>
                 </div>
               </div>
-            </div>
           </div>
-          <div className="coa-Page__side-content">
+          <div className="coa-OfficialDocumentPage__side-content">
             {!!officialDocumentCollections &&
               !!officialDocumentCollections.length && (
-                <div className="coa-TileGroup__tiles-container--compact">
-                  <span>Part of</span>
+                <div className="coa-OfficialDocumentPage__tiles-container">
+                  <p className="coa-OfficialDocumentPage__side-content-heading">Part of</p>
                   {officialDocumentCollections.map((collection, index) => (
                     <Tile
                       url={collection.url}
@@ -108,10 +102,10 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
               )}
           </div>
         </div>
-        {/*<RelatedToMobile
+        <RelatedToMobile
           relatedTo={contextualNavData.relatedTo}
           offeredBy={contextualNavData.offeredBy}
-        /> */}
+        />
       </div>
       <UserFeedback />
     </div>

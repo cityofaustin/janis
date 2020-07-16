@@ -417,13 +417,19 @@ const getOfficialDocumentPageData = (page, instance) => {
       let collection = edge.node.officialDocumentCollection;
       officialDocumentCollections.push({
         title: collection.title,
-        url: `${collection.departments[0].slug}/${collection.slug}`
+        url: `/${collection.departments[0].slug}/${collection.slug}`
       })
     })
 
   }
 
   officialDocumentPage.officialDocumentCollections = officialDocumentCollections;
+
+  officialDocumentPage.contextualNavData = {
+    parent: instance.parent,
+    relatedTo: [],
+    offeredBy: getOfferedByFromDepartments([]),
+  };
 
   return { officialDocumentPage: officialDocumentPage}
 
