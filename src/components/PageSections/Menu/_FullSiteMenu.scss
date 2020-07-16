@@ -82,7 +82,7 @@
   @include tablet {
     line-height: $coa-line-height-xxsmall;
     font-size: $coa-font-size-xxsmall;
-    height: 8rem;
+    // height: 8rem;
   }
 
 }
@@ -100,11 +100,11 @@
 }
 
 .coa-ThemesNav--open {
-  border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
-  border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-  border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  // border-top: $coa-menu-border-width solid $coa-menu-bodercolor;
+  // border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+  // border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+  // border-top-left-radius: 3px;
+  // border-top-right-radius: 3px;
 }
 
 .coa-FullSiteMenu__subNav {
@@ -119,10 +119,8 @@
   }
 }
 
-//removing css hover .coa-FullSiteMenu:hover
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
-  border-radius: $coa-button-border-radius $coa-button-border-radius 0 0;
 
   .coa-ThemesNav {
     border-top: none;

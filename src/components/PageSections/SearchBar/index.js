@@ -27,14 +27,13 @@ const SearchBar = ({ intl }) => {
     }
   }
 
-
   return (
     <div className="coa-SearchBar">
 
       <span className={"coa-SearchBar__container "+searchBarState}>
         <input
           id="coa_SearchBar__input"
-          className="coa-SearchBar__input"
+          className={"coa-SearchBar__input "+searchBarState}
           onKeyPress={()=>searchKeyInput(event)}
           tabindex={searchBarOpen ? "0" : "-1"}
         />

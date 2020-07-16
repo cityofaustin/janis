@@ -30,7 +30,6 @@
   max-width: $coa-top-menu-max-width;
   margin-left: auto;
   margin-right: auto;
-
   @include media($coa-medium-screen) {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -44,7 +43,6 @@
   // padding-top: 0px;
   // padding-bottom: 0px;
   display: block;
-
   @include media($coa-medium-screen) {
     display: flex;
     // padding-top: $coa-spacing-small;
@@ -54,7 +52,6 @@
 }
 
 .coa-Header__left-controls {
-  //display: inline-block;
   align-items: center;
   display: flex;
   justify-content: flex-start;
@@ -68,26 +65,16 @@
   @include media($coa-medium-screen) {
     margin-left: 0;
     width: 43%;
-    // background-color: pink;
   }
 }
 
 .coa-Header__center-controls {
-  // display: inline-block;
-  // position: relative;
-
-
   align-items: center;
   display: flex;
   justify-content: flex-start;
   order: 3;
-  // width: 9%;
   height: 56px;
-
-  border-top: 1px solid rgba($coa-color-white, 0.5);
   padding: $coa-spacing-small 0;
-  // background-color: green;
-
   @include media($coa-medium-screen) {
     order: unset;
     width: initial;
@@ -201,14 +188,12 @@
   text-decoration: none;
   margin-left: auto;
   margin-right: auto;
-
   &:hover {
     color: $coa-color-white;
   }
   &:visited {
     color: $coa-color-white;
   }
-
   @include media($coa-medium-screen) {
     font-size: 1.8rem;
     margin: initial;
@@ -216,11 +201,8 @@
 }
 
 .coa-Header__gov-site {
-  // text-align: center;
-  // background: $coa-color-blue-darkest;
   font-size: 1.2rem;
   line-height: 3.1rem;
-
   svg {
     vertical-align: middle;
     height: 1.6rem;
@@ -274,20 +256,23 @@
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   margin-right: 0.4rem;
-  color: $coa-color-white;
+  color: $coa-color-primary;
   position: absolute;
-  margin-left: 2rem;
-
+  margin-left: 3.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: $coa-color-white;
+  height: 34px;
+  border-radius: $coa-border-radius-medium;
+  cursor: pointer;
   i {
     font-size: $coa-font-size-md-small;
   }
-
   &:visited,
   &:active,
   &:hover {
-    color: $coa-color-white;
+    background-color: $coa-color-secondary;
   }
-
   @include media($coa-medium-screen) {
     display: none;
     font-size: $coa-font-size-small;

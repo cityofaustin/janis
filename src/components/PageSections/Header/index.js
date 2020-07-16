@@ -230,18 +230,32 @@ class Header extends Component {
                   className="coa-Header__menuIcon"
                   onClick={this.toggleFullSiteMenu}
                 >
+                {/*
                   {this.state.topMenuActive ? (
                     <i className="material-icons">close</i>
                   ) : (
                     <i className="material-icons">menu</i>
                   )}
+
                   {intl.formatMessage(i18n2.menu)}
+                */}
+
+                {this.state.topMenuActive ? (
+                  <> {intl.formatMessage(i18n2.close)} </>
+                ) : (
+                  <> {intl.formatMessage(i18n2.menu)} </>
+                )}
+
+
+
+
+
                 </a>
                 <I18nLink className="coa-Header__logo" to="/">
                   Austin.gov
                 </I18nLink>
 
-                <SearchIcon intl={intl} />
+                <SearchIcon intl={intl} menuState={this.state.topMenuActive && "active"}/>
 
               </div>
 
