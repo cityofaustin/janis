@@ -1,14 +1,18 @@
 .coa-SearchBar { // 🚨if noted out remove class name too!
+  display: inline-block;
+  width: 43%;
+  text-align: right;
+  padding-top: 11px;
 }
 
 .coa-SearchBar__container {
   background-color: none;
   border-radius: $coa-border-radius-medium;
   height: 40px;
-  margin-top: 8px;
   padding: 3px;
   &.open {
     background-color: $coa-color-white;
+    // background-color: yellow;
   }
   @include mobile {
     display: none;
@@ -19,11 +23,20 @@
   display: inline-block;
   background-color: inherit;
   border: none;
-  height: 100%;
-  width: 367px;
+  // height: 100%;
+  height: 20px;
+
+  width: 363px;
+  // width: 300px;
   vertical-align: top;
   margin-right: 7px;
   border-radius: $coa-border-radius-medium;
+  @media screen and (max-width: 1135px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 200px;
+  }
 }
 
 .coa-SearchBar__search-button {

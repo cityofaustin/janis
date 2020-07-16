@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl'
 import { search as i18n1 } from 'js/i18n/definitions'
 
-import SearchIcon from 'components/PageSections/SearchBar/SearchIcon'
-
 const SearchBar = ({ intl }) => {
 
   const [searchBarOpen, setSearchBarOpen] = useState(false)
@@ -33,17 +31,13 @@ const SearchBar = ({ intl }) => {
   return (
     <div className="coa-SearchBar">
 
-      <div className={"coa-SearchBar__container "+searchBarState}>
+      <span className={"coa-SearchBar__container "+searchBarState}>
         <input
           id="coa_SearchBar__input"
           className="coa-SearchBar__input"
           onKeyPress={()=>searchKeyInput(event)}
           tabindex={searchBarOpen ? "0" : "-1"}
         />
-        {/*
-          <a href='/search'>
-          🚨YOU should really just change this to a button BOBOBOB
-        */}
         <a
           onClick={()=>toggleSearchBar(searchBarOpen)}
           onKeyPress={()=>toggleSearchBar(searchBarOpen)}
@@ -57,9 +51,7 @@ const SearchBar = ({ intl }) => {
             </span>
           </div>
         </a>
-      </div>
-
-      <SearchIcon />
+      </span>
 
     </div>
 

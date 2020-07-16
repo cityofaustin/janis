@@ -2,14 +2,15 @@
   display: none;
   position: absolute;
   right: 0px;
-  padding-right: $coa-space-level4;
-  font-size: $coa-font-size-medium;
-  padding-top: $coa-space-level4;
+  padding-right: 20px;
+  // padding-top: $coa-space-level4;
+
   @include mobile {
     display: block;
   }
+
 }
 
-.coa-SearchBar__search-icon {
-  color: $coa-color-white;
+.coa-SearchBar__search-button-text.searchIcon {
+  line-height: 32px;
 }

@@ -3,6 +3,9 @@
   color: $coa-color-white;
   font-family: $coa-font-sans;
   z-index: 0;
+  @include mobile {
+    background-color: #1B1B1B;
+  }
 }
 
 .coa-LanguageSelectBar__list {
