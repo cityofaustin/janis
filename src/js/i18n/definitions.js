@@ -497,6 +497,7 @@ export const footerSiteMapMenu = defineMessages([
 export const officialdocuments = defineMessages({
   author: 'Author',
   document: 'Document',
+  partOf: 'Part of',
 });
 
 export const guides = defineMessages({

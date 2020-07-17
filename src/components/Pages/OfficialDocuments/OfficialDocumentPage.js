@@ -14,6 +14,7 @@ import UserFeedback from 'components/UserFeedback';
 const OfficialDocumentCollectionsList = ({
   officialDocumentCollections,
   mobile,
+  intl
 }) =>
   !!officialDocumentCollections && !!officialDocumentCollections.length ? (
     <div
@@ -22,7 +23,7 @@ const OfficialDocumentCollectionsList = ({
         (mobile ? ' coa-OfficialDocumentPage__tiles-mobile' : '')
       }
     >
-      <p className="coa-OfficialDocumentPage__side-content-heading">Part of</p>
+      <p className="coa-OfficialDocumentPage__side-content-heading">{intl.formatMessage(i18n.partOf)}</p>
       {officialDocumentCollections.map((collection, index) => (
         <Tile
           url={collection.url}
@@ -85,7 +86,8 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                 <p className="coa-OfficialDocumentPage__summary">{summary}</p>
                 <OfficialDocumentCollectionsList
                   officialDocumentCollections={officialDocumentCollections}
-                  mobile
+                  mobile={true}
+                  intl={intl}
                 />
                 <div className="coa-OfficialDocumentPage__document">
                   <h2>{intl.formatMessage(i18n.document)}</h2>
@@ -97,6 +99,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           <div className="coa-OfficialDocumentPage__side-content">
             <OfficialDocumentCollectionsList
               officialDocumentCollections={officialDocumentCollections}
+              intl={intl}
             />
           </div>
         </div>
