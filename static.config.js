@@ -1,5 +1,3 @@
-import filesize from 'filesize';
-import axios from 'axios';
 import moment from 'moment-timezone';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
@@ -8,12 +6,12 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
+import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
 import getTopicCollectionTopicQuery from 'js/queries/getTopicCollectionTopicQuery';
 import getTopicPageAdditionalData from 'js/queries/getTopicPageAdditionalData';
-import getOfficialDocumentsCollectionDocumentsQuery from 'js/queries/getOfficialDocumentsCollectionDocumentsQuery';
 import getPageUrlQuery from 'js/queries/getPageUrl';
 
 // Shiny ✨ new queries!
@@ -306,46 +304,6 @@ const getFormContainerData = async (fc, instance, client) => {
   return { formContainer: formContainer };
 };
 
-const checkUrl = async url => {
-  return await axios({
-    method: 'HEAD',
-    url: url,
-  })
-    .then(res => url)
-    .catch(error => null);
-};
-
-const getWorkingDocumentLink = async filename => {
-  // is this still needed? with brians new work?
-  /*
-    depending on environment, returns a valid url from either staging or production
-    used in getOfficialDocumentPageData
-  */
-  // Single source mode, example use case:
-  // If we're on PROD, we should only get prod documents
-  if (process.env.CMS_DOCS !== 'multiple') {
-    return `${process.env.CMS_DOCS}/${filename}`;
-  }
-
-  // Multi source mode, let's do some url checking and get something
-  // that works. example use case:
-  // If we're on STAGING, we want docs imported from PROD to work,
-  // as well as any new docs we added when testing on staging
-  if (process.env.CMS_DOCS === 'multiple') {
-    const docUrls = [
-      'https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media/documents',
-    ];
-
-    for (const url of docUrls) {
-      const validUrl = await checkUrl(`${url}/${filename}`);
-      if (validUrl !== null) {
-        return validUrl;
-      }
-    }
-  }
-};
-
 const getOfficialDocumentCollectionData = async (page, instance, client) => {
   let officialDocumentCollection = { ...page };
 
@@ -358,44 +316,13 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
     );
   }
 
-  const { officialDocumentCollectionDocuments } = await client.request(
-    getOfficialDocumentsCollectionDocumentsQuery,
-    {
-      id: officialDocumentCollection.id,
-    },
-  );
-
   officialDocumentCollection.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
     offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  let documentArray = [];
-
-  if (
-    officialDocumentCollectionDocuments &&
-    officialDocumentCollectionDocuments.edges &&
-    officialDocumentCollectionDocuments.edges.length > 0
-  ) {
-    for (let doc of officialDocumentCollectionDocuments.edges) {
-      // If we have a document in wagtail
-      // use that info to update the information syncronously
-      if (doc.node.page.live && doc.node.page.document) { // if the page is draft form, do not add
-        doc.node.page.link = await getWorkingDocumentLink(doc.node.page.document.filename);
-        // If it's a pdf, add the size
-        if (doc.node.page.document.filename.slice(-3) === 'pdf') {
-          doc.node.page.pdfSize = filesize(doc.node.page.document.fileSize).replace(
-            ' ',
-            '',
-          );
-        }
-        documentArray.push(doc.node.page);
-      }
-    }
-  }
-
-  officialDocumentCollection.documents = documentArray;
+  officialDocumentCollection.documents = await getOfficialDocumentCollectionDocuments(officialDocumentCollection.id, client);
 
   return { officialDocumentCollection: officialDocumentCollection };
 };
