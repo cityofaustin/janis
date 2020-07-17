@@ -1,6 +1,6 @@
 const getOfficialDocumentsCollectionDocumentsQuery = `
-  query getOfficialDocumentsCollectionDocumentsQuery($id: ID) {
-    officialDocumentCollectionDocuments(officialDocumentCollection: $id, orderBy: "-page__date") {
+  query getOfficialDocumentsCollectionDocumentsQuery($id: ID, $after: String) {
+    officialDocumentCollectionDocuments(officialDocumentCollection: $id, orderBy: "-page__date", first: 100, after: $after) {
       edges {
         node {
           page {
@@ -14,9 +14,14 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
             document {
               fileSize
               filename
+              url
             }
           }
         }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
       }
     }
   }
