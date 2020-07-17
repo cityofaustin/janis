@@ -1,13 +1,12 @@
+import moment from 'moment-timezone';
+
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
-
-import filesize from 'filesize';
-import axios from 'axios';
-import moment from 'moment-timezone';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
+import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -305,48 +304,8 @@ const getFormContainerData = async (fc, instance, client) => {
   return { formContainer: formContainer };
 };
 
-const checkUrl = async url => {
-  return await axios({
-    method: 'HEAD',
-    url: url,
-  })
-    .then(res => url)
-    .catch(error => null);
-};
-
-const getWorkingDocumentLink = async filename => {
-  // is this still needed? with brians new work?
-  /*
-    depending on environment, returns a valid url from either staging or production
-    used in getOfficialDocumentPageData
-  */
-  // Single source mode, example use case:
-  // If we're on PROD, we should only get prod documents
-  if (process.env.CMS_DOCS !== 'multiple') {
-    return `${process.env.CMS_DOCS}/${filename}`;
-  }
-
-  // Multi source mode, let's do some url checking and get something
-  // that works. example use case:
-  // If we're on STAGING, we want docs imported from PROD to work,
-  // as well as any new docs we added when testing on staging
-  if (process.env.CMS_DOCS === 'multiple') {
-    const docUrls = [
-      'https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents',
-      'https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media/documents',
-    ];
-
-    for (const url of docUrls) {
-      const validUrl = await checkUrl(`${url}/${filename}`);
-      if (validUrl !== null) {
-        return validUrl;
-      }
-    }
-  }
-};
-
-const getOfficialDocumentPageData = async (page, instance, client) => {
-  let officialDocumentPage = { ...page };
+const getOfficialDocumentCollectionData = async (page, instance, client) => {
+  let officialDocumentCollection = { ...page };
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -357,28 +316,15 @@ const getOfficialDocumentPageData = async (page, instance, client) => {
     );
   }
 
-  officialDocumentPage.contextualNavData = {
+  officialDocumentCollection.contextualNavData = {
     parent: instance.parent,
     relatedTo: relatedTo,
-    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
+    offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  for (let doc of officialDocumentPage.documents.edges) {
-    // If we have a document in wagtail
-    // use that info to update the information syncronously
-    if (doc.node.document) {
-      doc.node.link = await getWorkingDocumentLink(doc.node.document.filename);
-      // If it's a pdf, add the size
-      if (doc.node.document.filename.slice(-3) === 'pdf') {
-        doc.node.pdfSize = filesize(doc.node.document.fileSize).replace(
-          ' ',
-          '',
-        );
-      }
-    }
-  }
+  officialDocumentCollection.documents = await getOfficialDocumentCollectionDocuments(officialDocumentCollection.id, client);
 
-  return { officialDocumentPage: officialDocumentPage };
+  return { officialDocumentCollection: officialDocumentCollection };
 };
 
 const cleanEventPageData = page => {
@@ -450,6 +396,7 @@ const buildPageAtUrl = async (
     eventpage,
     locationpage,
     departmentpage,
+    officialdocumentpage,
     topiccollectionpage,
     janisbasepagewithtopiccollections,
     janisbasepagewithtopics,
@@ -491,7 +438,7 @@ const buildPageAtUrl = async (
       guidepage,
       servicepage,
       informationpage,
-      officialdocumentpage,
+      officialdocumentcollection,
       formcontainer,
     } = janisbasepagewithtopics;
 
@@ -531,13 +478,13 @@ const buildPageAtUrl = async (
       };
     }
 
-    if (officialdocumentpage) {
+    if (officialdocumentcollection) {
       return {
         path: instanceOfPage.url,
-        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentList',
+        template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
         getData: () =>
-          getOfficialDocumentPageData(
-            officialdocumentpage,
+          getOfficialDocumentCollectionData(
+            officialdocumentcollection,
             instanceOfPage,
             client,
           ),
@@ -597,6 +544,19 @@ const buildPageAtUrl = async (
       getData: () =>
         cleanNewsPageData(newspage, instanceOfPage, lastPublishedAt),
     };
+  }
+
+  // need to figure out what official document pages are going to do.
+  if (officialdocumentpage) {
+    return {
+      path: '404',
+      template: 'src/components/Pages/404',
+    }
+  }
+
+  return {
+    path: '404',
+    template: 'src/components/Pages/404',
   }
 };
 
@@ -896,16 +856,6 @@ export default {
     const allRoutes = routes.concat(translatedRoutes);
 
     return allRoutes;
-  },
-  webpack: (config, { stage }) => {
-    // Include babel poyfill for IE 11 and below
-    // https://github.com/nozzle/react-static/blob/811ebe1b5a5b8e24fffec99fcdb3375818383711/docs/concepts.md#browser-support
-    if (stage === 'prod') {
-      config.entry = ['babel-polyfill', config.entry];
-    } else if (stage === 'dev') {
-      config.entry = ['babel-polyfill', ...config.entry];
-    }
-    return config;
   },
   plugins: ['react-static-plugin-react-router'],
   prefetchRate: Number(process.env.REACT_STATIC_PREFETCH_RATE) || 0,

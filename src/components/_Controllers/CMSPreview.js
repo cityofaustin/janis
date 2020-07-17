@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
+import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 import {
   getPageRevisionQuery,
   getAsPage,
@@ -14,7 +15,7 @@ import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
-import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
+import OfficialDocumentCollection from 'components/Pages/OfficialDocuments/OfficialDocumentCollection';
 import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
@@ -59,6 +60,9 @@ class CMSPreview extends Component {
       const client = createGraphQLClientsByLang(locale, CMS_API);
       const data = await client.request(getPageRevisionQuery[page_type], { id: revision_id });
       const page = data.pageRevision[getAsPage[page_type]];
+      if (page_type === "official_document_collection") {
+        page.documents = await getOfficialDocumentCollectionDocuments(page.id, client)
+      }
       const janis_instance = data.pageRevision.previewJanisInstance;
 
       page.contextualNavData = {
@@ -109,8 +113,11 @@ class CMSPreview extends Component {
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
-          path="/official_document"
-          render={props => <OfficialDocumentList officialDocumentPage={page} />}
+          path="/official_document_collection"
+          render={props => {
+            let collection = page;
+            return <OfficialDocumentCollection officialDocumentCollection={page} />
+          }}
         />
         <Route
           path="/information"

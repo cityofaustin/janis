@@ -43,11 +43,10 @@ const branchOverrides = {
   },
   /* 👆 bob's */
 
-  '4422-20-to-10': {
     joplin_appname: 'joplin',
   },
-  'demo': {
-    joplin_appname: 'joplin-pr-demo',
+  '4621-preview': {
+    joplin_appname: 'joplin-pr-4621-preview',
   },
 };
 
