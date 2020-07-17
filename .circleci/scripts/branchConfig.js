@@ -26,6 +26,9 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
+  '4327-trashy': {
+    joplin_appname: 'joplin-staging',
+  }
 };
 
 module.exports = {
