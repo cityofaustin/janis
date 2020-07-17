@@ -10,9 +10,6 @@ const ThemesNav = props => {
   const intl = useIntl();
   const lang = intl.locale
 
-  console.log("coa-ThemesNav__link "+lang)
-  console.log("props.navigation :", props.navigation)
-
   if (lang === 'en') {
     props.navigation.map( theme => {
       theme.text = theme.text.split('and').join('&')

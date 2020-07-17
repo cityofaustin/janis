@@ -11,17 +11,16 @@ const SearchBar = ({ intl }) => {
   const toggleSearchBar = isOpen => {
     if (isOpen) {
       if (typeof window !== 'undefined') {
-        // If the search bar is meant to do quick search results. Let's componentize the quick search filter and use it here as well as on the search page.
+        /*
+          If the search bar changed to do quick search results. Let's componentize the 
+          quick search filter and use it here as well as on the search page.
+        */
         const searchTerm = document.getElementById("coa_SearchBar__input")
         window.location.hash = queryStringBuilder({
           '?': searchTerm.value,
           page: 1
         })
-        window.location.pathname = "search"
-        // window.location.pathname = "search#" + queryStringBuilder({
-        //   '?': searchTerm.value,
-        //   page: 1
-        // })
+        window.location.pathname = "/" + intl.locale + "/search"
       }
     } else {
       const input = document.getElementById('coa_SearchBar__input')
