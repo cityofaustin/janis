@@ -20,6 +20,7 @@ import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
 import NewsPage from 'components/Pages/News';
+import OfficialDocumentPage from 'components/Pages/OfficialDocuments/OfficialDocumentPage';
 
 import {
   cleanInformationForPreview,
@@ -191,7 +192,14 @@ class CMSPreview extends Component {
             return <EventPage eventPage={eventPage} />;
           }}
         />
-        <Route path="/news" render={props => <NewsPage newsPage={page} />} />
+        <Route
+          path="/news"
+          render={props => <NewsPage newsPage={page} />} 
+        />
+        <Route 
+          path="/official_document_page"
+          render={props => <OfficialDocumentPage OfficialDocuments={page}/>}
+        />
       </Switch>
     );
   }

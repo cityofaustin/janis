@@ -960,7 +960,6 @@ export default {
 
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
     allLangs.unshift(undefined);
-    // const allLangs = [undefined, 'en']
     const translatedRoutes = await Promise.all(
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
