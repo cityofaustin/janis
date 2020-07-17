@@ -72,6 +72,9 @@
   width: 288px;
   padding-left: 10px;
   padding-bottom: 32px;
+  @include media($coa-medium-screen) {
+    width: 704px;
+  }
   @include media($coa-large-screen) {
     display: none;
   }
