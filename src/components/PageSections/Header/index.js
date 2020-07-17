@@ -230,25 +230,12 @@ class Header extends Component {
                   className="coa-Header__menuIcon"
                   onClick={this.toggleFullSiteMenu}
                 >
-                {/*
-                  {this.state.topMenuActive ? (
-                    <i className="material-icons">close</i>
-                  ) : (
-                    <i className="material-icons">menu</i>
-                  )}
-
-                  {intl.formatMessage(i18n2.menu)}
-                */}
 
                 {this.state.topMenuActive ? (
                   <> {intl.formatMessage(i18n2.close)} </>
                 ) : (
                   <> {intl.formatMessage(i18n2.menu)} </>
                 )}
-
-
-
-
 
                 </a>
                 <I18nLink className="coa-Header__logo" to="/">

@@ -2,6 +2,7 @@ import React from 'react'
 import { injectIntl } from 'react-intl'
 import { search as i18n1 } from 'js/i18n/definitions'
 
+
 const SearchIcon = ({ intl, menuState }) => (
 
   <a
@@ -19,9 +20,4 @@ const SearchIcon = ({ intl, menuState }) => (
 
 )
 
-
 export default SearchIcon
-
-// <a href='/search' className="coa-SearchBar__search-container-icon">
-//   <i className="material-icons coa-SearchBar__search-icon">search</i>
-// </a>

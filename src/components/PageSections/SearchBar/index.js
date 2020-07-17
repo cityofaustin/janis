@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { injectIntl } from 'react-intl'
 import { search as i18n1 } from 'js/i18n/definitions'
+import { queryStringBuilder } from 'js/helpers/queryObjectBuilder'
 
 const SearchBar = ({ intl }) => {
 
@@ -8,11 +9,19 @@ const SearchBar = ({ intl }) => {
   const searchBarState = searchBarOpen ? "open" : "closed"
 
   const toggleSearchBar = isOpen => {
-    // setSearchBarOpen(!searchBarOpen)
-    console.log("isOpen :", isOpen)
     if (isOpen) {
       if (typeof window !== 'undefined') {
-        console.log('OK GO SEARCH', window.location)
+        // If the search bar is meant to do quick search results. Let's componentize the quick search filter and use it here as well as on the search page.
+        const searchTerm = document.getElementById("coa_SearchBar__input")
+        window.location.hash = queryStringBuilder({
+          '?': searchTerm.value,
+          page: 1
+        })
+        window.location.pathname = "search"
+        // window.location.pathname = "search#" + queryStringBuilder({
+        //   '?': searchTerm.value,
+        //   page: 1
+        // })
       }
     } else {
       const input = document.getElementById('coa_SearchBar__input')
