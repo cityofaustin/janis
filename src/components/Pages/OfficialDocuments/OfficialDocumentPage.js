@@ -12,11 +12,11 @@ import Tile from 'components/Tiles/Tile';
 import UserFeedback from 'components/UserFeedback';
 
 const OfficialDocumentCollectionsList = ({
-  officialDocumentCollections,
+  officialDocumentCollection,
   mobile,
   intl
 }) =>
-  !!officialDocumentCollections && !!officialDocumentCollections.length ? (
+  !!officialDocumentCollection && !!officialDocumentCollection.length ? (
     <div
       className={
         'coa-OfficialDocumentPage__tiles-container' +
@@ -24,7 +24,7 @@ const OfficialDocumentCollectionsList = ({
       }
     >
       <p className="coa-OfficialDocumentPage__side-content-heading">{intl.formatMessage(i18n.partOf)}</p>
-      {officialDocumentCollections.map((collection, index) => (
+      {officialDocumentCollection.map((collection, index) => (
         <Tile
           url={collection.url}
           text={collection.title}
@@ -49,7 +49,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       name,
       link,
       pdfSize,
-      officialDocumentCollections,
+      officialDocumentCollection,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
@@ -85,7 +85,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
               <div className="row">
                 <p className="coa-OfficialDocumentPage__summary">{summary}</p>
                 <OfficialDocumentCollectionsList
-                  officialDocumentCollections={officialDocumentCollections}
+                  officialDocumentCollection={officialDocumentCollection}
                   mobile={true}
                   intl={intl}
                 />
@@ -98,7 +98,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           </div>
           <div className="coa-OfficialDocumentPage__side-content">
             <OfficialDocumentCollectionsList
-              officialDocumentCollections={officialDocumentCollections}
+              officialDocumentCollection={officialDocumentCollection}
               intl={intl}
             />
           </div>

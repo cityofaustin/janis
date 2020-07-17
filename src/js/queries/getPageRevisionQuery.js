@@ -282,7 +282,6 @@ export const getOfficialDocumentsCollectionRevisionQuery = `
 
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
-  official_document: getOfficialDocumentsPageRevisionQuery,
   department: getDepartmentPageRevisionQuery,
   event: getEventPageRevisionQuery,
   location: getLocationPageRevisionQuery,
@@ -293,11 +292,11 @@ export const getPageRevisionQuery = {
   form: getFormPageRevisionQuery,
   news: getNewsPageRevisionQuery,
   official_document_collection: getOfficialDocumentsCollectionRevisionQuery,
+  official_document_page: getOfficialDocumentsPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
-  official_document: 'asOfficialDocumentPage',
   department: 'asDepartmentPage',
   event: 'asEventPage',
   location: 'asLocationPage',
@@ -308,4 +307,5 @@ export const getAsPage = {
   form: 'asFormContainer',
   news: 'asNewsPage',
   official_document_collection: 'asOfficialDocumentCollection',
+  official_document_page: 'asOfficialDocumentPage',
 };

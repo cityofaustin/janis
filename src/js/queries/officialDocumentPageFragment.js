@@ -12,6 +12,24 @@ const officialDocumentPageFragment = `
       filename
       url
     }
+    departments {
+      id
+      title
+      slug
+    }
+    officialDocumentCollection {
+      edges {
+        node {
+          officialDocumentCollection {
+            title
+            slug
+            departments {
+              slug
+            }
+          }
+        }
+      }
+    }
   }
 `;
 

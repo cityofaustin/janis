@@ -337,20 +337,19 @@ const getOfficialDocumentPageData = (page, instance) => {
     );
   }
 
-  let officialDocumentCollections = []
+  let officialDocumentCollection = []
 
   if (officialDocumentPage.officialDocumentCollection && officialDocumentPage.officialDocumentCollection.edges) {
     officialDocumentPage.officialDocumentCollection.edges.map(edge => {
       let collection = edge.node.officialDocumentCollection;
-      officialDocumentCollections.push({
+      officialDocumentCollection.push({
         title: collection.title,
         url: `/${collection.departments[0].slug}/${collection.slug}`
       })
     })
-
   }
 
-  officialDocumentPage.officialDocumentCollections = officialDocumentCollections;
+  officialDocumentPage.officialDocumentCollection = officialDocumentCollection;
 
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,

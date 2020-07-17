@@ -201,7 +201,21 @@ class CMSPreview extends Component {
         />
         <Route 
           path="/official_document_page"
-          render={props => <OfficialDocumentPage OfficialDocuments={page}/>}
+          render={props => {
+            let officialDocumentPage = page;
+              let officialDocumentCollection = []
+              if (officialDocumentPage.officialDocumentCollection && officialDocumentPage.officialDocumentCollection.edges) {
+    officialDocumentPage.officialDocumentCollection.edges.map(edge => {
+      let collection = edge.node.officialDocumentCollection;
+      officialDocumentCollection.push({
+        title: collection.title,
+        url: `/${collection.departments[0].slug}/${collection.slug}`
+      })
+    })
+  }
+    officialDocumentPage.officialDocumentCollection = officialDocumentCollection;
+            return <OfficialDocumentPage officialDocumentPage={officialDocumentPage}/>
+          }}
         />
       </Switch>
     );
