@@ -35,8 +35,6 @@ const AppView = ({ path }) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
 
-  console.log("navigation :", navigation)
-
   return (
     <div>
       <SkipToMain />

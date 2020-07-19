@@ -1,4 +1,4 @@
-.coa-SearchBar { 
+.coa-SearchBar {
   display: inline-block;
   width: 43%;
   text-align: right;
@@ -45,7 +45,9 @@
   background-color: $coa-color-white;
   border-radius: $coa-border-radius-medium;
   text-align: center;
-  width: 91px;
+  // width: 91px;
+  padding-left: 10px;
+  padding-right: 10px;
   height: 34px;
   transition: background-color .3s;
   cursor: pointer;

@@ -212,4 +212,9 @@
     font-size: $coa-font-size-small;
     margin-left: none;
   }
+  @include mobile-small {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 2rem;
+  }
 }

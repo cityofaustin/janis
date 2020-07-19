@@ -9,6 +9,9 @@
   @include mobile {
     display: block;
   }
+  @include mobile-small {
+    padding-right: 2rem;
+  }
 }
 
 .coa-SearchBar__search-button {

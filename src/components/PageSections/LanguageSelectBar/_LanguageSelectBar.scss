@@ -21,8 +21,21 @@
     justify-content: flex-end;
     padding-left: 0px;
   }
+  @include mobile-small {
+    text-align: center;
+    display: inherit;
+    padding-top: 5px;
+    height: 42px;
+  }
   li {
     margin: 0;
+    @include mobile-small {
+      padding: 10px;
+      display: inline;
+      a {
+        font-size: 14px;
+      }
+    }
   }
 }
 
