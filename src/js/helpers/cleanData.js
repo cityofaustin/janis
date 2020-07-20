@@ -543,16 +543,16 @@ export const filterEvents = events => {
 }
 
 export const cleanOfficialDocumentPageCollections = officialDocumentCollection => {
-  let cleanedOfficialDocumentCollection = []
+  let cleanedOfficialDocumentCollection = [];
   if (officialDocumentCollection && officialDocumentCollection.edges) {
     officialDocumentCollection.edges.map(edge => {
       let collection = edge.node.officialDocumentCollection;
       cleanedOfficialDocumentCollection.push({
         title: collection.title,
-        url: `/${collection.departments[0].slug}/${collection.slug}`
-      })
-    })
+        url: `/${collection.departments[0].slug}/${collection.slug}`,
+      });
+    });
   }
   return cleanedOfficialDocumentCollection;
-}
+};
 
