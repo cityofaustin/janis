@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import filesize from 'filesize';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -331,6 +332,7 @@ const getOfficialDocumentPageData = (page, instance) => {
   let officialDocumentPage = { ...page };
 
   if (officialDocumentPage.document.filename.slice(-3) === 'pdf') {
+    console.log(officialDocumentPage.document)
     officialDocumentPage.pdfSize = filesize(officialDocumentPage.document.fileSize).replace(
       ' ',
       '',
