@@ -58,6 +58,7 @@ query allPagesQuery($after: String) {
           document {
             fileSize
             filename
+            url
           }
           departments {
             id

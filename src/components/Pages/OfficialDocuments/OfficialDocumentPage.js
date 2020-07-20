@@ -42,13 +42,12 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       title,
       description,
       contextualNavData,
-      pageIsPartOf, // what is this?
       authoringOffice,
       summary,
       date,
       name,
-      link,
       pdfSize,
+      document,
       officialDocumentCollection,
     },
     // not the biggest fan of this logic but
@@ -91,7 +90,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                 />
                 <div className="coa-OfficialDocumentPage__document">
                   <h2>{intl.formatMessage(i18n.document)}</h2>
-                  <a href={link}>{name}</a> {pdfComponent}
+                  <a href={document.url}>{name}</a> {pdfComponent}
                 </div>
               </div>
             </div>
