@@ -17,6 +17,9 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
               filename
               url
             }
+            departments {
+              slug
+            }
           }
         }
       }

@@ -6,12 +6,32 @@ import { Link } from 'react-router-dom';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
-const OfficialDocumentEntry = ({ page: {id, date, title, authoringOffice, summary, name, link, pdfSize, slug }, intl }) => {
+const OfficialDocumentEntry = ({ 
+  page: {
+    id,
+    date,
+    title,
+    authoringOffice,
+    summary,
+    name,
+    link,
+    pdfSize,
+    slug,
+    departments
+  },
+  intl
+}) => {
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
     null
+
+  const entryUrl = (departments, slug) => (
+    (!!departments && !!departments.length) ?
+      `/${departments[0].slug}/${slug}`
+      : '/'
+  )
 
   // set the locale configuration for moment. Sets the locale for this component only
   moment.locale(intl.locale);
@@ -20,8 +40,7 @@ const OfficialDocumentEntry = ({ page: {id, date, title, authoringOffice, summar
       <div className="coa-OfficialDocumentPage__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
-    {/*should not be hardcoded, I can get it from the pages parent, is it the same parent as the official collectoin?*/}
-      <Link to={`/police-oversight/${slug}`} ><h2 className="coa-OfficialDocumentPage__title">{title}</h2></Link>
+      <Link to={entryUrl(departments, slug)} ><h2 className="coa-OfficialDocumentPage__title">{title}</h2></Link>
       <p>{summary}</p>
       <div className="coa-OfficialDocumentPage__small-heading-container">
         <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}
