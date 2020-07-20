@@ -31,6 +31,7 @@ import {
   getEventPageUrl,
   formatFeesRange,
   cleanEvents,
+  cleanOfficialDocumentPageCollections,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -332,25 +333,14 @@ const getOfficialDocumentPageData = (page, instance) => {
   let officialDocumentPage = { ...page };
 
   if (officialDocumentPage.document.filename.slice(-3) === 'pdf') {
-    officialDocumentPage.pdfSize = filesize(officialDocumentPage.document.fileSize).replace(
-      ' ',
-      '',
-    );
+    officialDocumentPage.pdfSize = filesize(
+      officialDocumentPage.document.fileSize,
+    ).replace(' ', '');
   }
 
-  let officialDocumentCollection = []
-
-  if (officialDocumentPage.officialDocumentCollection && officialDocumentPage.officialDocumentCollection.edges) {
-    officialDocumentPage.officialDocumentCollection.edges.map(edge => {
-      let collection = edge.node.officialDocumentCollection;
-      officialDocumentCollection.push({
-        title: collection.title,
-        url: `/${collection.departments[0].slug}/${collection.slug}`
-      })
-    })
-  }
-
-  officialDocumentPage.officialDocumentCollection = officialDocumentCollection;
+  officialDocumentPage.officialDocumentCollection = cleanOfficialDocumentPageCollections(
+    officialDocumentPage.officialDocumentCollection,
+  );
 
   officialDocumentPage.contextualNavData = {
     parent: instance.parent,
@@ -358,9 +348,8 @@ const getOfficialDocumentPageData = (page, instance) => {
     offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
   };
 
-  return { officialDocumentPage: officialDocumentPage}
-
-}
+  return { officialDocumentPage: officialDocumentPage };
+};
 
 
 const cleanEventPageData = page => {
