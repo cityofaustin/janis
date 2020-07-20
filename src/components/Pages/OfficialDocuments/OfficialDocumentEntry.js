@@ -40,7 +40,9 @@ const OfficialDocumentEntry = ({
       <div className="coa-OfficialDocumentPage__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
-      <Link to={entryUrl(departments, slug)} ><h2 className="coa-OfficialDocumentPage__title">{title}</h2></Link>
+      <Link to={entryUrl(departments, slug)}>
+        <h2 className="coa-OfficialDocumentPage__title">{title}</h2>
+      </Link>;
       <p>{summary}</p>
       <div className="coa-OfficialDocumentPage__small-heading-container">
         <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}
