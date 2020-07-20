@@ -542,4 +542,17 @@ export const filterEvents = events => {
   return events.filter(e => moment(e.date).isSameOrAfter(dateNow)).slice(0, 3);
 }
 
+export const cleanOfficialDocumentPageCollections = officialDocumentCollection => {
+  let cleanedOfficialDocumentCollection = []
+  if (officialDocumentCollection && officialDocumentCollection.edges) {
+    officialDocumentCollection.edges.map(edge => {
+      let collection = edge.node.officialDocumentCollection;
+      cleanedOfficialDocumentCollection.push({
+        title: collection.title,
+        url: `/${collection.departments[0].slug}/${collection.slug}`
+      })
+    })
+  }
+  return cleanedOfficialDocumentCollection;
+}
 
