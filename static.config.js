@@ -332,7 +332,6 @@ const getOfficialDocumentPageData = (page, instance) => {
   let officialDocumentPage = { ...page };
 
   if (officialDocumentPage.document.filename.slice(-3) === 'pdf') {
-    console.log(officialDocumentPage.document)
     officialDocumentPage.pdfSize = filesize(officialDocumentPage.document.fileSize).replace(
       ' ',
       '',

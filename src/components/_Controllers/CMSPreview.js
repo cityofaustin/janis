@@ -214,7 +214,6 @@ class CMSPreview extends Component {
             officialDocumentPage.officialDocumentCollection = cleanOfficialDocumentPageCollections(
               officialDocumentPage.officialDocumentCollection,
             );
-            console.log(officialDocumentPage.officialDocumentCollection)
             return (
               <OfficialDocumentPage
                 officialDocumentPage={officialDocumentPage}
