@@ -19,7 +19,7 @@ export default pluginOptions => ({
       new CompressionPlugin(),
     ])
 
-    config.devtool = false
+    config.devtool = false;
 
     return config;
   }
