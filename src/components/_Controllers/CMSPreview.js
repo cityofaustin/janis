@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
+import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 import {
   getPageRevisionQuery,
   getAsPage,
@@ -59,6 +60,9 @@ class CMSPreview extends Component {
       const client = createGraphQLClientsByLang(locale, CMS_API);
       const data = await client.request(getPageRevisionQuery[page_type], { id: revision_id });
       const page = data.pageRevision[getAsPage[page_type]];
+      if (page_type === "official_document_collection") {
+        page.documents = await getOfficialDocumentCollectionDocuments(page.id, client)
+      }
       const janis_instance = data.pageRevision.previewJanisInstance;
 
       page.contextualNavData = {
@@ -112,7 +116,6 @@ class CMSPreview extends Component {
           path="/official_document_collection"
           render={props => {
             let collection = page;
-            page.documents = [];
             return <OfficialDocumentCollection officialDocumentCollection={page} />
           }}
         />

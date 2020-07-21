@@ -28,7 +28,10 @@ const branchOverrides = {
   },
   '4327-trashy': {
     joplin_appname: 'joplin-staging',
-  }
+  },
+  '4621-preview': {
+    joplin_appname: 'joplin-pr-4621-preview',
+  },
 };
 
 module.exports = {
