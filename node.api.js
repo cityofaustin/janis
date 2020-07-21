@@ -13,7 +13,12 @@ export default pluginOptions => ({
 
     config.optimization.minimizer = [new UglifyJsPlugin()]
 
-    config.devtool = false
+    // Add webpack plugins
+    Array.prototype.push.apply(config.plugins, [
+      new CompressionPlugin(),
+    ])
+
+    config.devtool = false;
 
     return config;
   }
