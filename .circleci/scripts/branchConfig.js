@@ -23,8 +23,11 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  '4611-gzip': {
+  '4611-gzip-2': {
     joplin_appname: 'joplin',
+  },
+  '4327-trashy': {
+    joplin_appname: 'joplin-staging',
   },
   '4621-preview': {
     joplin_appname: 'joplin-pr-4621-preview',

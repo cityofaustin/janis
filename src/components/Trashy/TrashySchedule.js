@@ -65,25 +65,31 @@ const TrashySchedule = props => {
   );
 
   const bulkItemMessage = nextBulkPickupDate ?
-  `${intl.formatMessage(i18n.bulkitemcollection)}: {bulkPickupDate}` 
+  `${intl.formatMessage(i18n.bulkitemcollection)}: {bulkPickupDate}`
   : intl.formatMessage(i18n.invalidDate)
+
+  // If there is no nextBulkPickupDate, then move bulkPickupMessage to top of container
+  const bulkPickupMessage = (
+    <div className="coa-Trashy__schedule-bulk-pickup">
+      <h4>
+        <FormattedMessage
+          id="trashSchedule.bulkPickUp"
+          defaultMessage={bulkItemMessage}
+          values={{ bulkPickupDate }}
+        />
+      </h4>
+    </div>
+  )
 
   return (
     <div className="coa-Trashy__schedule-container">
       <div className="coa-Trashy__schedule-header">
         <h3>{intl.formatMessage(i18n.pickupschedule, { address })}</h3>
       </div>
+      {!nextBulkPickupDate && bulkPickupMessage}
       <div className="coa-Trashy__schedule-list-container">
         {pickUpList}
-        <div className="coa-Trashy__schedule-bulk-pickup">
-          <h4>
-            <FormattedMessage
-              id="trashSchedule.bulkPickUp"
-              defaultMessage={bulkItemMessage}
-              values={{ bulkPickupDate }}
-            />
-          </h4>
-        </div>
+        {!!nextBulkPickupDate && bulkPickupMessage}
       </div>
     </div>
   );
