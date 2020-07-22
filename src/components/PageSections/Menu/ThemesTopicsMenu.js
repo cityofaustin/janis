@@ -30,6 +30,7 @@ const TopicsLinks = props =>
   );
 
 const ThemesTopicsMenu = props => {
+  {console.log(" ThemesTopicsMenuprops :", props)}
   return (
     <nav
       className={`coa-ThemesTopicsMenu ${
