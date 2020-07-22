@@ -32,6 +32,9 @@ const branchOverrides = {
   '4621-preview': {
     joplin_appname: 'joplin-pr-4621-preview',
   },
+  '4591-seo-slug': {
+    joplin_appname: 'joplin-pr-4581-seo-tab'
+  }
 };
 
 module.exports = {
