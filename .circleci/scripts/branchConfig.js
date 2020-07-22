@@ -23,7 +23,7 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  '4611-gzip': {
+  '4611-gzip-2': {
     joplin_appname: 'joplin',
   },
   '4591-janis-docs': {

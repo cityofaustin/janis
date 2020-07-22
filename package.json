@@ -16,7 +16,6 @@
     "body-scroll-lock": "^2.6.1",
     "browser-locale": "^1.0.3",
     "classnames": "^2.2.5",
-    "compression-webpack-plugin": "^4.0.0",
     "core-js": "^3.6.5",
     "downshift": "^1.31.15",
     "filesize": "^4.1.2",
