@@ -1,4 +1,3 @@
-const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // This is how we modify webpack with react-static v6+
@@ -14,12 +13,7 @@ export default pluginOptions => ({
 
     config.optimization.minimizer = [new UglifyJsPlugin()]
 
-    // Add webpack plugins
-    Array.prototype.push.apply(config.plugins, [
-      new CompressionPlugin(),
-    ])
-
-    config.devtool = false
+    config.devtool = false;
 
     return config;
   }
