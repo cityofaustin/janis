@@ -55,9 +55,8 @@
   cursor: pointer;
   text-decoration: none;
   font-size: $coa-font-size-xsmall;
-  font-weight: $coa-font-regular !important; // needs to override font-weight for a tags.
+  font-weight: $coa-font-regular;
   color: $coa-color-burnt-coffee-black;
-  font-weight: $coa-font-medium;
   line-height: 16px;
   &:hover {
     color: $coa-color-white;
@@ -70,13 +69,6 @@
 .coa-ThemesNav__link.es {
   font-size: 13px;
   line-height: 13px;
-  &:hover {
-    color: $coa-color-white;
-    background-color: $coa-color-primary;
-    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
-    transition: background-color .3s, box-shadow .3s;
-  }
-  transition: background-color .3s, box-shadow .3s;
 }
 
 .coa-FullSiteMenu__subNav {
@@ -260,7 +252,7 @@
   margin-right: 2rem;
   padding-right: 2rem;
 
-  @include media($coa-medium-screen) {
+  @include mobile {
     margin-right: 0;
   }
 
@@ -277,7 +269,7 @@
 
 .coa-Header__right-controls {
   display: none;
-  @include media($coa-medium-screen) {
+  @include mobile {
     display: flex;
   }
 
@@ -303,7 +295,7 @@
   margin-right: 2rem;
   padding-right: 2rem;
 
-  @include media($coa-medium-screen) {
+  @include mobile {
     margin-right: 0;
   }
 
@@ -320,7 +312,7 @@
 
 .coa-ThemesNav__right-controls {
   display: none;
-  @include media($coa-medium-screen) {
+  @include mobile {
     display: flex;
   }
 
