@@ -40,7 +40,10 @@ const branchOverrides = {
     joplin_appname: 'joplin'
   },
   '4611-gzip': {
-    joplin_appname: 'joplin',
+    joplin_appname: 'joplin'
+  },
+  '4327-trashy': {
+    joplin_appname: 'joplin-staging',
   },
   '4621-preview': {
     joplin_appname: 'joplin-pr-4621-preview',
