@@ -10,8 +10,6 @@ import Email from './Email';
 import Address from './Address';
 import Hours from './Hours';
 import SocialMediaLink from './SocialMediaLink';
-import ExternalLink from 'components/ExternalLink';
-import ExternalLinkSVG from 'components/SVGs/ExternalLink';
 
 import {
   addressPropTypes,
