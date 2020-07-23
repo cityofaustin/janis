@@ -68,6 +68,7 @@
   "misc.formFailedToLoad": "Puede haber ocurrido un error al cargarlo (\"error 404\")",
   "navigation.home": "Inicio",
   "navigation.menu": "Menú",
+  "navigation.close": "Cerrar",
   "navigation.openInNewWindow": "Abrir en una ventana nueva",
   "navigation.search": "Buscar",
   "navigation.skipToMain": "Ir al contenido principal",

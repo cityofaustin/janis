@@ -36,9 +36,6 @@ const branchOverrides = {
   '4392-nav-v2': { // Ok to remove
     joplin_appname: 'joplin'
   },
-  'enter-search': { // Ok to remove
-    joplin_appname: 'joplin'
-  },
   '4611-gzip': {
     joplin_appname: 'joplin'
   },

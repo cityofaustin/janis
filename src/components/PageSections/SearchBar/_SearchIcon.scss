@@ -1,0 +1,25 @@
+.coa-SearchBar__search-container-icon {
+  display: none;
+  position: absolute;
+  right: 0px;
+  padding-right: 3.5rem;
+  &.active {
+    background-color: pink;
+  }
+  @include mobile {
+    display: block;
+  }
+  @include mobile-small {
+    padding-right: 2rem;
+  }
+}
+
+.coa-SearchBar__search-button {
+  &.active {
+    background-color: $coa-color-blue-active;
+  }
+}
+
+.coa-SearchBar__search-button-text.searchIcon {
+  line-height: 34px;
+}
