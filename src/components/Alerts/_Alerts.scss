@@ -20,9 +20,9 @@
   flex-direction:column;
   align-items: center;
   @include media($coa-medium-screen) {
-    max-width: 1160px;
+    max-width: $coa-top-menu-max-width;
     flex-direction: row;
-    height: 64px;
+    height: 56px;
   }
 }
 

@@ -112,6 +112,7 @@ export const misc = defineMessages({
 export const navigation = defineMessages({
   home: 'Home',
   menu: 'Menu',
+  close: 'Close',
   openInNewWindow: 'Opens in new window',
   search: 'Search',
   skipToMain: 'Skip to main content',

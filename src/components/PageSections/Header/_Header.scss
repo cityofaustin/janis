@@ -1,20 +1,8 @@
 .coa-Header {
-  // border-bottom: 1px solid lighten($coa-color-white, 10%);
   font-family: $coa-font-sans;
   background-color: $coa-color-primary;
   color: $coa-color-white;
 }
-
-.coa-Header--container {
-  max-width: $coa-top-menu-max-width;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-// .coa-Header--menu-is-open ~ main,
-// .coa-Header--menu-is-open ~ footer {
-//   display: block;
-// }
 
 .coa-Header--menu-is-open {
   position: fixed;
@@ -26,10 +14,9 @@
 }
 
 .coa-Header__container {
-  max-width: 1325px;
+  max-width: $coa-top-menu-max-width;
   margin-left: auto;
   margin-right: auto;
-
   @include media($coa-medium-screen) {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -37,15 +24,12 @@
 }
 
 .coa-Header__controls {
-  display: flex;
-  // height: $coa-header-toprow-height;
   justify-content: space-between;
   flex-wrap: wrap;
-
+  height: 56px;
+  display: block;
   @include media($coa-medium-screen) {
-    padding-top: $coa-spacing-small;
-    padding-bottom: $coa-spacing-small;
-    padding-right: $coa-spacing-small;
+    display: flex;
   }
 }
 
@@ -54,14 +38,10 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 2rem;
-
-  .coa-text-spacer--vertical:after {
-    display: block;
-    height: $coa-header-toprow-height;
-  }
-
+  width: auto;
   @include media($coa-medium-screen) {
     margin-left: 0;
+    width: 43%;
   }
 }
 
@@ -70,16 +50,18 @@
   display: flex;
   justify-content: flex-start;
   order: 3;
-  width: 100%;
-  border-top: 1px solid rgba($coa-color-white, 0.5);
+  height: 56px;
   padding: $coa-spacing-small 0;
-
   @include media($coa-medium-screen) {
     order: unset;
     width: initial;
     border-top: none;
     padding: 0;
   }
+}
+
+.coa-text-spacer--vertical {
+  width: 1.5rem;
 }
 
 .coa-Header__center-controls--active {
@@ -116,48 +98,6 @@
   }
 }
 
-.coa-Header__right-controls-wrapper {
-  order: 3;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 2rem;
-
-  @include media($coa-medium-screen) {
-    margin-right: 0;
-  }
-
-  display: flex;
-  a {
-    font-size: $coa-font-size-xsmall;
-  }
-  svg {
-    height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    vertical-align: -0.2rem;
-  }
-}
-
-.coa-Header__right-controls {
-  display: none;
-  @include media($coa-medium-screen) {
-    display: flex;
-  }
-
-  a {
-    color: $coa-color-white;
-    &:visited {
-      color: $coa-color-white;
-    }
-    svg {
-      margin-left: $coa-space-level1;
-      vertical-align: middle;
-      path {
-        fill: $coa-color-white;
-      }
-    }
-  }
-}
-
 .coa-Header__mobile-languages {
   @include media($coa-medium-screen) {
     display: none;
@@ -182,26 +122,21 @@
   text-decoration: none;
   margin-left: auto;
   margin-right: auto;
-
   &:hover {
     color: $coa-color-white;
   }
   &:visited {
     color: $coa-color-white;
   }
-
   @include media($coa-medium-screen) {
-    font-size: $coa-font-size-md-small;
+    font-size: 1.8rem;
     margin: initial;
   }
 }
 
 .coa-Header__gov-site {
-  background: $coa-color-blue-darkest;
   font-size: 1.2rem;
   line-height: 3.1rem;
-  cursor: pointer;
-  border-radius: 0px 0px 4px 4px;
   svg {
     vertical-align: middle;
     height: 1.6rem;
@@ -233,6 +168,12 @@
   }
 }
 
+.coa-Header__gov-site-title {
+  background: $coa-color-blue-darkest;
+  cursor: pointer;
+  border-radius: 0px 0px 4px 4px;
+}
+
 .coa-Header__gov-site-toggle {
   margin-left: 0.5rem;
   i {
@@ -249,23 +190,31 @@
   font-weight: $coa-font-medium;
   font-size: $coa-font-size-xsmall;
   margin-right: 0.4rem;
-  color: $coa-color-white;
+  color: $coa-color-primary;
   position: absolute;
-  margin-left: 2rem;
-
+  margin-left: 3.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: $coa-color-white;
+  height: 34px;
+  border-radius: $coa-border-radius-medium;
+  cursor: pointer;
   i {
     font-size: $coa-font-size-md-small;
   }
-
   &:visited,
   &:active,
   &:hover {
-    color: $coa-color-white;
+    background-color: $coa-color-secondary;
   }
-
   @include media($coa-medium-screen) {
     display: none;
     font-size: $coa-font-size-small;
     margin-left: none;
+  }
+  @include mobile-small {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 2rem;
   }
 }

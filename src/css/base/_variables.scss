@@ -64,25 +64,29 @@ $coa-spacing-xlarge: $coa-space-level8;
 $coa-column-count: 12;
 $coa-gutter-width: 2rem;
 $coa-container-margin: 2rem;
-$coa-wrapper-maxwidth: 1160px;
+$coa-wrapper-maxwidth: 1210px;
 $coa-wrapper-sm-maxwidth: 720px;
 
 //colors
 $coa-color-white: #ffffff;
 $coa-color-black: #000000;
+$coa-color-black-grey: #1B1B1B;
 
 $coa-color-blue: #3282af;
 $coa-color-blue-light: #d9e8f6;
 $coa-color-blue-dark: #2d759f;
 $coa-color-blue-darker: #065889;
 $coa-color-blue-darkest: #023654;
+$coa-color-blue-active: #edf5ff;
 
 //new COA brand color
 $coa-color-primary: #0049c7;
 $coa-color-half-primary: rgba(0, 80, 216, 0.5);
 $coa-color-almost-black: rgba(23, 23, 23, 1);
 $coa-color-decently-black: #212121;
+$coa-color-burnt-coffee-black: #2d2e2f;
 $coa-color-secondary: #f3f7fc;
+$coa-color-blue-warm-5v: #edf5ff;
 $coa-color-secondary-dark: #d9e8f6;
 $coa-color-grey: #f0f0f0;
 $coa-color-card-grey: #f7f7f7;
@@ -119,7 +123,7 @@ $coa-border-bottom-small-light-gray: 1.5px solid $coa-color-gray-lighter;
 $coa-box-shaddow-medium: 0px 3px 6px rgba(0,0,0,0.08);
 
 //magic numbers
-$coa-top-menu-max-width: 1160px;
+$coa-top-menu-max-width: 1210px;
 $coa-header-toprow-height: 55px;
 $coa-languageselectbar-height: 50px;
 $coa-button-border-radius: 4px;
