@@ -79,7 +79,11 @@ const SearchPage = () => {
   }
 
   const searchKeyInput = event => {
-    setSearchString(event.target.value)
+    if (event.key === "Enter") {
+      searchButtonPressed()
+    } else {
+      setSearchString(event.target.value)
+    }
     // For Quick Search (no-delay)... use 👇this, instead of that 👆.
     // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
     // setSearchResults(filteredSearch)
@@ -99,6 +103,7 @@ const SearchPage = () => {
             id="coa-search_input"
             className="coa-search_inputs"
             onChange={()=>searchKeyInput(event)}
+            onKeyPress={()=>searchKeyInput(event)}
             value={searchString}
           />
           <button

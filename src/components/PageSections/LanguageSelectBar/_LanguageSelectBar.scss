@@ -3,12 +3,15 @@
   color: $coa-color-white;
   font-family: $coa-font-sans;
   z-index: 0;
+  @include mobile {
+    background-color: $coa-color-black-grey;
+  }
 }
 
 .coa-LanguageSelectBar__list {
   color: $coa-color-white;
   list-style: none;
-  height: $coa-languageselectbar-height;
+  height: 56px;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -16,12 +19,23 @@
   padding-left: 15px;
   @include media($coa-medium-screen) {
     justify-content: flex-end;
-    // border-left: 1px solid #407CE2;
     padding-left: 0px;
   }
-
+  @include mobile-small {
+    text-align: center;
+    display: inherit;
+    padding-top: 5px;
+    height: 42px;
+  }
   li {
     margin: 0;
+    @include mobile-small {
+      padding: 10px;
+      display: inline;
+      a {
+        font-size: 14px;
+      }
+    }
   }
 }
 
@@ -45,14 +59,13 @@
 }
 
 .coa-LanguageSelectBar__background--active {
-  // should not be shown on mobile ever
+  /* should not be shown on mobile ever */
   @include media($coa-medium-screen) {
     display: inherit;
   }
   z-index: 0;
-  height: 50px;
+  height: 61px;
 }
-
 .coa-rtl {
   .coa-LanguageSelectBar__list {
     flex-direction: row-reverse;
@@ -67,12 +80,12 @@
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-md-small;
   margin: 0 0 0 $coa-spacing-xsmall;
-  padding: 0 $coa-spacing-small 0 0;
+  padding: 0 $coa-spacing-medium 0 0;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   @include media($coa-medium-screen) {
-    margin: 0;
+    // margin: 0;
   }
   &:visited {
     color: $coa-color-white;
