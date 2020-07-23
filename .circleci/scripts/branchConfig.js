@@ -23,8 +23,24 @@ const defaultValues = {
 
 // Add branch-specifc values here
 const branchOverrides = {
-  '4611-gzip-2': {
-    joplin_appname: 'joplin',
+  '3690-incremental': {
+    joplin_appname: 'joplin-pr-3690-incremental',
+    REACT_STATIC_PREFETCH_RATE: '10',
+  },
+  '4325-site-struct': {
+    joplin_appname: 'joplin-pr-import-everything',
+  },
+  '4289-page-guide': {
+    joplin_appname: 'joplin-pr-v3',
+  },
+  '4392-nav-v2': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
+  'enter-search': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
+  '4611-gzip': {
+    joplin_appname: 'joplin'
   },
   '4591-janis-docs': {
     joplin_appname: 'joplin-pr-4591-janis-docs',
