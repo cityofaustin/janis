@@ -2,6 +2,7 @@ import React from 'react';
 
 import Facebook from './Facebook';
 import Twitter from './Twitter';
+import ExternalLink from 'components/ExternalLink';
 
 const SocialMediaLink = ({ url }) => {
   const facebookRegex = /http(s)?:\/\/(www\.)?(facebook|fb)\.com\/[A-z0-9_\-\.]+\/?/g;
