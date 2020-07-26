@@ -28,13 +28,14 @@
 
 .coa-OfficialDocumentPage__summary {
   color: #454545;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0.25px;
   margin-bottom: 16px;
   padding-left: 10px;
   @include media($coa-large-screen) {
     margin-bottom: 64px;
+    font-size: 24px;
   }
 }
 
@@ -49,18 +50,15 @@
 }
 
 .coa-OfficialDocumentPage__document {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   padding-left: 10px;
+  width: 500px;
   h2 {
-    font-size: 20px;
     margin-bottom: 16px;
-    @include media($coa-large-screen) {
-      font-size: inherit;
-      margin-bottom: inherit;;
-    }
   }
   @include media($coa-large-screen) {
     margin-bottom: 48px;
+    width: inherit;
   }
 }
 

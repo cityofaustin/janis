@@ -73,7 +73,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
         <PageHeader
           contentType={'officialDocumentPage'}
           description={description}
-          columnWidth={12}
+          columnWidth={8}
         >
           {title}
         </PageHeader>
