@@ -30,7 +30,12 @@ const TopicsLinks = props =>
   );
 
 const ThemesTopicsMenu = props => {
-  {console.log(" ThemesTopicsMenuprops :", props)}
+  {console.log(" ThemesTopicsMenu props :", props)}
+  if (props.handleFullSiteMenuItem) {
+    console.log("props.handleFullSiteMenuItem() :", props.handleFullSiteMenuItem(0))
+  }
+
+  console.log("props.menu[0].text :", props.menu[0].text)
   return (
     <nav
       className={`coa-ThemesTopicsMenu ${
@@ -38,23 +43,26 @@ const ThemesTopicsMenu = props => {
       }`}
     >
       <ul className="coa-ThemesTopicsMenu__list">
-        {props.menu.map((theme, index) => (
-          <li className="coa-ThemesTopicsMenu__section" key={index}>
+
+
+          <li className="coa-ThemesTopicsMenu__section" >
             <h4
               className="coa-ThemesTopicsMenu__theme"
               tabIndex="0"
               onKeyDown={props.handleFullSiteMenuItem}
             >
-              {theme.text}
+              {props.menu[0].text}
             </h4>
             <TopicsLinks
               handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-              topicCollections={theme.topicCollectionPages.edges}
-              themeSlug={theme.slug}
+              topicCollections={props.menu[0].topicCollectionPages.edges}
+              themeSlug={props.menu[0].slug}
               intl={props.intl}
             />
           </li>
-        ))}
+
+
+
       </ul>
     </nav>
   );
@@ -71,3 +79,21 @@ ThemesTopicsMenu.propTypes = {
 };
 
 export default injectIntl(ThemesTopicsMenu);
+//
+// {props.menu.map((theme, index) => (
+//   <li className="coa-ThemesTopicsMenu__section" key={index}>
+//     <h4
+//       className="coa-ThemesTopicsMenu__theme"
+//       tabIndex="0"
+//       onKeyDown={props.handleFullSiteMenuItem}
+//     >
+//       {theme.text}
+//     </h4>
+//     <TopicsLinks
+//       handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+//       topicCollections={theme.topicCollectionPages.edges}
+//       themeSlug={theme.slug}
+//       intl={props.intl}
+//     />
+//   </li>
+// ))}
