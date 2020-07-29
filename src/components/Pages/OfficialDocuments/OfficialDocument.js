@@ -5,7 +5,7 @@ import moment from 'moment-timezone';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
-const OfficialDocument = ({ page: { node: {id, date, title, authoringOffice, summary, name, link, pdfSize }}, intl }) => {
+const OfficialDocument = ({ page: {id, date, title, authoringOffice, summary, name, link, pdfSize }, intl }) => {
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?

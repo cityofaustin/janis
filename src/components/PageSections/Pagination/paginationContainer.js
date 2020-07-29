@@ -4,7 +4,7 @@ import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPagination } from 'js/helpers/pagination.js';
-import { queryObjectBuilder } from 'js/helpers/queryObjectBuilder';
+import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder';
 
 import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
@@ -26,13 +26,17 @@ const PaginationContainer = ({
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
   const pages = buildPages(pagesArray, documentsPerPage);
-  const query = queryObjectBuilder();
+  let query = queryObjectBuilder();
   const [isTransition, setIsTransition] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber);
   const currentPage = pages[pageNumber];
 
   useEffect(() => {
+    /*
+      This hook will fire whenever there's a browser interaction.
+      Like, a back button or a change in the url.
+    */
     if (
       query.page &&
       pageNumber !== parseInt(query.page) - 1 &&
@@ -43,6 +47,22 @@ const PaginationContainer = ({
   });
 
   useEffect(() => {
+    /*
+      The transition effect of changing pages puts a block on new renderings.
+      So, we need to make sure there isn't a transition in effect before
+      we zero-out the page when a new one renders.
+    */
+    if (pageNumber === 0 && isTransition === false) {
+      updateUrl(0)
+    }
+  },[]);
+
+  useEffect(() => {
+    /*
+      This hook checks to see if a new search term is used. And, sets it back
+      to the first page. Like, if you are on page 3 of searching "police",
+      and then search "recycling", you don't wanna go page 3 of the new search.
+    */
     if (query.page) {
       setPageNumber(parseInt(query.page) - 1);
     } else {
@@ -51,13 +71,17 @@ const PaginationContainer = ({
   }, [searchedTerm]);
 
   const updatePage = newPage => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.split('&page=')[0];
-      window.location.hash = `${hash}&page=${parseInt(newPage) + 1}`;
-      setPageNumber(newPage); // NOTE: hooks must be in the order
-      setIsTransition(false);
-    }
+    updateUrl(newPage)
+    setPageNumber(newPage); // NOTE: hooks must be in the order
+    setIsTransition(false);
   };
+
+  const updateUrl = page => {
+    query.page = parseInt(page) + 1
+    if (typeof window !== 'undefined') {
+      window.location.hash = queryStringBuilder(query)
+    }
+  }
 
   function changePage(newPage) {
     setIsTransition(true);
@@ -91,7 +115,7 @@ const PaginationContainer = ({
 
           {shownPages.length > 1 && (
             <div
-              className={`coa-OfficialDocumentPage_pagination-container ${
+              className={`coa-PaginationContainer ${
                 smallMargins
                   ? 'coa-OfficialDocumentPage_pagination-container--small-margins'
                   : ''
@@ -99,9 +123,9 @@ const PaginationContainer = ({
             >
               <div
                 onClick={() => changePage(pageNumber - 1)}
-                className="coa-OfficialDocumentPage_page previous"
+                className="coa-PaginationContainer_page previous"
               >
-                <ChevronLeftBlue className="coa-OfficialDocumentPage_page-chevron" />
+                <ChevronLeftBlue className="coa-PaginationContainer_page-chevron" />
               </div>
 
               {pages &&
@@ -113,15 +137,14 @@ const PaginationContainer = ({
                     key={i}
                     pageNumberIndex={shownPages.indexOf(pageNumber + 1)}
                     changePage={changePage}
-                    contentType={'OfficialDocumentPage'}
                   />
                 ))}
 
               <div
                 onClick={() => changePage(pageNumber + 1)}
-                className="coa-OfficialDocumentPage_page next"
+                className="coa-PaginationContainer_page next"
               >
-                <ChevronRightBlue className="coa-OfficialDocumentPage_page-chevron right" />
+                <ChevronRightBlue className="coa-PaginationContainer_page-chevron right" />
               </div>
             </div>
           )}

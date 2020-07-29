@@ -6,9 +6,9 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
 import OfficialDocumentPage from 'components/Pages/OfficialDocuments/OfficialDocumentPage';
 
-const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
+const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
   const {
-    officialDocumentPage: {
+    officialDocumentCollection: {
       id,
       title,
       description,
@@ -21,7 +21,7 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
       coaGlobal,
       contextualNavData,
     },
-  } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
+  } = officialDocumentCollection ? { officialDocumentCollection } : useRouteData();
 
   return (
     <div>
@@ -48,4 +48,4 @@ const OfficialDocumentList = ({ officialDocumentPage, intl }) => {
   );
 };
 
-export default injectIntl(OfficialDocumentList);
+export default injectIntl(OfficialDocumentCollection);

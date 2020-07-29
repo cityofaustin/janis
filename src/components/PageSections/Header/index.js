@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
 
-import { misc as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
+import { search as i18n1, navigation as i18n2 } from 'js/i18n/definitions';
 
 import I18nLink from 'components/I18n/I18nLink';
-import ExternalLink from 'components/ExternalLink';
 
 import LanguageSelectBar from 'components/PageSections/LanguageSelectBar';
 import HowYouKnowMenu from 'components/PageSections/HowYouKnowMenu';
 import GovSite from 'components/PageSections/Header/GovSite';
 import PendingTranslation from 'components/PageSections/PendingTranslation';
+import SearchBar from 'components/PageSections/SearchBar';
+import SearchIcon from 'components/PageSections/SearchBar/SearchIcon'
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FullSiteMenu from '../Menu/FullSiteMenu';
@@ -188,12 +189,6 @@ class Header extends Component {
         role="banner"
       >
         <div className="coa-Header--container">
-          <GovSite
-            toggleHowYouKnowMenu={this.toggleHowYouKnowMenu}
-            keyboardHowYouKnowMenu={this.keyboardHowYouKnowMenu}
-            menuIsOpen={this.state.howYouKnowMenuIsOpen}
-            refnode={this.setHowYouKnowWrapperRef}
-          />
           <div className="coa-Header__mobile-languages">
             <LanguageSelectBar
               path={path}
@@ -230,41 +225,29 @@ class Header extends Component {
                     : null)
                 }
               >
+
                 <a
                   className="coa-Header__menuIcon"
                   onClick={this.toggleFullSiteMenu}
                 >
-                  {this.state.topMenuActive ? (
-                    <i className="material-icons">close</i>
-                  ) : (
-                    <i className="material-icons">menu</i>
-                  )}
-                  {intl.formatMessage(i18n2.menu)}
+
+                {this.state.topMenuActive ? (
+                  <> {intl.formatMessage(i18n2.close)} </>
+                ) : (
+                  <> {intl.formatMessage(i18n2.menu)} </>
+                )}
+
                 </a>
                 <I18nLink className="coa-Header__logo" to="/">
-                  City of Austin
+                  Austin.gov
                 </I18nLink>
-                <a href='/search' className="coa-ThemesNav__search-container-icon">
-                  <i className="material-icons coa-ThemesNav__search-icon">search</i>
-                </a>
+
+                <SearchIcon intl={intl} menuState={this.state.topMenuActive && "active"}/>
+
               </div>
-              <div className="coa-Header__right-controls-wrapper">
-                <div className="coa-Header__right-controls">
-                  <ExternalLink
-                    to="http://www.austintexas.gov/airport"
-                    ariaLabel={intl.formatMessage(i18n1.airport)}
-                  >
-                    {intl.formatMessage(i18n1.airport)}
-                  </ExternalLink>
-                  <span className="coa-text-spacer--vertical" />
-                  <ExternalLink
-                    to="http://311.austintexas.gov/"
-                    ariaLabel={'three one one'}
-                  >
-                    311
-                  </ExternalLink>
-                </div>
-              </div>
+
+              <SearchBar intl={intl} />
+
             </div>
           </div>
 

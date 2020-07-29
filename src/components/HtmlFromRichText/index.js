@@ -49,21 +49,22 @@ const HtmlFromRichText = ({ content }) => {
         }
 
         // If we're getting the button div from drafttail, we need to turn it into
-        // an 'a' tag to make the whole thing a link
+        // an 'a' tag to make the whole thing a link.
+        // We set the placeholder 'rich-text-button-link' class within Joplin's register_rich_text_features hook.
         if (
           domNode.attribs.class &&
           domNode.attribs.class.includes('rich-text-button-link')
         ) {
-          const child = domNode.children && domNode.children[0];
-          if (child && child.name === 'a') {
+          const linkChild = domNode.children && domNode.children.find(c => c.name === "a");
+          if (linkChild) {
             // make it a link not a div
             domNode.name = 'a';
 
             // get the href from the wrapped link
-            domNode.attribs.href = child.attribs.href;
+            domNode.attribs.href = linkChild.attribs.href;
 
             // get child text element from the wrapped link
-            domNode.children = child.children;
+            domNode.children = linkChild.children;
           }
         }
       }

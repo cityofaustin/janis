@@ -1,48 +1,82 @@
 import React from 'react';
-import { injectIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { misc as i18n } from 'js/i18n/definitions';
+import ExternalLink from 'components/ExternalLink';
 
-const ThemesNav = props => (
-  <nav
-    className={classNames('coa-ThemesNav', {
-      'coa-ThemesNav--open': props.isTopMenuActive,
-    })}
-  >
-    <ul className="coa-ThemesNav__list">
-      {props.navigation.map((theme, index) => (
-        <li
-          className="coa-ThemesNav__theme"
-          key={index}
+const ThemesNav = props => {
+
+  const intl = useIntl();
+  const lang = intl.locale
+
+  if (lang === 'en') {
+    props.navigation.map( theme => {
+      theme.text = theme.text.split('and').join('&')
+    })
+  }
+
+  return (
+    <nav
+      className={classNames('coa-ThemesNav', {
+        'coa-ThemesNav--open': props.isTopMenuActive,
+      })}
+    >
+      <ul className="coa-ThemesNav__list">
+        {props.navigation.map((theme, index) => (
+          <li
+            className="coa-ThemesNav__theme"
+            key={index}
+            tabIndex="0"
+            onKeyDown={props.handleOnClick}
+          >
+            <a className={"coa-ThemesNav__link "+lang} onClick={props.handleOnClick}>
+              {theme.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {props.isTopMenuActive ? (
+        <a
+          className="coa-FullSiteMenu__close"
           tabIndex="0"
-          onKeyDown={props.handleOnClick}
+          onClick={props.handleFullSiteMenuClose}
+          onKeyDown={props.handleFullSiteMenuClose}
         >
-          <a className="coa-ThemesNav__link" onClick={props.handleOnClick}>
-            {theme.text}
-          </a>
-        </li>
-      ))}
-    </ul>
-    {props.isTopMenuActive ? (
-      <a
-        className="coa-FullSiteMenu__close"
-        tabIndex="0"
-        onClick={props.handleFullSiteMenuClose}
-        onKeyDown={props.handleFullSiteMenuClose}
-      >
-        <i className="material-icons">close</i>
-      </a>
-    ) : null}
+          <i className="material-icons">close</i>
+        </a>
+      ) : null}
 
-    <a href='/search' className="coa-ThemesNav__search-container">
-      <i className="material-icons coa-ThemesNav__search-icon">search</i>
-      <span className="coa-ThemesNav__search-title">
-        Search
-      </span>
-    </a>
 
-  </nav>
-);
+
+      <div className="coa-Header__right-controls-wrapper">
+
+        <div className="coa-Header__right-controls">
+          <ExternalLink
+            to="http://311.austintexas.gov/"
+            ariaLabel={'three one one'}
+          >
+            311
+          </ExternalLink>
+
+          {/*  Note that this class is in _Header.scss  */}
+          <span className="coa-text-spacer--vertical" />
+          <ExternalLink
+            to="http://www.austintexas.gov/airport"
+            ariaLabel={intl.formatMessage(i18n.airport)}
+          >
+            {intl.formatMessage(i18n.airport)}
+          </ExternalLink>
+
+        </div>
+      </div>
+
+
+
+
+    </nav>
+  )
+}
 
 ThemesNav.propTypes = {
   handleOnClick: PropTypes.func.isRequired,

@@ -112,6 +112,7 @@ export const misc = defineMessages({
 export const navigation = defineMessages({
   home: 'Home',
   menu: 'Menu',
+  close: 'Close',
   openInNewWindow: 'Opens in new window',
   search: 'Search',
   skipToMain: 'Skip to main content',
@@ -550,8 +551,14 @@ export const search = defineMessages({
   search: "Search",
   getLatest: 'Get current information about coronavirus (COVID-19) in Austin',
   results: {
-    defaultMessage: ' results for {searchedTerm}',
-  }//"results for"
+    defaultMessage: 'results for {searchedTerm}',
+  },
+  noResultsHeader: {
+    defaultMessage: 'There are no matching results. Improve your search results by:',
+  },
+  suggestion1: "double-checking your spelling",
+  suggestion2: "using fewer keywords",
+  suggestion3: "searching for something less specific"
 });
 
 export const news = defineMessages({

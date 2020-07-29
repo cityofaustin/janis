@@ -1,8 +1,9 @@
 .coa-ExternalLink {
-  opacity: 0.75;
+  opacity: 1;
   text-decoration: none;
+  color: $coa-color-primary;
   &:hover {
-    opacity: 1;
+    opacity: 0.75;
   }
 
   svg {
@@ -24,8 +25,9 @@
 }
 
 .coa-ExternalLinkMaterial {
+  opacity: 0.75;
   padding: 0 3px;
-  font-size: 16px;
+  font-size: 12px;
   position: relative;
-  top: 3px;
+  top: 1px;
 }

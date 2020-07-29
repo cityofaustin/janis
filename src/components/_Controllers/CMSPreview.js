@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
+import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 import {
   getPageRevisionQuery,
   getAsPage,
@@ -14,7 +15,7 @@ import InformationPage from 'components/Pages/Information';
 import Topic from 'components/Pages/Topic';
 import Department from 'components/Pages/Department';
 import TopicCollection from 'components/Pages/TopicCollection';
-import OfficialDocumentList from 'components/Pages/OfficialDocuments/OfficialDocumentList';
+import OfficialDocumentCollection from 'components/Pages/OfficialDocuments/OfficialDocumentCollection';
 import FormContainer from 'components/Pages/Form';
 import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
@@ -34,7 +35,7 @@ class CMSPreview extends Component {
     super(props);
 
     this.state = {
-      data: null,
+      page: {},
     };
   }
 
@@ -53,62 +54,70 @@ class CMSPreview extends Component {
     // CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
     const { CMS_API } = queryString.parse(this.props.location.search);
 
-    const client = createGraphQLClientsByLang(intl.locale, CMS_API);
-    let req;
-    req = client.request(getPageRevisionQuery[page_type], { id: revision_id });
-
-    req.then(data => {
+    // Save Preview data for every locale
+    const preview_locales = ["en", "es"]
+    return Promise.all(preview_locales.map(async locale => {
+      const client = createGraphQLClientsByLang(locale, CMS_API);
+      const data = await client.request(getPageRevisionQuery[page_type], { id: revision_id });
       const page = data.pageRevision[getAsPage[page_type]];
+      if (page_type === "official_document_collection") {
+        page.documents = await getOfficialDocumentCollectionDocuments(page.id, client)
+      }
       const janis_instance = data.pageRevision.previewJanisInstance;
 
       page.contextualNavData = {
         relatedTo: [],
         offeredBy:
-          !!page.departments && !!page.departments[0]
-            ? [
-                {
-                  title: page.departments[0].title,
-                  url: `\${page.departments[0].slug}`,
-                },
-              ]
-            : [
-                {
-                  title: 'no department selected',
-                  url: 'no-department',
-                },
-              ],
+        !!page.departments && !!page.departments[0]
+        ? [
+          {
+            title: page.departments[0].title,
+            url: `\${page.departments[0].slug}`,
+          },
+        ]
+        : [
+          {
+            title: 'no department selected',
+            url: 'no-department',
+          },
+        ],
         parent: !!janis_instance.parent
-          ? janis_instance.parent
-          : {
-              url: 'no-topics',
-              title: 'No topics selected',
-              topiccollection: {
-                topics: [],
-              },
-            },
+        ? janis_instance.parent
+        : {
+          url: 'no-topics',
+          title: 'No topics selected',
+          topiccollection: {
+            topics: [],
+          },
+        },
       };
-
+      const pageData = Object.assign({}, this.state.page)
+      pageData[locale] = { ...page, ...janis_instance }
       this.setState({
-        page: { ...page, ...janis_instance },
+        page: pageData,
       });
-    });
+    }))
   }
 
   render() {
     const {
+      intl: {locale},
       match: {
         params: { revision_id, page_type },
       },
     } = this.props;
-    const { page } = this.state;
-
-    if (!page) return <h1>Loading</h1>;
+    if (!this.state.page[locale]) return <h1>Loading</h1>;
+    // Get page data for your specific locale
+    const page = this.state.page[locale];
     return (
       <Switch location={{ pathname: `/${page_type}` }}>
         <Route path="/services" render={props => <Service service={page} />} />
         <Route
-          path="/official_document"
-          render={props => <OfficialDocumentList officialDocumentPage={page} />}
+          path="/official_document_collection"
+          render={props => {
+            let collection = page;
+            return <OfficialDocumentCollection officialDocumentCollection={page} />
+          }}
         />
         <Route
           path="/information"

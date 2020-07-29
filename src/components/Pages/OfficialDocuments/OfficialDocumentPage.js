@@ -9,7 +9,7 @@ const OfficialDocumentPage = ({ officialDocuments, intl }) => {
   return (
     <div id="officialDocumentsPage">
       <PaginationContainer
-        pagesArray={officialDocuments.edges}
+        pagesArray={officialDocuments}
         PageComponent={OfficialDocument}
         intl={intl}
       />

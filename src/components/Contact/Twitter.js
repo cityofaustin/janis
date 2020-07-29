@@ -12,7 +12,7 @@ const Twitter = ({ url }) => {
         <TwitterSVG />
       </div>
       <div className="coa-ContactItem_content">
-        <ExternalLink to="https://twitter.com/atx_opo">@{matches[3]}</ExternalLink>
+        <ExternalLink to={url}>@{matches[3]}</ExternalLink>
       </div>
     </div>
   );

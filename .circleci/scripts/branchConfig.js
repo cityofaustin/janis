@@ -33,14 +33,11 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  'search-pag': {
+  '4392-nav-v2': { // Ok to remove
     joplin_appname: 'joplin'
   },
-  '4285-search-page': {
-    joplin_appname: 'joplin',
-  },
-  '4422-20-to-10': {
-    joplin_appname: 'joplin',
+  '4689-social-media': {
+    joplin_appname: 'joplin'
   },
 };
 
