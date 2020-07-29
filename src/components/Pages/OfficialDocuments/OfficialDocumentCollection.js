@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
-import OfficialDocumentPage from 'components/Pages/OfficialDocuments/OfficialDocumentPage';
+import OfficialDocumentPaginationPage from 'components/Pages/OfficialDocuments/OfficialDocumentPaginationPage';
 
 const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
   const {
@@ -39,7 +39,7 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         <PageHeader contentType={'official-document'} description={description}>
           {title}
         </PageHeader>
-        <OfficialDocumentPage
+        <OfficialDocumentPaginationPage
           officialDocuments={documents}
           intl={intl}
         />

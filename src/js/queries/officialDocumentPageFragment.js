@@ -2,26 +2,30 @@ const officialDocumentPageFragment = `
   fragment officialDocumentPageInfo on OfficialDocumentPageNode {
     id
     title
-    slug
-    description
+    date
+    title
+    authoringOffice
+    summary
+    name
+    document {
+      fileSize
+      filename
+      url
+    }
     departments {
       id
       title
       slug
     }
-    documents(orderBy: "-date") {
+    officialDocumentCollection {
       edges {
         node {
-          id
-          date
-          title
-          authoringOffice
-          summary
-          name
-          document {
-            fileSize
-            filename
-            url
+          officialDocumentCollection {
+            title
+            slug
+            departments {
+              slug
+            }
           }
         }
       }
