@@ -21,6 +21,7 @@ import Guide from 'components/Pages/Guide';
 import LocationPage from 'components/Pages/Location';
 import EventPage from 'components/Pages/Event';
 import NewsPage from 'components/Pages/News';
+import OfficialDocumentPage from 'components/Pages/OfficialDocuments/OfficialDocumentPage';
 
 import {
   cleanInformationForPreview,
@@ -28,6 +29,7 @@ import {
   cleanDepartmentForPreview,
   cleanLocationPage,
   getOfferedByFromDepartments,
+  cleanOfficialDocumentPageCollections,
 } from 'js/helpers/cleanData';
 
 class CMSPreview extends Component {
@@ -55,53 +57,60 @@ class CMSPreview extends Component {
     const { CMS_API } = queryString.parse(this.props.location.search);
 
     // Save Preview data for every locale
-    const preview_locales = ["en", "es"]
-    return Promise.all(preview_locales.map(async locale => {
-      const client = createGraphQLClientsByLang(locale, CMS_API);
-      const data = await client.request(getPageRevisionQuery[page_type], { id: revision_id });
-      const page = data.pageRevision[getAsPage[page_type]];
-      if (page_type === "official_document_collection") {
-        page.documents = await getOfficialDocumentCollectionDocuments(page.id, client)
-      }
-      const janis_instance = data.pageRevision.previewJanisInstance;
+    const preview_locales = ['en', 'es'];
+    return Promise.all(
+      preview_locales.map(async locale => {
+        const client = createGraphQLClientsByLang(locale, CMS_API);
+        const data = await client.request(getPageRevisionQuery[page_type], {
+          id: revision_id,
+        });
+        const page = data.pageRevision[getAsPage[page_type]];
+        if (page_type === 'official_document_collection') {
+          page.documents = await getOfficialDocumentCollectionDocuments(
+            page.id,
+            client,
+          );
+        }
+        const janis_instance = data.pageRevision.previewJanisInstance;
 
-      page.contextualNavData = {
-        relatedTo: [],
-        offeredBy:
-        !!page.departments && !!page.departments[0]
-        ? [
-          {
-            title: page.departments[0].title,
-            url: `\${page.departments[0].slug}`,
-          },
-        ]
-        : [
-          {
-            title: 'no department selected',
-            url: 'no-department',
-          },
-        ],
-        parent: !!janis_instance.parent
-        ? janis_instance.parent
-        : {
-          url: 'no-topics',
-          title: 'No topics selected',
-          topiccollection: {
-            topics: [],
-          },
-        },
-      };
-      const pageData = Object.assign({}, this.state.page)
-      pageData[locale] = { ...page, ...janis_instance }
-      this.setState({
-        page: pageData,
-      });
-    }))
+        page.contextualNavData = {
+          relatedTo: [],
+          offeredBy:
+            !!page.departments && !!page.departments[0]
+              ? [
+                  {
+                    title: page.departments[0].title,
+                    url: `\${page.departments[0].slug}`,
+                  },
+                ]
+              : [
+                  {
+                    title: 'no department selected',
+                    url: 'no-department',
+                  },
+                ],
+          parent: !!janis_instance.parent
+            ? janis_instance.parent
+            : {
+                url: 'no-topics',
+                title: 'No topics selected',
+                topiccollection: {
+                  topics: [],
+                },
+              },
+        };
+        const pageData = Object.assign({}, this.state.page);
+        pageData[locale] = { ...page, ...janis_instance };
+        this.setState({
+          page: pageData,
+        });
+      }),
+    );
   }
 
   render() {
     const {
-      intl: {locale},
+      intl: { locale },
       match: {
         params: { revision_id, page_type },
       },
@@ -116,7 +125,9 @@ class CMSPreview extends Component {
           path="/official_document_collection"
           render={props => {
             let collection = page;
-            return <OfficialDocumentCollection officialDocumentCollection={page} />
+            return (
+              <OfficialDocumentCollection officialDocumentCollection={page} />
+            );
           }}
         />
         <Route
@@ -195,6 +206,21 @@ class CMSPreview extends Component {
           }}
         />
         <Route path="/news" render={props => <NewsPage newsPage={page} />} />
+        <Route
+          path="/official_document_page"
+          render={props => {
+            let officialDocumentPage = page;
+
+            officialDocumentPage.officialDocumentCollection = cleanOfficialDocumentPageCollections(
+              officialDocumentPage.officialDocumentCollection,
+            );
+            return (
+              <OfficialDocumentPage
+                officialDocumentPage={officialDocumentPage}
+              />
+            );
+          }}
+        />
       </Switch>
     );
   }
