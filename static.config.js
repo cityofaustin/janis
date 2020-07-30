@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import filesize from 'filesize';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -31,6 +32,7 @@ import {
   getEventPageUrl,
   formatFeesRange,
   cleanEvents,
+  cleanOfficialDocumentPageCollections,
 } from 'js/helpers/cleanData';
 
 const getRelatedTo = async (parent, grandparent, client) => {
@@ -341,6 +343,30 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
   return { officialDocumentCollection: officialDocumentCollection };
 };
 
+const getOfficialDocumentPageData = (page, instance) => {
+  let officialDocumentPage = { ...page };
+
+  if (officialDocumentPage.document.filename.slice(-3) === 'pdf') {
+    officialDocumentPage.pdfSize = filesize(
+      officialDocumentPage.document.fileSize,
+    ).replace(' ', '');
+  }
+
+  officialDocumentPage.officialDocumentCollection = cleanOfficialDocumentPageCollections(
+    officialDocumentPage.officialDocumentCollection,
+  );
+
+  officialDocumentPage.contextualNavData = {
+    // parent: officialDocumentPage.officialDocumentCollection[0],
+    parent: instance.parent,
+    relatedTo: [],
+    offeredBy: getOfferedByFromDepartments(officialDocumentPage.departments),
+  };
+
+  return { officialDocumentPage: officialDocumentPage };
+};
+
+
 const cleanEventPageData = page => {
   let eventPage = { ...page };
 
@@ -364,6 +390,7 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
+<<<<<<< HEAD
 const getNewsListForDepartment = async (client, departmentId, locale) => {
   const { allPages } = await client.request(getNewsListPageQuery, {
     departmentPageId: departmentId,
@@ -388,6 +415,8 @@ const getNewsListForDepartment = async (client, departmentId, locale) => {
 
   return { newsList: newsList, parent: parent };
 };
+=======
+>>>>>>> master
 
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
@@ -598,11 +627,11 @@ const buildPageAtUrl = async (
     };
   }
 
-  // need to figure out what official document pages are going to do.
   if (officialdocumentpage) {
     return {
-      path: '404',
-      template: 'src/components/Pages/404',
+      path: instanceOfPage.url,
+      template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
+      getData: () => getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
     }
   }
 

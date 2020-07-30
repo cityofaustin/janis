@@ -75,7 +75,7 @@
     border-top: none;
   }
 
-  &:first-child {
+  &:first-of-type {
     border-top: 1px solid $coa-color-gray-light;
     &.coa-Tile--blue {
       border-top: 1px solid $coa-color-primary;
@@ -88,7 +88,7 @@
     border-top-left-radius: $coa-button-border-radius;
   }
 
-  &:last-child {
+  &:last-of-type {
     border-bottom: 1px solid $coa-color-gray-light;
     &.coa-Tile--blue {
       border-bottom: 1px solid $coa-color-primary;

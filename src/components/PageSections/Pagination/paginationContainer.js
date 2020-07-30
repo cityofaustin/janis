@@ -9,7 +9,6 @@ import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBu
 import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
-import OfficialDocument from 'components/Pages/OfficialDocuments/OfficialDocument';
 import { PageNumber } from 'components/PageSections/Pagination';
 
 const PaginationContainer = ({

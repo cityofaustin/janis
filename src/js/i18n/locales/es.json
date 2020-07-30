@@ -103,6 +103,7 @@
   "departmentPage.investigationProcessLinkText": "Proceso de investigación de quejas",
   "officialdocuments.author": "Autor",
   "officialdocuments.document": "Documento",
+  "officialdocuments.partOf": "Parte de",
   "guides.pageLink": "Visite esta página en alpha.austin.gov",
   "curbsideServices.pickupschedule": "Horario de recolección para {address}",
   "curbsideServices.bulkitemcollection": "Próxima recolección de artículos grandes",
