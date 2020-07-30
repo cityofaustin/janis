@@ -71,7 +71,7 @@
 }
 
 .coa-ThemesNav__link.active {
-  background-color: $coa-color-blue-active;
+  background-color: $coa-color-gray-4;
   &:hover {
     color: $coa-color-white;
     background-color: $coa-color-primary;
@@ -80,12 +80,27 @@
   }
 }
 
+.coa-FullSiteMenu__container {
+  position: absolute;
+  width: 100%;
+}
+
+.coa-MessageWIP {
+  margin: $coa-space-level1 0;
+  background-color: $coa-color-vintage-vinilla;
+  border-radius: $coa-menu-border-radius;
+  color: $coa-color-black;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
 .coa-FullSiteMenu__subNav {
   display: none;
-  background: $coa-color-white;
+  // background: $coa-color-white;
   position: absolute;
   width: 100%;
   padding: $coa-spacing-medium 0;
+  top: 100px;
   @include media($coa-medium-screen) {
     padding: 0;
   }
@@ -95,7 +110,7 @@
   background: $coa-color-white;
 
   .coa-ThemesNav {
-    border-top: none;
+    // border-top: none;
   }
 
   .coa-FullSiteMenu__subNav {
@@ -104,22 +119,22 @@
         content: '';
         height: calc(100% + 1px);
         width: 100%;
-        border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-        border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-        border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
+        // border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+        // border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+        // border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
         position: absolute;
         left: 0;
-        top: -1px;
+        // top: -1px;
         border-bottom-left-radius: $coa-menu-border-radius;
         border-bottom-right-radius: $coa-menu-border-radius;
       }
     }
 
     display: block;
-    border-top: 1px solid $coa-color-dark-grey;
+    // border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
-    border-bottom-left-radius: $coa-menu-border-radius;
-    border-bottom-right-radius: $coa-menu-border-radius;
+    // border-bottom-left-radius: $coa-menu-border-radius;
+    // border-bottom-right-radius: $coa-menu-border-radius;
   }
 }
 
@@ -128,6 +143,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: $coa-color-white;
+  border-radius: $coa-menu-border-radius;
 }
 
 .coa-ThemesTopicsMenu__section {

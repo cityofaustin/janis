@@ -13,6 +13,7 @@ const FullSiteMenu = props => (
       (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
     }
   >
+
     <div className="wrapper">
       <ThemesNav
         handleOnClick={props.handleFullSiteMenuOpen}
@@ -22,6 +23,17 @@ const FullSiteMenu = props => (
         slug={props.slug}
       />
     </div>
+
+    <section className="coa-FullSiteMenu__container">
+      <div className="wrapper container-fluid">
+        <div className="coa-MessageWIP">
+          [en/es] This site is a
+          🔗work in progress🔗.
+          Visit 🔗austintexas.gov for full city website.🔗
+        </div>
+      </div>
+    </section>
+
     <section className="coa-FullSiteMenu__subNav">
       <div className="wrapper container-fluid">
         <ThemesTopicsMenu
@@ -30,9 +42,21 @@ const FullSiteMenu = props => (
           slug={props.slug}
         />
       </div>
-      <MenuInfo handleToggleFullSiteMenu={props.toggleFullSiteMenu} />
     </section>
+
   </div>
 );
 
 export default injectIntl(FullSiteMenu);
+
+// <section className="coa-FullSiteMenu__subNav">
+//   <div className="wrapper container-fluid">
+//     <ThemesTopicsMenu
+//       menu={props.navigation}
+//       handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+//       slug={props.slug}
+//     />
+//   </div>
+//   <MenuInfo handleToggleFullSiteMenu={props.toggleFullSiteMenu} />
+// </section>
+//

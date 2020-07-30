@@ -40,18 +40,6 @@ const ThemesNav = props => {
           </li>
         ))}
       </ul>
-      {props.isTopMenuActive ? (
-        <a
-          className="coa-FullSiteMenu__close"
-          tabIndex="0"
-          onClick={props.handleFullSiteMenuClose}
-          onKeyDown={props.handleFullSiteMenuClose}
-        >
-          <i className="material-icons">close</i>
-        </a>
-      ) : null}
-
-
 
       <div className="coa-Header__right-controls-wrapper">
 
