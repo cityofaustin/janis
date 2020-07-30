@@ -34,7 +34,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3',
   },
   'getting-started': { // Ok to remove
-    joplin_appname: 'joplin'
+    joplin_appname: 'joplin',
   },
   '4591-janis-docs': {
     joplin_appname: 'joplin-pr-4591-janis-docs',
