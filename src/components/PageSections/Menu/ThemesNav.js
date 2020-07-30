@@ -30,7 +30,11 @@ const ThemesNav = props => {
             tabIndex="0"
             onKeyDown={props.handleOnClick}
           >
-            <a className={"coa-ThemesNav__link "+lang} onClick={props.handleOnClick}>
+            <a
+              className={"coa-ThemesNav__link " + lang + (theme.slug === props.slug ? " active" : "") }
+              onClick={props.handleOnClick}
+              slug={theme.slug}
+            >
               {theme.text}
             </a>
           </li>

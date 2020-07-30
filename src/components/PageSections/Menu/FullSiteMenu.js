@@ -19,6 +19,7 @@ const FullSiteMenu = props => (
         isTopMenuActive={props.isTopMenuActive}
         handleFullSiteMenuClose={props.handleFullSiteMenuClose}
         navigation={props.navigation}
+        slug={props.slug}
       />
     </div>
     <section className="coa-FullSiteMenu__subNav">
@@ -26,6 +27,7 @@ const FullSiteMenu = props => (
         <ThemesTopicsMenu
           menu={props.navigation}
           handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+          slug={props.slug}
         />
       </div>
       <MenuInfo handleToggleFullSiteMenu={props.toggleFullSiteMenu} />

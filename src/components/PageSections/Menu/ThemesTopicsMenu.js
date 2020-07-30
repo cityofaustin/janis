@@ -30,12 +30,9 @@ const TopicsLinks = props =>
   );
 
 const ThemesTopicsMenu = props => {
-  {console.log(" ThemesTopicsMenu props :", props)}
-  if (props.handleFullSiteMenuItem) {
-    console.log("props.handleFullSiteMenuItem() :", props.handleFullSiteMenuItem(0))
-  }
 
-  console.log("props.menu[0].text :", props.menu[0].text)
+  const topicMenu = props.menu.find( menu => menu.slug === props.slug)
+
   return (
     <nav
       className={`coa-ThemesTopicsMenu ${
@@ -43,26 +40,23 @@ const ThemesTopicsMenu = props => {
       }`}
     >
       <ul className="coa-ThemesTopicsMenu__list">
-
-
+        { topicMenu &&
           <li className="coa-ThemesTopicsMenu__section" >
             <h4
               className="coa-ThemesTopicsMenu__theme"
               tabIndex="0"
               onKeyDown={props.handleFullSiteMenuItem}
             >
-              {props.menu[0].text}
+              {topicMenu.text}
             </h4>
             <TopicsLinks
               handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-              topicCollections={props.menu[0].topicCollectionPages.edges}
-              themeSlug={props.menu[0].slug}
+              topicCollections={topicMenu.topicCollectionPages.edges}
+              themeSlug={topicMenu.slug}
               intl={props.intl}
             />
           </li>
-
-
-
+        }
       </ul>
     </nav>
   );

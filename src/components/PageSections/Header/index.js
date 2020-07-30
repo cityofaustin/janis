@@ -24,6 +24,7 @@ class Header extends Component {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
       showMessage: false,
+      slug: "",
     };
 
     // Bind wrappers and outside-click functions
@@ -98,6 +99,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: true,
         showMessage: false,
+        slug: e.target.getAttribute("slug"),
       });
     }
 
@@ -257,6 +259,7 @@ class Header extends Component {
             handleFullSiteMenuItem={this.closeFullSiteMenuItem}
             handleFullSiteMenuOpen={this.openFullSiteMenu}
             handleFullSiteMenuClose={this.closeFullSiteMenu}
+            slug={this.state.slug}
             isTopMenuActive={this.state.topMenuActive}
             toggleFullSiteMenu={this.toggleFullSiteMenu}
           />

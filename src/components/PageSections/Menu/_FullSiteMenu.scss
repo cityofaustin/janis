@@ -44,6 +44,10 @@
   padding: 10px 5px 10px 5px;
 }
 
+.coa-ThemesNav__theme:focus {
+  outline: none;
+}
+
 .coa-ThemesNav__link {
   transition: background-color .3s, box-shadow .3s;
   display: table-cell;
@@ -66,9 +70,14 @@
   }
 }
 
-.coa-ThemesNav__link.es {
-  font-size: 13px;
-  line-height: 13px;
+.coa-ThemesNav__link.active {
+  background-color: $coa-color-blue-active;
+  &:hover {
+    color: $coa-color-white;
+    background-color: $coa-color-primary;
+    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
+    transition: background-color .3s, box-shadow .3s;
+  }
 }
 
 .coa-FullSiteMenu__subNav {
