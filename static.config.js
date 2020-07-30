@@ -390,7 +390,6 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
-<<<<<<< HEAD
 const getNewsListForDepartment = async (client, departmentId, locale) => {
   const { allPages } = await client.request(getNewsListPageQuery, {
     departmentPageId: departmentId,
@@ -415,8 +414,7 @@ const getNewsListForDepartment = async (client, departmentId, locale) => {
 
   return { newsList: newsList, parent: parent };
 };
-=======
->>>>>>> master
+
 
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
