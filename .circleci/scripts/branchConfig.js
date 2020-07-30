@@ -33,7 +33,7 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  '4392-nav-v2': { // Ok to remove
+  'smaller-seal': { // Ok to remove
     joplin_appname: 'joplin'
   },
   '4591-janis-docs': {
