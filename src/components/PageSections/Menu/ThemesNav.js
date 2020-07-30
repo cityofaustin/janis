@@ -16,6 +16,8 @@ const ThemesNav = props => {
     })
   }
 
+  console.log("ThemesNav props :", props)
+
   return (
     <nav
       className={classNames('coa-ThemesNav', {
