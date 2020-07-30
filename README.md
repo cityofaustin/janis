@@ -28,11 +28,32 @@ Once Docker is installed and you've cloned the code from this repository, you ca
 
 #### As a React App (Developer Mode):
 
-```
-yarn start-local
-```
+In order to develop locally, you will need to have installed these development tools.
+- *HomeBrew*
+  - $`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+- *yarn*
+  - Note: Homebrew must be install first.
+  - $`brew install yarn`
+- *npm*
+  - Download and install at here: $`https://www.npmjs.com/get-npm`
 
-Your react app should be running at http://localhost:3000/ and pointing to your local Joplin backend. To run against staging Joplin, use `yarn start-staging` or `yarn start-joplin-staging`.
+Clone the repository and navigate into the newly downloaded directory.
+- $`git clone git@github.com:cityofaustin/janis.git`
+- $`cd janis`
+
+Install Janis dependencies.
+- $`yarn install`
+- $`npm install`
+
+Start a local environment with production data.
+- $`yarn start-joplin-prod`
+- If successful, you should be able to go to `http://localhost:3000/` and see a local version of Janis with production data!
+
+If you'd like to see Janis with staging data.
+- $`yarn start-joplin-staging`
+
+If you have a [Joplin](https://github.com/cityofaustin/joplin) instance running locally, you can run your local Janis against the local Joplin with...
+- $`yarn start-local`
 
 **As a static build**
 To run the site locally as a static build, the way it works in production, see the [Static build script](#static-build-script) section below.
