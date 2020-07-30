@@ -35,7 +35,7 @@ In order to develop locally, you will need to have installed these development t
   - Note: Homebrew must be install first.
   - $`brew install yarn`
 - *npm*
-  - Download and install at here: $`https://www.npmjs.com/get-npm`
+  - Download and install at here: https://www.npmjs.com/get-npm
 
 Clone the repository and navigate into the newly downloaded directory.
 - $`git clone git@github.com:cityofaustin/janis.git`
