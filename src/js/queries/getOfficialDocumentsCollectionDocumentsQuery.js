@@ -7,6 +7,7 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
             id
             date
             live
+            slug
             title
             authoringOffice
             summary
@@ -15,6 +16,9 @@ const getOfficialDocumentsCollectionDocumentsQuery = `
               fileSize
               filename
               url
+            }
+            departments {
+              slug
             }
           }
         }

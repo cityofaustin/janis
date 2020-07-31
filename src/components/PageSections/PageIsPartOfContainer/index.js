@@ -3,7 +3,6 @@ import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 import { misc as i18n2 } from 'js/i18n/definitions';
 
-
 import PageHeader from 'components/PageHeader';
 import Tile from 'components/Tiles/Tile';
 
@@ -13,7 +12,6 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
     <div className={"coa-Page__pageIsPartOfContainer"+(contentType === "service" ? "--service" : "")}>
 
       <div className="coa-Page__all-of-the-content" >
-
         <div className="coa-Page__main-content" >
           <div className="row">
             <div className="col-xs-12 col-md-11">
@@ -24,13 +22,11 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
                 {title}
               </PageHeader>
               <div className={"coa-Page__contacts-mobile pageIsPartOf"+(contentType === "service" ? " service" : "")}>
-
                 <PageIsPartOfContent
                   pageIsPartOf={pageIsPartOf}
                   intl={intl}
                   contentType={contentType}
-                ></PageIsPartOfContent>
-
+                />
               </div>
               {contentType === "information" && (
                 <div className="coa-Page__side-content coa-Page__main-content-divider"></div>
@@ -50,7 +46,7 @@ const PageIsPartOfContainer = ({ pageIsPartOf, contentType, description, title, 
               pageIsPartOf={pageIsPartOf}
               intl={intl}
               contentType={contentType}
-            ></PageIsPartOfContent>
+            />
 
             {contentType === "information" && (
               <div className="coa-ServicePage__contacts-desktop-divider"></div>
