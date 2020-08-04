@@ -23,7 +23,7 @@ const NewsListPageLink = ({ locale, departmentUrl, departmentTitle, intl }) => (
       {intl.formatMessage(i18n2.moreDeptNews, {
         department: departmentTitle,
       })}
-    </div>;
+    </div>
     <i class="material-icons coa-NewsPage__list-page-link-arrow">
       arrow_forward
     </i>
@@ -97,7 +97,7 @@ const NewsPage = ({ newsPage }) => {
               <div className="col-xs-12 col-md-12">
                 {body && <HtmlFromRichText title={' '} content={body} />}
                 <div className="coa-NewsPage__footer-published-date">
-                  Published {momentDate}
+                  {intl.formatMessage(i18n.publishedDate, { date: momentDate })}
                 </div>
                 <div className="coa-NewsPage__list-page-link-mobile">
                   <NewsListPageLink
@@ -119,6 +119,7 @@ const NewsPage = ({ newsPage }) => {
             locale={intl.locale}
             departmentUrl={fromDepartment.url}
             departmentTitle={fromDepartment.title}
+            intl={intl}
           />
           <div className="coa-ServicePage__contacts-desktop">
             {!!contact && <ContactDetails contact={contact} />}
