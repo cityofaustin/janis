@@ -667,7 +667,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const path = `/${!!langCode ? langCode : ''}`;
   console.log(`- Building routes for ${path}...`);
 
-  const client = createGraphQLClientsByLang(langCode);
+  const client = await createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
@@ -675,6 +675,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     const siteStructure = await client.request(allPagesQuery, { after: after });
     pages = pages.concat(siteStructure.allPages.edges);
     after = siteStructure.allPages.pageInfo.endCursor;
+    console.log(after);
     if (!siteStructure.allPages.pageInfo.hasNextPage) {
       break;
     }
@@ -834,8 +835,8 @@ export default {
     ];
     const requests = [];
     const data = {};
-    SUPPORTED_LANG_CODES.map(langCode => {
-      const client = createGraphQLClientsByLang(langCode);
+    SUPPORTED_LANG_CODES.map(async (langCode) => {
+      const client = await createGraphQLClientsByLang(langCode);
       queries.map(query => {
         requests.push(client.request(query.query));
         data[query.dataKey] = data[query.dataKey] || {};
