@@ -116,7 +116,7 @@ const PaginationContainer = ({
             <div
               className={`coa-PaginationContainer ${
                 smallMargins
-                  ? 'coa-OfficialDocumentPage_pagination-container--small-margins'
+                  ? 'coa-PaginationContainer--small-margins'
                   : ''
               }`}
             >
