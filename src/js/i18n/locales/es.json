@@ -159,5 +159,5 @@
   "news.fromAndByLine": "Por {fromDepartment}, escrita por {byDepartment}",
   "news.publishedDate": "Publicado {date}",
   "departmentPage.news": "Noticias",
-  "departmentPage.moreDeptNews": "Más noticias de {department}",
+  "departmentPage.moreDeptNews": "Más noticias de {department}"
 }
