@@ -10,18 +10,20 @@ import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
 import { useIntl } from 'react-intl';
-import { news as i18n } from 'js/i18n/definitions';
+import { news as i18n, deparmentPage as i18n2 } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
-const NewsListPageLink = ({ locale, departmentUrl, departmentTitle }) => (
+const NewsListPageLink = ({ locale, departmentUrl, departmentTitle, intl }) => (
   <a
     className="coa-NewsPage__list-page-link"
     href={`/${locale}${departmentUrl}news/`}
   >
     <div className="coa-NewsPage__list-page-link-text">
-      {`More ${departmentTitle} news`}
-    </div>
+      {intl.formatMessage(i18n2.moreDeptNews, {
+        department: departmentTitle,
+      })}
+    </div>;
     <i class="material-icons coa-NewsPage__list-page-link-arrow">
       arrow_forward
     </i>
@@ -102,6 +104,7 @@ const NewsPage = ({ newsPage }) => {
                     locale={intl.locale}
                     departmentUrl={fromDepartment.url}
                     departmentTitle={fromDepartment.title}
+                    intl={intl}
                   />
                 </div>
                 <div className="coa-Page__contacts-mobile">
