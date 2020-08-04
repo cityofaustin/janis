@@ -31,7 +31,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3',
   },
   '4404-news-pag': {
-    joplin_appname: 'joplin-pr-4404-news'
+    joplin_appname: 'joplin-pr-4404-news-api-only'
   },
 };
 
