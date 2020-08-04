@@ -10,7 +10,7 @@ import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
 import { useIntl } from 'react-intl';
-import { news as i18n, deparmentPage as i18n2 } from 'js/i18n/definitions';
+import { news as i18n, departmentPage as i18n2 } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
