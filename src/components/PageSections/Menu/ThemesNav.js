@@ -61,10 +61,8 @@ const ThemesNav = props => {
           </ExternalLink>
 
         </div>
+
       </div>
-
-
-
 
     </nav>
   )

@@ -76,6 +76,7 @@ class Header extends Component {
         this.setState({
           topMenuActive: false,
           showMessage: false,
+          slug: "",
         });
       }
     }
@@ -108,6 +109,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: false,
         showMessage: false,
+        slug: "",
       });
     }
   };
@@ -118,6 +120,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
+        slug: "",
       });
     }
 
@@ -138,6 +141,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: false,
         showMessage: false,
+        slug: "",
       });
     }
   };

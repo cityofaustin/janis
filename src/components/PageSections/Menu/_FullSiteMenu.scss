@@ -3,6 +3,7 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  height: 56px;
 }
 
 .coa-ThemesNav {
@@ -92,6 +93,9 @@
   color: $coa-color-black;
   font-size: 1.6rem;
   text-align: center;
+  // padding: .9rem;
+  // height: 52px;
+  // line-height: 52px;
 }
 
 .coa-FullSiteMenu__subNav {
@@ -140,9 +144,9 @@
 
 .coa-ThemesTopicsMenu__list {
   list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
   background-color: $coa-color-white;
   border-radius: $coa-menu-border-radius;
 }
@@ -151,23 +155,29 @@
   margin-left: 0;
   width: 100%;
   position: relative;
+  padding: 0 8%;
 
-  @include media($coa-medium-screen) {
-    width: 25%;
-    padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
-  }
+  // @include media($coa-medium-screen) {
+  //   width: 25%;
+  //   padding: $coa-spacing-large $coa-spacing-small $coa-spacing-large 0;
+  // }
 }
 
 .coa-ThemesTopicsMenu__theme {
-  font-size: $coa-font-size-small;
+  font-size: $coa-font-size-md-small;
   font-weight: $coa-font-medium;
   line-height: $coa-line-height-small;
   color: $coa-color-dark-blue;
   margin-bottom: $coa-spacing-xsmall;
+  padding: $coa-space-level5 0;
+  border-bottom: $coa-border-small-light-gray;
 }
 
 .coa-ThemesTopicsMenu__topics {
   margin-left: $coa-spacing-medium;
+  column-width: 600px;
+  padding: $coa-spacing-small;
+  padding-bottom: 5rem;
 
   @include media($coa-medium-screen) {
     margin-left: 0;
@@ -177,20 +187,23 @@
 .coa-ThemesTopicsMenu__topic {
   margin: 0;
   list-style: none;
-  display: flex;
+  break-inside: avoid-column; /* Prevent element from breaking */
+  page-break-inside: avoid; /* Prevent element from breaking in Firefox */
+  padding-bottom: $coa-spacing-small;
 
-  &:before {
-    color: $coa-color-darkest-grey;
-    font-size: $coa-font-size-xsmall;
-    margin-right: $coa-spacing-small;
-    margin-bottom: $coa-spacing-xsmall;
-  }
+  // &:before {
+  //   color: $coa-color-darkest-grey;
+  //   font-size: $coa-font-size-xsmall;
+  //   margin-right: $coa-spacing-small;
+  //   margin-bottom: $coa-spacing-xsmall;
+  // }
 }
 
 .coa-ThemesTopicsMenu__link {
   text-decoration: none;
-  font-size: $coa-font-size-xsmall;
-  line-height: $coa-line-height-xsmall;
+  font-size: 1.8rem;
+  font-weight: $coa-font-medium;
+  // line-height: $coa-line-height-xsmall;
 }
 
 .coa-FullSiteMenu__coming-soon {

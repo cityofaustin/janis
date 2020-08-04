@@ -3,31 +3,96 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { misc as i18n2 } from 'js/i18n/definitions';
 
-const TopicsLinks = props =>
-  props.topicCollections.length > 0 ? (
-    <ul className="coa-ThemesTopicsMenu__topics">
-      {props.topicCollections.map((tc, index) => (
-        <li
-          key={index}
-          className="coa-ThemesTopicsMenu__topic"
-          onKeyDown={props.handleFullSiteMenuItem}
-        >
-          <a
-            href={`/${props.intl.locale}${
-              tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
-            }`}
-            className="coa-ThemesTopicsMenu__link"
-          >
-            {tc.node.title}
-          </a>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="coa-FullSiteMenu__coming-soon">
-      {props.intl.formatMessage(i18n2.comingSoon)}
-    </p>
-  );
+const TopicsLinks = props => {
+
+  //
+  //
+    // if (props.topicCollections.length > 0) {
+    //
+    //   props.topicCollections.push({ node:{slug: "something-new",title: "New Added Theme "}})
+    //
+    // }
+    console.log("props :", props)
+
+
+  //
+  //
+
+  // columnWidth = ""
+
+
+  return (
+    <div className="coa-ThemesTopicsMenu__topics-container">
+
+      {props.topicCollections.length > 0 ? (
+
+        <ul className="coa-ThemesTopicsMenu__topics">
+          {props.topicCollections.map((tc, index) => (
+            <li
+              key={index}
+              className="coa-ThemesTopicsMenu__topic"
+              onKeyDown={props.handleFullSiteMenuItem}
+            >
+              <a
+                href={`/${props.intl.locale}${
+                  tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
+                }`}
+                className="coa-ThemesTopicsMenu__link"
+              >
+                {tc.node.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+      ) : (
+
+        <p className="coa-FullSiteMenu__coming-soon">
+          {props.intl.formatMessage(i18n2.comingSoon)}
+        </p>
+
+      )}
+
+    </div>
+
+  )
+}
+
+
+// <ul className="coa-ThemesTopicsMenu__topicsX"
+//   style={{backgroundColor: "purple"}}>
+//   <li>ok 2 x 1</li>
+//   <li>ok 2 x 2</li>
+//   <li>ok 2 x 1</li>
+//   <li>ok 2 x 2</li>
+// </ul>
+//
+// <ul className="coa-ThemesTopicsMenu__topicsX"
+//   style={{backgroundColor: "yellow"}}>
+//   <li>ok 3 x 1</li>
+//   <li>ok 2 x 2</li>
+// </ul>
+
+// <ul className="coa-ThemesTopicsMenu__topicsX">
+//   {props.topicCollections.map((tc, index) => (
+//     <li
+//       key={index}
+//       className="coa-ThemesTopicsMenu__topicX"
+//       onKeyDown={props.handleFullSiteMenuItem}
+//     >
+//       <a
+//         href={`/${props.intl.locale}${
+//           tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
+//         }`}
+//         className="coa-ThemesTopicsMenu__linkX"
+//       >
+//         {tc.node.title}
+//       </a>
+//     </li>
+//   ))}
+// </ul>
+
+
 
 const ThemesTopicsMenu = props => {
 
@@ -59,8 +124,9 @@ const ThemesTopicsMenu = props => {
         }
       </ul>
     </nav>
-  );
-};
+  )
+
+}
 
 TopicsLinks.propTypes = {
   themeSlug: PropTypes.string.isRequired,

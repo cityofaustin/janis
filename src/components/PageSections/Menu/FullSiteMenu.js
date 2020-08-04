@@ -27,9 +27,15 @@ const FullSiteMenu = props => (
     <section className="coa-FullSiteMenu__container">
       <div className="wrapper container-fluid">
         <div className="coa-MessageWIP">
-          [en/es] This site is a
-          🔗work in progress🔗.
-          Visit 🔗austintexas.gov for full city website.🔗
+          This site is a&nbsp;
+          <a href="https://alpha.austin.gov/a-new-website-for-the-city-of-austin/" className="coa-MenuInfo__link">
+            work in progress
+          </a>.
+          Visit&nbsp;
+          <a href="https://alpha.austin.gov/a-new-website-for-the-city-of-austin/" className="coa-MenuInfo__link">
+            austintexas.gov
+          </a>
+          &nbsp;for full city website.
         </div>
       </div>
     </section>
