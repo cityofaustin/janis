@@ -1,6 +1,5 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { filterEvents } from 'js/helpers/cleanData.js';
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import { events as i18n } from 'js/i18n/definitions';
