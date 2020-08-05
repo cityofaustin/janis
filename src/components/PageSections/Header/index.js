@@ -57,7 +57,16 @@ class Header extends Component {
   // Hides the menu
   handleClickOutside(event) {
     // Full site
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+
+    if (this.wrapperRef && (
+      !this.wrapperRef.contains(event.target) ||
+      event.target.className === "coa-FullSiteMenu__subNav" ||
+      event.target.className === "coa-MessageWIP" ||
+      event.target.className === "coa-FullSiteMenu__container" ||
+      event.target.className === "coa-ThemesNav__list" ||
+      event.target.className === "coa-ThemesNav__theme" ||
+      event.target.className === "coa-FullSiteMenu coa-FullSiteMenu--active"
+    )) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       if (
         event.target.className !== 'coa-Header__menuIcon' &&

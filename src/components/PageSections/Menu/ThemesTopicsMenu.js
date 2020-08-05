@@ -2,6 +2,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { misc as i18n2 } from 'js/i18n/definitions';
+import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 
 const TopicsLinks = props => {
 
@@ -13,13 +14,10 @@ const TopicsLinks = props => {
     //
     // }
     console.log("props :", props)
-
-
   //
   //
 
   // columnWidth = ""
-
 
   return (
     <div className="coa-ThemesTopicsMenu__topics-container">
@@ -97,36 +95,79 @@ const TopicsLinks = props => {
 const ThemesTopicsMenu = props => {
 
   const topicMenu = props.menu.find( menu => menu.slug === props.slug)
+  const isMobile = useMobileQuery();
+  console.log("isMobile :", isMobile)
 
   return (
-    <nav
-      className={`coa-ThemesTopicsMenu ${
-        props.extraClasses ? props.extraClasses : ''
-      }`}
-    >
-      <ul className="coa-ThemesTopicsMenu__list">
-        { topicMenu &&
-          <li className="coa-ThemesTopicsMenu__section" >
-            <h4
-              className="coa-ThemesTopicsMenu__theme"
-              tabIndex="0"
-              onKeyDown={props.handleFullSiteMenuItem}
-            >
-              {topicMenu.text}
-            </h4>
-            <TopicsLinks
-              handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-              topicCollections={topicMenu.topicCollectionPages.edges}
-              themeSlug={topicMenu.slug}
-              intl={props.intl}
-            />
-          </li>
-        }
-      </ul>
+      <nav
+        className={`coa-ThemesTopicsMenu ${
+          props.extraClasses ? props.extraClasses : ''
+        }`}
+      >
+      {isMobile ? (
+
+        <ul className="coa-ThemesTopicsMenu__list">
+          <MobileThemesTopicsMenu
+            menu={props.menu}
+            intl={props.intl}
+            handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+          />
+        </ul>
+
+      ) : (
+
+        <ul className="coa-ThemesTopicsMenu__list">
+          { topicMenu &&
+            <li className="coa-ThemesTopicsMenu__section" >
+              <h4
+                className="coa-ThemesTopicsMenu__theme"
+                tabIndex="0"
+                onKeyDown={props.handleFullSiteMenuItem}
+              >
+                {topicMenu.text}
+              </h4>
+              <TopicsLinks
+                handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+                topicCollections={topicMenu.topicCollectionPages.edges}
+                themeSlug={topicMenu.slug}
+                intl={props.intl}
+              />
+            </li>
+          }
+        </ul>
+      )}
+
+
     </nav>
+
   )
 
 }
+
+const MobileThemesTopicsMenu = ({menu, intl, handleFullSiteMenuItem}) => {
+
+  return (
+    menu.map((theme, index) => (
+      <li className="coa-ThemesTopicsMenu__section" key={index}>
+        <h4
+          className="coa-ThemesTopicsMenu__theme"
+          tabIndex="0"
+          onKeyDown={handleFullSiteMenuItem}
+        >
+          {theme.text}
+        </h4>
+        <TopicsLinks
+          handleFullSiteMenuItem={handleFullSiteMenuItem}
+          topicCollections={theme.topicCollectionPages.edges}
+          themeSlug={theme.slug}
+          intl={intl}
+        />
+      </li>
+    ))
+  )
+
+}
+
 
 TopicsLinks.propTypes = {
   themeSlug: PropTypes.string.isRequired,
@@ -139,21 +180,3 @@ ThemesTopicsMenu.propTypes = {
 };
 
 export default injectIntl(ThemesTopicsMenu);
-//
-// {props.menu.map((theme, index) => (
-//   <li className="coa-ThemesTopicsMenu__section" key={index}>
-//     <h4
-//       className="coa-ThemesTopicsMenu__theme"
-//       tabIndex="0"
-//       onKeyDown={props.handleFullSiteMenuItem}
-//     >
-//       {theme.text}
-//     </h4>
-//     <TopicsLinks
-//       handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-//       topicCollections={theme.topicCollectionPages.edges}
-//       themeSlug={theme.slug}
-//       intl={props.intl}
-//     />
-//   </li>
-// ))}

@@ -4,7 +4,13 @@
   margin-left: auto;
   margin-right: auto;
   height: 56px;
+  box-shadow: 2px 0px 5px rgba(0,0,255,0.15);
+
+  @include mobile {
+    height: 0px;
+  }
 }
+
 
 .coa-ThemesNav {
   display: flex;
@@ -82,29 +88,35 @@
 }
 
 .coa-FullSiteMenu__container {
-  position: absolute;
+  // position: absolute;
   width: 100%;
+  .wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .coa-MessageWIP {
-  margin: $coa-space-level1 0;
+  margin-top: 3px;
+  margin-bottom: 4px;
   background-color: $coa-color-vintage-vinilla;
   border-radius: $coa-menu-border-radius;
   color: $coa-color-black;
   font-size: 1.6rem;
   text-align: center;
-  // padding: .9rem;
-  // height: 52px;
-  // line-height: 52px;
+  padding: 3px;
 }
 
 .coa-FullSiteMenu__subNav {
   display: none;
-  // background: $coa-color-white;
-  position: absolute;
+  // position: absolute;
   width: 100%;
   padding: $coa-spacing-medium 0;
-  top: 100px;
+  // top: 104px;
+  .wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   @include media($coa-medium-screen) {
     padding: 0;
   }
@@ -135,6 +147,7 @@
     }
 
     display: block;
+
     // border-top: 1px solid $coa-color-dark-grey;
     z-index: 2;
     // border-bottom-left-radius: $coa-menu-border-radius;
@@ -155,7 +168,7 @@
   margin-left: 0;
   width: 100%;
   position: relative;
-  padding: 0 8%;
+  padding: 0 10%;
 
   // @include media($coa-medium-screen) {
   //   width: 25%;
@@ -175,13 +188,21 @@
 
 .coa-ThemesTopicsMenu__topics {
   margin-left: $coa-spacing-medium;
-  column-width: 600px;
+  // column-width: 600px;
   padding: $coa-spacing-small;
   padding-bottom: 5rem;
 
   @include media($coa-medium-screen) {
     margin-left: 0;
   }
+}
+
+.coa-ThemesTopicsMenu__topics-2col {
+  column-width: 400px;
+}
+
+.coa-ThemesTopicsMenu__topics-3col {
+  column-width: 300px;
 }
 
 .coa-ThemesTopicsMenu__topic {
@@ -284,33 +305,36 @@
   line-height: $coa-line-height-xsmall;
 }
 
-.coa-Header__right-controls-wrapper {
-  order: 3;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 2rem;
-  padding-right: 2rem;
-
-  @include mobile {
-    margin-right: 0;
-  }
-
-  display: flex;
-  a {
-    font-size: $coa-font-size-xsmall;
-  }
-  svg {
-    height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    vertical-align: -0.2rem;
-  }
-}
+// 🚨SAVING THIS NOTES FOR: https://github.com/cityofaustin/techstack/issues/4737
+// .coa-Header__right-controls-wrapper {
+//   order: 3;
+//   align-items: center;
+//   justify-content: flex-end;
+//   margin-right: 2rem;
+//   padding-right: 2rem;
+//
+//   @include mobile {
+//     margin-right: 0;
+//   }
+//
+//   display: flex;
+//   a {
+//     font-size: $coa-font-size-xsmall;
+//   }
+//   svg {
+//     height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+//     width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
+//     vertical-align: -0.2rem;
+//   }
+// }
 
 .coa-Header__right-controls {
   display: none;
-  @include mobile {
-    display: flex;
-  }
+  // 🚨SAVING THIS NOTES FOR: https://github.com/cityofaustin/techstack/issues/4737
+  // - There's more to this.. it needs to change where it lives.
+  // @include mobile {
+  //   display: flex;
+  // }
 
   a {
     color: $coa-color-primary;
