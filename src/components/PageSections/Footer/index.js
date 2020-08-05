@@ -11,7 +11,7 @@ import WorkInProgress from 'components/WorkInProgress';
 import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
-import citySealImg from 'images/coa_seal_color.png';
+import citySealImg from 'images/coa_seal_color_200x200.png';
 
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 

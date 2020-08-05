@@ -38,7 +38,6 @@ const AppView = ({ path }) => {
   return (
     <div>
       <SkipToMain />
-      <Header navigation={navigation[intl.locale]} path={path} />
       {/* START ⚠️COVED_19 Hardcoded */}
       <Alert
         badge="Coronavirus (COVID-19)"
@@ -46,6 +45,8 @@ const AppView = ({ path }) => {
         linkContent={intl.formatMessage(i18n1.getLatest)}
       />
       {/* END ⚠️COVED_19 Hardcoded */}
+      <Header navigation={navigation[intl.locale]} path={path} />
+
       <main role="main" id="main">
         <ScrollToTop />
         <Switch>

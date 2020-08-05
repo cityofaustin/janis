@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SectionHeader from 'components/SectionHeader';
-import citySealImg from 'images/coa_seal_color.png';
+import citySealImg from 'images/coa_seal_color_200x200.png';
 import { useIntl } from 'react-intl';
 import { misc as i18n, news as i18n2 } from 'js/i18n/definitions';
 

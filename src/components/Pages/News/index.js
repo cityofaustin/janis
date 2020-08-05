@@ -10,17 +10,19 @@ import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
 import { useIntl } from 'react-intl';
-import { news as i18n } from 'js/i18n/definitions';
+import { news as i18n, departmentPage as i18n2 } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
 
-const NewsListPageLink = ({ locale, departmentUrl, departmentTitle }) => (
+const NewsListPageLink = ({ locale, departmentUrl, departmentTitle, intl }) => (
   <a
     className="coa-NewsPage__list-page-link"
     href={`/${locale}${departmentUrl}news/`}
   >
     <div className="coa-NewsPage__list-page-link-text">
-      {`More ${departmentTitle} news`}
+      {intl.formatMessage(i18n2.moreDeptNews, {
+        department: departmentTitle,
+      })}
     </div>
     <i class="material-icons coa-NewsPage__list-page-link-arrow">
       arrow_forward
@@ -95,13 +97,14 @@ const NewsPage = ({ newsPage }) => {
               <div className="col-xs-12 col-md-12">
                 {body && <HtmlFromRichText title={' '} content={body} />}
                 <div className="coa-NewsPage__footer-published-date">
-                  Published {momentDate}
+                  {intl.formatMessage(i18n.publishedDate, { date: momentDate })}
                 </div>
                 <div className="coa-NewsPage__list-page-link-mobile">
                   <NewsListPageLink
                     locale={intl.locale}
                     departmentUrl={fromDepartment.url}
                     departmentTitle={fromDepartment.title}
+                    intl={intl}
                   />
                 </div>
                 <div className="coa-Page__contacts-mobile">
@@ -116,6 +119,7 @@ const NewsPage = ({ newsPage }) => {
             locale={intl.locale}
             departmentUrl={fromDepartment.url}
             departmentTitle={fromDepartment.title}
+            intl={intl}
           />
           <div className="coa-ServicePage__contacts-desktop">
             {!!contact && <ContactDetails contact={contact} />}

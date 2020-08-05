@@ -1,4 +1,4 @@
-.coa-OfficialDocumentPage_pagination-container {
+.coa-PaginationContainer {
   margin: 42px 10px 42px;
   width: 740px;
   text-align: left;
@@ -8,7 +8,12 @@
   }
 }
 
-.coa-OfficialDocumentPage_page {
+.coa-PaginationContainer--small-margins {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.coa-PaginationContainer_page {
   color: #0049C7;
   background-color: #F0F0F0;
   height: 48px;
@@ -27,17 +32,17 @@
   user-select: none; /* Standard syntax */
 }
 
-.coa-OfficialDocumentPage_page.previous {
+.coa-PaginationContainer_page.previous {
   border-radius: 4px 0px 0px 4px;
   border: none;
 }
 
-.coa-OfficialDocumentPage_page.next {
+.coa-PaginationContainer_page.next {
   border-radius: 0px 4px 4px 0px;
   border: none;
 }
 
-.coa-OfficialDocumentPage_page.number-container {
+.coa-PaginationContainer_page.number-container {
   background-color: rgba(0,0,0,0);
   color: #212121;
   border: solid #F0F0F0 1px;
@@ -50,32 +55,32 @@
   }
 }
 
-.coa-OfficialDocumentPage_page.ellipsis {
+.coa-PaginationContainer_page.ellipsis {
   border: none;
   pointer-events: none;
 }
 
 
-.coa-OfficialDocumentPage_number {
+.coa-PaginationContainer_number {
   font-weight: 900;
   position: relative;
   top: 2px;
 }
 
-.coa-OfficialDocumentPage_page.number-container.active {
+.coa-PaginationContainer_page.number-container.active {
   color: #0049C7;
   background-color: #D9E8F6;
   pointer-events: none;
 }
 
-.coa-OfficialDocumentPage_page-chevron {
+.coa-PaginationContainer_page-chevron {
   position: relative;
   height: 24px;
   top: 7px;
   left: 1px;
 }
 
-.coa-OfficialDocumentPage_text {
+.coa-PaginationContainer_text {
   display: inline-block;
   padding-left: 11px;
   padding-right: 10px;
@@ -84,36 +89,36 @@
   border-left: 1px solid #dbdee1;
 }
 
-.coa-OfficialDocumentPage_text.right {
+.coa-PaginationContainer_text.right {
   border: none;
   border-right: 1px solid #dbdee1;
   padding-left: 8px;
   padding-right: 12px;
 }
 
-.coa-OfficialDocumentPage_page:hover {
+.coa-PaginationContainer_page:hover {
   background-color: #0049C7;
   color: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page.active:hover {
+.coa-PaginationContainer_page.active:hover {
   background-color: #0049C7;
   color: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page:hover .coa-CheveronLeftBlue {
+.coa-PaginationContainer_page:hover .coa-CheveronLeftBlue {
   fill: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page .coa-CheveronLeftBlue:hover {
+.coa-PaginationContainer_page .coa-CheveronLeftBlue:hover {
   fill: rgba(0,0,0,0);
 }
 
-.coa-OfficialDocumentPage_page:hover .coa-CheveronRightBlue {
+.coa-PaginationContainer_page:hover .coa-CheveronRightBlue {
   fill: #FFFFFF;
 }
 
-.coa-OfficialDocumentPage_page .coa-CheveronRightBlue:hover {
+.coa-PaginationContainer_page .coa-CheveronRightBlue:hover {
   fill: rgba(0,0,0,0);
 }
 

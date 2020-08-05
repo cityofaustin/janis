@@ -258,9 +258,30 @@ export const getNewsPageRevisionQuery = `
   ${janisInstanceFragment}
 `;
 
+export const getOfficialDocumentsCollectionRevisionQuery = `
+  query getPageRevision($id: ID) {
+    pageRevision(id: $id) {
+      asOfficialDocumentCollection {
+        id
+        title
+        slug
+        description
+        departments {
+          id
+          title
+          slug
+        }
+      }
+      previewJanisInstance {
+        ...janisInstanceInfo
+      }
+    }
+  }
+  ${janisInstanceFragment}
+`;
+
 export const getPageRevisionQuery = {
   services: getServicePageRevisionQuery,
-  official_document: getOfficialDocumentsPageRevisionQuery,
   department: getDepartmentPageRevisionQuery,
   event: getEventPageRevisionQuery,
   location: getLocationPageRevisionQuery,
@@ -270,11 +291,12 @@ export const getPageRevisionQuery = {
   guide: getGuidePageRevisionQuery,
   form: getFormPageRevisionQuery,
   news: getNewsPageRevisionQuery,
+  official_document_collection: getOfficialDocumentsCollectionRevisionQuery,
+  official_document_page: getOfficialDocumentsPageRevisionQuery,
 };
 
 export const getAsPage = {
   services: 'asServicePage',
-  official_document: 'asOfficialDocumentPage',
   department: 'asDepartmentPage',
   event: 'asEventPage',
   location: 'asLocationPage',
@@ -284,4 +306,6 @@ export const getAsPage = {
   guide: 'asGuidePage',
   form: 'asFormContainer',
   news: 'asNewsPage',
+  official_document_collection: 'asOfficialDocumentCollection',
+  official_document_page: 'asOfficialDocumentPage',
 };

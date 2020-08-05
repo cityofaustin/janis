@@ -6,7 +6,7 @@ import guideIcon from 'images/guide_icon.png';
 
 const Tile = ({ url, text, compact, pageType, isPageType }) => {
   let typeIcon;
-  if (pageType == 'guide page') {
+  if (pageType === 'guide page') {
     typeIcon = guideIcon;
   }
 
