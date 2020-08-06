@@ -4,7 +4,7 @@
   margin-left: auto;
   margin-right: auto;
   height: 56px;
-  box-shadow: 2px 0px 5px rgba(0,0,255,0.15);
+  // box-shadow: 2px 0px 5px rgba(0,0,255,0.15);
 
   @include mobile {
     height: 0px;
@@ -13,13 +13,14 @@
 
 
 .coa-ThemesNav {
+  background: $coa-color-white;
   display: flex;
   align-items: center;
   padding: 0 4px;
-  position: relative;
-  @include media($coa-medium-screen) {
-    border-top: 1px solid rgba($coa-color-white, 0.5);
-  }
+  // position: relative;
+  // @include media($coa-medium-screen) {
+  //   border-top: 1px solid rgba($coa-color-white, 0.5);
+  // }
 }
 
 .coa-FullSiteMenu__close {
@@ -77,6 +78,11 @@
   }
 }
 
+.coa-ThemesNav__link.es {
+  font-size: 13px;
+  line-height: 13px;
+}
+
 .coa-ThemesNav__link.active {
   background-color: $coa-color-gray-4;
   &:hover {
@@ -97,6 +103,7 @@
 }
 
 .coa-MessageWIP {
+  position: relative;
   margin-top: 3px;
   margin-bottom: 4px;
   background-color: $coa-color-vintage-vinilla;
@@ -111,7 +118,7 @@
   display: none;
   // position: absolute;
   width: 100%;
-  padding: $coa-spacing-medium 0;
+  // padding: $coa-spacing-medium 0;
   // top: 104px;
   .wrapper {
     padding-left: 1rem;
@@ -130,21 +137,21 @@
   }
 
   .coa-FullSiteMenu__subNav {
-    @include media($coa-medium-screen) {
-      &:before {
-        content: '';
-        height: calc(100% + 1px);
-        width: 100%;
-        // border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
-        // border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
-        // border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
-        position: absolute;
-        left: 0;
-        // top: -1px;
-        border-bottom-left-radius: $coa-menu-border-radius;
-        border-bottom-right-radius: $coa-menu-border-radius;
-      }
-    }
+    // @include media($coa-medium-screen) {
+    //   &:before {
+    //     content: '';
+    //     height: calc(100% + 1px);
+    //     width: 100%;
+    //     // border-left: $coa-menu-border-width solid $coa-menu-bodercolor;
+    //     // border-right: $coa-menu-border-width solid $coa-menu-bodercolor;
+    //     // border-bottom: $coa-menu-border-width solid $coa-menu-bodercolor;
+    //     position: absolute;
+    //     left: 0;
+    //     // top: -1px;
+    //     border-bottom-left-radius: $coa-menu-border-radius;
+    //     border-bottom-right-radius: $coa-menu-border-radius;
+    //   }
+    // }
 
     display: block;
 
@@ -305,6 +312,19 @@
   line-height: $coa-line-height-xsmall;
 }
 
+.coa-ThemesNav__right-controls {
+  padding-right: 1rem;
+  a {
+    font-size: $coa-font-size-xsmall;
+  }
+  a:first-child {
+    padding-right: $coa-space-level3;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
 // 🚨SAVING THIS NOTES FOR: https://github.com/cityofaustin/techstack/issues/4737
 // .coa-Header__right-controls-wrapper {
 //   order: 3;
@@ -328,68 +348,32 @@
 //   }
 // }
 
-.coa-Header__right-controls {
-  display: none;
+// .coa-Header__right-controls {
+  // display: none;
   // 🚨SAVING THIS NOTES FOR: https://github.com/cityofaustin/techstack/issues/4737
   // - There's more to this.. it needs to change where it lives.
   // @include mobile {
   //   display: flex;
   // }
 
-  a {
-    color: $coa-color-primary;
-    &:visited {
-      color: $coa-color-primary;
-    }
-    svg {
-      margin-left: $coa-space-level1;
-      vertical-align: middle;
-      path {
-        fill: $coa-color-white;
-      }
-    }
-  }
-}
+  // a {
+  //   color: $coa-color-primary;
+  //   &:visited {
+  //     color: $coa-color-primary;
+  //   }
+  //   svg {
+  //     margin-left: $coa-space-level1;
+  //     vertical-align: middle;
+  //     path {
+  //       fill: $coa-color-white;
+  //     }
+  //   }
+  // }
+// }
 
-.coa-ThemesNav__right-controls-wrapper {
-  order: 3;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 2rem;
-  padding-right: 2rem;
 
-  @include mobile {
-    margin-right: 0;
-  }
 
-  display: flex;
-  a {
-    font-size: $coa-font-size-xsmall;
-  }
-  svg {
-    height: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    width: $coa-font-size-xsmall - 0.1rem; //based on parent element font-size
-    vertical-align: -0.2rem;
-  }
-}
 
-.coa-ThemesNav__right-controls {
-  display: none;
-  @include mobile {
-    display: flex;
-  }
-
-  a {
-    color: $coa-color-primary;
-    &:visited {
-      color: $coa-color-primary;
-    }
-    svg {
-      margin-left: $coa-space-level1;
-      vertical-align: middle;
-      path {
-        fill: $coa-color-white;
-      }
-    }
-  }
-}
+// .coa-text-spacer--vertical {
+//   width: 1.5rem;
+// }

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { misc as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
+import ExternalLink from 'components/ExternalLink';
+
 
 const TopicsLinks = props => {
 
@@ -96,7 +98,6 @@ const ThemesTopicsMenu = props => {
 
   const topicMenu = props.menu.find( menu => menu.slug === props.slug)
   const isMobile = useMobileQuery();
-  console.log("isMobile :", isMobile)
 
   return (
       <nav
@@ -106,12 +107,30 @@ const ThemesTopicsMenu = props => {
       >
       {isMobile ? (
 
-        <ul className="coa-ThemesTopicsMenu__list">
-          <MobileThemesTopicsMenu
-            menu={props.menu}
-            intl={props.intl}
-            handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-          />
+        <ul className="coa-ThemesTopicsMenuMobile">
+
+          {props.menu.map((theme, index) => (
+            <MobileThemesTopicsMenu
+              index={index}
+              theme={theme}
+              intl={props.intl}
+              handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+            />
+          ))}
+
+          <li>
+            <ExternalLink
+              to="http://311.austintexas.gov/"
+              ariaLabel={'three one one'}
+            >311</ExternalLink>
+          </li>
+
+          <li>
+            <ExternalLink
+              to="http://www.austintexas.gov/airport"
+              ariaLabel={props.intl.formatMessage(i18n2.airport)}
+            >{props.intl.formatMessage(i18n2.airport)}</ExternalLink>
+          </li>
         </ul>
 
       ) : (
@@ -144,26 +163,29 @@ const ThemesTopicsMenu = props => {
 
 }
 
-const MobileThemesTopicsMenu = ({menu, intl, handleFullSiteMenuItem}) => {
+const MobileThemesTopicsMenu = ({index, theme, intl, handleFullSiteMenuItem}) => {
+
+  let [ open, setOpen ] = useState(false)
 
   return (
-    menu.map((theme, index) => (
-      <li className="coa-ThemesTopicsMenu__section" key={index}>
-        <h4
-          className="coa-ThemesTopicsMenu__theme"
-          tabIndex="0"
-          onKeyDown={handleFullSiteMenuItem}
-        >
-          {theme.text}
-        </h4>
+    <li className="coa-ThemesTopicsMenu__section" key={index}>
+      <h4
+        className="coa-ThemesTopicsMenu__theme mobile"
+        tabIndex="0"
+        onClick={()=>setOpen(!open)}
+      >
+        {theme.text}
+      </h4>
+      {open &&
         <TopicsLinks
           handleFullSiteMenuItem={handleFullSiteMenuItem}
           topicCollections={theme.topicCollectionPages.edges}
           themeSlug={theme.slug}
           intl={intl}
         />
-      </li>
-    ))
+      }
+
+    </li>
   )
 
 }

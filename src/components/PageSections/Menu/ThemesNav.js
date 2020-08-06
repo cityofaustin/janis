@@ -22,6 +22,7 @@ const ThemesNav = props => {
         'coa-ThemesNav--open': props.isTopMenuActive,
       })}
     >
+
       <ul className="coa-ThemesNav__list">
         {props.navigation.map((theme, index) => (
           <li
@@ -41,28 +42,31 @@ const ThemesNav = props => {
         ))}
       </ul>
 
-      <div className="coa-Header__right-controls-wrapper">
+        {/*
+          <div className="coa-ThemesNav__right-controls-wrapper">
+        */}
 
-        <div className="coa-Header__right-controls">
+        <div className="coa-ThemesNav__right-controls">
+
           <ExternalLink
             to="http://311.austintexas.gov/"
             ariaLabel={'three one one'}
-          >
-            311
-          </ExternalLink>
+          >311</ExternalLink>
 
-          {/*  Note that this class is in _Header.scss  */}
-          <span className="coa-text-spacer--vertical" />
+          {/*
+            <span className="coa-text-spacer--vertical" />
+          */}
+
           <ExternalLink
             to="http://www.austintexas.gov/airport"
             ariaLabel={intl.formatMessage(i18n.airport)}
-          >
-            {intl.formatMessage(i18n.airport)}
-          </ExternalLink>
+          >{intl.formatMessage(i18n.airport)}</ExternalLink>
 
         </div>
 
-      </div>
+        {/*
+          </div>
+        */}
 
     </nav>
   )
