@@ -5,28 +5,25 @@ import { misc as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import ExternalLink from 'components/ExternalLink';
 
+import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
+import WorkInProgressBanner from 'components/WorkInProgress/WorkInProgressBanner.js';
 
 const TopicsLinks = props => {
 
-  //
-  //
-    // if (props.topicCollections.length > 0) {
-    //
-    //   props.topicCollections.push({ node:{slug: "something-new",title: "New Added Theme "}})
-    //
-    // }
-    console.log("props :", props)
-  //
-  //
-
-  // columnWidth = ""
+  let columnWidth = ""
+  if (props.topicCollections.length > 4) {
+    columnWidth = "2col"
+    if (props.topicCollections.length > 8) {
+      columnWidth = "3col"
+    }
+  }
 
   return (
     <div className="coa-ThemesTopicsMenu__topics-container">
 
       {props.topicCollections.length > 0 ? (
 
-        <ul className="coa-ThemesTopicsMenu__topics">
+        <ul className={ "coa-ThemesTopicsMenu__topics coa-ThemesTopicsMenu__topics"+columnWidth }>
           {props.topicCollections.map((tc, index) => (
             <li
               key={index}
@@ -109,6 +106,12 @@ const ThemesTopicsMenu = props => {
 
         <ul className="coa-ThemesTopicsMenuMobile">
 
+          <div className="coa-MessageWIP mobile">
+            <WorkInProgressBanner />
+          </div>
+
+          <div className="coa-ThemesTopicsMenuMobile__line"></div>
+
           {props.menu.map((theme, index) => (
             <MobileThemesTopicsMenu
               index={index}
@@ -154,6 +157,7 @@ const ThemesTopicsMenu = props => {
             </li>
           }
         </ul>
+
       )}
 
 
@@ -168,21 +172,29 @@ const MobileThemesTopicsMenu = ({index, theme, intl, handleFullSiteMenuItem}) =>
   let [ open, setOpen ] = useState(false)
 
   return (
-    <li className="coa-ThemesTopicsMenu__section" key={index}>
+    <li className="coa-ThemesTopicsMenu__section mobile" key={index}>
       <h4
         className="coa-ThemesTopicsMenu__theme mobile"
         tabIndex="0"
         onClick={()=>setOpen(!open)}
       >
         {theme.text}
+
+      <ChevronRightBlue
+        className={"coa-ThemesTopicsMenuMobile__Chevron "+(open && "open")}
+      />
+
       </h4>
       {open &&
-        <TopicsLinks
-          handleFullSiteMenuItem={handleFullSiteMenuItem}
-          topicCollections={theme.topicCollectionPages.edges}
-          themeSlug={theme.slug}
-          intl={intl}
-        />
+        <div className="coa-ThemesTopicsMenuMobile__topics">
+          <TopicsLinks
+            handleFullSiteMenuItem={handleFullSiteMenuItem}
+            topicCollections={theme.topicCollectionPages.edges}
+            themeSlug={theme.slug}
+            intl={intl}
+          />
+        </div>
+
       }
 
     </li>

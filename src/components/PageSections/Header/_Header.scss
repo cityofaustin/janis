@@ -77,7 +77,8 @@
     &:visited,
     &:active,
     &:hover {
-      color: $coa-color-primary;
+      color: $coa-color-white;
+      background-color: $coa-color-primary;
     }
   }
 

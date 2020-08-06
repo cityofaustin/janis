@@ -65,7 +65,7 @@ const ThemesNav = props => {
         </div>
 
         {/*
-          </div>
+          <div className="coa-ThemesNav__right-controls-wrapper">
         */}
 
     </nav>

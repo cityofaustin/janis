@@ -195,22 +195,23 @@
 
 .coa-ThemesTopicsMenu__topics {
   margin-left: $coa-spacing-medium;
-  // column-width: 600px;
   padding: $coa-spacing-small;
   padding-bottom: 5rem;
+  column-width: 750px;
 
   @include media($coa-medium-screen) {
     margin-left: 0;
   }
 }
 
-.coa-ThemesTopicsMenu__topics-2col {
+.coa-ThemesTopicsMenu__topics2col {
   column-width: 400px;
 }
-
-.coa-ThemesTopicsMenu__topics-3col {
-  column-width: 300px;
+.coa-ThemesTopicsMenu__topics3col {
+  column-width: 250px;
 }
+
+
 
 .coa-ThemesTopicsMenu__topic {
   margin: 0;
