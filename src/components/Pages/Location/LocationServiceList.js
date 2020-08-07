@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { find, capitalize } from 'lodash';
 import { useIntl } from 'react-intl';
 
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
@@ -34,14 +35,20 @@ const HoursExceptions = ({
   if (hoursSameAsLocation) {
     exceptions = locationHoursExceptions;
   }
-  return (
-    <div>
-      <div className="coa-ContactHoursExceptionsTitle">
-        {!!exceptions && (intl.formatMessage(i18nContact.exceptions))}
+  if (!exceptions) {
+    return <></>
+  } else {
+    return (
+      <div>
+        <div className="coa-ContactHoursExceptionsTitle">
+          {intl.formatMessage(i18nContact.exceptions)}
+        </div>
+        <div className="coa-ContactHoursExceptions">
+          <HtmlFromRichText content={exceptions} />
+        </div>
       </div>
-      <div className="coa-ContactHoursExceptions">{exceptions}</div>
-    </div>
-  );
+    );
+  }
 };
 
 const ServiceHours = ({ serviceHours, locationHours, hoursSameAsLocation }) => {
