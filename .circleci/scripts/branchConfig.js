@@ -33,8 +33,8 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  '4758-hyperlink': {
-    joplin_appname: 'joplin-pr-4758-hyperlink',
+  '4375-dependabot': {
+    joplin_appname: 'joplin-pr-4375-dependabot',
   }
 };
 
