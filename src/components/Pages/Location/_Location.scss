@@ -127,6 +127,13 @@ $coa-location-page-section-background: #ffffff;
   margin-top: 1.5rem;
 }
 
+.coa-LocationPage__sub-section-block__hours-exceptions-contents {
+  // Don't use <p> styling for nested RichTextBlock
+  p {
+    all: unset;
+  }
+}
+
 .coa-LocationPage__sub-section-block-title {
   font-weight: bolder;
 }
