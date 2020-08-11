@@ -36,6 +36,9 @@ const branchOverrides = {
   'mega-nav': { // Ok to remove
     joplin_appname: 'joplin'
   },
+  'small-desktop': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
   '4611-gzip': {
     joplin_appname: 'joplin'
   },

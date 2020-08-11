@@ -25,14 +25,25 @@
 }
 
 .coa-ThemesNav__list {
-  display: none;
-  @include media($coa-medium-screen) {
-    display: flex;
-    flex: 1;
-    list-style: none;
-    flex-direction: row;
-    align-items: center;
+  // display: none;
+  // @include media($coa-medium-screen) {
+  //   display: flex;
+  //   flex: 1;
+  //   list-style: none;
+  //   flex-direction: row;
+  //   align-items: center;
+  // }
+
+
+  display: flex;
+  flex: 1;
+  list-style: none;
+  flex-direction: row;
+  align-items: center;
+  @media (max-width: 950px) {
+    display: none;
   }
+
 }
 
 .coa-ThemesNav__theme {
@@ -263,7 +274,10 @@
   a:first-child {
     padding-right: $coa-space-level3;
   }
-  @include mobile {
+  // @include mobile {
+  //   display: none;
+  // }
+  @media (max-width: 950px) {
     display: none;
   }
 }
