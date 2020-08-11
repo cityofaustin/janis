@@ -4,6 +4,9 @@
   padding-top: $coa-spacing-small;
   max-width: 463px;
   margin-top: 5px;
+  @include mobile-small {
+    // width:
+  }
 }
 
 .coa-MessageWIP.mobile {
@@ -17,12 +20,42 @@
 .coa-ThemesTopicsMenu__section.mobile {
   padding-left: 0px;
   padding-right: 0px;
+  margin-bottom: 0px;
 }
 
-.coa-ThemesTopicsMenu__theme.mobile {
+.coa-ThemesTopicsMenu__theme.mobile, .coa-ThemesTopicsMenuMobile__external {
   font-size: 1.6rem;
   padding: $coa-spacing-md-small;
   margin-bottom: 0px;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  @include mobile-small {
+    padding-left: $coa-spacing-small;
+    padding-right: $coa-spacing-small;
+  }
+}
+
+.coa-ThemesTopicsMenuMobile__external {
+  margin-left: 0px;
+  border-bottom: $coa-border-small-light-gray;
+  a {
+    font-weight: $coa-font-medium;
+    i {
+      float: right;
+      font-size: 20px;
+      padding-top: 3px;
+    }
+  }
+}
+
+.coa-ThemesTopicsMenuMobile__external:last-child {
+  border-bottom: none;
+}
+
+
+.coa-ThemesTopicsMenu__theme.mobile.open {
+  background-color: $coa-color-card-grey;
+  border-bottom: none;
 }
 
 .coa-ThemesTopicsMenuMobile__line {

@@ -121,19 +121,20 @@ const ThemesTopicsMenu = props => {
             />
           ))}
 
-          <li>
-            <ExternalLink
-              to="http://311.austintexas.gov/"
-              ariaLabel={'three one one'}
-            >311</ExternalLink>
-          </li>
-
-          <li>
+          <li className="coa-ThemesTopicsMenuMobile__external">
             <ExternalLink
               to="http://www.austintexas.gov/airport"
               ariaLabel={props.intl.formatMessage(i18n2.airport)}
             >{props.intl.formatMessage(i18n2.airport)}</ExternalLink>
           </li>
+
+          <li className="coa-ThemesTopicsMenuMobile__external">
+            <ExternalLink
+              to="http://311.austintexas.gov/"
+              ariaLabel={'three one one'}
+            >AUS:311</ExternalLink>
+          </li>
+
         </ul>
 
       ) : (
@@ -174,7 +175,7 @@ const MobileThemesTopicsMenu = ({index, theme, intl, handleFullSiteMenuItem}) =>
   return (
     <li className="coa-ThemesTopicsMenu__section mobile" key={index}>
       <h4
-        className="coa-ThemesTopicsMenu__theme mobile"
+        className={"coa-ThemesTopicsMenu__theme mobile "+(open && "open")}
         tabIndex="0"
         onClick={()=>setOpen(!open)}
       >
