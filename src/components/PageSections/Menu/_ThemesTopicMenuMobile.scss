@@ -4,9 +4,6 @@
   padding-top: $coa-spacing-small;
   max-width: 463px;
   margin-top: $coa-spacing-xsmall;
-  @include mobile-small {
-    // width:
-  }
 }
 
 .coa-MessageWIP.mobile {
@@ -60,7 +57,6 @@
   border-bottom: none;
 }
 
-
 .coa-ThemesTopicsMenu__theme.mobile.open {
   background-color: $coa-color-card-grey;
   border-bottom: none;
@@ -71,7 +67,6 @@
   width: 100%;
   border-top: $coa-border-small-light-gray;
 }
-
 
 .coa-ThemesTopicsMenuMobile__Chevron {
   width: 24px;

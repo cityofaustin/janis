@@ -42,10 +42,6 @@ const ThemesNav = props => {
         ))}
       </ul>
 
-        {/*
-          <div className="coa-ThemesNav__right-controls-wrapper">
-        */}
-
         <div className="coa-ThemesNav__right-controls">
 
           <ExternalLink
@@ -53,20 +49,12 @@ const ThemesNav = props => {
             ariaLabel={'three one one'}
           >311</ExternalLink>
 
-          {/*
-            <span className="coa-text-spacer--vertical" />
-          */}
-
           <ExternalLink
             to="http://www.austintexas.gov/airport"
             ariaLabel={intl.formatMessage(i18n.airport)}
           >{intl.formatMessage(i18n.airport)}</ExternalLink>
 
         </div>
-
-        {/*
-          <div className="coa-ThemesNav__right-controls-wrapper">
-        */}
 
     </nav>
   )

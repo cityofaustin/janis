@@ -79,11 +79,6 @@
   i {
     font-size: $coa-font-size-md-small;
   }
-  // &:visited,
-  // &:active,
-  // &:hover {
-  //   background-color: $coa-color-secondary;
-  // }
   @include mobile {
     display: flex;
     font-size: $coa-font-size-xsmall;

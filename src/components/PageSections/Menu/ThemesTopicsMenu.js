@@ -56,41 +56,6 @@ const TopicsLinks = props => {
 }
 
 
-// <ul className="coa-ThemesTopicsMenu__topicsX"
-//   style={{backgroundColor: "purple"}}>
-//   <li>ok 2 x 1</li>
-//   <li>ok 2 x 2</li>
-//   <li>ok 2 x 1</li>
-//   <li>ok 2 x 2</li>
-// </ul>
-//
-// <ul className="coa-ThemesTopicsMenu__topicsX"
-//   style={{backgroundColor: "yellow"}}>
-//   <li>ok 3 x 1</li>
-//   <li>ok 2 x 2</li>
-// </ul>
-
-// <ul className="coa-ThemesTopicsMenu__topicsX">
-//   {props.topicCollections.map((tc, index) => (
-//     <li
-//       key={index}
-//       className="coa-ThemesTopicsMenu__topicX"
-//       onKeyDown={props.handleFullSiteMenuItem}
-//     >
-//       <a
-//         href={`/${props.intl.locale}${
-//           tc.node.slug ? `/${props.themeSlug}/${tc.node.slug}` : tc.node.url
-//         }`}
-//         className="coa-ThemesTopicsMenu__linkX"
-//       >
-//         {tc.node.title}
-//       </a>
-//     </li>
-//   ))}
-// </ul>
-
-
-
 const ThemesTopicsMenu = props => {
 
   const topicMenu = props.menu.find( menu => menu.slug === props.slug)
@@ -166,6 +131,7 @@ const ThemesTopicsMenu = props => {
   )
 
 }
+
 
 const MobileThemesTopicsMenu = ({index, theme, intl, handleFullSiteMenuItem}) => {
 
