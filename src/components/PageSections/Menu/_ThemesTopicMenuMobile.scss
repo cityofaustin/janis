@@ -3,7 +3,7 @@
   border-radius: $coa-menu-border-radius;
   padding-top: $coa-spacing-small;
   max-width: 463px;
-  margin-top: 5px;
+  margin-top: $coa-spacing-xsmall;
   @include mobile-small {
     // width:
   }
@@ -14,21 +14,29 @@
   padding: $coa-spacing-md-small;
   font-size: 1.4rem;
   text-align: left;
-  line-height: 2rem;
+  line-height: $coa-line-height-xxsmall;
+  @include mobile-small {
+    margin: 0.45rem 1.4rem 1.4rem 1.4rem;
+    text-align: center;
+    padding-top: $coa-spacing-xsmall;
+    padding-bottom: $coa-spacing-xsmall;
+  }
 }
 
 .coa-ThemesTopicsMenu__section.mobile {
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-bottom: 0px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+  font-size: 1.8rem;
 }
 
 .coa-ThemesTopicsMenu__theme.mobile, .coa-ThemesTopicsMenuMobile__external {
   font-size: 1.6rem;
   padding: $coa-spacing-md-small;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   padding-left: 5rem;
   padding-right: 5rem;
+  font-weight: $coa-font-semibold;
   @include mobile-small {
     padding-left: $coa-spacing-small;
     padding-right: $coa-spacing-small;
@@ -42,7 +50,7 @@
     font-weight: $coa-font-medium;
     i {
       float: right;
-      font-size: 20px;
+      font-size: $coa-font-size-smedium;
       padding-top: 3px;
     }
   }
@@ -56,6 +64,7 @@
 .coa-ThemesTopicsMenu__theme.mobile.open {
   background-color: $coa-color-card-grey;
   border-bottom: none;
+  padding-bottom: $coa-spacing-xsmall;
 }
 
 .coa-ThemesTopicsMenuMobile__line {
@@ -84,7 +93,23 @@
 .coa-ThemesTopicsMenuMobile__topics {
   background-color: $coa-color-card-grey;
   border-bottom: $coa-border-small-light-gray;
+  padding-left: $coa-spacing-medium;
+  @include mobile-small {
+    padding-left: 0;
+  }
+  ul {
+    padding-top: 0;
+    padding-bottom: $coa-spacing-small;
+    @include mobile-small {
+      margin-left: 0;
+    }
+  }
+  li {
+    line-height: $coa-spacing-medium;
+  }
   a {
     font-weight: $coa-font-regular;
+    font-size: 1.6rem;
   }
+
 }

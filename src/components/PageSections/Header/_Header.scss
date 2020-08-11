@@ -60,6 +60,42 @@
   }
 }
 
+.coa-Header__menuIcon {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-weight: $coa-font-medium;
+  margin-right: 0.4rem;
+  color: $coa-color-primary;
+  position: absolute;
+  margin-left: 3.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: $coa-color-white;
+  height: 34px;
+  border-radius: $coa-border-radius-medium;
+  cursor: pointer;
+  i {
+    font-size: $coa-font-size-md-small;
+  }
+  // &:visited,
+  // &:active,
+  // &:hover {
+  //   background-color: $coa-color-secondary;
+  // }
+  @include mobile {
+    display: flex;
+    font-size: $coa-font-size-xsmall;
+    margin-left: none;
+  }
+  @include mobile-small {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: 1.5rem;
+  }
+}
+
 .coa-Header__center-controls--active {
   background: $coa-color-white;
 
@@ -72,14 +108,8 @@
   }
 
   .coa-Header__menuIcon {
-    color: $coa-color-primary;
-
-    &:visited,
-    &:active,
-    &:hover {
-      color: $coa-color-white;
-      background-color: $coa-color-primary;
-    }
+    color: $coa-color-white;
+    background-color: $coa-color-primary;
   }
 
   @include media($coa-medium-screen) {
@@ -176,42 +206,5 @@
   i {
     vertical-align: middle;
     margin-top: -0.4rem;
-  }
-}
-
-.coa-Header__menuIcon {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-decoration: none;
-  font-weight: $coa-font-medium;
-  font-size: $coa-font-size-xsmall;
-  margin-right: 0.4rem;
-  color: $coa-color-primary;
-  position: absolute;
-  margin-left: 3.5rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  background-color: $coa-color-white;
-  height: 34px;
-  border-radius: $coa-border-radius-medium;
-  cursor: pointer;
-  i {
-    font-size: $coa-font-size-md-small;
-  }
-  &:visited,
-  &:active,
-  &:hover {
-    background-color: $coa-color-secondary;
-  }
-  @include media($coa-medium-screen) {
-    display: none;
-    font-size: $coa-font-size-small;
-    margin-left: none;
-  }
-  @include mobile-small {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    margin-left: 2rem;
   }
 }

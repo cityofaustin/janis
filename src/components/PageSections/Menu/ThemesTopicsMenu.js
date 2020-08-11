@@ -161,7 +161,6 @@ const ThemesTopicsMenu = props => {
 
       )}
 
-
     </nav>
 
   )

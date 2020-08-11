@@ -123,8 +123,12 @@
   .wrapper {
     padding-left: 1rem;
     padding-right: 1rem;
+    @include mobile-small {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
-  @include media($coa-medium-screen) {
+  @include mobile {
     padding: 0;
   }
 }
