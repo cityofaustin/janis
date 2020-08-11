@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
 
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
 import OfficialDocumentPaginationPage from 'components/Pages/OfficialDocuments/OfficialDocumentPaginationPage';
@@ -23,6 +24,8 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
     },
   } = officialDocumentCollection ? { officialDocumentCollection } : useRouteData();
 
+  const descriptonBlock = <HtmlFromRichText content={description} />
+
   return (
     <div>
       <Head>
@@ -36,7 +39,7 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         />
       )}
       <div>
-        <PageHeader contentType={'official-document'} description={description}>
+        <PageHeader contentType={'official-document'} description={descriptonBlock}>
           {title}
         </PageHeader>
         <OfficialDocumentPaginationPage

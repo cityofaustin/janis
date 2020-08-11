@@ -245,4 +245,9 @@ This will enable proper line wrapping for the :last-child.
 .coa-ContactHoursExceptions {
   font-size: $coa-font-size-xsmall;
   line-height: $coa-line-height-xxsmall;
+
+  // Don't use <p> styling for nested RichTextBlock
+  p {
+    all: unset;
+  }
 }
