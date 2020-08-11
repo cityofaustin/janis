@@ -39,9 +39,12 @@
   justify-content: flex-start;
   margin-left: 2rem;
   width: auto;
-  @include media($coa-medium-screen) {
-    margin-left: 0;
-    width: 43%;
+  // @include media($coa-medium-screen) {
+  margin-left: 0;
+  width: 43%;
+  // }
+  @media (max-width: 950px) {
+    display: none;
   }
 }
 
@@ -124,6 +127,9 @@
   @include media($coa-medium-screen) {
     display: none;
   }
+  // @media (max-width: 950px) {
+  //   display: flex;
+  // }
 }
 
 .coa-Header__desktop-languages {
