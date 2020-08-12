@@ -4,6 +4,7 @@
   margin-left: auto;
   margin-right: auto;
   height: 56px;
+  box-shadow: $coa-box-shadow-medium;
   @include mobile {
     height: 0px;
   }
@@ -87,6 +88,7 @@
 
 .coa-FullSiteMenu__container {
   width: 100%;
+  z-index: 2;
   .wrapper {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -123,9 +125,9 @@
 
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
+  z-index: 2;
   .coa-FullSiteMenu__subNav {
     display: block;
-    z-index: 2;
   }
 }
 
