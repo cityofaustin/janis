@@ -32,7 +32,6 @@
 
 .coa-ContextualNav__related {
   display: none;
-
   @include media($coa-medium-screen) {
     display: block;
     flex: 1;
