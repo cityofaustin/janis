@@ -25,36 +25,42 @@ const ThemesNav = props => {
 
       <ul className="coa-ThemesNav__list">
         {props.navigation.map((theme, index) => (
-          <li
-            className="coa-ThemesNav__theme"
-            key={index}
-            tabIndex="0"
-            onKeyDown={props.handleOnClick}
-          >
-            <a
-              className={"coa-ThemesNav__link " + lang + (theme.slug === props.slug ? " active" : "") }
-              onClick={props.handleOnClick}
-              slug={theme.slug}
+          <span>
+            <li
+              className="coa-ThemesNav__theme"
+              key={index}
+              tabIndex="0"
+              onKeyDown={props.handleOnClick}
             >
-              {theme.text}
-            </a>
-          </li>
+              <a
+                className={"coa-ThemesNav__link " + lang + (theme.slug === props.slug ? " active" : "") }
+                onClick={props.handleOnClick}
+                slug={theme.slug}
+              >
+                {theme.text}
+              </a>
+            </li>
+          </span>
         ))}
       </ul>
 
-        <div className="coa-ThemesNav__right-controls">
+      <div className="coa-ThemesNav__right-controls">
 
+        <div>
           <ExternalLink
             to="http://311.austintexas.gov/"
             ariaLabel={'three one one'}
           >311</ExternalLink>
+        </div>
 
+        <div>
           <ExternalLink
             to="http://www.austintexas.gov/airport"
             ariaLabel={intl.formatMessage(i18n.airport)}
           >{intl.formatMessage(i18n.airport)}</ExternalLink>
-
         </div>
+
+      </div>
 
     </nav>
   )
