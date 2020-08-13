@@ -99,7 +99,7 @@
   position: relative;
   margin-top: 3px;
   margin-bottom: 4px;
-  background-color: $coa-color-vintage-vinilla;
+  background-color: $coa-color-vintage-vanilla;
   border-radius: $coa-menu-border-radius;
   color: $coa-color-black;
   font-size: 1.6rem;
@@ -225,6 +225,8 @@
 }
 
 .coa-MenuInfo__resource {
+  // techdebt: we may be dealing with some weird div sizing here
+  // the links weren't clickable without this fix
   z-index: 4;
   display: flex;
   align-items: center;
