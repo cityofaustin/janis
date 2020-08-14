@@ -1,6 +1,6 @@
 export function searchWorker(currentResults, searchString) {
-  if (typeof(searchString) === 'number' ) {
-      searchString = searchString.toString();
+  if (typeof searchString === 'number' ) {
+    searchString = searchString.toString();
   }
 
   const terms = searchString.split(' ')
