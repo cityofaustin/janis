@@ -19,6 +19,7 @@ import getPageUrlQuery from 'js/queries/getPageUrl';
 import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
+import getNewsListPageQuery from 'js/queries/getNewsListPageQuery';
 
 import {
   cleanNavigation,
@@ -128,7 +129,7 @@ const getTopicPageData = async (page, instance, client) => {
   return { topic: topicPage };
 };
 
-const cleanDepartmentPageData = page => {
+const cleanDepartmentPageData = (page, locale) => {
   let departmentPage = { ...page };
 
   departmentPage.topServices = cleanDepartmentPageLinks(
@@ -146,12 +147,25 @@ const cleanDepartmentPageData = page => {
     departmentPage.departmentDirectors,
   );
 
+  // get the first janisUrl from the array here so we don't need to deal with it in the component
+  moment.locale(locale);
+  for (let newsItem of departmentPage.news) {
+    newsItem.url = newsItem.janisbasepagePtr.janisUrls
+      ? newsItem.janisbasepagePtr.janisUrls[0]
+      : '';
+
+    newsItem.newsDate = moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format(
+      'LL',
+    );
+  }
+
   return { department: departmentPage };
 };
 
 const cleanNewsPageData = (newsPage, instanceOfPage, lastPublishedAt) => {
   return { ...newsPage, ...instanceOfPage, lastPublishedAt };
 };
+
 const getTopicCollectionPageData = async (page, instanceOfPage, client) => {
   let topicCollectionPage = { ...page };
 
@@ -376,6 +390,31 @@ const getDepartmentsPageData = async client => {
   return { departments: departments };
 };
 
+const getNewsListForDepartment = async (client, departmentId, locale) => {
+  const { allPages } = await client.request(getNewsListPageQuery, {
+    departmentPageId: departmentId,
+  });
+
+  const departmentPage = allPages.edges[0].node.departmentpage;
+
+  const parent = {
+    id: departmentId,
+    title: departmentPage.title,
+    url: departmentPage.janisbasepagePtr.janisUrls[0],
+  };
+
+  moment.locale(locale);
+  const newsList = departmentPage.news.map(newsItem => ({
+    title: newsItem.title,
+    url: newsItem.janisbasepagePtr.janisUrls
+      ? newsItem.janisbasepagePtr.janisUrls[0]
+      : '',
+    newsDate: moment(newsItem.firstPublishedAt, 'YYYY-MM-DD').format('LL'),
+  }));
+
+  return { newsList: newsList, parent: parent };
+};
+
 
 const getAllEvents = async (client, hideCanceled) => {
   const date_now = moment()
@@ -433,10 +472,23 @@ const buildPageAtUrl = async (
     lastPublishedAt,
   } = pageAtUrlInfo;
   if (departmentpage) {
+    let locale = 'en';
+    if (['en', 'es'].includes(client.options.headers['Accept-Language'])) {
+      locale = client.options.headers['Accept-Language'];
+    }
+
+    const departmentNewsPage = {
+      path: 'news',
+      template: 'src/components/Pages/News/NewsList',
+      getData: () =>
+        getNewsListForDepartment(client, departmentpage.id, locale),
+    };
+
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Department',
-      getData: () => cleanDepartmentPageData(departmentpage),
+      children: [departmentNewsPage],
+      getData: () => cleanDepartmentPageData(departmentpage, locale),
     };
   }
 
@@ -683,8 +735,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // Build search index here before pages is altered.
   const searchIndex = searchIndexBuilder(pages);
 
-  // This is really something that should happen in joplin,
-  // but let's just use janis to do it for now
+  // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
     console.log("Looks like we're trying to do an incremental build!");
     // First let's find all of the parent/grandparent ids we need

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
-import { Link } from 'react-router-dom';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
@@ -40,9 +39,9 @@ const OfficialDocumentEntry = ({
       <div className="coa-OfficialDocumentPage__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
-      <Link to={entryUrl(departments, slug)}>
+      <a href={entryUrl(departments, slug)}>
         <h2 className="coa-OfficialDocumentPage__title">{title}</h2>
-      </Link>
+      </a>
       <p>{summary}</p>
       <div className="coa-OfficialDocumentPage__small-heading-container">
         <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}

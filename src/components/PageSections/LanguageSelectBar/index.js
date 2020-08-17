@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { SUPPORTED_LANGUAGES } from 'js/i18n/constants';
 
@@ -33,8 +32,8 @@ const LanguageSelectBar = ({
         {SUPPORTED_LANGUAGES.map(({ title, abbr, code, pending }, i) => {
           return (
             <li key={i} onClick={pending && togglePendingTranslation}>
-              <Link
-                to={`/${code}/${path}${typeof window !== 'undefined' ? window.location.hash : ""}`}
+              <a
+                href={`/${code}/${path}${typeof window !== 'undefined' ? window.location.hash : ""}`}
                 className={classNames('coa-LanguageSelectBar__item', {
                   'coa-LanguageSelectBar__item--active': intl.locale === code,
                   'coa-LanguageSelectBar__item--showMessage': showMessage,
@@ -48,7 +47,7 @@ const LanguageSelectBar = ({
                   selected={code === intl.locale}
                   showMessage={showMessage}
                 />
-              </Link>
+              </a>
             </li>
           );
         })}

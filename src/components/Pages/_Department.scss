@@ -160,3 +160,55 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.coa-DepartmentPage__news-date {
+  font-size: 1.6rem;
+  line-height: 2.8rem;
+  color: #757575;
+
+  @include tablet {
+    font-size: 1.4rem;
+    line-height: 2.5rem;
+  }
+}
+
+.coa-DepartmentPage__news-link {
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  border-bottom: 1px solid #dfe1e2;
+  padding-bottom: 16px;
+  margin-bottom: 14px;
+  a {
+    text-decoration: none;
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+  }
+}
+
+.coa-DepartmentPage__news-more-link {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 2.7rem;
+  a {
+    text-decoration: none;
+  }
+  i {
+    vertical-align: middle;
+    margin-top: -3px;
+    height: 24px;
+    margin-right: 8px;
+
+    @include mobile {
+      height: 20px;
+      margin-top: -6px;
+    }
+  }
+
+  @include mobile {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2rem;
+  }
+}

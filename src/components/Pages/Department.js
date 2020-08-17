@@ -30,6 +30,8 @@ const Department = ({ department, intl }) => {
       jobListings,
       topServices,
       relatedLinks,
+      news,
+      slug,
     },
   } = department ? { department } : useRouteData();
 
@@ -85,6 +87,33 @@ const Department = ({ department, intl }) => {
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content">
           <div className="wrapper wrapper--sm container-fluid">
+            {!!news && !!news.length && (
+              <>
+                <h2 className="coa-SectionHeader">
+                  {intl.formatMessage(i18n.news)}
+                </h2>
+                {news.map(newsItem => (
+                  <>
+                    <div className="coa-DepartmentPage__news-date">
+                      {newsItem.newsDate}
+                    </div>
+                    <div className="coa-DepartmentPage__news-link">
+                      <a href={`/${intl.locale}${newsItem.url}`}>
+                        {newsItem.title}
+                      </a>
+                    </div>
+                  </>
+                ))}
+                <div className="coa-DepartmentPage__news-more-link">
+                  <a href={`/${intl.locale}/${slug}/news/`}>
+                    <i class="material-icons">arrow_forward</i>
+                    {intl.formatMessage(i18n.moreDeptNews, {
+                      department: title,
+                    })}
+                  </a>
+                </div>
+              </>
+            )}
             <h2 className="coa-SectionHeader">
               {intl.formatMessage(i18n.whatWeDo)}
             </h2>
