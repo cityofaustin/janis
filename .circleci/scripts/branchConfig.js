@@ -30,6 +30,18 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
+  'mega-nav': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
+  '4611-gzip': {
+    joplin_appname: 'joplin'
+  },
+  '4591-janis-docs': {
+    joplin_appname: 'joplin-pr-4591-janis-docs',
+  },
+  '4758-hyperlink': {
+    joplin_appname: 'joplin-pr-4758-hyperlink',
+  }
 };
 
 module.exports = {

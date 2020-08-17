@@ -85,6 +85,7 @@ export const misc = defineMessages({
   services: 'Services',
   info: 'Information',
   projectsSiteLinkText: 'Help us improve.',
+  workInProgressLinkText: "work in progress",
   comingSoon: 'Coming soon',
   giveUserFeedback: 'Help us improve our website.',
   learnMore: 'Learn more',

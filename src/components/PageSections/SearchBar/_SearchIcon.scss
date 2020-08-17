@@ -1,7 +1,7 @@
 .coa-SearchBar__search-container-icon {
   display: none;
   position: absolute;
-  right: 0px;
+  right: 0;
   padding-right: 3.5rem;
   &.active {
     background-color: pink;
@@ -10,7 +10,12 @@
     display: block;
   }
   @include mobile-small {
-    padding-right: 2rem;
+    padding-right: 1.5rem;
+    font-size: 1.4rem;
+    i {
+      font-size: 1.4rem;
+      padding-top: $coa-spacing-small;
+    }
   }
 }
 

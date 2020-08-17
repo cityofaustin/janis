@@ -1,0 +1,110 @@
+.coa-ThemesTopicsMenuMobile {
+  background-color: $coa-color-white;
+  border-radius: $coa-menu-border-radius;
+  padding-top: $coa-spacing-small;
+  max-width: 463px;
+  margin-top: $coa-spacing-xsmall;
+}
+
+.coa-MessageWIP.mobile {
+  margin: 0.45rem 1.4rem 1.4rem 3.5rem;
+  padding: $coa-spacing-md-small;
+  font-size: 1.4rem;
+  text-align: left;
+  line-height: $coa-line-height-xxsmall;
+  @include mobile-small {
+    margin: 0.45rem 1.4rem 1.4rem 1.4rem;
+    text-align: center;
+    padding-top: $coa-spacing-xsmall;
+    padding-bottom: $coa-spacing-xsmall;
+  }
+}
+
+.coa-ThemesTopicsMenu__section.mobile {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+  font-size: 1.8rem;
+}
+
+.coa-ThemesTopicsMenu__theme.mobile, .coa-ThemesTopicsMenuMobile__external {
+  font-size: 1.6rem;
+  padding: $coa-spacing-md-small;
+  margin-bottom: 0;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  font-weight: $coa-font-semibold;
+  @include mobile-small {
+    padding-left: $coa-spacing-small;
+    padding-right: $coa-spacing-small;
+  }
+}
+
+.coa-ThemesTopicsMenuMobile__external {
+  margin-left: 0px;
+  border-bottom: $coa-border-small-light-gray;
+  a {
+    font-weight: $coa-font-medium;
+    i {
+      float: right;
+      font-size: $coa-font-size-smedium;
+      padding-top: 3px;
+    }
+  }
+}
+
+.coa-ThemesTopicsMenuMobile__external:last-child {
+  border-bottom: none;
+}
+
+.coa-ThemesTopicsMenu__theme.mobile.open {
+  background-color: $coa-color-card-grey;
+  border-bottom: none;
+  padding-bottom: $coa-spacing-xsmall;
+}
+
+.coa-ThemesTopicsMenuMobile__line {
+  width: 100%;
+  border-top: $coa-border-small-light-gray;
+}
+
+.coa-ThemesTopicsMenuMobile__Chevron {
+  width: 24px;
+  height: 24px;
+  float: right;
+  border-radius: 100%;
+  transform: rotate(90deg);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 255, 0);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.coa-ThemesTopicsMenuMobile__Chevron.open {
+  transform: rotate(270deg);
+  border-radius: 100%;
+  box-shadow: -3px 0px 3px 1px rgba(0, 0, 255, 0.2);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.coa-ThemesTopicsMenuMobile__topics {
+  background-color: $coa-color-card-grey;
+  border-bottom: $coa-border-small-light-gray;
+  padding-left: $coa-spacing-medium;
+  @include mobile-small {
+    padding-left: 0;
+  }
+  ul {
+    padding-top: 0;
+    padding-bottom: $coa-spacing-small;
+    @include mobile-small {
+      margin-left: 0;
+    }
+  }
+  li {
+    line-height: $coa-spacing-medium;
+  }
+  a {
+    font-weight: $coa-font-regular;
+    font-size: 1.6rem;
+  }
+
+}
