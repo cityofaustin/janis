@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { misc as i18n } from 'js/i18n/definitions';
 
 import ExternalLink from 'components/ExternalLink';
@@ -17,14 +16,14 @@ const WorkInProgress = ({ isClipped, intl }) =>
           </ExternalLink>
         ),
         alphaSiteLink: (
-          <Link className="coa-Footer__link" to="/">
+          <a className="coa-Footer__link" href="/">
             Alpha.austin.gov
-          </Link>
+          </a>
         ),
         projectsSiteLink: (
-          <Link to={`/${intl.locale}/feedback/`}>
+          <a href={`/${intl.locale}/feedback/`}>
             {intl.formatMessage(i18n.projectsSiteLinkText)}
-          </Link>
+          </a>
         ),
       }}
       defaultMessage="Alpha.austin.gov is a work in progress.\n{projectsSiteLink}"

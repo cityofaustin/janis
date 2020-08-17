@@ -27,9 +27,6 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  '4325-site-struct': {
-    joplin_appname: 'joplin-pr-import-everything',
-  },
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
