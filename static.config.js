@@ -735,8 +735,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // Build search index here before pages is altered.
   const searchIndex = searchIndexBuilder(pages);
 
-  // This is really something that should happen in joplin,
-  // but let's just use janis to do it for now
+  // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
     console.log("Looks like we're trying to do an incremental build!");
     // First let's find all of the parent/grandparent ids we need
