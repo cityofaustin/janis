@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { misc } from 'js/i18n/definitions';
 import { tilePropTypes } from './proptypes';
 import guideIcon from 'images/guide_icon.png';
@@ -15,7 +14,7 @@ const Tile = ({ url, text, compact, pageType, isPageType }) => {
   tileClasses += isPageType === 'information page' ? ' coa-Tile--blue' : '';
 
   return (
-    <Link className={tileClasses} to={url}>
+    <a className={tileClasses} href={url}>
       <div className="coa-Tile__content">
         <p className="coa-Tile__text">{text}</p>
         {typeIcon ? (
@@ -24,7 +23,7 @@ const Tile = ({ url, text, compact, pageType, isPageType }) => {
           <i className="material-icons">arrow_forward</i>
         )}
       </div>
-    </Link>
+    </a>
   );
 };
 

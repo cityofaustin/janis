@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
@@ -124,8 +123,8 @@ const EventListEntry = ({
   isSearchResult,
 }) => {
   return (
-    <Link
-      to={event.eventUrl}
+    <a
+      href={event.eventUrl}
       className={classNames('coa-EventListPage__Entry', {
         'coa-EventListPage__Entry--homepage': homepage,
         'coa-EventListPage__Entry--relatedPage': relatedPage,
@@ -144,7 +143,7 @@ const EventListEntry = ({
       {relatedPage && (
         <i className="material-icons coa-EventListPage__icon">arrow_forward</i>
       )}
-    </Link>
+    </a>
   );
 };
 

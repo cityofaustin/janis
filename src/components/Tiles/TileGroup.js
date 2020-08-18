@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
 import Tile from './Tile';
 import { tileGroupPropTypes } from './proptypes';
@@ -25,15 +24,15 @@ const TileGroup = ({
       >
         <h4 className="coa-TileGroup__title">
           {titleUrl ? (
-            <Link
-              to={
+            <a
+              href={
                 titleUrl.substring(0, 4) === 'http'
                   ? titleUrl
                   : `/${intl.locale}${titleUrl}`
               }
             >
               {title}
-            </Link>
+            </a>
           ) : (
             title
           )}

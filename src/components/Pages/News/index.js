@@ -9,12 +9,26 @@ import ContactDetails from 'components/Contact/ContactDetails';
 import UserFeedback from 'components/UserFeedback';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 
-import { Link } from 'react-router-dom';
-
 import { useIntl } from 'react-intl';
-import { news as i18n } from 'js/i18n/definitions';
+import { news as i18n, departmentPage as i18n2 } from 'js/i18n/definitions';
 
 import moment from 'moment-timezone';
+
+const NewsListPageLink = ({ locale, departmentUrl, departmentTitle, intl }) => (
+  <a
+    className="coa-NewsPage__list-page-link"
+    href={`/${locale}${departmentUrl}news/`}
+  >
+    <div className="coa-NewsPage__list-page-link-text">
+      {intl.formatMessage(i18n2.moreDeptNews, {
+        department: departmentTitle,
+      })}
+    </div>
+    <i class="material-icons coa-NewsPage__list-page-link-arrow">
+      arrow_forward
+    </i>
+  </a>
+);
 
 const NewsPage = ({ newsPage }) => {
   const intl = useIntl();
@@ -54,21 +68,21 @@ const NewsPage = ({ newsPage }) => {
               {byDepartment
                 ? intl.formatMessage(i18n.fromAndByLine, {
                     fromDepartment: (
-                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                      <a href={`/${intl.locale}${fromDepartment.url}`}>
                         {fromDepartment.title}
-                      </Link>
+                      </a>
                     ),
                     byDepartment: (
-                      <Link to={`/${intl.locale}${byDepartment.url}`}>
+                      <a href={`/${intl.locale}${byDepartment.url}`}>
                         {byDepartment.title}
-                      </Link>
+                      </a>
                     ),
                   })
                 : intl.formatMessage(i18n.fromLine, {
                     fromDepartment: (
-                      <Link to={`/${intl.locale}${fromDepartment.url}`}>
+                      <a href={`/${intl.locale}${fromDepartment.url}`}>
                         {fromDepartment.title}
-                      </Link>
+                      </a>
                     ),
                   })}
             </div>
@@ -83,7 +97,15 @@ const NewsPage = ({ newsPage }) => {
               <div className="col-xs-12 col-md-12">
                 {body && <HtmlFromRichText title={' '} content={body} />}
                 <div className="coa-NewsPage__footer-published-date">
-                  Published {momentDate}
+                  {intl.formatMessage(i18n.publishedDate, { date: momentDate })}
+                </div>
+                <div className="coa-NewsPage__list-page-link-mobile">
+                  <NewsListPageLink
+                    locale={intl.locale}
+                    departmentUrl={fromDepartment.url}
+                    departmentTitle={fromDepartment.title}
+                    intl={intl}
+                  />
                 </div>
                 <div className="coa-Page__contacts-mobile">
                   {!!contact && <ContactDetails contact={contact} />}
@@ -93,6 +115,12 @@ const NewsPage = ({ newsPage }) => {
           </div>
         </div>
         <div className="coa-Page__side-content">
+          <NewsListPageLink
+            locale={intl.locale}
+            departmentUrl={fromDepartment.url}
+            departmentTitle={fromDepartment.title}
+            intl={intl}
+          />
           <div className="coa-ServicePage__contacts-desktop">
             {!!contact && <ContactDetails contact={contact} />}
           </div>

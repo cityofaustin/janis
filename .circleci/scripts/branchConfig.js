@@ -27,11 +27,17 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  '4698-search-num': {
-    joplin_appname: 'joplin',
-  },
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
+  },
+  'right-div-fix': { // Ok to remove
+    joplin_appname: 'joplin'
+  },
+  '4611-gzip': {
+    joplin_appname: 'joplin'
+  },
+  '4591-janis-docs': {
+    joplin_appname: 'joplin-pr-4591-janis-docs',
   },
   '4758-hyperlink': {
     joplin_appname: 'joplin-pr-4758-hyperlink',
