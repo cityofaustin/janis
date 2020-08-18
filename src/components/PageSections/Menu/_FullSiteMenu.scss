@@ -261,11 +261,18 @@
 
 .coa-ThemesNav__right-controls {
   padding-right: 1rem;
+  display: inline;
+  div {
+    display: inline-block;
+  }
   a {
     font-size: $coa-font-size-xsmall;
   }
   a:first-child {
     padding-right: $coa-space-level3;
+  }
+  i {
+    display: inline;
   }
   @include mobile {
     display: none;
