@@ -30,7 +30,7 @@ const branchOverrides = {
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
   },
-  'mega-nav': { // Ok to remove
+  'right-div-fix': { // Ok to remove
     joplin_appname: 'joplin'
   },
   '4611-gzip': {
