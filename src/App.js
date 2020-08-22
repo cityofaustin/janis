@@ -31,6 +31,27 @@ const ScrollToTop = () => {
   return null;
 };
 
+const useScript = url => {
+  useEffect(() => {
+    const script = document.createElement('script');
+
+    script.src = url;
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, [url]);
+};
+
+const TalkToComponent = () => {
+  useScript("https://embed.tawk.to/5f401761cc6a6a5947adc27c/default")
+  return null
+}
+
+
 const AppView = ({ path }) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
@@ -57,6 +78,7 @@ const AppView = ({ path }) => {
           <Route component={CMSLive} />
         </Switch>
       </main>
+      <TalkToComponent />
       <Footer />
     </div>
   );
