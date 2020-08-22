@@ -835,16 +835,17 @@ export default {
     ];
     const requests = [];
     const data = {};
-    SUPPORTED_LANG_CODES.map(async (langCode) => {
+    await SUPPORTED_LANG_CODES.map(async (langCode) => {
       const client = await createGraphQLClientsByLang(langCode);
+      console.log('CLIENT', client)
       queries.map(query => {
         requests.push(client.request(query.query));
         data[query.dataKey] = data[query.dataKey] || {};
         data[query.dataKey][langCode] = null;
       });
-    });
-
-    (await Promise.all(requests)).forEach((response, i) => {
+      console.log('requestrs 22', requests)
+          (await Promise.all(requests)).forEach((response, i) => {
+      console.log('**** ',  response);
       const queryIndex = i % queries.length;
       const langIndex = (i - queryIndex) / queries.length;
       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
@@ -857,6 +858,11 @@ export default {
     });
 
     return data;
+    });
+
+    console.log('REQUERSTS', requests)
+
+
   },
   getRoutes: async ({ incremental }) => {
     let incrementalPageId = null;

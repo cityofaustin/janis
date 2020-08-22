@@ -9,6 +9,7 @@ export const createGraphQLClientsByLang = async (lang, CMS_API) => {
   const variables = {email: 'admin@austintexas.io', password: 'x'}
 
   return request(joplinEndpoint, getToken, variables).then(data => {
+    console.log('DATA', data);
     return new GraphQLClient(joplinEndpoint, {
       headers: { 'Accept-Language': lang, 'Authorization': `JWT ${data.tokenAuth.token}` },
     });
