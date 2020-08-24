@@ -19,6 +19,15 @@ const SearchPage = () => {
   let query = queryObjectBuilder()
   let searchedTerm = query["?"] || ""
 
+  const a = {}
+  searchIndex.forEach(p=>{
+    if (!a[p.pageType]) {
+      a[p.pageType] = []
+    }
+    a[p.pageType].push(p)
+  })
+  console.log("a :", a)
+   
   useEffect(() => {
     // This will catch if the language is changed and refilter the search.
     updateSearch()
