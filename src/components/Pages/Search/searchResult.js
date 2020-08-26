@@ -58,7 +58,6 @@ const DefaultPageResult = function({ page }) {
 
 const OfficialDocumentPage = function({ page }) {
 
-  console.log("page :", page)
   const {
     janisUrls,
     title,
