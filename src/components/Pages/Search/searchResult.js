@@ -125,9 +125,11 @@ const LocationPageResult = function({ page }) {
 
   return (
     <div className="coa-search_result coa-search_result-locations">
+
       <div className="coa-search_result-icon-container">
         <i className="material-icons coa-LocationPage__header-icon">place</i>
       </div>
+
       <div>
         <a
           className="coa-search_result-title"
