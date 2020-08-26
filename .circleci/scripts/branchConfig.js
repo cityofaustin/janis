@@ -39,8 +39,8 @@ const branchOverrides = {
   '4591-janis-docs': {
     joplin_appname: 'joplin-pr-4591-janis-docs',
   },
-  '4758-hyperlink': {
-    joplin_appname: 'joplin-pr-4758-hyperlink',
+  '4872-link-doc-summary': {
+    joplin_appname: 'joplin-pr-4872-link-summary',
   }
 };
 
