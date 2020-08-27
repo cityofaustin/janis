@@ -85,7 +85,9 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                <p className="coa-OfficialDocumentPage__summary">{summaryBlock}</p>
+                <p className="coa-OfficialDocumentPage__summary">
+                  {summaryBlock}
+                </p>
                 <OfficialDocumentCollectionsList
                   officialDocumentCollection={officialDocumentCollection}
                   mobile={true}
