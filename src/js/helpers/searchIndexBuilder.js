@@ -10,15 +10,16 @@ const searchIndexBuilder = function(pages) {
         "locationpage",
         "eventpage",
         "departmentpage",
-        "topiccollectionpage"
+        "topiccollectionpage",
+        "officialdocumentpage"
       ]
 
       const janisBasePagesWithTopics = [
         "servicepage",
         "guidepage",
         "informationpage",
-        "officialdocumentpage",
-        "formcontainer"
+        "formcontainer",
+        "officialdocumentcollection"
       ]
 
       // Checking if the page is one of our Janis Pages without topics.
@@ -29,7 +30,7 @@ const searchIndexBuilder = function(pages) {
             title: page.node[pageType].title,
             janisUrls: page.node.janisUrls,
             pageType: page.node.pageType,
-            summary: page.node[pageType].mission || page.node[pageType].shortDescription || ""
+            summary: page.node[pageType].mission || page.node[pageType].shortDescription || page.node[pageType].summary || ""
           }
           if (pageType === "eventpage") {
             searchIndexData.date = page.node[pageType].date
@@ -55,6 +56,11 @@ const searchIndexBuilder = function(pages) {
             searchIndexData.physicalState = page.node[pageType].physicalState
             searchIndexData.physicalZip = page.node[pageType].physicalZip
           }
+          if (pageType === "officialdocumentpage") {
+            searchIndexData.authoringOffice = page.node[pageType].authoringOffice
+            searchIndexData.document = page.node[pageType].document
+            searchIndexData.partOf = page.node[pageType].officialDocumentCollection.edges[0].node.officialDocumentCollection.title
+          }
           searchIndex.push(searchIndexData)
         }
       })
@@ -76,19 +82,6 @@ const searchIndexBuilder = function(pages) {
             if (topics.length > 0) {
               searchIndexData.topics = topics
             }
-          }
-          if (pageType === "officialdocumentpage") {
-            page.node.janisbasepagewithtopics[pageType].documents.edges.forEach( doc => {
-              searchIndex.push({
-                pageType: 'document page',
-                title: doc.node.title,
-                summary: doc.node.summary,
-                date: doc.node.date,
-                janisUrls: [doc.node.document.filename],
-                document: [doc.node.document],
-                topics: topics
-              })
-            })
           }
           searchIndex.push(searchIndexData)
         }
