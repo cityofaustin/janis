@@ -10,6 +10,7 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from 'components/PageSections/ContextualNav/RelatedToMobile';
 import Tile from 'components/Tiles/Tile';
 import UserFeedback from 'components/UserFeedback';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 
 const OfficialDocumentCollectionsList = ({
   officialDocumentCollection,
@@ -59,6 +60,8 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span>
   ) : null;
 
+  const summaryBlock = <HtmlFromRichText content={summary} /> 
+
   return (
     <div>
       <Head>
@@ -82,7 +85,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           <div className="coa-Page__main-content">
             <div className="wrapper container-fluid">
               <div className="row">
-                <p className="coa-OfficialDocumentPage__summary">{summary}</p>
+                <p className="coa-OfficialDocumentPage__summary">{summaryBlock}</p>
                 <OfficialDocumentCollectionsList
                   officialDocumentCollection={officialDocumentCollection}
                   mobile={true}
