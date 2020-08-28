@@ -89,10 +89,10 @@ const OfficialDocumentPage = function({ page }) {
           {document.filename}
         </a>
         <span className="coa-search_result-pdf-size">
-          /*
+          {/*
             The file size is originally in bytes. The math here will
             round the file size to the nearest decimal of a MB.
-          */
+          */}
           &nbsp;(PDF {Math.round(document.fileSize/100000)/10}mb)
         </span>
       </div>
