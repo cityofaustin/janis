@@ -10,8 +10,8 @@ const SearchResult = ({ page }) => {
     return <EventPageResult page={page}/>
   } else if ( page.pageType === "location page" ) {
     return <LocationPageResult page={page}/>
-  } else if ( page.pageType === "document page") {
-    return <OfficialDocumentPageDocumentResult page={page}/>
+  } else if ( page.pageType === "official document page") {
+    return <OfficialDocumentPage page={page}/>
   } else {
     return <DefaultPageResult page={page}/>
   }
@@ -31,7 +31,12 @@ const DefaultPageResult = function({ page }) {
   return (
     <div className="coa-search_result">
 
-      <a href={janisUrls && janisUrls[0]}> {title} </a> <br />
+      <a
+        className="coa-search_result-title"
+        href={janisUrls && janisUrls[0]}
+      >
+        {title}
+      </a>
 
       { summary && (
         <div className="coa-search_result-text">
@@ -51,12 +56,13 @@ const DefaultPageResult = function({ page }) {
 }
 
 
-const OfficialDocumentPageDocumentResult = function({ page }) {
+const OfficialDocumentPage = function({ page }) {
+
   const {
+    janisUrls,
     title,
     date,
     summary,
-    startTime,
     document,
     topics,
   } = page
@@ -64,27 +70,47 @@ const OfficialDocumentPageDocumentResult = function({ page }) {
   return (
     <div className="coa-search_result">
 
-      <div className="coa-search_result-text">
-        {date}
-      </div>
-      <div className="coa-search_result-title">
-        {title}
-      </div>
+      <a
+        className="coa-search_result-title"
+        href={janisUrls && janisUrls[0]}
+      >
+        {title} {date}
+      </a>
+
       <div className="coa-search_result-text">
         {summary}
       </div>
+
       <div className="coa-search_result-topics">
-        Document:
-        <a href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+document[0].filename}>
-          &nbsp; {document[0].filename}
+        <a
+          className="coa-search_result-pdf"
+          href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+document.filename}
+        >
+          {document.filename}
+        </a>
+        <span className="coa-search_result-pdf-size">
+          /*
+            The file size is originally in bytes. The math here will
+            round the file size to the nearest decimal of a MB.
+          */
+          &nbsp;(PDF {Math.round(document.fileSize/100000)/10}mb)
+        </span>
+      </div>
+
+      <div className="coa-search_result-topics from">
+        From: {page.authoringOffice}
+      </div>
+
+      <div className="coa-search_result-topics">
+        Part of:&nbsp;
+        <a
+          className="coa-search_result-pdf"
+          href={"/"+page.partOf.departments[0].slug+"/"+page.partOf.slug}
+        >
+          {page.partOf.title}
         </a>
       </div>
-      { (topics && topics.length > 0) && (
-        <div className="coa-search_result-topics">
-          Topic{topics.length > 1 ? "s: " : ": "}
-          {topics.join(", ")}
-        </div>
-      )}
+
     </div>
   )
 }
@@ -103,11 +129,18 @@ const LocationPageResult = function({ page }) {
 
   return (
     <div className="coa-search_result coa-search_result-locations">
+
       <div className="coa-search_result-icon-container">
         <i className="material-icons coa-LocationPage__header-icon">place</i>
       </div>
+
       <div>
-        <a href={janisUrls && janisUrls[0]}> {title} </a>
+        <a
+          className="coa-search_result-title"
+          href={janisUrls && janisUrls[0]}
+        >
+          {title}
+        </a>
         <br />
         <div className="coa-search_result-text coa-search_results-address">
           {physicalStreet}{physicalUnit && (" #"+physicalUnit)}

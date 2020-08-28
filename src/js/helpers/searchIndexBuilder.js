@@ -59,7 +59,7 @@ const searchIndexBuilder = function(pages) {
           if (pageType === "officialdocumentpage") {
             searchIndexData.authoringOffice = page.node[pageType].authoringOffice
             searchIndexData.document = page.node[pageType].document
-            searchIndexData.partOf = page.node[pageType].officialDocumentCollection.edges[0].node.officialDocumentCollection.title
+            searchIndexData.partOf = page.node[pageType].officialDocumentCollection.edges[0].node.officialDocumentCollection
           }
           searchIndex.push(searchIndexData)
         }
