@@ -29,8 +29,10 @@
   margin-right: 7px;
   border-radius: $coa-border-radius-medium;
   pointer-events: none;
+  opacity: 0;
   &.open {
     pointer-events: all;
+    opacity: 1;
   }
   @media screen and (max-width: 1135px) {
     width: 300px;
