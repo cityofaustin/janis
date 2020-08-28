@@ -36,8 +36,8 @@ const branchOverrides = {
   '4392-nav-v2': { // Ok to remove
     joplin_appname: 'joplin'
   },
-  '4591-janis-docs': {
-    joplin_appname: 'joplin-pr-4591-janis-docs',
+  '4129-graphql-api': {
+    joplin_appname: 'joplin-pr-4129-graphql-api',
   }
 };
 
