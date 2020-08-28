@@ -154,5 +154,11 @@
   "search.noResultsHeader": "No hay resultados para su selección. Para mejorar los resultados de la búsqueda:",
   "search.suggestion1": "revise la ortografía",
   "search.suggestion2": "use menos palabras claves",
-  "search.suggestion3": "busque algo menos especifico"
+  "search.suggestion3": "busque algo menos especifico",
+  "news.news": "Noticias",
+  "news.fromLine": "Por {fromDepartment}",
+  "news.fromAndByLine": "Por {fromDepartment}, escrita por {byDepartment}",
+  "news.publishedDate": "Publicado {date}",
+  "departmentPage.news": "Noticias",
+  "departmentPage.moreDeptNews": "Más noticias de {department}"
 }

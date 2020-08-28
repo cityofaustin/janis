@@ -16,6 +16,8 @@ const PaginationContainer = ({
   PageComponent,
   intl,
   searchedTerm,
+  fillTablet = false,
+  smallMargins = false,
 }) => {
   const documentsPerPage = 10;
   const isMobile = useMobileQuery();
@@ -103,7 +105,7 @@ const PaginationContainer = ({
     <div>
       <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
-          <div className="col-xs-12 col-md-8">
+          <div className={`col-xs-12 ${fillTablet ? 'col-lg-8' : 'col-md-8'}`}>
             {currentPage &&
               currentPage.map((page, index) => (
                 <PageComponent page={page} key={index} />
@@ -111,7 +113,13 @@ const PaginationContainer = ({
           </div>
 
           {shownPages.length > 1 && (
-            <div className="coa-PaginationContainer">
+            <div
+              className={`coa-PaginationContainer ${
+                smallMargins
+                  ? 'coa-PaginationContainer--small-margins'
+                  : ''
+              }`}
+            >
               <div
                 onClick={() => changePage(pageNumber - 1)}
                 className="coa-PaginationContainer_page previous"
