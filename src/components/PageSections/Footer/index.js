@@ -11,7 +11,7 @@ import WorkInProgress from 'components/WorkInProgress';
 import TwitterSVG from 'components/SVGs/Twitter';
 import FacebookSVG from 'components/SVGs/Facebook';
 import GithubSVG from 'components/SVGs/Github';
-import citySealImg from 'images/coa_seal_color.png';
+import citySealImg from 'images/coa_seal_color_200x200.png';
 
 import FooterSiteMap from 'components/PageSections/Footer/FooterSiteMap';
 
@@ -24,11 +24,8 @@ import {
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 
-import { Link } from 'react-router-dom';
-
 const Footer = ({ intl }) => (
   <footer>
-
     <div className="coa-Footer">
       <FooterSiteMap />
       <div className="coa-Footer__city-seal-wrapper">
@@ -64,9 +61,9 @@ const Footer = ({ intl }) => (
         </a>
       </div>
       <div className="coa-Footer__links">
-        <Link to={`/${intl.locale}/privacy-policy/`}>
+        <a href={`/${intl.locale}/privacy-policy/`}>
           {intl.formatMessage(i18n.privacyPolicy)}
-        </Link>
+        </a>
       </div>
     </div>
   </footer>

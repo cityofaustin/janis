@@ -23,57 +23,45 @@ const ThemesNav = props => {
         'coa-ThemesNav--open': props.isTopMenuActive,
       })}
     >
+
       <ul className="coa-ThemesNav__list">
         {props.navigation.map((theme, index) => (
-          <li
-            className="coa-ThemesNav__theme"
-            key={index}
-            tabIndex="0"
-            onKeyDown={props.handleOnClick}
-          >
-            <a className={"coa-ThemesNav__link "+lang} onClick={props.handleOnClick}>
-              {theme.text}
-            </a>
-          </li>
+          <span>
+            <li
+              className="coa-ThemesNav__theme"
+              key={index}
+              tabIndex="0"
+              onKeyDown={props.handleOnClick}
+            >
+              <a
+                className={"coa-ThemesNav__link " + lang + (theme.slug === props.slug ? " active" : "") }
+                onClick={props.handleOnClick}
+                slug={theme.slug}
+              >
+                {theme.text}
+              </a>
+            </li>
+          </span>
         ))}
       </ul>
-      {props.isTopMenuActive ? (
-        <a
-          className="coa-FullSiteMenu__close"
-          tabIndex="0"
-          onClick={props.handleFullSiteMenuClose}
-          onKeyDown={props.handleFullSiteMenuClose}
-        >
-          <i className="material-icons">close</i>
-        </a>
-      ) : null}
 
+      <div className="coa-ThemesNav__right-controls">
 
-
-      <div className="coa-Header__right-controls-wrapper">
-
-        <div className="coa-Header__right-controls">
+        <div>
           <ExternalLink
             to="http://311.austintexas.gov/"
             ariaLabel={'three one one'}
-          >
-            311
-          </ExternalLink>
+          >311</ExternalLink>
+        </div>
 
-          {/*  Note that this class is in _Header.scss  */}
-          <span className="coa-text-spacer--vertical" />
+        <div>
           <ExternalLink
             to="http://www.austintexas.gov/airport"
             ariaLabel={intl.formatMessage(i18n.airport)}
-          >
-            {intl.formatMessage(i18n.airport)}
-          </ExternalLink>
-
+          >{intl.formatMessage(i18n.airport)}</ExternalLink>
         </div>
+
       </div>
-
-
-
 
     </nav>
   )

@@ -7,6 +7,7 @@ import ResponsiveImage from 'components/ResponsiveImage';
 import { FULL_WIDTH_RESPONSIVE_IMAGE_SIZES } from 'js/helpers/constants';
 import getImageData from 'components/ResponsiveImage/getImageData';
 import Alert from 'components/Alerts';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 import { getDaysInOrder } from 'js/helpers/date';
 import {
   date as i18nDate,
@@ -180,8 +181,8 @@ const LocationPageFacilityHours = ({ hours }) => {
             <div className="coa-LocationPage__sub-section-block-title-padded">
               {intl.formatMessage(i18nContact.exceptions)}
             </div>
-            <div className="coa-LocationPage__sub-section-block-contents">
-              {hours.exceptions}
+            <div className="coa-LocationPage__sub-section-block__hours-exceptions-contents">
+              <HtmlFromRichText content={hours.exceptions} />
             </div>
           </div>
         )}

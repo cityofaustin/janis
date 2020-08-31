@@ -24,6 +24,7 @@ class Header extends Component {
       howYouKnowMenuIsOpen: false,
       topMenuActive: false,
       showMessage: false,
+      slug: "",
     };
 
     // Bind wrappers and outside-click functions
@@ -56,7 +57,16 @@ class Header extends Component {
   // Hides the menu
   handleClickOutside(event) {
     // Full site
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+
+    if (this.wrapperRef && (
+      !this.wrapperRef.contains(event.target) ||
+      event.target.className === "coa-FullSiteMenu__subNav" ||
+      event.target.className === "coa-MessageWIP" ||
+      event.target.className === "coa-FullSiteMenu__container" ||
+      event.target.className === "coa-ThemesNav__list" ||
+      event.target.className === "coa-ThemesNav__theme" ||
+      event.target.className === "coa-FullSiteMenu coa-FullSiteMenu--active"
+    )) {
       // If we're clicking on the mobile close button, we'll handle this in toggleFullSiteMenu instead
       if (
         event.target.className !== 'coa-Header__menuIcon' &&
@@ -75,6 +85,7 @@ class Header extends Component {
         this.setState({
           topMenuActive: false,
           showMessage: false,
+          slug: "",
         });
       }
     }
@@ -98,6 +109,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: true,
         showMessage: false,
+        slug: e.target.getAttribute("slug"),
       });
     }
 
@@ -106,6 +118,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: false,
         showMessage: false,
+        slug: "",
       });
     }
   };
@@ -116,6 +129,7 @@ class Header extends Component {
       e.preventDefault();
       this.setState({
         topMenuActive: false,
+        slug: "",
       });
     }
 
@@ -136,6 +150,7 @@ class Header extends Component {
       this.setState({
         topMenuActive: false,
         showMessage: false,
+        slug: "",
       });
     }
   };
@@ -257,6 +272,7 @@ class Header extends Component {
             handleFullSiteMenuItem={this.closeFullSiteMenuItem}
             handleFullSiteMenuOpen={this.openFullSiteMenu}
             handleFullSiteMenuClose={this.closeFullSiteMenu}
+            slug={this.state.slug}
             isTopMenuActive={this.state.topMenuActive}
             toggleFullSiteMenu={this.toggleFullSiteMenu}
           />

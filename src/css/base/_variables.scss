@@ -101,6 +101,7 @@ $coa-color-green-light: #02eaa4;
 
 $coa-color-orange: #e03400;
 $coa-color-orange-dark: #b82b00;
+$coa-color-vintage-vanilla: #FFF5C3;
 
 $coa-color-purple-lightest: #d7d2d9;
 $coa-color-purple-lighter: #9b90a2;
@@ -115,12 +116,13 @@ $coa-color-gray-light: #cbcbcb;
 $coa-color-gray: #919191;
 $coa-color-gray-dark: #363636;
 $coa-color-cod-gray: #171717;
+$coa-color-gray-4: #F3F3F3;
 
 //borders & border-ish (radius, box shaddows etc...)
 $coa-border-radius-medium: 4px;
 $coa-border-small-light-gray: 1px solid #e6e6e6;
 $coa-border-bottom-small-light-gray: 1.5px solid $coa-color-gray-lighter;
-$coa-box-shaddow-medium: 0px 3px 6px rgba(0,0,0,0.08);
+$coa-box-shadow-medium: 0px 3px 6px rgba(0,0,0,0.08);
 
 //magic numbers
 $coa-top-menu-max-width: 1210px;

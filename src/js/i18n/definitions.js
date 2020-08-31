@@ -85,6 +85,7 @@ export const misc = defineMessages({
   services: 'Services',
   info: 'Information',
   projectsSiteLinkText: 'Help us improve.',
+  workInProgressLinkText: "work in progress",
   comingSoon: 'Coming soon',
   giveUserFeedback: 'Help us improve our website.',
   learnMore: 'Learn more',
@@ -180,6 +181,10 @@ export const departmentPage = defineMessages({
   whatWeDo: 'What we do',
   meetDirector: 'Leadership',
   topServices: 'Top services',
+  news: 'News',
+  moreDeptNews: {
+    defaultMessage: 'More {department} news',
+  },
 });
 
 export const howYouKnowMenu = defineMessages({

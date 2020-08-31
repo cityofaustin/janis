@@ -2,13 +2,21 @@
 # - NOTE: make sure CMS_API has `/api/graphql` endpoints
 # - AND... CMS_MEDIA has `/media` endpoints
 
-# Examples
-# - export CMS_API='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
-# - export CMS_MEDIA='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/media'
+#   * Local Example *
+# export CMS_API='http://127.0.0.1:8000/api/graphql'
+# export CMS_MEDIA='http://127.0.0.1:8000/media'
 
-# Or,  maybe you want to use staging or production media
-# - Staging Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media`
-# - Production Media: `https://joplin3-austin-gov-static.s3.amazonaws.com/production/media`
+#   * Review Example *
+# export CMS_API='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/api/graphql'
+# export CMS_MEDIA='https://joplin-pr-3244-guide-icon-tile.herokuapp.com/media'
+
+#   * Staging Example  *
+# export CMS_API='https://joplin-staging.herokuapp.com/api/graphql'
+# export CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/staging/media'
+
+#   * Production Example *
+# export CMS_API='https://joplin.herokuapp.com/api/graphql'
+# export CMS_MEDIA='https://joplin3-austin-gov-static.s3.amazonaws.com/production/media'
 
 export NODE_PATH='./src'
 
