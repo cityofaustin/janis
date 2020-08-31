@@ -121,9 +121,9 @@ const SearchPage = () => {
 
             <div className="col-xs-12 col-md-8">
 
-            {searchedTerm && searchResults.length < 1 && (
-              <NoResults intl={intl} searchedTerm={searchedTerm}/>
-            )}
+              {searchedTerm && searchResults.length < 1 && (
+                <NoResults intl={intl} searchedTerm={searchedTerm}/>
+              )}
 
               <div className="coa-search_results-total">
                 {searchedTerm && searchResults.length > 0 && (
