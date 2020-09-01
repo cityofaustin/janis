@@ -7,11 +7,14 @@ import guidePageLiveFragment from './guidePageLiveFragment';
 import newsPageFragment from './newsPageFragment';
 
 const siteStructureQuery = `
-query allPagesQuery($after: String) {
-  allPages(live: true, first: 10, after: $after) {
+query allPagesQuery($after: String, $batchSize: Int) {
+  allPages(live: true, first: $batchSize, after: $after) {
     edges {
       node {
+        pageId
         pageType
+        parentClass
+        searchSummary
         janisUrls
         janisInstances {
           url

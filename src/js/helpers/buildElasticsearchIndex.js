@@ -13,9 +13,9 @@ const JANIS_BASE_PAGE_WITH_TOPIC_COLLECTIONS = "janisbasepagewithtopiccollection
 /**
   node.pageType comes from content_type.name in Joplin.
 **/
-const pageTypeDefinition = {
+const pageTypeDefinitions = {
   "location page": {
-    "addExtraFields": (doc, specificNode) => {
+    "addExtraFields": (doc, node, specificNode) => {
       const fieldsToAdd = [
         "physicalStreet",
         "physicalUnit",
@@ -30,7 +30,7 @@ const pageTypeDefinition = {
     }
   },
   "event page": {
-    "addExtraFields": (doc, specificNode) => {
+    "addExtraFields": (doc, node, specificNode) => {
       const fieldsToAdd = [
         "date",
         "startTime",
@@ -42,7 +42,7 @@ const pageTypeDefinition = {
         doc[field] = specificNode[field]
       })
       doc.location = specificNode.locations[0]
-      doc.eventUrl = specificNode.janisUrls[0]
+      doc.eventUrl = node.janisUrls[0]
       if (specificNode.eventIsFree) {
         doc.feesRange = ""
       } else {
@@ -81,7 +81,7 @@ const getSpecificNode = (node, pageTypeFieldName) => {
   } else {
     // Pages that have other parentClasses (like "janisbasepagewithtopics")
     // have their specific data nested under the parentClass name.
-    return node[parentClass]
+    return node[parentClass][pageTypeFieldName]
   }
 }
 
@@ -97,10 +97,12 @@ const getSpecificNode = (node, pageTypeFieldName) => {
 **/
 const buildElasticsearchIndex = async function(pages, indexName) {
   const body = [];
+  console.log(`Starting to build index ${indexName}`)
 
   pages.forEach(page => {
+    // console.log("a page?", page)
     const {node} = page;
-    const {janisUrls, pageType} = node;
+    const {janisUrls, pageType, parentClass} = node;
     // Skip pages that don't have a janisUrl
     if (!janisUrls.length) {
       return
@@ -109,7 +111,7 @@ const buildElasticsearchIndex = async function(pages, indexName) {
     // ex: "event page" => "eventpage"
     // This is because the specificNode field name in the graphql results removes whitespace.
     const pageTypeFieldName = pageType.replace(/\s+/g,"")
-    const pageTypeDefinition = pageTypeMap["pageType"]
+    const pageTypeDefinition = pageTypeDefinitions[pageType]
     if (!pageTypeDefinition) {
       // Don't add this page type to the index until we have a pageTypeDefinition set.
       return
@@ -117,25 +119,24 @@ const buildElasticsearchIndex = async function(pages, indexName) {
     const specificNode = getSpecificNode(node, pageTypeFieldName)
 
     let doc = {
-      _id: node.pageId,
       title: specificNode.title,
-      summary: specificNode.summary,
+      summary: specificNode.searchSummary,
       janisUrls: janisUrls,
       pageType: pageType,
     }
     const addExtraFields = pageTypeDefinition.addExtraFields
     if (addExtraFields) {
-      doc = addExtraFields(doc, specificNode)
+      doc = addExtraFields(doc, node, specificNode)
     }
 
     // Add topics
-    if (parent === JANIS_BASE_PAGE_WITH_TOPICS) {
+    if (parentClass === JANIS_BASE_PAGE_WITH_TOPICS) {
       const {janisInstances} = node;
       if (janisInstances.length) {
-        body.topics = []
+        doc.topics = []
         janisInstances.forEach(instance => {
           if (instance.parent && instance.parent.title) {
-            topics.push(instance.parent.title)
+            doc.topics.push(instance.parent.title)
           }
         })
       }
@@ -145,42 +146,47 @@ const buildElasticsearchIndex = async function(pages, indexName) {
     // followed by the doc that will be run by that operation.
     body.push({
       "index": {
-        "_index": indexName
+        "_index": indexName,
+        "_id": node.pageId,
       }
     })
     body.push(doc)
   })
 
-  console.log("~~~~~~ Building an index")
   // Taken from https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/bulk_examples.html
-  const { body: bulkResponse } = await elasticClient.bulk({
-    refresh: true,
-    maxRetries: 5,
-    body: body,
-   })
-  if (bulkResponse.errors) {
-    const erroredDocuments = []
-    // The items array has the same order of the dataset we just indexed.
-    // The presence of the `error` key indicates that the operation
-    // that we did for the document has failed.
-    bulkResponse.items.forEach((action, i) => {
-      const operation = Object.keys(action)[0]
-      if (action[operation].error) {
-        erroredDocuments.push({
-          // If the status is 429 it means that you can retry the document,
-          // otherwise it's very likely a mapping error, and you should
-          // fix the document before to try it again.
-          status: action[operation].status,
-          error: action[operation].error,
-          operation: body[i * 2],
-          document: body[i * 2 + 1]
-        })
-      }
-    })
-    console.log("~~~~~~ There were errors building your index")
-    console.log(erroredDocuments)
-  } else {
-    console.log("~~~~~~ Successfullly built index")
+  try {
+    const { body: bulkResponse } = await elasticClient.bulk({
+      refresh: true,
+      body: body,
+     })
+    if (bulkResponse.errors) {
+      const erroredDocuments = []
+      // The items array has the same order of the dataset we just indexed.
+      // The presence of the `error` key indicates that the operation
+      // that we did for the document has failed.
+      bulkResponse.items.forEach((action, i) => {
+        const operation = Object.keys(action)[0]
+        if (action[operation].error) {
+          erroredDocuments.push({
+            // If the status is 429 it means that you can retry the document,
+            // otherwise it's very likely a mapping error, and you should
+            // fix the document before to try it again.
+            status: action[operation].status,
+            error: action[operation].error,
+            operation: body[i * 2],
+            document: body[i * 2 + 1]
+          })
+        }
+      })
+      console.log(`There were errors building index ${indexName}`)
+      console.log(erroredDocuments)
+    } else {
+      console.log(`Successfully built index ${indexName}`)
+    }
+  } catch (err) {
+    console.log(`There were catastophic errors building index ${indexName}`)
+    console.log(err)
+    throw err
   }
 }
 

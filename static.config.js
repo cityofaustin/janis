@@ -717,15 +717,13 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
-  const path = `/${!!langCode ? langCode : ''}`;
-  console.log(`- Building routes for ${path}...`);
-
   const client = createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
+  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 25
   while (true) {
-    const siteStructure = await client.request(allPagesQuery, { after: after });
+    const siteStructure = await client.request(allPagesQuery, { after: after, batchSize: batchSize});
     pages = pages.concat(siteStructure.allPages.edges);
     after = siteStructure.allPages.pageInfo.endCursor;
     if (!siteStructure.allPages.pageInfo.hasNextPage) {
@@ -733,8 +731,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
-  fs = require('fs')
-  fs.writeFileSync(__dirname + `/pages_${langCode}.json`, JSON.stringify(pages))
+  // const fs = require('fs')
+  // fs.writeFileSync(__dirname + `/pages_${langCode}.json`, JSON.stringify(pages))
   const indexName = `local_${langCode}_${Date.now()}`
   await buildElasticsearchIndex(pages, indexName)
   // Build search index here before pages is altered.
@@ -850,7 +848,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       );
 
       const topServices = services.map(s => ({
-        type: !!langCode ? langCode : 'en',
+        type: langCode,
         url: s.url,
         title: s.title,
       }));
@@ -931,15 +929,39 @@ export default {
       },
     ];
 
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
-    );
-    const allRoutes = routes.concat(translatedRoutes);
+    // reduce() allows us to process multiple languages in sequence
+    await SUPPORTED_LANG_CODES.reduce((promise, langCode) => {
+      return promise.then(async ()=>{
+        const path = `/${langCode}`
+        console.log(`- Building routes for ${path}...`);
+        const pagesData = await makeAllPages(langCode, incrementalPageId)
+        pagesData.path = path;
+        allRoutes.push(pagesData)
+        if (langCode === "en") {
+          // Create pages without a path prefix for English pages.
+          defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          allRoutes.push(defaultPagesData)
+        }
+      })
+    }, Promise.resolve())
+
+    // parallel processing of all languages
+    /**
+    await SUPPORTED_LANG_CODES.map(async langCode => {
+      const path = `/${langCode}`
+      console.log(`- Building routes for ${path}...`);
+      const pagesData = await makeAllPages(langCode, incrementalPageId)
+      pagesData.path = path;
+      allRoutes.push(pagesData)
+      if (langCode === "en") {
+        // Create pages without a path prefix for English pages.
+        defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+        allRoutes.push(defaultPagesData)
+      }
+    })
+    **/
 
     return allRoutes;
   },
   plugins: ['react-static-plugin-react-router'],
-  prefetchRate: Number(process.env.REACT_STATIC_PREFETCH_RATE) || 0,
 };
