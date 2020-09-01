@@ -12,7 +12,7 @@ const SearchBar = ({ intl }) => {
     if (isOpen) {
       if (typeof window !== 'undefined') {
         /*
-          If the search bar changed to do quick search results. Let's componentize the 
+          If the search bar changed to do quick search results. Let's componentize the
           quick search filter and use it here as well as on the search page.
         */
         const searchTerm = document.getElementById("coa_SearchBar__input")

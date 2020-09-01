@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
+import HtmlFromRichText from 'components/HtmlFromRichText';
 
 const OfficialDocumentEntry = ({ 
   page: {
@@ -20,6 +21,8 @@ const OfficialDocumentEntry = ({
   },
   intl
 }) => {
+
+  const summaryBlock = <HtmlFromRichText content={summary} /> 
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?
@@ -42,7 +45,7 @@ const OfficialDocumentEntry = ({
       <a href={entryUrl(departments, slug)}>
         <h2 className="coa-OfficialDocumentPage__title">{title}</h2>
       </a>
-      <p>{summary}</p>
+      <p>{summaryBlock}</p>
       <div className="coa-OfficialDocumentPage__small-heading-container">
         <span className="coa-OfficialDocumentPage__small-heading">{intl.formatMessage(i18n.author)}:</span> {authoringOffice}
       </div>
