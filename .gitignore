@@ -41,3 +41,6 @@ src/**/*.css
 
 # react-static
 artifacts/
+
+# elasticsearch
+data_elasticsearch/
