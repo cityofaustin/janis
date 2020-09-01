@@ -733,8 +733,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
+  fs = require('fs')
+  fs.writeFileSync(__dirname + `/pages_${langCode}.json`, JSON.stringify(pages))
   const indexName = `local_${langCode}_${Date.now()}`
-  buildElasticsearchIndex(pages, indexName)
+  await buildElasticsearchIndex(pages, indexName)
   // Build search index here before pages is altered.
   const searchIndex = searchIndexBuilder(pages);
 

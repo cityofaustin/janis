@@ -16,24 +16,31 @@ const JANIS_BASE_PAGE_WITH_TOPIC_COLLECTIONS = "janisbasepagewithtopiccollection
 const pageTypeDefinition = {
   "location page": {
     "addExtraFields": (doc, specificNode) => {
-      return Object.assign(doc, ({
+      const fieldsToAdd = [
         "physicalStreet",
         "physicalUnit",
         "physicalCity",
         "physicalState",
         "physicalZip",
-      } = specificNode))
+      ]
+      fieldsToAdd.forEach(field => {
+        doc[field] = specificNode[field]
+      })
+      return doc
     }
   },
   "event page": {
     "addExtraFields": (doc, specificNode) => {
-      doc = Object.assign(doc, ({
+      const fieldsToAdd = [
         "date",
         "startTime",
         "endTime",
         "eventIsFree",
         "registrationUrl",
-      } = specificNode))
+      ]
+      fieldsToAdd.forEach(field => {
+        doc[field] = specificNode[field]
+      })
       doc.location = specificNode.locations[0]
       doc.eventUrl = specificNode.janisUrls[0]
       if (specificNode.eventIsFree) {
@@ -88,7 +95,7 @@ const getSpecificNode = (node, pageTypeFieldName) => {
     [lang code "es" or "en"] +
     [approximate timestamp of index creation (should be same for all languages)]
 **/
-const buildElasticsearchIndex = function(pages, indexName) {
+const buildElasticsearchIndex = async function(pages, indexName) {
   const body = [];
 
   pages.forEach(page => {
@@ -126,7 +133,7 @@ const buildElasticsearchIndex = function(pages, indexName) {
       const {janisInstances} = node;
       if (janisInstances.length) {
         body.topics = []
-        janisInstances.forEach(instance) => {
+        janisInstances.forEach(instance => {
           if (instance.parent && instance.parent.title) {
             topics.push(instance.parent.title)
           }
