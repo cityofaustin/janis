@@ -885,6 +885,7 @@ export default {
       },
     ];
     const requests = [];
+    console.log('supported lang codes ', SUPPORTED_LANG_CODES)
     // const data = {};
 // SUPPORTED_LANG_CODES.map(langCode => {
 //       const client = createGraphQLClientsByLang(langCode);

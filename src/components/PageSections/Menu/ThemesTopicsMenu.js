@@ -18,11 +18,6 @@ const TopicsLinks = props => {
     }
   }
 
-<<<<<<< HEAD
-const ThemesTopicsMenu = props => {
-  console.log(props)
-=======
->>>>>>> master
   return (
     <div className="coa-ThemesTopicsMenu__topics-container">
 
