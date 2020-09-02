@@ -727,7 +727,6 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     const siteStructure = await client.request(allPagesQuery, { after: after });
     pages = pages.concat(siteStructure.allPages.edges);
     after = siteStructure.allPages.pageInfo.endCursor;
-    console.log(after);
     if (!siteStructure.allPages.pageInfo.hasNextPage) {
       break;
     }
@@ -877,171 +876,40 @@ export default {
   }),
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
-    const queries = [
-      {
-        query: allThemesQuery,
-        dataKey: 'navigation',
-        middleware: cleanNavigation,
-      },
-    ];
-    const requests = [];
-    console.log('supported lang codes ', SUPPORTED_LANG_CODES)
+    // const queries = [
+    //   {
+    //     query: allThemesQuery,
+    //     dataKey: 'navigation',
+    //     middleware: cleanNavigation,
+    //   },
+    // ];
     // const data = {};
-// SUPPORTED_LANG_CODES.map(langCode => {
-//       const client = createGraphQLClientsByLang(langCode);
-//       queries.map(query => {
-//         requests.push(client.request(query.query));
-//         data[query.dataKey] = data[query.dataKey] || {};
-//         data[query.dataKey][langCode] = null;
-//       });
-//     });
+    // SUPPORTED_LANG_CODES.map(langCode => {
+    //       const client = createGraphQLClientsByLang(langCode);
+    //       queries.map(query => {
+    //         requests.push(client.request(query.query));
+    //         data[query.dataKey] = data[query.dataKey] || {};
+    //         data[query.dataKey][langCode] = null;
+    //       });
+    //     });
 
-//     (await Promise.all(requests)).forEach((response, i) => {
-//       const queryIndex = i % queries.length;
-//       const langIndex = (i - queryIndex) / queries.length;
-//       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
-//         typeof queries[queryIndex].middleware === 'function'
-//           ? queries[queryIndex].middleware(
-//               response,
-//               SUPPORTED_LANG_CODES[langIndex],
-//             )
-//           : response;
-//     });
-
-   const data = {
-      navigation: { 
-        en: [
-          {
-            id: 'VGhlbWVOb2RlOjE=',
-            slug: 'permits-tickets',
-            text: 'Permits and tickets',
-            description: '',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/permits-tickets'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjI=',
-            slug: 'health-safety',
-            text: 'Health and safety',
-            description: 'Find the resources you need to keep you and your family health and safe.',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/health-safety'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjM=',
-            slug: 'housing-utilities',
-            text: 'Housing and utilities',
-            description: 'Find the resources to keep your home, apartment, or condo running smoothly.',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/housing-utilities'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjQ=',
-            slug: 'jobs',
-            text: 'Jobs',
-            description: '',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/jobs'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjU=',
-            slug: 'government-business',
-            text: 'Government and business',
-            description: '',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/government-business'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjY=',
-            slug: 'pets',
-            text: 'Pets',
-            description: '',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/pets'
-          },
-          {
-            id: 'VGhlbWVOb2RlOjc=',
-            slug: 'explore-visit',
-            text: 'Explore and visit',
-            description: '',
-            topicCollectionPages: { edges: [] },
-            topics: null,
-            url: '/explore-visit'
-          }
-        ],
-      es: 
-[
-  {
-    id: 'VGhlbWVOb2RlOjE=',
-    slug: 'permits-tickets',
-    text: 'Permisos y multas',
-    description: '',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/permits-tickets'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjI=',
-    slug: 'health-safety',
-    text: 'Salud y seguridad',
-    description: 'Find the resources you need to keep you and your family health and safe.',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/health-safety'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjM=',
-    slug: 'housing-utilities',
-    text: 'Vivienda y servicios públicos',
-    description: 'Find the resources to keep your home, apartment, or condo running smoothly.',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/housing-utilities'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjQ=',
-    slug: 'jobs',
-    text: 'Empleos',
-    description: '',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/jobs'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjU=',
-    slug: 'government-business',
-    text: 'Gobierno y negocios',
-    description: '',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/government-business'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjY=',
-    slug: 'pets',
-    text: 'Mascotas',
-    description: '',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/pets'
-  },
-  {
-    id: 'VGhlbWVOb2RlOjc=',
-    slug: 'explore-visit',
-    text: 'Explore y visite',
-    description: '',
-    topicCollectionPages: { edges: [] },
-    topics: null,
-    url: '/explore-visit'
-  }
-]}};
-
+    //     (await Promise.all(requests)).forEach((response, i) => {
+    //       const queryIndex = i % queries.length;
+    //       const langIndex = (i - queryIndex) / queries.length;
+    //       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
+    //         typeof queries[queryIndex].middleware === 'function'
+    //           ? queries[queryIndex].middleware(
+    //               response,
+    //               SUPPORTED_LANG_CODES[langIndex],
+    //             )
+    //           : response;
+    //     });
+    const data = {'navigation': {}}
+    SUPPORTED_LANG_CODES.map(async langCode => {
+      const client = await createGraphQLClientsByLang(langCode);
+      let response = await client.request(allThemesQuery);
+      data['navigation'][langCode] = cleanNavigation(response, langCode)
+    })
 
     return data;
   },
