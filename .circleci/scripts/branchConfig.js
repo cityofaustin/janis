@@ -31,7 +31,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3',
   },
   '4129-graphql-api': {
-    joplin_appname: 'joplin-pr-4129-graphql-api',
+    joplin_appname: 'joplin-pr-4769-preview-graphql',
   },
   '4758-hyperlink': {
     joplin_appname: 'joplin-pr-4758-hyperlink',

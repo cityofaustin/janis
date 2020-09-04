@@ -716,7 +716,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
-  const path = `/${!!langCode ? langCode : ''}`;
+  const path = `/${langCode}`;
   console.log(`- Building routes for ${path}...`);
 
   const client = await createGraphQLClientsByLang(langCode);
@@ -876,34 +876,6 @@ export default {
   }),
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
-    // const queries = [
-    //   {
-    //     query: allThemesQuery,
-    //     dataKey: 'navigation',
-    //     middleware: cleanNavigation,
-    //   },
-    // ];
-    // const data = {};
-    // SUPPORTED_LANG_CODES.map(langCode => {
-    //       const client = createGraphQLClientsByLang(langCode);
-    //       queries.map(query => {
-    //         requests.push(client.request(query.query));
-    //         data[query.dataKey] = data[query.dataKey] || {};
-    //         data[query.dataKey][langCode] = null;
-    //       });
-    //     });
-
-    //     (await Promise.all(requests)).forEach((response, i) => {
-    //       const queryIndex = i % queries.length;
-    //       const langIndex = (i - queryIndex) / queries.length;
-    //       data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
-    //         typeof queries[queryIndex].middleware === 'function'
-    //           ? queries[queryIndex].middleware(
-    //               response,
-    //               SUPPORTED_LANG_CODES[langIndex],
-    //             )
-    //           : response;
-    //     });
     const data = {'navigation': {}}
     SUPPORTED_LANG_CODES.map(async langCode => {
       const client = await createGraphQLClientsByLang(langCode);
@@ -931,14 +903,19 @@ export default {
       },
     ];
 
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+    await Promise.all(
+      SUPPORTED_LANG_CODES.map(async (langCode) => {
+        const pagesData = await makeAllPages(langCode, incrementalPageId)
+        routes.push(pagesData)
+        if (langCode === "en") {
+          // Create pages without a path prefix for default routes using English data.
+          const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          routes.push(defaultPagesData)
+        }
+      })
     );
-    const allRoutes = routes.concat(translatedRoutes);
 
-    return allRoutes;
+    return routes;
   },
   plugins: ['react-static-plugin-react-router'],
   prefetchRate: Number(process.env.REACT_STATIC_PREFETCH_RATE) || 0,

@@ -9,12 +9,19 @@ export const createGraphQLClientsByLang = async (lang, CMS_API) => {
   const variables = {email: 'admin@austintexas.io', password: 'x'}
 
   return request(joplinEndpoint, getToken, variables).then(data => {
-    console.log('DATA', data);
     return new GraphQLClient(joplinEndpoint, {
       headers: { 'Accept-Language': lang, 'Authorization': `JWT ${data.tokenAuth.token}` },
     });
   })
 };
+
+export const createPreviewGraphQLClientsByLang = (lang, CMS_PREVIEW_API) => {
+  const joplinPreviewEndpoint = CMS_PREVIEW_API || process.env.CMS_PREVIEW_API
+  return new GraphQLClient(joplinPreviewEndpoint, {
+    headers: {'Accept-Language': lang }
+  })
+}
+
 
 export const postFeedback = data => {
   const { title, description } = data;

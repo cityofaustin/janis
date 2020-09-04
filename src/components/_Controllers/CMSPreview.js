@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router';
 import { injectIntl } from 'react-intl';
 import { request } from 'graphql-request';
 import queryString from 'query-string';
-import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
+import { createPreviewGraphQLClientsByLang } from 'js/helpers/fetchData';
 import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 import {
   getPageRevisionQuery,
@@ -53,14 +53,14 @@ class CMSPreview extends Component {
       },
     } = this.props;
 
-    // CMS_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
-    const { CMS_API } = queryString.parse(this.props.location.search);
+    // CMS_PREVIEW_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
+    const { PREVIEW_CMS_API } = queryString.parse(this.props.location.search);
 
     // Save Preview data for every locale
     const preview_locales = ['en', 'es'];
     return Promise.all(
       preview_locales.map(async locale => {
-        const client = createGraphQLClientsByLang(locale, CMS_API);
+        const client = createPreviewGraphQLClientsByLang(locale, PREVIEW_CMS_API);
         const data = await client.request(getPageRevisionQuery[page_type], {
           id: revision_id,
         });
