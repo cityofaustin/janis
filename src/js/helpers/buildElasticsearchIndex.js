@@ -4,7 +4,7 @@ const { Client } = require('@elastic/elasticsearch')
   ### How buildElasticsearchIndex works:
 
   Each page in our searchIndex is called a "doc", per elasticsearch's terminology.
-  Every "doc" will have at least these fields: "title", "summary", "janisUrls", and "pageType".
+  Every "doc" will have at least these fields: "title", "searchSummary", "janisUrls", and "pageType".
 
   If a pageType needs more fields than these,
   then they can be added to the "addExtraFields" function within the pageTypesToIndex object.
@@ -16,7 +16,7 @@ const { Client } = require('@elastic/elasticsearch')
   ### How to add a new pageType to the index:
   Add it to the pageTypesToIndex object.
   If there are extra fields to add, then add an optional "addExtraFields" function.
-  The data that goes into the "summary" field is specified by the pageType's model within Joplin.
+  The data that goes into the "searchSummary" field is specified by the contentType model's search_summary property within Joplin.
 **/
 
 // Tokens, to prevent typos of strings
@@ -165,7 +165,7 @@ const buildElasticsearchIndex = async function(pages, indexName="", withElastics
   pages.forEach(page => {
     // console.log("a page?", page)
     const {node} = page;
-    const {janisUrls, pageType, parentClass} = node;
+    const {janisUrls, pageType, parentClass, searchSummary} = node;
     // Skip pages that don't have a janisUrl
     if (!janisUrls.length) {
       return
@@ -184,7 +184,7 @@ const buildElasticsearchIndex = async function(pages, indexName="", withElastics
 
     let doc = {
       title: specificNode.title,
-      summary: specificNode.searchSummary,
+      searchSummary: searchSummary,
       janisUrls: janisUrls,
       pageType: pageType,
     }
