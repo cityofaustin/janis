@@ -84,7 +84,17 @@ const pageTypesToIndex = {
   "information page": {
   },
   "official document page": {
-    // TODO: official document pages/collections will need work
+    "addExtraFields": (doc, node, specificNode) => {
+      doc = addFieldsToDoc(doc, specificNode, [
+        "authoringOffice",
+        "document",
+        "body",
+      ])
+      doc.partOf = specificNode.officialDocumentCollection.edges[0].node.officialDocumentCollection
+      return doc
+    }
+  },
+  "official document collection": {
   },
 }
 
