@@ -6,7 +6,6 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 import buildElasticsearchIndex from 'js/helpers/buildElasticsearchIndex.js';
 import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
@@ -734,12 +733,13 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
-  // const fs = require('fs')
-  // fs.writeFileSync(__dirname + `/pages_${langCode}.json`, JSON.stringify(pages))
+  /**
+    Build search index here before pages are altered.
+    Hardcoding "withElasticsearch" and "indexName" for now.
+  **/
+  const withElasticsearch = false
   const indexName = `local_${langCode}_${Date.now()}`
-  // await buildElasticsearchIndex(pages, indexName)
-  // Build search index here before pages is altered.
-  const searchIndex = searchIndexBuilder(pages);
+  const searchIndex = await buildElasticsearchIndex(pages, indexName, withElasticsearch)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -826,13 +826,19 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
-  // Add the search page with the site search Index.
+
+  /**
+    If we're not using elasticsearch,
+    then add searchIndex directly to the search page.
+  **/
+  let searchPageData = {}
+  if (!withElasticsearch) {
+    searchPageData = { searchIndex }
+  }
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => {
-      return { searchIndex };
-    },
+    getData: () => searchPageData,
   });
 
   const data = {
