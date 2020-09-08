@@ -717,6 +717,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
+  const path = `/${langCode}`
+  console.log(`- Building routes for ${path}...`);
+
   const client = createGraphQLClientsByLang(langCode);
 
   let pages = [];
@@ -734,7 +737,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // const fs = require('fs')
   // fs.writeFileSync(__dirname + `/pages_${langCode}.json`, JSON.stringify(pages))
   const indexName = `local_${langCode}_${Date.now()}`
-  await buildElasticsearchIndex(pages, indexName)
+  // await buildElasticsearchIndex(pages, indexName)
   // Build search index here before pages is altered.
   const searchIndex = searchIndexBuilder(pages);
 
@@ -929,39 +932,18 @@ export default {
       },
     ];
 
-    // reduce() allows us to process multiple languages in sequence
-    await SUPPORTED_LANG_CODES.reduce((promise, langCode) => {
-      return promise.then(async ()=>{
-        const path = `/${langCode}`
-        console.log(`- Building routes for ${path}...`);
-        const pagesData = await makeAllPages(langCode, incrementalPageId)
-        pagesData.path = path;
-        allRoutes.push(pagesData)
-        if (langCode === "en") {
-          // Create pages without a path prefix for English pages.
-          defaultPagesData = Object.assign({}, pagesData, {path: '/'})
-          allRoutes.push(defaultPagesData)
-        }
-      })
-    }, Promise.resolve())
-
     // parallel processing of all languages
-    /**
-    await SUPPORTED_LANG_CODES.map(async langCode => {
-      const path = `/${langCode}`
-      console.log(`- Building routes for ${path}...`);
-      const pagesData = await makeAllPages(langCode, incrementalPageId)
-      pagesData.path = path;
-      allRoutes.push(pagesData)
+    await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
+      const allPagesForLang = await makeAllPages(langCode, incrementalPageId)
+      routes.push(allPagesForLang)
       if (langCode === "en") {
-        // Create pages without a path prefix for English pages.
-        defaultPagesData = Object.assign({}, pagesData, {path: '/'})
-        allRoutes.push(defaultPagesData)
+        // Create pages with the index '/' path prefix.
+        const allPagesForIndex = Object.assign({}, allPagesForLang, {path: '/'})
+        routes.push(allPagesForIndex)
       }
-    })
-    **/
+    }))
 
-    return allRoutes;
+    return routes;
   },
   plugins: ['react-static-plugin-react-router'],
 };
