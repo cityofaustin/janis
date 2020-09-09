@@ -6,7 +6,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
-import buildElasticsearchIndex from 'js/helpers/buildElasticsearchIndex.js';
+import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
 import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
@@ -739,7 +739,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   **/
   const withElasticsearch = false
   const indexName = `local_${langCode}_${Date.now()}`
-  const searchIndex = await buildElasticsearchIndex(pages, indexName, withElasticsearch)
+  const searchIndex = await searchIndexBuilder(pages, indexName, withElasticsearch)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
