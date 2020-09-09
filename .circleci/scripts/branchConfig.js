@@ -36,6 +36,9 @@ const branchOverrides = {
   'nav-cleanup': {
     joplin_appname: 'joplin'
   },
+  'push': {
+    joplin_appname: 'joplin'
+  },
   '4872-link-doc-summary': {
     joplin_appname: 'joplin-pr-4872-link-summary',
   }

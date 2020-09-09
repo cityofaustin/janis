@@ -126,6 +126,7 @@
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
   z-index: 2;
+  height: 100%;
   .coa-FullSiteMenu__subNav {
     display: block;
   }
