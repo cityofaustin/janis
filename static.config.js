@@ -716,7 +716,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
-  const path = `/${langCode}`
+  const path = `/${langCode || ''}`
   console.log(`- Building routes for ${path}...`);
 
   const client = createGraphQLClientsByLang(langCode);
@@ -857,7 +857,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       );
 
       const topServices = services.map(s => ({
-        type: langCode,
+        type: langCode || 'en',
         url: s.url,
         title: s.title,
       }));
@@ -939,17 +939,14 @@ export default {
     ];
 
     // parallel processing of all languages
-    await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
-      const allPagesForLang = await makeAllPages(langCode, incrementalPageId)
-      routes.push(allPagesForLang)
-      if (langCode === "en") {
-        // Create pages with the index '/' path prefix.
-        const allPagesForIndex = Object.assign({}, allPagesForLang, {path: '/'})
-        routes.push(allPagesForIndex)
-      }
-    }))
+    const allLangs = Array.from(SUPPORTED_LANG_CODES);
+    allLangs.unshift(undefined);
+    const translatedRoutes = await Promise.all(
+      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+    );
+    const allRoutes = routes.concat(translatedRoutes);
 
-    return routes;
+    return allRoutes
   },
   plugins: ['react-static-plugin-react-router'],
 };
