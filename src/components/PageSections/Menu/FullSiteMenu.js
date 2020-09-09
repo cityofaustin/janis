@@ -32,24 +32,55 @@ const FullSiteMenu = props => {
       </div>
 
       {!isMobile &&
-        <section className="coa-FullSiteMenu__container">
-          <div className="wrapper container-fluid">
-            <div className="coa-MessageWIP">
-              <WorkInProgressBanner />
+        <div style={ props.isTopMenuActive ? {
+            backgroundColor: 'rgba(27,27,27,0.25)',
+            paddingBottom: '70px',
+            paddingTop: '1px' //  should be conditional in WIP message
+          } : {} }>
+          <section className="coa-FullSiteMenu__container">
+            <div className="wrapper container-fluid">
+              <div className="coa-MessageWIP">
+                <WorkInProgressBanner />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <section className="coa-FullSiteMenu__subNav">
+            <div className="wrapper container-fluid">
+              <ThemesTopicsMenu
+                menu={props.navigation}
+                handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+                slug={props.slug}
+              />
+            </div>
+          </section>
+        </div>
+
+
       }
 
-      <section className="coa-FullSiteMenu__subNav">
-        <div className="wrapper container-fluid">
-          <ThemesTopicsMenu
-            menu={props.navigation}
-            handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-            slug={props.slug}
-          />
-        </div>
-      </section>
+
+      {/*
+        {!isMobile &&
+          <section className="coa-FullSiteMenu__container">
+            <div className="wrapper container-fluid">
+              <div className="coa-MessageWIP">
+                <WorkInProgressBanner />
+              </div>
+            </div>
+          </section>
+        }
+
+        <section className="coa-FullSiteMenu__subNav">
+          <div className="wrapper container-fluid">
+            <ThemesTopicsMenu
+              menu={props.navigation}
+              handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+              slug={props.slug}
+            />
+          </div>
+        </section>
+      */}
 
     </div>
   )
