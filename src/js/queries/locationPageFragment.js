@@ -62,7 +62,7 @@ const locationPageFragment = `
           relatedService {
             id
             title
-            janisUrl
+            janisUrls
             contact {
               phoneNumbers {
                 edges {

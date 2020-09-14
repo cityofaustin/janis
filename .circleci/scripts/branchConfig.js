@@ -35,7 +35,10 @@ const branchOverrides = {
   },
   '4872-link-doc-summary': {
     joplin_appname: 'joplin-pr-4872-link-summary',
-  }
+  },
+  '4776-elastic': {
+    joplin_appname: 'joplin-pr-4776-elastic'
+  },
 };
 
 module.exports = {
