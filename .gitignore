@@ -6,6 +6,7 @@
 # dev
 /tmp
 /storybook-static
+.env
 
 # testing
 /coverage
@@ -40,3 +41,6 @@ src/**/*.css
 
 # react-static
 artifacts/
+
+# elasticsearch
+data_elasticsearch/

@@ -22,7 +22,7 @@ const SearchResult = ({ page }) => {
 const DefaultPageResult = function({ page }) {
   const {
     title,
-    summary,
+    searchSummary,
     topics,
     pageType,
     janisUrls
@@ -38,9 +38,9 @@ const DefaultPageResult = function({ page }) {
         {title}
       </a>
 
-      { summary && (
+      { searchSummary && (
         <div className="coa-search_result-text">
-          {summary}
+          {searchSummary}
         </div>
       )}
 
@@ -62,7 +62,7 @@ const OfficialDocumentPage = function({ page }) {
     janisUrls,
     title,
     date,
-    summary,
+    searchSummary,
     document,
     topics,
   } = page
@@ -78,7 +78,7 @@ const OfficialDocumentPage = function({ page }) {
       </a>
 
       <div className="coa-search_result-text">
-        {summary}
+        {searchSummary}
       </div>
 
       <div className="coa-search_result-topics">
