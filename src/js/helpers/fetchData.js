@@ -5,8 +5,7 @@ import getToken from 'js/mutations/getToken.js'
 export const createGraphQLClientsByLang = async (lang, CMS_API) => {
   const joplinEndpoint = CMS_API || process.env.CMS_API
 
-  // const variables = {email: process.env.EMAIL, password: process.env.PASSWORD}
-  const variables = {email: 'admin@austintexas.io', password: 'x'}
+  const variables = {email: process.env.API_USERNAME, password: process.env.API_PASSWORD}
 
   return request(joplinEndpoint, getToken, variables).then(data => {
     return new GraphQLClient(joplinEndpoint, {
