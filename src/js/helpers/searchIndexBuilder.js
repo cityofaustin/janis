@@ -73,16 +73,11 @@ const pageTypesToIndex = {
       return doc
     }
   },
-  "department page": {
-  },
-  "topic collection page": {
-  },
-  "service page": {
-  },
-  "guide page": {
-  },
-  "information page": {
-  },
+  "department page": {},
+  "topic collection page": {},
+  "service page": {},
+  "guide page": {},
+  "information page": {},
   "official document page": {
     "addExtraFields": (doc, node, specificNode) => {
       doc = addFieldsToDoc(doc, specificNode, [
@@ -94,8 +89,8 @@ const pageTypesToIndex = {
       return doc
     }
   },
-  "official document collection": {
-  },
+  "official document collection": {},
+  "form container": {},
 }
 
 /**
