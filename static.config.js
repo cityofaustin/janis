@@ -716,15 +716,20 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
+<<<<<<< HEAD
   const path = `/${langCode}`;
+=======
+  const path = `/${langCode || ''}`
+>>>>>>> master
   console.log(`- Building routes for ${path}...`);
 
   const client = await createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
+  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 25
   while (true) {
-    const siteStructure = await client.request(allPagesQuery, { after: after });
+    const siteStructure = await client.request(allPagesQuery, { after: after, batchSize: batchSize});
     pages = pages.concat(siteStructure.allPages.edges);
     after = siteStructure.allPages.pageInfo.endCursor;
     if (!siteStructure.allPages.pageInfo.hasNextPage) {
@@ -732,8 +737,13 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     }
   }
 
-  // Build search index here before pages is altered.
-  const searchIndex = searchIndexBuilder(pages);
+  /**
+    Build search index here before pages are altered.
+    Hardcoding "withElasticsearch" and "indexName" for now.
+  **/
+  const withElasticsearch = false
+  const indexName = `local_${langCode}_${Date.now()}`
+  const searchIndex = await searchIndexBuilder(pages, indexName, withElasticsearch)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -820,13 +830,19 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
-  // Add the search page with the site search Index.
+
+  /**
+    If we're not using elasticsearch,
+    then add searchIndex directly to the search page.
+  **/
+  let searchPageData = {}
+  if (!withElasticsearch) {
+    searchPageData = { searchIndex }
+  }
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => {
-      return { searchIndex };
-    },
+    getData: () => searchPageData,
   });
 
   const data = {
@@ -845,7 +861,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       );
 
       const topServices = services.map(s => ({
-        type: !!langCode ? langCode : 'en',
+        type: langCode || 'en',
         url: s.url,
         title: s.title,
       }));
@@ -916,7 +932,16 @@ export default {
     );
 
     return routes;
+
+    //     // parallel processing of all languages
+    // const allLangs = Array.from(SUPPORTED_LANG_CODES);
+    // allLangs.unshift(undefined);
+    // const translatedRoutes = await Promise.all(
+    //   allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+    // );
+    // const allRoutes = routes.concat(translatedRoutes);
+
+    // return allRoutes
   },
   plugins: ['react-static-plugin-react-router'],
-  prefetchRate: Number(process.env.REACT_STATIC_PREFETCH_RATE) || 0,
 };
