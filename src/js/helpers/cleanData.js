@@ -79,7 +79,7 @@ export const cleanContact = contact => {
         zip: cleaned.locationPage.physicalZip,
       };
     }
-    
+
     cleaned.locationPageSlug = cleaned.locationPage.slug;
   }
 
@@ -94,9 +94,9 @@ export const cleanContact = contact => {
   return cleaned;
 };
 
-export const cleanLocationPageJanisUrl = janisUrl => {
-  if (!!janisUrl.length) {
-    return janisUrl[0];
+export const cleanLocationPageUrl = janisUrls => {
+  if (!!janisUrls.length) {
+    return janisUrls[0];
   }
   return '/';
 };
@@ -201,7 +201,7 @@ export const cleanLocationPage = locationPage => {
       exceptions: edge.node.relatedService.hoursExceptions,
       hoursSameAsLocation: edge.node.hoursSameAsLocation,
       //janisUrl is an array of urls, checks to see if there is length and if so takes the 1st one
-      url: cleanLocationPageJanisUrl(edge.node.relatedService.janisUrl),
+      url: cleanLocationPageUrl(edge.node.relatedService.janisUrls),
       phones:
         edge.node.relatedService.contact &&
         edge.node.relatedService.contact.phoneNumbers &&
@@ -555,4 +555,3 @@ export const cleanOfficialDocumentPageCollections = officialDocumentCollection =
   }
   return cleanedOfficialDocumentCollection;
 };
-
