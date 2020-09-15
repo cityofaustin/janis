@@ -716,11 +716,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     makeAllPages returns react-static data object with homepage
     and all built pages as children for '/en', '/es' and '/'
   */
-<<<<<<< HEAD
-  const path = `/${langCode}`;
-=======
   const path = `/${langCode || ''}`
->>>>>>> master
   console.log(`- Building routes for ${path}...`);
 
   const client = await createGraphQLClientsByLang(langCode);
