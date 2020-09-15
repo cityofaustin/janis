@@ -34,7 +34,11 @@ const FullSiteMenu = props => {
       {!isMobile &&
         <div style={ props.isTopMenuActive ? {
             backgroundColor: 'rgba(27,27,27,0.25)',
-            paddingBottom: '70px',
+            // paddingBottom: '70px',
+            // flex: '0 1 40px',
+            display: 'flex',
+            flexFlow: 'column',
+            height: '100%',
             paddingTop: '1px' //  should be conditional in WIP message
           } : {} }>
           <section className="coa-FullSiteMenu__container">
