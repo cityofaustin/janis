@@ -53,7 +53,7 @@ class CMSPreview extends Component {
       },
     } = this.props;
 
-    // CMS_PREVIEW_API param to build previews against non-default Joplin (ex: ?CMS_API=http://localhost:8000)
+    // CMS_PREVIEW_API param to build previews against non-default Joplin (ex: ?CMS_PREVIEW_API=http://localhost:8000)
     const { PREVIEW_CMS_API } = queryString.parse(this.props.location.search);
 
     // Save Preview data for every locale
