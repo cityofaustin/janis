@@ -40,7 +40,8 @@ const FullSiteMenu = props => {
         </div>
 
 
-          <div style={ props.isTopMenuActive ? {
+          <div className="coa-FullSiteMenu_dropdown" 
+            style={ props.isTopMenuActive ? {
               position: "absolute",
               height: '100%',
               width: "100%",
@@ -56,7 +57,7 @@ const FullSiteMenu = props => {
                 </div>
               </section>
             }
-            
+
             <section className="coa-FullSiteMenu__subNav">
               <div className="wrapper container-fluid">
                 <ThemesTopicsMenu
