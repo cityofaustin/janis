@@ -13,58 +13,88 @@ const FullSiteMenu = props => {
   const isMobile = useMobileQuery();
 
   return (
-    <div
-      ref={props.refnode}
-      className={
-        'coa-FullSiteMenu ' +
-        (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
-      }
-    >
+    <div>
 
-      <div className="wrapper">
-        <ThemesNav
-          handleOnClick={props.handleFullSiteMenuOpen}
-          isTopMenuActive={props.isTopMenuActive}
-          handleFullSiteMenuClose={props.handleFullSiteMenuClose}
-          navigation={props.navigation}
-          slug={props.slug}
-        />
-      </div>
+      <div
+        ref={props.refnode}
+        className={
+          'coa-FullSiteMenu ' +
+          (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
+        }
+        style={ (!isMobile && props.isTopMenuActive) ? {
+          position: "absolute",
+          width: "100%",
+          height: '100%',
+          backgroundColor: 'rgba(27,27,27,0)',
+        } : {} }
+      >
 
-      {!isMobile &&
-        <div style={ props.isTopMenuActive ? {
-            backgroundColor: 'rgba(27,27,27,0.25)',
-            // paddingBottom: '70px',
-            // flex: '0 1 40px',
-            display: 'flex',
-            flexFlow: 'column',
-            height: '100%',
-            paddingTop: '1px' //  should be conditional in WIP message
-          } : {} }>
-          <section className="coa-FullSiteMenu__container">
-            <div className="wrapper container-fluid">
-              <div className="coa-MessageWIP">
-                <WorkInProgressBanner />
-              </div>
-            </div>
-          </section>
-
-          <section className="coa-FullSiteMenu__subNav">
-            <div className="wrapper container-fluid">
-              <ThemesTopicsMenu
-                menu={props.navigation}
-                handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-                slug={props.slug}
-              />
-            </div>
-          </section>
+        <div className="wrapper">
+          <ThemesNav
+            handleOnClick={props.handleFullSiteMenuOpen}
+            isTopMenuActive={props.isTopMenuActive}
+            handleFullSiteMenuClose={props.handleFullSiteMenuClose}
+            navigation={props.navigation}
+            slug={props.slug}
+          />
         </div>
 
 
+          <div style={ props.isTopMenuActive ? {
+              position: "absolute",
+              height: '100%',
+              width: "100%",
+              backgroundColor: 'rgba(27,27,27,0.25)',
+            } : {} }>
+
+            {!isMobile &&
+              <section className="coa-FullSiteMenu__container">
+                <div className="wrapper container-fluid">
+                  <div className="coa-MessageWIP">
+                    <WorkInProgressBanner />
+                  </div>
+                </div>
+              </section>
+            }
+            
+            <section className="coa-FullSiteMenu__subNav">
+              <div className="wrapper container-fluid">
+                <ThemesTopicsMenu
+                  menu={props.navigation}
+                  handleFullSiteMenuItem={props.handleFullSiteMenuItem}
+                  slug={props.slug}
+                />
+              </div>
+            </section>
+
+          </div>
+
+
+
+      </div>
+
+      { !isMobile && props.isTopMenuActive &&
+
+        <div
+          style={{
+            backgroundColor: "white",
+            height: "57px",
+          }}
+        ></div>
+
       }
 
-
       {/*
+        <div style={{
+            backgroundColor: "pink",
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            left: "0px",
+            bottom: "0px"
+        }}>
+          footer
+        </div>
         {!isMobile &&
           <section className="coa-FullSiteMenu__container">
             <div className="wrapper container-fluid">
