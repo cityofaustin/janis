@@ -37,8 +37,8 @@ switch(branch) {
     }
     break;
   default:
-    apiKey = process.env.COA_PUBLISHER_V2_API_KEY_PR
-    publisherUrl = process.env.CI_COA_PUBLISHER_V2_URL_PR
+    apiKey = "scpZlv00kb6QYvg1Whw3M1dSTvnStT9W5yoTMban"
+    publisherUrl = "https://ix7ttiidvi.execute-api.us-east-1.amazonaws.com/4607-slack/publish-request"
 }
 
 const headers = {

@@ -39,6 +39,9 @@ const branchOverrides = {
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
+  '4607-slack': {
+    joplin_appname: 'joplin-staging'
+  }
 };
 
 module.exports = {
