@@ -12,7 +12,6 @@ const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => (
       PageComponent={OfficialDocumentEntry}
       intl={intl}
     />
-    <UserFeedback />
   </div>
 );
 

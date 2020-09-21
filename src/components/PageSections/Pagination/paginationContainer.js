@@ -10,6 +10,7 @@ import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
 import { PageNumber } from 'components/PageSections/Pagination';
+import Filter from 'components/PageSections/Pagination/Filter';
 
 const PaginationContainer = ({
   pagesArray,
@@ -105,6 +106,7 @@ const PaginationContainer = ({
     <div>
       <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
+          <Filter/>
           <div className={`col-xs-12 ${fillTablet ? 'col-lg-8' : 'col-md-8'}`}>
             {currentPage &&
               currentPage.map((page, index) => (

@@ -6,6 +6,7 @@ import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
 import OfficialDocumentPaginationPage from 'components/Pages/OfficialDocuments/OfficialDocumentPaginationPage';
+import UserFeedback from 'components/UserFeedback';
 
 const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
   const {
@@ -46,6 +47,7 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
           officialDocuments={documents}
           intl={intl}
         />
+        <UserFeedback />
       </div>
     </div>
   );

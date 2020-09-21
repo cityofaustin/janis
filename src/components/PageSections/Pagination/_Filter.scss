@@ -1,0 +1,20 @@
+.coa-search-filter__container {}
+
+.coa-search-filter__rail_label {
+    font-size: 2rem;
+    font-weight: 500;
+    color: $coa-color-black-grey;
+}
+
+.coa-search-filter__box {
+    border: 1.5px solid #eaeaea;
+}
+
+// Remove number input up/down arrows
+.coa-search-filter__date_input {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
