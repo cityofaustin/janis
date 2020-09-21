@@ -8,7 +8,9 @@
 
 .coa-filter__rail_label {
     @extend %coa-filer__label;
+    font-weight: 500;
     font-size: 2rem;
+    margin-bottom: 1.6rem;
 }
 
 .coa-filter__box {
@@ -40,8 +42,17 @@
 }
 
 .coa-filter__date_input {
-    box-sizing: border-box;
+    box-sizing: content-box;
+    padding: 0 .25rem;
     text-align: center;
+
+    &.coa-filter__date_input_day,
+    &.coa-filter__date_input_month {
+        width: 2em;
+    }
+    &.coa-filter__date_input_year {
+        width: 4em;
+    }
 
     // Remove number input up/down arrows
     &::-webkit-inner-spin-button,
@@ -49,17 +60,6 @@
         -webkit-appearance: none;
         margin: 0;
     }
-}
-
-.coa-filter__date_input_day,
-.coa-filter__date_input_month {
-
-    width: 2em;
-
-}
-
-.coa-filter__date_input_day {
-    width: 4em;
 }
 
 .coa-filter__calendar_icon {

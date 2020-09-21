@@ -140,15 +140,17 @@ const DatePicker = ({label}) => {
 
 const NumberInput = ({label, value, onChange}) => {
   return (
-    <label>
-      <span className="coa-filter__date_input_label">{label}</span>
-      <input
-        className={`coa-filter__date_input coa-filter__date_input_${label.toLowerCase()}`}
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
-    </label>
+    <div>
+      <label>
+        <span className="coa-filter__date_input_label">{label}</span>
+        <input
+          className={`coa-filter__date_input coa-filter__date_input_${label.toLowerCase()}`}
+          type="text"
+          value={value}
+          onChange={e => onChange(e.target.value)}
+        />
+      </label>
+    </div>
   )
 }
 
