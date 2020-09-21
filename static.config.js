@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import filesize from 'filesize';
+import { cloneDeep } from 'lodash';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -921,7 +922,9 @@ export default {
         routes.push(pagesData)
         if (langCode === "en") {
           // Create pages without a path prefix for default routes using English data.
-          const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          // const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          const defaultPagesData = _.cloneDeep(pagesData);
+          defaultPagesData.path = '/'
           routes.push(defaultPagesData)
         }
       })
