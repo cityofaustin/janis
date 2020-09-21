@@ -1,20 +1,73 @@
-.coa-search-filter__container {}
+.coa-filter__container {}
 
-.coa-search-filter__rail_label {
-    font-size: 2rem;
-    font-weight: 500;
+%coa-filer__label {
+    display: block;
+    line-height: normal;
     color: $coa-color-black-grey;
 }
 
-.coa-search-filter__box {
-    border: 1.5px solid #eaeaea;
+.coa-filter__rail_label {
+    @extend %coa-filer__label;
+    font-size: 2rem;
 }
 
-// Remove number input up/down arrows
-.coa-search-filter__date_input {
+.coa-filter__box {
+    border: 1.5px solid #eaeaea;
+    padding: 1.6rem;
+}
+
+.coa-filter__box_label {
+    @extend %coa-filer__label;
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 1.6rem;
+}
+
+.coa-filter__date_fields_label {
+    @extend %coa-filer__label;
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+
+.coa-filter__date_fields {
+    display: flex;
+    flex-direction: row;
+}
+
+.coa-filter__date_input_label {
+    @extend %coa-filer__label;
+    font-size: 1.4rem;
+}
+
+.coa-filter__date_input {
+    box-sizing: border-box;
+    text-align: center;
+
+    // Remove number input up/down arrows
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+}
+
+.coa-filter__date_input_day,
+.coa-filter__date_input_month {
+
+    width: 2em;
+
+}
+
+.coa-filter__date_input_day {
+    width: 4em;
+}
+
+.coa-filter__calendar_icon {
+  display: block;
+  font-size: 32px;
+  margin-top: 37px;
+  color: #0049c7;
+  &:hover {
+      cursor: pointer;
+  }
 }

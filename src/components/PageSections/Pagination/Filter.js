@@ -2,14 +2,14 @@ import React, { useState, useReducer, useEffect } from 'react';
 
 const Filter = () => {
   return (
-    <div className="coa-search-filter__container col-md-3">
-      <span className="coa-search-filter__rail_label">Filter</span>
-      <div className="coa-search-filter__box">
-        <span className="coa-search-filter__rail_label">Date</span>
+    <div className="coa-filter__container col-md-3">
+      <span className="coa-filter__rail_label">Filter</span>
+      <div className="coa-filter__box">
+        <span className="coa-filter__box_label">Date</span>
         <DatePicker label="From"/>
         <DatePicker label="To"/>
       </div>
-      <div className="coa-search-filter__apply_button">
+      <div className="coa-filter__apply_button">
       </div>
     </div>
   )
@@ -115,8 +115,8 @@ const DatePicker = ({label}) => {
 
   return (
     <div>
-      <span className="coa-search-filter__rail_label">{label}</span>
-      <div>
+      <span className="coa-filter__date_fields_label">{label}</span>
+      <div className="coa-filter__date_fields">
         <NumberInput
           label="Month"
           value={month}
@@ -132,9 +132,7 @@ const DatePicker = ({label}) => {
           value={year}
           onChange={setYear}
         />
-        <div>
-          lil button
-        </div>
+        <i className="material-icons coa-filter__calendar_icon">event</i>
       </div>
     </div>
   )
@@ -143,9 +141,9 @@ const DatePicker = ({label}) => {
 const NumberInput = ({label, value, onChange}) => {
   return (
     <label>
-      {label}
+      <span className="coa-filter__date_input_label">{label}</span>
       <input
-        className="coa-search-filter__date_input"
+        className={`coa-filter__date_input coa-filter__date_input_${label.toLowerCase()}`}
         type="text"
         value={value}
         onChange={e => onChange(e.target.value)}
