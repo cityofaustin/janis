@@ -49,7 +49,7 @@ const DatePicker = ({label}) => {
     when we need to update all 3 at the same time.
   **/
   const [date, setDate] = useReducer((priorDate, newDate)=>{
-    let {month, day, year} = newDate;
+    let {month=null, day=null, year=null} = newDate;
 
     /**
     If invalid date values are entered, then don't register them.
@@ -67,51 +67,38 @@ const DatePicker = ({label}) => {
       year = "2020"
     }
 
+    const finalDate = {...priorDate}
+    if (month !== null) finalDate.month = month
+    if (day !== null) finalDate.day = day
+    if (year !== null) finalDate.year = year
+    let finalMonth = finalDate.month
+    let finalDay = finalDate.day
+    let finalYear = finalDate.year
+
     /**
       If all 3 date inputs are filled out,
       then we'll approximate the nearest valid date.
       For example: if someone enters February 31st,
       javascript's Date function will set it to March 2nd.
     **/
-    if (month && day && year) {
-      const validDate = new Date(year, month - 1, day);
-      month = validDate.getMonth() + 1;
-      day = validDate.getDate();
-      year = validDate.getFullYear();
+    if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
+      const validDate = new Date(finalYear, finalMonth - 1, finalDay);
+      finalDate.month = String(validDate.getMonth() + 1);
+      finalDate.day = String(validDate.getDate());
+      finalDate.year = String(validDate.getFullYear());
     }
 
-    return {...priorDate, ...{month, day, year}}
+    return finalDate
   }, {
     month: '',
     day: '',
     year: ''
   })
-  const {month, day, year} = date
 
+  const {month, day, year} = date
   const setMonth = (month) => setDate({month: month})
   const setDay = (day) => setDate({day: day})
   const setYear = (year) => setDate({year: year})
-
-  // useEffect(()=>{
-  //   if (!!month && !!day && !!year) {
-  //     const validDate = new Date(year, month - 1, day);
-  //     const validMonth = validDate.getMonth() + 1;
-  //     const validDay = validDate.getDate();
-  //     const validYear = validDate.getFullYear();
-  //     // If the date entered was invalid, then set the nearest valid date.
-  //     if (
-  //       validMonth !== month ||
-  //       validDay !== day ||
-  //       validYear !== year
-  //     ) {
-  //       setDate({
-  //         month: validMonth,
-  //         day: validDay,
-  //         year: validYear
-  //       })
-  //     }
-  //   }
-  // }, [date])
 
   return (
     <div>
@@ -138,7 +125,7 @@ const DatePicker = ({label}) => {
   )
 }
 
-const NumberInput = ({label, value, onChange}) => {
+const NumberInput = ({label, value="", onChange}) => {
   return (
     <div>
       <label>
