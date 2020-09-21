@@ -34,17 +34,29 @@
 .coa-filter__date_fields {
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
+}
+
+.coa-filter__date_input_container {
+    padding-right: 1rem;
 }
 
 .coa-filter__date_input_label {
     @extend %coa-filer__label;
     font-size: 1.4rem;
+    margin-bottom: .3rem;
 }
+
+$input-box-height: 4.4rem;
 
 .coa-filter__date_input {
     box-sizing: content-box;
     padding: 0 .25rem;
     text-align: center;
+    border-radius: 4px;
+    border-style: none;
+    background-color: $coa-color-gray-4;
+    height: $input-box-height;
 
     &.coa-filter__date_input_day,
     &.coa-filter__date_input_month {
@@ -62,10 +74,17 @@
     }
 }
 
+.coa-filter__calendar_icon_container {
+    height: $input-box-height;
+    text-align: center;
+    border-radius: 4px;
+    border-style: none;
+    background-color: #EDF5FF;
+    padding: 1rem;
+}
+
 .coa-filter__calendar_icon {
-  display: block;
-  font-size: 32px;
-  margin-top: 37px;
+  font-size: 2.5rem;
   color: #0049c7;
   &:hover {
       cursor: pointer;

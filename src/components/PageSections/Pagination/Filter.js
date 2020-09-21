@@ -119,7 +119,9 @@ const DatePicker = ({label}) => {
           value={year}
           onChange={setYear}
         />
-        <i className="material-icons coa-filter__calendar_icon">event</i>
+        <div className="coa-filter__calendar_icon_container">
+          <i className="material-icons coa-filter__calendar_icon">event</i>
+        </div>
       </div>
     </div>
   )
@@ -127,7 +129,7 @@ const DatePicker = ({label}) => {
 
 const NumberInput = ({label, value="", onChange}) => {
   return (
-    <div>
+    <div className="coa-filter__date_input_container">
       <label>
         <span className="coa-filter__date_input_label">{label}</span>
         <input
