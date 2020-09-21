@@ -923,7 +923,7 @@ export default {
         if (langCode === "en") {
           // Create pages without a path prefix for default routes using English data.
           // const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
-          const defaultPagesData = _.cloneDeep(pagesData);
+          const defaultPagesData = cloneDeep(pagesData);
           defaultPagesData.path = '/'
           routes.push(defaultPagesData)
         }
