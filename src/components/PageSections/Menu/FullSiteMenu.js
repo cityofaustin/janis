@@ -73,38 +73,6 @@ const FullSiteMenu = props => {
 
       }
 
-      {/*
-        <div style={{
-            backgroundColor: "pink",
-            position: "absolute",
-            top: "0px",
-            right: "0px",
-            left: "0px",
-            bottom: "0px"
-        }}>
-          footer
-        </div>
-        {!isMobile &&
-          <section className="coa-FullSiteMenu__container">
-            <div className="wrapper container-fluid">
-              <div className="coa-MessageWIP">
-                <WorkInProgressBanner />
-              </div>
-            </div>
-          </section>
-        }
-
-        <section className="coa-FullSiteMenu__subNav">
-          <div className="wrapper container-fluid">
-            <ThemesTopicsMenu
-              menu={props.navigation}
-              handleFullSiteMenuItem={props.handleFullSiteMenuItem}
-              slug={props.slug}
-            />
-          </div>
-        </section>
-      */}
-
     </div>
   )
 }

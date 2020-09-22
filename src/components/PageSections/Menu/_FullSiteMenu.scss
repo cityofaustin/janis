@@ -64,9 +64,9 @@
   color: $coa-color-burnt-coffee-black;
   line-height: 16px;
   &:hover {
-    color: $coa-color-white;
-    background-color: $coa-color-primary;
-    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
+    color: $coa-color-burnt-coffee-black;
+    background-color: $coa-color-blue-warm-5v;
+    box-shadow: 2px 5px 7px rgba(0,0,255,0.2);
     transition: background-color .3s, box-shadow .3s;
   }
 }
@@ -79,9 +79,8 @@
 .coa-ThemesNav__link.active {
   background-color: $coa-color-gray-4;
   &:hover {
-    color: $coa-color-white;
-    background-color: $coa-color-primary;
-    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
+    background-color: $coa-color-blue-warm-5v;
+    box-shadow: 2px 5px 7px rgba(0,0,255,0.2);
     transition: background-color .3s, box-shadow .3s;
   }
 }
