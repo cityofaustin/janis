@@ -21,12 +21,6 @@ const FullSiteMenu = props => {
           'coa-FullSiteMenu ' +
           (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
         }
-        style={ props.isTopMenuActive ? {
-          position: "absolute",
-          width: "100%",
-          height: '100%',
-          backgroundColor: 'rgba(0,0,0,0)',
-        } : {} }
       >
 
         <div className="wrapper">
@@ -39,13 +33,10 @@ const FullSiteMenu = props => {
           />
         </div>
 
-          <div className="coa-FullSiteMenu_dropdown"
-            style={ props.isTopMenuActive ? {
-              position: "absolute",
-              height: '100%',
-              width: "100%",
-              backgroundColor: 'rgba(27,27,27,0.25)',
-            } : {} }>
+          <div className={
+              (props.isTopMenuActive ? 'coa-FullSiteMenu_dropdown' : '')
+            }
+          >
 
             {!isMobile &&
               <section className="coa-FullSiteMenu__container">
