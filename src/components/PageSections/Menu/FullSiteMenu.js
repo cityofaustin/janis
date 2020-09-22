@@ -21,7 +21,7 @@ const FullSiteMenu = props => {
           'coa-FullSiteMenu ' +
           (props.isTopMenuActive ? 'coa-FullSiteMenu--active' : '')
         }
-        style={ (!isMobile && props.isTopMenuActive) ? {
+        style={ props.isTopMenuActive ? {
           position: "absolute",
           width: "100%",
           height: '100%',
@@ -40,7 +40,7 @@ const FullSiteMenu = props => {
         </div>
 
 
-          <div className="coa-FullSiteMenu_dropdown" 
+          <div className="coa-FullSiteMenu_dropdown"
             style={ props.isTopMenuActive ? {
               position: "absolute",
               height: '100%',
