@@ -25,7 +25,7 @@ const FullSiteMenu = props => {
           position: "absolute",
           width: "100%",
           height: '100%',
-          backgroundColor: 'rgba(27,27,27,0)',
+          backgroundColor: 'rgba(0,0,0,0)',
         } : {} }
       >
 
@@ -38,7 +38,6 @@ const FullSiteMenu = props => {
             slug={props.slug}
           />
         </div>
-
 
           <div className="coa-FullSiteMenu_dropdown"
             style={ props.isTopMenuActive ? {
@@ -69,8 +68,6 @@ const FullSiteMenu = props => {
             </section>
 
           </div>
-
-
 
       </div>
 
