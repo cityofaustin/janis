@@ -109,6 +109,7 @@ const DateFields = ({label}) => {
     day: '',
     year: ''
   })
+  const [openDayPicker, setOpenDayPicker] = useState(false)
 
   const {month, day, year} = dateFields
   const setMonth = (month) => setDateFields({month: month})
@@ -123,7 +124,6 @@ const DateFields = ({label}) => {
     }
     setDateFields(dateToFields(date))
   }
-
   const dayPickerDate = fieldsToDate(dateFields)
 
   return (
@@ -146,13 +146,19 @@ const DateFields = ({label}) => {
           onChange={setYear}
         />
         <div className="coa-filter__calendar_icon_container">
-          <i className="material-icons coa-filter__calendar_icon">event</i>
+          <i
+            className="material-icons coa-filter__calendar_icon"
+            onClick={() => setOpenDayPicker(!openDayPicker)}
+          >event</i>
         </div>
       </div>
-      <DayPicker
-        onDayClick={handleDayPickerClick}
-        selectedDays={dayPickerDate}
-      />
+      {openDayPicker && (
+        <DayPicker
+          onDayClick={handleDayPickerClick}
+          selectedDays={dayPickerDate}
+          month={dayPickerDate || new Date()}
+        />
+      )}
     </div>
   )
 }
