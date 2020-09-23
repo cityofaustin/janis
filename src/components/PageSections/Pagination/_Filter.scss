@@ -95,6 +95,14 @@ $input-box-height: 4.4rem;
 
 .coa-daypicker__container {
     font-size: 1.4rem;
+    border-radius: 4px;
+    background-color: $coa-color-gray-4;
+    margin-top: 1rem;
+    &.coa-daypicker__container-hidden {
+        visibility: hidden;
+        height: 0;
+        display: block;
+    }
 }
 
 .coa-daypicker__year-month-container {
@@ -117,4 +125,5 @@ $input-box-height: 4.4rem;
     padding-right: 1.5rem;
     padding-left: .5rem;
     background-position: right .25rem center;
+    background-color: $coa-color-gray-4;
 }

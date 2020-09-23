@@ -164,25 +164,23 @@ const DateFields = ({label, lowerBound, upperBound}) => {
           <i className="material-icons coa-filter__calendar_icon">event</i>
         </div>
       </div>
-      {openDayPicker && (
-        <DayPicker
-          className="coa-daypicker__container"
-          fromMonth={lowerBound}
-          toMonth={upperBound}
-          onDayClick={handleDayPickerClick}
-          selectedDays={dayPickerDate}
-          month={dayPickerMonth || dayPickerDate || new Date()}
-          captionElement={({ date, localeUtils }) => (
-            <YearMonthPicker
-              date={date}
-              localeUtils={localeUtils}
-              onChange={setDayPickerMonth}
-              fromMonth={lowerBound}
-              toMonth={upperBound}
-            />
-          )}
-        />
-      )}
+      <DayPicker
+        className={`coa-daypicker__container ${!openDayPicker && "coa-daypicker__container-hidden"}`}
+        fromMonth={lowerBound}
+        toMonth={upperBound}
+        onDayClick={handleDayPickerClick}
+        selectedDays={dayPickerDate}
+        month={dayPickerMonth || dayPickerDate || new Date()}
+        captionElement={({ date, localeUtils }) => (
+          <YearMonthPicker
+            date={date}
+            localeUtils={localeUtils}
+            onChange={setDayPickerMonth}
+            fromMonth={lowerBound}
+            toMonth={upperBound}
+          />
+        )}
+      />
     </div>
   )
 }
