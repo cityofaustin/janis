@@ -1,14 +1,25 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import DayPicker from "react-day-picker";
+import DayPicker, {LocaleUtils} from "react-day-picker";
 
 const Filter = () => {
+  const lowerBound = new Date(2018, 1, 1)
+  const upperBound = new Date()
+
   return (
     <div className="coa-filter__container col-md-3">
       <span className="coa-filter__rail_label">Filter</span>
       <div className="coa-filter__box">
         <span className="coa-filter__box_label">Date</span>
-        <DateFields label="From"/>
-        <DateFields label="To"/>
+        <DateFields
+          label="From"
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
+        <DateFields
+          label="To"
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
       </div>
       <div className="coa-filter__apply_button">
       </div>
@@ -53,7 +64,7 @@ const dateToFields = (date) => {
 /**
   When we can stop supporting IE11, an input type of "date" would do all this work for us.
 **/
-const DateFields = ({label}) => {
+const DateFields = ({label, lowerBound, upperBound}) => {
   /**
     updateDate() is used to update any value of date.
     Examples:
@@ -110,6 +121,7 @@ const DateFields = ({label}) => {
     year: ''
   })
   const [openDayPicker, setOpenDayPicker] = useState(false)
+  const [dayPickerMonth, setDayPickerMonth] = useState(null)
 
   const {month, day, year} = dateFields
   const setMonth = (month) => setDateFields({month: month})
@@ -145,18 +157,29 @@ const DateFields = ({label}) => {
           value={year}
           onChange={setYear}
         />
-        <div className="coa-filter__calendar_icon_container">
-          <i
-            className="material-icons coa-filter__calendar_icon"
-            onClick={() => setOpenDayPicker(!openDayPicker)}
-          >event</i>
+        <div
+          className="coa-filter__calendar_icon_container"
+          onClick={() => setOpenDayPicker(!openDayPicker)}
+        >
+          <i className="material-icons coa-filter__calendar_icon">event</i>
         </div>
       </div>
       {openDayPicker && (
         <DayPicker
+          fromMonth={lowerBound}
+          toMonth={upperBound}
           onDayClick={handleDayPickerClick}
           selectedDays={dayPickerDate}
-          month={dayPickerDate || new Date()}
+          month={dayPickerMonth || dayPickerDate || new Date()}
+          captionElement={({ date, localeUtils }) => (
+            <YearMonthForm
+              date={date}
+              localeUtils={localeUtils}
+              onChange={setDayPickerMonth}
+              fromMonth={lowerBound}
+              toMonth={upperBound}
+            />
+          )}
         />
       )}
     </div>
@@ -177,6 +200,52 @@ const NumberInput = ({label, value="", onChange}) => {
       </label>
     </div>
   )
+}
+
+/**
+  Modified from https://react-day-picker.js.org/examples/elements-year-navigation
+
+  The YearMonthForm creates a select dropdown within DayPicker for choosing a month
+  or year to navigate to. The result is set as the dayPickerMonth.
+  dayPickerMonth is used to set the "month" prop in DayPicker.
+  month={dayPickerMonth || dayPickerDate || new Date()}
+
+  If a "dayPickerMonth" was set by selecting a Month or Year
+  from the YearMonthForm, then go there.
+  Otherwise, if there is a valid date entered by the dateFields, then use that.
+  Otherwise, default to the current month.
+**/
+const YearMonthForm = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
+  const months = localeUtils.getMonths();
+
+  const years = [];
+  for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
+    years.push(i);
+  }
+
+  const handleChange = function handleChange(e) {
+    const { year, month } = e.target.form;
+    onChange(new Date(year.value, month.value));
+  };
+
+  return (
+    <form className="DayPicker-Caption">
+      <select name="month" onChange={handleChange} value={date.getMonth()}>
+        {months.map((month, i) => (
+          <option key={month} value={i}>
+            {month}
+          </option>
+        ))}
+      </select>
+      <select name="year" onChange={handleChange} value={date.getFullYear()}>
+        {years.map(year => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
+      </select>
+    </form>
+  );
 }
 
 export default Filter;
