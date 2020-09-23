@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react';
+import DayPicker from "react-day-picker";
 
 const Filter = () => {
   return (
@@ -6,8 +7,8 @@ const Filter = () => {
       <span className="coa-filter__rail_label">Filter</span>
       <div className="coa-filter__box">
         <span className="coa-filter__box_label">Date</span>
-        <DatePicker label="From"/>
-        <DatePicker label="To"/>
+        <DateFields label="From"/>
+        <DateFields label="To"/>
       </div>
       <div className="coa-filter__apply_button">
       </div>
@@ -17,26 +18,42 @@ const Filter = () => {
 
 const twoDigitRegex = new RegExp('^[0-9]{1,2}$');
 const isValidMonth = (month) => (
-  month.match(twoDigitRegex) &&
+  String(month).match(twoDigitRegex) &&
   month <= 12 &&
   month >= 1
 )
 
 const isValidDay = (day) => (
-  day.match(twoDigitRegex) &&
+  String(day).match(twoDigitRegex) &&
   day <= 31 &&
   day >= 1
 )
 
 const fourDigitRegex = new RegExp('^[0-9]{1,4}$');
 const isValidYear = (year) => (
-  year.match(fourDigitRegex)
+  String(year).match(fourDigitRegex)
 )
+
+
+// If all fields are entered, then turn them into a date for the DayPicker
+const fieldsToDate = ({month=null, day=null, year=null}) => {
+  if (!month || !day || !year) return null
+  return new Date(year, month - 1, day)
+}
+
+// Convert a Date object into month, day, and year values.
+const dateToFields = (date) => {
+  return {
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    year: date.getFullYear(),
+  }
+}
 
 /**
   When we can stop supporting IE11, an input type of "date" would do all this work for us.
 **/
-const DatePicker = ({label}) => {
+const DateFields = ({label}) => {
   /**
     updateDate() is used to update any value of date.
     Examples:
@@ -48,8 +65,8 @@ const DatePicker = ({label}) => {
     because there is a useEffect side effect
     when we need to update all 3 at the same time.
   **/
-  const [date, setDate] = useReducer((priorDate, newDate)=>{
-    let {month=null, day=null, year=null} = newDate;
+  const [dateFields, setDateFields] = useReducer((priorDateFields, newDateFields)=>{
+    let {month=null, day=null, year=null} = newDateFields;
 
     /**
     If invalid date values are entered, then don't register them.
@@ -61,19 +78,16 @@ const DatePicker = ({label}) => {
       (day && !isValidDay(day)) ||
       (year && !isValidYear(year))
     ) {
-      return priorDate
+      return priorDateFields
     }
     if (year > new Date().getFullYear()) {
       year = "2020"
     }
 
-    const finalDate = {...priorDate}
-    if (month !== null) finalDate.month = month
-    if (day !== null) finalDate.day = day
-    if (year !== null) finalDate.year = year
-    let finalMonth = finalDate.month
-    let finalDay = finalDate.day
-    let finalYear = finalDate.year
+    let finalDateFields = {...priorDateFields}
+    if (month !== null) finalDateFields.month = month
+    if (day !== null) finalDateFields.day = day
+    if (year !== null) finalDateFields.year = year
 
     /**
       If all 3 date inputs are filled out,
@@ -81,24 +95,36 @@ const DatePicker = ({label}) => {
       For example: if someone enters February 31st,
       javascript's Date function will set it to March 2nd.
     **/
+    let finalMonth = finalDateFields.month
+    let finalDay = finalDateFields.day
+    let finalYear = finalDateFields.year
     if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
       const validDate = new Date(finalYear, finalMonth - 1, finalDay);
-      finalDate.month = String(validDate.getMonth() + 1);
-      finalDate.day = String(validDate.getDate());
-      finalDate.year = String(validDate.getFullYear());
+      finalDateFields = dateToFields(validDate)
     }
 
-    return finalDate
+    return finalDateFields
   }, {
     month: '',
     day: '',
     year: ''
   })
 
-  const {month, day, year} = date
-  const setMonth = (month) => setDate({month: month})
-  const setDay = (day) => setDate({day: day})
-  const setYear = (year) => setDate({year: year})
+  const {month, day, year} = dateFields
+  const setMonth = (month) => setDateFields({month: month})
+  const setDay = (day) => setDateFields({day: day})
+  const setYear = (year) => setDateFields({year: year})
+
+  const handleDayPickerClick = (date, { selected }) => {
+    if (selected) {
+      // Unselect the day if already selected
+      setDateFields({month: '', day: '', year: ''});
+      return;
+    }
+    setDateFields(dateToFields(date))
+  }
+
+  const dayPickerDate = fieldsToDate(dateFields)
 
   return (
     <div>
@@ -123,6 +149,10 @@ const DatePicker = ({label}) => {
           <i className="material-icons coa-filter__calendar_icon">event</i>
         </div>
       </div>
+      <DayPicker
+        onDayClick={handleDayPickerClick}
+        selectedDays={dayPickerDate}
+      />
     </div>
   )
 }
@@ -134,7 +164,7 @@ const NumberInput = ({label, value="", onChange}) => {
         <span className="coa-filter__date_input_label">{label}</span>
         <input
           className={`coa-filter__date_input coa-filter__date_input_${label.toLowerCase()}`}
-          type="text"
+          type="number"
           value={value}
           onChange={e => onChange(e.target.value)}
         />
