@@ -39,6 +39,9 @@ const branchOverrides = {
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
+  '4849-filter': {
+    joplin_appname: 'joplin-staging',
+  }
 };
 
 module.exports = {
