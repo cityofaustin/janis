@@ -1,4 +1,6 @@
-.coa-filter__container {}
+.coa-filter__container {
+    padding-right: 3rem;
+}
 
 %coa-filer__label {
     display: block;
@@ -88,5 +90,31 @@ $input-box-height: 4.4rem;
 
 .coa-filter__calendar_icon {
   font-size: 2.5rem;
-  color: #0049c7;
+  color: $coa-color-blue-warm-60v;
+}
+
+.coa-daypicker__container {
+    font-size: 1.4rem;
+}
+
+.coa-daypicker__year-month-container {
+    display: flex;
+    flex-wrap: wrap;
+    /**
+    If any languages have months that go over beyond the max-width,
+    then the year select will drop down to the next row.
+    **/
+    max-width: 16rem;
+}
+
+.coa-daypicker__select {
+    width: auto;
+    font-size: 1.4rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    height: auto;
+    display: inline;
+    padding-right: 1.5rem;
+    padding-left: .5rem;
+    background-position: right .25rem center;
 }

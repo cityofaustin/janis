@@ -6,7 +6,7 @@ const Filter = () => {
   const upperBound = new Date()
 
   return (
-    <div className="coa-filter__container col-md-3">
+    <div className="coa-filter__container col-md-auto">
       <span className="coa-filter__rail_label">Filter</span>
       <div className="coa-filter__box">
         <span className="coa-filter__box_label">Date</span>
@@ -166,13 +166,14 @@ const DateFields = ({label, lowerBound, upperBound}) => {
       </div>
       {openDayPicker && (
         <DayPicker
+          className="coa-daypicker__container"
           fromMonth={lowerBound}
           toMonth={upperBound}
           onDayClick={handleDayPickerClick}
           selectedDays={dayPickerDate}
           month={dayPickerMonth || dayPickerDate || new Date()}
           captionElement={({ date, localeUtils }) => (
-            <YearMonthForm
+            <YearMonthPicker
               date={date}
               localeUtils={localeUtils}
               onChange={setDayPickerMonth}
@@ -205,17 +206,17 @@ const NumberInput = ({label, value="", onChange}) => {
 /**
   Modified from https://react-day-picker.js.org/examples/elements-year-navigation
 
-  The YearMonthForm creates a select dropdown within DayPicker for choosing a month
+  The YearMonthPicker creates a select dropdown within DayPicker for choosing a month
   or year to navigate to. The result is set as the dayPickerMonth.
   dayPickerMonth is used to set the "month" prop in DayPicker.
   month={dayPickerMonth || dayPickerDate || new Date()}
 
   If a "dayPickerMonth" was set by selecting a Month or Year
-  from the YearMonthForm, then go there.
+  from the YearMonthPicker, then go there.
   Otherwise, if there is a valid date entered by the dateFields, then use that.
   Otherwise, default to the current month.
 **/
-const YearMonthForm = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
+const YearMonthPicker = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
   const months = localeUtils.getMonths();
 
   const years = [];
@@ -229,22 +230,24 @@ const YearMonthForm = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
   };
 
   return (
-    <form className="DayPicker-Caption">
-      <select name="month" onChange={handleChange} value={date.getMonth()}>
-        {months.map((month, i) => (
-          <option key={month} value={i}>
-            {month}
-          </option>
-        ))}
-      </select>
-      <select name="year" onChange={handleChange} value={date.getFullYear()}>
-        {years.map(year => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    </form>
+    <div className="DayPicker-Caption">
+      <form className="coa-daypicker__year-month-container">
+        <select className="coa-daypicker__select" name="month" onChange={handleChange} value={date.getMonth()}>
+          {months.map((month, i) => (
+            <option key={month} value={i}>
+              {month}
+            </option>
+          ))}
+        </select>
+        <select className="coa-daypicker__select" name="year" onChange={handleChange} value={date.getFullYear()}>
+          {years.map(year => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </form>
+    </div>
   );
 }
 

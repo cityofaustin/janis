@@ -102,11 +102,13 @@ const PaginationContainer = ({
     }
   }
 
+  const filterable = true
+
   return (
     <div>
       <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
-          <Filter/>
+          {filterable && <Filter/>}
           <div className={`col-xs-12 ${fillTablet ? 'col-lg-8' : 'col-md-8'}`}>
             {currentPage &&
               currentPage.map((page, index) => (
