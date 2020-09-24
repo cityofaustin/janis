@@ -64,12 +64,13 @@ const FullSiteMenu = props => {
 
       { !isMobile && props.isTopMenuActive &&
 
-        <div
-          style={{
-            backgroundColor: "white",
-            height: "57px",
-          }}
-        ></div>
+        /*
+          This div acts as a gap preserver for when the dropdown menu is active,
+          which changes the mneu position to absolute, thus the static gap is lost.
+          Here we recreate that.
+        */
+
+        <div className="coa-FullSiteMenu__activeGapFill"></div>
 
       }
 
