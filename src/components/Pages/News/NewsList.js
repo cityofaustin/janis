@@ -40,7 +40,6 @@ const NewsListPage = ({ newsListPage }) => {
             pagesArray={newsList}
             PageComponent={NewsListItem}
             intl={intl}
-            fillTablet
             smallMargins
           />
         </div>

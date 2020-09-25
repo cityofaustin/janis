@@ -167,7 +167,6 @@ export const curbsideServices = defineMessages({
 export const departmentPage = defineMessages({
   complaintFormButtonText: 'File a complaint against an Austin Police Officer',
   complaintFormUrl: 'https://forms.austin.gov/police-oversight/complaint',
-  thankFormButtonText: 'Thank the Austin Police Department',
   thankFormButtonUrl: 'https://forms.austin.gov/police-oversight/complaint',
   thankFormButtonText: 'Thank an Austin Police Officer',
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
@@ -575,3 +574,18 @@ export const news = defineMessages({
     defaultMessage: 'Published {date}',
   },
 });
+
+export const filter = defineMessages({
+  filter: 'Filter',
+  date: 'Date',
+  from: 'From',
+  to: 'To',
+  month: 'Month',
+  day: 'Day',
+  year: 'Year',
+  clearFilters: 'Clear filters',
+  applyFilters: 'Apply filters',
+  filterByDate: 'Filter by date',
+  filteredResults: '{count} filtered results',
+  OneFilteredResult: '1 filtered result',
+})

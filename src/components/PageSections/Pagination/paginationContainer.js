@@ -17,7 +17,6 @@ const PaginationContainer = ({
   PageComponent,
   intl,
   searchedTerm,
-  fillTablet = false,
   smallMargins = false,
 }) => {
   const documentsPerPage = 10;
@@ -109,7 +108,7 @@ const PaginationContainer = ({
       <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
           {filterable && <Filter/>}
-          <div className={`col-xs-12 ${fillTablet ? 'col-lg-8' : 'col-md-8'}`}>
+          <div className="col-xs-12 col-lg-8">
             {currentPage &&
               currentPage.map((page, index) => (
                 <PageComponent page={page} key={index} />

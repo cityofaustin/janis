@@ -128,5 +128,17 @@
   "news.news": "News",
   "news.fromLine": "From {fromDepartment}",
   "news.fromAndByLine": "From {fromDepartment}, written by {byDepartment}",
-  "news.publishedDate": "Published {date}"
+  "news.publishedDate": "Published {date}",
+  "filter.filter": "Filter",
+  "filter.date": "Date",
+  "filter.from": "From",
+  "filter.to": "To",
+  "filter.month": "Month",
+  "filter.day": "Day",
+  "filter.year": "Year",
+  "filter.clearFilters": "Clear filters",
+  "filter.applyFilters": "Apply filters",
+  "filter.filterByDate": "Filter by date",
+  "filter.filteredResults": "{count} filtered results",
+  "filter.OneFilteredResult": "1 filtered result"
 }

@@ -1,22 +1,58 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import DayPicker, {LocaleUtils} from "react-day-picker";
+import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
+import { useIntl } from 'react-intl';
+import { filter as i18n1 } from 'js/i18n/definitions';
+import { mobilePopupHelper } from 'js/helpers/hooks';
 
 const Filter = () => {
+  const intl = useIntl();
+  const isDesktop = useDesktopQuery();
   const lowerBound = new Date(2018, 1, 1)
   const upperBound = new Date()
 
+  if (!isDesktop) {
+    return (
+      <div className="coa-filter__filter-by-date-button">
+        <i className="material-icons">filter_list</i>
+        {intl.formatMessage(i18n1.filterByDate)}
+      </div>
+    )
+  } else {
+    return (
+      <div className="coa-filter__container col-md-auto">
+        <FilterBox
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
+      </div>
+    )
+  }
+}
+
+// const FilterMobilePopup = () => {
+//   const [menuOpened, setMenuOpened] = useState(false);
+//   mobilePopupHelper(menuOpened, setMenuOpened)
+//   return (
+//     <div>hi</div>
+//   )
+// }
+
+const FilterBox = ({lowerBound, upperBound}) => {
+  const intl = useIntl();
+
   return (
-    <div className="coa-filter__container col-md-auto">
-      <span className="coa-filter__rail_label">Filter</span>
+    <div>
+      <span className="coa-filter__rail_label">{intl.formatMessage(i18n1.filter)}</span>
       <div className="coa-filter__box">
-        <span className="coa-filter__box_label">Date</span>
+        <span className="coa-filter__box_label">{intl.formatMessage(i18n1.date)}</span>
         <DateFields
-          label="From"
+          label={intl.formatMessage(i18n1.from)}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />
         <DateFields
-          label="To"
+          label={intl.formatMessage(i18n1.to)}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />
@@ -65,6 +101,7 @@ const dateToFields = (date) => {
   When we can stop supporting IE11, an input type of "date" would do all this work for us.
 **/
 const DateFields = ({label, lowerBound, upperBound}) => {
+  const intl = useIntl();
   /**
     updateDate() is used to update any value of date.
     Examples:
@@ -143,17 +180,17 @@ const DateFields = ({label, lowerBound, upperBound}) => {
       <span className="coa-filter__date_fields_label">{label}</span>
       <div className="coa-filter__date_fields">
         <NumberInput
-          label="Month"
+          label={intl.formatMessage(i18n1.month)}
           value={month}
           onChange={setMonth}
         />
         <NumberInput
-          label="Day"
+          label={intl.formatMessage(i18n1.day)}
           value={day}
           onChange={setDay}
         />
         <NumberInput
-          label="Year"
+          label={intl.formatMessage(i18n1.year)}
           value={year}
           onChange={setYear}
         />
@@ -216,7 +253,6 @@ const NumberInput = ({label, value="", onChange}) => {
 **/
 const YearMonthPicker = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
   const months = localeUtils.getMonths();
-
   const years = [];
   for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
     years.push(i);

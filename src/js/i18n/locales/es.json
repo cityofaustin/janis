@@ -160,5 +160,17 @@
   "news.fromAndByLine": "Por {fromDepartment}, escrita por {byDepartment}",
   "news.publishedDate": "Publicado {date}",
   "departmentPage.news": "Noticias",
-  "departmentPage.moreDeptNews": "Más noticias de {department}"
+  "departmentPage.moreDeptNews": "Más noticias de {department}",
+  "filter.filter": "Filter",
+  "filter.date": "Date",
+  "filter.from": "From",
+  "filter.to": "To",
+  "filter.month": "Month",
+  "filter.day": "Day",
+  "filter.year": "Year",
+  "filter.clearFilters": "Clear filters",
+  "filter.applyFilters": "Apply filters",
+  "filter.filterByDate": "Filter by date",
+  "filter.filteredResults": "{count} filtered results",
+  "filter.OneFilteredResult": "1 filtered result"
 }
