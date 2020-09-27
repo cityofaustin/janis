@@ -22,6 +22,7 @@ const Filter = () => {
   } else {
     return (
       <div className="coa-filter__container col-md-auto">
+        <span className="coa-filter__rail_label">{intl.formatMessage(i18n1.filter)}</span>
         <FilterBox
           lowerBound={lowerBound}
           upperBound={upperBound}
@@ -47,18 +48,20 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
           "coa-filter__mobile-popup-background-open": menuOpened
         })}
       >
-        <div className="coa-filter__mobile">
-          <div>
+        <div className="coa-filter__mobile-popup-container">
+          <div className="coa-filter__mobile-popup-title">
             {intl.formatMessage(i18n1.filter)}
             <i
-              className="material-icons"
+              className="material-icons coa-filter__mobile-close"
               onClick={()=>setMenuOpened(false)}
             >close</i>
           </div>
-          <FilterBox
-            lowerBound={lowerBound}
-            upperBound={upperBound}
-          />
+          <div className="coa-filter__mobile-filter-container">
+            <FilterBox
+              lowerBound={lowerBound}
+              upperBound={upperBound}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +73,6 @@ const FilterBox = ({lowerBound, upperBound}) => {
 
   return (
     <div>
-      <span className="coa-filter__rail_label">{intl.formatMessage(i18n1.filter)}</span>
       <div className="coa-filter__box">
         <span className="coa-filter__box_label">{intl.formatMessage(i18n1.date)}</span>
         <DateFields
