@@ -1,7 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import DayPicker, {LocaleUtils} from "react-day-picker";
-import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
+import classNames from 'classnames';
 import { useIntl } from 'react-intl';
+import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
 
@@ -13,10 +14,10 @@ const Filter = () => {
 
   if (!isDesktop) {
     return (
-      <div className="coa-filter__filter-by-date-button">
-        <i className="material-icons">filter_list</i>
-        {intl.formatMessage(i18n1.filterByDate)}
-      </div>
+      <FilterMobilePopup
+        lowerBound={lowerBound}
+        upperBound={upperBound}
+      />
     )
   } else {
     return (
@@ -30,13 +31,39 @@ const Filter = () => {
   }
 }
 
-// const FilterMobilePopup = () => {
-//   const [menuOpened, setMenuOpened] = useState(false);
-//   mobilePopupHelper(menuOpened, setMenuOpened)
-//   return (
-//     <div>hi</div>
-//   )
-// }
+const FilterMobilePopup = ({lowerBound, upperBound}) => {
+  const intl = useIntl();
+  const [menuOpened, setMenuOpened] = useState(false);
+  mobilePopupHelper(menuOpened, setMenuOpened)
+
+  return (
+    <div style={{width: "100%"}}>
+      <div onClick={()=>setMenuOpened(true)} className="coa-filter__filter-by-date-button">
+        <i className="material-icons">filter_list</i>
+        {intl.formatMessage(i18n1.filterByDate)}
+      </div>
+      <div
+        className={classNames("coa-filter__mobile-popup-background", {
+          "coa-filter__mobile-popup-background-open": menuOpened
+        })}
+      >
+        <div className="coa-filter__mobile">
+          <div>
+            {intl.formatMessage(i18n1.filter)}
+            <i
+              className="material-icons"
+              onClick={()=>setMenuOpened(false)}
+            >close</i>
+          </div>
+          <FilterBox
+            lowerBound={lowerBound}
+            upperBound={upperBound}
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const FilterBox = ({lowerBound, upperBound}) => {
   const intl = useIntl();
