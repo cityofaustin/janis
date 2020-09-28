@@ -32,9 +32,9 @@
     overflow-y: scroll;
     display: none;
     transition: opacity 0.2s ease-in;
-    // If .75 opacity is set by "opacity: .75" instead of rgba(..., .75)
-    // then child elements won't be able to have a higher opacity.
-    background-color: rgba(0, 0, 0, .75);
+    // If opacity is set by explicit "opacity" setting instead of rgba(..., "opacity")
+    // then child elements/text won't be able to have a different opacity.
+    background-color: rgba(0, 0, 0, .9);
     &.coa-filter__mobile-popup-background-open {
         display: block;
     }
@@ -46,6 +46,11 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10vh;
+    @include tablet {
+        background: $coa-color-white;
+        padding: 10rem;
+        border-radius: 4px;
+    }
 }
 
 .coa-filter__mobile-popup-title-container {
@@ -54,6 +59,9 @@
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    @include tablet {
+        color: $coa-color-black;
+    }
 }
 
 .coa-filter__mobile-popup-title {
@@ -130,13 +138,16 @@ $input-box-height: 4.4rem;
     border-style: none;
     background-color: $coa-color-gray-4;
     height: $input-box-height;
+    width: 8rem;
 
-    &.coa-filter__date-input-day,
-    &.coa-filter__date-input-month {
-        width: 2em;
-    }
-    &.coa-filter__date-input-year {
-        width: 4em;
+    @include desktop {
+        &.coa-filter__date-input-day,
+        &.coa-filter__date-input-month {
+            width: 2em;
+        }
+        &.coa-filter__date-input-year {
+            width: 4em;
+        }
     }
 
     // Remove number input up/down arrows
@@ -226,6 +237,9 @@ $input-box-height: 4.4rem;
         margin-top: .5rem;
         color: $coa-color-white;
         background-color: $coa-color-blue-warm-60v;
+    }
+    @include tablet {
+        margin-top: 1rem;
     }
 }
 

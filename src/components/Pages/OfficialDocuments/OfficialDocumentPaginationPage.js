@@ -8,6 +8,7 @@ import PaginationContainer from 'components/PageSections/Pagination/paginationCo
 const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => (
   <div id="officialDocumentsPaginationPage">
     <PaginationContainer
+      filterable
       pagesArray={officialDocuments}
       PageComponent={OfficialDocumentEntry}
       intl={intl}

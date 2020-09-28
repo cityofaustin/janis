@@ -202,6 +202,7 @@ const DateFields = ({label, lowerBound, upperBound}) => {
   const setYear = (year) => setDateFields({year: year})
 
   const handleDayPickerClick = (date, { selected }) => {
+    setOpenDayPicker(false)
     if (selected) {
       // Unselect the day if already selected
       setDateFields({month: '', day: '', year: ''});

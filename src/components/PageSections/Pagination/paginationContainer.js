@@ -16,6 +16,7 @@ const PaginationContainer = ({
   pagesArray,
   PageComponent,
   intl,
+  filterable=false,
   searchedTerm,
   smallMargins = false,
 }) => {
@@ -100,8 +101,6 @@ const PaginationContainer = ({
       });
     }
   }
-
-  const filterable = true
 
   return (
     <div>
