@@ -175,7 +175,20 @@ $input-box-height: 4.4rem;
   color: $coa-color-blue-warm-60v;
 }
 
+// Implement col-xs-12 for proper mobile+tablet sizing with bootstrap
+%coa-col-xs-12 {
+    box-sizing: border-box;
+    -moz-flex-grow: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    flex-basis: 100%;
+    max-width: 100%;
+}
+
 .coa-daypicker__container {
+    @extend %coa-col-xs-12;
     font-size: 1.4rem;
     border-radius: 4px;
     background-color: $coa-color-gray-4;
@@ -184,6 +197,25 @@ $input-box-height: 4.4rem;
         visibility: hidden;
         height: 0;
         display: block;
+    }
+    &>.DayPicker-wrapper {
+        padding-bottom: initial;
+        &>.DayPicker-NavBar>.DayPicker-NavButton {
+            right: 0rem;
+        }
+        &>.DayPicker-Months {
+            &>.DayPicker-Month {
+                @extend %coa-col-xs-12;
+                &>.DayPicker-Body>.DayPicker-Week {
+                    &>.DayPicker-Day {
+                        padding: 0em;
+                    }
+                    &>.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+                        background-color: $coa-color-blue-warm-60v;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -227,8 +259,9 @@ $input-box-height: 4.4rem;
     color: $coa-color-blue-warm-60v;
     background-color: $coa-color-blue-warm-5v;
     margin-top: 1.5rem;
-    &:hover {
-        @include desktop {
+    @include desktop {
+        margin-bottom: 2rem;
+        &:hover {
             color: $coa-color-black;
             background-color: $coa-color-blue-warm-60v;
         }

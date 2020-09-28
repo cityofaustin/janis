@@ -213,7 +213,7 @@ const DateFields = ({label, lowerBound, upperBound}) => {
   const dayPickerDate = fieldsToDate(dateFields)
 
   return (
-    <div>
+    <div style={{"margin-top": "1rem"}}>
       <span className="coa-filter__date-fields-label">{label}</span>
       <div className="coa-filter__date-fields">
         <NumberInput
