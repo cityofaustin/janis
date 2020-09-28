@@ -867,7 +867,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       return {
         topServices,
         image: {
-          file: 'tomek-baginski-593896-unsplash',
+          file: 'banner_image', // Previous image for reference: tomek-baginski-593896-unsplash
           title: 'Lady Bird Lake',
         },
         events: allActiveEvents.events,
