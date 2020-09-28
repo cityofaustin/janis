@@ -49,16 +49,22 @@
     margin-top: 10vh;
 }
 
-.coa-filter__mobile-popup-title {
+.coa-filter__mobile-popup-title-container {
     color: $coa-color-white;
     font-size: 3.2rem;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;
+}
+
+.coa-filter__mobile-popup-title {
+    padding-bottom: 2rem;
 }
 
 .coa-filter__mobile-close {
+    // Give a little more touchable space
+    padding-left: 2rem;
+    padding-bottom: 2rem;
     &:hover {
         cursor: pointer;
     }
@@ -88,7 +94,7 @@
 
 .coa-filter__box_label {
     @extend %coa-filter__label;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 1.8rem;
     margin-bottom: 1.6rem;
 }

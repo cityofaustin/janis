@@ -49,8 +49,10 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
         })}
       >
         <div className="coa-filter__mobile-popup-container">
-          <div className="coa-filter__mobile-popup-title">
-            {intl.formatMessage(i18n1.filter)}
+          <div className="coa-filter__mobile-popup-title-container">
+            <div className="coa-filter__mobile-popup-title">
+              {intl.formatMessage(i18n1.filter)}
+            </div>
             <i
               className="material-icons coa-filter__mobile-close"
               onClick={()=>setMenuOpened(false)}
