@@ -39,7 +39,7 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
 
   return (
     <div style={{width: "100%"}}>
-      <div onClick={()=>setMenuOpened(true)} className="coa-filter__filter-by-date-button">
+      <div onClick={()=>setMenuOpened(true)} className="coa-filter__filter-by-date-button col-xs-12">
         <i className="material-icons">filter_list</i>
         {intl.formatMessage(i18n1.filterByDate)}
       </div>
@@ -58,12 +58,10 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
               onClick={()=>setMenuOpened(false)}
             >close</i>
           </div>
-          <div className="coa-filter__mobile-filter-container">
-            <FilterBox
-              lowerBound={lowerBound}
-              upperBound={upperBound}
-            />
-          </div>
+          <FilterBox
+            lowerBound={lowerBound}
+            upperBound={upperBound}
+          />
         </div>
       </div>
     </div>
@@ -72,11 +70,12 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
 
 const FilterBox = ({lowerBound, upperBound}) => {
   const intl = useIntl();
+  const isDesktop = useDesktopQuery();
 
   return (
     <div>
       <div className="coa-filter__box">
-        <span className="coa-filter__box_label">{intl.formatMessage(i18n1.date)}</span>
+        <span className="coa-filter__box-label">{intl.formatMessage(i18n1.date)}</span>
         <DateFields
           label={intl.formatMessage(i18n1.from)}
           lowerBound={lowerBound}
@@ -88,7 +87,13 @@ const FilterBox = ({lowerBound, upperBound}) => {
           upperBound={upperBound}
         />
       </div>
-      <div className="coa-filter__apply_button">
+      {!isDesktop && (
+        <div className="coa-filter__mobile-clear-button">
+          {intl.formatMessage(i18n1.clearFilters)}
+        </div>
+      )}
+      <div className="coa-filter__apply-button">
+        {intl.formatMessage(i18n1.applyFilters)}
       </div>
     </div>
   )
@@ -208,8 +213,8 @@ const DateFields = ({label, lowerBound, upperBound}) => {
 
   return (
     <div>
-      <span className="coa-filter__date_fields_label">{label}</span>
-      <div className="coa-filter__date_fields">
+      <span className="coa-filter__date-fields-label">{label}</span>
+      <div className="coa-filter__date-fields">
         <NumberInput
           label={intl.formatMessage(i18n1.month)}
           value={month}
@@ -226,10 +231,10 @@ const DateFields = ({label, lowerBound, upperBound}) => {
           onChange={setYear}
         />
         <div
-          className="coa-filter__calendar_icon_container"
+          className="coa-filter__calendar-icon-container"
           onClick={() => setOpenDayPicker(!openDayPicker)}
         >
-          <i className="material-icons coa-filter__calendar_icon">event</i>
+          <i className="material-icons coa-filter__calendar-icon">event</i>
         </div>
       </div>
       <DayPicker
@@ -255,11 +260,11 @@ const DateFields = ({label, lowerBound, upperBound}) => {
 
 const NumberInput = ({label, value="", onChange}) => {
   return (
-    <div className="coa-filter__date_input_container">
+    <div className="coa-filter__date-input-container">
       <label>
-        <span className="coa-filter__date_input_label">{label}</span>
+        <span className="coa-filter__date-input-label">{label}</span>
         <input
-          className={`coa-filter__date_input coa-filter__date_input_${label.toLowerCase()}`}
+          className={`coa-filter__date-input coa-filter__date-input-${label.toLowerCase()}`}
           type="number"
           value={value}
           onChange={e => onChange(e.target.value)}

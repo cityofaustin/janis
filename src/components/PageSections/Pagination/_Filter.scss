@@ -6,7 +6,6 @@
 .coa-filter__filter-by-date-button {
     background-color: $coa-color-blue-warm-5v;
     color: $coa-color-blue-warm-60v;
-    width: 100%;
     font-size: 1.6rem;
     font-weight: 500;
     text-align: center;
@@ -70,10 +69,6 @@
     }
 }
 
-.coa-filter__mobile-filter-container {
-    background-color: $coa-color-white;
-}
-
 %coa-filter__label {
     display: block;
     line-height: normal;
@@ -90,32 +85,36 @@
 .coa-filter__box {
     border: 1.5px solid #eaeaea;
     padding: 1.6rem;
+    border-radius: 4px;
+    @include mobile-and-tablet {
+        background-color: $coa-color-white;
+    }
 }
 
-.coa-filter__box_label {
+.coa-filter__box-label {
     @extend %coa-filter__label;
     font-weight: bold;
     font-size: 1.8rem;
     margin-bottom: 1.6rem;
 }
 
-.coa-filter__date_fields_label {
+.coa-filter__date-fields-label {
     @extend %coa-filter__label;
     font-weight: 500;
     font-size: 1.6rem;
 }
 
-.coa-filter__date_fields {
+.coa-filter__date-fields {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
 }
 
-.coa-filter__date_input_container {
+.coa-filter__date-input-container {
     padding-right: 1rem;
 }
 
-.coa-filter__date_input_label {
+.coa-filter__date-input-label {
     @extend %coa-filter__label;
     font-size: 1.4rem;
     margin-bottom: .3rem;
@@ -123,7 +122,7 @@
 
 $input-box-height: 4.4rem;
 
-.coa-filter__date_input {
+.coa-filter__date-input {
     box-sizing: content-box;
     padding: 0 .25rem;
     text-align: center;
@@ -132,11 +131,11 @@ $input-box-height: 4.4rem;
     background-color: $coa-color-gray-4;
     height: $input-box-height;
 
-    &.coa-filter__date_input_day,
-    &.coa-filter__date_input_month {
+    &.coa-filter__date-input-day,
+    &.coa-filter__date-input-month {
         width: 2em;
     }
-    &.coa-filter__date_input_year {
+    &.coa-filter__date-input-year {
         width: 4em;
     }
 
@@ -148,7 +147,7 @@ $input-box-height: 4.4rem;
     }
 }
 
-.coa-filter__calendar_icon_container {
+.coa-filter__calendar-icon-container {
     height: $input-box-height;
     text-align: center;
     border-radius: 4px;
@@ -160,7 +159,7 @@ $input-box-height: 4.4rem;
     }
 }
 
-.coa-filter__calendar_icon {
+.coa-filter__calendar-icon {
   font-size: 2.5rem;
   color: $coa-color-blue-warm-60v;
 }
@@ -198,4 +197,43 @@ $input-box-height: 4.4rem;
     padding-left: .5rem;
     background-position: right .25rem center;
     background-color: $coa-color-gray-4;
+}
+
+%coa-filter__button {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 4px;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.coa-filter__apply-button {
+    @extend %coa-filter__button;
+    color: $coa-color-blue-warm-60v;
+    background-color: $coa-color-blue-warm-5v;
+    margin-top: 1.5rem;
+    &:hover {
+        @include desktop {
+            color: $coa-color-black;
+            background-color: $coa-color-blue-warm-60v;
+        }
+    }
+    @include mobile-and-tablet {
+        margin-top: .5rem;
+        color: $coa-color-white;
+        background-color: $coa-color-blue-warm-60v;
+    }
+}
+
+.coa-filter__mobile-clear-button {
+    @extend %coa-filter__button;
+    color: $coa-color-red-cool-50v;
+    background-color: $coa-color-red-cool-5v;
+    @include mobile {
+        margin-top: .5rem;
+    }
 }
