@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
+import { months, weekdaysLong, weekdaysShort } from 'js/i18n/constants';
 
 const Filter = () => {
   const intl = useIntl();
@@ -217,17 +218,17 @@ const DateFields = ({label, lowerBound, upperBound}) => {
       <span className="coa-filter__date-fields-label">{label}</span>
       <div className="coa-filter__date-fields">
         <NumberInput
-          label={intl.formatMessage(i18n1.month)}
+          label="month"
           value={month}
           onChange={setMonth}
         />
         <NumberInput
-          label={intl.formatMessage(i18n1.day)}
+          label="day"
           value={day}
           onChange={setDay}
         />
         <NumberInput
-          label={intl.formatMessage(i18n1.year)}
+          label="year"
           value={year}
           onChange={setYear}
         />
@@ -245,10 +246,13 @@ const DateFields = ({label, lowerBound, upperBound}) => {
         onDayClick={handleDayPickerClick}
         selectedDays={dayPickerDate}
         month={dayPickerMonth || dayPickerDate || new Date()}
+        months={months(intl)}
+        weekdaysLong={weekdaysLong(intl)}
+        weekdaysShort={weekdaysShort(intl)}
         captionElement={({ date, localeUtils }) => (
           <YearMonthPicker
             date={date}
-            localeUtils={localeUtils}
+            months={months(intl)}
             onChange={setDayPickerMonth}
             fromMonth={lowerBound}
             toMonth={upperBound}
@@ -260,10 +264,11 @@ const DateFields = ({label, lowerBound, upperBound}) => {
 }
 
 const NumberInput = ({label, value="", onChange}) => {
+  const intl = useIntl();
   return (
     <div className="coa-filter__date-input-container">
       <label>
-        <span className="coa-filter__date-input-label">{label}</span>
+        <span className="coa-filter__date-input-label">{intl.formatMessage(i18n1[label])}</span>
         <input
           className={`coa-filter__date-input coa-filter__date-input-${label.toLowerCase()}`}
           type="number"
@@ -288,8 +293,7 @@ const NumberInput = ({label, value="", onChange}) => {
   Otherwise, if there is a valid date entered by the dateFields, then use that.
   Otherwise, default to the current month.
 **/
-const YearMonthPicker = ({ date, localeUtils, onChange, fromMonth, toMonth }) => {
-  const months = localeUtils.getMonths();
+const YearMonthPicker = ({ date, months, onChange, fromMonth, toMonth }) => {
   const years = [];
   for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
     years.push(i);

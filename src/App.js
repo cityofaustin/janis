@@ -34,6 +34,8 @@ const ScrollToTop = () => {
 const AppView = ({ path }) => {
   const intl = useIntl();
   const { navigation } = useSiteData();
+  console.log("~~~~~ hi")
+  console.log(LANG_URL_REGEX)
 
   return (
     <div>

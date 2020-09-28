@@ -18,14 +18,13 @@
 // Don't overwrite defaultValues.
 const defaultValues = {
   joplin_appname: 'joplin-staging',
-  REACT_STATIC_PREFETCH_RATE: '0', // Don't do prefetching by default
+  // REACT_STATIC_BATCH_SIZE: 25, // Don't do prefetching by default
 };
 
 // Add branch-specifc values here
 const branchOverrides = {
   '3690-incremental': {
     joplin_appname: 'joplin-pr-3690-incremental',
-    REACT_STATIC_PREFETCH_RATE: '10',
   },
   '4289-page-guide': {
     joplin_appname: 'joplin-pr-v3',
@@ -40,7 +39,8 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
   '4849-filter': {
-    joplin_appname: 'joplin-staging',
+    joplin_appname: 'joplin-pr-4849-filter',
+    // REACT_STATIC_BATCH_SIZE: 10,
   }
 };
 

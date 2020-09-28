@@ -1,3 +1,5 @@
+import { date as i18n1 } from 'js/i18n/definitions';
+
 export const SUPPORTED_LANGUAGES = [
   {
     // Default: English
@@ -77,3 +79,53 @@ export const i18nalizeLinkTo = (to, langCode = DEFAULT_LANG) => {
     location = langCode !== DEFAULT_LANG ? `/${langCode}${location}` : location;
   return location;
 };
+
+/**
+  @param intl (Object): the output from the useIntl() hook in your component
+**/
+export const months = (intl) => (
+  [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ].map(month=>intl.formatMessage(i18n1[month]))
+)
+
+/**
+  @param intl (Object): the output from the useIntl() hook in your component
+**/
+export const weekdaysLong = (intl) => (
+  [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ].map(weekday=>intl.formatMessage(i18n1[`weekday${weekday}`]))
+)
+
+/**
+  @param intl (Object): the output from the useIntl() hook in your component
+**/
+export const weekdaysShort = (intl) => (
+  [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ].map(weekday=>intl.formatMessage(i18n1[`weekday${weekday}Short`]))
+)
