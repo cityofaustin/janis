@@ -31,10 +31,10 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-v3',
   },
   '4611-gzip': {
-    joplin_appname: 'joplin'
+    joplin_appname: 'joplin',
   },
   'nav-cleanup': {
-    joplin_appname: 'joplin'
+    joplin_appname: 'joplin',
   },
   '4872-link-doc-summary': {
     joplin_appname: 'joplin-pr-4872-link-summary',
