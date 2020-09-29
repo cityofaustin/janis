@@ -46,6 +46,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10vh;
+    margin-bottom: 10vh;
     @include tablet {
         background: $coa-color-white;
         padding: 10rem;
@@ -90,12 +91,30 @@
     margin-bottom: 1.6rem;
 }
 
+/**
+    These values will allow our calendar to resize proportionally
+    on any size mobile or tablet screen.
+    The width must be set on the parent container (.coa-filter__box).
+    This will enable our coa-filter__date-input-containers to resize with flex-grow
+    to match the width of our calendar.
+**/
+$coa-calendar-mobile-width: 75vw;
+$coa-calendar-mobile-height: calc(70vw - 20px);
+$coa-calendar-tablet-width: 50vw;
+$coa-calendar-tablet-height: calc(50vw - 20px);
+
 .coa-filter__box {
     border: 1.5px solid #eaeaea;
     padding: 1.6rem;
     border-radius: 4px;
     @include mobile-and-tablet {
         background-color: $coa-color-white;
+    }
+    @include mobile {
+        width: $coa-calendar-mobile-width;
+    }
+    @include tablet {
+        width: $coa-calendar-tablet-width;
     }
 }
 
@@ -120,6 +139,9 @@
 
 .coa-filter__date-input-container {
     padding-right: 1rem;
+    @include mobile-and-tablet {
+        flex-grow: 1;
+    }
 }
 
 .coa-filter__date-input-label {
@@ -131,8 +153,7 @@
 $input-box-height: 4.4rem;
 
 .coa-filter__date-input {
-    box-sizing: content-box;
-    padding: 0 .25rem;
+    padding: 0 .5rem;
     text-align: center;
     border-radius: 4px;
     border-width: 1px;
@@ -140,7 +161,6 @@ $input-box-height: 4.4rem;
     border-color: $coa-color-gray-4;
     background-color: $coa-color-gray-4;
     height: $input-box-height;
-    width: 8rem;
 
     &:focus {
         border-color: $coa-color-blue-warm-60v
@@ -152,6 +172,7 @@ $input-box-height: 4.4rem;
     }
 
     @include desktop {
+        box-sizing: content-box;
         &.coa-filter__date-input-day,
         &.coa-filter__date-input-month {
             width: 2em;
@@ -179,6 +200,12 @@ $input-box-height: 4.4rem;
     &:hover {
         cursor: pointer;
     }
+    @include tablet {
+        margin-left: 3rem;
+    }
+    @include mobile {
+        margin-left: 2rem;
+    }
 }
 
 .coa-filter__calendar-icon {
@@ -204,6 +231,7 @@ $input-box-height: 4.4rem;
     border-radius: 4px;
     background-color: $coa-color-gray-4;
     margin-top: 1rem;
+    width: 100%;
     &.coa-daypicker__container-hidden {
         visibility: hidden;
         height: 0;
@@ -217,9 +245,17 @@ $input-box-height: 4.4rem;
         &>.DayPicker-Months {
             &>.DayPicker-Month {
                 @extend %coa-col-xs-12;
+                // See note next to $coa-calendar-mobile-height declaration
+                // to see how our calendar resizes itself proportionally on mobile+tablet.
+                @include mobile {
+                    height: $coa-calendar-mobile-height;
+                }
+                @include tablet {
+                    height: $coa-calendar-tablet-height;
+                }
                 &>.DayPicker-Body>.DayPicker-Week {
                     &>.DayPicker-Day {
-                        padding: 0em;
+                        // padding: 0em;
                     }
                     &>.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
                         background-color: $coa-color-blue-warm-60v;
