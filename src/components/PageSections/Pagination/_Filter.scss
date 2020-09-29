@@ -254,9 +254,6 @@ $input-box-height: 4.4rem;
                     height: $coa-calendar-tablet-height;
                 }
                 &>.DayPicker-Body>.DayPicker-Week {
-                    &>.DayPicker-Day {
-                        // padding: 0em;
-                    }
                     &>.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
                         background-color: $coa-color-blue-warm-60v;
                     }

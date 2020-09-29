@@ -8,7 +8,7 @@ import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
 import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder'
 
-import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js'
+import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js'
 
 
 const SearchPage = () => {

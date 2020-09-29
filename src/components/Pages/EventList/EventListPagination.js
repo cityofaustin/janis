@@ -9,7 +9,7 @@ import ChevronRight from 'components/SVGs/ChevronRight'
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue'
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue'
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
-import { PageNumber } from 'components/PageSections/Pagination'
+import PageNumber from 'components/PageSections/Pagination/PageNumber'
 
 const EventListPagination = ({ events, intl }) => {
   const eventsPerPage = 10

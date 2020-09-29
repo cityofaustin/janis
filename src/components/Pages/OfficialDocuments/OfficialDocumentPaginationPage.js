@@ -3,7 +3,7 @@ import { injectIntl } from 'react-intl';
 
 import OfficialDocumentEntry from 'components/Pages/OfficialDocuments/OfficialDocumentEntry';
 import UserFeedback from 'components/UserFeedback';
-import PaginationContainer from 'components/PageSections/Pagination/paginationContainer.js';
+import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js';
 
 const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => (
   <div id="officialDocumentsPaginationPage">

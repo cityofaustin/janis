@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex }) => {
+const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex }) => {
   const active = pageNumber === index ? " active" : ''
   let ellipsis = ""
   let pageIndex = index
@@ -19,3 +19,5 @@ export const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pag
     </div>
   )
 }
+
+export default PageNumber;

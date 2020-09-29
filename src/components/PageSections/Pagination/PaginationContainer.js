@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { injectIntl } from 'react-intl';
+import React, { useState, useEffect, useRef } from 'react';
 import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
@@ -9,16 +8,15 @@ import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBu
 import ChevronRight from 'components/SVGs/ChevronRight';
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
-import { PageNumber } from 'components/PageSections/Pagination';
+import PageNumber from 'components/PageSections/Pagination/PageNumber';
 import Filter from 'components/PageSections/Pagination/Filter';
 
 const PaginationContainer = ({
   pagesArray,
   PageComponent,
-  intl,
   filterable=false,
   searchedTerm,
-  smallMargins = false,
+  smallMargins=false,
 }) => {
   const documentsPerPage = 10;
   const isMobile = useMobileQuery();
@@ -29,6 +27,7 @@ const PaginationContainer = ({
   let query = queryObjectBuilder();
   const [isTransition, setIsTransition] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
+  const pageComponentsRef = useRef();
   const shownPages = buildPagination(pages, maxPagesShown, pageNumber);
   const currentPage = pages[pageNumber];
 
@@ -94,7 +93,7 @@ const PaginationContainer = ({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         element: window,
-        fadeElement: paginationContainerElm,
+        fadeElement: "paginationContainerElm",
         callback: () => {
           updatePage(newPage);
         }, // NOTE: callback will fire after fade OUT and BEFORE fade IN.
@@ -107,7 +106,7 @@ const PaginationContainer = ({
       <div id="paginationContainerElm" className="wrapper container-fluid">
         <div className="row">
           {filterable && <Filter/>}
-          <div className="col-xs-12 col-lg-8">
+          <div ref={pageComponentsRef} className="col-xs-12 col-lg-8">
             {currentPage &&
               currentPage.map((page, index) => (
                 <PageComponent page={page} key={index} />
