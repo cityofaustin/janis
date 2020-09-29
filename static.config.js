@@ -723,7 +723,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   let pages = [];
   let after = '';
-  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 25
+  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 10
   while (true) {
     const siteStructure = await client.request(allPagesQuery, { after: after, batchSize: batchSize});
     pages = pages.concat(siteStructure.allPages.edges);
