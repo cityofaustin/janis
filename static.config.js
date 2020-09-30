@@ -723,7 +723,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   let pages = [];
   let after = '';
-  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 10
+  let batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || null;
+  if (!batchSize) {
+    if (process.env.DEPLOY_ENV === "production") {
+      // Our production Joplin dyno is larger and has more resources to process more requests without timing out.
+      batchSize = 25
+    } else {
+      batchSize = 10
+    }
+  }
   while (true) {
     const siteStructure = await client.request(allPagesQuery, { after: after, batchSize: batchSize});
     pages = pages.concat(siteStructure.allPages.edges);
