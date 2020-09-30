@@ -4,8 +4,9 @@ import moment from 'moment-timezone';
 import { useIntl } from 'react-intl';
 
 import PageHeader from 'components/PageHeader';
-import EventListPagination from 'components/Pages/EventList/EventListPagination';
+import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js';
 import UserFeedback from 'components/UserFeedback';
+import EventListEntry from 'components/Pages/EventList/EventListEntry';
 import { events as i18n } from 'js/i18n/definitions';
 
 const filterOnDate = event => {
@@ -26,7 +27,10 @@ const EventList = () => {
       </Head>
       <PageHeader contentType={'event-list'}> {intl.formatMessage(i18n.events)} </PageHeader>
       <div className="wrapper container-fluid">
-        <EventListPagination events={events.filter(filterOnDate)} intl={intl} />
+        <PaginationContainer
+          pagesArray={events.filter(filterOnDate)}
+          PageComponent={EventListEntry}
+        />
         <UserFeedback />
       </div>
     </div>

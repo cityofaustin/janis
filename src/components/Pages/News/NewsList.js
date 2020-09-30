@@ -35,12 +35,10 @@ const NewsListPage = ({ newsListPage }) => {
         {intl.formatMessage(i18n.news)}
       </PageHeader>
       <div className="coa-Page__all-of-the-content">
-        <div className="coa-Page__main-content">
+        <div className="coa-Page__main-content coa-NewsPage__main-content">
           <PaginationContainer
             pagesArray={newsList}
             PageComponent={NewsListItem}
-            intl={intl}
-            smallMargins
           />
         </div>
       </div>

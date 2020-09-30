@@ -1,22 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { navigation as i18n2 } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
-import { buildPages, buildPagination } from 'js/helpers/pagination.js';
+import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
 import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder';
 
-import ChevronRight from 'components/SVGs/ChevronRight';
-import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
-import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
-import PageNumber from 'components/PageSections/Pagination/PageNumber';
 import Filter from 'components/PageSections/Pagination/Filter';
+import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
 const PaginationContainer = ({
   pagesArray,
   PageComponent,
   filterable=false,
-  searchedTerm,
-  smallMargins=false,
+  searchedTerm=null,
 }) => {
   const documentsPerPage = 10;
   const isMobile = useMobileQuery();
@@ -28,7 +23,7 @@ const PaginationContainer = ({
   const [isTransition, setIsTransition] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const pageComponentsRef = useRef();
-  const shownPages = buildPagination(pages, maxPagesShown, pageNumber);
+  const pageSelectorValues = buildPageSelectorValues(pages, maxPagesShown, pageNumber);
   const currentPage = pages[pageNumber];
 
   useEffect(() => {
@@ -93,7 +88,7 @@ const PaginationContainer = ({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         element: window,
-        fadeElement: "paginationContainerElm",
+        fadeElement: pageComponentsRef.current,
         callback: () => {
           updatePage(newPage);
         }, // NOTE: callback will fire after fade OUT and BEFORE fade IN.
@@ -102,53 +97,25 @@ const PaginationContainer = ({
   }
 
   return (
-    <div>
-      <div id="paginationContainerElm" className="wrapper container-fluid">
-        <div className="row">
-          {filterable && <Filter/>}
-          <div ref={pageComponentsRef} className="col-xs-12 col-lg-8">
+    <div className="wrapper container-fluid">
+      <div className="row">
+        {filterable && <Filter/>}
+        <div className="col-xs-12 col-lg-8">
+          <div>
+            50 Filtered results
+          </div>
+          <div ref={pageComponentsRef} id="paginationContainerElm">
             {currentPage &&
               currentPage.map((page, index) => (
                 <PageComponent page={page} key={index} />
               ))}
           </div>
-
-          {shownPages.length > 1 && (
-            <div
-              className={`coa-PaginationContainer ${
-                smallMargins
-                  ? 'coa-PaginationContainer--small-margins'
-                  : ''
-              }`}
-            >
-              <div
-                onClick={() => changePage(pageNumber - 1)}
-                className="coa-PaginationContainer_page previous"
-              >
-                <ChevronLeftBlue className="coa-PaginationContainer_page-chevron" />
-              </div>
-
-              {pages &&
-                shownPages.map((page, i) => (
-                  <PageNumber
-                    pageNumber={pageNumber + 1}
-                    index={shownPages[i]}
-                    paginationIndex={i}
-                    key={i}
-                    pageNumberIndex={shownPages.indexOf(pageNumber + 1)}
-                    changePage={changePage}
-                  />
-                ))}
-
-              <div
-                onClick={() => changePage(pageNumber + 1)}
-                className="coa-PaginationContainer_page next"
-              >
-                <ChevronRightBlue className="coa-PaginationContainer_page-chevron right" />
-              </div>
-            </div>
-          )}
         </div>
+        <PageSelector
+          pageSelectorValues={pageSelectorValues}
+          pageNumber={pageNumber}
+          changePage={changePage}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
 
-import PageHeader from 'components/PageHeader';
-
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import ContactDetails from 'components/Contact/ContactDetails';
