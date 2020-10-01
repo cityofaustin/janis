@@ -883,6 +883,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     },
   };
 
+  console.log('**--** ', langCode, data.children.length)
+
   return data;
 };
 
@@ -953,6 +955,7 @@ export default {
       allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
     );
     const allRoutes = routes.concat(translatedRoutes);
+    console.log('allRoutes being returned')
 
     return allRoutes
   },
