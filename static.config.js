@@ -807,8 +807,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     pages.map(pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
         return Promise.all(
-          pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
-            buildPageAtUrl(
+          pageAtUrlInfo.node.janisInstances.map(async instanceOfPage =>
+            await buildPageAtUrl(
               pageAtUrlInfo.node,
               instanceOfPage,
               client,
@@ -820,8 +820,8 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
       // not all pages have instances (events and locations not under departments)
       return Promise.all(
-        pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
-          buildPageAtUrl(
+        pageAtUrlInfo.node.janisUrls.map(async instanceOfPage =>
+          await buildPageAtUrl(
             pageAtUrlInfo.node,
             instanceOfPage,
             client,
@@ -898,35 +898,12 @@ export default {
   }),
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
-    const queries = [
-      {
-        query: allThemesQuery,
-        dataKey: 'navigation',
-        middleware: cleanNavigation,
-      },
-    ];
-    const requests = [];
-    const data = {};
-    SUPPORTED_LANG_CODES.map(langCode => {
-      const client = createGraphQLClientsByLang(langCode);
-      queries.map(query => {
-        requests.push(client.request(query.query));
-        data[query.dataKey] = data[query.dataKey] || {};
-        data[query.dataKey][langCode] = null;
-      });
-    });
-
-    (await Promise.all(requests)).forEach((response, i) => {
-      const queryIndex = i % queries.length;
-      const langIndex = (i - queryIndex) / queries.length;
-      data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
-        typeof queries[queryIndex].middleware === 'function'
-          ? queries[queryIndex].middleware(
-              response,
-              SUPPORTED_LANG_CODES[langIndex],
-            )
-          : response;
-    });
+    const data = {'navigation': {}}
+    SUPPORTED_LANG_CODES.map(async langCode => {
+      const client = await createGraphQLClientsByLang(langCode);
+      let response = await client.request(allThemesQuery);
+      data['navigation'][langCode] = cleanNavigation(response, langCode)
+    })
 
     return data;
   },
@@ -952,10 +929,10 @@ export default {
     const allLangs = Array.from(SUPPORTED_LANG_CODES);
     allLangs.unshift(undefined);
     const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+      allLangs.map(async langCode => await makeAllPages(langCode, incrementalPageId)),
     );
     const allRoutes = routes.concat(translatedRoutes);
-    console.log('allRoutes being returned')
+    console.log('allRoutes being returned', allRoutes.length)
 
     return allRoutes
   },
