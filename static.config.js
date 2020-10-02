@@ -805,9 +805,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   });
 
   let allPages = await Promise.all(
-    pages.map(pageAtUrlInfo => {
+    pages.map(async pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
-        return Promise.all(
+        return await Promise.all(
           pageAtUrlInfo.node.janisInstances.map(async instanceOfPage =>
             await buildPageAtUrl(
               pageAtUrlInfo.node,
@@ -820,7 +820,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       }
 
       // not all pages have instances (events and locations not under departments)
-      return Promise.all(
+      return await Promise.all(
         pageAtUrlInfo.node.janisUrls.map(async instanceOfPage =>
           await buildPageAtUrl(
             pageAtUrlInfo.node,
