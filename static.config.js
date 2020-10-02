@@ -894,7 +894,7 @@ export default {
   // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
-  maxThreads: 2,
+  // maxThreads: 2,
   outputFileRate: 50,
   getSiteProps: () => ({
     title: 'City of Austin',
@@ -928,18 +928,31 @@ export default {
       },
     ];
 
-    // parallel processing of all languages
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
-      allLangs.map(async langCode => await makeAllPages(langCode, incrementalPageId)),
+    await Promise.all(
+      SUPPORTED_LANG_CODES.map(async (langCode) => {
+        const pagesData = await makeAllPages(langCode, incrementalPageId)
+        routes.push(pagesData)
+        if (langCode === "en") {
+          // Create pages without a path prefix for default routes using English data.
+          // const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          const defaultPagesData = cloneDeep(pagesData);
+          defaultPagesData.path = '/'
+          routes.push(defaultPagesData)
+        }
+      })
     );
-    console.log('TRANSLATED ROUTES: ', translatedRoutes.length)
-    console.log(translatedRoutes)
-    const allRoutes = routes.concat(translatedRoutes);
-    console.log('allRoutes being returned', allRoutes.length)
+    // // parallel processing of all languages
+    // const allLangs = Array.from(SUPPORTED_LANG_CODES);
+    // allLangs.unshift(undefined);
+    // const translatedRoutes = await Promise.all(
+    //   allLangs.map(async langCode => await makeAllPages(langCode, incrementalPageId)),
+    // );
+    // console.log('TRANSLATED ROUTES: ', translatedRoutes.length)
+    // console.log(translatedRoutes)
+    // const allRoutes = routes.concat(translatedRoutes);
+    console.log('routes being returned', routes.length)
 
-    return allRoutes
+    return routes
   },
   plugins: ['react-static-plugin-react-router'],
 };
