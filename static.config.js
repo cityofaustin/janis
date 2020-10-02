@@ -864,7 +864,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
         topPages = allServicePages
       }
 
-      let services = cleanLinks(allServicePages, 'service');
+      let services = cleanLinks(topPages, 'service');
 
       // Make sure we don't have any dupes in top services
       services = services.filter(
