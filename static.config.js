@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import filesize from 'filesize';
+import { cloneDeep } from 'lodash';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -883,7 +884,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     },
   };
 
-  console.log('**--** ', langCode, data.children.length)
+  console.log('**--** ', langCode, data.children.length, data.path)
 
   return data;
 };
@@ -900,7 +901,7 @@ export default {
     // getSiteData's result is made available to the entire site via the useSiteData hook
     const data = {'navigation': {}}
     SUPPORTED_LANG_CODES.map(async langCode => {
-      const client = await createGraphQLClientsByLang(langCode);
+      const client = createGraphQLClientsByLang(langCode);
       let response = await client.request(allThemesQuery);
       data['navigation'][langCode] = cleanNavigation(response, langCode)
     })
@@ -931,6 +932,8 @@ export default {
     const translatedRoutes = await Promise.all(
       allLangs.map(async langCode => await makeAllPages(langCode, incrementalPageId)),
     );
+    console.log('TRANSLATED ROUTES: ', translatedRoutes.length)
+    console.log(translatedRoutes)
     const allRoutes = routes.concat(translatedRoutes);
     console.log('allRoutes being returned', allRoutes.length)
 
