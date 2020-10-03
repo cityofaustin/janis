@@ -33,6 +33,9 @@ const branchOverrides = {
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
+  '5032-top-pages': {
+    joplin_appname: 'joplin-pr-5032-top-pages'
+  },
   'demo': {
     joplin_appname: 'joplin-pr-demo'
   },

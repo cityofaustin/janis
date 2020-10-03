@@ -21,6 +21,7 @@ import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 import getNewsListPageQuery from 'js/queries/getNewsListPageQuery';
+import getHomePagesQuery from 'js/queries/getHomePagesQuery';
 
 import {
   cleanNavigation,
@@ -855,9 +856,16 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     template: 'src/components/Pages/Home',
     children: allPages,
     getData: async () => {
-      const { allServicePages } = await client.request(topServicesQuery);
+      const { allHomePages } = await client.request(getHomePagesQuery);
+      let topPages = allHomePages.edges[0].node.topPages
 
-      let services = cleanLinks(allServicePages, 'service');
+      // If no topPages were set, then default to using old method of getting the top 4 service pages
+      if (!topPages.edges.length) {
+        const { allServicePages } = await client.request(topServicesQuery);
+        topPages = allServicePages
+      }
+
+      let services = cleanLinks(topPages, 'service');
 
       // Make sure we don't have any dupes in top services
       services = services.filter(
