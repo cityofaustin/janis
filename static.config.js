@@ -481,8 +481,8 @@ const buildPageAtUrl = async (
     const departmentNewsPage = {
       path: 'news',
       template: 'src/components/Pages/News/NewsList',
-      getData: () =>
-        getNewsListForDepartment(client, departmentpage.id, locale),
+      getData: async () =>
+        await getNewsListForDepartment(client, departmentpage.id, locale),
     };
 
     return {
@@ -499,8 +499,8 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/TopicCollection',
-      getData: () =>
-        getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
+      getData: async () =>
+        await getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
     };
   }
 
@@ -509,7 +509,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(topicPage, instanceOfPage, client),
+      getData: async () => await getTopicPageData(topicPage, instanceOfPage, client),
     };
   }
 
@@ -526,7 +526,7 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Guide',
-        getData: () => getGuidePageData(guidepage, instanceOfPage, client),
+        getData: async () => await getGuidePageData(guidepage, instanceOfPage, client),
       };
     }
 
@@ -534,8 +534,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Service',
-        getData: () =>
-          getServicePageData(
+        getData: async () =>
+          await getServicePageData(
             servicepage,
             instanceOfPage,
             client,
@@ -548,8 +548,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Information',
-        getData: () =>
-          getInformationPageData(
+        getData: async () =>
+          await getInformationPageData(
             informationpage,
             instanceOfPage,
             client,
@@ -562,8 +562,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
-        getData: () =>
-          getOfficialDocumentCollectionData(
+        getData: async () =>
+          await getOfficialDocumentCollectionData(
             officialdocumentcollection,
             instanceOfPage,
             client,
@@ -575,8 +575,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Form',
-        getData: () =>
-          getFormContainerData(formcontainer, instanceOfPage, client),
+        getData: async () =>
+          await getFormContainerData(formcontainer, instanceOfPage, client),
       };
     }
   }
@@ -602,7 +602,7 @@ const buildPageAtUrl = async (
     return {
       path: '/departments/',
       template: 'src/components/Pages/Departments',
-      getData: () => getDepartmentsPageData(client),
+      getData: async () => await getDepartmentsPageData(client),
     };
   }
 
@@ -612,7 +612,7 @@ const buildPageAtUrl = async (
       path: '/events/',
       template: 'src/components/Pages/EventList',
       // getAllEvents takes client and boolean: if we should hide the cancelled events
-      getData: () => getAllEvents(client, false),
+      getData: async () => await getAllEvents(client, false),
     };
   }
 
@@ -630,7 +630,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
-      getData: () => getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
+      getData: async () => await getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
     }
   }
 
@@ -645,7 +645,7 @@ const getPagesOfGuidesData = async client => {
 
   const pagesOfGuidesData = {};
 
-  allGuidePages.edges.map(async guidePage => {
+  await Promise.all(allGuidePages.edges.map(async guidePage => {
     if (guidePage.node.sections.length > 0) {
       const guideUrl = await client.request(getPageUrlQuery, {
         id: guidePage.node.id,
@@ -707,7 +707,7 @@ const getPagesOfGuidesData = async client => {
         }
       });
     }
-  });
+  }));
 
   return pagesOfGuidesData;
 };
@@ -894,7 +894,7 @@ export default {
   // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
-  // maxThreads: 2,
+  maxThreads: 2,
   outputFileRate: 50,
   getSiteProps: () => ({
     title: 'City of Austin',
@@ -902,11 +902,11 @@ export default {
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
     const data = {'navigation': {}}
-    SUPPORTED_LANG_CODES.map(async langCode => {
+    await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
       const client = createGraphQLClientsByLang(langCode);
       let response = await client.request(allThemesQuery);
       data['navigation'][langCode] = cleanNavigation(response, langCode)
-    })
+    }))
 
     return data;
   },
