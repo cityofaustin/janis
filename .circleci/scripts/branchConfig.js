@@ -36,7 +36,7 @@ const branchOverrides = {
   'demo': {
     joplin_appname: 'joplin-pr-demo'
   },
-  'espanol-404-fixes' {
+  'espanol-404-fixes': {
     joplin_appname: 'joplin-pr-demo-copy'
   }
 };
