@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import filesize from 'filesize';
+import { cloneDeep } from 'lodash';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -481,8 +482,8 @@ const buildPageAtUrl = async (
     const departmentNewsPage = {
       path: 'news',
       template: 'src/components/Pages/News/NewsList',
-      getData: () =>
-        getNewsListForDepartment(client, departmentpage.id, locale),
+      getData: async () =>
+        await getNewsListForDepartment(client, departmentpage.id, locale),
     };
 
     return {
@@ -499,8 +500,8 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/TopicCollection',
-      getData: () =>
-        getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
+      getData: async () =>
+        await getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
     };
   }
 
@@ -509,7 +510,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(topicPage, instanceOfPage, client),
+      getData: async () => await getTopicPageData(topicPage, instanceOfPage, client),
     };
   }
 
@@ -526,7 +527,7 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Guide',
-        getData: () => getGuidePageData(guidepage, instanceOfPage, client),
+        getData: async () => await getGuidePageData(guidepage, instanceOfPage, client),
       };
     }
 
@@ -534,8 +535,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Service',
-        getData: () =>
-          getServicePageData(
+        getData: async () =>
+          await getServicePageData(
             servicepage,
             instanceOfPage,
             client,
@@ -548,8 +549,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Information',
-        getData: () =>
-          getInformationPageData(
+        getData: async () =>
+          await getInformationPageData(
             informationpage,
             instanceOfPage,
             client,
@@ -562,8 +563,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
-        getData: () =>
-          getOfficialDocumentCollectionData(
+        getData: async () =>
+          await getOfficialDocumentCollectionData(
             officialdocumentcollection,
             instanceOfPage,
             client,
@@ -575,8 +576,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Form',
-        getData: () =>
-          getFormContainerData(formcontainer, instanceOfPage, client),
+        getData: async () =>
+          await getFormContainerData(formcontainer, instanceOfPage, client),
       };
     }
   }
@@ -602,7 +603,7 @@ const buildPageAtUrl = async (
     return {
       path: '/departments/',
       template: 'src/components/Pages/Departments',
-      getData: () => getDepartmentsPageData(client),
+      getData: async () => await getDepartmentsPageData(client),
     };
   }
 
@@ -612,7 +613,7 @@ const buildPageAtUrl = async (
       path: '/events/',
       template: 'src/components/Pages/EventList',
       // getAllEvents takes client and boolean: if we should hide the cancelled events
-      getData: () => getAllEvents(client, false),
+      getData: async () => await getAllEvents(client, false),
     };
   }
 
@@ -630,7 +631,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
-      getData: () => getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
+      getData: async () => await getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
     }
   }
 
@@ -645,7 +646,7 @@ const getPagesOfGuidesData = async client => {
 
   const pagesOfGuidesData = {};
 
-  allGuidePages.edges.map(async guidePage => {
+  await Promise.all(allGuidePages.edges.map(async guidePage => {
     if (guidePage.node.sections.length > 0) {
       const guideUrl = await client.request(getPageUrlQuery, {
         id: guidePage.node.id,
@@ -707,7 +708,7 @@ const getPagesOfGuidesData = async client => {
         }
       });
     }
-  });
+  }));
 
   return pagesOfGuidesData;
 };
@@ -805,11 +806,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   });
 
   let allPages = await Promise.all(
-    pages.map(pageAtUrlInfo => {
+    pages.map(async pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
-        return Promise.all(
-          pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
-            buildPageAtUrl(
+        return await Promise.all(
+          pageAtUrlInfo.node.janisInstances.map(async instanceOfPage =>
+            await buildPageAtUrl(
               pageAtUrlInfo.node,
               instanceOfPage,
               client,
@@ -820,9 +821,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       }
 
       // not all pages have instances (events and locations not under departments)
-      return Promise.all(
-        pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
-          buildPageAtUrl(
+      return await Promise.all(
+        pageAtUrlInfo.node.janisUrls.map(async instanceOfPage =>
+          await buildPageAtUrl(
             pageAtUrlInfo.node,
             instanceOfPage,
             client,
@@ -904,35 +905,12 @@ export default {
   }),
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
-    const queries = [
-      {
-        query: allThemesQuery,
-        dataKey: 'navigation',
-        middleware: cleanNavigation,
-      },
-    ];
-    const requests = [];
-    const data = {};
-    SUPPORTED_LANG_CODES.map(langCode => {
+    const data = {'navigation': {}}
+    await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
       const client = createGraphQLClientsByLang(langCode);
-      queries.map(query => {
-        requests.push(client.request(query.query));
-        data[query.dataKey] = data[query.dataKey] || {};
-        data[query.dataKey][langCode] = null;
-      });
-    });
-
-    (await Promise.all(requests)).forEach((response, i) => {
-      const queryIndex = i % queries.length;
-      const langIndex = (i - queryIndex) / queries.length;
-      data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
-        typeof queries[queryIndex].middleware === 'function'
-          ? queries[queryIndex].middleware(
-              response,
-              SUPPORTED_LANG_CODES[langIndex],
-            )
-          : response;
-    });
+      let response = await client.request(allThemesQuery);
+      data['navigation'][langCode] = cleanNavigation(response, langCode)
+    }))
 
     return data;
   },
@@ -954,15 +932,21 @@ export default {
       },
     ];
 
-    // parallel processing of all languages
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+    await Promise.all(
+      SUPPORTED_LANG_CODES.map(async (langCode) => {
+        const pagesData = await makeAllPages(langCode, incrementalPageId)
+        routes.push(pagesData)
+        if (langCode === "en") {
+          // Create pages without a path prefix for default routes using English data.
+          // const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          const defaultPagesData = cloneDeep(pagesData);
+          defaultPagesData.path = '/'
+          routes.push(defaultPagesData)
+        }
+      })
     );
-    const allRoutes = routes.concat(translatedRoutes);
 
-    return allRoutes
+    return routes
   },
   plugins: ['react-static-plugin-react-router'],
 };
