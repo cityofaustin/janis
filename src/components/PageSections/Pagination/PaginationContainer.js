@@ -77,6 +77,14 @@ const PaginationContainer = ({
     }
   }
 
+  const applyFilter = () => {
+    // TODO: change the pageArray that gets rendered, based on the filter parameters
+  }
+
+  // TODO: date boundaries should be set by earliest and latest official documents in collection
+  const lowerBound = new Date(2018, 1, 1)
+  const upperBound = new Date()
+
   function changePage(newPage) {
     setIsTransition(true);
     if (
@@ -99,10 +107,16 @@ const PaginationContainer = ({
   return (
     <div className="wrapper container-fluid">
       <div className="row">
-        {filterable && <Filter/>}
+        {filterable && (
+          <Filter
+            applyFilter={applyFilter}
+            lowerBound={lowerBound}
+            upperBound={upperBound}
+          />
+        )}
         <div className="col-xs-12 col-lg-8">
           <div>
-            50 Filtered results
+            50 Filtered results {/** TODO: this component needs to get conencted to actual filter state **/}
           </div>
           <div ref={pageComponentsRef} id="paginationContainerElm">
             {currentPage &&

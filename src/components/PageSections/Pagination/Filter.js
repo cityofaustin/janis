@@ -7,11 +7,9 @@ import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
 import { months, weekdaysLong, weekdaysShort } from 'js/i18n/constants';
 
-const Filter = () => {
+const Filter = ({applyFilter, lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
-  const lowerBound = new Date(2018, 1, 1)
-  const upperBound = new Date()
 
   if (!isDesktop) {
     return (
