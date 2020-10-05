@@ -41,7 +41,7 @@ const AppView = ({ path }) => {
       {/* START ⚠️COVED_19 Hardcoded */}
       <Alert
         badge="Coronavirus (COVID-19)"
-        link="https://www.austintexas.gov/COVID19"
+        link="/government-business/covid-information-and-resources/"
         linkContent={intl.formatMessage(i18n1.getLatest)}
       />
       {/* END ⚠️COVED_19 Hardcoded */}
