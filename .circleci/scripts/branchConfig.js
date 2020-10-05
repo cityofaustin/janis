@@ -36,6 +36,9 @@ const branchOverrides = {
   '5032-top-pages': {
     joplin_appname: 'joplin-pr-5032-top-pages'
   },
+  'covid-link': {
+    joplin_appname: 'joplin-pr-demo'
+  },
   'demo': {
     joplin_appname: 'joplin-pr-demo'
   },
