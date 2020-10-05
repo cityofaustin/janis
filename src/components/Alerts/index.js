@@ -26,11 +26,12 @@ const Alert = ({ badge, content, link, linkContent }) => {
           <a
             href={link}
             className="coa-HomepageAlert__link-external"
-            target="_blank"
             rel="noopener noreferrer"
           >
             {linkContent}
-            <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+            {/*
+              <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+            */}
           </a>
         )}
         </div>
