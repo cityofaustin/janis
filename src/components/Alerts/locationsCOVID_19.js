@@ -30,15 +30,15 @@ const LocationsCOVID_19 = () => {
       { ( lang === "es" ) && (<>&nbsp;para información actualizada sobre horarios o&nbsp;</>)}
 
       <a
-        href="https://www.austintexas.gov/COVID19"
+        href="/government-business/covid-information-and-resources/"
         className="coa-HomepageAlert__link-external"
-        target="_blank"
         rel="noopener noreferrer"
       >
         { ( lang === "en" ) && (<>get current information about coronavirus (COVID-19) in Austin.</>)}
         { ( lang === "es" ) && (<>obtenga información actual sobre el coronavirus (COVID-19) en Austin.</>)}
 
-        <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+        // Just gonna keep this noted out here for Demo usecases.
+        // <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
       </a>
     </div>
   )
