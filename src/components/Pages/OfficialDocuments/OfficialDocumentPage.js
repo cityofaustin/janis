@@ -97,6 +97,13 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                   <h2>{intl.formatMessage(i18n.document)}</h2>
                   <a href={document.url}>{name}</a> {pdfComponent}
                 </div>
+                <div className="coa-OfficialDocumentPage__content-container">
+                  <h2>PDF content</h2>
+                  <p className="coa-OfficialDocumentPage__disclaimer"><span>Disclaimer:</span> The following text was extracted from the PDF file to make this document more accessible. This machine-generated content may contain styling errors due to redactions. In some instances, text may not load if the original file is a scanned image or has not been made searchable. For the full version of the document, please view the PDF.</p>
+                  <div className="coa-OfficialDocumentPage__content">
+                    body body body 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
