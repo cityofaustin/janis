@@ -49,11 +49,14 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       name,
       pdfSize,
       document,
+      body,
       officialDocumentCollection,
     },
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
+
+  console.log(useRouteData())
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = !!pdfSize ? (
@@ -99,9 +102,10 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                 </div>
                 <div className="coa-OfficialDocumentPage__content-container">
                   <h2>PDF content</h2>
-                  <p className="coa-OfficialDocumentPage__disclaimer"><span>Disclaimer:</span> The following text was extracted from the PDF file to make this document more accessible. This machine-generated content may contain styling errors due to redactions. In some instances, text may not load if the original file is a scanned image or has not been made searchable. For the full version of the document, please view the PDF.</p>
+                  <p className="coa-OfficialDocumentPage__disclaimer">
+                    <span className="coa-OfficialDocumentPage__span">Disclaimer:</span> The following text was extracted from the PDF file to make this document more accessible. This machine-generated content may contain styling errors due to redactions. In some instances, text may not load if the original file is a scanned image or has not been made searchable. For the full version of the document, please view the PDF.</p>
                   <div className="coa-OfficialDocumentPage__content">
-                    body body body 
+                    {body} 
                   </div>
                 </div>
               </div>
