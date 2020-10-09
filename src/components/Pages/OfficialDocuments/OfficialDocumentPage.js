@@ -101,9 +101,9 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                   <a href={document.url}>{name}</a> {pdfComponent}
                 </div>
                 <div className="coa-OfficialDocumentPage__content-container">
-                  <h2>PDF content</h2>
+                  <h2>{intl.formatMessage(i18n.pdfContent)}</h2>
                   <p className="coa-OfficialDocumentPage__disclaimer">
-                    <span className="coa-OfficialDocumentPage__span">{intl.formatMessage(i18n.disclaimer)}</span> {intl.formatMessage(i18n.message)}
+                    <span className="coa-OfficialDocumentPage__span">{intl.formatMessage(i18n.disclaimer)}:</span> {intl.formatMessage(i18n.message)}
                   </p>
                   <div className="coa-OfficialDocumentPage__content">
                     {body}
