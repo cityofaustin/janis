@@ -105,6 +105,8 @@
   "officialdocuments.author": "Autor",
   "officialdocuments.document": "Documento",
   "officialdocuments.partOf": "Parte de",
+  "officialdocuments.disclaimer": "DISCLAIMER",
+  "officialdocuments.message": "El siguiente texto fue extraído de un documento PDF para hacerlo más accesible. Este contenido generado por máquina puede contener errores de formato. El texto se mostrará en el idioma original del documento. En algunos casos, el texto no se cargará si el documento original es una imagen escaneada o si el texto no tiene capacidad de búsqueda. Para mirar la versión completa, favor de ver el documento PDF.",
   "guides.pageLink": "Visite esta página en alpha.austin.gov",
   "curbsideServices.pickupschedule": "Horario de recolección para {address}",
   "curbsideServices.bulkitemcollection": "Próxima recolección de artículos grandes",
