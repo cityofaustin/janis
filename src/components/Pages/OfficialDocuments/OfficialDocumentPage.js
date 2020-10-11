@@ -56,8 +56,6 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
     // it gets previews working with hooks
   } = officialDocumentPage ? { officialDocumentPage } : useRouteData();
 
-  console.log(useRouteData())
-
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = !!pdfSize ? (
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span>
