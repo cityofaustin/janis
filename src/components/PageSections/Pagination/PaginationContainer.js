@@ -18,13 +18,92 @@ const PaginationContainer = ({
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
-  const pages = buildPages(pagesArray, documentsPerPage);
   let query = queryObjectBuilder();
   const [isTransition, setIsTransition] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const pageComponentsRef = useRef();
+  const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
   const pageSelectorValues = buildPageSelectorValues(pages, maxPagesShown, pageNumber);
   const currentPage = pages[pageNumber];
+  /**
+    DayPicker lowerBound should be set by earliest official document in collection.
+    OfficialDocuments are sorted in descending order, so the final document will be the earliest.
+    upperBound should use the current date.
+    Otherwise people might get confused that they can't filter up to the current day.
+  **/
+  const lowerBound = new Date(pagesArray[pagesArray.length-1].date)
+  const upperBound = new Date()
+
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
+  const [filterApplied, setFilterApplied] = useState(false)
+
+  /**
+    Clear the filter by running
+    applyFilter(null,null,false)
+  **/
+  const applyFilter = (fromDate, toDate, filterApplied) => {
+    setFromDate(fromDate)
+    setToDate(toDate)
+    setFilterApplied(filterApplied)
+  }
+
+  // Update pages when we get a new toDate or fromDate.
+  useEffect(()=>{
+    let startIndex = null
+    let endIndex = null
+    /**
+      Find the earliest page for pageArray (endIndex).
+      Start at the last page in pageArray and work backwards
+      (since pages are returned in reverse chronological order, newest first).
+      Once we find the first page that is greater than or equal to the fromDate,
+      then we know that every page before it will be greater than or equal to the fromDate.
+    **/
+    if (fromDate) {
+      for (let i=(pagesArray.length-1); i>=0; i--) {
+        let page = pagesArray[i]
+        if (new Date(page.date) >= fromDate) {
+          endIndex = i
+          break;
+        }
+      }
+      // If no endIndex was found, then there are zero pages that are greater than the fromDate.
+      if (endIndex === null) {
+        setPages([])
+        return
+      }
+    }
+    /**
+      Find the latest page for pageArray (startIndex).
+      Start at the first page in pageArray and work forwards
+      (since pages are returned in reverse chronological order, newest first).
+      Once we find the first page that is less than or equal to the toDate,
+      Then we know that every page after it will be less than or equal to the toDate.
+    **/
+    if (toDate && (endIndex > -1)) {
+      for (let i=0; i<=(endIndex || (pagesArray.length-1)); i++) {
+        let page = pagesArray[i]
+        if (new Date(page.date) <= toDate) {
+          startIndex=i;
+          break;
+        }
+      }
+      // If no startIndex was found, then there are zero pages that are less than the toDate.
+      if (startIndex === null) {
+        setPages([])
+        return
+      }
+    }
+
+    if (startIndex === null) {
+      startIndex = 0
+    }
+    if (endIndex === null) {
+      endIndex = (pagesArray.length-1)
+    }
+    const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
+    setPages(buildPages(filteredPagesArray, documentsPerPage))
+  }, [pagesArray, fromDate, toDate])
 
   useEffect(() => {
     /*
@@ -64,6 +143,11 @@ const PaginationContainer = ({
     }
   }, [searchedTerm]);
 
+  useEffect(() => {
+    // When we update our pages be applying a filter, then reset our pageNumber to 0.
+    setPageNumber(0);
+  }, [pages]);
+
   const updatePage = newPage => {
     updateUrl(newPage)
     setPageNumber(newPage); // NOTE: hooks must be in the order
@@ -76,14 +160,6 @@ const PaginationContainer = ({
       window.location.hash = queryStringBuilder(query)
     }
   }
-
-  const applyFilter = () => {
-    // TODO: change the pageArray that gets rendered, based on the filter parameters
-  }
-
-  // TODO: date boundaries should be set by earliest and latest official documents in collection
-  const lowerBound = new Date(2018, 1, 1)
-  const upperBound = new Date()
 
   function changePage(newPage) {
     setIsTransition(true);
@@ -110,6 +186,8 @@ const PaginationContainer = ({
         {filterable && (
           <Filter
             applyFilter={applyFilter}
+            fromDate={fromDate}
+            toDate={toDate}
             lowerBound={lowerBound}
             upperBound={upperBound}
           />

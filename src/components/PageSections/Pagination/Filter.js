@@ -7,13 +7,16 @@ import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
 import { months, weekdaysLong, weekdaysShort } from 'js/i18n/constants';
 
-const Filter = ({applyFilter, lowerBound, upperBound}) => {
+const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
 
   if (!isDesktop) {
     return (
       <FilterMobilePopup
+        applyFilter={applyFilter}
+        fromDate={fromDate}
+        toDate={toDate}
         lowerBound={lowerBound}
         upperBound={upperBound}
       />
@@ -23,6 +26,9 @@ const Filter = ({applyFilter, lowerBound, upperBound}) => {
       <div className="coa-filter__container col-md-auto">
         <span className="coa-filter__rail_label">{intl.formatMessage(i18n1.filter)}</span>
         <FilterBox
+          applyFilter={applyFilter}
+          fromDate={fromDate}
+          toDate={toDate}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />
@@ -31,7 +37,7 @@ const Filter = ({applyFilter, lowerBound, upperBound}) => {
   }
 }
 
-const FilterMobilePopup = ({lowerBound, upperBound}) => {
+const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
   const intl = useIntl();
   const [menuOpened, setMenuOpened] = useState(false);
   mobilePopupHelper(menuOpened, setMenuOpened)
@@ -58,6 +64,9 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
             >close</i>
           </div>
           <FilterBox
+            applyFilter={applyFilter}
+            fromDate={fromDate}
+            toDate={toDate}
             lowerBound={lowerBound}
             upperBound={upperBound}
           />
@@ -67,55 +76,21 @@ const FilterMobilePopup = ({lowerBound, upperBound}) => {
   )
 }
 
-const FilterBox = ({lowerBound, upperBound}) => {
-  const intl = useIntl();
-  const isDesktop = useDesktopQuery();
-
-  return (
-    <div>
-      <div className="coa-filter__box">
-        <span className="coa-filter__box-label">{intl.formatMessage(i18n1.date)}</span>
-        <DateFields
-          label={intl.formatMessage(i18n1.from)}
-          lowerBound={lowerBound}
-          upperBound={upperBound}
-        />
-        <DateFields
-          label={intl.formatMessage(i18n1.to)}
-          lowerBound={lowerBound}
-          upperBound={upperBound}
-        />
-      </div>
-      {!isDesktop && (
-        <div className="coa-filter__mobile-clear-button">
-          {intl.formatMessage(i18n1.clearFilters)}
-        </div>
-      )}
-      <div className="coa-filter__apply-button">
-        {intl.formatMessage(i18n1.applyFilters)}
-      </div>
-    </div>
-  )
-}
-
 const twoDigitRegex = new RegExp('^[0-9]{1,2}$');
+const fourDigitRegex = new RegExp('^[0-9]{1,4}$');
 const isValidMonth = (month) => (
   String(month).match(twoDigitRegex) &&
   month <= 12 &&
   month >= 1
 )
-
 const isValidDay = (day) => (
   String(day).match(twoDigitRegex) &&
   day <= 31 &&
   day >= 1
 )
-
-const fourDigitRegex = new RegExp('^[0-9]{1,4}$');
 const isValidYear = (year) => (
   String(year).match(fourDigitRegex)
 )
-
 
 // If all fields are entered, then turn them into a date for the DayPicker
 const fieldsToDate = ({month=null, day=null, year=null}) => {
@@ -124,78 +99,149 @@ const fieldsToDate = ({month=null, day=null, year=null}) => {
 }
 
 // Convert a Date object into month, day, and year values.
+// If a null date is passed, then set empty strings.
 const dateToFields = (date) => {
-  return {
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-    year: date.getFullYear(),
+  return (date) ? {
+    month: date.getUTCMonth() + 1,
+    day: date.getUTCDate(),
+    year: date.getUTCFullYear(),
+  } : {
+    month: '',
+    day: '',
+    year: ''
   }
 }
 
 /**
-  When we can stop supporting IE11, an input type of "date" would do all this work for us.
-**/
-const DateFields = ({label, lowerBound, upperBound}) => {
-  const intl = useIntl();
-  /**
-    updateDate() is used to update any value of date.
+  The dateFieldsReducer contains the logic to update the month, day, and year values
+  from either the DayPicker Widget or the month, day, and year input fields.
+  When we can stop supporting IE11, an input type of "date" might do some of this work for us.
+  @param newDateFields
+    The newDateFields object can be used to update any value of date.
     Examples:
-    updateDate({month: 12})
-    updateDate({day: 31})
-    updateDate({month: 12, day: 31})
+    setDateFields({month: 12})
+    setDateFields({day: 31})
+    setDateFields({month: 12, day: 31})
 
     "month", "day", and "year" must all be in one state object
-    because there is a useEffect side effect
+    because there is a useReducer side effect
     when we need to update all 3 at the same time.
+  @returns dateFields
+    An Object containing the month, day, and year of the selected
+    {
+      month: <Number>,
+      day: <Number>,
+      year: <Number>
+    }
+**/
+function dateFieldsReducer(priorDateFields, newDateFields) {
+  let {month=null, day=null, year=null} = newDateFields;
+  /**
+  If invalid date values are entered, then don't register them.
+  "pattern", "min", "max" input field attributes only work at the moment of form submission.
+  Those attributes alone won't prevent users from entering bad inputs.
   **/
-  const [dateFields, setDateFields] = useReducer((priorDateFields, newDateFields)=>{
-    let {month=null, day=null, year=null} = newDateFields;
+  if (
+    (month && !isValidMonth(month)) ||
+    (day && !isValidDay(day)) ||
+    (year && !isValidYear(year))
+  ) {
+    return priorDateFields
+  }
+  if (year > new Date().getUTCFullYear()) {
+    year = "2020"
+  }
 
-    /**
-    If invalid date values are entered, then don't register them.
-    "pattern", "min", "max" input field attributes only work at the moment of form submission.
-    Those attributes alone won't prevent users from entering bad inputs.
-    **/
-    if (
-      (month && !isValidMonth(month)) ||
-      (day && !isValidDay(day)) ||
-      (year && !isValidYear(year))
-    ) {
-      return priorDateFields
-    }
-    if (year > new Date().getFullYear()) {
-      year = "2020"
-    }
+  let finalDateFields = {...priorDateFields}
+  if (month !== null) finalDateFields.month = month
+  if (day !== null) finalDateFields.day = day
+  if (year !== null) finalDateFields.year = year
 
-    let finalDateFields = {...priorDateFields}
-    if (month !== null) finalDateFields.month = month
-    if (day !== null) finalDateFields.day = day
-    if (year !== null) finalDateFields.year = year
+  /**
+    If all 3 date inputs are filled out,
+    then we'll approximate the nearest valid date.
+    For example: if someone enters February 31st,
+    javascript's Date function will set it to March 2nd.
+  **/
+  let finalMonth = finalDateFields.month
+  let finalDay = finalDateFields.day
+  let finalYear = finalDateFields.year
+  if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
+    const validDate = new Date(finalYear, finalMonth - 1, finalDay);
+    finalDateFields = dateToFields(validDate)
+  }
 
-    /**
-      If all 3 date inputs are filled out,
-      then we'll approximate the nearest valid date.
-      For example: if someone enters February 31st,
-      javascript's Date function will set it to March 2nd.
-    **/
-    let finalMonth = finalDateFields.month
-    let finalDay = finalDateFields.day
-    let finalYear = finalDateFields.year
-    if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
-      const validDate = new Date(finalYear, finalMonth - 1, finalDay);
-      finalDateFields = dateToFields(validDate)
-    }
+  return finalDateFields
+}
 
-    return finalDateFields
-  }, {
-    month: '',
-    day: '',
-    year: ''
-  })
+const FilterBox = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+  const intl = useIntl();
+  const isDesktop = useDesktopQuery();
+
+  /**
+    If your initial state is determined by props,
+    then you must set a useEffect to reset your state whenever those props change.
+    Technically, this is an anti-pattern.
+    However, we really do want to have 2 different states for toDate and fromDate.
+    There is the "toDate/fromDate" that has already been applied by a filter,
+    then there are the in-progress "toDateFields/fromDateFields" set by the DateFields component.
+    The "toDateFields/fromDateFields" will only be set as the "toDate/fromDate" when the user explicitly
+    clicks the button to "Apply Filter".
+    https://github.com/facebook/react/issues/16461
+  **/
+  const [fromDateFields, setFromDateFields] = useReducer(dateFieldsReducer, dateToFields(fromDate))
+  useEffect(()=>{
+    setFromDateFields(dateToFields(fromDate))
+  }, [fromDate])
+  const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateToFields(toDate))
+  useEffect(()=>{
+    setToDateFields(dateToFields(toDate))
+  }, [toDate])
+
+  return (
+    <div>
+      <div className="coa-filter__box">
+        <span className="coa-filter__box-label">{intl.formatMessage(i18n1.date)}</span>
+        <DateFields
+          label={intl.formatMessage(i18n1.from)}
+          dateFields={fromDateFields}
+          setDateFields={setFromDateFields}
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
+        <DateFields
+          label={intl.formatMessage(i18n1.to)}
+          dateFields={toDateFields}
+          setDateFields={setToDateFields}
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
+      </div>
+      {!isDesktop && (
+        <div
+          className="coa-filter__mobile-clear-button"
+          onClick={()=>applyFilter(null, null, false)}
+        >
+          {intl.formatMessage(i18n1.clearFilters)}
+        </div>
+      )}
+      <div
+        className="coa-filter__apply-button"
+        onClick={()=>applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields), true)}
+      >
+        {intl.formatMessage(i18n1.applyFilters)}
+      </div>
+    </div>
+  )
+}
+
+const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) => {
+  const intl = useIntl();
   const [openDayPicker, setOpenDayPicker] = useState(false)
   const [dayPickerMonth, setDayPickerMonth] = useState(null)
 
   const {month, day, year} = dateFields
+  const dayPickerDate = fieldsToDate(dateFields)
   const setMonth = (month) => setDateFields({month: month})
   const setDay = (day) => setDateFields({day: day})
   const setYear = (year) => setDateFields({year: year})
@@ -209,7 +255,6 @@ const DateFields = ({label, lowerBound, upperBound}) => {
     }
     setDateFields(dateToFields(date))
   }
-  const dayPickerDate = fieldsToDate(dateFields)
 
   return (
     <div style={{"margin-top": "1rem"}}>
@@ -293,7 +338,7 @@ const NumberInput = ({label, value="", onChange}) => {
 **/
 const YearMonthPicker = ({ date, months, onChange, fromMonth, toMonth }) => {
   const years = [];
-  for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
+  for (let i = fromMonth.getUTCFullYear(); i <= toMonth.getUTCFullYear(); i += 1) {
     years.push(i);
   }
 
@@ -305,14 +350,14 @@ const YearMonthPicker = ({ date, months, onChange, fromMonth, toMonth }) => {
   return (
     <div className="DayPicker-Caption">
       <form className="coa-daypicker__year-month-container">
-        <select className="coa-daypicker__select" name="month" onChange={handleChange} value={date.getMonth()}>
+        <select className="coa-daypicker__select" name="month" onChange={handleChange} value={date.getUTCMonth()}>
           {months.map((month, i) => (
             <option key={month} value={i}>
               {month}
             </option>
           ))}
         </select>
-        <select className="coa-daypicker__select" name="year" onChange={handleChange} value={date.getFullYear()}>
+        <select className="coa-daypicker__select" name="year" onChange={handleChange} value={date.getUTCFullYear()}>
           {years.map(year => (
             <option key={year} value={year}>
               {year}
