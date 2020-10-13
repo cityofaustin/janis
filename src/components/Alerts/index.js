@@ -7,6 +7,7 @@ import LocationsCOVID_19 from 'components/Alerts/locationsCOVID_19.js';
 const Alert = ({ badge, content, link, linkContent }) => {
   const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
+  
 
   return (
     <div className={"coa-HomepageAlert__container "+styleWithContent}>

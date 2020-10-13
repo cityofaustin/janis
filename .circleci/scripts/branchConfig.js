@@ -33,7 +33,7 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin'
   },
-  'nav-cleanup': {
+  'docs-back-fix': {
     joplin_appname: 'joplin'
   },
   '4872-link-doc-summary': {
