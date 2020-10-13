@@ -11,7 +11,7 @@ const ThemesNav = props => {
   const lang = intl.locale
 
   if (lang === 'en') {
-    props.navigation.map( theme => {
+    props.navigation.map(theme => {
       theme.text = theme.text.split('and').join('&')
     })
   }
