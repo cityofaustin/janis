@@ -27,24 +27,9 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  'espanol-404': {
-    joplin_appname: 'joplin-pr-demo-copy',
-  },
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
-  '5032-top-pages': {
-    joplin_appname: 'joplin-pr-5032-top-pages'
-  },
-  'covid-link': {
-    joplin_appname: 'joplin-pr-demo'
-  },
-  'demo': {
-    joplin_appname: 'joplin-pr-demo'
-  },
-  'espanol-404-fixes': {
-    joplin_appname: 'joplin-pr-demo-copy'
-  }
 };
 
 module.exports = {
