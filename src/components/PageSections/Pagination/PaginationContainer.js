@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useIntl } from 'react-intl';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
 import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder';
-
+import { filter as i18n1 } from 'js/i18n/definitions';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
@@ -13,6 +14,7 @@ const PaginationContainer = ({
   filterable=false,
   searchedTerm=null,
 }) => {
+  const intl = useIntl();
   const documentsPerPage = 10;
   const isMobile = useMobileQuery();
   const maxPagesMobile = 5;
@@ -103,6 +105,8 @@ const PaginationContainer = ({
     }
     const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
     setPages(buildPages(filteredPagesArray, documentsPerPage))
+    // When we update our pages be applying a filter, then reset our pageNumber to 0.
+    setPageNumber(0);
   }, [pagesArray, fromDate, toDate])
 
   useEffect(() => {
@@ -143,11 +147,6 @@ const PaginationContainer = ({
     }
   }, [searchedTerm]);
 
-  useEffect(() => {
-    // When we update our pages be applying a filter, then reset our pageNumber to 0.
-    setPageNumber(0);
-  }, [pages]);
-
   const updatePage = newPage => {
     updateUrl(newPage)
     setPageNumber(newPage); // NOTE: hooks must be in the order
@@ -180,6 +179,16 @@ const PaginationContainer = ({
     }
   }
 
+  let filterMessage = "";
+  if (filterApplied) {
+    const totalResultCount = pages.reduce((resultCount,page)=>resultCount+page.length, 0)
+    if (totalResultCount === 1) {
+      filterMessage = intl.formatMessage(i18n1.OneFilteredResult)
+    } else {
+      filterMessage = intl.formatMessage(i18n1.filteredResults, {count: totalResultCount})
+    }
+  }
+
   return (
     <div className="wrapper container-fluid">
       <div className="row">
@@ -193,9 +202,11 @@ const PaginationContainer = ({
           />
         )}
         <div className="col-xs-12 col-lg-8">
-          <div>
-            50 Filtered results {/** TODO: this component needs to get conencted to actual filter state **/}
-          </div>
+          {filterApplied && (
+            <div>
+              {filterMessage}
+            </div>
+          )}
           <div ref={pageComponentsRef} id="paginationContainerElm">
             {currentPage &&
               currentPage.map((page, index) => (
