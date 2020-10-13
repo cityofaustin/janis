@@ -95,11 +95,17 @@ const isValidYear = (year) => (
 // If all fields are entered, then turn them into a date for the DayPicker
 const fieldsToDate = ({month=null, day=null, year=null}) => {
   if (!month || !day || !year) return null
-  return new Date(year, month - 1, day)
+  return new Date(Date.UTC(year, month - 1, day))
 }
 
-// Convert a Date object into month, day, and year values.
-// If a null date is passed, then set empty strings.
+/**
+  Convert a Date object into month, day, and year values.
+  If a null date is passed, then set empty strings.
+  Note: we must get the UTC values. Otherwise, Javascript will convert them to
+  your browser's timezone, and the values will not match what you entered.
+  For Central Time, all of the days are one day behind UTC. Getting the UTC
+  values will allow everything to match as expected.
+**/
 const dateToFields = (date) => {
   return (date) ? {
     month: date.getUTCMonth() + 1,
@@ -167,7 +173,7 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   let finalDay = finalDateFields.day
   let finalYear = finalDateFields.year
   if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
-    const validDate = new Date(finalYear, finalMonth - 1, finalDay);
+    const validDate = new Date(Date.UTC(finalYear, finalMonth - 1, finalDay));
     finalDateFields = dateToFields(validDate)
   }
 
