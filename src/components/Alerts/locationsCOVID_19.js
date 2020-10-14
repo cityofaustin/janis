@@ -39,6 +39,7 @@ const LocationsCOVID_19 = () => {
         { ( lang === "es" ) && (<>obtenga información actual sobre el coronavirus (COVID-19) en Austin.</>)}
 
         <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+
       </a>
     </div>
   )

@@ -20,8 +20,12 @@ export const loader = {
     Object.assign(this, params)
     this.setValues()
     setTimeout(()=>{ // Pause a beat to allow page to load before animation
-      this.loader.style.display = 'block'
-      this.loader.style.opacity = 1
+      if (this.loader && this.loader.style) {
+        this.loader.style.display = 'block'
+      }
+      if (this.loader && this.loader.style) {
+        this.loader.style.opacity = 1
+      }
     }, this.delay)
   },
 
@@ -32,22 +36,25 @@ export const loader = {
 
     if (this.errorId) {
       this.error = document.getElementById(this.errorId)
-      this.error.style.opacity = 0
+      if (this.error.style) {
+        this.error.style.opacity = 0
+      }
     }
 
-    if (this.style === "popup") {
+    if (this.style && this.style === "popup" && this.content.style) {
       this.contentMarginTop = this.content.style.marginTop
     }
 
     const delay = this.delay / 1000
 
-    this.loader.style.opacity = 0
-    this.loader.style.transition =`opacity ${delay}s`
+    if (this.loader.style && this.content.style) {
+      this.loader.style.opacity = 0
+      this.loader.style.transition =`opacity ${delay}s`
+      this.content.style.opacity = 0
+      this.content.style.transition = `opacity ${delay}s, margin-top ${delay}s`
+    }
 
-    this.content.style.opacity = 0
-    this.content.style.transition = `opacity ${delay}s, margin-top ${delay}s`
-
-    if (this.errorId) {
+    if (this.error && this.error.style) {
       this.error.style.opacity = 0
       this.error.style.transition = `opacity ${delay}s, margin-top ${delay}s`
     }
@@ -55,25 +62,37 @@ export const loader = {
 
 
   end: function() {
-    if (this.error) {
+    if (this.error && this.error.style) {
       this.error.style.display = "none"
     }
-    this.loader.style.opacity = 0
+    if (this.loader.style) {
+      this.loader.style.opacity = 0
+    }
     setTimeout(()=>{
-      this.loader.style.display = "none"
-      this.content.style.opacity = 1
-      this.content.style.marginTop = "0px"
+      if (this.loader.style && this.content.style) {
+        this.loader.style.display = "none"
+        this.content.style.opacity = 1
+        this.content.style.marginTop = "0px"
+      }
     },this.delay)
   },
 
 
   endError: function() {
-    this.error.style.opacity = 0
-    this.loader.style.opacity = 0
+    if (this.error && this.error.style) {
+      this.error.style.opacity = 0
+    }
+    if (this.loader && this.loader.style) {
+      this.loader.style.opacity = 0
+    }
     setTimeout(()=>{
-      this.loader.style.display = 'none'
-      this.error.style.opacity = 1
-      if (this.style === "popup") {
+      if (this.loader && this.loader.style) {
+        this.loader.style.display = 'none'
+      }
+      if (this.error && this.error.style) {
+        this.error.style.opacity = 1
+      }
+      if (this.style === "popup" && this.error.style) {
         this.error.style.marginTop = "0px"
       }
     },this.delay)

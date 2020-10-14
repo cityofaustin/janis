@@ -23,7 +23,7 @@ const EventsHomePage = ({ events }) => {
         </div>
 
         <a
-          to={`/${intl.locale}/events`}
+          href={`/${intl.locale}/events`}
           className="coa-EventsHomePage__allEventsButton"
         >
           <div className="coa-EventsHomePage__allEventsButton--inner">

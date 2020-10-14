@@ -64,9 +64,9 @@
   color: $coa-color-burnt-coffee-black;
   line-height: 16px;
   &:hover {
-    color: $coa-color-white;
-    background-color: $coa-color-primary;
-    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
+    color: $coa-color-burnt-coffee-black;
+    background-color: $coa-color-blue-warm-5v;
+    box-shadow: 2px 5px 7px rgba(0,0,255,0.2);
     transition: background-color .3s, box-shadow .3s;
   }
 }
@@ -79,9 +79,8 @@
 .coa-ThemesNav__link.active {
   background-color: $coa-color-gray-4;
   &:hover {
-    color: $coa-color-white;
-    background-color: $coa-color-primary;
-    box-shadow: 2px 5px 7px rgba(0,0,255,0.4);
+    background-color: $coa-color-blue-warm-5v;
+    box-shadow: 2px 5px 7px rgba(0,0,255,0.2);
     transition: background-color .3s, box-shadow .3s;
   }
 }
@@ -97,7 +96,7 @@
 
 .coa-MessageWIP {
   position: relative;
-  margin-top: 3px;
+  margin-top: 4px;
   margin-bottom: 4px;
   background-color: $coa-color-vintage-vanilla;
   border-radius: $coa-menu-border-radius;
@@ -126,9 +125,20 @@
 .coa-FullSiteMenu--active {
   background: $coa-color-white;
   z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
   .coa-FullSiteMenu__subNav {
     display: block;
   }
+}
+
+.coa-FullSiteMenu_dropdown {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(27,27,27,0.25);
 }
 
 .coa-ThemesTopicsMenu__list {
@@ -277,4 +287,9 @@
   @include mobile {
     display: none;
   }
+}
+
+.coa-FullSiteMenu__activeGapFill {
+  background-color: white;
+  height: 56px;
 }
