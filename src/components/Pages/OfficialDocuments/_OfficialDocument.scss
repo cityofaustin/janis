@@ -5,9 +5,21 @@
   padding-bottom: 3rem;
 }
 
-.coa-OfficialDocumentPage__date {
+.coa-OfficialDocumentPageEntry__date {
   color: $coa-color-gray-dark;
   font-size: $coa-font-size-xsmall;
+}
+
+.coa-OfficialDocumentPage__date {
+  color: #5c5c5c;
+  font-size: 18px;
+  height: 23px;
+  line-height: 28px;
+  @include media($coa-medium-screen) {
+    font-size: 24px;
+    height: 32px;
+    line-height: 36px;
+  }
 }
 
 .coa-OfficialDocumentPage__title {

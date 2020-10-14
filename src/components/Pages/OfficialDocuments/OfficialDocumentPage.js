@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import path from 'path';
+import moment from 'moment-timezone';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
@@ -62,6 +62,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   ) : null;
 
   const summaryBlock = <HtmlFromRichText content={summary} /> 
+  moment.locale(intl.locale);
 
   return (
     <div>
@@ -78,6 +79,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           contentType={'officialDocumentPage'}
           description={description}
           columnWidth={8}
+          date={moment(date, "YYYY-MM-DD").format('LL')}
         >
           {title}
         </PageHeader>
