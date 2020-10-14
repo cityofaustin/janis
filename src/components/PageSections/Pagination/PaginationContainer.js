@@ -50,8 +50,25 @@ const PaginationContainer = ({
     setFilterApplied(filterApplied)
   }
 
+  /**
+    We're using this function because:
+    "Parsing of date strings with the Date constructor... is strongly discouraged due to browser differences and inconsistencies."
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+
+    So we convert a dateString from pagesArray "YYYY-MM-DD" into a valid Date.
+    new Date("YYYY-MM-DD") will not work consistently but
+    new Date("YYYY", "MM"-1, "DD") will work properly.
+  **/
+  function createDate(dateString) {
+    let year, month, day;
+    [year, month, day] = dateString.split("-")
+    return new Date(year, month-1, day)
+  }
   // Update pages when we get a new toDate or fromDate.
   useEffect(()=>{
+    if (!filterable) {
+      return
+    }
     let startIndex = null
     let endIndex = null
     /**
@@ -64,7 +81,7 @@ const PaginationContainer = ({
     if (fromDate) {
       for (let i=(pagesArray.length-1); i>=0; i--) {
         let page = pagesArray[i]
-        if (new Date(page.date) >= fromDate) {
+        if (createDate(page.date) >= fromDate) {
           endIndex = i
           break;
         }
@@ -85,7 +102,7 @@ const PaginationContainer = ({
     if (toDate && (endIndex > -1)) {
       for (let i=0; i<=(endIndex || (pagesArray.length-1)); i++) {
         let page = pagesArray[i]
-        if (new Date(page.date) <= toDate) {
+        if (createDate(page.date) <= toDate) {
           startIndex=i;
           break;
         }

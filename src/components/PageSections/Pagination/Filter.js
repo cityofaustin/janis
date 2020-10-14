@@ -95,7 +95,7 @@ const isValidYear = (year) => (
 // If all fields are entered, then turn them into a date for the DayPicker
 const fieldsToDate = ({month=null, day=null, year=null}) => {
   if (!month || !day || !year) return null
-  return new Date(Date.UTC(year, month - 1, day))
+  return new Date(year, month - 1, day)
 }
 
 /**
@@ -173,7 +173,7 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   let finalDay = finalDateFields.day
   let finalYear = finalDateFields.year
   if (finalMonth && finalDay && finalYear && finalYear.length === 4) {
-    const validDate = new Date(Date.UTC(finalYear, finalMonth - 1, finalDay));
+    const validDate = new Date(finalYear, finalMonth - 1, finalDay);
     finalDateFields = dateToFields(validDate)
   }
 
