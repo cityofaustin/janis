@@ -33,8 +33,11 @@ const PaginationContainer = ({
     upperBound should use the current date.
     Otherwise people might get confused that they can't filter up to the current day.
   **/
-  const lowerBound = new Date(pagesArray[pagesArray.length-1].date)
-  const upperBound = new Date()
+  let lowerBound, upperbound;
+  if (filterable) {
+    lowerBound = new Date(pagesArray[pagesArray.length-1].date)
+    upperBound = new Date()
+  }
 
   const [fromDate, setFromDate] = useState(null)
   const [toDate, setToDate] = useState(null)
