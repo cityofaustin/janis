@@ -63,6 +63,8 @@
   "misc.whyFormNotLoaded": "Why hasn't it loaded yet?",
   "misc.pluginBlockingForm": "A plugin could be blocking the form (example: \"Privacy Badger\")",
   "misc.formFailedToLoad": "It may have failed to load (\"404 error\")",
+  "misc.documentsTotal": "document in this collection",
+  "misc.documentsTotalPlural": "documents in this collection",
   "departments.departments": "Departments",
   "navigation.home": "Home",
   "navigation.menu": "Menu",

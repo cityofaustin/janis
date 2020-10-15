@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
@@ -26,7 +27,12 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
 
   const descriptonBlock = <HtmlFromRichText content={description} />
 
-  console.log("documents :", documents)
+  let subDescription = documents.length + " "
+  if (documents.length === 1) {
+    subDescription += intl.formatMessage(i18n.documentsTotal)
+  } else {
+    subDescription += intl.formatMessage(i18n.documentsTotalPlural)
+  }
 
   return (
     <div>
@@ -44,11 +50,10 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         <PageHeader
           contentType={'official-document'}
           description={descriptonBlock}
-          subDescription={documents.length > 0 && documents.length}
+          subDescription={subDescription}
         >
           {title}
         </PageHeader>
-
         <OfficialDocumentPaginationPage
           officialDocuments={documents}
           intl={intl}

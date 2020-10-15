@@ -67,6 +67,8 @@
   "misc.whyFormNotLoaded": "¿Por qué no ha cargado aún?",
   "misc.pluginBlockingForm": "Es posible que un plugin esté bloqueando el formulario (por ejemplo: \"Privacy Badger\")",
   "misc.formFailedToLoad": "Puede haber ocurrido un error al cargarlo (\"error 404\")",
+  "misc.documentsTotal": "documento en esta colección",
+  "misc.documentsTotalPlural": "documentos en esta colección",
   "navigation.home": "Inicio",
   "navigation.menu": "Menú",
   "navigation.close": "Cerrar",

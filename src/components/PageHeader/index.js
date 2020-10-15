@@ -8,7 +8,6 @@ import { misc as i18n, news as i18n2 } from 'js/i18n/definitions';
 
 const PageHeader = ({ description, subDescription, children, contentType, columnWidth, date }) => {
   const intl = useIntl();
-  console.log("subDescription :", subDescription)
   return (
     <div
       className={
@@ -47,15 +46,10 @@ const PageHeader = ({ description, subDescription, children, contentType, column
               <p className="coa-PageHeader__description">
                 {description}
               </p>
-            </>)}
+            )}
             {subDescription && (
-              <div>
-                {/*
-                  NEEDS MICROCOPY in ES!
-                */}
-                <div className="coa-OfficialDocumentCollection__documentCount">
-                  {documents.length} document{document.length === 1 ? "" : "s"} in this collection
-                </div>
+              <div className="coa-PageHeader__subDescription">
+                {subDescription}
               </div>
             )}
             {contentType && contentType === 'information' ? (
