@@ -32,7 +32,7 @@ const PageHeader = ({ description, subDescription, children, contentType, column
                   {intl.formatMessage(i18n2.news)}
                 </div>
               </>
-            )
+            ) 
             : null}
             {date && (
               <span className="coa-OfficialDocumentPage__date">
