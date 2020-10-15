@@ -26,6 +26,8 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
 
   const descriptonBlock = <HtmlFromRichText content={description} />
 
+  console.log("documents :", documents)
+
   return (
     <div>
       <Head>
@@ -39,9 +41,14 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         />
       )}
       <div>
-        <PageHeader contentType={'official-document'} description={descriptonBlock}>
+        <PageHeader
+          contentType={'official-document'}
+          description={descriptonBlock}
+          subDescription={documents.length > 0 && documents.length}
+        >
           {title}
         </PageHeader>
+
         <OfficialDocumentPaginationPage
           officialDocuments={documents}
           intl={intl}

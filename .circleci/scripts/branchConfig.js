@@ -30,6 +30,9 @@ const branchOverrides = {
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
+  'doc-totals': {
+    joplin_appname: 'joplin-pr-4776-elastic'
+  },
 };
 
 module.exports = {

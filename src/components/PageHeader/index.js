@@ -6,8 +6,9 @@ import citySealImg from 'images/coa_seal_color_200x200.png';
 import { useIntl } from 'react-intl';
 import { misc as i18n, news as i18n2 } from 'js/i18n/definitions';
 
-const PageHeader = ({ description, children, contentType, columnWidth, date }) => {
+const PageHeader = ({ description, subDescription, children, contentType, columnWidth, date }) => {
   const intl = useIntl();
+  console.log("subDescription :", subDescription)
   return (
     <div
       className={
@@ -32,7 +33,7 @@ const PageHeader = ({ description, children, contentType, columnWidth, date }) =
                   {intl.formatMessage(i18n2.news)}
                 </div>
               </>
-            ) 
+            )
             : null}
             {date && (
               <span className="coa-OfficialDocumentPage__date">
@@ -46,6 +47,16 @@ const PageHeader = ({ description, children, contentType, columnWidth, date }) =
               <p className="coa-PageHeader__description">
                 {description}
               </p>
+            </>)}
+            {subDescription && (
+              <div>
+                {/*
+                  NEEDS MICROCOPY in ES!
+                */}
+                <div className="coa-OfficialDocumentCollection__documentCount">
+                  {documents.length} document{document.length === 1 ? "" : "s"} in this collection
+                </div>
+              </div>
             )}
             {contentType && contentType === 'information' ? (
               <SectionHeader />
