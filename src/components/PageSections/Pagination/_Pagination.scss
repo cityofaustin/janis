@@ -1,3 +1,25 @@
+.pagination-transition-enter {
+    opacity: 0;
+}
+
+.pagination-transition-enter.pagination-transition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.pagination-transition-leave {
+  opacity: 1;
+}
+
+.pagination-transition-leave.pagination-transition-leave-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.coa-Pagination__page-component-container {
+    // transition: opacity 300ms ease-in;
+}
+
 .coa-PageSelector_container {
   margin: 42px 10px 0px;
   width: 740px;
@@ -52,7 +74,7 @@
 
 .coa-PageSelector_page.ellipsis {
   border: none;
-  pointer-events: none;
+  // pointer-events: none;
 }
 
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import ChevronLeftBlue from 'components/SVGs/ChevronLeftBlue';
 import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
@@ -12,30 +13,32 @@ import ChevronRightBlue from 'components/SVGs/ChevronRightBlue';
 const PageSelector = ({
   pageSelectorValues,
   pageNumber,
+  pagesCount,
   changePage
 }) => {
+  const hasPreviousPages = (pageNumber-1) >= 1
+  const hasNextPages = (pageNumber+1) <= pagesCount
+
   return pageSelectorValues.length ? (
     <div className="coa-PageSelector_container">
       <div
-        onClick={() => changePage(pageNumber - 1)}
+        onClick={() => hasPreviousPages && changePage(pageNumber - 1)}
         className="coa-PageSelector_page previous"
       >
         <ChevronLeftBlue className="coa-PageSelector_page-chevron" />
       </div>
 
-      {pageSelectorValues.map((page, i) => (
+      {pageSelectorValues.map((pageSelectorValue, i) => (
         <PageNumber
-          pageNumber={pageNumber + 1}
-          index={pageSelectorValues[i]}
-          paginationIndex={i}
           key={i}
-          pageNumberIndex={pageSelectorValues.indexOf(pageNumber + 1)}
+          pageSelectorValue={pageSelectorValue}
+          active={pageNumber === pageSelectorValue["pageNumberValue"]}
           changePage={changePage}
         />
       ))}
 
       <div
-        onClick={() => changePage(pageNumber + 1)}
+        onClick={() => hasNextPages && changePage(pageNumber + 1)}
         className="coa-PageSelector_page next"
       >
         <ChevronRightBlue className="coa-PageSelector_page-chevron right" />
@@ -44,21 +47,17 @@ const PageSelector = ({
   ) : null
 }
 
-const PageNumber = ({ pageNumber, index, changePage, paginationIndex, pageNumberIndex }) => {
-  const active = pageNumber === index ? " active" : ''
-  let ellipsis = ""
-  let pageIndex = index
-  if (index === "...") {
-    ellipsis = " ellipsis"
-    pageIndex = pageNumberIndex > paginationIndex ? pageNumber-1 : pageNumber+1
-  }
+const PageNumber = ({ pageSelectorValue, active, changePage }) => {
   return (
     <div
-      onClick={()=>changePage(pageIndex-1)}
-      className={ `coa-PageSelector_page number-container` + active + ellipsis }
+      onClick={()=>changePage(pageSelectorValue["pageNumberValue"])}
+      className={classNames(`coa-PageSelector_page number-container`, {
+        "ellipsis": pageSelectorValue["pageNumberDisplayed"] === "...",
+        "active": active,
+      })}
     >
       <div className={ `coa-PageSelector_number` }>
-        { index }
+        { pageSelectorValue["pageNumberDisplayed"] }
       </div>
     </div>
   )

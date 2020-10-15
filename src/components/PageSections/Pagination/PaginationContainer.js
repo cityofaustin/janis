@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
+import {
+  useQueryParam,
+  StringParam,
+  NumberParam,
+  ArrayParam,
+  withDefault,
+} from 'use-query-params';
+import { CSSTransitionGroup } from 'react-transition-group-v1'
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
@@ -14,19 +22,29 @@ const PaginationContainer = ({
   filterable=false,
   searchedTerm=null,
 }) => {
-  const intl = useIntl();
   const documentsPerPage = 10;
-  const isMobile = useMobileQuery();
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
-  let query = queryObjectBuilder();
+
+  const intl = useIntl();
+  const isMobile = useMobileQuery();
+
   const [isTransition, setIsTransition] = useState(false);
-  const [pageNumber, setPageNumber] = useState(0);
-  const pageComponentsRef = useRef();
+  const paginationContainerRef = useRef();
+  const pageComponentContainerRef = useRef();
+  const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
+  const pageIndex = pageNumber-1;
   const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
-  const pageSelectorValues = buildPageSelectorValues(pages, maxPagesShown, pageNumber);
-  const currentPage = pages[pageNumber];
+  const pagesCount = pages.length
+  // Reset PageNumber if it is invalid
+  useEffect(()=>{
+    if (!pages[pageIndex]) {
+      setPageNumber(1)
+    }
+  },[pageNumber])
+  const pageSelectorValues = buildPageSelectorValues(pagesCount, maxPagesShown, pageNumber);
+  const currentPage = pages[pageIndex];
   /**
     DayPicker lowerBound should be set by earliest official document in collection.
     OfficialDocuments are sorted in descending order, so the final document will be the earliest.
@@ -124,81 +142,81 @@ const PaginationContainer = ({
       endIndex = (pagesArray.length-1)
     }
     const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
-    setPages(buildPages(filteredPagesArray, documentsPerPage))
-    // When we update our pages be applying a filter, then reset our pageNumber to 0.
-    setPageNumber(0);
-  }, [pagesArray, fromDate, toDate])
+    pageComponentContainerRef.current.style.transition = "opacity .03s"
+    pageComponentContainerRef.current.style.opacity = 0
+    setTimeout(function(){
+      setPages(buildPages(filteredPagesArray, documentsPerPage))
+      // When we update our pages be applying a filter, then reset our pageNumber to 1.
+      setPageNumber(1);
+      pageComponentContainerRef.current.style.opacity = 1
+    }, 300)
+  }, [fromDate, toDate])
 
   // Update pages when an updated searchedTerm updates the pagesArray
   useEffect(()=>{
     setPages(buildPages(pagesArray, documentsPerPage))
   }, [pagesArray])
 
-  useEffect(() => {
-    /*
-      This hook will fire whenever there's a browser interaction.
-      Like, a back button or a change in the url.
-    */
-    if (
-      query.page &&
-      pageNumber !== parseInt(query.page) - 1 &&
-      isTransition === false
-    ) {
-      setPageNumber(parseInt(query.page - 1));
-    }
-  });
+  // useEffect(() => {
+  //   /*
+  //     This hook will fire whenever there's a browser interaction.
+  //     Like, a back button or a change in the url.
+  //   */
+  //   if (
+  //     query.page &&
+  //     pageNumber !== parseInt(query.page) - 1 &&
+  //     isTransition === false
+  //   ) {
+  //     setPageNumber(parseInt(query.page - 1));
+  //   }
+  // });
 
-  useEffect(() => {
-    /*
-      The transition effect of changing pages puts a block on new renderings.
-      So, we need to make sure there isn't a transition in effect before
-      we zero-out the page when a new one renders.
-    */
-    if (pageNumber === 0 && isTransition === false) {
-      updateUrl(0)
-    }
-  },[]);
+  // useEffect(() => {
+  //   /*
+  //     The transition effect of changing pages puts a block on new renderings.
+  //     So, we need to make sure there isn't a transition in effect before
+  //     we zero-out the page when a new one renders.
+  //   */
+  //   if (pageNumber === 0 && isTransition === false) {
+  //     updateUrl(0)
+  //   }
+  // },[]);
 
-  useEffect(() => {
-    /*
-      This hook checks to see if a new search term is used. And, sets it back
-      to the first page. Like, if you are on page 3 of searching "police",
-      and then search "recycling", you don't wanna go page 3 of the new search.
-    */
-    if (query.page) {
-      setPageNumber(parseInt(query.page) - 1);
-    } else {
-      setPageNumber(0);
-    }
-  }, [searchedTerm]);
+  // ******
+    //TODO: might have to incorporate queryParam for searchedTerm also?
+  // *****
+  // useEffect(() => {
+  //   /*
+  //     This hook checks to see if a new search term is used. And, sets it back
+  //     to the first page. Like, if you are on page 3 of searching "police",
+  //     and then search "recycling", you don't wanna go page 3 of the new search.
+  //   */
+  //   if (query.page) {
+  //     setPageNumber(parseInt(query.page) - 1);
+  //   } else {
+  //     setPageNumber(0);
+  //   }
+  // }, [searchedTerm]);
 
   const updatePage = newPage => {
-    updateUrl(newPage)
     setPageNumber(newPage); // NOTE: hooks must be in the order
     setIsTransition(false);
   };
 
-  const updateUrl = page => {
-    query.page = parseInt(page) + 1
-    if (typeof window !== 'undefined') {
-      window.location.hash = queryStringBuilder(query)
-    }
-  }
-
-  function changePage(newPage) {
+  function changePage(pageNumber) {
     setIsTransition(true);
     if (
-      newPage >= 0 &&
-      newPage <= pages.length - 1 &&
-      typeof window !== 'undefined'
+      pageNumber >= 1 &&
+      pageNumber <= pages.length
     ) {
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
         fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
-        element: window,
-        fadeElement: pageComponentsRef.current,
+        endpoint: paginationContainerRef.current.offsetTop,
+        fadeElement: pageComponentContainerRef.current,
         callback: () => {
-          updatePage(newPage);
+          setPageNumber(pageNumber); // NOTE: hooks must be in the order
+          setIsTransition(false);
         }, // NOTE: callback will fire after fade OUT and BEFORE fade IN.
       });
     }
@@ -215,7 +233,11 @@ const PaginationContainer = ({
   }
 
   return (
-    <div className="wrapper container-fluid" style={{"marginBottom": "42px"}}>
+    <div
+      ref={paginationContainerRef}
+      className="wrapper container-fluid"
+      style={{"marginBottom": "42px"}}
+    >
       <div className="row">
         {filterable && (
           <Filter
@@ -243,16 +265,16 @@ const PaginationContainer = ({
               </div>
             </div>
           )}
-          <div ref={pageComponentsRef} id="paginationContainerElm">
-            {currentPage &&
-              currentPage.map((page, index) => (
-                <PageComponent page={page} key={index} />
-              ))}
+          <div className="coa-Pagination__page-component-container" ref={pageComponentContainerRef}>
+            {currentPage && currentPage.map((page, index) => (
+              <PageComponent page={page} key={index} />
+            ))}
           </div>
         </div>
         <PageSelector
           pageSelectorValues={pageSelectorValues}
           pageNumber={pageNumber}
+          pagesCount={pagesCount}
           changePage={changePage}
         />
       </div>
@@ -261,3 +283,10 @@ const PaginationContainer = ({
 };
 
 export default PaginationContainer;
+
+// <CSSTransitionGroup
+//   transitionName="pagination-transition"
+//   transitionEnterTimeout={500}
+//   transitionLeaveTimeout={500}
+// >
+// </CSSTransitionGroup>
