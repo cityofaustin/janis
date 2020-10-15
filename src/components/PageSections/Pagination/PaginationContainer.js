@@ -207,7 +207,7 @@ const PaginationContainer = ({
   }
 
   return (
-    <div className="wrapper container-fluid">
+    <div className="wrapper container-fluid" style={{"marginBottom": "42px"}}>
       <div className="row">
         {filterable && (
           <Filter
@@ -220,8 +220,19 @@ const PaginationContainer = ({
         )}
         <div className="col-xs-12 col-lg-8">
           {filterApplied && (
-            <div>
-              {filterMessage}
+            <div className="coa-filter__filter-result-container">
+              <div className="coa-filter__filter-result-child">
+                {filterMessage}
+              </div>
+              <div
+                className="coa-filter__filter-result-clear"
+                onClick={()=>{applyFilter(null,null,false)}}
+              >
+                <span>
+                  {intl.formatMessage(i18n1.clearFilters)}
+                </span>
+                <i className="material-icons">close</i>
+              </div>
             </div>
           )}
           <div ref={pageComponentsRef} id="paginationContainerElm">

@@ -596,6 +596,7 @@ export const news = defineMessages({
 
 export const filter = defineMessages({
   filter: 'Filter',
+  filters: 'Filters',
   date: 'Date',
   from: 'From',
   to: 'To',
@@ -604,7 +605,6 @@ export const filter = defineMessages({
   year: 'Year',
   clearFilters: 'Clear filters',
   applyFilters: 'Apply filters',
-  filterByDate: 'Filter by date',
   filteredResults: '{count} filtered results',
   OneFilteredResult: '1 filtered result',
 })

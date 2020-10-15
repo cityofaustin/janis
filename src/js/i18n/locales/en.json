@@ -149,6 +149,7 @@
   "news.fromAndByLine": "From {fromDepartment}, written by {byDepartment}",
   "news.publishedDate": "Published {date}",
   "filter.filter": "Filter",
+  "filter.filters": "Filters",
   "filter.date": "Date",
   "filter.from": "From",
   "filter.to": "To",
@@ -157,7 +158,6 @@
   "filter.year": "Year",
   "filter.clearFilters": "Clear filters",
   "filter.applyFilters": "Apply filters",
-  "filter.filterByDate": "Filter by date",
   "filter.filteredResults": "{count} filtered results",
   "filter.OneFilteredResult": "1 filtered result"
 }

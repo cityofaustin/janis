@@ -181,6 +181,7 @@
   "departmentPage.news": "Noticias",
   "departmentPage.moreDeptNews": "Más noticias de {department}",
   "filter.filter": "Filtro",
+  "filter.filters": "Filtros",
   "filter.date": "Fecha",
   "filter.from": "Desde",
   "filter.to": "Hasta",
@@ -189,7 +190,6 @@
   "filter.year": "Año",
   "filter.clearFilters": "Borrar filtros",
   "filter.applyFilters": "Aplicar filtros",
-  "filter.filterByDate": "Filtrar por fecha",
   "filter.filteredResults": "{count} resultados filtrados",
   "filter.OneFilteredResult": "1 resultado filtrado"
 }

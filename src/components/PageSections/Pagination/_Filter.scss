@@ -3,11 +3,11 @@
     margin-left: 1rem;
 }
 
-.coa-filter__filter-by-date-button {
+.coa-filter__filter-button {
     background-color: $coa-color-blue-warm-5v;
     color: $coa-color-blue-warm-60v;
+    border-radius: 4px;
     font-size: 1.6rem;
-    font-weight: 500;
     text-align: center;
     padding: 1rem;
     margin-left: 1rem;
@@ -22,6 +22,43 @@
     }
 }
 
+.coa-filter__filter-result-container {
+    background-color: $coa-color-gray-4;
+    color: $coa-color-black-grey;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+    }
+}
+
+.coa-filter__filter-result-child {
+    flex-grow: 1;
+    // Putting padding on child elements increases the clickable size "Clear Filter" button
+    padding: 1rem;
+}
+
+.coa-filter__filter-result-clear {
+    @extend .coa-filter__filter-result-child;
+    color: $coa-color-red-cool-50v;
+    text-align: right;
+    @include mobile {
+        border-top: 1px solid $coa-color-gray-light;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &>.material-icons {
+        font-size: 2.1rem;
+        vertical-align: text-bottom;
+    }
+}
 
 .coa-filter__mobile-popup-background {
     width: 100vw;
@@ -267,15 +304,22 @@ $input-box-height: 4.4rem;
     display: flex;
     flex-wrap: wrap;
     /**
-    If any languages have months that go over beyond the max-width,
+    If any languages have month name translations that go over beyond the max-width,
     then the year select will drop down to the next row.
     **/
-    max-width: 16rem;
+    max-width: 25rem;
+    @include desktop {
+        // Desktop has a smaller picker than mobile or tablet
+        max-width: 16rem;
+    }
 }
 
 .coa-daypicker__select {
     width: auto;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    @include desktop {
+        font-size: 1.4rem;
+    }
     padding-top: .25rem;
     padding-bottom: .25rem;
     height: auto;
@@ -325,6 +369,6 @@ $input-box-height: 4.4rem;
     color: $coa-color-red-cool-50v;
     background-color: $coa-color-red-cool-5v;
     @include mobile {
-        margin-top: .5rem;
+        margin-top: 1rem;
     }
 }

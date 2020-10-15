@@ -44,9 +44,9 @@ const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBoun
 
   return (
     <div style={{width: "100%"}}>
-      <div onClick={()=>setMenuOpened(true)} className="coa-filter__filter-by-date-button col-xs-12">
+      <div onClick={()=>setMenuOpened(true)} className="coa-filter__filter-button col-xs-12">
         <i className="material-icons">filter_list</i>
-        {intl.formatMessage(i18n1.filterByDate)}
+        {intl.formatMessage(i18n1.filters)}
       </div>
       <div
         className={classNames("coa-filter__mobile-popup-background", {
