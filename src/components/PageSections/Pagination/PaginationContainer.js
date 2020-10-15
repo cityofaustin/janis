@@ -129,6 +129,11 @@ const PaginationContainer = ({
     setPageNumber(0);
   }, [pagesArray, fromDate, toDate])
 
+  // Update pages when an updated searchedTerm updates the pagesArray
+  useEffect(()=>{
+    setPages(buildPages(pagesArray, documentsPerPage))
+  }, [pagesArray])
+
   useEffect(() => {
     /*
       This hook will fire whenever there's a browser interaction.
