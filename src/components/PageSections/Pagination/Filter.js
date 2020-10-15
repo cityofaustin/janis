@@ -64,6 +64,7 @@ const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBoun
             >close</i>
           </div>
           <FilterBox
+            setMenuOpened={setMenuOpened}
             applyFilter={applyFilter}
             fromDate={fromDate}
             toDate={toDate}
@@ -180,9 +181,13 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   return finalDateFields
 }
 
-const FilterBox = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
+
+  const closeMobileMenu = () => {
+    setMenuOpened && setMenuOpened(false)
+  }
 
   /**
     If your initial state is determined by props,
@@ -226,14 +231,20 @@ const FilterBox = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
       {!isDesktop && (
         <div
           className="coa-filter__mobile-clear-button"
-          onClick={()=>applyFilter(null, null, false)}
+          onClick={()=>{
+            applyFilter(null, null, false)
+            closeMobileMenu()
+          }}
         >
           {intl.formatMessage(i18n1.clearFilters)}
         </div>
       )}
       <div
         className="coa-filter__apply-button"
-        onClick={()=>applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields), true)}
+        onClick={()=>{
+          applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields), true)
+          closeMobileMenu()
+        }}
       >
         {intl.formatMessage(i18n1.applyFilters)}
       </div>
