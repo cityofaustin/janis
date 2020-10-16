@@ -16,6 +16,7 @@ export function buildPages(allData, itemsPerPage) {
 
 **/
 export function buildPageSelectorValues(pagesCount, maxPagesShown, pageNumber) {
+  console.log("~~~~ how many pages??", pagesCount)
   if (pagesCount < 2) return []
   let pageSelectorValues = [{
     "pageNumberDisplayed": pageNumber,

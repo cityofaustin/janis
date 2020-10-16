@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import {
   useQueryParam,
-  StringParam,
   DateParam,
   NumberParam,
   withDefault,
@@ -20,7 +19,6 @@ const PaginationContainer = ({
   pagesArray,
   PageComponent,
   filterable=false,
-  searchedTerm=null,
 }) => {
   const documentsPerPage = 10;
   const maxPagesMobile = 5;
@@ -253,12 +251,10 @@ const PaginationContainer = ({
           >
             {/**
               The "key" prop is necessary for CSSTransitionGroup to work - even if there's only 1 child.
-              We set "key" to the current timestamp.
-              That way, we're guaranteed to get a new key every time the component is rendered.
-              When the keys change, the "enter" transition is run.
-              So we're guaranteed to get our fade-in transition, even if the newest filtered page result has the same values.
+              When the key changes, then the "enter" transition is run.
+              So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
             **/}
-            <div key={new Date()} ref={pageComponentContainerRef}>
+            <div key={fromDate + toDate + filterApplied} ref={pageComponentContainerRef}>
               {currentPage && currentPage.map((page, index) => (
                 <PageComponent page={page} key={page.id} />
               ))}

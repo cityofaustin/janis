@@ -1,8 +1,14 @@
 import React, { useState, useEffect  } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
-import { search as i18n } from 'js/i18n/definitions';
+import {
+  useQueryParam,
+  StringParam,
+  NumberParam,
+  withDefault,
+} from 'use-query-params';
 
+import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
@@ -10,81 +16,34 @@ import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBu
 import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js'
 
 const SearchPage = () => {
-
-  const intl = useIntl();
-  const lang = intl.locale
-  const { searchIndex } = useRouteData();
-  let query = queryObjectBuilder()
-  let searchedTerm = query["?"] || ""
-
-  useEffect(() => {
-    // This will catch if the language is changed and refilter the search.
-    updateSearch()
-  }, [lang])
-
-  useEffect(() => {
-    /*
-      This will catch a browser back or forward interaction and apply a new search
-      if the search is different.
-    */
-    window.onpopstate = function(event) {
-      updateSearch()
-    };
-
-    const input = document.getElementById("coa-search_input")
-    input.focus()
-    const filteredSearch = searchWorker(searchIndexWithUrl, input.value)
-    setSearchResults(filteredSearch)
-    if (typeof window !== 'undefined' && input.value.toLocaleLowerCase()) {
-      query = queryObjectBuilder()
-      query.page = query.page ? query.page : 1
-      window.location.hash = queryStringBuilder(query)
-      searchedTerm = query['?'] || ""
-    }
-  }, []);
-
-
-  // React hook makes our input dynamic (useful for "as-you-type" filtering)
-  let [ searchString, setSearchString ] = useState(searchedTerm)
-
+  const { searchIndex: unfilteredSearchIndex } = useRouteData();
   /*
    Don't show pages without Urls. There seems to be some pages that are 'live',
    but without a url - catch those here...
   */
-  const searchIndexWithUrl = searchIndex.filter( page => page.janisUrls.length > 0)
+  const searchIndex = unfilteredSearchIndex.filter( page => page.janisUrls.length > 0)
+  const intl = useIntl();
+  const lang = intl.locale
+  const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
+  const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
+  const [searchString, setSearchString] = useState(searchedTerm)
+  const [searchResults, setSearchResults] = useState([])
 
-  let [ searchResults, setSearchResults ] = useState(searchIndexWithUrl)
+  // Reset back to first page with a new searchedTerm
+  useEffect(()=>{
+    setPageNumber(1)
+  },[searchedTerm])
 
-  const searchButtonPressed = () => {
-    const results = document.getElementById('coa-search_results')
-    results.style.opacity = 0
-    setTimeout(function(){
-      if (typeof window !== 'undefined') {
-        query = queryObjectBuilder()
-        query.page = 1
-        query["?"] = searchString.toLocaleLowerCase()
-        window.location.hash = queryStringBuilder(query)
-        updateSearch()
-      }
-      results.style.opacity = 1
-    },300) // Allows for CSS transtion to complete (./_Search.scss).
-  }
-
-  const updateSearch = () => {
-    query = queryObjectBuilder()
-    const filteredSearch = searchWorker(searchIndexWithUrl, query['?'] || "")
-    setSearchResults(filteredSearch)
-  }
+  useEffect(()=>{
+    setSearchResults(searchWorker(searchIndex, searchedTerm))
+  }, [searchedTerm, unfilteredSearchIndex])
 
   const searchKeyInput = event => {
     if (event.key === "Enter") {
-      searchButtonPressed()
+      setSearchedTerm(searchString)
     } else {
       setSearchString(event.target.value)
     }
-    // For Quick Search (no-delay)... use 👇this, instead of that 👆.
-    // const filteredSearch = searchWorker(searchIndexWithUrl, event.target.value)
-    // setSearchResults(filteredSearch)
   }
 
   return (
@@ -106,7 +65,7 @@ const SearchPage = () => {
           />
           <button
             className="coa-search_button"
-            onClick={()=>searchButtonPressed('click')}
+            onClick={()=>setSearchedTerm(searchString)}
           >
             {intl.formatMessage(i18n.search)}
           </button>
@@ -147,7 +106,6 @@ const SearchPage = () => {
         <PaginationContainer
           pagesArray={searchResults}
           PageComponent={SearchResult}
-          searchedTerm={searchedTerm}
         />
 
       </div>
