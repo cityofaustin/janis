@@ -27,13 +27,9 @@ const SearchPage = () => {
   const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [searchString, setSearchString] = useState(searchedTerm)
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState(searchWorker(searchIndex, searchedTerm))
 
-  // Reset back to first page with a new searchedTerm
-  useEffect(()=>{
-    setPageNumber(1)
-  },[searchedTerm])
-
+  // Set searchResults when loading searchedTerm from queryParam
   useEffect(()=>{
     setSearchResults(searchWorker(searchIndex, searchedTerm))
   }, [searchedTerm, unfilteredSearchIndex])
@@ -49,6 +45,7 @@ const SearchPage = () => {
   // Set "q" QueryParam to "undefined" to remove it.
   const submitSearch = ()=>{
     setSearchedTerm(searchString || undefined)
+    setPageNumber(1)
   }
 
   return (
