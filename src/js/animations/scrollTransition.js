@@ -1,6 +1,5 @@
 export const scrollTransition = ({
   scrollDuration,
-  fadeDelay,
   endpoint=0,
   fadeElement,
   callback
@@ -13,10 +12,9 @@ export const scrollTransition = ({
   const movePercent = 1 / (scrollDuration * 60)
   const bottom = window.pageYOffset
   let t = 1
-  fadeElement.style.opacity = 1
-  fadeElement.style.transition = "opacity "+fadeDelay+"s"
 
   const scrollTransitionGo = (moveTo)=>{
+    console.log("~~~~ moveTo", moveTo)
     if (t > 0 && moveTo > endpoint) {
       window.scroll(0, moveTo)
       requestAnimationFrame(()=>{
@@ -29,11 +27,7 @@ export const scrollTransition = ({
       })
     } else {
       window.scroll(0,endpoint)
-      fadeElement.style.opacity = 0
-      setTimeout(function(){
-        callback()
-        fadeElement.style.opacity = 1
-      },fadeDelay * 1000)
+      setTimeout(callback, 300)
     }
   }
 

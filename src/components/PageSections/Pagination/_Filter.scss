@@ -350,7 +350,7 @@ $input-box-height: 4.4rem;
     @include desktop {
         margin-bottom: 2rem;
         &:hover {
-            color: $coa-color-black;
+            color: $coa-color-white;
             background-color: $coa-color-blue-warm-60v;
         }
     }

@@ -11,7 +11,6 @@ import { CSSTransitionGroup } from 'react-transition-group-v1'
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
-import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
@@ -30,7 +29,6 @@ const PaginationContainer = ({
   const intl = useIntl();
   const isMobile = useMobileQuery();
 
-  const [isTransition, setIsTransition] = useState(false);
   const paginationContainerRef = useRef();
   const pageComponentContainerRef = useRef();
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
@@ -142,14 +140,9 @@ const PaginationContainer = ({
       endIndex = (pagesArray.length-1)
     }
     const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
-    pageComponentContainerRef.current.style.transition = "opacity .03s"
-    pageComponentContainerRef.current.style.opacity = 0
-    setTimeout(function(){
-      setPages(buildPages(filteredPagesArray, documentsPerPage))
-      // When we update our pages be applying a filter, then reset our pageNumber to 1.
-      setPageNumber(1);
-      pageComponentContainerRef.current.style.opacity = 1
-    }, 300)
+    setPages(buildPages(filteredPagesArray, documentsPerPage))
+    // When we update our pages be applying a filter, then reset our pageNumber to 1.
+    setPageNumber(1);
   }, [fromDate, toDate])
 
   // Update pages when an updated searchedTerm updates the pagesArray
@@ -198,26 +191,18 @@ const PaginationContainer = ({
   //   }
   // }, [searchedTerm]);
 
-  const updatePage = newPage => {
-    setPageNumber(newPage); // NOTE: hooks must be in the order
-    setIsTransition(false);
-  };
-
   function changePage(pageNumber) {
-    setIsTransition(true);
     if (
       pageNumber >= 1 &&
       pageNumber <= pages.length
     ) {
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
-        fadeDelay: 0.3, // for both fade in & out. so 2x times value here for full transition.
         endpoint: paginationContainerRef.current.offsetTop,
         fadeElement: pageComponentContainerRef.current,
         callback: () => {
-          setPageNumber(pageNumber); // NOTE: hooks must be in the order
-          setIsTransition(false);
-        }, // NOTE: callback will fire after fade OUT and BEFORE fade IN.
+          setPageNumber(pageNumber);
+        },
       });
     }
   }
@@ -265,11 +250,24 @@ const PaginationContainer = ({
               </div>
             </div>
           )}
-          <div className="coa-Pagination__page-component-container" ref={pageComponentContainerRef}>
-            {currentPage && currentPage.map((page, index) => (
-              <PageComponent page={page} key={index} />
-            ))}
-          </div>
+          <CSSTransitionGroup
+            transitionName="pagination-trans"
+            transitionEnterTimeout={1200}
+            transitionLeave={false}
+          >
+            {/**
+              The "key" prop is necessary for CSSTransitionGroup to work - even if there's only 1 child.
+              We set "key" to the current timestamp.
+              That way, we're guaranteed to get a new key every time the component is rendered.
+              When the keys change, the "enter" transition is run.
+              So we're guaranteed to get our fade-in transition, even if the newest filtered page result has the same values.
+            **/}
+            <div key={new Date()} ref={pageComponentContainerRef}>
+                {currentPage && currentPage.map((page, index) => (
+                  <PageComponent page={page} key={page.id} />
+                ))}
+            </div>
+          </CSSTransitionGroup>
         </div>
         <PageSelector
           pageSelectorValues={pageSelectorValues}
