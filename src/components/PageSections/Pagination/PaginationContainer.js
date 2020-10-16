@@ -30,7 +30,7 @@ const PaginationContainer = ({
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [fromDate, setFromDate] = useQueryParam('fromDate', DateParam);
   const [toDate, setToDate] = useQueryParam('toDate', DateParam);
-  const [filterApplied, setFilterApplied] = useState(false)
+  const [filterApplied, setFilterApplied] = useState(Boolean(fromDate || toDate)) //If there are queryParams set when navigating to page, then the filter is applied
   const pageIndex = pageNumber-1;
   const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
   const pagesCount = pages.length
@@ -82,12 +82,7 @@ const PaginationContainer = ({
     because a page could initially be loaded with a filter applied from the URL queryParams.
   **/
   useEffect(()=>{
-    let newFilterApplied;
-    if (fromDate || toDate) {
-      newFilterApplied = true
-    } else {
-      newFilterApplied = false
-    }
+    const newFilterApplied = Boolean(fromDate || toDate)
     if (newFilterApplied !== filterApplied) {
       // Reset to page 1 if our filter status changes
       setFilterApplied(newFilterApplied)
