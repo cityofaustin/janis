@@ -6,7 +6,6 @@ import {
   NumberParam,
   withDefault,
 } from 'use-query-params';
-// import { CSSTransitionGroup } from 'react-transition-group-v1'
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
@@ -20,15 +19,12 @@ const PaginationContainer = ({
   PageComponent,
   filterable=false,
 }) => {
+  const intl = useIntl();
+  const isMobile = useMobileQuery();
   const documentsPerPage = 10;
   const maxPagesMobile = 5;
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
-
-  const isInitialMount = useRef(true);
-  const intl = useIntl();
-  const isMobile = useMobileQuery();
-
   const paginationContainerRef = useRef();
   const pageComponentContainerRef = useRef();
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
@@ -38,12 +34,24 @@ const PaginationContainer = ({
   const pageIndex = pageNumber-1;
   const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
   const pagesCount = pages.length
+
+  // Update pages when an updated searchedTerm updates the pagesArray
+  useEffect(()=>{
+    setPages(buildPages(pagesArray, documentsPerPage))
+  }, [pagesArray])
+
   // Reset PageNumber if it is invalid
   useEffect(()=>{
     if (!pages[pageIndex]) {
       setPageNumber(1)
     }
-  },[pageNumber])
+  },[pageNumber, toDate, fromDate])
+
+  // Update pages when an updated searchedTerm updates the pagesArray
+  useEffect(()=>{
+    setPages(buildPages(pagesArray, documentsPerPage))
+  }, [pagesArray])
+
   const pageSelectorValues = buildPageSelectorValues(pagesCount, maxPagesShown, pageNumber);
   const currentPage = pages[pageIndex];
   /**
@@ -60,16 +68,34 @@ const PaginationContainer = ({
 
   /**
     Clear the filter by running
-    applyFilter(null,null,false).
-    useQueryParams prefered using "undefined" instead of "null" to clear a queryParam
+    applyFilter(null,null).
+    useQueryParams prefers using "undefined" instead of "null" to clear a queryParam
   **/
-  const applyFilter = (fromDate=undefined, toDate=undefined, filterApplied) => {
-    setFromDate(fromDate)
-    setToDate(toDate)
-    setFilterApplied(filterApplied)
+  const applyFilter = (fromDate, toDate) => {
+    setFromDate(fromDate || undefined)
+    setToDate(toDate || undefined)
   }
 
-  // Update pages when we get a new toDate or fromDate.
+  /**
+    Check if we are using/removing a filter.
+    This is done in a separate useEffect() besides the applyFilter() function,
+    because a page could initially be loaded with a filter applied from the URL queryParams.
+  **/
+  useEffect(()=>{
+    let newFilterApplied;
+    if (fromDate || toDate) {
+      newFilterApplied = true
+    } else {
+      newFilterApplied = false
+    }
+    if (newFilterApplied !== filterApplied) {
+      // Reset to page 1 if our filter status changes
+      setFilterApplied(newFilterApplied)
+      setPageNumber(1)
+    }
+  },[fromDate, toDate])
+
+  // Update pages when we apply a new filter (toDate, fromDate).
   useEffect(()=>{
     if (!filterable) {
       return
@@ -127,61 +153,7 @@ const PaginationContainer = ({
     }
     const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
     setPages(buildPages(filteredPagesArray, documentsPerPage))
-    // When we update our pages be applying a filter, then reset our pageNumber to 1.
-    // Note: we won't run this on the initial mount so that we can use the initial pageNumber from the URL queryString
-    if (!isInitialMount.current) {
-      setPageNumber(1);
-      if (isInitialMount.current) {
-         isInitialMount.current = false;
-      }
-    }
   }, [fromDate, toDate])
-
-  // Update pages when an updated searchedTerm updates the pagesArray
-  useEffect(()=>{
-    setPages(buildPages(pagesArray, documentsPerPage))
-  }, [pagesArray])
-
-  // useEffect(() => {
-  //   /*
-  //     This hook will fire whenever there's a browser interaction.
-  //     Like, a back button or a change in the url.
-  //   */
-  //   if (
-  //     query.page &&
-  //     pageNumber !== parseInt(query.page) - 1 &&
-  //     isTransition === false
-  //   ) {
-  //     setPageNumber(parseInt(query.page - 1));
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   /*
-  //     The transition effect of changing pages puts a block on new renderings.
-  //     So, we need to make sure there isn't a transition in effect before
-  //     we zero-out the page when a new one renders.
-  //   */
-  //   if (pageNumber === 0 && isTransition === false) {
-  //     updateUrl(0)
-  //   }
-  // },[]);
-
-  // ******
-    //TODO: might have to incorporate queryParam for searchedTerm also?
-  // *****
-  // useEffect(() => {
-  //   /*
-  //     This hook checks to see if a new search term is used. And, sets it back
-  //     to the first page. Like, if you are on page 3 of searching "police",
-  //     and then search "recycling", you don't wanna go page 3 of the new search.
-  //   */
-  //   if (query.page) {
-  //     setPageNumber(parseInt(query.page) - 1);
-  //   } else {
-  //     setPageNumber(0);
-  //   }
-  // }, [searchedTerm]);
 
   function changePage(pageNumber) {
     if (
@@ -209,9 +181,6 @@ const PaginationContainer = ({
     }
   }
 
-  console.log("~~~ fromDate", fromDate)
-  console.log("~~~ toDate", toDate)
-
   return (
     <div
       ref={paginationContainerRef}
@@ -236,7 +205,7 @@ const PaginationContainer = ({
               </div>
               <div
                 className="coa-filter__filter-result-clear"
-                onClick={()=>{applyFilter(null,null,false)}}
+                onClick={()=>{applyFilter(null,null)}}
               >
                 <span>
                   {intl.formatMessage(i18n1.clearFilters)}
@@ -252,7 +221,7 @@ const PaginationContainer = ({
           **/}
           <div
             className="coa-Pagination__page-component-container"
-            key={pageNumber + fromDate + toDate + filterApplied}
+            key={String(pageNumber) + fromDate + toDate + filterApplied}
             ref={pageComponentContainerRef}
           >
             {currentPage && currentPage.map((page, index) => (
@@ -272,10 +241,3 @@ const PaginationContainer = ({
 };
 
 export default PaginationContainer;
-
-// <CSSTransitionGroup
-//   transitionName="pagination-trans"
-//   transitionEnterTimeout={1200}
-//   transitionLeave={false}
-// >
-// </CSSTransitionGroup>

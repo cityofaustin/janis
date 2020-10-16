@@ -40,10 +40,15 @@ const SearchPage = () => {
 
   const searchKeyInput = event => {
     if (event.key === "Enter") {
-      setSearchedTerm(searchString)
+      submitSearch()
     } else {
       setSearchString(event.target.value)
     }
+  }
+
+  // Set "q" QueryParam to "undefined" to remove it.
+  const submitSearch = ()=>{
+    setSearchedTerm(searchString || undefined)
   }
 
   return (
@@ -65,7 +70,7 @@ const SearchPage = () => {
           />
           <button
             className="coa-search_button"
-            onClick={()=>setSearchedTerm(searchString)}
+            onClick={submitSearch}
           >
             {intl.formatMessage(i18n.search)}
           </button>

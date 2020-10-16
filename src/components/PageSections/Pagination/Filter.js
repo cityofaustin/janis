@@ -108,7 +108,6 @@ const fieldsToDate = ({month=null, day=null, year=null}) => {
   values will allow everything to match as expected.
 **/
 const dateToFields = (date) => {
-  console.log("~~~~ what date yonder", date)
   return (date) ? {
     month: date.getUTCMonth() + 1,
     day: date.getUTCDate(),
@@ -233,7 +232,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
         <div
           className="coa-filter__mobile-clear-button"
           onClick={()=>{
-            applyFilter(null, null, false)
+            applyFilter(null, null)
             closeMobileMenu()
           }}
         >
@@ -243,7 +242,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
       <div
         className="coa-filter__apply-button"
         onClick={()=>{
-          applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields), true)
+          applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields))
           closeMobileMenu()
         }}
       >
