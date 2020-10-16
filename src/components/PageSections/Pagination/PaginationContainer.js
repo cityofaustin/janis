@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 import {
   useQueryParam,
   StringParam,
+  DateParam,
   NumberParam,
-  ArrayParam,
   withDefault,
 } from 'use-query-params';
 import { CSSTransitionGroup } from 'react-transition-group-v1'
@@ -12,6 +12,7 @@ import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
 import { filter as i18n1 } from 'js/i18n/definitions';
+import { createDateFromString } from 'js/helpers/date';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
@@ -26,12 +27,16 @@ const PaginationContainer = ({
   const maxPagesDesktop = 7;
   const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
 
+  const isInitialMount = useRef(true);
   const intl = useIntl();
   const isMobile = useMobileQuery();
 
   const paginationContainerRef = useRef();
   const pageComponentContainerRef = useRef();
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
+  const [fromDate, setFromDate] = useQueryParam('fromDate', DateParam);
+  const [toDate, setToDate] = useQueryParam('toDate', DateParam);
+  const [filterApplied, setFilterApplied] = useState(false)
   const pageIndex = pageNumber-1;
   const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
   const pagesCount = pages.length
@@ -55,34 +60,16 @@ const PaginationContainer = ({
     upperBound = new Date()
   }
 
-  const [fromDate, setFromDate] = useState(null)
-  const [toDate, setToDate] = useState(null)
-  const [filterApplied, setFilterApplied] = useState(false)
-
   /**
     Clear the filter by running
     applyFilter(null,null,false)
   **/
   const applyFilter = (fromDate, toDate, filterApplied) => {
-    setFromDate(fromDate)
-    setToDate(toDate)
+    fromDate && setFromDate(fromDate)
+    toDate && setToDate(toDate)
     setFilterApplied(filterApplied)
   }
 
-  /**
-    We're using this function because:
-    "Parsing of date strings with the Date constructor... is strongly discouraged due to browser differences and inconsistencies."
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
-
-    So we convert a dateString from pagesArray "YYYY-MM-DD" into a valid Date.
-    new Date("YYYY-MM-DD") will not work consistently but
-    new Date("YYYY", "MM"-1, "DD") will work properly.
-  **/
-  function createDate(dateString) {
-    let year, month, day;
-    [year, month, day] = dateString.split("-")
-    return new Date(year, month-1, day)
-  }
   // Update pages when we get a new toDate or fromDate.
   useEffect(()=>{
     if (!filterable) {
@@ -100,7 +87,7 @@ const PaginationContainer = ({
     if (fromDate) {
       for (let i=(pagesArray.length-1); i>=0; i--) {
         let page = pagesArray[i]
-        if (createDate(page.date) >= fromDate) {
+        if (createDateFromString(page.date) >= fromDate) {
           endIndex = i
           break;
         }
@@ -121,7 +108,7 @@ const PaginationContainer = ({
     if (toDate && (endIndex > -1)) {
       for (let i=0; i<=(endIndex || (pagesArray.length-1)); i++) {
         let page = pagesArray[i]
-        if (createDate(page.date) <= toDate) {
+        if (createDateFromString(page.date) <= toDate) {
           startIndex=i;
           break;
         }
@@ -142,7 +129,13 @@ const PaginationContainer = ({
     const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
     setPages(buildPages(filteredPagesArray, documentsPerPage))
     // When we update our pages be applying a filter, then reset our pageNumber to 1.
-    setPageNumber(1);
+    // Note: we won't run this on the initial mount so that we can use the initial pageNumber from the URL queryString
+    if (!isInitialMount.current) {
+      setPageNumber(1);
+      if (isInitialMount.current) {
+         isInitialMount.current = false;
+      }
+    }
   }, [fromDate, toDate])
 
   // Update pages when an updated searchedTerm updates the pagesArray
@@ -217,6 +210,9 @@ const PaginationContainer = ({
     }
   }
 
+  console.log("~~~ fromDate", fromDate)
+  console.log("~~~ toDate", toDate)
+
   return (
     <div
       ref={paginationContainerRef}
@@ -263,9 +259,9 @@ const PaginationContainer = ({
               So we're guaranteed to get our fade-in transition, even if the newest filtered page result has the same values.
             **/}
             <div key={new Date()} ref={pageComponentContainerRef}>
-                {currentPage && currentPage.map((page, index) => (
-                  <PageComponent page={page} key={page.id} />
-                ))}
+              {currentPage && currentPage.map((page, index) => (
+                <PageComponent page={page} key={page.id} />
+              ))}
             </div>
           </CSSTransitionGroup>
         </div>
@@ -281,10 +277,3 @@ const PaginationContainer = ({
 };
 
 export default PaginationContainer;
-
-// <CSSTransitionGroup
-//   transitionName="pagination-transition"
-//   transitionEnterTimeout={500}
-//   transitionLeaveTimeout={500}
-// >
-// </CSSTransitionGroup>

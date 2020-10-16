@@ -108,6 +108,7 @@ const fieldsToDate = ({month=null, day=null, year=null}) => {
   values will allow everything to match as expected.
 **/
 const dateToFields = (date) => {
+  console.log("~~~~ what date yonder", date)
   return (date) ? {
     month: date.getUTCMonth() + 1,
     day: date.getUTCDate(),

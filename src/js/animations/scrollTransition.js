@@ -14,7 +14,6 @@ export const scrollTransition = ({
   let t = 1
 
   const scrollTransitionGo = (moveTo)=>{
-    console.log("~~~~ moveTo", moveTo)
     if (t > 0 && moveTo > endpoint) {
       window.scroll(0, moveTo)
       requestAnimationFrame(()=>{
@@ -27,6 +26,7 @@ export const scrollTransition = ({
       })
     } else {
       window.scroll(0,endpoint)
+      // setTimeout() so that callback is fired only after the scrolling has finished.
       setTimeout(callback, 300)
     }
   }
