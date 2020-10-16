@@ -6,7 +6,7 @@ import {
   NumberParam,
   withDefault,
 } from 'use-query-params';
-import { CSSTransitionGroup } from 'react-transition-group-v1'
+// import { CSSTransitionGroup } from 'react-transition-group-v1'
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
@@ -60,11 +60,12 @@ const PaginationContainer = ({
 
   /**
     Clear the filter by running
-    applyFilter(null,null,false)
+    applyFilter(null,null,false).
+    useQueryParams prefered using "undefined" instead of "null" to clear a queryParam
   **/
-  const applyFilter = (fromDate, toDate, filterApplied) => {
-    fromDate && setFromDate(fromDate)
-    toDate && setToDate(toDate)
+  const applyFilter = (fromDate=undefined, toDate=undefined, filterApplied) => {
+    setFromDate(fromDate)
+    setToDate(toDate)
     setFilterApplied(filterApplied)
   }
 
@@ -244,22 +245,20 @@ const PaginationContainer = ({
               </div>
             </div>
           )}
-          <CSSTransitionGroup
-            transitionName="pagination-trans"
-            transitionEnterTimeout={1200}
-            transitionLeave={false}
+          {/**
+            The "key" prop is necessary to indicate whether our component should re-animate.
+            When the key changes, then our fadeIn animation is run.
+            So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
+          **/}
+          <div
+            className="coa-Pagination__page-component-container"
+            key={pageNumber + fromDate + toDate + filterApplied}
+            ref={pageComponentContainerRef}
           >
-            {/**
-              The "key" prop is necessary for CSSTransitionGroup to work - even if there's only 1 child.
-              When the key changes, then the "enter" transition is run.
-              So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
-            **/}
-            <div key={fromDate + toDate + filterApplied} ref={pageComponentContainerRef}>
-              {currentPage && currentPage.map((page, index) => (
-                <PageComponent page={page} key={page.id} />
-              ))}
-            </div>
-          </CSSTransitionGroup>
+            {currentPage && currentPage.map((page, index) => (
+              <PageComponent page={page} key={page.id} />
+            ))}
+          </div>
         </div>
         <PageSelector
           pageSelectorValues={pageSelectorValues}
@@ -273,3 +272,10 @@ const PaginationContainer = ({
 };
 
 export default PaginationContainer;
+
+// <CSSTransitionGroup
+//   transitionName="pagination-trans"
+//   transitionEnterTimeout={1200}
+//   transitionLeave={false}
+// >
+// </CSSTransitionGroup>

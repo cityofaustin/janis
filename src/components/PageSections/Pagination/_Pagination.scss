@@ -1,10 +1,27 @@
-.pagination-trans-enter {
-    opacity: 0;
+// .pagination-trans-enter {
+//     opacity: 0;
+// }
+//
+// .pagination-trans-enter-active {
+//   opacity: 1;
+//   transition: opacity 300ms ease-in;
+// }
+
+@keyframes fadeIn,
+@-webkit-keyframes fadeIn,
+@-webkit-keyframes fadeIn,
+@-moz-keyframes fadeIn,
+@-ms-keyframes {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
 }
 
-.pagination-trans-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in;
+.coa-Pagination__page-component-container {
+    animation: fadeIn 1s;
 }
 
 .coa-PageSelector_container {
