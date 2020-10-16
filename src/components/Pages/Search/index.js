@@ -12,7 +12,6 @@ import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
-import { queryObjectBuilder, queryStringBuilder } from 'js/helpers/queryObjectBuilder'
 import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js'
 
 const SearchPage = () => {

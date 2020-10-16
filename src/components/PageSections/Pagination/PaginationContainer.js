@@ -218,6 +218,7 @@ const PaginationContainer = ({
             The "key" prop is necessary to indicate whether our component should re-animate.
             When the key changes, then our fadeIn animation is run.
             So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
+            // TODO: add searchedTerm to key
           **/}
           <div
             className="coa-Pagination__page-component-container"
