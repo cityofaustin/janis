@@ -7,6 +7,7 @@ const officialDocumentPageFragment = `
     authoringOffice
     summary
     name
+    body
     document {
       fileSize
       filename

@@ -39,13 +39,13 @@ const AppView = ({ path }) => {
   return (
     <div>
       <SkipToMain />
-      {/* START ⚠️COVED_19 Hardcoded */}
+      {/* START ⚠️COVID_19 Hardcoded */}
       <Alert
         badge="Coronavirus (COVID-19)"
         link="https://www.austintexas.gov/COVID19"
         linkContent={intl.formatMessage(i18n1.getLatest)}
       />
-      {/* END ⚠️COVED_19 Hardcoded */}
+      {/* END ⚠️COVID_19 Hardcoded */}
       <Header navigation={navigation[intl.locale]} path={path} />
 
       <main role="main" id="main">
