@@ -725,7 +725,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   let pages = [];
   let after = '';
-  let batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || null;
+  let batchSize = Number(process.env.GRAPHQL_BATCH_SIZE) || null;
   if (!batchSize) {
     if (process.env.DEPLOY_ENV === "production") {
       // Our production Joplin dyno is larger and has more resources to process more requests without timing out.
@@ -745,11 +745,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   /**
     Build search index here before pages are altered.
-    Hardcoding "withElasticsearch" and "indexName" for now.
   **/
-  const withElasticsearch = false
+  const USE_ELASTICSEARCH = process.env.USE_ELASTICSEARCH === "true"
   const indexName = `local_${langCode}_${Date.now()}`
-  const searchIndex = await searchIndexBuilder(pages, indexName, withElasticsearch)
+  const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -842,7 +841,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     then add searchIndex directly to the search page.
   **/
   let searchPageData = {}
-  if (!withElasticsearch) {
+  if (!USE_ELASTICSEARCH) {
     searchPageData = { searchIndex }
   }
   allPages.push({

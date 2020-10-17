@@ -2,7 +2,7 @@
   For the initial site build, if you want to pull data from a joplin instance other than staging,
   plug in the CMS_API you want to use here.
 
-  Note: publish commands from Joplin will re-override the CMS_API value.
+  Note: subsequent publish commands from Joplin will re-override the CMS_API value.
   That means that deploys from subsequent github code pushes will pull data from whichever Joplin last triggered a publish,
   not the initial value in this file.
 
@@ -15,10 +15,16 @@
   That CMS_API value will only be used by the branch "2997-dept-links".
 **/
 
-// Don't overwrite defaultValues.
+/**
+  Don't overwrite defaultValues, add values for your specific branch into the branchOverrides object.
+
+  These environment variables will only be used for github deployments for staging and PRs.
+  Production deployments will not gets its values from here.
+  Production gets its environment variables from the Publisher only, so that nothing can be accidentally broken.
+**/
 const defaultValues = {
   joplin_appname: 'joplin-staging',
-  // REACT_STATIC_BATCH_SIZE: 25, // Don't do prefetching by default
+  GRAPHQL_BATCH_SIZE: 10, // Don't do prefetching by default
 };
 
 // Add branch-specifc values here
@@ -37,7 +43,6 @@ const branchOverrides = {
   },
   '4849-filter': {
     joplin_appname: 'joplin-pr-4849-filter',
-    // REACT_STATIC_BATCH_SIZE: 10,
   }
 };
 
