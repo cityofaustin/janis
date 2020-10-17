@@ -237,9 +237,8 @@ const searchIndexBuilder = async function(pages, indexName="", USE_ELASTICSEARCH
   @param {Object[]} searchIndex - All of the operations + documents to add to elasticsearch index.
 **/
 const sendIndexToElasticSeach = async (searchIndex) => {
-  // Hardcoding client address for now.
   const elasticClient = new Client({
-    node: 'http://localhost:9200'
+    node: process.env.ELASTICSEARCH_URL
   })
 
   // Taken from https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/bulk_examples.html
