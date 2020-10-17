@@ -24,7 +24,8 @@
 **/
 const defaultValues = {
   joplin_appname: 'joplin-staging',
-  GRAPHQL_BATCH_SIZE: 10, // Don't do prefetching by default
+  GRAPHQL_BATCH_SIZE: 10,
+  USE_ELASTICSEARCH: false,
 };
 
 // Add branch-specifc values here
