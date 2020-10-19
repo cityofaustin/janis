@@ -609,5 +609,5 @@ export const filter = defineMessages({
   clearFilters: 'Clear filters',
   applyFilters: 'Apply filters',
   filteredResults: '{count} filtered results',
-  OneFilteredResult: '1 filtered result',
+  oneFilteredResult: '1 filtered result',
 })

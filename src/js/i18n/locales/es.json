@@ -194,5 +194,5 @@
   "filter.clearFilters": "Borrar filtros",
   "filter.applyFilters": "Aplicar filtros",
   "filter.filteredResults": "{count} resultados filtrados",
-  "filter.OneFilteredResult": "1 resultado filtrado"
+  "filter.oneFilteredResult": "1 resultado filtrado"
 }
