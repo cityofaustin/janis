@@ -69,8 +69,33 @@
     margin-bottom: 16px;
   }
   @include media($coa-large-screen) {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
     width: inherit;
+  }
+}
+
+.coa-OfficialDocumentPage__span {
+  font-weight: $coa-font-semibold;
+}
+
+.coa-OfficialDocumentPage__content-container {
+  padding-left: 10px;
+}
+
+.coa-OfficialDocumentPage__disclaimer {
+  color: #454545;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 24px;
+}
+
+.coa-OfficialDocumentPage__content {
+  background-color: #f3f3f3;
+  padding: 16px;
+  margin-bottom: 48px;
+  font-size: 16px;
+  @include media($coa-medium-screen) {
+    padding: 40px;
   }
 }
 

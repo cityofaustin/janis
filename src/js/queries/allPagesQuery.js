@@ -58,6 +58,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
           authoringOffice
           summary
           name
+          body
           document {
             fileSize
             filename
