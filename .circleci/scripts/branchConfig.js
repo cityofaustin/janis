@@ -27,7 +27,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  'nav-cleanup': {
+  'missing-es-translations': {
     joplin_appname: 'joplin'
   },
   '4787-pdf-content': {
