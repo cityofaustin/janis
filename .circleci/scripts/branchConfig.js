@@ -37,7 +37,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-4776-elastic'
   },
   'doc-count': {
-    joplin_appname: 'joplin-pr-4776-elastic'
+    joplin_appname: 'joplin'
   },
 };
 
