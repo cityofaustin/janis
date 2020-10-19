@@ -159,5 +159,5 @@
   "filter.clearFilters": "Clear filters",
   "filter.applyFilters": "Apply filters",
   "filter.filteredResults": "{count} filtered results",
-  "filter.OneFilteredResult": "1 filtered result"
+  "filter.oneFilteredResult": "1 filtered result"
 }

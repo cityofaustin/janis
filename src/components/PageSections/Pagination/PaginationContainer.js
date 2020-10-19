@@ -170,7 +170,7 @@ const PaginationContainer = ({
   if (filterApplied) {
     const totalResultCount = pages.reduce((resultCount,page)=>resultCount+page.length, 0)
     if (totalResultCount === 1) {
-      filterMessage = intl.formatMessage(i18n1.OneFilteredResult)
+      filterMessage = intl.formatMessage(i18n1.oneFilteredResult)
     } else {
       filterMessage = intl.formatMessage(i18n1.filteredResults, {count: totalResultCount})
     }
