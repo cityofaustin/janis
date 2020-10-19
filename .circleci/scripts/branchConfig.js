@@ -31,7 +31,7 @@ const branchOverrides = {
     joplin_appname: 'joplin'
   },
   'janis-copy': {
-    joplin_appname: 'joplin-copy',
+    joplin_appname: 'joplin-pr-joplin-copy',
   },
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
