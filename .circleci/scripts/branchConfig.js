@@ -36,8 +36,8 @@ const branchOverrides = {
   'topic-microcopy': {
     joplin_appname: 'joplin',
   },
-  '4872-link-doc-summary': {
-    joplin_appname: 'joplin-pr-4872-link-summary',
+  '4787-pdf-content': {
+    joplin_appname: 'joplin-pr-4787-pdf-docs',
   },
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'

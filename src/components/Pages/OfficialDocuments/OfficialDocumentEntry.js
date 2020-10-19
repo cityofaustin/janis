@@ -39,7 +39,7 @@ const OfficialDocumentEntry = ({
   moment.locale(intl.locale);
   return (
     <div className="coa-OfficialDocumentPage__container">
-      <div className="coa-OfficialDocumentPage__date">
+      <div className="coa-OfficialDocumentPageEntry__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
       <a href={entryUrl(departments, slug)}>
