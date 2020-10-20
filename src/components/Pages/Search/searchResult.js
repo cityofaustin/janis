@@ -47,7 +47,7 @@ const DefaultPageResult = function({ page }) {
       { (topics && topics.length > 0) && (
         <div className="coa-search_result-topics">
           Topic{topics.length > 1 ? "s: " : ": "}
-          {topics.join(", ")}
+          {topics.map(t=>t.title).join(", ")}
         </div>
       )}
 
@@ -63,9 +63,12 @@ const OfficialDocumentPage = function({ page }) {
     title,
     date,
     searchSummary,
-    document,
-    topics,
+    authoringOffice,
+    officialDocumentCollections,
+    filename,
+    pdfSize,
   } = page
+  console.log("~~~~ OD page", page)
 
   return (
     <div className="coa-search_result">
@@ -84,30 +87,30 @@ const OfficialDocumentPage = function({ page }) {
       <div className="coa-search_result-topics">
         <a
           className="coa-search_result-pdf"
-          href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+document.filename}
+          href={"https://joplin3-austin-gov-static.s3.amazonaws.com/production/media/documents/"+filename}
         >
-          {document.filename}
+          {filename}
         </a>
         <span className="coa-search_result-pdf-size">
           {/*
             The file size is originally in bytes. The math here will
             round the file size to the nearest decimal of a MB.
           */}
-          &nbsp;(PDF {Math.round(document.fileSize/100000)/10}mb)
+          &nbsp;(PDF {Math.round(pdfSize/100000)/10}mb)
         </span>
       </div>
 
       <div className="coa-search_result-topics from">
-        From: {page.authoringOffice}
+        From: {authoringOffice}
       </div>
 
       <div className="coa-search_result-topics">
         Part of:&nbsp;
         <a
           className="coa-search_result-pdf"
-          href={"/"+page.partOf.departments[0].slug+"/"+page.partOf.slug}
+          href={"/"+officialDocumentCollections[0].url}
         >
-          {page.partOf.title}
+          {officialDocumentCollections[0].title}
         </a>
       </div>
 

@@ -10,9 +10,8 @@ import {
 
 import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
-import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
-import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js'
+import PaginationSearchPage from 'components/PageSections/Pagination/PaginationSearchPage'
 
 const SearchPage = () => {
   const { searchIndex: unfilteredSearchIndex } = useRouteData();
@@ -22,7 +21,6 @@ const SearchPage = () => {
   */
   const searchIndex = unfilteredSearchIndex.filter( page => page.janisUrls.length > 0)
   const intl = useIntl();
-  const lang = intl.locale
   const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [searchString, setSearchString] = useState(searchedTerm)
@@ -104,9 +102,8 @@ const SearchPage = () => {
           </div>
         </div>
 
-        <PaginationContainer
-          pagesArray={searchResults}
-          PageComponent={SearchResult}
+        <PaginationSearchPage
+          searchedTerm={searchedTerm}
         />
 
       </div>

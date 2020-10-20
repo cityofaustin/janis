@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { injectIntl } from 'react-intl';
 
 import OfficialDocumentEntry from 'components/Pages/OfficialDocuments/OfficialDocumentEntry';
 import UserFeedback from 'components/UserFeedback';
-import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js';
+import PaginationFiltered from 'components/PageSections/Pagination/PaginationFiltered.js';
 
-const OfficialDocumentPaginationPage = ({ officialDocuments, intl }) => (
+const OfficialDocumentPaginationPage = ({ officialDocuments }) => (
   <div id="officialDocumentsPaginationPage">
-    <PaginationContainer
+    <PaginationFiltered
       filterable
       pagesArray={officialDocuments}
       PageComponent={OfficialDocumentEntry}
-      intl={intl}
     />
   </div>
 );

@@ -5,7 +5,7 @@ import { news as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
 
 import ContextualNav from 'components/PageSections/ContextualNav';
-import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js';
+import PaginationStatic from 'components/PageSections/Pagination/PaginationStatic.js';
 import UserFeedback from 'components/UserFeedback';
 
 const NewsListItem = ({ page }) => {
@@ -36,7 +36,7 @@ const NewsListPage = ({ newsListPage }) => {
       </PageHeader>
       <div className="coa-Page__all-of-the-content">
         <div className="coa-Page__main-content coa-NewsPage__main-content">
-          <PaginationContainer
+          <PaginationStatic
             pagesArray={newsList}
             PageComponent={NewsListItem}
           />

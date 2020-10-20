@@ -14,7 +14,7 @@ import { createDateFromString } from 'js/helpers/date';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
-const PaginationContainer = ({
+const PaginationFiltered = ({
   pagesArray,
   PageComponent,
   filterable=false,
@@ -220,7 +220,7 @@ const PaginationContainer = ({
             key={String(pageNumber) + fromDate + toDate + filterApplied}
             ref={pageComponentContainerRef}
           >
-            {currentPage && currentPage.map((page, index) => (
+            {currentPage && currentPage.map((page) => (
               <PageComponent page={page} key={page.id} />
             ))}
           </div>
@@ -236,4 +236,4 @@ const PaginationContainer = ({
   );
 };
 
-export default PaginationContainer;
+export default PaginationFiltered;
