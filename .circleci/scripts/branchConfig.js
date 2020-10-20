@@ -24,8 +24,8 @@
 **/
 const defaultValues = {
   joplin_appname: 'joplin-staging',
-  GRAPHQL_BATCH_SIZE: 10,
-  USE_ELASTICSEARCH: false,
+  // GRAPHQL_BATCH_SIZE: 10,
+  // USE_ELASTICSEARCH: false,
 };
 
 // Add branch-specifc values here
@@ -44,6 +44,9 @@ const branchOverrides = {
   },
   '4849-filter': {
     joplin_appname: 'joplin-pr-4849-filter',
+  },
+  '5052-search': {
+    joplin_appname: 'joplin-pr-5052-search'
   }
 };
 
