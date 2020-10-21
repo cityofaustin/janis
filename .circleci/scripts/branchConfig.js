@@ -33,7 +33,7 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
-  'topic-microcopy': {
+  'topic-microcopy': { 
     joplin_appname: 'joplin',
   },
   '4787-pdf-content': {
