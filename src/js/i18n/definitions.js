@@ -108,6 +108,8 @@ export const misc = defineMessages({
   pluginBlockingForm:
     'A plugin could be blocking the form (example: "Privacy Badger")',
   formFailedToLoad: 'It may have failed to load ("404 error")',
+  documentsTotal: "document in this collection",
+  documentsTotalPlural: "documents in this collection",
 });
 
 export const navigation = defineMessages({

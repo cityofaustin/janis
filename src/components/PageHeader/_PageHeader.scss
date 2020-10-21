@@ -21,6 +21,11 @@
   }
 }
 
+.coa-PageHeader__subDescription {
+  color: $coa-color-black-grey;
+  font-size: 1.8rem;
+}
+
 .coa-PageHeader--service {
   padding-top: $coa-spacing-large;
   padding-bottom: $coa-spacing-large;
