@@ -133,7 +133,7 @@ export const services = defineMessages({
   checkOutServices: 'Check out City of Austin Services',
   service: 'Service',
   topServices: 'Top services',
-  allServices: 'All services',
+  allPages: 'All pages',
 });
 
 export const themes = defineMessages({
