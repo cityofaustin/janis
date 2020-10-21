@@ -6,7 +6,8 @@ import Trashy from 'components/Trashy';
 import Recollect from 'components/Recollect';
 
 const HtmlFromRichText = ({ content }) => {
-  return Parser(content, {
+
+  const parsed = Parser(content, {
     replace: domNode => {
       // this initial if is needed to prevent undefined error
       // making a sorta safe assumption that buttons in the steps
@@ -70,6 +71,10 @@ const HtmlFromRichText = ({ content }) => {
       }
     },
   });
+
+  console.log("parsed :", parsed)
+
+  return parsed
 };
 
 HtmlFromRichText.propTypes = {
