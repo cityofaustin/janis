@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
+import { useIntl } from 'react-intl';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 import HtmlFromRichText from 'components/HtmlFromRichText';
 
-const OfficialDocumentEntry = ({ 
+const OfficialDocumentEntry = ({
   page: {
     id,
     date,
@@ -19,10 +19,10 @@ const OfficialDocumentEntry = ({
     slug,
     departments
   },
-  intl
 }) => {
+  const intl = useIntl()
 
-  const summaryBlock = <HtmlFromRichText content={summary} /> 
+  const summaryBlock = <HtmlFromRichText content={summary} />
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?
@@ -69,4 +69,4 @@ OfficialDocumentEntry.propTypes = {
   }),
 }
 
-export default injectIntl(OfficialDocumentEntry);
+export default OfficialDocumentEntry;

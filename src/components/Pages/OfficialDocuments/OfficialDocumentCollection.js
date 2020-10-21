@@ -1,27 +1,28 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
-import { injectIntl } from 'react-intl';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
-import OfficialDocumentPaginationPage from 'components/Pages/OfficialDocuments/OfficialDocumentPaginationPage';
+import OfficialDocumentEntry from 'components/Pages/OfficialDocuments/OfficialDocumentEntry';
+import PaginationFiltered from 'components/PageSections/Pagination/PaginationFiltered.js';
 import UserFeedback from 'components/UserFeedback';
+import { createDateFromString } from 'js/helpers/date';
 
-const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
+/**
+  @param CMS_API
+    CMSPreview will pass through CMS_API
+    Defaults to process.env.CMS_API if CMS_PREVIEW doesn't include explicit CMS_API param
+**/
+const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=process.env.CMS_API }) => {
   const {
     officialDocumentCollection: {
-      id,
+      pageId,
       title,
       description,
-      slug,
-      topic,
-      topics,
-      theme,
-      department,
-      documents,
       coaGlobal,
       contextualNavData,
+      lowerBound, // DateString "YYYY-MM-DD"
     },
   } = officialDocumentCollection ? { officialDocumentCollection } : useRouteData();
 
@@ -43,9 +44,11 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         <PageHeader contentType={'official-document'} description={descriptonBlock}>
           {title}
         </PageHeader>
-        <OfficialDocumentPaginationPage
-          officialDocuments={documents}
-          intl={intl}
+        <PaginationFiltered
+          PageComponent={OfficialDocumentEntry}
+          lowerBound={createDateFromString(lowerBound)}
+          officialDocumentCollectionId={pageId}
+          CMS_API={CMS_API}
         />
         <UserFeedback />
       </div>
@@ -53,4 +56,4 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
   );
 };
 
-export default injectIntl(OfficialDocumentCollection);
+export default OfficialDocumentCollection;

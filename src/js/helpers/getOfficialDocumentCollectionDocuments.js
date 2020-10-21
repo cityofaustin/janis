@@ -1,9 +1,10 @@
 import filesize from 'filesize';
 import getOfficialDocumentsCollectionDocumentsQuery from 'js/queries/getOfficialDocumentsCollectionDocumentsQuery';
-
+import getOfficialDocumentsCollectionDocumentsLowerBoundQuery from 'js/queries/getOfficialDocumentsCollectionDocumentsLowerBoundQuery';
+import { createDateFromString } from 'js/helpers/date';
 
 // Get all Documents for an OfficialDocumentCollection
-const getOfficialDocumentCollectionDocuments = async (officialDocumentCollectionId, client) => {
+export const getOfficialDocumentCollectionDocuments = async (officialDocumentCollectionId, client) => {
   let officialDocumentCollectionDocuments = []
   let after = '';
   while (true) {
@@ -46,4 +47,23 @@ const getOfficialDocumentCollectionDocuments = async (officialDocumentCollection
   return documentArray
 }
 
-export default getOfficialDocumentCollectionDocuments
+/**
+  For the sake of our Filter's DayPicker,
+  return the date of the earliest OfficialDocument for a Collection.
+  It would not be necessary for users to choose a date earlier than the earliest date.
+  @returns lowerBound {DateString} "YYYY-MM-DD"
+**/
+export const getOfficialDocumentCollectionLowerBound = async (officialDocumentCollectionId, client) => {
+  const res = await client.request(
+    getOfficialDocumentsCollectionDocumentsLowerBoundQuery,
+    {
+      id: officialDocumentCollectionId,
+    },
+  );
+  const result = res.officialDocumentCollectionDocuments.edges
+  if (!result.length) {
+    // In case there are no documents on a Collection, default to 2018 as the lowerBound.
+    return new Date(2018,0,1)
+  }
+  return result[0].node.page.date
+}

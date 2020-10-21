@@ -120,6 +120,48 @@ const dateToFields = (date) => {
 }
 
 /**
+  Converts dateString into an object digestible by DateFields components
+  @param dateString {String "YYYY-MM-DD"}
+  @returns dateFields {Object {month, day, year}}
+**/
+const dateStringToFields = (dateString) => {
+  if (dateString) {
+    const [year, month, day] = dateString.split("-")
+    return {
+      month,
+      day,
+      year
+    }
+  } else {
+    return {
+      month: '',
+      day: '',
+      year: ''
+    }
+  }
+}
+
+/**
+  Converts dateFields object into a dateString
+  @param dateFields {Object {month, day, year}}
+  @returns dateString {String "YYYY-MM-DD"}
+**/
+const fieldsToDateString = (fields) => {
+  const date = fieldsToDate(fields)
+  if (!date) return null
+  let month = String(date.getUTCMonth() + 1)
+  if (month.length === 1) {
+    month = "0" + month
+  }
+  let day = String(date.getUTCDate())
+  if (day.length === 1) {
+    day = "0" + day
+  }
+  const year = String(date.getUTCFullYear())
+  return year + '-' + month + '-' + day
+}
+
+/**
   The dateFieldsReducer contains the logic to update the month, day, and year values
   from either the DayPicker Widget or the month, day, and year input fields.
   When we can stop supporting IE11, an input type of "date" might do some of this work for us.
@@ -200,13 +242,13 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
     clicks the button to "Apply Filter".
     https://github.com/facebook/react/issues/16461
   **/
-  const [fromDateFields, setFromDateFields] = useReducer(dateFieldsReducer, dateToFields(fromDate))
+  const [fromDateFields, setFromDateFields] = useReducer(dateFieldsReducer, dateStringToFields(fromDate))
   useEffect(()=>{
-    setFromDateFields(dateToFields(fromDate))
+    setFromDateFields(dateStringToFields(fromDate))
   }, [fromDate])
-  const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateToFields(toDate))
+  const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateStringToFields(toDate))
   useEffect(()=>{
-    setToDateFields(dateToFields(toDate))
+    setToDateFields(dateStringToFields(toDate))
   }, [toDate])
 
   return (
@@ -242,7 +284,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
       <div
         className="coa-filter__apply-button"
         onClick={()=>{
-          applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields))
+          applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields))
           closeMobileMenu()
         }}
       >

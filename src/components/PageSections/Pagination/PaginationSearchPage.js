@@ -14,7 +14,7 @@ import PageSelector from 'components/PageSections/Pagination/PageSelector';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 
 /**
-  This is a Pagination Container for the searchPage
+  This is a Pagination Container for the SearchPage
 **/
 const PaginationSearchPage = ({
   searchedTerm="",
@@ -45,12 +45,11 @@ const PaginationSearchPage = ({
     const fetchData = async ()=>{
       let result = await axios.get("http://localhost:8000/site_search?" + queryString.stringify({
         lang: lang,
-        q: searchedTerm,
         page: pageNumber,
         limit: documentsPerPage,
+        q: searchedTerm,
       }))
       if (result.status === 200) {
-        console.log("~~~ my result", result.data)
         setTotalPages(result.data._meta.totalPages)
         setCurrentPageResults(result.data.data)
         setIsLoading(false)
@@ -93,7 +92,6 @@ const PaginationSearchPage = ({
             The "key" prop is necessary to indicate whether our component should re-animate.
             When the key changes, then our fadeIn animation is run.
             So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
-            // TODO: add searchedTerm to key
           **/}
           {isError && (<div>There was an error fetching your query result.</div>)}
           {isLoading ? (<div className="coa-Pagination__loading">Loading...</div>) : (

@@ -1,70 +1,90 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
+import axios from 'axios';
+import queryString from 'query-string';
 import {
   useQueryParam,
-  DateParam,
+  StringParam,
   NumberParam,
   withDefault,
 } from 'use-query-params';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
-import { buildPages, buildPageSelectorValues } from 'js/helpers/pagination.js';
+import { buildPageSelectorValues } from 'js/helpers/pagination.js';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { createDateFromString } from 'js/helpers/date';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
+/**
+  This is a Pagination Container for the OfficialDocumentCollectionPage
+**/
 const PaginationFiltered = ({
-  pagesArray,
   PageComponent,
-  filterable=false,
+  officialDocumentCollectionId=null,
+  lowerBound=(createDateFromString(2018,0,1)),
+  CMS_API,
 }) => {
+  const searchApi = CMS_API.replace("/api/graphql", "/site_search")
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
   const intl = useIntl();
+  const lang = intl.locale
   const isMobile = useMobileQuery();
   const documentsPerPage = 10;
-  const maxPagesMobile = 5;
-  const maxPagesDesktop = 7;
-  const maxPagesShown = isMobile ? maxPagesMobile : maxPagesDesktop;
+  const maxPagesShown = isMobile ? 5 : 7;
   const paginationContainerRef = useRef();
   const pageComponentContainerRef = useRef();
+
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
-  const [fromDate, setFromDate] = useQueryParam('fromDate', DateParam);
-  const [toDate, setToDate] = useQueryParam('toDate', DateParam);
-  const [filterApplied, setFilterApplied] = useState(Boolean(fromDate || toDate)) //If there are queryParams set when navigating to page, then the filter is applied
-  const pageIndex = pageNumber-1;
-  const [pages, setPages] = useState(buildPages(pagesArray, documentsPerPage));
-  const pagesCount = pages.length
+  const [totalPages, setTotalPages] = useState(0)
+  const [totalResults, setTotalResults] = useState(0)
+  const [currentPageResults, setCurrentPageResults] = useState([])
+  const [fromDate, setFromDate] = useQueryParam('fromDate', StringParam);
+  const [toDate, setToDate] = useQueryParam('toDate', StringParam);
+  const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
+  const [filterApplied, setFilterApplied] = useState(Boolean(fromDate || toDate || searchedTerm))
 
-  // Update pages when an updated searchedTerm updates the pagesArray
-  useEffect(()=>{
-    setPages(buildPages(pagesArray, documentsPerPage))
-  }, [pagesArray])
-
-  // Reset PageNumber if it is invalid
-  useEffect(()=>{
-    if (!pages[pageIndex]) {
-      setPageNumber(1)
-    }
-  },[pageNumber, toDate, fromDate])
-
-  // Update pages when an updated searchedTerm updates the pagesArray
-  useEffect(()=>{
-    setPages(buildPages(pagesArray, documentsPerPage))
-  }, [pagesArray])
-
-  const pageSelectorValues = buildPageSelectorValues(pagesCount, maxPagesShown, pageNumber);
-  const currentPage = pages[pageIndex];
   /**
-    DayPicker lowerBound should be set by earliest official document in collection.
-    OfficialDocuments are sorted in descending order, so the final document will be the earliest.
+    DayPicker lowerBound will be set by earliest official document in collection.
     upperBound should use the current date.
     Otherwise people might get confused that they can't filter up to the current day.
   **/
-  let lowerBound, upperBound;
-  if (filterable) {
-    lowerBound = new Date(pagesArray[pagesArray.length-1].date)
-    upperBound = new Date()
-  }
+  const upperBound = new Date()
+
+  // Reset PageNumber if it is invalid
+  useEffect(()=>{
+    if ((totalPages && (pageNumber > totalPages)) || (pageNumber <= 0)) {
+      setPageNumber(1)
+    }
+  },[pageNumber, toDate, fromDate, searchedTerm])
+
+  // Get new currentPageResults
+  useEffect(() => {
+    const fetchData = async ()=>{
+      try {
+        let result = await axios.get(searchApi + "?" + queryString.stringify({
+          lang: lang,
+          page: pageNumber,
+          limit: documentsPerPage,
+          q: searchedTerm,
+          toDate: toDate,
+          fromDate: fromDate,
+          officialDocumentCollectionId: officialDocumentCollectionId,
+        }))
+        setTotalPages(result.data._meta.totalPages)
+        setTotalResults(result.data._meta.totalResults)
+        setCurrentPageResults(result.data.data)
+        setIsLoading(false)
+      } catch (err) {
+        // TODO: design + implement error handling
+        setIsLoading(false)
+        setIsError(true)
+      }
+    }
+    setIsLoading(true)
+    fetchData()
+  }, [pageNumber, searchedTerm, toDate, fromDate])
 
   /**
     Clear the filter by running
@@ -82,78 +102,18 @@ const PaginationFiltered = ({
     because a page could initially be loaded with a filter applied from the URL queryParams.
   **/
   useEffect(()=>{
-    const newFilterApplied = Boolean(fromDate || toDate)
+    const newFilterApplied = Boolean(fromDate || toDate || searchedTerm)
     if (newFilterApplied !== filterApplied) {
       // Reset to page 1 if our filter status changes
       setFilterApplied(newFilterApplied)
       setPageNumber(1)
     }
-  },[fromDate, toDate])
-
-  // Update pages when we apply a new filter (toDate, fromDate).
-  useEffect(()=>{
-    if (!filterable) {
-      return
-    }
-    let startIndex = null
-    let endIndex = null
-    /**
-      Find the earliest page for pageArray (endIndex).
-      Start at the last page in pageArray and work backwards
-      (since pages are returned in reverse chronological order, newest first).
-      Once we find the first page that is greater than or equal to the fromDate,
-      then we know that every page before it will be greater than or equal to the fromDate.
-    **/
-    if (fromDate) {
-      for (let i=(pagesArray.length-1); i>=0; i--) {
-        let page = pagesArray[i]
-        if (createDateFromString(page.date) >= fromDate) {
-          endIndex = i
-          break;
-        }
-      }
-      // If no endIndex was found, then there are zero pages that are greater than the fromDate.
-      if (endIndex === null) {
-        setPages([])
-        return
-      }
-    }
-    /**
-      Find the latest page for pageArray (startIndex).
-      Start at the first page in pageArray and work forwards
-      (since pages are returned in reverse chronological order, newest first).
-      Once we find the first page that is less than or equal to the toDate,
-      Then we know that every page after it will be less than or equal to the toDate.
-    **/
-    if (toDate && (endIndex > -1)) {
-      for (let i=0; i<=(endIndex || (pagesArray.length-1)); i++) {
-        let page = pagesArray[i]
-        if (createDateFromString(page.date) <= toDate) {
-          startIndex=i;
-          break;
-        }
-      }
-      // If no startIndex was found, then there are zero pages that are less than the toDate.
-      if (startIndex === null) {
-        setPages([])
-        return
-      }
-    }
-
-    if (startIndex === null) {
-      startIndex = 0
-    }
-    if (endIndex === null) {
-      endIndex = (pagesArray.length-1)
-    }
-    const filteredPagesArray = pagesArray.slice(startIndex, endIndex+1)
-    setPages(buildPages(filteredPagesArray, documentsPerPage))
-  }, [fromDate, toDate])
+  },[fromDate, toDate, searchedTerm])
 
   function changePage(pageNumber) {
     if (
       pageNumber >= 1 &&
-      pageNumber <= pages.length
+      pageNumber <= totalPages
     ) {
       scrollTransition({
         scrollDuration: 0.3, // Scroll effect duration, regardless of height, in seconds
@@ -166,15 +126,11 @@ const PaginationFiltered = ({
     }
   }
 
-  let filterMessage = "";
-  if (filterApplied) {
-    const totalResultCount = pages.reduce((resultCount,page)=>resultCount+page.length, 0)
-    if (totalResultCount === 1) {
-      filterMessage = intl.formatMessage(i18n1.oneFilteredResult)
-    } else {
-      filterMessage = intl.formatMessage(i18n1.filteredResults, {count: totalResultCount})
-    }
-  }
+  const filterMessage = (totalResults === 1) ? (
+    intl.formatMessage(i18n1.oneFilteredResult)
+  ) : (
+    intl.formatMessage(i18n1.filteredResults, {count: totalResults})
+  )
 
   return (
     <div
@@ -183,15 +139,13 @@ const PaginationFiltered = ({
       style={{"marginBottom": "42px"}}
     >
       <div className="row">
-        {filterable && (
-          <Filter
-            applyFilter={applyFilter}
-            fromDate={fromDate}
-            toDate={toDate}
-            lowerBound={lowerBound}
-            upperBound={upperBound}
-          />
-        )}
+        <Filter
+          applyFilter={applyFilter}
+          fromDate={fromDate}
+          toDate={toDate}
+          lowerBound={lowerBound}
+          upperBound={upperBound}
+        />
         <div className="col-xs-12 col-lg-8">
           {filterApplied && (
             <div className="coa-filter__filter-result-container">
@@ -213,22 +167,24 @@ const PaginationFiltered = ({
             The "key" prop is necessary to indicate whether our component should re-animate.
             When the key changes, then our fadeIn animation is run.
             So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
-            // TODO: add searchedTerm to key
           **/}
-          <div
-            className="coa-Pagination__page-component-container"
-            key={String(pageNumber) + fromDate + toDate + filterApplied}
-            ref={pageComponentContainerRef}
-          >
-            {currentPage && currentPage.map((page) => (
-              <PageComponent page={page} key={page.id} />
-            ))}
-          </div>
+          {isError && (<div>There was an error fetching your query result.</div>)}
+          {isLoading ? (<div className="coa-Pagination__loading">Loading...</div>) : (
+            <div
+              className="coa-Pagination__page-component-container"
+              key={currentPageResults.map(page=>page.id).join("-")}
+              ref={pageComponentContainerRef}
+            >
+              {currentPageResults && currentPageResults.map(page => (
+                <PageComponent page={page} key={page.id} />
+              ))}
+            </div>
+          )}
         </div>
         <PageSelector
-          pageSelectorValues={pageSelectorValues}
+          pageSelectorValues={buildPageSelectorValues(totalPages, maxPagesShown, pageNumber)}
           pageNumber={pageNumber}
-          pagesCount={pagesCount}
+          pagesCount={totalPages}
           changePage={changePage}
         />
       </div>

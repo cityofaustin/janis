@@ -25,41 +25,35 @@ const DefaultPageResult = function({ page }) {
     searchSummary,
     topics,
     pageType,
-    janisUrls
+    url,
   } = page
-
   return (
     <div className="coa-search_result">
-
       <a
         className="coa-search_result-title"
-        href={janisUrls && janisUrls[0]}
+        href={url}
       >
         {title}
       </a>
-
       { searchSummary && (
         <div className="coa-search_result-text">
           {searchSummary}
         </div>
       )}
-
       { (topics && topics.length > 0) && (
         <div className="coa-search_result-topics">
           Topic{topics.length > 1 ? "s: " : ": "}
           {topics.map(t=>t.title).join(", ")}
         </div>
       )}
-
     </div>
   )
 }
 
 
 const OfficialDocumentPage = function({ page }) {
-
   const {
-    janisUrls,
+    url,
     title,
     date,
     searchSummary,
@@ -68,14 +62,12 @@ const OfficialDocumentPage = function({ page }) {
     filename,
     pdfSize,
   } = page
-  console.log("~~~~ OD page", page)
-
   return (
     <div className="coa-search_result">
 
       <a
         className="coa-search_result-title"
-        href={janisUrls && janisUrls[0]}
+        href={url}
       >
         {title} {date}
       </a>
@@ -127,7 +119,7 @@ const LocationPageResult = function({ page }) {
     physicalCity,
     physicalState,
     physicalZip,
-    janisUrls
+    url
   } = page
 
   return (
@@ -140,7 +132,7 @@ const LocationPageResult = function({ page }) {
       <div>
         <a
           className="coa-search_result-title"
-          href={janisUrls && janisUrls[0]}
+          href={url}
         >
           {title}
         </a>

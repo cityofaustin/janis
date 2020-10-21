@@ -8,7 +8,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
-import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
+import {getOfficialDocumentCollectionLowerBound} from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -322,8 +322,9 @@ const getFormContainerData = async (fc, instance, client) => {
   return { formContainer: formContainer };
 };
 
-const getOfficialDocumentCollectionData = async (page, instance, client) => {
+const getOfficialDocumentCollectionData = async (page, instance, client, pageId) => {
   let officialDocumentCollection = { ...page };
+  officialDocumentCollection.pageId = pageId
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -340,7 +341,7 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
     offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  officialDocumentCollection.documents = await getOfficialDocumentCollectionDocuments(officialDocumentCollection.id, client);
+  officialDocumentCollection.lowerBound = await getOfficialDocumentCollectionLowerBound(officialDocumentCollection.id, client);
 
   return { officialDocumentCollection: officialDocumentCollection };
 };
@@ -459,6 +460,7 @@ const buildPageAtUrl = async (
   returns object with page url, template and data from appropriate query
   */
   const {
+    pageId,
     janisUrls,
     janisInstances,
     eventpage,
@@ -568,6 +570,7 @@ const buildPageAtUrl = async (
             officialdocumentcollection,
             instanceOfPage,
             client,
+            pageId,
           ),
       };
     }
