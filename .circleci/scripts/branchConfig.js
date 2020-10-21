@@ -33,7 +33,7 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
-  'topic-microcopy': { 
+  'out-link': {
     joplin_appname: 'joplin',
   },
   '4787-pdf-content': {
@@ -41,9 +41,6 @@ const branchOverrides = {
   },
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
-  },
-  'doc-totals': {
-    joplin_appname: 'joplin'
   },
 };
 
