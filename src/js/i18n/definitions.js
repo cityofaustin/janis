@@ -108,6 +108,8 @@ export const misc = defineMessages({
   pluginBlockingForm:
     'A plugin could be blocking the form (example: "Privacy Badger")',
   formFailedToLoad: 'It may have failed to load ("404 error")',
+  documentsTotal: "document in this collection",
+  documentsTotalPlural: "documents in this collection",
 });
 
 export const navigation = defineMessages({
@@ -131,7 +133,7 @@ export const services = defineMessages({
   checkOutServices: 'Check out City of Austin Services',
   service: 'Service',
   topServices: 'Top services',
-  allServices: 'All services',
+  allPages: 'All pages',
 });
 
 export const themes = defineMessages({
@@ -504,6 +506,9 @@ export const officialdocuments = defineMessages({
   author: 'Author',
   document: 'Document',
   partOf: 'Part of',
+  pdfContent: 'PDF Content',
+  disclaimer: 'Disclaimer',
+  message: 'The following text was extracted from the PDF file to make this document more accessible. This machine-generated content may contain styling errors due to redactions. In some instances, text may not load if the original file is a scanned image or has not been made searchable. For the full version of the document, please view the PDF.',
 });
 
 export const guides = defineMessages({

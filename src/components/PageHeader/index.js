@@ -6,7 +6,7 @@ import citySealImg from 'images/coa_seal_color_200x200.png';
 import { useIntl } from 'react-intl';
 import { misc as i18n, news as i18n2 } from 'js/i18n/definitions';
 
-const PageHeader = ({ description, children, contentType, columnWidth, date }) => {
+const PageHeader = ({ description, subDescription, children, contentType, columnWidth, date }) => {
   const intl = useIntl();
   return (
     <div
@@ -46,6 +46,11 @@ const PageHeader = ({ description, children, contentType, columnWidth, date }) =
               <p className="coa-PageHeader__description">
                 {description}
               </p>
+            )}
+            {subDescription && (
+              <div className="coa-PageHeader__subDescription">
+                {subDescription}
+              </div>
             )}
             {contentType && contentType === 'information' ? (
               <SectionHeader />
