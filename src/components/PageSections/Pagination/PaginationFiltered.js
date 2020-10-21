@@ -13,6 +13,7 @@ import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPageSelectorValues } from 'js/helpers/pagination.js';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { createDateFromString } from 'js/helpers/date';
+import { maxKeywordLength } from 'js/helpers/constants';
 import Filter from 'components/PageSections/Pagination/Filter';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 
@@ -22,7 +23,7 @@ import PageSelector from 'components/PageSections/Pagination/PageSelector';
 const PaginationFiltered = ({
   PageComponent,
   officialDocumentCollectionId=null,
-  lowerBound=(createDateFromString(2018,0,1)),
+  lowerBound=(createDateFromString("2018-01-01")),
   CMS_API,
 }) => {
   const searchApi = CMS_API.replace("/api/graphql", "/site_search")
@@ -42,7 +43,7 @@ const PaginationFiltered = ({
   const [currentPageResults, setCurrentPageResults] = useState([])
   const [fromDate, setFromDate] = useQueryParam('fromDate', StringParam);
   const [toDate, setToDate] = useQueryParam('toDate', StringParam);
-  const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
+  const [searchedTerm, setSearchedTerm] = useQueryParam("q")
   const [filterApplied, setFilterApplied] = useState(Boolean(fromDate || toDate || searchedTerm))
 
   /**
@@ -63,11 +64,15 @@ const PaginationFiltered = ({
   useEffect(() => {
     const fetchData = async ()=>{
       try {
+        let q = (searchedTerm || "").slice(0,maxKeywordLength)
+        // Django .search() will return zero results if the search value has less than 3 characters.
+        // So we'll set q to an empty string, and our searchApi will behave as if the keyword search filter was not applied.
+        if (q.length < 3) q="";
         let result = await axios.get(searchApi + "?" + queryString.stringify({
           lang: lang,
           page: pageNumber,
           limit: documentsPerPage,
-          q: searchedTerm,
+          q: q,
           toDate: toDate,
           fromDate: fromDate,
           officialDocumentCollectionId: officialDocumentCollectionId,
@@ -88,12 +93,13 @@ const PaginationFiltered = ({
 
   /**
     Clear the filter by running
-    applyFilter(null,null).
+    applyFilter(null,null,nul).
     useQueryParams prefers using "undefined" instead of "null" to clear a queryParam
   **/
-  const applyFilter = (fromDate, toDate) => {
+  const applyFilter = (fromDate, toDate, searchedTerm) => {
     setFromDate(fromDate || undefined)
     setToDate(toDate || undefined)
+    setSearchedTerm(searchedTerm || undefined)
   }
 
   /**
@@ -143,6 +149,7 @@ const PaginationFiltered = ({
           applyFilter={applyFilter}
           fromDate={fromDate}
           toDate={toDate}
+          searchedTerm={searchedTerm}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />

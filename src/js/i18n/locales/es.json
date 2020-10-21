@@ -194,5 +194,7 @@
   "filter.clearFilters": "Borrar filtros",
   "filter.applyFilters": "Aplicar filtros",
   "filter.filteredResults": "{count} resultados filtrados",
-  "filter.oneFilteredResult": "1 resultado filtrado"
+  "filter.oneFilteredResult": "1 resultado filtrado",
+  "filter.keyword": "Palabra clave",
+  "filter.keywordDescription": "Buscar dentro de esta colección de documentos"
 }

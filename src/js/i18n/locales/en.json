@@ -159,5 +159,7 @@
   "filter.clearFilters": "Clear filters",
   "filter.applyFilters": "Apply filters",
   "filter.filteredResults": "{count} filtered results",
-  "filter.oneFilteredResult": "1 filtered result"
+  "filter.oneFilteredResult": "1 filtered result",
+  "filter.keyword": "Keyword",
+  "filter.keywordDescription": "Search within this document collection"
 }

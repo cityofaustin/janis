@@ -6,8 +6,9 @@ import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
 import { months, weekdaysLong, weekdaysShort } from 'js/i18n/constants';
+import { maxKeywordLength } from 'js/helpers/constants';
 
-const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const Filter = ({applyFilter, fromDate, toDate, searchedTerm, lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
 
@@ -17,6 +18,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
         applyFilter={applyFilter}
         fromDate={fromDate}
         toDate={toDate}
+        searchedTerm={searchedTerm}
         lowerBound={lowerBound}
         upperBound={upperBound}
       />
@@ -29,6 +31,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
           applyFilter={applyFilter}
           fromDate={fromDate}
           toDate={toDate}
+          searchedTerm={searchedTerm}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />
@@ -37,7 +40,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
   }
 }
 
-const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const FilterMobilePopup = ({applyFilter, fromDate, toDate, searchedTerm, lowerBound, upperBound}) => {
   const intl = useIntl();
   const [menuOpened, setMenuOpened] = useState(false);
   mobilePopupHelper(menuOpened, setMenuOpened)
@@ -68,6 +71,7 @@ const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBoun
             applyFilter={applyFilter}
             fromDate={fromDate}
             toDate={toDate}
+            searchedTerm={searchedTerm}
             lowerBound={lowerBound}
             upperBound={upperBound}
           />
@@ -223,7 +227,7 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   return finalDateFields
 }
 
-const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedTerm="", lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
 
@@ -246,13 +250,46 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
   useEffect(()=>{
     setFromDateFields(dateStringToFields(fromDate))
   }, [fromDate])
+
   const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateStringToFields(toDate))
   useEffect(()=>{
     setToDateFields(dateStringToFields(toDate))
   }, [toDate])
 
+  const [searchString, setSearchString] = useState(searchedTerm)
+  useEffect(()=>{
+    setSearchString(searchedTerm)
+  }, [searchedTerm])
+
+  const runApplyFilter = () => {
+    applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields), searchString)
+  }
+
+  const handleKeywordInput = event => {
+    if (event.key === "Enter") {
+      runApplyFilter()
+    } else {
+      if (searchString.length < maxKeywordLength) {
+        setSearchString(event.target.value)
+      }
+    }
+  }
+
   return (
     <div>
+      <div className="coa-filter__box">
+        <span className="coa-filter__box-label">{intl.formatMessage(i18n1.keyword)}</span>
+        <span className="coa-filter__box-label-description">{intl.formatMessage(i18n1.keywordDescription)}</span>
+        <span className="coa-filter__keyword-input-container">
+          <i className="material-icons coa-filter__search-icon">search</i>
+          <input
+            className="coa-filter__keyword-input"
+            onChange={()=>handleKeywordInput(event)}
+            onKeyPress={()=>handleKeywordInput(event)}
+            value={searchString}
+          />
+        </span>
+      </div>
       <div className="coa-filter__box">
         <span className="coa-filter__box-label">{intl.formatMessage(i18n1.date)}</span>
         <DateFields
@@ -274,7 +311,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
         <div
           className="coa-filter__mobile-clear-button"
           onClick={()=>{
-            applyFilter(null, null)
+            applyFilter(null, null, null)
             closeMobileMenu()
           }}
         >
@@ -284,7 +321,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
       <div
         className="coa-filter__apply-button"
         onClick={()=>{
-          applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields))
+          runApplyFilter()
           closeMobileMenu()
         }}
       >

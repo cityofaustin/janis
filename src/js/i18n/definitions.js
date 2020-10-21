@@ -610,4 +610,6 @@ export const filter = defineMessages({
   applyFilters: 'Apply filters',
   filteredResults: '{count} filtered results',
   oneFilteredResult: '1 filtered result',
+  keyword: 'Keyword',
+  keywordDescription: 'Search within this document collection',
 })
