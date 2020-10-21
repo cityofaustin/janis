@@ -11,6 +11,7 @@ import { search as i18n } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPageSelectorValues } from 'js/helpers/pagination.js';
+import { maxKeywordLength } from 'js/helpers/constants';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 import SearchResult from 'components/Pages/Search/searchResult.js'
 
@@ -50,7 +51,7 @@ const PaginationSearchPage = ({
           lang: lang,
           page: pageNumber,
           limit: documentsPerPage,
-          q: searchedTerm,
+          q: (searchedTerm || "").slice(0,maxKeywordLength),
         }))
         setTotalPages(result.data._meta.totalPages)
         setTotalResults(result.data._meta.totalResults)
@@ -100,7 +101,7 @@ const PaginationSearchPage = ({
           So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
         **/}
         <div
-          className="coa-Pagination__page-component-container"
+          className="coa-Pagination__fade-in"
           key={currentPageResults.map(page=>page.id).join("-")}
           ref={pageComponentContainerRef}
         >
@@ -135,21 +136,25 @@ const PaginationSearchPage = ({
 
 const SearchResultsMessage = ({searchedTerm, totalResults})=>{
   const intl = useIntl()
-  return (searchedTerm && totalResults < 1) ? (
-    <NoResults searchedTerm={searchedTerm}/>
-  ): (
-    <div className="coa-search_results-total">
-      {searchedTerm && totalResults > 0 && (
-        <span>
-          {searchedTerm && totalResults + " "}
-          {intl.formatMessage(i18n.results, {
-            searchedTerm: (
-              <em>
-                "{searchedTerm}"
-              </em>
-            ),
-          })}
-        </span>
+  return (
+    <div className="coa-Pagination__fade-in">
+      {(searchedTerm && totalResults < 1) ? (
+        <NoResults searchedTerm={searchedTerm}/>
+      ): (
+        <div className="coa-search_results-total">
+          {searchedTerm && totalResults > 0 && (
+            <span>
+              {searchedTerm && totalResults + " "}
+              {intl.formatMessage(i18n.results, {
+                searchedTerm: (
+                  <em>
+                    "{searchedTerm}"
+                  </em>
+                ),
+              })}
+            </span>
+          )}
+        </div>
       )}
     </div>
   )

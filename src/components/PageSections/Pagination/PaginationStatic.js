@@ -81,7 +81,7 @@ const PaginationStatic = ({
             So if we update our searchedTerm, we'll get a fade-in transition.
           **/}
           <div
-            className="coa-Pagination__page-component-container"
+            className="coa-Pagination__fade-in"
             key={String(pageNumber) + searchedTerm}
             ref={pageComponentContainerRef}
           >

@@ -64,12 +64,11 @@ const PaginationFiltered = ({
   useEffect(() => {
     const fetchData = async ()=>{
       try {
-        let q = (searchedTerm || "").slice(0,maxKeywordLength)
         let result = await axios.get(searchApi + "?" + queryString.stringify({
           lang: lang,
           page: pageNumber,
           limit: documentsPerPage,
-          q: q,
+          q: (searchedTerm || "").slice(0,maxKeywordLength),
           toDate: toDate,
           fromDate: fromDate,
           officialDocumentCollectionId: officialDocumentCollectionId,
@@ -174,7 +173,7 @@ const PaginationFiltered = ({
           {isError && (<div>There was an error fetching your query result.</div>)}
           {isLoading ? (<div className="coa-Pagination__loading">Loading...</div>) : (
             <div
-              className="coa-Pagination__page-component-container"
+              className="coa-Pagination__fade-in"
               key={currentPageResults.map(page=>page.id).join("-")}
               ref={pageComponentContainerRef}
             >
