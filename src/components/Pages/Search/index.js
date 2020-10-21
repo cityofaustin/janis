@@ -14,22 +14,10 @@ import { searchWorker } from 'js/helpers/searchWorker'
 import PaginationSearchPage from 'components/PageSections/Pagination/PaginationSearchPage'
 
 const SearchPage = () => {
-  const { searchIndex: unfilteredSearchIndex } = useRouteData();
-  /*
-   Don't show pages without Urls. There seems to be some pages that are 'live',
-   but without a url - catch those here...
-  */
-  const searchIndex = unfilteredSearchIndex.filter( page => page.janisUrls.length > 0)
   const intl = useIntl();
   const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [searchString, setSearchString] = useState(searchedTerm)
-  const [searchResults, setSearchResults] = useState(searchWorker(searchIndex, searchedTerm))
-
-  // Set searchResults when loading searchedTerm from queryParam
-  useEffect(()=>{
-    setSearchResults(searchWorker(searchIndex, searchedTerm))
-  }, [searchedTerm, unfilteredSearchIndex])
 
   const searchKeyInput = event => {
     if (event.key === "Enter") {
@@ -72,71 +60,12 @@ const SearchPage = () => {
       </PageHeader>
 
       <div id="coa-search_results">
-        <div className="wrapper container-fluid">
-          <div className="row">
-
-            <div className="col-xs-12 col-md-8">
-
-              {searchedTerm && searchResults.length < 1 && (
-                <NoResults intl={intl} searchedTerm={searchedTerm}/>
-              )}
-
-              <div className="coa-search_results-total">
-                {searchedTerm && searchResults.length > 0 && (
-                  <span>
-                    {searchResults && searchResults.length + " "}
-
-                    {intl.formatMessage(i18n.results, {
-                      searchedTerm: (
-                        <em>
-                          "{searchedTerm}"
-                        </em>
-                      ),
-                    })}
-
-                  </span>
-                )}
-              </div>
-
-            </div>
-          </div>
-        </div>
-
         <PaginationSearchPage
           searchedTerm={searchedTerm}
         />
-
       </div>
     </div>
   )
 }
-
-const NoResults = function({intl, searchedTerm}) {
-
-  return (
-    <div>
-      <div className="coa-search_results-total">
-        0&nbsp;
-        {intl.formatMessage(i18n.results, {
-          searchedTerm: (
-            <em>
-              "{searchedTerm}"
-            </em>
-          ),
-        })}
-      </div>
-      <h2 className="coa-search_results-zero-message">
-        {intl.formatMessage(i18n.noResultsHeader)}
-      </h2>
-      <div className="coa-search_results-zero">
-        • {intl.formatMessage(i18n.suggestion1)} <br />
-        • {intl.formatMessage(i18n.suggestion2)} <br />
-        • {intl.formatMessage(i18n.suggestion3)} <br />
-      </div>
-    </div>
-  )
-
-}
-
 
 export default SearchPage

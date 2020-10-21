@@ -65,9 +65,6 @@ const PaginationFiltered = ({
     const fetchData = async ()=>{
       try {
         let q = (searchedTerm || "").slice(0,maxKeywordLength)
-        // Django .search() will return zero results if the search value has less than 3 characters.
-        // So we'll set q to an empty string, and our searchApi will behave as if the keyword search filter was not applied.
-        if (q.length < 3) q="";
         let result = await axios.get(searchApi + "?" + queryString.stringify({
           lang: lang,
           page: pageNumber,
@@ -80,12 +77,11 @@ const PaginationFiltered = ({
         setTotalPages(result.data._meta.totalPages)
         setTotalResults(result.data._meta.totalResults)
         setCurrentPageResults(result.data.data)
-        setIsLoading(false)
       } catch (err) {
         // TODO: design + implement error handling
-        setIsLoading(false)
         setIsError(true)
       }
+      setIsLoading(false)
     }
     setIsLoading(true)
     fetchData()

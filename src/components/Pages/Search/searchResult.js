@@ -2,10 +2,9 @@ import React from 'react';
 import moment from 'moment-timezone';
 
 import EventListEntry from 'components/Pages/EventList/EventListEntry';
-
+import HtmlFromRichText from 'components/HtmlFromRichText';
 
 const SearchResult = ({ page }) => {
-
   if ( page.pageType === "event page" ) {
     return <EventPageResult page={page}/>
   } else if ( page.pageType === "location page" ) {
@@ -15,9 +14,7 @@ const SearchResult = ({ page }) => {
   } else {
     return <DefaultPageResult page={page}/>
   }
-
 }
-
 
 const DefaultPageResult = function({ page }) {
   const {
@@ -73,7 +70,7 @@ const OfficialDocumentPage = function({ page }) {
       </a>
 
       <div className="coa-search_result-text">
-        {searchSummary}
+        <HtmlFromRichText content={searchSummary} />
       </div>
 
       <div className="coa-search_result-topics">
