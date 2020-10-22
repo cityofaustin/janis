@@ -11,6 +11,7 @@ import { search as i18n } from 'js/i18n/definitions';
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPageSelectorValues } from 'js/helpers/pagination.js';
+import { form as i18n2 } from 'js/i18n/definitions';
 import { maxKeywordLength } from 'js/helpers/constants';
 import PageSelector from 'components/PageSections/Pagination/PageSelector';
 import SearchResult from 'components/Pages/Search/searchResult.js'
@@ -87,7 +88,7 @@ const PaginationSearchPage = ({
   if (isError) {
     result = <div>There was an error fetching your query result.</div>
   } else if (isLoading) {
-    result = <div className="coa-Pagination__loading">Loading...</div>
+    result = <div className="coa-Pagination__loading">{intl.formatMessage(i18n2.loading)}</div>
   } else {
     result = (
       <div>

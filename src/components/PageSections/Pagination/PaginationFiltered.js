@@ -11,7 +11,7 @@ import {
 import { useMobileQuery } from 'js/helpers/reactMediaQueries.js';
 import { scrollTransition } from 'js/animations/scrollTransition.js';
 import { buildPageSelectorValues } from 'js/helpers/pagination.js';
-import { filter as i18n1 } from 'js/i18n/definitions';
+import { filter as i18n1, form as i18n2 } from 'js/i18n/definitions';
 import { createDateFromString } from 'js/helpers/date';
 import { maxKeywordLength } from 'js/helpers/constants';
 import Filter from 'components/PageSections/Pagination/Filter';
@@ -171,7 +171,7 @@ const PaginationFiltered = ({
             So if we update our fromDate, toDate, or activate/deactivate a filter, we'll get a fade-in transition.
           **/}
           {isError && (<div>There was an error fetching your query result.</div>)}
-          {isLoading ? (<div className="coa-Pagination__loading">Loading...</div>) : (
+          {isLoading ? (<div className="coa-Pagination__loading">{intl.formatMessage(i18n2.loading)}</div>) : (
             <div
               className="coa-Pagination__fade-in"
               key={currentPageResults.map(page=>page.id).join("-")}

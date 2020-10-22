@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useRef } from 'react';
 import DayPicker, {LocaleUtils} from "react-day-picker";
 import classNames from 'classnames';
 import { useIntl } from 'react-intl';
@@ -265,9 +265,17 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
     applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields), searchString)
   }
 
+  const keywordInputRef = useRef()
   const handleKeywordInput = event => {
     if (event.key === "Enter") {
-      runApplyFilter()
+      // If we're on desktop, apply the filter as soon as a user presses "Enter" on the keyword search
+      if (isDesktop) {
+        runApplyFilter()
+      } else {
+        // move mobile keyboard away on "Enter"
+        // Still need to click "Apply Filter" to apply the filter on mobile
+        keywordInputRef.current.blur()
+      }
     } else {
       if (searchString.length < maxKeywordLength) {
         setSearchString(event.target.value)
@@ -282,12 +290,15 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
         <span className="coa-filter__box-label-description">{intl.formatMessage(i18n1.keywordDescription)}</span>
         <span className="coa-filter__keyword-input-container">
           <i className="material-icons coa-filter__search-icon">search</i>
-          <input
-            className="coa-filter__keyword-input"
-            onChange={()=>handleKeywordInput(event)}
-            onKeyPress={()=>handleKeywordInput(event)}
-            value={searchString}
-          />
+          <form onSubmit={(event)=>{event.preventDefault()}}>
+            <input
+              ref={keywordInputRef}
+              className="coa-filter__keyword-input"
+              onChange={handleKeywordInput}
+              onKeyPress={handleKeywordInput}
+              value={searchString}
+            />
+          </form>
         </span>
       </div>
       <div className="coa-filter__box">
@@ -338,9 +349,17 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
 
   const {month, day, year} = dateFields
   const dayPickerDate = fieldsToDate(dateFields)
-  const setMonth = (month) => setDateFields({month: month})
-  const setDay = (day) => setDateFields({day: day})
-  const setYear = (year) => setDateFields({year: year})
+  const setMonth = (event) => setDateFields({month: event.target.value})
+  const setDay = (event) => setDateFields({day: event.target.value})
+  const yearInputRef = useRef()
+  const setYear = (event) => {
+    if (event.key === "Enter") {
+      // When user enters "year" input, move away the mobile keyboard
+      // Still need to click "Apply Filter" to apply the filter on mobile
+      yearInputRef.current.blur()
+    }
+    setDateFields({year: event.target.value})
+  }
 
   const handleDayPickerClick = (date, { selected }) => {
     setOpenDayPicker(false)
@@ -353,24 +372,30 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
   }
 
   return (
-    <div style={{"margin-top": "1rem"}}>
+    <div style={{"marginTop": "1rem"}}>
       <span className="coa-filter__date-fields-label">{label}</span>
       <div className="coa-filter__date-fields">
-        <NumberInput
-          label="month"
-          value={month}
-          onChange={setMonth}
-        />
-        <NumberInput
-          label="day"
-          value={day}
-          onChange={setDay}
-        />
-        <NumberInput
-          label="year"
-          value={year}
-          onChange={setYear}
-        />
+        <form
+          style={{"display": "inherit"}}
+          onSubmit={(event)=>{event.preventDefault()}}
+        >
+          <NumberInput
+            label="month"
+            value={month}
+            onChange={setMonth}
+          />
+          <NumberInput
+            label="day"
+            value={day}
+            onChange={setDay}
+          />
+          <NumberInput
+            label="year"
+            value={year}
+            onChange={setYear}
+            inputRef={yearInputRef}
+          />
+        </form>
         <div
           className="coa-filter__calendar-icon-container"
           onClick={() => setOpenDayPicker(!openDayPicker)}
@@ -402,17 +427,19 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
   )
 }
 
-const NumberInput = ({label, value="", onChange}) => {
+const NumberInput = ({label, value="", onChange, inputRef=null}) => {
   const intl = useIntl();
   return (
     <div className="coa-filter__date-input-container">
       <label>
         <span className="coa-filter__date-input-label">{intl.formatMessage(i18n1[label])}</span>
         <input
+          ref={inputRef}
           className={`coa-filter__date-input coa-filter__date-input-${label.toLowerCase()}`}
           type="number"
           value={value}
-          onChange={e => onChange(e.target.value)}
+          onChange={onChange}
+          onKeyPress={onChange}
         />
       </label>
     </div>

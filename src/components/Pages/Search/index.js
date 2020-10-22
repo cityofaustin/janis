@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
 import {
@@ -19,9 +19,11 @@ const SearchPage = () => {
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [searchString, setSearchString] = useState(searchedTerm)
 
+  const searchInputRef = useRef()
   const searchKeyInput = event => {
     if (event.key === "Enter") {
       submitSearch()
+      searchInputRef.current.blur()
     } else {
       setSearchString(event.target.value)
     }
@@ -44,10 +46,11 @@ const SearchPage = () => {
         {intl.formatMessage(i18n.search)}
         <div className="coa-search_bar_container">
           <input
+            ref={searchInputRef}
             id="coa-search_input"
             className="coa-search_inputs"
-            onChange={()=>searchKeyInput(event)}
-            onKeyPress={()=>searchKeyInput(event)}
+            onChange={searchKeyInput}
+            onKeyPress={searchKeyInput}
             value={searchString}
           />
           <button
