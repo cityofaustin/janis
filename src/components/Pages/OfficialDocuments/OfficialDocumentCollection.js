@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
@@ -28,6 +29,14 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=proces
 
   const descriptonBlock = <HtmlFromRichText content={description} />
 
+  let subDescription = ""
+  // let subDescription = documents.length + " "
+  // if (documents.length === 1) {
+  //   subDescription += intl.formatMessage(i18n.documentsTotal)
+  // } else {
+  //   subDescription += intl.formatMessage(i18n.documentsTotalPlural)
+  // }
+
   return (
     <div>
       <Head>
@@ -41,7 +50,11 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=proces
         />
       )}
       <div>
-        <PageHeader contentType={'official-document'} description={descriptonBlock}>
+        <PageHeader
+          contentType={'official-document'}
+          description={descriptonBlock}
+          subDescription={subDescription}
+        >
           {title}
         </PageHeader>
         <PaginationFiltered

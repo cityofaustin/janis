@@ -32,9 +32,6 @@ const branchOverrides = {
   '3690-incremental': {
     joplin_appname: 'joplin-pr-3690-incremental',
   },
-  'nav-cleanup': {
-    joplin_appname: 'joplin'
-  },
   '4787-pdf-content': {
     joplin_appname: 'joplin-pr-4787-pdf-docs',
   },

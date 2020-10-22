@@ -724,7 +724,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const path = `/${langCode || ''}`
   console.log(`- Building routes for ${path}...`);
 
-  const client = createGraphQLClientsByLang(langCode);
+  const client = await createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
@@ -900,7 +900,7 @@ export default {
     // getSiteData's result is made available to the entire site via the useSiteData hook
     const data = {'navigation': {}}
     await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
-      const client = createGraphQLClientsByLang(langCode);
+      const client = await createGraphQLClientsByLang(langCode);
       let response = await client.request(allThemesQuery);
       data['navigation'][langCode] = cleanNavigation(response, langCode)
     }))

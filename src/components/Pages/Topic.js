@@ -51,7 +51,7 @@ const Topic = ({ topic, intl }) => {
             )}
             {!!otherLinks.length && (
               <TileGroup
-                title={intl.formatMessage(i18n.allServices)}
+                title={intl.formatMessage(i18n.allPages)}
                 tiles={otherLinks}
               />
             )}
