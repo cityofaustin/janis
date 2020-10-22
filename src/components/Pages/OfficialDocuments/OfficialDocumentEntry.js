@@ -16,8 +16,7 @@ const OfficialDocumentEntry = ({
     name,
     link,
     pdfSize,
-    slug,
-    departments
+    url,
   },
 }) => {
   const intl = useIntl()
@@ -29,12 +28,6 @@ const OfficialDocumentEntry = ({
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
     null
 
-  const entryUrl = (departments, slug) => (
-    (!!departments && !!departments.length) ?
-      `/${departments[0].slug}/${slug}`
-      : '/'
-  )
-
   // set the locale configuration for moment. Sets the locale for this component only
   moment.locale(intl.locale);
   return (
@@ -42,7 +35,7 @@ const OfficialDocumentEntry = ({
       <div className="coa-OfficialDocumentPageEntry__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
-      <a href={entryUrl(departments, slug)}>
+      <a href={url}>
         <h2 className="coa-OfficialDocumentPage__title">{title}</h2>
       </a>
       <p>{summaryBlock}</p>
