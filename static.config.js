@@ -749,7 +749,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   /**
     Build search index here before pages are altered.
   **/
-  // const USE_ELASTICSEARCH = process.env.USE_ELASTICSEARCH === "true"
+  // const USE_ELASTICSEARCH = false
   // const indexName = `local_${langCode}_${Date.now()}`
   // const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
 

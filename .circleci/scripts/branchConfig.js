@@ -24,8 +24,7 @@
 **/
 const defaultValues = {
   joplin_appname: 'joplin-staging',
-  // GRAPHQL_BATCH_SIZE: 10,
-  // USE_ELASTICSEARCH: false,
+  // GRAPHQL_BATCH_SIZE: 10, // Only turn this on when Publisher knows how to parse it, otherwise your build request will fail
 };
 
 // Add branch-specifc values here
