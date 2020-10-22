@@ -247,7 +247,7 @@ export const getNewsPageRevisionQuery = `
   query getPageRevision($id: ID) {
     pageRevision(id: $id) {
       asNewsPage {
-        ...newsPageInfo  
+        ...newsPageInfo
       }
       previewJanisInstance {
         ...janisInstanceInfo
@@ -264,6 +264,7 @@ export const getOfficialDocumentsCollectionRevisionQuery = `
       asOfficialDocumentCollection {
         id
         title
+        documentsCount
         slug
         description
         departments {

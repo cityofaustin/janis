@@ -183,6 +183,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
           officialdocumentcollection {
             id
             title
+            documentsCount
             slug
             description
             departments {

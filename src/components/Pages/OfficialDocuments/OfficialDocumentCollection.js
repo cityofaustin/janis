@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { useRouteData, Head } from 'react-static';
 import { misc as i18n } from 'js/i18n/definitions';
 
@@ -16,11 +17,13 @@ import { createDateFromString } from 'js/helpers/date';
     Defaults to process.env.CMS_API if CMS_PREVIEW doesn't include explicit CMS_API param
 **/
 const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=process.env.CMS_API }) => {
+  const intl = useIntl();
   const {
     officialDocumentCollection: {
       pageId,
       title,
       description,
+      documentsCount,
       coaGlobal,
       contextualNavData,
       lowerBound, // DateString "YYYY-MM-DD"
@@ -29,13 +32,12 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=proces
 
   const descriptonBlock = <HtmlFromRichText content={description} />
 
-  let subDescription = ""
-  // let subDescription = documents.length + " "
-  // if (documents.length === 1) {
-  //   subDescription += intl.formatMessage(i18n.documentsTotal)
-  // } else {
-  //   subDescription += intl.formatMessage(i18n.documentsTotalPlural)
-  // }
+  let subDescription = documentsCount + " "
+  if (documentsCount === 1) {
+    subDescription += intl.formatMessage(i18n.documentsTotal)
+  } else {
+    subDescription += intl.formatMessage(i18n.documentsTotalPlural)
+  }
 
   return (
     <div>
