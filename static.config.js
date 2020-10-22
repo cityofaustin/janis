@@ -749,9 +749,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   /**
     Build search index here before pages are altered.
   **/
-  const USE_ELASTICSEARCH = process.env.USE_ELASTICSEARCH === "true"
-  const indexName = `local_${langCode}_${Date.now()}`
-  const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
+  // const USE_ELASTICSEARCH = process.env.USE_ELASTICSEARCH === "true"
+  // const indexName = `local_${langCode}_${Date.now()}`
+  // const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -839,18 +839,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
 
-  /**
-    If we're not using elasticsearch,
-    then add searchIndex directly to the search page.
-  **/
-  let searchPageData = {}
-  if (!USE_ELASTICSEARCH) {
-    searchPageData = { searchIndex }
-  }
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => searchPageData,
   });
 
   const data = {
