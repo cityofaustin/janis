@@ -227,6 +227,20 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   return finalDateFields
 }
 
+/**
+  When we focus on an input field on a mobile device, the mobile keyboard popups out.
+  When that keyboard pops out, it sometimes pushes our input field up, above the view of the screen.
+  This code will scroll the input field (and container) back into view.
+**/
+const fixMobileInputScrolling = (containerRef) => {
+  setTimeout(()=>{
+    // If input goes offscreen when the mobile keyboard pops up, then scroll it back into view.
+    if (containerRef.current.getBoundingClientRect().top < 0) {
+      containerRef.current.scrollIntoView()
+    }
+  },1000)
+}
+
 const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedTerm="", lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
@@ -265,6 +279,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
     applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields), searchString)
   }
 
+  const keywordInputContainerRef = useRef()
   const keywordInputRef = useRef()
   const handleKeywordInput = event => {
     if (event.key === "Enter") {
@@ -285,7 +300,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
 
   return (
     <div>
-      <div className="coa-filter__box">
+      <div className="coa-filter__box" ref={keywordInputContainerRef}>
         <span className="coa-filter__box-label">{intl.formatMessage(i18n1.keyword)}</span>
         <span className="coa-filter__box-label-description">{intl.formatMessage(i18n1.keywordDescription)}</span>
         <span className="coa-filter__keyword-input-container">
@@ -293,6 +308,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
           <form onSubmit={(event)=>{event.preventDefault()}}>
             <input
               ref={keywordInputRef}
+              onFocus={()=>fixMobileInputScrolling(keywordInputContainerRef)}
               className="coa-filter__keyword-input"
               onChange={handleKeywordInput}
               onKeyPress={handleKeywordInput}
@@ -371,8 +387,10 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
     setDateFields(dateToFields(date))
   }
 
+  const dateFieldContainerRef = useRef()
+
   return (
-    <div style={{"marginTop": "1rem"}}>
+    <div ref={dateFieldContainerRef} style={{"marginTop": "1rem"}}>
       <span className="coa-filter__date-fields-label">{label}</span>
       <div className="coa-filter__date-fields">
         <form
@@ -383,16 +401,19 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
             label="month"
             value={month}
             onChange={setMonth}
+            dateFieldContainerRef={dateFieldContainerRef}
           />
           <NumberInput
             label="day"
             value={day}
             onChange={setDay}
+            dateFieldContainerRef={dateFieldContainerRef}
           />
           <NumberInput
             label="year"
             value={year}
             onChange={setYear}
+            dateFieldContainerRef={dateFieldContainerRef}
             inputRef={yearInputRef}
           />
         </form>
@@ -427,7 +448,7 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
   )
 }
 
-const NumberInput = ({label, value="", onChange, inputRef=null}) => {
+const NumberInput = ({label, value="", onChange, dateFieldContainerRef, inputRef=null}) => {
   const intl = useIntl();
   return (
     <div className="coa-filter__date-input-container">
@@ -435,6 +456,7 @@ const NumberInput = ({label, value="", onChange, inputRef=null}) => {
         <span className="coa-filter__date-input-label">{intl.formatMessage(i18n1[label])}</span>
         <input
           ref={inputRef}
+          onFocus={()=>fixMobileInputScrolling(dateFieldContainerRef)}
           className={`coa-filter__date-input coa-filter__date-input-${label.toLowerCase()}`}
           type="number"
           value={value}
