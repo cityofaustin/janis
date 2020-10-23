@@ -65,12 +65,6 @@ class CMSPreview extends Component {
           id: revision_id,
         });
         const page = data.pageRevision[getAsPage[page_type]];
-        if (page_type === 'official_document_collection') {
-          page.documents = await getOfficialDocumentCollectionDocuments(
-            page.id,
-            client,
-          );
-        }
         const janis_instance = data.pageRevision.previewJanisInstance;
 
         page.contextualNavData = {
@@ -99,7 +93,7 @@ class CMSPreview extends Component {
                 },
               },
         };
-        const pageData = Object.assign({}, this.state.page);
+        const pageData = Object.assign({}, this.state.page, {pageId: page.id});
         pageData[locale] = { ...page, ...janis_instance };
         this.setState({
           page: pageData,
@@ -126,7 +120,10 @@ class CMSPreview extends Component {
           render={props => {
             let collection = page;
             return (
-              <OfficialDocumentCollection officialDocumentCollection={page} />
+              <OfficialDocumentCollection
+                officialDocumentCollection={page}
+                CMS_API={CMS_API} // Required for querying site_search endpoint
+              />
             );
           }}
         />

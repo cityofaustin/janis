@@ -2,6 +2,7 @@ import React, { Component, Fragment, Suspense, useEffect } from 'react';
 import { Root, useSiteData } from 'react-static';
 import { Route, Switch } from 'react-router';
 import { useLocation } from 'react-router-dom';
+import { QueryParamProvider } from 'use-query-params';
 import { useIntl } from 'react-intl';
 import { LANG_URL_REGEX } from 'js/i18n/constants';
 import { Helmet } from 'react-helmet'; // Helmet allows us to inject html attributes in the the document Header, body, and html tags.
@@ -62,29 +63,34 @@ const AppView = ({ path }) => {
   );
 };
 
+/**
+  The QueryParamProvider is required in order to use the useQueryParam hook.
+**/
 const App = ({ navigation, threeoneone }) => {
   return (
     <Root>
-      <div>
-        <Route
-          path={`${LANG_URL_REGEX}:path*`}
-          render={props => (
-            <I18nController
-              lang={props.match.params.lang}
-              path={props.match.params.path}
-            >
-              <Helmet
-                htmlAttributes={{
-                  lang: LANG_KEY[props.match.params.lang || 'en'],
-                }}
-              />
-              <Suspense fallback={<div>LOADING</div>}>
-                <AppView path={props.match.params.path || ''} />
-              </Suspense>
-            </I18nController>
-          )}
-        />
-      </div>
+      <QueryParamProvider ReactRouterRoute={Route}>
+        <div>
+          <Route
+            path={`${LANG_URL_REGEX}:path*`}
+            render={props => (
+              <I18nController
+                lang={props.match.params.lang}
+                path={props.match.params.path}
+              >
+                <Helmet
+                  htmlAttributes={{
+                    lang: LANG_KEY[props.match.params.lang || 'en'],
+                  }}
+                />
+                <Suspense fallback={<div>LOADING</div>}>
+                  <AppView path={props.match.params.path || ''} />
+                </Suspense>
+              </I18nController>
+            )}
+          />
+        </div>
+      </QueryParamProvider>
     </Root>
   );
 };

@@ -1,4 +1,4 @@
-export function searchWorker(currentResults, searchString) {
+export function searchWorker(currentResults, searchString="") {
   if (typeof searchString === 'number') {
     searchString = searchString.toString();
   }

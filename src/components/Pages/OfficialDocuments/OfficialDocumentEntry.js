@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import moment from 'moment-timezone';
+import { useIntl } from 'react-intl';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 import HtmlFromRichText from 'components/HtmlFromRichText';
 
-const OfficialDocumentEntry = ({ 
+const OfficialDocumentEntry = ({
   page: {
     id,
     date,
@@ -16,24 +16,17 @@ const OfficialDocumentEntry = ({
     name,
     link,
     pdfSize,
-    slug,
-    departments
+    url,
   },
-  intl
 }) => {
+  const intl = useIntl()
 
-  const summaryBlock = <HtmlFromRichText content={summary} /> 
+  const summaryBlock = <HtmlFromRichText content={summary} />
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?
     <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
     null
-
-  const entryUrl = (departments, slug) => (
-    (!!departments && !!departments.length) ?
-      `/${departments[0].slug}/${slug}`
-      : '/'
-  )
 
   // set the locale configuration for moment. Sets the locale for this component only
   moment.locale(intl.locale);
@@ -42,7 +35,7 @@ const OfficialDocumentEntry = ({
       <div className="coa-OfficialDocumentPageEntry__date">
         {moment(date, "YYYY-MM-DD").format('LL')}
       </div>
-      <a href={entryUrl(departments, slug)}>
+      <a href={url}>
         <h2 className="coa-OfficialDocumentPage__title">{title}</h2>
       </a>
       <p>{summaryBlock}</p>
@@ -69,4 +62,4 @@ OfficialDocumentEntry.propTypes = {
   }),
 }
 
-export default injectIntl(OfficialDocumentEntry);
+export default OfficialDocumentEntry;
