@@ -305,7 +305,10 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedT
         <span className="coa-filter__box-label-description">{intl.formatMessage(i18n1.keywordDescription)}</span>
         <span className="coa-filter__keyword-input-container">
           <i className="material-icons coa-filter__search-icon">search</i>
-          <form onSubmit={(event)=>{event.preventDefault()}}>
+          <form
+            className="coa-filter__keyword-input-form"
+            onSubmit={(event)=>{event.preventDefault()}}
+          >
             <input
               ref={keywordInputRef}
               onFocus={()=>fixMobileInputScrolling(keywordInputContainerRef)}

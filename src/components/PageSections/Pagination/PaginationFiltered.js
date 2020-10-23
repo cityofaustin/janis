@@ -133,8 +133,6 @@ const PaginationFiltered = ({
     intl.formatMessage(i18n1.filteredResults, {count: totalResults})
   )
 
-  console.log("~~~ currentPageResults", currentPageResults[0])
-  console.log("~~~ currentPageResults second one", currentPageResults[1])
   return (
     <div
       ref={paginationContainerRef}

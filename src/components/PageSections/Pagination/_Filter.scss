@@ -248,6 +248,11 @@ $input-box-height: 4.4rem;
     }
 }
 
+.coa-filter__keyword-input-form {
+    display: flex;
+    flex-grow: 1;
+}
+
 .coa-filter__keyword-input {
     background-color: inherit;
     border: none;
