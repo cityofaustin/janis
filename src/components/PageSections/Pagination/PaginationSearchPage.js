@@ -22,7 +22,7 @@ import SearchResult from 'components/Pages/Search/searchResult.js'
 const PaginationSearchPage = ({
   searchedTerm="",
 }) => {
-  const searchApi = CMS_API.replace("/api/graphql", "/site_search")
+  const searchApi = process.env.CMS_API.replace("/api/graphql", "/site_search")
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const intl = useIntl();
