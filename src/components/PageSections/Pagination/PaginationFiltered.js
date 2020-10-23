@@ -54,11 +54,13 @@ const PaginationFiltered = ({
   const upperBound = new Date()
 
   // Reset PageNumber if it is invalid
-  useEffect(()=>{
+  const resetPageNumber = () => {
     if ((totalPages && (pageNumber > totalPages)) || (pageNumber <= 0)) {
       setPageNumber(1)
     }
-  },[pageNumber, toDate, fromDate, searchedTerm])
+  }
+
+  useEffect(resetPageNumber, [pageNumber, toDate, fromDate, searchedTerm])
 
   // Get new currentPageResults
   useEffect(() => {
@@ -76,6 +78,7 @@ const PaginationFiltered = ({
         setTotalPages(result.data._meta.totalPages)
         setTotalResults(result.data._meta.totalResults)
         setCurrentPageResults(result.data.data)
+        resetPageNumber()
       } catch (err) {
         // TODO: design + implement error handling
         setIsError(true)

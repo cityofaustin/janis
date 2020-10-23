@@ -38,11 +38,12 @@ const PaginationSearchPage = ({
   const [currentPageResults, setCurrentPageResults] = useState([])
 
   // Reset PageNumber if it is invalid
-  useEffect(()=>{
-    if ((pageNumber > totalPages) || (pageNumber <= 0)) {
+  const resetPageNumber = () => {
+    if ((totalPages && (pageNumber > totalPages)) || (pageNumber <= 0)) {
       setPageNumber(1)
     }
-  },[pageNumber, searchedTerm])
+  }
+  useEffect(resetPageNumber,[pageNumber, searchedTerm])
 
   // Get new currentPageResults
   useEffect(() => {
@@ -57,6 +58,7 @@ const PaginationSearchPage = ({
         setTotalPages(result.data._meta.totalPages)
         setTotalResults(result.data._meta.totalResults)
         setCurrentPageResults(result.data.data)
+        resetPageNumber()
       } catch(err) {
         // TODO: design + implement error handling
         setIsError(true)
