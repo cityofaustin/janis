@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouteData, Head } from 'react-static';
 import { useIntl } from 'react-intl';
 import {
@@ -10,32 +10,20 @@ import {
 
 import { search as i18n } from 'js/i18n/definitions';
 import PageHeader from 'components/PageHeader';
-import SearchResult from 'components/Pages/Search/searchResult.js'
 import { searchWorker } from 'js/helpers/searchWorker'
-import PaginationContainer from 'components/PageSections/Pagination/PaginationContainer.js'
+import PaginationSearchPage from 'components/PageSections/Pagination/PaginationSearchPage'
 
 const SearchPage = () => {
-  const { searchIndex: unfilteredSearchIndex } = useRouteData();
-  /*
-   Don't show pages without Urls. There seems to be some pages that are 'live',
-   but without a url - catch those here...
-  */
-  const searchIndex = unfilteredSearchIndex.filter( page => page.janisUrls.length > 0)
   const intl = useIntl();
-  const lang = intl.locale
   const [searchedTerm, setSearchedTerm] = useQueryParam("q", StringParam)
   const [pageNumber, setPageNumber] = useQueryParam('page', withDefault(NumberParam, 1));
   const [searchString, setSearchString] = useState(searchedTerm)
-  const [searchResults, setSearchResults] = useState(searchWorker(searchIndex, searchedTerm))
 
-  // Set searchResults when loading searchedTerm from queryParam
-  useEffect(()=>{
-    setSearchResults(searchWorker(searchIndex, searchedTerm))
-  }, [searchedTerm, unfilteredSearchIndex])
-
+  const searchInputRef = useRef()
   const searchKeyInput = event => {
     if (event.key === "Enter") {
       submitSearch()
+      searchInputRef.current.blur()
     } else {
       setSearchString(event.target.value)
     }
@@ -58,10 +46,11 @@ const SearchPage = () => {
         {intl.formatMessage(i18n.search)}
         <div className="coa-search_bar_container">
           <input
+            ref={searchInputRef}
             id="coa-search_input"
             className="coa-search_inputs"
-            onChange={()=>searchKeyInput(event)}
-            onKeyPress={()=>searchKeyInput(event)}
+            onChange={searchKeyInput}
+            onKeyPress={searchKeyInput}
             value={searchString}
           />
           <button
@@ -74,72 +63,12 @@ const SearchPage = () => {
       </PageHeader>
 
       <div id="coa-search_results">
-        <div className="wrapper container-fluid">
-          <div className="row">
-
-            <div className="col-xs-12 col-md-8">
-
-              {searchedTerm && searchResults.length < 1 && (
-                <NoResults intl={intl} searchedTerm={searchedTerm}/>
-              )}
-
-              <div className="coa-search_results-total">
-                {searchedTerm && searchResults.length > 0 && (
-                  <span>
-                    {searchResults && searchResults.length + " "}
-
-                    {intl.formatMessage(i18n.results, {
-                      searchedTerm: (
-                        <em>
-                          "{searchedTerm}"
-                        </em>
-                      ),
-                    })}
-
-                  </span>
-                )}
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <PaginationContainer
-          pagesArray={searchResults}
-          PageComponent={SearchResult}
+        <PaginationSearchPage
+          searchedTerm={searchedTerm}
         />
-
       </div>
     </div>
   )
 }
-
-const NoResults = function({intl, searchedTerm}) {
-
-  return (
-    <div>
-      <div className="coa-search_results-total">
-        0&nbsp;
-        {intl.formatMessage(i18n.results, {
-          searchedTerm: (
-            <em>
-              "{searchedTerm}"
-            </em>
-          ),
-        })}
-      </div>
-      <h2 className="coa-search_results-zero-message">
-        {intl.formatMessage(i18n.noResultsHeader)}
-      </h2>
-      <div className="coa-search_results-zero">
-        • {intl.formatMessage(i18n.suggestion1)} <br />
-        • {intl.formatMessage(i18n.suggestion2)} <br />
-        • {intl.formatMessage(i18n.suggestion3)} <br />
-      </div>
-    </div>
-  )
-
-}
-
 
 export default SearchPage

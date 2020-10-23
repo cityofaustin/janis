@@ -145,15 +145,15 @@ const getSpecificNode = (node, pageTypeFieldName) => {
     [name of Janis branch] +
     [lang code "es" or "en"] +
     [approximate timestamp of index creation (should be same for all languages)]
-  @param (Boolean) withElasticsearch - If true, then send output of search index to elasticSearch.
+  @param (Boolean) USE_ELASTICSEARCH - If true, then send output of search index to elasticSearch.
     Otherwise, the search index is embeded into the search page for manual search.
-  @returns {Object[]} searchIndex or {null} - if not withElasticsearch, then return the searchIndex.
+  @returns {Object[]} searchIndex or {null} - if not USE_ELASTICSEARCH, then return the searchIndex.
     Otherwise
 **/
-const searchIndexBuilder = async function(pages, indexName="", withElasticsearch=false) {
+const searchIndexBuilder = async function(pages, indexName="", USE_ELASTICSEARCH=false) {
   const searchIndex = [];
 
-  if (indexName && withElasticsearch) {
+  if (indexName && USE_ELASTICSEARCH) {
     console.log(`Starting to build index ${indexName}`)
   }
 
@@ -201,7 +201,7 @@ const searchIndexBuilder = async function(pages, indexName="", withElasticsearch
       }
     }
 
-    if (withElasticsearch) {
+    if (USE_ELASTICSEARCH) {
       /**
         If we're sending the searchIndex to elasticsearch, then you must add an "index" operation object
         before the actual document that is run by that operation.
@@ -223,7 +223,7 @@ const searchIndexBuilder = async function(pages, indexName="", withElasticsearch
     searchIndex.push(doc)
   })
 
-  if (withElasticsearch) {
+  if (USE_ELASTICSEARCH) {
     await sendIndexToElasticSeach(searchIndex)
   } else {
     // If we're not sending the index to elasticsearch, then we're going to return it
@@ -237,9 +237,8 @@ const searchIndexBuilder = async function(pages, indexName="", withElasticsearch
   @param {Object[]} searchIndex - All of the operations + documents to add to elasticsearch index.
 **/
 const sendIndexToElasticSeach = async (searchIndex) => {
-  // Hardcoding client address for now.
   const elasticClient = new Client({
-    node: 'http://localhost:9200'
+    node: process.env.ELASTICSEARCH_URL
   })
 
   // Taken from https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/bulk_examples.html

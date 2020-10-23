@@ -28,3 +28,11 @@ export const DAYS = () => ([
 export const FULL_WIDTH_RESPONSIVE_IMAGE_SIZES =
   [640, 720, 750, 828, 1080, 1440, 2160]
 ;
+
+// Max length for our Filter keyword Search
+// Arbitrary. But if you search for something really long, it would negatively impact postgres performance
+export const maxKeywordLength = 100
+
+// Min length for our Filter keyword Search
+// Django .search() won't work for fewer than 3 characters
+export const minKeywordLength = 3

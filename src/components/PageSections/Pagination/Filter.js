@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useRef } from 'react';
 import DayPicker, {LocaleUtils} from "react-day-picker";
 import classNames from 'classnames';
 import { useIntl } from 'react-intl';
@@ -6,8 +6,9 @@ import { useDesktopQuery } from 'js/helpers/reactMediaQueries';
 import { filter as i18n1 } from 'js/i18n/definitions';
 import { mobilePopupHelper } from 'js/helpers/hooks';
 import { months, weekdaysLong, weekdaysShort } from 'js/i18n/constants';
+import { maxKeywordLength } from 'js/helpers/constants';
 
-const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const Filter = ({applyFilter, fromDate, toDate, searchedTerm, lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
 
@@ -17,6 +18,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
         applyFilter={applyFilter}
         fromDate={fromDate}
         toDate={toDate}
+        searchedTerm={searchedTerm}
         lowerBound={lowerBound}
         upperBound={upperBound}
       />
@@ -29,6 +31,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
           applyFilter={applyFilter}
           fromDate={fromDate}
           toDate={toDate}
+          searchedTerm={searchedTerm}
           lowerBound={lowerBound}
           upperBound={upperBound}
         />
@@ -37,7 +40,7 @@ const Filter = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
   }
 }
 
-const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+const FilterMobilePopup = ({applyFilter, fromDate, toDate, searchedTerm, lowerBound, upperBound}) => {
   const intl = useIntl();
   const [menuOpened, setMenuOpened] = useState(false);
   mobilePopupHelper(menuOpened, setMenuOpened)
@@ -68,6 +71,7 @@ const FilterMobilePopup = ({applyFilter, fromDate, toDate, lowerBound, upperBoun
             applyFilter={applyFilter}
             fromDate={fromDate}
             toDate={toDate}
+            searchedTerm={searchedTerm}
             lowerBound={lowerBound}
             upperBound={upperBound}
           />
@@ -117,6 +121,48 @@ const dateToFields = (date) => {
     day: '',
     year: ''
   }
+}
+
+/**
+  Converts dateString into an object digestible by DateFields components
+  @param dateString {String "YYYY-MM-DD"}
+  @returns dateFields {Object {month, day, year}}
+**/
+const dateStringToFields = (dateString) => {
+  if (dateString) {
+    const [year, month, day] = dateString.split("-")
+    return {
+      month,
+      day,
+      year
+    }
+  } else {
+    return {
+      month: '',
+      day: '',
+      year: ''
+    }
+  }
+}
+
+/**
+  Converts dateFields object into a dateString
+  @param dateFields {Object {month, day, year}}
+  @returns dateString {String "YYYY-MM-DD"}
+**/
+const fieldsToDateString = (fields) => {
+  const date = fieldsToDate(fields)
+  if (!date) return null
+  let month = String(date.getUTCMonth() + 1)
+  if (month.length === 1) {
+    month = "0" + month
+  }
+  let day = String(date.getUTCDate())
+  if (day.length === 1) {
+    day = "0" + day
+  }
+  const year = String(date.getUTCFullYear())
+  return year + '-' + month + '-' + day
 }
 
 /**
@@ -181,7 +227,21 @@ function dateFieldsReducer(priorDateFields, newDateFields) {
   return finalDateFields
 }
 
-const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBound, upperBound}) => {
+/**
+  When we focus on an input field on a mobile device, the mobile keyboard popups out.
+  When that keyboard pops out, it sometimes pushes our input field up, above the view of the screen.
+  This code will scroll the input field (and container) back into view.
+**/
+const fixMobileInputScrolling = (containerRef) => {
+  setTimeout(()=>{
+    // If input goes offscreen when the mobile keyboard pops up, then scroll it back into view.
+    if (containerRef.current.getBoundingClientRect().top < 0) {
+      containerRef.current.scrollIntoView()
+    }
+  },1000)
+}
+
+const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, searchedTerm="", lowerBound, upperBound}) => {
   const intl = useIntl();
   const isDesktop = useDesktopQuery();
 
@@ -200,17 +260,66 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
     clicks the button to "Apply Filter".
     https://github.com/facebook/react/issues/16461
   **/
-  const [fromDateFields, setFromDateFields] = useReducer(dateFieldsReducer, dateToFields(fromDate))
+  const [fromDateFields, setFromDateFields] = useReducer(dateFieldsReducer, dateStringToFields(fromDate))
   useEffect(()=>{
-    setFromDateFields(dateToFields(fromDate))
+    setFromDateFields(dateStringToFields(fromDate))
   }, [fromDate])
-  const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateToFields(toDate))
+
+  const [toDateFields, setToDateFields] = useReducer(dateFieldsReducer, dateStringToFields(toDate))
   useEffect(()=>{
-    setToDateFields(dateToFields(toDate))
+    setToDateFields(dateStringToFields(toDate))
   }, [toDate])
+
+  const [searchString, setSearchString] = useState(searchedTerm)
+  useEffect(()=>{
+    setSearchString(searchedTerm)
+  }, [searchedTerm])
+
+  const runApplyFilter = () => {
+    applyFilter(fieldsToDateString(fromDateFields), fieldsToDateString(toDateFields), searchString)
+  }
+
+  const keywordInputContainerRef = useRef()
+  const keywordInputRef = useRef()
+  const handleKeywordInput = event => {
+    if (event.key === "Enter") {
+      // If we're on desktop, apply the filter as soon as a user presses "Enter" on the keyword search
+      if (isDesktop) {
+        runApplyFilter()
+      } else {
+        // move mobile keyboard away on "Enter"
+        // Still need to click "Apply Filter" to apply the filter on mobile
+        keywordInputRef.current.blur()
+      }
+    } else {
+      if (searchString.length < maxKeywordLength) {
+        setSearchString(event.target.value)
+      }
+    }
+  }
 
   return (
     <div>
+      <div className="coa-filter__box" ref={keywordInputContainerRef}>
+        <span className="coa-filter__box-label">{intl.formatMessage(i18n1.keyword)}</span>
+        <span className="coa-filter__box-label-description">{intl.formatMessage(i18n1.keywordDescription)}</span>
+        <span className="coa-filter__keyword-input-container">
+          <i className="material-icons coa-filter__search-icon">search</i>
+          <form
+            className="coa-filter__keyword-input-form"
+            onSubmit={(event)=>{event.preventDefault()}}
+          >
+            <input
+              ref={keywordInputRef}
+              onFocus={()=>fixMobileInputScrolling(keywordInputContainerRef)}
+              className="coa-filter__keyword-input"
+              onChange={handleKeywordInput}
+              onKeyPress={handleKeywordInput}
+              value={searchString}
+            />
+          </form>
+        </span>
+      </div>
       <div className="coa-filter__box">
         <span className="coa-filter__box-label">{intl.formatMessage(i18n1.date)}</span>
         <DateFields
@@ -232,7 +341,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
         <div
           className="coa-filter__mobile-clear-button"
           onClick={()=>{
-            applyFilter(null, null)
+            applyFilter(null, null, null)
             closeMobileMenu()
           }}
         >
@@ -242,7 +351,7 @@ const FilterBox = ({setMenuOpened=null, applyFilter, fromDate, toDate, lowerBoun
       <div
         className="coa-filter__apply-button"
         onClick={()=>{
-          applyFilter(fieldsToDate(fromDateFields), fieldsToDate(toDateFields))
+          runApplyFilter()
           closeMobileMenu()
         }}
       >
@@ -259,9 +368,17 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
 
   const {month, day, year} = dateFields
   const dayPickerDate = fieldsToDate(dateFields)
-  const setMonth = (month) => setDateFields({month: month})
-  const setDay = (day) => setDateFields({day: day})
-  const setYear = (year) => setDateFields({year: year})
+  const setMonth = (event) => setDateFields({month: event.target.value})
+  const setDay = (event) => setDateFields({day: event.target.value})
+  const yearInputRef = useRef()
+  const setYear = (event) => {
+    if (event.key === "Enter") {
+      // When user enters "year" input, move away the mobile keyboard
+      // Still need to click "Apply Filter" to apply the filter on mobile
+      yearInputRef.current.blur()
+    }
+    setDateFields({year: event.target.value})
+  }
 
   const handleDayPickerClick = (date, { selected }) => {
     setOpenDayPicker(false)
@@ -273,25 +390,36 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
     setDateFields(dateToFields(date))
   }
 
+  const dateFieldContainerRef = useRef()
+
   return (
-    <div style={{"margin-top": "1rem"}}>
+    <div ref={dateFieldContainerRef} style={{"marginTop": "1rem"}}>
       <span className="coa-filter__date-fields-label">{label}</span>
       <div className="coa-filter__date-fields">
-        <NumberInput
-          label="month"
-          value={month}
-          onChange={setMonth}
-        />
-        <NumberInput
-          label="day"
-          value={day}
-          onChange={setDay}
-        />
-        <NumberInput
-          label="year"
-          value={year}
-          onChange={setYear}
-        />
+        <form
+          style={{"display": "inherit"}}
+          onSubmit={(event)=>{event.preventDefault()}}
+        >
+          <NumberInput
+            label="month"
+            value={month}
+            onChange={setMonth}
+            dateFieldContainerRef={dateFieldContainerRef}
+          />
+          <NumberInput
+            label="day"
+            value={day}
+            onChange={setDay}
+            dateFieldContainerRef={dateFieldContainerRef}
+          />
+          <NumberInput
+            label="year"
+            value={year}
+            onChange={setYear}
+            dateFieldContainerRef={dateFieldContainerRef}
+            inputRef={yearInputRef}
+          />
+        </form>
         <div
           className="coa-filter__calendar-icon-container"
           onClick={() => setOpenDayPicker(!openDayPicker)}
@@ -323,17 +451,20 @@ const DateFields = ({label, dateFields, setDateFields, lowerBound, upperBound}) 
   )
 }
 
-const NumberInput = ({label, value="", onChange}) => {
+const NumberInput = ({label, value="", onChange, dateFieldContainerRef, inputRef=null}) => {
   const intl = useIntl();
   return (
     <div className="coa-filter__date-input-container">
       <label>
         <span className="coa-filter__date-input-label">{intl.formatMessage(i18n1[label])}</span>
         <input
+          ref={inputRef}
+          onFocus={()=>fixMobileInputScrolling(dateFieldContainerRef)}
           className={`coa-filter__date-input coa-filter__date-input-${label.toLowerCase()}`}
           type="number"
           value={value}
-          onChange={e => onChange(e.target.value)}
+          onChange={onChange}
+          onKeyPress={onChange}
         />
       </label>
     </div>

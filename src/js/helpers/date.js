@@ -17,7 +17,6 @@ export const getDaysInOrder = () => {
 **/
 export const createDateFromString = (dateString) => {
   if (!dateString) return null;
-  let year, month, day;
-  [year, month, day] = dateString.split("-")
+  const [year, month, day] = dateString.split("-")
   return new Date(year, month-1, day)
 }

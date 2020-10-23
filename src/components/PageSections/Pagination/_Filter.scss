@@ -1,6 +1,9 @@
 .coa-filter__container {
     padding-right: 3rem;
     margin-left: 1rem;
+    @include desktop {
+        width: 330px;
+    }
 }
 
 .coa-filter__filter-button {
@@ -144,6 +147,9 @@ $coa-calendar-tablet-height: calc(50vw - 20px);
     border: 1.5px solid #eaeaea;
     padding: 1.6rem;
     border-radius: 4px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     @include mobile-and-tablet {
         background-color: $coa-color-white;
     }
@@ -160,6 +166,11 @@ $coa-calendar-tablet-height: calc(50vw - 20px);
     font-weight: bold;
     font-size: 1.8rem;
     margin-bottom: 1.6rem;
+}
+
+.coa-filter__box-label-description {
+    @extend .coa-filter__box-label;
+    font-weight: normal;
 }
 
 .coa-filter__date-fields-label {
@@ -225,6 +236,32 @@ $input-box-height: 4.4rem;
         -webkit-appearance: none;
         margin: 0;
     }
+}
+
+.coa-filter__keyword-input-container {
+    @extend .coa-filter__date-input;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    @include desktop {
+        width: inherit;
+    }
+}
+
+.coa-filter__keyword-input-form {
+    display: flex;
+    flex-grow: 1;
+}
+
+.coa-filter__keyword-input {
+    background-color: inherit;
+    border: none;
+}
+
+.coa-filter__search-icon {
+    font-size: 2.5rem;
+    padding: 1rem 0rem;
+    color: $coa-color-gray-30;
 }
 
 .coa-filter__calendar-icon-container {

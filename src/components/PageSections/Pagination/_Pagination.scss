@@ -23,8 +23,12 @@
     }
 }
 
-.coa-Pagination__page-component-container {
+.coa-Pagination__fade-in {
     animation: fadeIn 1s;
+}
+
+.coa-Pagination__loading {
+    height: 1000px;
 }
 
 .coa-PageSelector_container {
