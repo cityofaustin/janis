@@ -60,7 +60,7 @@ const PaginationFiltered = ({
     }
   }
 
-  useEffect(resetPageNumber, [pageNumber, toDate, fromDate, searchedTerm])
+  useEffect(resetPageNumber, [currentPageResults])
 
   // Get new currentPageResults
   useEffect(() => {
