@@ -732,7 +732,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   if (!batchSize) {
     if (process.env.DEPLOY_ENV === "production") {
       // Our production Joplin dyno is larger and has more resources to process more requests without timing out.
-      batchSize = 25
+      batchSize = 10
     } else {
       batchSize = 10
     }
