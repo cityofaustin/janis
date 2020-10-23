@@ -173,7 +173,6 @@ $coa-footer-other-gray: #41444c;
 $coa-footer-light-gray: #a3a3a3;
 $coa-footer-link-hover: #aacdec;
 
-
 /*
   USWDS(United State Web Design System) System color tokens
   - Reference: https://designsystem.digital.gov/design-tokens/color/system-tokens/
@@ -181,5 +180,8 @@ $coa-footer-link-hover: #aacdec;
   - Note: not all colors, specificlly those with transparency will be
     able to fall into this system.
 */
-
-$coa-color-blue-warm-5v: #EDF5FF;
+$coa-color-red-cool-5v: #FFF2F5;
+$coa-color-red-cool-50v: #E51D3D;
+$coa-color-blue-warm-5v: #edf5ff;
+$coa-color-blue-warm-60v: #0050D8;
+$coa-color-gray-30: #adadad;

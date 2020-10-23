@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { injectIntl } from 'react-intl'
+import React, { useState, useRef } from 'react'
+import { useIntl } from 'react-intl';
 import { search as i18n1 } from 'js/i18n/definitions'
-import { queryStringBuilder } from 'js/helpers/queryObjectBuilder'
+import queryString from 'query-string';
 
-const SearchBar = ({ intl }) => {
-
+const SearchBar = () => {
+  const intl = useIntl();
   const [searchBarOpen, setSearchBarOpen] = useState(false)
+  const [searchString, setSearchString] = useState("")
+  const searchBarRef = useRef();
   const searchBarState = searchBarOpen ? "open" : "closed"
 
   const toggleSearchBar = isOpen => {
@@ -15,16 +17,16 @@ const SearchBar = ({ intl }) => {
           If the search bar changed to do quick search results. Let's componentize the
           quick search filter and use it here as well as on the search page.
         */
-        const searchTerm = document.getElementById("coa_SearchBar__input")
-        window.location.hash = queryStringBuilder({
-          '?': searchTerm.value,
-          page: 1
-        })
-        window.location.pathname = "/" + intl.locale + "/search"
+        window.location.href =
+          window.location.origin +
+          "/" + intl.locale + "/search?" +
+          queryString.stringify({
+            "q": searchString,
+            "page": 1,
+          })
       }
     } else {
-      const input = document.getElementById('coa_SearchBar__input')
-      input.focus()
+      searchBarRef.current.focus()
       setSearchBarOpen(true)
     }
   }
@@ -32,6 +34,8 @@ const SearchBar = ({ intl }) => {
   const searchKeyInput = event => {
     if (event.key === "Enter") {
       toggleSearchBar(true)
+    } else {
+      setSearchString(event.target.value)
     }
   }
 
@@ -40,10 +44,12 @@ const SearchBar = ({ intl }) => {
 
       <span className={"coa-SearchBar__container "+searchBarState}>
         <input
-          id="coa_SearchBar__input"
+          ref={searchBarRef}
           className={"coa-SearchBar__input "+searchBarState}
+          onChange={()=>searchKeyInput(event)}
           onKeyPress={()=>searchKeyInput(event)}
           tabindex={searchBarOpen ? "0" : "-1"}
+          value={searchString}
         />
         <a
           onClick={()=>toggleSearchBar(searchBarOpen)}
@@ -67,4 +73,4 @@ const SearchBar = ({ intl }) => {
 }
 
 
-export default injectIntl(SearchBar)
+export default SearchBar

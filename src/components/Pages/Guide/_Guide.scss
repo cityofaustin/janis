@@ -388,11 +388,6 @@ $max-guide-tablet-width: $coa-medium-screen;
   height: 33vh;
 }
 
-// When mobile is open
-.frozen-body {
-  overflow-y: hidden;
-}
-
 .coa-GuideMenu__mobile-content-container {
   border-top: 5px solid $coa-color-primary;
   background-color: $coa-color-white;

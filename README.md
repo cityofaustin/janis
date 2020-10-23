@@ -45,18 +45,13 @@ Install Janis dependencies.
 - $`yarn install`
 - $`npm install`
 
-Start a local environment with production data.
-- $`cp template.env prod.env` and set API_PASSWORD to production password
-- $`yarn start-joplin-prod`
-- If successful, you should be able to go to `http://localhost:3000/` and see a local version of Janis with production data!
-
-If you'd like to see Janis with staging data.
-- $`cp template.env staging.env` and set API_PASSWORD to staging password, CMS_API to https://joplin-staging.herokuapp.com/api/graphql 
-- $`yarn start-joplin-staging`
-
-If you have a [Joplin](https://github.com/cityofaustin/joplin) instance running locally, you can run your local Janis against the local Joplin with...
-- $`cp template.env local.env` and set API_PASSWORD with local joplin password, CMS_API to http://127.0.0.1:8000/api/graphql
-- $`yarn start-local`
+To run with Joplin Data
+- Create a .env file $`cp template.env .env`
+- Plug in the API_PASSWORD values that you'll need to build from each Joplin environment
+- For example, to build from a locally running Joplin instance, add the correct API_PASSWORD_LOCAL to your .env and run `yarn start-local`
+- To pull Joplin data from staging, add API_PASSWORD_STAGING to your .env and run `yarn start-staging`
+- To pull Joplin data from production, add the correct API_PASSWORD_PROD to your .env and run `yarn start-prod`
+- For Review (PR) apps, you'll need to add both an API_PASSWORD_PR and the JOPLIN_APPNAME_PR to your .env and run `yarn start-pr`
 
 
 **As a static build**
