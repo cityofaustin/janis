@@ -22,6 +22,7 @@ import SearchResult from 'components/Pages/Search/searchResult.js'
 const PaginationSearchPage = ({
   searchedTerm="",
 }) => {
+  const searchApi = CMS_API.replace("/api/graphql", "/site_search")
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const intl = useIntl();
@@ -49,7 +50,7 @@ const PaginationSearchPage = ({
   useEffect(() => {
     const fetchData = async ()=>{
       try {
-        let result = await axios.get("http://localhost:8000/site_search?" + queryString.stringify({
+        let result = await axios.get(searchApi + "?" + queryString.stringify({
           lang: lang,
           page: pageNumber,
           limit: documentsPerPage,
