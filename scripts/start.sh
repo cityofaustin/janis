@@ -4,6 +4,7 @@ set -o errexit
 set -a # exports all assigned variables
 
 ENV_TYPE=$1
+BUILD=$2
 
 if [ -z "$ENV_TYPE" ]; then
   echo "Please select an ENV_TYPE to build from (LOCAL, PR, STAGING, or PROD)"
@@ -31,4 +32,11 @@ API_PASSWORD_VAR_NAME="API_PASSWORD_$ENV_TYPE"
 API_PASSWORD=${!API_PASSWORD_VAR_NAME}
 
 NODE_PATH=./src
-npm-run-all -p watch-css start-js
+
+if [ "$BUILD" == "BUILD" ]; then
+  yarn npm-run-all -p build-css build-js
+  echo " 🏗 END of the Joplin Build 🏗 "
+  npx http-server dist
+else
+  yarn npm-run-all -p watch-css start-js
+fi
