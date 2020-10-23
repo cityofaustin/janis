@@ -17,6 +17,14 @@ const SearchBar = () => {
           If the search bar changed to do quick search results. Let's componentize the
           quick search filter and use it here as well as on the search page.
         */
+
+        console.log("~~~~ what is origin?", window.location.origin )
+        console.log("~~~ where should be navigate to?", window.location.origin +
+        "/" + intl.locale + "/search?" +
+        queryString.stringify({
+          "q": searchString,
+          "page": 1,
+        }))
         window.location.href =
           window.location.origin +
           "/" + intl.locale + "/search?" +

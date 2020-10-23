@@ -43,6 +43,9 @@ const branchOverrides = {
   },
   '5052-search': {
     joplin_appname: 'joplin-pr-5052-search'
+  },
+  '5052-search-bugs': {
+    joplin_appname: 'joplin-staging'
   }
 };
 
