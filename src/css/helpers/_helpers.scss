@@ -14,3 +14,8 @@
   position: -webkit-sticky;
   position: sticky;
 }
+
+// For freezing document body when mobile popup menu is open
+.frozen-body {
+  overflow-y: hidden;
+}

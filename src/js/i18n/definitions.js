@@ -23,6 +23,25 @@ export const date = defineMessages({
   weekdayThursday: 'Thursday',
   weekdayFriday: 'Friday',
   weekdaySaturday: 'Saturday',
+  weekdaySundayShort: "Su",
+  weekdayMondayShort: "Mo",
+  weekdayTuesdayShort: "Tu",
+  weekdayWednesdayShort: "We",
+  weekdayThursdayShort: "Th",
+  weekdayFridayShort: "Fr",
+  weekdaySaturdayShort: "Sa",
+  January: "January",
+  February: "February",
+  March: "March",
+  April: "April",
+  May: "May",
+  June: "June",
+  July: "July",
+  August: "August",
+  September: "September",
+  October: "October",
+  November: "November",
+  December: "December",
 });
 
 export const emoji = defineMessages({
@@ -169,7 +188,6 @@ export const curbsideServices = defineMessages({
 export const departmentPage = defineMessages({
   complaintFormButtonText: 'File a complaint against an Austin Police Officer',
   complaintFormUrl: 'https://forms.austin.gov/police-oversight/complaint',
-  thankFormButtonText: 'Thank the Austin Police Department',
   thankFormButtonUrl: 'https://forms.austin.gov/police-oversight/complaint',
   thankFormButtonText: 'Thank an Austin Police Officer',
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
@@ -580,3 +598,20 @@ export const news = defineMessages({
     defaultMessage: 'Published {date}',
   },
 });
+
+export const filter = defineMessages({
+  filter: 'Filter',
+  filters: 'Filters',
+  date: 'Date',
+  from: 'From',
+  to: 'To',
+  month: 'Month',
+  day: 'Day',
+  year: 'Year',
+  clearFilters: 'Clear filters',
+  applyFilters: 'Apply filters',
+  filteredResults: '{count} filtered results',
+  oneFilteredResult: '1 filtered result',
+  keyword: 'Keyword',
+  keywordDescription: 'Search within this document collection',
+})

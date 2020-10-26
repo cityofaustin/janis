@@ -8,7 +8,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
-import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
+import {getOfficialDocumentCollectionLowerBound} from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -322,8 +322,9 @@ const getFormContainerData = async (fc, instance, client) => {
   return { formContainer: formContainer };
 };
 
-const getOfficialDocumentCollectionData = async (page, instance, client) => {
+const getOfficialDocumentCollectionData = async (page, instance, client, pageId) => {
   let officialDocumentCollection = { ...page };
+  officialDocumentCollection.pageId = pageId
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -340,7 +341,7 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
     offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  officialDocumentCollection.documents = await getOfficialDocumentCollectionDocuments(officialDocumentCollection.id, client);
+  officialDocumentCollection.lowerBound = await getOfficialDocumentCollectionLowerBound(officialDocumentCollection.id, client);
 
   return { officialDocumentCollection: officialDocumentCollection };
 };
@@ -459,6 +460,7 @@ const buildPageAtUrl = async (
   returns object with page url, template and data from appropriate query
   */
   const {
+    pageId,
     janisUrls,
     janisInstances,
     eventpage,
@@ -568,6 +570,7 @@ const buildPageAtUrl = async (
             officialdocumentcollection,
             instanceOfPage,
             client,
+            pageId,
           ),
       };
     }
@@ -721,15 +724,15 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const path = `/${langCode || ''}`
   console.log(`- Building routes for ${path}...`);
 
-  const client = createGraphQLClientsByLang(langCode);
+  const client = await createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
-  let batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || null;
+  let batchSize = Number(process.env.GRAPHQL_BATCH_SIZE) || null;
   if (!batchSize) {
     if (process.env.DEPLOY_ENV === "production") {
       // Our production Joplin dyno is larger and has more resources to process more requests without timing out.
-      batchSize = 25
+      batchSize = 10
     } else {
       batchSize = 10
     }
@@ -745,11 +748,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   /**
     Build search index here before pages are altered.
-    Hardcoding "withElasticsearch" and "indexName" for now.
   **/
-  const withElasticsearch = false
-  const indexName = `local_${langCode}_${Date.now()}`
-  const searchIndex = await searchIndexBuilder(pages, indexName, withElasticsearch)
+  // const USE_ELASTICSEARCH = false
+  // const indexName = `local_${langCode}_${Date.now()}`
+  // const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -837,18 +839,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
 
-  /**
-    If we're not using elasticsearch,
-    then add searchIndex directly to the search page.
-  **/
-  let searchPageData = {}
-  if (!withElasticsearch) {
-    searchPageData = { searchIndex }
-  }
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => searchPageData,
   });
 
   const data = {
@@ -907,7 +900,7 @@ export default {
     // getSiteData's result is made available to the entire site via the useSiteData hook
     const data = {'navigation': {}}
     await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
-      const client = createGraphQLClientsByLang(langCode);
+      const client = await createGraphQLClientsByLang(langCode);
       let response = await client.request(allThemesQuery);
       data['navigation'][langCode] = cleanNavigation(response, langCode)
     }))

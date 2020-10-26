@@ -123,3 +123,18 @@
     display: block;
   }
 }
+
+// PageSelector has some different styling on NewsPage only.
+// TODO: see if we still want NewsPage styling to be an exception
+.coa-NewsPage__main-content {
+    &>.wrapper>.row>.coa-PageSelector_container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding-top: 15px;
+        // TODO: those 2 things are both used by the EventListPage as well
+        text-align: center;
+        @include media($coa-medium-screen) {
+            width: 859px;
+        }
+    }
+}
