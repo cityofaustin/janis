@@ -42,8 +42,8 @@ const branchOverrides = {
   'out-link': {
     joplin_appname: 'joplin',
   },
-  '4787-pdf-content': {
-    joplin_appname: 'joplin-pr-4787-pdf-docs',
+  '5061-event-list': {
+    joplin_appname: 'joplin',
   },
   '4776-elastic': {
     joplin_appname: 'joplin-pr-4776-elastic'
