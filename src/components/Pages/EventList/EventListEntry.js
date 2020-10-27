@@ -121,7 +121,12 @@ const EventListEntry = ({
   relatedPage,
   relatedLocation,
   isSearchResult,
+  page
 }) => {
+  // EventListEntry is used in the EventList, Homepage, Location Related Events and Search Results.
+  // In the EventList it is used in PaginationStatic and the prop is called page. On every other instance
+  // it is event. This checks which prop to use.
+  event = event ? event : page;
   return (
     <a
       href={event.eventUrl}
