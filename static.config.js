@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import filesize from 'filesize';
+import { cloneDeep } from 'lodash';
 
 import { SUPPORTED_LANG_CODES } from 'js/i18n/constants';
 import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
@@ -7,7 +8,7 @@ import { createGraphQLClientsByLang } from 'js/helpers/fetchData';
 import allThemesQuery from 'js/queries/allThemesQuery';
 import topServicesQuery from 'js/queries/topServicesQuery';
 import searchIndexBuilder from 'js/helpers/searchIndexBuilder.js';
-import getOfficialDocumentCollectionDocuments from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
+import {getOfficialDocumentCollectionLowerBound} from 'js/helpers/getOfficialDocumentCollectionDocuments.js';
 
 // Shinier ✨✨ new queries!
 import allPagesQuery from 'js/queries/allPagesQuery';
@@ -20,6 +21,7 @@ import getDepartmentsPageQuery from 'js/queries/getDepartmentsPageQuery';
 import getAllGuidePagesSectionsQuery from 'js/queries/getAllGuidePagesSectionsQuery';
 import getEventPageQuery from 'js/queries/getEventPageQuery';
 import getNewsListPageQuery from 'js/queries/getNewsListPageQuery';
+import getHomePagesQuery from 'js/queries/getHomePagesQuery';
 
 import {
   cleanNavigation,
@@ -320,8 +322,9 @@ const getFormContainerData = async (fc, instance, client) => {
   return { formContainer: formContainer };
 };
 
-const getOfficialDocumentCollectionData = async (page, instance, client) => {
+const getOfficialDocumentCollectionData = async (page, instance, client, pageId) => {
   let officialDocumentCollection = { ...page };
+  officialDocumentCollection.pageId = pageId
 
   let relatedTo = [];
   if (instance.grandparent) {
@@ -338,7 +341,7 @@ const getOfficialDocumentCollectionData = async (page, instance, client) => {
     offeredBy: getOfferedByFromDepartments(officialDocumentCollection.departments),
   };
 
-  officialDocumentCollection.documents = await getOfficialDocumentCollectionDocuments(officialDocumentCollection.id, client);
+  officialDocumentCollection.lowerBound = await getOfficialDocumentCollectionLowerBound(officialDocumentCollection.id, client);
 
   return { officialDocumentCollection: officialDocumentCollection };
 };
@@ -457,6 +460,7 @@ const buildPageAtUrl = async (
   returns object with page url, template and data from appropriate query
   */
   const {
+    pageId,
     janisUrls,
     janisInstances,
     eventpage,
@@ -480,8 +484,8 @@ const buildPageAtUrl = async (
     const departmentNewsPage = {
       path: 'news',
       template: 'src/components/Pages/News/NewsList',
-      getData: () =>
-        getNewsListForDepartment(client, departmentpage.id, locale),
+      getData: async () =>
+        await getNewsListForDepartment(client, departmentpage.id, locale),
     };
 
     return {
@@ -498,8 +502,8 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/TopicCollection',
-      getData: () =>
-        getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
+      getData: async () =>
+        await getTopicCollectionPageData(topiccollectionpage, instanceOfPage, client),
     };
   }
 
@@ -508,7 +512,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/Topic',
-      getData: () => getTopicPageData(topicPage, instanceOfPage, client),
+      getData: async () => await getTopicPageData(topicPage, instanceOfPage, client),
     };
   }
 
@@ -525,7 +529,7 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Guide',
-        getData: () => getGuidePageData(guidepage, instanceOfPage, client),
+        getData: async () => await getGuidePageData(guidepage, instanceOfPage, client),
       };
     }
 
@@ -533,8 +537,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Service',
-        getData: () =>
-          getServicePageData(
+        getData: async () =>
+          await getServicePageData(
             servicepage,
             instanceOfPage,
             client,
@@ -547,8 +551,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Information',
-        getData: () =>
-          getInformationPageData(
+        getData: async () =>
+          await getInformationPageData(
             informationpage,
             instanceOfPage,
             client,
@@ -561,11 +565,12 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/OfficialDocuments/OfficialDocumentCollection',
-        getData: () =>
-          getOfficialDocumentCollectionData(
+        getData: async () =>
+          await getOfficialDocumentCollectionData(
             officialdocumentcollection,
             instanceOfPage,
             client,
+            pageId,
           ),
       };
     }
@@ -574,8 +579,8 @@ const buildPageAtUrl = async (
       return {
         path: instanceOfPage.url,
         template: 'src/components/Pages/Form',
-        getData: () =>
-          getFormContainerData(formcontainer, instanceOfPage, client),
+        getData: async () =>
+          await getFormContainerData(formcontainer, instanceOfPage, client),
       };
     }
   }
@@ -601,7 +606,7 @@ const buildPageAtUrl = async (
     return {
       path: '/departments/',
       template: 'src/components/Pages/Departments',
-      getData: () => getDepartmentsPageData(client),
+      getData: async () => await getDepartmentsPageData(client),
     };
   }
 
@@ -611,7 +616,7 @@ const buildPageAtUrl = async (
       path: '/events/',
       template: 'src/components/Pages/EventList',
       // getAllEvents takes client and boolean: if we should hide the cancelled events
-      getData: () => getAllEvents(client, false),
+      getData: async () => await getAllEvents(client, false),
     };
   }
 
@@ -629,7 +634,7 @@ const buildPageAtUrl = async (
     return {
       path: instanceOfPage.url,
       template: 'src/components/Pages/OfficialDocuments/OfficialDocumentPage',
-      getData: () => getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
+      getData: async () => await getOfficialDocumentPageData(officialdocumentpage, instanceOfPage),
     }
   }
 
@@ -644,7 +649,7 @@ const getPagesOfGuidesData = async client => {
 
   const pagesOfGuidesData = {};
 
-  allGuidePages.edges.map(async guidePage => {
+  await Promise.all(allGuidePages.edges.map(async guidePage => {
     if (guidePage.node.sections.length > 0) {
       const guideUrl = await client.request(getPageUrlQuery, {
         id: guidePage.node.id,
@@ -706,7 +711,7 @@ const getPagesOfGuidesData = async client => {
         }
       });
     }
-  });
+  }));
 
   return pagesOfGuidesData;
 };
@@ -719,11 +724,19 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   const path = `/${langCode || ''}`
   console.log(`- Building routes for ${path}...`);
 
-  const client = createGraphQLClientsByLang(langCode);
+  const client = await createGraphQLClientsByLang(langCode);
 
   let pages = [];
   let after = '';
-  const batchSize = Number(process.env.REACT_STATIC_BATCH_SIZE) || 25
+  let batchSize = Number(process.env.GRAPHQL_BATCH_SIZE) || null;
+  if (!batchSize) {
+    if (process.env.DEPLOY_ENV === "production") {
+      // Our production Joplin dyno is larger and has more resources to process more requests without timing out.
+      batchSize = 10
+    } else {
+      batchSize = 10
+    }
+  }
   while (true) {
     const siteStructure = await client.request(allPagesQuery, { after: after, batchSize: batchSize});
     pages = pages.concat(siteStructure.allPages.edges);
@@ -735,11 +748,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 
   /**
     Build search index here before pages are altered.
-    Hardcoding "withElasticsearch" and "indexName" for now.
   **/
-  const withElasticsearch = false
-  const indexName = `local_${langCode}_${Date.now()}`
-  const searchIndex = await searchIndexBuilder(pages, indexName, withElasticsearch)
+  // const USE_ELASTICSEARCH = false
+  // const indexName = `local_${langCode}_${Date.now()}`
+  // const searchIndex = await searchIndexBuilder(pages, indexName, USE_ELASTICSEARCH)
 
   // incremental build code, may be obsolete with v3
   if (incrementalPageId) {
@@ -796,11 +808,11 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   });
 
   let allPages = await Promise.all(
-    pages.map(pageAtUrlInfo => {
+    pages.map(async pageAtUrlInfo => {
       if (!!pageAtUrlInfo.node.janisInstances.length) {
-        return Promise.all(
-          pageAtUrlInfo.node.janisInstances.map(instanceOfPage =>
-            buildPageAtUrl(
+        return await Promise.all(
+          pageAtUrlInfo.node.janisInstances.map(async instanceOfPage =>
+            await buildPageAtUrl(
               pageAtUrlInfo.node,
               instanceOfPage,
               client,
@@ -811,9 +823,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
       }
 
       // not all pages have instances (events and locations not under departments)
-      return Promise.all(
-        pageAtUrlInfo.node.janisUrls.map(instanceOfPage =>
-          buildPageAtUrl(
+      return await Promise.all(
+        pageAtUrlInfo.node.janisUrls.map(async instanceOfPage =>
+          await buildPageAtUrl(
             pageAtUrlInfo.node,
             instanceOfPage,
             client,
@@ -827,18 +839,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
   // the nested maps return nested arrays that need to be flattened
   allPages = allPages.flat();
 
-  /**
-    If we're not using elasticsearch,
-    then add searchIndex directly to the search page.
-  **/
-  let searchPageData = {}
-  if (!withElasticsearch) {
-    searchPageData = { searchIndex }
-  }
   allPages.push({
     path: '/search/',
     template: 'src/components/Pages/Search',
-    getData: () => searchPageData,
   });
 
   const data = {
@@ -846,9 +849,16 @@ const makeAllPages = async (langCode, incrementalPageId) => {
     template: 'src/components/Pages/Home',
     children: allPages,
     getData: async () => {
-      const { allServicePages } = await client.request(topServicesQuery);
+      const { allHomePages } = await client.request(getHomePagesQuery);
+      let topPages = allHomePages.edges[0].node.topPages
 
-      let services = cleanLinks(allServicePages, 'service');
+      // If no topPages were set, then default to using old method of getting the top 4 service pages
+      if (!topPages.edges.length) {
+        const { allServicePages } = await client.request(topServicesQuery);
+        topPages = allServicePages
+      }
+
+      let services = cleanLinks(topPages, 'service');
 
       // Make sure we don't have any dupes in top services
       services = services.filter(
@@ -888,35 +898,12 @@ export default {
   }),
   getSiteData: async () => {
     // getSiteData's result is made available to the entire site via the useSiteData hook
-    const queries = [
-      {
-        query: allThemesQuery,
-        dataKey: 'navigation',
-        middleware: cleanNavigation,
-      },
-    ];
-    const requests = [];
-    const data = {};
-    SUPPORTED_LANG_CODES.map(langCode => {
-      const client = createGraphQLClientsByLang(langCode);
-      queries.map(query => {
-        requests.push(client.request(query.query));
-        data[query.dataKey] = data[query.dataKey] || {};
-        data[query.dataKey][langCode] = null;
-      });
-    });
-
-    (await Promise.all(requests)).forEach((response, i) => {
-      const queryIndex = i % queries.length;
-      const langIndex = (i - queryIndex) / queries.length;
-      data[queries[queryIndex].dataKey][SUPPORTED_LANG_CODES[langIndex]] =
-        typeof queries[queryIndex].middleware === 'function'
-          ? queries[queryIndex].middleware(
-              response,
-              SUPPORTED_LANG_CODES[langIndex],
-            )
-          : response;
-    });
+    const data = {'navigation': {}}
+    await Promise.all(SUPPORTED_LANG_CODES.map(async langCode => {
+      const client = await createGraphQLClientsByLang(langCode);
+      let response = await client.request(allThemesQuery);
+      data['navigation'][langCode] = cleanNavigation(response, langCode)
+    }))
 
     return data;
   },
@@ -938,15 +925,21 @@ export default {
       },
     ];
 
-    // parallel processing of all languages
-    const allLangs = Array.from(SUPPORTED_LANG_CODES);
-    allLangs.unshift(undefined);
-    const translatedRoutes = await Promise.all(
-      allLangs.map(langCode => makeAllPages(langCode, incrementalPageId)),
+    await Promise.all(
+      SUPPORTED_LANG_CODES.map(async (langCode) => {
+        const pagesData = await makeAllPages(langCode, incrementalPageId)
+        routes.push(pagesData)
+        if (langCode === "en") {
+          // Create pages without a path prefix for default routes using English data.
+          // const defaultPagesData = Object.assign({}, pagesData, {path: '/'})
+          const defaultPagesData = cloneDeep(pagesData);
+          defaultPagesData.path = '/'
+          routes.push(defaultPagesData)
+        }
+      })
     );
-    const allRoutes = routes.concat(translatedRoutes);
 
-    return allRoutes
+    return routes
   },
   plugins: ['react-static-plugin-react-router'],
 };

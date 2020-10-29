@@ -1,0 +1,411 @@
+.coa-filter__container {
+    padding-right: 3rem;
+    margin-left: 1rem;
+    @include desktop {
+        width: 330px;
+    }
+}
+
+.coa-filter__filter-button {
+    background-color: $coa-color-blue-warm-5v;
+    color: $coa-color-blue-warm-60v;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    &>.material-icons {
+        font-size: 2.1rem;
+        vertical-align: text-bottom;
+        padding-right: 1rem;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.coa-filter__filter-result-container {
+    background-color: $coa-color-gray-4;
+    color: $coa-color-black-grey;
+    border-radius: 4px;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+    }
+}
+
+.coa-filter__filter-result-child {
+    flex-grow: 1;
+    // Putting padding on child elements increases the clickable size "Clear Filter" button
+    padding: 1rem;
+}
+
+.coa-filter__filter-result-clear {
+    @extend .coa-filter__filter-result-child;
+    color: $coa-color-red-cool-50v;
+    text-align: right;
+    @include mobile {
+        border-top: 1px solid $coa-color-gray-light;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &>.material-icons {
+        font-size: 2.1rem;
+        vertical-align: text-bottom;
+    }
+}
+
+.coa-filter__mobile-popup-background {
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    overflow-y: scroll;
+    display: none;
+    transition: opacity 0.2s ease-in;
+    // If opacity is set by explicit "opacity" setting instead of rgba(..., "opacity")
+    // then child elements/text won't be able to have a different opacity.
+    background-color: rgba(0, 0, 0, .9);
+    &.coa-filter__mobile-popup-background-open {
+        display: block;
+    }
+}
+
+.coa-filter__mobile-popup-container {
+    opacity: 1;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    @include tablet {
+        background: $coa-color-white;
+        padding: 10rem;
+        border-radius: 4px;
+    }
+}
+
+.coa-filter__mobile-popup-title-container {
+    color: $coa-color-white;
+    font-size: 3.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    @include tablet {
+        color: $coa-color-black;
+    }
+}
+
+.coa-filter__mobile-popup-title {
+    padding-bottom: 2rem;
+}
+
+.coa-filter__mobile-close {
+    // Give a little more touchable space
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+%coa-filter__label {
+    display: block;
+    line-height: normal;
+    color: $coa-color-black-grey;
+}
+
+.coa-filter__rail_label {
+    @extend %coa-filter__label;
+    font-weight: 500;
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
+}
+
+/**
+    These values will allow our calendar to resize proportionally
+    on any size mobile or tablet screen.
+    The width must be set on the parent container (.coa-filter__box).
+    This will enable our coa-filter__date-input-containers to resize with flex-grow
+    to match the width of our calendar.
+**/
+$coa-calendar-mobile-width: 75vw;
+$coa-calendar-mobile-height: calc(70vw - 20px);
+$coa-calendar-tablet-width: 50vw;
+$coa-calendar-tablet-height: calc(50vw - 20px);
+
+.coa-filter__box {
+    border: 1.5px solid #eaeaea;
+    padding: 1.6rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    @include mobile-and-tablet {
+        background-color: $coa-color-white;
+    }
+    @include mobile {
+        width: $coa-calendar-mobile-width;
+    }
+    @include tablet {
+        width: $coa-calendar-tablet-width;
+    }
+}
+
+.coa-filter__box-label {
+    @extend %coa-filter__label;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 1.6rem;
+}
+
+.coa-filter__box-label-description {
+    @extend .coa-filter__box-label;
+    font-weight: normal;
+}
+
+.coa-filter__date-fields-label {
+    @extend %coa-filter__label;
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+
+.coa-filter__date-fields {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.coa-filter__date-input-container {
+    padding-right: 1rem;
+    @include mobile-and-tablet {
+        flex-grow: 1;
+    }
+}
+
+.coa-filter__date-input-label {
+    @extend %coa-filter__label;
+    font-size: 1.4rem;
+    margin-bottom: .3rem;
+}
+
+$input-box-height: 4.4rem;
+
+.coa-filter__date-input {
+    padding: 0 .5rem;
+    text-align: center;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $coa-color-gray-4;
+    background-color: $coa-color-gray-4;
+    height: $input-box-height;
+
+    &:focus {
+        border-color: $coa-color-blue-warm-60v
+    }
+
+    &:hover, &:focus {
+        // $coa-color-blue-warm-60v in rgba form, in order to add opacity
+        filter: drop-shadow(6px 3px 6px rgba(0, 80, 216, .24))
+    }
+
+    @include desktop {
+        box-sizing: content-box;
+        &.coa-filter__date-input-day,
+        &.coa-filter__date-input-month {
+            width: 2em;
+        }
+        &.coa-filter__date-input-year {
+            width: 4em;
+        }
+    }
+
+    // Remove number input up/down arrows
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.coa-filter__keyword-input-container {
+    @extend .coa-filter__date-input;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    @include desktop {
+        width: inherit;
+    }
+}
+
+.coa-filter__keyword-input-form {
+    display: flex;
+    flex-grow: 1;
+}
+
+.coa-filter__keyword-input {
+    background-color: inherit;
+    border: none;
+}
+
+.coa-filter__search-icon {
+    font-size: 2.5rem;
+    padding: 1rem 0rem;
+    color: $coa-color-gray-30;
+}
+
+.coa-filter__calendar-icon-container {
+    height: $input-box-height;
+    text-align: center;
+    border-radius: 4px;
+    border-style: none;
+    background-color: $coa-color-blue-warm-5v;
+    padding: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+    @include tablet {
+        margin-left: 3rem;
+    }
+    @include mobile {
+        margin-left: 2rem;
+    }
+}
+
+.coa-filter__calendar-icon {
+  font-size: 2.5rem;
+  color: $coa-color-blue-warm-60v;
+}
+
+// Implement col-xs-12 for proper mobile+tablet sizing with bootstrap
+%coa-col-xs-12 {
+    box-sizing: border-box;
+    -moz-flex-grow: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    flex-basis: 100%;
+    max-width: 100%;
+}
+
+.coa-daypicker__container {
+    @extend %coa-col-xs-12;
+    font-size: 1.4rem;
+    border-radius: 4px;
+    background-color: $coa-color-gray-4;
+    margin-top: 1rem;
+    width: 100%;
+    &.coa-daypicker__container-hidden {
+        visibility: hidden;
+        height: 0;
+        display: block;
+    }
+    &>.DayPicker-wrapper {
+        padding-bottom: initial;
+        &>.DayPicker-NavBar>.DayPicker-NavButton {
+            right: 0rem;
+        }
+        &>.DayPicker-Months {
+            &>.DayPicker-Month {
+                @extend %coa-col-xs-12;
+                // See note next to $coa-calendar-mobile-height declaration
+                // to see how our calendar resizes itself proportionally on mobile+tablet.
+                @include mobile {
+                    height: $coa-calendar-mobile-height;
+                }
+                @include tablet {
+                    height: $coa-calendar-tablet-height;
+                }
+                &>.DayPicker-Body>.DayPicker-Week {
+                    &>.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+                        background-color: $coa-color-blue-warm-60v;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.coa-daypicker__year-month-container {
+    display: flex;
+    flex-wrap: wrap;
+    /**
+    If any languages have month name translations that go over beyond the max-width,
+    then the year select will drop down to the next row.
+    **/
+    max-width: 25rem;
+    @include desktop {
+        // Desktop has a smaller picker than mobile or tablet
+        max-width: 16rem;
+    }
+}
+
+.coa-daypicker__select {
+    width: auto;
+    font-size: 1.6rem;
+    @include desktop {
+        font-size: 1.4rem;
+    }
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    height: auto;
+    display: inline;
+    padding-right: 1.5rem;
+    padding-left: .5rem;
+    background-position: right .25rem center;
+    background-color: $coa-color-gray-4;
+}
+
+%coa-filter__button {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 4px;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.coa-filter__apply-button {
+    @extend %coa-filter__button;
+    color: $coa-color-blue-warm-60v;
+    background-color: $coa-color-blue-warm-5v;
+    margin-top: 1.5rem;
+    @include desktop {
+        margin-bottom: 2rem;
+        &:hover {
+            color: $coa-color-white;
+            background-color: $coa-color-blue-warm-60v;
+        }
+    }
+    @include mobile-and-tablet {
+        margin-top: .5rem;
+        color: $coa-color-white;
+        background-color: $coa-color-blue-warm-60v;
+    }
+    @include tablet {
+        margin-top: 1rem;
+    }
+}
+
+.coa-filter__mobile-clear-button {
+    @extend %coa-filter__button;
+    color: $coa-color-red-cool-50v;
+    background-color: $coa-color-red-cool-5v;
+    @include mobile {
+        margin-top: 1rem;
+    }
+}

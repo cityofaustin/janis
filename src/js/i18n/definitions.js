@@ -23,6 +23,25 @@ export const date = defineMessages({
   weekdayThursday: 'Thursday',
   weekdayFriday: 'Friday',
   weekdaySaturday: 'Saturday',
+  weekdaySundayShort: "Su",
+  weekdayMondayShort: "Mo",
+  weekdayTuesdayShort: "Tu",
+  weekdayWednesdayShort: "We",
+  weekdayThursdayShort: "Th",
+  weekdayFridayShort: "Fr",
+  weekdaySaturdayShort: "Sa",
+  January: "January",
+  February: "February",
+  March: "March",
+  April: "April",
+  May: "May",
+  June: "June",
+  July: "July",
+  August: "August",
+  September: "September",
+  October: "October",
+  November: "November",
+  December: "December",
 });
 
 export const emoji = defineMessages({
@@ -108,6 +127,8 @@ export const misc = defineMessages({
   pluginBlockingForm:
     'A plugin could be blocking the form (example: "Privacy Badger")',
   formFailedToLoad: 'It may have failed to load ("404 error")',
+  documentsTotal: "document in this collection",
+  documentsTotalPlural: "documents in this collection",
 });
 
 export const navigation = defineMessages({
@@ -131,7 +152,7 @@ export const services = defineMessages({
   checkOutServices: 'Check out City of Austin Services',
   service: 'Service',
   topServices: 'Top services',
-  allServices: 'All services',
+  allPages: 'All pages',
 });
 
 export const themes = defineMessages({
@@ -167,7 +188,6 @@ export const curbsideServices = defineMessages({
 export const departmentPage = defineMessages({
   complaintFormButtonText: 'File a complaint against an Austin Police Officer',
   complaintFormUrl: 'https://forms.austin.gov/police-oversight/complaint',
-  thankFormButtonText: 'Thank the Austin Police Department',
   thankFormButtonUrl: 'https://forms.austin.gov/police-oversight/complaint',
   thankFormButtonText: 'Thank an Austin Police Officer',
   thankFormUrl: 'https://forms.austin.gov/police-oversight/thank',
@@ -504,6 +524,9 @@ export const officialdocuments = defineMessages({
   author: 'Author',
   document: 'Document',
   partOf: 'Part of',
+  pdfContent: 'PDF Content',
+  disclaimer: 'Disclaimer',
+  message: 'The following text was extracted from the PDF file to make this document more accessible. This machine-generated content may contain styling errors due to redactions. In some instances, text may not load if the original file is a scanned image or has not been made searchable. For the full version of the document, please view the PDF.',
 });
 
 export const guides = defineMessages({
@@ -575,3 +598,20 @@ export const news = defineMessages({
     defaultMessage: 'Published {date}',
   },
 });
+
+export const filter = defineMessages({
+  filter: 'Filter',
+  filters: 'Filters',
+  date: 'Date',
+  from: 'From',
+  to: 'To',
+  month: 'Month',
+  day: 'Day',
+  year: 'Year',
+  clearFilters: 'Clear filters',
+  applyFilters: 'Apply filters',
+  filteredResults: '{count} filtered results',
+  oneFilteredResult: '1 filtered result',
+  keyword: 'Keyword',
+  keywordDescription: 'Search within this document collection',
+})

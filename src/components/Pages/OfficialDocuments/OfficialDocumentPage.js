@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useRouteData, Head } from 'react-static';
 import { injectIntl } from 'react-intl';
-import path from 'path';
+import moment from 'moment-timezone';
 
 import { officialdocuments as i18n } from 'js/i18n/definitions';
 
@@ -49,6 +49,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
       name,
       pdfSize,
       document,
+      body,
       officialDocumentCollection,
     },
     // not the biggest fan of this logic but
@@ -61,6 +62,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
   ) : null;
 
   const summaryBlock = <HtmlFromRichText content={summary} /> 
+  moment.locale(intl.locale);
 
   return (
     <div>
@@ -77,6 +79,7 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
           contentType={'officialDocumentPage'}
           description={description}
           columnWidth={8}
+          date={moment(date, "YYYY-MM-DD").format('LL')}
         >
           {title}
         </PageHeader>
@@ -96,6 +99,15 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                 <div className="coa-OfficialDocumentPage__document">
                   <h2>{intl.formatMessage(i18n.document)}</h2>
                   <a href={document.url}>{name}</a> {pdfComponent}
+                </div>
+                <div className="coa-OfficialDocumentPage__content-container">
+                  <h2>{intl.formatMessage(i18n.pdfContent)}</h2>
+                  <p className="coa-OfficialDocumentPage__disclaimer">
+                    <span className="coa-OfficialDocumentPage__span">{intl.formatMessage(i18n.disclaimer)}:</span> {intl.formatMessage(i18n.message)}
+                  </p>
+                  <div className="coa-OfficialDocumentPage__content">
+                    {body}
+                  </div>
                 </div>
               </div>
             </div>

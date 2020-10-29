@@ -45,15 +45,14 @@ Install Janis dependencies.
 - $`yarn install`
 - $`npm install`
 
-Start a local environment with production data.
-- $`yarn start-joplin-prod`
-- If successful, you should be able to go to `http://localhost:3000/` and see a local version of Janis with production data!
+To run with Joplin Data
+- Create a .env file $`cp template.env .env`
+- Plug in the API_PASSWORD values that you'll need to build from each Joplin environment
+- For example, to build from a locally running Joplin instance, add the correct API_PASSWORD_LOCAL to your .env and run `yarn start-local`
+- To pull Joplin data from staging, add API_PASSWORD_STAGING to your .env and run `yarn start-staging`
+- To pull Joplin data from production, add the correct API_PASSWORD_PROD to your .env and run `yarn start-prod`
+- For Review (PR) apps, you'll need to add both an API_PASSWORD_PR and the JOPLIN_APPNAME_PR to your .env and run `yarn start-pr`
 
-If you'd like to see Janis with staging data.
-- $`yarn start-joplin-staging`
-
-If you have a [Joplin](https://github.com/cityofaustin/joplin) instance running locally, you can run your local Janis against the local Joplin with...
-- $`yarn start-local`
 
 **As a static build**
 To run the site locally as a static build, the way it works in production, see the [Static build script](#static-build-script) section below.

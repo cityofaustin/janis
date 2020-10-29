@@ -6,21 +6,50 @@ export function buildPages(allData, itemsPerPage) {
   return pages
 }
 
-export function buildPagination(pages, maxPagesShown, pageNumber) {
-  if (pages.length < 2) return []
-  let shownPages = [pageNumber+1]
+/**
+  Returns an array of pageSelectorValues, the values that are displayed
+  in the PageSelector.
+  ex:
+    [1, 2] if there are only 2 pages total.
+    [1,2,3,4,5,"..."] if there are many pages and current pageNumber === 1
+    ["...", 4,5,6,7,8, "..."] if there are many pages and current pageNumber === 6
 
-  for (var i = 1; i < maxPagesShown; i++) {
-    // Add the next page # and/or the previous page # if page exists
-    if (pageNumber + i <= pages.length - 1) shownPages.push(pageNumber + i + 1)
-    if (pageNumber + (i*-1) >= 0) shownPages.unshift(pageNumber + (i*-1) + 1)
+**/
+export function buildPageSelectorValues(pagesCount, maxPagesShown, pageNumber) {
+  if (pagesCount < 2) return []
+  let pageSelectorValues = [{
+    "pageNumberDisplayed": pageNumber,
+    "pageNumberValue": pageNumber,
+  }]
+
+  for (let i = 1; i < maxPagesShown; i++) {
+    // Add the next pageNumber if page exists
+    let nextPageNumber = pageNumber + i;
+    if (nextPageNumber <= pagesCount) {
+      pageSelectorValues.push({
+        "pageNumberDisplayed": nextPageNumber,
+        "pageNumberValue": nextPageNumber
+      })
+    }
+    // Add the previous pageNumber if page exists
+    let previousPageNumber = pageNumber - i;
+    if (previousPageNumber > 0) {
+      pageSelectorValues.unshift({
+        "pageNumberDisplayed": previousPageNumber,
+        "pageNumberValue": previousPageNumber
+      })
+    }
     // If all slots are filled, break loop.
-    if (shownPages.length >= maxPagesShown) break
+    if (pageSelectorValues.length >= maxPagesShown) break
   }
 
   // replace first and last pageNumber in list with ellipsis if there is more than 1 page in either direction...
-  if (shownPages[0] > 1) shownPages[0] = "..."
-  if (shownPages[shownPages.length -1] < pages.length) shownPages[shownPages.length -1] = "..."
+  if (pageSelectorValues[0]["pageNumberValue"] > 1) {
+    pageSelectorValues[0]["pageNumberDisplayed"] = "..."
+  }
+  if (pageSelectorValues[pageSelectorValues.length-1]["pageNumberValue"] < pagesCount-1) {
+    pageSelectorValues[pageSelectorValues.length -1]["pageNumberDisplayed"] = "..."
+  }
 
-  return shownPages
+  return pageSelectorValues
 }

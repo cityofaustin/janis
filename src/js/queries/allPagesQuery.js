@@ -58,6 +58,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
           authoringOffice
           summary
           name
+          body
           document {
             fileSize
             filename
@@ -182,6 +183,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
           officialdocumentcollection {
             id
             title
+            documentsCount
             slug
             description
             departments {

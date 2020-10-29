@@ -1,13 +1,26 @@
 import axios from 'axios';
-import { GraphQLClient } from 'graphql-request';
+import { request, GraphQLClient } from 'graphql-request';
+import getToken from 'js/mutations/getToken.js'
 
-export const createGraphQLClientsByLang = (lang, CMS_API) => {
+export const createGraphQLClientsByLang = async (lang, CMS_API) => {
   const joplinEndpoint = CMS_API || process.env.CMS_API
 
-  return new GraphQLClient(joplinEndpoint, {
-    headers: { 'Accept-Language': lang },
-  });
+  const variables = {email: process.env.API_USERNAME, password: process.env.API_PASSWORD}
+
+  return request(joplinEndpoint, getToken, variables).then(data => {
+    return new GraphQLClient(joplinEndpoint, {
+      headers: { 'Accept-Language': lang, 'Authorization': `JWT ${data.tokenAuth.token}` },
+    });
+  })
 };
+
+export const createPreviewGraphQLClientsByLang = (lang, PREVIEW_CMS_API) => {
+  const joplinPreviewEndpoint = PREVIEW_CMS_API || process.env.CMS_API.replace("/api/graphql", "/api/preview/graphql")
+  return new GraphQLClient(joplinPreviewEndpoint, {
+    headers: {'Accept-Language': lang }
+  })
+}
+
 
 export const postFeedback = data => {
   const { title, description } = data;

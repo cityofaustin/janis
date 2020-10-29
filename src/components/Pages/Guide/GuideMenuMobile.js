@@ -3,26 +3,11 @@ import classNames from 'classnames';
 
 import GuideMenu from 'components/Pages/Guide/GuideMenu';
 import { hyphenate } from './helpers';
+import { mobilePopupHelper } from 'js/helpers/hooks';
 
 function GuideMenuMobile({ title, contact, sections, currentSection, scrollGuideMenu, handleSectionClick, clickedSection }) {
   const [menuOpened, setMenuOpened] = useState(false);
-
-  // Freeze the body of the page when mobile menu is opened.
-  // Unfreeze the body of the page when mobile menu is closed.
-  useEffect(() => {
-    if (menuOpened) {
-      window.document.body.classList.add('frozen-body');
-    } else {
-      window.document.body.classList.remove('frozen-body');
-    }
-  }, [menuOpened]);
-
-  // Close menu when user pressed "back" button on browser
-  useEffect(() => {
-    window.onpopstate = function(event) {
-      if (menuOpened) setMenuOpened(false);
-    };
-  }, [menuOpened]);
+  mobilePopupHelper(menuOpened, setMenuOpened)
 
   function toggleMenuOpened() {
     setMenuOpened(!menuOpened);

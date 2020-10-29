@@ -1,20 +1,15 @@
 import React from 'react';
 import { useRouteData, Head } from 'react-static';
-
-import PageHeader from 'components/PageHeader';
+import { useIntl } from 'react-intl';
+import moment from 'moment-timezone';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import ContactDetails from 'components/Contact/ContactDetails';
 import UserFeedback from 'components/UserFeedback';
-
-import { useIntl } from 'react-intl';
-
-import moment from 'moment-timezone';
+import EventDetailCard from 'components/Pages/Event/EventDetailCard';
 
 import { events as i18n } from 'js/i18n/definitions';
-
-import EventDetailCard from 'components/Pages/Event/EventDetailCard';
 
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();

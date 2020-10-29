@@ -8,6 +8,7 @@
 @import 'css/vendor/variables_flexboxgrid';
 @import 'node_modules/flexboxgrid-sass/flexboxgrid';
 @import 'css/vendor/bootstrap_utilities_display';
+@import "node_modules/react-day-picker/lib/style";
 
 // base
 @import 'css/base/base';
@@ -70,8 +71,8 @@
 @import 'components/Pages/Form';
 @import 'components/PageSections/PendingTranslation/PendingTranslation';
 @import 'components/Pages/Location/Location';
-@import 'components/Pages/Event';
-@import 'components/Pages/EventList';
+@import 'components/Pages/Event/Event';
+@import 'components/Pages/EventList/EventList';
 @import 'components/Pages/News/News';
 @import 'components/PageSections/EventsHomePage/EventsHomePage';
 @import 'components/PageSections/RelatedEvents/RelatedEvents';
@@ -80,5 +81,6 @@
 @import 'components/Pages/Search/SearchResult';
 @import 'components/PageSections/RelatedEvents/RelatedEvents';
 @import 'components/PageSections/Pagination/Pagination';
+@import 'components/PageSections/Pagination/Filter';
 @import 'components/PageSections/SearchBar/SearchBar';
 @import 'components/PageSections/SearchBar/SearchIcon';

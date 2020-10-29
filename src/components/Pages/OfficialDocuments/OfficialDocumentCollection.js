@@ -1,30 +1,43 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { useRouteData, Head } from 'react-static';
-import { injectIntl } from 'react-intl';
+import { misc as i18n } from 'js/i18n/definitions';
 
 import HtmlFromRichText from 'components/HtmlFromRichText';
 import ContextualNav from 'components/PageSections/ContextualNav';
 import PageHeader from 'components/PageHeader';
-import OfficialDocumentPaginationPage from 'components/Pages/OfficialDocuments/OfficialDocumentPaginationPage';
+import OfficialDocumentEntry from 'components/Pages/OfficialDocuments/OfficialDocumentEntry';
+import PaginationFiltered from 'components/PageSections/Pagination/PaginationFiltered.js';
+import UserFeedback from 'components/UserFeedback';
+import { createDateFromString } from 'js/helpers/date';
 
-const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
+/**
+  @param CMS_API
+    CMSPreview will pass through CMS_API
+    Defaults to process.env.CMS_API if CMS_PREVIEW doesn't include explicit CMS_API param
+**/
+const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=process.env.CMS_API }) => {
+  const intl = useIntl();
   const {
     officialDocumentCollection: {
-      id,
+      pageId,
       title,
       description,
-      slug,
-      topic,
-      topics,
-      theme,
-      department,
-      documents,
+      documentsCount,
       coaGlobal,
       contextualNavData,
+      lowerBound, // DateString "YYYY-MM-DD"
     },
   } = officialDocumentCollection ? { officialDocumentCollection } : useRouteData();
 
   const descriptonBlock = <HtmlFromRichText content={description} />
+
+  let subDescription = documentsCount + " "
+  if (documentsCount === 1) {
+    subDescription += intl.formatMessage(i18n.documentsTotal)
+  } else {
+    subDescription += intl.formatMessage(i18n.documentsTotalPlural)
+  }
 
   return (
     <div>
@@ -39,16 +52,23 @@ const OfficialDocumentCollection = ({ officialDocumentCollection, intl }) => {
         />
       )}
       <div>
-        <PageHeader contentType={'official-document'} description={descriptonBlock}>
+        <PageHeader
+          contentType={'official-document'}
+          description={descriptonBlock}
+          subDescription={subDescription}
+        >
           {title}
         </PageHeader>
-        <OfficialDocumentPaginationPage
-          officialDocuments={documents}
-          intl={intl}
+        <PaginationFiltered
+          PageComponent={OfficialDocumentEntry}
+          lowerBound={createDateFromString(lowerBound)}
+          officialDocumentCollectionId={pageId}
+          CMS_API={CMS_API}
         />
+        <UserFeedback />
       </div>
     </div>
   );
 };
 
-export default injectIntl(OfficialDocumentCollection);
+export default OfficialDocumentCollection;

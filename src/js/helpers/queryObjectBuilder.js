@@ -34,7 +34,7 @@ export function queryObjectBuilder() {
   const queryObject = {}
 
   if (typeof window !== 'undefined') {
-    const query = decodeURIComponent(window.location.hash.split("#")[1])
+    const query = decodeURIComponent(window.location.hash.split("?")[1])
     if (query !== 'undefined') {
       const querySplit = query.split('&')
       querySplit.forEach( keyValue => {
