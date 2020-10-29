@@ -32,21 +32,9 @@ const branchOverrides = {
   '3690-incremental': {
     joplin_appname: 'joplin-pr-3690-incremental',
   },
-  '4787-pdf-content': {
-    joplin_appname: 'joplin-pr-4787-pdf-docs',
+  '5012-contact-slash': {
+    joplin_appname: 'joplin-pr-4907-remove-importer',
   },
-  '4776-elastic': {
-    joplin_appname: 'joplin-pr-4776-elastic'
-  },
-  '4849-filter': {
-    joplin_appname: 'joplin-pr-4849-filter',
-  },
-  '5052-search': {
-    joplin_appname: 'joplin-pr-5052-search'
-  },
-  '5052-search-bugs': {
-    joplin_appname: 'joplin-staging'
-  }
 };
 
 module.exports = {
