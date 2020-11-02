@@ -33,7 +33,7 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
   },
   '5012-contact-slash': {
-    joplin_appname: 'joplin-pr-4907-remove-importer',
+    joplin_appname: 'joplin-pr-4940-virtual-event',
   },
 };
 
