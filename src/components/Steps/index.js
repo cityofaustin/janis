@@ -42,10 +42,10 @@ const mapSteps = (steps, singleStep) =>
 const Steps = ({ steps }) => (
   <div className="coa-Steps">
     {steps.length === 1 ? (
-      <Fragment>🔥{mapSteps(steps, true)}</Fragment>
+      <Fragment>{mapSteps(steps, true)}</Fragment>
     ) : (
       <div className="coa-Steps__list">
-        <ol>🔥🔥{mapSteps(steps)}</ol>
+        <ol>{mapSteps(steps)}</ol>
       </div>
     )}
   </div>

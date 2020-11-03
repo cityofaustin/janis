@@ -48,3 +48,17 @@
     }
   }
 }
+
+.coa-HtmlFromRichText_exteranlLink {
+  // This hides the "a" tag underline so we can style separately for the icon and 
+  // prevent the icon from new line breaking all alone...
+  text-decoration-color: rgba(0,0,0,0);
+}
+
+.coa-HtmlFromRichText_exteranlLinkIcon {
+  font-size: 14px;
+  display: inline;
+  white-space: nowrap;
+  padding-left: 2px;
+  line-height: 20px;
+}

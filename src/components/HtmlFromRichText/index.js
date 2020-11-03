@@ -68,11 +68,41 @@ const HtmlFromRichText = ({ content }) => {
             domNode.children = linkChild.children;
           }
         }
+
+        /*
+          We want to add an external link icon to our external links. This will
+          check to see if the link includes "http", indicating it is external,
+          and then included the external link icon!
+        */
+        if (domNode.name === "a" && domNode.attribs.href.includes("http")) {
+          domNode.attribs.class += " coa-HtmlFromRichText_exteranlLink"
+          const linkTextContent = domNode.children[0].data
+
+          // convert text link to own element for style underline specific.
+          domNode.children[0] = {
+            type: "tag",
+            name: "u",
+            children: [{
+              type: "text",
+              data: linkTextContent
+            }],
+          }
+          domNode.children.push({
+            type: "tag",
+            name: "i",
+            attribs: {
+              class: "material-icons coa-HtmlFromRichText_exteranlLinkIcon",
+            },
+            children: [{
+              type: "text",
+              data: "open_in_new"
+            }],
+          })
+        }
+
       }
     },
   });
-
-  console.log("parsed :", parsed)
 
   return parsed
 };
