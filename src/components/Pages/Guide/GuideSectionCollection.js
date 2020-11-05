@@ -33,12 +33,21 @@ function GuideSection({
         {page.servicePage && <Steps steps={pageData.steps} />}
         <HtmlFromRichText title={' '} content={additionalContent} />
       </div>
-      <div className="coa-GuideSection__link">
-        <a href={url} target="_blank">
-          {intl.formatMessage(i18n.pageLink)}
-          <i className="material-icons">open_in_new</i>
-        </a>
-      </div>
+
+
+      {/*
+        We decided to remove the internal link on the guide pages here.
+        Thinking It might be worth keeped noted out here just to save how it was
+        implimented for the time being.... 
+
+        <div className="coa-GuideSection__link">
+          <a href={url} target="_blank">
+            {intl.formatMessage(i18n.pageLink)}
+            <i className="material-icons">open_in_new</i>
+          </a>
+        </div>
+      */}
+
     </div>
   );
 }
