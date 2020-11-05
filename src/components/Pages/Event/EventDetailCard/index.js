@@ -22,6 +22,13 @@ const EventTime = ({ startTime, endTime, noon }) => {
   return null;
 };
 
+const EventLocationVirtual = () => (
+  <div className="coa-EventDetailItem">
+    <i className="material-icons">devices</i> 
+    Virtual Event
+  </div>
+)
+
 const EventDetailCard = ({
   date,
   startTime,
@@ -39,6 +46,8 @@ const EventDetailCard = ({
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
 
+  console.log(location);
+
   return (
     <div className="coa-EventPage__EventDetailCard">
       <div className="coa-EventDetailItem">
@@ -48,17 +57,17 @@ const EventDetailCard = ({
           <EventTime startTime={startTime} endTime={endTime} noon={noon} />
         </div>
       </div>
-      {location && location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_of_Austin_location' ? (
         <EventLocationDetail
-          name={location.cityLocation.title}
-          street={location.cityLocation.physicalStreet}
-          city={location.cityLocation.physicalCity}
-          state={location.cityLocation.physicalState}
-          zip={location.cityLocation.physicalZip}
-          unit={location.cityLocation.physicalUnit}
+          name={location.cityOfAustinLocation.title}
+          street={location.cityOfAustinLocation.physicalStreet}
+          city={location.cityOfAustinLocation.physicalCity}
+          state={location.cityOfAustinLocation.physicalState}
+          zip={location.cityOfAustinLocation.physicalZip}
+          unit={location.cityOfAustinLocation.physicalUnit}
           additionalDetails={location.additionalDetails}
         />
-      ) : location && location.locationType === 'remote_location' ? (
+      ) : location && location.locationType === 'remote_non_Coa_location' ? (
         <EventLocationDetail
           name={location.remoteLocation.name}
           street={location.remoteLocation.street}
@@ -69,14 +78,17 @@ const EventDetailCard = ({
           additionalDetails={location.additionalDetails}
         />
       ) : null}
+      {location && location.locationType === 'virtual_event' ? 
+        <EventLocationVirtual />
+        : null}
       <EventDetailFees
         eventIsFree={eventIsFree}
         fees={fees}
         registrationUrl={registrationUrl}
       />
-      {location && location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_of_Austin_location' ? (
         <a
-          href={`/${intl.locale}/location/${location.cityLocation.slug}/`}
+          href={`/${intl.locale}/location/${location.cityOfAustinLocation.slug}/`}
           className="coa-EventDetailItem__location-link"
         >
           <div className="coa-EventDetailItem__location-link-text">
