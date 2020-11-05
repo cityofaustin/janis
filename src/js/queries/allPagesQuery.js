@@ -145,7 +145,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
               locations {
                 additionalDetails
                 locationType
-                cityLocation {
+                cityOfAustinLocation {
                   id
                   title
                   physicalStreet
@@ -155,13 +155,16 @@ query allPagesQuery($after: String, $batchSize: Int) {
                   physicalUnit
                   slug
                 }
-                remoteLocation {
+                remoteNonCoaLocation {
                   name
                   street
                   city
                   state
                   zip
                   unit
+                }
+                virtualEvent {
+                  eventLink
                 }
               }
               eventIsFree,

@@ -31,7 +31,7 @@ const informationPageFragment = `
       locations {
         additionalDetails
         locationType
-        cityLocation {
+        cityOfAustinLocation {
           id
           title
           physicalStreet
@@ -41,13 +41,16 @@ const informationPageFragment = `
           physicalUnit
           slug
         }
-        remoteLocation {
+        remoteNonCoaLocation {
           name
           street
           city
           state
           zip
           unit
+        }
+        virtualEvent {
+          eventLink
         }
       }
       eventIsFree,
