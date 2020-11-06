@@ -3,7 +3,7 @@ import FacebookAltSVG from 'components/SVGs/FacebookAlt';
 import ExternalLink from 'components/ExternalLink';
 
 const Facebook = ({ url }) => {
-  const regex = /^(?:http\:\/\/|https\:\/\/)?(?:www\.)?facebook\.com\/((?:\w\.)*#!\/)?([\w\-\.]*\/)*([\w\-\.]*)/;
+  const regex = /^(?:http\:\/\/|https\:\/\/)?(?:www\.)?facebook\.com\/((?:\w\.)*#!\/)?([\w\-\.]*\/*)*([\w\-\.]*)/;
   const matches = url.match(regex);
 
   return (
