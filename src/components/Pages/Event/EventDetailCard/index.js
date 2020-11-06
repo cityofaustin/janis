@@ -22,12 +22,17 @@ const EventTime = ({ startTime, endTime, noon }) => {
   return null;
 };
 
-const EventLocationVirtual = () => (
-  <div className="coa-EventDetailItem">
-    <i className="material-icons">devices</i> 
-    Virtual Event
-  </div>
-)
+const EventLocationVirtual = () => {
+  const intl = useIntl();
+  return (
+    <div className="coa-EventDetailVirtual">
+      <i className="material-icons">devices</i> 
+      <div className="coa-EventDetailVirtual_content">
+        {intl.formatMessage(i18n.virtualEvent)}
+      </div>
+    </div>
+  )
+}
 
 const EventDetailCard = ({
   date,
@@ -45,8 +50,6 @@ const EventDetailCard = ({
   // make sure to capatalize the first letter in the date
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
-
-  console.log(location);
 
   return (
     <div className="coa-EventPage__EventDetailCard">

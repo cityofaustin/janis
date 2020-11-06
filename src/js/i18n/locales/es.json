@@ -172,6 +172,7 @@
   "events.noon": "Mediodía",
   "events.upcoming": "Próximos eventos",
   "events.viewAll": "Ver todos los eventos",
+  "events.virtualEvent": "Evento virtual",
   "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin",
   "search.search": "Buscar",
   "search.results": "Resultados para {searchedTerm}",
