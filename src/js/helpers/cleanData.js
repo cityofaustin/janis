@@ -105,7 +105,7 @@ export const cleanLocation = locations => {
   if (locations.length === 2) {
     if (locations[0].locationType === 'virtual_event') {
       location = {...locations[1]};
-      location.virtualEvent = locations[0]].virtualEvent;
+      location.virtualEvent = locations[0].virtualEvent;
       location.virtualEvent.additionalDetails = locations[0].additionalDetails;
     } else {
       location = {...locations[0]};
