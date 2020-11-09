@@ -10,7 +10,7 @@ import UserFeedback from 'components/UserFeedback';
 import EventDetailCard from 'components/Pages/Event/EventDetailCard';
 
 import { events as i18n } from 'js/i18n/definitions';
-import cleanLocations from 'js/helpers/cleanData.js'
+import { cleanLocations } from 'js/helpers/cleanData.js'
 
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
