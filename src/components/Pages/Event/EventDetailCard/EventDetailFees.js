@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
 
-const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
+const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) => {
   const intl = useIntl();
 
   const registrationLinkFragment = (
@@ -15,6 +15,16 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
     </React.Fragment>
   );
 
+  const virtualLinkFragment = (
+    <React.Fragment>
+      {virtualLink ? (
+        <a href={virtualLink}>{intl.formatMessage(i18n.register)}</a> // todo : what does this say??
+      ) : (
+        null
+      )}
+    </React.Fragment>
+  );
+
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">local_play</i>
@@ -22,7 +32,7 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
         {eventIsFree ? (
           <div className="coa-EventDetailItem__fees-free">
             <div>{`${intl.formatMessage(i18n.free)}`}</div>
-            <div>{registrationLinkFragment}</div>
+            <div>{virtualLinkFragment || registrationLinkFragment}</div>
           </div>
         ) : (
           !!fees &&
@@ -37,7 +47,7 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
                     : `$${edge.node.fee}`}
                 </div>
               ))}
-              <div>{registrationLinkFragment}</div>
+              <div>{virtualLinkFragment || registrationLinkFragment}</div>
             </React.Fragment>
           )
         )}

@@ -51,6 +51,8 @@ const EventDetailCard = ({
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
 
+  // todo: we are going to have to be able to handle two locations, virtual and physical. or just one
+
   return (
     <div className="coa-EventPage__EventDetailCard">
       <div className="coa-EventDetailItem">
@@ -81,13 +83,14 @@ const EventDetailCard = ({
           additionalDetails={location.additionalDetails}
         />
       ) : null}
-      {location && location.locationType === 'virtual_event' ? 
+      {location && (location.locationType === 'virtual_event' || location.virtualEvent) ? 
         <EventLocationVirtual />
         : null}
       <EventDetailFees
         eventIsFree={eventIsFree}
         fees={fees}
         registrationUrl={registrationUrl}
+        virtualLink={location.virtualEvent && location.virtualEvent.eventLink}
       />
       {location && location.locationType === 'city_of_Austin_location' ? (
         <a
