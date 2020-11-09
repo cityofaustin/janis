@@ -42,21 +42,9 @@ const branchOverrides = {
   'out-link': {
     joplin_appname: 'joplin',
   },
-  '5061-event-list': {
-    joplin_appname: 'joplin',
+  '5012-contact-slash': {
+    joplin_appname: 'joplin-pr-4940-virtual-event',
   },
-  '4776-elastic': {
-    joplin_appname: 'joplin-pr-4776-elastic'
-  },
-  '4849-filter': {
-    joplin_appname: 'joplin-pr-4849-filter',
-  },
-  '5052-search': {
-    joplin_appname: 'joplin-pr-5052-search'
-  },
-  '5052-search-bugs': {
-    joplin_appname: 'joplin-staging'
-  }
 };
 
 module.exports = {
