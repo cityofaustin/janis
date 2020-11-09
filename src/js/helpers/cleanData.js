@@ -109,7 +109,7 @@ export const cleanLocation = locations => {
       location.virtualEvent.additionalDetails = locations[0].additionalDetails;
     } else {
       location = {...locations[0]};
-      location.virtualEvent = locations[1]].virtualEvent;
+      location.virtualEvent = locations[1].virtualEvent;
       location.virtualEvent.additionalDetails = locations[1].additionalDetails;
     }
   }
