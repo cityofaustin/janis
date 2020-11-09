@@ -25,6 +25,8 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) =>
     </React.Fragment>
   );
 
+  console.log(virtualLinkFragment || registrationLinkFragment);
+
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">local_play</i>

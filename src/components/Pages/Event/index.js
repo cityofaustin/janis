@@ -10,7 +10,7 @@ import UserFeedback from 'components/UserFeedback';
 import EventDetailCard from 'components/Pages/Event/EventDetailCard';
 
 import { events as i18n } from 'js/i18n/definitions';
-import { cleanLocations } from 'js/helpers/cleanData.js'
+import { cleanLocation } from 'js/helpers/cleanData.js'
 
 const EventDate = ({ date, canceled }) => {
   const intl = useIntl();
@@ -52,9 +52,7 @@ const EventPage = ({ eventPage }) => {
     },
   } = eventPage ? { eventPage } : useRouteData();
 
-  // until we have support for multiple locations, we're taking the first one
-  // const location = locations[0];
-  const location = cleanLocations(locations);
+  const location = cleanLocation(locations);
 
   return (
     <div>
