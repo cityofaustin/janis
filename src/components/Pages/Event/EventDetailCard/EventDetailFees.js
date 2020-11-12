@@ -15,18 +15,6 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) =>
     </React.Fragment>
   );
 
-  const virtualLinkFragment = (
-    <React.Fragment>
-      {virtualLink ? (
-        <a href={virtualLink}>{intl.formatMessage(i18n.register)}</a> // todo : what does this say??
-      ) : (
-        null
-      )}
-    </React.Fragment>
-  );
-
-  console.log(virtualLinkFragment || registrationLinkFragment);
-
   return (
     <div className="coa-EventDetailItem">
       <i className="material-icons">local_play</i>
@@ -34,7 +22,7 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) =>
         {eventIsFree ? (
           <div className="coa-EventDetailItem__fees-free">
             <div>{`${intl.formatMessage(i18n.free)}`}</div>
-            <div>{virtualLinkFragment || registrationLinkFragment}</div>
+            <div>{registrationLinkFragment}</div>
           </div>
         ) : (
           !!fees &&
@@ -49,7 +37,7 @@ const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) =>
                     : `$${edge.node.fee}`}
                 </div>
               ))}
-              <div>{virtualLinkFragment || registrationLinkFragment}</div>
+              <div>{registrationLinkFragment}</div>
             </React.Fragment>
           )
         )}

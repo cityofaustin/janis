@@ -22,13 +22,19 @@ const EventTime = ({ startTime, endTime, noon }) => {
   return null;
 };
 
-const EventLocationVirtual = () => {
+const EventLocationVirtual = ({eventLink, eventCode}) => {
   const intl = useIntl();
   return (
     <div className="coa-EventDetailVirtual">
       <i className="material-icons">devices</i> 
       <div className="coa-EventDetailVirtual_content">
         {intl.formatMessage(i18n.virtualEvent)}
+        <p>
+          <a href={eventLink}>
+            {eventLink}
+          </a>
+        </p>
+        {!!eventCode && <p>{eventCode}</p>}
       </div>
     </div>
   )
@@ -50,8 +56,6 @@ const EventDetailCard = ({
   // make sure to capatalize the first letter in the date
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
-
-  // todo: we are going to have to be able to handle two locations, virtual and physical. or just one
 
   return (
     <div className="coa-EventPage__EventDetailCard">
@@ -84,7 +88,10 @@ const EventDetailCard = ({
         />
       ) : null}
       {location && (location.locationType === 'virtual_event' || location.virtualEvent) ? 
-        <EventLocationVirtual />
+        <EventLocationVirtual 
+          eventLink = {location.virtualEvent.eventLink}
+          eventCode = {location.virtualEvent.additionalDetails}
+        />
         : null}
       <EventDetailFees
         eventIsFree={eventIsFree}
