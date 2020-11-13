@@ -76,6 +76,7 @@ const eventPageFragment = `
       }
       virtualEvent {
         eventLink
+        additionalInformation
       } 
     }
     eventIsFree

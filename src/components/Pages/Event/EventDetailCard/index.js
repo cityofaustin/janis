@@ -22,8 +22,9 @@ const EventTime = ({ startTime, endTime, noon }) => {
   return null;
 };
 
-const EventLocationVirtual = ({eventLink, eventCode}) => {
+const EventLocationVirtual = ({eventLink, additionalInformation}) => {
   const intl = useIntl();
+  console.log(additionalInformation)
   return (
     <div className="coa-EventDetailVirtual">
       <i className="material-icons">devices</i> 
@@ -34,7 +35,7 @@ const EventLocationVirtual = ({eventLink, eventCode}) => {
             {eventLink}
           </a>
         </p>
-        {!!eventCode && <p>{eventCode}</p>}
+        {!!additionalInformation && <p>{`Meeting Code:${additionalInformation}`}</p>}
       </div>
     </div>
   )
@@ -56,6 +57,8 @@ const EventDetailCard = ({
   // make sure to capatalize the first letter in the date
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
+
+  console.log(location)
 
   return (
     <div className="coa-EventPage__EventDetailCard">
@@ -90,7 +93,7 @@ const EventDetailCard = ({
       {location && (location.locationType === 'virtual_event' || location.virtualEvent) ? 
         <EventLocationVirtual 
           eventLink = {location.virtualEvent.eventLink}
-          eventCode = {location.virtualEvent.additionalDetails}
+          additionalInformation = {location.virtualEvent.additionalInformation}
         />
         : null}
       <EventDetailFees
