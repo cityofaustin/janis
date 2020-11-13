@@ -71,11 +71,10 @@ const EventDateListDetails = ({
       ? `${formatTimeLang(startTime, noon)}–${formatTimeLang(endTime, noon)}`
       : formatTimeLang(startTime, noon);
 
-  console.log(location)
   let locationName = null;
   if (location) {
     if (location.locationType === 'virtual_event') {
-      locationName = 'Virtual event'; //todo: translate!
+      locationName = intl.formatMessage(i18n.virtualEvent);
     } else {
       locationName =
         location.locationType === 'city_of_Austin_location'

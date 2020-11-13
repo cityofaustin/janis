@@ -37,7 +37,7 @@ const EventLocationVirtual = ({eventLink, additionalInformation}) => {
         </div>
         {!!additionalInformation &&
           <div className="coa-EventDetailVirtual__content-code">
-            {`Meeting Code: ${additionalInformation}`}
+            {`${intl.formatMessage(i18n.meetingCode)}: ${additionalInformation}`}
           </div>}
       </div>
     </div>
