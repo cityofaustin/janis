@@ -111,10 +111,15 @@
 
 }
 
-.coa-EventDetailVirtual_content {
+.coa-EventDetailVirtual__content {
   margin-left: 1.2rem;
   font-size: 1.4rem;
-  line-height: 2.2rem;}
+  line-height: 2.2rem;
+}
+
+.coa-EventDetailVirtual__content-code {
+  color: #5c5c5c;
+}
 
 .coa-EventsPage__contacts-desktop {
   width: 350px;

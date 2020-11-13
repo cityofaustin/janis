@@ -28,14 +28,17 @@ const EventLocationVirtual = ({eventLink, additionalInformation}) => {
   return (
     <div className="coa-EventDetailVirtual">
       <i className="material-icons">devices</i> 
-      <div className="coa-EventDetailVirtual_content">
+      <div className="coa-EventDetailVirtual__content">
         {intl.formatMessage(i18n.virtualEvent)}
-        <p>
+        <div>
           <a href={eventLink}>
             {eventLink}
           </a>
-        </p>
-        {!!additionalInformation && <p>{`Meeting Code:${additionalInformation}`}</p>}
+        </div>
+        {!!additionalInformation &&
+          <div className="coa-EventDetailVirtual__content-code">
+            {`Meeting Code: ${additionalInformation}`}
+          </div>}
       </div>
     </div>
   )
