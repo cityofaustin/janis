@@ -165,6 +165,7 @@ query allPagesQuery($after: String, $batchSize: Int) {
                 }
                 virtualEvent {
                   eventLink
+                  additionalInformation
                 }
               }
               eventIsFree,

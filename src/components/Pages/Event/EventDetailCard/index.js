@@ -24,7 +24,6 @@ const EventTime = ({ startTime, endTime, noon }) => {
 
 const EventLocationVirtual = ({eventLink, additionalInformation}) => {
   const intl = useIntl();
-  console.log(additionalInformation)
   return (
     <div className="coa-EventDetailVirtual">
       <i className="material-icons">devices</i> 
@@ -60,8 +59,6 @@ const EventDetailCard = ({
   // make sure to capatalize the first letter in the date
   momentDate = momentDate.charAt(0).toUpperCase() + momentDate.slice(1);
   const noon = intl.formatMessage(i18n.noon);
-
-  console.log(location)
 
   return (
     <div className="coa-EventPage__EventDetailCard">

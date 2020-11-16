@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { events as i18n } from 'js/i18n/definitions';
 
-const EventDetailFees = ({ eventIsFree, fees, registrationUrl, virtualLink }) => {
+const EventDetailFees = ({ eventIsFree, fees, registrationUrl }) => {
   const intl = useIntl();
 
   const registrationLinkFragment = (

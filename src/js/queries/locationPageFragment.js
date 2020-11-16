@@ -138,6 +138,7 @@ const locationPageFragment = `
         }
         virtualEvent {
           eventLink
+          additionalInformation
         }
       }
       eventIsFree,

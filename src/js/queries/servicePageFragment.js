@@ -47,6 +47,7 @@ const servicePageFragment = `
         }
         virtualEvent {
           eventLink
+          additionalInformation
         } 
       }
       eventIsFree,

@@ -51,6 +51,7 @@ const informationPageFragment = `
         }
         virtualEvent {
           eventLink
+          additionalInformation
         }
       }
       eventIsFree,
