@@ -45,6 +45,9 @@ const branchOverrides = {
   '5012-contact-slash': {
     joplin_appname: 'joplin-pr-4940-virtual-event',
   },
+  '4940-virtual-event': {
+    joplin_appname: 'joplin-pr-4940-virtual-event',
+  },
 };
 
 module.exports = {

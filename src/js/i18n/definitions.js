@@ -566,6 +566,8 @@ export const events = defineMessages({
   noon: 'Noon',
   upcoming: 'Upcoming events',
   viewAll: 'View all events',
+  virtualEvent: 'Virtual event',
+  meetingCode: 'Meeting code'
 });
 
 export const alert = defineMessages({

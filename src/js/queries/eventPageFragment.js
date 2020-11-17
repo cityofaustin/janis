@@ -56,7 +56,7 @@ const eventPageFragment = `
     locations {
       additionalDetails
       locationType
-      cityLocation {
+      cityOfAustinLocation {
         id
         title
         physicalStreet
@@ -66,7 +66,7 @@ const eventPageFragment = `
         physicalUnit
         slug
       }
-      remoteLocation {
+      remoteNonCoaLocation {
         name
         street
         city
@@ -74,6 +74,10 @@ const eventPageFragment = `
         zip
         unit
       }
+      virtualEvent {
+        eventLink
+        additionalInformation
+      } 
     }
     eventIsFree
     fees {

@@ -73,10 +73,14 @@ const EventDateListDetails = ({
 
   let locationName = null;
   if (location) {
-    locationName =
-      location.locationType === 'city_location'
-        ? location.cityLocation.title
-        : location.remoteLocation.name;
+    if (location.locationType === 'virtual_event') {
+      locationName = intl.formatMessage(i18n.virtualEvent);
+    } else {
+      locationName =
+        location.locationType === 'city_of_Austin_location'
+          ? location.cityOfAustinLocation.title
+          : location.remoteNonCoaLocation.name;
+    }
   }
 
   // Joplin lets a user mark an event as free but also include costs.
