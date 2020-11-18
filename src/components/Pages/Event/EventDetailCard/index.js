@@ -22,6 +22,27 @@ const EventTime = ({ startTime, endTime, noon }) => {
   return null;
 };
 
+const EventLocationVirtual = ({eventLink, additionalInformation}) => {
+  const intl = useIntl();
+  return (
+    <div className="coa-EventDetailVirtual">
+      <i className="material-icons">devices</i> 
+      <div className="coa-EventDetailVirtual__content">
+        {intl.formatMessage(i18n.virtualEvent)}
+        <div>
+          <a href={eventLink}>
+            {eventLink}
+          </a>
+        </div>
+        {!!additionalInformation &&
+          <div className="coa-EventDetailVirtual__content-code">
+            {`${intl.formatMessage(i18n.meetingCode)}: ${additionalInformation}`}
+          </div>}
+      </div>
+    </div>
+  )
+}
+
 const EventDetailCard = ({
   date,
   startTime,
@@ -48,17 +69,17 @@ const EventDetailCard = ({
           <EventTime startTime={startTime} endTime={endTime} noon={noon} />
         </div>
       </div>
-      {location && location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_of_Austin_location' ? (
         <EventLocationDetail
-          name={location.cityLocation.title}
-          street={location.cityLocation.physicalStreet}
-          city={location.cityLocation.physicalCity}
-          state={location.cityLocation.physicalState}
-          zip={location.cityLocation.physicalZip}
-          unit={location.cityLocation.physicalUnit}
+          name={location.cityOfAustinLocation.title}
+          street={location.cityOfAustinLocation.physicalStreet}
+          city={location.cityOfAustinLocation.physicalCity}
+          state={location.cityOfAustinLocation.physicalState}
+          zip={location.cityOfAustinLocation.physicalZip}
+          unit={location.cityOfAustinLocation.physicalUnit}
           additionalDetails={location.additionalDetails}
         />
-      ) : location && location.locationType === 'remote_location' ? (
+      ) : location && location.locationType === 'remote_non_Coa_location' ? (
         <EventLocationDetail
           name={location.remoteLocation.name}
           street={location.remoteLocation.street}
@@ -69,14 +90,21 @@ const EventDetailCard = ({
           additionalDetails={location.additionalDetails}
         />
       ) : null}
+      {location && (location.locationType === 'virtual_event' || location.virtualEvent) ? 
+        <EventLocationVirtual 
+          eventLink = {location.virtualEvent.eventLink}
+          additionalInformation = {location.virtualEvent.additionalInformation}
+        />
+        : null}
       <EventDetailFees
         eventIsFree={eventIsFree}
         fees={fees}
         registrationUrl={registrationUrl}
+        virtualLink={location.virtualEvent && location.virtualEvent.eventLink}
       />
-      {location && location.locationType === 'city_location' ? (
+      {location && location.locationType === 'city_of_Austin_location' ? (
         <a
-          href={`/${intl.locale}/location/${location.cityLocation.slug}/`}
+          href={`/${intl.locale}/location/${location.cityOfAustinLocation.slug}/`}
           className="coa-EventDetailItem__location-link"
         >
           <div className="coa-EventDetailItem__location-link-text">

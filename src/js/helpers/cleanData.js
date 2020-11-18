@@ -94,6 +94,28 @@ export const cleanContact = contact => {
   return cleaned;
 };
 
+export const cleanLocation = locations => {
+  // with the introduction of virtual events, we no longer can just accept the 
+  // first location in the array, since events can have two locations (virtual 
+  // plus a physical one)
+  let location = {}
+  if (locations.length === 1) {
+    return locations[0]
+  }
+  if (locations.length === 2) {
+    if (locations[0].locationType === 'virtual_event') {
+      location = {...locations[1]};
+      location.virtualEvent = locations[0].virtualEvent;
+      location.virtualEvent.additionalInformation = locations[0].virtualEvent.additionalInformation;
+    } else {
+      location = {...locations[0]};
+      location.virtualEvent = locations[1].virtualEvent;
+      location.virtualEvent.additionalInformation = locations[1].virtualEvent.additionalInformation;
+    }
+  }
+  return location
+}
+
 export const cleanLocationPageUrl = janisUrls => {
   if (!!janisUrls.length) {
     return janisUrls[0];
