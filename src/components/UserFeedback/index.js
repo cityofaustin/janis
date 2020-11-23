@@ -147,14 +147,16 @@ class UserFeedback extends Component {
       <div className="coa-UserFeedback">
         {true //this.state.feedbackSubmitted
           ? <div className="coa-UserFeedback__thankYou">
+                <div className="coa-UserFeedback__thankYou--check">
+                  <div className="coa-UserFeedback__check">
+                    <i className="material-icons">check</i>
+                  </div>
+                </div>
                 <h3> {intl.formatMessage(i18n2.received)}</h3>
                 <p>
                     <span>{intl.formatMessage(i18n2.furtherHelp)}</span>
                     <a href={feedbackLink}>{intl.formatMessage(i18n2.signUp)}</a>.
                 </p>
-                <div className="coa-UserFeedback__check">
-                  <i className="material-icons">check</i>
-                </div>
               </div>
           :
             <Fragment>
