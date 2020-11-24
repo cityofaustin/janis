@@ -73,8 +73,10 @@ export const userFeedback = defineMessages({
   tellUsMore:
     "Please tell us more about your feedback. \n We'll use this information to improve the site.",
   submit: 'Submit',
-  received: 'We have received your feedback.',
+  received: 'Thank you for your feedback.',
   thankYou: 'Thank you for helping improve this website!',
+  furtherHelp: 'To further help us make this website better, ',
+  signUp: 'sign up for a paid user feedback session with our team',
   characterLimit: 'Character limit',
   of: 'of',
   errorMessage:

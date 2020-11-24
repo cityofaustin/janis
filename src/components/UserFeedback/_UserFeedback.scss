@@ -2,11 +2,16 @@ $loader-dotsize: 6px; /* Specifies the size WxH of each dot in the sending anima
 
 .coa-UserFeedback {
   p {
-    padding: 20px;
+    padding: 10px;
     margin: 0;
-    @media screen and (min-width: 768px) {
-      padding: 30px;
-    }
+  }
+}
+
+.coa-UserFeedback__thankYou--check {
+  padding: 10px;
+  margin: 0;
+  @media screen and (min-width: 768px) {
+      padding: 20px;
   }
 }
 
