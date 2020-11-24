@@ -145,7 +145,7 @@ class UserFeedback extends Component {
 
     return (
       <div className="coa-UserFeedback">
-        {true //this.state.feedbackSubmitted
+        {this.state.feedbackSubmitted
           ? <div className="coa-UserFeedback__thankYou">
                 <div className="coa-UserFeedback__thankYou--check">
                   <div className="coa-UserFeedback__check">
