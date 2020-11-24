@@ -141,16 +141,22 @@ class UserFeedback extends Component {
       : "coa-UserFeedback__button-dimmed" ;
     const noButtonStyle = this.state.buttonValue === 'no' ? "coa-UserFeedback__button-selected"
       : "coa-UserFeedback__button-dimmed" ;
+    const feedbackLink = `/${intl.locale}/feedback/`;
 
     return (
       <div className="coa-UserFeedback">
         {this.state.feedbackSubmitted
           ? <div className="coa-UserFeedback__thankYou">
-                <h3> {intl.formatMessage(i18n2.received)}</h3>
-                <p> {intl.formatMessage(i18n2.thankYou)}</p>
-                <div className="coa-UserFeedback__check">
-                  <i className="material-icons">check</i>
+                <div className="coa-UserFeedback__thankYou--check">
+                  <div className="coa-UserFeedback__check">
+                    <i className="material-icons">check</i>
+                  </div>
                 </div>
+                <h3> {intl.formatMessage(i18n2.received)}</h3>
+                <p>
+                    <span>{intl.formatMessage(i18n2.furtherHelp)}</span>
+                    <a href={feedbackLink}>{intl.formatMessage(i18n2.signUp)}</a>.
+                </p>
               </div>
           :
             <Fragment>
