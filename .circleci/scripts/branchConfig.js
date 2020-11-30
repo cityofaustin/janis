@@ -39,7 +39,7 @@ const branchOverrides = {
   '4611-gzip': {
     joplin_appname: 'joplin',
   },
-  'out-link': {
+  'surface-api-test': {
     joplin_appname: 'joplin',
   },
   '5012-contact-slash': {

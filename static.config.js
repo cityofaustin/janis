@@ -343,6 +343,8 @@ const getOfficialDocumentCollectionData = async (page, instance, client, pageId)
 
   officialDocumentCollection.lowerBound = await getOfficialDocumentCollectionLowerBound(officialDocumentCollection.id, client);
 
+  console.log("officialDocumentCollection :", officialDocumentCollection)
+
   return { officialDocumentCollection: officialDocumentCollection };
 };
 
