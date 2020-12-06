@@ -1,5 +1,5 @@
 .coa-HomepageAlert__container {
-  background-color: #ffbe2e;
+  background-color: #face2f;
   padding-bottom: 2rem;
   @include media($coa-medium-screen) {
     padding-bottom: 0rem;
@@ -22,18 +22,15 @@
   @include media($coa-medium-screen) {
     max-width: $coa-top-menu-max-width;
     flex-direction: row;
-    height: 56px;
+    height: 52px;
   }
 }
 
 .coa-HomepageAlert__label {
-  width: 283px;
   height: 43px;
-  background-color: rgba(255, 255, 255, .7);
-  border-radius: 22px;
   margin-top:18px;
+  font-weight: bold;
   @include media($coa-medium-screen) {
-    width: 266px;
     margin-top: unset;
   }
 }
@@ -41,7 +38,6 @@
 .coa-HomepageAlert__label--content {
   width: 253px;
   font-size: 18px;
-  font-weight: bold;
   line-height: 27px;
 }
 
@@ -54,13 +50,12 @@
 
 .coa-HomepageAlert__label--text {
   position: relative;
-  top: 5px;
   left: 8px;
+  font-size: 16px;
 }
 
 .coa-HomepageAlert__link {
-  font-size: 18px;
-  padding-left: 16px;
+  font-size: 16px;
   padding-right: 16px;
   color: #171717;
   padding-top:8px;

@@ -12,14 +12,12 @@ const Alert = ({ badge, content, link, linkContent }) => {
     <div className={"coa-HomepageAlert__container "+styleWithContent}>
       <div className="coa-HomepageAlert__content">
         <div className="coa-HomepageAlert__label">
-          <div className="coa-HomepageAlert__label--content">
-            <div className="coa-HomepageAlert__label--icon">
-              <i className="material-icons">
-                error_outline
-              </i>
-            </div>
-            <span className="coa-HomepageAlert__label--text"> {badge} </span>
+          <div className="coa-HomepageAlert__label--icon">
+            <i className="material-icons">
+              error_outline
+            </i>
           </div>
+          <span className="coa-HomepageAlert__label--text"> {badge} </span>
         </div>
         <div className="coa-HomepageAlert__link">
         { !styleWithContent && (
