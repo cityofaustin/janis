@@ -31,7 +31,10 @@ const Alert = ({ badge, content, link, description }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {intl.formatMessage(i18n1.readMore)}<i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+            <span>{intl.formatMessage(i18n1.readMore)}</span>
+            <i className="material-icons coa-HomepageAlert__link-icon">
+              open_in_new
+            </i>
           </a>
         </div>
         )}

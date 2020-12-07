@@ -1,6 +1,5 @@
 .coa-HomepageAlert__container {
   background-color: #face2f;
-  padding-bottom: 2rem;
   @include media($coa-medium-screen) {
     padding-bottom: 0rem;
     padding-left: 2rem;
@@ -17,14 +16,13 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  flex-direction:column;
   align-items: center;
-  padding-left: 16px;
   color: #1b1b1b;
   @include media($coa-medium-screen) {
     max-width: $coa-top-menu-max-width;
     flex-direction: row;
     height: 52px;
+    padding-left: 16px;
   }
 }
 
@@ -44,10 +42,13 @@
 }
 
 .coa-HomepageAlert__label--icon {
-  display: inline;
-  top: 6px;
-  position: relative;
-  left: 10px;
+  display:none;
+  @include media($coa-medium-screen) {
+    display: inline;
+    top: 6px;
+    position: relative;
+    left: 10px;
+  }
 }
 
 .coa-HomepageAlert__label--text {
@@ -69,13 +70,23 @@
 }
 
 .coa-HomepageAlert__description {
-  padding-right: 8px;
+  display: none;
+  @include media($coa-medium-screen) {
+    display: inline;
+    padding-right: 8px;
+  }
 }
 
 .coa-HomepageAlert__link-external {
   color: #1b1b1b;
   &:visited {
     color: #1b1b1b;
+  }
+  span {
+    display: none;
+    @include media($coa-medium-screen) {
+      display: inline;
+    }
   }
 }
 
