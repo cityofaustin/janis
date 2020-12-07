@@ -129,4 +129,33 @@
 .coa-LocationAlert__block {
   padding: 16px;
   border-top: solid 1px #fee685;
+  display: flex;
+  justify-content: space-between;
+}
+
+.coa-LocationAlert__link-icon {
+  padding: 0 4px;
+  font-size: 16px;
+  position: relative;
+  top: 3px;
+}
+
+.coa-LocationAlert__link-external {
+  color: #1b1b1b;
+  text-decoration: none;
+  &:visited {
+    color: #1b1b1b;
+  }
+  span {
+    display: none;
+    @include media($coa-medium-screen) {
+      display: inline;
+    }
+  }
+  a {
+    display: inline-block;
+    position: relative;
+    padding-left: 500px;
+    margin-left: -500px;
+  }
 }
