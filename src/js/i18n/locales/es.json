@@ -176,7 +176,7 @@
   "events.viewAll": "Ver todos los eventos",
   "events.virtualEvent": "Evento virtual",
   "events.meetingCode": "Clave de acceso",
-  "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19) en Austin",
+  "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19).",
   "search.search": "Buscar",
   "search.results": "Resultados para {searchedTerm}",
   "search.noResultsHeader": "No hay resultados para su selección. Para mejorar los resultados de la búsqueda:",

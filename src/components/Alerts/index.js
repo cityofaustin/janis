@@ -8,6 +8,8 @@ const Alert = ({ badge, content, link, linkContent }) => {
   const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
 
+  console.log(styleWithContent)
+
   return (
     <div className={"coa-HomepageAlert__container "+styleWithContent}>
       <div className="coa-HomepageAlert__content">
@@ -17,21 +19,24 @@ const Alert = ({ badge, content, link, linkContent }) => {
               error_outline
             </i>
           </div>
-          <span className="coa-HomepageAlert__label--text"> {badge} </span>
+          <span className="coa-HomepageAlert__label--text">
+            {badge}
+          </span>
         </div>
+        { 
+        !styleWithContent && (
         <div className="coa-HomepageAlert__link">
-        { !styleWithContent && (
+          <span> {linkContent} </span>
           <a
             href={link}
             className="coa-HomepageAlert__link-external"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {linkContent}
-            <i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+            Read More<i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
           </a>
-        )}
         </div>
+        )}
       </div>
       { (content == "locationsCOVID_19") && (
         <div className="coa-HomepageAlert__label--text-content">

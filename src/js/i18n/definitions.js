@@ -573,7 +573,7 @@ export const events = defineMessages({
 });
 
 export const alert = defineMessages({
-  getLatest: 'Get current information about coronavirus (COVID-19) in Austin'
+  getLatest: 'Get current information about coronavirus (COVID-19).'
 })
 
 export const search = defineMessages({
