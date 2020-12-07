@@ -22,9 +22,12 @@
   @include media($coa-medium-screen) {
     max-width: $coa-top-menu-max-width;
     flex-direction: row;
-    height: 52px;
-    padding-left: 16px;
+    height: 73px;
     justify-content: inherit;
+  }
+  @include media($coa-large-screen) {
+    padding-left: 16px;
+    height: 52px;
   }
 }
 
@@ -32,6 +35,11 @@
   height: 40px;
   margin-top:18px;
   font-weight: 500;
+  width: 220px;
+  @include media($coa-large-screen) {
+    margin-top: unset;
+    width: unset;
+  }
   @include media($coa-medium-screen) {
     margin-top: unset;
   }
@@ -66,7 +74,11 @@
   line-height: 2.8rem;
   @include media($coa-medium-screen) {
     padding-left:20px;
-    padding-top:unset;
+    padding-top:unset; 
+    width: 450px;
+  }
+  @include media($coa-large-screen) {
+    width: unset;
   }
 }
 
