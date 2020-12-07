@@ -18,11 +18,13 @@
   display: flex;
   align-items: center;
   color: #1b1b1b;
+  justify-content: space-between;
   @include media($coa-medium-screen) {
     max-width: $coa-top-menu-max-width;
     flex-direction: row;
     height: 52px;
     padding-left: 16px;
+    justify-content: inherit;
   }
 }
 
@@ -61,7 +63,6 @@
   font-size: 16px;
   padding-right: 16px;
   color: #1b1b1b;
-  padding-top:8px;
   line-height: 2.8rem;
   @include media($coa-medium-screen) {
     padding-left:20px;
@@ -88,10 +89,15 @@
       display: inline;
     }
   }
+  a {
+    display: inline-block;
+    postiion: relative;
+    padding-left: 500px;
+    margin-left: -500px;
+  }
 }
 
 .coa-HomepageAlert__link-icon {
-  color: #936f38;
   padding: 0 4px;
   font-size: 16px;
   position: relative;
