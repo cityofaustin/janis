@@ -8,9 +8,12 @@ const Alert = ({ badge, content, link, description }) => {
   const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
 
+  console.log(content, styleWithContent)
+
   return (
+    <div>
     <div className={"coa-HomepageAlert__container "+styleWithContent}>
-      <div className="coa-HomepageAlert__content">
+      <div className={"coa-HomepageAlert__content "+styleWithContent}>
         <div className="coa-HomepageAlert__label">
           <div className="coa-HomepageAlert__label--icon">
             <i className="material-icons">
@@ -39,9 +42,12 @@ const Alert = ({ badge, content, link, description }) => {
         </div>
         )}
       </div>
-      { (content == "locationsCOVID_19") && (
+    </div>
+          { (content == "locationsCOVID_19") && (
         <div className="coa-HomepageAlert__label--text-content">
-          <LocationsCOVID_19 />
+          <LocationsCOVID_19
+            description={description}
+          />
         </div>
       )}
     </div>

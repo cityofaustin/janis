@@ -178,6 +178,7 @@
   "events.meetingCode": "Clave de acceso",
   "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19).",
   "alert.readMore": "Leer más",
+  "alert.location": "Las oficinas e instalaciones de la Ciudad de Austin quizás estén cerradas o tengan horario de emergencia temporal que no se ha actualizado en este sitio web",
   "search.search": "Buscar",
   "search.results": "Resultados para {searchedTerm}",
   "search.noResultsHeader": "No hay resultados para su selección. Para mejorar los resultados de la búsqueda:",

@@ -8,8 +8,7 @@
 }
 
 .coa-HomepageAlert__container.textContent {
-  padding: 15px 30px 24px 24px;
-  margin-bottom: 20px;
+  padding: 0px;
 }
 
 .coa-HomepageAlert__content {
@@ -29,6 +28,10 @@
     padding-left: 16px;
     height: 52px;
   }
+}
+
+.coa-HomepageAlert__content.textContent {
+  padding-left: 0px;
 }
 
 .coa-HomepageAlert__label {
@@ -119,5 +122,11 @@
 .coa-HomepageAlert__label--text-content {
   font-size: 18px;
   line-height: 26px;
-  padding-top: 5px;
+  background-color: #fff5c3;
+  margin-bottom: 20px;
+}
+
+.coa-LocationAlert__block {
+  padding: 16px;
+  border-top: solid 1px #fee685;
 }
