@@ -4,11 +4,9 @@ import { alert as i18n1 } from 'js/i18n/definitions';
 import ExternalLink from 'components/ExternalLink';
 import LocationsCOVID_19 from 'components/Alerts/locationsCOVID_19.js';
 
-const Alert = ({ badge, content, link, linkContent }) => {
+const Alert = ({ badge, content, link, description }) => {
   const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
-
-  console.log(styleWithContent)
 
   return (
     <div className={"coa-HomepageAlert__container "+styleWithContent}>
@@ -26,14 +24,14 @@ const Alert = ({ badge, content, link, linkContent }) => {
         { 
         !styleWithContent && (
         <div className="coa-HomepageAlert__link">
-          <span> {linkContent} </span>
+          <span className="coa-HomepageAlert__description"> {description} </span>
           <a
             href={link}
             className="coa-HomepageAlert__link-external"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Read More<i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
+            {intl.formatMessage(i18n1.readMore)}<i className="material-icons coa-HomepageAlert__link-icon">open_in_new</i>
           </a>
         </div>
         )}

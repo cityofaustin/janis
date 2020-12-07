@@ -20,6 +20,7 @@
   flex-direction:column;
   align-items: center;
   padding-left: 16px;
+  color: #1b1b1b;
   @include media($coa-medium-screen) {
     max-width: $coa-top-menu-max-width;
     flex-direction: row;
@@ -30,7 +31,7 @@
 .coa-HomepageAlert__label {
   height: 40px;
   margin-top:18px;
-  font-weight: bold;
+  font-weight: 500;
   @include media($coa-medium-screen) {
     margin-top: unset;
   }
@@ -58,7 +59,7 @@
 .coa-HomepageAlert__link {
   font-size: 16px;
   padding-right: 16px;
-  color: #171717;
+  color: #1b1b1b;
   padding-top:8px;
   line-height: 2.8rem;
   @include media($coa-medium-screen) {
@@ -67,16 +68,20 @@
   }
 }
 
+.coa-HomepageAlert__description {
+  padding-right: 8px;
+}
+
 .coa-HomepageAlert__link-external {
-  color: #171717;
+  color: #1b1b1b;
   &:visited {
-    color: #171717;
+    color: #1b1b1b;
   }
 }
 
 .coa-HomepageAlert__link-icon {
   color: #936f38;
-  padding: 0 3px;
+  padding: 0 4px;
   font-size: 16px;
   position: relative;
   top: 3px;
