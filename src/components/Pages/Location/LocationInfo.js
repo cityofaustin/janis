@@ -13,7 +13,8 @@ import {
   date as i18nDate,
   locations as i18nLocations,
   contact as i18nContact,
-  misc as i18nMisc
+  misc as i18nMisc,
+  alert as i18nAlert
 } from 'js/i18n/definitions';
 
 const LocationPageBlock = ({ title, content }) => (
@@ -165,12 +166,13 @@ const LocationPageFacilityHours = ({ hours }) => {
       <h2 className="coa-LocationPage__sub-section-title">
         {intl.formatMessage(i18nLocations.facilityHours)}
       </h2>
-      {/* START ⚠️COVED_19 Hardcoded */}
+      {/* START ⚠️COVID_19 Hardcoded */}
       <Alert
         badge="Coronavirus (COVID-19)"
         content="locationsCOVID_19"
+        description={intl.formatMessage(i18nAlert.getLatest)}
       />
-      {/* END ⚠️COVED_19 Hardcoded */}
+      {/* END ⚠️COVID_19 Hardcoded */}
       <div className="coa-LocationPage__sub-section-block-container coa-LocationPage__sub-section-block-container__hours">
         <LocationPageBlock
           title={intl.formatMessage(i18nLocations.standardHours)}
