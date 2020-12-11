@@ -10,6 +10,7 @@ import { injectIntl } from 'react-intl';
 import IframeResizer from 'iframe-resizer-react';
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 import { loader } from '../../js/animations/loader';
+import { isMuniCourt } from 'js/helpers/pageType.js'
 
 import PageHeader from 'components/PageHeader';
 import HtmlFromRichText from 'components/HtmlFromRichText';
@@ -19,6 +20,7 @@ import ContextualNav from 'components/PageSections/ContextualNav';
 import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import RowContainer from 'components/ErrorMessages/RowContainer';
 import InfoISVG from 'components/SVGs/InfoI';
+import TalkToComponent from 'components/TawkTo';
 
 function FormContainer({
   formContainer: { title, description, formUrl, coaGlobal, contextualNavData },
@@ -69,6 +71,7 @@ function FormContainer({
           offeredBy={contextualNavData.offeredBy}
         />
       )}
+      {isMuniCourt(contextualNavData) && <TalkToComponent />}
       <div id="coa-FormContainer__top">
         <PageHeader contentType={'information'} description={description}>
           {title}
