@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import path from 'path';
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import { isMuniCourt } from 'js/helpers/pageType.js'
 
 import PageBanner from 'components/PageBanner';
 import PageHeader from 'components/PageHeader';
@@ -39,9 +40,6 @@ const Service = ({ service, intl }) => {
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
-
-  console.log('parent: ', contextualNavData.parent)
-  console.log('offered ', contextualNavData.offeredBy)
 
   return (
     <div>
@@ -124,7 +122,7 @@ const Service = ({ service, intl }) => {
         )}
       </div>
       <UserFeedback />
-      <TalkToComponent />
+      {isMuniCourt(contextualNavData) && <TalkToComponent />}
     </div>
   );
 };
