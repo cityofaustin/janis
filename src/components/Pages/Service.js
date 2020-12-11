@@ -17,6 +17,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
 import RelatedEvents from 'components/PageSections/RelatedEvents';
 import UserFeedback from 'components/UserFeedback';
+import TalkToComponent from 'components/TawkTo';
 
 const Service = ({ service, intl }) => {
   const {
@@ -38,6 +39,9 @@ const Service = ({ service, intl }) => {
     // not the biggest fan of this logic but
     // it gets previews working with hooks
   } = service ? { service } : useRouteData();
+
+  console.log('parent: ', contextualNavData.parent)
+  console.log('offered ', contextualNavData.offeredBy)
 
   return (
     <div>
@@ -120,6 +124,7 @@ const Service = ({ service, intl }) => {
         )}
       </div>
       <UserFeedback />
+      <TalkToComponent />
     </div>
   );
 };

@@ -8,8 +8,6 @@ const Alert = ({ badge, content, link, description }) => {
   const styleWithContent = content ? "textContent" : ""
   const intl = useIntl();
 
-  console.log(content, styleWithContent)
-
   return (
     <div>
     <div className={"coa-HomepageAlert__container "+styleWithContent}>
