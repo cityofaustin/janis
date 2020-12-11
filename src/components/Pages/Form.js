@@ -71,7 +71,6 @@ function FormContainer({
           offeredBy={contextualNavData.offeredBy}
         />
       )}
-      {isMuniCourt(contextualNavData) && <TalkToComponent />}
       <div id="coa-FormContainer__top">
         <PageHeader contentType={'information'} description={description}>
           {title}
@@ -108,6 +107,7 @@ function FormContainer({
           />
         )}
       </div>
+      {isMuniCourt(contextualNavData) && <TalkToComponent />}
     </div>
   );
 }
