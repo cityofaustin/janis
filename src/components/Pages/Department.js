@@ -5,17 +5,15 @@ import { injectIntl } from 'react-intl';
 import path from 'path';
 import Parser from 'html-react-parser';
 
-import { departmentPage as i18n } from 'js/i18n/definitions';
+import { departmentPage as i18n, misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
 
 import SectionHeader from 'components/SectionHeader';
 import ContactDetails from 'components/Contact/ContactDetails';
 import PageBanner from 'components/PageBanner';
 import DirectorHeadshot from 'components/DirectorHeadshot';
 import PageHeader from 'components/PageHeader';
-
 import TileGroup from 'components/Tiles/TileGroup';
-
-import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import TalkToComponent from 'components/TawkTo';
 
 const Department = ({ department, intl }) => {
   const {
@@ -74,6 +72,8 @@ const Department = ({ department, intl }) => {
     ) : !!relatedLinks.length ? (
       <RelatedContent />
     ) : null;
+
+  const isMuniCourt = title === 'Municipal Court' || title === 'Corte Municipal';
 
   return (
     <div>
@@ -162,6 +162,7 @@ const Department = ({ department, intl }) => {
           </div>
         </div>
       </div>
+      {isMuniCourt && <TalkToComponent />}
     </div>
   );
 };
