@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import path from 'path';
 
 import { misc as i18n2, services as i18n3 } from 'js/i18n/definitions';
+import { isMuniCourt } from 'js/helpers/pageType.js'
 
 import PageBanner from 'components/PageBanner';
 import PageHeader from 'components/PageHeader';
@@ -17,6 +18,7 @@ import RelatedToMobile from '../PageSections/ContextualNav/RelatedToMobile';
 import PageIsPartOfContainer from 'components/PageSections/PageIsPartOfContainer';
 import RelatedEvents from 'components/PageSections/RelatedEvents';
 import UserFeedback from 'components/UserFeedback';
+import TalkToComponent from 'components/TawkTo';
 
 const InformationPage = ({ informationPage, intl }) => {
   const {
@@ -93,6 +95,7 @@ const InformationPage = ({ informationPage, intl }) => {
         )}
       </div>
       <UserFeedback />
+      {isMuniCourt(contextualNavData) && <TalkToComponent />}
     </div>
   );
 };
