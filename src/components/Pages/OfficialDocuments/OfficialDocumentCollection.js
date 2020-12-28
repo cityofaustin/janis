@@ -18,7 +18,6 @@ import { createDateFromString } from 'js/helpers/date';
 **/
 const OfficialDocumentCollection = ({ officialDocumentCollection, CMS_API=process.env.CMS_API }) => {
   const intl = useIntl();
-  console.log('CMS_API ', process.env.CMS_API)
   const {
     officialDocumentCollection: {
       pageId,
