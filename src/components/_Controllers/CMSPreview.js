@@ -109,7 +109,6 @@ class CMSPreview extends Component {
         params: { revision_id, page_type },
       },
     } = this.props;
-    const { PREVIEW_CMS_API } = queryString.parse(this.props.location.search);
     if (!this.state.page[locale]) return <h1>Loading</h1>;
     // Get page data for your specific locale
     const page = this.state.page[locale];
@@ -124,7 +123,7 @@ class CMSPreview extends Component {
             return (
               <OfficialDocumentCollection
                 officialDocumentCollection={page}
-                CMS_API={PREVIEW_CMS_API} // Required for querying site_search endpoint
+                // CMS_API={CMS_API} // Required for querying site_search endpoint
               />
             );
           }}
