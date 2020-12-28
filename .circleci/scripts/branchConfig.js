@@ -33,8 +33,8 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  '5054-events-search': {
-    joplin_appname: 'joplin-pr-5054-events-search',
+  '5084-crash': {
+    joplin_appname: 'joplin',
   },
 };
 
