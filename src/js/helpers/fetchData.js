@@ -15,8 +15,6 @@ export const createGraphQLClientsByLang = async (lang, CMS_API) => {
 };
 
 export const createPreviewGraphQLClientsByLang = (lang, PREVIEW_CMS_API) => {
-  console.log(PREVIEW_CMS_API, '!!!!!!!')
-  console.log(process.env.CMS_API, '&&&&&')
   const joplinPreviewEndpoint = PREVIEW_CMS_API || process.env.CMS_API.replace("/api/graphql", "/api/preview/graphql")
   return new GraphQLClient(joplinPreviewEndpoint, {
     headers: {'Accept-Language': lang }
