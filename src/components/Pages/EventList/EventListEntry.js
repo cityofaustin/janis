@@ -55,6 +55,7 @@ const EventDateListDetails = ({
     eventUrl,
     canceled,
     feesRange,
+    locationNameSearch, // the location name that is returned in search results
   } = event;
   const noon = intl.formatMessage(i18n.noon);
 
@@ -113,7 +114,7 @@ const EventDateListDetails = ({
       <div className="coa-EventListPage__Title">
         <a href={eventUrl}>{title}</a>
       </div>
-      <div className="coa-EventListPage__Location">{locationName}</div>
+      <div className="coa-EventListPage__Location">{locationNameSearch || locationName}</div>
       <div className="coa-EventListPage__Cost">{`${cost} ${registration}`}</div>
     </div>
   );
