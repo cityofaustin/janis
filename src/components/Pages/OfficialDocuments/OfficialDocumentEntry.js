@@ -25,7 +25,7 @@ const OfficialDocumentEntry = ({
 
   // If the link is a PDF with a pdfSize, then include it.
   const pdfComponent = (!!pdfSize) ?
-    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {pdfSize})</span> :
+    <span className="coa-OfficialDocumentPage__pdf-size">(PDF {Math.round(pdfSize/100000)/10} MB)</span> :
     null
 
   // set the locale configuration for moment. Sets the locale for this component only
