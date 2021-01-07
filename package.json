@@ -80,7 +80,7 @@
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.11.0",
     "sass-loader": "^7.2.0",
-    "serve": "^7.0.0",
+    "serve": "^10.1.2",
     "storybook": "^5.1.11",
     "storybook-addon-intl": "^2.4.1",
     "svg-url-loader": "^3.0.0",
