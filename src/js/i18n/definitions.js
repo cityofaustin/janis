@@ -180,6 +180,7 @@ export const curbsideServices = defineMessages({
   yardtrimmings: 'Yard trimmings',
   trash: 'Trash',
   compost: 'Compost',
+  xmasTrees: 'Holiday Tree Recycling',
   brushcollection: 'Large brush collection',
   bulkitemcollection: 'Next bulk item collection',
   pickupschedule: "Here's the pickup schedule for {address}",
