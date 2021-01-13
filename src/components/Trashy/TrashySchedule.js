@@ -19,6 +19,7 @@ const TrashySchedule = props => {
         compost: intl.formatMessage(i18n.compost),
         brushcollection: intl.formatMessage(i18n.brushcollection),
         bulkitemcollection: intl.formatMessage(i18n.bulkitemcollection),
+        xmas_trees: intl.formatMessage(i18n.xmasTrees),
         // removing the link for now, may come back
         // bulkitemcollection: (
         //   <I18nLink to="bulk-item-pickup">
@@ -33,10 +34,12 @@ const TrashySchedule = props => {
   const pickUpList = pickupDates.map(item => {
     const services = item.services.map(service => {
       let s = mapService(service);
-      return <li>{s}</li>;
+      // check if service was mapped correctly, otherwise s will be undefined 
+      return (s && <li>{s}</li>);
     });
 
     return (
+      !!services.length && services[0] &&
       <div className="coa-Trashy__schedule-list-pickup-item">
         <h4>
           <FormattedDate
