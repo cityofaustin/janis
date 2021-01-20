@@ -889,10 +889,10 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 };
 
 export default {
-  siteRoot: 'https://alpha.austin.gov/',
+  siteRoot: 'https://janis-v3-4584-sitemap.netlify.app/', //this should actually be contingent on build type
   // basePath // Do not alter this line if you want a working PR
-  // basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
-  basePath: '/',
+  basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
+  // basePath: '/',
   stagingSiteRoot: 'https://janis-staging.herokuapp.com/',
   getSiteProps: () => ({
     title: 'City of Austin',
