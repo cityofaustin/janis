@@ -889,7 +889,7 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 };
 
 export default {
-  siteRoot: 'https://janis-v3-4584-sitemap.netlify.app/', //this should actually be contingent on build type
+  siteRoot: process.env.DEPLOY_ENV === "production" ? 'https://alpha.austin.gov' : '/'
   // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   // basePath: '/',
