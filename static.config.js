@@ -889,7 +889,9 @@ const makeAllPages = async (langCode, incrementalPageId) => {
 };
 
 export default {
-  siteRoot: process.env.DEPLOY_ENV === "production" ? 'https://alpha.austin.gov' : '/',
+  // siteRoot: process.env.DEPLOY_ENV === "production" ? 'https://alpha.austin.gov' : '/',
+  // to test in staging:
+  siteRoot: process.env.DEPLOY_ENV === "staging" ? 'https://janis.austintexas.io' : '/',
   // basePath // Do not alter this line if you want a working PR
   basePath: process.env.BASE_PATH_PR ? process.env.BASE_PATH_PR : '/',
   // basePath: '/',
