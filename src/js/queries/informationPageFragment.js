@@ -20,6 +20,7 @@ const informationPageFragment = `
       locationPage {
         title
       }
+      socialMedia
     }
     events {
       id
