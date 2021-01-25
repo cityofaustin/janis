@@ -14574,6 +14574,14 @@ react-static-plugin-react-router@^7.2.2:
   resolved "https://registry.yarnpkg.com/react-static-plugin-react-router/-/react-static-plugin-react-router-7.4.2.tgz#f935fd62c615986e34c9924770cec6e2702dd598"
   integrity sha512-dd9A5wh5RjlX64RBy59U+Fx2XqThtpukuqxhBkLUvhDnv1UL5m+jjNd6oz4fOsP1pGEgEfOsZcE7ersSj/2AeA==
 
+react-static-plugin-sitemap@^7.4.2:
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/react-static-plugin-sitemap/-/react-static-plugin-sitemap-7.4.2.tgz#1194e27a94bbdbe8bce9c763f0e81e660c015480"
+  integrity sha512-F+9SXhbYukFoENBZSp//VrpyHPdu3LOJgnoOraV/6p0NFRyt/+JHN8JGWONK8NAjbCZCcG7cDjQfdMLbA2RYPQ==
+  dependencies:
+    chalk "^2.4.2"
+    fs-extra "^8.1.0"
+
 react-static@^7.4.2:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/react-static/-/react-static-7.4.2.tgz#4433dc724c85a074eb7f7412a2d6d55a1e062207"
