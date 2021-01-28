@@ -33,8 +33,8 @@ const branchOverrides = {
     joplin_appname: 'joplin-pr-3690-incremental',
     REACT_STATIC_PREFETCH_RATE: '10',
   },
-  '5084-crash': {
-    joplin_appname: 'joplin',
+  '5089-bold-rtf': {
+    joplin_appname: 'joplin-pr-5089-bold-rtf',
   },
 };
 
