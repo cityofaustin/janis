@@ -15,7 +15,7 @@ const HeroHome = ({ imageFilename, imageTitle, preheader }) => (
     <div className="coa-HeroHome" role="img" aria-label={imageTitle}>
       <div className="container-fluid wrapper">
         <span className="coa-HeroHome__preheader">{preheader}</span>
-        <h2 className="coa-HeroHome__header">Austin, Texas</h2>
+        <h2 className="coa-HeroHome__header">Austin, Texas ??</h2>
       </div>
     </div>
   </div>
