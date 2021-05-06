@@ -74,7 +74,7 @@ const HtmlFromRichText = ({ content }) => {
           check to see if the link includes "http", indicating it is external,
           and then included the external link icon!
         */
-        if (domNode.name === "a" && domNode.attribs.href.includes("http")) {
+        if (domNode.name === "a" && domNode.attribs.href && domNode.attribs.href.includes("http")) {
           domNode.attribs.class += " coa-HtmlFromRichText_exteranlLink"
           const linkTextContent = domNode.children[0].data
 
