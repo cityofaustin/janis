@@ -36,6 +36,9 @@ const branchOverrides = {
   '5084-crash': {
     joplin_appname: 'joplin',
   },
+  '5093-hardcode-link-name': {
+    joplin_appname: 'joplin',
+  },
 };
 
 module.exports = {
