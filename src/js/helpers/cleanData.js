@@ -405,12 +405,15 @@ export const cleanDepartmentPageLinks = (
   departmentPageLinks,
   departmentSlug,
 ) => {
+  let customTitle = "2019-20 Annual Report";
   const cleanedLinks = departmentPageLinks
-    ? departmentPageLinks.edges.map(edge => ({
+    ? departmentPageLinks.edges.map(edge => {
+    let replaceTitle = (edge.node.title === "Office of Police Oversight: 2019-2020 annual report");
+    return ({
         id: edge.node.pageId,
-        title: edge.node.title,
+        title: replaceTitle ? customTitle : edge.node.title,
         url: `/${departmentSlug}/${edge.node.slug}/`,
-      }))
+      })})
     : [];
 
   return cleanedLinks;
