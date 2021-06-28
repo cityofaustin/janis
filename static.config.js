@@ -349,7 +349,7 @@ const getOfficialDocumentCollectionData = async (page, instance, client, pageId)
 const getOfficialDocumentPageData = (page, instance) => {
   let officialDocumentPage = { ...page };
 
-  if (officialDocumentPage.document.filename.slice(-3) === 'pdf') {
+  if (officialDocumentPage?.document?.filename.slice(-3) === 'pdf') {
     officialDocumentPage.pdfSize = filesize(
       officialDocumentPage.document.fileSize,
     ).replace(' ', '');
