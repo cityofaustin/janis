@@ -96,19 +96,23 @@ const OfficialDocumentPage = ({ officialDocumentPage, intl }) => {
                   mobile={true}
                   intl={intl}
                 />
-                <div className="coa-OfficialDocumentPage__document">
-                  <h2>{intl.formatMessage(i18n.document)}</h2>
-                  <a href={document && document.url}>{name}</a> {pdfComponent}
-                </div>
-                <div className="coa-OfficialDocumentPage__content-container">
-                  <h2>{intl.formatMessage(i18n.pdfContent)}</h2>
-                  <p className="coa-OfficialDocumentPage__disclaimer">
-                    <span className="coa-OfficialDocumentPage__span">{intl.formatMessage(i18n.disclaimer)}:</span> {intl.formatMessage(i18n.message)}
-                  </p>
-                  <div className="coa-OfficialDocumentPage__content">
-                    {body}
+                {document?.url &&
+                  <>
+                  <div className="coa-OfficialDocumentPage__document">
+                    <h2>{intl.formatMessage(i18n.document)}</h2>
+                    <a href={document && document.url}>{name}</a> {pdfComponent}
                   </div>
-                </div>
+                  <div className="coa-OfficialDocumentPage__content-container">
+                    <h2>{intl.formatMessage(i18n.pdfContent)}</h2>
+                    <p className="coa-OfficialDocumentPage__disclaimer">
+                      <span className="coa-OfficialDocumentPage__span">{intl.formatMessage(i18n.disclaimer)}:</span> {intl.formatMessage(i18n.message)}
+                    </p>
+                    <div className="coa-OfficialDocumentPage__content">
+                      {body}
+                    </div>
+                  </div>
+                  </>
+                }
               </div>
             </div>
           </div>
