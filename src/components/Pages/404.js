@@ -32,6 +32,9 @@ class FourOhFour extends React.Component {
           <h1 className="coa-404__title">404</h1>
           <div className="coa-404__copy">
             <p>{this.props.intl.formatMessage(i18n.sorry404)}</p>
+            <p>{this.props.intl.formatMessage(i18n.cprc404)}
+            <a href={this.props.intl.formatMessage(i18n.cprcURL)}>{this.props.intl.formatMessage(i18n.cprcLink404)}</a>.
+            </p>
             <p>
               {this.props.intl.formatMessage(i18n.homeIntro404)}
               <a href="/">{this.props.intl.formatMessage(i18n.homeLink404)}</a>
