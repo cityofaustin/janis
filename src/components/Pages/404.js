@@ -32,16 +32,18 @@ class FourOhFour extends React.Component {
           <h1 className="coa-404__title">404</h1>
           <div className="coa-404__copy">
             <p>{this.props.intl.formatMessage(i18n.sorry404)}</p>
-            <p>{this.props.intl.formatMessage(i18n.cprc404)}
-            <a href={this.props.intl.formatMessage(i18n.cprcURL)}>{this.props.intl.formatMessage(i18n.cprcLink404)}</a>.
+            <p>
+              {this.props.intl.formatMessage(i18n.cprc404)}
+              <a href={this.props.intl.formatMessage(i18n.cprcURL)}>
+                {this.props.intl.formatMessage(i18n.cprcLink404)}
+              </a>
+              .
             </p>
             <p>
-              {this.props.intl.formatMessage(i18n.homeIntro404)}
-              <a href="/">{this.props.intl.formatMessage(i18n.homeLink404)}</a>
-              {this.props.intl.formatMessage(i18n.or404)}
-              <ExternalLink to={'https://projects.austintexas.io/contact/'}>
-                {this.props.intl.formatMessage(i18n.contactUs404)}
-              </ExternalLink>
+              {this.props.intl.formatMessage(i18n.contactByEmail)}
+              <a href={'mailto:opo.outreach@austintexas.gov'}>
+                email
+              </a>
               .
             </p>
           </div>

@@ -117,6 +117,7 @@ export const misc = defineMessages({
   cprc404: "Information related to the Community Police Review Commission is now located ",
   cprcURL: "https://www.austintexas.gov/about-community-police-review-commission",
   cprcLink404: "here",
+  contactByEmail: "Or contact us by ",
   homeIntro404: 'You can browse from the ',
   homeLink404: 'home page',
   or404: ', or ',
