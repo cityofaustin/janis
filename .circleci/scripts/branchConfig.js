@@ -39,6 +39,9 @@ const branchOverrides = {
   '5094-reports': {
     joplin_appname: 'joplin',
   },
+  'update-404': {
+    joplin_appname: 'joplin',
+  },
 };
 
 module.exports = {
