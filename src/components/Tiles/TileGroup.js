@@ -49,7 +49,7 @@ const TileGroup = ({
         >
           {!!tiles.length &&
             tiles.map(({ url, title, pageType }, index) => {
-              if (url="/police-oversight/about-community-police-review-commission/") {
+              if (url === "/police-oversight/about-community-police-review-commission/") {
                 url = "https://www.austintexas.gov/about-community-police-review-commission"
               }
               return (
