@@ -39,7 +39,7 @@ const branchOverrides = {
   '5094-reports': {
     joplin_appname: 'joplin',
   },
-  'update-404': {
+  '2021-report': {
     joplin_appname: 'joplin',
   },
 };
