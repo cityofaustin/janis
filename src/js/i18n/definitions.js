@@ -114,6 +114,8 @@ export const misc = defineMessages({
   offeredBy: 'Offered by',
   relatedInfo: 'Related information',
   sorry404: "Sorry, this isn't the page you were hoping to find.",
+  opo404: "Information related to the Office of Police Oversight is now located ",
+  opoURL: "https://www.austintexas.gov/department/office-police-oversight",
   cprc404: "Information related to the Community Police Review Commission is now located ",
   cprcURL: "https://www.austintexas.gov/about-community-police-review-commission",
   cprcLink404: "here",
