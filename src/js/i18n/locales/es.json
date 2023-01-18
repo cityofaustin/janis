@@ -189,6 +189,7 @@
   "alert.getLatest": "Obtenga información actual sobre el coronavirus (COVID-19).",
   "alert.readMore": "Leer más",
   "alert.location": "Las oficinas e instalaciones de la Ciudad de Austin quizás estén cerradas o tengan horario de emergencia temporal que no se ha actualizado en este sitio web.",
+  "alert.migration": "El sitio web de la Oficina de Fiscalización de la Policía se mudará pronto. Actualice sus enlaces guardados a",
   "search.search": "Buscar",
   "search.results": "Resultados para {searchedTerm}",
   "search.noResultsHeader": "No hay resultados para su selección. Para mejorar los resultados de la búsqueda:",

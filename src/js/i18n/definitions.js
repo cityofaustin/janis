@@ -579,7 +579,9 @@ export const events = defineMessages({
 
 export const alert = defineMessages({
   getLatest: 'Get current information about coronavirus (COVID-19).',
+  migration: 'The Office of Police Oversight website is moving soon. Please update your saved links to',
   readMore: 'Read more',
+  austintexas: 'austintexas.gov',
   location: 'City of Austin offices and facilities may be closed or have temporary emergency hours that are not up to date on this website.'
 });
 
