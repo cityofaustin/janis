@@ -15,7 +15,7 @@ const Alert = ({ badge, content, link, description }) => {
         <div className="coa-HomepageAlert__label">
           <div className="coa-HomepageAlert__label--icon">
             <i className="material-icons">
-              error_outline
+              report_gmailerrorred
             </i>
           </div>
           <span className="coa-HomepageAlert__label--text">
@@ -32,7 +32,7 @@ const Alert = ({ badge, content, link, description }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>{intl.formatMessage(i18n1.readMore)}</span>
+            <span>{intl.formatMessage(i18n1.austintexas)}</span>
             <i className="material-icons coa-HomepageAlert__link-icon">
               open_in_new
             </i>
