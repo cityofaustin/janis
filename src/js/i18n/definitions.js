@@ -114,6 +114,8 @@ export const misc = defineMessages({
   offeredBy: 'Offered by',
   relatedInfo: 'Related information',
   sorry404: "Sorry, this isn't the page you were hoping to find.",
+  opo404: "Information related to the Office of Police Oversight is now located ",
+  opoURL: "https://www.austintexas.gov/department/office-police-oversight",
   cprc404: "Information related to the Community Police Review Commission is now located ",
   cprcURL: "https://www.austintexas.gov/about-community-police-review-commission",
   cprcLink404: "here",
@@ -579,7 +581,9 @@ export const events = defineMessages({
 
 export const alert = defineMessages({
   getLatest: 'Get current information about coronavirus (COVID-19).',
+  migration: 'The Office of Police Oversight website is moving soon. Please update your saved links to',
   readMore: 'Read more',
+  austintexas: 'austintexas.gov',
   location: 'City of Austin offices and facilities may be closed or have temporary emergency hours that are not up to date on this website.'
 });
 

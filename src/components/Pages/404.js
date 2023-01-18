@@ -33,6 +33,13 @@ class FourOhFour extends React.Component {
           <div className="coa-404__copy">
             <p>{this.props.intl.formatMessage(i18n.sorry404)}</p>
             <p>
+              {this.props.intl.formatMessage(i18n.opo404)}
+              <a href={this.props.intl.formatMessage(i18n.opoURL)}>
+                {this.props.intl.formatMessage(i18n.cprcLink404)}
+              </a>
+              .
+            </p>
+            <p>
               {this.props.intl.formatMessage(i18n.cprc404)}
               <a href={this.props.intl.formatMessage(i18n.cprcURL)}>
                 {this.props.intl.formatMessage(i18n.cprcLink404)}
