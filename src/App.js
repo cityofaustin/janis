@@ -41,9 +41,9 @@ const AppView = ({ path }) => {
       <SkipToMain />
       {/* START ⚠️COVID_19 Hardcoded */}
       <Alert
-        badge="Coronavirus (COVID-19)"
-        link="https://www.austintexas.gov/COVID19"
-        description={intl.formatMessage(i18n1.getLatest)}
+        // badge="Notice"
+        link="https://www.austintexas.gov/department/office-police-oversight"
+        description={intl.formatMessage(i18n1.migration)}
       />
       {/* END ⚠️COVID_19 Hardcoded */}
       <Header navigation={navigation[intl.locale]} path={path} />

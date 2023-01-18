@@ -1,5 +1,5 @@
 .coa-HomepageAlert__container {
-  background-color: #face2f;
+  background-color: #ff9800;
   @include media($coa-medium-screen) {
     padding-bottom: 0rem;
     padding-left: 2rem;
@@ -77,8 +77,7 @@
   line-height: 2.8rem;
   @include media($coa-medium-screen) {
     padding-left:20px;
-    padding-top:unset; 
-    width: 450px;
+    padding-top:unset;
   }
   @include media($coa-large-screen) {
     width: unset;
