@@ -50,7 +50,7 @@
     "react-static-plugin-sitemap": "^7.4.2",
     "react-universal-component": "^2.8.1",
     "stickyfilljs": "^2.1.0",
-    "ua-parser-js": "^0.7.17",
+    "ua-parser-js": "^0.7.33",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "use-query-params": "^1.1.8",
     "uswds": "^1.4.5"
