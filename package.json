@@ -75,7 +75,7 @@
     "eslint-config-react-tools": "1.x.x",
     "eslint-plugin-react": "^7.21.2",
     "esm": "^3.2.25",
-    "extract-react-intl-messages": "^0.8.2",
+    "extract-react-intl-messages": "^4.1.1",
     "jest": "^24.9.0",
     "libphonenumber-js": "^1.7.22",
     "prettier": "^1.19.1",
